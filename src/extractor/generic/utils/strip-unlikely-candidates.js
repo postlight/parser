@@ -6,7 +6,7 @@ import {
 
 // ## NOTES:
 // This is a working first pass, but if/when we start optimizing
-// this is a good candidate.
+// this is a good candidate. - AP
 
 export default function stripUnlikelyCandidates($) {
   //  Loop through the provided document and remove any non-link nodes

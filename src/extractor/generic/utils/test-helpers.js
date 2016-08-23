@@ -1,3 +1,3 @@
 export function clean(string) {
-  return string.trim().replace(/\r?\n|\r/g, '').replace(/\s+/g, '')
+  return string.trim().replace(/\r?\n|\r/g, '').replace(/\s+/g, ' ')
 }

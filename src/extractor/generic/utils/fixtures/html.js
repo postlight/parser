@@ -94,6 +94,73 @@ const HTML = {
       </div>
     `,
   },
+
+  // brsToPs
+  singleBr: {
+    before: `
+      <div class="article adbox">
+        <br>
+        <p>Ooo good one</p>
+      </div>
+    `,
+    after: `
+      <div class="article adbox">
+        <br>
+        <p>Ooo good one</p>
+      </div>
+    `,
+  },
+  doubleBrs: {
+    before: `
+      <div class="article adbox">
+        <br />
+        <br />
+        <p>Ooo good one</p>
+      </div>
+    `,
+    after: `
+      <div class="article adbox">
+        <p></p>
+        <p>Ooo good one</p>
+      </div>
+    `,
+  },
+  severalBrs: {
+    before: `
+      <div class="article adbox">
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <p>Ooo good one</p>
+      </div>
+    `,
+    after: `
+      <div class="article adbox">
+        <p></p>
+        <p>Ooo good one</p>
+      </div>
+    `,
+  },
+  brsInP: {
+    before: `
+      <p>
+        Here is some text
+        <br />
+        <br />
+        Here is more text
+      </p>
+    `,
+    after: `
+      <p>
+        Here is some text
+      </p>
+      <p>
+        Here is more text
+      </p>
+    `,
+  },
 }
 
 export default HTML
