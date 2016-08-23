@@ -5,11 +5,15 @@
   "main": "index.js",
   "scripts": {
     "start": "node ./build",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha --compilers js:babel-register src/**/**/*.test.js"
   },
   "author": "",
   "license": "ISC",
-  "devDependencies": {},
+  "devDependencies": {
+    "babel-preset-es2015": "^6.13.2",
+    "babel-register": "^6.11.6",
+    "mocha": "^3.0.2"
+  },
   "dependencies": {
     "cheerio": "^0.20.0",
     "rollup": "^0.34.10"

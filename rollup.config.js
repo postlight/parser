@@ -1,5 +1,6 @@
 export default {
-  entry: 'index.js',
+  // entry: 'index.js',
+  entry: 'src/index.js'
   format: 'cjs',
-  dest: 'bundle.js' // equivalent to --output
+  dest: 'dist/bundle.js' // equivalent to --output
 };

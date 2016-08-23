@@ -3,7 +3,7 @@ import cheerio from 'cheerio'
 import CONSTANTS from './constants'
 
 const GenericContentExtractor = {
-  flags: {}
+  flags: {},
   // Entry point for parsing html
   parse(html, flags={}) {
     let $ = cheerio.load(html)
@@ -65,7 +65,7 @@ const GenericContentExtractor = {
         If weight_nodes is True, use classNames and IDs to determine the
         worthiness of nodes.
 
-        Returns an lxml node.
+        Returns cheerio instance $
    `
 
     // deep clone the node so we can get back to our initial parsed state
@@ -124,11 +124,6 @@ const GenericContentExtractor = {
 //             return normalize_spaces(node_to_html(node))
 //         else:
 //             return node
-//
-//     def node_is_sufficient(self, node):
-//         """Given a node, determine if it is article-like enough to return."""
-//         return (isinstance(node, lxml.html.HtmlElement) and
-//                 len(inner_text(node)) >= 100)
 //
 //
 //     def _extract_best_node(self):
