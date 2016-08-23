@@ -1,79 +1,94 @@
+import cheerio from 'cheerio'
+
 import CONSTANTS from './constants'
 
 const GenericContentExtractor = {
-  parse: (html) => {
-    return html
+  flags: {}
+  // Entry point for parsing html
+  parse(html, flags={}) {
+    let $ = cheerio.load(html)
+    if (flags) {
+      this.flags = flags
+    } else {
+      this.flags = {
+        "strip_unlikely_candidates": True,
+        "weight_nodes": True,
+        "clean_conditionally": True,
+      }
+    }
+    this.extract($)
+  },
+
+  extract($) {
+    `Extract the content for this resource - initially, pass in our
+    most restrictive flags which will return the highest quality
+    content. On each failure, retry with slightly more lax flags.
+
+    :param return_type: string. If "node", should return the content
+    as an LXML node rather than as an HTML string.
+
+    Flags:
+    strip_unlikely_candidates: Remove any elements that match
+    non-article-like criteria first.(Like, does this element
+      have a classname of "comment")
+
+    weight_nodes: Modify an elements score based on whether it has
+    certain classNames or IDs. Examples: Subtract if a node has
+    a className of 'comment', Add if a node has an ID of
+    'entry-content'.
+
+    clean_conditionally: Clean the node to return of some
+    superfluous content. Things like forms, ads, etc.
+    `
+    const extraction_flags = [
+      'strip_unlikely_candidates',
+      'weight_nodes',
+      'clean_conditionally'
+    ]
+
+    // Cascade through our extraction-specific flags in an ordered fashion,
+    // turning them off as we try to extract content.
+    {/* node = this.extractCleanNode( */}
+    {/*   this.extractBestNode(), */}
+    {/*   flags.cleanConditionally) */}
+    console.log('hi')
+  },
+
+  extractBestNode($) {
+    `   Using a variety of scoring techniques, extract the content most
+        likely to be article text.
+
+        If strip_unlikely_candidates is True, remove any elements that
+        match certain criteria first. (Like, does this element have a
+        classname of "comment")
+
+        If weight_nodes is True, use classNames and IDs to determine the
+        worthiness of nodes.
+
+        Returns an lxml node.
+   `
+
+    // deep clone the node so we can get back to our initial parsed state
+    // if needed
+    // TODO: Performance improvements here? Deepcopy is known to be slow.
+    // Can we avoid this somehow?
+    {/* root = deepcopy(self.resource) */}
+    {/*  */}
+    {/* if self.flags['strip_unlikely_candidates']: */}
+    {/*     self._strip_unlikely_candidates(root) */}
+    {/*  */}
+    {/* self._convert_to_paragraphs(root) */}
+    {/* self._score_content(root, weight_nodes=self.flags['weight_nodes']) */}
+    {/*  */}
+    {/* # print structure(root) */}
+    {/*  */}
+    {/* top_candidate = self._find_top_candidate(root) */}
+    {/*  */}
+    {/* return top_candidate */}
+
   }
 }
-// import logging
-//
-// from copy import deepcopy
-// from . import constants
-// from utils.dom.attribmap import AttribMap
-// import lxml.html
-// from lxml.html import builder as E
-// from utils.dom import (
-//     extract_by_selector,
-//     inner_text,
-//     link_density,
-//     node_to_html,
-// )
-// from utils.text import (has_sentence_end, normalize_spaces)
-// from utils.html import strip_tags
-//
-// logger = logging.getLogger(__name__)
-// # Shortcut
-// RE_NAMESPACE = {'re': constants.RE_NS}
-//
-// class GenericContentExtractor(object):
-//     """Article content extraction is a beast. For clarities sake, it is
-//     broken out into its own component.
-//
-//     """
-//
-//     def __init__(self, resource, flags=None, title=None):
-//         self.resource = resource
-//
-//         self.title = title
-//
-//         if flags:
-//             self.flags = flags
-//         else:
-//             self.flags = {
-//                 "strip_unlikely_candidates": True,
-//                 "weight_nodes": True,
-//                 "clean_conditionally": True,
-//             }
-//
-//     def extract(self, return_type="html"):
-//         """ Extract the content for this resource - initially, pass in our
-//             most restrictive flags which will return the highest quality
-//             content. On each failure, retry with slightly more lax flags.
-//
-//             :param return_type: string. If "node", should return the content
-//                                 as an LXML node rather than as an HTML string.
-//
-//             Flags:
-//               strip_unlikely_candidates: Remove any elements that match
-//                   non-article-like criteria first.(Like, does this element
-//                   have a classname of "comment")
-//
-//               weight_nodes: Modify an elements score based on whether it has
-//                   certain classNames or IDs. Examples: Subtract if a node has
-//                   a className of 'comment', Add if a node has an ID of
-//                   'entry-content'.
-//
-//               clean_conditionally: Clean the node to return of some
-//                   superfluous content. Things like forms, ads, etc.
-//         """
-//         extraction_flags = ['strip_unlikely_candidates', 'weight_nodes', 'clean_conditionally']
-//
-//         # Cascade through our extraction-specific flags in an ordered fashion,
-//         # turning them off as we try to extract content.
-//         clean_conditionally = self.flags.get('clean_conditionally', False)
-//         node = self.extract_clean_node(
-//             self._extract_best_node(),
-//             clean_conditionally=clean_conditionally)
+
 //
 //         if not self.node_is_sufficient(node):
 //             # We didn't succeed on first pass, one by one disable our

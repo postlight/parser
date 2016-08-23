@@ -9,9 +9,9 @@
   },
   "author": "",
   "license": "ISC",
-  "devDependencies": {
-  },
+  "devDependencies": {},
   "dependencies": {
+    "cheerio": "^0.20.0",
     "rollup": "^0.34.10"
   }
 }
