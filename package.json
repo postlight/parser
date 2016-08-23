@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node ./build",
-    "test": "mocha --compilers js:babel-register src/**/**/*.test.js"
+    "test": "mocha --compilers js:babel-register --recursive src/**/*.test.js"
   },
   "author": "",
   "license": "ISC",

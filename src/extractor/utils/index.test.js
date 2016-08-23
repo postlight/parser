@@ -1,9 +1,23 @@
 import assert from 'assert'
+import cheerio from 'cheerio'
+
+import HTML from './fixtures/html'
+import {
+  nodeIsSufficient
+} from './index'
 
 describe('Utils', () => {
   describe('nodeIsSufficient(node)', () => {
-    it("should return true if text length > 100 chars", () => {
-      assert.equal(true, true)
+    it("returns false if node text length < 100 chars", () => {
+      const $ = cheerio.load(HTML.tooShort)
+      const sufficient = nodeIsSufficient($.root())
+      assert.equal(sufficient, false)
+    })
+
+    it("returns true if node text length > 100 chars", () => {
+      const $ = cheerio.load(HTML.longEnough)
+      const sufficient = nodeIsSufficient($.root())
+      assert.equal(sufficient, true)
     })
   })
 })

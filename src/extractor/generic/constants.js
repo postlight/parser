@@ -747,6 +747,8 @@ export const POSITIVE_SCORE_HINTS = [
 // The above list, joined into a matching regular expression
 export const POSITIVE_SCORE_RE = new RegExp(POSITIVE_SCORE_HINTS.join('|'), 'i')
 
+// Readability publisher-specific guidelines
+export const READABILITY_ASSET = new RegExp('entry-content-asset', 'i')
 
 // A list of strings that denote a negative scoring for this content as being
 // an article container. Checked against className and id.
@@ -864,7 +866,8 @@ export const EXTRANEOUS_LINK_HINTS_RE = new RegExp(EXTRANEOUS_LINK_HINTS.join('|
 // Does not match:
 //  pg=102
 //  page:2
-export const PAGE_IN_HREF_RE = new RegExp('(page|paging|(p(a|g|ag)?(e|enum|ewanted|ing|ination)?(=|\/)(?P<pagenum>[0-9]{1,2})))', 'i')
+// DISABLING FOR NOW TODO AP
+// export const PAGE_IN_HREF_RE = new RegExp('(page|paging|(p(a|g|ag)?(e|enum|ewanted|ing|ination)?(=|\/)(?P<pagenum>[0-9]{1,2})))', 'i')
 
 // Match any phrase that looks like it could be page, or paging, or pagination
 export const PAGE_RE = new RegExp('pag(e|ing|inat)', 'i')
