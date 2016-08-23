@@ -1,4 +1,5 @@
 const HTML = {
+  // getWeight fixtures
   positiveId: `
     <div id="entry">
       <p>Ooo good one</p>
@@ -44,6 +45,55 @@ const HTML = {
       <p>Ooo good one</p>
     </div>
   `,
+
+  // stripUnlikelyCandidates
+  noMatches: `
+    <div id="foo">
+      <p>Ooo good one</p>
+    </div>
+  `,
+  whitelistMatch: {
+    before: `
+      <div class="header">Stuff</div>
+      <div class="article">
+        <p>Ooo good one</p>
+      </div>
+    `,
+    after: `
+      <div class="article">
+        <p>Ooo good one</p>
+      </div>
+    `,
+  },
+  whiteAndBlack: {
+    before: `
+      <div class="article adbox">
+        <p>Ooo good one</p>
+      </div>
+    `,
+    after: `
+      <div class="article adbox">
+        <p>Ooo good one</p>
+      </div>
+    `,
+  },
+  whiteInsideBlack: {
+    before: `
+      <div>
+        <div class="adbox">
+          <div class="article">
+            <p>Ooo good one</p>
+          </div>
+        </div>
+        <div>Something unrelated</div>
+      </div>
+    `,
+    after: `
+      <div>
+        <div>Something unrelated</div>
+      </div>
+    `,
+  },
 }
 
 export default HTML

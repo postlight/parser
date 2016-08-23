@@ -942,3 +942,16 @@ export const BLOCK_LEVEL_TAGS = [
     'ul',
     'video',
 ]
+
+
+// The removal is implemented as a blacklist and whitelist, this test finds
+// blacklisted elements that aren't whitelisted. We do this all in one
+// expression-both because it's only one pass, and because this skips the
+// serialization for whitelisted nodes.
+const candidates_blacklist = UNLIKELY_CANDIDATES_BLACKLIST.join('|')
+export const CANDIDATES_BLACKLIST = new RegExp(candidates_blacklist, 'i')
+
+const candidates_whitelist = UNLIKELY_CANDIDATES_WHITELIST.join('|')
+export const CANDIDATES_WHITELIST = new RegExp(candidates_whitelist, 'i')
+
+export const UNLIKELY_RE = new RegExp(`!(${candidates_whitelist})|(${candidates_blacklist})`, 'i')
