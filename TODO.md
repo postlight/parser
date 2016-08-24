@@ -5,7 +5,7 @@ x `node_is_sufficient`
 - `_extract_best_node`
 x `get_weight`
 x `_strip_unlikely_candidates`
-- `_convert_to_paragraphs`
+x `_convert_to_paragraphs`
 x `_brs_to_paragraphs`
 x `_paragraphize`
 

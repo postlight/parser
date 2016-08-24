@@ -610,7 +610,7 @@ export const DIV_TO_P_BLOCK_TAGS = [
     'p',
     'pre',
     'table',
-]
+].join(',')
 
 // A list of tags that should be ignored when trying to find the top candidate
 // for a document.

@@ -194,6 +194,36 @@ const HTML = {
       </p>
     `,
   },
+
+  // convertToParagraphs
+  convertToParagraphs: {
+    before: `
+      <p>
+        Here is some text
+        <span>This should remain in a p</span>
+        <br />
+        <br />
+        This should be wrapped in a p
+        <div>This should become a p</div>
+      </p>
+      <span>This should become a p</span>
+    `,
+    after: `
+      <p>
+        Here is some text
+        <span>This should remain in a p</span>
+      <p>
+        This should be wrapped in a p
+      </p><p>This should become a p</p>
+      </p> <p>This should become a p</p>
+    `,
+  },
+
+  // convertNodeToP
+  convertNodeToP: {
+    before: '<div>Should become a p</div>',
+    after: '<p>Should become a p</p>',
+  }
 }
 
 export default HTML
