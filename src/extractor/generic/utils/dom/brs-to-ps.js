@@ -1,4 +1,4 @@
-import paragraphize from './paragraphize'
+import { paragraphize } from './index'
 
 // ## NOTES:
 // Another good candidate for refactoring/optimizing.

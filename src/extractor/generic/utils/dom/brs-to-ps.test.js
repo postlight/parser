@@ -1,16 +1,11 @@
 import assert from 'assert'
 import cheerio from 'cheerio'
 
-import { clean } from './test-helpers'
+import { assertBeforeAndAfter } from './test-helpers'
 import HTML from '../fixtures/html'
 import {
   brsToPs
 } from './index'
-
-function assertBeforeAndAfter(key, fn) {
-  const $ = cheerio.load(HTML[key].before)
-  assert.equal(clean(fn($).html()), clean(HTML[key].after))
-}
 
 describe('Generic Extractor Utils', () => {
   describe('brsToPs(node)', () => {

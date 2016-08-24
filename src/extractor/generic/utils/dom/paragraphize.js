@@ -7,7 +7,7 @@ import { BLOCK_LEVEL_TAGS_RE } from '../constants'
 // If the node is a <br />, it treats the following inline siblings
 // as if they were its children.
 //
-// :param node: The node to paragraphize
+// :param node: The node to paragraphize; this is a raw node
 // :param $: The cheerio object to handle dom manipulation
 // :param br: Whether or not the passed node is a br
 
