@@ -942,6 +942,7 @@ export const BLOCK_LEVEL_TAGS = [
     'ul',
     'video',
 ]
+export const BLOCK_LEVEL_TAGS_RE = new RegExp(`^(${BLOCK_LEVEL_TAGS.join('|')})$`, 'i')
 
 
 // The removal is implemented as a blacklist and whitelist, this test finds

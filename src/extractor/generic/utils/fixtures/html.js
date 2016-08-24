@@ -120,8 +120,7 @@ const HTML = {
     `,
     after: `
       <div class="article adbox">
-        <p></p>
-        <p>Ooo good one</p>
+        <p> </p><p>Ooo good one</p>
       </div>
     `,
   },
@@ -138,8 +137,7 @@ const HTML = {
     `,
     after: `
       <div class="article adbox">
-        <p></p>
-        <p>Ooo good one</p>
+        <p> </p><p>Ooo good one</p>
       </div>
     `,
   },
@@ -155,9 +153,44 @@ const HTML = {
     after: `
       <p>
         Here is some text
-      </p>
       <p>
         Here is more text
+     </p></p>
+    `,
+  },
+  paragraphize: {
+    before: `
+      <p>
+        Here is some text
+        <br />
+        Here is more text
+        <span>And also this</span>
+      </p>
+    `,
+    after: `
+      <p>
+        Here is some text
+      <p>
+        Here is more text
+        <span>And also this</span>
+      </p></p>
+    `,
+  },
+  paragraphizeBlock: {
+    before: `
+      <p>
+        Here is some text
+        <br />
+        Here is more text
+        <div>And also this</div>
+      </p>
+    `,
+    after: `
+      <p>
+        Here is some text
+      <p>
+        Here is more text
+      </p><div>And also this</div>
       </p>
     `,
   },

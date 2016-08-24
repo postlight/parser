@@ -1,4 +1,4 @@
-
+Next: Continue working on paragraphize; move p tags outside other p tags (do this when not converting br)
 
 - `extract` (this kicks it all off)
 x `node_is_sufficient`
@@ -6,8 +6,8 @@ x `node_is_sufficient`
 x `get_weight`
 x `_strip_unlikely_candidates`
 - `_convert_to_paragraphs`
-- `_brs_to_paragraphs`
-- `_paragraphize`
+x `_brs_to_paragraphs`
+x `_paragraphize`
 
 ## Scoring
 

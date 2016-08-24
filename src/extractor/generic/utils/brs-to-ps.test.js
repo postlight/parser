@@ -34,8 +34,11 @@ describe('Generic Extractor Utils', () => {
 
     it("converts BR tags in a P tag into a P containing inline children", () => {
       const $ = cheerio.load(HTML.brsInP.before)
+
+      // Note: result is malformed HTML
+      // Will be handled elsewhere
       const result = brsToPs($).html()
-      // assert.equal(clean(result), clean(HTML.brsInP.after))
+      assert.equal(clean(result), clean(HTML.brsInP.after))
     })
 
   })
