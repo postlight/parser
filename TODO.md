@@ -11,12 +11,12 @@ x `_paragraphize`
 
 ## Scoring
 
-- `_get_score`
-- `_set_score`
-- `_add_score`
+x `_get_score`
+x `_set_score`
+x `_add_score`
 - `_score_content`
-- `_score_node`
-- `_score_paragraph`
+x `_score_node`
+x `_score_paragraph`
 
 ## Top Candidate
 

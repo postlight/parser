@@ -956,3 +956,9 @@ const candidates_whitelist = UNLIKELY_CANDIDATES_WHITELIST.join('|')
 export const CANDIDATES_WHITELIST = new RegExp(candidates_whitelist, 'i')
 
 export const UNLIKELY_RE = new RegExp(`!(${candidates_whitelist})|(${candidates_blacklist})`, 'i')
+
+
+export const PARAGRAPH_SCORE_TAGS = new RegExp('^(p|li|span|pre)$', 'i')
+export const CHILD_CONTENT_TAGS = new RegExp('^(td|blockquote|ol|ul|dl)$', 'i')
+export const BAD_TAGS = new RegExp('^(address|form)$', 'i')
+
