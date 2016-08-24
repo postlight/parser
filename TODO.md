@@ -23,3 +23,6 @@ x `_score_paragraph`
 - `_find_top_candidate`
 - `extract_clean_node`
 - `_clean_conditionally`
+
+
+Add helper methods to clean up tests

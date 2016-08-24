@@ -7,6 +7,11 @@ import {
   brsToPs
 } from './index'
 
+function assertBeforeAndAfter(key, fn) {
+  const $ = cheerio.load(HTML[key].before)
+  assert.equal(clean(fn($).html()), clean(HTML[key].after))
+}
+
 describe('Generic Extractor Utils', () => {
   describe('brsToPs(node)', () => {
 
@@ -16,29 +21,19 @@ describe('Generic Extractor Utils', () => {
     })
 
     it("does nothing when a single BR is present", () => {
-      const $ = cheerio.load(HTML.singleBr.before)
-      assert.equal(brsToPs($).html(), HTML.singleBr.after)
+      assertBeforeAndAfter('singleBr', brsToPs)
     })
 
     it("converts double BR tags to an empty P tag", () => {
-      const $ = cheerio.load(HTML.doubleBrs.before)
-      const result = brsToPs($).html()
-      assert.equal(clean(result), clean(HTML.doubleBrs.after))
+      assertBeforeAndAfter('doubleBrs', brsToPs)
     })
 
     it("converts several BR tags to an empty P tag", () => {
-      const $ = cheerio.load(HTML.severalBrs.before)
-      const result = brsToPs($).html()
-      assert.equal(clean(result), clean(HTML.severalBrs.after))
+      assertBeforeAndAfter('severalBrs', brsToPs)
     })
 
     it("converts BR tags in a P tag into a P containing inline children", () => {
-      const $ = cheerio.load(HTML.brsInP.before)
-
-      // Note: result is malformed HTML
-      // Will be handled elsewhere
-      const result = brsToPs($).html()
-      assert.equal(clean(result), clean(HTML.brsInP.after))
+      assertBeforeAndAfter('brsInP', brsToPs)
     })
 
   })
