@@ -634,43 +634,51 @@ export const NON_TOP_CANDIDATE_TAGS = [
 // very content-specific style content, like Blogger templates.
 // More examples here: http://microformats.org/wiki/blog-post-formats
 export const HNEWS_CONTENT_SELECTORS = [
-    {
-        //selector: XPath('//*[contains(@class, "hentry")]//*[contains(@class, "entry-content")]'),
-        must_exist: {
-            classes: ['hentry', 'entry-content'],
-        }
-    },
-    {
-        //selector: XPath('//*[contains(@class, "entry")]//*[contains(@class, "entry-content")]'),
-        must_exist: {
-            classes: ['entry', 'entry-content'],
-        }
-    },
-    {
-        //selector: XPath('//*[contains(@class, "entry")]//*[contains(@class, "entry_content")]'),
-        must_exist: {
-            classes: ['entry', 'entry_content'],
-        }
-    },
-    {
-        //selector: XPath('//*[contains(@class, "post")]//*[contains(@class, "post-body")]'),
-        must_exist: {
-            classes: ['post', 'post-body'],
-        }
-    },
-    {
-        //selector: XPath('//*[contains(@class, "post")]//*[contains(@class, "post_body")]'),
-        must_exist: {
-            classes: ['post', 'post_body'],
-        }
-    },
-    {
-        //selector: XPath('//*[contains(@class, "post")]//*[contains(@class, "postbody")]'),
-        must_exist: {
-            classes: ['post', 'postbody'],
-        }
-    },
+  ['.hentry', '.entry-content'],
+  ['entry', '.entry-content'],
+  ['.entry', '.entry_content'],
+  ['.post', '.postbody'],
+  ['.post', '.post_body'],
+  ['.post', '.post-body'],
 ]
+// export const HNEWS_CONTENT_SELECTORS = [
+//     {
+//         //selector: XPath('/#<{(|[contains(@class, "hentry")]/#<{(|[contains(@class, "entry-content")]'),
+//         must_exist: {
+//             classes: ['hentry', 'entry-content'],
+//         }
+//     },
+//     {
+//         //selector: XPath('/#<{(|[contains(@class, "entry")]/#<{(|[contains(@class, "entry-content")]'),
+//         must_exist: {
+//             classes: ['entry', 'entry-content'],
+//         }
+//     },
+//     {
+//         //selector: XPath('/#<{(|[contains(@class, "entry")]/#<{(|[contains(@class, "entry_content")]'),
+//         must_exist: {
+//             classes: ['entry', 'entry_content'],
+//         }
+//     },
+//     {
+//         //selector: XPath('/#<{(|[contains(@class, "post")]/#<{(|[contains(@class, "post-body")]'),
+//         must_exist: {
+//             classes: ['post', 'post-body'],
+//         }
+//     },
+//     {
+//         //selector: XPath('/#<{(|[contains(@class, "post")]/#<{(|[contains(@class, "post_body")]'),
+//         must_exist: {
+//             classes: ['post', 'post_body'],
+//         }
+//     },
+//     {
+//         //selector: XPath('/#<{(|[contains(@class, "post")]/#<{(|[contains(@class, "postbody")]'),
+//         must_exist: {
+//             classes: ['post', 'postbody'],
+//         }
+//     },
+// ]
 
 export const PHOTO_HINTS = [
     'figure',

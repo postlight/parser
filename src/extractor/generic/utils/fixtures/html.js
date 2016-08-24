@@ -219,8 +219,8 @@ const HTML = {
     `,
   },
 
-  // convertNodeToP
-  convertNodeToP: {
+  // convertNodeTo
+  convertNodeTo: {
     before: '<div>Should become a p</div>',
     after: '<p>Should become a p</p>',
   }

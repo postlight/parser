@@ -11,7 +11,7 @@ import {
   convertToParagraphs
 } from './index'
 
-import { convertNodeToP } from './convert-to-paragraphs'
+import { convertNodeTo } from './convert-to-paragraphs'
 
 describe('Generic Extractor Utils', () => {
   describe('convertToParagraphs($)', () => {
@@ -22,14 +22,14 @@ describe('Generic Extractor Utils', () => {
 
   })
 
-  describe('convertNodeToP(node, $)', () => {
+  describe('convertNodeTo(node, $)', () => {
     it('takes a node with any tag and turns it into a P tag', () => {
-      const $ = cheerio.load(HTML.convertNodeToP.before)
+      const $ = cheerio.load(HTML.convertNodeTo.before)
       const node = $('div').first()
 
-      const result = convertNodeToP(node, $).html()
+      const result = convertNodeTo(node, $).html()
 
-      assertClean(result, HTML.convertNodeToP.after)
+      assertClean(result, HTML.convertNodeTo.after)
     })
 
   })

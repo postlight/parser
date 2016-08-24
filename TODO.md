@@ -1,4 +1,4 @@
-Next: Continue working on paragraphize; move p tags outside other p tags (do this when not converting br)
+Next: Work on score-content, making sure it's working as intended (seems to be)
 
 - `extract` (this kicks it all off)
 x `node_is_sufficient`
@@ -23,6 +23,3 @@ x `_score_paragraph`
 - `_find_top_candidate`
 - `extract_clean_node`
 - `_clean_conditionally`
-
-
-Add helper methods to clean up tests
