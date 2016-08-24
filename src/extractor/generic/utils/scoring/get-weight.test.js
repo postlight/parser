@@ -1,7 +1,7 @@
 import assert from 'assert'
 import cheerio from 'cheerio'
 
-import HTML from './fixtures/html'
+import HTML from '../fixtures/html'
 import {
   getWeight
 } from './index'

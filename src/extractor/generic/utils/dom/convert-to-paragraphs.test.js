@@ -2,7 +2,7 @@ import assert from 'assert'
 import cheerio from 'cheerio'
 
 import { clean } from './test-helpers'
-import HTML from './fixtures/html'
+import HTML from '../fixtures/html'
 import {
   convertToParagraphs
 } from './index'
