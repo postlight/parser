@@ -1,4 +1,5 @@
 Next: Work on score-content, making sure it's working as intended (seems to be)
+Get better sense of when cheerio returns a raw node and when a cheerio object
 
 - `extract` (this kicks it all off)
 x `node_is_sufficient`
@@ -14,7 +15,7 @@ x `_paragraphize`
 x `_get_score`
 x `_set_score`
 x `_add_score`
-- `_score_content`
+x `_score_content`
 x `_score_node`
 x `_score_paragraph`
 
@@ -23,3 +24,6 @@ x `_score_paragraph`
 - `_find_top_candidate`
 - `extract_clean_node`
 - `_clean_conditionally`
+
+
+Make sure weightNodes flag is being passed properly
