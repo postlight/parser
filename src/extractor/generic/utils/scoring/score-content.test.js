@@ -2,9 +2,7 @@ import assert from 'assert'
 import cheerio from 'cheerio'
 import fs from 'fs'
 
-import {
-  clean
-} from '../dom/test-helpers'
+import { clean } from '../dom/test-helpers'
 import HTML from './fixtures/html'
 
 import {
@@ -38,7 +36,7 @@ describe('scoreContent($, weightNodes)', () => {
     const result = scoreContent($).html()
 
     // assert.equal(getScore($('article').first(), $), 63.75)
-    assert.equal(getScore($('article').first(), $), 67)
+    assert.equal(getScore($('article').first(), $), 70.5)
   })
 
   // it("scores this NYT article the same", () => {
