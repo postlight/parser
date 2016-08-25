@@ -223,7 +223,18 @@ const HTML = {
   convertNodeTo: {
     before: '<div>Should become a p</div>',
     after: '<p>Should become a p</p>',
-  }
+  },
+
+  // linkDensity
+  linkDensity5: `
+    <div><p>Some text!</p><p><a href="">Some text!</a></p> </div>
+  `,
+  linkDensity1: `
+    <div><p><a href="">Some text!</a></p></div>
+  `,
+  linkDensity0: `
+    <div><p><a href=""></a></p></div>
+  `,
 }
 
 export default HTML
