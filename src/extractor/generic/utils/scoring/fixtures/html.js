@@ -54,6 +54,34 @@ const HTML = {
       </div>
     `,
   },
+
+  // findTopCandidate
+  findDom1: `
+    <div score="100">
+      <p score="1">Lorem ipsum etc</p>
+    </div>
+  `,
+  findDom2: `
+    <div score="10">
+      <article score="50">
+        <p score="1">Lorem ipsum etc</p>
+      </article>
+    </div>
+  `,
+  findDom3: `
+    <article score="50">
+      <p score="1">Lorem ipsum br</p>
+      <br score="1000" />
+    </article>
+  `,
+  topBody: `
+    <body>
+      <article>
+        <p>Lorem ipsum etc</p>
+        <br />
+      </article>
+    <body>
+  `,
 }
 
 export default HTML

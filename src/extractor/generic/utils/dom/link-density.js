@@ -1,7 +1,7 @@
 // Determines what percentage of the text
 // in a node is link text
 // Takes a node, returns a float
-export default function linkDensity(node) {
+export function linkDensity(node) {
   const totalTextLength = textLength(node.text())
 
   const linkText = node.find('a').text()
@@ -16,7 +16,7 @@ export default function linkDensity(node) {
   }
 }
 
-function textLength(text) {
+export function textLength(text) {
   return text.trim()
              .replace(/\s+/g, ' ')
              .length

@@ -1,5 +1,4 @@
 Next: Work on score-content, making sure it's working as intended (seems to be)
-Get better sense of when cheerio returns a raw node and when a cheerio object
 
 - `extract` (this kicks it all off)
 x `node_is_sufficient`
@@ -21,9 +20,14 @@ x `_score_paragraph`
 
 ## Top Candidate
 
-- `_find_top_candidate`
+x `_find_top_candidate`
 - `extract_clean_node`
 - `_clean_conditionally`
 
 
 Make sure weightNodes flag is being passed properly
+Get better sense of when cheerio returns a raw node and when a cheerio object
+  Remove $ from function calls to getScore
+  Remove $ whenever possible
+Test if .is method is faster than regex methods
+Separate constants into activity-specific folders (dom, scoring)

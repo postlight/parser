@@ -629,6 +629,8 @@ export const NON_TOP_CANDIDATE_TAGS = [
     'meta',
 ]
 
+export const NON_TOP_CANDIDATE_TAGS_RE =
+  new RegExp(`^(${NON_TOP_CANDIDATE_TAGS.join('|')})$`, 'i')
 
 // A list of selectors that specify, very clearly, either hNews or other
 // very content-specific style content, like Blogger templates.
