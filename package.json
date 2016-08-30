@@ -10,6 +10,8 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "babel-plugin-transform-es2015-destructuring": "^6.9.0",
+    "babel-plugin-transform-object-rest-spread": "^6.8.0",
     "babel-preset-es2015": "^6.13.2",
     "babel-register": "^6.11.6",
     "mocha": "^3.0.2"

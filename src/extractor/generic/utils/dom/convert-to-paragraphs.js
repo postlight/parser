@@ -25,7 +25,7 @@ function convertDivs($) {
     const convertable = $(div).children()
       .not(DIV_TO_P_BLOCK_TAGS).length == 0
     if (convertable) {
-      convertNodeTo(div, $)
+      convertNodeTo(div, $, 'p')
     }
   })
 
@@ -36,7 +36,7 @@ function convertSpans($) {
   $('span').each((index, span) => {
     const convertable = $(span).parents('p, div').length == 0
     if (convertable) {
-      convertNodeTo(span, $)
+      convertNodeTo(span, $, 'p')
     }
   })
 

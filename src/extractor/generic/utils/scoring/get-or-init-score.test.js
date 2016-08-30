@@ -55,7 +55,7 @@ describe('getOrInitScore(node, $)', () => {
 
       const score = getOrInitScore(node, $)
 
-      assert.equal(getScore(node.parent(), $), score/4)
+      assert.equal(getScore(node.parent(), $), 16)
     })
   })
 })

@@ -47,13 +47,11 @@ describe('findTopCandidate($)', () => {
 
   it("appends a sibling with a good enough score", () => {
     const html = fs.readFileSync('../fixtures/latimes.html', 'utf-8')
-                 .replace(/<!--[\s\S]*?-->/g, '')
 
     let $ = cheerio.load(html)
     $ = scoreContent($)
 
     const topCandidate = findTopCandidate($)
-
     assert.equal($(topCandidate).text().length, 3652)
   })
 })

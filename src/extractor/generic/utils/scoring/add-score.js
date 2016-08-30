@@ -1,10 +1,16 @@
 import {
   getScore,
+  getOrInitScore,
   setScore,
 } from './index'
 
 export default function addScore(node, $, amount) {
-  const score = getScore(node, $) + amount
-  setScore(node, $, score)
-  return node
+  try {
+    const score = getOrInitScore(node, $) + amount
+    setScore(node, $, score)
+  } catch(e) {
+    console.debug(e)
+  } finally {
+    return node
+  }
 }

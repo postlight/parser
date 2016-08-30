@@ -559,6 +559,7 @@ export const UNLIKELY_CANDIDATES_BLACKLIST = [
     'presence_control_external', // lifehacker.com container full of false positives
     'popup',
     'printfriendly',
+    'related',
     'remove',
     'remark',
     'rss',
@@ -834,6 +835,9 @@ export const STRIP_OUTPUT_TAGS = [
     'hr',
 ]
 
+// Spacer images to be removed
+export const SPACER_RE = new RegExp("trans|transparent|spacer|blank", "i")
+
 // XPath to try to determine if a page is wordpress. Not always successful.
 export const IS_WP_XPATH = "//meta[@name='generator'][starts-with(@value,'WordPress')]"
 
@@ -972,3 +976,17 @@ export const PARAGRAPH_SCORE_TAGS = new RegExp('^(p|li|span|pre)$', 'i')
 export const CHILD_CONTENT_TAGS = new RegExp('^(td|blockquote|ol|ul|dl)$', 'i')
 export const BAD_TAGS = new RegExp('^(address|form)$', 'i')
 
+export const HTML_OR_BODY_RE = new RegExp('^(html|body)$', 'i')
+
+
+export const REMOVE_ATTRS = ['style', 'align']
+export const REMOVE_ATTR_SELECTORS = REMOVE_ATTRS.map(selector => `[${selector}]`)
+export const REMOVE_ATTR_LIST = REMOVE_ATTRS.join(',')
+
+export const REMOVE_EMPTY_TAGS = ['p']
+export const REMOVE_EMPTY_SELECTORS = REMOVE_EMPTY_TAGS.map(tag => `${tag}:empty`).join(',')
+
+export const CLEAN_CONDITIONALLY_TAGS = ['ul', 'ol', 'table', 'div'].join(',')
+
+const HEADER_TAGS = ['h2', 'h3', 'h4', 'h5', 'h6']
+export const HEADER_TAG_LIST = HEADER_TAGS.join(',')

@@ -85,8 +85,8 @@ export function mergeSiblings(candidate, topScore, $) {
 
         if (newScore >= siblingScoreThreshold) {
           return wrappingDiv.append(child)
-        } else if (node.tagName === 'p') {
-          childContentLength = textLength(child.text())
+        } else if (child.tagName === 'p') {
+          const childContentLength = textLength($(child).text())
 
           if (childContentLength > 80 && density < .25) {
             return wrappingDiv.append(child)
