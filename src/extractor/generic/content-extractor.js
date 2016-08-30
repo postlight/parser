@@ -24,13 +24,13 @@ const GenericContentExtractor = {
   },
 
   // Extract the content for this resource - initially, pass in our
-  // most restrictive flags which will return the highest quality
-  // content. On each failure, retry with slightly more lax flags.
+  // most restrictive opts which will return the highest quality
+  // content. On each failure, retry with slightly more lax opts.
   //
   // :param return_type: string. If "node", should return the content
   // as a cheerio node rather than as an HTML string.
   //
-  // Flags:
+  // Opts:
   // stripUnlikelyCandidates: Remove any elements that match
   // non-article-like criteria first.(Like, does this element
   //   have a classname of "comment")
@@ -45,7 +45,7 @@ const GenericContentExtractor = {
   extract(html, opts, title) {
     let $ = cheerio.load(html)
 
-    // Cascade through our extraction-specific flags in an ordered fashion,
+    // Cascade through our extraction-specific opts in an ordered fashion,
     // turning them off as we try to extract content.
     let node = extractCleanNode(
                 extractBestNode($, opts),
@@ -56,7 +56,7 @@ const GenericContentExtractor = {
       return this.cleanAndReturnNode(node, $)
     } else {
       // We didn't succeed on first pass, one by one disable our
-      // extraction flags and try again.
+      // extraction opts and try again.
       for (const key of Reflect.ownKeys(opts).filter(key => opts[key] === true)) {
         opts[key] = false
         $ = cheerio.load(html)
@@ -99,22 +99,3 @@ const GenericContentExtractor = {
 }
 
 export default GenericContentExtractor
-
-// if node is None:
-//     return None
-//
-// print "#######SCORE########"
-// print self.high_score
-// print self.top_node.tag
-// # Remove our scoring information from our content
-// if 'score' in node.attrib:
-//     del node.attrib['score']
-// for scored_node in node.xpath('./#<{(|[@score]'):
-//     del scored_node.attrib['score']
-//
-// if return_type == "html":
-//     return normalize_spaces(node_to_html(node))
-// else:
-//     return node
-//
-
