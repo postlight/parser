@@ -12,7 +12,7 @@ describe('GenericContentExtractor', () => {
       const html = fs.readFileSync('../fixtures/latimes.html', 'utf-8')
 
       const result = clean(GenericContentExtractor.parse(html))
-      // console.log(result)
+      console.log(result)
     })
   })
 })

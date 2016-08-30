@@ -1,4 +1,5 @@
 import cheerio from 'cheerio'
+import 'babel-polyfill'
 
 import extractBestNode from './extract-best-node'
 import nodeIsSufficient from '../utils/node-is-sufficient'
@@ -14,13 +15,12 @@ const GenericContentExtractor = {
 
   // Entry point for parsing html
   parse(html, opts={}) {
-    let $ = cheerio.load(html)
     opts = { ...this.defaultOpts, ...opts }
 
     // TODO: Title is used to clean headers.
     // Should be passed from title extraction.
     const title = ''
-    return this.extract($, opts, title)
+    return this.extract(html, opts, title)
   },
 
   // Extract the content for this resource - initially, pass in our
@@ -42,7 +42,9 @@ const GenericContentExtractor = {
   //
   // cleanConditionally: Clean the node to return of some
   // superfluous content. Things like forms, ads, etc.
-  extract($, opts, title) {
+  extract(html, opts, title) {
+    let $ = cheerio.load(html)
+
     // Cascade through our extraction-specific flags in an ordered fashion,
     // turning them off as we try to extract content.
     let node = extractCleanNode(
@@ -51,26 +53,28 @@ const GenericContentExtractor = {
                 opts.cleanConditionally)
 
     if (nodeIsSufficient(node)) {
-      console.log("success on first run!!!!!")
       return this.cleanAndReturnNode(node, $)
     } else {
       // We didn't succeed on first pass, one by one disable our
       // extraction flags and try again.
-      console.log("no success doing again!!!!!")
-      for (key in Reflect.ownKeys(opts).filter(key => opts[key] === true)) {
+      for (const key of Reflect.ownKeys(opts).filter(key => opts[key] === true)) {
         opts[key] = false
+        $ = cheerio.load(html)
+
         node = extractCleanNode(
                     extractBestNode($, opts),
+                    $,
                     opts.cleanConditionally)
 
         if (nodeIsSufficient(node)) {
           break
         }
       }
+
+      return this.cleanAndReturnNode(node, $)
     }
 
-
-    return node
+    return this.cleanAndReturnNode(node, $)
   },
 
   // Once we got here, either we're at our last-resort node, or
