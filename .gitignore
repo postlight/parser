@@ -1,3 +1,4 @@
 node_modules
 build
 bundle.js
+npm-debug.log
