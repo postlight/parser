@@ -4,15 +4,24 @@ import GenericContentExtractor from './content/extractor'
 import GenericTitleExtractor from './title/extractor'
 
 const GenericExtractor = {
-  parse: (html) => {
-    let $ = cheerio.load(html)
+  parse: (url, html) => {
+    if (html) {
+      let $ = cheerio.load(html)
+    } else {
+      // TODO
+      // Fetch link, following redirects
+      // to return html and initialize $
+    }
+
     // Cached value of every meta name in our document.
     // Used when extracting title/author/date_published/dek
-    const metaCache = $('meta').map((index, node) => $(node).attr('name'))
+    const metaCache = $('meta').map((index, node) => {
+      return $(node).attr('name')
+    }).toArray()
 
-    const title = GenericTitleExtractor.extract($, metaCache)
+    const title = GenericTitleExtractor.extract($, url, metaCache)
     return {
-      content: GenericContentExtractor.parse(html),
+      content: GenericContentExtractor.parse($, html),
       title: title,
     }
   }

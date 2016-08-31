@@ -9,7 +9,7 @@ import {
 
 // Given a title with separators in it (colons, dashes, etc),
 // resolve whether any of the segments should be removed.
-export default function resolveSplitTitle(title, url='http://example.com') {
+export default function resolveSplitTitle(title, url='') {
   // Splits while preserving splitters, like:
   // ['The New New York', ' - ', 'The Washington Post']
   title = title
@@ -94,7 +94,7 @@ function cleanDomainFromTitle(splitTitle, url) {
   const endSlug = splitTitle.slice(-1)[0].toLowerCase().replace(' ', '')
   const endSlugRatio = wuzzy.levenshtein(endSlug, nakedDomain)
 
-  if (endSlugRatio > .4 && endSlug.length > 5) {
+  if (endSlugRatio > .4 && endSlug.length >= 5) {
     return splitTitle.slice(0, -2).join('')
   }
 }
