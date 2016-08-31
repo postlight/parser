@@ -14,13 +14,12 @@ const GenericContentExtractor = {
   },
 
   // Entry point for parsing html
-  parse(html, opts={}) {
+  parse($, html, title='', opts={}) {
     opts = { ...this.defaultOpts, ...opts }
 
     // TODO: Title is used to clean headers.
     // Should be passed from title extraction.
-    const title = ''
-    return this.extract(html, opts, title)
+    return this.extract($, html, opts, title)
   },
 
   // Extract the content for this resource - initially, pass in our
@@ -42,8 +41,8 @@ const GenericContentExtractor = {
   //
   // cleanConditionally: Clean the node to return of some
   // superfluous content. Things like forms, ads, etc.
-  extract(html, opts, title) {
-    let $ = cheerio.load(html)
+  extract($, html, opts, title) {
+    $ = $ || cheerio.load(html)
 
     // Cascade through our extraction-specific opts in an ordered fashion,
     // turning them off as we try to extract content.

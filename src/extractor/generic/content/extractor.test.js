@@ -11,7 +11,7 @@ describe('GenericContentExtractor', () => {
     it("parses html and returns the article", () => {
       const html = fs.readFileSync('../fixtures/latimes.html', 'utf-8')
 
-      const result = clean(GenericContentExtractor.parse(html))
+      const result = clean(GenericContentExtractor.parse(null, html))
       console.log(result)
     })
   })

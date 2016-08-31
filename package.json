@@ -19,6 +19,7 @@
   },
   "dependencies": {
     "cheerio": "^0.20.0",
-    "rollup": "^0.34.10"
+    "rollup": "^0.34.10",
+    "wuzzy": "^0.1.2"
   }
 }

@@ -1,5 +1,4 @@
 TODO:
-- Test re-initializing $ if/when it needs to loop again
 - Make sure weightNodes flag is being passed properly
 - Get better sense of when cheerio returns a raw node and when a cheerio object
   - Remove $ from function calls to getScore
@@ -9,6 +8,8 @@ TODO:
 
 
 DONE:
+x Title metadata
+x Test re-initializing $ if/when it needs to loop again
 x `cleanHeaders` Remove any headers that are before any p tags, matching title, etc
 x `extract` (this kicks it all off)
 x `node_is_sufficient`

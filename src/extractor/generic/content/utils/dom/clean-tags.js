@@ -16,7 +16,7 @@ import { linkDensity } from './index'
 // etc)
 //
 // Return this same doc.
-export default function cleanConditionally(article, $) {
+export default function cleanTags(article, $) {
   $(CLEAN_CONDITIONALLY_TAGS, article).each((index, node) => {
     let weight = getScore($(node))
     if (!weight) {
