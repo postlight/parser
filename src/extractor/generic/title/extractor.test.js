@@ -5,11 +5,11 @@ import HTML from './fixtures/html'
 import GenericTitleExtractor from './extractor'
 
 describe('GenericTitleExtractor', () => {
-  describe('extract($, cachedMeta)', () => {
+  describe('extract($, url, cachedMeta)', () => {
     it('extracts strong meta title tags', () => {
       const $ = cheerio.load(HTML.dcTitle.test)
       const result = GenericTitleExtractor.extract(
-        $, ["dc.title", "something-else"]
+        $, '', ["dc.title", "something-else"]
       )
 
       assert.equal(result, HTML.dcTitle.result)
@@ -18,7 +18,7 @@ describe('GenericTitleExtractor', () => {
     it('pulls title from selectors lacking string meta', () => {
       const $ = cheerio.load(HTML.strongTitleSelector.test)
       const result = GenericTitleExtractor.extract(
-        $, ["og:title", "something-else"]
+        $, '', ["og:title", "something-else"]
       )
 
       assert.equal(result, HTML.ogTitle.result)
@@ -27,7 +27,7 @@ describe('GenericTitleExtractor', () => {
     it('then falls back to weak meta title tags', () => {
       const $ = cheerio.load(HTML.ogTitle.test)
       const result = GenericTitleExtractor.extract(
-        $, ["og:title", "something-else"]
+        $, '', ["og:title", "something-else"]
       )
 
       assert.equal(result, HTML.ogTitle.result)
@@ -37,7 +37,7 @@ describe('GenericTitleExtractor', () => {
   it('then falls back to weak selectors', () => {
     const $ = cheerio.load(HTML.weakTitleSelector.test)
     const result = GenericTitleExtractor.extract(
-      $, []
+      $, '', []
     )
 
     assert.equal(result, HTML.weakTitleSelector.result)

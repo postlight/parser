@@ -33,7 +33,9 @@ export default function extractFromSelectors(
         content = $(node).html()
       }
 
-      if (content) return content
+      if (content) {
+        return content
+      }
     }
   }
 

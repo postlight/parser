@@ -9,28 +9,28 @@ describe('cleanTitle(title, $)', () => {
     const title = "Too Short"
     const $ = cheerio.load(HTML.docWithH1)
 
-    assert.equal(cleanTitle(title, $), $('h1').text())
+    assert.equal(cleanTitle(title, '', $), $('h1').text())
   })
 
   it('only uses h1 if there is only one on the page', () => {
     const title = "Too Short"
     const $ = cheerio.load(HTML.docWith2H1s)
 
-    assert.equal(cleanTitle(title, $), title)
+    assert.equal(cleanTitle(title, '', $), title)
   })
 
   it('removes HTML tags from titles', () => {
     const title = "Too Short"
     const $ = cheerio.load(HTML.docWithTagsInH1.before)
 
-    assert.equal(cleanTitle(title, $), HTML.docWithTagsInH1.after)
+    assert.equal(cleanTitle(title, '', $), HTML.docWithTagsInH1.after)
   })
 
   it('trims extraneous spaces', () => {
     const title = " This Is a Great Title That You'll Love "
     const $ = cheerio.load(HTML.docWithTagsInH1.before)
 
-    assert.equal(cleanTitle(title, $), title.trim())
+    assert.equal(cleanTitle(title, '', $), title.trim())
   })
 
 })

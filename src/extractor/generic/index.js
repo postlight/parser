@@ -2,11 +2,13 @@ import cheerio from 'cheerio'
 
 import GenericContentExtractor from './content/extractor'
 import GenericTitleExtractor from './title/extractor'
+import GenericAuthorExtractor from './author/extractor'
 
 const GenericExtractor = {
   parse: (url, html) => {
+    let $
     if (html) {
-      let $ = cheerio.load(html)
+      $ = cheerio.load(html)
     } else {
       // TODO
       // Fetch link, following redirects
@@ -21,8 +23,9 @@ const GenericExtractor = {
 
     const title = GenericTitleExtractor.extract($, url, metaCache)
     return {
-      content: GenericContentExtractor.parse($, html),
       title: title,
+      author: GenericAuthorExtractor.extract($, metaCache),
+      content: GenericContentExtractor.parse($, html),
     }
   }
 }
