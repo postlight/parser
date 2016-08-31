@@ -2,7 +2,7 @@ import cheerio from 'cheerio'
 import 'babel-polyfill'
 
 import extractBestNode from './extract-best-node'
-import nodeIsSufficient from '../utils/node-is-sufficient'
+import nodeIsSufficient from '../../utils/node-is-sufficient'
 import extractCleanNode from './extract-clean-node'
 import { normalizeSpaces } from './utils/text'
 

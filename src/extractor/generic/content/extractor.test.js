@@ -4,7 +4,7 @@ import fs from 'fs'
 
 import { clean } from './utils/dom/test-helpers'
 
-import GenericContentExtractor from './content-extractor'
+import GenericContentExtractor from './extractor'
 
 describe('GenericContentExtractor', () => {
   describe('parse(html, opts)', () => {
