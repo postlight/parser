@@ -12,11 +12,19 @@ describe('GenericExtractor', () => {
 
       const {
         title,
-        author
+        author,
+        datePublished,
       } = GenericExtractor.parse("http://latimes.com", html)
 
       assert.equal(author, null)
-      assert.equal(title, 'California appears poised to be first to ban power-guzzling big-screen TVs')
+      assert.equal(
+        title,
+        'California appears poised to be first to ban power-guzzling big-screen TVs'
+      )
+      assert.equal(
+        datePublished.toISOString(),
+        '2009-10-14T04:00:00.000Z'
+      )
     })
 
     it("parses html and returns the article title", () => {
@@ -24,11 +32,19 @@ describe('GenericExtractor', () => {
 
       const {
         author,
-        title
+        title,
+        datePublished,
       } = GenericExtractor.parse("http://wired.com", html)
 
       assert.equal(author, 'Eric Adams')
-      assert.equal(title, 'Airplane Tires Don’t Explode on Landing Because They Are Pumped!')
+      assert.equal(
+        title,
+        'Airplane Tires Don’t Explode on Landing Because They Are Pumped!'
+      )
+      assert.equal(
+        datePublished,
+        null
+      )
     })
 
   })

@@ -3,6 +3,7 @@ import cheerio from 'cheerio'
 import GenericContentExtractor from './content/extractor'
 import GenericTitleExtractor from './title/extractor'
 import GenericAuthorExtractor from './author/extractor'
+import GenericDatePublishedExtractor from './date-published/extractor'
 
 const GenericExtractor = {
   parse: (url, html) => {
@@ -25,6 +26,7 @@ const GenericExtractor = {
     return {
       title: title,
       author: GenericAuthorExtractor.extract($, metaCache),
+      datePublished: GenericDatePublishedExtractor.extract($, url, metaCache),
       content: GenericContentExtractor.parse($, html),
     }
   }

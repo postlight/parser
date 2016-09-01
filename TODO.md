@@ -1,4 +1,9 @@
 TODO:
+  Tmrw:
+    - extractDatePublished
+    - extractDek
+    - extractNextPageUrl
+    - extractLeadImageUrl
 - Make sure weightNodes flag is being passed properly
 - Get better sense of when cheerio returns a raw node and when a cheerio object
   - Remove $ from function calls to getScore

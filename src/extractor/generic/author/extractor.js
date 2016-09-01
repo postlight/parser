@@ -44,18 +44,6 @@ const GenericAuthorExtractor = {
     return null
   }
 }
-    // def extract_author(self):
-    //     # Second, use our looser regular-expression based selectors for
-    //     # potential authors. These are more often bylines, and as a result
-    //     # contain more links, so max_children is higher.
-    //     author = self.extract_from_selectors('author',
-    //                                           constants.AUTHOR_SELECTORS_RE,
-    //                                           use_re = True,
-    //                                           max_children = 5)
-    //     if author and len(author) < constants.AUTHOR_MAX_LENGTH:
-    //         return author
-    //
-    //     return None
 
 export default GenericAuthorExtractor
 
