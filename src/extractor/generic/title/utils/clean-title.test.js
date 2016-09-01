@@ -20,8 +20,8 @@ describe('cleanTitle(title, $)', () => {
   })
 
   it('removes HTML tags from titles', () => {
-    const title = "Too Short"
     const $ = cheerio.load(HTML.docWithTagsInH1.before)
+    const title = $('h1').html()
 
     assert.equal(cleanTitle(title, '', $), HTML.docWithTagsInH1.after)
   })
