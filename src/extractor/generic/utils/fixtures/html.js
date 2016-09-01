@@ -23,6 +23,13 @@ const HTML = {
       </html>`,
     result: `bar`,
   },
+  custom: {
+    test: `
+      <html>
+        <meta property="foo" content="bar" />
+      </html>`,
+    result: `bar`,
+  },
 
   // extractFromSelectors
   simpleSelector: {

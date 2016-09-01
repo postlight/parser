@@ -2,25 +2,47 @@ import { stripTags } from '../../utils'
 
 // Given a node type to search for, and a list of meta tag names to
 // search for, find a meta tag associated.
+// metaNames can be an array of strings of an array of three-element
+// arrays that will define the attributes to select from the meta
+// elements. E.g., ['og:image', 'property', 'content'] will search
+// $('meta[property=og:image]').attr('content').
+//
+// Default is $('meta[name=og:image]').attr(value)
 export default function extractFromMeta(
   $,
   metaNames,
   cachedNames,
-  cleanTags=true
+  cleanTags=true,
 ) {
-  const foundNames = metaNames.filter(name =>
-                                      cachedNames.indexOf(name) !== -1
-                                     )
-  let metaValue
-  for (const name of foundNames) {
-    const nodes = $(`meta[name="${name}"]`)
+  const foundNames = metaNames.filter(name => {
+    const metaType = typeof name
 
+    if (metaType === 'string') {
+      return cachedNames.indexOf(name) !== -1
+    } else if (metaType === 'object') {
+      return cachedNames.indexOf(name[0]) !== 1
+    }
+  })
+
+  for (let name of foundNames) {
+    let type, value
+
+    if (typeof name === 'string') {
+      type = 'name'
+      value = 'value'
+    } else {
+      type = name[1]
+      value = name[2]
+      name = name[0]
+    }
+
+    const nodes = $(`meta[${type}="${name}"]`)
 
     // Get the unique value of every matching node, in case there
     // are two meta tags with the same name and value.
     // Remove empty values.
     const values =
-      $(`meta[name="${name}"]`).map((index, node) => $(node).attr('value'))
+      nodes.map((index, node) => $(node).attr(value))
                                .toArray()
                                .filter(text => text !== '')
 
@@ -32,6 +54,7 @@ export default function extractFromMeta(
       continue
     }
 
+    let metaValue
     // Meta values that contain HTML should be stripped, as they
     // weren't subject to cleaning previously.
     if (cleanTags) {

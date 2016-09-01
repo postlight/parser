@@ -32,6 +32,16 @@ describe('extractFromMeta($, metaNames, cachedNames, cleanTags)', () => {
     assert.equal(result, HTML.metaEmptyDupes.result)
   })
 
+  it('accepts custom attributes', () => {
+    const $ = cheerio.load(HTML.custom.test)
+    const metaNames = [['foo', 'property', 'content']]
+    const cachedNames = ['foo']
+    const result = extractFromMeta(
+      $, metaNames, cachedNames
+    )
+
+    assert.equal(result, HTML.custom.result)
+  })
 })
 
 

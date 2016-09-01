@@ -5,6 +5,7 @@ import GenericTitleExtractor from './title/extractor'
 import GenericAuthorExtractor from './author/extractor'
 import GenericDatePublishedExtractor from './date-published/extractor'
 import GenericDekExtractor from './dek/extractor'
+import GenericLeadImageUrlExtractor from './lead-image-url/extractor'
 
 const GenericExtractor = {
   parse: (url, html) => {
@@ -28,6 +29,8 @@ const GenericExtractor = {
       GenericDatePublishedExtractor.extract($, url, metaCache)
     const author = GenericAuthorExtractor.extract($, metaCache)
     const content = GenericContentExtractor.parse($, html)
+    const leadImageUrl =
+      GenericLeadImageUrlExtractor.extract($, content, metaCache)
     const dek = GenericDekExtractor.extract($, metaCache, content)
 
     return {
@@ -35,6 +38,7 @@ const GenericExtractor = {
       author,
       datePublished,
       dek,
+      leadImageUrl,
       content,
     }
   }

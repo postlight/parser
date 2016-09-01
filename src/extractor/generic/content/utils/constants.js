@@ -1,26 +1,3 @@
-
-
-
-// An ordered list of meta tag names that denote likely article leading images.
-// All attributes should be lowercase for faster case-insensitive matching.
-// From most distinct to least distinct.
-export const LEAD_IMAGE_URL_META_TAGS = [
-    //'og:image',
-    'image_src',
-]
-
-// An ordered list of XPath Selectors to find likely article deks. From
-// most explicit to least explicit.
-//
-// Should be more restrictive than not, as a failed dek can be pretty
-// detrimental to the aesthetics of an article.
-export const LEAD_IMAGE_URL_SELECTORS = [
-    {
-        //selector: '//link[@rel="image_src"]',
-    }, // hentry microformat
-]
-
-
 //// CONTENT FETCHING CONSTANTS ////
 
 // A list of strings that can be considered unlikely candidates when
@@ -188,43 +165,6 @@ export const PHOTO_HINTS = [
 ]
 export const PHOTO_HINTS_RE = new RegExp(PHOTO_HINTS.join('|'), 'i')
 
-export const POSITIVE_LEAD_IMAGE_URL_HINTS = [
-    'upload',
-    'wp-content',
-    'large',
-    'photo',
-    'wp-image',
-]
-export const POSITIVE_LEAD_IMAGE_URL_HINTS_RE = new RegExp(POSITIVE_LEAD_IMAGE_URL_HINTS.join('|'), 'i')
-
-export const NEGATIVE_LEAD_IMAGE_URL_HINTS = [
-    'spacer',
-    'sprite',
-    'blank',
-    'throbber',
-    'gradient',
-    'tile',
-    'bg',
-    'background',
-    'icon',
-    'social',
-    'header',
-    'hdr',
-    'advert',
-    'spinner',
-    'loader',
-    'loading',
-    'default',
-    'rating',
-    'share',
-    'facebook',
-    'twitter',
-    'theme',
-    'promo',
-    'ads',
-    'wp-includes',
-]
-export const NEGATIVE_LEAD_IMAGE_URL_HINTS_RE = new RegExp(NEGATIVE_LEAD_IMAGE_URL_HINTS.join('|'), 'i')
 
 // A list of strings that denote a positive scoring for this content as being
 // an article container. Checked against className and id.

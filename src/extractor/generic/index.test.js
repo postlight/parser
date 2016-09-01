@@ -15,6 +15,7 @@ describe('GenericExtractor', () => {
         author,
         datePublished,
         dek,
+        leadImageUrl,
       } = GenericExtractor.parse("http://latimes.com", html)
 
       assert.equal(author, null)
@@ -27,6 +28,7 @@ describe('GenericExtractor', () => {
         '2009-10-14T04:00:00.000Z'
       )
       assert.equal(dek, null)
+      assert.equal(leadImageUrl, 'http://latimesblogs.latimes.com/fb.jpg')
     })
 
     it("parses html and returns the article title", () => {
@@ -37,6 +39,7 @@ describe('GenericExtractor', () => {
         title,
         datePublished,
         dek,
+        leadImageUrl,
       } = GenericExtractor.parse("http://wired.com", html)
 
       assert.equal(author, 'Eric Adams')
@@ -46,6 +49,7 @@ describe('GenericExtractor', () => {
       )
       assert.equal(datePublished, null)
       assert.equal(dek, null)
+      assert.equal(leadImageUrl, 'https://www.wired.com/wp-content/uploads/2016/08/GettyImages-536814811-1200x630-e1471497753973.jpg')
     })
 
   })

@@ -1,4 +1,8 @@
 import moment from 'moment'
+// Is there a compelling reason to use moment here?
+// Mostly only being used for the isValid() method,
+// but could just check for 'Invalid Date' string.
+
 import {
   CLEAN_DATE_STRING_RE,
   TIME_MERIDIAN_RE

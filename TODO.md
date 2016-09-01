@@ -1,9 +1,8 @@
 TODO:
   Tmrw:
-    - extractDek
     - extractNextPageUrl
-    - extractLeadImageUrl
 - Try Closure webpack compiler
+- Rename all cleaners from cleanThing to clean
 - Make sure weightNodes flag is being passed properly
 - Get better sense of when cheerio returns a raw node and when a cheerio object
   - Remove $ from function calls to getScore
@@ -13,6 +12,8 @@ TODO:
 
 
 DONE:
+x extractLeadImageUrl
+x extractDek
 x extractDatePublished
 x Title metadata
 x Test re-initializing $ if/when it needs to loop again
