@@ -1,36 +1,4 @@
 
-// An ordered list of meta tag names that denote likely article deks. All
-// attributes should be lowercase for faster case-insensitive matching. From
-// most distinct to least distinct.
-//
-// NOTE: There are currently no meta tags that seem to provide the right
-// content consistenty enough. Two options were:
-//  - og:description
-//  - dc.description
-// However, these tags often have SEO-specific junk in them that's not
-// header-worthy like a dek is. Excerpt material at best.
-export const DEK_META_TAGS = [
-]
-
-// An ordered list of XPath Selectors to find likely article deks. From
-// most explicit to least explicit.
-//
-// Note - this does not use classes like CSS. This checks to see if the string
-// exists in the className, which is not as accurate as .className (which 
-// splits on spaces/endlines), but for our purposes it's close enough. The
-// speed tradeoff is worth the accuracy hit.
-//
-// Should be more restrictive than not, as a failed dek can be pretty
-// detrimental to the aesthetics of an article.
-export const DEK_SELECTORS = [
-    {
-        //selector: XPath('//*[contains(@class, "entry-summary")]'),
-        must_exist: {
-            classes: ['entry-summary'],
-        }
-    }, // hentry microformat
-]
-
 
 
 // An ordered list of meta tag names that denote likely article leading images.

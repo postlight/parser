@@ -4,6 +4,7 @@ import GenericContentExtractor from './content/extractor'
 import GenericTitleExtractor from './title/extractor'
 import GenericAuthorExtractor from './author/extractor'
 import GenericDatePublishedExtractor from './date-published/extractor'
+import GenericDekExtractor from './dek/extractor'
 
 const GenericExtractor = {
   parse: (url, html) => {
@@ -23,11 +24,18 @@ const GenericExtractor = {
     }).toArray()
 
     const title = GenericTitleExtractor.extract($, url, metaCache)
+    const datePublished =
+      GenericDatePublishedExtractor.extract($, url, metaCache)
+    const author = GenericAuthorExtractor.extract($, metaCache)
+    const content = GenericContentExtractor.parse($, html)
+    const dek = GenericDekExtractor.extract($, metaCache, content)
+
     return {
-      title: title,
-      author: GenericAuthorExtractor.extract($, metaCache),
-      datePublished: GenericDatePublishedExtractor.extract($, url, metaCache),
-      content: GenericContentExtractor.parse($, html),
+      title,
+      author,
+      datePublished,
+      dek,
+      content,
     }
   }
 }

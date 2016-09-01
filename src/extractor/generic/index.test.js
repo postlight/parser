@@ -14,6 +14,7 @@ describe('GenericExtractor', () => {
         title,
         author,
         datePublished,
+        dek,
       } = GenericExtractor.parse("http://latimes.com", html)
 
       assert.equal(author, null)
@@ -25,6 +26,7 @@ describe('GenericExtractor', () => {
         datePublished.toISOString(),
         '2009-10-14T04:00:00.000Z'
       )
+      assert.equal(dek, null)
     })
 
     it("parses html and returns the article title", () => {
@@ -34,6 +36,7 @@ describe('GenericExtractor', () => {
         author,
         title,
         datePublished,
+        dek,
       } = GenericExtractor.parse("http://wired.com", html)
 
       assert.equal(author, 'Eric Adams')
@@ -41,10 +44,8 @@ describe('GenericExtractor', () => {
         title,
         'Airplane Tires Don’t Explode on Landing Because They Are Pumped!'
       )
-      assert.equal(
-        datePublished,
-        null
-      )
+      assert.equal(datePublished, null)
+      assert.equal(dek, null)
     })
 
   })

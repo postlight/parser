@@ -70,12 +70,12 @@ describe('GenericDatePublishedExtractor', () => {
     })
 
     it('returns null if no date can be found', () => {
-      // const $ = cheerio.load(HTML.datePublishedMeta.test)
-      // const cachedMeta = ["displaydate", "something-else"]
-      // const result =
-      //   GenericDatePublishedExtractor.extract($, cachedMeta)
+      const $ = cheerio.load('<div></div>')
+      const cachedMeta = []
+      const result =
+        GenericDatePublishedExtractor.extract($, '', cachedMeta)
 
-      // assert.equal(result.toISOString(), HTML.datePublishedMeta.result.toISOString())
+      assert.equal(result, null)
     })
 
   })
