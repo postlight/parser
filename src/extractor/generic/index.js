@@ -36,7 +36,7 @@ const GenericExtractor = {
     return {
       title,
       author,
-      datePublished,
+      datePublished: datePublished ? datePublished.toISOString() : null,
       dek,
       leadImageUrl,
       content,
@@ -45,4 +45,3 @@ const GenericExtractor = {
 }
 
 export default GenericExtractor
-
