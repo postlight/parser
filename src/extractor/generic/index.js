@@ -20,7 +20,7 @@ const GenericExtractor = {
 
     // Cached value of every meta name in our document.
     // Used when extracting title/author/date_published/dek
-    const metaCache = $('meta').map((index, node) => {
+    const metaCache = $('meta').map((_, node) => {
       return $(node).attr('name')
     }).toArray()
 

@@ -24,7 +24,7 @@ describe('GenericExtractor', () => {
         'California appears poised to be first to ban power-guzzling big-screen TVs'
       )
       assert.equal(
-        datePublished.toISOString(),
+        datePublished,
         '2009-10-14T04:00:00.000Z'
       )
       assert.equal(dek, null)
