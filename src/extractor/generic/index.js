@@ -8,8 +8,7 @@ import GenericDekExtractor from './dek/extractor'
 import GenericLeadImageUrlExtractor from './lead-image-url/extractor'
 
 const GenericExtractor = {
-  parse: (url, html) => {
-    let $
+  parse: (url, html, $) => {
     if (html) {
       $ = cheerio.load(html)
     } else {

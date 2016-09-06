@@ -1,0 +1,4 @@
+#!/bin/bash
+# Runs the mocha tests
+
+mocha --compilers js:babel-register $(find src -name "*.test.js") --require babel-polyfill

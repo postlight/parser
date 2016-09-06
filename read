@@ -1,0 +1,7 @@
+#!/usr/bin/env node
+var Iris = require('./dist/bundle')
+
+var url = process.argv[2]
+var result = Iris.parse(url).then(function(result) {
+  console.log(result.content)
+})

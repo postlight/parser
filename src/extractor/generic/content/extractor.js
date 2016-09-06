@@ -17,8 +17,6 @@ const GenericContentExtractor = {
   parse($, html, title='', opts={}) {
     opts = { ...this.defaultOpts, ...opts }
 
-    // TODO: Title is used to clean headers.
-    // Should be passed from title extraction.
     return this.extract($, html, opts, title)
   },
 

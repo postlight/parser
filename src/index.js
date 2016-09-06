@@ -1,10 +1,19 @@
 import fs from 'fs'
 
-import GenericExtractor from './extractor/generic/index.js'
+import Resource from './resource'
+import GenericExtractor from './extractor/generic'
 
-// const html = fs.readFileSync('../fixtures/wired.html', 'utf-8')
-// const url = 'http://wired.com'
-// const result = GenericExtractor.parse(url, html)
-// console.log(result)
+import fetchResource from './resource/utils/fetch-resource'
+// export default fetchResource
 
-export default GenericExtractor
+// export { default as GenericExtractor } from './extractor/generic/index.js'
+
+const Iris = {
+  parse: async function(url) {
+    const $ = await Resource.create(url)
+    const result = GenericExtractor.parse(url, null, $)
+    return result
+  }
+}
+
+export default Iris

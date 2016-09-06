@@ -6,12 +6,13 @@
   "scripts": {
     "start": "node ./build",
     "build": "rollup -c",
-    "test": "mocha --compilers js:babel-register --recursive src/**/*.test.js"
+    "test": "./test-runner"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "babel-plugin-external-helpers": "^6.8.0",
+    "babel-plugin-transform-async-to-generator": "^6.8.0",
     "babel-plugin-transform-es2015-destructuring": "^6.9.0",
     "babel-plugin-transform-object-rest-spread": "^6.8.0",
     "babel-polyfill": "^6.13.0",
@@ -27,6 +28,7 @@
   "dependencies": {
     "cheerio": "^0.20.0",
     "moment": "^2.14.1",
+    "request-promise": "^4.1.1",
     "valid-url": "^1.0.9",
     "wuzzy": "^0.1.2"
   }

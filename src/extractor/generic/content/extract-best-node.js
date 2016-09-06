@@ -24,13 +24,14 @@ export default function extractBestNode($, opts) {
   // TODO Do I need this? – AP
   // let $root = $.root().clone()
 
+
   if (opts.stripUnlikelyCandidates) {
     $ = stripUnlikelyCandidates($)
   }
 
   $ = convertToParagraphs($)
   $ = scoreContent($, opts.weightNodes)
-  const topCandidate = findTopCandidate($)
+  const $topCandidate = findTopCandidate($)
 
-  return topCandidate
+  return $topCandidate
 }
