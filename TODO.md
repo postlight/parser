@@ -1,8 +1,6 @@
 TODO:
-- Check that lead-image-url extractor isn't looking for end-of-string file extension matches (i.e., it could be ...foo.jpg?otherstuff
 - Resource (fetches page, validates it, cleans it, normalizes meta tags (!), converts lazy-loaded images, makes links absolute, etc)
 - extractNextPageUrl
-- Try Closure webpack compiler
 - Rename all cleaners from cleanThing to clean
 - Make sure weightNodes flag is being passed properly
 - Get better sense of when cheerio returns a raw node and when a cheerio object
@@ -12,6 +10,7 @@ TODO:
 - Separate constants into activity-specific folders (dom, scoring)
 
 DONE:
+x Check that lead-image-url extractor isn't looking for end-of-string file extension matches (i.e., it could be ...foo.jpg?otherstuff
 x extractLeadImageUrl
 x extractDek
 x extractDatePublished

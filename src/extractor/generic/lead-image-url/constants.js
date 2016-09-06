@@ -49,5 +49,5 @@ export const NEGATIVE_LEAD_IMAGE_URL_HINTS = [
 ]
 export const NEGATIVE_LEAD_IMAGE_URL_HINTS_RE = new RegExp(NEGATIVE_LEAD_IMAGE_URL_HINTS.join('|'), 'i')
 
-export const GIF_RE = /\gif$/i
-export const JPG_RE = /\jpe?g$/i
+export const GIF_RE = /\.gif(\?.*)?$/i
+export const JPG_RE = /\.jpe?g(\?.*)?$/i

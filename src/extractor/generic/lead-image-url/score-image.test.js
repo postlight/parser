@@ -42,6 +42,9 @@ describe('scoreImageUrlUrl(url)', () => {
 
     const url3 = 'http://example.com/foojpg/bar'
     assert.equal(scoreImageUrl(url3), 0)
+
+    const url4 = 'http://example.com/foo.jpg?bar=baz'
+    assert.equal(scoreImageUrl(url4), 10)
   })
 })
 
