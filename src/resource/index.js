@@ -23,7 +23,16 @@ const Resource = {
     let result
 
     if (preparedResponse) {
-      result = preparedResponse
+      const validResponse = {
+        statusMessage: "OK",
+        statusCode: 200,
+        headers: {
+          "content-type": 'text/html',
+          "content-length": 500,
+        }
+      }
+
+      result = { body: preparedResponse, response: validResponse }
     } else {
       result = await fetchResource(url)
     }
