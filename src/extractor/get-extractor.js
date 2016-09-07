@@ -7,8 +7,5 @@ export default function getExtractor(url) {
   const parsedUrl = URL.parse(url)
   const { hostname } = parsedUrl
 
-  return {
-    ...GenericExtractor,
-    ...Extractors[hostname]
-  }
+  return Extractors[hostname] || GenericExtractor
 }
