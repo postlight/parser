@@ -10,6 +10,7 @@ import {
 } from './utils/dom'
 
 const Resource = {
+
   // Create a Resource.
   //
   // :param url: The URL for the document we should retrieve.
@@ -18,7 +19,6 @@ const Resource = {
   // :param response: If set, use as the response rather than
   //                  attempting to fetch it ourselves. Expects a
   //                  string.
-
   create: async function(url, preparedResponse, parseNon2xx=false) {
     let result
 
