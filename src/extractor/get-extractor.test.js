@@ -8,4 +8,10 @@ describe('getExtractor(url)', () => {
 
     assert.equal(extractor.domain, '*')
   })
+
+  it('returns a custom extractor if found', () => {
+    const extractor = getExtractor('https://nymag.com')
+
+    assert.equal(extractor.domain, 'nymag.com')
+  })
 })

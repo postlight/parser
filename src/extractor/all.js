@@ -1,7 +1,8 @@
 import GenericExtractor from './generic'
+import NYMagExtractor from './custom/nymag.com'
 
 const Extractors = {
-  '*': GenericExtractor
+  'nymag.com': NYMagExtractor,
 }
 
 export default Extractors
