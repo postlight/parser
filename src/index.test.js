@@ -6,7 +6,7 @@ describe('Iris', function() {
     it('does the whole thing', async function() {
       const result = await Iris.parse('http://theconcourse.deadspin.com/phyllis-schlafly-finally-croaks-1786219220')
 
-      console.log(result)
+      // console.log(result)
     })
   })
 })

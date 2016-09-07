@@ -9,7 +9,7 @@ describe('Resource', () => {
       const url = 'http://theconcourse.deadspin.com/1786177057'
       const $ = await Resource.create(url)
 
-      console.log($.html())
+      // console.log($.html())
     })
   })
 

@@ -2,8 +2,6 @@ import assert from 'assert'
 import cheerio from 'cheerio'
 import fs from 'fs'
 
-// import HTML from './fixtures/html'
-
 import extractCleanNode from './extract-clean-node'
 import extractBestNode from './extract-best-node'
 
@@ -21,14 +19,14 @@ describe('extractCleanNode(article, $, { cleanConditionally })', () => {
     const bestNode = extractBestNode($, opts)
     let result = $.html(bestNode)
     // console.log(result)
-    console.log(result.length)
+    // console.log(result.length)
     const cleanNode = extractCleanNode(bestNode, $, opts)
     result = $.html(cleanNode)
-    console.log(result.length)
+    // console.log(result.length)
     // console.log(result)
     // console.log(bestNode.html())
 
-    // assert.equal($(bestNode).text().length, 3652)
+    assert.equal($(bestNode).text().length, 3652)
   })
 })
 
