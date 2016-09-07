@@ -8,6 +8,9 @@ import GenericDekExtractor from './dek/extractor'
 import GenericLeadImageUrlExtractor from './lead-image-url/extractor'
 
 const GenericExtractor = {
+  // This extractor is the default for all domains
+  domain: '*',
+
   parse: (url, html, $) => {
     if (html) {
       $ = cheerio.load(html)
