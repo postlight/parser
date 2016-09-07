@@ -1,5 +1,5 @@
 export const REQUEST_HEADERS = {
-  'User-Agent': 'Readability - http://readability.com/about/'
+  "User-Agent": "Readability - http://readability.com/about/",
 }
 
 // The number of milliseconds to attempt to fetch a resource before timing out.

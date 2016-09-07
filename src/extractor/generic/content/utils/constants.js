@@ -37,6 +37,7 @@ export const UNLIKELY_CANDIDATES_BLACKLIST = [
     'remove',
     'remark',
     'rss',
+    'share',
     'shoutbox',
     'sidebar',
     'sociable',
