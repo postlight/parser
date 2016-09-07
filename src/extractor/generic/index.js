@@ -10,14 +10,16 @@ import GenericLeadImageUrlExtractor from './lead-image-url/extractor'
 const GenericExtractor = {
   // This extractor is the default for all domains
   domain: '*',
+  title: GenericTitleExtractor.extract,
+  datePublished : GenericDatePublishedExtractor.extract,
+  author: GenericAuthorExtractor.extract,
+  content: GenericContentExtractor.extract.bind(GenericContentExtractor),
+  leadImageUrl: GenericLeadImageUrlExtractor.extract,
+  dek: GenericDekExtractor.extract,
 
-  parse: (url, html, $) => {
+  parse: function(url, html, $) {
     if (html) {
       $ = cheerio.load(html)
-    } else {
-      // TODO
-      // Fetch link, following redirects
-      // to return html and initialize $
     }
 
     // Cached value of every meta name in our document.
@@ -26,14 +28,12 @@ const GenericExtractor = {
       return $(node).attr('name')
     }).toArray()
 
-    const title = GenericTitleExtractor.extract($, url, metaCache)
-    const datePublished =
-      GenericDatePublishedExtractor.extract($, url, metaCache)
-    const author = GenericAuthorExtractor.extract($, metaCache)
-    const content = GenericContentExtractor.parse($, html)
-    const leadImageUrl =
-      GenericLeadImageUrlExtractor.extract($, content, metaCache)
-    const dek = GenericDekExtractor.extract($, metaCache, content)
+    const title = this.title($, url, metaCache)
+    const datePublished = this.datePublished($, url, metaCache)
+    const author = this.author($, metaCache)
+    const content = this.content($, html)
+    const leadImageUrl = this.leadImageUrl($, content, metaCache)
+    const dek = this.dek($, content, metaCache)
 
     return {
       title,

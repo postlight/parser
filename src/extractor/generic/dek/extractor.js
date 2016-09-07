@@ -17,7 +17,7 @@ import {
 // until we have a more robust generic option.
 // Below is the original source for this, for reference.
 const GenericDekExtractor = {
-  extract($, cachedMeta, content) {
+  extract($, content, cachedMeta) {
     return null
   }
 }

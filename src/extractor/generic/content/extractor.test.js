@@ -8,15 +8,15 @@ import GenericContentExtractor from './extractor'
 
 describe('GenericContentExtractor', function() {
   this.timeout(1000000)
-  describe('parse(html, opts)', () => {
-    it("parses html and returns the article", () => {
+  describe('extract($, html, opts)', () => {
+    it("extracts html and returns the article", () => {
       const html = fs.readFileSync('../fixtures/latimes.html', 'utf-8')
 
       // Array.from(range(1, 100)).map((i) => {
       //   console.log(i)
-      //   clean(GenericContentExtractor.parse(null, html))
+      //   clean(GenericContentExtractor.extract(null, html))
       // })
-      const result = clean(GenericContentExtractor.parse(null, html))
+      const result = clean(GenericContentExtractor.extract(null, html))
       // console.log(result)
     })
   })

@@ -13,13 +13,6 @@ const GenericContentExtractor = {
     cleanConditionally: true,
   },
 
-  // Entry point for parsing html
-  parse($, html, title='', opts={}) {
-    opts = { ...this.defaultOpts, ...opts }
-
-    return this.extract($, html, opts, title)
-  },
-
   // Extract the content for this resource - initially, pass in our
   // most restrictive opts which will return the highest quality
   // content. On each failure, retry with slightly more lax opts.
@@ -39,7 +32,9 @@ const GenericContentExtractor = {
   //
   // cleanConditionally: Clean the node to return of some
   // superfluous content. Things like forms, ads, etc.
-  extract($, html, opts, title) {
+  extract($, html, opts, title='') {
+    opts = { ...this.defaultOpts, ...opts }
+
     $ = $ || cheerio.load(html)
 
     // Cascade through our extraction-specific opts in an ordered fashion,
