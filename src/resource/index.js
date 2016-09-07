@@ -19,8 +19,14 @@ const Resource = {
   //                  attempting to fetch it ourselves. Expects a
   //                  string.
 
-  create: async function(url, parseNon2xx=false, preparedResponse) {
-    const result = await fetchResource(url)
+  create: async function(url, preparedResponse, parseNon2xx=false) {
+    let result
+
+    if (preparedResponse) {
+      result = preparedResponse
+    } else {
+      result = await fetchResource(url)
+    }
     return this.generateDoc(result)
   },
 
