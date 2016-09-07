@@ -23,6 +23,7 @@ export default async function fetchResource(url) {
     url: parsedUrl,
     headers: REQUEST_HEADERS,
     timeout: FETCH_TIMEOUT,
+    encoding: null,
   }
 
   const { response, body } = await get(options)

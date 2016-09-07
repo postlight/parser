@@ -26,7 +26,7 @@ describe('extractCleanNode(article, $, { cleanConditionally })', () => {
     // console.log(result)
     // console.log(bestNode.html())
 
-    assert.equal($(bestNode).text().length, 3652)
+    assert.equal($(bestNode).text().length, 2687)
   })
 })
 

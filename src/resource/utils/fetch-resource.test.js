@@ -13,7 +13,7 @@ describe('fetchResource(url)', () => {
     const url = 'http://theconcourse.deadspin.com/1786177057'
     const { body, response } = await fetchResource(url)
 
-    assert.equal(typeof body, 'string')
+    assert.equal(typeof body, 'object')
   })
 })
 
