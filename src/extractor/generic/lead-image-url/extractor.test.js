@@ -6,14 +6,16 @@ import HTML from './fixtures/html'
 import GenericLeadImageUrlExtractor from './extractor'
 
 describe('GenericLeadImageUrlExtractor', () => {
-  describe('extract($, content, cachedMeta)', () => {
+  describe('extract({ $, content, metaCache })', () => {
     it('returns og:image first', () => {
       const $ = cheerio.load(HTML.og.test)
       const content = $('*').first()
-      const cachedMeta = ['og:image']
+      const metaCache = ['og:image']
 
       const result =
-        GenericLeadImageUrlExtractor.extract($, content, cachedMeta)
+        GenericLeadImageUrlExtractor.extract(
+          { $, content, metaCache }
+        )
 
       assert.equal(result, HTML.og.result)
     })
@@ -21,10 +23,12 @@ describe('GenericLeadImageUrlExtractor', () => {
     it('returns twitter:image', () => {
       const $ = cheerio.load(HTML.twitter.test)
       const content = $('*').first()
-      const cachedMeta = ['twitter:image']
+      const metaCache = ['twitter:image']
 
       const result =
-        GenericLeadImageUrlExtractor.extract($, content, cachedMeta)
+        GenericLeadImageUrlExtractor.extract(
+          { $, content, metaCache }
+        )
 
       assert.equal(result, HTML.twitter.result)
     })
@@ -32,10 +36,12 @@ describe('GenericLeadImageUrlExtractor', () => {
     it('finds images based on scoring', () => {
       const $ = cheerio.load(HTML.scoring.test)
       const content = $('*').first()
-      const cachedMeta = []
+      const metaCache = []
 
       const result =
-        GenericLeadImageUrlExtractor.extract($, content, cachedMeta)
+        GenericLeadImageUrlExtractor.extract(
+          { $, content, metaCache }
+        )
 
       assert.equal(result, HTML.scoring.result)
     })
@@ -43,10 +49,12 @@ describe('GenericLeadImageUrlExtractor', () => {
     it('returns image based on selectors', () => {
       const $ = cheerio.load(HTML.selectors.test)
       const content = $('*').first()
-      const cachedMeta = []
+      const metaCache = []
 
       const result =
-        GenericLeadImageUrlExtractor.extract($, content, cachedMeta)
+        GenericLeadImageUrlExtractor.extract(
+          { $, content, metaCache }
+        )
 
       assert.equal(result, HTML.selectors.result)
     })

@@ -13,12 +13,12 @@ import {
 } from '../utils'
 
 const GenericDatePublishedExtractor = {
-  extract($, url, cachedMeta) {
+  extract({ $, url, metaCache }) {
     let datePublished
     // First, check to see if we have a matching meta tag
     // that we can make use of.
     // Don't try cleaning tags from this string
-    datePublished = extractFromMeta($, DATE_PUBLISHED_META_TAGS, cachedMeta, false)
+    datePublished = extractFromMeta($, DATE_PUBLISHED_META_TAGS, metaCache, false)
     if(datePublished) return cleanDatePublished(datePublished)
 
     // Second, look through our selectors looking for potential

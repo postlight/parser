@@ -16,7 +16,9 @@ describe('GenericExtractor', () => {
         datePublished,
         dek,
         leadImageUrl,
-      } = GenericExtractor.parse("http://latimes.com", html)
+      } = GenericExtractor.parse(
+        { url: "http://latimes.com", html, metaCache: [] }
+      )
 
       assert.equal(author, null)
       assert.equal(
@@ -40,7 +42,9 @@ describe('GenericExtractor', () => {
         datePublished,
         dek,
         leadImageUrl,
-      } = GenericExtractor.parse("http://wired.com", html)
+      } = GenericExtractor.parse(
+        { url: "http://wired.com", html, metaCache: [] }
+      )
 
       assert.equal(author, 'Eric Adams')
       assert.equal(

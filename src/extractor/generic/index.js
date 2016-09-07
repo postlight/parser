@@ -17,23 +17,20 @@ const GenericExtractor = {
   leadImageUrl: GenericLeadImageUrlExtractor.extract,
   dek: GenericDekExtractor.extract,
 
-  parse: function(url, html, $) {
+  parse: function(options) {
+    let { html } = options
+
     if (html) {
-      $ = cheerio.load(html)
+      const $ = cheerio.load(html)
+      options.$ = $
     }
 
-    // Cached value of every meta name in our document.
-    // Used when extracting title/author/date_published/dek
-    const metaCache = $('meta').map((_, node) => {
-      return $(node).attr('name')
-    }).toArray()
-
-    const title = this.title($, url, metaCache)
-    const datePublished = this.datePublished($, url, metaCache)
-    const author = this.author($, metaCache)
-    const content = this.content($, html)
-    const leadImageUrl = this.leadImageUrl($, content, metaCache)
-    const dek = this.dek($, content, metaCache)
+    const title = this.title(options)
+    const datePublished = this.datePublished(options)
+    const author = this.author(options)
+    const content = this.content(options)
+    const leadImageUrl = this.leadImageUrl(options)
+    const dek = this.dek(options)
 
     return {
       title,

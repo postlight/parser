@@ -2,42 +2,31 @@ import GenericExtractor from '../generic'
 import { stripTags } from '../utils'
 
 const CustomExtractor = {
-  extract(Extractor=GenericExtractor, url, html, $) {
-    if (Extractor.domain === '*') return Extractor.parse(url, html, $)
-    const meta = []
+  extract(extractor=GenericExtractor, opts) {
+    const { $ } = opts
+    if (extractor.domain === '*') return extractor.parse(opts)
 
-    const title =
-      select($, Extractor.title) ||
-      GenericExtractor.title($, url, meta)
+    const title = extract({ ...opts, type: 'title', extractor })
+    const datePublished = extract({ ...opts, type: 'datePublished', extractor })
+    const author = extract({ ...opts, type: 'author', extractor })
+    const content = extract({ ...opts, type: 'content', extractor, html: true })
+    const leadImageUrl = extract({ ...opts, type: 'leadImageUrl', extractor, html: true })
+    const dek = extract({ ...opts, type: 'dek', extractor, html: true })
 
-    const datePublished =
-      select($, Extractor.datePublished) ||
-      GenericExtractor.datePublished($, url, meta)
-
-    const author =
-      select($, Extractor.author) ||
-      GenericExtractor.author($, meta)
-
-    const content =
-      select($, Extractor.content, true) ||
-      GenericExtractor.content($, html, {}, title)
-
-    const leadImageUrl =
-      select($, Extractor.leadImageUrl) ||
-      GenericExtractor.leadImageUrl($, content, meta)
-
-    const dek =
-      select($, Extractor.dek) ||
-      GenericExtractor.dek($, content, meta)
-
-      return {
-        title,
-        content,
-        datePublished,
-        leadImageUrl,
-        dek,
-      }
+    return {
+      title,
+      content,
+      datePublished,
+      leadImageUrl,
+      dek,
+    }
   }
+}
+
+function extract(opts) {
+  const { type, extractor, $ } = opts
+  return select($, extractor[type]) ||
+    GenericExtractor[type](opts)
 }
 
 function select($, selectObj, html=false) {

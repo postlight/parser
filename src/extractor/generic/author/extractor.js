@@ -13,12 +13,12 @@ import {
 } from '../utils'
 
 const GenericAuthorExtractor = {
-  extract($, cachedMeta) {
+  extract({ $, metaCache }) {
     let author
 
     // First, check to see if we have a matching
     // meta tag that we can make use of.
-    author = extractFromMeta($, AUTHOR_META_TAGS, cachedMeta)
+    author = extractFromMeta($, AUTHOR_META_TAGS, metaCache)
     if (author && author.length < AUTHOR_MAX_LENGTH) {
       return cleanAuthor(author)
     }

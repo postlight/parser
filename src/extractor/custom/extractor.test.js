@@ -18,7 +18,9 @@ describe('CustomExtractor', () => {
       author,
       datePublished,
       leadImageUrl,
-    } = CustomExtractor.extract(NYMagExtractor, url, html, $)
+    } = CustomExtractor.extract(
+      NYMagExtractor, { url, html, $, metaCache: [] }
+    )
 
     assert.equal(title, 'Trump Claims He Discussed $25K Donation With Florida Attorney General, But Not Trump University Investigation')
   })

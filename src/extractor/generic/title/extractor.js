@@ -11,12 +11,12 @@ import {
 } from '../utils'
 
 const GenericTitleExtractor = {
-  extract($, url, cachedMeta) {
+  extract({ $, url, metaCache }) {
     // First, check to see if we have a matching meta tag that we can make
     // use of that is strongly associated with the headline.
     let title
 
-    title = extractFromMeta($, STRONG_TITLE_META_TAGS, cachedMeta)
+    title = extractFromMeta($, STRONG_TITLE_META_TAGS, metaCache)
     if (title) return cleanTitle(title, url, $)
 
     // Second, look through our content selectors for the most likely
@@ -25,7 +25,7 @@ const GenericTitleExtractor = {
     if (title) return cleanTitle(title, url, $)
 
     // Third, check for weaker meta tags that may match.
-    title = extractFromMeta($, WEAK_TITLE_META_TAGS, cachedMeta)
+    title = extractFromMeta($, WEAK_TITLE_META_TAGS, metaCache)
     if (title) return cleanTitle(title, url, $)
 
     // Last, look for weaker selector tags that may match.

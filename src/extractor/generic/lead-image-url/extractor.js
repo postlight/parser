@@ -30,7 +30,7 @@ import clean from './clean'
 //   * domain
 //   * weird aspect ratio
 const GenericLeadImageUrlExtractor = {
-  extract($, content, cachedMeta) {
+  extract({ $, content, metaCache }) {
     let imageUrl, cleanUrl
 
     // Check to see if we have a matching meta tag that we can make use of.
@@ -41,7 +41,7 @@ const GenericLeadImageUrlExtractor = {
       extractFromMeta(
         $,
         LEAD_IMAGE_URL_META_TAGS,
-        cachedMeta,
+        metaCache,
         false
       )
 

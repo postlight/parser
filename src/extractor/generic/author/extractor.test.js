@@ -9,7 +9,7 @@ describe('GenericAuthorExtractor', () => {
     it('extracts author from meta tags', () => {
       const $ = cheerio.load(HTML.authorMeta.test)
       const result = GenericAuthorExtractor.extract(
-        $, ["dc.author", "something-else"]
+        { $, metaCache: ["dc.author", "something-else"] }
       )
 
       assert.equal(result, HTML.authorMeta.result)
@@ -18,7 +18,7 @@ describe('GenericAuthorExtractor', () => {
     it('extracts author from author selectors', () => {
       const $ = cheerio.load(HTML.authorSelectors.test)
       const result = GenericAuthorExtractor.extract(
-        $, ["dc.author", "something-else"]
+        { $, metaCache: ["dc.author", "something-else"] }
       )
 
       assert.equal(result, HTML.authorSelectors.result)
@@ -27,7 +27,7 @@ describe('GenericAuthorExtractor', () => {
     it('extracts author with regex selectors', () => {
       const $ = cheerio.load(HTML.authorRegSelectors.test)
       const result = GenericAuthorExtractor.extract(
-        $, ["dc.author", "something-else"]
+        { $, metaCache: ["dc.author", "something-else"] }
       )
 
       assert.equal(result, HTML.authorRegSelectors.result)
@@ -36,7 +36,7 @@ describe('GenericAuthorExtractor', () => {
     it('returns null if no author found', () => {
       const $ = cheerio.load('<div></div>')
       const result = GenericAuthorExtractor.extract(
-        $, ["dc.author", "something-else"]
+        { $, metaCache: ["dc.author", "something-else"] }
       )
 
       assert.equal(result, null)

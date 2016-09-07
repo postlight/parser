@@ -32,7 +32,7 @@ const GenericContentExtractor = {
   //
   // cleanConditionally: Clean the node to return of some
   // superfluous content. Things like forms, ads, etc.
-  extract($, html, opts, title='') {
+  extract({ $, html }, title='', opts) {
     opts = { ...this.defaultOpts, ...opts }
 
     $ = $ || cheerio.load(html)

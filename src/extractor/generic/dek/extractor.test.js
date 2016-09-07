@@ -5,13 +5,13 @@ import cheerio from 'cheerio'
 import GenericDekExtractor from './extractor'
 
 describe('GenericDekExtractor', () => {
-  describe('extract($, cachedMeta)', () => {
+  describe('extract({ $, metaCache })', () => {
 
     it('returns null if no dek can be found', () => {
       const $ = cheerio.load('<div></div>')
-      const cachedMeta = []
+      const metaCache = []
       const result =
-        GenericDekExtractor.extract($, cachedMeta)
+        GenericDekExtractor.extract({ $, metaCache })
 
       assert.equal(result, null)
     })
