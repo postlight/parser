@@ -7,7 +7,7 @@ import extractBestNode from './extract-best-node'
 
 describe('extractCleanNode(article, $, { cleanConditionally })', () => {
   it("cleans cruft out of a DOM node", () => {
-    const html = fs.readFileSync('../fixtures/wired.html', 'utf-8')
+    const html = fs.readFileSync('./fixtures/wired.html', 'utf-8')
     let $ = cheerio.load(html)
 
     const opts = {

@@ -31,20 +31,12 @@ describe('scoreContent($, weightNodes)', () => {
   })
 
   it("scores this Wired article the same", () => {
-    const html = fs.readFileSync('../fixtures/wired.html', 'utf-8')
+    const html = fs.readFileSync('./fixtures/wired.html', 'utf-8')
     const $ = cheerio.load(html)
     const result = scoreContent($).html()
 
     // assert.equal(getScore($('article').first(), $), 63.75)
     assert.equal(getScore($('article').first(), $), 65.5)
   })
-
-  // it("scores this NYT article the same", () => {
-  //   const html = fs.readFileSync('../fixtures/nytimes.html', 'utf-8')
-  //   const $ = cheerio.load(html)
-  //   const result = scoreContent($).html()
-  //
-  //   assert.equal(getScore($('div').first(), $), 385)
-  // })
 
 })

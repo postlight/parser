@@ -10,7 +10,7 @@ describe('GenericContentExtractor', function() {
   this.timeout(1000000)
   describe('extract($, html, opts)', () => {
     it("extracts html and returns the article", () => {
-      const html = fs.readFileSync('../fixtures/latimes.html', 'utf-8')
+      const html = fs.readFileSync('./fixtures/latimes.html', 'utf-8')
 
       // Array.from(range(1, 100)).map((i) => {
       //   console.log(i)
