@@ -12,13 +12,14 @@ const RootExtractor = {
     const title = extract({ ...opts, type: 'title', extractor })
     const datePublished = extract({ ...opts, type: 'datePublished', extractor })
     const author = extract({ ...opts, type: 'author', extractor })
-    const content = extract({ ...opts, type: 'content', extractor, html: true })
+    const content = extract({ ...opts, type: 'content', extractor, extractHtml: true })
     const leadImageUrl = extract({ ...opts, type: 'leadImageUrl', extractor })
     const dek = extract({ ...opts, type: 'dek', extractor })
 
     return {
       title,
       content,
+      author,
       datePublished,
       leadImageUrl,
       dek,
@@ -27,15 +28,15 @@ const RootExtractor = {
 }
 
 function extract(opts) {
-  const { type, extractor, $, html } = opts
+  const { type, extractor, $, extractHtml } = opts
 
   // If nothing matches the selector,
   // run the Generic extraction
-  return select($, extractor[type], html) ||
+  return select($, extractor[type], extractHtml) ||
     GenericExtractor[type](opts)
 }
 
-function select($, extractionOpts, html=false) {
+function select($, extractionOpts, extractHtml=false) {
   // Skip if there's not extraction for this type
   if (!extractionOpts) return
 
@@ -44,12 +45,20 @@ function select($, extractionOpts, html=false) {
   const matchingSelector = selectors.find((selector) => {
     return $(selector).length === 1
   })
+  console.log(matchingSelector)
+  // console.log($(matchingSelector).text())
+  console.log(extractHtml)
   if (!matchingSelector) return
 
   // If the selector type requests html as its return type
   // clean the element with provided cleaning selectors
-  if (html) {
+  if (extractHtml) {
     let $content = $(matchingSelector)
+
+    // Wrap in div so transformation can take place on root element
+    $content.wrap($('<div></div>'))
+    $content = $content.parent()
+
     $content = cleanBySelectors($content, $, extractionOpts)
     $content = transformElements($content, $, extractionOpts)
 
