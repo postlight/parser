@@ -13,8 +13,8 @@ const RootExtractor = {
     const datePublished = extract({ ...opts, type: 'datePublished', extractor })
     const author = extract({ ...opts, type: 'author', extractor })
     const content = extract({ ...opts, type: 'content', extractor, html: true })
-    const leadImageUrl = extract({ ...opts, type: 'leadImageUrl', extractor, html: true })
-    const dek = extract({ ...opts, type: 'dek', extractor, html: true })
+    const leadImageUrl = extract({ ...opts, type: 'leadImageUrl', extractor })
+    const dek = extract({ ...opts, type: 'dek', extractor })
 
     return {
       title,
@@ -27,11 +27,11 @@ const RootExtractor = {
 }
 
 function extract(opts) {
-  const { type, extractor, $ } = opts
+  const { type, extractor, $, html } = opts
 
   // If nothing matches the selector,
   // run the Generic extraction
-  return select($, extractor[type]) ||
+  return select($, extractor[type], html) ||
     GenericExtractor[type](opts)
 }
 
@@ -53,7 +53,7 @@ function select($, extractionOpts, html=false) {
     $content = cleanBySelectors($content, $, extractionOpts)
     $content = transformElements($content, $, extractionOpts)
 
-    return $content
+    return $.html($content)
   } else {
     return stripTags($(matchingSelector).text(), $)
   }
