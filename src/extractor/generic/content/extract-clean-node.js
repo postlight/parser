@@ -1,5 +1,4 @@
 import {
-  convertNodeTo,
   rewriteTopLevel,
   cleanImages,
   stripJunkTags,
@@ -9,6 +8,8 @@ import {
   cleanAttributes,
   removeEmpty,
 } from './utils/dom'
+
+import { convertNodeTo } from '../../utils/dom'
 
 // Clean our article content, returning a new, cleaned node.
 export default function extractCleanNode(article, $, cleanConditionally=true, title='') {

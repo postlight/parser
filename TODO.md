@@ -1,4 +1,5 @@
 TODO:
+- change customselector to rootselector. consider other options for generalizing cleaning (use generic cleaners)
 - run makeLinksAbsolute on extracted content before returning
 - remove logic for fetching meta attrs with custom props
 - Resource (fetches page, validates it, cleans it, normalizes meta tags (!), converts lazy-loaded images, makes links absolute, etc)

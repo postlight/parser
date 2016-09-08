@@ -3,7 +3,7 @@ import cheerio from 'cheerio'
 
 import { stripTags } from './index'
 
-describe('cleanTitle(title, $)', () => {
+describe('stripTags(title, $)', () => {
   it('strips tags from a string of text', () => {
     const $ = cheerio.load('<div></div>')
 

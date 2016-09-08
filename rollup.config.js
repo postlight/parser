@@ -3,7 +3,7 @@ import babelrc from 'babelrc-rollup'
 import commonjs from 'rollup-plugin-commonjs'
 
 export default {
-  entry: 'src/index.js',
+  entry: 'src/iris.js',
   plugins: [
     commonjs(),
     babel(babelrc()),

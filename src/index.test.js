@@ -1,4 +1,6 @@
-import Iris from './index'
+import assert from 'assert'
+
+import Iris from './iris'
 
 describe('Iris', function() {
   describe('parse(url)', function() {

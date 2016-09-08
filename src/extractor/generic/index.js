@@ -17,7 +17,7 @@ const GenericExtractor = {
   leadImageUrl: GenericLeadImageUrlExtractor.extract,
   dek: GenericDekExtractor.extract,
 
-  parse: function(options) {
+  extract: function(options) {
     let { html } = options
 
     if (html) {

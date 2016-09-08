@@ -1,3 +1,5 @@
+import { convertNodeTo } from '../../../../utils/dom'
+
 import { brsToPs } from './index'
 import { DIV_TO_P_BLOCK_TAGS } from '../constants'
 // Loop through the provided doc, and convert any p-like elements to
@@ -40,10 +42,5 @@ function convertSpans($) {
     }
   })
 
-  return $
-}
-
-export function convertNodeTo(node, $, tag='p') {
-  $(node).replaceWith(`<${tag}>${$(node).contents()}</${tag}>`)
   return $
 }

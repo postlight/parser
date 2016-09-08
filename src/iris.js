@@ -2,7 +2,7 @@ import fs from 'fs'
 
 import Resource from './resource'
 import getExtractor from './extractor/get-extractor'
-import RootExtractor from './extractor/custom/extractor'
+import RootExtractor from './extractor/root-extractor'
 
 import fetchResource from './resource/utils/fetch-resource'
 

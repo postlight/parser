@@ -1,5 +1,5 @@
 import { TEXT_LINK_RE } from './constants'
-import { stripTags } from '../../utils'
+import { stripTags } from '../../utils/dom'
 
 // Take a dek HTML fragment, and return the cleaned version of it.
 // Return None if the dek wasn't good enough.

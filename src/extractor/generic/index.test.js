@@ -6,8 +6,8 @@ import { clean } from './content/utils/dom/test-helpers'
 import GenericExtractor from './index'
 
 describe('GenericExtractor', () => {
-  describe('parse(html)', () => {
-    it("parses this old LA Times article", () => {
+  describe('extract(opts)', () => {
+    it("extracts this old LA Times article", () => {
       const html = fs.readFileSync('../fixtures/latimes.html', 'utf-8')
 
       const {
@@ -16,7 +16,7 @@ describe('GenericExtractor', () => {
         datePublished,
         dek,
         leadImageUrl,
-      } = GenericExtractor.parse(
+      } = GenericExtractor.extract(
         { url: "http://latimes.com", html, metaCache: [] }
       )
 
@@ -33,7 +33,7 @@ describe('GenericExtractor', () => {
       assert.equal(leadImageUrl, 'http://latimesblogs.latimes.com/fb.jpg')
     })
 
-    it("parses html and returns the article title", () => {
+    it("extracts html and returns the article title", () => {
       const html = fs.readFileSync('../fixtures/wired.html', 'utf-8')
 
       const {
@@ -42,7 +42,7 @@ describe('GenericExtractor', () => {
         datePublished,
         dek,
         leadImageUrl,
-      } = GenericExtractor.parse(
+      } = GenericExtractor.extract(
         { url: "http://wired.com", html, metaCache: [] }
       )
 

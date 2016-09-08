@@ -7,7 +7,8 @@ import {
   getOrInitScore,
   addScore,
 } from './index'
-import { convertNodeTo } from '../dom'
+
+import { convertNodeTo } from '../../../../utils/dom'
 
 // score content. Parents get the full value of their children's
 // content score, grandparents half
