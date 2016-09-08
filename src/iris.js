@@ -9,7 +9,10 @@ import fetchResource from './resource/utils/fetch-resource'
 const Iris = {
   parse: async function(url, html) {
     const $ = await Resource.create(url, html)
+    html = $.html()
+
     const Extractor = getExtractor(url)
+    console.log(`Using extractor for ${Extractor.domain}`)
 
     // Cached value of every meta name in our document.
     // Used when extracting title/author/date_published/dek

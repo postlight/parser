@@ -14,4 +14,10 @@ describe('getExtractor(url)', () => {
 
     assert.equal(extractor.domain, 'nymag.com')
   })
+
+  it('falls back to base domain if subdomain not found', () => {
+    const extractor = getExtractor('https://googleblog.blogspot.com')
+
+    assert.equal(extractor.domain, 'blogspot.com')
+  })
 })
