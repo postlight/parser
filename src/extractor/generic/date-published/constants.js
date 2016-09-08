@@ -1,6 +1,3 @@
-export const CLEAN_DATE_STRING_RE = /^\s*published\s*:?\s*(.*)/i
-export const TIME_MERIDIAN_RE = /(.*\d)(am|pm)(.*)/i
-
 // An ordered list of meta tag names that denote
 // likely date published dates. All attributes
 // should be lowercase for faster case-insensitive matching.

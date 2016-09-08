@@ -1,9 +1,9 @@
 import { NON_TOP_CANDIDATE_TAGS_RE } from '../constants'
 import { getScore } from './index'
 import {
-  linkDensity,
-  textLength
-} from '../dom/index'
+  textLength,
+  linkDensity
+} from '../../../../../utils/dom'
 
 // After we've calculated scores, loop through all of the possible
 // candidate nodes we found and find the one with the highest score.

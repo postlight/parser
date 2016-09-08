@@ -19,7 +19,7 @@ import {
   scoreByPosition,
 } from './score-image'
 
-import clean from './clean'
+import { cleanImage } from '../../../cleaners'
 
 // Given a resource, try to find the lead image URL from within
 // it. Like content and next page extraction, uses a scoring system
@@ -46,7 +46,7 @@ const GenericLeadImageUrlExtractor = {
       )
 
     if (imageUrl) {
-      cleanUrl = clean(imageUrl)
+      cleanUrl = cleanImage(imageUrl)
 
       if (cleanUrl) return cleanUrl
     }
@@ -79,7 +79,7 @@ const GenericLeadImageUrlExtractor = {
       , [null, 0])
 
     if (topScore > 0) {
-      cleanUrl = clean(topUrl)
+      cleanUrl = cleanImage(topUrl)
 
       if (cleanUrl) return cleanUrl
     }
@@ -90,19 +90,19 @@ const GenericLeadImageUrlExtractor = {
       const $node = $(selector).first()
       const src = $node.attr('src')
       if (src) {
-        cleanUrl = clean(src)
+        cleanUrl = cleanImage(src)
         if (cleanUrl) return cleanUrl
       }
 
       const href = $node.attr('href')
       if (href) {
-        cleanUrl = clean(href)
+        cleanUrl = cleanImage(href)
         if (cleanUrl) return cleanUrl
       }
 
       const value = $node.attr('value')
       if (value) {
-        cleanUrl = clean(value)
+        cleanUrl = cleanImage(value)
         if (cleanUrl) return cleanUrl
       }
     }

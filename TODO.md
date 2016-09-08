@@ -1,6 +1,4 @@
 TODO:
-- extract and generalize cleaners
-- get custom datePublished selector to convert to date object (prob through cleaner)
 - run makeLinksAbsolute on extracted content before returning
 - remove logic for fetching meta attrs with custom props
 - Resource (fetches page, validates it, cleans it, normalizes meta tags (!), converts lazy-loaded images, makes links absolute, etc)
@@ -14,6 +12,9 @@ TODO:
 - Separate constants into activity-specific folders (dom, scoring)
 
 DONE:
+x get custom datePublished selector to convert to date object (prob through cleaner)
+x extract and generalize cleaners
+  x move arguments to cleaners to object
 x Check that lead-image-url extractor isn't looking for end-of-string file extension matches (i.e., it could be ...foo.jpg?otherstuff
 x extractLeadImageUrl
 x extractDek

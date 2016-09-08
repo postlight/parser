@@ -2,7 +2,7 @@ import assert from 'assert'
 import fs from 'fs'
 import cheerio from 'cheerio'
 
-import CustomExtractor from './root-extractor'
+import RootExtractor from './root-extractor'
 import {
   cleanBySelectors,
   transformElements
@@ -11,7 +11,7 @@ import {
 import GenericExtractor from './generic'
 import NYMagExtractor from './custom/nymag.com'
 
-describe('CustomExtractor', () => {
+describe('RootExtractor', () => {
   it('extracts based on custom selectors', () => {
     const url = 'http://nymag.com/daily/intelligencer/2016/09/trump-discussed-usd25k-donation-with-florida-ag-not-fraud.html'
     const html = fs.readFileSync('./src/extractor/custom/nymag.com/fixtures/test.html', 'utf8')
@@ -23,7 +23,7 @@ describe('CustomExtractor', () => {
       author,
       datePublished,
       leadImageUrl,
-    } = CustomExtractor.extract(
+    } = RootExtractor.extract(
       NYMagExtractor, { url, html, $, metaCache: [] }
     )
 

@@ -28,14 +28,14 @@ const GenericExtractor = {
     const title = this.title(options)
     const datePublished = this.datePublished(options)
     const author = this.author(options)
-    const content = this.content(options)
+    const content = this.content({ ...options, title })
     const leadImageUrl = this.leadImageUrl(options)
     const dek = this.dek(options)
 
     return {
       title,
       author,
-      datePublished: datePublished ? datePublished.toISOString() : null,
+      datePublished: datePublished ? datePublished : null,
       dek,
       leadImageUrl,
       content,

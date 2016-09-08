@@ -8,7 +8,8 @@ import {
 } from './fetch-resource'
 import { MAX_CONTENT_LENGTH } from './constants'
 
-describe('fetchResource(url)', () => {
+describe('fetchResource(url)', function() {
+  this.timeout(10000)
   it('fetches domains', async () => {
     const url = 'http://theconcourse.deadspin.com/1786177057'
     const { body, response } = await fetchResource(url)

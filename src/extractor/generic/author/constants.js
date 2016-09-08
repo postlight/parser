@@ -55,6 +55,3 @@ export const BYLINE_SELECTORS_RE = [
   ['#byline', byline_re],
   ['.byline', byline_re],
 ]
-
-export const CLEAN_AUTHOR_RE = /^\s*(posted |written )?by\s*:?\s*(.*)/i
-    //     author = re.sub(r'^\s*(posted |written )?by\s*:?\s*(.*)(?i)',

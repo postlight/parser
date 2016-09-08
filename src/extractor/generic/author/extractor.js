@@ -5,7 +5,7 @@ import {
   BYLINE_SELECTORS_RE,
 } from './constants'
 
-import cleanAuthor from './clean-author'
+import { cleanAuthor } from '../../../cleaners'
 
 import {
   extractFromMeta,

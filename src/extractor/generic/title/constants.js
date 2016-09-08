@@ -52,11 +52,3 @@ export const WEAK_TITLE_SELECTORS = [
   'html head title',
   'title',
 ]
-
-
-// A regular expression that will match separating characters on a
-// title, that usually denote breadcrumbs or something similar.
-export const TITLE_SPLITTERS_RE = /(: | - | \| )/g
-
-export const DOMAIN_ENDINGS_RE =
-  new RegExp('\.com$|\.net$|\.org$|\.co\.uk$', 'g')

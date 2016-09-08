@@ -4,7 +4,7 @@ import {
   DEK_URL_RES,
 } from './constants'
 
-import cleanDek from './clean-dek'
+import { cleanDek } from '../../../cleaners'
 
 import {
   extractFromMeta,

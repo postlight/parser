@@ -1,6 +1,7 @@
 import 'babel-polyfill'
 
 import GenericExtractor from './generic'
+import Cleaners from '../cleaners'
 import { convertNodeTo, stripTags } from './utils/dom'
 
 const RootExtractor = {
@@ -17,7 +18,9 @@ const RootExtractor = {
     const title = extract({ ...opts, type: 'title' })
     const datePublished = extract({ ...opts, type: 'datePublished' })
     const author = extract({ ...opts, type: 'author' })
-    const content = extract({ ...opts, type: 'content', extractHtml: true })
+    const content = extract({
+      ...opts, type: 'content', extractHtml: true, title
+    })
     const leadImageUrl = extract({ ...opts, type: 'leadImageUrl', content })
     const dek = extract({ ...opts, type: 'dek', content })
 
@@ -33,15 +36,16 @@ const RootExtractor = {
 }
 
 function extract(opts) {
-  const { type, extractor, $, extractHtml } = opts
+  const { type, extractor } = opts
 
   // If nothing matches the selector,
   // run the Generic extraction
-  return select($, extractor[type], extractHtml) ||
+  return select({ ...opts, extractionOpts: extractor[type] }) ||
     GenericExtractor[type](opts)
 }
 
-function select($, extractionOpts, extractHtml=false) {
+function select(opts) {
+  const { $, type, extractionOpts, extractHtml=false } = opts
   // Skip if there's not extraction for this type
   if (!extractionOpts) return
 
@@ -71,7 +75,8 @@ function select($, extractionOpts, extractHtml=false) {
 
     return $.html($content)
   } else {
-    return stripTags($(matchingSelector).text(), $)
+    // return stripTags($(matchingSelector).text(), $)
+    return Cleaners[type]($(matchingSelector).text(), opts)
   }
 }
 

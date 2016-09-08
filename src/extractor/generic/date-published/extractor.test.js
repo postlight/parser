@@ -15,7 +15,7 @@ describe('GenericDatePublishedExtractor', () => {
         )
 
         assert.equal(
-          result.toISOString(),
+          result,
           HTML.datePublishedMeta.result.toISOString()
         )
     })
@@ -29,7 +29,7 @@ describe('GenericDatePublishedExtractor', () => {
         )
 
         assert.equal(
-          result.toISOString(),
+          result,
           HTML.datePublishedMeta.result.toISOString()
         )
     })
@@ -44,7 +44,7 @@ describe('GenericDatePublishedExtractor', () => {
         )
 
         assert.equal(
-          result.toISOString(),
+          result,
           new Date('2012/08/01').toISOString()
         )
     })
@@ -59,8 +59,8 @@ describe('GenericDatePublishedExtractor', () => {
         )
 
         assert.equal(
-          result.toISOString(),
-          new Date('2020-01-01').toISOString()
+          result,
+          new Date('2020 01 01').toISOString()
         )
     })
 
@@ -74,7 +74,7 @@ describe('GenericDatePublishedExtractor', () => {
         )
 
         assert.equal(
-          result.toISOString(),
+          result,
           new Date('2020/jan/01').toISOString()
         )
     })

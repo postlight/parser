@@ -3,8 +3,8 @@ import 'babel-polyfill'
 
 import extractBestNode from './extract-best-node'
 import nodeIsSufficient from '../../utils/node-is-sufficient'
-import extractCleanNode from './extract-clean-node'
-import { normalizeSpaces } from './utils/text'
+import { cleanContent } from '../../../cleaners'
+import { normalizeSpaces } from '../../../utils/text'
 
 const GenericContentExtractor = {
   defaultOpts: {
@@ -32,17 +32,20 @@ const GenericContentExtractor = {
   //
   // cleanConditionally: Clean the node to return of some
   // superfluous content. Things like forms, ads, etc.
-  extract({ $, html }, title='', opts) {
+  extract({ $, html, title }, opts) {
     opts = { ...this.defaultOpts, ...opts }
 
     $ = $ || cheerio.load(html)
 
     // Cascade through our extraction-specific opts in an ordered fashion,
     // turning them off as we try to extract content.
-    let node = extractCleanNode(
+    let node = cleanContent(
                 extractBestNode($, opts),
-                $,
-                opts.cleanConditionally)
+                {
+                  $,
+                  cleanConditionally: opts.cleanConditionally,
+                  title
+                })
 
     if (nodeIsSufficient(node)) {
       return this.cleanAndReturnNode(node, $)
@@ -53,7 +56,7 @@ const GenericContentExtractor = {
         opts[key] = false
         $ = cheerio.load(html)
 
-        node = extractCleanNode(
+        node = cleanContent(
                     extractBestNode($, opts),
                     $,
                     opts.cleanConditionally)

@@ -4,7 +4,7 @@ import {
   DATE_PUBLISHED_URL_RES,
 } from './constants'
 
-import cleanDatePublished from './clean-date-published'
+import { cleanDatePublished } from '../../../cleaners'
 
 import {
   extractFromMeta,
