@@ -1,5 +1,6 @@
 TODO:
-- change customselector to rootselector. consider other options for generalizing cleaning (use generic cleaners)
+- extract and generalize cleaners
+- get custom datePublished selector to convert to date object (prob through cleaner)
 - run makeLinksAbsolute on extracted content before returning
 - remove logic for fetching meta attrs with custom props
 - Resource (fetches page, validates it, cleans it, normalizes meta tags (!), converts lazy-loaded images, makes links absolute, etc)

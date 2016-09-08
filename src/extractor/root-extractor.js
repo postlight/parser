@@ -9,12 +9,17 @@ const RootExtractor = {
     // This is the generic extractor. Run its extract method
     if (extractor.domain === '*') return extractor.extract(opts)
 
-    const title = extract({ ...opts, type: 'title', extractor })
-    const datePublished = extract({ ...opts, type: 'datePublished', extractor })
-    const author = extract({ ...opts, type: 'author', extractor })
-    const content = extract({ ...opts, type: 'content', extractor, extractHtml: true })
-    const leadImageUrl = extract({ ...opts, type: 'leadImageUrl', extractor })
-    const dek = extract({ ...opts, type: 'dek', extractor })
+    opts = {
+      ...opts,
+      extractor
+    }
+
+    const title = extract({ ...opts, type: 'title' })
+    const datePublished = extract({ ...opts, type: 'datePublished' })
+    const author = extract({ ...opts, type: 'author' })
+    const content = extract({ ...opts, type: 'content', extractHtml: true })
+    const leadImageUrl = extract({ ...opts, type: 'leadImageUrl', content })
+    const dek = extract({ ...opts, type: 'dek', content })
 
     return {
       title,
@@ -40,18 +45,20 @@ function select($, extractionOpts, extractHtml=false) {
   // Skip if there's not extraction for this type
   if (!extractionOpts) return
 
+  // If a string is hardcoded for a type (e.g., Wikipedia
+  // contributors), return the string
+  if (typeof extractionOpts === 'string') return extractionOpts
+
   const { selectors } = extractionOpts
 
   const matchingSelector = selectors.find((selector) => {
     return $(selector).length === 1
   })
-  console.log(matchingSelector)
-  // console.log($(matchingSelector).text())
-  console.log(extractHtml)
+
   if (!matchingSelector) return
 
   // If the selector type requests html as its return type
-  // clean the element with provided cleaning selectors
+  // transform and clean the element with provided selectors
   if (extractHtml) {
     let $content = $(matchingSelector)
 
@@ -59,8 +66,8 @@ function select($, extractionOpts, extractHtml=false) {
     $content.wrap($('<div></div>'))
     $content = $content.parent()
 
-    $content = cleanBySelectors($content, $, extractionOpts)
     $content = transformElements($content, $, extractionOpts)
+    $content = cleanBySelectors($content, $, extractionOpts)
 
     return $.html($content)
   } else {
@@ -93,7 +100,7 @@ export function transformElements($content, $, { transforms }) {
     } else if (typeof value === 'function') {
       // If value is function, apply function to node
       $matches.each((index, node) => {
-        const result = value($(node))
+        const result = value($(node), $)
         // If function returns a string, convert node to that value
         if (typeof result === 'string') {
           convertNodeTo(node, $, result)

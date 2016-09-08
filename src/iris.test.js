@@ -16,5 +16,11 @@ describe('Iris', function() {
 
       // console.log(result)
     })
+
+    it('does wikipedia', async function() {
+      const result = await Iris.parse('https://en.wikipedia.org/wiki/Brihadeeswarar_Temple_fire')
+
+      console.log(result)
+    })
   })
 })
