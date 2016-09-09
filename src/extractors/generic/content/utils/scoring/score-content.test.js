@@ -7,7 +7,7 @@ import HTML from './fixtures/html'
 
 import {
   scoreContent,
-  getScore
+  getScore,
 } from './index'
 
 // TODO: Walk through these and sanity check my scores
@@ -34,6 +34,22 @@ describe('scoreContent($, weightNodes)', () => {
     const result = scoreContent($).html()
 
     assert.equal(getScore($('article').first()), 65.5)
+  })
+
+  // This is a strange case. On the first pass, scoreContent
+  // doesn't score every paragraph node for some reason.
+  it("scores this Vulture article the same", () => {
+    const html = fs.readFileSync('./fixtures/vulture.html', 'utf-8')
+    let $ = cheerio.load(html)
+    $ = scoreContent($)
+    // console.log("NUMBER OF SCORED Ps", $('p[score]').length)
+    // fs.writeFile('./vult.html', $.html())
+    // fs.writeFile('./vulttop.html', $.html(top))
+    // $('p').each((index, node) => {
+    //   console.log(node.attribs.score)
+    // })
+
+    // assert.equal(getScore($('[score]').first()), 65.5)
   })
 
 })

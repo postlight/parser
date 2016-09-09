@@ -7,7 +7,7 @@ import {
 // commas, etc. Higher is better.
 export default function scoreParagraph(node) {
   let score = 1
-  const text = node.text()
+  const text = node.text().trim()
   const textLength = text.length
 
   // If this paragraph is less than 25 characters, don't count it.

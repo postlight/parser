@@ -21,11 +21,27 @@ export default function scoreContent($, weightNodes=true) {
     })
   })
 
-  $('p, pre').each((index, node) => {
+  // TODO Why is this not scoring every p
+  // the first time through?
+  // Somehow it succeeds if I run it twice.
+  // See Vulture example in score-content.test.js
+  // It appears to have something to do with adding
+  // scores to parent nodes (comment that out and all
+  // children are scored).
+  scorePs($, weightNodes)
+  scorePs($, weightNodes)
+  // scorePs($, weightNodes)
+
+  return $
+}
+
+function scorePs($, weightNodes) {
+  $('p, pre').not('[score]').each((index, node) => {
     // The raw score for this paragraph, before we add any parent/child
     // scores.
     let $node = $(node)
     const rawScore = scoreNode($node)
+
     $node = setScore($node, $, getOrInitScore($node, $, weightNodes))
 
     // Add the individual content score to the parent node
@@ -37,8 +53,6 @@ export default function scoreContent($, weightNodes=true) {
       addScoreTo($parent.parent(), $, rawScore/2, weightNodes)
     }
   })
-
-  return $
 }
 
 function convertSpans($node, $) {
