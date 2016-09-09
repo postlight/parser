@@ -8,19 +8,19 @@ import {
 // gets and returns the score if it exists
 // if not, initializes a score based on
 // the node's tag type
-export default function getOrInitScore(node, $, weightNodes=true) {
-  let score = getScore(node, $)
+export default function getOrInitScore($node, $, weightNodes=true) {
+  let score = getScore($node)
 
   if (score) {
     return score
   } else {
-    score = scoreNode(node)
+    score = scoreNode($node)
 
     if (weightNodes) {
-      score = score + getWeight(node)
+      score = score + getWeight($node)
     }
 
-    addToParent(node, $, score)
+    addToParent($node, $, score)
   }
 
   return score

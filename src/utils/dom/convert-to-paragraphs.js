@@ -24,10 +24,11 @@ export default function convertToParagraphs($) {
 
 function convertDivs($) {
   $('div').each((index, div) => {
-    const convertable = $(div).children()
+    const $div = $(div)
+    const convertable = $div.children()
       .not(DIV_TO_P_BLOCK_TAGS).length == 0
     if (convertable) {
-      convertNodeTo(div, $, 'p')
+      convertNodeTo($div, $, 'p')
     }
   })
 
@@ -36,9 +37,10 @@ function convertDivs($) {
 
 function convertSpans($) {
   $('span').each((index, span) => {
-    const convertable = $(span).parents('p, div').length == 0
+    const $span = $(span)
+    const convertable = $span.parents('p, div').length == 0
     if (convertable) {
-      convertNodeTo(span, $, 'p')
+      convertNodeTo($span, $, 'p')
     }
   })
 

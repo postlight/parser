@@ -18,16 +18,14 @@ describe('scoreContent($, weightNodes)', () => {
     const $ = cheerio.load(HTML.hNews.before)
     const result = scoreContent($).html()
 
-    assert.equal(getScore($('div').first(), $), 140)
-    // assert.equal(getScore($('div').first(), $), 99)
+    assert.equal(getScore($('div').first()), 140)
   })
 
   it("is so-so about non-hNews content", () => {
     const $ = cheerio.load(HTML.nonHNews.before)
     const result = scoreContent($).html()
 
-    // assert.equal(getScore($('div').first(), $), 38)
-    assert.equal(getScore($('div').first(), $), 65)
+    assert.equal(getScore($('div').first()), 65)
   })
 
   it("scores this Wired article the same", () => {
@@ -35,8 +33,7 @@ describe('scoreContent($, weightNodes)', () => {
     const $ = cheerio.load(html)
     const result = scoreContent($).html()
 
-    // assert.equal(getScore($('article').first(), $), 63.75)
-    assert.equal(getScore($('article').first(), $), 65.5)
+    assert.equal(getScore($('article').first()), 65.5)
   })
 
 })

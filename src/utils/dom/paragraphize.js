@@ -12,6 +12,8 @@ import { BLOCK_LEVEL_TAGS_RE } from './constants'
 // :param br: Whether or not the passed node is a br
 
 export default function paragraphize(node, $, br=false) {
+  const $node = $(node)
+
   if (br) {
     let sibling = node.nextSibling
     let p = $('<p></p>')
@@ -28,8 +30,8 @@ export default function paragraphize(node, $, br=false) {
       sibling = nextSibling
     }
 
-    $(node).replaceWith(p)
-    $(node).remove()
+    $node.replaceWith(p)
+    $node.remove()
     return $
   } else {
     // Not currently implemented. May not need to; can leverage

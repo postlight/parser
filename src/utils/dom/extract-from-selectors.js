@@ -14,23 +14,23 @@ export default function extractFromSelectors(
     // If we didn't get exactly one of this selector, this may be
     // a list of articles or comments. Skip it.
     if (nodes.length === 1) {
-      const node = nodes[0]
+      const $node = $(nodes[0])
 
       // If it has a number of children, it's more likely a container
       // element. Skip it.
-      if ($(node).children().length > maxChildren) {
+      if ($node.children().length > maxChildren) {
         continue
       }
       // If it looks to be within a comment, skip it.
-      if (withinComment(node, $)) {
+      if (withinComment($node, $)) {
         continue
       }
 
       let content
       if (textOnly) {
-        content = $(node).text()
+        content = $node.text()
       } else {
-        content = $(node).html()
+        content = $node.html()
       }
 
       if (content) {

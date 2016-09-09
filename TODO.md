@@ -3,12 +3,12 @@ TODO:
 - Rename all cleaners from cleanThing to clean
 - Make sure weightNodes flag is being passed properly
 - Get better sense of when cheerio returns a raw node and when a cheerio object
-  - Remove $ from function calls to getScore
   - Remove $ whenever possible
 - Test if .is method is faster than regex methods
 - Separate constants into activity-specific folders (dom, scoring)
 
 DONE:
+x Remove $ from function calls to getScore
 x remove all but attributes whitelist. research what attributes are important beyond SRC and href
 x remove logic for fetching meta attrs with custom props
 x cleaning embed and object nodes

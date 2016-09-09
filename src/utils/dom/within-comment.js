@@ -1,7 +1,7 @@
-export default function withinComment(node, $) {
-  const parents = $(node).parents().toArray()
+export default function withinComment($node, $) {
+  const parents = $node.parents().toArray()
   const commentParent = parents.find((parent) => {
-    const classAndId = `${$(parent).attr('class')} ${$(parent).attr('id')}`
+    const classAndId = `${parent.attribs['class']} ${parent.attribs['id']}`
     return classAndId.includes('comment')
   })
 

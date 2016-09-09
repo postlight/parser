@@ -117,7 +117,7 @@ export function transformElements($content, $, { transforms }) {
     // If value is a string, convert directly
     if (typeof value === 'string') {
       $matches.each((index, node) => {
-        convertNodeTo(node, $, transforms[key])
+        convertNodeTo($(node), $, transforms[key])
       })
     } else if (typeof value === 'function') {
       // If value is function, apply function to node
@@ -125,7 +125,7 @@ export function transformElements($content, $, { transforms }) {
         const result = value($(node), $)
         // If function returns a string, convert node to that value
         if (typeof result === 'string') {
-          convertNodeTo(node, $, result)
+          convertNodeTo($(node), $, result)
         }
       })
     }

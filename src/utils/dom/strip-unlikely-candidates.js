@@ -18,9 +18,10 @@ export default function stripUnlikelyCandidates($) {
   //
   //  :param $: a cheerio object to strip nodes from
   //  :return $: the cleaned cheerio object
-  $('*').not('a').each(function(index, element) {
-    const classes = $(element).attr('class')
-    const id = $(element).attr('id')
+  $('*').not('a').each(function(index, node) {
+    const $node = $(node)
+    const classes = $node.attr('class')
+    const id = $node.attr('id')
     if (!id && !classes) {
       return
     } else {
@@ -28,7 +29,7 @@ export default function stripUnlikelyCandidates($) {
       if (CANDIDATES_WHITELIST.test(classAndId)) {
         return
       } else if (CANDIDATES_BLACKLIST.test(classAndId)) {
-        return $(element).remove()
+        return $node.remove()
       }
     }
   })

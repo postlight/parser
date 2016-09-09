@@ -5,12 +5,12 @@ import { convertNodeTo } from 'utils/dom'
 // strip them. Otherwise, turn 'em into H2s.
 export default function cleanHOnes(article, $) {
   // const hOnes = $.find('h1')
-  const hOnes = $('h1', article)
-  if (hOnes.length < 3) {
-    hOnes.each((index, node) => $(node).remove())
+  const $hOnes = $('h1', article)
+  if ($hOnes.length < 3) {
+    $hOnes.each((index, node) => $(node).remove())
   } else {
-    hOnes.each((index, node) => {
-      convertNodeTo(node, $, 'h2')
+    $hOnes.each((index, node) => {
+      convertNodeTo($(node), $, 'h2')
     })
   }
 

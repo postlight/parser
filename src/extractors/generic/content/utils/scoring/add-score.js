@@ -1,5 +1,4 @@
 import {
-  getScore,
   getOrInitScore,
   setScore,
 } from './index'

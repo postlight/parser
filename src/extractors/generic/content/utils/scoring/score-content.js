@@ -3,7 +3,6 @@ import { HNEWS_CONTENT_SELECTORS } from '../constants'
 import {
   scoreNode,
   setScore,
-  getScore,
   getOrInitScore,
   addScore,
 } from './index'
@@ -17,7 +16,7 @@ export default function scoreContent($, weightNodes=true) {
   // First, look for special hNews based selectors and give them a big
   // boost, if they exist
   HNEWS_CONTENT_SELECTORS.map(([parentSelector, childSelector]) => {
-    $(parentSelector).find(childSelector).each((index, node) => {
+    $(`${parentSelector} ${childSelector}`).each((index, node) => {
       addScore($(node).parent(parentSelector), $, 80)
     })
   })
@@ -25,37 +24,38 @@ export default function scoreContent($, weightNodes=true) {
   $('p, pre').each((index, node) => {
     // The raw score for this paragraph, before we add any parent/child
     // scores.
-    const rawScore = scoreNode($(node))
-    node = setScore(node, $, getOrInitScore($(node), $, weightNodes))
+    let $node = $(node)
+    const rawScore = scoreNode($node)
+    $node = setScore($node, $, getOrInitScore($node, $, weightNodes))
 
     // Add the individual content score to the parent node
-    const parent = $(node).parent()
-    addScoreTo(parent, $, rawScore, weightNodes)
-    if (parent) {
+    const $parent = $node.parent()
+    addScoreTo($parent, $, rawScore, weightNodes)
+    if ($parent) {
       // Add half of the individual content score to the
       // grandparent
-      addScoreTo(parent.parent(), $, rawScore/2, weightNodes)
+      addScoreTo($parent.parent(), $, rawScore/2, weightNodes)
     }
   })
 
   return $
 }
 
-function convertSpans(node, $) {
-  if (node.get(0)) {
-    const { tagName } = node.get(0)
+function convertSpans($node, $) {
+  if ($node.get(0)) {
+    const { tagName } = $node.get(0)
 
     if (tagName === 'span') {
       // convert spans to divs
-      convertNodeTo(node, $, 'div')
+      convertNodeTo($node, $, 'div')
     }
   }
 }
 
-function addScoreTo(node, $, score, weightNodes) {
-  if (node) {
-    convertSpans(node, $)
-    addScore(node, $, score)
+function addScoreTo($node, $, score, weightNodes) {
+  if ($node) {
+    convertSpans($node, $)
+    addScore($node, $, score)
   }
 }
 
