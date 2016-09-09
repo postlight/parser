@@ -15,7 +15,6 @@ describe('GenericExtractor', () => {
         author,
         datePublished,
         dek,
-        leadImageUrl,
       } = GenericExtractor.extract(
         { url: "http://latimes.com", html, metaCache: [] }
       )
@@ -30,7 +29,6 @@ describe('GenericExtractor', () => {
         '2009-10-14T04:00:00.000Z'
       )
       assert.equal(dek, null)
-      assert.equal(leadImageUrl, 'http://latimesblogs.latimes.com/fb.jpg')
     })
 
     it("extracts html and returns the article title", () => {
@@ -41,7 +39,6 @@ describe('GenericExtractor', () => {
         title,
         datePublished,
         dek,
-        leadImageUrl,
       } = GenericExtractor.extract(
         { url: "http://wired.com", html, metaCache: [] }
       )
@@ -53,7 +50,6 @@ describe('GenericExtractor', () => {
       )
       assert.equal(datePublished, null)
       assert.equal(dek, null)
-      assert.equal(leadImageUrl, 'https://www.wired.com/wp-content/uploads/2016/08/GettyImages-536814811-1200x630-e1471497753973.jpg')
     })
 
   })

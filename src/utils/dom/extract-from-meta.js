@@ -15,26 +15,14 @@ export default function extractFromMeta(
   cleanTags=true,
 ) {
   const foundNames = metaNames.filter(name => {
-    const metaType = typeof name
-
-    if (metaType === 'string') {
-      return cachedNames.indexOf(name) !== -1
-    } else if (metaType === 'object') {
-      return cachedNames.indexOf(name[0]) !== 1
-    }
+    return cachedNames.indexOf(name) !== -1
   })
 
   for (let name of foundNames) {
     let type, value
 
-    if (typeof name === 'string') {
-      type = 'name'
-      value = 'value'
-    } else {
-      type = name[1]
-      value = name[2]
-      name = name[0]
-    }
+    type = 'name'
+    value = 'value'
 
     const nodes = $(`meta[${type}="${name}"]`)
 

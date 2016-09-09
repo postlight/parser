@@ -1,5 +1,4 @@
 TODO:
-- remove logic for fetching meta attrs with custom props
 - extractNextPageUrl
 - Rename all cleaners from cleanThing to clean
 - Make sure weightNodes flag is being passed properly
@@ -10,6 +9,7 @@ TODO:
 - Separate constants into activity-specific folders (dom, scoring)
 
 DONE:
+x remove logic for fetching meta attrs with custom props
 x cleaning embed and object nodes
 x run makeLinksAbsolute on extracted content before returning
 x add option to fetch attrs in RootExtractor's select method

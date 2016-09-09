@@ -3,7 +3,7 @@ const HTML = {
     test: `
       <html>
         <head>
-          <meta property="og:image" content="http://example.com/lead.jpg">
+          <meta name="og:image" value="http://example.com/lead.jpg">
         </head>
       </html>
     `,
@@ -13,7 +13,7 @@ const HTML = {
     test: `
       <html>
         <head>
-          <meta name="twitter:image" content="http://example.com/lead.jpg">
+          <meta name="twitter:image" value="http://example.com/lead.jpg">
         </head>
       </html>
     `,

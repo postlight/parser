@@ -2,8 +2,8 @@
 // All attributes should be lowercase for faster case-insensitive matching.
 // From most distinct to least distinct.
 export const LEAD_IMAGE_URL_META_TAGS = [
-    ['og:image', 'property', 'content'],
-    ['twitter:image', 'name', 'content'],
+    'og:image',
+    'twitter:image',
     'image_src',
 ]
 
