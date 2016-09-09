@@ -8,9 +8,9 @@ import {
   rewriteTopLevel,
   stripJunkTags,
   makeLinksAbsolute,
-} from '../utils/dom'
+} from 'utils/dom'
 
-import { convertNodeTo } from '../extractor/utils/dom'
+import { convertNodeTo } from 'utils/dom'
 
 // Clean our article content, returning a new, cleaned node.
 export default function extractCleanNode(

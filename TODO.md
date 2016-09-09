@@ -1,6 +1,5 @@
 TODO:
 - remove logic for fetching meta attrs with custom props
-- Resource (fetches page, validates it, cleans it, normalizes meta tags (!), converts lazy-loaded images, makes links absolute, etc)
 - extractNextPageUrl
 - Rename all cleaners from cleanThing to clean
 - Make sure weightNodes flag is being passed properly
@@ -19,6 +18,7 @@ x extract and generalize cleaners
   x move arguments to cleaners to object
 x Check that lead-image-url extractor isn't looking for end-of-string file extension matches (i.e., it could be ...foo.jpg?otherstuff
 x extractLeadImageUrl
+x Resource (fetches page, validates it, cleans it, normalizes meta tags (!), converts lazy-loaded images, makes links absolute, etc)
 x extractDek
 x extractDatePublished
 x Title metadata

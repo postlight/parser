@@ -1,10 +1,8 @@
 import fs from 'fs'
 
-import Resource from './resource'
-import getExtractor from './extractor/get-extractor'
-import RootExtractor from './extractor/root-extractor'
-
-import fetchResource from './resource/utils/fetch-resource'
+import Resource from 'resource'
+import getExtractor from 'extractors/get-extractor'
+import RootExtractor from 'extractors/root-extractor'
 
 const Iris = {
   parse: async function(url, html) {

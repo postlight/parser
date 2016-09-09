@@ -2,9 +2,9 @@ import assert from 'assert'
 import cheerio from 'cheerio'
 
 import HTML from './fixtures/html'
-import { assertClean } from './test-helpers'
+import { assertClean } from 'test-helpers'
 
-import { rewriteTopLevel } from './index'
+import rewriteTopLevel from './rewrite-top-level'
 
 describe('rewriteTopLevel(node, $)', () => {
   it("turns html and body tags into divs", () => {

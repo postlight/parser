@@ -1,4 +1,4 @@
-import { convertNodeTo } from '../../extractor/utils/dom'
+import { convertNodeTo } from 'utils/dom'
 
 // Rewrite the tag name to div if it's a top level node like body or
 // html to avoid later complications with multiple body tags.

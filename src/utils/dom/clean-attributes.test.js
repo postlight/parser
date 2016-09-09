@@ -2,7 +2,7 @@ import cheerio from 'cheerio'
 import assert from 'assert'
 
 import HTML from './fixtures/html'
-import { assertClean } from './test-helpers'
+import { assertClean } from 'test-helpers'
 
 import { cleanAttributes } from './index'
 

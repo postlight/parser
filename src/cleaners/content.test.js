@@ -3,7 +3,7 @@ import cheerio from 'cheerio'
 import fs from 'fs'
 
 import extractCleanNode from './content'
-import extractBestNode from '../extractor/generic/content/extract-best-node'
+import extractBestNode from 'extractors/generic/content/extract-best-node'
 
 describe('extractCleanNode(article, { $, cleanConditionally, title } })', () => {
   it("cleans cruft out of a DOM node", () => {

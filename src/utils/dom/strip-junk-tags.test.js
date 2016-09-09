@@ -2,7 +2,7 @@ import assert from 'assert'
 import cheerio from 'cheerio'
 
 import HTML from './fixtures/html'
-import { assertClean } from './test-helpers'
+import { assertClean } from 'test-helpers'
 
 import { stripJunkTags } from './index'
 

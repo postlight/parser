@@ -12,6 +12,7 @@
   "license": "ISC",
   "devDependencies": {
     "babel-plugin-external-helpers": "^6.8.0",
+    "babel-plugin-module-alias": "^1.6.0",
     "babel-plugin-transform-async-to-generator": "^6.8.0",
     "babel-plugin-transform-es2015-destructuring": "^6.9.0",
     "babel-plugin-transform-object-rest-spread": "^6.8.0",
