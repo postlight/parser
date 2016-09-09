@@ -1,5 +1,4 @@
 TODO:
-- run makeLinksAbsolute on extracted content before returning
 - remove logic for fetching meta attrs with custom props
 - Resource (fetches page, validates it, cleans it, normalizes meta tags (!), converts lazy-loaded images, makes links absolute, etc)
 - extractNextPageUrl
@@ -12,6 +11,8 @@ TODO:
 - Separate constants into activity-specific folders (dom, scoring)
 
 DONE:
+x cleaning embed and object nodes
+x run makeLinksAbsolute on extracted content before returning
 x add option to fetch attrs in RootExtractor's select method
 x get custom datePublished selector to convert to date object (prob through cleaner)
 x extract and generalize cleaners

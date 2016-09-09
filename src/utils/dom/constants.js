@@ -9,6 +9,8 @@ export const STRIP_OUTPUT_TAGS = [
     'link',
     'style',
     'hr',
+    'embed',
+    'object',
 ]
 
 // cleanAttributes
