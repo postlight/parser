@@ -39,6 +39,19 @@ const NYMagExtractor = {
       'h1.headline-primary',
       'h1',
     ]
+  },
+
+  author: {
+    selectors: [
+      '.by-authors',
+    ]
+  },
+
+  datePublished: {
+    selectors: [
+      'time.article-timestamp[datetime]',
+      'time.article-timestamp',
+    ]
   }
 }
 

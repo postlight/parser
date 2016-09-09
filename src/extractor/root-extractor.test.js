@@ -3,6 +3,7 @@ import fs from 'fs'
 import cheerio from 'cheerio'
 
 import RootExtractor from './root-extractor'
+import { select } from './root-extractor'
 import {
   cleanBySelectors,
   transformElements
@@ -125,11 +126,51 @@ describe('transformElements($content, $, { transforms })', () => {
   })
 })
 
-export function clean(string) {
+describe('select(opts)', () => {
+  it(`returns a node's text with a simple selector`, () => {
+    const html = `
+      <div><div class="author">Bob</div></div>
+    `
+    const $ = cheerio.load(html)
+    const opts = {
+      type: 'author',
+      $,
+      extractionOpts: {
+        selectors: ['.author']
+      }
+    }
+
+    const result = select(opts)
+    assert.equal(result, 'Bob')
+   })
+
+  it(`returns a node's attr with a attr selector`, () => {
+    const html = `
+      <div>
+        <time datetime="2016-09-07T05:07:59-04:00">
+          September 7, 2016
+        </time>
+      </div>
+    `
+    const $ = cheerio.load(html)
+    const opts = {
+      type: 'datePublished',
+      $,
+      extractionOpts: {
+        selectors: ['time[datetime]']
+      }
+    }
+
+    const result = select(opts)
+    assert.equal(result, '2016-09-07T09:07:59.000Z')
+   })
+})
+
+function clean(string) {
   return string.trim().replace(/\r?\n|\r/g, '').replace(/\s+/g, ' ')
 }
 
-export function assertClean(a, b) {
+function assertClean(a, b) {
   assert.equal(clean(a), clean(b))
 }
 

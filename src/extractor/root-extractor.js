@@ -3,6 +3,7 @@ import 'babel-polyfill'
 import GenericExtractor from './generic'
 import Cleaners from '../cleaners'
 import { convertNodeTo, stripTags } from './utils/dom'
+import { ATTR_RE } from './constants'
 
 const RootExtractor = {
   extract(extractor=GenericExtractor, opts) {
@@ -44,7 +45,7 @@ function extract(opts) {
     GenericExtractor[type](opts)
 }
 
-function select(opts) {
+export function select(opts) {
   const { $, type, extractionOpts, extractHtml=false } = opts
   // Skip if there's not extraction for this type
   if (!extractionOpts) return
@@ -75,8 +76,17 @@ function select(opts) {
 
     return $.html($content)
   } else {
-    // return stripTags($(matchingSelector).text(), $)
-    return Cleaners[type]($(matchingSelector).text(), opts)
+    // if selector includes an attr (e.g., img[src]),
+    // extract the attr
+    const attr = matchingSelector.match(ATTR_RE)
+    let result
+    if (attr) {
+      result = $(matchingSelector).attr(attr[1])
+    } else {
+      // otherwise use the text of the node
+      result = $(matchingSelector).text()
+    }
+    return Cleaners[type](result, opts)
   }
 }
 

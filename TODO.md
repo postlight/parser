@@ -12,6 +12,7 @@ TODO:
 - Separate constants into activity-specific folders (dom, scoring)
 
 DONE:
+x add option to fetch attrs in RootExtractor's select method
 x get custom datePublished selector to convert to date object (prob through cleaner)
 x extract and generalize cleaners
   x move arguments to cleaners to object
