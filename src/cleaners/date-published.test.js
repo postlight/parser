@@ -46,6 +46,13 @@ describe('cleanDateString(dateString)', () => {
     assert.equal(date2, '8:30 PM  1/1/2020')
   })
 
+  it('cleans the dots from a.m. or p.m.', () => {
+    // The JS date parser is forgiving, but
+    // it needs a.m./p.m. without dots
+    const date1 = cleanDateString('1/1/2020 8:30 a.m.')
+    assert.equal(date1, '1/1/2020 8:30 am')
+  })
+
   it('can handle some tough timestamps', () => {
     // The JS date parser is forgiving, but
     // it needs am/pm separated from a time

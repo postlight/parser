@@ -27,8 +27,9 @@ export const DEK_SELECTORS = [
 
 // CLEAN DATE PUBLISHED CONSTANTS
 export const CLEAN_DATE_STRING_RE = /^\s*published\s*:?\s*(.*)/i
-export const TIME_MERIDIAN_RE = /(.*\d)(am|pm)(.*)/i
-export const SPLIT_DATE_STRING = /(\d{1,2}:\d{2,2}[ap]?m?)|(\d{1,2}[\/-]\d{1,2}[\/-]\d{2,4})|(\d{1,4})|(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)/ig
+export const TIME_MERIDIAN_SPACE_RE = /(.*\d)(am|pm)(.*)/i
+export const TIME_MERIDIAN_DOTS_RE = /\.m\./i
+export const SPLIT_DATE_STRING = /(\d{1,2}:\d{2,2}(\s?[ap]\.?m\.?)?)|(\d{1,2}[\/-]\d{1,2}[\/-]\d{2,4})|(\d{1,4})|(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)/ig
 
 // CLEAN TITLE CONSTANTS
 // A regular expression that will match separating characters on a
