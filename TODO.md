@@ -9,6 +9,7 @@ TODO:
 - Separate constants into activity-specific folders (dom, scoring)
 
 DONE:
+x remove all but attributes whitelist. research what attributes are important beyond SRC and href
 x remove logic for fetching meta attrs with custom props
 x cleaning embed and object nodes
 x run makeLinksAbsolute on extracted content before returning

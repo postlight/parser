@@ -82,9 +82,6 @@ const GenericContentExtractor = {
     if (!node) {
       return null
     }
-    // Remove our scoring information from our content
-    node.removeAttr('score')
-    node.find('[score]').removeAttr('score')
 
     return normalizeSpaces($.html(node))
 
