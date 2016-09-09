@@ -7,9 +7,10 @@ const WikipediaExtractor = {
 
     // transform top infobox to an image with caption
     transforms: {
-      '.infobox img': ($node, $) => {
+      '.infobox img': ($node) => {
         $node.parents('.infobox').prepend($node)
       },
+      '.infobox caption': 'figcaption',
       '.infobox': 'figure',
     },
 
@@ -17,6 +18,7 @@ const WikipediaExtractor = {
     clean: [
       '.mw-editsection',
       'figure tr, figure td, figure tbody',
+      '#toc',
     ],
 
   },
