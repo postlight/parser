@@ -62,6 +62,10 @@ export function select(opts) {
 
   if (!matchingSelector) return
 
+  // Declaring result; will contain either
+  // text or html, which will be cleaned
+  // by the appropriate cleaner type
+
   // If the selector type requests html as its return type
   // transform and clean the element with provided selectors
   if (extractHtml) {
@@ -74,12 +78,15 @@ export function select(opts) {
     $content = transformElements($content, $, extractionOpts)
     $content = cleanBySelectors($content, $, extractionOpts)
 
+    $content = Cleaners[type]($content, opts)
+
     return $.html($content)
   } else {
     // if selector includes an attr (e.g., img[src]),
     // extract the attr
     const attr = matchingSelector.match(ATTR_RE)
     let result
+
     if (attr) {
       result = $(matchingSelector).attr(attr[1])
     } else {

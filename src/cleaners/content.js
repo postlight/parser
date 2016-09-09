@@ -7,17 +7,21 @@ import {
   removeEmpty,
   rewriteTopLevel,
   stripJunkTags,
+  makeLinksAbsolute,
 } from '../utils/dom'
 
 import { convertNodeTo } from '../extractor/utils/dom'
 
 // Clean our article content, returning a new, cleaned node.
-export default function extractCleanNode(article, { $, cleanConditionally=true, title='' }) {
-  // do I need to copy/clone?
-  // Can't I just start over w/fresh html if I need to?
-  // Look into this
-  // let doc = article
-
+export default function extractCleanNode(
+  article,
+  {
+    $,
+    cleanConditionally=true,
+    title='',
+    url='',
+  }
+) {
   // Rewrite the tag name to div if it's a top level node like body or
   // html to avoid later complications with multiple body tags.
   rewriteTopLevel(article, $)
@@ -36,6 +40,9 @@ export default function extractCleanNode(article, { $, cleanConditionally=true, 
 
   // Clean headers
   cleanHeaders(article, $, title)
+
+  // Make links absolute
+  makeLinksAbsolute(article, $, url)
 
   // Remove style or align attributes
   cleanAttributes(article, $)

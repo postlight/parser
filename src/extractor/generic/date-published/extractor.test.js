@@ -1,5 +1,6 @@
 import assert from 'assert'
 import cheerio from 'cheerio'
+import moment from 'moment'
 
 import HTML from './fixtures/html'
 import GenericDatePublishedExtractor from './extractor'
@@ -60,7 +61,7 @@ describe('GenericDatePublishedExtractor', () => {
 
         assert.equal(
           result,
-          new Date('2020 01 01').toISOString()
+          moment(new Date('2020-01-01')).toISOString()
         )
     })
 

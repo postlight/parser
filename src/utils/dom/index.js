@@ -6,6 +6,7 @@ export { default as removeEmpty } from './remove-empty'
 export { default as cleanTags } from './clean-tags'
 export { default as cleanHeaders } from './clean-headers'
 export { default as rewriteTopLevel } from './rewrite-top-level'
+export { default as makeLinksAbsolute } from './make-links-absolute'
 export { textLength, linkDensity } from './link-density'
 
 

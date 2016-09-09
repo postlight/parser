@@ -17,7 +17,7 @@ describe('GenericContentExtractor', function() {
       //   clean(GenericContentExtractor.extract(null, html))
       // })
       const result = clean(GenericContentExtractor.extract(
-        { $: null, html}
+        { $: null, html, url: 'http://example.com' }
       ))
       // console.log(result)
     })
