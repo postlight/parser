@@ -46,6 +46,7 @@ export const AUTHOR_SELECTORS = [
   '.author',
   '.articleauthor',
   '.ArticleAuthor',
+  '.byline',
 ]
 
 // An ordered list of Selectors to find likely article authors, with

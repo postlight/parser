@@ -10,6 +10,7 @@ export const STRIP_OUTPUT_TAGS = [
     'style',
     'hr',
     'embed',
+    'iframe',
     'object',
 ]
 

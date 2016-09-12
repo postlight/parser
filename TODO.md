@@ -1,13 +1,13 @@
 TODO:
 - extractNextPageUrl
-- Rename all cleaners from cleanThing to clean
-- Make sure weightNodes flag is being passed properly
 - Get better sense of when cheerio returns a raw node and when a cheerio object
   - Remove $ whenever possible
 - Test if .is method is faster than regex methods
 - Separate constants into activity-specific folders (dom, scoring)
 
 DONE:
+x Make sure weightNodes flag is being passed properly
+x Rename all cleaners from cleanThing to clean
 x Remove $ from function calls to getScore
 x remove all but attributes whitelist. research what attributes are important beyond SRC and href
 x remove logic for fetching meta attrs with custom props
