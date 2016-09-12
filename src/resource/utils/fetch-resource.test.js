@@ -16,6 +16,13 @@ describe('fetchResource(url)', function() {
 
     assert.equal(typeof body, 'object')
   })
+
+  it('fetches nyt', async () => {
+    const url = 'http://www.nytimes.com/2016/08/16/upshot/the-state-of-the-clinton-trump-race-is-it-over.html?_r=0'
+    const { body, response } = await fetchResource(url)
+
+    assert.equal(typeof body, 'object')
+  })
 })
 
 describe('validateResponse(response)', () => {

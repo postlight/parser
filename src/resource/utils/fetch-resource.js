@@ -21,9 +21,13 @@ export default async function fetchResource(url) {
 
   const options = {
     url: parsedUrl,
-    headers: REQUEST_HEADERS,
+    headers: { ...REQUEST_HEADERS },
     timeout: FETCH_TIMEOUT,
+    // Don't set encoding; this fixes issues
+    // w/gzipped responses
     encoding: null,
+    // Accept cookies
+    jar: true,
   }
 
   const { response, body } = await get(options)

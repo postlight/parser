@@ -22,5 +22,12 @@ describe('Iris', function() {
 
       // console.log(result)
     })
+
+    it('does the nyt', async function() {
+      const result = await Iris.parse('http://www.nytimes.com/2016/08/16/upshot/the-state-of-the-clinton-trump-race-is-it-over.html?_r=0')
+
+      // console.log(result)
+    })
+
   })
 })
