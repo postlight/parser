@@ -21,30 +21,27 @@ export default function scoreContent($, weightNodes=true) {
     })
   })
 
-  // TODO Why is this not scoring every p
-  // the first time through?
-  // Somehow it succeeds if I run it twice.
-  // See Vulture example in score-content.test.js
-  // It appears to have something to do with adding
-  // scores to parent nodes (comment that out and all
-  // children are scored).
   scorePs($, weightNodes)
-  scorePs($, weightNodes)
-  // scorePs($, weightNodes)
 
   return $
 }
 
 function scorePs($, weightNodes) {
-  $('p, pre').not('[score]').each((index, node) => {
+  $('p, pre').toArray().map((node) => {
     // The raw score for this paragraph, before we add any parent/child
     // scores.
     let $node = $(node)
-    const rawScore = scoreNode($node)
-
     $node = setScore($node, $, getOrInitScore($node, $, weightNodes))
 
+    return $node
+  }).forEach(($node) => {
+    // The parent scoring has to be done in a separate loop
+    // because otherwise scoring the parent overwrites
+    // the score added to the child
+
     // Add the individual content score to the parent node
+    const rawScore = scoreNode($node)
+
     const $parent = $node.parent()
     addScoreTo($parent, $, rawScore, weightNodes)
     if ($parent) {
@@ -52,6 +49,7 @@ function scorePs($, weightNodes) {
       // grandparent
       addScoreTo($parent.parent(), $, rawScore/2, weightNodes)
     }
+
   })
 }
 
