@@ -237,7 +237,7 @@ const HTML = {
     `,
     after: `
     <div><div><div><p><a href="">Wow how about that</a></p></div></div></div>
-    `
+    `,
   },
 
   // cleanImages
@@ -252,7 +252,7 @@ const HTML = {
     <div>
       <img width="50">
     </div>
-    `
+    `,
   },
   cleanHeight: {
     before: `
@@ -264,7 +264,7 @@ const HTML = {
     <div>
       <img width="50">
     </div>
-    `
+    `,
   },
   cleanSpacer: {
     before: `
@@ -279,7 +279,7 @@ const HTML = {
       <img src="/foo/bar/baz/normal.png">
       <p>Some text</p>
     </div>
-    `
+    `,
   },
   // stripJunkTags
   stripsJunk: {
@@ -298,7 +298,7 @@ const HTML = {
     <div>
       <p>What an article</p>
     </div>
-    `
+    `,
   },
 
   // stripHOnes
@@ -314,7 +314,7 @@ const HTML = {
     <div>
       <p>What do you think?</p>
     </div>
-    `
+    `,
   },
   convertThreeHOnes: {
     before: `
@@ -334,7 +334,7 @@ const HTML = {
         <p>What do you think?</p>
         <h2>Can you believe it?!</h2>
       </div>
-    `
+    `,
   },
 
   // cleanAttributes
@@ -348,7 +348,7 @@ const HTML = {
       <div>
         <p>What do you think?</p>
       </div>
-    `
+    `,
   },
   removeAlign: {
     before: `
@@ -360,7 +360,7 @@ const HTML = {
       <div>
         <p>What do you think?</p>
       </div>
-    `
+    `,
   },
 
   // removeEmpty
@@ -375,7 +375,7 @@ const HTML = {
       <div>
         <p>What do you think?</p>
       </div>
-    `
+    `,
   },
   doNotRemoveBr: {
     before: `
@@ -392,7 +392,7 @@ const HTML = {
         <div></div>
         <p>What do you think?</p>
       </div>
-    `
+    `,
   },
   doNotNested: {
     before: `
@@ -409,7 +409,7 @@ const HTML = {
         <p><img src="foo/bar.jpg" /></p>
         <p>What do you think?</p>
       </div>
-    `
+    `,
   },
 
   // cleanConditionally
@@ -433,7 +433,7 @@ const HTML = {
         </p>
         <p>What do you think?</p>
       </div>
-    `
+    `,
   },
   removeTooManyInputs: {
     before: `
@@ -467,7 +467,7 @@ const HTML = {
         <p>What do you think?</p>
         <p>What do you think?</p>
       </div>
-    `
+    `,
   },
   removeShortNoImg: {
     before: `
@@ -490,7 +490,7 @@ const HTML = {
           <img src="asdf">
         </div>
       </div>
-    `
+    `,
   },
 
   linkDensityHigh: {
@@ -527,7 +527,7 @@ const HTML = {
           <li>Keep this one</li>
         </ul>
       </div>
-    `
+    `,
   },
   goodScoreTooDense: {
     before: `
@@ -567,7 +567,7 @@ const HTML = {
           <li>Keep this one</li>
         </ul>
       </div>
-    `
+    `,
   },
   previousEndsInColon: {
     before: `
@@ -608,7 +608,7 @@ const HTML = {
         <p>What do you think?</p>
       </div>
     `,
-    after: `What do you think?`
+    after: 'What do you think?',
   },
 
   // cleanHeaders
@@ -627,7 +627,7 @@ const HTML = {
         <h2>Keep me</h2>
         <p>What do you think?</p>
       </div>
-    `
+    `,
   },
   cleanTitleMatch: {
     before: `
@@ -642,7 +642,7 @@ const HTML = {
         <p>What do you think?</p>
         <p>What do you think?</p>
       </div>
-    `
+    `,
   },
   dropWithNegativeWeight: {
     before: `
@@ -657,8 +657,8 @@ const HTML = {
         <p>What do you think?</p>
         <p>What do you think?</p>
       </div>
-    `
+    `,
   },
-}
+};
 
-export default HTML
+export default HTML;

@@ -12,7 +12,7 @@ const HTML = {
 Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean m
       </p>
     </div>
-   `
-}
+   `,
+};
 
-export default HTML
+export default HTML;

@@ -1,1 +1,1 @@
-export const ATTR_RE = /\[([\w-]+)\]/
+export const ATTR_RE = /\[([\w-]+)\]/;

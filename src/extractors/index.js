@@ -1,5 +1,5 @@
 const Extractor = {
 
-}
+};
 
-export default Extractor
+export default Extractor;

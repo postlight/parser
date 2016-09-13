@@ -1,33 +1,30 @@
-import assert from 'assert'
-import cheerio from 'cheerio'
+import cheerio from 'cheerio';
 
-import HTML from './fixtures/html'
-import { assertClean } from 'test-helpers'
+import { assertClean } from 'test-helpers';
 
-import { cleanImages } from './index'
+import HTML from './fixtures/html';
+import { cleanImages } from './index';
 
 describe('cleanImages($)', () => {
-  it("removes images with small heights/widths", () => {
-    let $ = cheerio.load(HTML.cleanSmallImages.before)
+  it('removes images with small heights/widths', () => {
+    const $ = cheerio.load(HTML.cleanSmallImages.before);
 
-    let result = cleanImages($('*').first(), $)
-    assertClean(result.html(), HTML.cleanSmallImages.after)
-  })
+    const result = cleanImages($('*').first(), $);
+    assertClean(result.html(), HTML.cleanSmallImages.after);
+  });
 
-  it("removes height attribute from images that remain", () => {
-    let $ = cheerio.load(HTML.cleanHeight.before)
+  it('removes height attribute from images that remain', () => {
+    const $ = cheerio.load(HTML.cleanHeight.before);
 
-    let result = cleanImages($('*').first(), $)
-    assertClean(result.html(), HTML.cleanHeight.after)
-  })
+    const result = cleanImages($('*').first(), $);
+    assertClean(result.html(), HTML.cleanHeight.after);
+  });
 
-  it("removes spacer/transparent images", () => {
-    let $ = cheerio.load(HTML.cleanSpacer.before)
+  it('removes spacer/transparent images', () => {
+    const $ = cheerio.load(HTML.cleanSpacer.before);
 
-    let result = cleanImages($('*').first(), $)
-    assertClean(result.html(), HTML.cleanSpacer.after)
-  })
-})
-
-
+    const result = cleanImages($('*').first(), $);
+    assertClean(result.html(), HTML.cleanSpacer.after);
+  });
+});
 

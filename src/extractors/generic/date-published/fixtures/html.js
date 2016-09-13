@@ -7,7 +7,7 @@ const HTML = {
         </head>
       </html>
     `,
-    result: new Date('1/1/2020 8:30 (EST)')
+    result: new Date('1/1/2020 8:30 (EST)'),
   },
   datePublishedSelectors: {
     test: `
@@ -19,8 +19,8 @@ const HTML = {
         </head>
       </div>
     `,
-    result: new Date('1/1/2020 8:30 am (EST)')
+    result: new Date('1/1/2020 8:30 am (EST)'),
   },
-}
+};
 
-export default HTML
+export default HTML;

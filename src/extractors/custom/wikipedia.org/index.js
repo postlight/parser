@@ -8,7 +8,7 @@ const WikipediaExtractor = {
     // transform top infobox to an image with caption
     transforms: {
       '.infobox img': ($node) => {
-        $node.parents('.infobox').prepend($node)
+        $node.parents('.infobox').prepend($node);
       },
       '.infobox caption': 'figcaption',
       '.infobox': 'figure',
@@ -28,15 +28,15 @@ const WikipediaExtractor = {
   title: {
     selectors: [
       'h2.title',
-    ]
+    ],
   },
 
   datePublished: {
     selectors: [
       '#footer-info-lastmod',
-    ]
+    ],
   },
 
-}
+};
 
-export default WikipediaExtractor
+export default WikipediaExtractor;

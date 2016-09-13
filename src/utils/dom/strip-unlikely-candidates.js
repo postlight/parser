@@ -1,8 +1,7 @@
 import {
   CANDIDATES_WHITELIST,
   CANDIDATES_BLACKLIST,
-  UNLIKELY_RE,
-} from './constants'
+} from './constants';
 
 // ## NOTES:
 // This is a working first pass, but if/when we start optimizing
@@ -18,21 +17,19 @@ export default function stripUnlikelyCandidates($) {
   //
   //  :param $: a cheerio object to strip nodes from
   //  :return $: the cleaned cheerio object
-  $('*').not('a').each(function(index, node) {
-    const $node = $(node)
-    const classes = $node.attr('class')
-    const id = $node.attr('id')
-    if (!id && !classes) {
-      return
-    } else {
-      const classAndId = `${classes || ''} ${id || ''}`
-      if (CANDIDATES_WHITELIST.test(classAndId)) {
-        return
-      } else if (CANDIDATES_BLACKLIST.test(classAndId)) {
-        return $node.remove()
-      }
-    }
-  })
+  $('*').not('a').each((index, node) => {
+    const $node = $(node);
+    const classes = $node.attr('class');
+    const id = $node.attr('id');
+    if (!id && !classes) return;
 
-  return $
+    const classAndId = `${classes || ''} ${id || ''}`;
+    if (CANDIDATES_WHITELIST.test(classAndId)) {
+      return;
+    } else if (CANDIDATES_BLACKLIST.test(classAndId)) {
+      $node.remove();
+    }
+  });
+
+  return $;
 }

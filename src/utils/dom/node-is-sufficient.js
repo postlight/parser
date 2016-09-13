@@ -3,5 +3,5 @@
 // return: boolean
 
 export default function nodeIsSufficient($node) {
-  return $node.text().trim().length >= 100
+  return $node.text().trim().length >= 100;
 }

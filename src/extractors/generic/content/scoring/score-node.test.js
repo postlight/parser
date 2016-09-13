@@ -1,95 +1,94 @@
-import assert from 'assert'
-import cheerio from 'cheerio'
+import assert from 'assert';
+import cheerio from 'cheerio';
 
-import HTML from './fixtures/html'
+import HTML from './fixtures/html';
 
 import {
   scoreNode,
   scoreParagraph,
-} from './index'
+} from './index';
 
 
 describe('scoreNode(node)', () => {
-  it(`scores P, LI, SPAN, and PRE using scoreParagraph`, () => {
-    const html = '<p><em>Foo</em> bar</p>'
-    const $ = cheerio.load(html)
-    let node = $('p').first()
+  it('scores P, LI, SPAN, and PRE using scoreParagraph', () => {
+    const html = '<p><em>Foo</em> bar</p>';
+    const $ = cheerio.load(html);
+    const node = $('p').first();
 
-    const score = scoreNode(node)
-    const pScore = scoreParagraph(node)
+    const score = scoreNode(node);
+    const pScore = scoreParagraph(node);
 
-    assert.equal(score, pScore)
-    assert.equal(score, 0)
-  })
+    assert.equal(score, pScore);
+    assert.equal(score, 0);
+  });
 
-  it(`scores P, LI, SPAN, and PRE using scoreParagraph`, () => {
-    const $ = cheerio.load(HTML.score1)
-    let node = $('p').first()
+  it('scores P, LI, SPAN, and PRE using scoreParagraph', () => {
+    const $ = cheerio.load(HTML.score1);
+    const node = $('p').first();
 
-    const score = scoreNode(node)
-    const pScore = scoreParagraph(node)
+    const score = scoreNode(node);
+    const pScore = scoreParagraph(node);
 
-    assert.equal(score, pScore)
-    assert.equal(score, 1)
+    assert.equal(score, pScore);
+    assert.equal(score, 1);
+  });
 
-  })
+  it('scores P, LI, SPAN, and PRE using scoreParagraph', () => {
+    const $ = cheerio.load(HTML.score3);
+    const node = $('p').first();
 
-  it(`scores P, LI, SPAN, and PRE using scoreParagraph`, () => {
-    const $ = cheerio.load(HTML.score3)
-    let node = $('p').first()
+    const score = scoreNode(node);
+    const pScore = scoreParagraph(node);
 
-    const score = scoreNode(node)
-    const pScore = scoreParagraph(node)
+    assert.equal(score, pScore);
+    assert.equal(score, 3);
+  });
 
-    assert.equal(score, pScore)
-    assert.equal(score, 3)
-  })
+  it('scores P, LI, SPAN, and PRE using scoreParagraph', () => {
+    const $ = cheerio.load(HTML.score19);
+    const node = $('p').first();
 
-  it(`scores P, LI, SPAN, and PRE using scoreParagraph`, () => {
-    const $ = cheerio.load(HTML.score19)
-    let node = $('p').first()
+    const score = scoreNode(node);
+    const pScore = scoreParagraph(node);
 
-    const score = scoreNode(node)
-    const pScore = scoreParagraph(node)
+    assert.equal(score, pScore);
+    assert.equal(score, 19);
+  });
 
-    assert.equal(score, pScore)
-    assert.equal(score, 19)
-  })
+  it('scores divs with 5', () => {
+    const $ = cheerio.load(HTML.divScore5);
+    const node = $('div').first();
 
-  it(`scores divs with 5`, () => {
-    const $ = cheerio.load(HTML.divScore5)
-    let node = $('div').first()
+    const score = scoreNode(node);
 
-    const score = scoreNode(node)
+    assert.equal(score, 5);
+  });
 
-    assert.equal(score, 5)
-  })
+  it('scores the blockquote family with 3', () => {
+    const $ = cheerio.load(HTML.blockquoteScore3);
+    const node = $('blockquote').first();
 
-  it(`scores the blockquote family with 3`, () => {
-    const $ = cheerio.load(HTML.blockquoteScore3)
-    let node = $('blockquote').first()
+    const score = scoreNode(node);
 
-    const score = scoreNode(node)
+    assert.equal(score, 3);
+  });
 
-    assert.equal(score, 3)
-  })
+  it('scores a form with negative 3', () => {
+    const $ = cheerio.load(HTML.formScoreNeg3);
+    const node = $('form').first();
 
-  it(`scores a form with negative 3`, () => {
-    const $ = cheerio.load(HTML.formScoreNeg3)
-    let node = $('form').first()
+    const score = scoreNode(node);
 
-    const score = scoreNode(node)
+    assert.equal(score, -3);
+  });
 
-    assert.equal(score, -3)
-  })
+  it('scores a TH element with negative 5', () => {
+    const $ = cheerio.load(HTML.thScoreNeg5);
+    const node = $('th').first();
 
-  it(`scores a TH element with negative 5`, () => {
-    const $ = cheerio.load(HTML.thScoreNeg5)
-    let node = $('th').first()
+    const score = scoreNode(node);
 
-    const score = scoreNode(node)
-
-    assert.equal(score, -5)
-  })
-})
+    assert.equal(score, -5);
+  });
+});
 

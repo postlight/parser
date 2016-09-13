@@ -1,1 +1,1 @@
-export { default as fetchResource } from './fetch-resource'
+export { default as fetchResource } from './fetch-resource';

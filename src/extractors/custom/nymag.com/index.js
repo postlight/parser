@@ -22,37 +22,39 @@ const NYMagExtractor = {
     // the transformation.
     transforms: {
       // Convert h1s to h2s
-      'h1': 'h2',
+      h1: 'h2',
 
       // Convert lazy-loaded noscript images to figures
-      'noscript': ($node) => {
-        const $children = $node.children()
+      noscript: ($node) => {
+        const $children = $node.children();
         if ($children.length === 1 && $children.get(0).tagName === 'img') {
-          return 'figure'
+          return 'figure';
         }
-      }
-    }
+
+        return null;
+      },
+    },
   },
 
   title: {
     selectors: [
       'h1.headline-primary',
       'h1',
-    ]
+    ],
   },
 
   author: {
     selectors: [
       '.by-authors',
-    ]
+    ],
   },
 
   datePublished: {
     selectors: [
       'time.article-timestamp[datetime]',
       'time.article-timestamp',
-    ]
-  }
-}
+    ],
+  },
+};
 
-export default NYMagExtractor
+export default NYMagExtractor;

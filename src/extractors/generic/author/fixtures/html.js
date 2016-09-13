@@ -5,7 +5,7 @@ const HTML = {
         <meta name="dc.author" value="Adam" />
       </html>
     `,
-    result: `Adam`
+    result: 'Adam',
   },
   authorSelectors: {
     test: `
@@ -15,7 +15,7 @@ const HTML = {
         </div>
       </div>
     `,
-    result: `Adam`
+    result: 'Adam',
   },
   authorRegSelectors: {
     test: `
@@ -25,8 +25,8 @@ const HTML = {
         </div>
       </div>
     `,
-    result: `Adam`
+    result: 'Adam',
   },
-}
+};
 
-export default HTML
+export default HTML;

@@ -7,7 +7,7 @@ const HTML = {
         </head>
       </html>
     `,
-    result: `http://example.com/lead.jpg`
+    result: 'http://example.com/lead.jpg',
   },
   twitter: {
     test: `
@@ -17,7 +17,7 @@ const HTML = {
         </head>
       </html>
     `,
-    result: `http://example.com/lead.jpg`
+    result: 'http://example.com/lead.jpg',
   },
   scoring: {
     test: `
@@ -27,7 +27,7 @@ const HTML = {
         <img src="http://example.com/upload/whateverpic.png" />
       </div>
     `,
-    result: `http://example.com/upload/goodpic.jpg`
+    result: 'http://example.com/upload/goodpic.jpg',
   },
   selectors: {
     test: `
@@ -35,8 +35,8 @@ const HTML = {
         <link rel="image_src" href="http://example.com/upload/goodpic.jpg">
       </div>
     `,
-    result: `http://example.com/upload/goodpic.jpg`
+    result: 'http://example.com/upload/goodpic.jpg',
   },
-}
+};
 
-export default HTML
+export default HTML;

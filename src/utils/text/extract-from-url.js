@@ -4,12 +4,10 @@
 // string to be cleaned.
 // Only used for date_published currently.
 export default function extractFromUrl(url, regexList) {
-  const matchRe = regexList.find((re) => {
-    return re.test(url)
-  })
+  const matchRe = regexList.find(re => re.test(url));
   if (matchRe) {
-    return matchRe.exec(url)[1]
-  } else {
-    return null
+    return matchRe.exec(url)[1];
   }
+
+  return null;
 }

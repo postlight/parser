@@ -14,27 +14,27 @@ const BloggerExtractor = {
 
     // Convert the noscript tag to a div
     transforms: {
-      'noscript': 'div'
+      noscript: 'div',
     },
   },
 
   author: {
     selectors: [
-      '.post-author-name'
-    ]
+      '.post-author-name',
+    ],
   },
 
   title: {
     selectors: [
       'h2.title',
-    ]
+    ],
   },
 
   datePublished: {
     selectors: [
       'span.publishdate',
-    ]
-  }
-}
+    ],
+  },
+};
 
-export default BloggerExtractor
+export default BloggerExtractor;

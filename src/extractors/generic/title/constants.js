@@ -6,24 +6,24 @@
 // attributes should be lowercase for faster case-insensitive matching. From
 // most distinct to least distinct.
 export const STRONG_TITLE_META_TAGS = [
-    'tweetmeme-title',
-    'dc.title',
-    'rbtitle',
-    'headline',
-    'title',
-]
+  'tweetmeme-title',
+  'dc.title',
+  'rbtitle',
+  'headline',
+  'title',
+];
 
 // og:title is weak because it typically contains context that we don't like,
 // for example the source site's name. Gotta get that brand into facebook!
 export const WEAK_TITLE_META_TAGS = [
-    'og:title',
-]
+  'og:title',
+];
 
 // An ordered list of XPath Selectors to find likely article titles. From
 // most explicit to least explicit.
 //
 // Note - this does not use classes like CSS. This checks to see if the string
-// exists in the className, which is not as accurate as .className (which 
+// exists in the className, which is not as accurate as .className (which
 // splits on spaces/endlines), but for our purposes it's close enough. The
 // speed tradeoff is worth the accuracy hit.
 export const STRONG_TITLE_SELECTORS = [
@@ -33,7 +33,7 @@ export const STRONG_TITLE_SELECTORS = [
   'h1.article',
   '.instapaper_title',
   '#meebo-title',
-]
+];
 
 export const WEAK_TITLE_SELECTORS = [
   'article h1',
@@ -51,4 +51,4 @@ export const WEAK_TITLE_SELECTORS = [
   'h1',
   'html head title',
   'title',
-]
+];

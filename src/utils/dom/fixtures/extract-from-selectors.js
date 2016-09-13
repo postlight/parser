@@ -5,7 +5,7 @@ const HTML = {
       <html>
         <meta name="foo" value="bar" />
       </html>`,
-    result: `bar`,
+    result: 'bar',
   },
   metaDupes: {
     test: `
@@ -21,14 +21,14 @@ const HTML = {
         <meta name="foo" value="bar" />
         <meta name="foo" value="" />
       </html>`,
-    result: `bar`,
+    result: 'bar',
   },
   custom: {
     test: `
       <html>
         <meta property="foo" content="bar" />
       </html>`,
-    result: `bar`,
+    result: 'bar',
   },
 
   // extractFromSelectors
@@ -37,7 +37,7 @@ const HTML = {
       <html>
         <div class="author">Adam</div>
       </html>`,
-    result: `Adam`,
+    result: 'Adam',
   },
   insideComment: {
     test: `
@@ -70,6 +70,6 @@ const HTML = {
       </html>`,
     result: null,
   },
-}
+};
 
-export default HTML
+export default HTML;

@@ -1,4 +1,4 @@
-import { paragraphize } from './index'
+import { paragraphize } from './index';
 
 // ## NOTES:
 // Another good candidate for refactoring/optimizing.
@@ -11,19 +11,19 @@ import { paragraphize } from './index'
 //  :param $: A cheerio object
 
 export default function brsToPs($) {
-  let collapsing = false
+  let collapsing = false;
   $('br').each((index, element) => {
-    let nextElement = $(element).next().get(0)
+    const nextElement = $(element).next().get(0);
 
     if (nextElement && nextElement.tagName === 'br') {
-      collapsing = true
-      $(element).remove()
+      collapsing = true;
+      $(element).remove();
     } else if (collapsing) {
-      collapsing = false
+      collapsing = false;
       // $(element).replaceWith('<p />')
-      paragraphize(element, $, true)
+      paragraphize(element, $, true);
     }
-  })
+  });
 
-  return $
+  return $;
 }

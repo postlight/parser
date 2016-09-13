@@ -1,40 +1,36 @@
-import assert from 'assert'
-import fs from 'fs'
-import cheerio from 'cheerio'
+import assert from 'assert';
+import fs from 'fs';
+import cheerio from 'cheerio';
 
-import RootExtractor from './root-extractor'
-import { select } from './root-extractor'
+import { assertClean } from 'test-helpers';
 import {
+  default as RootExtractor,
+  select,
   cleanBySelectors,
-  transformElements
-} from './root-extractor'
+  transformElements,
+} from './root-extractor';
 
-import GenericExtractor from './generic'
-import NYMagExtractor from './custom/nymag.com'
+import NYMagExtractor from './custom/nymag.com';
 
 describe('RootExtractor', () => {
   it('extracts based on custom selectors', () => {
-    const url = 'http://nymag.com/daily/intelligencer/2016/09/trump-discussed-usd25k-donation-with-florida-ag-not-fraud.html'
-    const html = fs.readFileSync('./src/extractors/custom/nymag.com/fixtures/test.html', 'utf8')
-    const $ = cheerio.load(html)
+    const url = 'http://nymag.com/daily/intelligencer/2016/09/trump-discussed-usd25k-donation-with-florida-ag-not-fraud.html';
+    const html = fs.readFileSync('./src/extractors/custom/nymag.com/fixtures/test.html', 'utf8');
+    const $ = cheerio.load(html);
 
     const {
       title,
-      content,
-      author,
-      datePublished,
-      leadImageUrl,
     } = RootExtractor.extract(
       NYMagExtractor, { url, html, $, metaCache: [] }
-    )
+    );
 
-    assert.equal(title, 'Trump Claims He Discussed $25K Donation With Florida Attorney General, But Not Trump University Investigation')
-  })
-})
+    assert.equal(title, 'Trump Claims He Discussed $25K Donation With Florida Attorney General, But Not Trump University Investigation');
+  });
+});
 
 describe('cleanBySelectors($content, $, { clean })', () => {
   it('removes provided selectors from the content', () => {
-    const opts = { clean: ['.ad', '.share'] }
+    const opts = { clean: ['.ad', '.share'] };
     const html = `
       <div>
         <div class="body">
@@ -42,16 +38,16 @@ describe('cleanBySelectors($content, $, { clean })', () => {
           <p>This is some good content</p>
           <div class="ad">Advertisement!</div>
         </div>
-    </div>`
-    const $ = cheerio.load(html)
+    </div>`;
+    const $ = cheerio.load(html);
 
-    let $content = $('.body')
-    $content = cleanBySelectors($content, $, opts)
+    let $content = $('.body');
+    $content = cleanBySelectors($content, $, opts);
 
-    assert.equal($content.find('.ad').length, 0)
-    assert.equal($content.find('.share').length, 0)
-  })
-})
+    assert.equal($content.find('.ad').length, 0);
+    assert.equal($content.find('.share').length, 0);
+  });
+});
 
 describe('transformElements($content, $, { transforms })', () => {
   it('performs a simple transformation on matched elements', () => {
@@ -63,12 +59,12 @@ describe('transformElements($content, $, { transforms })', () => {
         <h1>WOW BIG TITLE</h1>
       </div>
     </div>
-    `
+    `;
     const opts = {
-      transforms: { 'h1': 'h2' }
-    }
-    const $ = cheerio.load(html)
-    let $content = $('.body')
+      transforms: { h1: 'h2' },
+    };
+    const $ = cheerio.load(html);
+    let $content = $('.body');
 
     const after = `
       <div class="body">
@@ -76,11 +72,11 @@ describe('transformElements($content, $, { transforms })', () => {
         <p>Here are some words</p>
         <h2>WOW BIG TITLE</h2>
       </div>
-    `
+    `;
 
-    $content = transformElements($content, $, opts)
-    assertClean($.html($content), after)
-  })
+    $content = transformElements($content, $, opts);
+    assertClean($.html($content), after);
+  });
 
   it('performs a complex transformation on matched elements', () => {
     const html = `
@@ -95,19 +91,21 @@ describe('transformElements($content, $, { transforms })', () => {
         <p>Here are some words</p>
       </div>
     </div>
-    `
+    `;
     const opts = {
       transforms: {
-        'noscript': ($node) => {
-          const $children = $node.children()
+        noscript: ($node) => {
+          const $children = $node.children();
           if ($children.length === 1 && $children.get(0).tagName === 'img') {
-            return 'figure'
+            return 'figure';
           }
-        }
-      }
-    }
-    const $ = cheerio.load(html)
-    let $content = $('.body')
+
+          return null;
+        },
+      },
+    };
+    const $ = cheerio.load(html);
+    let $content = $('.body');
 
     const after = `
       <div class="body">
@@ -119,58 +117,49 @@ describe('transformElements($content, $, { transforms })', () => {
         </noscript>
         <p>Here are some words</p>
       </div>
-    `
+    `;
 
-    $content = transformElements($content, $, opts)
-    assertClean($.html($content), after)
-  })
-})
+    $content = transformElements($content, $, opts);
+    assertClean($.html($content), after);
+  });
+});
 
 describe('select(opts)', () => {
-  it(`returns a node's text with a simple selector`, () => {
+  it('returns a node\'s text with a simple selector', () => {
     const html = `
       <div><div class="author">Bob</div></div>
-    `
-    const $ = cheerio.load(html)
+    `;
+    const $ = cheerio.load(html);
     const opts = {
       type: 'author',
       $,
       extractionOpts: {
-        selectors: ['.author']
-      }
-    }
+        selectors: ['.author'],
+      },
+    };
 
-    const result = select(opts)
-    assert.equal(result, 'Bob')
-   })
+    const result = select(opts);
+    assert.equal(result, 'Bob');
+  });
 
-  it(`returns a node's attr with a attr selector`, () => {
+  it('returns a node\'s attr with a attr selector', () => {
     const html = `
       <div>
         <time datetime="2016-09-07T05:07:59-04:00">
           September 7, 2016
         </time>
       </div>
-    `
-    const $ = cheerio.load(html)
+    `;
+    const $ = cheerio.load(html);
     const opts = {
       type: 'datePublished',
       $,
       extractionOpts: {
-        selectors: ['time[datetime]']
-      }
-    }
+        selectors: ['time[datetime]'],
+      },
+    };
 
-    const result = select(opts)
-    assert.equal(result, '2016-09-07T09:07:59.000Z')
-   })
-})
-
-function clean(string) {
-  return string.trim().replace(/\r?\n|\r/g, '').replace(/\s+/g, ' ')
-}
-
-function assertClean(a, b) {
-  assert.equal(clean(a), clean(b))
-}
-
+    const result = select(opts);
+    assert.equal(result, '2016-09-07T09:07:59.000Z');
+  });
+});

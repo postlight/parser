@@ -1,27 +1,28 @@
-import {
-  DEK_META_TAGS,
-  DEK_SELECTORS,
-  DEK_URL_RES,
-} from './constants'
+// import {
+//   DEK_META_TAGS,
+//   DEK_SELECTORS,
+//   DEK_URL_RES,
+// } from './constants';
 
-import { cleanDek } from 'cleaners'
+// import { cleanDek } from 'cleaners';
 
-import {
-  extractFromMeta,
-  extractFromSelectors,
-} from 'utils/dom'
+// import {
+//   extractFromMeta,
+//   extractFromSelectors,
+// } from 'utils/dom';
 
 // Currently there is only one selector for
 // deks. We should simply return null here
 // until we have a more robust generic option.
 // Below is the original source for this, for reference.
 const GenericDekExtractor = {
-  extract({ $, content, metaCache }) {
-    return null
-  }
-}
+  // extract({ $, content, metaCache }) {
+  extract() {
+    return null;
+  },
+};
 
-export default GenericDekExtractor
+export default GenericDekExtractor;
 
 // def extract_dek(self):
 //     # First, check to see if we have a matching meta tag that we can make

@@ -1,11 +1,12 @@
 import {
-  scoreContent,
-  findTopCandidate,
-} from './scoring'
-import {
   stripUnlikelyCandidates,
   convertToParagraphs,
-} from 'utils/dom'
+} from 'utils/dom';
+
+import {
+  scoreContent,
+  findTopCandidate,
+} from './scoring';
 
 // Using a variety of scoring techniques, extract the content most
 // likely to be article text.
@@ -26,12 +27,12 @@ export default function extractBestNode($, opts) {
 
 
   if (opts.stripUnlikelyCandidates) {
-    $ = stripUnlikelyCandidates($)
+    $ = stripUnlikelyCandidates($);
   }
 
-  $ = convertToParagraphs($)
-  $ = scoreContent($, opts.weightNodes)
-  const $topCandidate = findTopCandidate($)
+  $ = convertToParagraphs($);
+  $ = scoreContent($, opts.weightNodes);
+  const $topCandidate = findTopCandidate($);
 
-  return $topCandidate
+  return $topCandidate;
 }

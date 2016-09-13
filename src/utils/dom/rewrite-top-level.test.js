@@ -1,18 +1,16 @@
-import assert from 'assert'
-import cheerio from 'cheerio'
+import cheerio from 'cheerio';
 
-import HTML from './fixtures/html'
-import { assertClean } from 'test-helpers'
+import { assertClean } from 'test-helpers';
 
-import rewriteTopLevel from './rewrite-top-level'
+import HTML from './fixtures/html';
+import rewriteTopLevel from './rewrite-top-level';
 
 describe('rewriteTopLevel(node, $)', () => {
-  it("turns html and body tags into divs", () => {
-    let $ = cheerio.load(HTML.rewriteHTMLBody.before)
+  it('turns html and body tags into divs', () => {
+    const $ = cheerio.load(HTML.rewriteHTMLBody.before);
 
-    let result = rewriteTopLevel($('html').first(), $)
-    assertClean(result.html(), HTML.rewriteHTMLBody.after)
-  })
-})
-
+    const result = rewriteTopLevel($('html').first(), $);
+    assertClean(result.html(), HTML.rewriteHTMLBody.after);
+  });
+});
 

@@ -1,17 +1,21 @@
-import { TAGS_TO_REMOVE } from './constants'
-export default function clean($) {
-  $(TAGS_TO_REMOVE).remove()
-
-  $ = cleanComments($)
-  return $
-}
+import { TAGS_TO_REMOVE } from './constants';
 
 function isComment(index, node) {
-  return node.type === 'comment'
+  return node.type === 'comment';
 }
 
 function cleanComments($) {
-  $.root().find('*').contents().filter(isComment).remove()
+  $.root().find('*')
+          .contents()
+          .filter(isComment)
+          .remove();
 
-  return $
+  return $;
+}
+
+export default function clean($) {
+  $(TAGS_TO_REMOVE).remove();
+
+  $ = cleanComments($);
+  return $;
 }

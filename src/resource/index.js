@@ -1,72 +1,70 @@
-import 'babel-polyfill'
+import 'babel-polyfill';
 
-import cheerio from 'cheerio'
+import cheerio from 'cheerio';
 
-import { fetchResource } from './utils'
+import { fetchResource } from './utils';
 import {
   normalizeMetaTags,
   convertLazyLoadedImages,
   clean,
-} from './utils/dom'
+} from './utils/dom';
 
 const Resource = {
 
   // Create a Resource.
   //
   // :param url: The URL for the document we should retrieve.
-  // :param parseNon2xx: If true, attempt to parse non-200 level
-  //                       resources. Default is false.
   // :param response: If set, use as the response rather than
   //                  attempting to fetch it ourselves. Expects a
   //                  string.
-  create: async function(url, preparedResponse, parseNon2xx=false) {
-    let result
+  async create(url, preparedResponse) {
+    let result;
 
     if (preparedResponse) {
       const validResponse = {
-        statusMessage: "OK",
+        statusMessage: 'OK',
         statusCode: 200,
         headers: {
-          "content-type": 'text/html',
-          "content-length": 500,
-        }
-      }
+          'content-type': 'text/html',
+          'content-length': 500,
+        },
+      };
 
-      result = { body: preparedResponse, response: validResponse }
+      result = { body: preparedResponse, response: validResponse };
     } else {
-      result = await fetchResource(url)
+      result = await fetchResource(url);
     }
-    return this.generateDoc(result)
+    return this.generateDoc(result);
   },
 
   generateDoc({ body: content, response }) {
-    const { "content-type": contentType } = response.headers
+    const { 'content-type': contentType } = response.headers;
 
     // TODO: Implement is_text function from
     // https://github.com/ReadabilityHoldings/readability/blob/8dc89613241d04741ebd42fa9fa7df1b1d746303/readability/utils/text.py#L57
     if (!contentType.includes('html') &&
         !contentType.includes('text')) {
-          throw new Error(`Content does not appear to be text.`)
+      throw new Error('Content does not appear to be text.');
     }
 
-    let $ = cheerio.load(content, { normalizeWhitespace: true })
+    let $ = cheerio.load(content, { normalizeWhitespace: true });
 
     if ($.root().children().length === 0) {
-      throw new Error(`No children, likely a bad parse.`)
+      throw new Error('No children, likely a bad parse.');
     }
 
-    $ = normalizeMetaTags($)
-    $ = convertLazyLoadedImages($)
-    $ = clean($)
+    $ = normalizeMetaTags($);
+    $ = convertLazyLoadedImages($);
+    $ = clean($);
 
-    return $
-  }
-}
+    return $;
+  },
+};
 
-export default Resource
+export default Resource;
 //     def __init__(self, url, parse_non_2xx=False, response=None):
 //         """ Create a Resource.
-//         
+//
 //             :param url: The URL for the document we should retrieve.
 //             :param parse_non_2xx: If True, attempt to parse non-200 level
 //                                   resources. If False, raise a RetrievalFailed
@@ -128,14 +126,14 @@ export default Resource
 //     """ A Resource is a wrapper class for an HTTP resource. Provides
 //         functionality to fetch a resource as well as a handful of shortcut
 //         methods to run xpath efficiently on HTML, etc.
-//     
+//
 //         Uses requests and lxml internally for fetching and querying.
 //     """
 //
 //
 //     def __init__(self, url, parse_non_2xx=False, response=None):
 //         """ Create a Resource.
-//         
+//
 //             :param url: The URL for the document we should retrieve.
 //             :param parse_non_2xx: If True, attempt to parse non-200 level
 //                                   resources. If False, raise a RetrievalFailed
@@ -164,20 +162,20 @@ export default Resource
 //             as though it has already fetched the content. Useful for using
 //             Resource objects without having to do a GET.
 //         """
-//         
+//
 //         if type(content) != unicode:
 //             raise TypeError("Provided content must be unicode.")
 //
 //         if headers is None:
 //             headers = {}
-//         
+//
 //         try:
 //             utf8_content = content.encode('utf-8', 'strict')
 //         except UnicodeDecodeError:
 //             logger.warning("Unable to encode content for url %s. Content "
 //                             "should be unicode and encodeable at this point.")
 //             utf8_content = content.encode('utf-8', 'replace')
-//         
+//
 //         mocked_response_dict = {
 //             "cookies": {},
 //             "_content": utf8_content,
@@ -214,7 +212,7 @@ export default Resource
 //         mocked_response = requests.Response()
 //         for k, v in mocked_response_dict.items():
 //             setattr(mocked_response, k, v)
-//         
+//
 //         return Resource(
 //             url = url,
 //             response = mocked_response
@@ -225,13 +223,13 @@ export default Resource
 //     def url(self):
 //         return self._url
 //
-//     
+//
 //     @url.setter
 //     def url(self, value):
 //         parsed_url = urlparse(value)
 //         if parsed_url.scheme not in ('http', 'https'):
 //             raise ValueError("Resource only allows HTTP and HTTPS urls.")
-//         
+//
 //         if not parsed_url.netloc:
 //             raise ValueError("Relative URLs are not allowed.")
 //
@@ -311,21 +309,21 @@ export default Resource
 //     def is_plaintext(self):
 //         if 'text/plain' in self.content_type:
 //             return True
-//         
+//
 //         return False
-//     
+//
 //     @property
 //     def is_image(self):
 //         if 'image' in self.content_type:
 //             return True
-//         
+//
 //         return False
-//     
+//
 //     @property
 //     def is_pdf(self):
 //         if 'pdf' in self.content_type:
 //             return True
-//         
+//
 //         return False
 //
 //     _lxml_doc = None
@@ -342,7 +340,7 @@ export default Resource
 //         """ Generate an XPath Evaluator for this doc. """
 //         if self._docxp is None:
 //             self._docxp = XPathEvaluator(self.doc)
-//         
+//
 //         return self._docxp
 //
 //     _redocxp = None
@@ -350,7 +348,7 @@ export default Resource
 //     def redocxp(self):
 //         """ Generate an XPath Evaluator for this doc, that includes the RE
 //             namespace for regular expression matching.
-//             
+//
 //         """
 //         if self._redocxp is None:
 //             _rens = {'re':'http://exslt.org/regular-expressions'}
@@ -365,7 +363,7 @@ export default Resource
 //             not is_text(self.content[:512])):
 //                 raise ValueError("Content does not appear to be text.")
 //
-//         
+//
 //         # Remove useless carriage returns which get parsed as &#13; otherwise
 //         content = re.sub(r'(\n\r|\r\n)', '\n', self.content)
 //
@@ -376,16 +374,16 @@ export default Resource
 //
 //
 //
-//             
+//
 //         if len(self._lxml_doc.getchildren()) == 0:
 //             stats.increment('iris.resource.encoding.no_children')
 //             raise ValueError("No children, likely a bad parse.")
 //
 //
 //         # Sometimes, lxml (or BeautifulSoup) will wrap the whole document
-//         # in an extra html tag. This screws up a whole bunch of things in 
+//         # in an extra html tag. This screws up a whole bunch of things in
 //         # the parsing process. If this is the case, reset the doc to the
-//         # ACTUAL root of the doc.    
+//         # ACTUAL root of the doc.
 //         # Sample cases:
 //         # * Strange Doctype causing issues: http://bit.ly/IATz0B
 //         # * Messy markup causing double HTML tags: http://bit.ly/IGOq4o
@@ -417,7 +415,7 @@ export default Resource
 //                 a.attrib['rel'] = ' '.join(rel_attribs)
 //             else:
 //                 a.attrib['rel'] = 'nofollow'
-//                 
+//
 //         # Re-relativize anchor links
 //         anchor_link_xpath = ("//a[starts-with(@href, '%s#')]" %
 //                              self.url.replace("'", "%27"))
@@ -430,16 +428,16 @@ export default Resource
 //     def attrib_map(self):
 //         """ Create an AttribMap object for fast checking of class/id existence
 //             in the document. Used in association with extract_by_selector.
-//             
+//
 //         """
 //         if self._attrib_map is None:
 //             self._attrib_map = AttribMap(self.doc)
-//         
+//
 //         return self._attrib_map
 //
 //
 //     def extract_by_selector(self, selector):
 //         " Shortcut to run extract_by_selector on our doc with our AttribMap. "
 //         return ebs(self.doc, selector, self.attrib_map, self.docxp)
-//     
+//
 //

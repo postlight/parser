@@ -1,10 +1,11 @@
-import cheerio from 'cheerio'
-import 'babel-polyfill'
+import cheerio from 'cheerio';
+import 'babel-polyfill';
 
-import extractBestNode from './extract-best-node'
-import { nodeIsSufficient } from 'utils/dom'
-import { cleanContent } from 'cleaners'
-import { normalizeSpaces } from 'utils/text'
+import { nodeIsSufficient } from 'utils/dom';
+import { cleanContent } from 'cleaners';
+import { normalizeSpaces } from 'utils/text';
+
+import extractBestNode from './extract-best-node';
 
 const GenericContentExtractor = {
   defaultOpts: {
@@ -33,46 +34,44 @@ const GenericContentExtractor = {
   // cleanConditionally: Clean the node to return of some
   // superfluous content. Things like forms, ads, etc.
   extract({ $, html, title, url }, opts) {
-    opts = { ...this.defaultOpts, ...opts }
+    opts = { ...this.defaultOpts, ...opts };
 
-    $ = $ || cheerio.load(html)
+    $ = $ || cheerio.load(html);
 
     // Cascade through our extraction-specific opts in an ordered fashion,
     // turning them off as we try to extract content.
-    let node = this.getContentNode($, title, url, opts)
+    let node = this.getContentNode($, title, url, opts);
 
     if (nodeIsSufficient(node)) {
-      return this.cleanAndReturnNode(node, $)
-    } else {
-      // We didn't succeed on first pass, one by one disable our
-      // extraction opts and try again.
-      for (const key of Reflect.ownKeys(opts).filter(key => opts[key] === true)) {
-        opts[key] = false
-        $ = cheerio.load(html)
-
-        node = this.getContentNode($, title, url, opts)
-
-        if (nodeIsSufficient(node)) {
-          break
-        }
-      }
-
-      return this.cleanAndReturnNode(node, $)
+      return this.cleanAndReturnNode(node, $);
     }
 
-    return this.cleanAndReturnNode(node, $)
+    // We didn't succeed on first pass, one by one disable our
+    // extraction opts and try again.
+    for (const key of Reflect.ownKeys(opts).filter(k => opts[k] === true)) {
+      opts[key] = false;
+      $ = cheerio.load(html);
+
+      node = this.getContentNode($, title, url, opts);
+
+      if (nodeIsSufficient(node)) {
+        break;
+      }
+    }
+
+    return this.cleanAndReturnNode(node, $);
   },
 
   // Get node given current options
   getContentNode($, title, url, opts) {
     return cleanContent(
               extractBestNode($, opts),
-              {
-                $,
-                cleanConditionally: opts.cleanConditionally,
-                title,
-                url,
-              })
+      {
+        $,
+        cleanConditionally: opts.cleanConditionally,
+        title,
+        url,
+      });
   },
 
   // Once we got here, either we're at our last-resort node, or
@@ -80,10 +79,10 @@ const GenericContentExtractor = {
   // move forward.
   cleanAndReturnNode(node, $) {
     if (!node) {
-      return null
+      return null;
     }
 
-    return normalizeSpaces($.html(node))
+    return normalizeSpaces($.html(node));
 
     // if return_type == "html":
     //     return normalize_spaces(node_to_html(node))
@@ -91,6 +90,6 @@ const GenericContentExtractor = {
     //     return node
   },
 
-}
+};
 
-export default GenericContentExtractor
+export default GenericContentExtractor;

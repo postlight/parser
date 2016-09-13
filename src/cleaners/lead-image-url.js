@@ -1,10 +1,10 @@
-import validUrl from 'valid-url'
+import validUrl from 'valid-url';
 
 export default function clean(leadImageUrl) {
-  leadImageUrl = leadImageUrl.trim()
+  leadImageUrl = leadImageUrl.trim();
   if (validUrl.isWebUri(leadImageUrl)) {
-    return leadImageUrl
-  } else {
-    return null
+    return leadImageUrl;
   }
+
+  return null;
 }

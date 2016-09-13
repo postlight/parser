@@ -1,16 +1,15 @@
-import assert from 'assert'
-import cheerio from 'cheerio'
+import assert from 'assert';
+import cheerio from 'cheerio';
 
-import HTML from './fixtures/html'
+import HTML from './fixtures/html';
 
-import { normalizeSpaces } from './index'
+import { normalizeSpaces } from './index';
 
 describe('normalizeSpaces(text)', () => {
-  it("normalizes spaces from text", () => {
-    let $ = cheerio.load(HTML.normalizeSpaces.before)
+  it('normalizes spaces from text', () => {
+    const $ = cheerio.load(HTML.normalizeSpaces.before);
 
-    let result = normalizeSpaces($('*').first().text())
-    assert.equal(result, HTML.normalizeSpaces.after)
-  })
-
-})
+    const result = normalizeSpaces($('*').first().text());
+    assert.equal(result, HTML.normalizeSpaces.after);
+  });
+});

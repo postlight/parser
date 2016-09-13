@@ -1,24 +1,22 @@
-import cheerio from 'cheerio'
-import assert from 'assert'
+import cheerio from 'cheerio';
 
-import HTML from './fixtures/html'
-import { assertClean } from 'test-helpers'
+import { assertClean } from 'test-helpers';
 
-import { cleanAttributes } from './index'
+import HTML from './fixtures/html';
+import { cleanAttributes } from './index';
 
 describe('cleanAttributes($)', () => {
-  it("removes style attributes from nodes", () => {
-    let $ = cheerio.load(HTML.removeStyle.before)
+  it('removes style attributes from nodes', () => {
+    const $ = cheerio.load(HTML.removeStyle.before);
 
-    let result = cleanAttributes($('*').first(), $)
-    assertClean(result.html(), HTML.removeStyle.after)
-  })
+    const result = cleanAttributes($('*').first());
+    assertClean($.html(result), HTML.removeStyle.after);
+  });
 
-  it("removes align attributes from nodes", () => {
-    let $ = cheerio.load(HTML.removeAlign.before)
+  it('removes align attributes from nodes', () => {
+    const $ = cheerio.load(HTML.removeAlign.before);
 
-    let result = cleanAttributes($('*').first(), $)
-    assertClean(result.html(), HTML.removeAlign.after)
-  })
-
-})
+    const result = cleanAttributes($('*').first());
+    assertClean($.html(result), HTML.removeAlign.after);
+  });
+});

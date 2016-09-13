@@ -82,6 +82,6 @@ const HTML = {
       </article>
     <body>
   `,
-}
+};
 
-export default HTML
+export default HTML;

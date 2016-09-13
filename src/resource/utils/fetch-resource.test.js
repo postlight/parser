@@ -1,118 +1,118 @@
-import assert from 'assert'
-import URL from 'url'
+import assert from 'assert';
+import URL from 'url';
 
 import {
   default as fetchResource,
   baseDomain,
   validateResponse,
-} from './fetch-resource'
-import { MAX_CONTENT_LENGTH } from './constants'
+} from './fetch-resource';
+import { MAX_CONTENT_LENGTH } from './constants';
 
-describe('fetchResource(url)', function() {
-  this.timeout(1000000)
-  it('fetches domains', async () => {
-    const url = 'http://theconcourse.deadspin.com/1786177057'
-    const { body, response } = await fetchResource(url)
+describe('fetchResource(url)', function test() {
+  this.timeout(1000000);
+  it('fetches domains', (async) () => {
+    const url = 'http://theconcourse.deadspin.com/1786177057';
+    const { body } = await fetchResource(url);
 
-    assert.equal(typeof body, 'object')
-  })
+    assert.equal(typeof body, 'object');
+  });
 
-  it('fetches nyt', async () => {
-    const url = 'http://www.nytimes.com/2016/08/16/upshot/the-state-of-the-clinton-trump-race-is-it-over.html?_r=0'
-    const { body, response } = await fetchResource(url)
+  it('fetches nyt', (async) () => {
+    const url = 'http://www.nytimes.com/2016/08/16/upshot/the-state-of-the-clinton-trump-race-is-it-over.html?_r=0';
+    const { body } = await fetchResource(url);
 
-    assert.equal(typeof body, 'object')
-  })
-})
+    assert.equal(typeof body, 'object');
+  });
+});
 
 describe('validateResponse(response)', () => {
   it('validates a response object', () => {
     const validResponse = {
-      statusMessage: "OK",
+      statusMessage: 'OK',
       statusCode: 200,
       headers: {
-        "content-type": 'text/html',
-        "content-length": 500,
-      }
-    }
+        'content-type': 'text/html',
+        'content-length': 500,
+      },
+    };
 
-    assert.equal(validateResponse(validResponse), true)
-  })
+    assert.equal(validateResponse(validResponse), true);
+  });
 
   it('throws an error if there is no status code', () => {
     const invalidResponse = {
-    }
+    };
 
     assert.throws(
       () => {
-        validateResponse(invalidResponse)
+        validateResponse(invalidResponse);
       },
       /unable to fetch content/i
-    )
-  })
+    );
+  });
 
   it('throws an error if response code is not 2xx', () => {
     const invalidResponse = {
       statusCode: 500,
-    }
+    };
 
     assert.throws(
       () => {
-        validateResponse(invalidResponse)
+        validateResponse(invalidResponse);
       },
       /instructed to reject non-2xx/i
-    )
-  })
+    );
+  });
 
   it('throws an error if response has bad content-type', () => {
     const invalidResponse = {
-      statusMessage: "OK",
+      statusMessage: 'OK',
       statusCode: 200,
       headers: {
-        "content-type": 'image/gif',
-        "content-length": 500,
-      }
-    }
+        'content-type': 'image/gif',
+        'content-length': 500,
+      },
+    };
 
     assert.throws(
       () => {
-        validateResponse(invalidResponse)
+        validateResponse(invalidResponse);
       },
       /content-type for this resource/i
-    )
-  })
+    );
+  });
 
   it('throws an error if response length is > max', () => {
     const invalidResponse = {
-      statusMessage: "OK",
+      statusMessage: 'OK',
       statusCode: 200,
       headers: {
-        "content-type": 'text/html',
-        "content-length": MAX_CONTENT_LENGTH + 1,
-      }
-    }
+        'content-type': 'text/html',
+        'content-length': MAX_CONTENT_LENGTH + 1,
+      },
+    };
 
     assert.throws(
       () => {
-        validateResponse(invalidResponse)
+        validateResponse(invalidResponse);
       },
       /Content for this resource was too large/i
-    )
-  })
-})
+    );
+  });
+});
 
 describe('baseDomain(parsedUrl)', () => {
   it('returns the base domain, excluding subdomain', () => {
-    const url = 'https://www.npmjs.com/package/request#streaming'
-    const parsedUrl = URL.parse(url)
+    const url = 'https://www.npmjs.com/package/request#streaming';
+    const parsedUrl = URL.parse(url);
 
-    assert.equal(baseDomain(parsedUrl), 'npmjs.com')
-  })
+    assert.equal(baseDomain(parsedUrl), 'npmjs.com');
+  });
 
   it('returns the base domain as is if no subdomain', () => {
-    const url = 'https://npmjs.com/package/request#streaming'
-    const parsedUrl = URL.parse(url)
+    const url = 'https://npmjs.com/package/request#streaming';
+    const parsedUrl = URL.parse(url);
 
-    assert.equal(baseDomain(parsedUrl), 'npmjs.com')
-  })
-})
+    assert.equal(baseDomain(parsedUrl), 'npmjs.com');
+  });
+});

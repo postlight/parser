@@ -8,54 +8,52 @@ import {
   rewriteTopLevel,
   stripJunkTags,
   makeLinksAbsolute,
-} from 'utils/dom'
-
-import { convertNodeTo } from 'utils/dom'
+} from 'utils/dom';
 
 // Clean our article content, returning a new, cleaned node.
 export default function extractCleanNode(
   article,
   {
     $,
-    cleanConditionally=true,
-    title='',
-    url='',
+    cleanConditionally = true,
+    title = '',
+    url = '',
   }
 ) {
   // Rewrite the tag name to div if it's a top level node like body or
   // html to avoid later complications with multiple body tags.
-  rewriteTopLevel(article, $)
+  rewriteTopLevel(article, $);
 
   // Drop small images and spacer images
-  cleanImages(article, $)
+  cleanImages(article, $);
 
   // Drop certain tags like <title>, etc
   // This is -mostly- for cleanliness, not security.
-  stripJunkTags(article, $)
+  stripJunkTags(article, $);
 
   // H1 tags are typically the article title, which should be extracted
   // by the title extractor instead. If there's less than 3 of them (<3),
   // strip them. Otherwise, turn 'em into H2s.
-  cleanHOnes(article, $)
+  cleanHOnes(article, $);
 
   // Clean headers
-  cleanHeaders(article, $, title)
+  cleanHeaders(article, $, title);
 
   // Make links absolute
-  makeLinksAbsolute(article, $, url)
+  makeLinksAbsolute(article, $, url);
 
   // Remove style or align attributes
-  cleanAttributes(article, $)
+  cleanAttributes(article);
 
   // We used to clean UL's and OL's here, but it was leading to
   // too many in-article lists being removed. Consider a better
   // way to detect menus particularly and remove them.
-  cleanTags(article, $, cleanConditionally)
+  cleanTags(article, $, cleanConditionally);
 
   // Remove empty paragraph nodes
-  removeEmpty(article, $)
+  removeEmpty(article, $);
 
-  return article
+  return article;
 }
     //     headers = doc.xpath('.//h2 | .//h3 | .//h4 | .//h5 | .//h6')
     //     for header in headers:

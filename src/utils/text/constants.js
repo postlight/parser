@@ -14,9 +14,9 @@
 // Does not match:
 //  pg=102
 //  page:2
-export const PAGE_IN_HREF_RE = new RegExp('(page|paging|(p(a|g|ag)?(e|enum|ewanted|ing|ination)))?(=|\/)([0-9]{1,3})', 'i')
+export const PAGE_IN_HREF_RE = new RegExp('(page|paging|(p(a|g|ag)?(e|enum|ewanted|ing|ination)))?(=|/)([0-9]{1,3})', 'i');
 
-export const HAS_ALPHA_RE = /[a-z]/i
+export const HAS_ALPHA_RE = /[a-z]/i;
 
-export const IS_ALPHA_RE = /^[a-z]+$/i
-export const IS_DIGIT_RE = /^[0-9]+$/i
+export const IS_ALPHA_RE = /^[a-z]+$/i;
+export const IS_DIGIT_RE = /^[0-9]+$/i;

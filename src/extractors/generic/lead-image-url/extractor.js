@@ -1,14 +1,12 @@
-import 'babel-polyfill'
+import 'babel-polyfill';
+
+import { extractFromMeta } from 'utils/dom';
+import { cleanImage } from 'cleaners';
 
 import {
   LEAD_IMAGE_URL_META_TAGS,
   LEAD_IMAGE_URL_SELECTORS,
-} from './constants'
-
-import {
-  extractFromMeta,
-  extractFromSelectors
-} from 'utils/dom'
+} from './constants';
 
 import {
   scoreImageUrl,
@@ -17,9 +15,7 @@ import {
   scoreBySibling,
   scoreByDimensions,
   scoreByPosition,
-} from './score-image'
-
-import { cleanImage } from 'cleaners'
+} from './score-image';
 
 // Given a resource, try to find the lead image URL from within
 // it. Like content and next page extraction, uses a scoring system
@@ -31,86 +27,87 @@ import { cleanImage } from 'cleaners'
 //   * weird aspect ratio
 const GenericLeadImageUrlExtractor = {
   extract({ $, content, metaCache }) {
-    let imageUrl, cleanUrl
+    let cleanUrl;
 
     // Check to see if we have a matching meta tag that we can make use of.
     // Moving this higher because common practice is now to use large
     // images on things like Open Graph or Twitter cards.
     // images usually have for things like Open Graph.
-    imageUrl =
+    const imageUrl =
       extractFromMeta(
         $,
         LEAD_IMAGE_URL_META_TAGS,
         metaCache,
         false
-      )
+      );
 
     if (imageUrl) {
-      cleanUrl = cleanImage(imageUrl)
+      cleanUrl = cleanImage(imageUrl);
 
-      if (cleanUrl) return cleanUrl
+      if (cleanUrl) return cleanUrl;
     }
 
     // Next, try to find the "best" image via the content.
     // We'd rather not have to fetch each image and check dimensions,
     // so try to do some analysis and determine them instead.
-    const imgs = $('img', content).toArray()
-    let imgScores = {}
+    const imgs = $('img', content).toArray();
+    const imgScores = {};
 
     imgs.forEach((img, index) => {
-      const $img = $(img)
-      const src = $img.attr('src')
+      const $img = $(img);
+      const src = $img.attr('src');
 
-      if (!src) return
+      if (!src) return;
 
-      let score = scoreImageUrl(src)
-      score = score + scoreAttr($img)
-      score = score + scoreByParents($img)
-      score = score + scoreBySibling($img)
-      score = score + scoreByDimensions($img)
-      score = score + scoreByPosition(imgs, index)
+      let score = scoreImageUrl(src);
+      score += scoreAttr($img);
+      score += scoreByParents($img);
+      score += scoreBySibling($img);
+      score += scoreByDimensions($img);
+      score += scoreByPosition(imgs, index);
 
-      imgScores[src] = score
-    })
+      imgScores[src] = score;
+    });
 
     const [topUrl, topScore] =
       Reflect.ownKeys(imgScores).reduce((acc, key) =>
         imgScores[key] > acc[1] ? [key, imgScores[key]] : acc
-      , [null, 0])
+      , [null, 0]);
 
     if (topScore > 0) {
-      cleanUrl = cleanImage(topUrl)
+      cleanUrl = cleanImage(topUrl);
 
-      if (cleanUrl) return cleanUrl
+      if (cleanUrl) return cleanUrl;
     }
 
     // If nothing else worked, check to see if there are any really
     // probable nodes in the doc, like <link rel="image_src" />.
     for (const selector of LEAD_IMAGE_URL_SELECTORS) {
-      const $node = $(selector).first()
-      const src = $node.attr('src')
+      const $node = $(selector).first();
+      const src = $node.attr('src');
       if (src) {
-        cleanUrl = cleanImage(src)
-        if (cleanUrl) return cleanUrl
+        cleanUrl = cleanImage(src);
+        if (cleanUrl) return cleanUrl;
       }
 
-      const href = $node.attr('href')
+      const href = $node.attr('href');
       if (href) {
-        cleanUrl = cleanImage(href)
-        if (cleanUrl) return cleanUrl
+        cleanUrl = cleanImage(href);
+        if (cleanUrl) return cleanUrl;
       }
 
-      const value = $node.attr('value')
+      const value = $node.attr('value');
       if (value) {
-        cleanUrl = cleanImage(value)
-        if (cleanUrl) return cleanUrl
+        cleanUrl = cleanImage(value);
+        if (cleanUrl) return cleanUrl;
       }
     }
 
+    return null;
   },
-}
+};
 
-export default GenericLeadImageUrlExtractor
+export default GenericLeadImageUrlExtractor;
 
 // def extract(self):
 //     """
@@ -182,7 +179,7 @@ export default GenericLeadImageUrlExtractor
 //         if sibling is not None:
 //             if sibling.tag == 'figcaption':
 //                 img_score += 25
-//     
+//
 //             sib_sig = ' '.join([sibling.get('id', ''),
 //                                 sibling.get('class', '')]).lower()
 //             if 'caption' in sib_sig:
@@ -215,7 +212,7 @@ export default GenericLeadImageUrlExtractor
 //
 //         if img_width and img_height and not 'sprite' in img_path:
 //             area = img_width * img_height
-//     
+//
 //             if area < 5000: # Smaller than 50x100
 //                 logger.debug('Image with small area found. Subtracting 100.')
 //                 img_score -= 100

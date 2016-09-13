@@ -5,7 +5,7 @@ const HTML = {
         <meta name="dc.title" value="This Is the Title Okay" />
       <html>
     `,
-    result: `This Is the Title Okay`
+    result: 'This Is the Title Okay',
   },
   ogTitle: {
     test: `
@@ -13,7 +13,7 @@ const HTML = {
         <meta name="og:title" value="This Is the Title Okay" />
       <html>
     `,
-    result: `This Is the Title Okay`
+    result: 'This Is the Title Okay',
   },
   strongTitleSelector: {
     test: `
@@ -23,7 +23,7 @@ const HTML = {
         </article>
       <html>
     `,
-    result: `This Is the Title Okay`
+    result: 'This Is the Title Okay',
   },
   weakTitleSelector: {
     test: `
@@ -33,8 +33,8 @@ const HTML = {
         </head>
       <html>
     `,
-    result: `This Is the Weak Title Okay`
+    result: 'This Is the Weak Title Okay',
   },
-}
+};
 
-export default HTML
+export default HTML;

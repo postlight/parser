@@ -1,0 +1,21 @@
+#!/usr/local/bin/fish
+
+set file $argv[1]
+set function $argv[2]
+
+touch src/extractors/generic/next-page-url/scoring/utils/index.js
+touch src/extractors/generic/next-page-url/scoring/utils/$file.js
+touch src/extractors/generic/next-page-url/scoring/utils/$file.test.js
+
+echo "import assert from 'assert';" > src/extractors/generic/next-page-url/scoring/utils/$file.test.js
+echo "" >> src/extractors/generic/next-page-url/scoring/utils/$file.test.js
+echo "import $function from './$file';" >> src/extractors/generic/next-page-url/scoring/utils/$file.test.js
+echo "" >> src/extractors/generic/next-page-url/scoring/utils/$file.test.js
+echo "export { default as $function } from './$file'" >> src/extractors/generic/next-page-url/scoring/utils/index.js
+
+echo "Now make it a default export"
+echo "Move it to its file"
+echo "Move its tests to its test file"
+echo "import in score-links"
+echo "Test it."
+

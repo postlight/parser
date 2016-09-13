@@ -1,11 +1,10 @@
-const idkRe = new RegExp('^(p|pre)$', 'i')
+const idkRe = new RegExp('^(p|pre)$', 'i');
 
-export default function scoreLength(textLength, tagName='p') {
-  let score
-  const chunks = textLength / 50
+export default function scoreLength(textLength, tagName = 'p') {
+  const chunks = textLength / 50;
 
   if (chunks > 0) {
-    let lengthBonus
+    let lengthBonus;
 
     // No idea why p or pre are being tamped down here
     // but just following the source for now
@@ -13,14 +12,14 @@ export default function scoreLength(textLength, tagName='p') {
     // since this is only being called from the context
     // of scoreParagraph
     if (idkRe.test(tagName)) {
-      lengthBonus = chunks - 2
+      lengthBonus = chunks - 2;
     } else {
-      lengthBonus = chunks - 1.25
+      lengthBonus = chunks - 1.25;
     }
 
-    return Math.min(Math.max(lengthBonus, 0), 3)
-  } else {
-    return 0
+    return Math.min(Math.max(lengthBonus, 0), 3);
   }
+
+  return 0;
 }
 

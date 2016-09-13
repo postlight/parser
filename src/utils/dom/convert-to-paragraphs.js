@@ -1,7 +1,33 @@
-import { convertNodeTo } from 'utils/dom'
+import { convertNodeTo } from 'utils/dom';
 
-import { brsToPs } from './index'
-import { DIV_TO_P_BLOCK_TAGS } from './constants'
+import { brsToPs } from './index';
+import { DIV_TO_P_BLOCK_TAGS } from './constants';
+
+function convertDivs($) {
+  $('div').each((index, div) => {
+    const $div = $(div);
+    const convertable = $div.children()
+      .not(DIV_TO_P_BLOCK_TAGS).length === 0;
+    if (convertable) {
+      convertNodeTo($div, $, 'p');
+    }
+  });
+
+  return $;
+}
+
+function convertSpans($) {
+  $('span').each((index, span) => {
+    const $span = $(span);
+    const convertable = $span.parents('p, div').length === 0;
+    if (convertable) {
+      convertNodeTo($span, $, 'p');
+    }
+  });
+
+  return $;
+}
+
 // Loop through the provided doc, and convert any p-like elements to
 // actual paragraph tags.
 //
@@ -15,34 +41,9 @@ import { DIV_TO_P_BLOCK_TAGS } from './constants'
 //   (By-reference mutation, though. Returned just for convenience.)
 
 export default function convertToParagraphs($) {
-  $ = brsToPs($)
-  $ = convertDivs($)
-  $ = convertSpans($)
+  $ = brsToPs($);
+  $ = convertDivs($);
+  $ = convertSpans($);
 
-  return $
-}
-
-function convertDivs($) {
-  $('div').each((index, div) => {
-    const $div = $(div)
-    const convertable = $div.children()
-      .not(DIV_TO_P_BLOCK_TAGS).length == 0
-    if (convertable) {
-      convertNodeTo($div, $, 'p')
-    }
-  })
-
-  return $
-}
-
-function convertSpans($) {
-  $('span').each((index, span) => {
-    const $span = $(span)
-    const convertable = $span.parents('p, div').length == 0
-    if (convertable) {
-      convertNodeTo($span, $, 'p')
-    }
-  })
-
-  return $
+  return $;
 }

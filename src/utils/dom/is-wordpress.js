@@ -1,5 +1,5 @@
-import { IS_WP_SELECTOR } from './constants'
+import { IS_WP_SELECTOR } from './constants';
 
 export default function isWordpress($) {
-  return $(IS_WP_SELECTOR).length > 0
+  return $(IS_WP_SELECTOR).length > 0;
 }

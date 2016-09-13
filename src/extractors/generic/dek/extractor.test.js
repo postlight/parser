@@ -1,20 +1,18 @@
-import assert from 'assert'
-import cheerio from 'cheerio'
+import assert from 'assert';
+import cheerio from 'cheerio';
 
 // import HTML from './fixtures/html'
-import GenericDekExtractor from './extractor'
+import GenericDekExtractor from './extractor';
 
 describe('GenericDekExtractor', () => {
   describe('extract({ $, metaCache })', () => {
-
     it('returns null if no dek can be found', () => {
-      const $ = cheerio.load('<div></div>')
-      const metaCache = []
+      const $ = cheerio.load('<div></div>');
+      const metaCache = [];
       const result =
-        GenericDekExtractor.extract({ $, metaCache })
+        GenericDekExtractor.extract({ $, metaCache });
 
-      assert.equal(result, null)
-    })
-
-  })
-})
+      assert.equal(result, null);
+    });
+  });
+});
