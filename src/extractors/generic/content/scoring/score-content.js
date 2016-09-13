@@ -1,4 +1,4 @@
-import { HNEWS_CONTENT_SELECTORS } from '../constants'
+import { HNEWS_CONTENT_SELECTORS } from './constants'
 
 import {
   scoreNode,

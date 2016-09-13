@@ -1,6 +1,6 @@
 import { HEADER_TAG_LIST } from './constants'
 import { normalizeSpaces } from '../text'
-import { getWeight } from 'extractors/generic/content/utils/scoring'
+import { getWeight } from 'extractors/generic/content/scoring'
 
 export default function cleanHeaders($article, $, title='') {
   $(HEADER_TAG_LIST, $article).each((index, header) => {

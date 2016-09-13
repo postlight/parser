@@ -1,7 +1,7 @@
 import {
   scoreContent,
   findTopCandidate,
-} from './utils/scoring'
+} from './scoring'
 import {
   stripUnlikelyCandidates,
   convertToParagraphs,

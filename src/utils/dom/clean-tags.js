@@ -4,7 +4,7 @@ import {
   setScore,
   getOrInitScore,
   scoreCommas,
-} from 'extractors/generic/content/utils/scoring'
+} from 'extractors/generic/content/scoring'
 
 import { normalizeSpaces } from '../text'
 

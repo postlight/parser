@@ -1,4 +1,4 @@
-import { NON_TOP_CANDIDATE_TAGS_RE } from '../constants'
+import { NON_TOP_CANDIDATE_TAGS_RE } from './constants'
 import { getScore } from './index'
 import {
   textLength,

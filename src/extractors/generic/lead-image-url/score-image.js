@@ -5,7 +5,7 @@ import {
   JPG_RE,
 } from './constants'
 
-import { PHOTO_HINTS_RE } from '../content/utils/constants'
+import { PHOTO_HINTS_RE } from '../content/scoring/constants'
 
 // Scores image urls based on a variety of heuristics.
 export function scoreImageUrl(url) {

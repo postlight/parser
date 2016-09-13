@@ -3,7 +3,7 @@ import {
   POSITIVE_SCORE_RE,
   PHOTO_HINTS_RE,
   READABILITY_ASSET,
-} from '../constants'
+} from './constants'
 
 
 // Get the score of a node based on its className and id.
