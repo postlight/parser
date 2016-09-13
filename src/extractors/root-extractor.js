@@ -7,7 +7,7 @@ import { ATTR_RE } from './constants'
 
 const RootExtractor = {
   extract(extractor=GenericExtractor, opts) {
-    const { $ } = opts
+    const { $, contentOnly, extractedTitle } = opts
     // This is the generic extractor. Run its extract method
     if (extractor.domain === '*') return extractor.extract(opts)
 
@@ -16,23 +16,33 @@ const RootExtractor = {
       extractor
     }
 
-    const title = extract({ ...opts, type: 'title' })
-    const datePublished = extract({ ...opts, type: 'datePublished' })
-    const author = extract({ ...opts, type: 'author' })
-    const content = extract({
-      ...opts, type: 'content', extractHtml: true, title
-    })
-    const leadImageUrl = extract({ ...opts, type: 'leadImageUrl', content })
-    const dek = extract({ ...opts, type: 'dek', content })
-
-    return {
-      title,
-      content,
-      author,
-      datePublished,
-      leadImageUrl,
-      dek,
+    if (contentOnly) {
+      const content = extract({
+        ...opts, type: 'content', extractHtml: true, title: extractedTitle
+      })
+      return {
+        content
+      }
+    } else {
+      const title = extract({ ...opts, type: 'title' })
+      const datePublished = extract({ ...opts, type: 'datePublished' })
+      const author = extract({ ...opts, type: 'author' })
+      const nextPageUrl = extract({ ...opts, type: 'nextPageUrl' })
+      const content = extract({
+        ...opts, type: 'content', extractHtml: true, title
+      })
+      const leadImageUrl = extract({ ...opts, type: 'leadImageUrl', content })
+      const dek = extract({ ...opts, type: 'dek', content })
+      return {
+        title,
+        content,
+        author,
+        datePublished,
+        leadImageUrl,
+        dek,
+      }
     }
+
   }
 }
 

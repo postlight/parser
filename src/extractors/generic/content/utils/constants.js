@@ -263,66 +263,8 @@ export const NEGATIVE_SCORE_HINTS = [
 // The above list, joined into a matching regular expression
 export const NEGATIVE_SCORE_RE = new RegExp(NEGATIVE_SCORE_HINTS.join('|'), 'i')
 
-// XPath to try to determine if a page is wordpress. Not always successful.
-export const IS_WP_XPATH = "//meta[@name='generator'][starts-with(@value,'WordPress')]"
-
 // Match a digit. Pretty clear.
 export const DIGIT_RE = new RegExp('[0-9]')
-
-// A list of words that, if found in link text or URLs, likely mean that
-// this link is not a next page link.
-export const EXTRANEOUS_LINK_HINTS = [
-    'print',
-    'archive',
-    'comment',
-    'discuss',
-    'e-mail',
-    'email',
-    'share',
-    'reply',
-    'all',
-    'login',
-    'sign',
-    'single',
-    'adx',
-    'entry-unrelated'
-]
-export const EXTRANEOUS_LINK_HINTS_RE = new RegExp(EXTRANEOUS_LINK_HINTS.join('|'), 'i')
-
-// An expression that looks to try to find the page digit within a URL, if
-// it exists.
-// Matches:
-//  page=1
-//  pg=1
-//  p=1
-//  paging=12
-//  pag=7
-//  pagination/1
-//  paging/88
-//  pa/83
-//  p/11
-//
-// Does not match:
-//  pg=102
-//  page:2
-// DISABLING FOR NOW TODO AP
-// export const PAGE_IN_HREF_RE = new RegExp('(page|paging|(p(a|g|ag)?(e|enum|ewanted|ing|ination)?(=|\/)(?P<pagenum>[0-9]{1,2})))', 'i')
-
-// Match any phrase that looks like it could be page, or paging, or pagination
-export const PAGE_RE = new RegExp('pag(e|ing|inat)', 'i')
-
-// Match any link text/classname/id that looks like it could mean the next
-// page. Things like: next, continue, >, >>, » but not >|, »| as those can
-// mean last page.
-export const NEXT_LINK_TEXT_RE = new RegExp('(next|weiter|continue|>([^\|]|$)|»([^\|]|$))', 'i')
-
-// Match any link text/classname/id that looks like it is an end link: things
-// like "first", "last", "end", etc.
-export const CAP_LINK_TEXT_RE = new RegExp('(first|last|end)', 'i')
-
-// Match any link text/classname/id that looks like it means the previous
-// page.
-export const PREV_LINK_TEXT_RE = new RegExp('(prev|earl|old|new|<|«)', 'i')
 
 // Match 2 or more consecutive <br> tags
 export const BR_TAGS_RE = new RegExp('(<br[^>]*>[ \n\r\t]*){2,}', 'i')

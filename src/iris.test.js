@@ -29,5 +29,18 @@ describe('Iris', function() {
       // console.log(result)
     })
 
+    it('does ars pagination', async function() {
+      const url = 'http://arstechnica.com/gadgets/2016/08/the-connected-renter-how-to-make-your-apartment-smarter/'
+      const result = await Iris.parse(
+        url,
+        null,
+        { fetchAllPages: true }
+      )
+
+      // console.log(result)
+      assert.equal(result.nextPageUrl, `${url}2`)
+      // console.log(result.content)
+    })
+
   })
 })

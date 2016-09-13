@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+<title>The connected renter: How to make your apartment smarter | Ars Technica</title>
+    <script type="text/javascript">
+    ars = {"ASSETS":"http:\/\/cdn.arstechnica.net\/wp-content\/themes\/ars\/assets","HOME_URL":"http:\/\/arstechnica.com","LOGIN_URL":"https:\/\/arstechnica.com\/services\/login-desktop.html?v=1","CIVIS":"\/civis","THEME":"light","VIEW":"grid","MOBILE":false,"PREMIER":false,"LOGGED":false,"ENV":"production","AD":{"kw":["section_gadgets","discipline","smart-home-gadgets-3","gadgets","consumer"],"zone":"consumer","queue":[]},"TOTAL":76298,"UNREAD":0,"RECENT":[954557,954535,954549,954441,954111,954425,954079,954381,954405,954375,954353,954359,953823,954223,954167,953759,954127,954137,953651,795591,945117,948903,50397,953951,953701],"LOGINS":true,"CROSS":false,"GEOALERTS":true,"PARSELY":"arstechnica.com","COMMENTS":false,"HOMEPAGE":false,"COUNTRY":"us","SITE":1,"READY":[],"SHOW_ADS":true,"IMG_PROXY":"https:\/\/cdn.arstechnica.net\/i\/","CATEGORY":"gadgets","PAGETITLE":""};
+  </script>
+
+  <link rel="stylesheet" type="text/css" media="all" href="http://cdn.arstechnica.net/wp-content/themes/ars/assets/css/main-022c9f4290.css" />
+      <link rel="alternate" type="application/rss+xml" href="http://feeds.arstechnica.com/arstechnica/index/" />
+  <link rel="shortcut icon" href="https://cdn.arstechnica.net/favicon.ico" />
+  <link rel="icon" type="image/x-icon" href="https://cdn.arstechnica.net/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="http://cdn.arstechnica.net/wp-content/themes/ars/assets/img/ars-ios-icon-d9a45f558c.png" />
+  <link rel="icon" sizes="192x192" href="http://cdn.arstechnica.net/wp-content/themes/ars/assets/img/material-ars-db41652381.png" />
+
+    <meta name="application-name" content="Ars Technica"/>
+  <meta name="msapplication-starturl" content="http://arstechnica.com/"/>
+  <meta name="msapplication-tooltip" content="Ars Technica: Serving the technologist for 1.2 decades"/>
+  <meta name="msapplication-task" content="name=News;action-uri=http://arstechnica.com/;icon-uri=https://cdn.arstechnica.net/favicon.ico"/>
+  <meta name="msapplication-task" content="name=Features;action-uri=http://arstechnica.com/features/;icon-uri=https://cdn.arstechnica.net/ie-jump-menu/jump-features.ico"/>
+  <meta name="msapplication-task" content="name=OpenForum;action-uri=http://arstechnica.com/civis/;icon-uri=https://cdn.arstechnica.net/ie-jump-menu/jump-forum.ico"/>
+  <meta name="msapplication-task" content="name=Subscribe;action-uri=http://arstechnica.com/subscriptions/;icon-uri=https://cdn.arstechnica.net/ie-jump-menu/jump-subscribe.ico"/>
+
+
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><script type="text/javascript">window.NREUM||(NREUM={}),__nr_require=function(t,e,n){function r(n){if(!e[n]){var o=e[n]={exports:{}};t[n][0].call(o.exports,function(e){var o=t[n][1][e];return r(o||e)},o,o.exports)}return e[n].exports}if("function"==typeof __nr_require)return __nr_require;for(var o=0;o<n.length;o++)r(n[o]);return r}({1:[function(t,e,n){function r(){}function o(t,e,n){return function(){return i(t,[(new Date).getTime()].concat(u(arguments)),e?null:this,n),e?void 0:this}}var i=t("handle"),a=t(2),u=t(3),c=t("ee").get("tracer"),f=NREUM;"undefined"==typeof window.newrelic&&(newrelic=f);var s=["setPageViewName","setCustomAttribute","finished","addToTrace","inlineHit"],p="api-",l=p+"ixn-";a(s,function(t,e){f[e]=o(p+e,!0,"api")}),f.addPageAction=o(p+"addPageAction",!0),e.exports=newrelic,f.interaction=function(){return(new r).get()};var d=r.prototype={createTracer:function(t,e){var n={},r=this,o="function"==typeof e;return i(l+"tracer",[Date.now(),t,n],r),function(){if(c.emit((o?"":"no-")+"fn-start",[Date.now(),r,o],n),o)try{return e.apply(this,arguments)}finally{c.emit("fn-end",[Date.now()],n)}}}};a("setName,setAttribute,save,ignore,onEnd,getContext,end,get".split(","),function(t,e){d[e]=o(l+e)}),newrelic.noticeError=function(t){"string"==typeof t&&(t=new Error(t)),i("err",[t,(new Date).getTime()])}},{}],2:[function(t,e,n){function r(t,e){var n=[],r="",i=0;for(r in t)o.call(t,r)&&(n[i]=e(r,t[r]),i+=1);return n}var o=Object.prototype.hasOwnProperty;e.exports=r},{}],3:[function(t,e,n){function r(t,e,n){e||(e=0),"undefined"==typeof n&&(n=t?t.length:0);for(var r=-1,o=n-e||0,i=Array(o<0?0:o);++r<o;)i[r]=t[e+r];return i}e.exports=r},{}],ee:[function(t,e,n){function r(){}function o(t){function e(t){return t&&t instanceof r?t:t?u(t,a,i):i()}function n(n,r,o){t&&t(n,r,o);for(var i=e(o),a=l(n),u=a.length,c=0;c<u;c++)a[c].apply(i,r);var s=f[m[n]];return s&&s.push([w,n,r,i]),i}function p(t,e){g[t]=l(t).concat(e)}function l(t){return g[t]||[]}function d(t){return s[t]=s[t]||o(n)}function v(t,e){c(t,function(t,n){e=e||"feature",m[n]=e,e in f||(f[e]=[])})}var g={},m={},w={on:p,emit:n,get:d,listeners:l,context:e,buffer:v};return w}function i(){return new r}var a="nr@context",u=t("gos"),c=t(2),f={},s={},p=e.exports=o();p.backlog=f},{}],gos:[function(t,e,n){function r(t,e,n){if(o.call(t,e))return t[e];var r=n();if(Object.defineProperty&&Object.keys)try{return Object.defineProperty(t,e,{value:r,writable:!0,enumerable:!1}),r}catch(i){}return t[e]=r,r}var o=Object.prototype.hasOwnProperty;e.exports=r},{}],handle:[function(t,e,n){function r(t,e,n,r){o.buffer([t],r),o.emit(t,e,n)}var o=t("ee").get("handle");e.exports=r,r.ee=o},{}],id:[function(t,e,n){function r(t){var e=typeof t;return!t||"object"!==e&&"function"!==e?-1:t===window?0:a(t,i,function(){return o++})}var o=1,i="nr@id",a=t("gos");e.exports=r},{}],loader:[function(t,e,n){function r(){if(!h++){var t=y.info=NREUM.info,e=s.getElementsByTagName("script")[0];if(t&&t.licenseKey&&t.applicationID&&e){c(m,function(e,n){t[e]||(t[e]=n)});var n="https"===g.split(":")[0]||t.sslForHttp;y.proto=n?"https://":"http://",u("mark",["onload",a()],null,"api");var r=s.createElement("script");r.src=y.proto+t.agent,e.parentNode.insertBefore(r,e)}}}function o(){"complete"===s.readyState&&i()}function i(){u("mark",["domContent",a()],null,"api")}function a(){return(new Date).getTime()}var u=t("handle"),c=t(2),f=window,s=f.document,p="addEventListener",l="attachEvent",d=f.XMLHttpRequest,v=d&&d.prototype;NREUM.o={ST:setTimeout,CT:clearTimeout,XHR:d,REQ:f.Request,EV:f.Event,PR:f.Promise,MO:f.MutationObserver},t(1);var g=""+location,m={beacon:"bam.nr-data.net",errorBeacon:"bam.nr-data.net",agent:"js-agent.newrelic.com/nr-963.min.js"},w=d&&v&&v[p]&&!/CriOS/.test(navigator.userAgent),y=e.exports={offset:a(),origin:g,features:{},xhrWrappable:w};s[p]?(s[p]("DOMContentLoaded",i,!1),f[p]("load",r,!1)):(s[l]("onreadystatechange",o),f[l]("onload",r)),u("mark",["firstbyte",a()],null,"api");var h=0},{}]},{},["loader"]);</script>
+  <meta name="advertising" content="ask" />
+  <meta property="fb:admins" content="592156917" />
+  <meta property="fb:admins" content="108943" />
+  <meta property="fb:admins" content="10103365229664579" />
+
+  <meta name="format-detection" content="telephone=no" />
+  <meta name="theme-color" content="#000000" />
+
+  
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <!-- cache hit 72:single/meta:bbf8001ecaa8312156551cbba451e5f8 -->
+<meta name='parsely-page' content='{"title":"The connected renter: How to make your apartment smarter","link":"http:\/\/arstechnica.com\/gadgets\/2016\/08\/the-connected-renter-how-to-make-your-apartment-smarter\/","type":"post","author":"Valentina Palladino","post_id":921807,"pub_date":"2016-08-10T11:15:53Z","section":"Gear &amp; Gadgets","tags":["gadgetology","iot","smart-apartments","smart-home","type: feature"],"image_url":"http:\/\/cdn.arstechnica.net\/wp-content\/uploads\/2016\/07\/smartapartment_hero5-150x150.jpg"}'>
+<meta name='parsely-metadata' content='{"type":"feature","title":"The connected renter: How to make your apartment smarter","post_id":921807,"lower_deck":"Turning your rented space into a smart home can be tricky; we have some advice.","image_url":"http:\/\/cdn.arstechnica.net\/wp-content\/uploads\/2016\/07\/smartapartment_hero5-150x150.jpg","listing_image_url":"http:\/\/cdn.arstechnica.net\/wp-content\/uploads\/2016\/07\/smartapartment_hero5-300x150.jpg"}'>
+
+<link rel="canonical" href="http://arstechnica.com/gadgets/2016/08/the-connected-renter-how-to-make-your-apartment-smarter/" />
+
+<link rel="amphtml" href="http://arstechnica.com/gadgets/2016/08/the-connected-renter-how-to-make-your-apartment-smarter/?amp=1">
+
+
+
+<link rel="shorturl" href="http://arstechnica.com/?p=921807" />
+
+<meta name="description" content="Turning your rented space into a smart home can be tricky; we have some advice." />
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:url" content="http://arstechnica.com/gadgets/2016/08/the-connected-renter-how-to-make-your-apartment-smarter/">
+<meta name="twitter:title" content="The connected renter: How to make your apartment smarter">
+<meta name="twitter:description" content="Turning your rented space into a smart home can be tricky; we have some advice.">
+
+<meta name="twitter:site" content="@arstechnica">
+<meta name="twitter:domain" content="arstechnica.com">
+
+<meta property="og:site_name" content="Ars Technica" />
+
+<meta name="twitter:image:src" content="http://cdn.arstechnica.net/wp-content/uploads/2016/07/smartapartment_hero5-640x215.jpg">
+<meta name="twitter:image:width" content="640">
+<meta name="twitter:image:height" content="215">
+
+<meta name="twitter:creator" content="@valentinalucia">
+
+<meta property="og:url" content="http://arstechnica.com/gadgets/2016/08/the-connected-renter-how-to-make-your-apartment-smarter/" />
+<meta property="og:title" content="The connected renter: How to make your apartment smarter" />
+<meta property="og:image" content="http://cdn.arstechnica.net/wp-content/uploads/2016/07/smartapartment_hero5-640x215.jpg" />
+<meta property="og:description" content="Turning your rented space into a smart home can be tricky; we have some advice." />
+<meta property="og:type" content="article" />
+
+<script type="text/javascript">var digitalData = {"contributor":"Valentina Palladino","contentID":921807,"contentLength":4370,"display":"The connected renter: How to make your apartment smarter","pageType":"feature","keywords":{"display":"gadgetology|iot|smart-apartments|smart-home|type: feature"},"canonical":"http:\/\/arstechnica.com\/gadgets\/2016\/08\/the-connected-renter-how-to-make-your-apartment-smarter\/","pageValue":1,"publishDate":"2016-08-10T11:15:53+00:00","section":"Gear &amp; Gadgets"};</script>
+  <!-- cache hit 72:single/header:bbf8001ecaa8312156551cbba451e5f8 -->
+        
+  
+  </head>
+<body class="single single-post postid-921807 single-format-standard grid-view light fullwidth blog-us">
+
+  <aside class="ad ad_crown" id="ad_crown_top"></aside>
+
+<div class="site-wrapper">
+  <header class="site-header">
+    <div class="header-left">
+      <a href="http://arstechnica.com" id="header-logo" title="Ars Technica Homepage">
+      <span class="icon icon-logo-ars-us"></span>
+  </a>
+      <div class="dropdown" id="header-search">
+        <a href="/search/" class="dropdown-toggle">
+          <span class="icon icon-search-mag-glass"></span>
+        </a>
+        <div class="dropdown-content">
+          <form action="/search/" method="GET" id="search_form">
+  <input type="hidden" name="ie" value="UTF-8">
+  <input type="text" name="q" id="hdr_search_input" value="" placeholder="Search..." tabindex="10">
+</form>
+<a class="nav-search-close">Close</a>
+        </div>
+      </div>
+      <nav id="header-nav-primary">
+        <ul>
+          
+  <li><a class="" href="/information-technology/">Biz &amp; IT</a></li>
+  <li><a class="active" href="/gadgets/">Tech</a></li>
+  <li><a class="" href="/science/">Science</a></li>
+  <li><a class="" href="/tech-policy/">Policy</a></li>
+  <li><a class="" href="/cars/">Cars</a></li>
+  <li><a class="" href="/gaming/">Gaming &amp; Culture</a></li>
+  <li><a href="/civis/">Forums</a></li>        </ul>
+      </nav>
+      <div class="dropdown dropdown-mega" id="header-burger">
+        <a href="#site-footer" class="dropdown-toggle">
+          <span></span>
+        </a>
+        <div class="dropdown-content">
+          <section class="burger-navigate">
+  <h3>
+    <span class="icon icon-half-target"></span>
+    Navigate
+  </h3>
+  <ul>
+    <li><a href="http://video.arstechnica.com/">Videos</a></li>
+    <li><a href="/features/">Features</a></li>
+    <li><a href="/reviews/">Reviews</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="/rss-feeds/">RSS Feeds</a></li>
+    <li><a href="/?view=mobile">Mobile Site</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="/about-us/">About Ars</a></li>
+    <li><a href="/staff-directory/">Staff Directory</a></li>
+    <li><a href="/contact-us/">Contact Us</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="/advertise-with-us/">Advertise with Ars</a></li>
+    <li><a href="/reprints/">Reprints</a></li>
+  </ul>
+</section>
+
+<section class="burger-filter">
+  <h3>
+    <span class="icon icon-half-mag"></span>
+    Filter by topic
+  </h3>
+  <ul id="burger-nav-primary">
+    
+  <li><a class="" href="/information-technology/">Biz &amp; IT</a></li>
+  <li><a class="active" href="/gadgets/">Tech</a></li>
+  <li><a class="" href="/science/">Science</a></li>
+  <li><a class="" href="/tech-policy/">Policy</a></li>
+  <li><a class="" href="/cars/">Cars</a></li>
+  <li><a class="" href="/gaming/">Gaming &amp; Culture</a></li>
+  <li><a href="/civis/">Forums</a></li>  </ul>
+</section>
+
+<section class="burger-settings">
+  <h3>
+    <span class="icon icon-half-gear"></span>
+    Settings
+  </h3>
+  <div>
+    <div class="burger-layout">
+      
+<p>Front page layout</p>
+<div class="burger-layout-grid">
+  <a rel="nofollow" href="http://arstechnica.com/gadgets/2016/08/the-connected-renter-how-to-make-your-apartment-smarter/?view=grid" class="">
+    <span class="icon icon-grid"></span><br>
+    Grid
+    <div class="faux-radio active"></div>
+      </a>
+</div>
+
+<div class="burger-layout-list">
+  <a rel="nofollow" href="http://arstechnica.com/gadgets/2016/08/the-connected-renter-how-to-make-your-apartment-smarter/?view=archive" class="">
+    <span class="icon icon-list"></span><br>
+    List
+    <div class="faux-radio "></div>
+      </a>
+</div>
+
+<div class="burger-layout-unified">
+  <a rel="nofollow" href="http://arstechnica.com/gadgets/2016/08/the-connected-renter-how-to-make-your-apartment-smarter/?view=unified" class="">
+    <span class="icon icon-hybrid-view"></span><br>
+    Unified
+    <div class="faux-radio "></div>
+      </a>
+</div>
+    </div>
+    <div class="burger-theme">
+      
+<p>Site theme</p>
+<div class="burger-theme-light">
+  <a rel="nofollow" href="http://arstechnica.com/gadgets/2016/08/the-connected-renter-how-to-make-your-apartment-smarter/?theme=light" class="">
+    <span><span>Black on white</span></span>
+    <div class="faux-radio active"></div>
+      </a>
+</div>
+
+<div class="burger-theme-dark">
+  <a rel="nofollow" href="http://arstechnica.com/gadgets/2016/08/the-connected-renter-how-to-make-your-apartment-smarter/?theme=dark" class="">
+    <span><span>White on black</span></span>
+    <div class="faux-radio "></div>
+      </a>
+</div>
+    </div>
+  </div>
+      <div class="burger-frs">
+      <div class="frs-desc">
+        <h3 class="cat-name">Feature Report Series</h3>
+        <a href="/feature-series/specialized-databases/" class="cat-desc subheading">The Rise of Specialized Databases</a>
+      </div>
+    </div>
+  </section>
+        </div>
+      </div>
+      <div class="dropdown dropdown-mega" id="header-account">
+      <a href="http://arstechnica.com/civis/ucp.php?mode=login&return_to=%2Fgadgets%2F2016%2F08%2Fthe-connected-renter-how-to-make-your-apartment-smarter%2F" class="dropdown-toggle">
+      Sign in
+      <span class="icon dropdown-indicator icon-drop-indicator"></span>
+    </a>
+    <div class="dropdown-content">
+    <section class="profile-activity">
+      <h3>
+        <span class="icon icon-half-bubble-up"></span>
+        Comment activity
+      </h3>
+              <p>Sign up or login to join the discussions!</p>
+          </section>
+
+    <section class="profile-settings">
+              <form id="login-form" action="https://arstechnica.com/civis/ucp.php?mode=login" method="post">
+  <input type="text" name="username" id="username" placeholder="Username or Email" />
+  <input type="password" name="password" id="password"  placeholder="Password" />
+  <input type="submit" value="Submit" class="button button-orange button-wide" name="login" />
+  <label id="remember-label">
+    <input type="checkbox" name="autologin" id="autologin" />
+  Stay logged in</label> <span>|</span> <a href="/civis/ucp.php?mode=sendpassword">Having trouble?</a>
+
+  <input type="hidden" name="redirect" value="./ucp.php?mode=login&amp;return_to=%2Fservices%2Fx%2Fa.php%3Fpath%3D%2Fgadgets%2F2016%2F08%2Fthe-connected-renter-how-to-make-your-apartment-smarter%2F%26s%3D1" />
+  <input type="hidden" name="return_to" value="/services/x/a.php?path=%2Fgadgets%2F2016%2F08%2Fthe-connected-renter-how-to-make-your-apartment-smarter%2F&amp;s=1" />
+</form>
+<div class="register-account">
+  <span>Sign up to comment and more</span>
+  <a href="http://arstechnica.com/civis/ucp.php?mode=register" class="signup-btn button button-wide">Sign up</a>
+</div>
+      
+    </section>
+  </div>
+</div>
+    </div>
+    <div class="header-right">
+            <!-- cache hit 72:header/site-toggle:2a05a4cf44df398d720c458b68ecffc5 -->
+  <div class="dropdown dropdown-right" id="header-sites">
+                        <a href="http://arstechnica.com/?return" class="dropdown-toggle">
+          <span class="icon header-flag icon-flag-us"></span>
+          <span class="icon dropdown-indicator icon-drop-indicator"></span>
+        </a>
+                                  
+    <div class="dropdown-content">
+                        <a href="http://arstechnica.co.uk">
+            <span class="icon header-flag icon-flag-uk"></span>
+            Ars Technica UK          </a>
+          </div>
+  </div>
+          </div>
+  </header>
+
+        
+  <div class="content-wrapper">
+
+<script type="text/javascript">
+  ars.ARTICLE = {"url":"http:\/\/arstechnica.com\/gadgets\/2016\/08\/the-connected-renter-how-to-make-your-apartment-smarter\/","short_url":"http:\/\/arstechnica.com\/?p=921807","title":"The connected renter: How to make your apartment smarter","author":505571,"id":921807,"topic":1324485,"pages":3,"current_page":1,"superscroll":true,"promoted":[],"single_page":false,"comments":132,"fullwidth":true,"slug":"the-connected-renter-how-to-make-your-apartment-smarter","arsStaff":{"104481":{"name":"Aaron Zimmerman","title":"Copyeditor","staff":true},"332715":{"name":"Andrew Cunningham","title":"Senior Products Editor","staff":true},"520255":{"name":"Annalee Newitz","title":"Tech Culture Editor","staff":true},"509873":{"name":"Beth Mole","title":"Health Reporter","staff":true},"335607":{"name":"Cyrus Farivar","title":"Senior Business Editor","staff":true},"329388":{"name":"Dan Goodin","title":"Security Editor","staff":true},"427993":{"name":"David Kravets","title":"Senior Editor","staff":true},"512413":{"name":"Eric Berger","title":"Senior Space Editor","staff":true},"55943":{"name":"Jacqui Cheng","title":"Editor at Large","staff":false},"439519":{"name":"Jennifer Hahn","title":"Video Producer\/Editor","staff":true},"334677":{"name":"Joe Mullin","title":"Tech Policy Editor","staff":true},"52979":{"name":"John Timmer","title":"Senior Science Editor","staff":true},"312082":{"name":"Jon Brodkin","title":"Senior IT Reporter","staff":true},"14317":{"name":"Jonathan M. Gitlin","title":"Automotive Editor","staff":true},"338374":{"name":"Kathleen DeVries","title":"","staff":false},"522745":{"name":"Kelly Fiveash","title":"News Editor","staff":true},"440179":{"name":"Kerry Staurseth","title":"Associate Copyeditor","staff":true},"328283":{"name":"Kyle Orland","title":"Senior Gaming Editor","staff":true},"483933":{"name":"Mark Walton","title":"Consumer Editor","staff":true},"331051":{"name":"Megan Geuss","title":"Staff editor","staff":true},"182268":{"name":"Nate Anderson","title":"Deputy Editor","staff":true},"1169":{"name":"Peter Bright","title":"Technology Editor","staff":true},"391727":{"name":"Ron Amadeo","title":"Reviews Editor","staff":true},"348927":{"name":"Sam Machkovech","title":"Culture Reporter","staff":true},"314884":{"name":"Sean Gallagher","title":"IT Editor","staff":true},"466481":{"name":"Sebastian Anthony","title":"Editor of Ars Technica UK","staff":true},"505571":{"name":"Valentina Palladino","title":"Associate Reviewer","staff":true},"369205":{"name":"Akshat Rathi","title":"Associate Writer","staff":false},"325040":{"name":"Allie Wilkinson","title":"","staff":false},"505703":{"name":"Cassandra Khaw","title":"Contributing Reporter ","staff":true},"453791":{"name":"Cathleen O'Grady","title":"Contributing science reporter","staff":true},"102179":{"name":"Chris Lee","title":"Associate writer","staff":true},"332078":{"name":"Curt Hopkins","title":"Associate Writer","staff":false},"6978":{"name":"Dave Girard","title":"Associate Writer","staff":false},"332434":{"name":"Dave Klingler","title":"Associate Writer","staff":false},"129513":{"name":"David Kanter","title":"","staff":false},"254631":{"name":"Diana Gitig","title":"Associate Writer","staff":false},"52335":{"name":"edgar","title":"","staff":false},"172426":{"name":"egosumliber","title":"","staff":false},"480857":{"name":"Glyn Moody","title":"Contributing Policy Editor","staff":true},"46707":{"name":"Iljitsch van Beijnum","title":"Associate Writer","staff":true},"332336":{"name":"James Holloway","title":"Associate Writer","staff":false},"217531":{"name":"Jeremy Jacquot","title":"","staff":false},"15365":{"name":"Jeremy Reimer","title":"Senior Niche Technology Historian","staff":false},"8996":{"name":"John Siracusa","title":"Associate writer","staff":false},"375641":{"name":"Kate Prengaman","title":"","staff":false},"251816":{"name":"Kate Shaw Yoshida","title":"Associate Writer","staff":false},"133411":{"name":"Knadles","title":"","staff":false},"37509":{"name":"Matt Ford","title":"Associate writer","staff":false},"300066":{"name":"Matthew Braga","title":"Associate writer","staff":true},"323078":{"name":"Matthew Francis","title":"Associate Writer","staff":false},"173191":{"name":"Matthew Lasar","title":"Associate writer","staff":true},"336278":{"name":"Melissae Fellet","title":"Associate Writer","staff":false},"1991":{"name":"Ohrmazd","title":"","staff":false},"445261":{"name":"Robert Lemos","title":"","staff":false},"66380":{"name":"Ryan Paul","title":"Ars Editor Emeritus ","staff":false},"17480":{"name":"SBD","title":"","staff":false},"294205":{"name":"Scott K. Johnson","title":"Associate Writer","staff":true},"451673":{"name":"Shalini Saxena","title":"Science Writer","staff":false},"163185":{"name":"Tim De Chant","title":"","staff":false},"173910":{"name":"Tim Lee","title":"","staff":false},"181333":{"name":"vansau","title":"","staff":false},"445789":{"name":"Xaq Rzetelny","title":"","staff":false},"6021":{"name":"Yaz","title":"","staff":false},"417641":{"name":"Yogi Patel","title":"","staff":false},"513703":{"name":"Forrest Marvez","title":"Web Developer","staff":false},"316010":{"name":"Jason Marlin","title":"Technical Director","staff":true},"998":{"name":"Ken Fisher","title":"Editor in Chief","staff":true},"1002":{"name":"Aurich Lawson","title":"Creative Director","staff":true},"25862":{"name":"Eric Bangeman","title":"Managing Editor","staff":true},"10243":{"name":"Lee Hutchinson","title":"Senior Technology Editor","staff":true},"330533":{"name":"Nathan Mattise","title":"Features Editor","staff":true},"495539":{"name":"S.I. Newhouse","title":"","staff":true},"547195":{"name":"Tom Mendelsohn","title":"Contributing Sub Editor","staff":true},"513593":{"name":"Andrii Degeler","title":"Contributing reporter","staff":true},"549735":{"name":"Jennifer Baker","title":"Contributing Europe Correspondent","staff":true},"100955":{"name":"Lee Aylward","title":"Lead Developer","staff":false}}};
+</script>
+
+<article itemscope itemtype="http://schema.org/NewsArticle" class="article-single standalone intro-standard ">
+
+  <div class="column-wrapper">
+
+    <div class="left-column">
+      <header class="article-header">
+        <h4 class="post-upperdek">
+      Gear &amp; Gadgets    &mdash;
+</h4>
+        <h1 itemprop="headline">The connected renter: How to make your apartment smarter</h1>
+        <h2 itemprop="description">Turning your rented space into a smart home can be tricky; we have some advice.</h2>
+        <section class="post-meta">
+
+  
+  <p class="byline" itemprop="author creator" itemscope itemtype="http://schema.org/Person">
+      <a itemprop="url" href="http://arstechnica.com/author/valentina/" rel="author"><span itemprop="name">Valentina Palladino</span></a>
+      -  <time class="date" data-time="1470827753" datetime="2016-08-10T11:15:53+00:00">Aug 10, 2016 11:15 am UTC</time>
+  </p>
+
+
+  
+</section>      </header>
+
+      <section class="article-guts">
+        <div itemprop="articleBody" class="article-content post-page">
+          
+<figure class="intro-image full">
+  <img src="http://cdn.arstechnica.net/wp-content/uploads/2016/07/smartapartment_hero5-980x713.jpg"/>
+      <figcaption class="caption"><div class="caption-credit">Valentina Palladino</div></figcaption>  </figure>
+
+
+
+
+<!-- cache hit 72:single/related:bbf8001ecaa8312156551cbba451e5f8 --><!-- empty -->
+<aside id="social-left"><a title="73 posters participating" class="comment-count icon-comment-bubble-down" href="http://arstechnica.com/gadgets/2016/08/the-connected-renter-how-to-make-your-apartment-smarter/?comments=1">
+      <span class="comment-count-before">reader comments</span>
+    <span class="comment-count-number">132</span>
+  </a>  
+
+<div class="share-links">
+  <span>Share this story</span>
+  <a href="https://www.facebook.com/sharer.php?u=http%3A%2F%2Farstechnica.com%2F%3Fpost_type%3Dpost%26p%3D921807" target="_blank" class="social-icon share-facebook" title="Share on Facebook"></a>
+  <a href="https://twitter.com/share?text=The+connected+renter%3A+How+to+make+your+apartment+smarter&url=http%3A%2F%2Farstechnica.com%2F%3Fpost_type%3Dpost%26p%3D921807" target="_blank" class="social-icon share-twitter" title="Share on Twitter"></a>
+  <a href="https://www.reddit.com/submit?url=http%3A%2F%2Farstechnica.com%2F%3Fpost_type%3Dpost%26p%3D921807&title=The+connected+renter%3A+How+to+make+your+apartment+smarter" target="_blank" class="social-icon share-reddit" title="Share on Reddit"></a>
+  <a href="https://plus.google.com/share?url=http%3A%2F%2Farstechnica.com%2F%3Fpost_type%3Dpost%26p%3D921807" target="_blank" class="social-icon share-gplus" title="Share on Google+"></a>
+</div>
+</aside><p class="p1"><aside class="manual-ad right"><div id="xrailTop300x251_frame"></div></aside><script type="text/javascript">ars.AD.queue.push(["xrailTop", {sz:"300x251", kws:["bottom"], collapse: true}]);</script></p>
+<p class="p1">Name a home appliance or product, and there's probably a smart version of it today. But for the renters among us, it can be tricky to navigate the aisles of smart light bulbs, thermostats, air conditioners, and vacuums to pick out devices that won't jeopardize your security deposit. When you don't own your home, there’s a different set of rules dictating modifications, and some smart home products don't take that into account.</p>
+<p class="p1">Luckily these days, an increasing number of smart home devices can cater to apartment dwellers that want to avoid ripping open walls and trussing up wires. And as a NYC-based Ars staffer, I had a particularly perfect rental laboratory to recently test and explore what kinds of smart home devices fit renters' needs.</p>
+<h2>What protocols should/can you use?</h2>
+<p class="p1">When picking out accessories, for convenience's sake you'll probably want to decide ahead of time which of the many competing smart home ecosystems you'd like those products to come from. If you want to control all of your smart home products from the same app or want every product to be able to "talk" to each other, brand or protocol lock-in is the easiest current approach.</p>
+<h3>HomeKit</h3>
+<p class="p1">Let's start with the one everyone has heard of: HomeKit. Apple's IoT framework lets you control HomeKit-compatible devices via your iPhone or iPad. This framework tries to make it easier for users to control all smart home products by allowing the devices to talk to each other over a home's Wi-Fi network. With HomeKit, you can use Siri voice commands to control smart products—with iOS 10 in fact, an official "Home" app will make it easier to control HomeKit devices and group them together. After setting devices up, you can control them using simple phrases like, "Siri, turn off the living room lights." You can also make nuanced commands that control only certain devices. For example, the voice command "Good morning" could initiate a group of actions including turning on the bedroom and bathroom lights and opening the blinds.</p>
+<p class="p1">The thing to remember about HomeKit is that manufacturers must integrate compatible hardware into their products under the terms of <a href="https://developer.apple.com/homekit/"> Apple's MFi licensing program </a>. For example, a year or so ago Philips <a href="http://arstechnica.com/gadgets/2015/10/new-philips-hue-bridge-works-with-homekit-lets-siri-control-lights/"> came out with a HomeKit-enabled Hue bridge </a> for its smart lighting systems. The Philips Hue bridge already existed, but the company needed to make a new one that worked specifically with HomeKit. So far, companies including Belkin, Honeywell, and iHome among others have made HomeKit-ready devices. But still, the overall number of HomeKit-compatible devices is dwarfed by the number of smart home products available. HomeKit is also only available on Apple devices running iOS 8.2 or later, and watchOS 2 allows you to control devices via your Apple Watch.</p>
+<p class="p1"><figure class="video"><div class="wrapper" style="padding-bottom: 56.122448979592%;"><div style="height:550px; width:980px"><script src="//player.cnevids.com/embedjs/5722396833055407d4000003/5511d76261646d5566020000.js" class="x-skip"></script></div></div><figcaption class="caption"><div class="caption-text">Video shot/edited by Jennifer Hahn.</div></figcaption></figure></p>
+<h3>Alexa</h3>
+<p class="p1">Amazon's Alexa voice assistant is tied to Amazon's products, namely the Echo, and you can ask it questions about basically anything. Along the same lines as Siri, you can also control some smart home products by asking Alexa to turn things on and off. Through the Alexa mobile app, users can create batch commands similar to those available through Siri, and this option makes it possible to control entire rooms filled with devices. Unlike with Siri and HomeKit, though, manufacturers can create Alexa compatibility with software updates rather than implementing entirely new hardware—that's why companies like Nest and Haiku have been able to add Alexa support to their smart home products.<aside class="pullbox sidebar story-sidebar right"><div class="story-sidebar-part"><a href="http://arstechnica.com/gadgets/2016/05/one-year-after-alexa-amazons-echo-has-found-a-small-but-smart-niche/" class="story-sidebar-part-img" style="background-image:url('http://cdn.arstechnica.net/wp-content/uploads/2016/04/echalexa1-300x150.jpg');"></a><div class="story-sidebar-part-content"><h3>Further Reading</h3><a href="http://arstechnica.com/gadgets/2016/05/one-year-after-alexa-amazons-echo-has-found-a-small-but-smart-niche/">One year after Alexa: Amazon’s Echo has found a small but smart niche</a></div></div></aside></p>
+<p class="p1">The convenience of HomeKit and Alexa is that you can control all of your devices using your voice—Alexa and Siri handle the communication from there. Otherwise, most smart home devices instead rely on dedicated apps that act like remote controls. HomeKit has the added benefit that devices can "talk" to one another, much like compatible devices under the Works with Nest framework. If, for example, you leave your home and lock your smart door lock behind you, that action could trigger turning off the lights inside a home.</p>
+<h3>Zigbee and Z-Wave</h3>
+<p class="p1">While HomeKit and Alexa have a lot of growing to do in terms of compatibility, Zigbee and Z-Wave have already linked to hundreds of working smart home devices. Both are mesh networking systems that send information between all devices on a network bound together by a hub. Zigbee runs on the universal 2.4GHz ISM frequency band, meaning its products are country-agnostic. By contrast, Z-Wave runs on the 915 MHz ISM band in the United States and the 868 MHz RFID band in the UK.</p>
+<p class="p1">Both of these protocols, especially Zigbee, are suited for those who want to fiddle around with their devices and set unique commands and controls. However, keep in mind that hubs and devices on Zigbee and Z-Wave tend to have shorter ranges, meaning you'll need to keep individual devices relatively close to each other. For apartment dwellers, that might actually work to your advantage if you have only a few small rooms to connect.</p>
+<h3>Which products are off-limits?</h3>
+<p class="p1"><aside class="pullbox sidebar story-sidebar right"><div class="story-sidebar-part"><a href="http://arstechnica.com/gadgets/2012/08/a-thermostat-that-learns-three-months-with-the-nest/" class="story-sidebar-part-img" style="background-image:url('http://cdn.arstechnica.net/wp-content/uploads/2012/07/Nest5-300x100.jpg');"></a><div class="story-sidebar-part-content"><h3>Further Reading</h3><a href="http://arstechnica.com/gadgets/2012/08/a-thermostat-that-learns-three-months-with-the-nest/">A thermostat that learns? Three months with the Nest</a></div></div></aside>The best way to know what can and can’t work within your rental is decidedly analogue—read your lease and any other renter's agreements you may have signed upon moving in. Check the official documentation to see what you have access to and what you don't. For example, my apartment came with a refrigerator, oven, and microwave, and my lease forbids me from installing any different ones without notifying the landlord's office first. I'm also not allowed to have washer or dryer units in my apartment. You don't want to buy any smart home product only to realize its installation or very existence violates your lease agreements.</p>
+<p class="p1">As a general rule of thumb, smart thermostats are typically off-limits for renters. These products require rewiring stuff that's hidden behind walls, after all. Another category you'll want to be careful with is smart locks. Many (not all—we'll get to some examples) replace the locks on your doors, which renters typically cannot do without a specific reason or without informing management.</p>
+
+        </div>
+
+        
+                  <nav class="page-numbers">Page: <span class="numbers">1 <a href="http://arstechnica.com/gadgets/2016/08/the-connected-renter-how-to-make-your-apartment-smarter/2/">2</a> <a href="http://arstechnica.com/gadgets/2016/08/the-connected-renter-how-to-make-your-apartment-smarter/3/">3</a> <a href="http://arstechnica.com/gadgets/2016/08/the-connected-renter-how-to-make-your-apartment-smarter/2/"><span class="next">Next <span class="arrow">&rarr;</span></span></a></span></nav>
+        
+      </section>
+
+    </div>
+
+    <div class="xrail">
+      <div class="xrail-content">
+        
+        
+                  <aside class="ad ad_xrail ad_xrail_top" id="ad_xrail_top"></aside>
+              </div>
+    </div>
+
+  </div>
+
+  <div class="column-wrapper">
+    <div class="left-column">
+              <!-- cache hit 72:single/author:25c5cf55de332e2a649a4867671ecbdb --><section class="article-author">
+      <a style="background-image:url('http://cdn.arstechnica.net/wp-content/uploads/2016/05/v.palladino-45953.jpg');" class="author-photo" href="/author/valentina"></a>
+  
+  <div class="author-bio">
+    <section class="author-bio-top">
+      <a href="/author/valentina" class="author-name">Valentina Palladino</a>
+      Valentina is the Associate Reviewer for Ars Technica, covering all gadgets with a focus on mobile devices and wearables. She has a soft spot for Chromebooks.    </section>
+    <section class="author-social">
+                          <strong>Twitter</strong> <a href="https://www.twitter.com/valentinalucia" target="_blank">@valentinalucia</a>
+          </section>
+    
+  </div>
+
+</section>
+      
+      <aside id="social-footer">
+        <a title="73 posters participating" class="comment-count icon-comment-bubble-down" href="http://arstechnica.com/gadgets/2016/08/the-connected-renter-how-to-make-your-apartment-smarter/?comments=1">
+      <span class="comment-count-before">reader comments</span>
+    <span class="comment-count-number">132</span>
+  </a>  
+
+<div class="share-links">
+  <span>Share this story</span>
+  <a href="https://www.facebook.com/sharer.php?u=http%3A%2F%2Farstechnica.com%2F%3Fpost_type%3Dpost%26p%3D921807" target="_blank" class="social-icon share-facebook" title="Share on Facebook"></a>
+  <a href="https://twitter.com/share?text=The+connected+renter%3A+How+to+make+your+apartment+smarter&url=http%3A%2F%2Farstechnica.com%2F%3Fpost_type%3Dpost%26p%3D921807" target="_blank" class="social-icon share-twitter" title="Share on Twitter"></a>
+  <a href="https://www.reddit.com/submit?url=http%3A%2F%2Farstechnica.com%2F%3Fpost_type%3Dpost%26p%3D921807&title=The+connected+renter%3A+How+to+make+your+apartment+smarter" target="_blank" class="social-icon share-reddit" title="Share on Reddit"></a>
+  <a href="https://plus.google.com/share?url=http%3A%2F%2Farstechnica.com%2F%3Fpost_type%3Dpost%26p%3D921807" target="_blank" class="social-icon share-gplus" title="Share on Google+"></a>
+</div>
+      </aside>
+    </div>
+    <div class="xrail">
+    </div>
+  </div>
+
+
+  <div id="article-footer-wrap">
+          <div class="row comments-row">
+  <section id="comments-area">
+    <a name="comments-bar"></a>
+          <div id="comments-container"></div>
+      <div id="comments-posting-container" class="thick-divide-bottom">
+        <p id="reply">You must <a href="http://arstechnica.com/civis/ucp.php?mode=login&return_to/gadgets/2016/08/the-connected-renter-how-to-make-your-apartment-smarter/" class="vote_login">login or create an account</a> to comment.</p>
+      </div>
+      <section>
+</div>
+      <div class="prev-next-links">
+  <a href="http://arstechnica.com/science/2016/08/access-to-healthcare-through-aca-may-actually-be-improving-americans-health/" rel="prev"><span class="arrow">&larr;</span> Previous story</a>  <a href="http://arstechnica.com/tech-policy/2016/08/judge-blasts-dojs-refusal-to-explain-stingray-use-in-attempted-murder-case/" rel="next">Next story <span class="arrow">&rarr;</span></a></div>      <footer id="article-footer">
+  <div id="recommendations-footer">
+    <aside id="story-recommendations">
+  <div class="heading-column">
+    <h3>Related Stories</h3>
+  </div>
+  <div id="story-recs" class="rec-wrap"></div>
+</aside>
+        <aside id="sponsored-recommendations">
+  <div class="heading-column">
+    <h3>Sponsored Stories</h3>
+    <a href="http://www.outbrain.com/what-is/default/en" target="_blank">Powered by <span class="icon outbrain-logo icon-logo-outbrain"></span></a>
+  </div>
+  <div id="outbrain-recs">
+  </div>
+</aside>
+        <aside id="latest-stories">
+  <div class="heading-column">
+    <h3>Today on Ars</h3>
+  </div>
+  <div id="latest-recs" class="rec-wrap listing-earlier"></div>
+</aside>
+  </div>
+</footer>
+    
+  </div>
+</article>
+  </div>
+
+  <footer class="site-footer">
+    <nav class="nav-footer">
+
+	<section>
+		<ul>
+			<li><a href="/rss-feeds/">RSS Feeds</a></li>
+			<li><a rel="nofollow" href="http://arstechnica.com/gadgets/2016/08/the-connected-renter-how-to-make-your-apartment-smarter/?view=mobile">View Mobile Site</a></li>
+			<li><a href="http://arstechnica.co.uk/">Visit Ars Technica UK</a></li>
+			<li><a href="/about-us/">About Us</a></li>
+		</ul>
+	</section>
+
+	<section>
+		<ul>
+			<li><a href="/contact-us/">Contact Us</a></li>
+			<li><a href="/staff-directory/">Staff</a></li>
+			<li><a href="/advertise-with-us/">Advertise with us</a></li>
+			<li><a href="/reprints/">Reprints</a></li>
+		</ul>		
+	</section>
+
+</nav>
+
+<section class="footer-terms-logo">
+	<div class="cn-logo">
+		<a href="http://condenast.com/" class="icon icon-logo-cn-us" title="Visit Condé Nast"></a>
+	</div>
+
+	<div id="copyright-terms">
+  WIRED Media Group<br>
+  Use of this Site constitutes acceptance of our <a href="http://www.condenast.com/privacy-policy" target="_blank">User Agreement</a> (effective 1/2/14) and <a href="http://www.condenast.com/privacy-policy#privacypolicy">Privacy Policy</a> (effective 1/2/14), and <a href="/amendment-to-conde-nast-user-agreement-privacy-policy/">Ars Technica Addendum (effective 5/17/2012)</a>. <a href="http://www.condenast.com/privacy-policy#privacypolicy-california">Your California Privacy Rights</a>. The material on this site may not be reproduced, distributed, transmitted, cached or otherwise used, except with the prior written <a href="https://www.condenast.com/reprints-permissions">permission of Condé Nast</a>.
+</div>
+</section>  </footer>
+</div>
+
+<script type="text/javascript" src="http://cdn.arstechnica.net/wp-content/themes/ars/assets/js/main-779cf33049.js"></script>
+
+  <script type="text/javascript">!function(n,e,t){var s,c;s=function(){var e=n.location.hostname,s=location.search.match(/CNS_SB=([^&\s]+)[&\s]?/)||[],c=e+"/cns"+(s.length?"-sandbox/"+s[1]:"")+"/services.min.js";return t||"//"+c}(),n.cns=n.cns||{async:function(n,e){this.queue[n]||(this.queue[n]=[]),"function"==typeof e&&this.queue[n].push(e)},queue:{}},c=e.createElement("script"),c.async=!0,c.src=s,e.body.appendChild(c)}(window,document, 'http://cdn.arstechnica.net/cns/services.min.js'); </script>
+<script type="text/javascript" src="http://cdn.arstechnica.net/wp-content/themes/ars/assets/js/ars-28f58ebe5a.ads.us.js"></script>
+
+<!-- cache hit 72:single/javascript-footer:bbf8001ecaa8312156551cbba451e5f8 -->
+        
+
+
+
+
+    <!-- Google Analytics start -->
+	<script type="text/javascript">
+	var _gaq = _gaq || [];
+  _gaq.push(
+    ['_setAccount', 'UA-31997-1'],
+    ['_setCustomVar', 1, 'view', "grid"],
+    ['_setCustomVar', 2, 'theme', "light"],
+    ['_setCustomVar', 3, 'logged_in', "false"],
+    ['_setCustomVar', 4, 'show_comments', "false"],
+    ['_setCustomVar', 5, 'is_premier', "false"],
+    ['_trackPageview']
+  );
+	(function() {
+	  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
+	</script>
+  <!-- Google Analytics end -->
+
+  <!-- Parse.ly start -->
+	<script type="text/javascript">
+  (function(d) {
+    var site = "arstechnica.com",
+    b = d.body,
+    e = d.createElement("div");
+    e.innerHTML = '<span id="parsely-cfg" data-parsely-site="'+site+'"></span>';
+    e.id = "parsely-root";
+    e.style.display = "none";
+    b.appendChild(e);
+  })(document);
+
+  (function(s, p, d) {
+    var h=d.location.protocol, i=p+"-"+s,
+    e=d.getElementById(i), r=d.getElementById(p+"-root"),
+    u=h==="https:"?"d1z2jf7jlzjs58.cloudfront.net"
+      :"static."+p+".com";
+    if (e) return;
+    e = d.createElement(s); e.id = i; e.async = true;
+    e.src = h+"//"+u+"/p.js"; r.appendChild(e);
+  })("script", "parsely", document);
+	</script>
+  <!-- Parse.ly end -->
+
+  <!-- Adobe Tag Mgr. -->
+  <script src="//assets.adobedtm.com/6372cf21ef88ee60bc2977a4898dcb5c7945a212/satelliteLib-56a425e07376b6977c987d46ef46ba636a6e2036.js"></script>
+
+  <script type="text/javascript">_satellite.pageBottom();</script>
+
+
+
+
+
+<script type="text/javascript">window.NREUM||(NREUM={});NREUM.info={"beacon":"bam.nr-data.net","licenseKey":"2facee05ce","applicationID":"26427541","transactionName":"ZQFUZEtVW0VWU01QCVxLd1NNXVpYGENQVwFeAQ==","queueTime":0,"applicationTime":1279,"atts":"SUZXEgNPSEs=","errorBeacon":"bam.nr-data.net","agent":""}</script></body>
+</html>

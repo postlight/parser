@@ -301,7 +301,7 @@ export const NEGATIVE_SCORE_HINTS = [
 export const NEGATIVE_SCORE_RE = new RegExp(NEGATIVE_SCORE_HINTS.join('|'), 'i')
 
 // XPath to try to determine if a page is wordpress. Not always successful.
-export const IS_WP_XPATH = "//meta[@name='generator'][starts-with(@value,'WordPress')]"
+export const IS_WP_SELECTOR = 'meta[name=generator][value^=WordPress]'
 
 // Match a digit. Pretty clear.
 export const DIGIT_RE = new RegExp('[0-9]')

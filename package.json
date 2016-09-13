@@ -28,6 +28,7 @@
   },
   "dependencies": {
     "cheerio": "^0.20.0",
+    "difflib": "^0.2.4",
     "moment": "^2.14.1",
     "request-promise": "^4.1.1",
     "valid-url": "^1.0.9",

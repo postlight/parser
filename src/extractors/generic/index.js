@@ -6,6 +6,7 @@ import GenericAuthorExtractor from './author/extractor'
 import GenericDatePublishedExtractor from './date-published/extractor'
 import GenericDekExtractor from './dek/extractor'
 import GenericLeadImageUrlExtractor from './lead-image-url/extractor'
+import GenericNextPageUrlExtractor from './next-page-url/extractor'
 
 const GenericExtractor = {
   // This extractor is the default for all domains
@@ -16,6 +17,7 @@ const GenericExtractor = {
   content: GenericContentExtractor.extract.bind(GenericContentExtractor),
   leadImageUrl: GenericLeadImageUrlExtractor.extract,
   dek: GenericDekExtractor.extract,
+  nextPageUrl: GenericNextPageUrlExtractor.extract,
 
   extract: function(options) {
     let { html } = options
@@ -31,6 +33,7 @@ const GenericExtractor = {
     const content = this.content({ ...options, title })
     const leadImageUrl = this.leadImageUrl(options)
     const dek = this.dek(options)
+    const nextPageUrl = this.nextPageUrl(options)
 
     return {
       title,
@@ -39,6 +42,7 @@ const GenericExtractor = {
       dek,
       leadImageUrl,
       content,
+      nextPageUrl,
     }
   }
 }
