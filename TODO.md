@@ -2,11 +2,11 @@ TODO:
 - Complete response:
   - add excerpt
   - add word count
-  - add total pages
-  - add rendered pages
 - Test if .is method is faster than regex methods
 
 DONE:
+x add total pages
+x add rendered pages
 x add canonicalUrl
 x add domain
 x Separate constants into activity-specific folders (dom, scoring)

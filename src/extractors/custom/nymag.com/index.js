@@ -38,6 +38,7 @@ const NYMagExtractor = {
 
   title: {
     selectors: [
+      'h1.lede-feature-title',
       'h1.headline-primary',
       'h1',
     ],
@@ -46,6 +47,13 @@ const NYMagExtractor = {
   author: {
     selectors: [
       '.by-authors',
+      '.lede-feature-author',
+    ],
+  },
+
+  dek: {
+    selectors: [
+      '.lede-feature-teaser',
     ],
   },
 

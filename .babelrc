@@ -11,7 +11,8 @@
         "./cleaners": "cleaners",
         "./resource": "resource",
         "./extractors": "extractors",
-        "./test-helpers.js": "test-helpers"
+        "./test-helpers.js": "test-helpers",
+        "./iris.js": "iris"
       }
     }]
   ]
