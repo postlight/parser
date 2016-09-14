@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node ./build",
     "lint": "eslint src/** --fix",
-    "build": "eslint src/** && rollup -c",
+    "build": "eslint src/** --fix && rollup -c",
     "test_build": "rollup -c",
     "test": "./test-runner"
   },

@@ -1,4 +1,11 @@
 TODO:
+- Complete response:
+  - add canonicalUrl
+  - add excerpt
+  - add domain
+  - add word count
+  - add total pages
+  - add rendered pages
 - Test if .is method is faster than regex methods
 
 DONE:
