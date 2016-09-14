@@ -13,27 +13,17 @@
   },
   "rules": {
     "no-param-reassign": 0,
-    /* TODO fix this; this should work w/import/resolver below, but doesn't */
-    "import/no-extraneous-dependencies": 0,
-    "import/no-unresolved": 0,
     "no-control-regex": 0,
     "import/prefer-default-export": 0,
     "generator-star-spacing": 0,
     "babel/generator-star-spacing": 0,
     "func-names": 0,
-    "no-useless-escape": 0,
+    // "no-useless-escape": 0,
     "no-confusing-arrow": 0,
   },
   "settings": {
     "import/resolver": {
-      "babel-module": {
-        "extensions": [".js"]
-      }
+      "babel-module": {}
     }
   },
-  "parserOptions":{
-    "ecmaFeatures": {
-      "experimentalObjectRestSpread": true
-    }
-  }
 }

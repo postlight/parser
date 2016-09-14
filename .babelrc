@@ -4,12 +4,15 @@
     "transform-es2015-destructuring",
     "transform-object-rest-spread",
     "transform-async-to-generator",
-    ["module-alias", [
-      { "src": "./src/utils", "expose": "utils" },
-      { "src": "./src/cleaners", "expose": "cleaners" },
-      { "src": "./src/resource", "expose": "resource" },
-      { "src": "./src/extractors", "expose": "extractors" },
-      { "src": "./src/test-helpers.js", "expose": "test-helpers" }
-    ]]
+    ["module-resolver", {
+      "root": ["./src"],
+      "alias": {
+        "./utils": "utils",
+        "./cleaners": "cleaners",
+        "./resource": "resource",
+        "./extractors": "extractors",
+        "./test-helpers.js": "test-helpers"
+      }
+    }]
   ]
 }

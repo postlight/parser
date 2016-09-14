@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "node ./build",
-    "lint": "eslint src/**",
+    "lint": "eslint src/** --fix",
     "build": "eslint src/** && rollup -c",
+    "test_build": "rollup -c",
     "test": "./test-runner"
   },
   "author": "",
@@ -19,7 +20,6 @@
     "babel-plugin-transform-async-to-generator": "^6.8.0",
     "babel-plugin-transform-es2015-destructuring": "^6.9.0",
     "babel-plugin-transform-object-rest-spread": "^6.8.0",
-    "babel-polyfill": "^6.13.0",
     "babel-preset-es2015": "^6.13.2",
     "babel-preset-es2015-rollup": "^1.2.0",
     "babel-register": "^6.11.6",
@@ -38,9 +38,11 @@
     "rollup-plugin-commonjs": "^4.1.0"
   },
   "dependencies": {
+    "babel-polyfill": "^6.13.0",
     "cheerio": "^0.20.0",
     "difflib": "^0.2.4",
     "moment": "^2.14.1",
+    "request": "^2.74.0",
     "request-promise": "^4.1.1",
     "valid-url": "^1.0.9",
     "wuzzy": "^0.1.2"
