@@ -9,6 +9,7 @@ import GenericLeadImageUrlExtractor from './lead-image-url/extractor';
 import GenericNextPageUrlExtractor from './next-page-url/extractor';
 import GenericUrlExtractor from './url/extractor';
 import GenericExcerptExtractor from './excerpt/extractor';
+import GenericWordCountExtractor from './word-count/extractor';
 
 const GenericExtractor = {
   // This extractor is the default for all domains
@@ -22,6 +23,7 @@ const GenericExtractor = {
   nextPageUrl: GenericNextPageUrlExtractor.extract,
   urlAndDomain: GenericUrlExtractor.extract,
   excerpt: GenericExcerptExtractor.extract,
+  wordCount: GenericWordCountExtractor.extract,
 
   extract(options) {
     const { html } = options;
@@ -39,6 +41,7 @@ const GenericExtractor = {
     const dek = this.dek({ ...options, content });
     const nextPageUrl = this.nextPageUrl(options);
     const excerpt = this.excerpt({ ...options, content });
+    const wordCount = this.excerpt({ ...options, content });
     const { url, domain } = this.urlAndDomain(options);
 
     return {
@@ -52,6 +55,7 @@ const GenericExtractor = {
       url,
       domain,
       excerpt,
+      wordCount,
     };
   },
 };

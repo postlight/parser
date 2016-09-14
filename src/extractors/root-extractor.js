@@ -129,7 +129,9 @@ const RootExtractor = {
     const leadImageUrl = extractResult({ ...opts, type: 'leadImageUrl', content });
     const dek = extractResult({ ...opts, type: 'dek', content });
     const excerpt = extractResult({ ...opts, type: 'excerpt', content });
+    const wordCount = extractResult({ ...opts, type: 'wordCount', content });
     const { url, domain } = extractResult({ ...opts, type: 'urlAndDomain' });
+
     return {
       title,
       content,
@@ -141,6 +143,7 @@ const RootExtractor = {
       url,
       domain,
       excerpt,
+      wordCount,
     };
   },
 };
