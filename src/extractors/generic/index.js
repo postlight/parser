@@ -15,15 +15,15 @@ const GenericExtractor = {
   // This extractor is the default for all domains
   domain: '*',
   title: GenericTitleExtractor.extract,
-  datePublished: GenericDatePublishedExtractor.extract,
+  date_published: GenericDatePublishedExtractor.extract,
   author: GenericAuthorExtractor.extract,
   content: GenericContentExtractor.extract.bind(GenericContentExtractor),
-  leadImageUrl: GenericLeadImageUrlExtractor.extract,
+  lead_image_url: GenericLeadImageUrlExtractor.extract,
   dek: GenericDekExtractor.extract,
-  nextPageUrl: GenericNextPageUrlExtractor.extract,
-  urlAndDomain: GenericUrlExtractor.extract,
+  next_page_url: GenericNextPageUrlExtractor.extract,
+  url_and_domain: GenericUrlExtractor.extract,
   excerpt: GenericExcerptExtractor.extract,
-  wordCount: GenericWordCountExtractor.extract,
+  word_count: GenericWordCountExtractor.extract,
 
   extract(options) {
     const { html } = options;
@@ -34,28 +34,28 @@ const GenericExtractor = {
     }
 
     const title = this.title(options);
-    const datePublished = this.datePublished(options);
+    const date_published = this.date_published(options);
     const author = this.author(options);
     const content = this.content({ ...options, title });
-    const leadImageUrl = this.leadImageUrl({ ...options, content });
+    const lead_image_url = this.lead_image_url({ ...options, content });
     const dek = this.dek({ ...options, content });
-    const nextPageUrl = this.nextPageUrl(options);
+    const next_page_url = this.next_page_url(options);
     const excerpt = this.excerpt({ ...options, content });
-    const wordCount = this.wordCount({ ...options, content });
-    const { url, domain } = this.urlAndDomain(options);
+    const word_count = this.word_count({ ...options, content });
+    const { url, domain } = this.url_and_domain(options);
 
     return {
       title,
       author,
-      datePublished: datePublished || null,
+      date_published: date_published || null,
       dek,
-      leadImageUrl,
+      lead_image_url,
       content,
-      nextPageUrl,
+      next_page_url,
       url,
       domain,
       excerpt,
-      wordCount,
+      word_count,
     };
   },
 };

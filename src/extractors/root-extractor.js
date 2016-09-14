@@ -120,30 +120,30 @@ const RootExtractor = {
       };
     }
     const title = extractResult({ ...opts, type: 'title' });
-    const datePublished = extractResult({ ...opts, type: 'datePublished' });
+    const date_published = extractResult({ ...opts, type: 'date_published' });
     const author = extractResult({ ...opts, type: 'author' });
-    const nextPageUrl = extractResult({ ...opts, type: 'nextPageUrl' });
+    const next_page_url = extractResult({ ...opts, type: 'next_page_url' });
     const content = extractResult({
       ...opts, type: 'content', extractHtml: true, title,
     });
-    const leadImageUrl = extractResult({ ...opts, type: 'leadImageUrl', content });
+    const lead_image_url = extractResult({ ...opts, type: 'lead_image_url', content });
     const dek = extractResult({ ...opts, type: 'dek', content });
     const excerpt = extractResult({ ...opts, type: 'excerpt', content });
-    const wordCount = extractResult({ ...opts, type: 'wordCount', content });
-    const { url, domain } = extractResult({ ...opts, type: 'urlAndDomain' });
+    const word_count = extractResult({ ...opts, type: 'word_count', content });
+    const { url, domain } = extractResult({ ...opts, type: 'url_and_domain' });
 
     return {
       title,
       content,
       author,
-      datePublished,
-      leadImageUrl,
+      date_published,
+      lead_image_url,
       dek,
-      nextPageUrl,
+      next_page_url,
       url,
       domain,
       excerpt,
-      wordCount,
+      word_count,
     };
   },
 };

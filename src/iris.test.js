@@ -29,7 +29,7 @@ describe('Iris', () => {
       const result = await Iris.parse('http://www.nytimes.com/2016/08/16/upshot/the-state-of-the-clinton-trump-race-is-it-over.html?_r=0');
 
       assert.equal(typeof result, 'object');
-      assert.equal(result.totalPages, 1);
+      assert.equal(result.total_pages, 1);
       // console.log(result)
     });
 
@@ -41,13 +41,13 @@ describe('Iris', () => {
         { fetchAllPages: true }
       );
 
-      const { totalPages, pagesRendered } = result;
+      const { total_pages, pages_rendered } = result;
 
-      assert.equal(totalPages, 3);
-      assert.equal(pagesRendered, 3);
+      assert.equal(total_pages, 3);
+      assert.equal(pages_rendered, 3);
 
       // console.log(result)
-      assert.equal(result.nextPageUrl, `${url}2`);
+      assert.equal(result.next_page_url, `${url}2`);
       // console.log(result.content)
     });
   });

@@ -5,7 +5,7 @@ import Resource from 'resource';
 
 export default async function collectAllPages(
   {
-    nextPageUrl,
+    next_page_url,
     html,
     $,
     metaCache,
@@ -21,13 +21,13 @@ export default async function collectAllPages(
 
   // If we've gone over 26 pages, something has
   // likely gone wrong.
-  while (nextPageUrl && pages < 26) {
+  while (next_page_url && pages < 26) {
     pages += 1;
-    $ = await Resource.create(nextPageUrl);
+    $ = await Resource.create(next_page_url);
     html = $.html();
 
     const extractorOpts = {
-      url: nextPageUrl,
+      url: next_page_url,
       html,
       $,
       metaCache,
@@ -38,7 +38,7 @@ export default async function collectAllPages(
 
     const nextPageResult = RootExtractor.extract(Extractor, extractorOpts);
 
-    previousUrls.push(nextPageUrl);
+    previousUrls.push(next_page_url);
     result = {
       ...result,
       content: `
@@ -49,12 +49,12 @@ export default async function collectAllPages(
         `,
     };
 
-    nextPageUrl = nextPageResult.nextPageUrl;
+    next_page_url = nextPageResult.next_page_url;
   }
 
   return {
     ...result,
-    totalPages: pages,
-    pagesRendered: pages,
+    total_pages: pages,
+    pages_rendered: pages,
   };
 }

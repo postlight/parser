@@ -11,7 +11,7 @@ describe('GenericExtractor', () => {
       const {
         title,
         author,
-        datePublished,
+        date_published,
         dek,
       } = GenericExtractor.extract(
         { url: 'http://latimes.com', html, metaCache: [] }
@@ -23,7 +23,7 @@ describe('GenericExtractor', () => {
         'California appears poised to be first to ban power-guzzling big-screen TVs'
       );
       assert.equal(
-        datePublished,
+        date_published,
         '2009-10-14T04:00:00.000Z'
       );
       assert.equal(dek, null);

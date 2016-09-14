@@ -17,14 +17,14 @@ const Iris = {
     const metaCache = $('meta').map((_, node) => $(node).attr('name')).toArray();
 
     let result = RootExtractor.extract(Extractor, { url, html, $, metaCache });
-    const { title, nextPageUrl } = result;
+    const { title, next_page_url } = result;
 
-    // Fetch more pages if nextPageUrl found
-    if (fetchAllPages && nextPageUrl) {
+    // Fetch more pages if next_page_url found
+    if (fetchAllPages && next_page_url) {
       result = await collectAllPages(
         {
           Extractor,
-          nextPageUrl,
+          next_page_url,
           html,
           $,
           metaCache,
@@ -36,8 +36,8 @@ const Iris = {
     } else {
       result = {
         ...result,
-        totalPages: 1,
-        renderedPages: 1,
+        total_pages: 1,
+        rendered_pages: 1,
       };
     }
 
