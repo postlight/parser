@@ -19,6 +19,7 @@ const Iris = {
     let result = RootExtractor.extract(Extractor, { url, html, $, metaCache });
     const { title, nextPageUrl } = result;
 
+    // Fetch more pages if nextPageUrl found
     if (fetchAllPages && nextPageUrl) {
       result = await collectAllPages(
         {
@@ -33,6 +34,12 @@ const Iris = {
           url,
         }
       );
+    } else {
+      result = {
+        ...result,
+        totalPages: 1,
+        renderedPages: 1,
+      }
     }
 
     return result;

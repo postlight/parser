@@ -17,11 +17,14 @@ export default async function collectAllPages(
     url,
   }
 ) {
-  let pages = 2;
+  // At this point, we've fetched just the first page
+  let pages = 1;
   const previousUrls = [removeAnchor(url)];
+
   // If we've gone over 26 pages, something has
   // likely gone wrong.
   while (nextPageUrl && pages < 26) {
+    pages += 1;
     $ = await Resource.create(nextPageUrl);
     html = $.html();
 
@@ -50,8 +53,11 @@ export default async function collectAllPages(
 
     nextPageUrl = nextPageResult.nextPageUrl;
 
-    pages += 1;
   }
 
-  return result;
+  return {
+    ...result,
+    totalPages: pages,
+    pagesRendered: pages,
+  };
 }
