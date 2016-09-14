@@ -6,7 +6,7 @@ import GenericExtractor from './index';
 describe('GenericExtractor', () => {
   describe('extract(opts)', () => {
     it('extracts this old LA Times article', () => {
-      const html = fs.readFileSync('../fixtures/latimes.html', 'utf-8');
+      const html = fs.readFileSync('./fixtures/latimes.html', 'utf-8');
 
       const {
         title,
@@ -30,7 +30,7 @@ describe('GenericExtractor', () => {
     });
 
     it('extracts html and returns the article title', () => {
-      const html = fs.readFileSync('../fixtures/wired.html', 'utf-8');
+      const html = fs.readFileSync('./fixtures/wired.html', 'utf-8');
 
       const {
         author,
