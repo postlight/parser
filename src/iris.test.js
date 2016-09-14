@@ -16,7 +16,6 @@ describe('Iris', () => {
       const result = await Iris.parse('https://googleblog.blogspot.com/2016/08/onhub-turns-one-today.html');
 
       assert.equal(typeof result, 'object');
-      // console.log(result)
     });
 
     it('does wikipedia', async function() {

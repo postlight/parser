@@ -7,6 +7,7 @@ import GenericDatePublishedExtractor from './date-published/extractor';
 import GenericDekExtractor from './dek/extractor';
 import GenericLeadImageUrlExtractor from './lead-image-url/extractor';
 import GenericNextPageUrlExtractor from './next-page-url/extractor';
+import GenericUrlExtractor from './url/extractor';
 
 const GenericExtractor = {
   // This extractor is the default for all domains
@@ -18,6 +19,7 @@ const GenericExtractor = {
   leadImageUrl: GenericLeadImageUrlExtractor.extract,
   dek: GenericDekExtractor.extract,
   nextPageUrl: GenericNextPageUrlExtractor.extract,
+  urlAndDomain: GenericUrlExtractor.extract,
 
   extract(options) {
     const { html } = options;
@@ -34,6 +36,7 @@ const GenericExtractor = {
     const leadImageUrl = this.leadImageUrl(options);
     const dek = this.dek(options);
     const nextPageUrl = this.nextPageUrl(options);
+    const { url, domain } = this.urlAndDomain(options);
 
     return {
       title,
@@ -43,6 +46,8 @@ const GenericExtractor = {
       leadImageUrl,
       content,
       nextPageUrl,
+      url,
+      domain,
     };
   },
 };

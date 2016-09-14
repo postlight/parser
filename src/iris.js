@@ -16,7 +16,7 @@ const Iris = {
     // Used when extracting title/author/date_published/dek
     const metaCache = $('meta').map((_, node) => $(node).attr('name')).toArray();
 
-    let result = this.runExtraction(Extractor, { url, html, $, metaCache });
+    let result = RootExtractor.extract(Extractor, { url, html, $, metaCache });
     const { title, nextPageUrl } = result;
 
     if (fetchAllPages && nextPageUrl) {
@@ -28,6 +28,7 @@ const Iris = {
           $,
           metaCache,
           result,
+          Extractor,
           title,
           url,
         }
@@ -35,10 +36,6 @@ const Iris = {
     }
 
     return result;
-  },
-
-  runExtraction(Extractor, opts) {
-    return RootExtractor.extract(Extractor, opts);
   },
 
 };

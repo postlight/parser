@@ -1,14 +1,14 @@
 TODO:
 - Complete response:
-  - add canonicalUrl
   - add excerpt
-  - add domain
   - add word count
   - add total pages
   - add rendered pages
 - Test if .is method is faster than regex methods
 
 DONE:
+x add canonicalUrl
+x add domain
 x Separate constants into activity-specific folders (dom, scoring)
 x extractNextPageUrl
 x Make sure weightNodes flag is being passed properly

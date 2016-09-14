@@ -128,6 +128,7 @@ const RootExtractor = {
     });
     const leadImageUrl = extractResult({ ...opts, type: 'leadImageUrl', content });
     const dek = extractResult({ ...opts, type: 'dek', content });
+    const { url, domain } = extractResult({ ...opts, type: 'urlAndDomain' });
     return {
       title,
       content,
@@ -136,6 +137,8 @@ const RootExtractor = {
       leadImageUrl,
       dek,
       nextPageUrl,
+      url,
+      domain,
     };
   },
 };

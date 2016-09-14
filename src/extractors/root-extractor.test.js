@@ -14,17 +14,19 @@ import NYMagExtractor from './custom/nymag.com';
 
 describe('RootExtractor', () => {
   it('extracts based on custom selectors', () => {
-    const url = 'http://nymag.com/daily/intelligencer/2016/09/trump-discussed-usd25k-donation-with-florida-ag-not-fraud.html';
+    const fullUrl = 'http://nymag.com/daily/intelligencer/2016/09/trump-discussed-usd25k-donation-with-florida-ag-not-fraud.html';
     const html = fs.readFileSync('./src/extractors/custom/nymag.com/fixtures/test.html', 'utf8');
     const $ = cheerio.load(html);
 
     const {
+      url,
       title,
     } = RootExtractor.extract(
-      NYMagExtractor, { url, html, $, metaCache: [] }
+      NYMagExtractor, { url: fullUrl, html, $, metaCache: [] }
     );
 
     assert.equal(title, 'Trump Claims He Discussed $25K Donation With Florida Attorney General, But Not Trump University Investigation');
+    assert.equal(url, fullUrl);
   });
 });
 

@@ -1,5 +1,6 @@
 import 'babel-polyfill';
 import { removeAnchor } from 'utils/text';
+import RootExtractor from 'extractors/root-extractor';
 import Resource from 'resource';
 
 import Iris from '../iris';
@@ -34,7 +35,7 @@ export default async function collectAllPages(
       previousUrls,
     };
 
-    const nextPageResult = Iris.runExtraction(Extractor, extractorOpts);
+    const nextPageResult = RootExtractor.extract(Extractor, extractorOpts);
 
     previousUrls.push(nextPageUrl);
     result = {
