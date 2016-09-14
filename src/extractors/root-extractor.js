@@ -53,7 +53,7 @@ export function select(opts) {
 
   const { selectors } = extractionOpts;
 
-  const matchingSelector = selectors.find(selector => $(selector).length === 1);
+  const matchingSelector = selectors.find(selector => $(selector).length === 1 && $(selector).text().trim() !== '');
 
   if (!matchingSelector) return null;
 
