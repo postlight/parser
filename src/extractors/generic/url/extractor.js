@@ -1,9 +1,7 @@
 import URL from 'url';
 import { extractFromMeta } from 'utils/dom';
 
-import {
-  CANONICAL_META_SELECTORS,
-} from './constants';
+import { CANONICAL_META_SELECTORS } from './constants';
 
 function parseDomain(url) {
   const parsedUrl = URL.parse(url);
