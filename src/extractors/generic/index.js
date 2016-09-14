@@ -41,7 +41,7 @@ const GenericExtractor = {
     const dek = this.dek({ ...options, content });
     const nextPageUrl = this.nextPageUrl(options);
     const excerpt = this.excerpt({ ...options, content });
-    const wordCount = this.excerpt({ ...options, content });
+    const wordCount = this.wordCount({ ...options, content });
     const { url, domain } = this.urlAndDomain(options);
 
     return {
