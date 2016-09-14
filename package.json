@@ -1,8 +1,8 @@
 {
-  "name": "js_read",
+  "name": "node-readability",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "./dist/iris.js",
   "scripts": {
     "start": "node ./build",
     "lint": "eslint src/** --fix",
@@ -41,6 +41,7 @@
     "babel-polyfill": "^6.13.0",
     "cheerio": "^0.20.0",
     "difflib": "^0.2.4",
+    "ellipsize": "0.0.2",
     "moment": "^2.14.1",
     "request": "^2.74.0",
     "request-promise": "^4.1.1",

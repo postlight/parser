@@ -41,10 +41,10 @@ describe('Iris', () => {
         { fetchAllPages: true }
       );
 
-      const { totalPages, pagesRendered } = result
+      const { totalPages, pagesRendered } = result;
 
-      assert.equal(totalPages, 3)
-      assert.equal(pagesRendered, 3)
+      assert.equal(totalPages, 3);
+      assert.equal(pagesRendered, 3);
 
       // console.log(result)
       assert.equal(result.nextPageUrl, `${url}2`);

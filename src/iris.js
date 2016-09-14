@@ -7,7 +7,7 @@ const Iris = {
   async parse(url, html, opts = {}) {
     const { fetchAllPages = true } = opts || true;
     const Extractor = getExtractor(url);
-    console.log(`Using extractor for ${Extractor.domain}`);
+    // console.log(`Using extractor for ${Extractor.domain}`);
 
     const $ = await Resource.create(url, html);
     html = $.html();
@@ -29,7 +29,6 @@ const Iris = {
           $,
           metaCache,
           result,
-          Extractor,
           title,
           url,
         }
@@ -39,7 +38,7 @@ const Iris = {
         ...result,
         totalPages: 1,
         renderedPages: 1,
-      }
+      };
     }
 
     return result;

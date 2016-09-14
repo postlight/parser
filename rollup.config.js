@@ -9,6 +9,6 @@ export default {
     babel(babelrc()),
   ],
   format: 'cjs',
-  dest: 'dist/bundle.js', // equivalent to --output
+  dest: 'dist/iris.js', // equivalent to --output
   sourceMap: true,
 }

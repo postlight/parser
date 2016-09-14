@@ -1,10 +1,10 @@
 TODO:
 - Complete response:
-  - add excerpt
   - add word count
 - Test if .is method is faster than regex methods
 
 DONE:
+x add excerpt
 x add total pages
 x add rendered pages
 x add canonicalUrl
