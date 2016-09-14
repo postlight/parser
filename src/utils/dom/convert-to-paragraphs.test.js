@@ -1,6 +1,4 @@
 import cheerio from 'cheerio';
-import assert from 'assert';
-import fs from 'fs';
 
 import { assertClean } from 'test-helpers';
 import HTML from './fixtures/html';
@@ -29,14 +27,6 @@ describe('convertToParagraphs($)', () => {
     `;
     const $ = cheerio.load(html);
     assertClean(convertToParagraphs($).html(), html);
-  });
-
-  it('tracks this', () => {
-    const html = fs.readFileSync('./fixtures/vulture.html', 'utf-8');
-    let $ = cheerio.load(html);
-    $ = convertToParagraphs($);
-
-    assert.equal($('p[score]').length, 62);
   });
 });
 

@@ -42,7 +42,7 @@ describe('scoreContent($, weightNodes)', () => {
 
     assert.equal($('p[score]').length, 62);
     const itemprop = $('[itemprop=articleBody]').first();
-    assert.equal(itemprop.attr('score'), '564.2');
+    assert.equal(itemprop.attr('score'), '559.2');
   });
 
   it('gives its parent all of the children scores', () => {
@@ -75,7 +75,7 @@ describe('scoreContent($, weightNodes)', () => {
     let $ = cheerio.load(html);
     $ = scoreContent($);
 
-    assert.equal($('p').first().attr('score'), '4.9');
-    assert.equal($('div div').attr('score'), '29.5');
+    assert.equal($('p').first().attr('score'), '5');
+    assert.equal($('div div').attr('score'), '30');
   });
 });
