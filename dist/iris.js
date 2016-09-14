@@ -3717,15 +3717,15 @@ var GenericExtractor = {
   // This extractor is the default for all domains
   domain: '*',
   title: GenericTitleExtractor.extract,
-  datePublished: GenericDatePublishedExtractor.extract,
+  date_published: GenericDatePublishedExtractor.extract,
   author: GenericAuthorExtractor.extract,
   content: GenericContentExtractor.extract.bind(GenericContentExtractor),
-  leadImageUrl: GenericLeadImageUrlExtractor.extract,
+  lead_image_url: GenericLeadImageUrlExtractor.extract,
   dek: GenericDekExtractor.extract,
-  nextPageUrl: GenericNextPageUrlExtractor.extract,
-  urlAndDomain: GenericUrlExtractor.extract,
+  next_page_url: GenericNextPageUrlExtractor.extract,
+  url_and_domain: GenericUrlExtractor.extract,
   excerpt: GenericExcerptExtractor.extract,
-  wordCount: GenericWordCountExtractor.extract,
+  word_count: GenericWordCountExtractor.extract,
 
   extract: function extract(options) {
     var html = options.html;
@@ -3737,33 +3737,33 @@ var GenericExtractor = {
     }
 
     var title = this.title(options);
-    var datePublished = this.datePublished(options);
+    var date_published = this.date_published(options);
     var author = this.author(options);
     var content = this.content(_extends({}, options, { title: title }));
-    var leadImageUrl = this.leadImageUrl(_extends({}, options, { content: content }));
+    var lead_image_url = this.lead_image_url(_extends({}, options, { content: content }));
     var dek = this.dek(_extends({}, options, { content: content }));
-    var nextPageUrl = this.nextPageUrl(options);
+    var next_page_url = this.next_page_url(options);
     var excerpt = this.excerpt(_extends({}, options, { content: content }));
-    var wordCount = this.excerpt(_extends({}, options, { content: content }));
+    var word_count = this.word_count(_extends({}, options, { content: content }));
 
-    var _urlAndDomain = this.urlAndDomain(options);
+    var _url_and_domain = this.url_and_domain(options);
 
-    var url = _urlAndDomain.url;
-    var domain = _urlAndDomain.domain;
+    var url = _url_and_domain.url;
+    var domain = _url_and_domain.domain;
 
 
     return {
       title: title,
       author: author,
-      datePublished: datePublished || null,
+      date_published: date_published || null,
       dek: dek,
-      leadImageUrl: leadImageUrl,
+      lead_image_url: lead_image_url,
       content: content,
-      nextPageUrl: nextPageUrl,
+      next_page_url: next_page_url,
       url: url,
       domain: domain,
       excerpt: excerpt,
-      wordCount: wordCount
+      word_count: word_count
     };
   }
 };
@@ -3910,17 +3910,17 @@ var RootExtractor = {
       };
     }
     var title = extractResult(_extends({}, opts, { type: 'title' }));
-    var datePublished = extractResult(_extends({}, opts, { type: 'datePublished' }));
+    var date_published = extractResult(_extends({}, opts, { type: 'date_published' }));
     var author = extractResult(_extends({}, opts, { type: 'author' }));
-    var nextPageUrl = extractResult(_extends({}, opts, { type: 'nextPageUrl' }));
+    var next_page_url = extractResult(_extends({}, opts, { type: 'next_page_url' }));
     var content = extractResult(_extends({}, opts, { type: 'content', extractHtml: true, title: title
     }));
-    var leadImageUrl = extractResult(_extends({}, opts, { type: 'leadImageUrl', content: content }));
+    var lead_image_url = extractResult(_extends({}, opts, { type: 'lead_image_url', content: content }));
     var dek = extractResult(_extends({}, opts, { type: 'dek', content: content }));
     var excerpt = extractResult(_extends({}, opts, { type: 'excerpt', content: content }));
-    var wordCount = extractResult(_extends({}, opts, { type: 'wordCount', content: content }));
+    var word_count = extractResult(_extends({}, opts, { type: 'word_count', content: content }));
 
-    var _extractResult = extractResult(_extends({}, opts, { type: 'urlAndDomain' }));
+    var _extractResult = extractResult(_extends({}, opts, { type: 'url_and_domain' }));
 
     var url = _extractResult.url;
     var domain = _extractResult.domain;
@@ -3930,21 +3930,21 @@ var RootExtractor = {
       title: title,
       content: content,
       author: author,
-      datePublished: datePublished,
-      leadImageUrl: leadImageUrl,
+      date_published: date_published,
+      lead_image_url: lead_image_url,
       dek: dek,
-      nextPageUrl: nextPageUrl,
+      next_page_url: next_page_url,
       url: url,
       domain: domain,
       excerpt: excerpt,
-      wordCount: wordCount
+      word_count: word_count
     };
   }
 };
 
 var collectAllPages = (function () {
   var _ref = asyncToGenerator(regeneratorRuntime.mark(function _callee(_ref2) {
-    var nextPageUrl = _ref2.nextPageUrl;
+    var next_page_url = _ref2.next_page_url;
     var html = _ref2.html;
     var $ = _ref2.$;
     var metaCache = _ref2.metaCache;
@@ -3965,14 +3965,14 @@ var collectAllPages = (function () {
             // likely gone wrong.
 
           case 2:
-            if (!(nextPageUrl && pages < 26)) {
+            if (!(next_page_url && pages < 26)) {
               _context.next = 15;
               break;
             }
 
             pages += 1;
             _context.next = 6;
-            return Resource.create(nextPageUrl);
+            return Resource.create(next_page_url);
 
           case 6:
             $ = _context.sent;
@@ -3980,7 +3980,7 @@ var collectAllPages = (function () {
             html = $.html();
 
             extractorOpts = {
-              url: nextPageUrl,
+              url: next_page_url,
               html: html,
               $: $,
               metaCache: metaCache,
@@ -3991,19 +3991,19 @@ var collectAllPages = (function () {
             nextPageResult = RootExtractor.extract(Extractor, extractorOpts);
 
 
-            previousUrls.push(nextPageUrl);
+            previousUrls.push(next_page_url);
             result = _extends({}, result, {
               content: '\n        ' + result.content + '\n        <hr>\n        <h4>Page ' + pages + '</h4>\n        ' + nextPageResult.content + '\n        '
             });
 
-            nextPageUrl = nextPageResult.nextPageUrl;
+            next_page_url = nextPageResult.next_page_url;
             _context.next = 2;
             break;
 
           case 15:
             return _context.abrupt('return', _extends({}, result, {
-              totalPages: pages,
-              pagesRendered: pages
+              total_pages: pages,
+              pages_rendered: pages
             }));
 
           case 16:
@@ -4027,7 +4027,7 @@ var Iris = {
 
     var opts = arguments.length <= 2 || arguments[2] === undefined ? {} : arguments[2];
     return asyncToGenerator(regeneratorRuntime.mark(function _callee() {
-      var _ref, _ref$fetchAllPages, fetchAllPages, Extractor, $, metaCache, result, _result, title, nextPageUrl;
+      var _ref, _ref$fetchAllPages, fetchAllPages, Extractor, $, metaCache, result, _result, title, next_page_url;
 
       return regeneratorRuntime.wrap(function _callee$(_context) {
         while (1) {
@@ -4055,11 +4055,11 @@ var Iris = {
               result = RootExtractor.extract(Extractor, { url: url, html: html, $: $, metaCache: metaCache });
               _result = result;
               title = _result.title;
-              nextPageUrl = _result.nextPageUrl;
+              next_page_url = _result.next_page_url;
 
-              // Fetch more pages if nextPageUrl found
+              // Fetch more pages if next_page_url found
 
-              if (!(fetchAllPages && nextPageUrl)) {
+              if (!(fetchAllPages && next_page_url)) {
                 _context.next = 19;
                 break;
               }
@@ -4067,7 +4067,7 @@ var Iris = {
               _context.next = 16;
               return collectAllPages({
                 Extractor: Extractor,
-                nextPageUrl: nextPageUrl,
+                next_page_url: next_page_url,
                 html: html,
                 $: $,
                 metaCache: metaCache,
@@ -4083,8 +4083,8 @@ var Iris = {
 
             case 19:
               result = _extends({}, result, {
-                totalPages: 1,
-                renderedPages: 1
+                total_pages: 1,
+                rendered_pages: 1
               });
 
             case 20:

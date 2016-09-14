@@ -20,6 +20,7 @@
     "func-names": 0,
     // "no-useless-escape": 0,
     "no-confusing-arrow": 0,
+    "camelcase": 0,
   },
   "settings": {
     "import/resolver": {
