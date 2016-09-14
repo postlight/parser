@@ -41,5 +41,41 @@ describe('scoreContent($, weightNodes)', () => {
     $ = scoreContent($);
 
     assert.equal($('p[score]').length, 62);
+    const itemprop = $('[itemprop=articleBody]').first();
+    assert.equal(itemprop.attr('score'), '564.2');
+  });
+
+  it('gives its parent all of the children scores', () => {
+    const html = `
+      <div score="0">
+        <div score="0">
+          <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
+            when an unknown printer took a galley of type and scrambled it to make a type 
+            specimen book.
+          </p>
+          <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
+            when an unknown printer took a galley of type and scrambled it to make a type 
+            specimen book.
+          </p>
+          <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
+            when an unknown printer took a galley of type and scrambled it to make a type 
+            specimen book.
+          </p>
+          <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
+            when an unknown printer took a galley of type and scrambled it to make a type 
+            specimen book.
+          </p>
+        </div>
+      </div>
+    `;
+    let $ = cheerio.load(html);
+    $ = scoreContent($);
+
+    assert.equal($('p').first().attr('score'), '4.9');
+    assert.equal($('div div').attr('score'), '29.5');
   });
 });

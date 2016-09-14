@@ -1,11 +1,9 @@
 TODO:
-- extractNextPageUrl
-- Get better sense of when cheerio returns a raw node and when a cheerio object
-  - Remove $ whenever possible
 - Test if .is method is faster than regex methods
-- Separate constants into activity-specific folders (dom, scoring)
 
 DONE:
+x Separate constants into activity-specific folders (dom, scoring)
+x extractNextPageUrl
 x Make sure weightNodes flag is being passed properly
 x Rename all cleaners from cleanThing to clean
 x Remove $ from function calls to getScore

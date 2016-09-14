@@ -8,14 +8,15 @@ export default function findTopCandidate($) {
   let $candidate;
   let topScore = 0;
 
-  $('*[score]').each((index, node) => {
+  $('[score]').each((index, node) => {
     const $node = $(node);
+    const score = getScore($node);
     // Ignore tags like BR, HR, etc
     if (NON_TOP_CANDIDATE_TAGS_RE.test(node.tagName)) {
       return;
     }
 
-    const score = getScore($node);
+    // const score = getScore($node);
 
     if (score > topScore) {
       topScore = score;

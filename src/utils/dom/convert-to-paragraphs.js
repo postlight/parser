@@ -1,13 +1,12 @@
-import { convertNodeTo } from 'utils/dom';
+import { brsToPs, convertNodeTo } from 'utils/dom';
 
-import { brsToPs } from './index';
 import { DIV_TO_P_BLOCK_TAGS } from './constants';
 
 function convertDivs($) {
   $('div').each((index, div) => {
     const $div = $(div);
-    const convertable = $div.children()
-      .not(DIV_TO_P_BLOCK_TAGS).length === 0;
+    const convertable = $div.children(DIV_TO_P_BLOCK_TAGS).length === 0;
+                            // .not(DIV_TO_P_BLOCK_TAGS).length === 0;
     if (convertable) {
       convertNodeTo($div, $, 'p');
     }

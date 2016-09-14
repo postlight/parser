@@ -1,4 +1,6 @@
 import cheerio from 'cheerio';
+import assert from 'assert';
+import fs from 'fs';
 
 import { assertClean } from 'test-helpers';
 import HTML from './fixtures/html';
@@ -10,11 +12,31 @@ function assertBeforeAndAfter(key, fn) {
   assertClean(fn($).html(), HTML[key].after);
 }
 
-describe('Generic Extractor Utils', () => {
-  describe('convertToParagraphs($)', () => {
-    it('performs all conversions', () => {
-      assertBeforeAndAfter('convertToParagraphs', convertToParagraphs);
-    });
+describe('convertToParagraphs($)', () => {
+  it('performs simple conversions', () => {
+    assertBeforeAndAfter('convertToParagraphs', convertToParagraphs);
+  });
+
+  it('does not convert a div with nested p children', () => {
+    const html = `
+      <div>
+        <div>
+          <div>
+            <p>This is a paragraph</p>
+          </div>
+        </div>
+      </div>
+    `;
+    const $ = cheerio.load(html);
+    assertClean(convertToParagraphs($).html(), html);
+  });
+
+  it('tracks this', () => {
+    const html = fs.readFileSync('./fixtures/vulture.html', 'utf-8');
+    let $ = cheerio.load(html);
+    $ = convertToParagraphs($);
+
+    assert.equal($('p[score]').length, 62);
   });
 });
 

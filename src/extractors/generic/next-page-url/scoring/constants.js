@@ -23,7 +23,7 @@ export const EXTRANEOUS_LINK_HINTS_RE = new RegExp(EXTRANEOUS_LINK_HINTS.join('|
 // Match any link text/classname/id that looks like it could mean the next
 // page. Things like: next, continue, >, >>, » but not >|, »| as those can
 // mean last page.
-export const NEXT_LINK_TEXT_RE = new RegExp('(next|weiter|continue|>([^\|]|$)|»([^\|]|$))', 'i');
+export const NEXT_LINK_TEXT_RE = new RegExp('(next|weiter|continue|>([^|]|$)|»([^|]|$))', 'i');
 
 // Match any link text/classname/id that looks like it is an end link: things
 // like "first", "last", "end", etc.

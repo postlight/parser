@@ -27,22 +27,15 @@ function addScoreTo($node, $, score) {
 }
 
 function scorePs($, weightNodes) {
-  $('p, pre').toArray().map((node) => {
+  $('p, pre').not('[score]').each((index, node) => {
     // The raw score for this paragraph, before we add any parent/child
     // scores.
     let $node = $(node);
     $node = setScore($node, $, getOrInitScore($node, $, weightNodes));
 
-    return $node;
-  }).forEach(($node) => {
-    // The parent scoring has to be done in a separate loop
-    // because otherwise scoring the parent overwrites
-    // the score added to the child
-
-    // Add the individual content score to the parent node
+    const $parent = $node.parent();
     const rawScore = scoreNode($node);
 
-    const $parent = $node.parent();
     addScoreTo($parent, $, rawScore, weightNodes);
     if ($parent) {
       // Add half of the individual content score to the
@@ -50,6 +43,8 @@ function scorePs($, weightNodes) {
       addScoreTo($parent.parent(), $, rawScore / 2, weightNodes);
     }
   });
+
+  return $;
 }
 
 // score content. Parents get the full value of their children's
@@ -63,7 +58,13 @@ export default function scoreContent($, weightNodes = true) {
     });
   });
 
-  scorePs($, weightNodes);
+  // Doubling this again
+  // Previous solution caused a bug
+  // in which parents weren't retaining
+  // scores. This is not ideal, and
+  // should be fixed.
+  $ = scorePs($, weightNodes);
+  $ = scorePs($, weightNodes);
 
   return $;
 }

@@ -55,4 +55,4 @@ export const SPLIT_DATE_STRING =
 export const TITLE_SPLITTERS_RE = /(: | - | \| )/g;
 
 export const DOMAIN_ENDINGS_RE =
-  new RegExp('\.com$|\.net$|\.org$|\.co\.uk$', 'g');
+  new RegExp('.com$|.net$|.org$|.co.uk$', 'g');

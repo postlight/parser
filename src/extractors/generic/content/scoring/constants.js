@@ -152,7 +152,7 @@ export const POSITIVE_SCORE_HINTS = [
   'story',
   'text',
   '[-_]copy', // usatoday
-  '\Bcopy',
+  '\\Bcopy',
 ];
 
 // The above list, joined into a matching regular expression
@@ -177,7 +177,7 @@ export const NEGATIVE_SCORE_HINTS = [
   'com-',
   'combx',
   'comment',
-  'comment\B',
+  'comment\\B',
   'contact',
   'copy',
   'credit',

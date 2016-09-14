@@ -14,5 +14,16 @@ describe('convertNodeTo(node, $)', () => {
 
     assert.equal(result, after);
   });
+
+  it('retains attributes on conversion', () => {
+    const html = '<span class="foo" score="100">Should keep its attrs</span>';
+    const $ = cheerio.load(html);
+    const node = $('span').first();
+
+    const result = convertNodeTo(node, $, 'div').html();
+    const after = '<div class="foo" score="100">Should keep its attrs</div>';
+
+    assert.equal(result, after);
+  });
 });
 
