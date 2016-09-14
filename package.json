@@ -1,5 +1,5 @@
 {
-  "name": "node-readability",
+  "name": "readability-parser",
   "version": "1.0.0",
   "description": "",
   "main": "./dist/iris.js",
