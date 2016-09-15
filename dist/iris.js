@@ -889,7 +889,7 @@ var REMOVE_ATTR_SELECTORS = REMOVE_ATTRS.map(function (selector) {
   return '[' + selector + ']';
 });
 var REMOVE_ATTR_LIST = REMOVE_ATTRS.join(',');
-var WHITELIST_ATTRS = ['src', 'href', 'class', 'id'];
+var WHITELIST_ATTRS = ['src', 'href', 'class', 'id', 'score'];
 var WHITELIST_ATTRS_RE = new RegExp('^(' + WHITELIST_ATTRS.join('|') + ')$', 'i');
 
 // removeEmpty
@@ -899,7 +899,7 @@ var REMOVE_EMPTY_SELECTORS = REMOVE_EMPTY_TAGS.map(function (tag) {
 }).join(',');
 
 // cleanTags
-var CLEAN_CONDITIONALLY_TAGS = ['ul', 'ol', 'table', 'div'].join(',');
+var CLEAN_CONDITIONALLY_TAGS = ['ul', 'ol', 'table', 'div', 'button', 'form'].join(',');
 
 // cleanHeaders
 var HEADER_TAGS = ['h2', 'h3', 'h4', 'h5', 'h6'];
@@ -912,9 +912,9 @@ var HEADER_TAG_LIST = HEADER_TAGS.join(',');
 // and then tested for existence using re:test, so may contain simple,
 // non-pipe style regular expression queries if necessary.
 var UNLIKELY_CANDIDATES_BLACKLIST = ['ad-break', 'adbox', 'advert', 'addthis', 'agegate', 'aux', 'blogger-labels', 'combx', 'comment', 'conversation', 'disqus', 'entry-unrelated', 'extra', 'foot', 'form', 'header', 'hidden', 'loader', 'login', // Note: This can hit 'blogindex'.
-'menu', 'meta', 'nav', 'pager', 'pagination', 'predicta', // readwriteweb inline ad box
+'menu', 'meta', 'nav', 'outbrain', 'pager', 'pagination', 'predicta', // readwriteweb inline ad box
 'presence_control_external', // lifehacker.com container full of false positives
-'popup', 'printfriendly', 'related', 'remove', 'remark', 'rss', 'share', 'shoutbox', 'sidebar', 'sociable', 'sponsor', 'tools'];
+'popup', 'printfriendly', 'related', 'remove', 'remark', 'rss', 'share', 'shoutbox', 'sidebar', 'sociable', 'sponsor', 'taboola', 'tools'];
 
 // A list of strings that can be considered LIKELY candidates when
 // extracting content from a resource. Essentially, the inverse of the
@@ -1135,6 +1135,11 @@ function convertToParagraphs($) {
 
 function convertNodeTo($node, $) {
   var tag = arguments.length <= 2 || arguments[2] === undefined ? 'p' : arguments[2];
+
+  var node = $node.get(0);
+  if (!node) {
+    return $;
+  }
 
   var _$node$get = $node.get(0);
 
@@ -1750,24 +1755,23 @@ function mergeSiblings($candidate, topScore, $) {
     return $candidate;
   }
 
-  var siblingScoreThreshold = Math.max(10, topScore * 0.2);
+  var siblingScoreThreshold = Math.max(10, topScore * 0.25);
   var wrappingDiv = $('<div></div>');
 
-  $candidate.parent().children().each(function (index, child) {
-    var $child = $(child);
+  $candidate.parent().children().each(function (index, sibling) {
+    var $sibling = $(sibling);
     // Ignore tags like BR, HR, etc
-    if (NON_TOP_CANDIDATE_TAGS_RE$1.test(child.tagName)) {
+    if (NON_TOP_CANDIDATE_TAGS_RE$1.test(sibling.tagName)) {
       return null;
     }
 
-    var childScore = getScore($child);
-    if (childScore) {
-      if ($child === $candidate) {
-        wrappingDiv.append($child);
+    var siblingScore = getScore($sibling);
+    if (siblingScore) {
+      if ($sibling === $candidate) {
+        wrappingDiv.append($sibling);
       } else {
         var contentBonus = 0;
-        // extract to scoreLinkDensity() TODO
-        var density = linkDensity($child);
+        var density = linkDensity($sibling);
 
         // If sibling has a very low link density,
         // give it a small bonus
@@ -1783,22 +1787,22 @@ function mergeSiblings($candidate, topScore, $) {
 
         // If sibling node has the same class as
         // candidate, give it a bonus
-        if ($child.attr('class') === $candidate.attr('class')) {
+        if ($sibling.attr('class') === $candidate.attr('class')) {
           contentBonus += topScore * 0.2;
         }
 
-        var newScore = getScore($child) + contentBonus;
+        var newScore = siblingScore + contentBonus;
 
         if (newScore >= siblingScoreThreshold) {
-          return wrappingDiv.append($child);
-        } else if (child.tagName === 'p') {
-          var childContent = $child.text();
-          var childContentLength = textLength(childContent);
+          return wrappingDiv.append($sibling);
+        } else if (sibling.tagName === 'p') {
+          var siblingContent = $sibling.text();
+          var siblingContentLength = textLength(siblingContent);
 
-          if (childContentLength > 80 && density < 0.25) {
-            return wrappingDiv.append($child);
-          } else if (childContentLength <= 80 && density === 0 && hasSentenceEnd(childContent)) {
-            return wrappingDiv.append($child);
+          if (siblingContentLength > 80 && density < 0.25) {
+            return wrappingDiv.append($sibling);
+          } else if (siblingContentLength <= 80 && density === 0 && hasSentenceEnd(siblingContent)) {
+            return wrappingDiv.append($sibling);
           }
         }
       }
@@ -2307,7 +2311,7 @@ function extractCleanNode(article, _ref) {
   // Make links absolute
   makeLinksAbsolute(article, $, url);
 
-  // Remove style or align attributes
+  // Remove unnecessary attributes
   cleanAttributes(article);
 
   // We used to clean UL's and OL's here, but it was leading to
@@ -2320,43 +2324,6 @@ function extractCleanNode(article, _ref) {
 
   return article;
 }
-//     headers = doc.xpath('.//h2 | .//h3 | .//h4 | .//h5 | .//h6')
-//     for header in headers:
-//         drop_header = False
-//
-//         # Remove any headers that are before any p tags in the
-//         # document. This probably means that it was part of the title, a
-//         # subtitle or something else extraneous like a datestamp or byline,
-//         # all of which should be handled by other metadata handling.
-//         no_previous_ps = int(header.xpath("count(preceding::p[1])")) == 0
-//         if no_previous_ps:
-//             similar_header_count = int(doc.xpath('count(.//%s)' % header.tag))
-//             if similar_header_count < 3:
-//                 drop_header = True
-//
-//         # Remove any headers that match the title exactly.
-//         if inner_text(header) == self.title:
-//             drop_header = True
-//
-//         # If this header has a negative weight, it's probably junk.
-//         # Get rid of it.
-//         if self.get_weight(header) < 0:
-//             drop_header = True
-//
-//         if drop_header:
-//             try:
-//                 header.drop_tree()
-//             except AssertionError:
-//                 # No parent exists for this node, so just blank it out.
-//                 header.text = ''
-//
-//     if clean_conditionally:
-//         # We used to clean UL's and OL's here, but it was leading to
-//         # too many in-article lists being removed. Consider a better
-//         # way to detect menus particularly and remove them.
-//         self._clean_conditionally(doc, ['ul', 'ol', 'table', 'div'])
-//
-//     return doc
 
 function cleanTitle(title, _ref) {
   var url = _ref.url;
@@ -2737,7 +2704,7 @@ var GenericAuthorExtractor = {
     }
 
     // Second, look through our selectors looking for potential authors.
-    author = extractFromSelectors($, AUTHOR_SELECTORS, 2);
+    author = extractFromSelectors($, AUTHOR_SELECTORS, 2, { contains: true });
     if (author && author.length < AUTHOR_MAX_LENGTH) {
       return cleanAuthor(author);
     }
