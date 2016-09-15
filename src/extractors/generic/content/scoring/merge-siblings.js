@@ -17,24 +17,23 @@ export default function mergeSiblings($candidate, topScore, $) {
     return $candidate;
   }
 
-  const siblingScoreThreshold = Math.max(10, topScore * 0.2);
+  const siblingScoreThreshold = Math.max(10, topScore * 0.25);
   const wrappingDiv = $('<div></div>');
 
-  $candidate.parent().children().each((index, child) => {
-    const $child = $(child);
+  $candidate.parent().children().each((index, sibling) => {
+    const $sibling = $(sibling);
     // Ignore tags like BR, HR, etc
-    if (NON_TOP_CANDIDATE_TAGS_RE.test(child.tagName)) {
+    if (NON_TOP_CANDIDATE_TAGS_RE.test(sibling.tagName)) {
       return null;
     }
 
-    const childScore = getScore($child);
-    if (childScore) {
-      if ($child === $candidate) {
-        wrappingDiv.append($child);
+    const siblingScore = getScore($sibling);
+    if (siblingScore) {
+      if ($sibling === $candidate) {
+        wrappingDiv.append($sibling);
       } else {
         let contentBonus = 0;
-        // extract to scoreLinkDensity() TODO
-        const density = linkDensity($child);
+        const density = linkDensity($sibling);
 
         // If sibling has a very low link density,
         // give it a small bonus
@@ -50,23 +49,23 @@ export default function mergeSiblings($candidate, topScore, $) {
 
         // If sibling node has the same class as
         // candidate, give it a bonus
-        if ($child.attr('class') === $candidate.attr('class')) {
+        if ($sibling.attr('class') === $candidate.attr('class')) {
           contentBonus += topScore * 0.2;
         }
 
-        const newScore = getScore($child) + contentBonus;
+        const newScore = siblingScore + contentBonus;
 
         if (newScore >= siblingScoreThreshold) {
-          return wrappingDiv.append($child);
-        } else if (child.tagName === 'p') {
-          const childContent = $child.text();
-          const childContentLength = textLength(childContent);
+          return wrappingDiv.append($sibling);
+        } else if (sibling.tagName === 'p') {
+          const siblingContent = $sibling.text();
+          const siblingContentLength = textLength(siblingContent);
 
-          if (childContentLength > 80 && density < 0.25) {
-            return wrappingDiv.append($child);
-          } else if (childContentLength <= 80 && density === 0 &&
-                    hasSentenceEnd(childContent)) {
-            return wrappingDiv.append($child);
+          if (siblingContentLength > 80 && density < 0.25) {
+            return wrappingDiv.append($sibling);
+          } else if (siblingContentLength <= 80 && density === 0 &&
+                    hasSentenceEnd(siblingContent)) {
+            return wrappingDiv.append($sibling);
           }
         }
       }
