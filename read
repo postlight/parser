@@ -1,9 +1,0 @@
-#!/usr/bin/env node
-var fs = require('fs')
-var Iris = require('./dist/bundle')
-
-var url = process.argv[2]
-var html = fs.readFileSync('../file.html', 'utf8')
-var result = Iris.parse(url, html).then(function(result) {
-  console.log(result.content)
-})

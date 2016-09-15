@@ -18,7 +18,7 @@ export const STRIP_OUTPUT_TAGS = [
 export const REMOVE_ATTRS = ['style', 'align'];
 export const REMOVE_ATTR_SELECTORS = REMOVE_ATTRS.map(selector => `[${selector}]`);
 export const REMOVE_ATTR_LIST = REMOVE_ATTRS.join(',');
-export const WHITELIST_ATTRS = ['src', 'href', 'class', 'id'];
+export const WHITELIST_ATTRS = ['src', 'href', 'class', 'id', 'score'];
 export const WHITELIST_ATTRS_RE = new RegExp(`^(${WHITELIST_ATTRS.join('|')})$`, 'i');
 
 // removeEmpty
@@ -26,7 +26,7 @@ export const REMOVE_EMPTY_TAGS = ['p'];
 export const REMOVE_EMPTY_SELECTORS = REMOVE_EMPTY_TAGS.map(tag => `${tag}:empty`).join(',');
 
 // cleanTags
-export const CLEAN_CONDITIONALLY_TAGS = ['ul', 'ol', 'table', 'div'].join(',');
+export const CLEAN_CONDITIONALLY_TAGS = ['ul', 'ol', 'table', 'div', 'button', 'form'].join(',');
 
 // cleanHeaders
 const HEADER_TAGS = ['h2', 'h3', 'h4', 'h5', 'h6'];
@@ -54,7 +54,7 @@ export const UNLIKELY_CANDIDATES_BLACKLIST = [
   'entry-unrelated',
   'extra',
   'foot',
-  'form',
+  // 'form', // This is too generic, has too many false positives
   'header',
   'hidden',
   'loader',
@@ -62,6 +62,7 @@ export const UNLIKELY_CANDIDATES_BLACKLIST = [
   'menu',
   'meta',
   'nav',
+  'outbrain',
   'pager',
   'pagination',
   'predicta',                  // readwriteweb inline ad box
@@ -77,6 +78,7 @@ export const UNLIKELY_CANDIDATES_BLACKLIST = [
   'sidebar',
   'sociable',
   'sponsor',
+  'taboola',
   'tools',
 ];
 

@@ -63,8 +63,8 @@ export default function scoreContent($, weightNodes = true) {
   // in which parents weren't retaining
   // scores. This is not ideal, and
   // should be fixed.
-  $ = scorePs($, weightNodes);
-  $ = scorePs($, weightNodes);
+  scorePs($, weightNodes);
+  scorePs($, weightNodes);
 
   return $;
 }

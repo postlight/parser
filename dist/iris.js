@@ -191,12 +191,12 @@ var fetchResource = (function () {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            parsedUrl = URL.parse(url);
+            parsedUrl = URL.parse(encodeURI(url));
             options = {
               url: parsedUrl,
               headers: _extends({}, REQUEST_HEADERS),
               timeout: FETCH_TIMEOUT,
-              // Don't set encoding; this fixes issues
+              // Don't set encoding; fixes issues
               // w/gzipped responses
               encoding: null,
               // Accept cookies
@@ -915,7 +915,9 @@ var HEADER_TAG_LIST = HEADER_TAGS.join(',');
 // extracting content from a resource. These strings are joined together
 // and then tested for existence using re:test, so may contain simple,
 // non-pipe style regular expression queries if necessary.
-var UNLIKELY_CANDIDATES_BLACKLIST = ['ad-break', 'adbox', 'advert', 'addthis', 'agegate', 'aux', 'blogger-labels', 'combx', 'comment', 'conversation', 'disqus', 'entry-unrelated', 'extra', 'foot', 'form', 'header', 'hidden', 'loader', 'login', // Note: This can hit 'blogindex'.
+var UNLIKELY_CANDIDATES_BLACKLIST = ['ad-break', 'adbox', 'advert', 'addthis', 'agegate', 'aux', 'blogger-labels', 'combx', 'comment', 'conversation', 'disqus', 'entry-unrelated', 'extra', 'foot',
+// 'form', // This is too generic, has too many false positives
+'header', 'hidden', 'loader', 'login', // Note: This can hit 'blogindex'.
 'menu', 'meta', 'nav', 'outbrain', 'pager', 'pagination', 'predicta', // readwriteweb inline ad box
 'presence_control_external', // lifehacker.com container full of false positives
 'popup', 'printfriendly', 'related', 'remove', 'remark', 'rss', 'share', 'shoutbox', 'sidebar', 'sociable', 'sponsor', 'taboola', 'tools'];
@@ -1599,8 +1601,8 @@ function scoreContent($) {
   // in which parents weren't retaining
   // scores. This is not ideal, and
   // should be fixed.
-  $ = scorePs($, weightNodes);
-  $ = scorePs($, weightNodes);
+  scorePs($, weightNodes);
+  scorePs($, weightNodes);
 
   return $;
 }
@@ -1825,14 +1827,13 @@ function findTopCandidate($) {
   var topScore = 0;
 
   $('[score]').each(function (index, node) {
-    var $node = $(node);
-    var score = getScore($node);
     // Ignore tags like BR, HR, etc
     if (NON_TOP_CANDIDATE_TAGS_RE$1.test(node.tagName)) {
       return;
     }
 
-    // const score = getScore($node);
+    var $node = $(node);
+    var score = getScore($node);
 
     if (score > topScore) {
       topScore = score;
