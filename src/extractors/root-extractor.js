@@ -51,7 +51,7 @@ export function select(opts) {
   // contributors), return the string
   if (typeof extractionOpts === 'string') return extractionOpts;
 
-  const { selectors } = extractionOpts;
+  const { selectors, defaultCleaner = true } = extractionOpts;
 
   const matchingSelector = selectors.find(selector => $(selector).length === 1 && $(selector).text().trim() !== '');
 
@@ -88,7 +88,14 @@ export function select(opts) {
     // otherwise use the text of the node
     result = $(matchingSelector).text();
   }
-  return Cleaners[type](result, opts);
+
+  // Allow custom extractor to skip default cleaner
+  // for this type; defaults to true
+  if (defaultCleaner) {
+    return Cleaners[type](result, opts);
+  }
+
+  return result;
 }
 
 function extractResult(opts) {

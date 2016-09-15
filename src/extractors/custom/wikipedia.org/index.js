@@ -5,6 +5,8 @@ const WikipediaExtractor = {
       '#mw-content-text',
     ],
 
+    defaultCleaner: false,
+
     // transform top infobox to an image with caption
     transforms: {
       '.infobox img': ($node) => {
