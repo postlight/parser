@@ -6,6 +6,7 @@ var babelPolyfill = require('babel-polyfill');
 var cheerio = _interopDefault(require('cheerio'));
 var URL = _interopDefault(require('url'));
 var request = _interopDefault(require('request'));
+var stringDirection = _interopDefault(require('string-direction'));
 var validUrl = _interopDefault(require('valid-url'));
 var moment = _interopDefault(require('moment'));
 var wuzzy = _interopDefault(require('wuzzy'));
@@ -848,6 +849,8 @@ var WikipediaExtractor = {
   domain: 'wikipedia.org',
   content: {
     selectors: ['#mw-content-text'],
+
+    defaultCleaner: false,
 
     // transform top infobox to an image with caption
     transforms: {
@@ -2709,7 +2712,7 @@ var GenericAuthorExtractor = {
     }
 
     // Second, look through our selectors looking for potential authors.
-    author = extractFromSelectors($, AUTHOR_SELECTORS, 2, { contains: true });
+    author = extractFromSelectors($, AUTHOR_SELECTORS, 2);
     if (author && author.length < AUTHOR_MAX_LENGTH) {
       return cleanAuthor(author);
     }
@@ -3698,6 +3701,10 @@ var GenericExtractor = {
   url_and_domain: GenericUrlExtractor.extract,
   excerpt: GenericExcerptExtractor.extract,
   word_count: GenericWordCountExtractor.extract,
+  direction: function direction(_ref) {
+    var title = _ref.title;
+    return stringDirection.getDirection(title);
+  },
 
   extract: function extract(options) {
     var html = options.html;
@@ -3717,6 +3724,7 @@ var GenericExtractor = {
     var next_page_url = this.next_page_url(options);
     var excerpt = this.excerpt(_extends({}, options, { content: content }));
     var word_count = this.word_count(_extends({}, options, { content: content }));
+    var direction = this.direction({ title: title });
 
     var _url_and_domain = this.url_and_domain(options);
 
@@ -3735,7 +3743,8 @@ var GenericExtractor = {
       url: url,
       domain: domain,
       excerpt: excerpt,
-      word_count: word_count
+      word_count: word_count,
+      direction: direction
     };
   }
 };
@@ -3807,6 +3816,8 @@ function select(opts) {
   if (typeof extractionOpts === 'string') return extractionOpts;
 
   var selectors = extractionOpts.selectors;
+  var _extractionOpts$defau = extractionOpts.defaultCleaner;
+  var defaultCleaner = _extractionOpts$defau === undefined ? true : _extractionOpts$defau;
 
 
   var matchingSelector = selectors.find(function (selector) {
@@ -3846,7 +3857,14 @@ function select(opts) {
     // otherwise use the text of the node
     result = $(matchingSelector).text();
   }
-  return Cleaners[type](result, opts);
+
+  // Allow custom extractor to skip default cleaner
+  // for this type; defaults to true
+  if (defaultCleaner) {
+    return Cleaners[type](result, opts);
+  }
+
+  return result;
 }
 
 function extractResult(opts) {
@@ -3891,6 +3909,7 @@ var RootExtractor = {
     var dek = extractResult(_extends({}, opts, { type: 'dek', content: content }));
     var excerpt = extractResult(_extends({}, opts, { type: 'excerpt', content: content }));
     var word_count = extractResult(_extends({}, opts, { type: 'word_count', content: content }));
+    var direction = extractResult(_extends({}, opts, { type: 'direction', title: title }));
 
     var _extractResult = extractResult(_extends({}, opts, { type: 'url_and_domain' }));
 
@@ -3909,7 +3928,8 @@ var RootExtractor = {
       url: url,
       domain: domain,
       excerpt: excerpt,
-      word_count: word_count
+      word_count: word_count,
+      direction: direction
     };
   }
 };

@@ -45,6 +45,7 @@
     "moment": "^2.14.1",
     "request": "^2.74.0",
     "request-promise": "^4.1.1",
+    "string-direction": "^0.1.2",
     "valid-url": "^1.0.9",
     "wuzzy": "^0.1.2"
   }

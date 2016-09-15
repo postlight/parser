@@ -1,4 +1,5 @@
 import cheerio from 'cheerio';
+import stringDirection from 'string-direction';
 
 import GenericContentExtractor from './content/extractor';
 import GenericTitleExtractor from './title/extractor';
@@ -24,6 +25,7 @@ const GenericExtractor = {
   url_and_domain: GenericUrlExtractor.extract,
   excerpt: GenericExcerptExtractor.extract,
   word_count: GenericWordCountExtractor.extract,
+  direction: ({ title }) => stringDirection.getDirection(title),
 
   extract(options) {
     const { html } = options;
@@ -42,6 +44,7 @@ const GenericExtractor = {
     const next_page_url = this.next_page_url(options);
     const excerpt = this.excerpt({ ...options, content });
     const word_count = this.word_count({ ...options, content });
+    const direction = this.direction({ title });
     const { url, domain } = this.url_and_domain(options);
 
     return {
@@ -56,6 +59,7 @@ const GenericExtractor = {
       domain,
       excerpt,
       word_count,
+      direction,
     };
   },
 };
