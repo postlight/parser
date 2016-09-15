@@ -25,5 +25,17 @@ describe('convertNodeTo(node, $)', () => {
 
     assert.equal(result, after);
   });
+
+  it('does nothing if node.get returns null', () => {
+    const html = '<span class="foo" score="100">Should keep its attrs</span>';
+    const $ = cheerio.load(html);
+    const node = {
+      get: () => null,
+    };
+
+    const result = convertNodeTo(node, $, 'div').html();
+
+    assert.equal(result, html);
+  });
 });
 
