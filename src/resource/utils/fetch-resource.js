@@ -76,13 +76,13 @@ export function baseDomain({ host }) {
 //       unicode content for HTML, with charset conversion.
 
 export default async function fetchResource(url) {
-  const parsedUrl = URL.parse(url);
+  const parsedUrl = URL.parse(encodeURI(url));
 
   const options = {
     url: parsedUrl,
     headers: { ...REQUEST_HEADERS },
     timeout: FETCH_TIMEOUT,
-    // Don't set encoding; this fixes issues
+    // Don't set encoding; fixes issues
     // w/gzipped responses
     encoding: null,
     // Accept cookies
