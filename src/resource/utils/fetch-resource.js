@@ -87,6 +87,10 @@ export default async function fetchResource(url) {
     encoding: null,
     // Accept cookies
     jar: true,
+    // Accept and decode gzip
+    gzip: true,
+    // Follow any redirect
+    followAllRedirects: true,
   };
 
   const { response, body } = await get(options);

@@ -200,7 +200,11 @@ var fetchResource = (function () {
               // w/gzipped responses
               encoding: null,
               // Accept cookies
-              jar: true
+              jar: true,
+              // Accept and decode gzip
+              gzip: true,
+              // Follow any redirect
+              followAllRedirects: true
             };
             _context.next = 4;
             return get(options);
