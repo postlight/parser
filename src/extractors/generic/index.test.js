@@ -23,8 +23,8 @@ describe('GenericExtractor', () => {
         'California appears poised to be first to ban power-guzzling big-screen TVs'
       );
       assert.equal(
-        date_published,
-        '2009-10-14T04:00:00.000Z'
+        date_published.split('T')[0],
+        '2009-10-14'
       );
       assert.equal(dek, null);
     });
