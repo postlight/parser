@@ -810,7 +810,7 @@ var NYMagExtractor = {
     selectors: ['.lede-feature-teaser']
   },
 
-  datePublished: {
+  date_published: {
     selectors: ['time.article-timestamp[datetime]', 'time.article-timestamp']
   }
 };
@@ -840,7 +840,7 @@ var BloggerExtractor = {
     selectors: ['h2.title']
   },
 
-  datePublished: {
+  date_published: {
     selectors: ['span.publishdate']
   }
 };
@@ -872,8 +872,46 @@ var WikipediaExtractor = {
     selectors: ['h2.title']
   },
 
-  datePublished: {
+  date_published: {
     selectors: ['#footer-info-lastmod']
+  }
+
+};
+
+var TwitterExtractor = {
+  domain: 'twitter.com',
+
+  content: {
+    transforms: {
+      // We're transforming essentially the whole page here.
+      // Twitter doesn't have nice selectors, so our initial
+      // selector grabs the whole page, then we're re-writing
+      // it to fit our needs before we clean it up.
+      '.permalink[role=main]': function permalinkRoleMain($node, $) {
+        var tweets = $node.find('.tweet');
+        var $tweetContainer = $('<div id="TWEETS_GO_HERE"></div>');
+        $tweetContainer.append(tweets);
+        $node.replaceWith($tweetContainer);
+      },
+
+      // Twitter wraps @ with s, which
+      // renders as a strikethrough
+      s: 'span'
+    },
+
+    selectors: ['.permalink[role=main]'],
+
+    defaultCleaner: false,
+
+    clean: ['.stream-item-footer', 'button', '.tweet-details-fixer']
+  },
+
+  author: {
+    selectors: ['.tweet.permalink-tweet .username']
+  },
+
+  date_published: {
+    selectors: ['.tweet.permalink-tweet .metadata']
   }
 
 };
@@ -881,7 +919,8 @@ var WikipediaExtractor = {
 var Extractors = {
   'nymag.com': NYMagExtractor,
   'blogspot.com': BloggerExtractor,
-  'wikipedia.org': WikipediaExtractor
+  'wikipedia.org': WikipediaExtractor,
+  'twitter.com': TwitterExtractor
 };
 
 // Spacer images to be removed
@@ -2470,9 +2509,9 @@ function resolveSplitTitle(title) {
 
 var Cleaners = {
   author: cleanAuthor,
-  leadImageUrl: clean$1,
+  lead_image_url: clean$1,
   dek: cleanDek,
-  datePublished: cleanDatePublished,
+  date_published: cleanDatePublished,
   content: extractCleanNode,
   title: cleanTitle
 };
@@ -3842,7 +3881,9 @@ function select(opts) {
     $content = transformElements($content, $, extractionOpts);
     $content = cleanBySelectors($content, $, extractionOpts);
 
-    $content = Cleaners[type]($content, opts);
+    if (defaultCleaner) {
+      $content = Cleaners[type]($content, opts);
+    }
 
     return $.html($content);
   }
@@ -4029,12 +4070,13 @@ var Iris = {
               _ref$fetchAllPages = _ref.fetchAllPages;
               fetchAllPages = _ref$fetchAllPages === undefined ? true : _ref$fetchAllPages;
               Extractor = getExtractor(url);
-              // console.log(`Using extractor for ${Extractor.domain}`);
 
-              _context.next = 6;
+              console.log('Using extractor for ' + Extractor.domain);
+
+              _context.next = 7;
               return Resource.create(url, html);
 
-            case 6:
+            case 7:
               $ = _context.sent;
 
               html = $.html();
@@ -4052,11 +4094,11 @@ var Iris = {
               // Fetch more pages if next_page_url found
 
               if (!(fetchAllPages && next_page_url)) {
-                _context.next = 19;
+                _context.next = 20;
                 break;
               }
 
-              _context.next = 16;
+              _context.next = 17;
               return collectAllPages({
                 Extractor: Extractor,
                 next_page_url: next_page_url,
@@ -4068,21 +4110,21 @@ var Iris = {
                 url: url
               });
 
-            case 16:
+            case 17:
               result = _context.sent;
-              _context.next = 20;
+              _context.next = 21;
               break;
 
-            case 19:
+            case 20:
               result = _extends({}, result, {
                 total_pages: 1,
                 rendered_pages: 1
               });
 
-            case 20:
+            case 21:
               return _context.abrupt('return', result);
 
-            case 21:
+            case 22:
             case 'end':
               return _context.stop();
           }

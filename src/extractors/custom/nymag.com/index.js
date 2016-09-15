@@ -57,7 +57,7 @@ const NYMagExtractor = {
     ],
   },
 
-  datePublished: {
+  date_published: {
     selectors: [
       'time.article-timestamp[datetime]',
       'time.article-timestamp',

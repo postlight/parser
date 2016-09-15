@@ -7,9 +7,9 @@ import cleanTitle from './title';
 
 const Cleaners = {
   author: cleanAuthor,
-  leadImageUrl: cleanImage,
+  lead_image_url: cleanImage,
   dek: cleanDek,
-  datePublished: cleanDatePublished,
+  date_published: cleanDatePublished,
   content: cleanContent,
   title: cleanTitle,
 };

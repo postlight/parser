@@ -33,7 +33,7 @@ const WikipediaExtractor = {
     ],
   },
 
-  datePublished: {
+  date_published: {
     selectors: [
       '#footer-info-lastmod',
     ],

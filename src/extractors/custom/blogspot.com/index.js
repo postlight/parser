@@ -30,7 +30,7 @@ const BloggerExtractor = {
     ],
   },
 
-  datePublished: {
+  date_published: {
     selectors: [
       'span.publishdate',
     ],

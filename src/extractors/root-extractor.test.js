@@ -158,7 +158,7 @@ describe('select(opts)', () => {
     `;
     const $ = cheerio.load(html);
     const opts = {
-      type: 'datePublished',
+      type: 'date_published',
       $,
       extractionOpts: {
         selectors: ['time[datetime]'],
