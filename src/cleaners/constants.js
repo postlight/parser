@@ -26,6 +26,8 @@ export const DEK_SELECTORS = [
 ];
 
 // CLEAN DATE PUBLISHED CONSTANTS
+export const MS_DATE_STRING = /^\d{13}$/i;
+export const SEC_DATE_STRING = /^\d{10}$/i;
 export const CLEAN_DATE_STRING_RE = /^\s*published\s*:?\s*(.*)/i;
 export const TIME_MERIDIAN_SPACE_RE = /(.*\d)(am|pm)(.*)/i;
 export const TIME_MERIDIAN_DOTS_RE = /\.m\./i;

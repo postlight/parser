@@ -4,6 +4,8 @@ import moment from 'moment';
 // but could just check for 'Invalid Date' string.
 
 import {
+  MS_DATE_STRING,
+  SEC_DATE_STRING,
   CLEAN_DATE_STRING_RE,
   SPLIT_DATE_STRING,
   TIME_MERIDIAN_SPACE_RE,
@@ -22,6 +24,11 @@ export function cleanDateString(dateString) {
 // Take a date published string, and hopefully return a date out of
 // it. Return none if we fail.
 export default function cleanDatePublished(dateString) {
+  // If string is in milliseconds or seconds, convert to int
+  if (MS_DATE_STRING.test(dateString) || SEC_DATE_STRING.test(dateString)) {
+    dateString = parseInt(dateString, 10)
+  }
+
   let date = moment(new Date(dateString));
 
   if (!date.isValid()) {
