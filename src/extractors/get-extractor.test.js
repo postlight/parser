@@ -20,4 +20,10 @@ describe('getExtractor(url)', () => {
 
     assert.equal(extractor.domain, 'blogspot.com');
   });
+
+  it('falls back to base domain if subdomain not found', () => {
+    const extractor = getExtractor('https://en.m.wikipedia.org');
+
+    assert.equal(extractor.domain, 'wikipedia.org');
+  });
 });
