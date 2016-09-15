@@ -1,10 +1,23 @@
 import assert from 'assert';
+import { Errors } from 'utils';
 
 import Iris from './iris';
 
 describe('Iris', () => {
   describe('parse(url)', function test() {
     this.timeout(1000000);
+    it('returns an error if a malformed url is passed', async function() {
+      const error = await Iris.parse('foo.com');
+
+      assert.equal(error, Errors.badUrl);
+    });
+
+    it('returns an error if a bad url is passed', async function() {
+      const error = await Iris.parse('foo.com');
+
+      assert.equal(error, Errors.badUrl);
+    });
+
     it('does the whole thing', async function() {
       const result = await Iris.parse('http://theconcourse.deadspin.com/phyllis-schlafly-finally-croaks-1786219220');
 

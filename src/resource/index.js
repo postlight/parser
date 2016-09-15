@@ -17,7 +17,7 @@ const Resource = {
   // :param response: If set, use as the response rather than
   //                  attempting to fetch it ourselves. Expects a
   //                  string.
-  async create(url, preparedResponse) {
+  async create(url, preparedResponse, parsedUrl) {
     let result;
 
     if (preparedResponse) {
@@ -32,8 +32,13 @@ const Resource = {
 
       result = { body: preparedResponse, response: validResponse };
     } else {
-      result = await fetchResource(url);
+      result = await fetchResource(url, parsedUrl);
     }
+
+    if (result.error) {
+      return result;
+    }
+
     return this.generateDoc(result);
   },
 

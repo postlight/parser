@@ -2,6 +2,7 @@ import 'babel-polyfill';
 
 import URL from 'url';
 import request from 'request';
+import { Errors } from 'utils';
 
 import {
   REQUEST_HEADERS,
@@ -75,8 +76,8 @@ export function baseDomain({ host }) {
 // TODO: Ensure we are not fetching something enormous. Always return
 //       unicode content for HTML, with charset conversion.
 
-export default async function fetchResource(url) {
-  const parsedUrl = URL.parse(encodeURI(url));
+export default async function fetchResource(url, parsedUrl) {
+  parsedUrl = parsedUrl || URL.parse(encodeURI(url));
 
   const options = {
     url: parsedUrl,
@@ -99,6 +100,6 @@ export default async function fetchResource(url) {
     validateResponse(response);
     return { body, response };
   } catch (e) {
-    return e;
+    return Errors.badUrl;
   }
 }

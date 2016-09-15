@@ -26,7 +26,7 @@ export function cleanDateString(dateString) {
 export default function cleanDatePublished(dateString) {
   // If string is in milliseconds or seconds, convert to int
   if (MS_DATE_STRING.test(dateString) || SEC_DATE_STRING.test(dateString)) {
-    dateString = parseInt(dateString, 10)
+    dateString = parseInt(dateString, 10);
   }
 
   let date = moment(new Date(dateString));

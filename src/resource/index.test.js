@@ -1,4 +1,5 @@
 import assert from 'assert';
+import { Errors } from 'utils';
 
 import Resource from './index';
 
@@ -10,6 +11,13 @@ describe('Resource', () => {
       const $ = await Resource.create(url);
 
       assert.equal(typeof $, 'function');
+    });
+
+    it('returns an error message if the url is malformed', (async) () => {
+      const url = 'http://nytimes.com/500';
+      const error = await Resource.create(url);
+
+      assert.equal(error, Errors.badUrl);
     });
   });
 

@@ -10,6 +10,19 @@ import { MAX_CONTENT_LENGTH } from './constants';
 
 describe('fetchResource(url)', function test() {
   this.timeout(1000000);
+  it('returns appropriate json for bad url', (async) () => {
+    const url = 'http://www.nytimes.com/500';
+    const { error } = await fetchResource(url);
+
+    assert.equal(error, true);
+  });
+
+  it('fetches nyt', (async) () => {
+    const url = 'http://www.nytimes.com/2016/08/16/upshot/the-state-of-the-clinton-trump-race-is-it-over.html?_r=0';
+    const { body } = await fetchResource(url);
+
+    assert.equal(typeof body, 'object');
+  });
   it('fetches domains', (async) () => {
     const url = 'http://theconcourse.deadspin.com/1786177057';
     const { body } = await fetchResource(url);

@@ -2,9 +2,9 @@
 
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
 
+var URL = _interopDefault(require('url'));
 var babelPolyfill = require('babel-polyfill');
 var cheerio = _interopDefault(require('cheerio'));
-var URL = _interopDefault(require('url'));
 var request = _interopDefault(require('request'));
 var stringDirection = _interopDefault(require('string-direction'));
 var validUrl = _interopDefault(require('valid-url'));
@@ -12,6 +12,50 @@ var moment = _interopDefault(require('moment'));
 var wuzzy = _interopDefault(require('wuzzy'));
 var difflib = _interopDefault(require('difflib'));
 var ellipsize = _interopDefault(require('ellipsize'));
+
+var _marked = [range].map(regeneratorRuntime.mark);
+
+function range() {
+  var start = arguments.length <= 0 || arguments[0] === undefined ? 1 : arguments[0];
+  var end = arguments.length <= 1 || arguments[1] === undefined ? 1 : arguments[1];
+  return regeneratorRuntime.wrap(function range$(_context) {
+    while (1) {
+      switch (_context.prev = _context.next) {
+        case 0:
+          if (!(start <= end)) {
+            _context.next = 5;
+            break;
+          }
+
+          _context.next = 3;
+          return start += 1;
+
+        case 3:
+          _context.next = 0;
+          break;
+
+        case 5:
+        case "end":
+          return _context.stop();
+      }
+    }
+  }, _marked[0], this);
+}
+
+// extremely simple url validation as a first step
+function validateUrl(_ref) {
+  var hostname = _ref.hostname;
+
+  // If this isn't a valid url, return an error message
+  return !!hostname;
+}
+
+var Errors = {
+  badUrl: {
+    error: true,
+    messages: 'The url parameter passed does not look like a valid URL. Please check your data and try again.'
+  }
+};
 
 var REQUEST_HEADERS = {
   'User-Agent': 'Readability - http://readability.com/about/'
@@ -185,14 +229,15 @@ function validateResponse(response) {
 //       unicode content for HTML, with charset conversion.
 
 var fetchResource = (function () {
-  var _ref2 = asyncToGenerator(regeneratorRuntime.mark(function _callee(url) {
-    var parsedUrl, options, _ref3, response, body;
+  var _ref2 = asyncToGenerator(regeneratorRuntime.mark(function _callee(url, parsedUrl) {
+    var options, _ref3, response, body;
 
     return regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            parsedUrl = URL.parse(encodeURI(url));
+            parsedUrl = parsedUrl || URL.parse(encodeURI(url));
+
             options = {
               url: parsedUrl,
               headers: _extends({}, REQUEST_HEADERS),
@@ -222,7 +267,7 @@ var fetchResource = (function () {
           case 12:
             _context.prev = 12;
             _context.t0 = _context['catch'](7);
-            return _context.abrupt('return', _context.t0);
+            return _context.abrupt('return', Errors.badUrl);
 
           case 15:
           case 'end':
@@ -232,7 +277,7 @@ var fetchResource = (function () {
     }, _callee, this, [[7, 12]]);
   }));
 
-  function fetchResource(_x2) {
+  function fetchResource(_x2, _x3) {
     return _ref2.apply(this, arguments);
   }
 
@@ -313,7 +358,7 @@ var Resource = {
   // :param response: If set, use as the response rather than
   //                  attempting to fetch it ourselves. Expects a
   //                  string.
-  create: function create(url, preparedResponse) {
+  create: function create(url, preparedResponse, parsedUrl) {
     var _this = this;
 
     return asyncToGenerator(regeneratorRuntime.mark(function _callee() {
@@ -345,15 +390,23 @@ var Resource = {
 
             case 6:
               _context.next = 8;
-              return fetchResource(url);
+              return fetchResource(url, parsedUrl);
 
             case 8:
               result = _context.sent;
 
             case 9:
+              if (!result.error) {
+                _context.next = 11;
+                break;
+              }
+
+              return _context.abrupt('return', result);
+
+            case 11:
               return _context.abrupt('return', _this.generateDoc(result));
 
-            case 10:
+            case 12:
             case 'end':
               return _context.stop();
           }
@@ -911,7 +964,7 @@ var TwitterExtractor = {
   },
 
   date_published: {
-    selectors: ['.tweet.permalink-tweet .metadata']
+    selectors: ['.permalink-tweet ._timestamp[data-time-ms]']
   }
 
 };
@@ -2256,6 +2309,8 @@ var CLEAN_AUTHOR_RE = /^\s*(posted |written )?by\s*:?\s*(.*)/i;
 // CLEAN DEK CONSTANTS
 var TEXT_LINK_RE = new RegExp('http(s)?://', 'i');
 // CLEAN DATE PUBLISHED CONSTANTS
+var MS_DATE_STRING = /^\d{13}$/i;
+var SEC_DATE_STRING = /^\d{10}$/i;
 var CLEAN_DATE_STRING_RE = /^\s*published\s*:?\s*(.*)/i;
 var TIME_MERIDIAN_SPACE_RE = /(.*\d)(am|pm)(.*)/i;
 var TIME_MERIDIAN_DOTS_RE = /\.m\./i;
@@ -2315,6 +2370,11 @@ function cleanDateString(dateString) {
 // Take a date published string, and hopefully return a date out of
 // it. Return none if we fail.
 function cleanDatePublished(dateString) {
+  // If string is in milliseconds or seconds, convert to int
+  if (MS_DATE_STRING.test(dateString) || SEC_DATE_STRING.test(dateString)) {
+    dateString = parseInt(dateString, 10);
+  }
+
   var date = moment(new Date(dateString));
 
   if (!date.isValid()) {
@@ -3367,35 +3427,6 @@ function scoreExtraneousLinks(href) {
   return 0;
 }
 
-var _marked = [range].map(regeneratorRuntime.mark);
-
-function range() {
-  var start = arguments.length <= 0 || arguments[0] === undefined ? 1 : arguments[0];
-  var end = arguments.length <= 1 || arguments[1] === undefined ? 1 : arguments[1];
-  return regeneratorRuntime.wrap(function range$(_context) {
-    while (1) {
-      switch (_context.prev = _context.next) {
-        case 0:
-          if (!(start <= end)) {
-            _context.next = 5;
-            break;
-          }
-
-          _context.next = 3;
-          return start += 1;
-
-        case 3:
-          _context.next = 0;
-          break;
-
-        case 5:
-        case "end":
-          return _context.stop();
-      }
-    }
-  }, _marked[0], this);
-}
-
 function makeSig$1($link) {
   return ($link.attr('class') || '') + ' ' + ($link.attr('id') || '');
 }
@@ -3788,9 +3819,10 @@ var GenericExtractor = {
   }
 };
 
-function getExtractor(url) {
-  var parsedUrl = URL.parse(url);
-  var hostname = parsedUrl.hostname;
+function getExtractor(url, parsedUrl) {
+  parsedUrl = parsedUrl || URL.parse(url);
+  var _parsedUrl = parsedUrl;
+  var hostname = _parsedUrl.hostname;
 
   var baseDomain = hostname.split('.').slice(-2).join('.');
 
@@ -4060,7 +4092,7 @@ var Iris = {
 
     var opts = arguments.length <= 2 || arguments[2] === undefined ? {} : arguments[2];
     return asyncToGenerator(regeneratorRuntime.mark(function _callee() {
-      var _ref, _ref$fetchAllPages, fetchAllPages, Extractor, $, metaCache, result, _result, title, next_page_url;
+      var _ref, _ref$fetchAllPages, fetchAllPages, parsedUrl, Extractor, $, metaCache, result, _result, title, next_page_url;
 
       return regeneratorRuntime.wrap(function _callee$(_context) {
         while (1) {
@@ -4069,15 +4101,33 @@ var Iris = {
               _ref = opts || true;
               _ref$fetchAllPages = _ref.fetchAllPages;
               fetchAllPages = _ref$fetchAllPages === undefined ? true : _ref$fetchAllPages;
-              Extractor = getExtractor(url);
+              parsedUrl = URL.parse(url);
 
-              console.log('Using extractor for ' + Extractor.domain);
+              if (validateUrl(parsedUrl)) {
+                _context.next = 6;
+                break;
+              }
 
-              _context.next = 7;
-              return Resource.create(url, html);
+              return _context.abrupt('return', Errors.badUrl);
 
-            case 7:
+            case 6:
+              Extractor = getExtractor(url, parsedUrl);
+              // console.log(`Using extractor for ${Extractor.domain}`);
+
+              _context.next = 9;
+              return Resource.create(url, html, parsedUrl);
+
+            case 9:
               $ = _context.sent;
+
+              if (!$.error) {
+                _context.next = 12;
+                break;
+              }
+
+              return _context.abrupt('return', $);
+
+            case 12:
 
               html = $.html();
 
@@ -4086,7 +4136,7 @@ var Iris = {
               metaCache = $('meta').map(function (_, node) {
                 return $(node).attr('name');
               }).toArray();
-              result = RootExtractor.extract(Extractor, { url: url, html: html, $: $, metaCache: metaCache });
+              result = RootExtractor.extract(Extractor, { url: url, html: html, $: $, metaCache: metaCache, parsedUrl: parsedUrl });
               _result = result;
               title = _result.title;
               next_page_url = _result.next_page_url;
@@ -4094,11 +4144,11 @@ var Iris = {
               // Fetch more pages if next_page_url found
 
               if (!(fetchAllPages && next_page_url)) {
-                _context.next = 20;
+                _context.next = 24;
                 break;
               }
 
-              _context.next = 17;
+              _context.next = 21;
               return collectAllPages({
                 Extractor: Extractor,
                 next_page_url: next_page_url,
@@ -4110,21 +4160,21 @@ var Iris = {
                 url: url
               });
 
-            case 17:
+            case 21:
               result = _context.sent;
-              _context.next = 21;
+              _context.next = 25;
               break;
 
-            case 20:
+            case 24:
               result = _extends({}, result, {
                 total_pages: 1,
                 rendered_pages: 1
               });
 
-            case 21:
+            case 25:
               return _context.abrupt('return', result);
 
-            case 22:
+            case 26:
             case 'end':
               return _context.stop();
           }
