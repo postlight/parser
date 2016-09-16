@@ -5,7 +5,7 @@ import { convertNodeTo } from 'utils/dom';
 // strip them. Otherwise, turn 'em into H2s.
 export default function cleanHOnes(article, $) {
   const $hOnes = $('h1', article);
-  
+
   if ($hOnes.length < 3) {
     $hOnes.each((index, node) => $(node).remove());
   } else {
