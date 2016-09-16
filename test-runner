@@ -1,4 +1,13 @@
 #!/bin/bash
 # Runs the mocha tests
 
-mocha --reporter spec --compilers js:babel-register $(find src -name "*.test.js") --require babel-polyfill
+if [ $BASH_ARGV ]; then
+  FILES=$(find src -name "*$BASH_ARGV*.test.js")
+  echo Running test for $FILES...
+else
+  echo Running all tests...
+  FILES=$(find src -name "*.test.js")
+fi
+
+
+mocha --reporter spec --compilers js:babel-register $FILES --require babel-polyfill
