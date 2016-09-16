@@ -528,7 +528,11 @@ var WikipediaExtractor = {
     // transform top infobox to an image with caption
     transforms: {
       '.infobox img': function infoboxImg($node) {
-        $node.parents('.infobox').prepend($node);
+        var $parent = $node.parents('.infobox');
+        // Only prepend the first image in .infobox
+        if ($parent.children('img').length === 0) {
+          $parent.prepend($node);
+        }
       },
       '.infobox caption': 'figcaption',
       '.infobox': 'figure'
