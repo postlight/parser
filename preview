@@ -1,0 +1,26 @@
+#!/usr/bin/env node
+var fs = require('fs')
+var execSync = require('child_process').execSync
+
+console.log('Rebuilding Mercury...')
+execSync('npm run build')
+
+var Mercury = require('./dist/mercury')
+
+var url = process.argv[2]
+
+console.log(`Fetching ${url}...`)
+Mercury.parse(url).then(function(result) {
+  var file = './preview.html'
+  var header = `Results for <a href="${url}">${url}</a>`
+  var html = Object.keys(result).reduce(function(html, key) {
+    var keyHtml = `<h4>${key}</h4> ${result[key]}`
+    return html += keyHtml
+  }, header)
+  fs.writeFileSync(file, html)
+  execSync(`open ${file}`)
+  setTimeout(function() {
+    fs.unlinkSync(file)
+  }, 1000)
+})
+
