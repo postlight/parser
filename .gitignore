@@ -1,7 +1,6 @@
 node_modules
 build
 npm-debug.log
-dist
 TODO.md
 fixtures
 read
