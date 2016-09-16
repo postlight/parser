@@ -3,12 +3,12 @@ import babelrc from 'babelrc-rollup'
 import commonjs from 'rollup-plugin-commonjs'
 
 export default {
-  entry: 'src/iris.js',
+  entry: 'src/mercury.js',
   plugins: [
     commonjs(),
     babel(babelrc()),
   ],
   format: 'cjs',
-  dest: 'dist/iris.js', // equivalent to --output
+  dest: 'dist/mercury.js', // equivalent to --output
   sourceMap: true,
 }

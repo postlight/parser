@@ -9,7 +9,7 @@ import getExtractor from 'extractors/get-extractor';
 import RootExtractor from 'extractors/root-extractor';
 import collectAllPages from 'extractors/collect-all-pages';
 
-const Iris = {
+const Mercury = {
   async parse(url, html, opts = {}) {
     const { fetchAllPages = true } = opts || true;
 
@@ -65,4 +65,4 @@ const Iris = {
 
 };
 
-export default Iris;
+export default Mercury;

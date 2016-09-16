@@ -1,8 +1,8 @@
 {
-  "name": "readability-parser",
+  "name": "mercury-parser",
   "version": "1.0.0",
   "description": "",
-  "main": "./dist/iris.js",
+  "main": "./dist/mercury.js",
   "scripts": {
     "start": "node ./build",
     "lint": "eslint src/** --fix",
