@@ -25,6 +25,7 @@ const WikipediaExtractor = {
       '.mw-editsection',
       'figure tr, figure td, figure tbody',
       '#toc',
+      '.navbox',
     ],
 
   },

@@ -539,7 +539,7 @@ var WikipediaExtractor = {
     },
 
     // Selectors to remove from the extracted content
-    clean: ['.mw-editsection', 'figure tr, figure td, figure tbody', '#toc']
+    clean: ['.mw-editsection', 'figure tr, figure td, figure tbody', '#toc', '.navbox']
 
   },
 
