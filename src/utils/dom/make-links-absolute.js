@@ -12,6 +12,5 @@ function absolutize($, rootUrl, attr, $content) {
 export default function makeLinksAbsolute($content, $, url) {
   ['href', 'src'].forEach(attr => absolutize($, url, attr, $content));
 
-  // console.log($content.html())
   return $content;
 }

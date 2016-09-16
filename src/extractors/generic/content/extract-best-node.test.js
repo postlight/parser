@@ -19,8 +19,5 @@ describe('extractBestNode($, flags)', () => {
     const bestNode = extractBestNode($, opts);
 
     assert(typeof bestNode, 'object');
-    // console.log(bestNode.html())
-
-    // assert.equal($(bestNode).text().length, 3652)
   });
 });

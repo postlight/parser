@@ -3,10 +3,6 @@ import {
   CANDIDATES_BLACKLIST,
 } from './constants';
 
-// ## NOTES:
-// This is a working first pass, but if/when we start optimizing
-// this is a good candidate. - AP
-
 export default function stripUnlikelyCandidates($) {
   //  Loop through the provided document and remove any non-link nodes
   //  that are unlikely candidates for article content.

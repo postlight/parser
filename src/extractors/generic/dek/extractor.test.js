@@ -1,7 +1,6 @@
 import assert from 'assert';
 import cheerio from 'cheerio';
 
-// import HTML from './fixtures/html'
 import GenericDekExtractor from './extractor';
 
 describe('GenericDekExtractor', () => {
