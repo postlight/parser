@@ -1,6 +1,7 @@
 {
   "presets": ["es2015"],
   "plugins": [
+    "transform-runtime",
     "transform-es2015-destructuring",
     "transform-object-rest-spread",
     "transform-async-to-generator",

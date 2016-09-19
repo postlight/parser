@@ -2,23 +2,33 @@
 
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
 
+var _regeneratorRuntime = _interopDefault(require('babel-runtime/regenerator'));
+var _extends = _interopDefault(require('babel-runtime/helpers/extends'));
+var _asyncToGenerator = _interopDefault(require('babel-runtime/helpers/asyncToGenerator'));
 var URL = _interopDefault(require('url'));
 var babelPolyfill = require('babel-polyfill');
 var cheerio = _interopDefault(require('cheerio'));
+var _Promise = _interopDefault(require('babel-runtime/core-js/promise'));
 var request = _interopDefault(require('request'));
+var _Reflect$ownKeys = _interopDefault(require('babel-runtime/core-js/reflect/own-keys'));
 var stringDirection = _interopDefault(require('string-direction'));
+var _getIterator = _interopDefault(require('babel-runtime/core-js/get-iterator'));
+var _defineProperty = _interopDefault(require('babel-runtime/helpers/defineProperty'));
+var _slicedToArray = _interopDefault(require('babel-runtime/helpers/slicedToArray'));
+var _typeof = _interopDefault(require('babel-runtime/helpers/typeof'));
 var validUrl = _interopDefault(require('valid-url'));
 var moment = _interopDefault(require('moment'));
 var wuzzy = _interopDefault(require('wuzzy'));
 var difflib = _interopDefault(require('difflib'));
+var _Array$from = _interopDefault(require('babel-runtime/core-js/array/from'));
 var ellipsize = _interopDefault(require('ellipsize'));
 
-var _marked = [range].map(regeneratorRuntime.mark);
+var _marked = [range].map(_regeneratorRuntime.mark);
 
 function range() {
   var start = arguments.length <= 0 || arguments[0] === undefined ? 1 : arguments[0];
   var end = arguments.length <= 1 || arguments[1] === undefined ? 1 : arguments[1];
-  return regeneratorRuntime.wrap(function range$(_context) {
+  return _regeneratorRuntime.wrap(function range$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
         case 0:
@@ -73,110 +83,8 @@ var BAD_CONTENT_TYPES_RE = new RegExp('^(' + BAD_CONTENT_TYPES.join('|') + ')$',
 // for us to attempt parsing. Defaults to 5 MB.
 var MAX_CONTENT_LENGTH = 5242880;
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {
-  return typeof obj;
-} : function (obj) {
-  return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj;
-};
-
-var asyncToGenerator = function (fn) {
-  return function () {
-    var gen = fn.apply(this, arguments);
-    return new Promise(function (resolve, reject) {
-      function step(key, arg) {
-        try {
-          var info = gen[key](arg);
-          var value = info.value;
-        } catch (error) {
-          reject(error);
-          return;
-        }
-
-        if (info.done) {
-          resolve(value);
-        } else {
-          return Promise.resolve(value).then(function (value) {
-            return step("next", value);
-          }, function (err) {
-            return step("throw", err);
-          });
-        }
-      }
-
-      return step("next");
-    });
-  };
-};
-
-var defineProperty = function (obj, key, value) {
-  if (key in obj) {
-    Object.defineProperty(obj, key, {
-      value: value,
-      enumerable: true,
-      configurable: true,
-      writable: true
-    });
-  } else {
-    obj[key] = value;
-  }
-
-  return obj;
-};
-
-var _extends = Object.assign || function (target) {
-  for (var i = 1; i < arguments.length; i++) {
-    var source = arguments[i];
-
-    for (var key in source) {
-      if (Object.prototype.hasOwnProperty.call(source, key)) {
-        target[key] = source[key];
-      }
-    }
-  }
-
-  return target;
-};
-
-var slicedToArray = function () {
-  function sliceIterator(arr, i) {
-    var _arr = [];
-    var _n = true;
-    var _d = false;
-    var _e = undefined;
-
-    try {
-      for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {
-        _arr.push(_s.value);
-
-        if (i && _arr.length === i) break;
-      }
-    } catch (err) {
-      _d = true;
-      _e = err;
-    } finally {
-      try {
-        if (!_n && _i["return"]) _i["return"]();
-      } finally {
-        if (_d) throw _e;
-      }
-    }
-
-    return _arr;
-  }
-
-  return function (arr, i) {
-    if (Array.isArray(arr)) {
-      return arr;
-    } else if (Symbol.iterator in Object(arr)) {
-      return sliceIterator(arr, i);
-    } else {
-      throw new TypeError("Invalid attempt to destructure non-iterable instance");
-    }
-  };
-}();
-
 function get(options) {
-  return new Promise(function (resolve, reject) {
+  return new _Promise(function (resolve, reject) {
     request(options, function (err, response, body) {
       if (err) {
         reject(err);
@@ -229,10 +137,10 @@ function validateResponse(response) {
 //       unicode content for HTML, with charset conversion.
 
 var fetchResource = (function () {
-  var _ref2 = asyncToGenerator(regeneratorRuntime.mark(function _callee(url, parsedUrl) {
+  var _ref2 = _asyncToGenerator(_regeneratorRuntime.mark(function _callee(url, parsedUrl) {
     var options, _ref3, response, body;
 
-    return regeneratorRuntime.wrap(function _callee$(_context) {
+    return _regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
@@ -321,7 +229,7 @@ var TAGS_TO_REMOVE = ['script', 'style', 'form'].join(',');
 // the src attribute so the images are no longer lazy loaded.
 function convertLazyLoadedImages($) {
   $('img').each(function (_, img) {
-    Reflect.ownKeys(img.attribs).forEach(function (attr) {
+    _Reflect$ownKeys(img.attribs).forEach(function (attr) {
       var value = img.attribs[attr];
 
       if (attr !== 'src' && IS_LINK.test(value) && IS_IMAGE.test(value)) {
@@ -361,9 +269,9 @@ var Resource = {
   create: function create(url, preparedResponse, parsedUrl) {
     var _this = this;
 
-    return asyncToGenerator(regeneratorRuntime.mark(function _callee() {
+    return _asyncToGenerator(_regeneratorRuntime.mark(function _callee() {
       var result, validResponse;
-      return regeneratorRuntime.wrap(function _callee$(_context) {
+      return _regeneratorRuntime.wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
@@ -866,7 +774,7 @@ function convertNodeTo($node, $) {
 
   var attribs = _$node$get.attribs;
 
-  var attribString = Reflect.ownKeys(attribs).map(function (key) {
+  var attribString = _Reflect$ownKeys(attribs).map(function (key) {
     return key + '=' + attribs[key];
   }).join(' ');
 
@@ -943,9 +851,9 @@ function cleanHOnes(article, $) {
 function removeAllButWhitelist($article) {
   // $('*', article).each((index, node) => {
   $article.find('*').each(function (index, node) {
-    node.attribs = Reflect.ownKeys(node.attribs).reduce(function (acc, attr) {
+    node.attribs = _Reflect$ownKeys(node.attribs).reduce(function (acc, attr) {
       if (WHITELIST_ATTRS_RE.test(attr)) {
-        return _extends({}, acc, defineProperty({}, attr, node.attribs[attr]));
+        return _extends({}, acc, _defineProperty({}, attr, node.attribs[attr]));
       }
 
       return acc;
@@ -1301,7 +1209,7 @@ function scoreContent($) {
   // First, look for special hNews based selectors and give them a big
   // boost, if they exist
   HNEWS_CONTENT_SELECTORS$1.forEach(function (_ref) {
-    var _ref2 = slicedToArray(_ref, 2);
+    var _ref2 = _slicedToArray(_ref, 2);
 
     var parentSelector = _ref2[0];
     var childSelector = _ref2[1];
@@ -1424,7 +1332,7 @@ function articleBaseUrl(url, parsed) {
     if (segment.includes('.')) {
       var _segment$split = segment.split('.');
 
-      var _segment$split2 = slicedToArray(_segment$split, 2);
+      var _segment$split2 = _slicedToArray(_segment$split, 2);
 
       var possibleSegment = _segment$split2[0];
       var fileExt = _segment$split2[1];
@@ -1799,7 +1707,7 @@ function extractFromMeta($, metaNames, cachedNames) {
       }
     };
 
-    for (var _iterator = foundNames[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+    for (var _iterator = _getIterator(foundNames), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
       var _ret = _loop();
 
       if ((typeof _ret === 'undefined' ? 'undefined' : _typeof(_ret)) === "object") return _ret.v;
@@ -1849,7 +1757,7 @@ function extractFromSelectors($, selectors) {
   var _iteratorError = undefined;
 
   try {
-    for (var _iterator = selectors[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+    for (var _iterator = _getIterator(selectors), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
       var selector = _step.value;
 
       var nodes = $(selector);
@@ -2089,7 +1997,7 @@ function extractBreadcrumbTitle(splitTitle, text) {
         return acc;
       }, {});
 
-      var _Reflect$ownKeys$redu = Reflect.ownKeys(termCounts).reduce(function (acc, key) {
+      var _Reflect$ownKeys$redu = _Reflect$ownKeys(termCounts).reduce(function (acc, key) {
         if (acc[1] < termCounts[key]) {
           return [key, termCounts[key]];
         }
@@ -2097,7 +2005,7 @@ function extractBreadcrumbTitle(splitTitle, text) {
         return acc;
       }, [0, 0]);
 
-      var _Reflect$ownKeys$redu2 = slicedToArray(_Reflect$ownKeys$redu, 2);
+      var _Reflect$ownKeys$redu2 = _slicedToArray(_Reflect$ownKeys$redu, 2);
 
       var maxTerm = _Reflect$ownKeys$redu2[0];
       var termCount = _Reflect$ownKeys$redu2[1];
@@ -2275,9 +2183,9 @@ var GenericContentExtractor = {
     var _iteratorError = undefined;
 
     try {
-      for (var _iterator = Reflect.ownKeys(opts).filter(function (k) {
+      for (var _iterator = _getIterator(_Reflect$ownKeys(opts).filter(function (k) {
         return opts[k] === true;
-      })[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+      })), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
         var key = _step.value;
 
         opts[key] = false;
@@ -2442,10 +2350,10 @@ var GenericAuthorExtractor = {
     var _iteratorError = undefined;
 
     try {
-      for (var _iterator = BYLINE_SELECTORS_RE[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+      for (var _iterator = _getIterator(BYLINE_SELECTORS_RE), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
         var _ref4 = _step.value;
 
-        var _ref3 = slicedToArray(_ref4, 2);
+        var _ref3 = _slicedToArray(_ref4, 2);
 
         var selector = _ref3[0];
         var regex = _ref3[1];
@@ -2736,11 +2644,11 @@ var GenericLeadImageUrlExtractor = {
       imgScores[src] = score;
     });
 
-    var _Reflect$ownKeys$redu = Reflect.ownKeys(imgScores).reduce(function (acc, key) {
+    var _Reflect$ownKeys$redu = _Reflect$ownKeys(imgScores).reduce(function (acc, key) {
       return imgScores[key] > acc[1] ? [key, imgScores[key]] : acc;
     }, [null, 0]);
 
-    var _Reflect$ownKeys$redu2 = slicedToArray(_Reflect$ownKeys$redu, 2);
+    var _Reflect$ownKeys$redu2 = _slicedToArray(_Reflect$ownKeys$redu, 2);
 
     var topUrl = _Reflect$ownKeys$redu2[0];
     var topScore = _Reflect$ownKeys$redu2[1];
@@ -2759,7 +2667,7 @@ var GenericLeadImageUrlExtractor = {
     var _iteratorError = undefined;
 
     try {
-      for (var _iterator = LEAD_IMAGE_URL_SELECTORS[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+      for (var _iterator = _getIterator(LEAD_IMAGE_URL_SELECTORS), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
         var selector = _step.value;
 
         var $node = $(selector).first();
@@ -2799,161 +2707,6 @@ var GenericLeadImageUrlExtractor = {
     return null;
   }
 };
-
-// def extract(self):
-//     """
-//     # First, try to find the "best" image via the content.
-//     # We'd rather not have to fetch each image and check dimensions,
-//     # so try to do some analysis and determine them instead.
-//     content = self.extractor.extract_content(return_type="node")
-//     imgs = content.xpath('.//img')
-//     img_scores = defaultdict(int)
-//     logger.debug('Scoring %d images from content', len(imgs))
-//     for (i, img) in enumerate(imgs):
-//         img_score = 0
-//
-//         if not 'src' in img.attrib:
-//             logger.debug('No src attribute found')
-//             continue
-//
-//         try:
-//             parsed_img = urlparse(img.attrib['src'])
-//             img_path = parsed_img.path.lower()
-//         except ValueError:
-//             logger.debug('ValueError getting img path.')
-//             continue
-//         logger.debug('Image path is %s', img_path)
-//
-//         if constants.POSITIVE_LEAD_IMAGE_URL_HINTS_RE.match(img_path):
-//             logger.debug('Positive URL hints match. Adding 20.')
-//             img_score += 20
-//
-//         if constants.NEGATIVE_LEAD_IMAGE_URL_HINTS_RE.match(img_path):
-//             logger.debug('Negative URL hints match. Subtracting 20.')
-//             img_score -= 20
-//
-//         # Gifs are more often structure than photos
-//         if img_path.endswith('gif'):
-//             logger.debug('gif found. Subtracting 10.')
-//             img_score -= 10
-//
-//         # JPGs are more often photographs
-//         if img_path.endswith('jpg'):
-//             logger.debug('jpg found. Adding 10.')
-//             img_score += 10
-//
-//         # PNGs are neutral.
-//
-//         # Alt attribute usually means non-presentational image.
-//         if 'alt' in img.attrib and len(img.attrib['alt']) > 5:
-//             logger.debug('alt attribute found. Adding 5.')
-//             img_score += 5
-//
-//         # Look through our parent and grandparent for figure-like
-//         # container elements, give a bonus if we find them
-//         parents = [img.getparent()]
-//         if parents[0] is not None and parents[0].getparent() is not None:
-//             parents.append(parents[0].getparent())
-//         for p in parents:
-//             if p.tag == 'figure':
-//                 logger.debug('Parent with <figure> tag found. Adding 25.')
-//                 img_score += 25
-//
-//             p_sig = ' '.join([p.get('id', ''), p.get('class', '')])
-//             if constants.PHOTO_HINTS_RE.search(p_sig):
-//                 logger.debug('Photo hints regex match. Adding 15.')
-//                 img_score += 15
-//
-//         # Look at our immediate sibling and see if it looks like it's a
-//         # caption. Bonus if so.
-//         sibling = img.getnext()
-//         if sibling is not None:
-//             if sibling.tag == 'figcaption':
-//                 img_score += 25
-//
-//             sib_sig = ' '.join([sibling.get('id', ''),
-//                                 sibling.get('class', '')]).lower()
-//             if 'caption' in sib_sig:
-//                 img_score += 15
-//
-//         # Pull out width/height if they were set.
-//         img_width = None
-//         img_height = None
-//         if 'width' in img.attrib:
-//             try:
-//                 img_width = float(img.get('width'))
-//             except ValueError:
-//                 pass
-//         if 'height' in img.attrib:
-//             try:
-//                 img_height = float(img.get('height'))
-//             except ValueError:
-//                 pass
-//
-//         # Penalty for skinny images
-//         if img_width and img_width <= 50:
-//             logger.debug('Skinny image found. Subtracting 50.')
-//             img_score -= 50
-//
-//         # Penalty for short images
-//         if img_height and img_height <= 50:
-//             # Wide, short images are more common than narrow, tall ones
-//             logger.debug('Short image found. Subtracting 25.')
-//             img_score -= 25
-//
-//         if img_width and img_height and not 'sprite' in img_path:
-//             area = img_width * img_height
-//
-//             if area < 5000: # Smaller than 50x100
-//                 logger.debug('Image with small area found. Subtracting 100.')
-//                 img_score -= 100
-//             else:
-//                 img_score += round(area/1000.0)
-//
-//         # If the image is higher on the page than other images,
-//         # it gets a bonus. Penalty if lower.
-//         logger.debug('Adding page placement bonus of %d.', len(imgs)/2 - i)
-//         img_score += len(imgs)/2 - i
-//
-//         # Use the raw src here because we munged img_path for case
-//         # insensitivity
-//         logger.debug('Final score is %d.', img_score)
-//         img_scores[img.attrib['src']] += img_score
-//
-//     top_score = 0
-//     top_url = None
-//     for (url, score) in img_scores.items():
-//         if score > top_score:
-//             top_url = url
-//             top_score = score
-//
-//     if top_score > 0:
-//         logger.debug('Using top score image from content. Score was %d', top_score)
-//         return top_url
-//
-//
-//     # If nothing else worked, check to see if there are any really
-//     # probable nodes in the doc, like <link rel="image_src" />.
-//     logger.debug('Trying to find lead image in probable nodes')
-//     for selector in constants.LEAD_IMAGE_URL_SELECTORS:
-//         nodes = self.resource.extract_by_selector(selector)
-//         for node in nodes:
-//             clean_value = None
-//             if node.attrib.get('src'):
-//                 clean_value = self.clean(node.attrib['src'])
-//
-//             if not clean_value and node.attrib.get('href'):
-//                 clean_value = self.clean(node.attrib['href'])
-//
-//             if not clean_value and node.attrib.get('value'):
-//                 clean_value = self.clean(node.attrib['value'])
-//
-//             if clean_value:
-//                 logger.debug('Found lead image in probable nodes.')
-//                 logger.debug('Node was: %s', node)
-//                 return clean_value
-//
-//     return None
 
 function scoreSimilarity(score, articleUrl, href) {
   // Do this last and only if we have a real candidate, because it's
@@ -3059,7 +2812,7 @@ function scoreByParents$1($link) {
   var negativeMatch = false;
   var score = 0;
 
-  Array.from(range(0, 4)).forEach(function () {
+  _Array$from(range(0, 4)).forEach(function () {
     if ($parent.length === 0) {
       return;
     }
@@ -3252,7 +3005,7 @@ function scoreLinks(_ref) {
     return possiblePages;
   }, {});
 
-  return Reflect.ownKeys(scoredPages).length === 0 ? null : scoredPages;
+  return _Reflect$ownKeys(scoredPages).length === 0 ? null : scoredPages;
 }
 
 // Looks for and returns next page url
@@ -3286,7 +3039,7 @@ var GenericNextPageUrlExtractor = {
 
     // now that we've scored all possible pages,
     // find the biggest one.
-    var topPage = Reflect.ownKeys(scoredLinks).reduce(function (acc, link) {
+    var topPage = _Reflect$ownKeys(scoredLinks).reduce(function (acc, link) {
       var scoredLink = scoredLinks[link];
       return scoredLink.score > acc.score ? scoredLink : acc;
     }, { score: -100 });
@@ -3467,7 +3220,7 @@ function transformElements($content, $, _ref2) {
 
   if (!transforms) return null;
 
-  Reflect.ownKeys(transforms).forEach(function (key) {
+  _Reflect$ownKeys(transforms).forEach(function (key) {
     var $matches = $(key, $content);
     var value = transforms[key];
 
@@ -3627,7 +3380,7 @@ var RootExtractor = {
 };
 
 var collectAllPages = (function () {
-  var _ref = asyncToGenerator(regeneratorRuntime.mark(function _callee(_ref2) {
+  var _ref = _asyncToGenerator(_regeneratorRuntime.mark(function _callee(_ref2) {
     var next_page_url = _ref2.next_page_url;
     var html = _ref2.html;
     var $ = _ref2.$;
@@ -3637,7 +3390,7 @@ var collectAllPages = (function () {
     var title = _ref2.title;
     var url = _ref2.url;
     var pages, previousUrls, extractorOpts, nextPageResult;
-    return regeneratorRuntime.wrap(function _callee$(_context) {
+    return _regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
@@ -3710,10 +3463,10 @@ var Mercury = {
     var _this = this;
 
     var opts = arguments.length <= 2 || arguments[2] === undefined ? {} : arguments[2];
-    return asyncToGenerator(regeneratorRuntime.mark(function _callee() {
+    return _asyncToGenerator(_regeneratorRuntime.mark(function _callee() {
       var _ref, _ref$fetchAllPages, fetchAllPages, parsedUrl, Extractor, $, metaCache, result, _result, title, next_page_url;
 
-      return regeneratorRuntime.wrap(function _callee$(_context) {
+      return _regeneratorRuntime.wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
