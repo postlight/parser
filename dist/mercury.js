@@ -501,11 +501,59 @@ var TwitterExtractor = {
 
 };
 
+var NYTimesExtractor = {
+  title: {
+    selectors: ['.g-headline', 'h1.headline']
+  },
+
+  author: {
+    selectors: ['.g-byline', '.byline']
+  },
+
+  content: {
+    selectors: ['div.g-blocks', 'article#story'],
+
+    defaultCleaner: false,
+
+    transforms: {
+      'img.g-lazy': function imgGLazy($node) {
+        var src = $node.attr('src');
+        // const widths = $node.attr('data-widths')
+        //                   .slice(1)
+        //                   .slice(0, -1)
+        //                   .split(',');
+        // if (widths.length) {
+        //   width = widths.slice(-1);
+        // } else {
+        //   width = '900';
+        // }
+        var width = 640;
+
+        src = src.replace('{{size}}', width);
+        $node.attr('src', src);
+      }
+    },
+
+    clean: ['.ad', 'header#story-header', '.story-body-1 .lede.video', '.visually-hidden', '#newsletter-promo', '.promo', '.comments-button', '.hidden']
+  },
+
+  date_published: null,
+
+  lead_image_url: null,
+
+  dek: null,
+
+  next_page_url: null,
+
+  excerpt: null
+};
+
 var Extractors = {
   'nymag.com': NYMagExtractor,
   'blogspot.com': BloggerExtractor,
   'wikipedia.org': WikipediaExtractor,
-  'twitter.com': TwitterExtractor
+  'twitter.com': TwitterExtractor,
+  'www.nytimes.com': NYTimesExtractor
 };
 
 // Spacer images to be removed
@@ -3207,7 +3255,7 @@ var ATTR_RE = /\[([\w-]+)\]/;
 function cleanBySelectors($content, $, _ref) {
   var clean = _ref.clean;
 
-  if (!clean) return null;
+  if (!clean) return $content;
 
   $(clean.join(','), $content).remove();
 
@@ -3218,7 +3266,7 @@ function cleanBySelectors($content, $, _ref) {
 function transformElements($content, $, _ref2) {
   var transforms = _ref2.transforms;
 
-  if (!transforms) return null;
+  if (!transforms) return $content;
 
   _Reflect$ownKeys(transforms).forEach(function (key) {
     var $matches = $(key, $content);
@@ -3552,6 +3600,32 @@ var Mercury = {
           }
         }
       }, _callee, _this);
+    }))();
+  },
+
+
+  // A convenience method for getting a resource
+  // to work with, e.g., for custom extractor generator
+  fetchResource: function fetchResource(url) {
+    var _this2 = this;
+
+    return asyncToGenerator(regeneratorRuntime.mark(function _callee2() {
+      return regeneratorRuntime.wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              _context2.next = 2;
+              return Resource.create(url);
+
+            case 2:
+              return _context2.abrupt('return', _context2.sent);
+
+            case 3:
+            case 'end':
+              return _context2.stop();
+          }
+        }
+      }, _callee2, _this2);
     }))();
   }
 };

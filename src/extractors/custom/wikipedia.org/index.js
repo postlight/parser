@@ -1,4 +1,4 @@
-const WikipediaExtractor = {
+export const WikipediaExtractor = {
   domain: 'wikipedia.org',
   content: {
     selectors: [
@@ -45,5 +45,3 @@ const WikipediaExtractor = {
   },
 
 };
-
-export default WikipediaExtractor;

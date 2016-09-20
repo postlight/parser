@@ -34,3 +34,7 @@ The result looks like this:
 ```
 
 If Mercury is unable to find a field, that field will return `null`.
+
+## Contributing
+
+If you'd like to write a custom parser for a site, [here's how](src/extractors/custom/README.md).

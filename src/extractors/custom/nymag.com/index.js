@@ -1,7 +1,7 @@
-const NYMagExtractor = {
+export const NYMagExtractor = {
   domain: 'nymag.com',
   content: {
-    // Order by most likely. Extractor will stop on first occurence
+    // Order by most likely. Extractor will stop on first occurrence
     selectors: [
       'div.article-content',
       'section.body',
@@ -64,5 +64,3 @@ const NYMagExtractor = {
     ],
   },
 };
-
-export default NYMagExtractor;

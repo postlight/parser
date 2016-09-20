@@ -7,7 +7,7 @@ import { ATTR_RE } from './constants';
 
 // Remove elements by an array of selectors
 export function cleanBySelectors($content, $, { clean }) {
-  if (!clean) return null;
+  if (!clean) return $content;
 
   $(clean.join(','), $content).remove();
 
@@ -16,7 +16,7 @@ export function cleanBySelectors($content, $, { clean }) {
 
 // Transform matching elements
 export function transformElements($content, $, { transforms }) {
-  if (!transforms) return null;
+  if (!transforms) return $content;
 
   Reflect.ownKeys(transforms).forEach((key) => {
     const $matches = $(key, $content);

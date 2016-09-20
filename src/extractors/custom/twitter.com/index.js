@@ -1,4 +1,4 @@
-const TwitterExtractor = {
+export const TwitterExtractor = {
   domain: 'twitter.com',
 
   content: {
@@ -46,6 +46,3 @@ const TwitterExtractor = {
   },
 
 };
-
-
-export default TwitterExtractor;

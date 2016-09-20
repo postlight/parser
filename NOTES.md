@@ -43,7 +43,7 @@ My goal is be to create declarative extractors that describe what rather than ho
 ```javascript
 NYMagExtractor = {
   content: {
-    // Order by most likely. Extractor will stop on first occurence
+    // Order by most likely. Extractor will stop on first occurrence
     selectors: [
       'div.article-content',
       'section.body',

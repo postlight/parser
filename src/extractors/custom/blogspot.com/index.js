@@ -1,4 +1,4 @@
-const BloggerExtractor = {
+export const BloggerExtractor = {
   domain: 'blogspot.com',
   content: {
     // Blogger is insane and does not load its content
@@ -36,5 +36,3 @@ const BloggerExtractor = {
     ],
   },
 };
-
-export default BloggerExtractor;

@@ -7,8 +7,10 @@
     "start": "node ./build",
     "lint": "eslint src/** --fix",
     "build": "eslint src/** --fix && rollup -c",
+    "build-generator": "rollup -c scripts/rollup.config.js",
     "test_build": "rollup -c",
-    "test": "./test-runner"
+    "test": "./test-runner",
+    "generate-custom-parser": "node ./dist/generate-custom-parser.js"
   },
   "author": "",
   "license": "ISC",
@@ -33,10 +35,13 @@
     "eslint-plugin-import": "^1.15.0",
     "eslint-plugin-jsx-a11y": "^2.2.2",
     "eslint-plugin-react": "^6.2.1",
+    "inquirer": "^1.1.3",
     "mocha": "^3.0.2",
+    "ora": "^0.3.0",
     "rollup": "^0.34.13",
     "rollup-plugin-babel": "^2.6.1",
-    "rollup-plugin-commonjs": "^4.1.0"
+    "rollup-plugin-commonjs": "^4.1.0",
+    "rollup-plugin-multi-entry": "^2.0.1"
   },
   "dependencies": {
     "babel-polyfill": "^6.13.0",
