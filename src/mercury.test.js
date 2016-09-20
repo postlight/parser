@@ -5,7 +5,6 @@ import Mercury from './mercury';
 
 describe('Mercury', () => {
   describe('parse(url)', function test() {
-    this.timeout(1000000);
     it('returns an error if a malformed url is passed', async function() {
       const error = await Mercury.parse('foo.com');
 

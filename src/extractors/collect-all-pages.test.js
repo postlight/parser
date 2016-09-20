@@ -4,9 +4,9 @@
 //
 // import collectAllPages from './collect-all-pages';
 //
-// describe('collectAllPages(opts)', () => {
-//   it('fetches additional pages', () => {
+describe('collectAllPages(opts)', () => {
+  it('fetches additional pages', () => {
 //     const html = fs.readFileSync('./fixtures/ars.html');
 //     const $ = cheerio.load(html);
-//   });
-// });
+  });
+});
