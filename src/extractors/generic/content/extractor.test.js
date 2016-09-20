@@ -5,7 +5,7 @@ import { clean } from 'test-helpers';
 
 import GenericContentExtractor from './extractor';
 
-describe('GenericContentExtractor', function () {
+describe('GenericContentExtractor', () => {
   describe('extract($, html, opts)', () => {
     it('extracts html and returns the article', () => {
       const html = fs.readFileSync('./fixtures/vulture.html', 'utf-8');

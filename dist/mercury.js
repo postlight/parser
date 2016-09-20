@@ -351,7 +351,7 @@ var Resource = {
 var NYMagExtractor = {
   domain: 'nymag.com',
   content: {
-    // Order by most likely. Extractor will stop on first occurence
+    // Order by most likely. Extractor will stop on first occurrence
     selectors: ['div.article-content', 'section.body', 'article.article'],
 
     // Selectors to remove from the extracted content
@@ -548,12 +548,49 @@ var NYTimesExtractor = {
   excerpt: null
 };
 
+// Rename CustomExtractor
+// to fit your publication
+var TheAtlanticExtractor = {
+  domain: 'www.theatlantic.com',
+  title: {
+    selectors: ['h1.hed']
+  },
+
+  author: {
+    selectors: ['article#article .article-cover-extra .metadata .byline a']
+  },
+
+  content: {
+    selectors: ['.article-body'],
+
+    // Is there anything in the content you selected that needs transformed
+    // before it's consumable content? E.g., unusual lazy loaded images
+    transforms: [],
+
+    // Is there anything that is in the result that shouldn't be?
+    // The clean selectors will remove anything that matches from
+    // the result
+    clean: []
+  },
+
+  date_published: null,
+
+  lead_image_url: null,
+
+  dek: null,
+
+  next_page_url: null,
+
+  excerpt: null
+};
+
 var Extractors = {
   'nymag.com': NYMagExtractor,
   'blogspot.com': BloggerExtractor,
   'wikipedia.org': WikipediaExtractor,
   'twitter.com': TwitterExtractor,
-  'www.nytimes.com': NYTimesExtractor
+  'www.nytimes.com': NYTimesExtractor,
+  'www.theatlantic.com': TheAtlanticExtractor
 };
 
 // Spacer images to be removed
@@ -3609,8 +3646,8 @@ var Mercury = {
   fetchResource: function fetchResource(url) {
     var _this2 = this;
 
-    return asyncToGenerator(regeneratorRuntime.mark(function _callee2() {
-      return regeneratorRuntime.wrap(function _callee2$(_context2) {
+    return _asyncToGenerator(_regeneratorRuntime.mark(function _callee2() {
+      return _regeneratorRuntime.wrap(function _callee2$(_context2) {
         while (1) {
           switch (_context2.prev = _context2.next) {
             case 0:

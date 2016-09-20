@@ -4,7 +4,7 @@ import { Errors } from 'utils';
 import Resource from './index';
 
 describe('Resource', () => {
-  describe('create(url)', function test() {
+  describe('create(url)', () => {
     it('fetches the page and returns a cheerio object', (async) () => {
       const url = 'http://theconcourse.deadspin.com/1786177057';
       const $ = await Resource.create(url);

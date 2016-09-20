@@ -8,7 +8,7 @@ import {
 } from './fetch-resource';
 import { MAX_CONTENT_LENGTH } from './constants';
 
-describe('fetchResource(url)', function test() {
+describe('fetchResource(url)', () => {
   it('returns appropriate json for bad url', (async) () => {
     const url = 'http://www.nytimes.com/500';
     const { error } = await fetchResource(url);

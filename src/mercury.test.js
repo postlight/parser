@@ -4,7 +4,7 @@ import { Errors } from 'utils';
 import Mercury from './mercury';
 
 describe('Mercury', () => {
-  describe('parse(url)', function test() {
+  describe('parse(url)', () => {
     it('returns an error if a malformed url is passed', async function() {
       const error = await Mercury.parse('foo.com');
 

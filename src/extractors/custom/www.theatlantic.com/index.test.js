@@ -15,8 +15,8 @@ describe('CustomExtractor', () => {
     // src/extractors/all.js
     const url = 'http://www.theatlantic.com/technology/archive/2016/09/why-new-yorkers-got-a-push-alert-about-a-manhunt/500591/';
     const extractor = getExtractor(url);
-    assert.equal(extractor.domain, URL.parse(url).hostname)
-  })
+    assert.equal(extractor.domain, URL.parse(url).hostname);
+  });
 
   it('works with a starter story', (async) () => {
     // To pass this test, begin filling out your
