@@ -4,7 +4,17 @@ Mercury can extract meaningful content from almost any web site, but custom pars
 
 ## How to generate a custom parser
 
-Take a look at the live custom parsers in [`src/extractors/custom`](/src/extractors/custom) for examples and to check if the site you want to write a parser for already exists.
+First, you'll need to clone the Mercury Parser repository and install dependencies.
+
+```bash
+git clone https://github.com/postlight/mercury-parser.git
+
+cd mercury-parser
+
+npm install
+```
+
+Now that you're ready to go, take a look at the live custom parsers in [`src/extractors/custom`](/src/extractors/custom) for examples and to check if the site you want to write a parser for already exists.
 
 To generate a new custom parser, run:
 
