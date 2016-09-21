@@ -73,9 +73,7 @@ export function select(opts) {
     $content = transformElements($content, $, extractionOpts);
     $content = cleanBySelectors($content, $, extractionOpts);
 
-    if (defaultCleaner) {
-      $content = Cleaners[type]($content, opts);
-    }
+    $content = Cleaners[type]($content, { ...opts, defaultCleaner });
 
     return $.html($content);
   }

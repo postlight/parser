@@ -18,6 +18,7 @@ export default function extractCleanNode(
     cleanConditionally = true,
     title = '',
     url = '',
+    defaultCleaner = true,
   }
 ) {
   // Rewrite the tag name to div if it's a top level node like body or
@@ -25,7 +26,9 @@ export default function extractCleanNode(
   rewriteTopLevel(article, $);
 
   // Drop small images and spacer images
-  cleanImages(article, $);
+  // Only do this is defaultCleaner is set to true;
+  // this can sometimes be too aggressive.
+  if (defaultCleaner) cleanImages(article, $);
 
   // Drop certain tags like <title>, etc
   // This is -mostly- for cleanliness, not security.
@@ -48,7 +51,8 @@ export default function extractCleanNode(
   // We used to clean UL's and OL's here, but it was leading to
   // too many in-article lists being removed. Consider a better
   // way to detect menus particularly and remove them.
-  cleanTags(article, $, cleanConditionally);
+  // Also optionally running, since it can be overly aggressive.
+  if (defaultCleaner) cleanTags(article, $, cleanConditionally);
 
   // Remove empty paragraph nodes
   removeEmpty(article, $);

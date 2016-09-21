@@ -2007,13 +2007,17 @@ function extractCleanNode(article, _ref) {
   var title = _ref$title === undefined ? '' : _ref$title;
   var _ref$url = _ref.url;
   var url = _ref$url === undefined ? '' : _ref$url;
+  var _ref$defaultCleaner = _ref.defaultCleaner;
+  var defaultCleaner = _ref$defaultCleaner === undefined ? true : _ref$defaultCleaner;
 
   // Rewrite the tag name to div if it's a top level node like body or
   // html to avoid later complications with multiple body tags.
   rewriteTopLevel(article, $);
 
   // Drop small images and spacer images
-  cleanImages(article, $);
+  // Only do this is defaultCleaner is set to true;
+  // this can sometimes be too aggressive.
+  if (defaultCleaner) cleanImages(article, $);
 
   // Drop certain tags like <title>, etc
   // This is -mostly- for cleanliness, not security.
@@ -2036,7 +2040,8 @@ function extractCleanNode(article, _ref) {
   // We used to clean UL's and OL's here, but it was leading to
   // too many in-article lists being removed. Consider a better
   // way to detect menus particularly and remove them.
-  cleanTags(article, $, cleanConditionally);
+  // Also optionally running, since it can be overly aggressive.
+  if (defaultCleaner) cleanTags(article, $, cleanConditionally);
 
   // Remove empty paragraph nodes
   removeEmpty(article, $);
@@ -3370,9 +3375,7 @@ function select(opts) {
     $content = transformElements($content, $, extractionOpts);
     $content = cleanBySelectors($content, $, extractionOpts);
 
-    if (defaultCleaner) {
-      $content = Cleaners[type]($content, opts);
-    }
+    $content = Cleaners[type]($content, _extends({}, opts, { defaultCleaner: defaultCleaner }));
 
     return $.html($content);
   }
