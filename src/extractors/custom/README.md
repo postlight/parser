@@ -230,7 +230,7 @@ This test checks to see whether or not Mercury can find your custom parser. In o
     // src/extractors/all.js
 ```
 
-So let's follow those instructions. In `[www.newyorker.com/index.js](www.newyorker.com/index.js)`, we're coing to rename `CustomExtractor` to `NewYorkerExtractor`, just like we did in the test. The top of our custom parser should now look like this:
+So let's follow those instructions. In [`www.newyorker.com/index.js`](./www.newyorker.com/index.js), we're going to rename `CustomExtractor` to `NewYorkerExtractor`, just like we did in the test. The top of our custom parser should now look like this:
 
 ```javascript
 export const NewYorkerExtractor = {
@@ -241,7 +241,7 @@ export const NewYorkerExtractor = {
 }
 ```
 
-Save the file, and you'll notice your test still isn't passing. If we refer back to the instructions above, we'll see that we need to add our new extractor to `[src/extractors/all.js](../extractors/all.js)`. So let's do that. First, we need to add the following import to the rest of the imports at top of the file:
+Save the file, and you'll notice your test still isn't passing. If we refer back to the instructions above, we'll see that we need to add our new extractor to [`src/extractors/all.js`](../all.js). So let's do that. First, we need to add the following import to the rest of the imports at top of the file:
 
 ```javascript
 import { NewYorkerExtractor } from './custom/www.newyorker.com';
@@ -280,7 +280,7 @@ The next test checks to see whether your extractor returns the correct title:
   });
 ```
 
-As you can see, to pass this test, we need to fill out our title selector. In order to do this, you need to know what your selector is. To do this, open the html fixture the generator downloaded for you in the `[fixtures](/fixtures)` directory. In our example, that file is `fixtures/www.newyorker.com/1475248565793.html`. Now open that file in your web browser.
+As you can see, to pass this test, we need to fill out our title selector. In order to do this, you need to know what your selector is. To do this, open the html fixture the generator downloaded for you in the [`fixtures`](/fixtures) directory. In our example, that file is `fixtures/www.newyorker.com/1475248565793.html`. Now open that file in your web browser.
 
 The page should look more or less exactly like the site you pointed it to, but this version is downloaded locally for test purposes. (You should always look for selectors using this local fixture rather than the actual web site; some sites re-write elements after the page loads, and we want to make sure we're looking at the page the same way Mercury will be.)
 
