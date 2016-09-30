@@ -26,8 +26,8 @@ var ellipsize = _interopDefault(require('ellipsize'));
 var _marked = [range].map(_regeneratorRuntime.mark);
 
 function range() {
-  var start = arguments.length <= 0 || arguments[0] === undefined ? 1 : arguments[0];
-  var end = arguments.length <= 1 || arguments[1] === undefined ? 1 : arguments[1];
+  var start = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+  var end = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
   return _regeneratorRuntime.wrap(function range$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
@@ -101,7 +101,7 @@ function get(options) {
 // further processing of this url.
 
 function validateResponse(response) {
-  var parseNon2xx = arguments.length <= 1 || arguments[1] === undefined ? false : arguments[1];
+  var parseNon2xx = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
 
   // Check if we got a valid status code
   if (response.statusMessage !== 'OK') {
@@ -627,6 +627,49 @@ var NewYorkerExtractor = {
   excerpt: null
 };
 
+// Rename CustomExtractor
+// to fit your publication
+// (e.g., NYTimesExtractor)
+var WiredExtractor = {
+  domain: 'www.wired.com',
+  title: {
+    selectors: ['h1.post-title']
+  },
+
+  author: {
+    selectors: ['a[rel="author"]']
+  },
+
+  content: {
+    selectors: ['article.content'],
+
+    // Is there anything in the content you selected that needs transformed
+    // before it's consumable content? E.g., unusual lazy loaded images
+    transforms: [],
+
+    // Is there anything that is in the result that shouldn't be?
+    // The clean selectors will remove anything that matches from
+    // the result
+    clean: ['.visually-hidden']
+  },
+
+  date_published: {
+    selectors: [['meta[itemprop="datePublished"]', 'value']]
+  },
+
+  lead_image_url: {
+    selectors: [['meta[name="og:image"]', 'value']]
+  },
+
+  dek: {
+    selectors: [['meta[name="og:description"]', 'value']]
+  },
+
+  next_page_url: null,
+
+  excerpt: null
+};
+
 var Extractors = {
   'nymag.com': NYMagExtractor,
   'blogspot.com': BloggerExtractor,
@@ -634,7 +677,9 @@ var Extractors = {
   'twitter.com': TwitterExtractor,
   'www.nytimes.com': NYTimesExtractor,
   'www.theatlantic.com': TheAtlanticExtractor,
-  'www.newyorker.com': NewYorkerExtractor
+  'www.newyorker.com': NewYorkerExtractor,
+  'www.wired.com': WiredExtractor
+
 };
 
 // Spacer images to be removed
@@ -822,7 +867,7 @@ function brsToPs($) {
 // :param br: Whether or not the passed node is a br
 
 function paragraphize(node, $) {
-  var br = arguments.length <= 2 || arguments[2] === undefined ? false : arguments[2];
+  var br = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
 
   var $node = $(node);
 
@@ -892,7 +937,7 @@ function convertToParagraphs($) {
 }
 
 function convertNodeTo($node, $) {
-  var tag = arguments.length <= 2 || arguments[2] === undefined ? 'p' : arguments[2];
+  var tag = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'p';
 
   var node = $node.get(0);
   if (!node) {
@@ -952,7 +997,7 @@ function cleanImages($article, $) {
 }
 
 function stripJunkTags(article, $) {
-  var tags = arguments.length <= 2 || arguments[2] === undefined ? [] : arguments[2];
+  var tags = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [];
 
   if (tags.length === 0) {
     tags = STRIP_OUTPUT_TAGS;
@@ -1165,7 +1210,7 @@ function scoreCommas(text) {
 var idkRe = new RegExp('^(p|pre)$', 'i');
 
 function scoreLength(textLength) {
-  var tagName = arguments.length <= 1 || arguments[1] === undefined ? 'p' : arguments[1];
+  var tagName = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'p';
 
   var chunks = textLength / 50;
 
@@ -1249,7 +1294,7 @@ function addToParent(node, $, score) {
 // if not, initializes a score based on
 // the node's tag type
 function getOrInitScore($node, $) {
-  var weightNodes = arguments.length <= 2 || arguments[2] === undefined ? true : arguments[2];
+  var weightNodes = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
 
   var score = getScore($node);
 
@@ -1339,7 +1384,7 @@ function scorePs($, weightNodes) {
 // score content. Parents get the full value of their children's
 // content score, grandparents half
 function scoreContent($) {
-  var weightNodes = arguments.length <= 1 || arguments[1] === undefined ? true : arguments[1];
+  var weightNodes = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
 
   // First, look for special hNews based selectors and give them a big
   // boost, if they exist
@@ -1709,7 +1754,7 @@ function cleanTags($article, $) {
 }
 
 function cleanHeaders($article, $) {
-  var title = arguments.length <= 2 || arguments[2] === undefined ? '' : arguments[2];
+  var title = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
 
   $(HEADER_TAG_LIST, $article).each(function (index, header) {
     var $header = $(header);
@@ -1794,7 +1839,7 @@ function linkDensity($node) {
 // search for, find a meta tag associated.
 
 function extractFromMeta($, metaNames, cachedNames) {
-  var cleanTags = arguments.length <= 3 || arguments[3] === undefined ? true : arguments[3];
+  var cleanTags = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
 
   var foundNames = metaNames.filter(function (name) {
     return cachedNames.indexOf(name) !== -1;
@@ -1885,8 +1930,8 @@ function isGoodNode($node, maxChildren) {
 // be extractable from the document. This is for flat
 // meta-information, like author, title, date published, etc.
 function extractFromSelectors($, selectors) {
-  var maxChildren = arguments.length <= 2 || arguments[2] === undefined ? 1 : arguments[2];
-  var textOnly = arguments.length <= 3 || arguments[3] === undefined ? true : arguments[3];
+  var maxChildren = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 1;
+  var textOnly = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
   var _iteratorNormalCompletion = true;
   var _didIteratorError = false;
   var _iteratorError = undefined;
@@ -2214,7 +2259,7 @@ function cleanDomainFromTitle(splitTitle, url) {
 // Given a title with separators in it (colons, dashes, etc),
 // resolve whether any of the segments should be removed.
 function resolveSplitTitle(title) {
-  var url = arguments.length <= 1 || arguments[1] === undefined ? '' : arguments[1];
+  var url = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
 
   // Splits while preserving splitters, like:
   // ['The New New York', ' - ', 'The Washington Post']
@@ -3236,7 +3281,7 @@ var GenericUrlExtractor = {
 var EXCERPT_META_SELECTORS = ['og:description', 'twitter:description'];
 
 function clean$2(content, $) {
-  var maxLength = arguments.length <= 2 || arguments[2] === undefined ? 200 : arguments[2];
+  var maxLength = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 200;
 
   content = content.replace(/[\s\n]+/g, ' ').trim();
   return ellipsize(content, maxLength, { ellipse: '&hellip;' });
@@ -3488,7 +3533,7 @@ function extractResult(opts) {
 
 var RootExtractor = {
   extract: function extract() {
-    var extractor = arguments.length <= 0 || arguments[0] === undefined ? GenericExtractor : arguments[0];
+    var extractor = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : GenericExtractor;
     var opts = arguments[1];
     var _opts = opts;
     var contentOnly = _opts.contentOnly;
@@ -3628,7 +3673,7 @@ var Mercury = {
   parse: function parse(url, html) {
     var _this = this;
 
-    var opts = arguments.length <= 2 || arguments[2] === undefined ? {} : arguments[2];
+    var opts = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
     return _asyncToGenerator(_regeneratorRuntime.mark(function _callee() {
       var _opts$fetchAllPages, fetchAllPages, _opts$fallback, fallback, parsedUrl, Extractor, $, metaCache, result, _result, title, next_page_url;
 
