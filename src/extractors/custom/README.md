@@ -55,11 +55,10 @@ The text you want isn't the text inside a matching element, but rather, inside t
 export const ExampleExtractor = {
     ...
 
-    // This example returns the datetime attribute if it exists; if not, it falls back to the text of time.article-timestamp
+    // This example returns the datetime attribute if it exists
     date_published: {
       selectors: [
         ['time.article-timestamp[datetime]', 'datetime'],
-        'time.article-timestamp',
       ],
     },
 
@@ -148,11 +147,17 @@ Now that you know the basics of how custom extractors work, let's walk through t
 First, you'll need to clone the Mercury Parser repository and install dependencies.
 
 ```bash
-git clone https://github.com/postlight/mercury-parser.git
+git clone git@github.com:postlight/readability-parser.git
 
-cd mercury-parser
+cd readibilty-parser
 
 npm install
+```
+
+If you don't have already have watchman installed, you'll also need to install that:
+
+```bash
+brew install watchman
 ```
 
 You should also create a new git branch for your custom extractor:
