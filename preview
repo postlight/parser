@@ -10,7 +10,7 @@ var Mercury = require('./dist/mercury')
 var url = process.argv[2]
 
 console.log(`Fetching link`)
-Mercury.parse(url).then(function(result) {
+Mercury.parse(url, null, { fallback: false }).then(function(result) {
   var htmlFile = './preview.html'
   var jsonFile = './preview.json'
 

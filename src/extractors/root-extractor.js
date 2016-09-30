@@ -3,7 +3,6 @@ import 'babel-polyfill';
 import Cleaners from 'cleaners';
 import { convertNodeTo } from 'utils/dom';
 import GenericExtractor from './generic';
-import { ATTR_RE } from './constants';
 
 // Remove elements by an array of selectors
 export function cleanBySelectors($content, $, { clean }) {
@@ -42,6 +41,17 @@ export function transformElements($content, $, { transforms }) {
   return $content;
 }
 
+function findMatchingSelector($, selectors) {
+  return selectors.find((selector) => {
+    if (Array.isArray(selector)) {
+      const [s, attr] = selector;
+      return $(s).length === 1 && $(s).attr(attr) && $(s).attr(attr).trim() !== '';
+    }
+
+    return $(selector).length === 1 && $(selector).text().trim() !== '';
+  });
+}
+
 export function select(opts) {
   const { $, type, extractionOpts, extractHtml = false } = opts;
   // Skip if there's not extraction for this type
@@ -53,7 +63,7 @@ export function select(opts) {
 
   const { selectors, defaultCleaner = true } = extractionOpts;
 
-  const matchingSelector = selectors.find(selector => $(selector).length === 1 && $(selector).text().trim() !== '');
+  const matchingSelector = findMatchingSelector($, selectors);
 
   if (!matchingSelector) return null;
 
@@ -77,16 +87,16 @@ export function select(opts) {
 
     return $.html($content);
   }
-  // if selector includes an attr (e.g., img[src]),
-  // extract the attr
-  const attr = matchingSelector.match(ATTR_RE);
+
   let result;
 
-  if (attr) {
-    result = $(matchingSelector).attr(attr[1]);
+  // if selector is an array (e.g., ['img', 'src']),
+  // extract the attr
+  if (Array.isArray(matchingSelector)) {
+    const [selector, attr] = matchingSelector;
+    result = $(selector).attr(attr).trim();
   } else {
-    // otherwise use the text of the node
-    result = $(matchingSelector).text();
+    result = $(matchingSelector).text().trim();
   }
 
   // Allow custom extractor to skip default cleaner
@@ -99,12 +109,20 @@ export function select(opts) {
 }
 
 function extractResult(opts) {
-  const { type, extractor } = opts;
+  const { type, extractor, fallback = true } = opts;
 
-  // If nothing matches the selector,
+  const result = select({ ...opts, extractionOpts: extractor[type] });
+
+  // If custom parser succeeds, return the result
+  if (result) {
+    return result;
+  }
+
+  // If nothing matches the selector, and fallback is enabled,
   // run the Generic extraction
-  return select({ ...opts, extractionOpts: extractor[type] }) ||
-    GenericExtractor[type](opts);
+  if (fallback) return GenericExtractor[type](opts);
+
+  return null;
 }
 
 const RootExtractor = {
@@ -138,7 +156,8 @@ const RootExtractor = {
     const excerpt = extractResult({ ...opts, type: 'excerpt', content });
     const word_count = extractResult({ ...opts, type: 'word_count', content });
     const direction = extractResult({ ...opts, type: 'direction', title });
-    const { url, domain } = extractResult({ ...opts, type: 'url_and_domain' });
+    const { url, domain } =
+      extractResult({ ...opts, type: 'url_and_domain' }) || { url: null, domain: null };
 
     return {
       title,

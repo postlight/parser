@@ -9,7 +9,10 @@
   "globals": {
     /* mocha */
     "describe",
-    "it"
+    "it",
+    "fit",
+    "jasmine",
+    "beforeEach",
   },
   "rules": {
     "no-param-reassign": 0,

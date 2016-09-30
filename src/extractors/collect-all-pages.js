@@ -1,6 +1,7 @@
 import 'babel-polyfill';
 import { removeAnchor } from 'utils/text';
 import RootExtractor from 'extractors/root-extractor';
+import GenericExtractor from 'extractors/generic';
 import Resource from 'resource';
 
 export default async function collectAllPages(
@@ -52,9 +53,11 @@ export default async function collectAllPages(
     next_page_url = nextPageResult.next_page_url;
   }
 
+  const word_count = GenericExtractor.word_count({ content: `<div>${result.content}</div>` });
   return {
     ...result,
     total_pages: pages,
     pages_rendered: pages,
+    word_count,
   };
 }

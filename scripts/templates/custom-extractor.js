@@ -4,11 +4,18 @@ export default function (hostname) {
   return template`
     // Rename CustomExtractor
     // to fit your publication
+    // (e.g., NYTimesExtractor)
     export const CustomExtractor = {
       domain: '${hostname}',
       title: {
         selectors: [
           // enter title selectors
+        ],
+      },
+
+      author: {
+        selectors: [
+          // enter author selectors
         ],
       },
 

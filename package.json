@@ -9,8 +9,8 @@
     "build-generator": "rollup -c scripts/rollup.config.js",
     "test_build": "rollup -c",
     "test": "jest",
-    "watch:test": "jest --watch",
-    "generate-custom-parser": "node ./dist/generate-custom-parser.js"
+    "watch:test": "jest --watch --noStackTrace",
+    "generate-parser": "node ./dist/generate-custom-parser.js && eslint src/** --fix --quiet > /dev/null"
   },
   "author": "Postlight",
   "license": "ISC",

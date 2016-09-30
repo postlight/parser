@@ -11,7 +11,10 @@ import collectAllPages from 'extractors/collect-all-pages';
 
 const Mercury = {
   async parse(url, html, opts = {}) {
-    const { fetchAllPages = true } = opts || true;
+    const {
+      fetchAllPages = true,
+      fallback = true,
+    } = opts;
 
     const parsedUrl = URL.parse(url);
 
@@ -35,7 +38,7 @@ const Mercury = {
     // Used when extracting title/author/date_published/dek
     const metaCache = $('meta').map((_, node) => $(node).attr('name')).toArray();
 
-    let result = RootExtractor.extract(Extractor, { url, html, $, metaCache, parsedUrl });
+    let result = RootExtractor.extract(Extractor, { url, html, $, metaCache, parsedUrl, fallback });
     const { title, next_page_url } = result;
 
     // Fetch more pages if next_page_url found

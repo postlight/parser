@@ -46,6 +46,7 @@ describe('Mercury', () => {
     });
 
     it('does ars pagination', async function() {
+      jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000;
       const url = 'http://arstechnica.com/gadgets/2016/08/the-connected-renter-how-to-make-your-apartment-smarter/';
       const result = await Mercury.parse(
         url,

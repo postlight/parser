@@ -7,7 +7,7 @@ var fs = _interopDefault(require('fs'));
 var URL = _interopDefault(require('url'));
 var inquirer = _interopDefault(require('inquirer'));
 var ora = _interopDefault(require('ora'));
-var _typeof2 = _interopDefault(require('babel-runtime/helpers/typeof'));
+var _typeof = _interopDefault(require('babel-runtime/helpers/typeof'));
 var regenerator = _interopDefault(require('babel-runtime/regenerator'));
 var _extends = _interopDefault(require('babel-runtime/helpers/extends'));
 var asyncToGenerator = _interopDefault(require('babel-runtime/helpers/asyncToGenerator'));
@@ -15,9 +15,9 @@ var babelPolyfill = _interopDefault(require('babel-polyfill'));
 var cheerio = _interopDefault(require('cheerio'));
 var promise = _interopDefault(require('babel-runtime/core-js/promise'));
 var request = _interopDefault(require('request'));
-var ownKeys = _interopDefault(require('babel-runtime/core-js/reflect/own-keys'));
+var _Reflect$ownKeys = _interopDefault(require('babel-runtime/core-js/reflect/own-keys'));
 var stringDirection = _interopDefault(require('string-direction'));
-var getIterator = _interopDefault(require('babel-runtime/core-js/get-iterator'));
+var _getIterator = _interopDefault(require('babel-runtime/core-js/get-iterator'));
 var defineProperty = _interopDefault(require('babel-runtime/helpers/defineProperty'));
 var validUrl = _interopDefault(require('valid-url'));
 var moment = _interopDefault(require('moment'));
@@ -31,7 +31,7 @@ function createCommonjsModule(fn, module) {
 	return module = { exports: {} }, fn(module, module.exports), module.exports;
 }
 
-var mercury=createCommonjsModule(function(module){'use strict';function _interopDefault(ex){return ex&&(typeof ex==='undefined'?'undefined':_typeof2(ex))==='object'&&'default'in ex?ex['default']:ex;}var _regeneratorRuntime=_interopDefault(regenerator);var _extends$$=_interopDefault(_extends);var _asyncToGenerator=_interopDefault(asyncToGenerator);var URL$$=_interopDefault(URL);var babelPolyfill$$=babelPolyfill;var cheerio$$=_interopDefault(cheerio);var _Promise=_interopDefault(promise);var request$$=_interopDefault(request);var _Reflect$ownKeys=_interopDefault(ownKeys);var stringDirection$$=_interopDefault(stringDirection);var _getIterator=_interopDefault(getIterator);var _defineProperty=_interopDefault(defineProperty);var _slicedToArray$$=_interopDefault(_slicedToArray);var _typeof=_interopDefault(_typeof2);var validUrl$$=_interopDefault(validUrl);var moment$$=_interopDefault(moment);var wuzzy$$=_interopDefault(wuzzy);var difflib$$=_interopDefault(difflib);var _Array$from=_interopDefault(from);var ellipsize$$=_interopDefault(ellipsize);var _marked=[range].map(_regeneratorRuntime.mark);function range(){var start=arguments.length<=0||arguments[0]===undefined?1:arguments[0];var end=arguments.length<=1||arguments[1]===undefined?1:arguments[1];return _regeneratorRuntime.wrap(function range$(_context){while(1){switch(_context.prev=_context.next){case 0:if(!(start<=end)){_context.next=5;break;}_context.next=3;return start+=1;case 3:_context.next=0;break;case 5:case"end":return _context.stop();}}},_marked[0],this);}// extremely simple url validation as a first step
+var mercury=createCommonjsModule(function(module){'use strict';function _interopDefault(ex){return ex&&(typeof ex==='undefined'?'undefined':_typeof(ex))==='object'&&'default'in ex?ex['default']:ex;}var _regeneratorRuntime=_interopDefault(regenerator);var _extends$$=_interopDefault(_extends);var _asyncToGenerator=_interopDefault(asyncToGenerator);var URL$$=_interopDefault(URL);var babelPolyfill$$=babelPolyfill;var cheerio$$=_interopDefault(cheerio);var _Promise=_interopDefault(promise);var request$$=_interopDefault(request);var _Reflect$ownKeys$$=_interopDefault(_Reflect$ownKeys);var stringDirection$$=_interopDefault(stringDirection);var _getIterator$$=_interopDefault(_getIterator);var _defineProperty=_interopDefault(defineProperty);var _slicedToArray$$=_interopDefault(_slicedToArray);var _typeof$$=_interopDefault(_typeof);var validUrl$$=_interopDefault(validUrl);var moment$$=_interopDefault(moment);var wuzzy$$=_interopDefault(wuzzy);var difflib$$=_interopDefault(difflib);var _Array$from=_interopDefault(from);var ellipsize$$=_interopDefault(ellipsize);var _marked=[range].map(_regeneratorRuntime.mark);function range(){var start=arguments.length<=0||arguments[0]===undefined?1:arguments[0];var end=arguments.length<=1||arguments[1]===undefined?1:arguments[1];return _regeneratorRuntime.wrap(function range$(_context){while(1){switch(_context.prev=_context.next){case 0:if(!(start<=end)){_context.next=5;break;}_context.next=3;return start+=1;case 3:_context.next=0;break;case 5:case"end":return _context.stop();}}},_marked[0],this);}// extremely simple url validation as a first step
 function validateUrl(_ref){var hostname=_ref.hostname;// If this isn't a valid url, return an error message
 return!!hostname;}var Errors={badUrl:{error:true,messages:'The url parameter passed does not look like a valid URL. Please check your data and try again.'}};var REQUEST_HEADERS={'User-Agent':'Readability - http://readability.com/about/'};// The number of milliseconds to attempt to fetch a resource before timing out.
 var FETCH_TIMEOUT=10000;// Content types that we do not extract content from
@@ -65,7 +65,7 @@ function normalizeMetaTags($){$=convertMetaProp($,'content','value');$=convertMe
 // Many sites will have img tags with no source, or an image tag with a src
 // attribute that a is a placeholer. We need to be able to properly fill in
 // the src attribute so the images are no longer lazy loaded.
-function convertLazyLoadedImages($){$('img').each(function(_,img){_Reflect$ownKeys(img.attribs).forEach(function(attr){var value=img.attribs[attr];if(attr!=='src'&&IS_LINK.test(value)&&IS_IMAGE.test(value)){$(img).attr('src',value);}});});return $;}function isComment(index,node){return node.type==='comment';}function cleanComments($){$.root().find('*').contents().filter(isComment).remove();return $;}function clean($){$(TAGS_TO_REMOVE).remove();$=cleanComments($);return $;}var Resource={// Create a Resource.
+function convertLazyLoadedImages($){$('img').each(function(_,img){_Reflect$ownKeys$$(img.attribs).forEach(function(attr){var value=img.attribs[attr];if(attr!=='src'&&IS_LINK.test(value)&&IS_IMAGE.test(value)){$(img).attr('src',value);}});});return $;}function isComment(index,node){return node.type==='comment';}function cleanComments($){$.root().find('*').contents().filter(isComment).remove();return $;}function clean($){$(TAGS_TO_REMOVE).remove();$=cleanComments($);return $;}var Resource={// Create a Resource.
 //
 // :param url: The URL for the document we should retrieve.
 // :param response: If set, use as the response rather than
@@ -83,7 +83,7 @@ clean:['.ad','.single-related-story'],// Object of tranformations to make on mat
 // the transformation.
 transforms:{// Convert h1s to h2s
 h1:'h2',// Convert lazy-loaded noscript images to figures
-noscript:function noscript($node){var $children=$node.children();if($children.length===1&&$children.get(0).tagName==='img'){return'figure';}return null;}}},title:{selectors:['h1.lede-feature-title','h1.headline-primary','h1']},author:{selectors:['.by-authors','.lede-feature-author']},dek:{selectors:['.lede-feature-teaser']},date_published:{selectors:['time.article-timestamp[datetime]','time.article-timestamp']}};var BloggerExtractor={domain:'blogspot.com',content:{// Blogger is insane and does not load its content
+noscript:function noscript($node){var $children=$node.children();if($children.length===1&&$children.get(0).tagName==='img'){return'figure';}return null;}}},title:{selectors:['h1.lede-feature-title','h1.headline-primary','h1']},author:{selectors:['.by-authors','.lede-feature-author']},dek:{selectors:['.lede-feature-teaser']},date_published:{selectors:[['time.article-timestamp[datetime]','datetime'],'time.article-timestamp']}};var BloggerExtractor={domain:'blogspot.com',content:{// Blogger is insane and does not load its content
 // initially in the page, but it's all there
 // in noscript
 selectors:['.post-content noscript'],// Selectors to remove from the extracted content
@@ -97,7 +97,7 @@ clean:['.mw-editsection','figure tr, figure td, figure tbody','#toc','.navbox']}
 // it to fit our needs before we clean it up.
 '.permalink[role=main]':function permalinkRoleMain($node,$){var tweets=$node.find('.tweet');var $tweetContainer=$('<div id="TWEETS_GO_HERE"></div>');$tweetContainer.append(tweets);$node.replaceWith($tweetContainer);},// Twitter wraps @ with s, which
 // renders as a strikethrough
-s:'span'},selectors:['.permalink[role=main]'],defaultCleaner:false,clean:['.stream-item-footer','button','.tweet-details-fixer']},author:{selectors:['.tweet.permalink-tweet .username']},date_published:{selectors:['.permalink-tweet ._timestamp[data-time-ms]']}};var NYTimesExtractor={title:{selectors:['.g-headline','h1.headline']},author:{selectors:['.g-byline','.byline']},content:{selectors:['div.g-blocks','article#story'],defaultCleaner:false,transforms:{'img.g-lazy':function imgGLazy($node){var src=$node.attr('src');// const widths = $node.attr('data-widths')
+s:'span'},selectors:['.permalink[role=main]'],defaultCleaner:false,clean:['.stream-item-footer','button','.tweet-details-fixer']},author:{selectors:['.tweet.permalink-tweet .username']},date_published:{selectors:[['.permalink-tweet ._timestamp[data-time-ms]','data-time-ms']]}};var NYTimesExtractor={title:{selectors:['.g-headline','h1.headline']},author:{selectors:['.g-byline','.byline']},content:{selectors:['div.g-blocks','article#story'],defaultCleaner:false,transforms:{'img.g-lazy':function imgGLazy($node){var src=$node.attr('src');// const widths = $node.attr('data-widths')
 //                   .slice(1)
 //                   .slice(0, -1)
 //                   .split(',');
@@ -113,10 +113,18 @@ var TheAtlanticExtractor={domain:'www.theatlantic.com',title:{selectors:['h1.hed
 transforms:[],// Is there anything that is in the result that shouldn't be?
 // The clean selectors will remove anything that matches from
 // the result
-clean:[]},date_published:null,lead_image_url:null,dek:null,next_page_url:null,excerpt:null};var Extractors={'nymag.com':NYMagExtractor,'blogspot.com':BloggerExtractor,'wikipedia.org':WikipediaExtractor,'twitter.com':TwitterExtractor,'www.nytimes.com':NYTimesExtractor,'www.theatlantic.com':TheAtlanticExtractor};// Spacer images to be removed
+clean:[]},date_published:null,lead_image_url:null,dek:null,next_page_url:null,excerpt:null};// Rename CustomExtractor
+// to fit your publication
+// (e.g., NYTimesExtractor)
+var NewYorkerExtractor={domain:'www.newyorker.com',title:{selectors:['h1.title']},author:{selectors:['.contributors']},content:{selectors:['div#articleBody','div.articleBody'],// Is there anything in the content you selected that needs transformed
+// before it's consumable content? E.g., unusual lazy loaded images
+transforms:[],// Is there anything that is in the result that shouldn't be?
+// The clean selectors will remove anything that matches from
+// the result
+clean:[]},date_published:{selectors:[['meta[name="article:published_time"]','value']]},lead_image_url:{selectors:[['meta[name="og:image"]','value']]},dek:{selectors:[['meta[name="og:description"]','value']]},next_page_url:null,excerpt:null};var Extractors={'nymag.com':NYMagExtractor,'blogspot.com':BloggerExtractor,'wikipedia.org':WikipediaExtractor,'twitter.com':TwitterExtractor,'www.nytimes.com':NYTimesExtractor,'www.theatlantic.com':TheAtlanticExtractor,'www.newyorker.com':NewYorkerExtractor};// Spacer images to be removed
 var SPACER_RE=new RegExp('trans|transparent|spacer|blank','i');// A list of tags to strip from the output if we encounter them.
 var STRIP_OUTPUT_TAGS=['title','script','noscript','link','style','hr','embed','iframe','object'];// cleanAttributes
-var REMOVE_ATTRS=['style','align'];var REMOVE_ATTR_SELECTORS=REMOVE_ATTRS.map(function(selector){return'['+selector+']';});var REMOVE_ATTR_LIST=REMOVE_ATTRS.join(',');var WHITELIST_ATTRS=['src','href','class','id','score'];var WHITELIST_ATTRS_RE=new RegExp('^('+WHITELIST_ATTRS.join('|')+')$','i');// removeEmpty
+var REMOVE_ATTRS=['style','align'];var REMOVE_ATTR_SELECTORS=REMOVE_ATTRS.map(function(selector){return'['+selector+']';});var REMOVE_ATTR_LIST=REMOVE_ATTRS.join(',');var WHITELIST_ATTRS=['src','srcset','href','class','id','alt','score'];var WHITELIST_ATTRS_RE=new RegExp('^('+WHITELIST_ATTRS.join('|')+')$','i');// removeEmpty
 var REMOVE_EMPTY_TAGS=['p'];var REMOVE_EMPTY_SELECTORS=REMOVE_EMPTY_TAGS.map(function(tag){return tag+':empty';}).join(',');// cleanTags
 var CLEAN_CONDITIONALLY_TAGS=['ul','ol','table','div','button','form'].join(',');// cleanHeaders
 var HEADER_TAGS=['h2','h3','h4','h5','h6'];var HEADER_TAG_LIST=HEADER_TAGS.join(',');// // CONTENT FETCHING CONSTANTS ////
@@ -211,7 +219,7 @@ while(sibling&&!(sibling.tagName&&BLOCK_LEVEL_TAGS_RE.test(sibling.tagName))){va
 //   :param $: A cheerio object to search
 //   :return cheerio object with new p elements
 //   (By-reference mutation, though. Returned just for convenience.)
-function convertToParagraphs($){$=brsToPs($);$=convertDivs($);$=convertSpans($);return $;}function convertNodeTo($node,$){var tag=arguments.length<=2||arguments[2]===undefined?'p':arguments[2];var node=$node.get(0);if(!node){return $;}var _$node$get=$node.get(0);var attribs=_$node$get.attribs;var attribString=_Reflect$ownKeys(attribs).map(function(key){return key+'='+attribs[key];}).join(' ');$node.replaceWith('<'+tag+' '+attribString+'>'+$node.contents()+'</'+tag+'>');return $;}function cleanForHeight($img,$){var height=parseInt($img.attr('height'),10);var width=parseInt($img.attr('width'),10)||20;// Remove images that explicitly have very small heights or
+function convertToParagraphs($){$=brsToPs($);$=convertDivs($);$=convertSpans($);return $;}function convertNodeTo($node,$){var tag=arguments.length<=2||arguments[2]===undefined?'p':arguments[2];var node=$node.get(0);if(!node){return $;}var _$node$get=$node.get(0);var attribs=_$node$get.attribs;var attribString=_Reflect$ownKeys$$(attribs).map(function(key){return key+'='+attribs[key];}).join(' ');$node.replaceWith('<'+tag+' '+attribString+'>'+$node.contents()+'</'+tag+'>');return $;}function cleanForHeight($img,$){var height=parseInt($img.attr('height'),10);var width=parseInt($img.attr('width'),10)||20;// Remove images that explicitly have very small heights or
 // widths, because they are most likely shims or icons,
 // which aren't very useful for reading.
 if((height||20)<10||width<10){$img.remove();}else if(height){// Don't ever specify a height on images, so that we can
@@ -219,11 +227,11 @@ if((height||20)<10||width<10){$img.remove();}else if(height){// Don't ever speci
 // aspect ratio.
 $img.removeAttr('height');}return $;}// Cleans out images where the source string matches transparent/spacer/etc
 // TODO This seems very aggressive - AP
-function removeSpacers($img,$){if(SPACER_RE.test($img.attr('src'))){$img.remove();}return $;}function cleanImages($article,$){$article.find('img').each(function(index,img){var $img=$(img);cleanForHeight($img,$);removeSpacers($img,$);});return $;}function stripJunkTags(article,$){$(STRIP_OUTPUT_TAGS.join(','),article).remove();return $;}// H1 tags are typically the article title, which should be extracted
+function removeSpacers($img,$){if(SPACER_RE.test($img.attr('src'))){$img.remove();}return $;}function cleanImages($article,$){$article.find('img').each(function(index,img){var $img=$(img);cleanForHeight($img,$);removeSpacers($img,$);});return $;}function stripJunkTags(article,$){var tags=arguments.length<=2||arguments[2]===undefined?[]:arguments[2];if(tags.length===0){tags=STRIP_OUTPUT_TAGS;}$(tags.join(','),article).remove();return $;}// H1 tags are typically the article title, which should be extracted
 // by the title extractor instead. If there's less than 3 of them (<3),
 // strip them. Otherwise, turn 'em into H2s.
 function cleanHOnes(article,$){var $hOnes=$('h1',article);if($hOnes.length<3){$hOnes.each(function(index,node){return $(node).remove();});}else{$hOnes.each(function(index,node){convertNodeTo($(node),$,'h2');});}return $;}function removeAllButWhitelist($article){// $('*', article).each((index, node) => {
-$article.find('*').each(function(index,node){node.attribs=_Reflect$ownKeys(node.attribs).reduce(function(acc,attr){if(WHITELIST_ATTRS_RE.test(attr)){return _extends$$({},acc,_defineProperty({},attr,node.attribs[attr]));}return acc;},{});});}// function removeAttrs(article, $) {
+$article.find('*').each(function(index,node){node.attribs=_Reflect$ownKeys$$(node.attribs).reduce(function(acc,attr){if(WHITELIST_ATTRS_RE.test(attr)){return _extends$$({},acc,_defineProperty({},attr,node.attribs[attr]));}return acc;},{});});}// function removeAttrs(article, $) {
 //   REMOVE_ATTRS.forEach((attr) => {
 //     $(`[${attr}]`, article).removeAttr(attr);
 //   });
@@ -444,14 +452,14 @@ var values=nodes.map(function(index,node){return $(node).attr(value);}).toArray(
 // also.
 if(values.length===1){var metaValue=void 0;// Meta values that contain HTML should be stripped, as they
 // weren't subject to cleaning previously.
-if(cleanTags){metaValue=stripTags(values[0],$);}else{metaValue=values[0];}return{v:metaValue};}};for(var _iterator=_getIterator(foundNames),_step;!(_iteratorNormalCompletion=(_step=_iterator.next()).done);_iteratorNormalCompletion=true){var _ret=_loop();if((typeof _ret==='undefined'?'undefined':_typeof(_ret))==="object")return _ret.v;}// If nothing is found, return null
+if(cleanTags){metaValue=stripTags(values[0],$);}else{metaValue=values[0];}return{v:metaValue};}};for(var _iterator=_getIterator$$(foundNames),_step;!(_iteratorNormalCompletion=(_step=_iterator.next()).done);_iteratorNormalCompletion=true){var _ret=_loop();if((typeof _ret==='undefined'?'undefined':_typeof$$(_ret))==="object")return _ret.v;}// If nothing is found, return null
 }catch(err){_didIteratorError=true;_iteratorError=err;}finally{try{if(!_iteratorNormalCompletion&&_iterator.return){_iterator.return();}}finally{if(_didIteratorError){throw _iteratorError;}}}return null;}function isGoodNode($node,maxChildren){// If it has a number of children, it's more likely a container
 // element. Skip it.
 if($node.children().length>maxChildren){return false;}// If it looks to be within a comment, skip it.
 if(withinComment($node)){return false;}return true;}// Given a a list of selectors find content that may
 // be extractable from the document. This is for flat
 // meta-information, like author, title, date published, etc.
-function extractFromSelectors($,selectors){var maxChildren=arguments.length<=2||arguments[2]===undefined?1:arguments[2];var textOnly=arguments.length<=3||arguments[3]===undefined?true:arguments[3];var _iteratorNormalCompletion=true;var _didIteratorError=false;var _iteratorError=undefined;try{for(var _iterator=_getIterator(selectors),_step;!(_iteratorNormalCompletion=(_step=_iterator.next()).done);_iteratorNormalCompletion=true){var selector=_step.value;var nodes=$(selector);// If we didn't get exactly one of this selector, this may be
+function extractFromSelectors($,selectors){var maxChildren=arguments.length<=2||arguments[2]===undefined?1:arguments[2];var textOnly=arguments.length<=3||arguments[3]===undefined?true:arguments[3];var _iteratorNormalCompletion=true;var _didIteratorError=false;var _iteratorError=undefined;try{for(var _iterator=_getIterator$$(selectors),_step;!(_iteratorNormalCompletion=(_step=_iterator.next()).done);_iteratorNormalCompletion=true){var selector=_step.value;var nodes=$(selector);// If we didn't get exactly one of this selector, this may be
 // a list of articles or comments. Skip it.
 if(nodes.length===1){var $node=$(nodes[0]);if(isGoodNode($node,maxChildren)){var content=void 0;if(textOnly){content=$node.text();}else{content=$node.html();}if(content){return content;}}}}}catch(err){_didIteratorError=true;_iteratorError=err;}finally{try{if(!_iteratorNormalCompletion&&_iterator.return){_iterator.return();}}finally{if(_didIteratorError){throw _iteratorError;}}}return null;}// strips all tags from a string of text
 function stripTags(text,$){// Wrapping text in html element prevents errors when text
@@ -480,10 +488,12 @@ function cleanDateString(dateString){return(dateString.match(SPLIT_DATE_STRING)|
 // it. Return none if we fail.
 function cleanDatePublished(dateString){// If string is in milliseconds or seconds, convert to int
 if(MS_DATE_STRING.test(dateString)||SEC_DATE_STRING.test(dateString)){dateString=parseInt(dateString,10);}var date=moment$$(new Date(dateString));if(!date.isValid()){dateString=cleanDateString(dateString);date=moment$$(new Date(dateString));}return date.isValid()?date.toISOString():null;}// Clean our article content, returning a new, cleaned node.
-function extractCleanNode(article,_ref){var $=_ref.$;var _ref$cleanConditional=_ref.cleanConditionally;var cleanConditionally=_ref$cleanConditional===undefined?true:_ref$cleanConditional;var _ref$title=_ref.title;var title=_ref$title===undefined?'':_ref$title;var _ref$url=_ref.url;var url=_ref$url===undefined?'':_ref$url;// Rewrite the tag name to div if it's a top level node like body or
+function extractCleanNode(article,_ref){var $=_ref.$;var _ref$cleanConditional=_ref.cleanConditionally;var cleanConditionally=_ref$cleanConditional===undefined?true:_ref$cleanConditional;var _ref$title=_ref.title;var title=_ref$title===undefined?'':_ref$title;var _ref$url=_ref.url;var url=_ref$url===undefined?'':_ref$url;var _ref$defaultCleaner=_ref.defaultCleaner;var defaultCleaner=_ref$defaultCleaner===undefined?true:_ref$defaultCleaner;// Rewrite the tag name to div if it's a top level node like body or
 // html to avoid later complications with multiple body tags.
 rewriteTopLevel(article,$);// Drop small images and spacer images
-cleanImages(article,$);// Drop certain tags like <title>, etc
+// Only do this is defaultCleaner is set to true;
+// this can sometimes be too aggressive.
+if(defaultCleaner)cleanImages(article,$);// Drop certain tags like <title>, etc
 // This is -mostly- for cleanliness, not security.
 stripJunkTags(article,$);// H1 tags are typically the article title, which should be extracted
 // by the title extractor instead. If there's less than 3 of them (<3),
@@ -494,7 +504,8 @@ makeLinksAbsolute(article,$,url);// Remove unnecessary attributes
 cleanAttributes(article);// We used to clean UL's and OL's here, but it was leading to
 // too many in-article lists being removed. Consider a better
 // way to detect menus particularly and remove them.
-cleanTags(article,$,cleanConditionally);// Remove empty paragraph nodes
+// Also optionally running, since it can be overly aggressive.
+if(defaultCleaner)cleanTags(article,$,cleanConditionally);// Remove empty paragraph nodes
 removeEmpty(article,$);return article;}function cleanTitle(title,_ref){var url=_ref.url;var $=_ref.$;// If title has |, :, or - in it, see if
 // we can clean it up.
 if(TITLE_SPLITTERS_RE.test(title)){title=resolveSplitTitle(title,url);}// Final sanity check that we didn't get a crazy title.
@@ -507,11 +518,11 @@ return stripTags(title,$).trim();}function extractBreadcrumbTitle(splitTitle,tex
 if(splitTitle.length>=6){var _ret=function(){// Look to see if we can find a breadcrumb splitter that happens
 // more than once. If we can, we'll be able to better pull out
 // the title.
-var termCounts=splitTitle.reduce(function(acc,titleText){acc[titleText]=acc[titleText]?acc[titleText]+1:1;return acc;},{});var _Reflect$ownKeys$redu=_Reflect$ownKeys(termCounts).reduce(function(acc,key){if(acc[1]<termCounts[key]){return[key,termCounts[key]];}return acc;},[0,0]);var _Reflect$ownKeys$redu2=_slicedToArray$$(_Reflect$ownKeys$redu,2);var maxTerm=_Reflect$ownKeys$redu2[0];var termCount=_Reflect$ownKeys$redu2[1];// We found a splitter that was used more than once, so it
+var termCounts=splitTitle.reduce(function(acc,titleText){acc[titleText]=acc[titleText]?acc[titleText]+1:1;return acc;},{});var _Reflect$ownKeys$redu=_Reflect$ownKeys$$(termCounts).reduce(function(acc,key){if(acc[1]<termCounts[key]){return[key,termCounts[key]];}return acc;},[0,0]);var _Reflect$ownKeys$redu2=_slicedToArray$$(_Reflect$ownKeys$redu,2);var maxTerm=_Reflect$ownKeys$redu2[0];var termCount=_Reflect$ownKeys$redu2[1];// We found a splitter that was used more than once, so it
 // is probably the breadcrumber. Split our title on that instead.
 // Note: max_term should be <= 4 characters, so that " >> "
 // will match, but nothing longer than that.
-if(termCount>=2&&maxTerm.length<=4){splitTitle=text.split(maxTerm);}var splitEnds=[splitTitle[0],splitTitle.slice(-1)];var longestEnd=splitEnds.reduce(function(acc,end){return acc.length>end.length?acc:end;},'');if(longestEnd.length>10){return{v:longestEnd};}return{v:text};}();if((typeof _ret==='undefined'?'undefined':_typeof(_ret))==="object")return _ret.v;}return null;}function cleanDomainFromTitle(splitTitle,url){// Search the ends of the title, looking for bits that fuzzy match
+if(termCount>=2&&maxTerm.length<=4){splitTitle=text.split(maxTerm);}var splitEnds=[splitTitle[0],splitTitle.slice(-1)];var longestEnd=splitEnds.reduce(function(acc,end){return acc.length>end.length?acc:end;},'');if(longestEnd.length>10){return{v:longestEnd};}return{v:text};}();if((typeof _ret==='undefined'?'undefined':_typeof$$(_ret))==="object")return _ret.v;}return null;}function cleanDomainFromTitle(splitTitle,url){// Search the ends of the title, looking for bits that fuzzy match
 // the URL too closely. If one is found, discard it and return the
 // rest.
 //
@@ -561,7 +572,7 @@ extract:function extract(_ref,opts){var $=_ref.$;var html=_ref.html;var title=_r
 // turning them off as we try to extract content.
 var node=this.getContentNode($,title,url,opts);if(nodeIsSufficient(node)){return this.cleanAndReturnNode(node,$);}// We didn't succeed on first pass, one by one disable our
 // extraction opts and try again.
-var _iteratorNormalCompletion=true;var _didIteratorError=false;var _iteratorError=undefined;try{for(var _iterator=_getIterator(_Reflect$ownKeys(opts).filter(function(k){return opts[k]===true;})),_step;!(_iteratorNormalCompletion=(_step=_iterator.next()).done);_iteratorNormalCompletion=true){var key=_step.value;opts[key]=false;$=cheerio$$.load(html);node=this.getContentNode($,title,url,opts);if(nodeIsSufficient(node)){break;}}}catch(err){_didIteratorError=true;_iteratorError=err;}finally{try{if(!_iteratorNormalCompletion&&_iterator.return){_iterator.return();}}finally{if(_didIteratorError){throw _iteratorError;}}}return this.cleanAndReturnNode(node,$);},// Get node given current options
+var _iteratorNormalCompletion=true;var _didIteratorError=false;var _iteratorError=undefined;try{for(var _iterator=_getIterator$$(_Reflect$ownKeys$$(opts).filter(function(k){return opts[k]===true;})),_step;!(_iteratorNormalCompletion=(_step=_iterator.next()).done);_iteratorNormalCompletion=true){var key=_step.value;opts[key]=false;$=cheerio$$.load(html);node=this.getContentNode($,title,url,opts);if(nodeIsSufficient(node)){break;}}}catch(err){_didIteratorError=true;_iteratorError=err;}finally{try{if(!_iteratorNormalCompletion&&_iterator.return){_iterator.return();}}finally{if(_didIteratorError){throw _iteratorError;}}}return this.cleanAndReturnNode(node,$);},// Get node given current options
 getContentNode:function getContentNode($,title,url,opts){return extractCleanNode(extractBestNode($,opts),{$:$,cleanConditionally:opts.cleanConditionally,title:title,url:url});},// Once we got here, either we're at our last-resort node, or
 // we broke early. Make sure we at least have -something- before we
 // move forward.
@@ -611,7 +622,7 @@ var bylineRe=/^[\n\s]*By/i;var BYLINE_SELECTORS_RE=[['#byline',bylineRe],['.byli
 author=extractFromMeta($,AUTHOR_META_TAGS,metaCache);if(author&&author.length<AUTHOR_MAX_LENGTH){return cleanAuthor(author);}// Second, look through our selectors looking for potential authors.
 author=extractFromSelectors($,AUTHOR_SELECTORS,2);if(author&&author.length<AUTHOR_MAX_LENGTH){return cleanAuthor(author);}// Last, use our looser regular-expression based selectors for
 // potential authors.
-var _iteratorNormalCompletion=true;var _didIteratorError=false;var _iteratorError=undefined;try{for(var _iterator=_getIterator(BYLINE_SELECTORS_RE),_step;!(_iteratorNormalCompletion=(_step=_iterator.next()).done);_iteratorNormalCompletion=true){var _ref4=_step.value;var _ref3=_slicedToArray$$(_ref4,2);var selector=_ref3[0];var regex=_ref3[1];var node=$(selector);if(node.length===1){var text=node.text();if(regex.test(text)){return cleanAuthor(text);}}}}catch(err){_didIteratorError=true;_iteratorError=err;}finally{try{if(!_iteratorNormalCompletion&&_iterator.return){_iterator.return();}}finally{if(_didIteratorError){throw _iteratorError;}}}return null;}};// An ordered list of meta tag names that denote
+var _iteratorNormalCompletion=true;var _didIteratorError=false;var _iteratorError=undefined;try{for(var _iterator=_getIterator$$(BYLINE_SELECTORS_RE),_step;!(_iteratorNormalCompletion=(_step=_iterator.next()).done);_iteratorNormalCompletion=true){var _ref4=_step.value;var _ref3=_slicedToArray$$(_ref4,2);var selector=_ref3[0];var regex=_ref3[1];var node=$(selector);if(node.length===1){var text=node.text();if(regex.test(text)){return cleanAuthor(text);}}}}catch(err){_didIteratorError=true;_iteratorError=err;}finally{try{if(!_iteratorNormalCompletion&&_iterator.return){_iterator.return();}}finally{if(_didIteratorError){throw _iteratorError;}}}return null;}};// An ordered list of meta tag names that denote
 // likely date published dates. All attributes
 // should be lowercase for faster case-insensitive matching.
 // From most distinct to least distinct.
@@ -677,9 +688,9 @@ var GenericLeadImageUrlExtractor={extract:function extract(_ref){var $=_ref.$;va
 var imageUrl=extractFromMeta($,LEAD_IMAGE_URL_META_TAGS,metaCache,false);if(imageUrl){cleanUrl=clean$1(imageUrl);if(cleanUrl)return cleanUrl;}// Next, try to find the "best" image via the content.
 // We'd rather not have to fetch each image and check dimensions,
 // so try to do some analysis and determine them instead.
-var imgs=$('img',content).toArray();var imgScores={};imgs.forEach(function(img,index){var $img=$(img);var src=$img.attr('src');if(!src)return;var score=scoreImageUrl(src);score+=scoreAttr($img);score+=scoreByParents($img);score+=scoreBySibling($img);score+=scoreByDimensions($img);score+=scoreByPosition(imgs,index);imgScores[src]=score;});var _Reflect$ownKeys$redu=_Reflect$ownKeys(imgScores).reduce(function(acc,key){return imgScores[key]>acc[1]?[key,imgScores[key]]:acc;},[null,0]);var _Reflect$ownKeys$redu2=_slicedToArray$$(_Reflect$ownKeys$redu,2);var topUrl=_Reflect$ownKeys$redu2[0];var topScore=_Reflect$ownKeys$redu2[1];if(topScore>0){cleanUrl=clean$1(topUrl);if(cleanUrl)return cleanUrl;}// If nothing else worked, check to see if there are any really
+var imgs=$('img',content).toArray();var imgScores={};imgs.forEach(function(img,index){var $img=$(img);var src=$img.attr('src');if(!src)return;var score=scoreImageUrl(src);score+=scoreAttr($img);score+=scoreByParents($img);score+=scoreBySibling($img);score+=scoreByDimensions($img);score+=scoreByPosition(imgs,index);imgScores[src]=score;});var _Reflect$ownKeys$redu=_Reflect$ownKeys$$(imgScores).reduce(function(acc,key){return imgScores[key]>acc[1]?[key,imgScores[key]]:acc;},[null,0]);var _Reflect$ownKeys$redu2=_slicedToArray$$(_Reflect$ownKeys$redu,2);var topUrl=_Reflect$ownKeys$redu2[0];var topScore=_Reflect$ownKeys$redu2[1];if(topScore>0){cleanUrl=clean$1(topUrl);if(cleanUrl)return cleanUrl;}// If nothing else worked, check to see if there are any really
 // probable nodes in the doc, like <link rel="image_src" />.
-var _iteratorNormalCompletion=true;var _didIteratorError=false;var _iteratorError=undefined;try{for(var _iterator=_getIterator(LEAD_IMAGE_URL_SELECTORS),_step;!(_iteratorNormalCompletion=(_step=_iterator.next()).done);_iteratorNormalCompletion=true){var selector=_step.value;var $node=$(selector).first();var src=$node.attr('src');if(src){cleanUrl=clean$1(src);if(cleanUrl)return cleanUrl;}var href=$node.attr('href');if(href){cleanUrl=clean$1(href);if(cleanUrl)return cleanUrl;}var value=$node.attr('value');if(value){cleanUrl=clean$1(value);if(cleanUrl)return cleanUrl;}}}catch(err){_didIteratorError=true;_iteratorError=err;}finally{try{if(!_iteratorNormalCompletion&&_iterator.return){_iterator.return();}}finally{if(_didIteratorError){throw _iteratorError;}}}return null;}};function scoreSimilarity(score,articleUrl,href){// Do this last and only if we have a real candidate, because it's
+var _iteratorNormalCompletion=true;var _didIteratorError=false;var _iteratorError=undefined;try{for(var _iterator=_getIterator$$(LEAD_IMAGE_URL_SELECTORS),_step;!(_iteratorNormalCompletion=(_step=_iterator.next()).done);_iteratorNormalCompletion=true){var selector=_step.value;var $node=$(selector).first();var src=$node.attr('src');if(src){cleanUrl=clean$1(src);if(cleanUrl)return cleanUrl;}var href=$node.attr('href');if(href){cleanUrl=clean$1(href);if(cleanUrl)return cleanUrl;}var value=$node.attr('value');if(value){cleanUrl=clean$1(value);if(cleanUrl)return cleanUrl;}}}catch(err){_didIteratorError=true;_iteratorError=err;}finally{try{if(!_iteratorNormalCompletion&&_iterator.return){_iterator.return();}}finally{if(_didIteratorError){throw _iteratorError;}}}return null;}};function scoreSimilarity(score,articleUrl,href){// Do this last and only if we have a real candidate, because it's
 // potentially expensive computationally. Compare the link to this
 // URL using difflib to get the % similarity of these URLs. On a
 // sliding scale, subtract points from this link based on
@@ -753,47 +764,256 @@ var scoredPages=links.reduce(function(possiblePages,link){// Remove any anchor d
 // standardizing URLs (it's hard), we're going to do
 // some checking with and without a trailing slash
 var href=removeAnchor(link.attribs.href);var $link=$(link);var linkText=$link.text();if(!shouldScore(href,articleUrl,baseUrl,parsedUrl,linkText,previousUrls)){return possiblePages;}// ## PASSED THE FIRST-PASS TESTS. Start scoring. ##
-if(!possiblePages[href]){possiblePages[href]={score:0,linkText:linkText,href:href};}else{possiblePages[href].linkText=possiblePages[href].linkText+'|'+linkText;}var possiblePage=possiblePages[href];var linkData=makeSig($link,linkText);var pageNum=pageNumFromUrl(href);var score=scoreBaseUrl(href,baseRegex);score+=scoreNextLinkText(linkData);score+=scoreCapLinks(linkData);score+=scorePrevLink(linkData);score+=scoreByParents$1($link);score+=scoreExtraneousLinks(href);score+=scorePageInLink(pageNum,isWp);score+=scoreLinkText(linkText,pageNum);score+=scoreSimilarity(score,articleUrl,href);possiblePage.score=score;return possiblePages;},{});return _Reflect$ownKeys(scoredPages).length===0?null:scoredPages;}// Looks for and returns next page url
+if(!possiblePages[href]){possiblePages[href]={score:0,linkText:linkText,href:href};}else{possiblePages[href].linkText=possiblePages[href].linkText+'|'+linkText;}var possiblePage=possiblePages[href];var linkData=makeSig($link,linkText);var pageNum=pageNumFromUrl(href);var score=scoreBaseUrl(href,baseRegex);score+=scoreNextLinkText(linkData);score+=scoreCapLinks(linkData);score+=scorePrevLink(linkData);score+=scoreByParents$1($link);score+=scoreExtraneousLinks(href);score+=scorePageInLink(pageNum,isWp);score+=scoreLinkText(linkText,pageNum);score+=scoreSimilarity(score,articleUrl,href);possiblePage.score=score;return possiblePages;},{});return _Reflect$ownKeys$$(scoredPages).length===0?null:scoredPages;}// Looks for and returns next page url
 // for multi-page articles
 var GenericNextPageUrlExtractor={extract:function extract(_ref){var $=_ref.$;var url=_ref.url;var parsedUrl=_ref.parsedUrl;var _ref$previousUrls=_ref.previousUrls;var previousUrls=_ref$previousUrls===undefined?[]:_ref$previousUrls;parsedUrl=parsedUrl||URL$$.parse(url);var articleUrl=removeAnchor(url);var baseUrl=articleBaseUrl(url,parsedUrl);var links=$('a[href]').toArray();var scoredLinks=scoreLinks({links:links,articleUrl:articleUrl,baseUrl:baseUrl,parsedUrl:parsedUrl,$:$,previousUrls:previousUrls});// If no links were scored, return null
 if(!scoredLinks)return null;// now that we've scored all possible pages,
 // find the biggest one.
-var topPage=_Reflect$ownKeys(scoredLinks).reduce(function(acc,link){var scoredLink=scoredLinks[link];return scoredLink.score>acc.score?scoredLink:acc;},{score:-100});// If the score is less than 50, we're not confident enough to use it,
+var topPage=_Reflect$ownKeys$$(scoredLinks).reduce(function(acc,link){var scoredLink=scoredLinks[link];return scoredLink.score>acc.score?scoredLink:acc;},{score:-100});// If the score is less than 50, we're not confident enough to use it,
 // so we fail.
 if(topPage.score>=50){return topPage.href;}return null;}};var CANONICAL_META_SELECTORS=['og:url'];function parseDomain(url){var parsedUrl=URL$$.parse(url);var hostname=parsedUrl.hostname;return hostname;}function result(url){return{url:url,domain:parseDomain(url)};}var GenericUrlExtractor={extract:function extract(_ref){var $=_ref.$;var url=_ref.url;var metaCache=_ref.metaCache;var $canonical=$('link[rel=canonical]');if($canonical.length!==0){var href=$canonical.attr('href');if(href){return result(href);}}var metaUrl=extractFromMeta($,CANONICAL_META_SELECTORS,metaCache);if(metaUrl){return result(metaUrl);}return result(url);}};var EXCERPT_META_SELECTORS=['og:description','twitter:description'];function clean$2(content,$){var maxLength=arguments.length<=2||arguments[2]===undefined?200:arguments[2];content=content.replace(/[\s\n]+/g,' ').trim();return ellipsize$$(content,maxLength,{ellipse:'&hellip;'});}var GenericExcerptExtractor={extract:function extract(_ref){var $=_ref.$;var content=_ref.content;var metaCache=_ref.metaCache;var excerpt=extractFromMeta($,EXCERPT_META_SELECTORS,metaCache);if(excerpt){return clean$2(stripTags(excerpt,$));}// Fall back to excerpting from the extracted content
 var maxLength=200;var shortContent=content.slice(0,maxLength*5);return clean$2($(shortContent).text(),$,maxLength);}};var GenericWordCountExtractor={extract:function extract(_ref){var content=_ref.content;var $=cheerio$$.load(content);var text=normalizeSpaces($('div').first().text());return text.split(/\s/).length;}};var GenericExtractor={// This extractor is the default for all domains
-domain:'*',title:GenericTitleExtractor.extract,date_published:GenericDatePublishedExtractor.extract,author:GenericAuthorExtractor.extract,content:GenericContentExtractor.extract.bind(GenericContentExtractor),lead_image_url:GenericLeadImageUrlExtractor.extract,dek:GenericDekExtractor.extract,next_page_url:GenericNextPageUrlExtractor.extract,url_and_domain:GenericUrlExtractor.extract,excerpt:GenericExcerptExtractor.extract,word_count:GenericWordCountExtractor.extract,direction:function direction(_ref){var title=_ref.title;return stringDirection$$.getDirection(title);},extract:function extract(options){var html=options.html;if(html){var $=cheerio$$.load(html);options.$=$;}var title=this.title(options);var date_published=this.date_published(options);var author=this.author(options);var content=this.content(_extends$$({},options,{title:title}));var lead_image_url=this.lead_image_url(_extends$$({},options,{content:content}));var dek=this.dek(_extends$$({},options,{content:content}));var next_page_url=this.next_page_url(options);var excerpt=this.excerpt(_extends$$({},options,{content:content}));var word_count=this.word_count(_extends$$({},options,{content:content}));var direction=this.direction({title:title});var _url_and_domain=this.url_and_domain(options);var url=_url_and_domain.url;var domain=_url_and_domain.domain;return{title:title,author:author,date_published:date_published||null,dek:dek,lead_image_url:lead_image_url,content:content,next_page_url:next_page_url,url:url,domain:domain,excerpt:excerpt,word_count:word_count,direction:direction};}};function getExtractor(url,parsedUrl){parsedUrl=parsedUrl||URL$$.parse(url);var _parsedUrl=parsedUrl;var hostname=_parsedUrl.hostname;var baseDomain=hostname.split('.').slice(-2).join('.');return Extractors[hostname]||Extractors[baseDomain]||GenericExtractor;}var ATTR_RE=/\[([\w-]+)\]/;// Remove elements by an array of selectors
+domain:'*',title:GenericTitleExtractor.extract,date_published:GenericDatePublishedExtractor.extract,author:GenericAuthorExtractor.extract,content:GenericContentExtractor.extract.bind(GenericContentExtractor),lead_image_url:GenericLeadImageUrlExtractor.extract,dek:GenericDekExtractor.extract,next_page_url:GenericNextPageUrlExtractor.extract,url_and_domain:GenericUrlExtractor.extract,excerpt:GenericExcerptExtractor.extract,word_count:GenericWordCountExtractor.extract,direction:function direction(_ref){var title=_ref.title;return stringDirection$$.getDirection(title);},extract:function extract(options){var html=options.html;if(html){var $=cheerio$$.load(html);options.$=$;}var title=this.title(options);var date_published=this.date_published(options);var author=this.author(options);var content=this.content(_extends$$({},options,{title:title}));var lead_image_url=this.lead_image_url(_extends$$({},options,{content:content}));var dek=this.dek(_extends$$({},options,{content:content}));var next_page_url=this.next_page_url(options);var excerpt=this.excerpt(_extends$$({},options,{content:content}));var word_count=this.word_count(_extends$$({},options,{content:content}));var direction=this.direction({title:title});var _url_and_domain=this.url_and_domain(options);var url=_url_and_domain.url;var domain=_url_and_domain.domain;return{title:title,author:author,date_published:date_published||null,dek:dek,lead_image_url:lead_image_url,content:content,next_page_url:next_page_url,url:url,domain:domain,excerpt:excerpt,word_count:word_count,direction:direction};}};function getExtractor(url,parsedUrl){parsedUrl=parsedUrl||URL$$.parse(url);var _parsedUrl=parsedUrl;var hostname=_parsedUrl.hostname;var baseDomain=hostname.split('.').slice(-2).join('.');return Extractors[hostname]||Extractors[baseDomain]||GenericExtractor;}// Remove elements by an array of selectors
 function cleanBySelectors($content,$,_ref){var clean=_ref.clean;if(!clean)return $content;$(clean.join(','),$content).remove();return $content;}// Transform matching elements
-function transformElements($content,$,_ref2){var transforms=_ref2.transforms;if(!transforms)return $content;_Reflect$ownKeys(transforms).forEach(function(key){var $matches=$(key,$content);var value=transforms[key];// If value is a string, convert directly
+function transformElements($content,$,_ref2){var transforms=_ref2.transforms;if(!transforms)return $content;_Reflect$ownKeys$$(transforms).forEach(function(key){var $matches=$(key,$content);var value=transforms[key];// If value is a string, convert directly
 if(typeof value==='string'){$matches.each(function(index,node){convertNodeTo($(node),$,transforms[key]);});}else if(typeof value==='function'){// If value is function, apply function to node
 $matches.each(function(index,node){var result=value($(node),$);// If function returns a string, convert node to that value
-if(typeof result==='string'){convertNodeTo($(node),$,result);}});}});return $content;}function select(opts){var $=opts.$;var type=opts.type;var extractionOpts=opts.extractionOpts;var _opts$extractHtml=opts.extractHtml;var extractHtml=_opts$extractHtml===undefined?false:_opts$extractHtml;// Skip if there's not extraction for this type
+if(typeof result==='string'){convertNodeTo($(node),$,result);}});}});return $content;}function findMatchingSelector($,selectors){return selectors.find(function(selector){if(Array.isArray(selector)){var _selector=_slicedToArray$$(selector,2);var s=_selector[0];var attr=_selector[1];return $(s).length===1&&$(s).attr(attr)&&$(s).attr(attr).trim()!=='';}return $(selector).length===1&&$(selector).text().trim()!=='';});}function select(opts){var $=opts.$;var type=opts.type;var extractionOpts=opts.extractionOpts;var _opts$extractHtml=opts.extractHtml;var extractHtml=_opts$extractHtml===undefined?false:_opts$extractHtml;// Skip if there's not extraction for this type
 if(!extractionOpts)return null;// If a string is hardcoded for a type (e.g., Wikipedia
 // contributors), return the string
-if(typeof extractionOpts==='string')return extractionOpts;var selectors=extractionOpts.selectors;var _extractionOpts$defau=extractionOpts.defaultCleaner;var defaultCleaner=_extractionOpts$defau===undefined?true:_extractionOpts$defau;var matchingSelector=selectors.find(function(selector){return $(selector).length===1&&$(selector).text().trim()!=='';});if(!matchingSelector)return null;// Declaring result; will contain either
+if(typeof extractionOpts==='string')return extractionOpts;var selectors=extractionOpts.selectors;var _extractionOpts$defau=extractionOpts.defaultCleaner;var defaultCleaner=_extractionOpts$defau===undefined?true:_extractionOpts$defau;var matchingSelector=findMatchingSelector($,selectors);if(!matchingSelector)return null;// Declaring result; will contain either
 // text or html, which will be cleaned
 // by the appropriate cleaner type
 // If the selector type requests html as its return type
 // transform and clean the element with provided selectors
 if(extractHtml){var $content=$(matchingSelector);// Wrap in div so transformation can take place on root element
-$content.wrap($('<div></div>'));$content=$content.parent();$content=transformElements($content,$,extractionOpts);$content=cleanBySelectors($content,$,extractionOpts);if(defaultCleaner){$content=Cleaners[type]($content,opts);}return $.html($content);}// if selector includes an attr (e.g., img[src]),
+$content.wrap($('<div></div>'));$content=$content.parent();$content=transformElements($content,$,extractionOpts);$content=cleanBySelectors($content,$,extractionOpts);$content=Cleaners[type]($content,_extends$$({},opts,{defaultCleaner:defaultCleaner}));return $.html($content);}var result=void 0;// if selector is an array (e.g., ['img', 'src']),
 // extract the attr
-var attr=matchingSelector.match(ATTR_RE);var result=void 0;if(attr){result=$(matchingSelector).attr(attr[1]);}else{// otherwise use the text of the node
-result=$(matchingSelector).text();}// Allow custom extractor to skip default cleaner
+if(Array.isArray(matchingSelector)){var _matchingSelector=_slicedToArray$$(matchingSelector,2);var selector=_matchingSelector[0];var attr=_matchingSelector[1];result=$(selector).attr(attr).trim();}else{result=$(matchingSelector).text().trim();}// Allow custom extractor to skip default cleaner
 // for this type; defaults to true
-if(defaultCleaner){return Cleaners[type](result,opts);}return result;}function extractResult(opts){var type=opts.type;var extractor=opts.extractor;// If nothing matches the selector,
+if(defaultCleaner){return Cleaners[type](result,opts);}return result;}function extractResult(opts){var type=opts.type;var extractor=opts.extractor;var _opts$fallback=opts.fallback;var fallback=_opts$fallback===undefined?true:_opts$fallback;var result=select(_extends$$({},opts,{extractionOpts:extractor[type]}));// If custom parser succeeds, return the result
+if(result){return result;}// If nothing matches the selector, and fallback is enabled,
 // run the Generic extraction
-return select(_extends$$({},opts,{extractionOpts:extractor[type]}))||GenericExtractor[type](opts);}var RootExtractor={extract:function extract(){var extractor=arguments.length<=0||arguments[0]===undefined?GenericExtractor:arguments[0];var opts=arguments[1];var _opts=opts;var contentOnly=_opts.contentOnly;var extractedTitle=_opts.extractedTitle;// This is the generic extractor. Run its extract method
-if(extractor.domain==='*')return extractor.extract(opts);opts=_extends$$({},opts,{extractor:extractor});if(contentOnly){var _content=extractResult(_extends$$({},opts,{type:'content',extractHtml:true,title:extractedTitle}));return{content:_content};}var title=extractResult(_extends$$({},opts,{type:'title'}));var date_published=extractResult(_extends$$({},opts,{type:'date_published'}));var author=extractResult(_extends$$({},opts,{type:'author'}));var next_page_url=extractResult(_extends$$({},opts,{type:'next_page_url'}));var content=extractResult(_extends$$({},opts,{type:'content',extractHtml:true,title:title}));var lead_image_url=extractResult(_extends$$({},opts,{type:'lead_image_url',content:content}));var dek=extractResult(_extends$$({},opts,{type:'dek',content:content}));var excerpt=extractResult(_extends$$({},opts,{type:'excerpt',content:content}));var word_count=extractResult(_extends$$({},opts,{type:'word_count',content:content}));var direction=extractResult(_extends$$({},opts,{type:'direction',title:title}));var _extractResult=extractResult(_extends$$({},opts,{type:'url_and_domain'}));var url=_extractResult.url;var domain=_extractResult.domain;return{title:title,content:content,author:author,date_published:date_published,lead_image_url:lead_image_url,dek:dek,next_page_url:next_page_url,url:url,domain:domain,excerpt:excerpt,word_count:word_count,direction:direction};}};var collectAllPages=function(){var _ref=_asyncToGenerator(_regeneratorRuntime.mark(function _callee(_ref2){var next_page_url=_ref2.next_page_url;var html=_ref2.html;var $=_ref2.$;var metaCache=_ref2.metaCache;var result=_ref2.result;var Extractor=_ref2.Extractor;var title=_ref2.title;var url=_ref2.url;var pages,previousUrls,extractorOpts,nextPageResult;return _regeneratorRuntime.wrap(function _callee$(_context){while(1){switch(_context.prev=_context.next){case 0:// At this point, we've fetched just the first page
+if(fallback)return GenericExtractor[type](opts);return null;}var RootExtractor={extract:function extract(){var extractor=arguments.length<=0||arguments[0]===undefined?GenericExtractor:arguments[0];var opts=arguments[1];var _opts=opts;var contentOnly=_opts.contentOnly;var extractedTitle=_opts.extractedTitle;// This is the generic extractor. Run its extract method
+if(extractor.domain==='*')return extractor.extract(opts);opts=_extends$$({},opts,{extractor:extractor});if(contentOnly){var _content=extractResult(_extends$$({},opts,{type:'content',extractHtml:true,title:extractedTitle}));return{content:_content};}var title=extractResult(_extends$$({},opts,{type:'title'}));var date_published=extractResult(_extends$$({},opts,{type:'date_published'}));var author=extractResult(_extends$$({},opts,{type:'author'}));var next_page_url=extractResult(_extends$$({},opts,{type:'next_page_url'}));var content=extractResult(_extends$$({},opts,{type:'content',extractHtml:true,title:title}));var lead_image_url=extractResult(_extends$$({},opts,{type:'lead_image_url',content:content}));var dek=extractResult(_extends$$({},opts,{type:'dek',content:content}));var excerpt=extractResult(_extends$$({},opts,{type:'excerpt',content:content}));var word_count=extractResult(_extends$$({},opts,{type:'word_count',content:content}));var direction=extractResult(_extends$$({},opts,{type:'direction',title:title}));var _ref3=extractResult(_extends$$({},opts,{type:'url_and_domain'}))||{url:null,domain:null};var url=_ref3.url;var domain=_ref3.domain;return{title:title,content:content,author:author,date_published:date_published,lead_image_url:lead_image_url,dek:dek,next_page_url:next_page_url,url:url,domain:domain,excerpt:excerpt,word_count:word_count,direction:direction};}};var collectAllPages=function(){var _ref=_asyncToGenerator(_regeneratorRuntime.mark(function _callee(_ref2){var next_page_url=_ref2.next_page_url;var html=_ref2.html;var $=_ref2.$;var metaCache=_ref2.metaCache;var result=_ref2.result;var Extractor=_ref2.Extractor;var title=_ref2.title;var url=_ref2.url;var pages,previousUrls,extractorOpts,nextPageResult,word_count;return _regeneratorRuntime.wrap(function _callee$(_context){while(1){switch(_context.prev=_context.next){case 0:// At this point, we've fetched just the first page
 pages=1;previousUrls=[removeAnchor(url)];// If we've gone over 26 pages, something has
 // likely gone wrong.
-case 2:if(!(next_page_url&&pages<26)){_context.next=15;break;}pages+=1;_context.next=6;return Resource.create(next_page_url);case 6:$=_context.sent;html=$.html();extractorOpts={url:next_page_url,html:html,$:$,metaCache:metaCache,contentOnly:true,extractedTitle:title,previousUrls:previousUrls};nextPageResult=RootExtractor.extract(Extractor,extractorOpts);previousUrls.push(next_page_url);result=_extends$$({},result,{content:'\n        '+result.content+'\n        <hr>\n        <h4>Page '+pages+'</h4>\n        '+nextPageResult.content+'\n        '});next_page_url=nextPageResult.next_page_url;_context.next=2;break;case 15:return _context.abrupt('return',_extends$$({},result,{total_pages:pages,pages_rendered:pages}));case 16:case'end':return _context.stop();}}},_callee,this);}));function collectAllPages(_x){return _ref.apply(this,arguments);}return collectAllPages;}();var Mercury={parse:function parse(url,html){var _this=this;var opts=arguments.length<=2||arguments[2]===undefined?{}:arguments[2];return _asyncToGenerator(_regeneratorRuntime.mark(function _callee(){var _ref,_ref$fetchAllPages,fetchAllPages,parsedUrl,Extractor,$,metaCache,result,_result,title,next_page_url;return _regeneratorRuntime.wrap(function _callee$(_context){while(1){switch(_context.prev=_context.next){case 0:_ref=opts||true;_ref$fetchAllPages=_ref.fetchAllPages;fetchAllPages=_ref$fetchAllPages===undefined?true:_ref$fetchAllPages;parsedUrl=URL$$.parse(url);if(validateUrl(parsedUrl)){_context.next=6;break;}return _context.abrupt('return',Errors.badUrl);case 6:Extractor=getExtractor(url,parsedUrl);// console.log(`Using extractor for ${Extractor.domain}`);
-_context.next=9;return Resource.create(url,html,parsedUrl);case 9:$=_context.sent;if(!$.error){_context.next=12;break;}return _context.abrupt('return',$);case 12:html=$.html();// Cached value of every meta name in our document.
+case 2:if(!(next_page_url&&pages<26)){_context.next=15;break;}pages+=1;_context.next=6;return Resource.create(next_page_url);case 6:$=_context.sent;html=$.html();extractorOpts={url:next_page_url,html:html,$:$,metaCache:metaCache,contentOnly:true,extractedTitle:title,previousUrls:previousUrls};nextPageResult=RootExtractor.extract(Extractor,extractorOpts);previousUrls.push(next_page_url);result=_extends$$({},result,{content:'\n        '+result.content+'\n        <hr>\n        <h4>Page '+pages+'</h4>\n        '+nextPageResult.content+'\n        '});next_page_url=nextPageResult.next_page_url;_context.next=2;break;case 15:word_count=GenericExtractor.word_count({content:'<div>'+result.content+'</div>'});return _context.abrupt('return',_extends$$({},result,{total_pages:pages,pages_rendered:pages,word_count:word_count}));case 17:case'end':return _context.stop();}}},_callee,this);}));function collectAllPages(_x){return _ref.apply(this,arguments);}return collectAllPages;}();var Mercury={parse:function parse(url,html){var _this=this;var opts=arguments.length<=2||arguments[2]===undefined?{}:arguments[2];return _asyncToGenerator(_regeneratorRuntime.mark(function _callee(){var _opts$fetchAllPages,fetchAllPages,_opts$fallback,fallback,parsedUrl,Extractor,$,metaCache,result,_result,title,next_page_url;return _regeneratorRuntime.wrap(function _callee$(_context){while(1){switch(_context.prev=_context.next){case 0:_opts$fetchAllPages=opts.fetchAllPages;fetchAllPages=_opts$fetchAllPages===undefined?true:_opts$fetchAllPages;_opts$fallback=opts.fallback;fallback=_opts$fallback===undefined?true:_opts$fallback;parsedUrl=URL$$.parse(url);if(validateUrl(parsedUrl)){_context.next=7;break;}return _context.abrupt('return',Errors.badUrl);case 7:Extractor=getExtractor(url,parsedUrl);// console.log(`Using extractor for ${Extractor.domain}`);
+_context.next=10;return Resource.create(url,html,parsedUrl);case 10:$=_context.sent;if(!$.error){_context.next=13;break;}return _context.abrupt('return',$);case 13:html=$.html();// Cached value of every meta name in our document.
 // Used when extracting title/author/date_published/dek
-metaCache=$('meta').map(function(_,node){return $(node).attr('name');}).toArray();result=RootExtractor.extract(Extractor,{url:url,html:html,$:$,metaCache:metaCache,parsedUrl:parsedUrl});_result=result;title=_result.title;next_page_url=_result.next_page_url;// Fetch more pages if next_page_url found
-if(!(fetchAllPages&&next_page_url)){_context.next=24;break;}_context.next=21;return collectAllPages({Extractor:Extractor,next_page_url:next_page_url,html:html,$:$,metaCache:metaCache,result:result,title:title,url:url});case 21:result=_context.sent;_context.next=25;break;case 24:result=_extends$$({},result,{total_pages:1,rendered_pages:1});case 25:return _context.abrupt('return',result);case 26:case'end':return _context.stop();}}},_callee,_this);}))();},// A convenience method for getting a resource
+metaCache=$('meta').map(function(_,node){return $(node).attr('name');}).toArray();result=RootExtractor.extract(Extractor,{url:url,html:html,$:$,metaCache:metaCache,parsedUrl:parsedUrl,fallback:fallback});_result=result;title=_result.title;next_page_url=_result.next_page_url;// Fetch more pages if next_page_url found
+if(!(fetchAllPages&&next_page_url)){_context.next=25;break;}_context.next=22;return collectAllPages({Extractor:Extractor,next_page_url:next_page_url,html:html,$:$,metaCache:metaCache,result:result,title:title,url:url});case 22:result=_context.sent;_context.next=26;break;case 25:result=_extends$$({},result,{total_pages:1,rendered_pages:1});case 26:return _context.abrupt('return',result);case 27:case'end':return _context.stop();}}},_callee,_this);}))();},// A convenience method for getting a resource
 // to work with, e.g., for custom extractor generator
 fetchResource:function fetchResource(url){var _this2=this;return _asyncToGenerator(_regeneratorRuntime.mark(function _callee2(){return _regeneratorRuntime.wrap(function _callee2$(_context2){while(1){switch(_context2.prev=_context2.next){case 0:_context2.next=2;return Resource.create(url);case 2:return _context2.abrupt('return',_context2.sent);case 3:case'end':return _context2.stop();}}},_callee2,_this2);}))();}};module.exports=Mercury;});
+
+// A list of tags to strip from the output if we encounter them.
+var STRIP_OUTPUT_TAGS = ['title', 'script', 'noscript', 'link', 'style', 'hr', 'embed', 'iframe', 'object'];
+
+// cleanAttributes
+var REMOVE_ATTRS = ['style', 'align'];
+var REMOVE_ATTR_SELECTORS = REMOVE_ATTRS.map(function (selector) {
+  return '[' + selector + ']';
+});
+var REMOVE_ATTR_LIST = REMOVE_ATTRS.join(',');
+var WHITELIST_ATTRS = ['src', 'srcset', 'href', 'class', 'id', 'alt', 'score'];
+var WHITELIST_ATTRS_RE = new RegExp('^(' + WHITELIST_ATTRS.join('|') + ')$', 'i');
+
+// removeEmpty
+var REMOVE_EMPTY_TAGS = ['p'];
+var REMOVE_EMPTY_SELECTORS = REMOVE_EMPTY_TAGS.map(function (tag) {
+  return tag + ':empty';
+}).join(',');
+
+// cleanTags
+var CLEAN_CONDITIONALLY_TAGS = ['ul', 'ol', 'table', 'div', 'button', 'form'].join(',');
+
+// cleanHeaders
+var HEADER_TAGS = ['h2', 'h3', 'h4', 'h5', 'h6'];
+var HEADER_TAG_LIST = HEADER_TAGS.join(',');
+
+// // CONTENT FETCHING CONSTANTS ////
+
+// A list of strings that can be considered unlikely candidates when
+// extracting content from a resource. These strings are joined together
+// and then tested for existence using re:test, so may contain simple,
+// non-pipe style regular expression queries if necessary.
+var UNLIKELY_CANDIDATES_BLACKLIST = ['ad-break', 'adbox', 'advert', 'addthis', 'agegate', 'aux', 'blogger-labels', 'combx', 'comment', 'conversation', 'disqus', 'entry-unrelated', 'extra', 'foot',
+// 'form', // This is too generic, has too many false positives
+'header', 'hidden', 'loader', 'login', // Note: This can hit 'blogindex'.
+'menu', 'meta', 'nav', 'outbrain', 'pager', 'pagination', 'predicta', // readwriteweb inline ad box
+'presence_control_external', // lifehacker.com container full of false positives
+'popup', 'printfriendly', 'related', 'remove', 'remark', 'rss', 'share', 'shoutbox', 'sidebar', 'sociable', 'sponsor', 'taboola', 'tools'];
+
+// A list of strings that can be considered LIKELY candidates when
+// extracting content from a resource. Essentially, the inverse of the
+// blacklist above - if something matches both blacklist and whitelist,
+// it is kept. This is useful, for example, if something has a className
+// of "rss-content entry-content". It matched 'rss', so it would normally
+// be removed, however, it's also the entry content, so it should be left
+// alone.
+//
+// These strings are joined together and then tested for existence using
+// re:test, so may contain simple, non-pipe style regular expression queries
+// if necessary.
+var UNLIKELY_CANDIDATES_WHITELIST = ['and', 'article', 'body', 'blogindex', 'column', 'content', 'entry-content-asset', 'format', // misuse of form
+'hfeed', 'hentry', 'hatom', 'main', 'page', 'posts', 'shadow'];
+
+// A list of tags which, if found inside, should cause a <div /> to NOT
+// be turned into a paragraph tag. Shallow div tags without these elements
+// should be turned into <p /> tags.
+var DIV_TO_P_BLOCK_TAGS = ['a', 'blockquote', 'dl', 'div', 'img', 'p', 'pre', 'table'].join(',');
+
+// A list of tags that should be ignored when trying to find the top candidate
+// for a document.
+var NON_TOP_CANDIDATE_TAGS = ['br', 'b', 'i', 'label', 'hr', 'area', 'base', 'basefont', 'input', 'img', 'link', 'meta'];
+
+var NON_TOP_CANDIDATE_TAGS_RE = new RegExp('^(' + NON_TOP_CANDIDATE_TAGS.join('|') + ')$', 'i');
+
+var PHOTO_HINTS = ['figure', 'photo', 'image', 'caption'];
+var PHOTO_HINTS_RE = new RegExp(PHOTO_HINTS.join('|'), 'i');
+
+// A list of strings that denote a positive scoring for this content as being
+// an article container. Checked against className and id.
+//
+// TODO: Perhaps have these scale based on their odds of being quality?
+var POSITIVE_SCORE_HINTS = ['article', 'articlecontent', 'instapaper_body', 'blog', 'body', 'content', 'entry-content-asset', 'entry', 'hentry', 'main', 'Normal', 'page', 'pagination', 'permalink', 'post', 'story', 'text', '[-_]copy', // usatoday
+'\\Bcopy'];
+
+// The above list, joined into a matching regular expression
+var POSITIVE_SCORE_RE = new RegExp(POSITIVE_SCORE_HINTS.join('|'), 'i');
+
+// A list of strings that denote a negative scoring for this content as being
+// an article container. Checked against className and id.
+//
+// TODO: Perhaps have these scale based on their odds of being quality?
+var NEGATIVE_SCORE_HINTS = ['adbox', 'advert', 'author', 'bio', 'bookmark', 'bottom', 'byline', 'clear', 'com-', 'combx', 'comment', 'comment\\B', 'contact', 'copy', 'credit', 'crumb', 'date', 'deck', 'excerpt', 'featured', // tnr.com has a featured_content which throws us off
+'foot', 'footer', 'footnote', 'graf', 'head', 'info', 'infotext', // newscientist.com copyright
+'instapaper_ignore', 'jump', 'linebreak', 'link', 'masthead', 'media', 'meta', 'modal', 'outbrain', // slate.com junk
+'promo', 'pr_', // autoblog - press release
+'related', 'respond', 'roundcontent', // lifehacker restricted content warning
+'scroll', 'secondary', 'share', 'shopping', 'shoutbox', 'side', 'sidebar', 'sponsor', 'stamp', 'sub', 'summary', 'tags', 'tools', 'widget'];
+// The above list, joined into a matching regular expression
+var NEGATIVE_SCORE_RE = new RegExp(NEGATIVE_SCORE_HINTS.join('|'), 'i');
+
+// A list of words that, if found in link text or URLs, likely mean that
+// this link is not a next page link.
+var EXTRANEOUS_LINK_HINTS = ['print', 'archive', 'comment', 'discuss', 'e-mail', 'email', 'share', 'reply', 'all', 'login', 'sign', 'single', 'adx', 'entry-unrelated'];
+var EXTRANEOUS_LINK_HINTS_RE = new RegExp(EXTRANEOUS_LINK_HINTS.join('|'), 'i');
+
+// A list of all of the block level tags known in HTML5 and below. Taken from
+// http://bit.ly/qneNIT
+var BLOCK_LEVEL_TAGS = ['article', 'aside', 'blockquote', 'body', 'br', 'button', 'canvas', 'caption', 'col', 'colgroup', 'dd', 'div', 'dl', 'dt', 'embed', 'fieldset', 'figcaption', 'figure', 'footer', 'form', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'header', 'hgroup', 'hr', 'li', 'map', 'object', 'ol', 'output', 'p', 'pre', 'progress', 'section', 'table', 'tbody', 'textarea', 'tfoot', 'th', 'thead', 'tr', 'ul', 'video'];
+var BLOCK_LEVEL_TAGS_RE = new RegExp('^(' + BLOCK_LEVEL_TAGS.join('|') + ')$', 'i');
+
+// The removal is implemented as a blacklist and whitelist, this test finds
+// blacklisted elements that aren't whitelisted. We do this all in one
+// expression-both because it's only one pass, and because this skips the
+// serialization for whitelisted nodes.
+var candidatesBlacklist = UNLIKELY_CANDIDATES_BLACKLIST.join('|');
+var candidatesWhitelist = UNLIKELY_CANDIDATES_WHITELIST.join('|');
+
+function stripJunkTags(article, $) {
+  var tags = arguments.length <= 2 || arguments[2] === undefined ? [] : arguments[2];
+
+  if (tags.length === 0) {
+    tags = STRIP_OUTPUT_TAGS;
+  }
+
+  $(tags.join(','), article).remove();
+
+  return $;
+}
+
+// // CONTENT FETCHING CONSTANTS ////
+
+// A list of strings that can be considered unlikely candidates when
+// extracting content from a resource. These strings are joined together
+// and then tested for existence using re:test, so may contain simple,
+// non-pipe style regular expression queries if necessary.
+var UNLIKELY_CANDIDATES_BLACKLIST$1 = ['ad-break', 'adbox', 'advert', 'addthis', 'agegate', 'aux', 'blogger-labels', 'combx', 'comment', 'conversation', 'disqus', 'entry-unrelated', 'extra', 'foot', 'form', 'header', 'hidden', 'loader', 'login', // Note: This can hit 'blogindex'.
+'menu', 'meta', 'nav', 'pager', 'pagination', 'predicta', // readwriteweb inline ad box
+'presence_control_external', // lifehacker.com container full of false positives
+'popup', 'printfriendly', 'related', 'remove', 'remark', 'rss', 'share', 'shoutbox', 'sidebar', 'sociable', 'sponsor', 'tools'];
+
+// A list of strings that can be considered LIKELY candidates when
+// extracting content from a resource. Essentially, the inverse of the
+// blacklist above - if something matches both blacklist and whitelist,
+// it is kept. This is useful, for example, if something has a className
+// of "rss-content entry-content". It matched 'rss', so it would normally
+// be removed, however, it's also the entry content, so it should be left
+// alone.
+//
+// These strings are joined together and then tested for existence using
+// re:test, so may contain simple, non-pipe style regular expression queries
+// if necessary.
+var UNLIKELY_CANDIDATES_WHITELIST$1 = ['and', 'article', 'body', 'blogindex', 'column', 'content', 'entry-content-asset', 'format', // misuse of form
+'hfeed', 'hentry', 'hatom', 'main', 'page', 'posts', 'shadow'];
+
+// A list of tags which, if found inside, should cause a <div /> to NOT
+// be turned into a paragraph tag. Shallow div tags without these elements
+// should be turned into <p /> tags.
+var DIV_TO_P_BLOCK_TAGS$1 = ['a', 'blockquote', 'dl', 'div', 'img', 'p', 'pre', 'table'].join(',');
+
+// A list of tags that should be ignored when trying to find the top candidate
+// for a document.
+var NON_TOP_CANDIDATE_TAGS$1 = ['br', 'b', 'i', 'label', 'hr', 'area', 'base', 'basefont', 'input', 'img', 'link', 'meta'];
+
+var NON_TOP_CANDIDATE_TAGS_RE$1 = new RegExp('^(' + NON_TOP_CANDIDATE_TAGS$1.join('|') + ')$', 'i');
+
+var PHOTO_HINTS$1 = ['figure', 'photo', 'image', 'caption'];
+var PHOTO_HINTS_RE$1 = new RegExp(PHOTO_HINTS$1.join('|'), 'i');
+
+// A list of strings that denote a positive scoring for this content as being
+// an article container. Checked against className and id.
+//
+// TODO: Perhaps have these scale based on their odds of being quality?
+var POSITIVE_SCORE_HINTS$1 = ['article', 'articlecontent', 'instapaper_body', 'blog', 'body', 'content', 'entry-content-asset', 'entry', 'hentry', 'main', 'Normal', 'page', 'pagination', 'permalink', 'post', 'story', 'text', '[-_]copy', // usatoday
+'\\Bcopy'];
+
+// The above list, joined into a matching regular expression
+var POSITIVE_SCORE_RE$1 = new RegExp(POSITIVE_SCORE_HINTS$1.join('|'), 'i');
+
+// A list of strings that denote a negative scoring for this content as being
+// an article container. Checked against className and id.
+//
+// TODO: Perhaps have these scale based on their odds of being quality?
+var NEGATIVE_SCORE_HINTS$1 = ['adbox', 'advert', 'author', 'bio', 'bookmark', 'bottom', 'byline', 'clear', 'com-', 'combx', 'comment', 'comment\\B', 'contact', 'copy', 'credit', 'crumb', 'date', 'deck', 'excerpt', 'featured', // tnr.com has a featured_content which throws us off
+'foot', 'footer', 'footnote', 'graf', 'head', 'info', 'infotext', // newscientist.com copyright
+'instapaper_ignore', 'jump', 'linebreak', 'link', 'masthead', 'media', 'meta', 'modal', 'outbrain', // slate.com junk
+'promo', 'pr_', // autoblog - press release
+'related', 'respond', 'roundcontent', // lifehacker restricted content warning
+'scroll', 'secondary', 'share', 'shopping', 'shoutbox', 'side', 'sidebar', 'sponsor', 'stamp', 'sub', 'summary', 'tags', 'tools', 'widget'];
+// The above list, joined into a matching regular expression
+var NEGATIVE_SCORE_RE$1 = new RegExp(NEGATIVE_SCORE_HINTS$1.join('|'), 'i');
+
+// A list of all of the block level tags known in HTML5 and below. Taken from
+// http://bit.ly/qneNIT
+var BLOCK_LEVEL_TAGS$1 = ['article', 'aside', 'blockquote', 'body', 'br', 'button', 'canvas', 'caption', 'col', 'colgroup', 'dd', 'div', 'dl', 'dt', 'embed', 'fieldset', 'figcaption', 'figure', 'footer', 'form', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'header', 'hgroup', 'hr', 'li', 'map', 'object', 'ol', 'output', 'p', 'pre', 'progress', 'section', 'table', 'tbody', 'textarea', 'tfoot', 'th', 'thead', 'tr', 'ul', 'video'];
+var BLOCK_LEVEL_TAGS_RE$1 = new RegExp('^(' + BLOCK_LEVEL_TAGS$1.join('|') + ')$', 'i');
+
+// The removal is implemented as a blacklist and whitelist, this test finds
+// blacklisted elements that aren't whitelisted. We do this all in one
+// expression-both because it's only one pass, and because this skips the
+// serialization for whitelisted nodes.
+var candidatesBlacklist$1 = UNLIKELY_CANDIDATES_BLACKLIST$1.join('|');
+var candidatesWhitelist$1 = UNLIKELY_CANDIDATES_WHITELIST$1.join('|');
+
+function absolutize($, rootUrl, attr, $content) {
+  $('[' + attr + ']', $content).each(function (_, node) {
+    var url = node.attribs[attr];
+    var absoluteUrl = URL.resolve(rootUrl, url);
+
+    node.attribs[attr] = absoluteUrl;
+  });
+}
+
+function makeLinksAbsolute($content, $, url) {
+  ['href', 'src'].forEach(function (attr) {
+    return absolutize($, url, attr, $content);
+  });
+
+  return $content;
+}
 
 function insertValues(strings) {
   for (var _len = arguments.length, values = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
@@ -851,16 +1071,28 @@ function template(strings) {
   }).join('\n');
 }
 
-var _templateObject = _taggedTemplateLiteral(['\n    // Rename CustomExtractor\n    // to fit your publication\n    export const CustomExtractor = {\n      domain: \'', '\',\n      title: {\n        selectors: [\n          // enter title selectors\n        ],\n      },\n\n      content: {\n        selectors: [\n          // enter content selectors\n        ],\n\n        // Is there anything in the content you selected that needs transformed\n        // before it\'s consumable content? E.g., unusual lazy loaded images\n        transforms: [\n        ],\n\n        // Is there anything that is in the result that shouldn\'t be?\n        // The clean selectors will remove anything that matches from\n        // the result\n        clean: [\n\n        ]\n      },\n\n      date_published: null,\n\n      lead_image_url: null,\n\n      dek: null,\n\n      next_page_url: null,\n\n      excerpt: null,\n    }\n  '], ['\n    // Rename CustomExtractor\n    // to fit your publication\n    export const CustomExtractor = {\n      domain: \'', '\',\n      title: {\n        selectors: [\n          // enter title selectors\n        ],\n      },\n\n      content: {\n        selectors: [\n          // enter content selectors\n        ],\n\n        // Is there anything in the content you selected that needs transformed\n        // before it\'s consumable content? E.g., unusual lazy loaded images\n        transforms: [\n        ],\n\n        // Is there anything that is in the result that shouldn\'t be?\n        // The clean selectors will remove anything that matches from\n        // the result\n        clean: [\n\n        ]\n      },\n\n      date_published: null,\n\n      lead_image_url: null,\n\n      dek: null,\n\n      next_page_url: null,\n\n      excerpt: null,\n    }\n  ']);
+var _templateObject = _taggedTemplateLiteral(['\n    // Rename CustomExtractor\n    // to fit your publication\n    // (e.g., NYTimesExtractor)\n    export const CustomExtractor = {\n      domain: \'', '\',\n      title: {\n        selectors: [\n          // enter title selectors\n        ],\n      },\n\n      author: {\n        selectors: [\n          // enter author selectors\n        ],\n      },\n\n      content: {\n        selectors: [\n          // enter content selectors\n        ],\n\n        // Is there anything in the content you selected that needs transformed\n        // before it\'s consumable content? E.g., unusual lazy loaded images\n        transforms: [\n        ],\n\n        // Is there anything that is in the result that shouldn\'t be?\n        // The clean selectors will remove anything that matches from\n        // the result\n        clean: [\n\n        ]\n      },\n\n      date_published: null,\n\n      lead_image_url: null,\n\n      dek: null,\n\n      next_page_url: null,\n\n      excerpt: null,\n    }\n  '], ['\n    // Rename CustomExtractor\n    // to fit your publication\n    // (e.g., NYTimesExtractor)\n    export const CustomExtractor = {\n      domain: \'', '\',\n      title: {\n        selectors: [\n          // enter title selectors\n        ],\n      },\n\n      author: {\n        selectors: [\n          // enter author selectors\n        ],\n      },\n\n      content: {\n        selectors: [\n          // enter content selectors\n        ],\n\n        // Is there anything in the content you selected that needs transformed\n        // before it\'s consumable content? E.g., unusual lazy loaded images\n        transforms: [\n        ],\n\n        // Is there anything that is in the result that shouldn\'t be?\n        // The clean selectors will remove anything that matches from\n        // the result\n        clean: [\n\n        ]\n      },\n\n      date_published: null,\n\n      lead_image_url: null,\n\n      dek: null,\n\n      next_page_url: null,\n\n      excerpt: null,\n    }\n  ']);
 
 function extractorTemplate (hostname) {
   return template(_templateObject, hostname);
 }
 
-var _templateObject$1 = _taggedTemplateLiteral(['\n    import assert from \'assert\';\n    import fs from \'fs\';\n    import URL from \'url\';\n    import cheerio from \'cheerio\';\n\n    import Mercury from \'mercury\';\n    import getExtractor from \'extractors/get-extractor\';\n\n    // Rename CustomExtractor\n    describe(\'CustomExtractor\', () => {\n      it(\'is selected properly\', () => {\n        // To pass this test, rename your extractor in\n        // ', '/index.js\n        // then add your new extractor to\n        // src/extractors/all.js\n        const url = \'', '\';\n        const extractor = getExtractor(url);\n        assert.equal(extractor.domain, URL.parse(url).hostname)\n      })\n\n      it(\'works with a starter story\', (async) () => {\n        // To pass this test, begin filling out your\n        // selectors in ', '/index.js. This test is just\n        // a stub; you can add more fields to test as much of\n        // your parser as possible.\n        const html = fs.readFileSync(\'', '\');\n        const uri = \'', '\';\n\n        const { content, title, author } = await Mercury.parse(uri, html);\n        const $ = cheerio.load(content);\n        const text = $(\'*\').first()\n                           .text()\n                           .trim()\n                           .slice(0, 20);\n\n        // Update these values with the expected values from\n        // the article.\n        assert.equal(title, \'\');\n        assert.equal(author, \'\');\n        assert.equal(text, \'\');\n      });\n    });\n  '], ['\n    import assert from \'assert\';\n    import fs from \'fs\';\n    import URL from \'url\';\n    import cheerio from \'cheerio\';\n\n    import Mercury from \'mercury\';\n    import getExtractor from \'extractors/get-extractor\';\n\n    // Rename CustomExtractor\n    describe(\'CustomExtractor\', () => {\n      it(\'is selected properly\', () => {\n        // To pass this test, rename your extractor in\n        // ', '/index.js\n        // then add your new extractor to\n        // src/extractors/all.js\n        const url = \'', '\';\n        const extractor = getExtractor(url);\n        assert.equal(extractor.domain, URL.parse(url).hostname)\n      })\n\n      it(\'works with a starter story\', (async) () => {\n        // To pass this test, begin filling out your\n        // selectors in ', '/index.js. This test is just\n        // a stub; you can add more fields to test as much of\n        // your parser as possible.\n        const html = fs.readFileSync(\'', '\');\n        const uri = \'', '\';\n\n        const { content, title, author } = await Mercury.parse(uri, html);\n        const $ = cheerio.load(content);\n        const text = $(\'*\').first()\n                           .text()\n                           .trim()\n                           .slice(0, 20);\n\n        // Update these values with the expected values from\n        // the article.\n        assert.equal(title, \'\');\n        assert.equal(author, \'\');\n        assert.equal(text, \'\');\n      });\n    });\n  ']);
+var _templateObject$1 = _taggedTemplateLiteral(['\n  it(\'returns the ', '\', (async) () => {\n            // To pass this test, fill out the ', ' selector\n            // in ', '/index.js.\n            const html =\n              fs.readFileSync(\'', '\');\n            const articleUrl =\n              \'', '\';\n\n            const { ', ' } =\n              await Mercury.parse(articleUrl, html, { fallback: false });\n\n            // Update these values with the expected values from\n            // the article.\n            assert.equal(', ', ', ')\n          });\n    '], ['\n  it(\'returns the ', '\', (async) () => {\n            // To pass this test, fill out the ', ' selector\n            // in ', '/index.js.\n            const html =\n              fs.readFileSync(\'', '\');\n            const articleUrl =\n              \'', '\';\n\n            const { ', ' } =\n              await Mercury.parse(articleUrl, html, { fallback: false });\n\n            // Update these values with the expected values from\n            // the article.\n            assert.equal(', ', ', ')\n          });\n    ']);
+var _templateObject2 = _taggedTemplateLiteral(['\n    import assert from \'assert\';\n    import fs from \'fs\';\n    import URL from \'url\';\n    import cheerio from \'cheerio\';\n\n    import Mercury from \'mercury\';\n    import getExtractor from \'extractors/get-extractor\';\n\n    // Rename CustomExtractor\n    describe(\'CustomExtractor\', () => {\n      it(\'is selected properly\', () => {\n        // To pass this test, rename your extractor in\n        // ', '/index.js\n        // (e.g., CustomExtractor => NYTimesExtractor)\n        // then add your new extractor to\n        // src/extractors/all.js\n        const url =\n          \'', '\';\n        const extractor = getExtractor(url);\n        assert.equal(extractor.domain, URL.parse(url).hostname)\n      })\n\n        ', '\n\n      it(\'returns the content\', (async) () => {\n        // To pass this test, fill out the content selector\n        // in ', '/index.js.\n        // You may also want to make use of the clean and transform\n        // options.\n        const html =\n          fs.readFileSync(\'', '\');\n        const url =\n          \'', '\';\n\n        const { content } =\n          await Mercury.parse(url, html, { fallback: false });\n\n        const $ = cheerio.load(content || \'\');\n\n        const first13 = $(\'*\').first()\n                              .text()\n                              .trim()\n                              .split(/\\s+/)\n                              .slice(0, 13)\n                              .join(\' \')\n\n        // Update these values with the expected values from\n        // the article.\n        assert.equal(first13, null);\n      });\n    });\n  '], ['\n    import assert from \'assert\';\n    import fs from \'fs\';\n    import URL from \'url\';\n    import cheerio from \'cheerio\';\n\n    import Mercury from \'mercury\';\n    import getExtractor from \'extractors/get-extractor\';\n\n    // Rename CustomExtractor\n    describe(\'CustomExtractor\', () => {\n      it(\'is selected properly\', () => {\n        // To pass this test, rename your extractor in\n        // ', '/index.js\n        // (e.g., CustomExtractor => NYTimesExtractor)\n        // then add your new extractor to\n        // src/extractors/all.js\n        const url =\n          \'', '\';\n        const extractor = getExtractor(url);\n        assert.equal(extractor.domain, URL.parse(url).hostname)\n      })\n\n        ', '\n\n      it(\'returns the content\', (async) () => {\n        // To pass this test, fill out the content selector\n        // in ', '/index.js.\n        // You may also want to make use of the clean and transform\n        // options.\n        const html =\n          fs.readFileSync(\'', '\');\n        const url =\n          \'', '\';\n\n        const { content } =\n          await Mercury.parse(url, html, { fallback: false });\n\n        const $ = cheerio.load(content || \'\');\n\n        const first13 = $(\'*\').first()\n                              .text()\n                              .trim()\n                              .split(/\\\\s+/)\n                              .slice(0, 13)\n                              .join(\' \')\n\n        // Update these values with the expected values from\n        // the article.\n        assert.equal(first13, null);\n      });\n    });\n  ']);
+var IGNORE = ['url', 'domain', 'content', 'word_count', 'next_page_url', 'excerpt', 'direction', 'total_pages', 'rendered_pages'];
 
-function extractorTestTemplate (file, url, dir) {
-  return template(_templateObject$1, dir, url, dir, file, url);
+function testFor(key, value, dir, file, url) {
+  if (IGNORE.find(function (k) {
+    return k === key;
+  })) return '';
+
+  return template(_templateObject$1, key, key, dir, file, url, key, key, value ? "'" + value + "'" : "''");
+}
+
+function extractorTestTemplate (file, url, dir, result) {
+  return template(_templateObject2, dir, url, _Reflect$ownKeys(result).map(function (k) {
+    return testFor(k, result[k], dir, file, url);
+  }).join('\n\n'), dir, file, url);
 }
 
 var questions = [{
@@ -913,24 +1145,36 @@ function savePage($, _ref, newParser) {
 
   var filename = new Date().getTime();
   var file = './fixtures/' + hostname + '/' + filename + '.html';
+  // fix http(s) relative links:
+  makeLinksAbsolute($('*').first(), $, url);
+  $('[src], [href]').each(function (index, node) {
+    var $node = $(node);
+    var link = $node.attr('src');
+    if (link && link.slice(0, 2) === '//') {
+      $node.attr('src', 'http:' + link);
+    }
+  });
+  var html = stripJunkTags($('*').first(), $, ['script']).html();
 
-  fs.writeFileSync(file, $.html());
+  fs.writeFileSync(file, html);
 
-  if (newParser) {
-    confirm(generateScaffold, [url, file], 'Generating parser and tests');
-    console.log('Your custom site extractor has been set up. To get started building it, run\n    npm test -- ' + getDir(url) + '/index.test.js');
-  } else {
-    console.log('It looks like you already have a custom parser for this url.\nThe page you linked to has been added to ' + file + '. Copy and paste\nthe following code to use that page in your tests:\nconst html = fs.readFileSync(\'' + file + '\');');
-  }
+  var result = mercury.parse(url, html).then(function (result) {
+    if (newParser) {
+      confirm(generateScaffold, [url, file, result], 'Generating parser and tests');
+      console.log('Your custom site extractor has been set up. To get started building it, run\n      npm run watch:test -- ' + hostname);
+    } else {
+      console.log('\n  It looks like you already have a custom parser for this url.\n  The page you linked to has been added to ' + file + '. Copy and paste\n  the following code to use that page in your tests:\n  const html = fs.readFileSync(\'' + file + '\');');
+    }
+  });
 }
 
-function generateScaffold(url, file) {
+function generateScaffold(url, file, result) {
   var _URL$parse3 = URL.parse(url);
 
   var hostname = _URL$parse3.hostname;
 
   var extractor = extractorTemplate(hostname);
-  var extractorTest = extractorTestTemplate(file, url, getDir(url));
+  var extractorTest = extractorTestTemplate(file, url, getDir(url), result);
 
   fs.writeFileSync(getDir(url) + '/index.js', extractor);
   fs.writeFileSync(getDir(url) + '/index.test.js', extractorTest);

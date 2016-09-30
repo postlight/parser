@@ -59,7 +59,7 @@ export const NYMagExtractor = {
 
   date_published: {
     selectors: [
-      'time.article-timestamp[datetime]',
+      ['time.article-timestamp[datetime]', 'datetime'],
       'time.article-timestamp',
     ],
   },

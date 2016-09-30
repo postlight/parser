@@ -392,7 +392,7 @@ var NYMagExtractor = {
   },
 
   date_published: {
-    selectors: ['time.article-timestamp[datetime]', 'time.article-timestamp']
+    selectors: [['time.article-timestamp[datetime]', 'datetime'], 'time.article-timestamp']
   }
 };
 
@@ -496,7 +496,7 @@ var TwitterExtractor = {
   },
 
   date_published: {
-    selectors: ['.permalink-tweet ._timestamp[data-time-ms]']
+    selectors: [['.permalink-tweet ._timestamp[data-time-ms]', 'data-time-ms']]
   }
 
 };
@@ -584,13 +584,57 @@ var TheAtlanticExtractor = {
   excerpt: null
 };
 
+// Rename CustomExtractor
+// to fit your publication
+// (e.g., NYTimesExtractor)
+var NewYorkerExtractor = {
+  domain: 'www.newyorker.com',
+  title: {
+    selectors: ['h1.title']
+  },
+
+  author: {
+    selectors: ['.contributors']
+  },
+
+  content: {
+    selectors: ['div#articleBody', 'div.articleBody'],
+
+    // Is there anything in the content you selected that needs transformed
+    // before it's consumable content? E.g., unusual lazy loaded images
+    transforms: [],
+
+    // Is there anything that is in the result that shouldn't be?
+    // The clean selectors will remove anything that matches from
+    // the result
+    clean: []
+  },
+
+  date_published: {
+    selectors: [['meta[name="article:published_time"]', 'value']]
+  },
+
+  lead_image_url: {
+    selectors: [['meta[name="og:image"]', 'value']]
+  },
+
+  dek: {
+    selectors: [['meta[name="og:description"]', 'value']]
+  },
+
+  next_page_url: null,
+
+  excerpt: null
+};
+
 var Extractors = {
   'nymag.com': NYMagExtractor,
   'blogspot.com': BloggerExtractor,
   'wikipedia.org': WikipediaExtractor,
   'twitter.com': TwitterExtractor,
   'www.nytimes.com': NYTimesExtractor,
-  'www.theatlantic.com': TheAtlanticExtractor
+  'www.theatlantic.com': TheAtlanticExtractor,
+  'www.newyorker.com': NewYorkerExtractor
 };
 
 // Spacer images to be removed
@@ -605,7 +649,7 @@ var REMOVE_ATTR_SELECTORS = REMOVE_ATTRS.map(function (selector) {
   return '[' + selector + ']';
 });
 var REMOVE_ATTR_LIST = REMOVE_ATTRS.join(',');
-var WHITELIST_ATTRS = ['src', 'href', 'class', 'id', 'score'];
+var WHITELIST_ATTRS = ['src', 'srcset', 'href', 'class', 'id', 'alt', 'score'];
 var WHITELIST_ATTRS_RE = new RegExp('^(' + WHITELIST_ATTRS.join('|') + ')$', 'i');
 
 // removeEmpty
@@ -908,7 +952,13 @@ function cleanImages($article, $) {
 }
 
 function stripJunkTags(article, $) {
-  $(STRIP_OUTPUT_TAGS.join(','), article).remove();
+  var tags = arguments.length <= 2 || arguments[2] === undefined ? [] : arguments[2];
+
+  if (tags.length === 0) {
+    tags = STRIP_OUTPUT_TAGS;
+  }
+
+  $(tags.join(','), article).remove();
 
   return $;
 }
@@ -3291,8 +3341,6 @@ function getExtractor(url, parsedUrl) {
   return Extractors[hostname] || Extractors[baseDomain] || GenericExtractor;
 }
 
-var ATTR_RE = /\[([\w-]+)\]/;
-
 // Remove elements by an array of selectors
 function cleanBySelectors($content, $, _ref) {
   var clean = _ref.clean;
@@ -3334,6 +3382,21 @@ function transformElements($content, $, _ref2) {
   return $content;
 }
 
+function findMatchingSelector($, selectors) {
+  return selectors.find(function (selector) {
+    if (Array.isArray(selector)) {
+      var _selector = _slicedToArray(selector, 2);
+
+      var s = _selector[0];
+      var attr = _selector[1];
+
+      return $(s).length === 1 && $(s).attr(attr) && $(s).attr(attr).trim() !== '';
+    }
+
+    return $(selector).length === 1 && $(selector).text().trim() !== '';
+  });
+}
+
 function select(opts) {
   var $ = opts.$;
   var type = opts.type;
@@ -3353,9 +3416,7 @@ function select(opts) {
   var defaultCleaner = _extractionOpts$defau === undefined ? true : _extractionOpts$defau;
 
 
-  var matchingSelector = selectors.find(function (selector) {
-    return $(selector).length === 1 && $(selector).text().trim() !== '';
-  });
+  var matchingSelector = findMatchingSelector($, selectors);
 
   if (!matchingSelector) return null;
 
@@ -3379,16 +3440,20 @@ function select(opts) {
 
     return $.html($content);
   }
-  // if selector includes an attr (e.g., img[src]),
-  // extract the attr
-  var attr = matchingSelector.match(ATTR_RE);
+
   var result = void 0;
 
-  if (attr) {
-    result = $(matchingSelector).attr(attr[1]);
+  // if selector is an array (e.g., ['img', 'src']),
+  // extract the attr
+  if (Array.isArray(matchingSelector)) {
+    var _matchingSelector = _slicedToArray(matchingSelector, 2);
+
+    var selector = _matchingSelector[0];
+    var attr = _matchingSelector[1];
+
+    result = $(selector).attr(attr).trim();
   } else {
-    // otherwise use the text of the node
-    result = $(matchingSelector).text();
+    result = $(matchingSelector).text().trim();
   }
 
   // Allow custom extractor to skip default cleaner
@@ -3403,11 +3468,22 @@ function select(opts) {
 function extractResult(opts) {
   var type = opts.type;
   var extractor = opts.extractor;
+  var _opts$fallback = opts.fallback;
+  var fallback = _opts$fallback === undefined ? true : _opts$fallback;
 
-  // If nothing matches the selector,
+
+  var result = select(_extends({}, opts, { extractionOpts: extractor[type] }));
+
+  // If custom parser succeeds, return the result
+  if (result) {
+    return result;
+  }
+
+  // If nothing matches the selector, and fallback is enabled,
   // run the Generic extraction
+  if (fallback) return GenericExtractor[type](opts);
 
-  return select(_extends({}, opts, { extractionOpts: extractor[type] })) || GenericExtractor[type](opts);
+  return null;
 }
 
 var RootExtractor = {
@@ -3444,10 +3520,10 @@ var RootExtractor = {
     var word_count = extractResult(_extends({}, opts, { type: 'word_count', content: content }));
     var direction = extractResult(_extends({}, opts, { type: 'direction', title: title }));
 
-    var _extractResult = extractResult(_extends({}, opts, { type: 'url_and_domain' }));
+    var _ref3 = extractResult(_extends({}, opts, { type: 'url_and_domain' })) || { url: null, domain: null };
 
-    var url = _extractResult.url;
-    var domain = _extractResult.domain;
+    var url = _ref3.url;
+    var domain = _ref3.domain;
 
 
     return {
@@ -3477,7 +3553,7 @@ var collectAllPages = (function () {
     var Extractor = _ref2.Extractor;
     var title = _ref2.title;
     var url = _ref2.url;
-    var pages, previousUrls, extractorOpts, nextPageResult;
+    var pages, previousUrls, extractorOpts, nextPageResult, word_count;
     return _regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
@@ -3526,12 +3602,14 @@ var collectAllPages = (function () {
             break;
 
           case 15:
+            word_count = GenericExtractor.word_count({ content: '<div>' + result.content + '</div>' });
             return _context.abrupt('return', _extends({}, result, {
               total_pages: pages,
-              pages_rendered: pages
+              pages_rendered: pages,
+              word_count: word_count
             }));
 
-          case 16:
+          case 17:
           case 'end':
             return _context.stop();
         }
@@ -3552,42 +3630,43 @@ var Mercury = {
 
     var opts = arguments.length <= 2 || arguments[2] === undefined ? {} : arguments[2];
     return _asyncToGenerator(_regeneratorRuntime.mark(function _callee() {
-      var _ref, _ref$fetchAllPages, fetchAllPages, parsedUrl, Extractor, $, metaCache, result, _result, title, next_page_url;
+      var _opts$fetchAllPages, fetchAllPages, _opts$fallback, fallback, parsedUrl, Extractor, $, metaCache, result, _result, title, next_page_url;
 
       return _regeneratorRuntime.wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              _ref = opts || true;
-              _ref$fetchAllPages = _ref.fetchAllPages;
-              fetchAllPages = _ref$fetchAllPages === undefined ? true : _ref$fetchAllPages;
+              _opts$fetchAllPages = opts.fetchAllPages;
+              fetchAllPages = _opts$fetchAllPages === undefined ? true : _opts$fetchAllPages;
+              _opts$fallback = opts.fallback;
+              fallback = _opts$fallback === undefined ? true : _opts$fallback;
               parsedUrl = URL.parse(url);
 
               if (validateUrl(parsedUrl)) {
-                _context.next = 6;
+                _context.next = 7;
                 break;
               }
 
               return _context.abrupt('return', Errors.badUrl);
 
-            case 6:
+            case 7:
               Extractor = getExtractor(url, parsedUrl);
               // console.log(`Using extractor for ${Extractor.domain}`);
 
-              _context.next = 9;
+              _context.next = 10;
               return Resource.create(url, html, parsedUrl);
 
-            case 9:
+            case 10:
               $ = _context.sent;
 
               if (!$.error) {
-                _context.next = 12;
+                _context.next = 13;
                 break;
               }
 
               return _context.abrupt('return', $);
 
-            case 12:
+            case 13:
 
               html = $.html();
 
@@ -3596,7 +3675,7 @@ var Mercury = {
               metaCache = $('meta').map(function (_, node) {
                 return $(node).attr('name');
               }).toArray();
-              result = RootExtractor.extract(Extractor, { url: url, html: html, $: $, metaCache: metaCache, parsedUrl: parsedUrl });
+              result = RootExtractor.extract(Extractor, { url: url, html: html, $: $, metaCache: metaCache, parsedUrl: parsedUrl, fallback: fallback });
               _result = result;
               title = _result.title;
               next_page_url = _result.next_page_url;
@@ -3604,11 +3683,11 @@ var Mercury = {
               // Fetch more pages if next_page_url found
 
               if (!(fetchAllPages && next_page_url)) {
-                _context.next = 24;
+                _context.next = 25;
                 break;
               }
 
-              _context.next = 21;
+              _context.next = 22;
               return collectAllPages({
                 Extractor: Extractor,
                 next_page_url: next_page_url,
@@ -3620,21 +3699,21 @@ var Mercury = {
                 url: url
               });
 
-            case 21:
+            case 22:
               result = _context.sent;
-              _context.next = 25;
+              _context.next = 26;
               break;
 
-            case 24:
+            case 25:
               result = _extends({}, result, {
                 total_pages: 1,
                 rendered_pages: 1
               });
 
-            case 25:
+            case 26:
               return _context.abrupt('return', result);
 
-            case 26:
+            case 27:
             case 'end':
               return _context.stop();
           }

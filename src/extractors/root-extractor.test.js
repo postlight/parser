@@ -10,7 +10,7 @@ import {
   transformElements,
 } from './root-extractor';
 
-import NYMagExtractor from './custom/nymag.com';
+import { NYMagExtractor } from './custom/nymag.com';
 
 describe('RootExtractor', () => {
   it('extracts based on custom selectors', () => {
@@ -31,6 +31,18 @@ describe('RootExtractor', () => {
     assert.equal(url, fullUrl);
     assert.equal(word_count, 727);
     assert.equal(direction, 'ltr');
+  });
+
+  it('only returns what the custom parser gives it if fallback is disabled', () => {
+    const fullUrl = 'http://nymag.com/daily/intelligencer/2016/09/trump-discussed-usd25k-donation-with-florida-ag-not-fraud.html';
+    const html = fs.readFileSync('./src/extractors/custom/nymag.com/fixtures/test.html', 'utf8');
+    const $ = cheerio.load(html);
+
+    const { url } = RootExtractor.extract(
+      NYMagExtractor, { url: fullUrl, html, $, metaCache: [], fallback: false }
+    );
+
+    assert.equal(url, null);
   });
 });
 
@@ -148,7 +160,7 @@ describe('select(opts)', () => {
     assert.equal(result, 'Bob');
   });
 
-  it('returns a node\'s attr with a attr selector', () => {
+  it('returns a node\'s attr with an attr selector', () => {
     const html = `
       <div>
         <time datetime="2016-09-07T05:07:59-04:00">
@@ -161,7 +173,7 @@ describe('select(opts)', () => {
       type: 'date_published',
       $,
       extractionOpts: {
-        selectors: ['time[datetime]'],
+        selectors: [['time', 'datetime']],
       },
     };
 
