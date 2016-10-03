@@ -7,6 +7,7 @@ import { TheAtlanticExtractor } from './custom/www.theatlantic.com';
 import { NewYorkerExtractor } from './custom/www.newyorker.com';
 import { WiredExtractor } from './custom/www.wired.com';
 import { MSNExtractor } from './custom/www.msn.com';
+import { YahooExtractor } from './custom/www.yahoo.com';
 
 
 const Extractors = {
@@ -19,6 +20,7 @@ const Extractors = {
   'www.newyorker.com': NewYorkerExtractor,
   'www.wired.com': WiredExtractor,
   'www.msn.com': MSNExtractor,
+  'www.yahoo.com': YahooExtractor,
 
 };
 
