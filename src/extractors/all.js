@@ -6,6 +6,8 @@ import { NYTimesExtractor } from './custom/www.nytimes.com';
 import { TheAtlanticExtractor } from './custom/www.theatlantic.com';
 import { NewYorkerExtractor } from './custom/www.newyorker.com';
 import { WiredExtractor } from './custom/www.wired.com';
+import { MSNExtractor } from './custom/www.msn.com';
+
 
 const Extractors = {
   'nymag.com': NYMagExtractor,
@@ -16,6 +18,7 @@ const Extractors = {
   'www.theatlantic.com': TheAtlanticExtractor,
   'www.newyorker.com': NewYorkerExtractor,
   'www.wired.com': WiredExtractor,
+  'www.msn.com': MSNExtractor,
 
 };
 
