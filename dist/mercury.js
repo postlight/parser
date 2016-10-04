@@ -846,6 +846,41 @@ var WikiaExtractor = {
   excerpt: null
 };
 
+// Rename CustomExtractor
+// to fit your publication
+// (e.g., NYTimesExtractor)
+var LittleThingsExtractor = {
+  domain: 'www.littlethings.com',
+  title: {
+    selectors: ['h1.post-title']
+  },
+
+  author: {
+    selectors: [['meta[name="author"]', 'value']]
+  },
+
+  content: {
+    selectors: [
+    // enter content selectors
+    '.mainContentIntro', '.content-wrapper'],
+
+    // Is there anything in the content you selected that needs transformed
+    // before it's consumable content? E.g., unusual lazy loaded images
+    transforms: [],
+
+    // Is there anything that is in the result that shouldn't be?
+    // The clean selectors will remove anything that matches from
+    // the result
+    clean: []
+  },
+
+  lead_image_url: null,
+
+  next_page_url: null,
+
+  excerpt: null
+};
+
 var Extractors = {
   'nymag.com': NYMagExtractor,
   'blogspot.com': BloggerExtractor,
@@ -858,7 +893,8 @@ var Extractors = {
   'www.msn.com': MSNExtractor,
   'www.yahoo.com': YahooExtractor,
   'www.buzzfeed.com': BuzzfeedExtractor,
-  'fandom.wikia.com': WikiaExtractor
+  'fandom.wikia.com': WikiaExtractor,
+  'www.littlethings.com': LittleThingsExtractor
 
 };
 

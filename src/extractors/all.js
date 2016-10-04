@@ -10,6 +10,7 @@ import { MSNExtractor } from './custom/www.msn.com';
 import { YahooExtractor } from './custom/www.yahoo.com';
 import { BuzzfeedExtractor } from './custom/www.buzzfeed.com';
 import { WikiaExtractor } from './custom/fandom.wikia.com';
+import { LittleThingsExtractor } from './custom/www.littlethings.com';
 
 
 const Extractors = {
@@ -25,6 +26,7 @@ const Extractors = {
   'www.yahoo.com': YahooExtractor,
   'www.buzzfeed.com': BuzzfeedExtractor,
   'fandom.wikia.com': WikiaExtractor,
+  'www.littlethings.com': LittleThingsExtractor,
 
 };
 
