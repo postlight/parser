@@ -9,6 +9,7 @@ import { WiredExtractor } from './custom/www.wired.com';
 import { MSNExtractor } from './custom/www.msn.com';
 import { YahooExtractor } from './custom/www.yahoo.com';
 import { BuzzfeedExtractor } from './custom/www.buzzfeed.com';
+import { WikiaExtractor } from './custom/fandom.wikia.com';
 
 
 const Extractors = {
@@ -23,6 +24,7 @@ const Extractors = {
   'www.msn.com': MSNExtractor,
   'www.yahoo.com': YahooExtractor,
   'www.buzzfeed.com': BuzzfeedExtractor,
+  'fandom.wikia.com': WikiaExtractor,
 
 };
 
