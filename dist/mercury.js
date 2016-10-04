@@ -713,6 +713,139 @@ var MSNExtractor = {
   excerpt: null
 };
 
+// Rename CustomExtractor
+// to fit your publication
+// (e.g., NYTimesExtractor)
+var YahooExtractor = {
+  domain: 'www.yahoo.com',
+  title: {
+    selectors: ['header.canvas-header']
+  },
+
+  author: {
+    selectors: ['span.provider-name']
+  },
+
+  content: {
+    selectors: [
+    // enter content selectors
+    '.content-canvas'],
+
+    // Is there anything in the content you selected that needs transformed
+    // before it's consumable content? E.g., unusual lazy loaded images
+    transforms: [],
+
+    // Is there anything that is in the result that shouldn't be?
+    // The clean selectors will remove anything that matches from
+    // the result
+    clean: ['.figure-caption']
+  },
+
+  date_published: {
+    selectors: ['time.date']
+  },
+
+  lead_image_url: {
+    selectors: [['meta[name="og:image"]', 'value']]
+  },
+
+  dek: {
+    selectors: [['meta[name="og:description"]', 'value']]
+  },
+
+  next_page_url: null,
+
+  excerpt: null
+};
+
+// Rename CustomExtractor
+// to fit your publication
+// (e.g., NYTimesExtractor)
+var BuzzfeedExtractor = {
+  domain: 'www.buzzfeed.com',
+  title: {
+    selectors: ['h1[id="post-title"]']
+  },
+
+  author: {
+    selectors: ['a[data-action="user/username"]', 'byline__author']
+  },
+
+  content: {
+    selectors: [
+      // enter content selectors
+    ],
+
+    // Is there anything in the content you selected that needs transformed
+    // before it's consumable content? E.g., unusual lazy loaded images
+    transforms: [],
+
+    // Is there anything that is in the result that shouldn't be?
+    // The clean selectors will remove anything that matches from
+    // the result
+    clean: []
+  },
+
+  date_published: {
+    selectors: ['.buzz-datetime']
+  },
+
+  lead_image_url: {
+    selectors: [['meta[name="og:image"]', 'value']]
+  },
+
+  dek: {
+    selectors: [['meta[name="description"]', 'value']]
+  },
+
+  next_page_url: null,
+
+  excerpt: null
+};
+
+// Rename CustomExtractor
+// to fit your publication
+// (e.g., NYTimesExtractor)
+var WikiaExtractor = {
+  domain: 'fandom.wikia.com',
+  title: {
+    selectors: ['h1.entry-title']
+  },
+
+  author: {
+    selectors: ['.author vcard', '.fn']
+  },
+
+  content: {
+    selectors: ['.grid-content', '.entry-content'],
+
+    // Is there anything in the content you selected that needs transformed
+    // before it's consumable content? E.g., unusual lazy loaded images
+    transforms: [],
+
+    // Is there anything that is in the result that shouldn't be?
+    // The clean selectors will remove anything that matches from
+    // the result
+    clean: []
+  },
+
+  date_published: {
+    selectors: [['meta[name="article:published_time"]', 'value']]
+  },
+
+  lead_image_url: {
+    selectors: [['meta[name="og:image"]', 'value']]
+  },
+
+  dek: {
+    selectors: [['meta[name="og:description"]', 'value']]
+  },
+
+  next_page_url: null,
+
+  excerpt: null
+};
+
 var Extractors = {
   'nymag.com': NYMagExtractor,
   'blogspot.com': BloggerExtractor,
@@ -722,7 +855,10 @@ var Extractors = {
   'www.theatlantic.com': TheAtlanticExtractor,
   'www.newyorker.com': NewYorkerExtractor,
   'www.wired.com': WiredExtractor,
-  'www.msn.com': MSNExtractor
+  'www.msn.com': MSNExtractor,
+  'www.yahoo.com': YahooExtractor,
+  'www.buzzfeed.com': BuzzfeedExtractor,
+  'fandom.wikia.com': WikiaExtractor
 
 };
 
