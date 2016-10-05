@@ -11,6 +11,7 @@ import { YahooExtractor } from './custom/www.yahoo.com';
 import { BuzzfeedExtractor } from './custom/www.buzzfeed.com';
 import { WikiaExtractor } from './custom/fandom.wikia.com';
 import { LittleThingsExtractor } from './custom/www.littlethings.com';
+import { PoliticoExtractor } from './custom/www.politico.com';
 
 
 const Extractors = {
@@ -27,6 +28,7 @@ const Extractors = {
   'www.buzzfeed.com': BuzzfeedExtractor,
   'fandom.wikia.com': WikiaExtractor,
   'www.littlethings.com': LittleThingsExtractor,
+  'www.politico.com': PoliticoExtractor,
 
 };
 
