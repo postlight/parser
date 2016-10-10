@@ -4,7 +4,7 @@ import fs from 'fs';
 import Mercury from 'mercury';
 
 describe('TwitterExtractor', () => {
-  it('works with a feature story', (async) () => {
+  it('works with a feature story', async () => {
     const html = fs.readFileSync('./fixtures/twitter.com/tweet.html');
     const uri = 'https://twitter.com/KingBeyonceStan/status/745276948213968896';
 

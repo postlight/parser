@@ -20,7 +20,7 @@ describe('WikiaExtractor', () => {
     assert.equal(extractor.domain, URL.parse(url).hostname);
   });
 
-  it('returns the title', ((async)) () => {
+  it('returns the title', async () => {
     // To pass this test, fill out the title selector
     // in ./src/extractors/custom/fandom.wikia.com/index.js.
     const html =
@@ -37,7 +37,7 @@ describe('WikiaExtractor', () => {
   });
 
 
-  it('returns the author', ((async)) () => {
+  it('returns the author', async () => {
     // To pass this test, fill out the author selector
     // in ./src/extractors/custom/fandom.wikia.com/index.js.
     const html =
@@ -54,7 +54,7 @@ describe('WikiaExtractor', () => {
   });
 
 
-  it('returns the date_published', ((async)) () => {
+  it('returns the date_published', async () => {
     // To pass this test, fill out the date_published selector
     // in ./src/extractors/custom/fandom.wikia.com/index.js.
     const html =
@@ -70,25 +70,7 @@ describe('WikiaExtractor', () => {
     assert.equal(date_published, '2016-10-03T02:30:57.000Z');
   });
 
-
-  it('returns the dek', ((async)) () => {
-    // To pass this test, fill out the dek selector
-    // in ./src/extractors/custom/fandom.wikia.com/index.js.
-    const html =
-      fs.readFileSync('./fixtures/fandom.wikia.com/1475595373938.html');
-    const articleUrl =
-      'http://fandom.wikia.com/articles/box-office-good-peculiar';
-
-    const { dek } =
-      await Mercury.parse(articleUrl, html, { fallback: false });
-
-    // Update these values with the expected values from
-    // the article.
-    assert.equal(dek, 'Tim Burton once again claimed the top spot at the box office. Miss Peregrine’s Home for Peculiar Children secured a respectable #1 showing and may have some staying power in the coming weeks. All in all, it’s not a huge win but it’s good enough. Meanwhile, Deepwater Horizon performed about as well as expected. Seeing as how […]');
-  });
-
-
-  it('returns the lead_image_url', ((async)) () => {
+  it('returns the lead_image_url', async () => {
     // To pass this test, fill out the lead_image_url selector
     // in ./src/extractors/custom/fandom.wikia.com/index.js.
     const html =
@@ -105,7 +87,7 @@ describe('WikiaExtractor', () => {
   });
 
 
-  it('returns the content', ((async)) () => {
+  it('returns the content', async () => {
     // To pass this test, fill out the content selector
     // in ./src/extractors/custom/fandom.wikia.com/index.js.
     // You may also want to make use of the clean and transform

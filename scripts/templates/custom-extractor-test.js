@@ -18,7 +18,7 @@ function testFor(key, value, dir, file, url) {
   if (IGNORE.find(k => k === key)) return ''
 
   return template`
-  it('returns the ${key}', (async) () => {
+  it('returns the ${key}', async () => {
             // To pass this test, fill out the ${key} selector
             // in ${dir}/index.js.
             const html =
@@ -62,7 +62,7 @@ export default function (file, url, dir, result) {
 
         ${Reflect.ownKeys(result).map(k => testFor(k, result[k], dir, file, url)).join('\n\n')}
 
-      it('returns the content', (async) () => {
+      it('returns the content', async () => {
         // To pass this test, fill out the content selector
         // in ${dir}/index.js.
         // You may also want to make use of the clean and transform

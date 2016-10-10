@@ -20,7 +20,7 @@ describe('PoliticoExtractor', () => {
     assert.equal(extractor.domain, URL.parse(url).hostname);
   });
 
-  it('returns the title', ((async)) () => {
+  it('returns the title', async () => {
     // To pass this test, fill out the title selector
     // in ./src/extractors/custom/www.politico.com/index.js.
     const html =
@@ -37,7 +37,7 @@ describe('PoliticoExtractor', () => {
   });
 
 
-  it('returns the author', ((async)) () => {
+  it('returns the author', async () => {
     // To pass this test, fill out the author selector
     // in ./src/extractors/custom/www.politico.com/index.js.
     const html =
@@ -50,11 +50,11 @@ describe('PoliticoExtractor', () => {
 
     // Update these values with the expected values from
     // the article.
-    assert.equal(author, '');
+    assert.equal(author, 'Steven Shepard');
   });
 
 
-  it('returns the date_published', ((async)) () => {
+  it('returns the date_published', async () => {
     // To pass this test, fill out the date_published selector
     // in ./src/extractors/custom/www.politico.com/index.js.
     const html =
@@ -67,11 +67,11 @@ describe('PoliticoExtractor', () => {
 
     // Update these values with the expected values from
     // the article.
-    assert.equal(date_published, '');
+    assert.equal(date_published, '2016-10-04T09:07:00.000Z');
   });
 
 
-  it('returns the dek', ((async)) () => {
+  it('returns the dek', async () => {
     // To pass this test, fill out the dek selector
     // in ./src/extractors/custom/www.politico.com/index.js.
     const html =
@@ -88,7 +88,7 @@ describe('PoliticoExtractor', () => {
   });
 
 
-  it('returns the lead_image_url', ((async)) () => {
+  it('returns the lead_image_url', async () => {
     // To pass this test, fill out the lead_image_url selector
     // in ./src/extractors/custom/www.politico.com/index.js.
     const html =
@@ -105,7 +105,7 @@ describe('PoliticoExtractor', () => {
   });
 
 
-  it('returns the content', ((async)) () => {
+  it('returns the content', async () => {
     // To pass this test, fill out the content selector
     // in ./src/extractors/custom/www.politico.com/index.js.
     // You may also want to make use of the clean and transform

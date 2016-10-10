@@ -19,21 +19,25 @@ export const BuzzfeedExtractor = {
 
   content: {
     selectors: [
-      '#buzz_sub_buzz', '.bf_dom', 'div[rel:gt_cat="[ttp]:content"]',
-
+      '#buzz_sub_buzz',
       // enter content selectors
     ],
 
+    defaultCleaner: false,
+
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images
-    transforms: [
-    ],
+    transforms: {
+      h2: 'b',
+    },
 
     // Is there anything that is in the result that shouldn't be?
     // The clean selectors will remove anything that matches from
     // the result
     clean: [
-
+      '.instapaper_ignore',
+      '.suplist_list_hide .buzz_superlist_item .buzz_superlist_number_inline',
+      '.share-box',
     ],
   },
 

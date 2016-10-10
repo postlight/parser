@@ -20,7 +20,7 @@ describe('BuzzfeedExtractor', () => {
     assert.equal(extractor.domain, URL.parse(url).hostname);
   });
 
-  it('returns the title', ((async)) () => {
+  it('returns the title', async () => {
     // To pass this test, fill out the title selector
     // in ./src/extractors/custom/www.buzzfeed.com/index.js.
     const html =
@@ -37,7 +37,7 @@ describe('BuzzfeedExtractor', () => {
   });
 
 
-  it('returns the author', ((async)) () => {
+  it('returns the author', async () => {
     // To pass this test, fill out the author selector
     // in ./src/extractors/custom/www.buzzfeed.com/index.js.
     const html =
@@ -54,24 +54,24 @@ describe('BuzzfeedExtractor', () => {
   });
 
 
-  it('returns the date_published', ((async)) () => {
-    // To pass this test, fill out the date_published selector
-    // in ./src/extractors/custom/www.buzzfeed.com/index.js.
-    const html =
-      fs.readFileSync('./fixtures/www.buzzfeed.com/1475531975121.html');
-    const articleUrl =
-      'https://www.buzzfeed.com/ikrd/people-are-calling-out-this-edited-picture-of-demi-lovato-fo';
+  // it('returns the date_published', async () => {
+  //   // To pass this test, fill out the date_published selector
+  //   // in ./src/extractors/custom/www.buzzfeed.com/index.js.
+  //   const html =
+  //     fs.readFileSync('./fixtures/www.buzzfeed.com/1475531975121.html');
+  //   const articleUrl =
+  //     'https://www.buzzfeed.com/ikrd/people-are-calling-out-this-edited-picture-of-demi-lovato-fo';
+  //
+  //   const { date_published } =
+  //     await Mercury.parse(articleUrl, html, { fallback: false });
+  //
+  //   // Update these values with the expected values from
+  //   // the article.
+  //   // assert.equal(date_published, 'hi');
+  // });
 
-    const { date_published } =
-      await Mercury.parse(articleUrl, html, { fallback: false });
 
-    // Update these values with the expected values from
-    // the article.
-    assert.equal(date_published, ' ');
-  });
-
-
-  it('returns the dek', ((async)) () => {
+  it('returns the dek', async () => {
     // To pass this test, fill out the dek selector
     // in ./src/extractors/custom/www.buzzfeed.com/index.js.
     const html =
@@ -88,7 +88,7 @@ describe('BuzzfeedExtractor', () => {
   });
 
 
-  it('returns the lead_image_url', ((async)) () => {
+  it('returns the lead_image_url', async () => {
     // To pass this test, fill out the lead_image_url selector
     // in ./src/extractors/custom/www.buzzfeed.com/index.js.
     const html =
@@ -105,7 +105,7 @@ describe('BuzzfeedExtractor', () => {
   });
 
 
-  it('returns the content', ((async)) () => {
+  it('returns the content', async () => {
     // To pass this test, fill out the content selector
     // in ./src/extractors/custom/www.buzzfeed.com/index.js.
     // You may also want to make use of the clean and transform

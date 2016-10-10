@@ -5,14 +5,14 @@ import Resource from './index';
 
 describe('Resource', () => {
   describe('create(url)', () => {
-    it('fetches the page and returns a cheerio object', (async) () => {
+    it('fetches the page and returns a cheerio object', async () => {
       const url = 'http://theconcourse.deadspin.com/1786177057';
       const $ = await Resource.create(url);
 
       assert.equal(typeof $, 'function');
     });
 
-    it('returns an error message if the url is malformed', (async) () => {
+    it('returns an error message if the url is malformed', async () => {
       const url = 'http://nytimes.com/500';
       const error = await Resource.create(url);
 

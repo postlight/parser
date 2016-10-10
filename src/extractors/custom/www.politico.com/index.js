@@ -12,8 +12,7 @@ export const PoliticoExtractor = {
 
   author: {
     selectors: [
-      // enter author selectors
-
+      '.story-main-content .byline .vcard',
     ],
   },
 
@@ -35,14 +34,12 @@ export const PoliticoExtractor = {
     // the result
     clean: [
       'figcaption',
-
     ],
   },
 
   date_published: {
     selectors: [
-      // enter date selectors
-      ['.timestamp[time="datetime"]'],
+      ['.story-main-content .timestamp time[datetime]', 'datetime'],
 
     ],
   },

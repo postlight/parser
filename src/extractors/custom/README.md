@@ -149,7 +149,7 @@ First, you'll need to clone the Mercury Parser repository and install dependenci
 ```bash
 git clone git@github.com:postlight/readability-parser.git
 
-cd readibilty-parser
+cd readabilty-parser
 
 npm install
 ```
@@ -183,7 +183,7 @@ For our New Yorker example, we're going to use [this story](http://www.newyorker
 When the generator script completes, you'll be prompted to run:
 
 ```bash
-npm watch:test -- www.newyorker.com
+npm run watch:test -- www.newyorker.com
 ```
 
 This will run the tests for the parser you just generated, which should fail (which makes sense — you haven't written it yet!). Your goal now is to follow the instructions in the generated `www.newyorker.com/index.test.js` and `www.newyorker.com/index.js` files until they pass!
@@ -353,7 +353,7 @@ You can refer to the [NewYorkerExtractor](www.newyorker.com/index.js) to see mor
 
 ### Step 5: Content extraction
 
-I've left content extraction for last, since it's often the trickiest, sometimes requiring special passes to [clean](#cleaning-content) and [transform](#using-tranforms) the content. For the New Yorker, the first part is easy: The selector for this page is clearly `div#articleBody`. But that's just our frist step, because unlike the other tests, where we want to make sure we're matching a simple string, we need to sanity check that the page looks good when it's rendered, and that there aren't any elements returned by our selector that we don't want.
+I've left content extraction for last, since it's often the trickiest, sometimes requiring special passes to [clean](#cleaning-content) and [transform](#using-tranforms) the content. For the New Yorker, the first part is easy: The selector for this page is clearly `div#articleBody`. But that's just our first step, because unlike the other tests, where we want to make sure we're matching a simple string, we need to sanity check that the page looks good when it's rendered, and that there aren't any elements returned by our selector that we don't want.
 
 To aid you in previewing the results, you can run the `./preview` script to see what the title and content output look like. So, after you've chosen your selector, run the preview script on the URL you're testing:
 

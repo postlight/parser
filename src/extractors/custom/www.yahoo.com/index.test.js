@@ -20,7 +20,7 @@ describe('YahooExtractor', () => {
     assert.equal(extractor.domain, URL.parse(url).hostname);
   });
 
-  it('returns the title', ((async)) () => {
+  it('returns the title', async () => {
     // To pass this test, fill out the title selector
     // in ./src/extractors/custom/www.yahoo.com/index.js.
     const html =
@@ -37,7 +37,7 @@ describe('YahooExtractor', () => {
   });
 
 
-  it('returns the author', ((async)) () => {
+  it('returns the author', async () => {
     // To pass this test, fill out the author selector
     // in ./src/extractors/custom/www.yahoo.com/index.js.
     const html =
@@ -54,7 +54,7 @@ describe('YahooExtractor', () => {
   });
 
 
-  it('returns the date_published', ((async)) () => {
+  it('returns the date_published', async () => {
     // To pass this test, fill out the date_published selector
     // in ./src/extractors/custom/www.yahoo.com/index.js.
     const html =
@@ -67,11 +67,11 @@ describe('YahooExtractor', () => {
 
     // Update these values with the expected values from
     // the article.
-    assert.equal(date_published, '2016-10-03T04:00:00.000Z');
+    assert.equal(date_published, '2016-10-03T05:00:00.000Z');
   });
 
 
-  it('returns the dek', ((async)) () => {
+  it('returns the dek', async () => {
     // To pass this test, fill out the dek selector
     // in ./src/extractors/custom/www.yahoo.com/index.js.
     const html =
@@ -84,11 +84,11 @@ describe('YahooExtractor', () => {
 
     // Update these values with the expected values from
     // the article.
-    assert.equal(dek, 'The Hillary Clinton campaign has canceled joint appearances with former primary opponent Bernie Sanders after he admitted that');
+    assert.equal(dek, 'The Hillary Clinton campaign has canceled joint appearances with former primary opponent Bernie Sanders after he admitted that "of course" it bothered him that Clinton seemed to be talking down to his supporters in hacked audio from a fundraiser. The two were set to have joint appearance together Monday. Instead, Sanders will appear in both Iowa and Wisconsin on Monday to boost her candidacy without her. Clinton is now scheduled to swing through Iowa later in the week, but possibly without Sanders, who was asked on CNN\'s "State of the Union" if it bothered him that Clinton had referred to his younger supporters as "the children of the great recession" who "live in their parents\' basement" to');
   });
 
 
-  it('returns the lead_image_url', ((async)) () => {
+  it('returns the lead_image_url', async () => {
     // To pass this test, fill out the lead_image_url selector
     // in ./src/extractors/custom/www.yahoo.com/index.js.
     const html =
@@ -105,7 +105,7 @@ describe('YahooExtractor', () => {
   });
 
 
-  it('returns the content', ((async)) () => {
+  it('returns the content', async () => {
     // To pass this test, fill out the content selector
     // in ./src/extractors/custom/www.yahoo.com/index.js.
     // You may also want to make use of the clean and transform

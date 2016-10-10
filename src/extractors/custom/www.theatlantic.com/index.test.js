@@ -18,7 +18,7 @@ describe('CustomExtractor', () => {
     assert.equal(extractor.domain, URL.parse(url).hostname);
   });
 
-  it('works with a starter story', (async) () => {
+  it('works with a starter story', async () => {
     // To pass this test, begin filling out your
     // selectors in ./src/extractors/custom/www.theatlantic.com/index.js. This test is just
     // a stub; you can add more fields to test as much of

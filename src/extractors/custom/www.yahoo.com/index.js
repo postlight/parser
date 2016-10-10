@@ -39,7 +39,7 @@ export const YahooExtractor = {
 
   date_published: {
     selectors: [
-      'time.date',
+      ['time.date[datetime]', 'datetime'],
     ],
   },
 
