@@ -150,8 +150,8 @@ const RootExtractor = {
       ...opts, type: 'content', extractHtml: true, title,
     });
     const lead_image_url = extractResult({ ...opts, type: 'lead_image_url', content });
-    const dek = extractResult({ ...opts, type: 'dek', content });
     const excerpt = extractResult({ ...opts, type: 'excerpt', content });
+    const dek = extractResult({ ...opts, type: 'dek', content, excerpt });
     const word_count = extractResult({ ...opts, type: 'word_count', content });
     const direction = extractResult({ ...opts, type: 'direction', title });
     const { url, domain } =

@@ -1,12 +1,16 @@
 import { stripTags } from 'utils/dom';
 
 import { TEXT_LINK_RE } from './constants';
+import { excerptContent } from 'utils/text';
 
 // Take a dek HTML fragment, and return the cleaned version of it.
 // Return None if the dek wasn't good enough.
-export default function cleanDek(dek, { $ }) {
+export default function cleanDek(dek, { $, excerpt }) {
   // Sanity check that we didn't get too short or long of a dek.
   if (dek.length > 1000 || dek.length < 5) return null;
+
+  // Check that dek isn't the same as excerpt
+  if (excerpt && excerptContent(excerpt, 10) === excerptContent(dek, 10)) return null;
 
   const dekText = stripTags(dek, $);
 

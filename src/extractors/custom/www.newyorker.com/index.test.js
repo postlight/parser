@@ -5,6 +5,7 @@ import cheerio from 'cheerio';
 
 import Mercury from 'mercury';
 import getExtractor from 'extractors/get-extractor';
+import { excerptContent } from 'utils/text';
 
 describe('NewYorkerExtractor', () => {
   it('is selected properly', () => {
@@ -118,12 +119,7 @@ describe('NewYorkerExtractor', () => {
 
     const $ = cheerio.load(content || '');
 
-    const first13 = $('*').first()
-                          .text()
-                          .trim()
-                          .split(/\s+/)
-                          .slice(0, 13)
-                          .join(' ');
+    const first13 = excerptContent($('*').first().text(), 13)
 
     // Update these values with the expected values from
     // the article.
