@@ -1,5 +1,3 @@
-import 'babel-polyfill';
-
 import cheerio from 'cheerio';
 
 import { fetchResource } from './utils';

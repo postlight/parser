@@ -1,5 +1,4 @@
 import URL from 'url';
-import 'babel-polyfill';
 import wuzzy from 'wuzzy';
 
 import {

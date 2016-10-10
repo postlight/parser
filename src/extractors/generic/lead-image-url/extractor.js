@@ -1,5 +1,3 @@
-import 'babel-polyfill';
-
 import { extractFromMeta } from 'utils/dom';
 import { cleanImage } from 'cleaners';
 

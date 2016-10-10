@@ -1,5 +1,3 @@
-import 'babel-polyfill';
-
 import URL from 'url';
 import request from 'request';
 import { Errors } from 'utils';

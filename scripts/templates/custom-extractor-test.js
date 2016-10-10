@@ -1,5 +1,3 @@
-import 'babel-polyfill';
-
 import template from './index';
 
 const IGNORE = [

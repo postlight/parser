@@ -1,4 +1,3 @@
-import 'babel-polyfill';
 import { removeAnchor } from 'utils/text';
 import RootExtractor from 'extractors/root-extractor';
 import GenericExtractor from 'extractors/generic';

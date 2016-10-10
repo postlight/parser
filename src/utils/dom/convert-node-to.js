@@ -1,5 +1,3 @@
-import 'babel-polyfill';
-
 export default function convertNodeTo($node, $, tag = 'p') {
   const node = $node.get(0);
   if (!node) {

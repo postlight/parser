@@ -1,5 +1,4 @@
 import cheerio from 'cheerio';
-import 'babel-polyfill';
 
 import { nodeIsSufficient } from 'utils/dom';
 import { cleanContent } from 'cleaners';

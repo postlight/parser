@@ -1,5 +1,3 @@
-import 'babel-polyfill';
-
 import Cleaners from 'cleaners';
 import { convertNodeTo } from 'utils/dom';
 import GenericExtractor from './generic';

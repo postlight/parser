@@ -1,5 +1,3 @@
-import 'babel-polyfill';
-
 import {
   IS_LINK,
   IS_IMAGE,

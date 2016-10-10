@@ -1,5 +1,3 @@
-import 'babel-polyfill';
-
 import { WHITELIST_ATTRS_RE } from './constants';
 
 function removeAllButWhitelist($article) {
