@@ -1823,6 +1823,12 @@ function hasSentenceEnd(text) {
   return SENTENCE_END_RE.test(text);
 }
 
+function excerptContent(content) {
+              var words = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 10;
+
+              return content.trim().split(/\s+/).slice(0, words).join(' ');
+}
+
 // Now that we have a top_candidate, look through the siblings of
 // it to see if any of them are decently scored. If they are, they
 // may be split parts of the content (Like two divs, a preamble and
@@ -2322,9 +2328,13 @@ function clean$1(leadImageUrl) {
 // Return None if the dek wasn't good enough.
 function cleanDek(dek, _ref) {
   var $ = _ref.$;
+  var excerpt = _ref.excerpt;
 
   // Sanity check that we didn't get too short or long of a dek.
   if (dek.length > 1000 || dek.length < 5) return null;
+
+  // Check that dek isn't the same as excerpt
+  if (excerpt && excerptContent(excerpt, 10) === excerptContent(dek, 10)) return null;
 
   var dekText = stripTags(dek, $);
 
@@ -3829,8 +3839,8 @@ var RootExtractor = {
     var content = extractResult(_extends({}, opts, { type: 'content', extractHtml: true, title: title
     }));
     var lead_image_url = extractResult(_extends({}, opts, { type: 'lead_image_url', content: content }));
-    var dek = extractResult(_extends({}, opts, { type: 'dek', content: content }));
     var excerpt = extractResult(_extends({}, opts, { type: 'excerpt', content: content }));
+    var dek = extractResult(_extends({}, opts, { type: 'dek', content: content, excerpt: excerpt }));
     var word_count = extractResult(_extends({}, opts, { type: 'word_count', content: content }));
     var direction = extractResult(_extends({}, opts, { type: 'direction', title: title }));
 

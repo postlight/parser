@@ -1,7 +1,7 @@
 import { stripTags } from 'utils/dom';
+import { excerptContent } from 'utils/text';
 
 import { TEXT_LINK_RE } from './constants';
-import { excerptContent } from 'utils/text';
 
 // Take a dek HTML fragment, and return the cleaned version of it.
 // Return None if the dek wasn't good enough.

@@ -37,15 +37,35 @@ export default function (hostname) {
         ]
       },
 
-      date_published: null,
+      date_published: {
+        selectors: [
+          // enter selectors
+        ],
+      },
 
-      lead_image_url: null,
+      lead_image_url: {
+        selectors: [
+          // enter selectors
+        ],
+      },
 
-      dek: null,
+      dek: {
+        selectors: [
+          // enter selectors
+        ],
+      },
 
-      next_page_url: null,
+      next_page_url: {
+        selectors: [
+          // enter selectors
+        ],
+      },
 
-      excerpt: null,
+      excerpt: {
+        selectors: [
+          // enter selectors
+        ],
+      },
     }
   `;
 }

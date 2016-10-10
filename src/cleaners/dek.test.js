@@ -50,8 +50,7 @@ describe('cleanDek(dekString, { $ })', () => {
 
   it('returns null if the dek is the same as the excerpt', () => {
     const $ = cheerio.load('<div></div>');
-    const excerpt = 'Hello to all of my friends'
+    const excerpt = 'Hello to all of my friends';
     assert.equal(cleanDek(excerpt, { $, excerpt }), null);
   });
-
 });
