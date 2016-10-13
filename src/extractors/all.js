@@ -13,7 +13,7 @@ import { WikiaExtractor } from './custom/fandom.wikia.com';
 import { LittleThingsExtractor } from './custom/www.littlethings.com';
 import { PoliticoExtractor } from './custom/www.politico.com';
 import { DeadspinExtractor } from './custom/deadspin.com';
-
+import { BroadwayWorldExtractor } from './custom/www.broadwayworld.com';
 
 const Extractors = {
   'nymag.com': NYMagExtractor,
@@ -31,7 +31,7 @@ const Extractors = {
   'www.littlethings.com': LittleThingsExtractor,
   'www.politico.com': PoliticoExtractor,
   'deadspin.com': DeadspinExtractor,
-
+  'www.broadwayworld.com': BroadwayWorldExtractor,
 };
 
 export default Extractors;
