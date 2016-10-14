@@ -1034,6 +1034,64 @@ var BroadwayWorldExtractor = {
   }
 };
 
+// Rename CustomExtractor
+// to fit your publication
+// (e.g., NYTimesExtractor)
+var ApartmentTherapyExtractor = {
+  domain: 'www.apartmenttherapy.com',
+  title: {
+    selectors: ['h1.headline']
+  },
+
+  author: {
+    selectors: ['.PostByline__name']
+  },
+
+  content: {
+    selectors: ['div.post__content'],
+
+    // Is there anything in the content you selected that needs transformed
+    // before it's consumable content? E.g., unusual lazy loaded images
+    transforms: {
+      'div[data-render-react-id="images/LazyPicture"]': function divDataRenderReactIdImagesLazyPicture($node, $) {
+        var data = JSON.parse($node.attr('data-props'));
+        var src = data.sources[0].src;
+        var $img = $('<img />').attr('src', src);
+        $node.replaceWith($img);
+      }
+    },
+
+    // Is there anything that is in the result that shouldn't be?
+    // The clean selectors will remove anything that matches from
+    // the result
+    clean: []
+  },
+
+  date_published: {
+    selectors: [['.PostByline__timestamp[datetime]', 'datetime']]
+  },
+
+  lead_image_url: {
+    selectors: [['meta[name="og:image"]', 'value']]
+  },
+
+  dek: {
+    selectors: [['meta[name=description]', 'value']]
+  },
+
+  next_page_url: {
+    selectors: [
+      // enter selectors
+    ]
+  },
+
+  excerpt: {
+    selectors: [
+      // enter selectors
+    ]
+  }
+};
+
 var Extractors = {
   'nymag.com': NYMagExtractor,
   'blogspot.com': BloggerExtractor,
@@ -1050,7 +1108,8 @@ var Extractors = {
   'www.littlethings.com': LittleThingsExtractor,
   'www.politico.com': PoliticoExtractor,
   'deadspin.com': DeadspinExtractor,
-  'www.broadwayworld.com': BroadwayWorldExtractor
+  'www.broadwayworld.com': BroadwayWorldExtractor,
+  'www.apartmenttherapy.com': ApartmentTherapyExtractor
 };
 
 // Spacer images to be removed
