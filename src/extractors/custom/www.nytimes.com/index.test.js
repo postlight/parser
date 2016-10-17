@@ -33,7 +33,7 @@ describe('NYTimesExtractor', () => {
                        .slice(0, 20);
 
     assert.equal(title, 'Ahmad Khan Rahami Is Arrested in Manhattan and New Jersey Bombings');
-    assert.equal(author, 'MARC SANTORA, WILLIAM K. RASHBAUM, AL BAKER and ADAM GOLDMAN');
+    assert.equal(author, 'Marc Santora, William K. Rashbaum, Al Baker and Adam Goldman');
     assert.equal(text, 'The man believed to ');
   });
 });

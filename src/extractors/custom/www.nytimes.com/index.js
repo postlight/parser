@@ -8,6 +8,7 @@ export const NYTimesExtractor = {
 
   author: {
     selectors: [
+      ['meta[name="author"]', 'value'],
       '.g-byline',
       '.byline',
     ],

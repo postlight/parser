@@ -506,7 +506,7 @@ var NYTimesExtractor = {
   },
 
   author: {
-    selectors: ['.g-byline', '.byline']
+    selectors: [['meta[name="author"]', 'value'], '.g-byline', '.byline']
   },
 
   content: {
@@ -1056,6 +1056,7 @@ var ApartmentTherapyExtractor = {
       'div[data-render-react-id="images/LazyPicture"]': function divDataRenderReactIdImagesLazyPicture($node, $) {
         var data = JSON.parse($node.attr('data-props'));
         var src = data.sources[0].src;
+
         var $img = $('<img />').attr('src', src);
         $node.replaceWith($img);
       }
@@ -1124,7 +1125,7 @@ var REMOVE_ATTR_SELECTORS = REMOVE_ATTRS.map(function (selector) {
   return '[' + selector + ']';
 });
 var REMOVE_ATTR_LIST = REMOVE_ATTRS.join(',');
-var WHITELIST_ATTRS = ['src', 'srcset', 'href', 'class', 'id', 'alt', 'score'];
+var WHITELIST_ATTRS = ['src', 'srcset', 'href', 'class', 'id', 'alt'];
 var WHITELIST_ATTRS_RE = new RegExp('^(' + WHITELIST_ATTRS.join('|') + ')$', 'i');
 
 // removeEmpty
