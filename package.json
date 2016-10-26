@@ -10,11 +10,14 @@
     "test_build": "rollup -c",
     "test": "jest",
     "watch:test": "jest --watch --noStackTrace",
-    "generate-parser": "node ./dist/generate-custom-parser.js && eslint src/** --fix --quiet > /dev/null"
+    "generate-parser": "node ./dist/generate-custom-parser.js && eslint src/** --fix --quiet > /dev/null",
+    "add-contributor": "all-contributors add",
+    "generate-contributors": "all-contributors generate"
   },
   "author": "Postlight",
   "license": "ISC",
   "devDependencies": {
+    "all-contributors-cli": "^3.0.7",
     "babel-eslint": "^6.1.2",
     "babel-jest": "^15.0.0",
     "babel-plugin-external-helpers": "^6.8.0",
