@@ -1116,6 +1116,12 @@ var Extractors = {
 // Spacer images to be removed
 var SPACER_RE = new RegExp('trans|transparent|spacer|blank', 'i');
 
+// The class we will use to mark elements we want to keep
+// but would normally remove
+var KEEP_CLASS = 'mercury-parser-keep';
+
+var KEEP_SELECTORS = ['iframe[src^="https://www.youtube.com"]', 'iframe[src^="http://www.youtube.com"]', 'iframe[src^="https://player.vimeo"]', 'iframe[src^="http://player.vimeo"]'];
+
 // A list of tags to strip from the output if we encounter them.
 var STRIP_OUTPUT_TAGS = ['title', 'script', 'noscript', 'link', 'style', 'hr', 'embed', 'iframe', 'object'];
 
@@ -1427,6 +1433,18 @@ function cleanImages($article, $) {
   return $;
 }
 
+function markToKeep(article, $) {
+  var tags = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [];
+
+  if (tags.length === 0) {
+    tags = KEEP_SELECTORS;
+  }
+
+  $(tags.join(','), article).addClass(KEEP_CLASS);
+
+  return $;
+}
+
 function stripJunkTags(article, $) {
   var tags = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [];
 
@@ -1434,7 +1452,12 @@ function stripJunkTags(article, $) {
     tags = STRIP_OUTPUT_TAGS;
   }
 
-  $(tags.join(','), article).remove();
+  // Remove matching elements, but ignore
+  // any element with a class of mercury-parser-keep
+  $(tags.join(','), article).not('.' + KEEP_CLASS).remove();
+
+  // Remove the mercury-parser-keep class from result
+  $('.' + KEEP_CLASS).removeClass(KEEP_CLASS);
 
   return $;
 }
@@ -2554,6 +2577,11 @@ function extractCleanNode(article, _ref) {
   // Only do this is defaultCleaner is set to true;
   // this can sometimes be too aggressive.
   if (defaultCleaner) cleanImages(article, $);
+
+  // Mark elements to keep that would normally be removed.
+  // E.g., stripJunkTags will remove iframes, so we're going to mark
+  // YouTube/Vimeo videos as elements we want to keep.
+  markToKeep(article, $);
 
   // Drop certain tags like <title>, etc
   // This is -mostly- for cleanliness, not security.

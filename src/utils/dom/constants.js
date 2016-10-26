@@ -1,6 +1,17 @@
 // Spacer images to be removed
 export const SPACER_RE = new RegExp('trans|transparent|spacer|blank', 'i');
 
+// The class we will use to mark elements we want to keep
+// but would normally remove
+export const KEEP_CLASS = 'mercury-parser-keep';
+
+export const KEEP_SELECTORS = [
+  'iframe[src^="https://www.youtube.com"]',
+  'iframe[src^="http://www.youtube.com"]',
+  'iframe[src^="https://player.vimeo"]',
+  'iframe[src^="http://player.vimeo"]',
+];
+
 // A list of tags to strip from the output if we encounter them.
 export const STRIP_OUTPUT_TAGS = [
   'title',
