@@ -18,6 +18,15 @@
         "doc",
         "example"
       ]
+    },
+    {
+      "login": "spiffytoy",
+      "name": "Toy Vano",
+      "avatar_url": "https://avatars.githubusercontent.com/u/19412836?v=3",
+      "profile": "https://github.com/spiffytoy",
+      "contributions": [
+        "code"
+      ]
     }
   ]
 }
