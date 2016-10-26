@@ -27,5 +27,13 @@ describe('removeEmpty($)', () => {
     const result = removeEmpty($('*').first(), $);
     assertClean(result.html(), HTML.removeEmptyP.after);
   });
+
+  it('does not remove empty p tags containing an iframe', () => {
+    const html = '<div><p><span><iframe src="foo"></iframe></span></p></div>';
+    const $ = cheerio.load(html);
+
+    const result = removeEmpty($('*').first(), $);
+    assertClean(result.html(), html);
+  });
 });
 
