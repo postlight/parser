@@ -948,7 +948,12 @@ var DeadspinExtractor = {
 
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images
-    transforms: {},
+    transforms: {
+      'iframe.lazyload[data-recommend-id^="youtube://"]': function iframeLazyloadDataRecommendIdYoutube($node) {
+        var youtubeId = $node.attr('id').split('youtube-')[1];
+        $node.attr('src', 'https://www.youtube.com/embed/' + youtubeId);
+      }
+    },
 
     // Is there anything that is in the result that shouldn't be?
     // The clean selectors will remove anything that matches from
@@ -1511,7 +1516,7 @@ function cleanAttributes($article) {
 function removeEmpty($article, $) {
   $article.find('p').each(function (index, p) {
     var $p = $(p);
-    if ($p.text().trim() === '') $p.remove();
+    if ($p.find('iframe, img').length === 0 && $p.text().trim() === '') $p.remove();
   });
 
   return $;

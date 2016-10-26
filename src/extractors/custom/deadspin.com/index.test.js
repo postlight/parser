@@ -88,7 +88,6 @@ describe('CustomExtractor', () => {
     assert.equal(lead_image_url, 'https://i.kinja-img.com/gawker-media/image/upload/s--SUEXWZgf--/c_fill,fl_progressive,g_center,h_450,q_80,w_800/vmeayd7lteyycwzcdlju.jpg');
   });
 
-
   it('returns the content', async () => {
     // To pass this test, fill out the content selector
     // in ./src/extractors/custom/deadspin.com/index.js.
@@ -109,5 +108,27 @@ describe('CustomExtractor', () => {
     // Update these values with the expected values from
     // the article.
     assert.equal(first13, 'Photo credit: Rob Carr/Getty Washington’s Danny Espinosa problem is inextricably linked to its');
+  });
+
+  it('handles lazy-loaded video', async () => {
+    // To pass this test, fill out the content selector
+    // in ./src/extractors/custom/deadspin.com/index.js.
+    // You may also want to make use of the clean and transform
+    // options.
+    const html =
+      fs.readFileSync('./fixtures/deadspin.com/1477505848605.html');
+    const url =
+      'http://deadspin.com/remember-when-donald-trump-got-booed-for-butchering-ta-1788216229';
+
+    const { content } =
+      await Mercury.parse(url, html, { fallback: false });
+
+    const $ = cheerio.load(content || '');
+
+    const youtube = $('iframe[src]');
+
+    // Update these values with the expected values from
+    // the article.
+    assert.equal(youtube.length, 1);
   });
 });
