@@ -1,5 +1,5 @@
 # Mercury Parser - Extracting content from chaos
-[![All Contributors](https://img.shields.io/badge/all_contributors-3-orange.svg?style=flat-square)](#contributors)
+[![All Contributors](https://img.shields.io/badge/all_contributors-4-orange.svg?style=flat-square)](#contributors)
 
 The Mercury Parser extracts the bits that humans care about from any URL you give it. That includes article content, titles, authors, published dates, excerpts, lead images, and more.
 
@@ -43,6 +43,6 @@ If you'd like to write a custom parser for a site, [here's how](src/extractors/c
 ## Contributors
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
-| [<img src="https://avatars.githubusercontent.com/u/64131?v=3" width="50px;"/><br /><sub>Adam Pash</sub>](http://adampash.com)<br />📝 [💻](https://github.com/postlight/readability-parser/commits?author=adampash) [📖](https://github.com/postlight/readability-parser/commits?author=adampash) 💡 | [<img src="https://avatars.githubusercontent.com/u/19412836?v=3" width="50px;"/><br /><sub>Toy Vano</sub>](https://github.com/spiffytoy)<br />[💻](https://github.com/postlight/readability-parser/commits?author=spiffytoy) | [<img src="https://avatars.githubusercontent.com/u/183608?v=3" width="50px;"/><br /><sub>Drew Bell</sub>](droob.org)<br />[💻](https://github.com/postlight/readability-parser/commits?author=droob) |
-| :---: | :---: | :---: |
+| [<img src="https://avatars.githubusercontent.com/u/64131?v=3" width="50px;"/><br /><sub>Adam Pash</sub>](http://adampash.com)<br />📝 [💻](https://github.com/postlight/readability-parser/commits?author=adampash) [📖](https://github.com/postlight/readability-parser/commits?author=adampash) 💡 | [<img src="https://avatars.githubusercontent.com/u/19412836?v=3" width="50px;"/><br /><sub>Toy Vano</sub>](https://github.com/spiffytoy)<br />[💻](https://github.com/postlight/readability-parser/commits?author=spiffytoy) | [<img src="https://avatars.githubusercontent.com/u/183608?v=3" width="50px;"/><br /><sub>Drew Bell</sub>](droob.org)<br />[💻](https://github.com/postlight/readability-parser/commits?author=droob) | [<img src="https://avatars.githubusercontent.com/u/305901?v=3" width="50px;"/><br /><sub>Jeremy Mack</sub>](https://twitter.com/mutewinter)<br />[💻](https://github.com/postlight/readability-parser/commits?author=mutewinter) |
+| :---: | :---: | :---: | :---: |
 <!-- ALL-CONTRIBUTORS-LIST:END -->
