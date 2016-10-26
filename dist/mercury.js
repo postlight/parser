@@ -1114,6 +1114,11 @@ var Extractors = {
   'www.littlethings.com': LittleThingsExtractor,
   'www.politico.com': PoliticoExtractor,
   'deadspin.com': DeadspinExtractor,
+  'jezebel.com': DeadspinExtractor,
+  'lifehacker.com': DeadspinExtractor,
+  'kotaku.com': DeadspinExtractor,
+  'gizmodo.com': DeadspinExtractor,
+  'jalopnik.com': DeadspinExtractor,
   'www.broadwayworld.com': BroadwayWorldExtractor,
   'www.apartmenttherapy.com': ApartmentTherapyExtractor
 };
@@ -1488,7 +1493,6 @@ function cleanHOnes(article, $) {
 }
 
 function removeAllButWhitelist($article) {
-  // $('*', article).each((index, node) => {
   $article.find('*').each(function (index, node) {
     node.attribs = _Reflect$ownKeys(node.attribs).reduce(function (acc, attr) {
       if (WHITELIST_ATTRS_RE.test(attr)) {
@@ -1513,7 +1517,6 @@ function cleanAttributes($article) {
   // Grabbing the parent because at this point
   // $article will be wrapped in a div which will
   // have a score set on it.
-  console.log('HMM', $article.parent().length);
   return removeAllButWhitelist($article.parent().length ? $article.parent() : $article);
 }
 

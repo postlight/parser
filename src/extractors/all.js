@@ -32,6 +32,11 @@ const Extractors = {
   'www.littlethings.com': LittleThingsExtractor,
   'www.politico.com': PoliticoExtractor,
   'deadspin.com': DeadspinExtractor,
+  'jezebel.com': DeadspinExtractor,
+  'lifehacker.com': DeadspinExtractor,
+  'kotaku.com': DeadspinExtractor,
+  'gizmodo.com': DeadspinExtractor,
+  'jalopnik.com': DeadspinExtractor,
   'www.broadwayworld.com': BroadwayWorldExtractor,
   'www.apartmenttherapy.com': ApartmentTherapyExtractor,
 };
