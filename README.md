@@ -43,6 +43,6 @@ If you'd like to write a custom parser for a site, [here's how](src/extractors/c
 ## Contributors
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
-| [<img src="https://avatars.githubusercontent.com/u/64131?v=3" width="50px;"/><br /><sub>Adam Pash</sub>](http://adampash.com)<br /> |
+| [<img src="https://avatars.githubusercontent.com/u/64131?v=3" width="50px;"/><br /><sub>Adam Pash</sub>](http://adampash.com)<br />📝 [💻](https://github.com/postlight/readability-parser/commits?author=adampash) [📖](https://github.com/postlight/readability-parser/commits?author=adampash) 💡 |
 | :---: |
 <!-- ALL-CONTRIBUTORS-LIST:END -->
