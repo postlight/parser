@@ -6,6 +6,7 @@ import {
   cleanTags,
   removeEmpty,
   rewriteTopLevel,
+  markToKeep,
   stripJunkTags,
   makeLinksAbsolute,
 } from 'utils/dom';
@@ -29,6 +30,11 @@ export default function extractCleanNode(
   // Only do this is defaultCleaner is set to true;
   // this can sometimes be too aggressive.
   if (defaultCleaner) cleanImages(article, $);
+
+  // Mark elements to keep that would normally be removed.
+  // E.g., stripJunkTags will remove iframes, so we're going to mark
+  // YouTube/Vimeo videos as elements we want to keep.
+  markToKeep(article, $);
 
   // Drop certain tags like <title>, etc
   // This is -mostly- for cleanliness, not security.

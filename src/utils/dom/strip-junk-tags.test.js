@@ -12,5 +12,12 @@ describe('stripJunkTags($)', () => {
     const result = stripJunkTags($('*').first(), $);
     assertClean(result.html(), HTML.stripsJunk.after);
   });
+
+  it('keeps youtube embeds', () => {
+    const $ = cheerio.load(HTML.ignoresKeepable.before);
+
+    const result = stripJunkTags($('*').first(), $);
+    assertClean(result.html(), HTML.ignoresKeepable.after);
+  });
 });
 

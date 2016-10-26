@@ -21,7 +21,6 @@ describe('Mercury', () => {
       const result = await Mercury.parse('http://theconcourse.deadspin.com/phyllis-schlafly-finally-croaks-1786219220');
 
       assert.equal(typeof result, 'object');
-      // console.log(result)
     });
 
     it('does blogger', async function() {
@@ -34,7 +33,6 @@ describe('Mercury', () => {
       const result = await Mercury.parse('https://en.wikipedia.org/wiki/Brihadeeswarar_Temple_fire');
 
       assert.equal(typeof result, 'object');
-      // console.log(result)
     });
 
     it('does the nyt', async function() {
@@ -42,7 +40,6 @@ describe('Mercury', () => {
 
       assert.equal(typeof result, 'object');
       assert.equal(result.total_pages, 1);
-      // console.log(result)
     });
 
     it('does ars pagination', async function() {
@@ -59,9 +56,7 @@ describe('Mercury', () => {
       assert.equal(total_pages, 3);
       assert.equal(pages_rendered, 3);
 
-      // console.log(result)
       assert.equal(result.next_page_url, `${url}2`);
-      // console.log(result.content)
     });
   });
 });

@@ -5,6 +5,7 @@ export { default as paragraphize } from './paragraphize';
 export { default as convertToParagraphs } from './convert-to-paragraphs';
 export { default as convertNodeTo } from './convert-node-to';
 export { default as cleanImages } from './clean-images';
+export { default as markToKeep } from './mark-to-keep';
 export { default as stripJunkTags } from './strip-junk-tags';
 export { default as cleanHOnes } from './clean-h-ones';
 export { default as cleanAttributes } from './clean-attributes';

@@ -300,6 +300,44 @@ const HTML = {
     </div>
     `,
   },
+  ignoresKeepable: {
+    before: `
+    <div>
+      <style>.red { color: 'red'; }</style>
+      <title>WOW</title>
+      <link rel="asdflkjawef" />
+      <p>What an article</p>
+      <iframe class="mercury-parser-keep" src="https://www.youtube.com/embed/_2AqQV8wDvY" frameborder="0" allowfullscreen></iframe>
+      <hr />
+    </div>
+    `,
+    after: `
+    <div>
+      <p>What an article</p>
+      <iframe class="" src="https://www.youtube.com/embed/_2AqQV8wDvY" frameborder="0" allowfullscreen></iframe>
+    </div>
+    `,
+  },
+
+  // markToKeep
+  marksYouTube: {
+    before: `
+    <div>
+      <p>What an article</p>
+      <iframe src="https://www.youtube.com/embed/_2AqQV8wDvY" frameborder="0" allowfullscreen></iframe>
+      <iframe src="foo" frameborder="0" allowfullscreen></iframe>
+      <iframe src="https://player.vimeo.com/video/57712615"></iframe>
+    </div>
+    `,
+    after: `
+    <div>
+      <p>What an article</p>
+      <iframe src="https://www.youtube.com/embed/_2AqQV8wDvY" frameborder="0" allowfullscreen class="mercury-parser-keep"></iframe>
+      <iframe src="foo" frameborder="0" allowfullscreen></iframe>
+      <iframe src="https://player.vimeo.com/video/57712615" class="mercury-parser-keep"></iframe>
+    </div>
+    `,
+  },
 
   // stripHOnes
   removeTwoHOnes: {
