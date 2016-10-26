@@ -10,7 +10,7 @@
     "test_build": "rollup -c",
     "test": "jest",
     "watch:test": "jest --watch --noStackTrace",
-    "generate-parser": "node ./dist/generate-custom-parser.js && eslint src/** --fix --quiet > /dev/null",
+    "generate-parser": "node ./dist/generate-custom-parser.js && eslint src/extractors/custom/**/*.js --fix --quiet > /dev/null",
     "add-contributor": "all-contributors add",
     "generate-contributors": "all-contributors generate"
   },
