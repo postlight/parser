@@ -1,4 +1,5 @@
 # Mercury Parser - Extracting content from chaos
+[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors)
 
 The Mercury Parser extracts the bits that humans care about from any URL you give it. That includes article content, titles, authors, published dates, excerpts, lead images, and more.
 
@@ -38,3 +39,10 @@ If Mercury is unable to find a field, that field will return `null`.
 ## Contributing
 
 If you'd like to write a custom parser for a site, [here's how](src/extractors/custom/README.md).
+
+## Contributors
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+| [<img src="https://avatars.githubusercontent.com/u/64131?v=3" width="50px;"/><br /><sub>Adam Pash</sub>](http://adampash.com)<br /> |
+| :---: |
+<!-- ALL-CONTRIBUTORS-LIST:END -->

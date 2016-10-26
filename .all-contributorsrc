@@ -1,0 +1,18 @@
+{
+  "projectName": "readability-parser",
+  "projectOwner": "postlight",
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 50,
+  "commit": true,
+  "contributors": [
+    {
+      "login": "adampash",
+      "name": "Adam Pash",
+      "avatar_url": "https://avatars.githubusercontent.com/u/64131?v=3",
+      "profile": "http://adampash.com",
+      "contributions": []
+    }
+  ]
+}
