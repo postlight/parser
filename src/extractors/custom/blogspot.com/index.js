@@ -26,7 +26,7 @@ export const BloggerExtractor = {
 
   title: {
     selectors: [
-      'h2.title',
+      '.post h2.title',
     ],
   },
 

@@ -417,7 +417,7 @@ var BloggerExtractor = {
   },
 
   title: {
-    selectors: ['h2.title']
+    selectors: ['.post h2.title']
   },
 
   date_published: {
