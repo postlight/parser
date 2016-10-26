@@ -1498,6 +1498,8 @@ function removeAllButWhitelist($article) {
       return acc;
     }, {});
   });
+
+  return $article;
 }
 
 // function removeAttrs(article, $) {
@@ -1508,9 +1510,11 @@ function removeAllButWhitelist($article) {
 
 // Remove attributes like style or align
 function cleanAttributes($article) {
-  removeAllButWhitelist($article);
-
-  return $article;
+  // Grabbing the parent because at this point
+  // $article will be wrapped in a div which will
+  // have a score set on it.
+  console.log('HMM', $article.parent().length);
+  return removeAllButWhitelist($article.parent().length ? $article.parent() : $article);
 }
 
 function removeEmpty($article, $) {
@@ -2603,9 +2607,6 @@ function extractCleanNode(article, _ref) {
   // Make links absolute
   makeLinksAbsolute(article, $, url);
 
-  // Remove unnecessary attributes
-  cleanAttributes(article);
-
   // We used to clean UL's and OL's here, but it was leading to
   // too many in-article lists being removed. Consider a better
   // way to detect menus particularly and remove them.
@@ -2614,6 +2615,9 @@ function extractCleanNode(article, _ref) {
 
   // Remove empty paragraph nodes
   removeEmpty(article, $);
+
+  // Remove unnecessary attributes
+  cleanAttributes(article, $);
 
   return article;
 }

@@ -1,7 +1,6 @@
 import { WHITELIST_ATTRS_RE } from './constants';
 
 function removeAllButWhitelist($article) {
-  // $('*', article).each((index, node) => {
   $article.find('*').each((index, node) => {
     node.attribs = Reflect.ownKeys(node.attribs).reduce((acc, attr) => {
       if (WHITELIST_ATTRS_RE.test(attr)) {
@@ -11,6 +10,8 @@ function removeAllButWhitelist($article) {
       return acc;
     }, {});
   });
+
+  return $article;
 }
 
 // function removeAttrs(article, $) {
@@ -21,7 +22,11 @@ function removeAllButWhitelist($article) {
 
 // Remove attributes like style or align
 export default function cleanAttributes($article) {
-  removeAllButWhitelist($article);
-
-  return $article;
+  // Grabbing the parent because at this point
+  // $article will be wrapped in a div which will
+  // have a score set on it.
+  return removeAllButWhitelist(
+    $article.parent().length ?
+      $article.parent() : $article
+  );
 }

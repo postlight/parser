@@ -18,7 +18,16 @@ describe('Mercury', () => {
     });
 
     it('does the whole thing', async function() {
-      const result = await Mercury.parse('http://theconcourse.deadspin.com/phyllis-schlafly-finally-croaks-1786219220');
+      const result =
+        await Mercury.parse('http://deadspin.com/remember-when-donald-trump-got-booed-for-butchering-ta-1788216229');
+
+      assert.equal(typeof result, 'object');
+      assert.equal(result.content.indexOf('score="') === -1, true);
+    });
+
+    it('does blogger', async function() {
+      const result =
+        await Mercury.parse('https://googleblog.blogspot.com/2016/08/onhub-turns-one-today.html');
 
       assert.equal(typeof result, 'object');
     });

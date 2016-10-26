@@ -51,9 +51,6 @@ export default function extractCleanNode(
   // Make links absolute
   makeLinksAbsolute(article, $, url);
 
-  // Remove unnecessary attributes
-  cleanAttributes(article);
-
   // We used to clean UL's and OL's here, but it was leading to
   // too many in-article lists being removed. Consider a better
   // way to detect menus particularly and remove them.
@@ -62,6 +59,9 @@ export default function extractCleanNode(
 
   // Remove empty paragraph nodes
   removeEmpty(article, $);
+
+  // Remove unnecessary attributes
+  cleanAttributes(article, $);
 
   return article;
 }
