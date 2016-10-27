@@ -1,0 +1,25 @@
+## Customize the test machine
+machine:
+
+  timezone:
+    America/New_York
+
+  node:
+    version:
+      4.3.2
+
+## Customize dependencies
+dependencies:
+  pre:
+    - nvm install 6.9.1
+    - nvm install 7.0.0
+
+## Customize test commands
+test:
+  override:
+    - nvm use 4.3.2 && npm run build && jest --maxWorkers=1:
+        parallel: true
+    - nvm use 6.9 && npm run build && jest --maxWorkers=1:
+        parallel: true
+    - nvm use 7.0 && npm run build && jest --maxWorkers=1:
+        parallel: true
