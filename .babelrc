@@ -2,6 +2,7 @@
   "presets": ["es2015"],
   "plugins": [
     [
+      "transform-export-extensions",
       "transform-runtime",
       {
         "polyfill": true,

@@ -1,10 +1,20 @@
 import assert from 'assert';
 import fs from 'fs';
 import cheerio from 'cheerio';
+import URL from 'url';
 
+import getExtractor from 'extractors/get-extractor';
 import Mercury from 'mercury';
 
 describe('NYTimesExtractor', () => {
+  it('is selected properly', () => {
+    const url =
+      'http://www.nytimes.com/interactive/2016/09/15/arts/design/national-museum-of-african-american-history-and-culture.html';
+    const extractor = getExtractor(url);
+    console.log(extractor.domain, URL.parse(url).hostname)
+    assert.equal(extractor.domain, URL.parse(url).hostname);
+  });
+
   it('works with a feature story', async () => {
     const html = fs.readFileSync('./fixtures/www.nytimes.com/1474061823854.html');
     const uri = 'http://www.nytimes.com/interactive/2016/09/15/arts/design/national-museum-of-african-american-history-and-culture.html';

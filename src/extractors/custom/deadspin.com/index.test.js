@@ -7,8 +7,7 @@ import Mercury from 'mercury';
 import getExtractor from 'extractors/get-extractor';
 import { excerptContent } from 'utils/text';
 
-// Rename CustomExtractor
-describe('CustomExtractor', () => {
+describe('DeadspinExtractor', () => {
   it('is selected properly', () => {
     // To pass this test, rename your extractor in
     // ./src/extractors/custom/deadspin.com/index.js

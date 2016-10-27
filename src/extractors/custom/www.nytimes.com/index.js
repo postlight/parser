@@ -1,4 +1,6 @@
 export const NYTimesExtractor = {
+  domain: 'www.nytimes.com',
+
   title: {
     selectors: [
       '.g-headline',
