@@ -2,6 +2,7 @@
   "name": "mercury-parser",
   "version": "1.0.0",
   "description": "",
+  "repository": "github:postlight/mercury-parser",
   "main": "./dist/mercury.js",
   "scripts": {
     "lint": "eslint src/** --fix",
