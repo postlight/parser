@@ -2,6 +2,7 @@ import fs from 'fs'
 import URL from 'url'
 import inquirer from 'inquirer'
 import ora from 'ora'
+import { exec } from 'child_process'
 
 import Mercury from '../dist/mercury'
 import {
@@ -81,8 +82,8 @@ function savePage($, [url], newParser) {
 
 function generateScaffold(url, file, result) {
   const { hostname } = URL.parse(url);
-  const extractor = extractorTemplate(hostname)
-  const extractorTest = extractorTestTemplate(file, url, getDir(url), result)
+  const extractor = extractorTemplate(hostname, extractorName(hostname))
+  const extractorTest = extractorTestTemplate(file, url, getDir(url), result, extractorName(hostname))
 
   fs.writeFileSync(`${getDir(url)}/index.js`, extractor)
   fs.writeFileSync(`${getDir(url)}/index.test.js`, extractorTest)
@@ -90,11 +91,20 @@ function generateScaffold(url, file, result) {
     './src/extractors/custom/index.js',
     exportString(url),
   )
+  exec(`npm run lint-fix-quiet -- ${getDir(url)}/*.js`)
+}
+
+function extractorName(hostname) {
+  const name = hostname
+    .split('.')
+    .map(w => `${w.charAt(0).toUpperCase()}${w.slice(1)}`)
+    .join('')
+  return `${name}Extractor`
 }
 
 function exportString(url) {
   const { hostname } = URL.parse(url);
-  return `export * from './${hostname}'`;
+  return `export * from './${hostname}';`;
 }
 
 function confirmCreateDir(dir, msg) {

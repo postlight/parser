@@ -1,11 +1,8 @@
 import template from './index';
 
-export default function (hostname) {
+export default function (hostname, name) {
   return template`
-    // Rename CustomExtractor
-    // to fit your publication
-    // (e.g., NYTimesExtractor)
-    export const CustomExtractor = {
+    export const ${name} = {
       domain: '${hostname}',
 
       title: {

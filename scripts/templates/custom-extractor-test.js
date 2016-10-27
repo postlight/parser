@@ -34,7 +34,7 @@ function testFor(key, value, dir, file, url) {
     `;
 }
 
-export default function (file, url, dir, result) {
+export default function (file, url, dir, result, name) {
   return template`
     import assert from 'assert';
     import fs from 'fs';
@@ -45,10 +45,7 @@ export default function (file, url, dir, result) {
     import getExtractor from 'extractors/get-extractor';
     import { excerptContent } from 'utils/text';
 
-    // Rename CustomExtractor
-    // to fit your publication
-    // (e.g., NYTimesExtractor)
-    describe('CustomExtractor', () => {
+    describe('${name}', () => {
       it('is selected properly', () => {
         // This test should be passing by default.
         // It sanity checks that the correct parser

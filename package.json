@@ -5,12 +5,13 @@
   "main": "./dist/mercury.js",
   "scripts": {
     "lint": "eslint src/** --fix",
+    "lint-fix-quiet": "eslint --fix --quiet",
     "build": "eslint src/** --fix && rollup -c",
     "build-generator": "rollup -c scripts/rollup.config.js",
     "test_build": "rollup -c",
     "test": "jest",
     "watch:test": "jest --watch --noStackTrace",
-    "generate-parser": "node ./dist/generate-custom-parser.js && eslint src/extractors/custom/**/*.js --fix --quiet > /dev/null",
+    "generate-parser": "node ./dist/generate-custom-parser.js",
     "add-contributor": "all-contributors add",
     "generate-contributors": "all-contributors generate"
   },

@@ -188,84 +188,11 @@ npm run watch:test -- www.newyorker.com
 
 This will run the tests for the parser you just generated, which should fail (which makes sense — you haven't written it yet!). Your goal now is to follow the instructions in the generated `www.newyorker.com/index.test.js` and `www.newyorker.com/index.js` files until they pass!
 
-### Step 2: Passing your first test
+### Step 2: Passing your first test: Title extraction
 
-If you look at your parser's test file, you'll see a few instructions to guide you in making your tests pass. The first comment at the top of our test file is simple: It instructs you to rename CustomExtractor. In our case, we're going to rename it to NewYorkerExtractor.
+If you look at your parser's test file, you'll see a few instructions to guide you in polishing your parser and making your tests pass.
 
-So, from this:
-
-```javascript
-  // Rename CustomExtractor
-  describe('CustomExtractor', () => {
-
-  ...
-```
-
-...to this:
-
-```javascript
-  describe('NewYorkerExtractor', () => {
-
-  ...
-```
-
-That was easy, but when you save the file you may notice that this didn't make your test pass. So let's look more closely at the first test:
-
-```javascript
-  it('is selected properly', () => {
-    // To pass this test, rename your extractor in
-    // ./src/extractors/custom/www.newyorker.com/index.js
-    // (e.g., CustomExtractor => NYTimesExtractor)
-    // then add your new extractor to
-    // src/extractors/all.js
-    const url =
-      'http://www.newyorker.com/tech/elements/hacking-cryptography-and-the-countdown-to-quantum-computing';
-    const extractor = getExtractor(url);
-    assert.equal(extractor.domain, URL.parse(url).hostname);
-  });
-```
-
-This test checks to see whether or not Mercury can find your custom parser. In our example, it ensures that Mercury correctly selects our custom parser when it's parsing a link from `http://www.newyorker.com`. At the very top of the test, you'll see the following instructions:
-
-```javascript
-    // To pass this test, rename your extractor in
-    // ./src/extractors/custom/www.newyorker.com/index.js
-    // (e.g., CustomExtractor => NYTimesExtractor)
-    // then add your new extractor to
-    // src/extractors/all.js
-```
-
-So let's follow those instructions. In [`www.newyorker.com/index.js`](./www.newyorker.com/index.js), we're going to rename `CustomExtractor` to `NewYorkerExtractor`, just like we did in the test. The top of our custom parser should now look like this:
-
-```javascript
-export const NewYorkerExtractor = {
-  domain: 'www.newyorker.com',
-
-  ...
-
-}
-```
-
-Save the file, and you'll notice your test still isn't passing. If we refer back to the instructions above, we'll see that we need to add our new extractor to [`src/extractors/all.js`](../all.js). So let's do that. First, we need to add the following import to the rest of the imports at top of the file:
-
-```javascript
-import { NewYorkerExtractor } from './custom/www.newyorker.com';
-```
-
-Next, we need to add our new custom extractor to the Extractors object. The key should be your site's domain (in our case, `www.newyorker.com`), and the value should be the extractor we imported above. So, it should look like this:
-
-```javascript
-const Extractors = {
-  ...
-  'www.newyorker.com': NewYorkerExtractor,
-};
-```
-
-When you save your changes, you'll notice that your first test is now passing — congrats! Now it's time to move onto your next test.
-
-### Step 3: Performing a simple title extraction
-
-The next test checks to see whether your extractor returns the correct title:
+By default, the first test, which ensures your custom extractor is being selected properly, should be passing. The first failing test checks to see whether your extractor returns the correct title:
 
 ```javascript
   it('returns the title', (async) () => {
@@ -325,7 +252,7 @@ AssertionError: 'Hacking, Cryptography, and the Countdown to Quantum Computing' 
 
 When Mercury generated our test, it took a guess at the page's title, and in this case, it got it wrong. So update the test with thte title we expect, save it, and your test should pass!
 
-### Step 4: Speed it up
+### Step 3: Speed it up
 
 We've been moving at a slow pace, but as you can see, once you understand the basics, extracting most items on the page is actually very easy. For example, if you follow the same instructions to find the author selector, you'll find that the `.contributors` selector will return the correct author (Alex Hutchinson).
 
@@ -351,7 +278,7 @@ As [explained above](#selecting-an-attribute), to return an attribute rather tha
 
 You can refer to the [NewYorkerExtractor](www.newyorker.com/index.js) to see more the rest of the basic selectors.
 
-### Step 5: Content extraction
+### Step 4: Content extraction
 
 I've left content extraction for last, since it's often the trickiest, sometimes requiring special passes to [clean](#cleaning-content) and [transform](#using-tranforms) the content. For the New Yorker, the first part is easy: The selector for this page is clearly `div#articleBody`. But that's just our first step, because unlike the other tests, where we want to make sure we're matching a simple string, we need to sanity check that the page looks good when it's rendered, and that there aren't any elements returned by our selector that we don't want.
 
