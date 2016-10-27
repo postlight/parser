@@ -11,7 +11,6 @@ describe('NYTimesExtractor', () => {
     const url =
       'http://www.nytimes.com/interactive/2016/09/15/arts/design/national-museum-of-african-american-history-and-culture.html';
     const extractor = getExtractor(url);
-    console.log(extractor.domain, URL.parse(url).hostname)
     assert.equal(extractor.domain, URL.parse(url).hostname);
   });
 

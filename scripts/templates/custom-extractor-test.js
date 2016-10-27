@@ -29,7 +29,7 @@ function testFor(key, value, dir, file, url) {
 
             // Update these values with the expected values from
             // the article.
-            assert.equal(${key}, ${value ? "'" + value + "'" : "''"})
+            assert.equal(${key}, ${value ? "`" + value + "`" : "''"})
           });
     `;
 }
@@ -46,13 +46,13 @@ export default function (file, url, dir, result) {
     import { excerptContent } from 'utils/text';
 
     // Rename CustomExtractor
+    // to fit your publication
+    // (e.g., NYTimesExtractor)
     describe('CustomExtractor', () => {
       it('is selected properly', () => {
-        // To pass this test, rename your extractor in
-        // ${dir}/index.js
-        // (e.g., CustomExtractor => NYTimesExtractor)
-        // then add your new extractor to
-        // src/extractors/all.js
+        // This test should be passing by default.
+        // It sanity checks that the correct parser
+        // is being selected for URLs from this domain
         const url =
           '${url}';
         const extractor = getExtractor(url);
@@ -80,7 +80,7 @@ export default function (file, url, dir, result) {
 
         // Update these values with the expected values from
         // the article.
-        assert.equal(first13, null);
+        assert.equal(first13, 'Add the first 13 words of the article here');
       });
     });
   `;

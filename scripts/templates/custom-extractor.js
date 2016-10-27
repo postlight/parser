@@ -7,6 +7,7 @@ export default function (hostname) {
     // (e.g., NYTimesExtractor)
     export const CustomExtractor = {
       domain: '${hostname}',
+
       title: {
         selectors: [
           // enter title selectors
@@ -16,6 +17,24 @@ export default function (hostname) {
       author: {
         selectors: [
           // enter author selectors
+        ],
+      },
+
+      date_published: {
+        selectors: [
+          // enter selectors
+        ],
+      },
+
+      dek: {
+        selectors: [
+          // enter selectors
+        ],
+      },
+
+      lead_image_url: {
+        selectors: [
+          // enter selectors
         ],
       },
 
@@ -35,36 +54,6 @@ export default function (hostname) {
         clean: [
 
         ]
-      },
-
-      date_published: {
-        selectors: [
-          // enter selectors
-        ],
-      },
-
-      lead_image_url: {
-        selectors: [
-          // enter selectors
-        ],
-      },
-
-      dek: {
-        selectors: [
-          // enter selectors
-        ],
-      },
-
-      next_page_url: {
-        selectors: [
-          // enter selectors
-        ],
-      },
-
-      excerpt: {
-        selectors: [
-          // enter selectors
-        ],
       },
     }
   `;

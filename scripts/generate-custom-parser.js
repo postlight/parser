@@ -86,6 +86,15 @@ function generateScaffold(url, file, result) {
 
   fs.writeFileSync(`${getDir(url)}/index.js`, extractor)
   fs.writeFileSync(`${getDir(url)}/index.test.js`, extractorTest)
+  fs.appendFileSync(
+    './src/extractors/custom/index.js',
+    exportString(url),
+  )
+}
+
+function exportString(url) {
+  const { hostname } = URL.parse(url);
+  return `export * from './${hostname}'`;
 }
 
 function confirmCreateDir(dir, msg) {
