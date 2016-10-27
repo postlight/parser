@@ -52,9 +52,9 @@ dependencies:
 #     - bundle exec rake db:create db:schema:load
 
 ## Customize test commands
-# test:
-#   override:
-#     - phpunit test/unit-tests # use PHPunit for testing
+test:
+  override:
+    - jest --maxWorkers=1
 #   post:
 #     - bundle exec rake jasmine:ci: # add an extra test type
 #         environment:
