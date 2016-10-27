@@ -2,7 +2,7 @@
 machine:
 
   timezone:
-    America/Los_Angeles # Set the timezone
+    America/New_York
 
   node:
     version:
@@ -55,9 +55,12 @@ dependencies:
 ## Customize test commands
 test:
   override:
-    - nvm use 4.3.2 && jest --maxWorkers=1
-    - nvm use 6.9 && jest --maxWorkers=1
-    - nvm use 7.0 && jest --maxWorkers=1
+    - nvm use 4.3.2 && npm run build && jest --maxWorkers=1:
+        parallel: true
+    - nvm use 6.9 && npm run build && jest --maxWorkers=1:
+        parallel: true
+    - nvm use 7.0 && npm run build && jest --maxWorkers=1:
+        parallel: true
 #   post:
 #     - bundle exec rake jasmine:ci: # add an extra test type
 #         environment:
