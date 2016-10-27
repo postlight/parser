@@ -15,6 +15,7 @@ import { PoliticoExtractor } from './custom/www.politico.com';
 import { DeadspinExtractor } from './custom/deadspin.com';
 import { BroadwayWorldExtractor } from './custom/www.broadwayworld.com';
 import { ApartmentTherapyExtractor } from './custom/www.apartmenttherapy.com';
+import { MediumExtractor } from './custom/medium.com';
 
 const Extractors = {
   'nymag.com': NYMagExtractor,
@@ -39,6 +40,7 @@ const Extractors = {
   'jalopnik.com': DeadspinExtractor,
   'www.broadwayworld.com': BroadwayWorldExtractor,
   'www.apartmenttherapy.com': ApartmentTherapyExtractor,
+  'medium.com': MediumExtractor,
 };
 
 export default Extractors;

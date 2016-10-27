@@ -10,10 +10,11 @@ var cheerio = _interopDefault(require('cheerio'));
 var _Promise = _interopDefault(require('babel-runtime/core-js/promise'));
 var request = _interopDefault(require('request'));
 var _Reflect$ownKeys = _interopDefault(require('babel-runtime/core-js/reflect/own-keys'));
+var _slicedToArray = _interopDefault(require('babel-runtime/helpers/slicedToArray'));
 var stringDirection = _interopDefault(require('string-direction'));
 var _getIterator = _interopDefault(require('babel-runtime/core-js/get-iterator'));
+var _toConsumableArray = _interopDefault(require('babel-runtime/helpers/toConsumableArray'));
 var _defineProperty = _interopDefault(require('babel-runtime/helpers/defineProperty'));
-var _slicedToArray = _interopDefault(require('babel-runtime/helpers/slicedToArray'));
 var _typeof = _interopDefault(require('babel-runtime/helpers/typeof'));
 var validUrl = _interopDefault(require('valid-url'));
 var moment = _interopDefault(require('moment'));
@@ -1098,6 +1099,76 @@ var ApartmentTherapyExtractor = {
   }
 };
 
+var MediumExtractor = {
+  domain: 'medium.com',
+  title: {
+    selectors: ['h1']
+  },
+
+  author: {
+    selectors: [['meta[name="author"]', 'value']]
+  },
+
+  content: {
+    selectors: ['.section-content'],
+
+    // Is there anything in the content you selected that needs transformed
+    // before it's consumable content? E.g., unusual lazy loaded images
+    transforms: {
+      // Re-write lazy-loaded youtube videos
+      iframe: function iframe($node) {
+        var ytRe = /https:\/\/i.embed.ly\/.+url=https:\/\/i\.ytimg\.com\/vi\/(\w+)\//;
+        var thumb = decodeURIComponent($node.attr('data-thumbnail'));
+
+        if (ytRe.test(thumb)) {
+          var _thumb$match = thumb.match(ytRe);
+
+          var _thumb$match2 = _slicedToArray(_thumb$match, 2);
+
+          var _ = _thumb$match2[0];
+          var youtubeId = _thumb$match2[1]; // eslint-disable-line
+
+          $node.attr('src', 'https://www.youtube.com/embed/' + youtubeId);
+          var $parent = $node.parents('figure');
+          $parent.prepend($node.clone());
+          $node.remove();
+        }
+      }
+    },
+
+    // Is there anything that is in the result that shouldn't be?
+    // The clean selectors will remove anything that matches from
+    // the result
+    clean: []
+  },
+
+  date_published: {
+    selectors: [['time[datetime]', 'datetime']]
+  },
+
+  lead_image_url: {
+    selectors: [['meta[name="og:image"]', 'value']]
+  },
+
+  dek: {
+    selectors: [
+      // enter selectors
+    ]
+  },
+
+  next_page_url: {
+    selectors: [
+      // enter selectors
+    ]
+  },
+
+  excerpt: {
+    selectors: [
+      // enter selectors
+    ]
+  }
+};
+
 var Extractors = {
   'nymag.com': NYMagExtractor,
   'blogspot.com': BloggerExtractor,
@@ -1120,7 +1191,8 @@ var Extractors = {
   'gizmodo.com': DeadspinExtractor,
   'jalopnik.com': DeadspinExtractor,
   'www.broadwayworld.com': BroadwayWorldExtractor,
-  'www.apartmenttherapy.com': ApartmentTherapyExtractor
+  'www.apartmenttherapy.com': ApartmentTherapyExtractor,
+  'medium.com': MediumExtractor
 };
 
 // Spacer images to be removed
@@ -1443,11 +1515,20 @@ function cleanImages($article, $) {
   return $;
 }
 
-function markToKeep(article, $) {
-  var tags = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [];
+function markToKeep(article, $, url) {
+  var tags = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : [];
 
   if (tags.length === 0) {
     tags = KEEP_SELECTORS;
+  }
+
+  if (url) {
+    var _URL$parse = URL.parse(url);
+
+    var protocol = _URL$parse.protocol;
+    var hostname = _URL$parse.hostname;
+
+    tags = [].concat(_toConsumableArray(tags), ['iframe[src^="' + protocol + '//' + hostname + '"]']);
   }
 
   $(tags.join(','), article).addClass(KEEP_CLASS);
@@ -2593,7 +2674,7 @@ function extractCleanNode(article, _ref) {
   // Mark elements to keep that would normally be removed.
   // E.g., stripJunkTags will remove iframes, so we're going to mark
   // YouTube/Vimeo videos as elements we want to keep.
-  markToKeep(article, $);
+  markToKeep(article, $, url);
 
   // Drop certain tags like <title>, etc
   // This is -mostly- for cleanliness, not security.
