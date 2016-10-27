@@ -3,7 +3,7 @@ install:
   # Get the latest stable version of Node.js or io.js
   - ps: Install-Product node 4.3.2
   # install modules
-  - npm install
+  - ps: npm install
 
 build:
   parallel: true                  # enable MSBuild parallel builds
@@ -11,6 +11,6 @@ build:
 
 # to run your custom scripts instead of automatic tests
 test_script:
-  - ps: Install-Product node 4.3.2 && npm run build && jest --maxWorkers=1
-  - ps: Install-Product node 6.9 && npm run build && jest --maxWorkers=1
-  - ps: Install-Product node 7.0 && npm run build && jest --maxWorkers=1
+  - ps: npm run build && jest --maxWorkers=1
+  # - ps: Install-Product node 6.9 && npm run build && jest --maxWorkers=1
+  # - ps: Install-Product node 7.0 && npm run build && jest --maxWorkers=1
