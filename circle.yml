@@ -4,10 +4,11 @@ machine:
   timezone:
     America/Los_Angeles # Set the timezone
 
-  # Version of ruby to use
   node:
     version:
       4.3.2
+      6.9.1
+      7.0.0
 
   # Override /etc/hosts
   # hosts:
@@ -54,7 +55,9 @@ dependencies:
 ## Customize test commands
 test:
   override:
-    - jest --maxWorkers=1
+    - nvm use 4.3.2 && jest --maxWorkers=1
+    - nvm use 6.9 && jest --maxWorkers=1
+    - nvm use 7.0 && jest --maxWorkers=1
 #   post:
 #     - bundle exec rake jasmine:ci: # add an extra test type
 #         environment:
