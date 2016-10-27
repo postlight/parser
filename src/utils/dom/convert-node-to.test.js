@@ -38,4 +38,3 @@ describe('convertNodeTo(node, $)', () => {
     assert.equal(result, html);
   });
 });
-

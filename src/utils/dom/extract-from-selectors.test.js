@@ -33,4 +33,3 @@ describe('extractFromSelectors($, selectors, maxChildren, textOnly)', () => {
     assert.equal(result, HTML.manyChildren.result);
   });
 });
-

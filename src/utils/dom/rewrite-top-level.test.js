@@ -13,4 +13,3 @@ describe('rewriteTopLevel(node, $)', () => {
     assertClean(result.html(), HTML.rewriteHTMLBody.after);
   });
 });
-

@@ -32,4 +32,3 @@ describe('markToKeep($)', () => {
     assertClean(result.html(), keptHtml);
   });
 });
-

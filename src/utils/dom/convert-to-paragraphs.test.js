@@ -29,4 +29,3 @@ describe('convertToParagraphs($)', () => {
     assertClean(convertToParagraphs($).html(), html);
   });
 });
-

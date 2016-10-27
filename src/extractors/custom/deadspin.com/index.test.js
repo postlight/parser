@@ -36,7 +36,6 @@ describe('DeadspinExtractor', () => {
     assert.equal(title, 'The Nationals Are Stuck With Danny Espinosa Tonight, Unless They Opt For The Only Thing Worse');
   });
 
-
   it('returns the author', async () => {
     // To pass this test, fill out the author selector
     // in ./src/extractors/custom/deadspin.com/index.js.
@@ -53,7 +52,6 @@ describe('DeadspinExtractor', () => {
     assert.equal(author, 'Chris Thompson');
   });
 
-
   it('returns the date_published', async () => {
     // To pass this test, fill out the date_published selector
     // in ./src/extractors/custom/deadspin.com/index.js.
@@ -69,7 +67,6 @@ describe('DeadspinExtractor', () => {
     // the article.
     assert.equal(date_published, '2016-10-13T16:34:00.000Z');
   });
-
 
   it('returns the lead_image_url', async () => {
     // To pass this test, fill out the lead_image_url selector

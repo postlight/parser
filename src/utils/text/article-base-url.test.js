@@ -17,4 +17,3 @@ describe('articleBaseUrl(url, parsedUrl)', () => {
     assert.equal(articleBaseUrl(url), cleaned);
   });
 });
-

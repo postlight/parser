@@ -37,7 +37,6 @@ describe('WikiaExtractor', () => {
     assert.equal(title, 'Box Office: It’s Good to Be ‘Peculiar’');
   });
 
-
   it('returns the author', async () => {
     // To pass this test, fill out the author selector
     // in ./src/extractors/custom/fandom.wikia.com/index.js.
@@ -53,7 +52,6 @@ describe('WikiaExtractor', () => {
     // the article.
     assert.equal(author, 'Drew Dietsch');
   });
-
 
   it('returns the date_published', async () => {
     // To pass this test, fill out the date_published selector
@@ -86,7 +84,6 @@ describe('WikiaExtractor', () => {
     // the article.
     assert.equal(lead_image_url, 'http://fandom.wikia.com/wp-content/uploads/2016/10/box-office-peculiar-feature-hero.jpg');
   });
-
 
   it('returns the content', async () => {
     // To pass this test, fill out the content selector

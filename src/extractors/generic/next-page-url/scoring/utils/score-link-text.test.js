@@ -19,4 +19,3 @@ describe('scoreLinkText(linkText)', () => {
     assert.equal(scoreLinkText('4', 5), -44);
   });
 });
-

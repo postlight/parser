@@ -8,7 +8,6 @@ import {
   scoreParagraph,
 } from './index';
 
-
 describe('scoreNode(node)', () => {
   it('scores P, LI, SPAN, and PRE using scoreParagraph', () => {
     const html = '<p><em>Foo</em> bar</p>';
@@ -91,4 +90,3 @@ describe('scoreNode(node)', () => {
     assert.equal(score, -5);
   });
 });
-

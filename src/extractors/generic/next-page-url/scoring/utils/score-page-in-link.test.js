@@ -15,4 +15,3 @@ describe('scorePageInLink(pageNum, isWp)', () => {
     assert.equal(scorePageInLink(10, true), 0);
   });
 });
-

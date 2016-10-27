@@ -24,6 +24,15 @@
     // "no-useless-escape": 0,
     "no-confusing-arrow": 0,
     "camelcase": 0,
+    "no-multiple-empty-lines": [
+      "error", {"max": 1, "maxEOF": 0, "maxBOF": 0}
+    ],
+  },
+  "options": {
+    "no-multiple-empty-lines": {
+      "max": 1,
+      "maxEOF": 0,
+    },
   },
   "settings": {
     "import/resolver": {

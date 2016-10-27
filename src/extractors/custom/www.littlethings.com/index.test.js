@@ -37,7 +37,6 @@ describe('LittleThingsExtractor', () => {
     assert.equal(title, 'Snip The Stems Off Plastic Spoons To Make A Quirky Pineapple Lamp');
   });
 
-
   it('returns the author', async () => {
     // To pass this test, fill out the author selector
     // in ./src/extractors/custom/www.littlethings.com/index.js.
@@ -53,7 +52,6 @@ describe('LittleThingsExtractor', () => {
     // the article.
     assert.equal(author, 'Laura Caseley');
   });
-
 
   // it('returns the date_published', async () => {
   //   // To pass this test, fill out the date_published selector
@@ -71,7 +69,6 @@ describe('LittleThingsExtractor', () => {
   //   assert.equal(date_published, '');
   // });
 
-
   // it('returns the dek', async () => {
   //   // To pass this test, fill out the dek selector
   //   // in ./src/extractors/custom/www.littlethings.com/index.js.
@@ -88,7 +85,6 @@ describe('LittleThingsExtractor', () => {
   //   assert.equal(dek, '');
   // });
 
-
   it('returns the lead_image_url', async () => {
     // To pass this test, fill out the lead_image_url selector
     // in ./src/extractors/custom/www.littlethings.com/index.js.
@@ -104,7 +100,6 @@ describe('LittleThingsExtractor', () => {
     // the article.
     assert.equal(lead_image_url, 'http://cdn1.littlethings.com/app/uploads/2016/09/pineapple-b-thumb-1.jpg');
   });
-
 
   it('returns the content', async () => {
     // To pass this test, fill out the content selector

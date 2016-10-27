@@ -25,4 +25,3 @@ export default function getOrInitScore($node, $, weightNodes = true) {
 
   return score;
 }
-

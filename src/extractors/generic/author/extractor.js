@@ -45,4 +45,3 @@ const GenericAuthorExtractor = {
 };
 
 export default GenericAuthorExtractor;
-

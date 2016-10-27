@@ -22,4 +22,3 @@ export default function scoreLength(textLength, tagName = 'p') {
 
   return 0;
 }
-

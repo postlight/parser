@@ -17,4 +17,3 @@ describe('removeAnchor(url)', () => {
     assert.equal(removeAnchor(url), cleaned);
   });
 });
-

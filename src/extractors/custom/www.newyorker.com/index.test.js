@@ -36,7 +36,6 @@ describe('NewYorkerExtractor', () => {
     assert.equal(title, 'Hacking, Cryptography, and the Countdown to Quantum Computing');
   });
 
-
   it('returns the author', async () => {
     // To pass this test, fill out the author selector
     // in ./src/extractors/custom/www.newyorker.com/index.js.
@@ -52,7 +51,6 @@ describe('NewYorkerExtractor', () => {
     // the article.
     assert.equal(author, 'Alex Hutchinson');
   });
-
 
   it('returns the date_published', async () => {
     // To pass this test, fill out the date_published selector
@@ -70,7 +68,6 @@ describe('NewYorkerExtractor', () => {
     assert.equal(date_published, '2016-09-26T18:04:22.000Z');
   });
 
-
   it('returns the dek', async () => {
     // To pass this test, fill out the dek selector
     // in ./src/extractors/custom/www.newyorker.com/index.js.
@@ -86,7 +83,6 @@ describe('NewYorkerExtractor', () => {
     // the article.
     assert.equal(dek, 'In a decade, events like the recent data breach at Yahoo could become much more common, driven by a new kind of machine.');
   });
-
 
   it('returns the lead_image_url', async () => {
     // To pass this test, fill out the lead_image_url selector

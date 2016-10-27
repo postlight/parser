@@ -37,7 +37,6 @@ describe('CustomExtractor', () => {
     assert.equal(title, 'American Theatre Wing Launches Andrew Lloyd Webber Training Scholarships');
   });
 
-
   it('returns the author', async () => {
     // To pass this test, fill out the author selector
     // in ./src/extractors/custom/www.broadwayworld.com/index.js.
@@ -53,7 +52,6 @@ describe('CustomExtractor', () => {
     // the article.
     assert.equal(author, 'BWW News Desk');
   });
-
 
   it('returns the date_published', async () => {
     // To pass this test, fill out the date_published selector
@@ -71,7 +69,6 @@ describe('CustomExtractor', () => {
     assert.equal(date_published, '2016-10-13T19:35:00.000Z');
   });
 
-
   it('returns the dek', async () => {
     // To pass this test, fill out the dek selector
     // in ./src/extractors/custom/www.broadwayworld.com/index.js.
@@ -88,7 +85,6 @@ describe('CustomExtractor', () => {
     assert.equal(dek, 'The American Theatre Wing announced today that their Andrew Lloyd Webber Initiative has launched its second initiative program, the Training Scholarships, bridging the gap between talent and opportunity and creating a strong pipeline to the professional theatre for promising artists of all backgrounds.');
   });
 
-
   it('returns the lead_image_url', async () => {
     // To pass this test, fill out the lead_image_url selector
     // in ./src/extractors/custom/www.broadwayworld.com/index.js.
@@ -104,7 +100,6 @@ describe('CustomExtractor', () => {
     // the article.
     assert.equal(lead_image_url, 'https://images.bwwstatic.com/columnpic7/7B5FD766-A644-E386-19DE07017A3AD79C.jpg');
   });
-
 
   it('returns the content', async () => {
     // To pass this test, fill out the content selector

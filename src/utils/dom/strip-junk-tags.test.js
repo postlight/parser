@@ -20,4 +20,3 @@ describe('stripJunkTags($)', () => {
     assertClean(result.html(), HTML.ignoresKeepable.after);
   });
 });
-

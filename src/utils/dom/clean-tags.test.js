@@ -63,4 +63,3 @@ describe('cleanTags($)', () => {
     assertClean(result.html(), HTML.cleanEntryContentAsset.before);
   });
 });
-

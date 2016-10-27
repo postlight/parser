@@ -55,4 +55,3 @@ describe('findTopCandidate($)', () => {
     assert.equal($($topCandidate).text().length, 3652);
   });
 });
-

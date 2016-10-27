@@ -36,4 +36,3 @@ describe('removeEmpty($)', () => {
     assertClean(result.html(), html);
   });
 });
-

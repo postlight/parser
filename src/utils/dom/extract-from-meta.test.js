@@ -32,4 +32,3 @@ describe('extractFromMeta($, metaNames, cachedNames, cleanTags)', () => {
     assert.equal(result, HTML.metaEmptyDupes.result);
   });
 });
-

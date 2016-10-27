@@ -37,7 +37,6 @@ describe('BuzzfeedExtractor', () => {
     assert.equal(title, 'People Are Calling Out This Edited Picture Of Demi Lovato For Body-Shaming Her');
   });
 
-
   it('returns the author', async () => {
     // To pass this test, fill out the author selector
     // in ./src/extractors/custom/www.buzzfeed.com/index.js.
@@ -53,7 +52,6 @@ describe('BuzzfeedExtractor', () => {
     // the article.
     assert.equal(author, 'Ikran Dahir');
   });
-
 
   // it('returns the date_published', async () => {
   //   // To pass this test, fill out the date_published selector
@@ -71,7 +69,6 @@ describe('BuzzfeedExtractor', () => {
   //   // assert.equal(date_published, 'hi');
   // });
 
-
   it('returns the dek', async () => {
     // To pass this test, fill out the dek selector
     // in ./src/extractors/custom/www.buzzfeed.com/index.js.
@@ -88,7 +85,6 @@ describe('BuzzfeedExtractor', () => {
     assert.equal(dek, 'Lovato said: "Is that how my boobs should look?"..');
   });
 
-
   it('returns the lead_image_url', async () => {
     // To pass this test, fill out the lead_image_url selector
     // in ./src/extractors/custom/www.buzzfeed.com/index.js.
@@ -104,7 +100,6 @@ describe('BuzzfeedExtractor', () => {
     // the article.
     assert.equal(lead_image_url, 'https://img.buzzfeed.com/buzzfeed-static/static/2016-10/3/12/social_promotion/buzzfeed-prod-fastlane01/facebook-social-promotion-17757-1475512210-1.jpg');
   });
-
 
   it('returns the content', async () => {
     // To pass this test, fill out the content selector

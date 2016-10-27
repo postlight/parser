@@ -5,7 +5,6 @@ import {
   READABILITY_ASSET,
 } from './constants';
 
-
 // Get the score of a node based on its className and id.
 export default function getWeight(node) {
   const classes = node.attr('class');
@@ -52,4 +51,3 @@ export default function getWeight(node) {
 
   return score;
 }
-

@@ -20,4 +20,3 @@ describe('scoreBaseUrl(href, baseRegex)', () => {
     assert.equal(scoreBaseUrl(badUrl, baseRegex), 0);
   });
 });
-

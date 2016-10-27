@@ -20,4 +20,3 @@ describe('cleanHOnes($)', () => {
     assertClean(result.html(), HTML.convertThreeHOnes.after);
   });
 });
-

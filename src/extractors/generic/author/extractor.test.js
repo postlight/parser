@@ -43,4 +43,3 @@ describe('GenericAuthorExtractor', () => {
     });
   });
 });
-

@@ -37,7 +37,6 @@ describe('PoliticoExtractor', () => {
     assert.equal(title, 'Insiders: Trump will sink Pence in VP debate');
   });
 
-
   it('returns the author', async () => {
     // To pass this test, fill out the author selector
     // in ./src/extractors/custom/www.politico.com/index.js.
@@ -53,7 +52,6 @@ describe('PoliticoExtractor', () => {
     // the article.
     assert.equal(author, 'Steven Shepard');
   });
-
 
   it('returns the date_published', async () => {
     // To pass this test, fill out the date_published selector
@@ -71,7 +69,6 @@ describe('PoliticoExtractor', () => {
     assert.equal(date_published, '2016-10-04T09:07:00.000Z');
   });
 
-
   it('returns the dek', async () => {
     // To pass this test, fill out the dek selector
     // in ./src/extractors/custom/www.politico.com/index.js.
@@ -88,7 +85,6 @@ describe('PoliticoExtractor', () => {
     assert.equal(dek, '"Is it just me or are the two VP candidates infinitely more appealing than their running mates?" said a Pennsylvania Republican.');
   });
 
-
   it('returns the lead_image_url', async () => {
     // To pass this test, fill out the lead_image_url selector
     // in ./src/extractors/custom/www.politico.com/index.js.
@@ -104,7 +100,6 @@ describe('PoliticoExtractor', () => {
     // the article.
     assert.equal(lead_image_url, 'http://static.politico.com/0f/e7/5ee9a89044d1a01f74140bcd5b9e/caucus-vp-preview.jpg');
   });
-
 
   it('returns the content', async () => {
     // To pass this test, fill out the content selector

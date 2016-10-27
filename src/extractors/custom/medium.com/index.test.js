@@ -32,7 +32,6 @@ describe('MediumExtractor', () => {
     assert.equal(title, 'WTF? What’s The Future?');
   });
 
-
   it('returns the author', async () => {
     const html =
       fs.readFileSync('./fixtures/medium.com/1477523363921.html');
@@ -44,7 +43,6 @@ describe('MediumExtractor', () => {
 
     assert.equal(author, 'Tim O\'Reilly');
   });
-
 
   it('returns the date_published', async () => {
     const html =
@@ -58,7 +56,6 @@ describe('MediumExtractor', () => {
     assert.equal(date_published, '2016-10-19T14:24:20.323Z');
   });
 
-
   it('returns the dek', async () => {
     const html =
       fs.readFileSync('./fixtures/medium.com/1477523363921.html');
@@ -70,7 +67,6 @@ describe('MediumExtractor', () => {
 
     assert.equal(dek, null);
   });
-
 
   it('returns the lead_image_url', async () => {
     // To pass this test, fill out the lead_image_url selector
@@ -87,7 +83,6 @@ describe('MediumExtractor', () => {
     // the article.
     assert.equal(lead_image_url, 'https://cdn-images-1.medium.com/max/1200/1*3Gzaug9mRc8vvx1cuQWkog.png');
   });
-
 
   it('returns the content', async () => {
     const html =

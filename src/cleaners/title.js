@@ -23,4 +23,3 @@ export default function cleanTitle(title, { url, $ }) {
   // strip any html tags in the title text
   return stripTags(title, $).trim();
 }
-

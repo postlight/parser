@@ -32,4 +32,3 @@ describe('scoreByParents($link)', () => {
     assert.equal(scoreByParents($link), -25);
   });
 });
-

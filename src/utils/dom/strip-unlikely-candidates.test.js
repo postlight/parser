@@ -31,4 +31,3 @@ describe('Generic Extractor Utils', () => {
     });
   });
 });
-

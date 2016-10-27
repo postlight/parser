@@ -15,4 +15,3 @@ describe('scoreCapLinks(linkData)', () => {
     assert.equal(scoreCapLinks(linkData), 0);
   });
 });
-

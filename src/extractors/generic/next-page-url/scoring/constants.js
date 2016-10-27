@@ -35,4 +35,3 @@ export const PREV_LINK_TEXT_RE = new RegExp('(prev|earl|old|new|<|«)', 'i');
 
 // Match any phrase that looks like it could be page, or paging, or pagination
 export const PAGE_RE = new RegExp('pag(e|ing|inat)', 'i');
-

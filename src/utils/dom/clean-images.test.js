@@ -27,4 +27,3 @@ describe('cleanImages($)', () => {
     assertClean(result.html(), HTML.cleanSpacer.after);
   });
 });
-

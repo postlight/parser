@@ -15,7 +15,6 @@ const BAD_CONTENT_TYPES = [
 
 export const BAD_CONTENT_TYPES_RE = new RegExp(`^(${BAD_CONTENT_TYPES.join('|')})$`, 'i');
 
-
 // Use this setting as the maximum size an article can be
 // for us to attempt parsing. Defaults to 5 MB.
 export const MAX_CONTENT_LENGTH = 5242880;

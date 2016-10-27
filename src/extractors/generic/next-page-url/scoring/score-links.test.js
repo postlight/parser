@@ -39,4 +39,3 @@ describe('scoreLinks(links)', () => {
     assert.equal(scoredPages, null);
   });
 });
-

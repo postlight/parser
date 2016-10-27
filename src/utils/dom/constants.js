@@ -43,7 +43,6 @@ export const CLEAN_CONDITIONALLY_TAGS = ['ul', 'ol', 'table', 'div', 'button', '
 const HEADER_TAGS = ['h2', 'h3', 'h4', 'h5', 'h6'];
 export const HEADER_TAG_LIST = HEADER_TAGS.join(',');
 
-
 // // CONTENT FETCHING CONSTANTS ////
 
 // A list of strings that can be considered unlikely candidates when
@@ -175,7 +174,6 @@ export const PHOTO_HINTS = [
   'caption',
 ];
 export const PHOTO_HINTS_RE = new RegExp(PHOTO_HINTS.join('|'), 'i');
-
 
 // A list of strings that denote a positive scoring for this content as being
 // an article container. Checked against className and id.
@@ -375,7 +373,6 @@ export const BLOCK_LEVEL_TAGS = [
 ];
 export const BLOCK_LEVEL_TAGS_RE = new RegExp(`^(${BLOCK_LEVEL_TAGS.join('|')})$`, 'i');
 
-
 // The removal is implemented as a blacklist and whitelist, this test finds
 // blacklisted elements that aren't whitelisted. We do this all in one
 // expression-both because it's only one pass, and because this skips the
@@ -387,7 +384,6 @@ const candidatesWhitelist = UNLIKELY_CANDIDATES_WHITELIST.join('|');
 export const CANDIDATES_WHITELIST = new RegExp(candidatesWhitelist, 'i');
 
 export const UNLIKELY_RE = new RegExp(`!(${candidatesWhitelist})|(${candidatesBlacklist})`, 'i');
-
 
 export const PARAGRAPH_SCORE_TAGS = new RegExp('^(p|li|span|pre)$', 'i');
 export const CHILD_CONTENT_TAGS = new RegExp('^(td|blockquote|ol|ul|dl)$', 'i');

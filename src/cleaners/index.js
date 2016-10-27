@@ -14,7 +14,6 @@ const Cleaners = {
   title: cleanTitle,
 };
 
-
 export default Cleaners;
 
 export { cleanAuthor };

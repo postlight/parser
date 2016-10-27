@@ -25,7 +25,6 @@ export default function extractBestNode($, opts) {
   // TODO Do I need this? – AP
   // let $root = $.root().clone()
 
-
   if (opts.stripUnlikelyCandidates) {
     $ = stripUnlikelyCandidates($);
   }

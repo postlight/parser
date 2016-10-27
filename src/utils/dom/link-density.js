@@ -1,4 +1,3 @@
-
 export function textLength(text) {
   return text.trim()
              .replace(/\s+/g, ' ')

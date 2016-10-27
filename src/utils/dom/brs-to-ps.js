@@ -4,7 +4,6 @@ import { paragraphize } from './index';
 // Another good candidate for refactoring/optimizing.
 // Very imperative code, I don't love it. - AP
 
-
 //  Given cheerio object, convert consecutive <br /> tags into
 //  <p /> tags instead.
 //

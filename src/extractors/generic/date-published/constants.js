@@ -58,4 +58,3 @@ export const DATE_PUBLISHED_URL_RES = [
     // /2012/jan/27/
   new RegExp(`/(20\\d{2}/${abbrevMonthsStr}/[0-3]\\d)/`, 'i'),
 ];
-

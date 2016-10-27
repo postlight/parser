@@ -106,4 +106,3 @@ export default function cleanTags($article, $) {
 
   return $;
 }
-

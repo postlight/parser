@@ -30,4 +30,3 @@ describe('linkDensity($)', () => {
     assert.equal(density, 0);
   });
 });
-

@@ -37,7 +37,6 @@ describe('WiredExtractor', () => {
     assert.equal(title, 'An Ode to the Rosetta Spacecraft as It Flings Itself Into a Comet');
   });
 
-
   it('returns the author', async () => {
     // To pass this test, fill out the author selector
     // in ./src/extractors/custom/www.wired.com/index.js.
@@ -53,7 +52,6 @@ describe('WiredExtractor', () => {
     // the article.
     assert.equal(author, 'Emma Grey Ellis');
   });
-
 
   it('returns the date_published', async () => {
     // To pass this test, fill out the date_published selector
@@ -71,7 +69,6 @@ describe('WiredExtractor', () => {
     assert.equal(date_published, '2016-09-30T07:00:12.000Z');
   });
 
-
   it('returns the dek', async () => {
     // To pass this test, fill out the dek selector
     // in ./src/extractors/custom/www.wired.com/index.js.
@@ -88,7 +85,6 @@ describe('WiredExtractor', () => {
     assert.equal(dek, 'Time to break out the tissues, space fans.');
   });
 
-
   it('returns the lead_image_url', async () => {
     // To pass this test, fill out the lead_image_url selector
     // in ./src/extractors/custom/www.wired.com/index.js.
@@ -104,7 +100,6 @@ describe('WiredExtractor', () => {
     // the article.
     assert.equal(lead_image_url, 'https://www.wired.com/wp-content/uploads/2016/09/Rosetta_impact-1-1200x630.jpg');
   });
-
 
   it('returns the content', async () => {
     // To pass this test, fill out the content selector

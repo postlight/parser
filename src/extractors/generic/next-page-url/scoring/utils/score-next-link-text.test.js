@@ -15,4 +15,3 @@ describe('scoreNextLinkText(linkData)', () => {
     assert.equal(scoreNextLinkText(linkData), 0);
   });
 });
-

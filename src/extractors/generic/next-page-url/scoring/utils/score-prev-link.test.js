@@ -15,4 +15,3 @@ describe('scorePrevLink(linkData)', () => {
     assert.equal(scorePrevLink(linkData), 0);
   });
 });
-

@@ -33,4 +33,3 @@ describe('cleanTitle(title, { url, $ })', () => {
     assert.equal(cleanTitle(title, { url: '', $ }), title.trim());
   });
 });
-

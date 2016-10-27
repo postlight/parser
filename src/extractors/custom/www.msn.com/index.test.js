@@ -37,7 +37,6 @@ describe('MSNExtractor', () => {
     assert.equal(title, 'This Is Your Brain On Sad Movies; Plus 5 Films To Cry To');
   });
 
-
   it('returns the author', async () => {
     // To pass this test, fill out the author selector
     // in ./src/extractors/custom/www.msn.com/index.js.
@@ -53,7 +52,6 @@ describe('MSNExtractor', () => {
     // the article.
     assert.equal(author, 'Lizette Borreli');
   });
-
 
   it('returns the date_published', async () => {
     // To pass this test, fill out the date_published selector
@@ -71,7 +69,6 @@ describe('MSNExtractor', () => {
     assert.equal(date_published.split('T')[0], '2016-09-21');
   });
 
-
   it('returns the dek', async () => {
     // To pass this test, fill out the dek selector
     // in ./src/extractors/custom/www.msn.com/index.js.
@@ -88,7 +85,6 @@ describe('MSNExtractor', () => {
     assert.equal(dek, 'The psychological reason why we love to watch sad movies is linked to the release of endorphins.');
   });
 
-
   it('returns the lead_image_url', async () => {
     // To pass this test, fill out the lead_image_url selector
     // in ./src/extractors/custom/www.msn.com/index.js.
@@ -104,7 +100,6 @@ describe('MSNExtractor', () => {
     // the article.
     assert.equal(lead_image_url, null);
   });
-
 
   it('returns the content', async () => {
     // To pass this test, fill out the content selector

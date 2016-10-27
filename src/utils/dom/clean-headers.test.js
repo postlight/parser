@@ -27,4 +27,3 @@ describe('cleanHeaders(article, $)', () => {
     assertClean(result.html(), HTML.dropWithNegativeWeight.after);
   });
 });
-

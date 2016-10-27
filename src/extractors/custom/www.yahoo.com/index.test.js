@@ -37,7 +37,6 @@ describe('YahooExtractor', () => {
     assert.equal(title, 'Clinton Cancels Joint Events with Sanders');
   });
 
-
   it('returns the author', async () => {
     // To pass this test, fill out the author selector
     // in ./src/extractors/custom/www.yahoo.com/index.js.
@@ -53,7 +52,6 @@ describe('YahooExtractor', () => {
     // the article.
     assert.equal(author, 'Fox Nation');
   });
-
 
   it('returns the date_published', async () => {
     // To pass this test, fill out the date_published selector
@@ -71,7 +69,6 @@ describe('YahooExtractor', () => {
     assert.equal(date_published, '2016-10-03T05:00:00.000Z');
   });
 
-
   it('returns the dek', async () => {
     // To pass this test, fill out the dek selector
     // in ./src/extractors/custom/www.yahoo.com/index.js.
@@ -88,7 +85,6 @@ describe('YahooExtractor', () => {
     assert.equal(dek, 'The Hillary Clinton campaign has canceled joint appearances with former primary opponent Bernie Sanders after he admitted that "of course" it bothered him that Clinton seemed to be talking down to his supporters in hacked audio from a fundraiser. The two were set to have joint appearance together Monday. Instead, Sanders will appear in both Iowa and Wisconsin on Monday to boost her candidacy without her. Clinton is now scheduled to swing through Iowa later in the week, but possibly without Sanders, who was asked on CNN\'s "State of the Union" if it bothered him that Clinton had referred to his younger supporters as "the children of the great recession" who "live in their parents\' basement" to');
   });
 
-
   it('returns the lead_image_url', async () => {
     // To pass this test, fill out the lead_image_url selector
     // in ./src/extractors/custom/www.yahoo.com/index.js.
@@ -104,7 +100,6 @@ describe('YahooExtractor', () => {
     // the article.
     assert.equal(lead_image_url, 'https://s.yimg.com/uu/api/res/1.2/tE8CoXSgHD15n5p8wUwGJA--/aD0zMDA7dz02MjQ7c209MTthcHBpZD15dGFjaHlvbg--/http://slingstone.zenfs.com/offnetwork/218c3f97f0b7e1598b6dc9fd10126e22');
   });
-
 
   it('returns the content', async () => {
     // To pass this test, fill out the content selector

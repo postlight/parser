@@ -15,4 +15,3 @@ describe('scoreExtraneousLinks(href)', () => {
     assert.equal(scoreExtraneousLinks(url), 0);
   });
 });
-

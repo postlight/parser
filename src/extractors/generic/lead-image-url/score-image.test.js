@@ -221,4 +221,3 @@ describe('scoreByPosition($imgs, index)', () => {
     assert.equal(scoreByPosition($imgs, 0), 3);
   });
 });
-

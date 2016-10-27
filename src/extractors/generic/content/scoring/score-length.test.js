@@ -18,4 +18,3 @@ describe('Scoring utils', () => {
     });
   });
 });
-

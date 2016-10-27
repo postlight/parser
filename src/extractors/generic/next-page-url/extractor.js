@@ -46,5 +46,4 @@ const GenericNextPageUrlExtractor = {
   },
 };
 
-
 export default GenericNextPageUrlExtractor;

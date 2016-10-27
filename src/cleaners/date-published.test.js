@@ -59,4 +59,3 @@ describe('cleanDateString(dateString)', () => {
     assert.equal(date1, '15 Apr 2016 10:59');
   });
 });
-

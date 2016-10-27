@@ -15,4 +15,3 @@ describe('TwitterExtractor', () => {
     assert.equal(date_published, '2016-06-21T15:27:25.000Z');
   });
 });
-

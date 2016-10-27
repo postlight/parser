@@ -2,4 +2,3 @@
 export default function scoreCommas(text) {
   return (text.match(/,/g) || []).length;
 }
-
