@@ -6,9 +6,9 @@ machine:
 
   node:
     version:
-      4.3.2
-      6.9.1
-      7.0.0
+      - 4.3.2
+      - 6.9.1
+      - 7.0.0
 
   # Override /etc/hosts
   # hosts:
