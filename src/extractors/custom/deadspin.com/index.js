@@ -1,5 +1,15 @@
 export const DeadspinExtractor = {
   domain: 'deadspin.com',
+
+  supportedDomains: [
+    'jezebel.com',
+    'lifehacker.com',
+    'kotaku.com',
+    'gizmodo.com',
+    'jalopnik.com',
+    'kinja.com',
+  ],
+
   title: {
     selectors: [
       'h1.headline',

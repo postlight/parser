@@ -10,10 +10,10 @@ var cheerio = _interopDefault(require('cheerio'));
 var _Promise = _interopDefault(require('babel-runtime/core-js/promise'));
 var request = _interopDefault(require('request'));
 var _Reflect$ownKeys = _interopDefault(require('babel-runtime/core-js/reflect/own-keys'));
+var _toConsumableArray = _interopDefault(require('babel-runtime/helpers/toConsumableArray'));
 var _slicedToArray = _interopDefault(require('babel-runtime/helpers/slicedToArray'));
 var stringDirection = _interopDefault(require('string-direction'));
 var _getIterator = _interopDefault(require('babel-runtime/core-js/get-iterator'));
-var _toConsumableArray = _interopDefault(require('babel-runtime/helpers/toConsumableArray'));
 var _defineProperty = _interopDefault(require('babel-runtime/helpers/defineProperty'));
 var _typeof = _interopDefault(require('babel-runtime/helpers/typeof'));
 var validUrl = _interopDefault(require('valid-url'));
@@ -347,6 +347,17 @@ var Resource = {
     return $;
   }
 };
+
+var merge = function merge(extractor, domains) {
+  return domains.reduce(function (acc, domain) {
+    acc[domain] = extractor;
+    return acc;
+  }, {});
+};
+
+function mergeSupportedDomains(extractor) {
+  return extractor.supportedDomains ? merge(extractor, [extractor.domain].concat(_toConsumableArray(extractor.supportedDomains))) : merge(extractor, [extractor.domain]);
+}
 
 var NYMagExtractor = {
   domain: 'nymag.com',
@@ -936,6 +947,9 @@ var PoliticoExtractor = {
 
 var DeadspinExtractor = {
   domain: 'deadspin.com',
+
+  supportedDomains: ['jezebel.com', 'lifehacker.com', 'kotaku.com', 'gizmodo.com', 'jalopnik.com', 'kinja.com'],
+
   title: {
     selectors: ['h1.headline']
   },
@@ -1101,6 +1115,9 @@ var ApartmentTherapyExtractor = {
 
 var MediumExtractor = {
   domain: 'medium.com',
+
+  supportedDomains: ['trackchanges.postlight.com'],
+
   title: {
     selectors: ['h1']
   },
@@ -1169,7 +1186,7 @@ var MediumExtractor = {
   }
 };
 
-var Extractors = {
+var Extractors = _extends({
   'nymag.com': NYMagExtractor,
   'blogspot.com': BloggerExtractor,
   'wikipedia.org': WikipediaExtractor,
@@ -1183,17 +1200,11 @@ var Extractors = {
   'www.buzzfeed.com': BuzzfeedExtractor,
   'fandom.wikia.com': WikiaExtractor,
   'www.littlethings.com': LittleThingsExtractor,
-  'www.politico.com': PoliticoExtractor,
-  'deadspin.com': DeadspinExtractor,
-  'jezebel.com': DeadspinExtractor,
-  'lifehacker.com': DeadspinExtractor,
-  'kotaku.com': DeadspinExtractor,
-  'gizmodo.com': DeadspinExtractor,
-  'jalopnik.com': DeadspinExtractor,
+  'www.politico.com': PoliticoExtractor
+}, mergeSupportedDomains(DeadspinExtractor), {
   'www.broadwayworld.com': BroadwayWorldExtractor,
-  'www.apartmenttherapy.com': ApartmentTherapyExtractor,
-  'medium.com': MediumExtractor
-};
+  'www.apartmenttherapy.com': ApartmentTherapyExtractor
+}, mergeSupportedDomains(MediumExtractor));
 
 // Spacer images to be removed
 var SPACER_RE = new RegExp('trans|transparent|spacer|blank', 'i');

@@ -1,5 +1,10 @@
 export const MediumExtractor = {
   domain: 'medium.com',
+
+  supportedDomains: [
+    'trackchanges.postlight.com',
+  ],
+
   title: {
     selectors: [
       'h1',
