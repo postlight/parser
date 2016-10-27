@@ -6,9 +6,7 @@ machine:
 
   node:
     version:
-      - 4.3.2
-      - 6.9.1
-      - 7.0.0
+      4.3.2
 
   # Override /etc/hosts
   # hosts:
@@ -29,6 +27,8 @@ machine:
 ## Customize dependencies
 dependencies:
   pre:
+    - nvm install 6.9.1
+    - nvm install 7.0.0
     # - npm install coffeescript # install from a different package manager
     # - gem uninstall bundler # use a custom version of bundler
     # - gem install bundler --pre
