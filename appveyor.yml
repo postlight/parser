@@ -1,0 +1,16 @@
+# scripts that run after cloning repository
+install:
+  # by default, all script lines are interpreted as batch
+  - nvm install 4.3.2
+  - nvm install 6.9.1
+  - nvm install 7.0.0
+
+build:
+  parallel: true                  # enable MSBuild parallel builds
+
+
+# to run your custom scripts instead of automatic tests
+test_script:
+  - nvm use 4.3.2 && npm run build && jest --maxWorkers=1
+  - nvm use 6.9 && npm run build && jest --maxWorkers=1
+  - nvm use 7.0 && npm run build && jest --maxWorkers=1
