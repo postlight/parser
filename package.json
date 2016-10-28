@@ -45,6 +45,7 @@
     "jest": "^16.0.2",
     "jest-cli": "^16.0.2",
     "mocha": "^3.0.2",
+    "nock": "^9.0.2",
     "ora": "^0.3.0",
     "rollup": "^0.36.3",
     "rollup-plugin-babel": "^2.6.1",

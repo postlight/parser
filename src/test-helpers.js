@@ -1,4 +1,7 @@
 import assert from 'assert';
+import nock from 'nock';
+import fs from 'fs';
+import path from 'path';
 
 export function clean(string) {
   return string.trim().replace(/\r?\n|\r/g, '').replace(/\s+/g, ' ');
@@ -7,3 +10,43 @@ export function clean(string) {
 export function assertClean(a, b) {
   assert.equal(clean(a), clean(b));
 }
+
+// using this from https://www.ctl.io/developers/blog/post/http-apis-test-code
+export function record(name, options={}) {
+  const test_folder = options.test_folder || '.';
+  const fixtures_folder = options.fixtures_folder || 'fixtures/nock';
+  const fp = path.join(test_folder, fixtures_folder, name + '.js');
+  // `has_fixtures` indicates whether the test has fixtures we should read,
+  // or doesn't, so we should record and save them.
+  // the environment variable `NOCK_RECORD` can be used to force a new recording.
+  let has_fixtures = !!process.env.NOCK_RECORD;
+
+  return {
+    // starts recording, or ensure the fixtures exist
+    before: () => {
+      if (!has_fixtures) try {
+        require('../' + fp);
+        has_fixtures = true;
+      } catch (e) {
+        nock.recorder.rec({
+          dont_print: true
+        });
+      } else {
+        has_fixtures = false;
+        nock.recorder.rec({
+          dont_print: true
+        });
+      }
+    },
+    // saves our recording if fixtures didn't already exist
+    after: (done) => {
+      if (!has_fixtures) {
+        has_fixtures = nock.recorder.play();
+        const text = "const nock = require('nock');\n" + has_fixtures.join('\n');
+        fs.writeFile(fp, text, done);
+      } else {
+        done();
+      }
+    }
+  }
+};

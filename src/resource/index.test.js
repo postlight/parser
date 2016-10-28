@@ -1,9 +1,14 @@
 import assert from 'assert';
 import { Errors } from 'utils';
 
+import { record } from 'test-helpers';
 import Resource from './index';
 
 describe('Resource', () => {
+  const recorder = record('resource-test');
+  beforeAll(recorder.before);
+  afterAll(recorder.after);
+
   describe('create(url)', () => {
     it('fetches the page and returns a cheerio object', async () => {
       const url = 'http://theconcourse.deadspin.com/1786177057';
