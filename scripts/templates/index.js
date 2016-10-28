@@ -1,4 +1,4 @@
-import insertValues from './insert-values'
+import insertValues from './insert-values';
 
 const bodyPattern = /^\n([\s\S]+)\s{2}$/gm;
 const trailingWhitespace = /\s+$/;

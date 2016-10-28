@@ -1,9 +1,14 @@
 import assert from 'assert';
 import { Errors } from 'utils';
 
+import { record } from 'test-helpers';
 import Mercury from './mercury';
 
 describe('Mercury', () => {
+  const recorder = record('mercury-test');
+  beforeAll(recorder.before);
+  afterAll(recorder.after);
+
   describe('parse(url)', () => {
     it('returns an error if a malformed url is passed', async () => {
       const error = await Mercury.parse('foo.com');

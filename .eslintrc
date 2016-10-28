@@ -13,6 +13,8 @@
     "fit",
     "jasmine",
     "beforeEach",
+    "beforeAll",
+    "afterAll",
   },
   "rules": {
     "no-param-reassign": 0,

@@ -28,7 +28,15 @@ function get(options) {
 
 export function validateResponse(response, parseNon2xx = false) {
   // Check if we got a valid status code
-  if (response.statusMessage !== 'OK') {
+  // This isn't great, but I'm requiring a statusMessage to be set
+  // before short circuiting b/c nock doesn't set it in tests
+  // statusMessage only not set in nock response, in which case
+  // I check statusCode, which is currently only 200 for OK responses
+  // in tests
+  if (
+    (response.statusMessage && response.statusMessage !== 'OK') ||
+      response.statusCode !== 200
+  ) {
     if (!response.statusCode) {
       throw new Error(
         `Unable to fetch content. Original exception was ${response.error}`

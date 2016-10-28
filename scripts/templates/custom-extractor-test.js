@@ -10,10 +10,10 @@ const IGNORE = [
   'direction',
   'total_pages',
   'rendered_pages',
-]
+];
 
 function testFor(key, value, dir, file, url) {
-  if (IGNORE.find(k => k === key)) return ''
+  if (IGNORE.find(k => k === key)) return '';
 
   return template`
   it('returns the ${key}', async () => {
@@ -29,7 +29,7 @@ function testFor(key, value, dir, file, url) {
 
             // Update these values with the expected values from
             // the article.
-            assert.equal(${key}, ${value ? "`" + value + "`" : "''"})
+            assert.equal(${key}, ${value ? `\`${value}\`` : "''"})
           });
     `;
 }
