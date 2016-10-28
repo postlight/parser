@@ -1,0 +1,14 @@
+# scripts that run after cloning repository
+install:
+  # Get the latest stable version of Node.js or io.js
+  - ps: Install-Product node 4.3.2
+  # install modules
+  - npm install --global yarn
+  - yarn
+
+build_script:
+  - yarn build
+
+# to run your custom scripts instead of automatic tests
+test_script:
+  - yarn test -- --maxWorkers=4
