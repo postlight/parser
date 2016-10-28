@@ -24,9 +24,9 @@ dependencies:
 ## Customize test commands
 test:
   override:
-    - nvm use 4.3.2 && yarn build && yarn test -- --maxWorkers=1:
+    - nvm use 4.3.2 && yarn build && yarn test -- --maxWorkers=4:
         parallel: true
-    - nvm use 6.9 && npm run build && yarn test -- --maxWorkers=1:
+    - nvm use 6.9 && npm run build && yarn test -- --maxWorkers=4:
         parallel: true
-    - nvm use 7.0 && npm run build && yarn test -- --maxWorkers=1:
+    - nvm use 7.0 && npm run build && yarn test -- --maxWorkers=4:
         parallel: true
