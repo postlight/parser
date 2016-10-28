@@ -4,6 +4,7 @@ install:
   - ps: Install-Product node 4.3.2
   # install modules
   - ps: npm install --global yarn
+  - echo Install packages via yarn
   - ps: yarn
 
 build:
