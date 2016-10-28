@@ -1,6 +1,6 @@
 # Mercury Parser - Extracting content from chaos
 
-[![CircleCI](https://circleci.com/gh/postlight/mercury-parser.svg?style=svg&circle-token=3026c2b527d3767750e767872d08991aeb4f8f10)](https://circleci.com/gh/postlight/mercury-parser)
+[![CircleCI](https://circleci.com/gh/postlight/mercury-parser.svg?style=svg&circle-token=3026c2b527d3767750e767872d08991aeb4f8f10)](https://circleci.com/gh/postlight/mercury-parser) [![Build status](https://ci.appveyor.com/api/projects/status/bxwqp6mn8ijycqh4?svg=true)](https://ci.appveyor.com/project/adampash/mercury-parser)
 
 The Mercury Parser extracts the bits that humans care about from any URL you give it. That includes article content, titles, authors, published dates, excerpts, lead images, and more.
 
