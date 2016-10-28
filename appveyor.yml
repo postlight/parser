@@ -7,8 +7,10 @@ install:
   - echo Install packages via yarn
   - ps: yarn
 
-build:
-  parallel: true                  # enable MSBuild parallel builds
+
+build: off
+# build:
+#   parallel: true                  # enable MSBuild parallel builds
 
 
 # to run your custom scripts instead of automatic tests
