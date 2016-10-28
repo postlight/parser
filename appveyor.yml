@@ -13,6 +13,6 @@ build:
 
 # to run your custom scripts instead of automatic tests
 test_script:
-  - ps: yarn build && jest --maxWorkers=1
+  - ps: npm run build && jest --maxWorkers=1
   # - ps: Install-Product node 6.9 && npm run build && jest --maxWorkers=1
   # - ps: Install-Product node 7.0 && npm run build && jest --maxWorkers=1
