@@ -3,20 +3,12 @@ install:
   # Get the latest stable version of Node.js or io.js
   - ps: Install-Product node 4.3.2
   # install modules
-  - ps: npm install --global yarn
-  - echo Install packages via yarn
-  - ps: yarn
-
+  - npm install --global yarn
+  - yarn
 
 build_script:
   - yarn build
-# build:
-#   parallel: true                  # enable MSBuild parallel builds
-
 
 # to run your custom scripts instead of automatic tests
 test_script:
-  - yarn build
   - yarn test -- --maxWorkers=4
-  # - ps: Install-Product node 6.9 && npm run build && jest --maxWorkers=1
-  # - ps: Install-Product node 7.0 && npm run build && jest --maxWorkers=1
