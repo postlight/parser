@@ -21,12 +21,25 @@ dependencies:
   override:
     - yarn install
 
+database:
+  override:
+    - echo "Skipping DB section."
+
+build:
+  override:
+    - nvm use 4.3.2 && yarn build:
+        paralell: true
+    - nvm use 4.3.2 && yarn build:
+        paralell: true
+    - nvm use 4.3.2 && yarn build:
+        paralell: true
+
 ## Customize test commands
 test:
   override:
-    - nvm use 4.3.2 && yarn build && yarn test -- --maxWorkers=4:
+    - nvm use 4.3.2 && yarn test -- --maxWorkers=4:
         parallel: true
-    - nvm use 6.9 && npm run build && yarn test -- --maxWorkers=4:
+    - nvm use 6.9 && yarn test -- --maxWorkers=4:
         parallel: true
-    - nvm use 7.0 && npm run build && yarn test -- --maxWorkers=4:
+    - nvm use 7.0 && yarn test -- --maxWorkers=4:
         parallel: true
