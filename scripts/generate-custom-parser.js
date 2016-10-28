@@ -69,6 +69,8 @@ function savePage($, [url], newParser) {
     if (newParser) {
       confirm(generateScaffold, [url, file, result], 'Generating parser and tests');
       console.log(`Your custom site extractor has been set up. To get started building it, run
+      yarn watch:test -- ${hostname}
+        -- OR --
       npm run watch:test -- ${hostname}`)
     } else {
       console.log(`

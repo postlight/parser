@@ -10,6 +10,7 @@ var cheerio = _interopDefault(require('cheerio'));
 var _Promise = _interopDefault(require('babel-runtime/core-js/promise'));
 var request = _interopDefault(require('request'));
 var _Reflect$ownKeys = _interopDefault(require('babel-runtime/core-js/reflect/own-keys'));
+var _Object$keys = _interopDefault(require('babel-runtime/core-js/object/keys'));
 var _toConsumableArray = _interopDefault(require('babel-runtime/helpers/toConsumableArray'));
 var _slicedToArray = _interopDefault(require('babel-runtime/helpers/slicedToArray'));
 var stringDirection = _interopDefault(require('string-direction'));
@@ -83,6 +84,10 @@ var BAD_CONTENT_TYPES_RE = new RegExp('^(' + BAD_CONTENT_TYPES.join('|') + ')$',
 // for us to attempt parsing. Defaults to 5 MB.
 var MAX_CONTENT_LENGTH = 5242880;
 
+// Turn the global proxy on or off
+// Proxying is not currently enabled in Python source
+// so not implementing logic in port.
+
 function get(options) {
   return new _Promise(function (resolve, reject) {
     request(options, function (err, response, body) {
@@ -112,9 +117,9 @@ function validateResponse(response) {
     }
   }
 
-  var _response$headers = response.headers;
-  var contentType = _response$headers['content-type'];
-  var contentLength = _response$headers['content-length'];
+  var _response$headers = response.headers,
+      contentType = _response$headers['content-type'],
+      contentLength = _response$headers['content-length'];
 
   // Check that the content is not in BAD_CONTENT_TYPES
 
@@ -130,13 +135,17 @@ function validateResponse(response) {
   return true;
 }
 
+// Grabs the last two pieces of the URL and joins them back together
+// This is to get the 'livejournal.com' from 'erotictrains.livejournal.com'
+
+
 // Set our response attribute to the result of fetching our URL.
 // TODO: This should gracefully handle timeouts and raise the
 //       proper exceptions on the many failure cases of HTTP.
 // TODO: Ensure we are not fetching something enormous. Always return
 //       unicode content for HTML, with charset conversion.
 
-var fetchResource = (function () {
+var fetchResource$1 = (function () {
   var _ref2 = _asyncToGenerator(_regeneratorRuntime.mark(function _callee(url, parsedUrl) {
     var options, _ref3, response, body;
 
@@ -298,7 +307,7 @@ var Resource = {
 
             case 6:
               _context.next = 8;
-              return fetchResource(url, parsedUrl);
+              return fetchResource$1(url, parsedUrl);
 
             case 8:
               result = _context.sent;
@@ -323,8 +332,8 @@ var Resource = {
     }))();
   },
   generateDoc: function generateDoc(_ref) {
-    var content = _ref.body;
-    var response = _ref.response;
+    var content = _ref.body,
+        response = _ref.response;
     var contentType = response.headers['content-type'];
 
     // TODO: Implement is_text function from
@@ -358,6 +367,36 @@ var merge = function merge(extractor, domains) {
 function mergeSupportedDomains(extractor) {
   return extractor.supportedDomains ? merge(extractor, [extractor.domain].concat(_toConsumableArray(extractor.supportedDomains))) : merge(extractor, [extractor.domain]);
 }
+
+var BloggerExtractor = {
+  domain: 'blogspot.com',
+  content: {
+    // Blogger is insane and does not load its content
+    // initially in the page, but it's all there
+    // in noscript
+    selectors: ['.post-content noscript'],
+
+    // Selectors to remove from the extracted content
+    clean: [],
+
+    // Convert the noscript tag to a div
+    transforms: {
+      noscript: 'div'
+    }
+  },
+
+  author: {
+    selectors: ['.post-author-name']
+  },
+
+  title: {
+    selectors: ['.post h2.title']
+  },
+
+  date_published: {
+    selectors: ['span.publishdate']
+  }
+};
 
 var NYMagExtractor = {
   domain: 'nymag.com',
@@ -404,36 +443,6 @@ var NYMagExtractor = {
 
   date_published: {
     selectors: [['time.article-timestamp[datetime]', 'datetime'], 'time.article-timestamp']
-  }
-};
-
-var BloggerExtractor = {
-  domain: 'blogspot.com',
-  content: {
-    // Blogger is insane and does not load its content
-    // initially in the page, but it's all there
-    // in noscript
-    selectors: ['.post-content noscript'],
-
-    // Selectors to remove from the extracted content
-    clean: [],
-
-    // Convert the noscript tag to a div
-    transforms: {
-      noscript: 'div'
-    }
-  },
-
-  author: {
-    selectors: ['.post-author-name']
-  },
-
-  title: {
-    selectors: ['.post h2.title']
-  },
-
-  date_published: {
-    selectors: ['span.publishdate']
   }
 };
 
@@ -513,6 +522,8 @@ var TwitterExtractor = {
 };
 
 var NYTimesExtractor = {
+  domain: 'www.nytimes.com',
+
   title: {
     selectors: ['.g-headline', 'h1.headline']
   },
@@ -1138,12 +1149,11 @@ var MediumExtractor = {
         var thumb = decodeURIComponent($node.attr('data-thumbnail'));
 
         if (ytRe.test(thumb)) {
-          var _thumb$match = thumb.match(ytRe);
+          var _thumb$match = thumb.match(ytRe),
+              _thumb$match2 = _slicedToArray(_thumb$match, 2),
+              _ = _thumb$match2[0],
+              youtubeId = _thumb$match2[1]; // eslint-disable-line
 
-          var _thumb$match2 = _slicedToArray(_thumb$match, 2);
-
-          var _ = _thumb$match2[0];
-          var youtubeId = _thumb$match2[1]; // eslint-disable-line
 
           $node.attr('src', 'https://www.youtube.com/embed/' + youtubeId);
           var $parent = $node.parents('figure');
@@ -1186,25 +1196,33 @@ var MediumExtractor = {
   }
 };
 
-var Extractors = _extends({
-  'nymag.com': NYMagExtractor,
-  'blogspot.com': BloggerExtractor,
-  'wikipedia.org': WikipediaExtractor,
-  'twitter.com': TwitterExtractor,
-  'www.nytimes.com': NYTimesExtractor,
-  'www.theatlantic.com': TheAtlanticExtractor,
-  'www.newyorker.com': NewYorkerExtractor,
-  'www.wired.com': WiredExtractor,
-  'www.msn.com': MSNExtractor,
-  'www.yahoo.com': YahooExtractor,
-  'www.buzzfeed.com': BuzzfeedExtractor,
-  'fandom.wikia.com': WikiaExtractor,
-  'www.littlethings.com': LittleThingsExtractor,
-  'www.politico.com': PoliticoExtractor
-}, mergeSupportedDomains(DeadspinExtractor), {
-  'www.broadwayworld.com': BroadwayWorldExtractor,
-  'www.apartmenttherapy.com': ApartmentTherapyExtractor
-}, mergeSupportedDomains(MediumExtractor));
+
+
+var CustomExtractors = Object.freeze({
+	BloggerExtractor: BloggerExtractor,
+	NYMagExtractor: NYMagExtractor,
+	WikipediaExtractor: WikipediaExtractor,
+	TwitterExtractor: TwitterExtractor,
+	NYTimesExtractor: NYTimesExtractor,
+	TheAtlanticExtractor: TheAtlanticExtractor,
+	NewYorkerExtractor: NewYorkerExtractor,
+	WiredExtractor: WiredExtractor,
+	MSNExtractor: MSNExtractor,
+	YahooExtractor: YahooExtractor,
+	BuzzfeedExtractor: BuzzfeedExtractor,
+	WikiaExtractor: WikiaExtractor,
+	LittleThingsExtractor: LittleThingsExtractor,
+	PoliticoExtractor: PoliticoExtractor,
+	DeadspinExtractor: DeadspinExtractor,
+	BroadwayWorldExtractor: BroadwayWorldExtractor,
+	ApartmentTherapyExtractor: ApartmentTherapyExtractor,
+	MediumExtractor: MediumExtractor
+});
+
+var Extractors = _Object$keys(CustomExtractors).reduce(function (acc, key) {
+  var extractor = CustomExtractors[key];
+  return _extends({}, acc, mergeSupportedDomains(extractor));
+}, {});
 
 // Spacer images to be removed
 var SPACER_RE = new RegExp('trans|transparent|spacer|blank', 'i');
@@ -1274,12 +1292,17 @@ var DIV_TO_P_BLOCK_TAGS = ['a', 'blockquote', 'dl', 'div', 'img', 'p', 'pre', 't
 
 // A list of tags that should be ignored when trying to find the top candidate
 // for a document.
-var NON_TOP_CANDIDATE_TAGS = ['br', 'b', 'i', 'label', 'hr', 'area', 'base', 'basefont', 'input', 'img', 'link', 'meta'];
 
-var NON_TOP_CANDIDATE_TAGS_RE = new RegExp('^(' + NON_TOP_CANDIDATE_TAGS.join('|') + ')$', 'i');
 
-var PHOTO_HINTS = ['figure', 'photo', 'image', 'caption'];
-var PHOTO_HINTS_RE = new RegExp(PHOTO_HINTS.join('|'), 'i');
+
+
+// A list of selectors that specify, very clearly, either hNews or other
+// very content-specific style content, like Blogger templates.
+// More examples here: http://microformats.org/wiki/blog-post-formats
+
+
+
+
 
 // A list of strings that denote a positive scoring for this content as being
 // an article container. Checked against className and id.
@@ -1290,6 +1313,9 @@ var POSITIVE_SCORE_HINTS = ['article', 'articlecontent', 'instapaper_body', 'blo
 
 // The above list, joined into a matching regular expression
 var POSITIVE_SCORE_RE = new RegExp(POSITIVE_SCORE_HINTS.join('|'), 'i');
+
+// Readability publisher-specific guidelines
+
 
 // A list of strings that denote a negative scoring for this content as being
 // an article container. Checked against className and id.
@@ -1307,13 +1333,36 @@ var NEGATIVE_SCORE_RE = new RegExp(NEGATIVE_SCORE_HINTS.join('|'), 'i');
 // XPath to try to determine if a page is wordpress. Not always successful.
 var IS_WP_SELECTOR = 'meta[name=generator][value^=WordPress]';
 
+// Match a digit. Pretty clear.
+
+
 // A list of words that, if found in link text or URLs, likely mean that
 // this link is not a next page link.
-var EXTRANEOUS_LINK_HINTS = ['print', 'archive', 'comment', 'discuss', 'e-mail', 'email', 'share', 'reply', 'all', 'login', 'sign', 'single', 'adx', 'entry-unrelated'];
-var EXTRANEOUS_LINK_HINTS_RE = new RegExp(EXTRANEOUS_LINK_HINTS.join('|'), 'i');
+
+
 
 // Match any phrase that looks like it could be page, or paging, or pagination
 var PAGE_RE = new RegExp('pag(e|ing|inat)', 'i');
+
+// Match any link text/classname/id that looks like it could mean the next
+// page. Things like: next, continue, >, >>, » but not >|, »| as those can
+// mean last page.
+// export const NEXT_LINK_TEXT_RE = new RegExp('(next|weiter|continue|>([^\|]|$)|»([^\|]|$))', 'i');
+
+
+// Match any link text/classname/id that looks like it is an end link: things
+// like "first", "last", "end", etc.
+
+
+// Match any link text/classname/id that looks like it means the previous
+// page.
+
+
+// Match 2 or more consecutive <br> tags
+
+
+// Match 1 BR tag.
+
 
 // A list of all of the block level tags known in HTML5 and below. Taken from
 // http://bit.ly/qneNIT
@@ -1361,13 +1410,12 @@ function stripUnlikelyCandidates($) {
 // Another good candidate for refactoring/optimizing.
 // Very imperative code, I don't love it. - AP
 
-
 //  Given cheerio object, convert consecutive <br /> tags into
 //  <p /> tags instead.
 //
 //  :param $: A cheerio object
 
-function brsToPs($) {
+function brsToPs$$1($) {
   var collapsing = false;
   $('br').each(function (index, element) {
     var nextElement = $(element).next().get(0);
@@ -1458,8 +1506,8 @@ function convertSpans($) {
 //   :return cheerio object with new p elements
 //   (By-reference mutation, though. Returned just for convenience.)
 
-function convertToParagraphs($) {
-  $ = brsToPs($);
+function convertToParagraphs$$1($) {
+  $ = brsToPs$$1($);
   $ = convertDivs($);
   $ = convertSpans($);
 
@@ -1474,9 +1522,8 @@ function convertNodeTo($node, $) {
     return $;
   }
 
-  var _$node$get = $node.get(0);
-
-  var attribs = _$node$get.attribs;
+  var _$node$get = $node.get(0),
+      attribs = _$node$get.attribs;
 
   var attribString = _Reflect$ownKeys(attribs).map(function (key) {
     return key + '=' + attribs[key];
@@ -1534,10 +1581,9 @@ function markToKeep(article, $, url) {
   }
 
   if (url) {
-    var _URL$parse = URL.parse(url);
-
-    var protocol = _URL$parse.protocol;
-    var hostname = _URL$parse.hostname;
+    var _URL$parse = URL.parse(url),
+        protocol = _URL$parse.protocol,
+        hostname = _URL$parse.hostname;
 
     tags = [].concat(_toConsumableArray(tags), ['iframe[src^="' + protocol + '//' + hostname + '"]']);
   }
@@ -1568,7 +1614,7 @@ function stripJunkTags(article, $) {
 // by the title extractor instead. If there's less than 3 of them (<3),
 // strip them. Otherwise, turn 'em into H2s.
 
-function cleanHOnes(article, $) {
+function cleanHOnes$$1(article, $) {
   var $hOnes = $('h1', article);
 
   if ($hOnes.length < 3) {
@@ -1691,17 +1737,32 @@ var NEGATIVE_SCORE_HINTS$1 = ['adbox', 'advert', 'author', 'bio', 'bookmark', 'b
 // The above list, joined into a matching regular expression
 var NEGATIVE_SCORE_RE$1 = new RegExp(NEGATIVE_SCORE_HINTS$1.join('|'), 'i');
 
+// Match a digit. Pretty clear.
+
+
+// Match 2 or more consecutive <br> tags
+
+
+// Match 1 BR tag.
+
+
 // A list of all of the block level tags known in HTML5 and below. Taken from
 // http://bit.ly/qneNIT
-var BLOCK_LEVEL_TAGS$1 = ['article', 'aside', 'blockquote', 'body', 'br', 'button', 'canvas', 'caption', 'col', 'colgroup', 'dd', 'div', 'dl', 'dt', 'embed', 'fieldset', 'figcaption', 'figure', 'footer', 'form', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'header', 'hgroup', 'hr', 'li', 'map', 'object', 'ol', 'output', 'p', 'pre', 'progress', 'section', 'table', 'tbody', 'textarea', 'tfoot', 'th', 'thead', 'tr', 'ul', 'video'];
-var BLOCK_LEVEL_TAGS_RE$1 = new RegExp('^(' + BLOCK_LEVEL_TAGS$1.join('|') + ')$', 'i');
+
+
 
 // The removal is implemented as a blacklist and whitelist, this test finds
 // blacklisted elements that aren't whitelisted. We do this all in one
 // expression-both because it's only one pass, and because this skips the
 // serialization for whitelisted nodes.
 var candidatesBlacklist$1 = UNLIKELY_CANDIDATES_BLACKLIST$1.join('|');
+
+
 var candidatesWhitelist$1 = UNLIKELY_CANDIDATES_WHITELIST$1.join('|');
+
+
+
+
 var PARAGRAPH_SCORE_TAGS$1 = new RegExp('^(p|li|span|pre)$', 'i');
 var CHILD_CONTENT_TAGS$1 = new RegExp('^(td|blockquote|ol|ul|dl)$', 'i');
 var BAD_TAGS$1 = new RegExp('^(address|form)$', 'i');
@@ -1794,7 +1855,7 @@ function scoreLength(textLength) {
 
 // Score a paragraph using various methods. Things like number of
 // commas, etc. Higher is better.
-function scoreParagraph(node) {
+function scoreParagraph$$1(node) {
   var score = 1;
   var text = node.text().trim();
   var textLength = text.length;
@@ -1827,9 +1888,9 @@ function setScore($node, $, score) {
   return $node;
 }
 
-function addScore($node, $, amount) {
+function addScore$$1($node, $, amount) {
   try {
-    var score = getOrInitScore($node, $) + amount;
+    var score = getOrInitScore$$1($node, $) + amount;
     setScore($node, $, score);
   } catch (e) {
     // Ignoring; error occurs in scoreNode
@@ -1839,10 +1900,10 @@ function addScore($node, $, amount) {
 }
 
 // Adds 1/4 of a child's score to its parent
-function addToParent(node, $, score) {
+function addToParent$$1(node, $, score) {
   var parent = node.parent();
   if (parent) {
-    addScore(parent, $, score * 0.25);
+    addScore$$1(parent, $, score * 0.25);
   }
 
   return node;
@@ -1851,7 +1912,7 @@ function addToParent(node, $, score) {
 // gets and returns the score if it exists
 // if not, initializes a score based on
 // the node's tag type
-function getOrInitScore($node, $) {
+function getOrInitScore$$1($node, $) {
   var weightNodes = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
 
   var score = getScore($node);
@@ -1860,30 +1921,30 @@ function getOrInitScore($node, $) {
     return score;
   }
 
-  score = scoreNode($node);
+  score = scoreNode$$1($node);
 
   if (weightNodes) {
     score += getWeight($node);
   }
 
-  addToParent($node, $, score);
+  addToParent$$1($node, $, score);
 
   return score;
 }
 
 // Score an individual node. Has some smarts for paragraphs, otherwise
 // just scores based on tag.
-function scoreNode($node) {
-  var _$node$get = $node.get(0);
-
-  var tagName = _$node$get.tagName;
+function scoreNode$$1($node) {
+  var _$node$get = $node.get(0),
+      tagName = _$node$get.tagName;
 
   // TODO: Consider ordering by most likely.
   // E.g., if divs are a more common tag on a page,
   // Could save doing that regex test on every node – AP
 
+
   if (PARAGRAPH_SCORE_TAGS$1.test(tagName)) {
-    return scoreParagraph($node);
+    return scoreParagraph$$1($node);
   } else if (tagName === 'div') {
     return 5;
   } else if (CHILD_CONTENT_TAGS$1.test(tagName)) {
@@ -1899,10 +1960,8 @@ function scoreNode($node) {
 
 function convertSpans$1($node, $) {
   if ($node.get(0)) {
-    var _$node$get = $node.get(0);
-
-    var tagName = _$node$get.tagName;
-
+    var _$node$get = $node.get(0),
+        tagName = _$node$get.tagName;
 
     if (tagName === 'span') {
       // convert spans to divs
@@ -1914,7 +1973,7 @@ function convertSpans$1($node, $) {
 function addScoreTo($node, $, score) {
   if ($node) {
     convertSpans$1($node, $);
-    addScore($node, $, score);
+    addScore$$1($node, $, score);
   }
 }
 
@@ -1923,10 +1982,10 @@ function scorePs($, weightNodes) {
     // The raw score for this paragraph, before we add any parent/child
     // scores.
     var $node = $(node);
-    $node = setScore($node, $, getOrInitScore($node, $, weightNodes));
+    $node = setScore($node, $, getOrInitScore$$1($node, $, weightNodes));
 
     var $parent = $node.parent();
-    var rawScore = scoreNode($node);
+    var rawScore = scoreNode$$1($node);
 
     addScoreTo($parent, $, rawScore, weightNodes);
     if ($parent) {
@@ -1941,19 +2000,18 @@ function scorePs($, weightNodes) {
 
 // score content. Parents get the full value of their children's
 // content score, grandparents half
-function scoreContent($) {
+function scoreContent$$1($) {
   var weightNodes = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
 
   // First, look for special hNews based selectors and give them a big
   // boost, if they exist
   HNEWS_CONTENT_SELECTORS$1.forEach(function (_ref) {
-    var _ref2 = _slicedToArray(_ref, 2);
-
-    var parentSelector = _ref2[0];
-    var childSelector = _ref2[1];
+    var _ref2 = _slicedToArray(_ref, 2),
+        parentSelector = _ref2[0],
+        childSelector = _ref2[1];
 
     $(parentSelector + ' ' + childSelector).each(function (index, node) {
-      addScore($(node).parent(parentSelector), $, 80);
+      addScore$$1($(node).parent(parentSelector), $, 80);
     });
   });
 
@@ -2057,9 +2115,9 @@ function isGoodSegment(segment, index, firstSegmentHasLetters) {
 // that might have pagination data within them.
 function articleBaseUrl(url, parsed) {
   var parsedUrl = parsed || URL.parse(url);
-  var protocol = parsedUrl.protocol;
-  var host = parsedUrl.host;
-  var path = parsedUrl.path;
+  var protocol = parsedUrl.protocol,
+      host = parsedUrl.host,
+      path = parsedUrl.path;
 
 
   var firstSegmentHasLetters = false;
@@ -2068,12 +2126,10 @@ function articleBaseUrl(url, parsed) {
 
     // Split off and save anything that looks like a file type.
     if (segment.includes('.')) {
-      var _segment$split = segment.split('.');
-
-      var _segment$split2 = _slicedToArray(_segment$split, 2);
-
-      var possibleSegment = _segment$split2[0];
-      var fileExt = _segment$split2[1];
+      var _segment$split = segment.split('.'),
+          _segment$split2 = _slicedToArray(_segment$split, 2),
+          possibleSegment = _segment$split2[0],
+          fileExt = _segment$split2[1];
 
       if (IS_ALPHA_RE.test(fileExt)) {
         segment = possibleSegment;
@@ -2189,7 +2245,7 @@ function mergeSiblings($candidate, topScore, $) {
 
 // After we've calculated scores, loop through all of the possible
 // candidate nodes we found and find the one with the highest score.
-function findTopCandidate($) {
+function findTopCandidate$$1($) {
   var $candidate = void 0;
   var topScore = 0;
 
@@ -2218,6 +2274,8 @@ function findTopCandidate($) {
 
   return $candidate;
 }
+
+// Scoring
 
 function removeUnlessContent($node, $, weight) {
   // Explicitly save entry-content-asset tags, which are
@@ -2296,12 +2354,12 @@ function removeUnlessContent($node, $, weight) {
 // etc)
 //
 // Return this same doc.
-function cleanTags($article, $) {
+function cleanTags$$1($article, $) {
   $(CLEAN_CONDITIONALLY_TAGS, $article).each(function (index, node) {
     var $node = $(node);
     var weight = getScore($node);
     if (!weight) {
-      weight = getOrInitScore($node, $);
+      weight = getOrInitScore$$1($node, $);
       setScore($node, $, weight);
     }
 
@@ -2350,7 +2408,7 @@ function cleanHeaders($article, $) {
 // Rewrite the tag name to div if it's a top level node like body or
 // html to avoid later complications with multiple body tags.
 
-function rewriteTopLevel(article, $) {
+function rewriteTopLevel$$1(article, $) {
   // I'm not using context here because
   // it's problematic when converting the
   // top-level/root node - AP
@@ -2402,8 +2460,8 @@ function linkDensity($node) {
 // Given a node type to search for, and a list of meta tag names to
 // search for, find a meta tag associated.
 
-function extractFromMeta($, metaNames, cachedNames) {
-  var cleanTags = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
+function extractFromMeta$$1($, metaNames, cachedNames) {
+  var cleanTags$$1 = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
 
   var foundNames = metaNames.filter(function (name) {
     return cachedNames.indexOf(name) !== -1;
@@ -2439,7 +2497,7 @@ function extractFromMeta($, metaNames, cachedNames) {
         var metaValue = void 0;
         // Meta values that contain HTML should be stripped, as they
         // weren't subject to cleaning previously.
-        if (cleanTags) {
+        if (cleanTags$$1) {
           metaValue = stripTags(values[0], $);
         } else {
           metaValue = values[0];
@@ -2493,7 +2551,7 @@ function isGoodNode($node, maxChildren) {
 // Given a a list of selectors find content that may
 // be extractable from the document. This is for flat
 // meta-information, like author, title, date published, etc.
-function extractFromSelectors($, selectors) {
+function extractFromSelectors$$1($, selectors) {
   var maxChildren = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 1;
   var textOnly = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
   var _iteratorNormalCompletion = true;
@@ -2573,12 +2631,32 @@ function isWordpress($) {
   return $(IS_WP_SELECTOR).length > 0;
 }
 
+// DOM manipulation
+
 // CLEAN AUTHOR CONSTANTS
 var CLEAN_AUTHOR_RE = /^\s*(posted |written )?by\s*:?\s*(.*)/i;
 //     author = re.sub(r'^\s*(posted |written )?by\s*:?\s*(.*)(?i)',
 
 // CLEAN DEK CONSTANTS
 var TEXT_LINK_RE = new RegExp('http(s)?://', 'i');
+// An ordered list of meta tag names that denote likely article deks.
+// From most distinct to least distinct.
+//
+// NOTE: There are currently no meta tags that seem to provide the right
+// content consistenty enough. Two options were:
+//  - og:description
+//  - dc.description
+// However, these tags often have SEO-specific junk in them that's not
+// header-worthy like a dek is. Excerpt material at best.
+
+
+// An ordered list of Selectors to find likely article deks. From
+// most explicit to least explicit.
+//
+// Should be more restrictive than not, as a failed dek can be pretty
+// detrimental to the aesthetics of an article.
+
+
 // CLEAN DATE PUBLISHED CONSTANTS
 var MS_DATE_STRING = /^\d{13}$/i;
 var SEC_DATE_STRING = /^\d{10}$/i;
@@ -2616,8 +2694,8 @@ function clean$1(leadImageUrl) {
 // Take a dek HTML fragment, and return the cleaned version of it.
 // Return None if the dek wasn't good enough.
 function cleanDek(dek, _ref) {
-  var $ = _ref.$;
-  var excerpt = _ref.excerpt;
+  var $ = _ref.$,
+      excerpt = _ref.excerpt;
 
   // Sanity check that we didn't get too short or long of a dek.
   if (dek.length > 1000 || dek.length < 5) return null;
@@ -2663,19 +2741,19 @@ function cleanDatePublished(dateString) {
 // Clean our article content, returning a new, cleaned node.
 
 function extractCleanNode(article, _ref) {
-  var $ = _ref.$;
-  var _ref$cleanConditional = _ref.cleanConditionally;
-  var cleanConditionally = _ref$cleanConditional === undefined ? true : _ref$cleanConditional;
-  var _ref$title = _ref.title;
-  var title = _ref$title === undefined ? '' : _ref$title;
-  var _ref$url = _ref.url;
-  var url = _ref$url === undefined ? '' : _ref$url;
-  var _ref$defaultCleaner = _ref.defaultCleaner;
-  var defaultCleaner = _ref$defaultCleaner === undefined ? true : _ref$defaultCleaner;
+  var $ = _ref.$,
+      _ref$cleanConditional = _ref.cleanConditionally,
+      cleanConditionally = _ref$cleanConditional === undefined ? true : _ref$cleanConditional,
+      _ref$title = _ref.title,
+      title = _ref$title === undefined ? '' : _ref$title,
+      _ref$url = _ref.url,
+      url = _ref$url === undefined ? '' : _ref$url,
+      _ref$defaultCleaner = _ref.defaultCleaner,
+      defaultCleaner = _ref$defaultCleaner === undefined ? true : _ref$defaultCleaner;
 
   // Rewrite the tag name to div if it's a top level node like body or
   // html to avoid later complications with multiple body tags.
-  rewriteTopLevel(article, $);
+  rewriteTopLevel$$1(article, $);
 
   // Drop small images and spacer images
   // Only do this is defaultCleaner is set to true;
@@ -2694,7 +2772,7 @@ function extractCleanNode(article, _ref) {
   // H1 tags are typically the article title, which should be extracted
   // by the title extractor instead. If there's less than 3 of them (<3),
   // strip them. Otherwise, turn 'em into H2s.
-  cleanHOnes(article, $);
+  cleanHOnes$$1(article, $);
 
   // Clean headers
   cleanHeaders(article, $, title);
@@ -2706,7 +2784,7 @@ function extractCleanNode(article, _ref) {
   // too many in-article lists being removed. Consider a better
   // way to detect menus particularly and remove them.
   // Also optionally running, since it can be overly aggressive.
-  if (defaultCleaner) cleanTags(article, $, cleanConditionally);
+  if (defaultCleaner) cleanTags$$1(article, $, cleanConditionally);
 
   // Remove empty paragraph nodes
   removeEmpty(article, $);
@@ -2717,9 +2795,9 @@ function extractCleanNode(article, _ref) {
   return article;
 }
 
-function cleanTitle(title, _ref) {
-  var url = _ref.url;
-  var $ = _ref.$;
+function cleanTitle$$1(title, _ref) {
+  var url = _ref.url,
+      $ = _ref.$;
 
   // If title has |, :, or - in it, see if
   // we can clean it up.
@@ -2761,17 +2839,16 @@ function extractBreadcrumbTitle(splitTitle, text) {
         }
 
         return acc;
-      }, [0, 0]);
-
-      var _Reflect$ownKeys$redu2 = _slicedToArray(_Reflect$ownKeys$redu, 2);
-
-      var maxTerm = _Reflect$ownKeys$redu2[0];
-      var termCount = _Reflect$ownKeys$redu2[1];
+      }, [0, 0]),
+          _Reflect$ownKeys$redu2 = _slicedToArray(_Reflect$ownKeys$redu, 2),
+          maxTerm = _Reflect$ownKeys$redu2[0],
+          termCount = _Reflect$ownKeys$redu2[1];
 
       // We found a splitter that was used more than once, so it
       // is probably the breadcrumber. Split our title on that instead.
       // Note: max_term should be <= 4 characters, so that " >> "
       // will match, but nothing longer than that.
+
 
       if (termCount >= 2 && maxTerm.length <= 4) {
         splitTitle = text.split(maxTerm);
@@ -2806,9 +2883,8 @@ function cleanDomainFromTitle(splitTitle, url) {
   //
   // Strip out the big TLDs - it just makes the matching a bit more
   // accurate. Not the end of the world if it doesn't strip right.
-  var _URL$parse = URL.parse(url);
-
-  var host = _URL$parse.host;
+  var _URL$parse = URL.parse(url),
+      host = _URL$parse.host;
 
   var nakedDomain = host.replace(DOMAIN_ENDINGS_RE, '');
 
@@ -2858,7 +2934,7 @@ var Cleaners = {
   dek: cleanDek,
   date_published: cleanDatePublished,
   content: extractCleanNode,
-  title: cleanTitle
+  title: cleanTitle$$1
 };
 
 // Using a variety of scoring techniques, extract the content most
@@ -2878,14 +2954,13 @@ function extractBestNode($, opts) {
   // TODO Do I need this? – AP
   // let $root = $.root().clone()
 
-
   if (opts.stripUnlikelyCandidates) {
     $ = stripUnlikelyCandidates($);
   }
 
-  $ = convertToParagraphs($);
-  $ = scoreContent($, opts.weightNodes);
-  var $topCandidate = findTopCandidate($);
+  $ = convertToParagraphs$$1($);
+  $ = scoreContent$$1($, opts.weightNodes);
+  var $topCandidate = findTopCandidate$$1($);
 
   return $topCandidate;
 }
@@ -2917,10 +2992,10 @@ var GenericContentExtractor = {
   // cleanConditionally: Clean the node to return of some
   // superfluous content. Things like forms, ads, etc.
   extract: function extract(_ref, opts) {
-    var $ = _ref.$;
-    var html = _ref.html;
-    var title = _ref.title;
-    var url = _ref.url;
+    var $ = _ref.$,
+        html = _ref.html,
+        title = _ref.title,
+        url = _ref.url;
 
     opts = _extends({}, this.defaultOpts, opts);
 
@@ -3028,29 +3103,29 @@ var WEAK_TITLE_SELECTORS = ['article h1', '#entry-title', '.entry-title', '#entr
 
 var GenericTitleExtractor = {
   extract: function extract(_ref) {
-    var $ = _ref.$;
-    var url = _ref.url;
-    var metaCache = _ref.metaCache;
+    var $ = _ref.$,
+        url = _ref.url,
+        metaCache = _ref.metaCache;
 
     // First, check to see if we have a matching meta tag that we can make
     // use of that is strongly associated with the headline.
     var title = void 0;
 
-    title = extractFromMeta($, STRONG_TITLE_META_TAGS, metaCache);
-    if (title) return cleanTitle(title, { url: url, $: $ });
+    title = extractFromMeta$$1($, STRONG_TITLE_META_TAGS, metaCache);
+    if (title) return cleanTitle$$1(title, { url: url, $: $ });
 
     // Second, look through our content selectors for the most likely
     // article title that is strongly associated with the headline.
-    title = extractFromSelectors($, STRONG_TITLE_SELECTORS);
-    if (title) return cleanTitle(title, { url: url, $: $ });
+    title = extractFromSelectors$$1($, STRONG_TITLE_SELECTORS);
+    if (title) return cleanTitle$$1(title, { url: url, $: $ });
 
     // Third, check for weaker meta tags that may match.
-    title = extractFromMeta($, WEAK_TITLE_META_TAGS, metaCache);
-    if (title) return cleanTitle(title, { url: url, $: $ });
+    title = extractFromMeta$$1($, WEAK_TITLE_META_TAGS, metaCache);
+    if (title) return cleanTitle$$1(title, { url: url, $: $ });
 
     // Last, look for weaker selector tags that may match.
-    title = extractFromSelectors($, WEAK_TITLE_SELECTORS);
-    if (title) return cleanTitle(title, { url: url, $: $ });
+    title = extractFromSelectors$$1($, WEAK_TITLE_SELECTORS);
+    if (title) return cleanTitle$$1(title, { url: url, $: $ });
 
     // If no matches, return an empty string
     return '';
@@ -3083,20 +3158,20 @@ var BYLINE_SELECTORS_RE = [['#byline', bylineRe], ['.byline', bylineRe]];
 
 var GenericAuthorExtractor = {
   extract: function extract(_ref) {
-    var $ = _ref.$;
-    var metaCache = _ref.metaCache;
+    var $ = _ref.$,
+        metaCache = _ref.metaCache;
 
     var author = void 0;
 
     // First, check to see if we have a matching
     // meta tag that we can make use of.
-    author = extractFromMeta($, AUTHOR_META_TAGS, metaCache);
+    author = extractFromMeta$$1($, AUTHOR_META_TAGS, metaCache);
     if (author && author.length < AUTHOR_MAX_LENGTH) {
       return cleanAuthor(author);
     }
 
     // Second, look through our selectors looking for potential authors.
-    author = extractFromSelectors($, AUTHOR_SELECTORS, 2);
+    author = extractFromSelectors$$1($, AUTHOR_SELECTORS, 2);
     if (author && author.length < AUTHOR_MAX_LENGTH) {
       return cleanAuthor(author);
     }
@@ -3170,20 +3245,20 @@ new RegExp('/(20\\d{2}/' + abbrevMonthsStr + '/[0-3]\\d)/', 'i')];
 
 var GenericDatePublishedExtractor = {
   extract: function extract(_ref) {
-    var $ = _ref.$;
-    var url = _ref.url;
-    var metaCache = _ref.metaCache;
+    var $ = _ref.$,
+        url = _ref.url,
+        metaCache = _ref.metaCache;
 
     var datePublished = void 0;
     // First, check to see if we have a matching meta tag
     // that we can make use of.
     // Don't try cleaning tags from this string
-    datePublished = extractFromMeta($, DATE_PUBLISHED_META_TAGS, metaCache, false);
+    datePublished = extractFromMeta$$1($, DATE_PUBLISHED_META_TAGS, metaCache, false);
     if (datePublished) return cleanDatePublished(datePublished);
 
     // Second, look through our selectors looking for potential
     // date_published's.
-    datePublished = extractFromSelectors($, DATE_PUBLISHED_SELECTORS);
+    datePublished = extractFromSelectors$$1($, DATE_PUBLISHED_SELECTORS);
     if (datePublished) return cleanDatePublished(datePublished);
 
     // Lastly, look to see if a dately string exists in the URL
@@ -3217,6 +3292,34 @@ var GenericDekExtractor = {
     return null;
   }
 };
+
+
+
+// def extract_dek(self):
+//     # First, check to see if we have a matching meta tag that we can make
+//     # use of.
+//     dek = self.extract_from_meta('dek', constants.DEK_META_TAGS)
+//     if not dek:
+//         # Second, look through our CSS/XPath selectors. This may return
+//         # an HTML fragment.
+//         dek = self.extract_from_selectors('dek',
+//                                            constants.DEK_SELECTORS,
+//                                            text_only=False)
+//
+//     if dek:
+//         # Make sure our dek isn't in the first few thousand characters
+//         # of the content, otherwise it's just the start of the article
+//         # and not a true dek.
+//         content = self.extract_content()
+//         content_chunk = normalize_spaces(strip_tags(content[:2000]))
+//         dek_chunk = normalize_spaces(dek[:100]) # Already has no tags.
+//
+//         # 80% or greater similarity means the dek was very similar to some
+//         # of the starting content, so we skip it.
+//         if fuzz.partial_ratio(content_chunk, dek_chunk) < 80:
+//             return dek
+//
+//     return None
 
 // An ordered list of meta tag names that denote likely article leading images.
 // All attributes should be lowercase for faster case-insensitive matching.
@@ -3362,9 +3465,9 @@ function scoreByPosition($imgs, index) {
 //   * weird aspect ratio
 var GenericLeadImageUrlExtractor = {
   extract: function extract(_ref) {
-    var $ = _ref.$;
-    var content = _ref.content;
-    var metaCache = _ref.metaCache;
+    var $ = _ref.$,
+        content = _ref.content,
+        metaCache = _ref.metaCache;
 
     var cleanUrl = void 0;
 
@@ -3372,7 +3475,7 @@ var GenericLeadImageUrlExtractor = {
     // Moving this higher because common practice is now to use large
     // images on things like Open Graph or Twitter cards.
     // images usually have for things like Open Graph.
-    var imageUrl = extractFromMeta($, LEAD_IMAGE_URL_META_TAGS, metaCache, false);
+    var imageUrl = extractFromMeta$$1($, LEAD_IMAGE_URL_META_TAGS, metaCache, false);
 
     if (imageUrl) {
       cleanUrl = clean$1(imageUrl);
@@ -3404,13 +3507,10 @@ var GenericLeadImageUrlExtractor = {
 
     var _Reflect$ownKeys$redu = _Reflect$ownKeys(imgScores).reduce(function (acc, key) {
       return imgScores[key] > acc[1] ? [key, imgScores[key]] : acc;
-    }, [null, 0]);
-
-    var _Reflect$ownKeys$redu2 = _slicedToArray(_Reflect$ownKeys$redu, 2);
-
-    var topUrl = _Reflect$ownKeys$redu2[0];
-    var topScore = _Reflect$ownKeys$redu2[1];
-
+    }, [null, 0]),
+        _Reflect$ownKeys$redu2 = _slicedToArray(_Reflect$ownKeys$redu, 2),
+        topUrl = _Reflect$ownKeys$redu2[0],
+        topScore = _Reflect$ownKeys$redu2[1];
 
     if (topScore > 0) {
       cleanUrl = clean$1(topUrl);
@@ -3465,6 +3565,163 @@ var GenericLeadImageUrlExtractor = {
     return null;
   }
 };
+
+
+
+// def extract(self):
+//     """
+//     # First, try to find the "best" image via the content.
+//     # We'd rather not have to fetch each image and check dimensions,
+//     # so try to do some analysis and determine them instead.
+//     content = self.extractor.extract_content(return_type="node")
+//     imgs = content.xpath('.//img')
+//     img_scores = defaultdict(int)
+//     logger.debug('Scoring %d images from content', len(imgs))
+//     for (i, img) in enumerate(imgs):
+//         img_score = 0
+//
+//         if not 'src' in img.attrib:
+//             logger.debug('No src attribute found')
+//             continue
+//
+//         try:
+//             parsed_img = urlparse(img.attrib['src'])
+//             img_path = parsed_img.path.lower()
+//         except ValueError:
+//             logger.debug('ValueError getting img path.')
+//             continue
+//         logger.debug('Image path is %s', img_path)
+//
+//         if constants.POSITIVE_LEAD_IMAGE_URL_HINTS_RE.match(img_path):
+//             logger.debug('Positive URL hints match. Adding 20.')
+//             img_score += 20
+//
+//         if constants.NEGATIVE_LEAD_IMAGE_URL_HINTS_RE.match(img_path):
+//             logger.debug('Negative URL hints match. Subtracting 20.')
+//             img_score -= 20
+//
+//         # Gifs are more often structure than photos
+//         if img_path.endswith('gif'):
+//             logger.debug('gif found. Subtracting 10.')
+//             img_score -= 10
+//
+//         # JPGs are more often photographs
+//         if img_path.endswith('jpg'):
+//             logger.debug('jpg found. Adding 10.')
+//             img_score += 10
+//
+//         # PNGs are neutral.
+//
+//         # Alt attribute usually means non-presentational image.
+//         if 'alt' in img.attrib and len(img.attrib['alt']) > 5:
+//             logger.debug('alt attribute found. Adding 5.')
+//             img_score += 5
+//
+//         # Look through our parent and grandparent for figure-like
+//         # container elements, give a bonus if we find them
+//         parents = [img.getparent()]
+//         if parents[0] is not None and parents[0].getparent() is not None:
+//             parents.append(parents[0].getparent())
+//         for p in parents:
+//             if p.tag == 'figure':
+//                 logger.debug('Parent with <figure> tag found. Adding 25.')
+//                 img_score += 25
+//
+//             p_sig = ' '.join([p.get('id', ''), p.get('class', '')])
+//             if constants.PHOTO_HINTS_RE.search(p_sig):
+//                 logger.debug('Photo hints regex match. Adding 15.')
+//                 img_score += 15
+//
+//         # Look at our immediate sibling and see if it looks like it's a
+//         # caption. Bonus if so.
+//         sibling = img.getnext()
+//         if sibling is not None:
+//             if sibling.tag == 'figcaption':
+//                 img_score += 25
+//
+//             sib_sig = ' '.join([sibling.get('id', ''),
+//                                 sibling.get('class', '')]).lower()
+//             if 'caption' in sib_sig:
+//                 img_score += 15
+//
+//         # Pull out width/height if they were set.
+//         img_width = None
+//         img_height = None
+//         if 'width' in img.attrib:
+//             try:
+//                 img_width = float(img.get('width'))
+//             except ValueError:
+//                 pass
+//         if 'height' in img.attrib:
+//             try:
+//                 img_height = float(img.get('height'))
+//             except ValueError:
+//                 pass
+//
+//         # Penalty for skinny images
+//         if img_width and img_width <= 50:
+//             logger.debug('Skinny image found. Subtracting 50.')
+//             img_score -= 50
+//
+//         # Penalty for short images
+//         if img_height and img_height <= 50:
+//             # Wide, short images are more common than narrow, tall ones
+//             logger.debug('Short image found. Subtracting 25.')
+//             img_score -= 25
+//
+//         if img_width and img_height and not 'sprite' in img_path:
+//             area = img_width * img_height
+//
+//             if area < 5000: # Smaller than 50x100
+//                 logger.debug('Image with small area found. Subtracting 100.')
+//                 img_score -= 100
+//             else:
+//                 img_score += round(area/1000.0)
+//
+//         # If the image is higher on the page than other images,
+//         # it gets a bonus. Penalty if lower.
+//         logger.debug('Adding page placement bonus of %d.', len(imgs)/2 - i)
+//         img_score += len(imgs)/2 - i
+//
+//         # Use the raw src here because we munged img_path for case
+//         # insensitivity
+//         logger.debug('Final score is %d.', img_score)
+//         img_scores[img.attrib['src']] += img_score
+//
+//     top_score = 0
+//     top_url = None
+//     for (url, score) in img_scores.items():
+//         if score > top_score:
+//             top_url = url
+//             top_score = score
+//
+//     if top_score > 0:
+//         logger.debug('Using top score image from content. Score was %d', top_score)
+//         return top_url
+//
+//
+//     # If nothing else worked, check to see if there are any really
+//     # probable nodes in the doc, like <link rel="image_src" />.
+//     logger.debug('Trying to find lead image in probable nodes')
+//     for selector in constants.LEAD_IMAGE_URL_SELECTORS:
+//         nodes = self.resource.extract_by_selector(selector)
+//         for node in nodes:
+//             clean_value = None
+//             if node.attrib.get('src'):
+//                 clean_value = self.clean(node.attrib['src'])
+//
+//             if not clean_value and node.attrib.get('href'):
+//                 clean_value = self.clean(node.attrib['href'])
+//
+//             if not clean_value and node.attrib.get('value'):
+//                 clean_value = self.clean(node.attrib['value'])
+//
+//             if clean_value:
+//                 logger.debug('Found lead image in probable nodes.')
+//                 logger.debug('Node was: %s', node)
+//                 return clean_value
+//
+//     return None
 
 function scoreSimilarity(score, articleUrl, href) {
   // Do this last and only if we have a real candidate, because it's
@@ -3548,6 +3805,8 @@ var CAP_LINK_TEXT_RE$1 = new RegExp('(first|last|end)', 'i');
 // page.
 var PREV_LINK_TEXT_RE$1 = new RegExp('(prev|earl|old|new|<|«)', 'i');
 
+// Match any phrase that looks like it could be page, or paging, or pagination
+
 function scoreExtraneousLinks(href) {
   // If the URL itself contains extraneous values, give a penalty.
   if (EXTRANEOUS_LINK_HINTS_RE$1.test(href)) {
@@ -3626,11 +3885,11 @@ function shouldScore(href, articleUrl, baseUrl, parsedUrl, linkText, previousUrl
 
   var hostname = parsedUrl.hostname;
 
-  var _URL$parse = URL.parse(href);
-
-  var linkHost = _URL$parse.hostname;
+  var _URL$parse = URL.parse(href),
+      linkHost = _URL$parse.hostname;
 
   // Domain mismatch.
+
 
   if (linkHost !== hostname) {
     return false;
@@ -3702,13 +3961,13 @@ function makeSig($link, linkText) {
 }
 
 function scoreLinks(_ref) {
-  var links = _ref.links;
-  var articleUrl = _ref.articleUrl;
-  var baseUrl = _ref.baseUrl;
-  var parsedUrl = _ref.parsedUrl;
-  var $ = _ref.$;
-  var _ref$previousUrls = _ref.previousUrls;
-  var previousUrls = _ref$previousUrls === undefined ? [] : _ref$previousUrls;
+  var links = _ref.links,
+      articleUrl = _ref.articleUrl,
+      baseUrl = _ref.baseUrl,
+      parsedUrl = _ref.parsedUrl,
+      $ = _ref.$,
+      _ref$previousUrls = _ref.previousUrls,
+      previousUrls = _ref$previousUrls === undefined ? [] : _ref$previousUrls;
 
   parsedUrl = parsedUrl || URL.parse(articleUrl);
   var baseRegex = makeBaseRegex(baseUrl);
@@ -3770,11 +4029,11 @@ function scoreLinks(_ref) {
 // for multi-page articles
 var GenericNextPageUrlExtractor = {
   extract: function extract(_ref) {
-    var $ = _ref.$;
-    var url = _ref.url;
-    var parsedUrl = _ref.parsedUrl;
-    var _ref$previousUrls = _ref.previousUrls;
-    var previousUrls = _ref$previousUrls === undefined ? [] : _ref$previousUrls;
+    var $ = _ref.$,
+        url = _ref.url,
+        parsedUrl = _ref.parsedUrl,
+        _ref$previousUrls = _ref.previousUrls,
+        previousUrls = _ref$previousUrls === undefined ? [] : _ref$previousUrls;
 
     parsedUrl = parsedUrl || URL.parse(url);
 
@@ -3830,9 +4089,9 @@ function result(url) {
 
 var GenericUrlExtractor = {
   extract: function extract(_ref) {
-    var $ = _ref.$;
-    var url = _ref.url;
-    var metaCache = _ref.metaCache;
+    var $ = _ref.$,
+        url = _ref.url,
+        metaCache = _ref.metaCache;
 
     var $canonical = $('link[rel=canonical]');
     if ($canonical.length !== 0) {
@@ -3842,7 +4101,7 @@ var GenericUrlExtractor = {
       }
     }
 
-    var metaUrl = extractFromMeta($, CANONICAL_META_SELECTORS, metaCache);
+    var metaUrl = extractFromMeta$$1($, CANONICAL_META_SELECTORS, metaCache);
     if (metaUrl) {
       return result(metaUrl);
     }
@@ -3862,11 +4121,11 @@ function clean$2(content, $) {
 
 var GenericExcerptExtractor = {
   extract: function extract(_ref) {
-    var $ = _ref.$;
-    var content = _ref.content;
-    var metaCache = _ref.metaCache;
+    var $ = _ref.$,
+        content = _ref.content,
+        metaCache = _ref.metaCache;
 
-    var excerpt = extractFromMeta($, EXCERPT_META_SELECTORS, metaCache);
+    var excerpt = extractFromMeta$$1($, EXCERPT_META_SELECTORS, metaCache);
     if (excerpt) {
       return clean$2(stripTags(excerpt, $));
     }
@@ -3926,11 +4185,9 @@ var GenericExtractor = {
     var word_count = this.word_count(_extends({}, options, { content: content }));
     var direction = this.direction({ title: title });
 
-    var _url_and_domain = this.url_and_domain(options);
-
-    var url = _url_and_domain.url;
-    var domain = _url_and_domain.domain;
-
+    var _url_and_domain = this.url_and_domain(options),
+        url = _url_and_domain.url,
+        domain = _url_and_domain.domain;
 
     return {
       title: title,
@@ -3951,8 +4208,8 @@ var GenericExtractor = {
 
 function getExtractor(url, parsedUrl) {
   parsedUrl = parsedUrl || URL.parse(url);
-  var _parsedUrl = parsedUrl;
-  var hostname = _parsedUrl.hostname;
+  var _parsedUrl = parsedUrl,
+      hostname = _parsedUrl.hostname;
 
   var baseDomain = hostname.split('.').slice(-2).join('.');
 
@@ -4003,10 +4260,9 @@ function transformElements($content, $, _ref2) {
 function findMatchingSelector($, selectors) {
   return selectors.find(function (selector) {
     if (Array.isArray(selector)) {
-      var _selector = _slicedToArray(selector, 2);
-
-      var s = _selector[0];
-      var attr = _selector[1];
+      var _selector = _slicedToArray(selector, 2),
+          s = _selector[0],
+          attr = _selector[1];
 
       return $(s).length === 1 && $(s).attr(attr) && $(s).attr(attr).trim() !== '';
     }
@@ -4016,11 +4272,11 @@ function findMatchingSelector($, selectors) {
 }
 
 function select(opts) {
-  var $ = opts.$;
-  var type = opts.type;
-  var extractionOpts = opts.extractionOpts;
-  var _opts$extractHtml = opts.extractHtml;
-  var extractHtml = _opts$extractHtml === undefined ? false : _opts$extractHtml;
+  var $ = opts.$,
+      type = opts.type,
+      extractionOpts = opts.extractionOpts,
+      _opts$extractHtml = opts.extractHtml,
+      extractHtml = _opts$extractHtml === undefined ? false : _opts$extractHtml;
   // Skip if there's not extraction for this type
 
   if (!extractionOpts) return null;
@@ -4029,9 +4285,9 @@ function select(opts) {
   // contributors), return the string
   if (typeof extractionOpts === 'string') return extractionOpts;
 
-  var selectors = extractionOpts.selectors;
-  var _extractionOpts$defau = extractionOpts.defaultCleaner;
-  var defaultCleaner = _extractionOpts$defau === undefined ? true : _extractionOpts$defau;
+  var selectors = extractionOpts.selectors,
+      _extractionOpts$defau = extractionOpts.defaultCleaner,
+      defaultCleaner = _extractionOpts$defau === undefined ? true : _extractionOpts$defau;
 
 
   var matchingSelector = findMatchingSelector($, selectors);
@@ -4064,10 +4320,9 @@ function select(opts) {
   // if selector is an array (e.g., ['img', 'src']),
   // extract the attr
   if (Array.isArray(matchingSelector)) {
-    var _matchingSelector = _slicedToArray(matchingSelector, 2);
-
-    var selector = _matchingSelector[0];
-    var attr = _matchingSelector[1];
+    var _matchingSelector = _slicedToArray(matchingSelector, 2),
+        selector = _matchingSelector[0],
+        attr = _matchingSelector[1];
 
     result = $(selector).attr(attr).trim();
   } else {
@@ -4084,10 +4339,10 @@ function select(opts) {
 }
 
 function extractResult(opts) {
-  var type = opts.type;
-  var extractor = opts.extractor;
-  var _opts$fallback = opts.fallback;
-  var fallback = _opts$fallback === undefined ? true : _opts$fallback;
+  var type = opts.type,
+      extractor = opts.extractor,
+      _opts$fallback = opts.fallback,
+      fallback = _opts$fallback === undefined ? true : _opts$fallback;
 
 
   var result = select(_extends({}, opts, { extractionOpts: extractor[type] }));
@@ -4108,9 +4363,9 @@ var RootExtractor = {
   extract: function extract() {
     var extractor = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : GenericExtractor;
     var opts = arguments[1];
-    var _opts = opts;
-    var contentOnly = _opts.contentOnly;
-    var extractedTitle = _opts.extractedTitle;
+    var _opts = opts,
+        contentOnly = _opts.contentOnly,
+        extractedTitle = _opts.extractedTitle;
     // This is the generic extractor. Run its extract method
 
     if (extractor.domain === '*') return extractor.extract(opts);
@@ -4138,11 +4393,9 @@ var RootExtractor = {
     var word_count = extractResult(_extends({}, opts, { type: 'word_count', content: content }));
     var direction = extractResult(_extends({}, opts, { type: 'direction', title: title }));
 
-    var _ref3 = extractResult(_extends({}, opts, { type: 'url_and_domain' })) || { url: null, domain: null };
-
-    var url = _ref3.url;
-    var domain = _ref3.domain;
-
+    var _ref3 = extractResult(_extends({}, opts, { type: 'url_and_domain' })) || { url: null, domain: null },
+        url = _ref3.url,
+        domain = _ref3.domain;
 
     return {
       title: title,
@@ -4163,14 +4416,14 @@ var RootExtractor = {
 
 var collectAllPages = (function () {
   var _ref = _asyncToGenerator(_regeneratorRuntime.mark(function _callee(_ref2) {
-    var next_page_url = _ref2.next_page_url;
-    var html = _ref2.html;
-    var $ = _ref2.$;
-    var metaCache = _ref2.metaCache;
-    var result = _ref2.result;
-    var Extractor = _ref2.Extractor;
-    var title = _ref2.title;
-    var url = _ref2.url;
+    var next_page_url = _ref2.next_page_url,
+        html = _ref2.html,
+        $ = _ref2.$,
+        metaCache = _ref2.metaCache,
+        result = _ref2.result,
+        Extractor = _ref2.Extractor,
+        title = _ref2.title,
+        url = _ref2.url;
     var pages, previousUrls, extractorOpts, nextPageResult, word_count;
     return _regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
@@ -4254,37 +4507,34 @@ var Mercury = {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              _opts$fetchAllPages = opts.fetchAllPages;
-              fetchAllPages = _opts$fetchAllPages === undefined ? true : _opts$fetchAllPages;
-              _opts$fallback = opts.fallback;
-              fallback = _opts$fallback === undefined ? true : _opts$fallback;
+              _opts$fetchAllPages = opts.fetchAllPages, fetchAllPages = _opts$fetchAllPages === undefined ? true : _opts$fetchAllPages, _opts$fallback = opts.fallback, fallback = _opts$fallback === undefined ? true : _opts$fallback;
               parsedUrl = URL.parse(url);
 
               if (validateUrl(parsedUrl)) {
-                _context.next = 7;
+                _context.next = 4;
                 break;
               }
 
               return _context.abrupt('return', Errors.badUrl);
 
-            case 7:
+            case 4:
               Extractor = getExtractor(url, parsedUrl);
               // console.log(`Using extractor for ${Extractor.domain}`);
 
-              _context.next = 10;
+              _context.next = 7;
               return Resource.create(url, html, parsedUrl);
 
-            case 10:
+            case 7:
               $ = _context.sent;
 
               if (!$.error) {
-                _context.next = 13;
+                _context.next = 10;
                 break;
               }
 
               return _context.abrupt('return', $);
 
-            case 13:
+            case 10:
 
               html = $.html();
 
@@ -4294,18 +4544,16 @@ var Mercury = {
                 return $(node).attr('name');
               }).toArray();
               result = RootExtractor.extract(Extractor, { url: url, html: html, $: $, metaCache: metaCache, parsedUrl: parsedUrl, fallback: fallback });
-              _result = result;
-              title = _result.title;
-              next_page_url = _result.next_page_url;
+              _result = result, title = _result.title, next_page_url = _result.next_page_url;
 
               // Fetch more pages if next_page_url found
 
               if (!(fetchAllPages && next_page_url)) {
-                _context.next = 25;
+                _context.next = 20;
                 break;
               }
 
-              _context.next = 22;
+              _context.next = 17;
               return collectAllPages({
                 Extractor: Extractor,
                 next_page_url: next_page_url,
@@ -4317,21 +4565,21 @@ var Mercury = {
                 url: url
               });
 
-            case 22:
+            case 17:
               result = _context.sent;
-              _context.next = 26;
+              _context.next = 21;
               break;
 
-            case 25:
+            case 20:
               result = _extends({}, result, {
                 total_pages: 1,
                 rendered_pages: 1
               });
 
-            case 26:
+            case 21:
               return _context.abrupt('return', result);
 
-            case 27:
+            case 22:
             case 'end':
               return _context.stop();
           }
