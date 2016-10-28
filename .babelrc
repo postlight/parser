@@ -1,14 +1,6 @@
 {
   "presets": ["es2015"],
   "plugins": [
-    [
-      "transform-export-extensions",
-      "transform-runtime",
-      {
-        "polyfill": true,
-        "regenerator": true
-      }
-    ],
     "transform-es2015-destructuring",
     "transform-object-rest-spread",
     "transform-async-to-generator",
@@ -23,5 +15,19 @@
         "./mercury.js": "mercury"
       }
     }]
-  ]
+  ],
+  "env": {
+    "development": {
+      "plugins": [
+        "transform-export-extensions",
+        [
+          "transform-runtime",
+          {
+            "polyfill": true,
+            "regenerator": true
+          }
+        ]
+      ]
+    }
+  }
 }
