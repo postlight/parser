@@ -5,9 +5,9 @@
   "repository": "github:postlight/mercury-parser",
   "main": "./dist/mercury.js",
   "scripts": {
-    "lint": "eslint src/** --fix",
+    "lint": "eslint src/**/*.js --fix",
     "lint-fix-quiet": "eslint --fix --quiet",
-    "build": "eslint src/** --fix && rollup -c",
+    "build": "yarn lint && rollup -c",
     "build-generator": "rollup -c scripts/rollup.config.js",
     "test_build": "rollup -c",
     "test": "jest",

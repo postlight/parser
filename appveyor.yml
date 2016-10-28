@@ -8,14 +8,15 @@ install:
   - ps: yarn
 
 
-build: off
+build_script:
+  - yarn build
 # build:
 #   parallel: true                  # enable MSBuild parallel builds
 
 
 # to run your custom scripts instead of automatic tests
 test_script:
-  - ps: yarn build
-  - ps: yarn test -- --maxWorkers=1
+  - yarn build
+  - yarn test -- --maxWorkers=1
   # - ps: Install-Product node 6.9 && npm run build && jest --maxWorkers=1
   # - ps: Install-Product node 7.0 && npm run build && jest --maxWorkers=1
