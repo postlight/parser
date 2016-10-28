@@ -1,5 +1,5 @@
 import assert from 'assert';
-import nock from 'nock';
+import nock from 'nock'; // eslint-disable-line import/no-extraneous-dependencies
 import fs from 'fs';
 import path from 'path';
 
@@ -12,10 +12,10 @@ export function assertClean(a, b) {
 }
 
 // using this from https://www.ctl.io/developers/blog/post/http-apis-test-code
-export function record(name, options={}) {
+export function record(name, options = {}) {
   const test_folder = options.test_folder || '.';
   const fixtures_folder = options.fixtures_folder || 'fixtures/nock';
-  const fp = path.join(test_folder, fixtures_folder, name + '.js');
+  const fp = path.join(test_folder, fixtures_folder, `${name}.js`);
   // `has_fixtures` indicates whether the test has fixtures we should read,
   // or doesn't, so we should record and save them.
   // the environment variable `NOCK_RECORD` can be used to force a new recording.
@@ -24,17 +24,19 @@ export function record(name, options={}) {
   return {
     // starts recording, or ensure the fixtures exist
     before: () => {
-      if (!has_fixtures) try {
-        require('../' + fp);
-        has_fixtures = true;
-      } catch (e) {
-        nock.recorder.rec({
-          dont_print: true
-        });
+      if (!has_fixtures) {
+        try {
+          require(`../${fp}`); // eslint-disable-line global-require, import/no-dynamic-require, max-len
+          has_fixtures = true;
+        } catch (e) {
+          nock.recorder.rec({
+            dont_print: true,
+          });
+        }
       } else {
         has_fixtures = false;
         nock.recorder.rec({
-          dont_print: true
+          dont_print: true,
         });
       }
     },
@@ -42,11 +44,11 @@ export function record(name, options={}) {
     after: (done) => {
       if (!has_fixtures) {
         has_fixtures = nock.recorder.play();
-        const text = "const nock = require('nock');\n" + has_fixtures.join('\n');
+        const text = `const nock = require('nock');\n${has_fixtures.join('\n')}`;
         fs.writeFile(fp, text, done);
       } else {
         done();
       }
-    }
-  }
-};
+    },
+  };
+}

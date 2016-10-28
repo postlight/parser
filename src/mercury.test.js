@@ -1,8 +1,8 @@
 import assert from 'assert';
 import { Errors } from 'utils';
 
-import Mercury from './mercury';
 import { record } from 'test-helpers';
+import Mercury from './mercury';
 
 describe('Mercury', () => {
   const recorder = record('mercury-test');
