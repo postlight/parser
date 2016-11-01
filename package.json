@@ -8,7 +8,8 @@
     "lint": "eslint . --fix",
     "lint-fix-quiet": "eslint --fix --quiet",
     "build": "yarn lint && rollup -c",
-    "build-generator": "rollup -c scripts/rollup.config.js",
+    "build:web": "yarn lint && rollup -c rollup.config.web.js",
+    "build:generator": "rollup -c scripts/rollup.config.js",
     "test_build": "rollup -c",
     "test": "jest",
     "watch:test": "jest --watch",
@@ -49,20 +50,33 @@
     "ora": "^0.3.0",
     "rollup": "^0.36.3",
     "rollup-plugin-babel": "^2.6.1",
+    "rollup-plugin-browser": "^0.1.0",
     "rollup-plugin-commonjs": "^5.0.5",
-    "rollup-plugin-multi-entry": "^2.0.1"
+    "rollup-plugin-json": "^2.0.2",
+    "rollup-plugin-multi-entry": "^2.0.1",
+    "rollup-plugin-node-globals": "^1.0.9",
+    "rollup-plugin-node-resolve": "^2.0.0",
+    "rollup-plugin-replace": "^1.1.1"
   },
   "dependencies": {
     "babel-polyfill": "^6.13.0",
     "babel-runtime": "^6.11.6",
     "cheerio": "^0.22.0",
-    "difflib": "^0.2.4",
+    "difflib": "adampash/difflib.js",
     "ellipsize": "0.0.2",
+    "is-browser": "^2.0.1",
+    "jquery": "^3.1.1",
     "moment": "^2.14.1",
     "request": "czardoz/request",
     "request-promise": "^4.1.1",
     "string-direction": "^0.1.2",
+    "url-browser": "^0.1.4",
+    "url-parse": "^1.1.7",
     "valid-url": "^1.0.9",
-    "wuzzy": "^0.1.2"
+    "wuzzy": "adampash/wuzzy"
+  },
+  "browser": {
+    "cheerio": "jquery",
+    "URL": "url-parse"
   }
 }

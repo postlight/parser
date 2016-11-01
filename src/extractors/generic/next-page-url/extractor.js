@@ -1,4 +1,5 @@
-import URL from 'url';
+/* eslint-disable */
+import URL from 'url-parse';
 
 import {
   articleBaseUrl,
@@ -10,21 +11,22 @@ import scoreLinks from './scoring/score-links';
 // for multi-page articles
 const GenericNextPageUrlExtractor = {
   extract({ $, url, parsedUrl, previousUrls = [] }) {
-    parsedUrl = parsedUrl || URL.parse(url);
+    parsedUrl = parsedUrl || new URL(url);
 
     const articleUrl = removeAnchor(url);
     const baseUrl = articleBaseUrl(url, parsedUrl);
 
     const links = $('a[href]').toArray();
 
-    const scoredLinks = scoreLinks({
-      links,
-      articleUrl,
-      baseUrl,
-      parsedUrl,
-      $,
-      previousUrls,
-    });
+    const scoredLinks = null;
+    // const scoredLinks = scoreLinks({
+    //   links,
+    //   articleUrl,
+    //   baseUrl,
+    //   parsedUrl,
+    //   $,
+    //   previousUrls,
+    // });
 
     // If no links were scored, return null
     if (!scoredLinks) return null;

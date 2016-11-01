@@ -1,4 +1,4 @@
-import URL from 'url';
+import URL from 'url-parse';
 import {
   HAS_ALPHA_RE,
   IS_ALPHA_RE,
@@ -34,7 +34,7 @@ function isGoodSegment(segment, index, firstSegmentHasLetters) {
 // pagination data exists in it. Useful for comparing to other links
 // that might have pagination data within them.
 export default function articleBaseUrl(url, parsed) {
-  const parsedUrl = parsed || URL.parse(url);
+  const parsedUrl = parsed || new URL(url);
   const { protocol, host, path } = parsedUrl;
 
   let firstSegmentHasLetters = false;
