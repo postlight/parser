@@ -1,4 +1,5 @@
 import URL from 'url';
+import cheerio from 'cheerio';
 
 import Resource from 'resource';
 import {
@@ -38,7 +39,17 @@ const Mercury = {
     // Used when extracting title/author/date_published/dek
     const metaCache = $('meta').map((_, node) => $(node).attr('name')).toArray();
 
-    let result = RootExtractor.extract(Extractor, { url, html, $, metaCache, parsedUrl, fallback });
+    let result = RootExtractor.extract(
+      Extractor,
+      {
+        url,
+        html,
+        $,
+        metaCache,
+        parsedUrl,
+        fallback,
+        cheerio,
+      });
     const { title, next_page_url } = result;
 
     // Fetch more pages if next_page_url found
@@ -53,6 +64,7 @@ const Mercury = {
           result,
           title,
           url,
+          cheerio,
         }
       );
     } else {

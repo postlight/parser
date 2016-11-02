@@ -1,5 +1,15 @@
 export default function getAttrs(node) {
   const { attribs, attributes } = node;
 
-  return attribs || attributes;
+  if (!attribs && attributes) {
+    const attrs = Reflect.ownKeys(attributes).reduce((acc, index) => {
+      const attr = attributes[index];
+
+      acc[attr.name] = attr.value;
+      return acc;
+    }, {});
+    return attrs;
+  }
+
+  return attribs;
 }

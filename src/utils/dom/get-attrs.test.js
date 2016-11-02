@@ -4,15 +4,21 @@ import getAttrs from './get-attrs';
 
 describe('getAttrs(node)', () => {
   it('returns attrs for a raw jquery node', () => {
-    const jqueryNode = {
+    const domNode = {
       attributes: {
-        class: 'foo bar',
-        id: 'baz bat',
+        0: {
+          name: 'class',
+          value: 'foo bar',
+        },
       },
     };
 
-    assert.deepEqual(getAttrs(jqueryNode), jqueryNode.attributes)
-  })
+    const attrs = {
+      class: 'foo bar',
+    };
+
+    assert.deepEqual(getAttrs(domNode), attrs);
+  });
 
   it('returns attrs for a raw cheerio node', () => {
     const cheerioNode = {
@@ -22,6 +28,6 @@ describe('getAttrs(node)', () => {
       },
     };
 
-    assert.deepEqual(getAttrs(cheerioNode), cheerioNode.attribs)
-  })
-})
+    assert.deepEqual(getAttrs(cheerioNode), cheerioNode.attribs);
+  });
+});

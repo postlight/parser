@@ -1,5 +1,8 @@
 import Cleaners from 'cleaners';
-import { convertNodeTo } from 'utils/dom';
+import {
+  convertNodeTo,
+  getHtml,
+} from 'utils/dom';
 import GenericExtractor from './generic';
 
 // Remove elements by an array of selectors
@@ -83,7 +86,7 @@ export function select(opts) {
 
     $content = Cleaners[type]($content, { ...opts, defaultCleaner });
 
-    return $.html($content);
+    return getHtml($, $content);
   }
 
   let result;
@@ -118,10 +121,7 @@ function extractResult(opts) {
 
   // If nothing matches the selector, and fallback is enabled,
   // run the Generic extraction
-  // if (fallback) return GenericExtractor[type](opts);
-  if (fallback && type === 'title') return GenericExtractor[type](opts);
-  if (fallback && type === 'direction') return GenericExtractor[type](opts);
-  if (fallback && type === 'author') return GenericExtractor[type](opts);
+  if (fallback) return GenericExtractor[type](opts);
 
   return null;
 }

@@ -13,6 +13,7 @@ export default async function collectAllPages(
     Extractor,
     title,
     url,
+    cheerio,
   }
 ) {
   // At this point, we've fetched just the first page
@@ -34,6 +35,7 @@ export default async function collectAllPages(
       contentOnly: true,
       extractedTitle: title,
       previousUrls,
+      cheerio,
     };
 
     const nextPageResult = RootExtractor.extract(Extractor, extractorOpts);

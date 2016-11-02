@@ -1,14 +1,21 @@
+import {
+  getAttrs,
+  setAttrs,
+} from 'utils/dom';
+
 import { WHITELIST_ATTRS_RE } from './constants';
 
 function removeAllButWhitelist($article) {
   $article.find('*').each((index, node) => {
-    node.attribs = Reflect.ownKeys(node.attribs).reduce((acc, attr) => {
+    const attrs = getAttrs(node);
+
+    setAttrs(node, Reflect.ownKeys(attrs).reduce((acc, attr) => {
       if (WHITELIST_ATTRS_RE.test(attr)) {
-        return { ...acc, [attr]: node.attribs[attr] };
+        return { ...acc, [attr]: attrs[attr] };
       }
 
       return acc;
-    }, {});
+    }, {}));
   });
 
   return $article;

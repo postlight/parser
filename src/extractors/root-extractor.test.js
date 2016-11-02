@@ -24,7 +24,7 @@ describe('RootExtractor', () => {
       word_count,
       direction,
     } = RootExtractor.extract(
-      NYMagExtractor, { url: fullUrl, html, $, metaCache: [] }
+      NYMagExtractor, { url: fullUrl, html, $, metaCache: [], cheerio }
     );
 
     assert.equal(title, 'Trump Claims He Discussed $25K Donation With Florida Attorney General, But Not Trump University Investigation');

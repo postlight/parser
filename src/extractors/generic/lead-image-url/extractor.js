@@ -24,8 +24,11 @@ import {
 //   * domain
 //   * weird aspect ratio
 const GenericLeadImageUrlExtractor = {
-  extract({ $, content, metaCache }) {
+  extract({ $, content, metaCache, html }) {
     let cleanUrl;
+    if ($('head').length === 0) {
+      $('*').first().prepend(html);
+    }
 
     // Check to see if we have a matching meta tag that we can make use of.
     // Moving this higher because common practice is now to use large

@@ -24,7 +24,7 @@ export default {
       preferBuiltins: false,
     }),
   ],
-  format: 'umd',
+  format: 'iife',
   moduleName: 'Mercury',
   dest: 'dist/mercury.web.js', // equivalent to --output
   sourceMap: true,

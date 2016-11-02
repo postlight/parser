@@ -1,3 +1,5 @@
+import { getAttrs } from 'utils/dom';
+
 import {
   IS_LINK,
   IS_IMAGE,
@@ -10,8 +12,10 @@ import {
 // the src attribute so the images are no longer lazy loaded.
 export default function convertLazyLoadedImages($) {
   $('img').each((_, img) => {
-    Reflect.ownKeys(img.attribs).forEach((attr) => {
-      const value = img.attribs[attr];
+    const attrs = getAttrs(img);
+
+    Reflect.ownKeys(attrs).forEach((attr) => {
+      const value = attrs[attr];
 
       if (attr !== 'src' && IS_LINK.test(value) &&
           IS_IMAGE.test(value)) {

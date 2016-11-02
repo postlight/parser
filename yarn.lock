@@ -1067,8 +1067,8 @@ diff@1.4.0:
   resolved "https://registry.yarnpkg.com/diff/-/diff-1.4.0.tgz#7f28d2eb9ee7b15a97efd89ce63dcfdaa3ccbabf"
 
 difflib@adampash/difflib.js:
-  version "0.2.5"
-  resolved "https://codeload.github.com/adampash/difflib.js/tar.gz/c0847f7f2d30d82bec6fd4ffc62f11af3b2c3d6d"
+  version "0.2.6"
+  resolved "https://codeload.github.com/adampash/difflib.js/tar.gz/32e8e38c7fcd935241b9baab71bb432fd9b166ed"
   dependencies:
     heap ">= 0.2.0"
 
@@ -1395,10 +1395,6 @@ expand-tilde@^1.2.2:
   resolved "https://registry.yarnpkg.com/expand-tilde/-/expand-tilde-1.2.2.tgz#0b81eba897e5a3d31d1c3d102f8f01441e559449"
   dependencies:
     os-homedir "^1.0.1"
-
-extend-deep@^0.1.1:
-  version "0.1.6"
-  resolved "https://registry.yarnpkg.com/extend-deep/-/extend-deep-0.1.6.tgz#7f1aca80f506af3cc6cead7af1d0111c0f3e2a20"
 
 extend-shallow@^2.0.1:
   version "2.0.1"
@@ -2269,6 +2265,10 @@ jsbn@~0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/jsbn/-/jsbn-0.1.0.tgz#650987da0dd74f4ebf5a11377a2aa2d273e97dfd"
 
+jsdifflib:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/jsdifflib/-/jsdifflib-1.1.0.tgz#2d8d54b2a43ecfd68074abde22582d8b12bdabf3"
+
 jsdom@^9.8.0:
   version "9.8.3"
   resolved "https://registry.yarnpkg.com/jsdom/-/jsdom-9.8.3.tgz#fde29c109c32a1131e0b6c65914e64198f97c370"
@@ -2697,6 +2697,21 @@ modify-babel-preset@^2.1.1:
   dependencies:
     require-relative "^0.8.7"
 
+modulex-path@^1.0.0:
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/modulex-path/-/modulex-path-1.0.6.tgz#c6af730680b5296cf2df9cd2ad938394aec7309d"
+
+modulex-querystring@^1.0.0:
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/modulex-querystring/-/modulex-querystring-1.0.7.tgz#90722770d190c48a2db439a30723102a86226545"
+
+modulex-url:
+  version "1.0.8"
+  resolved "https://registry.yarnpkg.com/modulex-url/-/modulex-url-1.0.8.tgz#2088c3478aee48c23946d25457fe6599ba805f42"
+  dependencies:
+    modulex-path "^1.0.0"
+    modulex-querystring "^1.0.0"
+
 moment@^2.14.1:
   version "2.15.2"
   resolved "https://registry.yarnpkg.com/moment/-/moment-2.15.2.tgz#1bfdedf6a6e345f322fe956d5df5bd08a8ce84dc"
@@ -2994,6 +3009,10 @@ punycode@^1.4.1:
   version "1.4.1"
   resolved "https://registry.yarnpkg.com/punycode/-/punycode-1.4.1.tgz#c0d5a63b2718800ad8e1eb0fa5269c84dd41845e"
 
+punycode@1.3.2:
+  version "1.3.2"
+  resolved "https://registry.yarnpkg.com/punycode/-/punycode-1.3.2.tgz#9653a036fb7c1ee42342f2325cceefea3926c48d"
+
 qs@^6.0.2, qs@~6.3.0:
   version "6.3.0"
   resolved "https://registry.yarnpkg.com/qs/-/qs-6.3.0.tgz#f403b264f23bc01228c74131b407f18d5ea5d442"
@@ -3004,6 +3023,9 @@ qs@~6.2.0:
 querystringify@0.0.x:
   version "0.0.4"
   resolved "https://registry.yarnpkg.com/querystringify/-/querystringify-0.0.4.tgz#0cf7f84f9463ff0ae51c4c4b142d95be37724d9c"
+querystring@0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/querystring/-/querystring-0.2.0.tgz#b209849203bb25df820da756e747005878521620"
 
 randomatic@^1.1.3:
   version "1.1.5"
@@ -3194,10 +3216,6 @@ require-uncached@^1.0.2:
   dependencies:
     caller-path "^0.1.0"
     resolve-from "^1.0.0"
-
-requires-port@1.0.x:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/requires-port/-/requires-port-1.0.0.tgz#925d2601d39ac485e091cf0da5c6e694dc3dcaff"
 
 resolve-dir@^0.1.0:
   version "0.1.1"
@@ -3621,18 +3639,12 @@ uglify-to-browserify@~1.0.0:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/uglify-to-browserify/-/uglify-to-browserify-1.0.2.tgz#6e0924d6bda6b5afe349e39a6d632850a0f882b7"
 
-url-browser@^0.1.4:
-  version "0.1.4"
-  resolved "https://registry.yarnpkg.com/url-browser/-/url-browser-0.1.4.tgz#443dd241a2bd140625310ded7505195f7e05c3c6"
+url:
+  version "0.11.0"
+  resolved "https://registry.yarnpkg.com/url/-/url-0.11.0.tgz#3838e97cfc60521eb73c525a8e55bfdd9e2e28f1"
   dependencies:
-    extend-deep "^0.1.1"
-
-url-parse@^1.1.7:
-  version "1.1.7"
-  resolved "https://registry.yarnpkg.com/url-parse/-/url-parse-1.1.7.tgz#025cff999653a459ab34232147d89514cc87d74a"
-  dependencies:
-    querystringify "0.0.x"
-    requires-port "1.0.x"
+    punycode "1.3.2"
+    querystring "0.2.0"
 
 user-home@^2.0.0:
   version "2.0.0"

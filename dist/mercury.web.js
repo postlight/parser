@@ -1,10 +1,5 @@
-(function (global, factory) {
-            typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('url')) :
-            typeof define === 'function' && define.amd ? define(['url'], factory) :
-            (global.Mercury = factory(global.URL));
-}(this, (function (URL) { 'use strict';
-
-URL = 'default' in URL ? URL['default'] : URL;
+var Mercury = (function () {
+'use strict';
 
 var global$1 = typeof global !== "undefined" ? global :
             typeof self !== "undefined" ? self :
@@ -2192,515 +2187,1404 @@ exports.default = function (fn) {
 
 var _asyncToGenerator = unwrapExports(asyncToGenerator);
 
-/**
- * Check if we're required to add a port number.
- *
- * @see https://url.spec.whatwg.org/#default-port
- * @param {Number|String} port Port number we need to check
- * @param {String} protocol Protocol we need to check against.
- * @returns {Boolean} Is it a default port for the given protocol
- * @api private
- */
-var index$2 = function required(port, protocol) {
-  protocol = protocol.split(':')[0];
-  port = +port;
+var punycode$1 = createCommonjsModule(function (module, exports) {
+/*! https://mths.be/punycode v1.3.2 by @mathias */
+(function(root) {
 
-  if (!port) return false;
+	/** Detect free variables */
+	var freeExports = typeof exports == 'object' && exports &&
+		!exports.nodeType && exports;
+	var freeModule = typeof module == 'object' && module &&
+		!module.nodeType && module;
+	var freeGlobal = typeof global$1 == 'object' && global$1;
+	if (
+		freeGlobal.global === freeGlobal ||
+		freeGlobal.window === freeGlobal ||
+		freeGlobal.self === freeGlobal
+	) {
+		root = freeGlobal;
+	}
 
-  switch (protocol) {
-    case 'http':
-    case 'ws':
-    return port !== 80;
+	/**
+	 * The `punycode` object.
+	 * @name punycode
+	 * @type Object
+	 */
+	var punycode,
 
-    case 'https':
-    case 'wss':
-    return port !== 443;
+	/** Highest positive signed 32-bit float value */
+	maxInt = 2147483647, // aka. 0x7FFFFFFF or 2^31-1
 
-    case 'ftp':
-    return port !== 21;
+	/** Bootstring parameters */
+	base = 36,
+	tMin = 1,
+	tMax = 26,
+	skew = 38,
+	damp = 700,
+	initialBias = 72,
+	initialN = 128, // 0x80
+	delimiter = '-', // '\x2D'
 
-    case 'gopher':
-    return port !== 70;
+	/** Regular expressions */
+	regexPunycode = /^xn--/,
+	regexNonASCII = /[^\x20-\x7E]/, // unprintable ASCII chars + non-ASCII chars
+	regexSeparators = /[\x2E\u3002\uFF0E\uFF61]/g, // RFC 3490 separators
 
-    case 'file':
-    return false;
+	/** Error messages */
+	errors = {
+		'overflow': 'Overflow: input needs wider integers to process',
+		'not-basic': 'Illegal input >= 0x80 (not a basic code point)',
+		'invalid-input': 'Invalid input'
+	},
+
+	/** Convenience shortcuts */
+	baseMinusTMin = base - tMin,
+	floor = Math.floor,
+	stringFromCharCode = String.fromCharCode,
+
+	/** Temporary variable */
+	key;
+
+	/*--------------------------------------------------------------------------*/
+
+	/**
+	 * A generic error utility function.
+	 * @private
+	 * @param {String} type The error type.
+	 * @returns {Error} Throws a `RangeError` with the applicable error message.
+	 */
+	function error(type) {
+		throw RangeError(errors[type]);
+	}
+
+	/**
+	 * A generic `Array#map` utility function.
+	 * @private
+	 * @param {Array} array The array to iterate over.
+	 * @param {Function} callback The function that gets called for every array
+	 * item.
+	 * @returns {Array} A new array of values returned by the callback function.
+	 */
+	function map(array, fn) {
+		var length = array.length;
+		var result = [];
+		while (length--) {
+			result[length] = fn(array[length]);
+		}
+		return result;
+	}
+
+	/**
+	 * A simple `Array#map`-like wrapper to work with domain name strings or email
+	 * addresses.
+	 * @private
+	 * @param {String} domain The domain name or email address.
+	 * @param {Function} callback The function that gets called for every
+	 * character.
+	 * @returns {Array} A new string of characters returned by the callback
+	 * function.
+	 */
+	function mapDomain(string, fn) {
+		var parts = string.split('@');
+		var result = '';
+		if (parts.length > 1) {
+			// In email addresses, only the domain name should be punycoded. Leave
+			// the local part (i.e. everything up to `@`) intact.
+			result = parts[0] + '@';
+			string = parts[1];
+		}
+		// Avoid `split(regex)` for IE8 compatibility. See #17.
+		string = string.replace(regexSeparators, '\x2E');
+		var labels = string.split('.');
+		var encoded = map(labels, fn).join('.');
+		return result + encoded;
+	}
+
+	/**
+	 * Creates an array containing the numeric code points of each Unicode
+	 * character in the string. While JavaScript uses UCS-2 internally,
+	 * this function will convert a pair of surrogate halves (each of which
+	 * UCS-2 exposes as separate characters) into a single code point,
+	 * matching UTF-16.
+	 * @see `punycode.ucs2.encode`
+	 * @see <https://mathiasbynens.be/notes/javascript-encoding>
+	 * @memberOf punycode.ucs2
+	 * @name decode
+	 * @param {String} string The Unicode input string (UCS-2).
+	 * @returns {Array} The new array of code points.
+	 */
+	function ucs2decode(string) {
+		var output = [],
+		    counter = 0,
+		    length = string.length,
+		    value,
+		    extra;
+		while (counter < length) {
+			value = string.charCodeAt(counter++);
+			if (value >= 0xD800 && value <= 0xDBFF && counter < length) {
+				// high surrogate, and there is a next character
+				extra = string.charCodeAt(counter++);
+				if ((extra & 0xFC00) == 0xDC00) { // low surrogate
+					output.push(((value & 0x3FF) << 10) + (extra & 0x3FF) + 0x10000);
+				} else {
+					// unmatched surrogate; only append this code unit, in case the next
+					// code unit is the high surrogate of a surrogate pair
+					output.push(value);
+					counter--;
+				}
+			} else {
+				output.push(value);
+			}
+		}
+		return output;
+	}
+
+	/**
+	 * Creates a string based on an array of numeric code points.
+	 * @see `punycode.ucs2.decode`
+	 * @memberOf punycode.ucs2
+	 * @name encode
+	 * @param {Array} codePoints The array of numeric code points.
+	 * @returns {String} The new Unicode string (UCS-2).
+	 */
+	function ucs2encode(array) {
+		return map(array, function(value) {
+			var output = '';
+			if (value > 0xFFFF) {
+				value -= 0x10000;
+				output += stringFromCharCode(value >>> 10 & 0x3FF | 0xD800);
+				value = 0xDC00 | value & 0x3FF;
+			}
+			output += stringFromCharCode(value);
+			return output;
+		}).join('');
+	}
+
+	/**
+	 * Converts a basic code point into a digit/integer.
+	 * @see `digitToBasic()`
+	 * @private
+	 * @param {Number} codePoint The basic numeric code point value.
+	 * @returns {Number} The numeric value of a basic code point (for use in
+	 * representing integers) in the range `0` to `base - 1`, or `base` if
+	 * the code point does not represent a value.
+	 */
+	function basicToDigit(codePoint) {
+		if (codePoint - 48 < 10) {
+			return codePoint - 22;
+		}
+		if (codePoint - 65 < 26) {
+			return codePoint - 65;
+		}
+		if (codePoint - 97 < 26) {
+			return codePoint - 97;
+		}
+		return base;
+	}
+
+	/**
+	 * Converts a digit/integer into a basic code point.
+	 * @see `basicToDigit()`
+	 * @private
+	 * @param {Number} digit The numeric value of a basic code point.
+	 * @returns {Number} The basic code point whose value (when used for
+	 * representing integers) is `digit`, which needs to be in the range
+	 * `0` to `base - 1`. If `flag` is non-zero, the uppercase form is
+	 * used; else, the lowercase form is used. The behavior is undefined
+	 * if `flag` is non-zero and `digit` has no uppercase form.
+	 */
+	function digitToBasic(digit, flag) {
+		//  0..25 map to ASCII a..z or A..Z
+		// 26..35 map to ASCII 0..9
+		return digit + 22 + 75 * (digit < 26) - ((flag != 0) << 5);
+	}
+
+	/**
+	 * Bias adaptation function as per section 3.4 of RFC 3492.
+	 * http://tools.ietf.org/html/rfc3492#section-3.4
+	 * @private
+	 */
+	function adapt(delta, numPoints, firstTime) {
+		var k = 0;
+		delta = firstTime ? floor(delta / damp) : delta >> 1;
+		delta += floor(delta / numPoints);
+		for (/* no initialization */; delta > baseMinusTMin * tMax >> 1; k += base) {
+			delta = floor(delta / baseMinusTMin);
+		}
+		return floor(k + (baseMinusTMin + 1) * delta / (delta + skew));
+	}
+
+	/**
+	 * Converts a Punycode string of ASCII-only symbols to a string of Unicode
+	 * symbols.
+	 * @memberOf punycode
+	 * @param {String} input The Punycode string of ASCII-only symbols.
+	 * @returns {String} The resulting string of Unicode symbols.
+	 */
+	function decode(input) {
+		// Don't use UCS-2
+		var output = [],
+		    inputLength = input.length,
+		    out,
+		    i = 0,
+		    n = initialN,
+		    bias = initialBias,
+		    basic,
+		    j,
+		    index,
+		    oldi,
+		    w,
+		    k,
+		    digit,
+		    t,
+		    /** Cached calculation results */
+		    baseMinusT;
+
+		// Handle the basic code points: let `basic` be the number of input code
+		// points before the last delimiter, or `0` if there is none, then copy
+		// the first basic code points to the output.
+
+		basic = input.lastIndexOf(delimiter);
+		if (basic < 0) {
+			basic = 0;
+		}
+
+		for (j = 0; j < basic; ++j) {
+			// if it's not a basic code point
+			if (input.charCodeAt(j) >= 0x80) {
+				error('not-basic');
+			}
+			output.push(input.charCodeAt(j));
+		}
+
+		// Main decoding loop: start just after the last delimiter if any basic code
+		// points were copied; start at the beginning otherwise.
+
+		for (index = basic > 0 ? basic + 1 : 0; index < inputLength; /* no final expression */) {
+
+			// `index` is the index of the next character to be consumed.
+			// Decode a generalized variable-length integer into `delta`,
+			// which gets added to `i`. The overflow checking is easier
+			// if we increase `i` as we go, then subtract off its starting
+			// value at the end to obtain `delta`.
+			for (oldi = i, w = 1, k = base; /* no condition */; k += base) {
+
+				if (index >= inputLength) {
+					error('invalid-input');
+				}
+
+				digit = basicToDigit(input.charCodeAt(index++));
+
+				if (digit >= base || digit > floor((maxInt - i) / w)) {
+					error('overflow');
+				}
+
+				i += digit * w;
+				t = k <= bias ? tMin : (k >= bias + tMax ? tMax : k - bias);
+
+				if (digit < t) {
+					break;
+				}
+
+				baseMinusT = base - t;
+				if (w > floor(maxInt / baseMinusT)) {
+					error('overflow');
+				}
+
+				w *= baseMinusT;
+
+			}
+
+			out = output.length + 1;
+			bias = adapt(i - oldi, out, oldi == 0);
+
+			// `i` was supposed to wrap around from `out` to `0`,
+			// incrementing `n` each time, so we'll fix that now:
+			if (floor(i / out) > maxInt - n) {
+				error('overflow');
+			}
+
+			n += floor(i / out);
+			i %= out;
+
+			// Insert `n` at position `i` of the output
+			output.splice(i++, 0, n);
+
+		}
+
+		return ucs2encode(output);
+	}
+
+	/**
+	 * Converts a string of Unicode symbols (e.g. a domain name label) to a
+	 * Punycode string of ASCII-only symbols.
+	 * @memberOf punycode
+	 * @param {String} input The string of Unicode symbols.
+	 * @returns {String} The resulting Punycode string of ASCII-only symbols.
+	 */
+	function encode(input) {
+		var n,
+		    delta,
+		    handledCPCount,
+		    basicLength,
+		    bias,
+		    j,
+		    m,
+		    q,
+		    k,
+		    t,
+		    currentValue,
+		    output = [],
+		    /** `inputLength` will hold the number of code points in `input`. */
+		    inputLength,
+		    /** Cached calculation results */
+		    handledCPCountPlusOne,
+		    baseMinusT,
+		    qMinusT;
+
+		// Convert the input in UCS-2 to Unicode
+		input = ucs2decode(input);
+
+		// Cache the length
+		inputLength = input.length;
+
+		// Initialize the state
+		n = initialN;
+		delta = 0;
+		bias = initialBias;
+
+		// Handle the basic code points
+		for (j = 0; j < inputLength; ++j) {
+			currentValue = input[j];
+			if (currentValue < 0x80) {
+				output.push(stringFromCharCode(currentValue));
+			}
+		}
+
+		handledCPCount = basicLength = output.length;
+
+		// `handledCPCount` is the number of code points that have been handled;
+		// `basicLength` is the number of basic code points.
+
+		// Finish the basic string - if it is not empty - with a delimiter
+		if (basicLength) {
+			output.push(delimiter);
+		}
+
+		// Main encoding loop:
+		while (handledCPCount < inputLength) {
+
+			// All non-basic code points < n have been handled already. Find the next
+			// larger one:
+			for (m = maxInt, j = 0; j < inputLength; ++j) {
+				currentValue = input[j];
+				if (currentValue >= n && currentValue < m) {
+					m = currentValue;
+				}
+			}
+
+			// Increase `delta` enough to advance the decoder's <n,i> state to <m,0>,
+			// but guard against overflow
+			handledCPCountPlusOne = handledCPCount + 1;
+			if (m - n > floor((maxInt - delta) / handledCPCountPlusOne)) {
+				error('overflow');
+			}
+
+			delta += (m - n) * handledCPCountPlusOne;
+			n = m;
+
+			for (j = 0; j < inputLength; ++j) {
+				currentValue = input[j];
+
+				if (currentValue < n && ++delta > maxInt) {
+					error('overflow');
+				}
+
+				if (currentValue == n) {
+					// Represent delta as a generalized variable-length integer
+					for (q = delta, k = base; /* no condition */; k += base) {
+						t = k <= bias ? tMin : (k >= bias + tMax ? tMax : k - bias);
+						if (q < t) {
+							break;
+						}
+						qMinusT = q - t;
+						baseMinusT = base - t;
+						output.push(
+							stringFromCharCode(digitToBasic(t + qMinusT % baseMinusT, 0))
+						);
+						q = floor(qMinusT / baseMinusT);
+					}
+
+					output.push(stringFromCharCode(digitToBasic(q, 0)));
+					bias = adapt(delta, handledCPCountPlusOne, handledCPCount == basicLength);
+					delta = 0;
+					++handledCPCount;
+				}
+			}
+
+			++delta;
+			++n;
+
+		}
+		return output.join('');
+	}
+
+	/**
+	 * Converts a Punycode string representing a domain name or an email address
+	 * to Unicode. Only the Punycoded parts of the input will be converted, i.e.
+	 * it doesn't matter if you call it on a string that has already been
+	 * converted to Unicode.
+	 * @memberOf punycode
+	 * @param {String} input The Punycoded domain name or email address to
+	 * convert to Unicode.
+	 * @returns {String} The Unicode representation of the given Punycode
+	 * string.
+	 */
+	function toUnicode(input) {
+		return mapDomain(input, function(string) {
+			return regexPunycode.test(string)
+				? decode(string.slice(4).toLowerCase())
+				: string;
+		});
+	}
+
+	/**
+	 * Converts a Unicode string representing a domain name or an email address to
+	 * Punycode. Only the non-ASCII parts of the domain name will be converted,
+	 * i.e. it doesn't matter if you call it with a domain that's already in
+	 * ASCII.
+	 * @memberOf punycode
+	 * @param {String} input The domain name or email address to convert, as a
+	 * Unicode string.
+	 * @returns {String} The Punycode representation of the given domain name or
+	 * email address.
+	 */
+	function toASCII(input) {
+		return mapDomain(input, function(string) {
+			return regexNonASCII.test(string)
+				? 'xn--' + encode(string)
+				: string;
+		});
+	}
+
+	/*--------------------------------------------------------------------------*/
+
+	/** Define the public API */
+	punycode = {
+		/**
+		 * A string representing the current Punycode.js version number.
+		 * @memberOf punycode
+		 * @type String
+		 */
+		'version': '1.3.2',
+		/**
+		 * An object of methods to convert from JavaScript's internal character
+		 * representation (UCS-2) to Unicode code points, and back.
+		 * @see <https://mathiasbynens.be/notes/javascript-encoding>
+		 * @memberOf punycode
+		 * @type Object
+		 */
+		'ucs2': {
+			'decode': ucs2decode,
+			'encode': ucs2encode
+		},
+		'decode': decode,
+		'encode': encode,
+		'toASCII': toASCII,
+		'toUnicode': toUnicode
+	};
+
+	/** Expose `punycode` */
+	// Some AMD build optimizers, like r.js, check for specific condition patterns
+	// like the following:
+	if (
+		typeof define == 'function' &&
+		typeof define.amd == 'object' &&
+		define.amd
+	) {
+		define('punycode', function() {
+			return punycode;
+		});
+	} else if (freeExports && freeModule) {
+		if (module.exports == freeExports) { // in Node.js or RingoJS v0.8.0+
+			freeModule.exports = punycode;
+		} else { // in Narwhal or RingoJS v0.7.0-
+			for (key in punycode) {
+				punycode.hasOwnProperty(key) && (freeExports[key] = punycode[key]);
+			}
+		}
+	} else { // in Rhino or a web browser
+		root.punycode = punycode;
+	}
+
+}(this));
+});
+
+var util$1 = {
+  isString: function(arg) {
+    return typeof(arg) === 'string';
+  },
+  isObject: function(arg) {
+    return typeof(arg) === 'object' && arg !== null;
+  },
+  isNull: function(arg) {
+    return arg === null;
+  },
+  isNullOrUndefined: function(arg) {
+    return arg == null;
   }
-
-  return port !== 0;
 };
 
-var slashes = /^[A-Za-z][A-Za-z0-9+-.]*:\/\//;
-
-/**
- * These properties should not be copied or inherited from. This is only needed
- * for all non blob URL's as a blob URL does not include a hash, only the
- * origin.
- *
- * @type {Object}
- * @private
- */
-var ignore = { hash: 1, query: 1 };
-var URL$3;
-
-/**
- * The location object differs when your code is loaded through a normal page,
- * Worker or through a worker using a blob. And with the blobble begins the
- * trouble as the location object will contain the URL of the blob, not the
- * location of the page where our code is loaded in. The actual origin is
- * encoded in the `pathname` so we can thankfully generate a good "default"
- * location from it so we can generate proper relative URL's again.
- *
- * @param {Object|String} loc Optional default location object.
- * @returns {Object} lolcation object.
- * @api public
- */
-var lolcation$1 = function lolcation$1(loc) {
-  loc = loc || global$1.location || {};
-  URL$3 = URL$3 || index$1;
-
-  var finaldestination = {}
-    , type = typeof loc
-    , key;
-
-  if ('blob:' === loc.protocol) {
-    finaldestination = new URL$3(unescape(loc.pathname), {});
-  } else if ('string' === type) {
-    finaldestination = new URL$3(loc, {});
-    for (key in ignore) delete finaldestination[key];
-  } else if ('object' === type) {
-    for (key in loc) {
-      if (key in ignore) continue;
-      finaldestination[key] = loc[key];
-    }
-
-    if (finaldestination.slashes === undefined) {
-      finaldestination.slashes = slashes.test(loc.href);
-    }
-  }
-
-  return finaldestination;
-};
-
-var has$4 = Object.prototype.hasOwnProperty;
-
-/**
- * Simple query string parser.
- *
- * @param {String} query The query string that needs to be parsed.
- * @returns {Object}
- * @api public
- */
-function querystring(query) {
-  var parser = /([^=?&]+)=?([^&]*)/g
-    , result = {}
-    , part;
-
-  //
-  // Little nifty parsing hack, leverage the fact that RegExp.exec increments
-  // the lastIndex property so we can continue executing this loop until we've
-  // parsed all results.
-  //
-  for (;
-    part = parser.exec(query);
-    result[decodeURIComponent(part[1])] = decodeURIComponent(part[2])
-  );
-
-  return result;
-}
-
-/**
- * Transform a query string to an object.
- *
- * @param {Object} obj Object that should be transformed.
- * @param {String} prefix Optional prefix.
- * @returns {String}
- * @api public
- */
-function querystringify(obj, prefix) {
-  prefix = prefix || '';
-
-  var pairs = [];
-
-  //
-  // Optionally prefix with a '?' if needed
-  //
-  if ('string' !== typeof prefix) prefix = '?';
-
-  for (var key in obj) {
-    if (has$4.call(obj, key)) {
-      pairs.push(encodeURIComponent(key) +'='+ encodeURIComponent(obj[key]));
-    }
-  }
-
-  return pairs.length ? prefix + pairs.join('&') : '';
-}
-
+// Copyright Joyent, Inc. and other Node contributors.
 //
-// Expose the module.
+// Permission is hereby granted, free of charge, to any person obtaining a
+// copy of this software and associated documentation files (the
+// "Software"), to deal in the Software without restriction, including
+// without limitation the rights to use, copy, modify, merge, publish,
+// distribute, sublicense, and/or sell copies of the Software, and to permit
+// persons to whom the Software is furnished to do so, subject to the
+// following conditions:
 //
-var stringify$1 = querystringify;
-var parse$1 = querystring;
+// The above copyright notice and this permission notice shall be included
+// in all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
+// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
+// USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-var index$4 = {
-	stringify: stringify$1,
-	parse: parse$1
-};
-
-var required$1 = index$2;
-var lolcation = lolcation$1;
-var qs = index$4;
-var protocolre = /^([a-z][a-z0-9.+-]*:)?(\/\/)?([\S\s]*)/i;
-
-/**
- * These are the parse rules for the URL parser, it informs the parser
- * about:
- *
- * 0. The char it Needs to parse, if it's a string it should be done using
- *    indexOf, RegExp using exec and NaN means set as current value.
- * 1. The property we should set when parsing this value.
- * 2. Indication if it's backwards or forward parsing, when set as number it's
- *    the value of extra chars that should be split off.
- * 3. Inherit from location if non existing in the parser.
- * 4. `toLowerCase` the resulting value.
- */
-var rules = [
-  ['#', 'hash'],                        // Extract from the back.
-  ['?', 'query'],                       // Extract from the back.
-  ['/', 'pathname'],                    // Extract from the back.
-  ['@', 'auth', 1],                     // Extract from the front.
-  [NaN, 'host', undefined, 1, 1],       // Set left over value.
-  [/:(\d+)$/, 'port', undefined, 1],    // RegExp the back.
-  [NaN, 'hostname', undefined, 1, 1]    // Set left over.
-];
-
-/**
- * @typedef ProtocolExtract
- * @type Object
- * @property {String} protocol Protocol matched in the URL, in lowercase.
- * @property {Boolean} slashes `true` if protocol is followed by "//", else `false`.
- * @property {String} rest Rest of the URL that is not part of the protocol.
- */
-
-/**
- * Extract protocol information from a URL with/without double slash ("//").
- *
- * @param {String} address URL we want to extract from.
- * @return {ProtocolExtract} Extracted information.
- * @api private
- */
-function extractProtocol(address) {
-  var match = protocolre.exec(address);
-
-  return {
-    protocol: match[1] ? match[1].toLowerCase() : '',
-    slashes: !!match[2],
-    rest: match[3]
-  };
+// If obj.hasOwnProperty has been overridden, then calling
+// obj.hasOwnProperty(prop) will break.
+// See: https://github.com/joyent/node/issues/1707
+function hasOwnProperty$1(obj, prop) {
+  return Object.prototype.hasOwnProperty.call(obj, prop);
 }
 
-/**
- * Resolve a relative URL pathname against a base URL pathname.
- *
- * @param {String} relative Pathname of the relative URL.
- * @param {String} base Pathname of the base URL.
- * @return {String} Resolved pathname.
- * @api private
- */
-function resolve$1(relative, base) {
-  var path = (base || '/').split('/').slice(0, -1).concat(relative.split('/'))
-    , i = path.length
-    , last = path[i - 1]
-    , unshift = false
-    , up = 0;
+var decode$1 = function(qs, sep, eq, options) {
+  sep = sep || '&';
+  eq = eq || '=';
+  var obj = {};
 
-  while (i--) {
-    if (path[i] === '.') {
-      path.splice(i, 1);
-    } else if (path[i] === '..') {
-      path.splice(i, 1);
+  if (typeof qs !== 'string' || qs.length === 0) {
+    return obj;
+  }
+
+  var regexp = /\+/g;
+  qs = qs.split(sep);
+
+  var maxKeys = 1000;
+  if (options && typeof options.maxKeys === 'number') {
+    maxKeys = options.maxKeys;
+  }
+
+  var len = qs.length;
+  // maxKeys <= 0 means that we should not limit keys count
+  if (maxKeys > 0 && len > maxKeys) {
+    len = maxKeys;
+  }
+
+  for (var i = 0; i < len; ++i) {
+    var x = qs[i].replace(regexp, '%20'),
+        idx = x.indexOf(eq),
+        kstr, vstr, k, v;
+
+    if (idx >= 0) {
+      kstr = x.substr(0, idx);
+      vstr = x.substr(idx + 1);
+    } else {
+      kstr = x;
+      vstr = '';
+    }
+
+    k = decodeURIComponent(kstr);
+    v = decodeURIComponent(vstr);
+
+    if (!hasOwnProperty$1(obj, k)) {
+      obj[k] = v;
+    } else if (Array.isArray(obj[k])) {
+      obj[k].push(v);
+    } else {
+      obj[k] = [obj[k], v];
+    }
+  }
+
+  return obj;
+};
+
+// Copyright Joyent, Inc. and other Node contributors.
+//
+// Permission is hereby granted, free of charge, to any person obtaining a
+// copy of this software and associated documentation files (the
+// "Software"), to deal in the Software without restriction, including
+// without limitation the rights to use, copy, modify, merge, publish,
+// distribute, sublicense, and/or sell copies of the Software, and to permit
+// persons to whom the Software is furnished to do so, subject to the
+// following conditions:
+//
+// The above copyright notice and this permission notice shall be included
+// in all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
+// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
+// USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+var stringifyPrimitive = function(v) {
+  switch (typeof v) {
+    case 'string':
+      return v;
+
+    case 'boolean':
+      return v ? 'true' : 'false';
+
+    case 'number':
+      return isFinite(v) ? v : '';
+
+    default:
+      return '';
+  }
+};
+
+var encode$1 = function(obj, sep, eq, name) {
+  sep = sep || '&';
+  eq = eq || '=';
+  if (obj === null) {
+    obj = undefined;
+  }
+
+  if (typeof obj === 'object') {
+    return Object.keys(obj).map(function(k) {
+      var ks = encodeURIComponent(stringifyPrimitive(k)) + eq;
+      if (Array.isArray(obj[k])) {
+        return obj[k].map(function(v) {
+          return ks + encodeURIComponent(stringifyPrimitive(v));
+        }).join(sep);
+      } else {
+        return ks + encodeURIComponent(stringifyPrimitive(obj[k]));
+      }
+    }).join(sep);
+
+  }
+
+  if (!name) return '';
+  return encodeURIComponent(stringifyPrimitive(name)) + eq +
+         encodeURIComponent(stringifyPrimitive(obj));
+};
+
+var index$1 = createCommonjsModule(function (module, exports) {
+'use strict';
+
+exports.decode = exports.parse = decode$1;
+exports.encode = exports.stringify = encode$1;
+});
+
+var punycode = punycode$1;
+var util = util$1;
+
+var parse$1 = urlParse;
+var resolve$1 = urlResolve;
+var resolveObject = urlResolveObject;
+var format = urlFormat;
+
+var Url_1 = Url;
+
+function Url() {
+  this.protocol = null;
+  this.slashes = null;
+  this.auth = null;
+  this.host = null;
+  this.port = null;
+  this.hostname = null;
+  this.hash = null;
+  this.search = null;
+  this.query = null;
+  this.pathname = null;
+  this.path = null;
+  this.href = null;
+}
+
+// Reference: RFC 3986, RFC 1808, RFC 2396
+
+// define these here so at least they only have to be
+// compiled once on the first module load.
+var protocolPattern = /^([a-z0-9.+-]+:)/i;
+var portPattern = /:[0-9]*$/;
+var simplePathPattern = /^(\/\/?(?!\/)[^\?\s]*)(\?[^\s]*)?$/;
+var delims = ['<', '>', '"', '`', ' ', '\r', '\n', '\t'];
+var unwise = ['{', '}', '|', '\\', '^', '`'].concat(delims);
+var autoEscape = ['\''].concat(unwise);
+var nonHostChars = ['%', '/', '?', ';', '#'].concat(autoEscape);
+var hostEndingChars = ['/', '?', '#'];
+var hostnameMaxLen = 255;
+var hostnamePartPattern = /^[+a-z0-9A-Z_-]{0,63}$/;
+var hostnamePartStart = /^([+a-z0-9A-Z_-]{0,63})(.*)$/;
+var unsafeProtocol = {
+      'javascript': true,
+      'javascript:': true
+    };
+var hostlessProtocol = {
+      'javascript': true,
+      'javascript:': true
+    };
+var slashedProtocol = {
+      'http': true,
+      'https': true,
+      'ftp': true,
+      'gopher': true,
+      'file': true,
+      'http:': true,
+      'https:': true,
+      'ftp:': true,
+      'gopher:': true,
+      'file:': true
+    };
+var querystring = index$1;
+
+function urlParse(url, parseQueryString, slashesDenoteHost) {
+  if (url && util.isObject(url) && url instanceof Url) return url;
+
+  var u = new Url;
+  u.parse(url, parseQueryString, slashesDenoteHost);
+  return u;
+}
+
+Url.prototype.parse = function(url, parseQueryString, slashesDenoteHost) {
+  if (!util.isString(url)) {
+    throw new TypeError("Parameter 'url' must be a string, not " + typeof url);
+  }
+
+  // Copy chrome, IE, opera backslash-handling behavior.
+  // Back slashes before the query string get converted to forward slashes
+  // See: https://code.google.com/p/chromium/issues/detail?id=25916
+  var queryIndex = url.indexOf('?'),
+      splitter =
+          (queryIndex !== -1 && queryIndex < url.indexOf('#')) ? '?' : '#',
+      uSplit = url.split(splitter),
+      slashRegex = /\\/g;
+  uSplit[0] = uSplit[0].replace(slashRegex, '/');
+  url = uSplit.join(splitter);
+
+  var rest = url;
+
+  // trim before proceeding.
+  // This is to support parse stuff like "  http://foo.com  \n"
+  rest = rest.trim();
+
+  if (!slashesDenoteHost && url.split('#').length === 1) {
+    // Try fast path regexp
+    var simplePath = simplePathPattern.exec(rest);
+    if (simplePath) {
+      this.path = rest;
+      this.href = rest;
+      this.pathname = simplePath[1];
+      if (simplePath[2]) {
+        this.search = simplePath[2];
+        if (parseQueryString) {
+          this.query = querystring.parse(this.search.substr(1));
+        } else {
+          this.query = this.search.substr(1);
+        }
+      } else if (parseQueryString) {
+        this.search = '';
+        this.query = {};
+      }
+      return this;
+    }
+  }
+
+  var proto = protocolPattern.exec(rest);
+  if (proto) {
+    proto = proto[0];
+    var lowerProto = proto.toLowerCase();
+    this.protocol = lowerProto;
+    rest = rest.substr(proto.length);
+  }
+
+  // figure out if it's got a host
+  // user@server is *always* interpreted as a hostname, and url
+  // resolution will treat //foo/bar as host=foo,path=bar because that's
+  // how the browser resolves relative URLs.
+  if (slashesDenoteHost || proto || rest.match(/^\/\/[^@\/]+@[^@\/]+/)) {
+    var slashes = rest.substr(0, 2) === '//';
+    if (slashes && !(proto && hostlessProtocol[proto])) {
+      rest = rest.substr(2);
+      this.slashes = true;
+    }
+  }
+
+  if (!hostlessProtocol[proto] &&
+      (slashes || (proto && !slashedProtocol[proto]))) {
+
+    // there's a hostname.
+    // the first instance of /, ?, ;, or # ends the host.
+    //
+    // If there is an @ in the hostname, then non-host chars *are* allowed
+    // to the left of the last @ sign, unless some host-ending character
+    // comes *before* the @-sign.
+    // URLs are obnoxious.
+    //
+    // ex:
+    // http://a@b@c/ => user:a@b host:c
+    // http://a@b?@c => user:a host:c path:/?@c
+
+    // v0.12 TODO(isaacs): This is not quite how Chrome does things.
+    // Review our test case against browsers more comprehensively.
+
+    // find the first instance of any hostEndingChars
+    var hostEnd = -1;
+    for (var i = 0; i < hostEndingChars.length; i++) {
+      var hec = rest.indexOf(hostEndingChars[i]);
+      if (hec !== -1 && (hostEnd === -1 || hec < hostEnd))
+        hostEnd = hec;
+    }
+
+    // at this point, either we have an explicit point where the
+    // auth portion cannot go past, or the last @ char is the decider.
+    var auth, atSign;
+    if (hostEnd === -1) {
+      // atSign can be anywhere.
+      atSign = rest.lastIndexOf('@');
+    } else {
+      // atSign must be in auth portion.
+      // http://a@b/c@d => host:b auth:a path:/c@d
+      atSign = rest.lastIndexOf('@', hostEnd);
+    }
+
+    // Now we have a portion which is definitely the auth.
+    // Pull that off.
+    if (atSign !== -1) {
+      auth = rest.slice(0, atSign);
+      rest = rest.slice(atSign + 1);
+      this.auth = decodeURIComponent(auth);
+    }
+
+    // the host is the remaining to the left of the first non-host char
+    hostEnd = -1;
+    for (var i = 0; i < nonHostChars.length; i++) {
+      var hec = rest.indexOf(nonHostChars[i]);
+      if (hec !== -1 && (hostEnd === -1 || hec < hostEnd))
+        hostEnd = hec;
+    }
+    // if we still have not hit it, then the entire thing is a host.
+    if (hostEnd === -1)
+      hostEnd = rest.length;
+
+    this.host = rest.slice(0, hostEnd);
+    rest = rest.slice(hostEnd);
+
+    // pull out port.
+    this.parseHost();
+
+    // we've indicated that there is a hostname,
+    // so even if it's empty, it has to be present.
+    this.hostname = this.hostname || '';
+
+    // if hostname begins with [ and ends with ]
+    // assume that it's an IPv6 address.
+    var ipv6Hostname = this.hostname[0] === '[' &&
+        this.hostname[this.hostname.length - 1] === ']';
+
+    // validate a little.
+    if (!ipv6Hostname) {
+      var hostparts = this.hostname.split(/\./);
+      for (var i = 0, l = hostparts.length; i < l; i++) {
+        var part = hostparts[i];
+        if (!part) continue;
+        if (!part.match(hostnamePartPattern)) {
+          var newpart = '';
+          for (var j = 0, k = part.length; j < k; j++) {
+            if (part.charCodeAt(j) > 127) {
+              // we replace non-ASCII char with a temporary placeholder
+              // we need this to make sure size of hostname is not
+              // broken by replacing non-ASCII by nothing
+              newpart += 'x';
+            } else {
+              newpart += part[j];
+            }
+          }
+          // we test again with ASCII char only
+          if (!newpart.match(hostnamePartPattern)) {
+            var validParts = hostparts.slice(0, i);
+            var notHost = hostparts.slice(i + 1);
+            var bit = part.match(hostnamePartStart);
+            if (bit) {
+              validParts.push(bit[1]);
+              notHost.unshift(bit[2]);
+            }
+            if (notHost.length) {
+              rest = '/' + notHost.join('.') + rest;
+            }
+            this.hostname = validParts.join('.');
+            break;
+          }
+        }
+      }
+    }
+
+    if (this.hostname.length > hostnameMaxLen) {
+      this.hostname = '';
+    } else {
+      // hostnames are always lower case.
+      this.hostname = this.hostname.toLowerCase();
+    }
+
+    if (!ipv6Hostname) {
+      // IDNA Support: Returns a punycoded representation of "domain".
+      // It only converts parts of the domain name that
+      // have non-ASCII characters, i.e. it doesn't matter if
+      // you call it with a domain that already is ASCII-only.
+      this.hostname = punycode.toASCII(this.hostname);
+    }
+
+    var p = this.port ? ':' + this.port : '';
+    var h = this.hostname || '';
+    this.host = h + p;
+    this.href += this.host;
+
+    // strip [ and ] from the hostname
+    // the host field still retains them, though
+    if (ipv6Hostname) {
+      this.hostname = this.hostname.substr(1, this.hostname.length - 2);
+      if (rest[0] !== '/') {
+        rest = '/' + rest;
+      }
+    }
+  }
+
+  // now rest is set to the post-host stuff.
+  // chop off any delim chars.
+  if (!unsafeProtocol[lowerProto]) {
+
+    // First, make 100% sure that any "autoEscape" chars get
+    // escaped, even if encodeURIComponent doesn't think they
+    // need to be.
+    for (var i = 0, l = autoEscape.length; i < l; i++) {
+      var ae = autoEscape[i];
+      if (rest.indexOf(ae) === -1)
+        continue;
+      var esc = encodeURIComponent(ae);
+      if (esc === ae) {
+        esc = escape(ae);
+      }
+      rest = rest.split(ae).join(esc);
+    }
+  }
+
+
+  // chop off from the tail first.
+  var hash = rest.indexOf('#');
+  if (hash !== -1) {
+    // got a fragment string.
+    this.hash = rest.substr(hash);
+    rest = rest.slice(0, hash);
+  }
+  var qm = rest.indexOf('?');
+  if (qm !== -1) {
+    this.search = rest.substr(qm);
+    this.query = rest.substr(qm + 1);
+    if (parseQueryString) {
+      this.query = querystring.parse(this.query);
+    }
+    rest = rest.slice(0, qm);
+  } else if (parseQueryString) {
+    // no query string, but parseQueryString still requested
+    this.search = '';
+    this.query = {};
+  }
+  if (rest) this.pathname = rest;
+  if (slashedProtocol[lowerProto] &&
+      this.hostname && !this.pathname) {
+    this.pathname = '/';
+  }
+
+  //to support http.request
+  if (this.pathname || this.search) {
+    var p = this.pathname || '';
+    var s = this.search || '';
+    this.path = p + s;
+  }
+
+  // finally, reconstruct the href based on what has been validated.
+  this.href = this.format();
+  return this;
+};
+
+// format a parsed object into a url string
+function urlFormat(obj) {
+  // ensure it's an object, and not a string url.
+  // If it's an obj, this is a no-op.
+  // this way, you can call url_format() on strings
+  // to clean up potentially wonky urls.
+  if (util.isString(obj)) obj = urlParse(obj);
+  if (!(obj instanceof Url)) return Url.prototype.format.call(obj);
+  return obj.format();
+}
+
+Url.prototype.format = function() {
+  var auth = this.auth || '';
+  if (auth) {
+    auth = encodeURIComponent(auth);
+    auth = auth.replace(/%3A/i, ':');
+    auth += '@';
+  }
+
+  var protocol = this.protocol || '',
+      pathname = this.pathname || '',
+      hash = this.hash || '',
+      host = false,
+      query = '';
+
+  if (this.host) {
+    host = auth + this.host;
+  } else if (this.hostname) {
+    host = auth + (this.hostname.indexOf(':') === -1 ?
+        this.hostname :
+        '[' + this.hostname + ']');
+    if (this.port) {
+      host += ':' + this.port;
+    }
+  }
+
+  if (this.query &&
+      util.isObject(this.query) &&
+      Object.keys(this.query).length) {
+    query = querystring.stringify(this.query);
+  }
+
+  var search = this.search || (query && ('?' + query)) || '';
+
+  if (protocol && protocol.substr(-1) !== ':') protocol += ':';
+
+  // only the slashedProtocols get the //.  Not mailto:, xmpp:, etc.
+  // unless they had them to begin with.
+  if (this.slashes ||
+      (!protocol || slashedProtocol[protocol]) && host !== false) {
+    host = '//' + (host || '');
+    if (pathname && pathname.charAt(0) !== '/') pathname = '/' + pathname;
+  } else if (!host) {
+    host = '';
+  }
+
+  if (hash && hash.charAt(0) !== '#') hash = '#' + hash;
+  if (search && search.charAt(0) !== '?') search = '?' + search;
+
+  pathname = pathname.replace(/[?#]/g, function(match) {
+    return encodeURIComponent(match);
+  });
+  search = search.replace('#', '%23');
+
+  return protocol + host + pathname + search + hash;
+};
+
+function urlResolve(source, relative) {
+  return urlParse(source, false, true).resolve(relative);
+}
+
+Url.prototype.resolve = function(relative) {
+  return this.resolveObject(urlParse(relative, false, true)).format();
+};
+
+function urlResolveObject(source, relative) {
+  if (!source) return relative;
+  return urlParse(source, false, true).resolveObject(relative);
+}
+
+Url.prototype.resolveObject = function(relative) {
+  if (util.isString(relative)) {
+    var rel = new Url();
+    rel.parse(relative, false, true);
+    relative = rel;
+  }
+
+  var result = new Url();
+  var tkeys = Object.keys(this);
+  for (var tk = 0; tk < tkeys.length; tk++) {
+    var tkey = tkeys[tk];
+    result[tkey] = this[tkey];
+  }
+
+  // hash is always overridden, no matter what.
+  // even href="" will remove it.
+  result.hash = relative.hash;
+
+  // if the relative url is empty, then there's nothing left to do here.
+  if (relative.href === '') {
+    result.href = result.format();
+    return result;
+  }
+
+  // hrefs like //foo/bar always cut to the protocol.
+  if (relative.slashes && !relative.protocol) {
+    // take everything except the protocol from relative
+    var rkeys = Object.keys(relative);
+    for (var rk = 0; rk < rkeys.length; rk++) {
+      var rkey = rkeys[rk];
+      if (rkey !== 'protocol')
+        result[rkey] = relative[rkey];
+    }
+
+    //urlParse appends trailing / to urls like http://www.example.com
+    if (slashedProtocol[result.protocol] &&
+        result.hostname && !result.pathname) {
+      result.path = result.pathname = '/';
+    }
+
+    result.href = result.format();
+    return result;
+  }
+
+  if (relative.protocol && relative.protocol !== result.protocol) {
+    // if it's a known url protocol, then changing
+    // the protocol does weird things
+    // first, if it's not file:, then we MUST have a host,
+    // and if there was a path
+    // to begin with, then we MUST have a path.
+    // if it is file:, then the host is dropped,
+    // because that's known to be hostless.
+    // anything else is assumed to be absolute.
+    if (!slashedProtocol[relative.protocol]) {
+      var keys = Object.keys(relative);
+      for (var v = 0; v < keys.length; v++) {
+        var k = keys[v];
+        result[k] = relative[k];
+      }
+      result.href = result.format();
+      return result;
+    }
+
+    result.protocol = relative.protocol;
+    if (!relative.host && !hostlessProtocol[relative.protocol]) {
+      var relPath = (relative.pathname || '').split('/');
+      while (relPath.length && !(relative.host = relPath.shift()));
+      if (!relative.host) relative.host = '';
+      if (!relative.hostname) relative.hostname = '';
+      if (relPath[0] !== '') relPath.unshift('');
+      if (relPath.length < 2) relPath.unshift('');
+      result.pathname = relPath.join('/');
+    } else {
+      result.pathname = relative.pathname;
+    }
+    result.search = relative.search;
+    result.query = relative.query;
+    result.host = relative.host || '';
+    result.auth = relative.auth;
+    result.hostname = relative.hostname || relative.host;
+    result.port = relative.port;
+    // to support http.request
+    if (result.pathname || result.search) {
+      var p = result.pathname || '';
+      var s = result.search || '';
+      result.path = p + s;
+    }
+    result.slashes = result.slashes || relative.slashes;
+    result.href = result.format();
+    return result;
+  }
+
+  var isSourceAbs = (result.pathname && result.pathname.charAt(0) === '/'),
+      isRelAbs = (
+          relative.host ||
+          relative.pathname && relative.pathname.charAt(0) === '/'
+      ),
+      mustEndAbs = (isRelAbs || isSourceAbs ||
+                    (result.host && relative.pathname)),
+      removeAllDots = mustEndAbs,
+      srcPath = result.pathname && result.pathname.split('/') || [],
+      relPath = relative.pathname && relative.pathname.split('/') || [],
+      psychotic = result.protocol && !slashedProtocol[result.protocol];
+
+  // if the url is a non-slashed url, then relative
+  // links like ../.. should be able
+  // to crawl up to the hostname, as well.  This is strange.
+  // result.protocol has already been set by now.
+  // Later on, put the first path part into the host field.
+  if (psychotic) {
+    result.hostname = '';
+    result.port = null;
+    if (result.host) {
+      if (srcPath[0] === '') srcPath[0] = result.host;
+      else srcPath.unshift(result.host);
+    }
+    result.host = '';
+    if (relative.protocol) {
+      relative.hostname = null;
+      relative.port = null;
+      if (relative.host) {
+        if (relPath[0] === '') relPath[0] = relative.host;
+        else relPath.unshift(relative.host);
+      }
+      relative.host = null;
+    }
+    mustEndAbs = mustEndAbs && (relPath[0] === '' || srcPath[0] === '');
+  }
+
+  if (isRelAbs) {
+    // it's absolute.
+    result.host = (relative.host || relative.host === '') ?
+                  relative.host : result.host;
+    result.hostname = (relative.hostname || relative.hostname === '') ?
+                      relative.hostname : result.hostname;
+    result.search = relative.search;
+    result.query = relative.query;
+    srcPath = relPath;
+    // fall through to the dot-handling below.
+  } else if (relPath.length) {
+    // it's relative
+    // throw away the existing file, and take the new path instead.
+    if (!srcPath) srcPath = [];
+    srcPath.pop();
+    srcPath = srcPath.concat(relPath);
+    result.search = relative.search;
+    result.query = relative.query;
+  } else if (!util.isNullOrUndefined(relative.search)) {
+    // just pull out the search.
+    // like href='?foo'.
+    // Put this after the other two cases because it simplifies the booleans
+    if (psychotic) {
+      result.hostname = result.host = srcPath.shift();
+      //occationaly the auth can get stuck only in host
+      //this especially happens in cases like
+      //url.resolveObject('mailto:local1@domain1', 'local2@domain2')
+      var authInHost = result.host && result.host.indexOf('@') > 0 ?
+                       result.host.split('@') : false;
+      if (authInHost) {
+        result.auth = authInHost.shift();
+        result.host = result.hostname = authInHost.shift();
+      }
+    }
+    result.search = relative.search;
+    result.query = relative.query;
+    //to support http.request
+    if (!util.isNull(result.pathname) || !util.isNull(result.search)) {
+      result.path = (result.pathname ? result.pathname : '') +
+                    (result.search ? result.search : '');
+    }
+    result.href = result.format();
+    return result;
+  }
+
+  if (!srcPath.length) {
+    // no path at all.  easy.
+    // we've already handled the other stuff above.
+    result.pathname = null;
+    //to support http.request
+    if (result.search) {
+      result.path = '/' + result.search;
+    } else {
+      result.path = null;
+    }
+    result.href = result.format();
+    return result;
+  }
+
+  // if a url ENDs in . or .., then it must get a trailing slash.
+  // however, if it ends in anything else non-slashy,
+  // then it must NOT get a trailing slash.
+  var last = srcPath.slice(-1)[0];
+  var hasTrailingSlash = (
+      (result.host || relative.host || srcPath.length > 1) &&
+      (last === '.' || last === '..') || last === '');
+
+  // strip single dots, resolve double dots to parent dir
+  // if the path tries to go above the root, `up` ends up > 0
+  var up = 0;
+  for (var i = srcPath.length; i >= 0; i--) {
+    last = srcPath[i];
+    if (last === '.') {
+      srcPath.splice(i, 1);
+    } else if (last === '..') {
+      srcPath.splice(i, 1);
       up++;
     } else if (up) {
-      if (i === 0) unshift = true;
-      path.splice(i, 1);
+      srcPath.splice(i, 1);
       up--;
     }
   }
 
-  if (unshift) path.unshift('');
-  if (last === '.' || last === '..') path.push('');
-
-  return path.join('/');
-}
-
-/**
- * The actual URL instance. Instead of returning an object we've opted-in to
- * create an actual constructor as it's much more memory efficient and
- * faster and it pleases my OCD.
- *
- * @constructor
- * @param {String} address URL we want to parse.
- * @param {Object|String} location Location defaults for relative paths.
- * @param {Boolean|Function} parser Parser for the query string.
- * @api public
- */
-function URL$1(address, location, parser) {
-  if (!(this instanceof URL$1)) {
-    return new URL$1(address, location, parser);
-  }
-
-  var relative, extracted, parse, instruction, index, key
-    , instructions = rules.slice()
-    , type = typeof location
-    , url = this
-    , i = 0;
-
-  //
-  // The following if statements allows this module two have compatibility with
-  // 2 different API:
-  //
-  // 1. Node.js's `url.parse` api which accepts a URL, boolean as arguments
-  //    where the boolean indicates that the query string should also be parsed.
-  //
-  // 2. The `URL` interface of the browser which accepts a URL, object as
-  //    arguments. The supplied object will be used as default values / fall-back
-  //    for relative paths.
-  //
-  if ('object' !== type && 'string' !== type) {
-    parser = location;
-    location = null;
-  }
-
-  if (parser && 'function' !== typeof parser) parser = qs.parse;
-
-  location = lolcation(location);
-
-  //
-  // Extract protocol information before running the instructions.
-  //
-  extracted = extractProtocol(address || '');
-  relative = !extracted.protocol && !extracted.slashes;
-  url.slashes = extracted.slashes || relative && location.slashes;
-  url.protocol = extracted.protocol || location.protocol || '';
-  address = extracted.rest;
-
-  //
-  // When the authority component is absent the URL starts with a path
-  // component.
-  //
-  if (!extracted.slashes) instructions[2] = [/(.*)/, 'pathname'];
-
-  for (; i < instructions.length; i++) {
-    instruction = instructions[i];
-    parse = instruction[0];
-    key = instruction[1];
-
-    if (parse !== parse) {
-      url[key] = address;
-    } else if ('string' === typeof parse) {
-      if (~(index = address.indexOf(parse))) {
-        if ('number' === typeof instruction[2]) {
-          url[key] = address.slice(0, index);
-          address = address.slice(index + instruction[2]);
-        } else {
-          url[key] = address.slice(index);
-          address = address.slice(0, index);
-        }
-      }
-    } else if (index = parse.exec(address)) {
-      url[key] = index[1];
-      address = address.slice(0, index.index);
+  // if the path is allowed to go above the root, restore leading ..s
+  if (!mustEndAbs && !removeAllDots) {
+    for (; up--; up) {
+      srcPath.unshift('..');
     }
-
-    url[key] = url[key] || (
-      relative && instruction[3] ? location[key] || '' : ''
-    );
-
-    //
-    // Hostname, host and protocol should be lowercased so they can be used to
-    // create a proper `origin`.
-    //
-    if (instruction[4]) url[key] = url[key].toLowerCase();
   }
 
-  //
-  // Also parse the supplied query string in to an object. If we're supplied
-  // with a custom parser as function use that instead of the default build-in
-  // parser.
-  //
-  if (parser) url.query = parser(url.query);
-
-  //
-  // If the URL is relative, resolve the pathname against the base URL.
-  //
-  if (
-      relative
-    && location.slashes
-    && url.pathname.charAt(0) !== '/'
-    && (url.pathname !== '' || location.pathname !== '')
-  ) {
-    url.pathname = resolve$1(url.pathname, location.pathname);
+  if (mustEndAbs && srcPath[0] !== '' &&
+      (!srcPath[0] || srcPath[0].charAt(0) !== '/')) {
+    srcPath.unshift('');
   }
 
-  //
-  // We should not add port numbers if they are already the default port number
-  // for a given protocol. As the host also contains the port number we're going
-  // override it with the hostname which contains no port number.
-  //
-  if (!required$1(url.port, url.protocol)) {
-    url.host = url.hostname;
-    url.port = '';
+  if (hasTrailingSlash && (srcPath.join('/').substr(-1) !== '/')) {
+    srcPath.push('');
   }
 
-  //
-  // Parse down the `auth` for the username and password.
-  //
-  url.username = url.password = '';
-  if (url.auth) {
-    instruction = url.auth.split(':');
-    url.username = instruction[0] || '';
-    url.password = instruction[1] || '';
+  var isAbsolute = srcPath[0] === '' ||
+      (srcPath[0] && srcPath[0].charAt(0) === '/');
+
+  // put the host back
+  if (psychotic) {
+    result.hostname = result.host = isAbsolute ? '' :
+                                    srcPath.length ? srcPath.shift() : '';
+    //occationaly the auth can get stuck only in host
+    //this especially happens in cases like
+    //url.resolveObject('mailto:local1@domain1', 'local2@domain2')
+    var authInHost = result.host && result.host.indexOf('@') > 0 ?
+                     result.host.split('@') : false;
+    if (authInHost) {
+      result.auth = authInHost.shift();
+      result.host = result.hostname = authInHost.shift();
+    }
   }
 
-  url.origin = url.protocol && url.host && url.protocol !== 'file:'
-    ? url.protocol +'//'+ url.host
-    : 'null';
+  mustEndAbs = mustEndAbs || (result.host && srcPath.length);
 
-  //
-  // The href is just the compiled result.
-  //
-  url.href = url.toString();
-}
-
-/**
- * This is convenience method for changing properties in the URL instance to
- * insure that they all propagate correctly.
- *
- * @param {String} part          Property we need to adjust.
- * @param {Mixed} value          The newly assigned value.
- * @param {Boolean|Function} fn  When setting the query, it will be the function
- *                               used to parse the query.
- *                               When setting the protocol, double slash will be
- *                               removed from the final url if it is true.
- * @returns {URL}
- * @api public
- */
-URL$1.prototype.set = function set(part, value, fn) {
-  var url = this;
-
-  switch (part) {
-    case 'query':
-      if ('string' === typeof value && value.length) {
-        value = (fn || qs.parse)(value);
-      }
-
-      url[part] = value;
-      break;
-
-    case 'port':
-      url[part] = value;
-
-      if (!required$1(value, url.protocol)) {
-        url.host = url.hostname;
-        url[part] = '';
-      } else if (value) {
-        url.host = url.hostname +':'+ value;
-      }
-
-      break;
-
-    case 'hostname':
-      url[part] = value;
-
-      if (url.port) value += ':'+ url.port;
-      url.host = value;
-      break;
-
-    case 'host':
-      url[part] = value;
-
-      if (/:\d+$/.test(value)) {
-        value = value.split(':');
-        url.port = value.pop();
-        url.hostname = value.join(':');
-      } else {
-        url.hostname = value;
-        url.port = '';
-      }
-
-      break;
-
-    case 'protocol':
-      url.protocol = value.toLowerCase();
-      url.slashes = !fn;
-      break;
-
-    case 'pathname':
-      url.pathname = value.length && value.charAt(0) !== '/' ? '/' + value : value;
-
-      break;
-
-    default:
-      url[part] = value;
+  if (mustEndAbs && !isAbsolute) {
+    srcPath.unshift('');
   }
 
-  for (var i = 0; i < rules.length; i++) {
-    var ins = rules[i];
-
-    if (ins[4]) url[ins[1]] = url[ins[1]].toLowerCase();
+  if (!srcPath.length) {
+    result.pathname = null;
+    result.path = null;
+  } else {
+    result.pathname = srcPath.join('/');
   }
 
-  url.origin = url.protocol && url.host && url.protocol !== 'file:'
-    ? url.protocol +'//'+ url.host
-    : 'null';
-
-  url.href = url.toString();
-
-  return url;
-};
-
-/**
- * Transform the properties back in to a valid and full URL string.
- *
- * @param {Function} stringify Optional query stringify function.
- * @returns {String}
- * @api public
- */
-URL$1.prototype.toString = function toString(stringify) {
-  if (!stringify || 'function' !== typeof stringify) stringify = qs.stringify;
-
-  var query
-    , url = this
-    , protocol = url.protocol;
-
-  if (protocol && protocol.charAt(protocol.length - 1) !== ':') protocol += ':';
-
-  var result = protocol + (url.slashes ? '//' : '');
-
-  if (url.username) {
-    result += url.username;
-    if (url.password) result += ':'+ url.password;
-    result += '@';
+  //to support request.http
+  if (!util.isNull(result.pathname) || !util.isNull(result.search)) {
+    result.path = (result.pathname ? result.pathname : '') +
+                  (result.search ? result.search : '');
   }
-
-  result += url.host + url.pathname;
-
-  query = 'object' === typeof url.query ? stringify(url.query) : url.query;
-  if (query) result += '?' !== query.charAt(0) ? '?'+ query : query;
-
-  if (url.hash) result += url.hash;
-
+  result.auth = relative.auth || result.auth;
+  result.slashes = result.slashes || relative.slashes;
+  result.href = result.format();
   return result;
 };
 
-//
-// Expose the URL parser and some additional properties that might be useful for
-// others or testing.
-//
-URL$1.extractProtocol = extractProtocol;
-URL$1.location = lolcation;
-URL$1.qs = qs;
+Url.prototype.parseHost = function() {
+  var host = this.host;
+  var port = portPattern.exec(host);
+  if (port) {
+    port = port[0];
+    if (port !== ':') {
+      this.port = port.substr(1);
+    }
+    host = host.substr(0, host.length - port.length);
+  }
+  if (host) this.hostname = host;
+};
 
-var index$1 = URL$1;
+var url = {
+	parse: parse$1,
+	resolve: resolve$1,
+	resolveObject: resolveObject,
+	format: format,
+	Url: Url_1
+};
 
 var jquery = createCommonjsModule(function (module) {
 /*!
@@ -13399,7 +14283,9 @@ var TheAtlanticExtractor = {
     clean: []
   },
 
-  date_published: null,
+  date_published: {
+    selectors: [['time[itemProp="datePublished"]', 'datetime']]
+  },
 
   lead_image_url: null,
 
@@ -14116,7 +15002,7 @@ var Extractors = _Object$keys(CustomExtractors).reduce(function (acc, key) {
   return _extends$1({}, acc, mergeSupportedDomains(extractor));
 }, {});
 
-var index$6 = createCommonjsModule(function (module, exports) {
+var index$3 = createCommonjsModule(function (module, exports) {
 (function(){
 
   var LTR_MARK = "\u200e",
@@ -14268,219 +15154,41 @@ var index$6 = createCommonjsModule(function (module, exports) {
 }).call(this);
 });
 
-// CLEAN AUTHOR CONSTANTS
-var CLEAN_AUTHOR_RE = /^\s*(posted |written )?by\s*:?\s*(.*)/i;
-//     author = re.sub(r'^\s*(posted |written )?by\s*:?\s*(.*)(?i)',
+// 19.1.2.7 / 15.2.3.4 Object.getOwnPropertyNames(O)
+var $keys$2      = _objectKeysInternal;
+var hiddenKeys = _enumBugKeys.concat('length', 'prototype');
 
-// CLEAN DEK CONSTANTS
-var TEXT_LINK_RE = new RegExp('http(s)?://', 'i');
-// An ordered list of meta tag names that denote likely article deks.
-// From most distinct to least distinct.
-//
-// NOTE: There are currently no meta tags that seem to provide the right
-// content consistenty enough. Two options were:
-//  - og:description
-//  - dc.description
-// However, these tags often have SEO-specific junk in them that's not
-// header-worthy like a dek is. Excerpt material at best.
+var f$3 = Object.getOwnPropertyNames || function getOwnPropertyNames(O){
+  return $keys$2(O, hiddenKeys);
+};
 
+var _objectGopn = {
+	f: f$3
+};
 
-// An ordered list of Selectors to find likely article deks. From
-// most explicit to least explicit.
-//
-// Should be more restrictive than not, as a failed dek can be pretty
-// detrimental to the aesthetics of an article.
+// all object keys, includes non-enumerable and symbols
+var gOPN     = _objectGopn;
+var gOPS$1     = _objectGops;
+var anObject$6 = _anObject;
+var Reflect  = _global.Reflect;
+var _ownKeys = Reflect && Reflect.ownKeys || function ownKeys(it){
+  var keys       = gOPN.f(anObject$6(it))
+    , getSymbols = gOPS$1.f;
+  return getSymbols ? keys.concat(getSymbols(it)) : keys;
+};
 
+// 26.1.11 Reflect.ownKeys(target)
+var $export$6 = _export;
 
-// CLEAN DATE PUBLISHED CONSTANTS
-var MS_DATE_STRING = /^\d{13}$/i;
-var SEC_DATE_STRING = /^\d{10}$/i;
-var CLEAN_DATE_STRING_RE = /^\s*published\s*:?\s*(.*)/i;
-var TIME_MERIDIAN_SPACE_RE = /(.*\d)(am|pm)(.*)/i;
-var TIME_MERIDIAN_DOTS_RE = /\.m\./i;
-var months = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
-var allMonths = months.join('|');
-var timestamp1 = '[0-9]{1,2}:[0-9]{2,2}( ?[ap].?m.?)?';
-var timestamp2 = '[0-9]{1,2}[/-][0-9]{1,2}[/-][0-9]{2,4}';
-var SPLIT_DATE_STRING = new RegExp('(' + timestamp1 + ')|(' + timestamp2 + ')|([0-9]{1,4})|(' + allMonths + ')', 'ig');
+$export$6($export$6.S, 'Reflect', {ownKeys: _ownKeys});
 
-// CLEAN TITLE CONSTANTS
-// A regular expression that will match separating characters on a
-// title, that usually denote breadcrumbs or something similar.
-var TITLE_SPLITTERS_RE = /(: | - | \| )/g;
+var ownKeys$2 = _core.Reflect.ownKeys;
 
-var DOMAIN_ENDINGS_RE = new RegExp('.com$|.net$|.org$|.co.uk$', 'g');
-
-// Take an author string (like 'By David Smith ') and clean it to
-// just the name(s): 'David Smith'.
-function cleanAuthor(author) {
-  return author.replace(CLEAN_AUTHOR_RE, '$2').trim();
-}
-
-var index$7 = createCommonjsModule(function (module) {
-(function(module) {
-    'use strict';
-
-    module.exports.is_uri = is_iri;
-    module.exports.is_http_uri = is_http_iri;
-    module.exports.is_https_uri = is_https_iri;
-    module.exports.is_web_uri = is_web_iri;
-    // Create aliases
-    module.exports.isUri = is_iri;
-    module.exports.isHttpUri = is_http_iri;
-    module.exports.isHttpsUri = is_https_iri;
-    module.exports.isWebUri = is_web_iri;
-
-
-    // private function
-    // internal URI spitter method - direct from RFC 3986
-    var splitUri = function(uri) {
-        var splitted = uri.match(/(?:([^:\/?#]+):)?(?:\/\/([^\/?#]*))?([^?#]*)(?:\?([^#]*))?(?:#(.*))?/);
-        return splitted;
-    };
-
-    function is_iri(value) {
-        if (!value) {
-            return;
-        }
-
-        // check for illegal characters
-        if (/[^a-z0-9\:\/\?\#\[\]\@\!\$\&\'\(\)\*\+\,\;\=\.\-\_\~\%]/i.test(value)) return;
-
-        // check for hex escapes that aren't complete
-        if (/%[^0-9a-f]/i.test(value)) return;
-        if (/%[0-9a-f](:?[^0-9a-f]|$)/i.test(value)) return;
-
-        var splitted = [];
-        var scheme = '';
-        var authority = '';
-        var path = '';
-        var query = '';
-        var fragment = '';
-        var out = '';
-
-        // from RFC 3986
-        splitted = splitUri(value);
-        scheme = splitted[1]; 
-        authority = splitted[2];
-        path = splitted[3];
-        query = splitted[4];
-        fragment = splitted[5];
-
-        // scheme and path are required, though the path can be empty
-        if (!(scheme && scheme.length && path.length >= 0)) return;
-
-        // if authority is present, the path must be empty or begin with a /
-        if (authority && authority.length) {
-            if (!(path.length === 0 || /^\//.test(path))) return;
-        } else {
-            // if authority is not present, the path must not start with //
-            if (/^\/\//.test(path)) return;
-        }
-
-        // scheme must begin with a letter, then consist of letters, digits, +, ., or -
-        if (!/^[a-z][a-z0-9\+\-\.]*$/.test(scheme.toLowerCase()))  return;
-
-        // re-assemble the URL per section 5.3 in RFC 3986
-        out += scheme + ':';
-        if (authority && authority.length) {
-            out += '//' + authority;
-        }
-
-        out += path;
-
-        if (query && query.length) {
-            out += '?' + query;
-        }
-
-        if (fragment && fragment.length) {
-            out += '#' + fragment;
-        }
-
-        return out;
-    }
-
-    function is_http_iri(value, allowHttps) {
-        if (!is_iri(value)) {
-            return;
-        }
-
-        var splitted = [];
-        var scheme = '';
-        var authority = '';
-        var path = '';
-        var port = '';
-        var query = '';
-        var fragment = '';
-        var out = '';
-
-        // from RFC 3986
-        splitted = splitUri(value);
-        scheme = splitted[1]; 
-        authority = splitted[2];
-        path = splitted[3];
-        query = splitted[4];
-        fragment = splitted[5];
-
-        if (!scheme)  return;
-
-        if(allowHttps) {
-            if (scheme.toLowerCase() != 'https') return;
-        } else {
-            if (scheme.toLowerCase() != 'http') return;
-        }
-
-        // fully-qualified URIs must have an authority section that is
-        // a valid host
-        if (!authority) {
-            return;
-        }
-
-        // enable port component
-        if (/:(\d+)$/.test(authority)) {
-            port = authority.match(/:(\d+)$/)[0];
-            authority = authority.replace(/:\d+$/, '');
-        }
-
-        out += scheme + ':';
-        out += '//' + authority;
-        
-        if (port) {
-            out += port;
-        }
-        
-        out += path;
-        
-        if(query && query.length){
-            out += '?' + query;
-        }
-
-        if(fragment && fragment.length){
-            out += '#' + fragment;
-        }
-        
-        return out;
-    }
-
-    function is_https_iri(value) {
-        return is_http_iri(value, true);
-    }
-
-    function is_web_iri(value) {
-        return (is_http_iri(value) || is_https_iri(value));
-    }
-
-})(module);
+var ownKeys$1 = createCommonjsModule(function (module) {
+module.exports = { "default": ownKeys$2, __esModule: true };
 });
 
-function clean(leadImageUrl) {
-  leadImageUrl = leadImageUrl.trim();
-  if (index$7.isWebUri(leadImageUrl)) {
-    return leadImageUrl;
-  }
-
-  return null;
-}
+var _Reflect$ownKeys = unwrapExports(ownKeys$1);
 
 // Spacer images to be removed
 var SPACER_RE = new RegExp('trans|transparent|spacer|blank', 'i');
@@ -14637,6 +15345,33 @@ var CANDIDATES_BLACKLIST = new RegExp(candidatesBlacklist, 'i');
 var candidatesWhitelist = UNLIKELY_CANDIDATES_WHITELIST.join('|');
 var CANDIDATES_WHITELIST = new RegExp(candidatesWhitelist, 'i');
 
+function stripUnlikelyCandidates($) {
+  //  Loop through the provided document and remove any non-link nodes
+  //  that are unlikely candidates for article content.
+  //
+  //  Links are ignored because there are very often links to content
+  //  that are identified as non-body-content, but may be inside
+  //  article-like content.
+  //
+  //  :param $: a cheerio object to strip nodes from
+  //  :return $: the cleaned cheerio object
+  $('*').not('a').each(function (index, node) {
+    var $node = $(node);
+    var classes = $node.attr('class');
+    var id = $node.attr('id');
+    if (!id && !classes) return;
+
+    var classAndId = (classes || '') + ' ' + (id || '');
+    if (CANDIDATES_WHITELIST.test(classAndId)) {
+      return;
+    } else if (CANDIDATES_BLACKLIST.test(classAndId)) {
+      $node.remove();
+    }
+  });
+
+  return $;
+}
+
 // ## NOTES:
 // Another good candidate for refactoring/optimizing.
 // Very imperative code, I don't love it. - AP
@@ -14706,7 +15441,7 @@ function convertDivs($) {
     var convertable = $div.children(DIV_TO_P_BLOCK_TAGS).length === 0;
 
     if (convertable) {
-      convertNodeTo($div, $, 'p');
+      convertNodeTo$$1($div, $, 'p');
     }
   });
 
@@ -14718,62 +15453,44 @@ function convertSpans($) {
     var $span = $(span);
     var convertable = $span.parents('p, div').length === 0;
     if (convertable) {
-      convertNodeTo($span, $, 'p');
+      convertNodeTo$$1($span, $, 'p');
     }
   });
 
   return $;
 }
 
-// 19.1.2.7 / 15.2.3.4 Object.getOwnPropertyNames(O)
-var $keys$2      = _objectKeysInternal;
-var hiddenKeys = _enumBugKeys.concat('length', 'prototype');
+// Loop through the provided doc, and convert any p-like elements to
+// actual paragraph tags.
+//
+//   Things fitting this criteria:
+//   * Multiple consecutive <br /> tags.
+//   * <div /> tags without block level elements inside of them
+//   * <span /> tags who are not children of <p /> or <div /> tags.
+//
+//   :param $: A cheerio object to search
+//   :return cheerio object with new p elements
+//   (By-reference mutation, though. Returned just for convenience.)
 
-var f$3 = Object.getOwnPropertyNames || function getOwnPropertyNames(O){
-  return $keys$2(O, hiddenKeys);
-};
+function convertToParagraphs$$1($) {
+  $ = brsToPs$$1($);
+  $ = convertDivs($);
+  $ = convertSpans($);
 
-var _objectGopn = {
-	f: f$3
-};
+  return $;
+}
 
-// all object keys, includes non-enumerable and symbols
-var gOPN     = _objectGopn;
-var gOPS$1     = _objectGops;
-var anObject$6 = _anObject;
-var Reflect  = _global.Reflect;
-var _ownKeys = Reflect && Reflect.ownKeys || function ownKeys(it){
-  var keys       = gOPN.f(anObject$6(it))
-    , getSymbols = gOPS$1.f;
-  return getSymbols ? keys.concat(getSymbols(it)) : keys;
-};
-
-// 26.1.11 Reflect.ownKeys(target)
-var $export$6 = _export;
-
-$export$6($export$6.S, 'Reflect', {ownKeys: _ownKeys});
-
-var ownKeys$2 = _core.Reflect.ownKeys;
-
-var ownKeys$1 = createCommonjsModule(function (module) {
-module.exports = { "default": ownKeys$2, __esModule: true };
-});
-
-var _Reflect$ownKeys = unwrapExports(ownKeys$1);
-
-function convertNodeTo($node, $) {
+function convertNodeTo$$1($node, $) {
   var tag = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'p';
 
   var node = $node.get(0);
   if (!node) {
     return $;
   }
+  var attrs = getAttrs(node);
 
-  var _$node$get = $node.get(0),
-      attribs = _$node$get.attribs;
-
-  var attribString = _Reflect$ownKeys(attribs).map(function (key) {
-    return key + '=' + attribs[key];
+  var attribString = _Reflect$ownKeys(attrs).map(function (key) {
+    return key + '=' + attrs[key];
   }).join(' ');
 
   $node.replaceWith('<' + tag + ' ' + attribString + '>' + $node.contents() + '</' + tag + '>');
@@ -14820,15 +15537,15 @@ function cleanImages($article, $) {
   return $;
 }
 
-function markToKeep(article, $, url) {
+function markToKeep(article, $, url$$1) {
   var tags = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : [];
 
   if (tags.length === 0) {
     tags = KEEP_SELECTORS;
   }
 
-  if (url) {
-    var _URL$parse = URL.parse(url),
+  if (url$$1) {
+    var _URL$parse = url.parse(url$$1),
         protocol = _URL$parse.protocol,
         hostname = _URL$parse.hostname;
 
@@ -14870,7 +15587,7 @@ function cleanHOnes$$1(article, $) {
     });
   } else {
     $hOnes.each(function (index, node) {
-      convertNodeTo($(node), $, 'h2');
+      convertNodeTo$$1($(node), $, 'h2');
     });
   }
 
@@ -14921,13 +15638,15 @@ var _defineProperty = unwrapExports(defineProperty$1);
 
 function removeAllButWhitelist($article) {
   $article.find('*').each(function (index, node) {
-    node.attribs = _Reflect$ownKeys(node.attribs).reduce(function (acc, attr) {
+    var attrs = getAttrs(node);
+
+    setAttrs(node, _Reflect$ownKeys(attrs).reduce(function (acc, attr) {
       if (WHITELIST_ATTRS_RE.test(attr)) {
-        return _extends$1({}, acc, _defineProperty({}, attr, node.attribs[attr]));
+        return _extends$1({}, acc, _defineProperty({}, attr, attrs[attr]));
       }
 
       return acc;
-    }, {});
+    }, {}));
   });
 
   return $article;
@@ -14940,7 +15659,7 @@ function removeAllButWhitelist($article) {
 // }
 
 // Remove attributes like style or align
-function cleanAttributes($article) {
+function cleanAttributes$$1($article) {
   // Grabbing the parent because at this point
   // $article will be wrapped in a div which will
   // have a score set on it.
@@ -15254,7 +15973,7 @@ function convertSpans$1($node, $) {
 
     if (tagName === 'span') {
       // convert spans to divs
-      convertNodeTo($node, $, 'div');
+      convertNodeTo$$1($node, $, 'div');
     }
   }
 }
@@ -15283,6 +16002,34 @@ function scorePs($, weightNodes) {
       addScoreTo($parent.parent(), $, rawScore / 2, weightNodes);
     }
   });
+
+  return $;
+}
+
+// score content. Parents get the full value of their children's
+// content score, grandparents half
+function scoreContent$$1($) {
+  var weightNodes = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+
+  // First, look for special hNews based selectors and give them a big
+  // boost, if they exist
+  HNEWS_CONTENT_SELECTORS$1.forEach(function (_ref) {
+    var _ref2 = _slicedToArray(_ref, 2),
+        parentSelector = _ref2[0],
+        childSelector = _ref2[1];
+
+    $(parentSelector + ' ' + childSelector).each(function (index, node) {
+      addScore$$1($(node).parent(parentSelector), $, 80);
+    });
+  });
+
+  // Doubling this again
+  // Previous solution caused a bug
+  // in which parents weren't retaining
+  // scores. This is not ideal, and
+  // should be fixed.
+  scorePs($, weightNodes);
+  scorePs($, weightNodes);
 
   return $;
 }
@@ -15374,8 +16121,8 @@ function isGoodSegment(segment, index, firstSegmentHasLetters) {
 // Take a URL, and return the article base of said URL. That is, no
 // pagination data exists in it. Useful for comparing to other links
 // that might have pagination data within them.
-function articleBaseUrl(url, parsed) {
-  var parsedUrl = parsed || new index$1(url);
+function articleBaseUrl(url$$1, parsed) {
+  var parsedUrl = parsed || url.parse(url$$1);
   var protocol = parsedUrl.protocol,
       host = parsedUrl.host,
       path = parsedUrl.path;
@@ -15502,6 +16249,38 @@ function mergeSiblings($candidate, topScore, $) {
   });
 
   return wrappingDiv;
+}
+
+// After we've calculated scores, loop through all of the possible
+// candidate nodes we found and find the one with the highest score.
+function findTopCandidate$$1($) {
+  var $candidate = void 0;
+  var topScore = 0;
+
+  $('[score]').each(function (index, node) {
+    // Ignore tags like BR, HR, etc
+    if (NON_TOP_CANDIDATE_TAGS_RE$1.test(node.tagName)) {
+      return;
+    }
+
+    var $node = $(node);
+    var score = getScore($node);
+
+    if (score > topScore) {
+      topScore = score;
+      $candidate = $node;
+    }
+  });
+
+  // If we don't have a candidate, return the body
+  // or whatever the first element is
+  if (!$candidate) {
+    return $('body') || $('*').first();
+  }
+
+  $candidate = mergeSiblings($candidate, topScore, $);
+
+  return $candidate;
 }
 
 // Scoring
@@ -15641,24 +16420,28 @@ function rewriteTopLevel$$1(article, $) {
   // I'm not using context here because
   // it's problematic when converting the
   // top-level/root node - AP
-  $ = convertNodeTo($('html'), $, 'div');
-  $ = convertNodeTo($('body'), $, 'div');
+  $ = convertNodeTo$$1($('html'), $, 'div');
+  $ = convertNodeTo$$1($('body'), $, 'div');
 
   return $;
 }
 
+/* eslint-disable */
 function absolutize($, rootUrl, attr, $content) {
   $('[' + attr + ']', $content).each(function (_, node) {
-    var url = node.attribs[attr];
-    var absoluteUrl = URL.resolve(rootUrl, url);
+    var attrs = getAttrs(node);
+    var url$$1 = attrs[attr];
 
-    node.attribs[attr] = absoluteUrl;
+    if (url$$1) {
+      var absoluteUrl = url.resolve(rootUrl, url$$1);
+      setAttr(node, attr, absoluteUrl);
+    }
   });
 }
 
-function makeLinksAbsolute($content, $, url) {
+function makeLinksAbsolute$$1($content, $, url$$1) {
   ['href', 'src'].forEach(function (attr) {
-    return absolutize($, url, attr, $content);
+    return absolutize($, url$$1, attr, $content);
   });
 
   return $content;
@@ -15825,7 +16608,7 @@ var pIE$2            = _objectPie;
 var createDesc$3     = _propertyDesc;
 var toIObject$6      = _toIobject;
 var toPrimitive$2    = _toPrimitive;
-var has$6            = _has;
+var has$5            = _has;
 var IE8_DOM_DEFINE$1 = _ie8DomDefine;
 var gOPD$1           = Object.getOwnPropertyDescriptor;
 
@@ -15835,7 +16618,7 @@ var f$6 = _descriptors ? gOPD$1 : function getOwnPropertyDescriptor(O, P){
   if(IE8_DOM_DEFINE$1)try {
     return gOPD$1(O, P);
   } catch(e){ /* empty */ }
-  if(has$6(O, P))return createDesc$3(!pIE$2.f.call(O, P), O[P]);
+  if(has$5(O, P))return createDesc$3(!pIE$2.f.call(O, P), O[P]);
 };
 
 var _objectGopd = {
@@ -15844,7 +16627,7 @@ var _objectGopd = {
 
 // ECMAScript 6 symbols shim
 var global$9         = _global;
-var has$5            = _has;
+var has$4            = _has;
 var DESCRIPTORS$1    = _descriptors;
 var $export$8        = _export;
 var redefine$1       = _redefine;
@@ -15916,12 +16699,12 @@ var $defineProperty$1 = function defineProperty(it, key, D){
   anObject$7(it);
   key = toPrimitive$1(key, true);
   anObject$7(D);
-  if(has$5(AllSymbols, key)){
+  if(has$4(AllSymbols, key)){
     if(!D.enumerable){
-      if(!has$5(it, HIDDEN))dP$4(it, HIDDEN, createDesc$2(1, {}));
+      if(!has$4(it, HIDDEN))dP$4(it, HIDDEN, createDesc$2(1, {}));
       it[HIDDEN][key] = true;
     } else {
-      if(has$5(it, HIDDEN) && it[HIDDEN][key])it[HIDDEN][key] = false;
+      if(has$4(it, HIDDEN) && it[HIDDEN][key])it[HIDDEN][key] = false;
       D = _create(D, {enumerable: createDesc$2(0, false)});
     } return setSymbolDesc(it, key, D);
   } return dP$4(it, key, D);
@@ -15940,15 +16723,15 @@ var $create = function create(it, P){
 };
 var $propertyIsEnumerable = function propertyIsEnumerable(key){
   var E = isEnum.call(this, key = toPrimitive$1(key, true));
-  if(this === ObjectProto$1 && has$5(AllSymbols, key) && !has$5(OPSymbols, key))return false;
-  return E || !has$5(this, key) || !has$5(AllSymbols, key) || has$5(this, HIDDEN) && this[HIDDEN][key] ? E : true;
+  if(this === ObjectProto$1 && has$4(AllSymbols, key) && !has$4(OPSymbols, key))return false;
+  return E || !has$4(this, key) || !has$4(AllSymbols, key) || has$4(this, HIDDEN) && this[HIDDEN][key] ? E : true;
 };
 var $getOwnPropertyDescriptor = function getOwnPropertyDescriptor(it, key){
   it  = toIObject$3(it);
   key = toPrimitive$1(key, true);
-  if(it === ObjectProto$1 && has$5(AllSymbols, key) && !has$5(OPSymbols, key))return;
+  if(it === ObjectProto$1 && has$4(AllSymbols, key) && !has$4(OPSymbols, key))return;
   var D = gOPD(it, key);
-  if(D && has$5(AllSymbols, key) && !(has$5(it, HIDDEN) && it[HIDDEN][key]))D.enumerable = true;
+  if(D && has$4(AllSymbols, key) && !(has$4(it, HIDDEN) && it[HIDDEN][key]))D.enumerable = true;
   return D;
 };
 var $getOwnPropertyNames = function getOwnPropertyNames(it){
@@ -15957,7 +16740,7 @@ var $getOwnPropertyNames = function getOwnPropertyNames(it){
     , i      = 0
     , key;
   while(names.length > i){
-    if(!has$5(AllSymbols, key = names[i++]) && key != HIDDEN && key != META)result.push(key);
+    if(!has$4(AllSymbols, key = names[i++]) && key != HIDDEN && key != META)result.push(key);
   } return result;
 };
 var $getOwnPropertySymbols = function getOwnPropertySymbols(it){
@@ -15967,7 +16750,7 @@ var $getOwnPropertySymbols = function getOwnPropertySymbols(it){
     , i      = 0
     , key;
   while(names.length > i){
-    if(has$5(AllSymbols, key = names[i++]) && (IS_OP ? has$5(ObjectProto$1, key) : true))result.push(AllSymbols[key]);
+    if(has$4(AllSymbols, key = names[i++]) && (IS_OP ? has$4(ObjectProto$1, key) : true))result.push(AllSymbols[key]);
   } return result;
 };
 
@@ -15978,7 +16761,7 @@ if(!USE_NATIVE$1){
     var tag = uid$1(arguments.length > 0 ? arguments[0] : undefined);
     var $set = function(value){
       if(this === ObjectProto$1)$set.call(OPSymbols, value);
-      if(has$5(this, HIDDEN) && has$5(this[HIDDEN], tag))this[HIDDEN][tag] = false;
+      if(has$4(this, HIDDEN) && has$4(this[HIDDEN], tag))this[HIDDEN][tag] = false;
       setSymbolDesc(this, tag, createDesc$2(1, value));
     };
     if(DESCRIPTORS$1 && setter)setSymbolDesc(ObjectProto$1, tag, {configurable: true, set: $set});
@@ -16015,7 +16798,7 @@ for(var symbols = $keys$3(wks.store), i$1 = 0; symbols.length > i$1; )wksDefine(
 $export$8($export$8.S + $export$8.F * !USE_NATIVE$1, 'Symbol', {
   // 19.4.2.1 Symbol.for(key)
   'for': function(key){
-    return has$5(SymbolRegistry, key += '')
+    return has$4(SymbolRegistry, key += '')
       ? SymbolRegistry[key]
       : SymbolRegistry[key] = $Symbol(key);
   },
@@ -16081,10 +16864,10 @@ _wksDefine('asyncIterator');
 
 _wksDefine('observable');
 
-var index$8 = _core.Symbol;
+var index$4 = _core.Symbol;
 
 var symbol = createCommonjsModule(function (module) {
-module.exports = { "default": index$8, __esModule: true };
+module.exports = { "default": index$4, __esModule: true };
 });
 
 var _typeof_1 = createCommonjsModule(function (module, exports) {
@@ -16197,7 +16980,7 @@ function isGoodNode($node, maxChildren) {
     return false;
   }
   // If it looks to be within a comment, skip it.
-  if (withinComment($node)) {
+  if (withinComment$$1($node)) {
     return false;
   }
 
@@ -16265,14 +17048,13 @@ function stripTags(text, $) {
   return cleanText === '' ? text : cleanText;
 }
 
-function withinComment($node) {
+function withinComment$$1($node) {
   var parents = $node.parents().toArray();
   var commentParent = parents.find(function (parent) {
     debugger; // eslint-disable-line
-    var _parent$attribs = parent.attribs;
-    _parent$attribs = _parent$attribs === undefined ? {} : _parent$attribs;
-    var nodeClass = _parent$attribs.class,
-        id = _parent$attribs.id;
+    var attrs = getAttrs(parent);
+    var nodeClass = attrs.class,
+        id = attrs.id;
 
     var classAndId = nodeClass + ' ' + id;
     return classAndId.includes('comment');
@@ -16285,11 +17067,282 @@ function withinComment($node) {
 // param: node (a cheerio node)
 // return: boolean
 
+function nodeIsSufficient($node) {
+  return $node.text().trim().length >= 100;
+}
+
 function isWordpress($) {
   return $(IS_WP_SELECTOR).length > 0;
 }
 
+function getAttrs(node) {
+  var attribs = node.attribs,
+      attributes = node.attributes;
+
+
+  if (!attribs && attributes) {
+    var attrs = _Reflect$ownKeys(attributes).reduce(function (acc, index) {
+      var attr = attributes[index];
+
+      acc[attr.name] = attr.value;
+      return acc;
+    }, {});
+    return attrs;
+  }
+
+  return attribs;
+}
+
+function setAttr(node, attr, val) {
+  if (node.attribs) {
+    node.attribs[attr] = val;
+  } else if (node.attributes) {
+    node.setAttribute(attr, val);
+  }
+
+  return node;
+}
+
+/* eslint-disable */
+function setAttrs(node, attrs) {
+  if (node.attribs) {
+    node.attribs = attrs;
+  } else if (node.attributes) {
+    while (node.attributes.length > 0) {
+      node.removeAttribute(node.attributes[0].name);
+    }_Reflect$ownKeys(attrs).forEach(function (key) {
+      node.setAttribute(key, attrs[key]);
+    });
+  }
+
+  return node;
+}
+
+function getHtml($, $node) {
+  // if this is cheerio
+  if ($.html) {
+    return $.html($node);
+  }
+
+  // if this is jquery
+  return $('<div />').append($node.clone()).html();
+}
+
 // DOM manipulation
+
+// CLEAN AUTHOR CONSTANTS
+var CLEAN_AUTHOR_RE = /^\s*(posted |written )?by\s*:?\s*(.*)/i;
+//     author = re.sub(r'^\s*(posted |written )?by\s*:?\s*(.*)(?i)',
+
+// CLEAN DEK CONSTANTS
+var TEXT_LINK_RE = new RegExp('http(s)?://', 'i');
+// An ordered list of meta tag names that denote likely article deks.
+// From most distinct to least distinct.
+//
+// NOTE: There are currently no meta tags that seem to provide the right
+// content consistenty enough. Two options were:
+//  - og:description
+//  - dc.description
+// However, these tags often have SEO-specific junk in them that's not
+// header-worthy like a dek is. Excerpt material at best.
+
+
+// An ordered list of Selectors to find likely article deks. From
+// most explicit to least explicit.
+//
+// Should be more restrictive than not, as a failed dek can be pretty
+// detrimental to the aesthetics of an article.
+
+
+// CLEAN DATE PUBLISHED CONSTANTS
+var MS_DATE_STRING = /^\d{13}$/i;
+var SEC_DATE_STRING = /^\d{10}$/i;
+var CLEAN_DATE_STRING_RE = /^\s*published\s*:?\s*(.*)/i;
+var TIME_MERIDIAN_SPACE_RE = /(.*\d)(am|pm)(.*)/i;
+var TIME_MERIDIAN_DOTS_RE = /\.m\./i;
+var months = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
+var allMonths = months.join('|');
+var timestamp1 = '[0-9]{1,2}:[0-9]{2,2}( ?[ap].?m.?)?';
+var timestamp2 = '[0-9]{1,2}[/-][0-9]{1,2}[/-][0-9]{2,4}';
+var SPLIT_DATE_STRING = new RegExp('(' + timestamp1 + ')|(' + timestamp2 + ')|([0-9]{1,4})|(' + allMonths + ')', 'ig');
+
+// CLEAN TITLE CONSTANTS
+// A regular expression that will match separating characters on a
+// title, that usually denote breadcrumbs or something similar.
+var TITLE_SPLITTERS_RE = /(: | - | \| )/g;
+
+var DOMAIN_ENDINGS_RE = new RegExp('.com$|.net$|.org$|.co.uk$', 'g');
+
+// Take an author string (like 'By David Smith ') and clean it to
+// just the name(s): 'David Smith'.
+function cleanAuthor(author) {
+  return author.replace(CLEAN_AUTHOR_RE, '$2').trim();
+}
+
+var index$6 = createCommonjsModule(function (module) {
+(function(module) {
+    'use strict';
+
+    module.exports.is_uri = is_iri;
+    module.exports.is_http_uri = is_http_iri;
+    module.exports.is_https_uri = is_https_iri;
+    module.exports.is_web_uri = is_web_iri;
+    // Create aliases
+    module.exports.isUri = is_iri;
+    module.exports.isHttpUri = is_http_iri;
+    module.exports.isHttpsUri = is_https_iri;
+    module.exports.isWebUri = is_web_iri;
+
+
+    // private function
+    // internal URI spitter method - direct from RFC 3986
+    var splitUri = function(uri) {
+        var splitted = uri.match(/(?:([^:\/?#]+):)?(?:\/\/([^\/?#]*))?([^?#]*)(?:\?([^#]*))?(?:#(.*))?/);
+        return splitted;
+    };
+
+    function is_iri(value) {
+        if (!value) {
+            return;
+        }
+
+        // check for illegal characters
+        if (/[^a-z0-9\:\/\?\#\[\]\@\!\$\&\'\(\)\*\+\,\;\=\.\-\_\~\%]/i.test(value)) return;
+
+        // check for hex escapes that aren't complete
+        if (/%[^0-9a-f]/i.test(value)) return;
+        if (/%[0-9a-f](:?[^0-9a-f]|$)/i.test(value)) return;
+
+        var splitted = [];
+        var scheme = '';
+        var authority = '';
+        var path = '';
+        var query = '';
+        var fragment = '';
+        var out = '';
+
+        // from RFC 3986
+        splitted = splitUri(value);
+        scheme = splitted[1]; 
+        authority = splitted[2];
+        path = splitted[3];
+        query = splitted[4];
+        fragment = splitted[5];
+
+        // scheme and path are required, though the path can be empty
+        if (!(scheme && scheme.length && path.length >= 0)) return;
+
+        // if authority is present, the path must be empty or begin with a /
+        if (authority && authority.length) {
+            if (!(path.length === 0 || /^\//.test(path))) return;
+        } else {
+            // if authority is not present, the path must not start with //
+            if (/^\/\//.test(path)) return;
+        }
+
+        // scheme must begin with a letter, then consist of letters, digits, +, ., or -
+        if (!/^[a-z][a-z0-9\+\-\.]*$/.test(scheme.toLowerCase()))  return;
+
+        // re-assemble the URL per section 5.3 in RFC 3986
+        out += scheme + ':';
+        if (authority && authority.length) {
+            out += '//' + authority;
+        }
+
+        out += path;
+
+        if (query && query.length) {
+            out += '?' + query;
+        }
+
+        if (fragment && fragment.length) {
+            out += '#' + fragment;
+        }
+
+        return out;
+    }
+
+    function is_http_iri(value, allowHttps) {
+        if (!is_iri(value)) {
+            return;
+        }
+
+        var splitted = [];
+        var scheme = '';
+        var authority = '';
+        var path = '';
+        var port = '';
+        var query = '';
+        var fragment = '';
+        var out = '';
+
+        // from RFC 3986
+        splitted = splitUri(value);
+        scheme = splitted[1]; 
+        authority = splitted[2];
+        path = splitted[3];
+        query = splitted[4];
+        fragment = splitted[5];
+
+        if (!scheme)  return;
+
+        if(allowHttps) {
+            if (scheme.toLowerCase() != 'https') return;
+        } else {
+            if (scheme.toLowerCase() != 'http') return;
+        }
+
+        // fully-qualified URIs must have an authority section that is
+        // a valid host
+        if (!authority) {
+            return;
+        }
+
+        // enable port component
+        if (/:(\d+)$/.test(authority)) {
+            port = authority.match(/:(\d+)$/)[0];
+            authority = authority.replace(/:\d+$/, '');
+        }
+
+        out += scheme + ':';
+        out += '//' + authority;
+        
+        if (port) {
+            out += port;
+        }
+        
+        out += path;
+        
+        if(query && query.length){
+            out += '?' + query;
+        }
+
+        if(fragment && fragment.length){
+            out += '#' + fragment;
+        }
+        
+        return out;
+    }
+
+    function is_https_iri(value) {
+        return is_http_iri(value, true);
+    }
+
+    function is_web_iri(value) {
+        return (is_http_iri(value) || is_https_iri(value));
+    }
+
+})(module);
+});
+
+function clean(leadImageUrl) {
+  leadImageUrl = leadImageUrl.trim();
+  if (index$6.isWebUri(leadImageUrl)) {
+    return leadImageUrl;
+  }
+
+  return null;
+}
 
 // Take a dek HTML fragment, and return the cleaned version of it.
 // Return None if the dek wasn't good enough.
@@ -20615,7 +21668,7 @@ function extractCleanNode(article, _ref) {
   cleanHeaders(article, $, title);
 
   // Make links absolute
-  makeLinksAbsolute(article, $, url);
+  makeLinksAbsolute$$1(article, $, url);
 
   // We used to clean UL's and OL's here, but it was leading to
   // too many in-article lists being removed. Consider a better
@@ -20627,7 +21680,7 @@ function extractCleanNode(article, _ref) {
   removeEmpty(article, $);
 
   // Remove unnecessary attributes
-  cleanAttributes(article, $);
+  cleanAttributes$$1(article, $);
 
   return article;
 }
@@ -27909,7 +28962,7 @@ var tanimoto = function (a, b) {
 	return  (both / (a.length + b.length - both));
 };
 
-var index$10 = {
+var index$7 = {
 	jarowinkler: jarowinkler,
 	levenshtein: levenshtein,
 	ngram: ngram,
@@ -27975,27 +29028,27 @@ function extractBreadcrumbTitle(splitTitle, text) {
   return null;
 }
 
-function cleanDomainFromTitle(splitTitle, url) {
+function cleanDomainFromTitle(splitTitle, url$$1) {
   // Search the ends of the title, looking for bits that fuzzy match
   // the URL too closely. If one is found, discard it and return the
   // rest.
   //
   // Strip out the big TLDs - it just makes the matching a bit more
   // accurate. Not the end of the world if it doesn't strip right.
-  var _ref = new index$1(url),
-      host = _ref.host;
+  var _URL$parse = url.parse(url$$1),
+      host = _URL$parse.host;
 
   var nakedDomain = host.replace(DOMAIN_ENDINGS_RE, '');
 
   var startSlug = splitTitle[0].toLowerCase().replace(' ', '');
-  var startSlugRatio = index$10.levenshtein(startSlug, nakedDomain);
+  var startSlugRatio = index$7.levenshtein(startSlug, nakedDomain);
 
   if (startSlugRatio > 0.4 && startSlug.length > 5) {
     return splitTitle.slice(2).join('');
   }
 
   var endSlug = splitTitle.slice(-1)[0].toLowerCase().replace(' ', '');
-  var endSlugRatio = index$10.levenshtein(endSlug, nakedDomain);
+  var endSlugRatio = index$7.levenshtein(endSlug, nakedDomain);
 
   if (endSlugRatio > 0.4 && endSlug.length >= 5) {
     return splitTitle.slice(0, -2).join('');
@@ -28007,7 +29060,7 @@ function cleanDomainFromTitle(splitTitle, url) {
 // Given a title with separators in it (colons, dashes, etc),
 // resolve whether any of the segments should be removed.
 function resolveSplitTitle(title) {
-  var url = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
+  var url$$1 = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
 
   // Splits while preserving splitters, like:
   // ['The New New York', ' - ', 'The Washington Post']
@@ -28019,7 +29072,7 @@ function resolveSplitTitle(title) {
   var newTitle = extractBreadcrumbTitle(splitTitle, title);
   if (newTitle) return newTitle;
 
-  newTitle = cleanDomainFromTitle(splitTitle, url);
+  newTitle = cleanDomainFromTitle(splitTitle, url$$1);
   if (newTitle) return newTitle;
 
   // Fuzzy ratio didn't find anything, so this title is probably legit.
@@ -28034,6 +29087,147 @@ var Cleaners = {
   date_published: cleanDatePublished,
   content: extractCleanNode,
   title: cleanTitle$$1
+};
+
+// Using a variety of scoring techniques, extract the content most
+// likely to be article text.
+//
+// If strip_unlikely_candidates is True, remove any elements that
+// match certain criteria first. (Like, does this element have a
+// classname of "comment")
+//
+// If weight_nodes is True, use classNames and IDs to determine the
+// worthiness of nodes.
+//
+// Returns a cheerio object $
+function extractBestNode($, opts) {
+  // clone the node so we can get back to our
+  // initial parsed state if needed
+  // TODO Do I need this? – AP
+  // let $root = $.root().clone()
+
+  if (opts.stripUnlikelyCandidates) {
+    $ = stripUnlikelyCandidates($);
+  }
+
+  $ = convertToParagraphs$$1($);
+  $ = scoreContent$$1($, opts.weightNodes);
+  var $topCandidate = findTopCandidate$$1($);
+
+  return $topCandidate;
+}
+
+var GenericContentExtractor = {
+  defaultOpts: {
+    stripUnlikelyCandidates: true,
+    weightNodes: true,
+    cleanConditionally: true
+  },
+
+  // Extract the content for this resource - initially, pass in our
+  // most restrictive opts which will return the highest quality
+  // content. On each failure, retry with slightly more lax opts.
+  //
+  // :param return_type: string. If "node", should return the content
+  // as a cheerio node rather than as an HTML string.
+  //
+  // Opts:
+  // stripUnlikelyCandidates: Remove any elements that match
+  // non-article-like criteria first.(Like, does this element
+  //   have a classname of "comment")
+  //
+  // weightNodes: Modify an elements score based on whether it has
+  // certain classNames or IDs. Examples: Subtract if a node has
+  // a className of 'comment', Add if a node has an ID of
+  // 'entry-content'.
+  //
+  // cleanConditionally: Clean the node to return of some
+  // superfluous content. Things like forms, ads, etc.
+  extract: function extract(_ref, opts) {
+    var $ = _ref.$,
+        html = _ref.html,
+        title = _ref.title,
+        url = _ref.url,
+        cheerio = _ref.cheerio;
+
+    opts = _extends$1({}, this.defaultOpts, opts);
+
+    $ = $ || cheerio.load(html);
+
+    // Cascade through our extraction-specific opts in an ordered fashion,
+    // turning them off as we try to extract content.
+    var node = this.getContentNode($, title, url, opts);
+
+    if (nodeIsSufficient(node)) {
+      return this.cleanAndReturnNode(node, $);
+    }
+
+    // We didn't succeed on first pass, one by one disable our
+    // extraction opts and try again.
+    var _iteratorNormalCompletion = true;
+    var _didIteratorError = false;
+    var _iteratorError = undefined;
+
+    try {
+      for (var _iterator = _getIterator(_Reflect$ownKeys(opts).filter(function (k) {
+        return opts[k] === true;
+      })), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+        var key = _step.value;
+
+        opts[key] = false;
+        $ = cheerio.load(html);
+
+        node = this.getContentNode($, title, url, opts);
+
+        if (nodeIsSufficient(node)) {
+          break;
+        }
+      }
+    } catch (err) {
+      _didIteratorError = true;
+      _iteratorError = err;
+    } finally {
+      try {
+        if (!_iteratorNormalCompletion && _iterator.return) {
+          _iterator.return();
+        }
+      } finally {
+        if (_didIteratorError) {
+          throw _iteratorError;
+        }
+      }
+    }
+
+    return this.cleanAndReturnNode(node, $);
+  },
+
+
+  // Get node given current options
+  getContentNode: function getContentNode($, title, url, opts) {
+    return extractCleanNode(extractBestNode($, opts), {
+      $: $,
+      cleanConditionally: opts.cleanConditionally,
+      title: title,
+      url: url
+    });
+  },
+
+
+  // Once we got here, either we're at our last-resort node, or
+  // we broke early. Make sure we at least have -something- before we
+  // move forward.
+  cleanAndReturnNode: function cleanAndReturnNode(node, $) {
+    if (!node) {
+      return null;
+    }
+
+    return normalizeSpaces(getHtml($, node));
+
+    // if return_type == "html":
+    //     return normalize_spaces(node_to_html(node))
+    // else:
+    //     return node
+  }
 };
 
 // TODO: It would be great if we could merge the meta and selector lists into
@@ -28426,9 +29620,13 @@ var GenericLeadImageUrlExtractor = {
   extract: function extract(_ref) {
     var $ = _ref.$,
         content = _ref.content,
-        metaCache = _ref.metaCache;
+        metaCache = _ref.metaCache,
+        html = _ref.html;
 
     var cleanUrl = void 0;
+    if ($('head').length === 0) {
+      $('*').first().prepend(html);
+    }
 
     // Check to see if we have a matching meta tag that we can make use of.
     // Moving this higher because common practice is now to use large
@@ -29060,7 +30258,7 @@ var heap = createCommonjsModule(function (module, exports) {
 }).call(this);
 });
 
-var index$12 = heap;
+var index$9 = heap;
 
 var difflib$1 = createCommonjsModule(function (module, exports) {
 // Generated by CoffeeScript 1.3.1
@@ -29097,7 +30295,7 @@ Class Differ:
 
   floor = Math.floor, max = Math.max, min = Math.min;
 
-  Heap = index$12;
+  Heap = index$9;
 
   _calculateRatio = function(matches, length) {
     if (length) {
@@ -29137,8 +30335,6 @@ Class Differ:
   };
 
   SequenceMatcher = (function() {
-
-    SequenceMatcher.name = 'SequenceMatcher';
 
     /*
       SequenceMatcher is a flexible class for comparing pairs of sequences of
@@ -29799,8 +30995,6 @@ Class Differ:
   };
 
   Differ = (function() {
-
-    Differ.name = 'Differ';
 
     /*
       Differ is a class for comparing sequences of lines of text, and
@@ -30548,7 +31742,7 @@ Class Differ:
 }).call(this);
 });
 
-var index$11 = difflib$1;
+var index$8 = difflib$1;
 
 function scoreSimilarity(score, articleUrl, href) {
   // Do this last and only if we have a real candidate, because it's
@@ -30557,7 +31751,7 @@ function scoreSimilarity(score, articleUrl, href) {
   // sliding scale, subtract points from this link based on
   // similarity.
   if (score > 0) {
-    var similarity = new index$11.SequenceMatcher(null, articleUrl, href).ratio();
+    var similarity = new index$8.SequenceMatcher(null, articleUrl, href).ratio();
     // Subtract .1 from diff_percent when calculating modifier,
     // which means that if it's less than 10% different, we give a
     // bonus instead. Ex:
@@ -30698,8 +31892,8 @@ function scorePrevLink(linkData) {
 
 function shouldScore(href, articleUrl, baseUrl, parsedUrl, linkText, previousUrls) {
   // skip if we've already fetched this url
-  if (previousUrls.find(function (url) {
-    return href === url;
+  if (previousUrls.find(function (url$$1) {
+    return href === url$$1;
   }) !== undefined) {
     return false;
   }
@@ -30712,8 +31906,8 @@ function shouldScore(href, articleUrl, baseUrl, parsedUrl, linkText, previousUrl
 
   var hostname = parsedUrl.hostname;
 
-  var _ref = new index$1(href),
-      linkHost = _ref.hostname;
+  var _URL$parse = url.parse(href),
+      linkHost = _URL$parse.hostname;
 
   // Domain mismatch.
 
@@ -30787,33 +31981,98 @@ function makeSig($link, linkText) {
   return (linkText || $link.text()) + ' ' + ($link.attr('class') || '') + ' ' + ($link.attr('id') || '');
 }
 
+function scoreLinks(_ref) {
+  var links = _ref.links,
+      articleUrl = _ref.articleUrl,
+      baseUrl = _ref.baseUrl,
+      parsedUrl = _ref.parsedUrl,
+      $ = _ref.$,
+      _ref$previousUrls = _ref.previousUrls,
+      previousUrls = _ref$previousUrls === undefined ? [] : _ref$previousUrls;
+
+  parsedUrl = parsedUrl || url.parse(articleUrl);
+  var baseRegex = makeBaseRegex(baseUrl);
+  var isWp = isWordpress($);
+
+  // Loop through all links, looking for hints that they may be next-page
+  // links. Things like having "page" in their textContent, className or
+  // id, or being a child of a node with a page-y className or id.
+  //
+  // After we do that, assign each page a score, and pick the one that
+  // looks most like the next page link, as long as its score is strong
+  // enough to have decent confidence.
+  var scoredPages = links.reduce(function (possiblePages, link) {
+    // Remove any anchor data since we don't do a good job
+    // standardizing URLs (it's hard), we're going to do
+    // some checking with and without a trailing slash
+    var attrs = getAttrs(link);
+    var href = removeAnchor(attrs.href);
+    var $link = $(link);
+    var linkText = $link.text();
+
+    if (!shouldScore(href, articleUrl, baseUrl, parsedUrl, linkText, previousUrls)) {
+      return possiblePages;
+    }
+
+    // ## PASSED THE FIRST-PASS TESTS. Start scoring. ##
+    if (!possiblePages[href]) {
+      possiblePages[href] = {
+        score: 0,
+        linkText: linkText,
+        href: href
+      };
+    } else {
+      possiblePages[href].linkText = possiblePages[href].linkText + '|' + linkText;
+    }
+
+    var possiblePage = possiblePages[href];
+    var linkData = makeSig($link, linkText);
+    var pageNum = pageNumFromUrl(href);
+
+    var score = scoreBaseUrl(href, baseRegex);
+    score += scoreNextLinkText(linkData);
+    score += scoreCapLinks(linkData);
+    score += scorePrevLink(linkData);
+    score += scoreByParents$1($link);
+    score += scoreExtraneousLinks(href);
+    score += scorePageInLink(pageNum, isWp);
+    score += scoreLinkText(linkText, pageNum);
+    score += scoreSimilarity(score, articleUrl, href);
+
+    possiblePage.score = score;
+
+    return possiblePages;
+  }, {});
+
+  return _Reflect$ownKeys(scoredPages).length === 0 ? null : scoredPages;
+}
+
 /* eslint-disable */
 // Looks for and returns next page url
 // for multi-page articles
 var GenericNextPageUrlExtractor = {
   extract: function extract(_ref) {
     var $ = _ref.$,
-        url = _ref.url,
+        url$$1 = _ref.url,
         parsedUrl = _ref.parsedUrl,
         _ref$previousUrls = _ref.previousUrls,
         previousUrls = _ref$previousUrls === undefined ? [] : _ref$previousUrls;
 
-    parsedUrl = parsedUrl || new index$1(url);
+    parsedUrl = parsedUrl || url.parse(url$$1);
 
-    var articleUrl = removeAnchor(url);
-    var baseUrl = articleBaseUrl(url, parsedUrl);
+    var articleUrl = removeAnchor(url$$1);
+    var baseUrl = articleBaseUrl(url$$1, parsedUrl);
 
     var links = $('a[href]').toArray();
 
-    var scoredLinks = null;
-    // const scoredLinks = scoreLinks({
-    //   links,
-    //   articleUrl,
-    //   baseUrl,
-    //   parsedUrl,
-    //   $,
-    //   previousUrls,
-    // });
+    var scoredLinks = scoreLinks({
+      links: links,
+      articleUrl: articleUrl,
+      baseUrl: baseUrl,
+      parsedUrl: parsedUrl,
+      $: $,
+      previousUrls: previousUrls
+    });
 
     // If no links were scored, return null
     if (!scoredLinks) return null;
@@ -30835,11 +32094,136 @@ var GenericNextPageUrlExtractor = {
   }
 };
 
-// import cheerio from 'cheerio';
-// import GenericContentExtractor from './content/extractor';
-// import GenericUrlExtractor from './url/extractor';
-// import GenericExcerptExtractor from './excerpt/extractor';
-// import GenericWordCountExtractor from './word-count/extractor';
+var CANONICAL_META_SELECTORS = ['og:url'];
+
+function parseDomain(url$$1) {
+  var parsedUrl = url.parse(url$$1);
+  var hostname = parsedUrl.hostname;
+
+  return hostname;
+}
+
+function result(url$$1) {
+  return {
+    url: url$$1,
+    domain: parseDomain(url$$1)
+  };
+}
+
+var GenericUrlExtractor = {
+  extract: function extract(_ref) {
+    var $ = _ref.$,
+        url$$1 = _ref.url,
+        metaCache = _ref.metaCache;
+
+    var $canonical = $('link[rel=canonical]');
+    if ($canonical.length !== 0) {
+      var href = $canonical.attr('href');
+      if (href) {
+        return result(href);
+      }
+    }
+
+    var metaUrl = extractFromMeta$$1($, CANONICAL_META_SELECTORS, metaCache);
+    if (metaUrl) {
+      return result(metaUrl);
+    }
+
+    return result(url$$1);
+  }
+};
+
+var defaults = {
+    ellipse: '…',
+    chars: [' ', '-'],
+    max: 140,
+    truncate: true
+};
+
+function ellipsize(str, max, ellipse, chars, truncate) {
+    var last = 0,
+        c = '';
+
+    if (str.length < max) return str;
+
+    for (var i = 0, len = str.length; i < len; i++) {
+        c = str.charAt(i);
+
+        if (chars.indexOf(c) !== -1) {
+            last = i;
+        }
+
+        if (i < max) continue;
+        if (last === 0) {
+            return !truncate ? '' : str.substring(0, max - 1) + ellipse;
+        }
+
+        return str.substring(0, last) + ellipse;
+    }
+
+    return str;
+}
+
+var index$11 = function(str, max, opts) {
+    if (typeof str !== 'string' || str.length === 0) return '';
+    if (max === 0) return '';
+
+    opts = opts || {};
+
+    for (var key in defaults) {
+        if (opts[key] === null || typeof opts[key] === 'undefined') {
+            opts[key] = defaults[key];
+        }
+    }
+
+    opts.max = max || opts.max;
+
+    return ellipsize(str, opts.max, opts.ellipse, opts.chars, opts.truncate);
+};
+
+var EXCERPT_META_SELECTORS = ['og:description', 'twitter:description'];
+
+function clean$1(content, $) {
+  var maxLength = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 200;
+
+  content = content.replace(/[\s\n]+/g, ' ').trim();
+  return index$11(content, maxLength, { ellipse: '&hellip;' });
+}
+
+var GenericExcerptExtractor = {
+  extract: function extract(_ref) {
+    var $ = _ref.$,
+        content = _ref.content,
+        metaCache = _ref.metaCache;
+
+    var excerpt = extractFromMeta$$1($, EXCERPT_META_SELECTORS, metaCache);
+    if (excerpt) {
+      return clean$1(stripTags(excerpt, $));
+    }
+    // Fall back to excerpting from the extracted content
+    var maxLength = 200;
+    var shortContent = content.slice(0, maxLength * 5);
+    return clean$1($(shortContent).text(), $, maxLength);
+  }
+};
+
+var GenericWordCountExtractor = {
+  extract: function extract(_ref) {
+    var content = _ref.content;
+
+    var $content = void 0;
+    if (jquery.load) {
+      var $ = jquery.load(content);
+      $content = $('div').first();
+    } else {
+      var _$ = jquery;
+      $content = _$('<div />').prepend(content);
+    }
+
+    var text = normalizeSpaces($content.text());
+    return text.split(/\s/).length;
+  }
+};
 
 var GenericExtractor = {
   // This extractor is the default for all domains
@@ -30847,37 +32231,43 @@ var GenericExtractor = {
   title: GenericTitleExtractor.extract,
   date_published: GenericDatePublishedExtractor.extract,
   author: GenericAuthorExtractor.extract,
-  // content: GenericContentExtractor.extract.bind(GenericContentExtractor),
+  content: GenericContentExtractor.extract.bind(GenericContentExtractor),
   lead_image_url: GenericLeadImageUrlExtractor.extract,
   dek: GenericDekExtractor.extract,
   next_page_url: GenericNextPageUrlExtractor.extract,
-  // url_and_domain: GenericUrlExtractor.extract,
-  // excerpt: GenericExcerptExtractor.extract,
-  // word_count: GenericWordCountExtractor.extract,
+  url_and_domain: GenericUrlExtractor.extract,
+  excerpt: GenericExcerptExtractor.extract,
+  word_count: GenericWordCountExtractor.extract,
   direction: function direction(_ref) {
     var title = _ref.title;
-    return index$6.getDirection(title);
+    return index$3.getDirection(title);
   },
 
   extract: function extract(options) {
-    // const { html } = options;
+    var html = options.html,
+        cheerio = options.cheerio,
+        $ = options.$;
 
-    // if (html) {
-    //   const $ = cheerio.load(html);
-    //   options.$ = $;
-    // }
+
+    if (html && !$) {
+      var loaded = cheerio.load(html);
+      options.$ = loaded;
+    }
 
     var title = this.title(options);
     var date_published = this.date_published(options);
     var author = this.author(options);
-    // const content = this.content({ ...options, title });
+    var content = this.content(_extends$1({}, options, { title: title }));
     var lead_image_url = this.lead_image_url(_extends$1({}, options, { content: '' }));
     var dek = this.dek(_extends$1({}, options, { content: '' }));
     var next_page_url = this.next_page_url(options);
-    // const excerpt = this.excerpt({ ...options, content });
-    // const word_count = this.word_count({ ...options, content });
+    var excerpt = this.excerpt(_extends$1({}, options, { content: content }));
+    var word_count = this.word_count(_extends$1({}, options, { content: content }));
     var direction = this.direction({ title: title });
-    // const { url, domain } = this.url_and_domain(options);
+
+    var _url_and_domain = this.url_and_domain(options),
+        url = _url_and_domain.url,
+        domain = _url_and_domain.domain;
 
     return {
       title: title,
@@ -30885,19 +32275,19 @@ var GenericExtractor = {
       date_published: date_published || null,
       dek: dek,
       lead_image_url: lead_image_url,
-      // content,
+      content: content,
       next_page_url: next_page_url,
-      // url,
-      // domain,
-      // excerpt,
-      // word_count,
+      url: url,
+      domain: domain,
+      excerpt: excerpt,
+      word_count: word_count,
       direction: direction
     };
   }
 };
 
-function getExtractor(url, parsedUrl) {
-  parsedUrl = parsedUrl || URL.parse(url);
+function getExtractor(url$$1, parsedUrl) {
+  parsedUrl = parsedUrl || url.parse(url$$1);
   var _parsedUrl = parsedUrl,
       hostname = _parsedUrl.hostname;
 
@@ -30930,7 +32320,7 @@ function transformElements($content, $, _ref2) {
     // If value is a string, convert directly
     if (typeof value === 'string') {
       $matches.each(function (index, node) {
-        convertNodeTo($(node), $, transforms[key]);
+        convertNodeTo$$1($(node), $, transforms[key]);
       });
     } else if (typeof value === 'function') {
       // If value is function, apply function to node
@@ -30938,7 +32328,7 @@ function transformElements($content, $, _ref2) {
         var result = value($(node), $);
         // If function returns a string, convert node to that value
         if (typeof result === 'string') {
-          convertNodeTo($(node), $, result);
+          convertNodeTo$$1($(node), $, result);
         }
       });
     }
@@ -31002,7 +32392,7 @@ function select(opts) {
 
     $content = Cleaners[type]($content, _extends$1({}, opts, { defaultCleaner: defaultCleaner }));
 
-    return $.html($content);
+    return getHtml($, $content);
   }
 
   var result = void 0;
@@ -31045,9 +32435,7 @@ function extractResult(opts) {
   // If nothing matches the selector, and fallback is enabled,
   // run the Generic extraction
   // if (fallback) return GenericExtractor[type](opts);
-  if (fallback && type === 'title') return GenericExtractor[type](opts);
-  if (fallback && type === 'direction') return GenericExtractor[type](opts);
-  if (fallback && type === 'author') return GenericExtractor[type](opts);
+  if (fallback) return GenericExtractor[type](opts);
 
   return null;
 }
@@ -31117,7 +32505,7 @@ var Mercury = {
 
     var opts = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
     return _asyncToGenerator(index.mark(function _callee() {
-      var _opts$fetchAllPages, fetchAllPages, _opts$fallback, fallback, url, parsedUrl, Extractor, html, metaCache, result;
+      var _opts$fetchAllPages, fetchAllPages, _opts$fallback, fallback, url$$1, parsedUrl, Extractor, html, clone, metaCache, result;
 
       return index.wrap(function _callee$(_context) {
         while (1) {
@@ -31125,37 +32513,33 @@ var Mercury = {
             case 0:
               _opts$fetchAllPages = opts.fetchAllPages, fetchAllPages = _opts$fetchAllPages === undefined ? false : _opts$fetchAllPages, _opts$fallback = opts.fallback, fallback = _opts$fallback === undefined ? true : _opts$fallback;
               //
+              // const url = 'http://example.com/foo/bar'
 
-              url = window.location.href;
-              parsedUrl = new index$1('http://deadspin.com/foo/bar');
-
-              console.log(parsedUrl);
+              url$$1 = 'http://www.theatlantic.com/technology/archive/2016/09/why-new-yorkers-got-a-push-alert-about-a-manhunt/500591/';
+              parsedUrl = url.parse(url$$1);
 
               if (validateUrl(parsedUrl)) {
-                _context.next = 6;
+                _context.next = 5;
                 break;
               }
 
               return _context.abrupt('return', Errors.badUrl);
 
-            case 6:
-              Extractor = getExtractor(url, parsedUrl);
-
-              console.log(Extractor);
-
-              html = jquery('*').html();
-
-              console.log(html);
+            case 5:
+              Extractor = getExtractor(url$$1, parsedUrl);
+              html = jquery('html').html();
+              clone = jquery('html').clone();
               //
               //   // Cached value of every meta name in our document.
               //   // Used when extracting title/author/date_published/dek
+
               metaCache = jquery('meta').map(function (_, node) {
                 return jquery(node).attr('name');
               }).toArray();
-
-              console.log(metaCache);
               //
-              result = RootExtractor.extract(Extractor, { url: url, html: html, $: jquery, metaCache: metaCache, parsedUrl: parsedUrl, fallback: fallback });
+
+              result = RootExtractor.extract(Extractor, { url: url$$1, html: html, $: jquery, metaCache: metaCache, parsedUrl: parsedUrl, fallback: fallback });
+
 
               console.log(result);
               //   const { title, next_page_url } = result;
@@ -31191,7 +32575,7 @@ var Mercury = {
               //   return await Resource.create(url);
               // },
 
-            case 14:
+            case 11:
             case 'end':
               return _context.stop();
           }
@@ -31205,5 +32589,5 @@ Mercury.parse();
 
 return Mercury;
 
-})));
+}());
 //# sourceMappingURL=mercury.web.js.map

@@ -1,5 +1,5 @@
 /* eslint-disable */
-import URL from 'url-parse';
+import URL from 'url';
 import $ from 'jquery';
 
 // import Resource from 'resource';
@@ -18,26 +18,25 @@ const Mercury = {
       fallback = true,
     } = opts;
     //
-    const url = window.location.href
-    const parsedUrl = new URL('http://deadspin.com/foo/bar');
-    console.log(parsedUrl)
+    // const url = 'http://example.com/foo/bar'
+    const url = 'http://www.theatlantic.com/technology/archive/2016/09/why-new-yorkers-got-a-push-alert-about-a-manhunt/500591/'
+    const parsedUrl = URL.parse(url);
 
     if (!validateUrl(parsedUrl)) {
       return Errors.badUrl;
     }
 
     const Extractor = getExtractor(url, parsedUrl);
-    console.log(Extractor)
 
-    const html = $('*').html();
-    console.log(html)
+    const html = $('html').html();
+    const clone = $('html').clone()
   //
   //   // Cached value of every meta name in our document.
   //   // Used when extracting title/author/date_published/dek
     const metaCache = $('meta').map((_, node) => $(node).attr('name')).toArray();
-    console.log(metaCache)
   //
     let result = RootExtractor.extract(Extractor, { url, html, $, metaCache, parsedUrl, fallback });
+
     console.log(result)
   //   const { title, next_page_url } = result;
   //

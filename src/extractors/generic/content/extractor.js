@@ -1,6 +1,7 @@
-import cheerio from 'cheerio';
-
-import { nodeIsSufficient } from 'utils/dom';
+import {
+  nodeIsSufficient,
+  getHtml,
+} from 'utils/dom';
 import { cleanContent } from 'cleaners';
 import { normalizeSpaces } from 'utils/text';
 
@@ -32,7 +33,7 @@ const GenericContentExtractor = {
   //
   // cleanConditionally: Clean the node to return of some
   // superfluous content. Things like forms, ads, etc.
-  extract({ $, html, title, url }, opts) {
+  extract({ $, html, title, url, cheerio }, opts) {
     opts = { ...this.defaultOpts, ...opts };
 
     $ = $ || cheerio.load(html);
@@ -81,7 +82,7 @@ const GenericContentExtractor = {
       return null;
     }
 
-    return normalizeSpaces($.html(node));
+    return normalizeSpaces(getHtml($, node));
 
     // if return_type == "html":
     //     return normalize_spaces(node_to_html(node))

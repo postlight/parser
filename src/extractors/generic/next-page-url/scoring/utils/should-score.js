@@ -1,4 +1,4 @@
-import URL from 'url-parse';
+import URL from 'url';
 
 import {
   DIGIT_RE,
@@ -25,7 +25,7 @@ export default function shouldScore(
   }
 
   const { hostname } = parsedUrl;
-  const { hostname: linkHost } = new URL(href);
+  const { hostname: linkHost } = URL.parse(href);
 
   // Domain mismatch.
   if (linkHost !== hostname) {

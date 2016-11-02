@@ -52,7 +52,7 @@ const Resource = {
 
     let $ = cheerio.load(content, { normalizeWhitespace: true });
 
-    if ($.root().children().length === 0) {
+    if ($('*').first().children().length === 0) {
       throw new Error('No children, likely a bad parse.');
     }
 

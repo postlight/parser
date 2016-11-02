@@ -24,3 +24,4 @@ export { default as isWordpress } from './is-wordpress';
 export { default as getAttrs } from './get-attrs';
 export { default as setAttr } from './set-attr';
 export { default as setAttrs } from './set-attrs';
+export { default as getHtml } from './get-html';
