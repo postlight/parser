@@ -160,7 +160,8 @@ const RootExtractor = {
     const word_count = extractResult({ ...opts, type: 'word_count', content });
     const direction = extractResult({ ...opts, type: 'direction', title });
     const { url, domain } =
-      extractResult({ ...opts, type: 'url_and_domain' }) || { url: null, domain: null };
+      extractResult({ ...opts, type: 'url_and_domain' })
+      || { url: null, domain: null };
 
     return {
       title,

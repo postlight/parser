@@ -2,7 +2,7 @@
 import URL from 'url';
 import cheerio from 'cheerio';
 
-// import Resource from 'resource';
+import Resource from 'resource';
 import {
   validateUrl,
   Errors,
@@ -12,13 +12,14 @@ import RootExtractor from 'extractors/root-extractor';
 // import collectAllPages from 'extractors/collect-all-pages';
 
 const Mercury = {
-  async parse(opts = {}) {
+  async parse(html, opts = {}) {
     const {
       fetchAllPages = false,
       fallback = true,
     } = opts;
     //
     const url = window.location.href;
+    // const url = 'http://www.nytimes.com/2016/09/20/nyregion/nyc-nj-explosions-ahmad-khan-rahami.html'
     // const url = 'http://www.theatlantic.com/technology/archive/2016/09/why-new-yorkers-got-a-push-alert-about-a-manhunt/500591/'
     const parsedUrl = URL.parse(url);
 
@@ -28,15 +29,31 @@ const Mercury = {
 
     const Extractor = getExtractor(url, parsedUrl);
 
-    const { $, html } = cheerio.load(null, true)
+    html = html || cheerio.html()
+    const $ = await Resource.create(url, html, parsedUrl);
+
   //
   //   // Cached value of every meta name in our document.
   //   // Used when extracting title/author/date_published/dek
     const metaCache = $('meta').map((_, node) => $(node).attr('name')).toArray();
   //
-    let result = RootExtractor.extract(Extractor, { url, html, $, metaCache, parsedUrl, fallback, cheerio });
+    let result = RootExtractor.extract(
+      Extractor,
+      {
+        url,
+        html,
+        $,
+        metaCache,
+        parsedUrl,
+        fallback,
+        cheerio,
+        browser: true,
+      }
+    );
 
-    console.log(result)
+    $.cleanup()
+
+    return result
   //   const { title, next_page_url } = result;
   //
   //   // Fetch more pages if next_page_url found
@@ -72,7 +89,5 @@ const Mercury = {
 
   }
 };
-
-Mercury.parse()
 
 export default Mercury;

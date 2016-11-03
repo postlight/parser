@@ -1,5 +1,5 @@
 import URL from 'url';
-import request from 'request';
+// import request from 'request';
 import { Errors } from 'utils';
 
 import {
@@ -9,16 +9,16 @@ import {
   MAX_CONTENT_LENGTH,
 } from './constants';
 
-function get(options) {
-  return new Promise((resolve, reject) => {
-    request(options, (err, response, body) => {
-      if (err) {
-        reject(err);
-      } else {
-        resolve({ body, response });
-      }
-    });
-  });
+function get(options) { // eslint-disable-line
+  // return new Promise((resolve, reject) => {
+  //   request(options, (err, response, body) => {
+  //     if (err) {
+  //       reject(err);
+  //     } else {
+  //       resolve({ body, response });
+  //     }
+  //   });
+  // });
 }
 
 // Evaluate a response to ensure it's something we should be keeping.
