@@ -1,3 +1,4 @@
+/* eslint-disable */
 import Cleaners from 'cleaners';
 import {
   convertNodeTo,
@@ -48,6 +49,7 @@ function findMatchingSelector($, selectors) {
       const [s, attr] = selector;
       return $(s).length === 1 && $(s).attr(attr) && $(s).attr(attr).trim() !== '';
     }
+    // debugger
 
     return $(selector).length === 1 && $(selector).text().trim() !== '';
   });

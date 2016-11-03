@@ -51,7 +51,8 @@ const GenericLeadImageUrlExtractor = {
     // Next, try to find the "best" image via the content.
     // We'd rather not have to fetch each image and check dimensions,
     // so try to do some analysis and determine them instead.
-    const imgs = $('img', content).toArray();
+    const $content = $(content);
+    const imgs = $('img', $content).toArray();
     const imgScores = {};
 
     imgs.forEach((img, index) => {

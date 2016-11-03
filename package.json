@@ -77,7 +77,7 @@
     "wuzzy": "adampash/wuzzy"
   },
   "browser": {
-    "cheerio": "jquery",
+    "cheerio": "./src/utils/cheerio-query",
     "URL": "url-parse"
   }
 }
