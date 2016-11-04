@@ -18,8 +18,8 @@ const Mercury = {
       fallback = true,
     } = opts;
     //
-    // const url = window.location.href;
-    const url = 'http://www.nytimes.com/2016/09/20/nyregion/nyc-nj-explosions-ahmad-khan-rahami.html'
+    const url = window.location.href;
+    // const url = 'http://www.nytimes.com/2016/09/20/nyregion/nyc-nj-explosions-ahmad-khan-rahami.html'
     const parsedUrl = URL.parse(url);
 
     if (!validateUrl(parsedUrl)) {
