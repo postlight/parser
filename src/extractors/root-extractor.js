@@ -1,9 +1,6 @@
 /* eslint-disable */
 import Cleaners from 'cleaners';
-import {
-  convertNodeTo,
-  getHtml,
-} from 'utils/dom';
+import { convertNodeTo } from 'utils/dom';
 import GenericExtractor from './generic';
 
 // Remove elements by an array of selectors
@@ -88,7 +85,7 @@ export function select(opts) {
 
     $content = Cleaners[type]($content, { ...opts, defaultCleaner });
 
-    return getHtml($, $content);
+    return $.html($content);
   }
 
   let result;

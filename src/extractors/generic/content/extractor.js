@@ -1,7 +1,4 @@
-import {
-  nodeIsSufficient,
-  getHtml,
-} from 'utils/dom';
+import { nodeIsSufficient } from 'utils/dom';
 import { cleanContent } from 'cleaners';
 import { normalizeSpaces } from 'utils/text';
 
@@ -82,7 +79,7 @@ const GenericContentExtractor = {
       return null;
     }
 
-    return normalizeSpaces(getHtml($, node));
+    return normalizeSpaces($.html(node));
 
     // if return_type == "html":
     //     return normalize_spaces(node_to_html(node))
