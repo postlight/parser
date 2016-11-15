@@ -104,7 +104,10 @@ export default async function fetchResource(url, parsedUrl) {
 
   try {
     validateResponse(response);
-    return { body, response };
+    return {
+      body,
+      response,
+    };
   } catch (e) {
     return Errors.badUrl;
   }

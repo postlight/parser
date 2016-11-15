@@ -11,7 +11,7 @@
     "build-generator": "rollup -c scripts/rollup.config.js",
     "test_build": "rollup -c",
     "test": "jest",
-    "watch:test": "jest --watch --noStackTrace",
+    "watch:test": "jest --watch",
     "generate-parser": "node ./dist/generate-custom-parser.js",
     "add-contributor": "all-contributors add",
     "generate-contributors": "all-contributors generate"
@@ -59,7 +59,7 @@
     "difflib": "^0.2.4",
     "ellipsize": "0.0.2",
     "moment": "^2.14.1",
-    "request": "^2.74.0",
+    "request": "czardoz/request",
     "request-promise": "^4.1.1",
     "string-direction": "^0.1.2",
     "valid-url": "^1.0.9",
