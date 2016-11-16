@@ -30,10 +30,35 @@ $.root = () => {
 
 $.browser = true
 
+
+const isContainer = ($node) => {
+  const el = $node.get(0)
+  if (el) {
+    return el.tagName.toLowerCase() === 'container'
+  }
+
+  return false
+}
+
 $.html = ($node) => {
   if ($node) {
-    if ($node.parent()) {
+    const $parent = $node.parent()
+
+    // verify that parent is inside parsing container
+    // console.log('in right place?', $parent.html())
+    // console.log('in right place?', $parent.parents().length)
+    if ($parent.parents(`.${PARSER_CLASS}`).length > 0 && $parent.get(0).tagName.toLowerCase() !== 'container') {
+      // console.log('do it in here')
+      // console.log($parent.get(0).tagName)
       return $node.parent().clone().html() || $node.clone().html();
+    } else {
+      // console.log('doing it here')
+      // console.log($node.children().html())
+      if (isContainer($node) || isContainer($node.children('container'))) {
+        return $node.children('container').clone().html()
+      }
+
+      return $node.clone().html()
     }
 
     return $node.clone().html();

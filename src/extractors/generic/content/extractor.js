@@ -79,6 +79,8 @@ const GenericContentExtractor = {
       return null;
     }
 
+    // console.log("DONE", $.html(node))
+    // console.log("node", node)
     return normalizeSpaces($.html(node));
 
     // if return_type == "html":
