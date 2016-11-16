@@ -10,13 +10,13 @@ var cheerio = _interopDefault(require('cheerio'));
 var _Promise = _interopDefault(require('babel-runtime/core-js/promise'));
 var request = _interopDefault(require('request'));
 var _Reflect$ownKeys = _interopDefault(require('babel-runtime/core-js/reflect/own-keys'));
-var _Object$keys = _interopDefault(require('babel-runtime/core-js/object/keys'));
 var _toConsumableArray = _interopDefault(require('babel-runtime/helpers/toConsumableArray'));
-var _slicedToArray = _interopDefault(require('babel-runtime/helpers/slicedToArray'));
-var stringDirection = _interopDefault(require('string-direction'));
-var _getIterator = _interopDefault(require('babel-runtime/core-js/get-iterator'));
 var _defineProperty = _interopDefault(require('babel-runtime/helpers/defineProperty'));
+var _slicedToArray = _interopDefault(require('babel-runtime/helpers/slicedToArray'));
 var _typeof = _interopDefault(require('babel-runtime/helpers/typeof'));
+var _getIterator = _interopDefault(require('babel-runtime/core-js/get-iterator'));
+var _Object$keys = _interopDefault(require('babel-runtime/core-js/object/keys'));
+var stringDirection = _interopDefault(require('string-direction'));
 var validUrl = _interopDefault(require('valid-url'));
 var moment = _interopDefault(require('moment'));
 var wuzzy = _interopDefault(require('wuzzy'));
@@ -89,6 +89,7 @@ var MAX_CONTENT_LENGTH = 5242880;
 // so not implementing logic in port.
 
 function get(options) {
+  // eslint-disable-line
   return new _Promise(function (resolve, reject) {
     request(options, function (err, response, body) {
       if (err) {
@@ -234,6 +235,1482 @@ function normalizeMetaTags($) {
   return $;
 }
 
+// Spacer images to be removed
+var SPACER_RE = new RegExp('trans|transparent|spacer|blank', 'i');
+
+// The class we will use to mark elements we want to keep
+// but would normally remove
+var KEEP_CLASS = 'mercury-parser-keep';
+
+var KEEP_SELECTORS = ['iframe[src^="https://www.youtube.com"]', 'iframe[src^="http://www.youtube.com"]', 'iframe[src^="https://player.vimeo"]', 'iframe[src^="http://player.vimeo"]'];
+
+// A list of tags to strip from the output if we encounter them.
+var STRIP_OUTPUT_TAGS = ['title', 'script', 'noscript', 'link', 'style', 'hr', 'embed', 'iframe', 'object'];
+
+// cleanAttributes
+var REMOVE_ATTRS = ['style', 'align'];
+var REMOVE_ATTR_SELECTORS = REMOVE_ATTRS.map(function (selector) {
+  return '[' + selector + ']';
+});
+var REMOVE_ATTR_LIST = REMOVE_ATTRS.join(',');
+var WHITELIST_ATTRS = ['src', 'srcset', 'href', 'class', 'id', 'alt'];
+var WHITELIST_ATTRS_RE = new RegExp('^(' + WHITELIST_ATTRS.join('|') + ')$', 'i');
+
+// removeEmpty
+var REMOVE_EMPTY_TAGS = ['p'];
+var REMOVE_EMPTY_SELECTORS = REMOVE_EMPTY_TAGS.map(function (tag) {
+  return tag + ':empty';
+}).join(',');
+
+// cleanTags
+var CLEAN_CONDITIONALLY_TAGS = ['ul', 'ol', 'table', 'div', 'button', 'form'].join(',');
+
+// cleanHeaders
+var HEADER_TAGS = ['h2', 'h3', 'h4', 'h5', 'h6'];
+var HEADER_TAG_LIST = HEADER_TAGS.join(',');
+
+// // CONTENT FETCHING CONSTANTS ////
+
+// A list of strings that can be considered unlikely candidates when
+// extracting content from a resource. These strings are joined together
+// and then tested for existence using re:test, so may contain simple,
+// non-pipe style regular expression queries if necessary.
+var UNLIKELY_CANDIDATES_BLACKLIST = ['ad-break', 'adbox', 'advert', 'addthis', 'agegate', 'aux', 'blogger-labels', 'combx', 'comment', 'conversation', 'disqus', 'entry-unrelated', 'extra', 'foot',
+// 'form', // This is too generic, has too many false positives
+'header', 'hidden', 'loader', 'login', // Note: This can hit 'blogindex'.
+'menu', 'meta', 'nav', 'outbrain', 'pager', 'pagination', 'predicta', // readwriteweb inline ad box
+'presence_control_external', // lifehacker.com container full of false positives
+'popup', 'printfriendly', 'related', 'remove', 'remark', 'rss', 'share', 'shoutbox', 'sidebar', 'sociable', 'sponsor', 'taboola', 'tools'];
+
+// A list of strings that can be considered LIKELY candidates when
+// extracting content from a resource. Essentially, the inverse of the
+// blacklist above - if something matches both blacklist and whitelist,
+// it is kept. This is useful, for example, if something has a className
+// of "rss-content entry-content". It matched 'rss', so it would normally
+// be removed, however, it's also the entry content, so it should be left
+// alone.
+//
+// These strings are joined together and then tested for existence using
+// re:test, so may contain simple, non-pipe style regular expression queries
+// if necessary.
+var UNLIKELY_CANDIDATES_WHITELIST = ['and', 'article', 'body', 'blogindex', 'column', 'content', 'entry-content-asset', 'format', // misuse of form
+'hfeed', 'hentry', 'hatom', 'main', 'page', 'posts', 'shadow'];
+
+// A list of tags which, if found inside, should cause a <div /> to NOT
+// be turned into a paragraph tag. Shallow div tags without these elements
+// should be turned into <p /> tags.
+var DIV_TO_P_BLOCK_TAGS = ['a', 'blockquote', 'dl', 'div', 'img', 'p', 'pre', 'table'].join(',');
+
+// A list of tags that should be ignored when trying to find the top candidate
+// for a document.
+
+
+
+
+// A list of selectors that specify, very clearly, either hNews or other
+// very content-specific style content, like Blogger templates.
+// More examples here: http://microformats.org/wiki/blog-post-formats
+
+
+
+
+
+// A list of strings that denote a positive scoring for this content as being
+// an article container. Checked against className and id.
+//
+// TODO: Perhaps have these scale based on their odds of being quality?
+var POSITIVE_SCORE_HINTS = ['article', 'articlecontent', 'instapaper_body', 'blog', 'body', 'content', 'entry-content-asset', 'entry', 'hentry', 'main', 'Normal', 'page', 'pagination', 'permalink', 'post', 'story', 'text', '[-_]copy', // usatoday
+'\\Bcopy'];
+
+// The above list, joined into a matching regular expression
+var POSITIVE_SCORE_RE = new RegExp(POSITIVE_SCORE_HINTS.join('|'), 'i');
+
+// Readability publisher-specific guidelines
+
+
+// A list of strings that denote a negative scoring for this content as being
+// an article container. Checked against className and id.
+//
+// TODO: Perhaps have these scale based on their odds of being quality?
+var NEGATIVE_SCORE_HINTS = ['adbox', 'advert', 'author', 'bio', 'bookmark', 'bottom', 'byline', 'clear', 'com-', 'combx', 'comment', 'comment\\B', 'contact', 'copy', 'credit', 'crumb', 'date', 'deck', 'excerpt', 'featured', // tnr.com has a featured_content which throws us off
+'foot', 'footer', 'footnote', 'graf', 'head', 'info', 'infotext', // newscientist.com copyright
+'instapaper_ignore', 'jump', 'linebreak', 'link', 'masthead', 'media', 'meta', 'modal', 'outbrain', // slate.com junk
+'promo', 'pr_', // autoblog - press release
+'related', 'respond', 'roundcontent', // lifehacker restricted content warning
+'scroll', 'secondary', 'share', 'shopping', 'shoutbox', 'side', 'sidebar', 'sponsor', 'stamp', 'sub', 'summary', 'tags', 'tools', 'widget'];
+// The above list, joined into a matching regular expression
+var NEGATIVE_SCORE_RE = new RegExp(NEGATIVE_SCORE_HINTS.join('|'), 'i');
+
+// XPath to try to determine if a page is wordpress. Not always successful.
+var IS_WP_SELECTOR = 'meta[name=generator][value^=WordPress]';
+
+// Match a digit. Pretty clear.
+
+
+// A list of words that, if found in link text or URLs, likely mean that
+// this link is not a next page link.
+
+
+
+// Match any phrase that looks like it could be page, or paging, or pagination
+var PAGE_RE = new RegExp('pag(e|ing|inat)', 'i');
+
+// Match any link text/classname/id that looks like it could mean the next
+// page. Things like: next, continue, >, >>, » but not >|, »| as those can
+// mean last page.
+// export const NEXT_LINK_TEXT_RE = new RegExp('(next|weiter|continue|>([^\|]|$)|»([^\|]|$))', 'i');
+
+
+// Match any link text/classname/id that looks like it is an end link: things
+// like "first", "last", "end", etc.
+
+
+// Match any link text/classname/id that looks like it means the previous
+// page.
+
+
+// Match 2 or more consecutive <br> tags
+
+
+// Match 1 BR tag.
+
+
+// A list of all of the block level tags known in HTML5 and below. Taken from
+// http://bit.ly/qneNIT
+var BLOCK_LEVEL_TAGS = ['article', 'aside', 'blockquote', 'body', 'br', 'button', 'canvas', 'caption', 'col', 'colgroup', 'dd', 'div', 'dl', 'dt', 'embed', 'fieldset', 'figcaption', 'figure', 'footer', 'form', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'header', 'hgroup', 'hr', 'li', 'map', 'object', 'ol', 'output', 'p', 'pre', 'progress', 'section', 'table', 'tbody', 'textarea', 'tfoot', 'th', 'thead', 'tr', 'ul', 'video'];
+var BLOCK_LEVEL_TAGS_RE = new RegExp('^(' + BLOCK_LEVEL_TAGS.join('|') + ')$', 'i');
+
+// The removal is implemented as a blacklist and whitelist, this test finds
+// blacklisted elements that aren't whitelisted. We do this all in one
+// expression-both because it's only one pass, and because this skips the
+// serialization for whitelisted nodes.
+var candidatesBlacklist = UNLIKELY_CANDIDATES_BLACKLIST.join('|');
+var CANDIDATES_BLACKLIST = new RegExp(candidatesBlacklist, 'i');
+
+var candidatesWhitelist = UNLIKELY_CANDIDATES_WHITELIST.join('|');
+var CANDIDATES_WHITELIST = new RegExp(candidatesWhitelist, 'i');
+
+function stripUnlikelyCandidates($) {
+  //  Loop through the provided document and remove any non-link nodes
+  //  that are unlikely candidates for article content.
+  //
+  //  Links are ignored because there are very often links to content
+  //  that are identified as non-body-content, but may be inside
+  //  article-like content.
+  //
+  //  :param $: a cheerio object to strip nodes from
+  //  :return $: the cleaned cheerio object
+  $('*').not('a').each(function (index, node) {
+    var $node = $(node);
+    var classes = $node.attr('class');
+    var id = $node.attr('id');
+    if (!id && !classes) return;
+
+    var classAndId = (classes || '') + ' ' + (id || '');
+    if (CANDIDATES_WHITELIST.test(classAndId)) {
+      return;
+    } else if (CANDIDATES_BLACKLIST.test(classAndId)) {
+      $node.remove();
+    }
+  });
+
+  return $;
+}
+
+// ## NOTES:
+// Another good candidate for refactoring/optimizing.
+// Very imperative code, I don't love it. - AP
+
+//  Given cheerio object, convert consecutive <br /> tags into
+//  <p /> tags instead.
+//
+//  :param $: A cheerio object
+
+function brsToPs$$1($) {
+  var collapsing = false;
+  $('br').each(function (index, element) {
+    var $element = $(element);
+    var nextElement = $element.next().get(0);
+
+    if (nextElement && nextElement.tagName.toLowerCase() === 'br') {
+      collapsing = true;
+      $element.remove();
+    } else if (collapsing) {
+      collapsing = false;
+      // $(element).replaceWith('<p />')
+      paragraphize(element, $, true);
+    }
+  });
+
+  return $;
+}
+
+// Given a node, turn it into a P if it is not already a P, and
+// make sure it conforms to the constraints of a P tag (I.E. does
+// not contain any other block tags.)
+//
+// If the node is a <br />, it treats the following inline siblings
+// as if they were its children.
+//
+// :param node: The node to paragraphize; this is a raw node
+// :param $: The cheerio object to handle dom manipulation
+// :param br: Whether or not the passed node is a br
+
+function paragraphize(node, $) {
+  var br = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+
+  var $node = $(node);
+
+  if (br) {
+    var sibling = node.nextSibling;
+    var p = $('<p></p>');
+
+    // while the next node is text or not a block level element
+    // append it to a new p node
+    while (sibling && !(sibling.tagName && BLOCK_LEVEL_TAGS_RE.test(sibling.tagName))) {
+      var nextSibling = sibling.nextSibling;
+      $(sibling).appendTo(p);
+      sibling = nextSibling;
+    }
+
+    $node.replaceWith(p);
+    $node.remove();
+    return $;
+  }
+
+  return $;
+}
+
+function convertDivs($) {
+  $('div').each(function (index, div) {
+    var $div = $(div);
+    var convertable = $div.children(DIV_TO_P_BLOCK_TAGS).length === 0;
+
+    if (convertable) {
+      convertNodeTo$$1($div, $, 'p');
+    }
+  });
+
+  return $;
+}
+
+function convertSpans($) {
+  $('span').each(function (index, span) {
+    var $span = $(span);
+    var convertable = $span.parents('p, div').length === 0;
+    if (convertable) {
+      convertNodeTo$$1($span, $, 'p');
+    }
+  });
+
+  return $;
+}
+
+// Loop through the provided doc, and convert any p-like elements to
+// actual paragraph tags.
+//
+//   Things fitting this criteria:
+//   * Multiple consecutive <br /> tags.
+//   * <div /> tags without block level elements inside of them
+//   * <span /> tags who are not children of <p /> or <div /> tags.
+//
+//   :param $: A cheerio object to search
+//   :return cheerio object with new p elements
+//   (By-reference mutation, though. Returned just for convenience.)
+
+function convertToParagraphs$$1($) {
+  $ = brsToPs$$1($);
+  $ = convertDivs($);
+  $ = convertSpans($);
+
+  return $;
+}
+
+function convertNodeTo$$1($node, $) {
+  var tag = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'p';
+
+  var node = $node.get(0);
+  if (!node) {
+    return $;
+  }
+  var attrs = getAttrs(node) || {};
+
+  var attribString = _Reflect$ownKeys(attrs).map(function (key) {
+    return key + '=' + attrs[key];
+  }).join(' ');
+  var html = void 0;
+
+  if ($.browser) {
+    // In the browser, the contents of noscript tags aren't rendered, therefore
+    // transforms on the noscript tag (commonly used for lazy-loading) don't work
+    // as expected. This test case handles that
+    html = node.tagName.toLowerCase() === 'noscript' ? $node.text() : $node.html();
+  } else {
+    html = $node.contents();
+  }
+  $node.replaceWith('<' + tag + ' ' + attribString + '>' + html + '</' + tag + '>');
+  return $;
+}
+
+function cleanForHeight($img, $) {
+  var height = parseInt($img.attr('height'), 10);
+  var width = parseInt($img.attr('width'), 10) || 20;
+
+  // Remove images that explicitly have very small heights or
+  // widths, because they are most likely shims or icons,
+  // which aren't very useful for reading.
+  if ((height || 20) < 10 || width < 10) {
+    $img.remove();
+  } else if (height) {
+    // Don't ever specify a height on images, so that we can
+    // scale with respect to width without screwing up the
+    // aspect ratio.
+    $img.removeAttr('height');
+  }
+
+  return $;
+}
+
+// Cleans out images where the source string matches transparent/spacer/etc
+// TODO This seems very aggressive - AP
+function removeSpacers($img, $) {
+  if (SPACER_RE.test($img.attr('src'))) {
+    $img.remove();
+  }
+
+  return $;
+}
+
+function cleanImages($article, $) {
+  $article.find('img').each(function (index, img) {
+    var $img = $(img);
+
+    cleanForHeight($img, $);
+    removeSpacers($img, $);
+  });
+
+  return $;
+}
+
+function markToKeep(article, $, url) {
+  var tags = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : [];
+
+  if (tags.length === 0) {
+    tags = KEEP_SELECTORS;
+  }
+
+  if (url) {
+    var _URL$parse = URL.parse(url),
+        protocol = _URL$parse.protocol,
+        hostname = _URL$parse.hostname;
+
+    tags = [].concat(_toConsumableArray(tags), ['iframe[src^="' + protocol + '//' + hostname + '"]']);
+  }
+
+  $(tags.join(','), article).addClass(KEEP_CLASS);
+
+  return $;
+}
+
+function stripJunkTags(article, $) {
+  var tags = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [];
+
+  if (tags.length === 0) {
+    tags = STRIP_OUTPUT_TAGS;
+  }
+
+  // Remove matching elements, but ignore
+  // any element with a class of mercury-parser-keep
+  $(tags.join(','), article).not('.' + KEEP_CLASS).remove();
+
+  // Remove the mercury-parser-keep class from result
+  $('.' + KEEP_CLASS, article).removeClass(KEEP_CLASS);
+
+  return $;
+}
+
+// H1 tags are typically the article title, which should be extracted
+// by the title extractor instead. If there's less than 3 of them (<3),
+// strip them. Otherwise, turn 'em into H2s.
+
+function cleanHOnes$$1(article, $) {
+  var $hOnes = $('h1', article);
+
+  if ($hOnes.length < 3) {
+    $hOnes.each(function (index, node) {
+      return $(node).remove();
+    });
+  } else {
+    $hOnes.each(function (index, node) {
+      convertNodeTo$$1($(node), $, 'h2');
+    });
+  }
+
+  return $;
+}
+
+function removeAllButWhitelist($article) {
+  $article.find('*').each(function (index, node) {
+    var attrs = getAttrs(node);
+
+    setAttrs(node, _Reflect$ownKeys(attrs).reduce(function (acc, attr) {
+      if (WHITELIST_ATTRS_RE.test(attr)) {
+        return _extends({}, acc, _defineProperty({}, attr, attrs[attr]));
+      }
+
+      return acc;
+    }, {}));
+  });
+
+  return $article;
+}
+
+// function removeAttrs(article, $) {
+//   REMOVE_ATTRS.forEach((attr) => {
+//     $(`[${attr}]`, article).removeAttr(attr);
+//   });
+// }
+
+// Remove attributes like style or align
+function cleanAttributes$$1($article) {
+  // Grabbing the parent because at this point
+  // $article will be wrapped in a div which will
+  // have a score set on it.
+  return removeAllButWhitelist($article.parent().length ? $article.parent() : $article);
+}
+
+function removeEmpty($article, $) {
+  $article.find('p').each(function (index, p) {
+    var $p = $(p);
+    if ($p.find('iframe, img').length === 0 && $p.text().trim() === '') $p.remove();
+  });
+
+  return $;
+}
+
+// // CONTENT FETCHING CONSTANTS ////
+
+// A list of strings that can be considered unlikely candidates when
+// extracting content from a resource. These strings are joined together
+// and then tested for existence using re:test, so may contain simple,
+// non-pipe style regular expression queries if necessary.
+var UNLIKELY_CANDIDATES_BLACKLIST$1 = ['ad-break', 'adbox', 'advert', 'addthis', 'agegate', 'aux', 'blogger-labels', 'combx', 'comment', 'conversation', 'disqus', 'entry-unrelated', 'extra', 'foot', 'form', 'header', 'hidden', 'loader', 'login', // Note: This can hit 'blogindex'.
+'menu', 'meta', 'nav', 'pager', 'pagination', 'predicta', // readwriteweb inline ad box
+'presence_control_external', // lifehacker.com container full of false positives
+'popup', 'printfriendly', 'related', 'remove', 'remark', 'rss', 'share', 'shoutbox', 'sidebar', 'sociable', 'sponsor', 'tools'];
+
+// A list of strings that can be considered LIKELY candidates when
+// extracting content from a resource. Essentially, the inverse of the
+// blacklist above - if something matches both blacklist and whitelist,
+// it is kept. This is useful, for example, if something has a className
+// of "rss-content entry-content". It matched 'rss', so it would normally
+// be removed, however, it's also the entry content, so it should be left
+// alone.
+//
+// These strings are joined together and then tested for existence using
+// re:test, so may contain simple, non-pipe style regular expression queries
+// if necessary.
+var UNLIKELY_CANDIDATES_WHITELIST$1 = ['and', 'article', 'body', 'blogindex', 'column', 'content', 'entry-content-asset', 'format', // misuse of form
+'hfeed', 'hentry', 'hatom', 'main', 'page', 'posts', 'shadow'];
+
+// A list of tags which, if found inside, should cause a <div /> to NOT
+// be turned into a paragraph tag. Shallow div tags without these elements
+// should be turned into <p /> tags.
+var DIV_TO_P_BLOCK_TAGS$1 = ['a', 'blockquote', 'dl', 'div', 'img', 'p', 'pre', 'table'].join(',');
+
+// A list of tags that should be ignored when trying to find the top candidate
+// for a document.
+var NON_TOP_CANDIDATE_TAGS$1 = ['br', 'b', 'i', 'label', 'hr', 'area', 'base', 'basefont', 'input', 'img', 'link', 'meta'];
+
+var NON_TOP_CANDIDATE_TAGS_RE$1 = new RegExp('^(' + NON_TOP_CANDIDATE_TAGS$1.join('|') + ')$', 'i');
+
+// A list of selectors that specify, very clearly, either hNews or other
+// very content-specific style content, like Blogger templates.
+// More examples here: http://microformats.org/wiki/blog-post-formats
+var HNEWS_CONTENT_SELECTORS$1 = [['.hentry', '.entry-content'], ['entry', '.entry-content'], ['.entry', '.entry_content'], ['.post', '.postbody'], ['.post', '.post_body'], ['.post', '.post-body']];
+
+var PHOTO_HINTS$1 = ['figure', 'photo', 'image', 'caption'];
+var PHOTO_HINTS_RE$1 = new RegExp(PHOTO_HINTS$1.join('|'), 'i');
+
+// A list of strings that denote a positive scoring for this content as being
+// an article container. Checked against className and id.
+//
+// TODO: Perhaps have these scale based on their odds of being quality?
+var POSITIVE_SCORE_HINTS$1 = ['article', 'articlecontent', 'instapaper_body', 'blog', 'body', 'content', 'entry-content-asset', 'entry', 'hentry', 'main', 'Normal', 'page', 'pagination', 'permalink', 'post', 'story', 'text', '[-_]copy', // usatoday
+'\\Bcopy'];
+
+// The above list, joined into a matching regular expression
+var POSITIVE_SCORE_RE$1 = new RegExp(POSITIVE_SCORE_HINTS$1.join('|'), 'i');
+
+// Readability publisher-specific guidelines
+var READABILITY_ASSET$1 = new RegExp('entry-content-asset', 'i');
+
+// A list of strings that denote a negative scoring for this content as being
+// an article container. Checked against className and id.
+//
+// TODO: Perhaps have these scale based on their odds of being quality?
+var NEGATIVE_SCORE_HINTS$1 = ['adbox', 'advert', 'author', 'bio', 'bookmark', 'bottom', 'byline', 'clear', 'com-', 'combx', 'comment', 'comment\\B', 'contact', 'copy', 'credit', 'crumb', 'date', 'deck', 'excerpt', 'featured', // tnr.com has a featured_content which throws us off
+'foot', 'footer', 'footnote', 'graf', 'head', 'info', 'infotext', // newscientist.com copyright
+'instapaper_ignore', 'jump', 'linebreak', 'link', 'masthead', 'media', 'meta', 'modal', 'outbrain', // slate.com junk
+'promo', 'pr_', // autoblog - press release
+'related', 'respond', 'roundcontent', // lifehacker restricted content warning
+'scroll', 'secondary', 'share', 'shopping', 'shoutbox', 'side', 'sidebar', 'sponsor', 'stamp', 'sub', 'summary', 'tags', 'tools', 'widget'];
+// The above list, joined into a matching regular expression
+var NEGATIVE_SCORE_RE$1 = new RegExp(NEGATIVE_SCORE_HINTS$1.join('|'), 'i');
+
+// Match a digit. Pretty clear.
+
+
+// Match 2 or more consecutive <br> tags
+
+
+// Match 1 BR tag.
+
+
+// A list of all of the block level tags known in HTML5 and below. Taken from
+// http://bit.ly/qneNIT
+
+
+
+// The removal is implemented as a blacklist and whitelist, this test finds
+// blacklisted elements that aren't whitelisted. We do this all in one
+// expression-both because it's only one pass, and because this skips the
+// serialization for whitelisted nodes.
+var candidatesBlacklist$1 = UNLIKELY_CANDIDATES_BLACKLIST$1.join('|');
+
+
+var candidatesWhitelist$1 = UNLIKELY_CANDIDATES_WHITELIST$1.join('|');
+
+
+
+
+var PARAGRAPH_SCORE_TAGS$1 = new RegExp('^(p|li|span|pre)$', 'i');
+var CHILD_CONTENT_TAGS$1 = new RegExp('^(td|blockquote|ol|ul|dl)$', 'i');
+var BAD_TAGS$1 = new RegExp('^(address|form)$', 'i');
+
+// Get the score of a node based on its className and id.
+function getWeight(node) {
+  var classes = node.attr('class');
+  var id = node.attr('id');
+  var score = 0;
+
+  if (id) {
+    // if id exists, try to score on both positive and negative
+    if (POSITIVE_SCORE_RE$1.test(id)) {
+      score += 25;
+    }
+    if (NEGATIVE_SCORE_RE$1.test(id)) {
+      score -= 25;
+    }
+  }
+
+  if (classes) {
+    if (score === 0) {
+      // if classes exist and id did not contribute to score
+      // try to score on both positive and negative
+      if (POSITIVE_SCORE_RE$1.test(classes)) {
+        score += 25;
+      }
+      if (NEGATIVE_SCORE_RE$1.test(classes)) {
+        score -= 25;
+      }
+    }
+
+    // even if score has been set by id, add score for
+    // possible photo matches
+    // "try to keep photos if we can"
+    if (PHOTO_HINTS_RE$1.test(classes)) {
+      score += 10;
+    }
+
+    // add 25 if class matches entry-content-asset,
+    // a class apparently instructed for use in the
+    // Readability publisher guidelines
+    // https://www.readability.com/developers/guidelines
+    if (READABILITY_ASSET$1.test(classes)) {
+      score += 25;
+    }
+  }
+
+  return score;
+}
+
+// returns the score of a node based on
+// the node's score attribute
+// returns null if no score set
+function getScore($node) {
+  // console.log("NODE", $node, $node.attr('score'))
+  return parseFloat($node.attr('score')) || null;
+}
+
+// return 1 for every comma in text
+function scoreCommas(text) {
+  return (text.match(/,/g) || []).length;
+}
+
+var idkRe = new RegExp('^(p|pre)$', 'i');
+
+function scoreLength(textLength) {
+  var tagName = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'p';
+
+  var chunks = textLength / 50;
+
+  if (chunks > 0) {
+    var lengthBonus = void 0;
+
+    // No idea why p or pre are being tamped down here
+    // but just following the source for now
+    // Not even sure why tagName is included here,
+    // since this is only being called from the context
+    // of scoreParagraph
+    if (idkRe.test(tagName)) {
+      lengthBonus = chunks - 2;
+    } else {
+      lengthBonus = chunks - 1.25;
+    }
+
+    return Math.min(Math.max(lengthBonus, 0), 3);
+  }
+
+  return 0;
+}
+
+// Score a paragraph using various methods. Things like number of
+// commas, etc. Higher is better.
+function scoreParagraph$$1(node) {
+  var score = 1;
+  var text = node.text().trim();
+  var textLength = text.length;
+
+  // If this paragraph is less than 25 characters, don't count it.
+  if (textLength < 25) {
+    return 0;
+  }
+
+  // Add points for any commas within this paragraph
+  score += scoreCommas(text);
+
+  // For every 50 characters in this paragraph, add another point. Up
+  // to 3 points.
+  score += scoreLength(textLength);
+
+  // Articles can end with short paragraphs when people are being clever
+  // but they can also end with short paragraphs setting up lists of junk
+  // that we strip. This negative tweaks junk setup paragraphs just below
+  // the cutoff threshold.
+  if (text.slice(-1) === ':') {
+    score -= 1;
+  }
+
+  return score;
+}
+
+function setScore($node, $, score) {
+  $node.attr('score', score);
+  return $node;
+}
+
+function addScore$$1($node, $, amount) {
+  try {
+    var score = getOrInitScore$$1($node, $) + amount;
+    setScore($node, $, score);
+  } catch (e) {
+    // Ignoring; error occurs in scoreNode
+  }
+
+  return $node;
+}
+
+// Adds 1/4 of a child's score to its parent
+function addToParent$$1(node, $, score) {
+  var parent = node.parent();
+  if (parent) {
+    addScore$$1(parent, $, score * 0.25);
+  }
+
+  return node;
+}
+
+// gets and returns the score if it exists
+// if not, initializes a score based on
+// the node's tag type
+function getOrInitScore$$1($node, $) {
+  var weightNodes = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
+
+  var score = getScore($node);
+
+  if (score) {
+    return score;
+  }
+
+  score = scoreNode$$1($node);
+
+  if (weightNodes) {
+    score += getWeight($node);
+  }
+
+  addToParent$$1($node, $, score);
+
+  return score;
+}
+
+// Score an individual node. Has some smarts for paragraphs, otherwise
+// just scores based on tag.
+function scoreNode$$1($node) {
+  var _$node$get = $node.get(0),
+      tagName = _$node$get.tagName;
+
+  // TODO: Consider ordering by most likely.
+  // E.g., if divs are a more common tag on a page,
+  // Could save doing that regex test on every node – AP
+
+
+  if (PARAGRAPH_SCORE_TAGS$1.test(tagName)) {
+    return scoreParagraph$$1($node);
+  } else if (tagName.toLowerCase() === 'div') {
+    return 5;
+  } else if (CHILD_CONTENT_TAGS$1.test(tagName)) {
+    return 3;
+  } else if (BAD_TAGS$1.test(tagName)) {
+    return -3;
+  } else if (tagName.toLowerCase() === 'th') {
+    return -5;
+  }
+
+  return 0;
+}
+
+function convertSpans$1($node, $) {
+  if ($node.get(0)) {
+    var _$node$get = $node.get(0),
+        tagName = _$node$get.tagName;
+
+    if (tagName === 'span') {
+      // convert spans to divs
+      convertNodeTo$$1($node, $, 'div');
+    }
+  }
+}
+
+function addScoreTo($node, $, score) {
+  if ($node) {
+    convertSpans$1($node, $);
+    addScore$$1($node, $, score);
+  }
+}
+
+function scorePs($, weightNodes) {
+  $('p, pre').not('[score]').each(function (index, node) {
+    // The raw score for this paragraph, before we add any parent/child
+    // scores.
+    var $node = $(node);
+    $node = setScore($node, $, getOrInitScore$$1($node, $, weightNodes));
+
+    var $parent = $node.parent();
+    var rawScore = scoreNode$$1($node);
+
+    addScoreTo($parent, $, rawScore, weightNodes);
+    if ($parent) {
+      // Add half of the individual content score to the
+      // grandparent
+      addScoreTo($parent.parent(), $, rawScore / 2, weightNodes);
+    }
+  });
+
+  return $;
+}
+
+// score content. Parents get the full value of their children's
+// content score, grandparents half
+function scoreContent$$1($) {
+  var weightNodes = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+
+  // First, look for special hNews based selectors and give them a big
+  // boost, if they exist
+  HNEWS_CONTENT_SELECTORS$1.forEach(function (_ref) {
+    var _ref2 = _slicedToArray(_ref, 2),
+        parentSelector = _ref2[0],
+        childSelector = _ref2[1];
+
+    $(parentSelector + ' ' + childSelector).each(function (index, node) {
+      addScore$$1($(node).parent(parentSelector), $, 80);
+    });
+  });
+
+  // Doubling this again
+  // Previous solution caused a bug
+  // in which parents weren't retaining
+  // scores. This is not ideal, and
+  // should be fixed.
+  scorePs($, weightNodes);
+  scorePs($, weightNodes);
+
+  return $;
+}
+
+var NORMALIZE_RE = /\s{2,}/g;
+
+function normalizeSpaces(text) {
+  return text.replace(NORMALIZE_RE, ' ').trim();
+}
+
+// Given a node type to search for, and a list of regular expressions,
+// look to see if this extraction can be found in the URL. Expects
+// that each expression in r_list will return group(1) as the proper
+// string to be cleaned.
+// Only used for date_published currently.
+function extractFromUrl(url, regexList) {
+  var matchRe = regexList.find(function (re) {
+    return re.test(url);
+  });
+  // const matchRe = null
+  if (matchRe) {
+    return matchRe.exec(url)[1];
+  }
+
+  return null;
+}
+
+// An expression that looks to try to find the page digit within a URL, if
+// it exists.
+// Matches:
+//  page=1
+//  pg=1
+//  p=1
+//  paging=12
+//  pag=7
+//  pagination/1
+//  paging/88
+//  pa/83
+//  p/11
+//
+// Does not match:
+//  pg=102
+//  page:2
+var PAGE_IN_HREF_RE = new RegExp('(page|paging|(p(a|g|ag)?(e|enum|ewanted|ing|ination)))?(=|/)([0-9]{1,3})', 'i');
+
+var HAS_ALPHA_RE = /[a-z]/i;
+
+var IS_ALPHA_RE = /^[a-z]+$/i;
+var IS_DIGIT_RE = /^[0-9]+$/i;
+
+function pageNumFromUrl(url) {
+  var matches = url.match(PAGE_IN_HREF_RE);
+  if (!matches) return null;
+
+  var pageNum = parseInt(matches[6], 10);
+
+  // Return pageNum < 100, otherwise
+  // return null
+  return pageNum < 100 ? pageNum : null;
+}
+
+function removeAnchor(url) {
+  return url.split('#')[0].replace(/\/$/, '');
+}
+
+function isGoodSegment(segment, index, firstSegmentHasLetters) {
+  var goodSegment = true;
+
+  // If this is purely a number, and it's the first or second
+  // url_segment, it's probably a page number. Remove it.
+  if (index < 2 && IS_DIGIT_RE.test(segment) && segment.length < 3) {
+    goodSegment = true;
+  }
+
+  // If this is the first url_segment and it's just "index",
+  // remove it
+  if (index === 0 && segment.toLowerCase() === 'index') {
+    goodSegment = false;
+  }
+
+  // If our first or second url_segment is smaller than 3 characters,
+  // and the first url_segment had no alphas, remove it.
+  if (index < 2 && segment.length < 3 && !firstSegmentHasLetters) {
+    goodSegment = false;
+  }
+
+  return goodSegment;
+}
+
+// Take a URL, and return the article base of said URL. That is, no
+// pagination data exists in it. Useful for comparing to other links
+// that might have pagination data within them.
+function articleBaseUrl(url, parsed) {
+  var parsedUrl = parsed || URL.parse(url);
+  var protocol = parsedUrl.protocol,
+      host = parsedUrl.host,
+      path = parsedUrl.path;
+
+
+  var firstSegmentHasLetters = false;
+  var cleanedSegments = path.split('/').reverse().reduce(function (acc, rawSegment, index) {
+    var segment = rawSegment;
+
+    // Split off and save anything that looks like a file type.
+    if (segment.includes('.')) {
+      var _segment$split = segment.split('.'),
+          _segment$split2 = _slicedToArray(_segment$split, 2),
+          possibleSegment = _segment$split2[0],
+          fileExt = _segment$split2[1];
+
+      if (IS_ALPHA_RE.test(fileExt)) {
+        segment = possibleSegment;
+      }
+    }
+
+    // If our first or second segment has anything looking like a page
+    // number, remove it.
+    if (PAGE_IN_HREF_RE.test(segment) && index < 2) {
+      segment = segment.replace(PAGE_IN_HREF_RE, '');
+    }
+
+    // If we're on the first segment, check to see if we have any
+    // characters in it. The first segment is actually the last bit of
+    // the URL, and this will be helpful to determine if we're on a URL
+    // segment that looks like "/2/" for example.
+    if (index === 0) {
+      firstSegmentHasLetters = HAS_ALPHA_RE.test(segment);
+    }
+
+    // If it's not marked for deletion, push it to cleaned_segments.
+    if (isGoodSegment(segment, index, firstSegmentHasLetters)) {
+      acc.push(segment);
+    }
+
+    return acc;
+  }, []);
+
+  return protocol + '//' + host + cleanedSegments.reverse().join('/');
+}
+
+// Given a string, return True if it appears to have an ending sentence
+// within it, false otherwise.
+var SENTENCE_END_RE = new RegExp('.( |$)');
+function hasSentenceEnd(text) {
+  return SENTENCE_END_RE.test(text);
+}
+
+function excerptContent(content) {
+              var words = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 10;
+
+              return content.trim().split(/\s+/).slice(0, words).join(' ');
+}
+
+// Now that we have a top_candidate, look through the siblings of
+// it to see if any of them are decently scored. If they are, they
+// may be split parts of the content (Like two divs, a preamble and
+// a body.) Example:
+// http://articles.latimes.com/2009/oct/14/business/fi-bigtvs14
+function mergeSiblings($candidate, topScore, $) {
+  if (!$candidate.parent().length) {
+    return $candidate;
+  }
+
+  var siblingScoreThreshold = Math.max(10, topScore * 0.25);
+  var wrappingDiv = $('<div></div>');
+
+  $candidate.parent().children().each(function (index, sibling) {
+    var $sibling = $(sibling);
+    // Ignore tags like BR, HR, etc
+    if (NON_TOP_CANDIDATE_TAGS_RE$1.test(sibling.tagName)) {
+      return null;
+    }
+
+    var siblingScore = getScore($sibling);
+    if (siblingScore) {
+      if ($sibling.get(0) === $candidate.get(0)) {
+        wrappingDiv.append($sibling);
+      } else {
+        var contentBonus = 0;
+        var density = linkDensity($sibling);
+
+        // If sibling has a very low link density,
+        // give it a small bonus
+        if (density < 0.05) {
+          contentBonus += 20;
+        }
+
+        // If sibling has a high link density,
+        // give it a penalty
+        if (density >= 0.5) {
+          contentBonus -= 20;
+        }
+
+        // If sibling node has the same class as
+        // candidate, give it a bonus
+        if ($sibling.attr('class') === $candidate.attr('class')) {
+          contentBonus += topScore * 0.2;
+        }
+
+        var newScore = siblingScore + contentBonus;
+
+        if (newScore >= siblingScoreThreshold) {
+          return wrappingDiv.append($sibling);
+        } else if (sibling.tagName === 'p') {
+          var siblingContent = $sibling.text();
+          var siblingContentLength = textLength(siblingContent);
+
+          if (siblingContentLength > 80 && density < 0.25) {
+            return wrappingDiv.append($sibling);
+          } else if (siblingContentLength <= 80 && density === 0 && hasSentenceEnd(siblingContent)) {
+            return wrappingDiv.append($sibling);
+          }
+        }
+      }
+    }
+
+    return null;
+  });
+
+  if (wrappingDiv.children().length === 1 && wrappingDiv.children().first().get(0) === $candidate.get(0)) {
+    return $candidate;
+  }
+
+  return wrappingDiv;
+}
+
+// After we've calculated scores, loop through all of the possible
+// candidate nodes we found and find the one with the highest score.
+function findTopCandidate$$1($) {
+  var $candidate = void 0;
+  var topScore = 0;
+
+  $('[score]').each(function (index, node) {
+    // Ignore tags like BR, HR, etc
+    if (NON_TOP_CANDIDATE_TAGS_RE$1.test(node.tagName)) {
+      return;
+    }
+
+    var $node = $(node);
+    var score = getScore($node);
+
+    if (score > topScore) {
+      topScore = score;
+      $candidate = $node;
+    }
+  });
+
+  // If we don't have a candidate, return the body
+  // or whatever the first element is
+  if (!$candidate) {
+    return $('body') || $('*').first();
+  }
+
+  $candidate = mergeSiblings($candidate, topScore, $);
+
+  return $candidate;
+}
+
+// Scoring
+
+function removeUnlessContent($node, $, weight) {
+  // Explicitly save entry-content-asset tags, which are
+  // noted as valuable in the Publisher guidelines. For now
+  // this works everywhere. We may want to consider making
+  // this less of a sure-thing later.
+  if ($node.hasClass('entry-content-asset')) {
+    return;
+  }
+
+  var content = normalizeSpaces($node.text());
+
+  if (scoreCommas(content) < 10) {
+    var pCount = $('p', $node).length;
+    var inputCount = $('input', $node).length;
+
+    // Looks like a form, too many inputs.
+    if (inputCount > pCount / 3) {
+      $node.remove();
+      return;
+    }
+
+    var contentLength = content.length;
+    var imgCount = $('img', $node).length;
+
+    // Content is too short, and there are no images, so
+    // this is probably junk content.
+    if (contentLength < 25 && imgCount === 0) {
+      $node.remove();
+      return;
+    }
+
+    var density = linkDensity($node);
+
+    // Too high of link density, is probably a menu or
+    // something similar.
+    // console.log(weight, density, contentLength)
+    if (weight < 25 && density > 0.2 && contentLength > 75) {
+      $node.remove();
+      return;
+    }
+
+    // Too high of a link density, despite the score being
+    // high.
+    if (weight >= 25 && density > 0.5) {
+      // Don't remove the node if it's a list and the
+      // previous sibling starts with a colon though. That
+      // means it's probably content.
+      var tagName = $node.get(0).tagName.toLowerCase();
+      var nodeIsList = tagName === 'ol' || tagName === 'ul';
+      if (nodeIsList) {
+        var previousNode = $node.prev();
+        if (previousNode && normalizeSpaces(previousNode.text()).slice(-1) === ':') {
+          return;
+        }
+      }
+
+      $node.remove();
+      return;
+    }
+
+    var scriptCount = $('script', $node).length;
+
+    // Too many script tags, not enough content.
+    if (scriptCount > 0 && contentLength < 150) {
+      $node.remove();
+      return;
+    }
+  }
+}
+
+// Given an article, clean it of some superfluous content specified by
+// tags. Things like forms, ads, etc.
+//
+// Tags is an array of tag name's to search through. (like div, form,
+// etc)
+//
+// Return this same doc.
+function cleanTags$$1($article, $) {
+  $(CLEAN_CONDITIONALLY_TAGS, $article).each(function (index, node) {
+    var $node = $(node);
+    var weight = getScore($node);
+    if (!weight) {
+      weight = getOrInitScore$$1($node, $);
+      setScore($node, $, weight);
+    }
+
+    // drop node if its weight is < 0
+    if (weight < 0) {
+      $node.remove();
+    } else {
+      // deteremine if node seems like content
+      removeUnlessContent($node, $, weight);
+    }
+  });
+
+  return $;
+}
+
+function cleanHeaders($article, $) {
+  var title = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
+
+  $(HEADER_TAG_LIST, $article).each(function (index, header) {
+    var $header = $(header);
+    // Remove any headers that appear before all other p tags in the
+    // document. This probably means that it was part of the title, a
+    // subtitle or something else extraneous like a datestamp or byline,
+    // all of which should be handled by other metadata handling.
+    if ($($header, $article).prevAll('p').length === 0) {
+      return $header.remove();
+    }
+
+    // Remove any headers that match the title exactly.
+    if (normalizeSpaces($(header).text()) === title) {
+      return $header.remove();
+    }
+
+    // If this header has a negative weight, it's probably junk.
+    // Get rid of it.
+    if (getWeight($(header)) < 0) {
+      return $header.remove();
+    }
+
+    return $header;
+  });
+
+  return $;
+}
+
+// Rewrite the tag name to div if it's a top level node like body or
+// html to avoid later complications with multiple body tags.
+
+function rewriteTopLevel$$1(article, $) {
+  // I'm not using context here because
+  // it's problematic when converting the
+  // top-level/root node - AP
+  $ = convertNodeTo$$1($('html'), $, 'div');
+  $ = convertNodeTo$$1($('body'), $, 'div');
+
+  return $;
+}
+
+/* eslint-disable */
+function absolutize($, rootUrl, attr, $content) {
+  $('[' + attr + ']', $content).each(function (_, node) {
+    var attrs = getAttrs(node);
+    var url = attrs[attr];
+
+    if (url) {
+      var absoluteUrl = URL.resolve(rootUrl, url);
+      setAttr(node, attr, absoluteUrl);
+    }
+  });
+}
+
+function makeLinksAbsolute$$1($content, $, url) {
+  ['href', 'src'].forEach(function (attr) {
+    return absolutize($, url, attr, $content);
+  });
+
+  return $content;
+}
+
+function textLength(text) {
+  return text.trim().replace(/\s+/g, ' ').length;
+}
+
+// Determines what percentage of the text
+// in a node is link text
+// Takes a node, returns a float
+function linkDensity($node) {
+  var totalTextLength = textLength($node.text());
+
+  var linkText = $node.find('a').text();
+  var linkLength = textLength(linkText);
+
+  if (totalTextLength > 0) {
+    return linkLength / totalTextLength;
+  } else if (totalTextLength === 0 && linkLength > 0) {
+    return 1;
+  }
+
+  return 0;
+}
+
+// Given a node type to search for, and a list of meta tag names to
+// search for, find a meta tag associated.
+
+function extractFromMeta$$1($, metaNames, cachedNames) {
+  var cleanTags$$1 = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
+
+  var foundNames = metaNames.filter(function (name) {
+    return cachedNames.indexOf(name) !== -1;
+  });
+
+  var _iteratorNormalCompletion = true;
+  var _didIteratorError = false;
+  var _iteratorError = undefined;
+
+  try {
+    var _loop = function _loop() {
+      var name = _step.value;
+
+      var type = 'name';
+      var value = 'value';
+
+      var nodes = $('meta[' + type + '="' + name + '"]');
+
+      // Get the unique value of every matching node, in case there
+      // are two meta tags with the same name and value.
+      // Remove empty values.
+      var values = nodes.map(function (index, node) {
+        return $(node).attr(value);
+      }).toArray().filter(function (text) {
+        return text !== '';
+      });
+
+      // If we have more than one value for the same name, we have a
+      // conflict and can't trust any of them. Skip this name. If we have
+      // zero, that means our meta tags had no values. Skip this name
+      // also.
+      if (values.length === 1) {
+        var metaValue = void 0;
+        // Meta values that contain HTML should be stripped, as they
+        // weren't subject to cleaning previously.
+        if (cleanTags$$1) {
+          metaValue = stripTags(values[0], $);
+        } else {
+          metaValue = values[0];
+        }
+
+        return {
+          v: metaValue
+        };
+      }
+    };
+
+    for (var _iterator = _getIterator(foundNames), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+      var _ret = _loop();
+
+      if ((typeof _ret === 'undefined' ? 'undefined' : _typeof(_ret)) === "object") return _ret.v;
+    }
+
+    // If nothing is found, return null
+  } catch (err) {
+    _didIteratorError = true;
+    _iteratorError = err;
+  } finally {
+    try {
+      if (!_iteratorNormalCompletion && _iterator.return) {
+        _iterator.return();
+      }
+    } finally {
+      if (_didIteratorError) {
+        throw _iteratorError;
+      }
+    }
+  }
+
+  return null;
+}
+
+function isGoodNode($node, maxChildren) {
+  // If it has a number of children, it's more likely a container
+  // element. Skip it.
+  if ($node.children().length > maxChildren) {
+    return false;
+  }
+  // If it looks to be within a comment, skip it.
+  if (withinComment$$1($node)) {
+    return false;
+  }
+
+  return true;
+}
+
+// Given a a list of selectors find content that may
+// be extractable from the document. This is for flat
+// meta-information, like author, title, date published, etc.
+function extractFromSelectors$$1($, selectors) {
+  var maxChildren = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 1;
+  var textOnly = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
+  var _iteratorNormalCompletion = true;
+  var _didIteratorError = false;
+  var _iteratorError = undefined;
+
+  try {
+    for (var _iterator = _getIterator(selectors), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+      var selector = _step.value;
+
+      var nodes = $(selector);
+
+      // If we didn't get exactly one of this selector, this may be
+      // a list of articles or comments. Skip it.
+      if (nodes.length === 1) {
+        var $node = $(nodes[0]);
+
+        if (isGoodNode($node, maxChildren)) {
+          var content = void 0;
+          if (textOnly) {
+            content = $node.text();
+          } else {
+            content = $node.html();
+          }
+
+          if (content) {
+            return content;
+          }
+        }
+      }
+    }
+  } catch (err) {
+    _didIteratorError = true;
+    _iteratorError = err;
+  } finally {
+    try {
+      if (!_iteratorNormalCompletion && _iterator.return) {
+        _iterator.return();
+      }
+    } finally {
+      if (_didIteratorError) {
+        throw _iteratorError;
+      }
+    }
+  }
+
+  return null;
+}
+
+// strips all tags from a string of text
+function stripTags(text, $) {
+  // Wrapping text in html element prevents errors when text
+  // has no html
+  var cleanText = $('<span>' + text + '</span>').text();
+  return cleanText === '' ? text : cleanText;
+}
+
+function withinComment$$1($node) {
+  var parents = $node.parents().toArray();
+  var commentParent = parents.find(function (parent) {
+    var attrs = getAttrs(parent);
+    var nodeClass = attrs.class,
+        id = attrs.id;
+
+    var classAndId = nodeClass + ' ' + id;
+    return classAndId.includes('comment');
+  });
+
+  return commentParent !== undefined;
+}
+
+// Given a node, determine if it's article-like enough to return
+// param: node (a cheerio node)
+// return: boolean
+
+function nodeIsSufficient($node) {
+  return $node.text().trim().length >= 100;
+}
+
+function isWordpress($) {
+  return $(IS_WP_SELECTOR).length > 0;
+}
+
+function getAttrs(node) {
+  var attribs = node.attribs,
+      attributes = node.attributes;
+
+
+  if (!attribs && attributes) {
+    var attrs = _Reflect$ownKeys(attributes).reduce(function (acc, index) {
+      var attr = attributes[index];
+
+      acc[attr.name] = attr.value;
+      return acc;
+    }, {});
+    return attrs;
+  }
+
+  return attribs;
+}
+
+function setAttr(node, attr, val) {
+  if (node.attribs) {
+    node.attribs[attr] = val;
+  } else if (node.attributes) {
+    node.setAttribute(attr, val);
+  }
+
+  return node;
+}
+
+/* eslint-disable */
+function setAttrs(node, attrs) {
+  if (node.attribs) {
+    node.attribs = attrs;
+  } else if (node.attributes) {
+    while (node.attributes.length > 0) {
+      node.removeAttribute(node.attributes[0].name);
+    }_Reflect$ownKeys(attrs).forEach(function (key) {
+      node.setAttribute(key, attrs[key]);
+    });
+  }
+
+  return node;
+}
+
+// DOM manipulation
+
 var IS_LINK = new RegExp('https?://', 'i');
 var IS_IMAGE = new RegExp('.(png|gif|jpe?g)', 'i');
 
@@ -246,8 +1723,10 @@ var TAGS_TO_REMOVE = ['script', 'style', 'form'].join(',');
 // the src attribute so the images are no longer lazy loaded.
 function convertLazyLoadedImages($) {
   $('img').each(function (_, img) {
-    _Reflect$ownKeys(img.attribs).forEach(function (attr) {
-      var value = img.attribs[attr];
+    var attrs = getAttrs(img);
+
+    _Reflect$ownKeys(attrs).forEach(function (attr) {
+      var value = attrs[attr];
 
       if (attr !== 'src' && IS_LINK.test(value) && IS_IMAGE.test(value)) {
         $(img).attr('src', value);
@@ -263,7 +1742,7 @@ function isComment(index, node) {
 }
 
 function cleanComments($) {
-  $.root().find('*').contents().filter(isComment).remove();
+  $('*').first().contents().filter(isComment).remove();
 
   return $;
 }
@@ -353,7 +1832,7 @@ var Resource = {
 
     var $ = cheerio.load(content, { normalizeWhitespace: true });
 
-    if ($.root().children().length === 0) {
+    if ($('*').first().children().length === 0) {
       throw new Error('No children, likely a bad parse.');
     }
 
@@ -426,10 +1905,18 @@ var NYMagExtractor = {
       h1: 'h2',
 
       // Convert lazy-loaded noscript images to figures
-      noscript: function noscript($node) {
-        var $children = $node.children();
-        if ($children.length === 1 && $children.get(0).tagName === 'img') {
-          return 'figure';
+      noscript: function noscript($node, $) {
+        if ($.browser) {
+          var $children = $($node.text());
+
+          if ($children.length === 1 && $children.get(0) !== undefined && $children.get(0).tagName.toLowerCase() === 'img') {
+            return 'figure';
+          }
+        } else {
+          var _$children = $node.children();
+          if (_$children.length === 1 && _$children.get(0).tagName === 'img') {
+            return 'figure';
+          }
         }
 
         return null;
@@ -603,7 +2090,9 @@ var TheAtlanticExtractor = {
     clean: []
   },
 
-  date_published: null,
+  date_published: {
+    selectors: [['time[itemProp="datePublished"]', 'datetime']]
+  },
 
   lead_image_url: null,
 
@@ -1232,1415 +2721,6 @@ var Extractors = _Object$keys(CustomExtractors).reduce(function (acc, key) {
   return _extends({}, acc, mergeSupportedDomains(extractor));
 }, {});
 
-// Spacer images to be removed
-var SPACER_RE = new RegExp('trans|transparent|spacer|blank', 'i');
-
-// The class we will use to mark elements we want to keep
-// but would normally remove
-var KEEP_CLASS = 'mercury-parser-keep';
-
-var KEEP_SELECTORS = ['iframe[src^="https://www.youtube.com"]', 'iframe[src^="http://www.youtube.com"]', 'iframe[src^="https://player.vimeo"]', 'iframe[src^="http://player.vimeo"]'];
-
-// A list of tags to strip from the output if we encounter them.
-var STRIP_OUTPUT_TAGS = ['title', 'script', 'noscript', 'link', 'style', 'hr', 'embed', 'iframe', 'object'];
-
-// cleanAttributes
-var REMOVE_ATTRS = ['style', 'align'];
-var REMOVE_ATTR_SELECTORS = REMOVE_ATTRS.map(function (selector) {
-  return '[' + selector + ']';
-});
-var REMOVE_ATTR_LIST = REMOVE_ATTRS.join(',');
-var WHITELIST_ATTRS = ['src', 'srcset', 'href', 'class', 'id', 'alt'];
-var WHITELIST_ATTRS_RE = new RegExp('^(' + WHITELIST_ATTRS.join('|') + ')$', 'i');
-
-// removeEmpty
-var REMOVE_EMPTY_TAGS = ['p'];
-var REMOVE_EMPTY_SELECTORS = REMOVE_EMPTY_TAGS.map(function (tag) {
-  return tag + ':empty';
-}).join(',');
-
-// cleanTags
-var CLEAN_CONDITIONALLY_TAGS = ['ul', 'ol', 'table', 'div', 'button', 'form'].join(',');
-
-// cleanHeaders
-var HEADER_TAGS = ['h2', 'h3', 'h4', 'h5', 'h6'];
-var HEADER_TAG_LIST = HEADER_TAGS.join(',');
-
-// // CONTENT FETCHING CONSTANTS ////
-
-// A list of strings that can be considered unlikely candidates when
-// extracting content from a resource. These strings are joined together
-// and then tested for existence using re:test, so may contain simple,
-// non-pipe style regular expression queries if necessary.
-var UNLIKELY_CANDIDATES_BLACKLIST = ['ad-break', 'adbox', 'advert', 'addthis', 'agegate', 'aux', 'blogger-labels', 'combx', 'comment', 'conversation', 'disqus', 'entry-unrelated', 'extra', 'foot',
-// 'form', // This is too generic, has too many false positives
-'header', 'hidden', 'loader', 'login', // Note: This can hit 'blogindex'.
-'menu', 'meta', 'nav', 'outbrain', 'pager', 'pagination', 'predicta', // readwriteweb inline ad box
-'presence_control_external', // lifehacker.com container full of false positives
-'popup', 'printfriendly', 'related', 'remove', 'remark', 'rss', 'share', 'shoutbox', 'sidebar', 'sociable', 'sponsor', 'taboola', 'tools'];
-
-// A list of strings that can be considered LIKELY candidates when
-// extracting content from a resource. Essentially, the inverse of the
-// blacklist above - if something matches both blacklist and whitelist,
-// it is kept. This is useful, for example, if something has a className
-// of "rss-content entry-content". It matched 'rss', so it would normally
-// be removed, however, it's also the entry content, so it should be left
-// alone.
-//
-// These strings are joined together and then tested for existence using
-// re:test, so may contain simple, non-pipe style regular expression queries
-// if necessary.
-var UNLIKELY_CANDIDATES_WHITELIST = ['and', 'article', 'body', 'blogindex', 'column', 'content', 'entry-content-asset', 'format', // misuse of form
-'hfeed', 'hentry', 'hatom', 'main', 'page', 'posts', 'shadow'];
-
-// A list of tags which, if found inside, should cause a <div /> to NOT
-// be turned into a paragraph tag. Shallow div tags without these elements
-// should be turned into <p /> tags.
-var DIV_TO_P_BLOCK_TAGS = ['a', 'blockquote', 'dl', 'div', 'img', 'p', 'pre', 'table'].join(',');
-
-// A list of tags that should be ignored when trying to find the top candidate
-// for a document.
-
-
-
-
-// A list of selectors that specify, very clearly, either hNews or other
-// very content-specific style content, like Blogger templates.
-// More examples here: http://microformats.org/wiki/blog-post-formats
-
-
-
-
-
-// A list of strings that denote a positive scoring for this content as being
-// an article container. Checked against className and id.
-//
-// TODO: Perhaps have these scale based on their odds of being quality?
-var POSITIVE_SCORE_HINTS = ['article', 'articlecontent', 'instapaper_body', 'blog', 'body', 'content', 'entry-content-asset', 'entry', 'hentry', 'main', 'Normal', 'page', 'pagination', 'permalink', 'post', 'story', 'text', '[-_]copy', // usatoday
-'\\Bcopy'];
-
-// The above list, joined into a matching regular expression
-var POSITIVE_SCORE_RE = new RegExp(POSITIVE_SCORE_HINTS.join('|'), 'i');
-
-// Readability publisher-specific guidelines
-
-
-// A list of strings that denote a negative scoring for this content as being
-// an article container. Checked against className and id.
-//
-// TODO: Perhaps have these scale based on their odds of being quality?
-var NEGATIVE_SCORE_HINTS = ['adbox', 'advert', 'author', 'bio', 'bookmark', 'bottom', 'byline', 'clear', 'com-', 'combx', 'comment', 'comment\\B', 'contact', 'copy', 'credit', 'crumb', 'date', 'deck', 'excerpt', 'featured', // tnr.com has a featured_content which throws us off
-'foot', 'footer', 'footnote', 'graf', 'head', 'info', 'infotext', // newscientist.com copyright
-'instapaper_ignore', 'jump', 'linebreak', 'link', 'masthead', 'media', 'meta', 'modal', 'outbrain', // slate.com junk
-'promo', 'pr_', // autoblog - press release
-'related', 'respond', 'roundcontent', // lifehacker restricted content warning
-'scroll', 'secondary', 'share', 'shopping', 'shoutbox', 'side', 'sidebar', 'sponsor', 'stamp', 'sub', 'summary', 'tags', 'tools', 'widget'];
-// The above list, joined into a matching regular expression
-var NEGATIVE_SCORE_RE = new RegExp(NEGATIVE_SCORE_HINTS.join('|'), 'i');
-
-// XPath to try to determine if a page is wordpress. Not always successful.
-var IS_WP_SELECTOR = 'meta[name=generator][value^=WordPress]';
-
-// Match a digit. Pretty clear.
-
-
-// A list of words that, if found in link text or URLs, likely mean that
-// this link is not a next page link.
-
-
-
-// Match any phrase that looks like it could be page, or paging, or pagination
-var PAGE_RE = new RegExp('pag(e|ing|inat)', 'i');
-
-// Match any link text/classname/id that looks like it could mean the next
-// page. Things like: next, continue, >, >>, » but not >|, »| as those can
-// mean last page.
-// export const NEXT_LINK_TEXT_RE = new RegExp('(next|weiter|continue|>([^\|]|$)|»([^\|]|$))', 'i');
-
-
-// Match any link text/classname/id that looks like it is an end link: things
-// like "first", "last", "end", etc.
-
-
-// Match any link text/classname/id that looks like it means the previous
-// page.
-
-
-// Match 2 or more consecutive <br> tags
-
-
-// Match 1 BR tag.
-
-
-// A list of all of the block level tags known in HTML5 and below. Taken from
-// http://bit.ly/qneNIT
-var BLOCK_LEVEL_TAGS = ['article', 'aside', 'blockquote', 'body', 'br', 'button', 'canvas', 'caption', 'col', 'colgroup', 'dd', 'div', 'dl', 'dt', 'embed', 'fieldset', 'figcaption', 'figure', 'footer', 'form', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'header', 'hgroup', 'hr', 'li', 'map', 'object', 'ol', 'output', 'p', 'pre', 'progress', 'section', 'table', 'tbody', 'textarea', 'tfoot', 'th', 'thead', 'tr', 'ul', 'video'];
-var BLOCK_LEVEL_TAGS_RE = new RegExp('^(' + BLOCK_LEVEL_TAGS.join('|') + ')$', 'i');
-
-// The removal is implemented as a blacklist and whitelist, this test finds
-// blacklisted elements that aren't whitelisted. We do this all in one
-// expression-both because it's only one pass, and because this skips the
-// serialization for whitelisted nodes.
-var candidatesBlacklist = UNLIKELY_CANDIDATES_BLACKLIST.join('|');
-var CANDIDATES_BLACKLIST = new RegExp(candidatesBlacklist, 'i');
-
-var candidatesWhitelist = UNLIKELY_CANDIDATES_WHITELIST.join('|');
-var CANDIDATES_WHITELIST = new RegExp(candidatesWhitelist, 'i');
-
-function stripUnlikelyCandidates($) {
-  //  Loop through the provided document and remove any non-link nodes
-  //  that are unlikely candidates for article content.
-  //
-  //  Links are ignored because there are very often links to content
-  //  that are identified as non-body-content, but may be inside
-  //  article-like content.
-  //
-  //  :param $: a cheerio object to strip nodes from
-  //  :return $: the cleaned cheerio object
-  $('*').not('a').each(function (index, node) {
-    var $node = $(node);
-    var classes = $node.attr('class');
-    var id = $node.attr('id');
-    if (!id && !classes) return;
-
-    var classAndId = (classes || '') + ' ' + (id || '');
-    if (CANDIDATES_WHITELIST.test(classAndId)) {
-      return;
-    } else if (CANDIDATES_BLACKLIST.test(classAndId)) {
-      $node.remove();
-    }
-  });
-
-  return $;
-}
-
-// ## NOTES:
-// Another good candidate for refactoring/optimizing.
-// Very imperative code, I don't love it. - AP
-
-//  Given cheerio object, convert consecutive <br /> tags into
-//  <p /> tags instead.
-//
-//  :param $: A cheerio object
-
-function brsToPs$$1($) {
-  var collapsing = false;
-  $('br').each(function (index, element) {
-    var nextElement = $(element).next().get(0);
-
-    if (nextElement && nextElement.tagName === 'br') {
-      collapsing = true;
-      $(element).remove();
-    } else if (collapsing) {
-      collapsing = false;
-      // $(element).replaceWith('<p />')
-      paragraphize(element, $, true);
-    }
-  });
-
-  return $;
-}
-
-// Given a node, turn it into a P if it is not already a P, and
-// make sure it conforms to the constraints of a P tag (I.E. does
-// not contain any other block tags.)
-//
-// If the node is a <br />, it treats the following inline siblings
-// as if they were its children.
-//
-// :param node: The node to paragraphize; this is a raw node
-// :param $: The cheerio object to handle dom manipulation
-// :param br: Whether or not the passed node is a br
-
-function paragraphize(node, $) {
-  var br = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-
-  var $node = $(node);
-
-  if (br) {
-    var sibling = node.nextSibling;
-    var p = $('<p></p>');
-
-    // while the next node is text or not a block level element
-    // append it to a new p node
-    while (sibling && !(sibling.tagName && BLOCK_LEVEL_TAGS_RE.test(sibling.tagName))) {
-      var nextSibling = sibling.nextSibling;
-      $(sibling).appendTo(p);
-      sibling = nextSibling;
-    }
-
-    $node.replaceWith(p);
-    $node.remove();
-    return $;
-  }
-
-  return $;
-}
-
-function convertDivs($) {
-  $('div').each(function (index, div) {
-    var $div = $(div);
-    var convertable = $div.children(DIV_TO_P_BLOCK_TAGS).length === 0;
-
-    if (convertable) {
-      convertNodeTo($div, $, 'p');
-    }
-  });
-
-  return $;
-}
-
-function convertSpans($) {
-  $('span').each(function (index, span) {
-    var $span = $(span);
-    var convertable = $span.parents('p, div').length === 0;
-    if (convertable) {
-      convertNodeTo($span, $, 'p');
-    }
-  });
-
-  return $;
-}
-
-// Loop through the provided doc, and convert any p-like elements to
-// actual paragraph tags.
-//
-//   Things fitting this criteria:
-//   * Multiple consecutive <br /> tags.
-//   * <div /> tags without block level elements inside of them
-//   * <span /> tags who are not children of <p /> or <div /> tags.
-//
-//   :param $: A cheerio object to search
-//   :return cheerio object with new p elements
-//   (By-reference mutation, though. Returned just for convenience.)
-
-function convertToParagraphs$$1($) {
-  $ = brsToPs$$1($);
-  $ = convertDivs($);
-  $ = convertSpans($);
-
-  return $;
-}
-
-function convertNodeTo($node, $) {
-  var tag = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'p';
-
-  var node = $node.get(0);
-  if (!node) {
-    return $;
-  }
-
-  var _$node$get = $node.get(0),
-      attribs = _$node$get.attribs;
-
-  var attribString = _Reflect$ownKeys(attribs).map(function (key) {
-    return key + '=' + attribs[key];
-  }).join(' ');
-
-  $node.replaceWith('<' + tag + ' ' + attribString + '>' + $node.contents() + '</' + tag + '>');
-  return $;
-}
-
-function cleanForHeight($img, $) {
-  var height = parseInt($img.attr('height'), 10);
-  var width = parseInt($img.attr('width'), 10) || 20;
-
-  // Remove images that explicitly have very small heights or
-  // widths, because they are most likely shims or icons,
-  // which aren't very useful for reading.
-  if ((height || 20) < 10 || width < 10) {
-    $img.remove();
-  } else if (height) {
-    // Don't ever specify a height on images, so that we can
-    // scale with respect to width without screwing up the
-    // aspect ratio.
-    $img.removeAttr('height');
-  }
-
-  return $;
-}
-
-// Cleans out images where the source string matches transparent/spacer/etc
-// TODO This seems very aggressive - AP
-function removeSpacers($img, $) {
-  if (SPACER_RE.test($img.attr('src'))) {
-    $img.remove();
-  }
-
-  return $;
-}
-
-function cleanImages($article, $) {
-  $article.find('img').each(function (index, img) {
-    var $img = $(img);
-
-    cleanForHeight($img, $);
-    removeSpacers($img, $);
-  });
-
-  return $;
-}
-
-function markToKeep(article, $, url) {
-  var tags = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : [];
-
-  if (tags.length === 0) {
-    tags = KEEP_SELECTORS;
-  }
-
-  if (url) {
-    var _URL$parse = URL.parse(url),
-        protocol = _URL$parse.protocol,
-        hostname = _URL$parse.hostname;
-
-    tags = [].concat(_toConsumableArray(tags), ['iframe[src^="' + protocol + '//' + hostname + '"]']);
-  }
-
-  $(tags.join(','), article).addClass(KEEP_CLASS);
-
-  return $;
-}
-
-function stripJunkTags(article, $) {
-  var tags = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [];
-
-  if (tags.length === 0) {
-    tags = STRIP_OUTPUT_TAGS;
-  }
-
-  // Remove matching elements, but ignore
-  // any element with a class of mercury-parser-keep
-  $(tags.join(','), article).not('.' + KEEP_CLASS).remove();
-
-  // Remove the mercury-parser-keep class from result
-  $('.' + KEEP_CLASS, article).removeClass(KEEP_CLASS);
-
-  return $;
-}
-
-// H1 tags are typically the article title, which should be extracted
-// by the title extractor instead. If there's less than 3 of them (<3),
-// strip them. Otherwise, turn 'em into H2s.
-
-function cleanHOnes$$1(article, $) {
-  var $hOnes = $('h1', article);
-
-  if ($hOnes.length < 3) {
-    $hOnes.each(function (index, node) {
-      return $(node).remove();
-    });
-  } else {
-    $hOnes.each(function (index, node) {
-      convertNodeTo($(node), $, 'h2');
-    });
-  }
-
-  return $;
-}
-
-function removeAllButWhitelist($article) {
-  $article.find('*').each(function (index, node) {
-    node.attribs = _Reflect$ownKeys(node.attribs).reduce(function (acc, attr) {
-      if (WHITELIST_ATTRS_RE.test(attr)) {
-        return _extends({}, acc, _defineProperty({}, attr, node.attribs[attr]));
-      }
-
-      return acc;
-    }, {});
-  });
-
-  return $article;
-}
-
-// function removeAttrs(article, $) {
-//   REMOVE_ATTRS.forEach((attr) => {
-//     $(`[${attr}]`, article).removeAttr(attr);
-//   });
-// }
-
-// Remove attributes like style or align
-function cleanAttributes($article) {
-  // Grabbing the parent because at this point
-  // $article will be wrapped in a div which will
-  // have a score set on it.
-  return removeAllButWhitelist($article.parent().length ? $article.parent() : $article);
-}
-
-function removeEmpty($article, $) {
-  $article.find('p').each(function (index, p) {
-    var $p = $(p);
-    if ($p.find('iframe, img').length === 0 && $p.text().trim() === '') $p.remove();
-  });
-
-  return $;
-}
-
-// // CONTENT FETCHING CONSTANTS ////
-
-// A list of strings that can be considered unlikely candidates when
-// extracting content from a resource. These strings are joined together
-// and then tested for existence using re:test, so may contain simple,
-// non-pipe style regular expression queries if necessary.
-var UNLIKELY_CANDIDATES_BLACKLIST$1 = ['ad-break', 'adbox', 'advert', 'addthis', 'agegate', 'aux', 'blogger-labels', 'combx', 'comment', 'conversation', 'disqus', 'entry-unrelated', 'extra', 'foot', 'form', 'header', 'hidden', 'loader', 'login', // Note: This can hit 'blogindex'.
-'menu', 'meta', 'nav', 'pager', 'pagination', 'predicta', // readwriteweb inline ad box
-'presence_control_external', // lifehacker.com container full of false positives
-'popup', 'printfriendly', 'related', 'remove', 'remark', 'rss', 'share', 'shoutbox', 'sidebar', 'sociable', 'sponsor', 'tools'];
-
-// A list of strings that can be considered LIKELY candidates when
-// extracting content from a resource. Essentially, the inverse of the
-// blacklist above - if something matches both blacklist and whitelist,
-// it is kept. This is useful, for example, if something has a className
-// of "rss-content entry-content". It matched 'rss', so it would normally
-// be removed, however, it's also the entry content, so it should be left
-// alone.
-//
-// These strings are joined together and then tested for existence using
-// re:test, so may contain simple, non-pipe style regular expression queries
-// if necessary.
-var UNLIKELY_CANDIDATES_WHITELIST$1 = ['and', 'article', 'body', 'blogindex', 'column', 'content', 'entry-content-asset', 'format', // misuse of form
-'hfeed', 'hentry', 'hatom', 'main', 'page', 'posts', 'shadow'];
-
-// A list of tags which, if found inside, should cause a <div /> to NOT
-// be turned into a paragraph tag. Shallow div tags without these elements
-// should be turned into <p /> tags.
-var DIV_TO_P_BLOCK_TAGS$1 = ['a', 'blockquote', 'dl', 'div', 'img', 'p', 'pre', 'table'].join(',');
-
-// A list of tags that should be ignored when trying to find the top candidate
-// for a document.
-var NON_TOP_CANDIDATE_TAGS$1 = ['br', 'b', 'i', 'label', 'hr', 'area', 'base', 'basefont', 'input', 'img', 'link', 'meta'];
-
-var NON_TOP_CANDIDATE_TAGS_RE$1 = new RegExp('^(' + NON_TOP_CANDIDATE_TAGS$1.join('|') + ')$', 'i');
-
-// A list of selectors that specify, very clearly, either hNews or other
-// very content-specific style content, like Blogger templates.
-// More examples here: http://microformats.org/wiki/blog-post-formats
-var HNEWS_CONTENT_SELECTORS$1 = [['.hentry', '.entry-content'], ['entry', '.entry-content'], ['.entry', '.entry_content'], ['.post', '.postbody'], ['.post', '.post_body'], ['.post', '.post-body']];
-
-var PHOTO_HINTS$1 = ['figure', 'photo', 'image', 'caption'];
-var PHOTO_HINTS_RE$1 = new RegExp(PHOTO_HINTS$1.join('|'), 'i');
-
-// A list of strings that denote a positive scoring for this content as being
-// an article container. Checked against className and id.
-//
-// TODO: Perhaps have these scale based on their odds of being quality?
-var POSITIVE_SCORE_HINTS$1 = ['article', 'articlecontent', 'instapaper_body', 'blog', 'body', 'content', 'entry-content-asset', 'entry', 'hentry', 'main', 'Normal', 'page', 'pagination', 'permalink', 'post', 'story', 'text', '[-_]copy', // usatoday
-'\\Bcopy'];
-
-// The above list, joined into a matching regular expression
-var POSITIVE_SCORE_RE$1 = new RegExp(POSITIVE_SCORE_HINTS$1.join('|'), 'i');
-
-// Readability publisher-specific guidelines
-var READABILITY_ASSET$1 = new RegExp('entry-content-asset', 'i');
-
-// A list of strings that denote a negative scoring for this content as being
-// an article container. Checked against className and id.
-//
-// TODO: Perhaps have these scale based on their odds of being quality?
-var NEGATIVE_SCORE_HINTS$1 = ['adbox', 'advert', 'author', 'bio', 'bookmark', 'bottom', 'byline', 'clear', 'com-', 'combx', 'comment', 'comment\\B', 'contact', 'copy', 'credit', 'crumb', 'date', 'deck', 'excerpt', 'featured', // tnr.com has a featured_content which throws us off
-'foot', 'footer', 'footnote', 'graf', 'head', 'info', 'infotext', // newscientist.com copyright
-'instapaper_ignore', 'jump', 'linebreak', 'link', 'masthead', 'media', 'meta', 'modal', 'outbrain', // slate.com junk
-'promo', 'pr_', // autoblog - press release
-'related', 'respond', 'roundcontent', // lifehacker restricted content warning
-'scroll', 'secondary', 'share', 'shopping', 'shoutbox', 'side', 'sidebar', 'sponsor', 'stamp', 'sub', 'summary', 'tags', 'tools', 'widget'];
-// The above list, joined into a matching regular expression
-var NEGATIVE_SCORE_RE$1 = new RegExp(NEGATIVE_SCORE_HINTS$1.join('|'), 'i');
-
-// Match a digit. Pretty clear.
-
-
-// Match 2 or more consecutive <br> tags
-
-
-// Match 1 BR tag.
-
-
-// A list of all of the block level tags known in HTML5 and below. Taken from
-// http://bit.ly/qneNIT
-
-
-
-// The removal is implemented as a blacklist and whitelist, this test finds
-// blacklisted elements that aren't whitelisted. We do this all in one
-// expression-both because it's only one pass, and because this skips the
-// serialization for whitelisted nodes.
-var candidatesBlacklist$1 = UNLIKELY_CANDIDATES_BLACKLIST$1.join('|');
-
-
-var candidatesWhitelist$1 = UNLIKELY_CANDIDATES_WHITELIST$1.join('|');
-
-
-
-
-var PARAGRAPH_SCORE_TAGS$1 = new RegExp('^(p|li|span|pre)$', 'i');
-var CHILD_CONTENT_TAGS$1 = new RegExp('^(td|blockquote|ol|ul|dl)$', 'i');
-var BAD_TAGS$1 = new RegExp('^(address|form)$', 'i');
-
-// Get the score of a node based on its className and id.
-function getWeight(node) {
-  var classes = node.attr('class');
-  var id = node.attr('id');
-  var score = 0;
-
-  if (id) {
-    // if id exists, try to score on both positive and negative
-    if (POSITIVE_SCORE_RE$1.test(id)) {
-      score += 25;
-    }
-    if (NEGATIVE_SCORE_RE$1.test(id)) {
-      score -= 25;
-    }
-  }
-
-  if (classes) {
-    if (score === 0) {
-      // if classes exist and id did not contribute to score
-      // try to score on both positive and negative
-      if (POSITIVE_SCORE_RE$1.test(classes)) {
-        score += 25;
-      }
-      if (NEGATIVE_SCORE_RE$1.test(classes)) {
-        score -= 25;
-      }
-    }
-
-    // even if score has been set by id, add score for
-    // possible photo matches
-    // "try to keep photos if we can"
-    if (PHOTO_HINTS_RE$1.test(classes)) {
-      score += 10;
-    }
-
-    // add 25 if class matches entry-content-asset,
-    // a class apparently instructed for use in the
-    // Readability publisher guidelines
-    // https://www.readability.com/developers/guidelines
-    if (READABILITY_ASSET$1.test(classes)) {
-      score += 25;
-    }
-  }
-
-  return score;
-}
-
-// returns the score of a node based on
-// the node's score attribute
-// returns null if no score set
-function getScore($node) {
-  return parseFloat($node.attr('score')) || null;
-}
-
-// return 1 for every comma in text
-function scoreCommas(text) {
-  return (text.match(/,/g) || []).length;
-}
-
-var idkRe = new RegExp('^(p|pre)$', 'i');
-
-function scoreLength(textLength) {
-  var tagName = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'p';
-
-  var chunks = textLength / 50;
-
-  if (chunks > 0) {
-    var lengthBonus = void 0;
-
-    // No idea why p or pre are being tamped down here
-    // but just following the source for now
-    // Not even sure why tagName is included here,
-    // since this is only being called from the context
-    // of scoreParagraph
-    if (idkRe.test(tagName)) {
-      lengthBonus = chunks - 2;
-    } else {
-      lengthBonus = chunks - 1.25;
-    }
-
-    return Math.min(Math.max(lengthBonus, 0), 3);
-  }
-
-  return 0;
-}
-
-// Score a paragraph using various methods. Things like number of
-// commas, etc. Higher is better.
-function scoreParagraph$$1(node) {
-  var score = 1;
-  var text = node.text().trim();
-  var textLength = text.length;
-
-  // If this paragraph is less than 25 characters, don't count it.
-  if (textLength < 25) {
-    return 0;
-  }
-
-  // Add points for any commas within this paragraph
-  score += scoreCommas(text);
-
-  // For every 50 characters in this paragraph, add another point. Up
-  // to 3 points.
-  score += scoreLength(textLength);
-
-  // Articles can end with short paragraphs when people are being clever
-  // but they can also end with short paragraphs setting up lists of junk
-  // that we strip. This negative tweaks junk setup paragraphs just below
-  // the cutoff threshold.
-  if (text.slice(-1) === ':') {
-    score -= 1;
-  }
-
-  return score;
-}
-
-function setScore($node, $, score) {
-  $node.attr('score', score);
-  return $node;
-}
-
-function addScore$$1($node, $, amount) {
-  try {
-    var score = getOrInitScore$$1($node, $) + amount;
-    setScore($node, $, score);
-  } catch (e) {
-    // Ignoring; error occurs in scoreNode
-  }
-
-  return $node;
-}
-
-// Adds 1/4 of a child's score to its parent
-function addToParent$$1(node, $, score) {
-  var parent = node.parent();
-  if (parent) {
-    addScore$$1(parent, $, score * 0.25);
-  }
-
-  return node;
-}
-
-// gets and returns the score if it exists
-// if not, initializes a score based on
-// the node's tag type
-function getOrInitScore$$1($node, $) {
-  var weightNodes = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
-
-  var score = getScore($node);
-
-  if (score) {
-    return score;
-  }
-
-  score = scoreNode$$1($node);
-
-  if (weightNodes) {
-    score += getWeight($node);
-  }
-
-  addToParent$$1($node, $, score);
-
-  return score;
-}
-
-// Score an individual node. Has some smarts for paragraphs, otherwise
-// just scores based on tag.
-function scoreNode$$1($node) {
-  var _$node$get = $node.get(0),
-      tagName = _$node$get.tagName;
-
-  // TODO: Consider ordering by most likely.
-  // E.g., if divs are a more common tag on a page,
-  // Could save doing that regex test on every node – AP
-
-
-  if (PARAGRAPH_SCORE_TAGS$1.test(tagName)) {
-    return scoreParagraph$$1($node);
-  } else if (tagName === 'div') {
-    return 5;
-  } else if (CHILD_CONTENT_TAGS$1.test(tagName)) {
-    return 3;
-  } else if (BAD_TAGS$1.test(tagName)) {
-    return -3;
-  } else if (tagName === 'th') {
-    return -5;
-  }
-
-  return 0;
-}
-
-function convertSpans$1($node, $) {
-  if ($node.get(0)) {
-    var _$node$get = $node.get(0),
-        tagName = _$node$get.tagName;
-
-    if (tagName === 'span') {
-      // convert spans to divs
-      convertNodeTo($node, $, 'div');
-    }
-  }
-}
-
-function addScoreTo($node, $, score) {
-  if ($node) {
-    convertSpans$1($node, $);
-    addScore$$1($node, $, score);
-  }
-}
-
-function scorePs($, weightNodes) {
-  $('p, pre').not('[score]').each(function (index, node) {
-    // The raw score for this paragraph, before we add any parent/child
-    // scores.
-    var $node = $(node);
-    $node = setScore($node, $, getOrInitScore$$1($node, $, weightNodes));
-
-    var $parent = $node.parent();
-    var rawScore = scoreNode$$1($node);
-
-    addScoreTo($parent, $, rawScore, weightNodes);
-    if ($parent) {
-      // Add half of the individual content score to the
-      // grandparent
-      addScoreTo($parent.parent(), $, rawScore / 2, weightNodes);
-    }
-  });
-
-  return $;
-}
-
-// score content. Parents get the full value of their children's
-// content score, grandparents half
-function scoreContent$$1($) {
-  var weightNodes = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
-
-  // First, look for special hNews based selectors and give them a big
-  // boost, if they exist
-  HNEWS_CONTENT_SELECTORS$1.forEach(function (_ref) {
-    var _ref2 = _slicedToArray(_ref, 2),
-        parentSelector = _ref2[0],
-        childSelector = _ref2[1];
-
-    $(parentSelector + ' ' + childSelector).each(function (index, node) {
-      addScore$$1($(node).parent(parentSelector), $, 80);
-    });
-  });
-
-  // Doubling this again
-  // Previous solution caused a bug
-  // in which parents weren't retaining
-  // scores. This is not ideal, and
-  // should be fixed.
-  scorePs($, weightNodes);
-  scorePs($, weightNodes);
-
-  return $;
-}
-
-var NORMALIZE_RE = /\s{2,}/g;
-
-function normalizeSpaces(text) {
-  return text.replace(NORMALIZE_RE, ' ').trim();
-}
-
-// Given a node type to search for, and a list of regular expressions,
-// look to see if this extraction can be found in the URL. Expects
-// that each expression in r_list will return group(1) as the proper
-// string to be cleaned.
-// Only used for date_published currently.
-function extractFromUrl(url, regexList) {
-  var matchRe = regexList.find(function (re) {
-    return re.test(url);
-  });
-  if (matchRe) {
-    return matchRe.exec(url)[1];
-  }
-
-  return null;
-}
-
-// An expression that looks to try to find the page digit within a URL, if
-// it exists.
-// Matches:
-//  page=1
-//  pg=1
-//  p=1
-//  paging=12
-//  pag=7
-//  pagination/1
-//  paging/88
-//  pa/83
-//  p/11
-//
-// Does not match:
-//  pg=102
-//  page:2
-var PAGE_IN_HREF_RE = new RegExp('(page|paging|(p(a|g|ag)?(e|enum|ewanted|ing|ination)))?(=|/)([0-9]{1,3})', 'i');
-
-var HAS_ALPHA_RE = /[a-z]/i;
-
-var IS_ALPHA_RE = /^[a-z]+$/i;
-var IS_DIGIT_RE = /^[0-9]+$/i;
-
-function pageNumFromUrl(url) {
-  var matches = url.match(PAGE_IN_HREF_RE);
-  if (!matches) return null;
-
-  var pageNum = parseInt(matches[6], 10);
-
-  // Return pageNum < 100, otherwise
-  // return null
-  return pageNum < 100 ? pageNum : null;
-}
-
-function removeAnchor(url) {
-  return url.split('#')[0].replace(/\/$/, '');
-}
-
-function isGoodSegment(segment, index, firstSegmentHasLetters) {
-  var goodSegment = true;
-
-  // If this is purely a number, and it's the first or second
-  // url_segment, it's probably a page number. Remove it.
-  if (index < 2 && IS_DIGIT_RE.test(segment) && segment.length < 3) {
-    goodSegment = true;
-  }
-
-  // If this is the first url_segment and it's just "index",
-  // remove it
-  if (index === 0 && segment.toLowerCase() === 'index') {
-    goodSegment = false;
-  }
-
-  // If our first or second url_segment is smaller than 3 characters,
-  // and the first url_segment had no alphas, remove it.
-  if (index < 2 && segment.length < 3 && !firstSegmentHasLetters) {
-    goodSegment = false;
-  }
-
-  return goodSegment;
-}
-
-// Take a URL, and return the article base of said URL. That is, no
-// pagination data exists in it. Useful for comparing to other links
-// that might have pagination data within them.
-function articleBaseUrl(url, parsed) {
-  var parsedUrl = parsed || URL.parse(url);
-  var protocol = parsedUrl.protocol,
-      host = parsedUrl.host,
-      path = parsedUrl.path;
-
-
-  var firstSegmentHasLetters = false;
-  var cleanedSegments = path.split('/').reverse().reduce(function (acc, rawSegment, index) {
-    var segment = rawSegment;
-
-    // Split off and save anything that looks like a file type.
-    if (segment.includes('.')) {
-      var _segment$split = segment.split('.'),
-          _segment$split2 = _slicedToArray(_segment$split, 2),
-          possibleSegment = _segment$split2[0],
-          fileExt = _segment$split2[1];
-
-      if (IS_ALPHA_RE.test(fileExt)) {
-        segment = possibleSegment;
-      }
-    }
-
-    // If our first or second segment has anything looking like a page
-    // number, remove it.
-    if (PAGE_IN_HREF_RE.test(segment) && index < 2) {
-      segment = segment.replace(PAGE_IN_HREF_RE, '');
-    }
-
-    // If we're on the first segment, check to see if we have any
-    // characters in it. The first segment is actually the last bit of
-    // the URL, and this will be helpful to determine if we're on a URL
-    // segment that looks like "/2/" for example.
-    if (index === 0) {
-      firstSegmentHasLetters = HAS_ALPHA_RE.test(segment);
-    }
-
-    // If it's not marked for deletion, push it to cleaned_segments.
-    if (isGoodSegment(segment, index, firstSegmentHasLetters)) {
-      acc.push(segment);
-    }
-
-    return acc;
-  }, []);
-
-  return protocol + '//' + host + cleanedSegments.reverse().join('/');
-}
-
-// Given a string, return True if it appears to have an ending sentence
-// within it, false otherwise.
-var SENTENCE_END_RE = new RegExp('.( |$)');
-function hasSentenceEnd(text) {
-  return SENTENCE_END_RE.test(text);
-}
-
-function excerptContent(content) {
-              var words = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 10;
-
-              return content.trim().split(/\s+/).slice(0, words).join(' ');
-}
-
-// Now that we have a top_candidate, look through the siblings of
-// it to see if any of them are decently scored. If they are, they
-// may be split parts of the content (Like two divs, a preamble and
-// a body.) Example:
-// http://articles.latimes.com/2009/oct/14/business/fi-bigtvs14
-function mergeSiblings($candidate, topScore, $) {
-  if (!$candidate.parent().length) {
-    return $candidate;
-  }
-
-  var siblingScoreThreshold = Math.max(10, topScore * 0.25);
-  var wrappingDiv = $('<div></div>');
-
-  $candidate.parent().children().each(function (index, sibling) {
-    var $sibling = $(sibling);
-    // Ignore tags like BR, HR, etc
-    if (NON_TOP_CANDIDATE_TAGS_RE$1.test(sibling.tagName)) {
-      return null;
-    }
-
-    var siblingScore = getScore($sibling);
-    if (siblingScore) {
-      if ($sibling === $candidate) {
-        wrappingDiv.append($sibling);
-      } else {
-        var contentBonus = 0;
-        var density = linkDensity($sibling);
-
-        // If sibling has a very low link density,
-        // give it a small bonus
-        if (density < 0.05) {
-          contentBonus += 20;
-        }
-
-        // If sibling has a high link density,
-        // give it a penalty
-        if (density >= 0.5) {
-          contentBonus -= 20;
-        }
-
-        // If sibling node has the same class as
-        // candidate, give it a bonus
-        if ($sibling.attr('class') === $candidate.attr('class')) {
-          contentBonus += topScore * 0.2;
-        }
-
-        var newScore = siblingScore + contentBonus;
-
-        if (newScore >= siblingScoreThreshold) {
-          return wrappingDiv.append($sibling);
-        } else if (sibling.tagName === 'p') {
-          var siblingContent = $sibling.text();
-          var siblingContentLength = textLength(siblingContent);
-
-          if (siblingContentLength > 80 && density < 0.25) {
-            return wrappingDiv.append($sibling);
-          } else if (siblingContentLength <= 80 && density === 0 && hasSentenceEnd(siblingContent)) {
-            return wrappingDiv.append($sibling);
-          }
-        }
-      }
-    }
-
-    return null;
-  });
-
-  return wrappingDiv;
-}
-
-// After we've calculated scores, loop through all of the possible
-// candidate nodes we found and find the one with the highest score.
-function findTopCandidate$$1($) {
-  var $candidate = void 0;
-  var topScore = 0;
-
-  $('[score]').each(function (index, node) {
-    // Ignore tags like BR, HR, etc
-    if (NON_TOP_CANDIDATE_TAGS_RE$1.test(node.tagName)) {
-      return;
-    }
-
-    var $node = $(node);
-    var score = getScore($node);
-
-    if (score > topScore) {
-      topScore = score;
-      $candidate = $node;
-    }
-  });
-
-  // If we don't have a candidate, return the body
-  // or whatever the first element is
-  if (!$candidate) {
-    return $('body') || $('*').first();
-  }
-
-  $candidate = mergeSiblings($candidate, topScore, $);
-
-  return $candidate;
-}
-
-// Scoring
-
-function removeUnlessContent($node, $, weight) {
-  // Explicitly save entry-content-asset tags, which are
-  // noted as valuable in the Publisher guidelines. For now
-  // this works everywhere. We may want to consider making
-  // this less of a sure-thing later.
-  if ($node.hasClass('entry-content-asset')) {
-    return;
-  }
-
-  var content = normalizeSpaces($node.text());
-
-  if (scoreCommas(content) < 10) {
-    var pCount = $('p', $node).length;
-    var inputCount = $('input', $node).length;
-
-    // Looks like a form, too many inputs.
-    if (inputCount > pCount / 3) {
-      $node.remove();
-      return;
-    }
-
-    var contentLength = content.length;
-    var imgCount = $('img', $node).length;
-
-    // Content is too short, and there are no images, so
-    // this is probably junk content.
-    if (contentLength < 25 && imgCount === 0) {
-      $node.remove();
-      return;
-    }
-
-    var density = linkDensity($node);
-
-    // Too high of link density, is probably a menu or
-    // something similar.
-    // console.log(weight, density, contentLength)
-    if (weight < 25 && density > 0.2 && contentLength > 75) {
-      $node.remove();
-      return;
-    }
-
-    // Too high of a link density, despite the score being
-    // high.
-    if (weight >= 25 && density > 0.5) {
-      // Don't remove the node if it's a list and the
-      // previous sibling starts with a colon though. That
-      // means it's probably content.
-      var tagName = $node.get(0).tagName;
-      var nodeIsList = tagName === 'ol' || tagName === 'ul';
-      if (nodeIsList) {
-        var previousNode = $node.prev();
-        if (previousNode && normalizeSpaces(previousNode.text()).slice(-1) === ':') {
-          return;
-        }
-      }
-
-      $node.remove();
-      return;
-    }
-
-    var scriptCount = $('script', $node).length;
-
-    // Too many script tags, not enough content.
-    if (scriptCount > 0 && contentLength < 150) {
-      $node.remove();
-      return;
-    }
-  }
-}
-
-// Given an article, clean it of some superfluous content specified by
-// tags. Things like forms, ads, etc.
-//
-// Tags is an array of tag name's to search through. (like div, form,
-// etc)
-//
-// Return this same doc.
-function cleanTags$$1($article, $) {
-  $(CLEAN_CONDITIONALLY_TAGS, $article).each(function (index, node) {
-    var $node = $(node);
-    var weight = getScore($node);
-    if (!weight) {
-      weight = getOrInitScore$$1($node, $);
-      setScore($node, $, weight);
-    }
-
-    // drop node if its weight is < 0
-    if (weight < 0) {
-      $node.remove();
-    } else {
-      // deteremine if node seems like content
-      removeUnlessContent($node, $, weight);
-    }
-  });
-
-  return $;
-}
-
-function cleanHeaders($article, $) {
-  var title = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
-
-  $(HEADER_TAG_LIST, $article).each(function (index, header) {
-    var $header = $(header);
-    // Remove any headers that appear before all other p tags in the
-    // document. This probably means that it was part of the title, a
-    // subtitle or something else extraneous like a datestamp or byline,
-    // all of which should be handled by other metadata handling.
-    if ($($header, $article).prevAll('p').length === 0) {
-      return $header.remove();
-    }
-
-    // Remove any headers that match the title exactly.
-    if (normalizeSpaces($(header).text()) === title) {
-      return $header.remove();
-    }
-
-    // If this header has a negative weight, it's probably junk.
-    // Get rid of it.
-    if (getWeight($(header)) < 0) {
-      return $header.remove();
-    }
-
-    return $header;
-  });
-
-  return $;
-}
-
-// Rewrite the tag name to div if it's a top level node like body or
-// html to avoid later complications with multiple body tags.
-
-function rewriteTopLevel$$1(article, $) {
-  // I'm not using context here because
-  // it's problematic when converting the
-  // top-level/root node - AP
-  $ = convertNodeTo($('html'), $, 'div');
-  $ = convertNodeTo($('body'), $, 'div');
-
-  return $;
-}
-
-function absolutize($, rootUrl, attr, $content) {
-  $('[' + attr + ']', $content).each(function (_, node) {
-    var url = node.attribs[attr];
-    var absoluteUrl = URL.resolve(rootUrl, url);
-
-    node.attribs[attr] = absoluteUrl;
-  });
-}
-
-function makeLinksAbsolute($content, $, url) {
-  ['href', 'src'].forEach(function (attr) {
-    return absolutize($, url, attr, $content);
-  });
-
-  return $content;
-}
-
-function textLength(text) {
-  return text.trim().replace(/\s+/g, ' ').length;
-}
-
-// Determines what percentage of the text
-// in a node is link text
-// Takes a node, returns a float
-function linkDensity($node) {
-  var totalTextLength = textLength($node.text());
-
-  var linkText = $node.find('a').text();
-  var linkLength = textLength(linkText);
-
-  if (totalTextLength > 0) {
-    return linkLength / totalTextLength;
-  } else if (totalTextLength === 0 && linkLength > 0) {
-    return 1;
-  }
-
-  return 0;
-}
-
-// Given a node type to search for, and a list of meta tag names to
-// search for, find a meta tag associated.
-
-function extractFromMeta$$1($, metaNames, cachedNames) {
-  var cleanTags$$1 = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
-
-  var foundNames = metaNames.filter(function (name) {
-    return cachedNames.indexOf(name) !== -1;
-  });
-
-  var _iteratorNormalCompletion = true;
-  var _didIteratorError = false;
-  var _iteratorError = undefined;
-
-  try {
-    var _loop = function _loop() {
-      var name = _step.value;
-
-      var type = 'name';
-      var value = 'value';
-
-      var nodes = $('meta[' + type + '="' + name + '"]');
-
-      // Get the unique value of every matching node, in case there
-      // are two meta tags with the same name and value.
-      // Remove empty values.
-      var values = nodes.map(function (index, node) {
-        return $(node).attr(value);
-      }).toArray().filter(function (text) {
-        return text !== '';
-      });
-
-      // If we have more than one value for the same name, we have a
-      // conflict and can't trust any of them. Skip this name. If we have
-      // zero, that means our meta tags had no values. Skip this name
-      // also.
-      if (values.length === 1) {
-        var metaValue = void 0;
-        // Meta values that contain HTML should be stripped, as they
-        // weren't subject to cleaning previously.
-        if (cleanTags$$1) {
-          metaValue = stripTags(values[0], $);
-        } else {
-          metaValue = values[0];
-        }
-
-        return {
-          v: metaValue
-        };
-      }
-    };
-
-    for (var _iterator = _getIterator(foundNames), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-      var _ret = _loop();
-
-      if ((typeof _ret === 'undefined' ? 'undefined' : _typeof(_ret)) === "object") return _ret.v;
-    }
-
-    // If nothing is found, return null
-  } catch (err) {
-    _didIteratorError = true;
-    _iteratorError = err;
-  } finally {
-    try {
-      if (!_iteratorNormalCompletion && _iterator.return) {
-        _iterator.return();
-      }
-    } finally {
-      if (_didIteratorError) {
-        throw _iteratorError;
-      }
-    }
-  }
-
-  return null;
-}
-
-function isGoodNode($node, maxChildren) {
-  // If it has a number of children, it's more likely a container
-  // element. Skip it.
-  if ($node.children().length > maxChildren) {
-    return false;
-  }
-  // If it looks to be within a comment, skip it.
-  if (withinComment($node)) {
-    return false;
-  }
-
-  return true;
-}
-
-// Given a a list of selectors find content that may
-// be extractable from the document. This is for flat
-// meta-information, like author, title, date published, etc.
-function extractFromSelectors$$1($, selectors) {
-  var maxChildren = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 1;
-  var textOnly = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
-  var _iteratorNormalCompletion = true;
-  var _didIteratorError = false;
-  var _iteratorError = undefined;
-
-  try {
-    for (var _iterator = _getIterator(selectors), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-      var selector = _step.value;
-
-      var nodes = $(selector);
-
-      // If we didn't get exactly one of this selector, this may be
-      // a list of articles or comments. Skip it.
-      if (nodes.length === 1) {
-        var $node = $(nodes[0]);
-
-        if (isGoodNode($node, maxChildren)) {
-          var content = void 0;
-          if (textOnly) {
-            content = $node.text();
-          } else {
-            content = $node.html();
-          }
-
-          if (content) {
-            return content;
-          }
-        }
-      }
-    }
-  } catch (err) {
-    _didIteratorError = true;
-    _iteratorError = err;
-  } finally {
-    try {
-      if (!_iteratorNormalCompletion && _iterator.return) {
-        _iterator.return();
-      }
-    } finally {
-      if (_didIteratorError) {
-        throw _iteratorError;
-      }
-    }
-  }
-
-  return null;
-}
-
-// strips all tags from a string of text
-function stripTags(text, $) {
-  // Wrapping text in html element prevents errors when text
-  // has no html
-  var cleanText = $('<span>' + text + '</span>').text();
-  return cleanText === '' ? text : cleanText;
-}
-
-function withinComment($node) {
-  var parents = $node.parents().toArray();
-  var commentParent = parents.find(function (parent) {
-    var classAndId = parent.attribs.class + ' ' + parent.attribs.id;
-    return classAndId.includes('comment');
-  });
-
-  return commentParent !== undefined;
-}
-
-// Given a node, determine if it's article-like enough to return
-// param: node (a cheerio node)
-// return: boolean
-
-function nodeIsSufficient($node) {
-  return $node.text().trim().length >= 100;
-}
-
-function isWordpress($) {
-  return $(IS_WP_SELECTOR).length > 0;
-}
-
-// DOM manipulation
-
 // CLEAN AUTHOR CONSTANTS
 var CLEAN_AUTHOR_RE = /^\s*(posted |written )?by\s*:?\s*(.*)/i;
 //     author = re.sub(r'^\s*(posted |written )?by\s*:?\s*(.*)(?i)',
@@ -2786,7 +2866,7 @@ function extractCleanNode(article, _ref) {
   cleanHeaders(article, $, title);
 
   // Make links absolute
-  makeLinksAbsolute(article, $, url);
+  makeLinksAbsolute$$1(article, $, url);
 
   // We used to clean UL's and OL's here, but it was leading to
   // too many in-article lists being removed. Consider a better
@@ -2798,7 +2878,7 @@ function extractCleanNode(article, _ref) {
   removeEmpty(article, $);
 
   // Remove unnecessary attributes
-  cleanAttributes(article, $);
+  cleanAttributes$$1(article, $);
 
   return article;
 }
@@ -3003,11 +3083,12 @@ var GenericContentExtractor = {
     var $ = _ref.$,
         html = _ref.html,
         title = _ref.title,
-        url = _ref.url;
+        url = _ref.url,
+        cheerio$$1 = _ref.cheerio;
 
     opts = _extends({}, this.defaultOpts, opts);
 
-    $ = $ || cheerio.load(html);
+    $ = $ || cheerio$$1.load(html);
 
     // Cascade through our extraction-specific opts in an ordered fashion,
     // turning them off as we try to extract content.
@@ -3030,7 +3111,7 @@ var GenericContentExtractor = {
         var key = _step.value;
 
         opts[key] = false;
-        $ = cheerio.load(html);
+        $ = cheerio$$1.load(html);
 
         node = this.getContentNode($, title, url, opts);
 
@@ -3475,9 +3556,13 @@ var GenericLeadImageUrlExtractor = {
   extract: function extract(_ref) {
     var $ = _ref.$,
         content = _ref.content,
-        metaCache = _ref.metaCache;
+        metaCache = _ref.metaCache,
+        html = _ref.html;
 
     var cleanUrl = void 0;
+    if (!$.browser && $('head').length === 0) {
+      $('*').first().prepend(html);
+    }
 
     // Check to see if we have a matching meta tag that we can make use of.
     // Moving this higher because common practice is now to use large
@@ -3494,7 +3579,8 @@ var GenericLeadImageUrlExtractor = {
     // Next, try to find the "best" image via the content.
     // We'd rather not have to fetch each image and check dimensions,
     // so try to do some analysis and determine them instead.
-    var imgs = $('img', content).toArray();
+    var $content = $(content);
+    var imgs = $('img', $content).toArray();
     var imgScores = {};
 
     imgs.forEach(function (img, index) {
@@ -3992,7 +4078,8 @@ function scoreLinks(_ref) {
     // Remove any anchor data since we don't do a good job
     // standardizing URLs (it's hard), we're going to do
     // some checking with and without a trailing slash
-    var href = removeAnchor(link.attribs.href);
+    var attrs = getAttrs(link);
+    var href = removeAnchor(attrs.href);
     var $link = $(link);
     var linkText = $link.text();
 
@@ -4033,6 +4120,7 @@ function scoreLinks(_ref) {
   return _Reflect$ownKeys(scoredPages).length === 0 ? null : scoredPages;
 }
 
+/* eslint-disable */
 // Looks for and returns next page url
 // for multi-page articles
 var GenericNextPageUrlExtractor = {
@@ -4149,8 +4237,9 @@ var GenericWordCountExtractor = {
     var content = _ref.content;
 
     var $ = cheerio.load(content);
+    var $content = $('div').first();
 
-    var text = normalizeSpaces($('div').first().text());
+    var text = normalizeSpaces($content.text());
     return text.split(/\s/).length;
   }
 };
@@ -4174,12 +4263,14 @@ var GenericExtractor = {
   },
 
   extract: function extract(options) {
-    var html = options.html;
+    var html = options.html,
+        cheerio$$1 = options.cheerio,
+        $ = options.$;
 
 
-    if (html) {
-      var $ = cheerio.load(html);
-      options.$ = $;
+    if (html && !$) {
+      var loaded = cheerio$$1.load(html);
+      options.$ = loaded;
     }
 
     var title = this.title(options);
@@ -4224,6 +4315,7 @@ function getExtractor(url, parsedUrl) {
   return Extractors[hostname] || Extractors[baseDomain] || GenericExtractor;
 }
 
+/* eslint-disable */
 // Remove elements by an array of selectors
 function cleanBySelectors($content, $, _ref) {
   var clean = _ref.clean;
@@ -4248,7 +4340,7 @@ function transformElements($content, $, _ref2) {
     // If value is a string, convert directly
     if (typeof value === 'string') {
       $matches.each(function (index, node) {
-        convertNodeTo($(node), $, transforms[key]);
+        convertNodeTo$$1($(node), $, transforms[key]);
       });
     } else if (typeof value === 'function') {
       // If value is function, apply function to node
@@ -4256,7 +4348,7 @@ function transformElements($content, $, _ref2) {
         var result = value($(node), $);
         // If function returns a string, convert node to that value
         if (typeof result === 'string') {
-          convertNodeTo($(node), $, result);
+          convertNodeTo$$1($(node), $, result);
         }
       });
     }
@@ -4274,6 +4366,7 @@ function findMatchingSelector($, selectors) {
 
       return $(s).length === 1 && $(s).attr(attr) && $(s).attr(attr).trim() !== '';
     }
+    // debugger
 
     return $(selector).length === 1 && $(selector).text().trim() !== '';
   });
@@ -4431,7 +4524,8 @@ var collectAllPages = (function () {
         result = _ref2.result,
         Extractor = _ref2.Extractor,
         title = _ref2.title,
-        url = _ref2.url;
+        url = _ref2.url,
+        cheerio$$1 = _ref2.cheerio;
     var pages, previousUrls, extractorOpts, nextPageResult, word_count;
     return _regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
@@ -4466,7 +4560,8 @@ var collectAllPages = (function () {
               metaCache: metaCache,
               contentOnly: true,
               extractedTitle: title,
-              previousUrls: previousUrls
+              previousUrls: previousUrls,
+              cheerio: cheerio$$1
             };
             nextPageResult = RootExtractor.extract(Extractor, extractorOpts);
 
@@ -4551,7 +4646,15 @@ var Mercury = {
               metaCache = $('meta').map(function (_, node) {
                 return $(node).attr('name');
               }).toArray();
-              result = RootExtractor.extract(Extractor, { url: url, html: html, $: $, metaCache: metaCache, parsedUrl: parsedUrl, fallback: fallback });
+              result = RootExtractor.extract(Extractor, {
+                url: url,
+                html: html,
+                $: $,
+                metaCache: metaCache,
+                parsedUrl: parsedUrl,
+                fallback: fallback,
+                cheerio: cheerio
+              });
               _result = result, title = _result.title, next_page_url = _result.next_page_url;
 
               // Fetch more pages if next_page_url found
@@ -4570,7 +4673,8 @@ var Mercury = {
                 metaCache: metaCache,
                 result: result,
                 title: title,
-                url: url
+                url: url,
+                cheerio: cheerio
               });
 
             case 17:

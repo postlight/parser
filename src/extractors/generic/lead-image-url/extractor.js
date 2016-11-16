@@ -24,9 +24,9 @@ import {
 //   * domain
 //   * weird aspect ratio
 const GenericLeadImageUrlExtractor = {
-  extract({ $, content, metaCache, html, browser = false }) {
+  extract({ $, content, metaCache, html }) {
     let cleanUrl;
-    if (!browser && $('head').length === 0) {
+    if (!$.browser && $('head').length === 0) {
       $('*').first().prepend(html);
     }
 

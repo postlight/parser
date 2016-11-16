@@ -46,7 +46,6 @@ const Mercury = {
         parsedUrl,
         fallback,
         cheerio,
-        browser: true,
       }
     );
 

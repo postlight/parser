@@ -5,34 +5,14 @@ import cheerio from 'cheerio';
 import { assertClean } from 'test-helpers';
 import {
   default as RootExtractor,
-  select,
-  cleanBySelectors,
-  transformElements,
+    select,
+    cleanBySelectors,
+    transformElements,
 } from './root-extractor';
 
 import { NYMagExtractor } from './custom/nymag.com';
 
 describe('RootExtractor', () => {
-  it('extracts based on custom selectors', () => {
-    const fullUrl = 'http://nymag.com/daily/intelligencer/2016/09/trump-discussed-usd25k-donation-with-florida-ag-not-fraud.html';
-    const html = fs.readFileSync('./src/extractors/custom/nymag.com/fixtures/test.html', 'utf8');
-    const $ = cheerio.load(html);
-
-    const {
-      url,
-      title,
-      word_count,
-      direction,
-    } = RootExtractor.extract(
-      NYMagExtractor, { url: fullUrl, html, $, metaCache: [], cheerio }
-    );
-
-    assert.equal(title, 'Trump Claims He Discussed $25K Donation With Florida Attorney General, But Not Trump University Investigation');
-    assert.equal(url, fullUrl);
-    assert.equal(word_count, 727);
-    assert.equal(direction, 'ltr');
-  });
-
   it('only returns what the custom parser gives it if fallback is disabled', () => {
     const fullUrl = 'http://nymag.com/daily/intelligencer/2016/09/trump-discussed-usd25k-donation-with-florida-ag-not-fraud.html';
     const html = fs.readFileSync('./src/extractors/custom/nymag.com/fixtures/test.html', 'utf8');
@@ -112,10 +92,19 @@ describe('transformElements($content, $, { transforms })', () => {
     `;
     const opts = {
       transforms: {
-        noscript: ($node) => {
-          const $children = $node.children();
-          if ($children.length === 1 && $children.get(0).tagName === 'img') {
-            return 'figure';
+        noscript: ($node, $) => {
+          if ($.browser) {
+            const $children = $($node.text());
+
+            if ($children.length === 1 && $children.get(0) !== undefined &&
+              $children.get(0).tagName.toLowerCase() === 'img') {
+              return 'figure';
+            }
+          } else {
+            const $children = $node.children();
+            if ($children.length === 1 && $children.get(0).tagName === 'img') {
+              return 'figure';
+            }
           }
 
           return null;

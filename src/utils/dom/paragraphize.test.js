@@ -26,7 +26,14 @@ describe('Generic Extractor Utils', () => {
       // note: result here is not valid html; will handle elsewhere
       const result = paragraphize(node, $, true).html();
 
-      assert.equal(clean(result), clean(HTML.paragraphizeBlock.after));
+      if ($.browser) {
+        // small quirks in how jquery handles this vs. cheerio
+        const html =
+          '<p> Here is some text <p> Here is more text </p></p><div>And also this</div> <p></p>';
+        assert.equal(clean(result), html);
+      } else {
+        assert.equal(clean(result), clean(HTML.paragraphizeBlock.after));
+      }
     });
   });
 });

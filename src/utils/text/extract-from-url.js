@@ -5,6 +5,7 @@
 // Only used for date_published currently.
 export default function extractFromUrl(url, regexList) {
   const matchRe = regexList.find(re => re.test(url));
+  // const matchRe = null
   if (matchRe) {
     return matchRe.exec(url)[1];
   }

@@ -1,4 +1,5 @@
 import cheerio from 'cheerio';
+import assert from 'assert';
 
 import { assertClean } from 'test-helpers';
 
@@ -13,7 +14,12 @@ describe('markToKeep($)', () => {
     const $ = cheerio.load(HTML.marksYouTube.before);
 
     const result = markToKeep($('*').first(), $);
-    assertClean(result.html(), HTML.marksYouTube.after);
+
+    assert.equal(result('iframe.mercury-parser-keep').length, 2);
+
+    if (!$.browser) {
+      assertClean(result.html(), HTML.marksYouTube.after);
+    }
   });
 
   it('marks same-domain elements to keep', () => {

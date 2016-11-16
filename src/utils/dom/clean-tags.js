@@ -56,7 +56,7 @@ function removeUnlessContent($node, $, weight) {
         // Don't remove the node if it's a list and the
         // previous sibling starts with a colon though. That
         // means it's probably content.
-      const tagName = $node.get(0).tagName;
+      const tagName = $node.get(0).tagName.toLowerCase();
       const nodeIsList = tagName === 'ol' || tagName === 'ul';
       if (nodeIsList) {
         const previousNode = $node.prev();

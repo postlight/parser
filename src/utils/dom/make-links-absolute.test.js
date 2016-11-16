@@ -3,15 +3,24 @@ import cheerio from 'cheerio';
 
 import makeLinksAbsolute from './make-links-absolute';
 
+const getResultHtml = (result, $) => {
+  if (cheerio.browser) {
+    return result.html();
+  }
+
+  return $.html(result);
+};
+
 describe('makeLinksAbsolute($)', () => {
   it('makes relative #hrefs absolute', () => {
     const html = '<div><a href="#foo">bar</a></div>';
     const $ = cheerio.load(html);
     const $content = $('*').first();
 
-    const result = $.html(makeLinksAbsolute($content, $, 'http://example.com'));
+    const result = makeLinksAbsolute($content, $, 'http://example.com');
+    const resultHtml = getResultHtml(result, $);
 
-    assert.equal(result, '<div><a href="http://example.com/#foo">bar</a></div>');
+    assert.equal(resultHtml, '<div><a href="http://example.com/#foo">bar</a></div>');
   });
 
   it('makes relative ./relative paths absolute', () => {
@@ -19,9 +28,10 @@ describe('makeLinksAbsolute($)', () => {
     const $ = cheerio.load(html);
     const $content = $('*').first();
 
-    const result = $.html(makeLinksAbsolute($content, $, 'http://example.com/baz/bat'));
+    const result = makeLinksAbsolute($content, $, 'http://example.com/baz/bat');
+    const resultHtml = getResultHtml(result, $);
 
-    assert.equal(result, '<div><a href="http://example.com/baz/foo/bar">bar</a></div>');
+    assert.equal(resultHtml, '<div><a href="http://example.com/baz/foo/bar">bar</a></div>');
   });
 
   it('makes relative /root/paths absolute', () => {
@@ -29,9 +39,10 @@ describe('makeLinksAbsolute($)', () => {
     const $ = cheerio.load(html);
     const $content = $('*').first();
 
-    const result = $.html(makeLinksAbsolute($content, $, 'http://example.com/baz/bat'));
+    const result = makeLinksAbsolute($content, $, 'http://example.com/baz/bat');
+    const resultHtml = getResultHtml(result, $);
 
-    assert.equal(result, '<div><a href="http://example.com/foo/bar">bar</a></div>');
+    assert.equal(resultHtml, '<div><a href="http://example.com/foo/bar">bar</a></div>');
   });
 
   it('makes relative srcs absolute', () => {
@@ -39,8 +50,9 @@ describe('makeLinksAbsolute($)', () => {
     const $ = cheerio.load(html);
     const $content = $('*').first();
 
-    const result = $.html(makeLinksAbsolute($content, $, 'http://example.com'));
+    const result = makeLinksAbsolute($content, $, 'http://example.com');
+    const resultHtml = getResultHtml(result, $);
 
-    assert.equal(result, '<div><img src="http://example.com/#foo"></div>');
+    assert.equal(resultHtml, '<div><img src="http://example.com/#foo"></div>');
   });
 });

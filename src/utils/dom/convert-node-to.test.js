@@ -37,4 +37,18 @@ describe('convertNodeTo(node, $)', () => {
 
     assert.equal(result, html);
   });
+
+  // In the browser, the contents of noscript tags aren't rendered, therefore
+  // transforms on the noscript tag (commonly used for lazy-loading) don't work
+  // as expected. This test case handles that
+  it('handles noscript tags in the browser', () => {
+    const html = '<noscript><img src="http://example.com" /></noscript>';
+    const resultHtml = '<figure><img src="http://example.com"></figure>';
+    const $ = cheerio.load(html);
+    const node = $('noscript');
+
+    const result = convertNodeTo(node, $, 'figure', 'noscript').html();
+
+    assert.equal(result, resultHtml);
+  });
 });

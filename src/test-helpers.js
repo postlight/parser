@@ -45,7 +45,7 @@ export function record(name, options = {}) {
       if (!has_fixtures) {
         has_fixtures = nock.recorder.play();
         const text = `const nock = require('nock');\n${has_fixtures.join('\n')}`;
-        fs.writeFile(fp, text, done);
+        // fs.writeFile(fp, text, done);
       } else {
         done();
       }

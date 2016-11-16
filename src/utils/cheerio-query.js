@@ -8,10 +8,11 @@ const $ = (selector, context, rootjQuery, contextOverride = true) => {
   if (contextOverride) {
     if (context && typeof context === 'string') {
       context = `.${PARSER_CLASS} ${context}`
-    } else {
+    } else if (!context) {
       context = `.${PARSER_CLASS}`
     }
   }
+
   return new jQuery.fn.init(selector, context, rootjQuery);
 };
 
@@ -23,17 +24,34 @@ $.cloneHtml = ($node) => {
   // return $('html', null, null, false).clone().children().wrap('<div />').wrap('<div />')
 }
 
+$.root = () => {
+  return $('*').first()
+}
+
+$.browser = true
+
 $.html = ($node) => {
   if ($node) {
-    return $('<div />').append($node.clone()).html();
+    if ($node.parent()) {
+      return $node.parent().clone().html() || $node.clone().html();
+    }
+
+    return $node.clone().html();
   }
 
-  const body = $('body', null, null, false).clone()
-  const head = $('head', null, null, false).clone()
-  const html = $('<div />')
-    .append($(`<div>${head.html()}</div>`))
-    .append($(`<div>${body.html()}</div>`))
-    .wrap('<div />')
+  const $body = $('body', null, null, false).clone()
+  const $head = $('head', null, null, false).clone()
+  const $parsingNode = $body.find(`.${PARSER_CLASS}`)
+
+  if ($parsingNode.length > 0) {
+    // return $('<div />').html($parsingNode).html()
+    return $parsingNode.children().html()
+  }
+
+  const html = $('<container />')
+    .append($(`<container>${$head.html()}</container>`))
+    .append($(`<container>${$body.html()}</container>`))
+    .wrap('<container />')
     .parent()
     .html()
 
@@ -51,10 +69,12 @@ $.load = (html, opts = {}, returnHtml = false) => {
     html = $.cloneHtml()
   } else {
     if (normalizeWhitespace) {
-      html = html.replace(/[\s\n\r]+/g, ' ')
+      if (typeof html === 'string') {
+        html = html.replace(/[\s\n\r]+/g, ' ')
+      }
     }
 
-    html = $('<div />').html(html)
+    html = $('<container />').html(html)
   }
 
   const $body = $('body', null, null, false)
@@ -66,7 +86,15 @@ $.load = (html, opts = {}, returnHtml = false) => {
     $parsingNode = $body.find(`.${PARSER_CLASS}`)
   }
 
+  // Strip scripts
   html.find('script').remove()
+
+  // Remove comments
+  html.find('*').contents().each(function(el) {
+    if(this.nodeType === Node.COMMENT_NODE) {
+      $(this).remove();
+    }
+  });
   $parsingNode.html(html);
 
   if (returnHtml) return { $, html: html.html() }

@@ -10,7 +10,12 @@ describe('cleanTags($)', () => {
     const $ = cheerio.load(HTML.dropNegativeScore.before);
 
     const result = cleanTags($('*').first(), $);
-    assertClean(result.html(), HTML.dropNegativeScore.after);
+    // again small adjustments for cheerio vs. jquery implementation quirks
+    // not functionally significant
+    assertClean(
+      result.html(),
+      cheerio.browser ? HTML.dropNegativeScore.afterBrowser : HTML.dropNegativeScore.after
+    );
   });
 
   it('removes a node with too many inputs', () => {

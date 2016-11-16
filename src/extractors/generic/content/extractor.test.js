@@ -8,7 +8,7 @@ import GenericContentExtractor from './extractor';
 
 describe('GenericContentExtractor', () => {
   describe('extract($, html, opts)', () => {
-    fit('extracts html and returns the article', () => {
+    it('extracts html and returns the article', () => {
       const html = fs.readFileSync('./fixtures/vulture.html', 'utf-8');
 
       // Array.from(range(1, 100)).map((i) => {

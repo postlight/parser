@@ -1,3 +1,5 @@
 **/fixtures/*
 dist/*
 coverage/*
+karma.conf.js
+test-main.js
