@@ -13301,13 +13301,23 @@ $.root = function () {
 
 $.browser = true;
 
+var isContainer = function isContainer($node) {
+  var el = $node.get(0);
+  if (el) {
+    return el.tagName.toLowerCase() === 'container';
+  }
+
+  return false;
+};
+
 $.html = function ($node) {
   if ($node) {
-    if ($node.parent()) {
-      return $node.parent().clone().html() || $node.clone().html();
+    // we never want to return a parsing container, only its children
+    if (isContainer($node) || isContainer($node.children('container'))) {
+      return $node.children('container').html();
     }
 
-    return $node.clone().html();
+    return $("<div>").append($node.eq(0).clone()).html();
   }
 
   var $body = $('body', null, null, false).clone();
@@ -16656,7 +16666,7 @@ var NYTimesExtractor = {
   content: {
     selectors: ['div.g-blocks', 'article#story'],
 
-    defaultCleaner: false,
+    // defaultCleaner: false,
 
     transforms: {
       'img.g-lazy': function imgGLazy($node) {
@@ -16677,7 +16687,7 @@ var NYTimesExtractor = {
       }
     },
 
-    clean: ['.ad', 'header#story-header', '.story-body-1 .lede.video', '.visually-hidden', '#newsletter-promo', '.promo', '.comments-button', '.hidden']
+    clean: ['.ad', 'header#story-header', '.story-body-1 .lede.video', '.visually-hidden', '#newsletter-promo', '.promo', '.comments-button', '.hidden', '.comments']
   },
 
   date_published: null,
@@ -29590,6 +29600,8 @@ var GenericContentExtractor = {
       return null;
     }
 
+    // console.log("DONE", $.html(node))
+    // console.log("node", node)
     return normalizeSpaces($.html(node));
 
     // if return_type == "html":
@@ -29932,7 +29944,7 @@ function scoreBySibling($img) {
   var $sibling = $img.next();
   var sibling = $sibling.get(0);
 
-  if (sibling && sibling.tagName === 'figcaption') {
+  if (sibling && sibling.tagName.toLowerCase() === 'figcaption') {
     score += 25;
   }
 
@@ -32877,10 +32889,9 @@ var Mercury = {
             case 0:
               _opts$fetchAllPages = opts.fetchAllPages, fetchAllPages = _opts$fetchAllPages === undefined ? false : _opts$fetchAllPages, _opts$fallback = opts.fallback, fallback = _opts$fallback === undefined ? true : _opts$fallback;
               //
+              // const url = window.location.href;
 
-              url$$1 = window.location.href;
-              // const url = 'http://www.nytimes.com/2016/09/20/nyregion/nyc-nj-explosions-ahmad-khan-rahami.html'
-
+              url$$1 = 'http://www.nytimes.com/2016/09/20/nyregion/nyc-nj-explosions-ahmad-khan-rahami.html';
               parsedUrl = url.parse(url$$1);
 
               if (validateUrl(parsedUrl)) {
@@ -32910,6 +32921,7 @@ var Mercury = {
               }).toArray();
               //
 
+              console.log("Using extractor for", Extractor.domain);
               result = RootExtractor.extract(Extractor, {
                 url: url$$1,
                 html: html,
@@ -32925,7 +32937,7 @@ var Mercury = {
 
               return _context.abrupt('return', result);
 
-            case 14:
+            case 15:
             case 'end':
               return _context.stop();
           }

@@ -61,7 +61,6 @@
     "nock": "^9.0.2",
     "ora": "^0.3.0",
     "phantomjs-polyfill-find": "ptim/phantomjs-polyfill-find",
-    "phantomjs-polyfill-includes": "Neuromobile/phantomjs-polyfill-includes",
     "phantomjs-polyfill-string-includes": "^1.0.0",
     "phantomjs-prebuilt": "^2.1.13",
     "requirejs": "^2.3.2",

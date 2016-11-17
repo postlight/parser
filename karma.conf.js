@@ -16,7 +16,6 @@ module.exports = function (config) {
       // 'test-main.js',
       './node_modules/phantomjs-polyfill-find/find-polyfill.js',
       './node_modules/phantomjs-polyfill-string-includes/index.js',
-      // './node_modules/phantomjs-polyfill-includes/includes-polyfill.js',
       { pattern: 'src/**/*.test.js', included: true },
     ],
 

@@ -18,8 +18,8 @@ const Mercury = {
       fallback = true,
     } = opts;
     //
-    const url = window.location.href;
-    // const url = 'http://www.nytimes.com/2016/09/20/nyregion/nyc-nj-explosions-ahmad-khan-rahami.html'
+    // const url = window.location.href;
+    const url = 'http://www.nytimes.com/2016/09/20/nyregion/nyc-nj-explosions-ahmad-khan-rahami.html'
     const parsedUrl = URL.parse(url);
 
     if (!validateUrl(parsedUrl)) {
@@ -36,6 +36,7 @@ const Mercury = {
   //   // Used when extracting title/author/date_published/dek
     const metaCache = $('meta').map((_, node) => $(node).attr('name')).toArray();
   //
+    console.log("Using extractor for", Extractor.domain)
     let result = RootExtractor.extract(
       Extractor,
       {

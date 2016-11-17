@@ -4106,10 +4106,6 @@ phantomjs-polyfill-find@ptim/phantomjs-polyfill-find:
   version "0.0.1"
   resolved "https://codeload.github.com/ptim/phantomjs-polyfill-find/tar.gz/026b69dcabe743265f5214775e42f8d1e8aabedc"
 
-phantomjs-polyfill-includes@Neuromobile/phantomjs-polyfill-includes:
-  version "1.0.2"
-  resolved "https://codeload.github.com/Neuromobile/phantomjs-polyfill-includes/tar.gz/9c642e106537a8ec9091a9ddaba0cf41036fa373"
-
 phantomjs-polyfill-string-includes:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/phantomjs-polyfill-string-includes/-/phantomjs-polyfill-string-includes-1.0.0.tgz#ea180d4bbc24b8d83e477f8ee8893efabcb29393"

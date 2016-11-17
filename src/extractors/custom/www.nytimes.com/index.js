@@ -22,7 +22,7 @@ export const NYTimesExtractor = {
       'article#story',
     ],
 
-    defaultCleaner: false,
+    // defaultCleaner: false,
 
     transforms: {
       'img.g-lazy': ($node) => {
@@ -52,6 +52,7 @@ export const NYTimesExtractor = {
       '.promo',
       '.comments-button',
       '.hidden',
+      '.comments',
     ],
   },
 

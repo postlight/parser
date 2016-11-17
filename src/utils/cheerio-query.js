@@ -42,26 +42,12 @@ const isContainer = ($node) => {
 
 $.html = ($node) => {
   if ($node) {
-    const $parent = $node.parent()
-
-    // verify that parent is inside parsing container
-    // console.log('in right place?', $parent.html())
-    // console.log('in right place?', $parent.parents().length)
-    if ($parent.parents(`.${PARSER_CLASS}`).length > 0 && $parent.get(0).tagName.toLowerCase() !== 'container') {
-      // console.log('do it in here')
-      // console.log($parent.get(0).tagName)
-      return $node.parent().clone().html() || $node.clone().html();
-    } else {
-      // console.log('doing it here')
-      // console.log($node.children().html())
-      if (isContainer($node) || isContainer($node.children('container'))) {
-        return $node.children('container').clone().html()
-      }
-
-      return $node.clone().html()
+    // we never want to return a parsing container, only its children
+    if (isContainer($node) || isContainer($node.children('container'))) {
+      return $node.children('container').html()
     }
 
-    return $node.clone().html();
+    return $("<div>").append($node.eq(0).clone()).html()
   }
 
   const $body = $('body', null, null, false).clone()
@@ -69,7 +55,6 @@ $.html = ($node) => {
   const $parsingNode = $body.find(`.${PARSER_CLASS}`)
 
   if ($parsingNode.length > 0) {
-    // return $('<div />').html($parsingNode).html()
     return $parsingNode.children().html()
   }
 
