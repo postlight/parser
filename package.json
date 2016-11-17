@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "repository": "github:postlight/mercury-parser",
-  "main": "./dist/mercury.web.js",
+  "main": "./dist/mercury.js",
   "scripts": {
     "lint": "eslint . --fix",
     "lint-fix-quiet": "eslint --fix --quiet",
