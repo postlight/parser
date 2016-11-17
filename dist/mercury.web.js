@@ -13325,7 +13325,6 @@ $.html = function ($node) {
   var $parsingNode = $body.find('.' + PARSER_CLASS);
 
   if ($parsingNode.length > 0) {
-    // return $('<div />').html($parsingNode).html()
     return $parsingNode.children().html();
   }
 
@@ -14123,7 +14122,10 @@ var fetchResource = (function () {
             _context.prev = 7;
 
             validateResponse(response);
-            return _context.abrupt('return', { body: body, response: response });
+            return _context.abrupt('return', {
+              body: body,
+              response: response
+            });
 
           case 12:
             _context.prev = 12;
@@ -14505,6 +14507,7 @@ function convertNodeTo$$1($node, $) {
     return $;
   }
   var attrs = getAttrs(node) || {};
+  // console.log(attrs)
 
   var attribString = _Reflect$ownKeys(attrs).map(function (key) {
     return key + '=' + attrs[key];
@@ -16281,6 +16284,8 @@ function getAttrs(node) {
   if (!attribs && attributes) {
     var attrs = _Reflect$ownKeys(attributes).reduce(function (acc, index) {
       var attr = attributes[index];
+
+      if (!attr.name || !attr.value) return acc;
 
       acc[attr.name] = attr.value;
       return acc;
@@ -32388,6 +32393,10 @@ function scoreLinks(_ref) {
     // standardizing URLs (it's hard), we're going to do
     // some checking with and without a trailing slash
     var attrs = getAttrs(link);
+
+    // if href is undefined, return
+    if (!attrs.href) return possiblePages;
+
     var href = removeAnchor(attrs.href);
     var $link = $(link);
     var linkText = $link.text();
@@ -32889,9 +32898,10 @@ var Mercury = {
             case 0:
               _opts$fetchAllPages = opts.fetchAllPages, fetchAllPages = _opts$fetchAllPages === undefined ? false : _opts$fetchAllPages, _opts$fallback = opts.fallback, fallback = _opts$fallback === undefined ? true : _opts$fallback;
               //
-              // const url = window.location.href;
 
-              url$$1 = 'http://www.nytimes.com/2016/09/20/nyregion/nyc-nj-explosions-ahmad-khan-rahami.html';
+              url$$1 = window.location.href;
+              // const url = 'http://www.nytimes.com/2016/09/20/nyregion/nyc-nj-explosions-ahmad-khan-rahami.html'
+
               parsedUrl = url.parse(url$$1);
 
               if (validateUrl(parsedUrl)) {

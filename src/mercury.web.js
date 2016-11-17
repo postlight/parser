@@ -18,8 +18,8 @@ const Mercury = {
       fallback = true,
     } = opts;
     //
-    // const url = window.location.href;
-    const url = 'http://www.nytimes.com/2016/09/20/nyregion/nyc-nj-explosions-ahmad-khan-rahami.html'
+    const url = window.location.href;
+    // const url = 'http://www.nytimes.com/2016/09/20/nyregion/nyc-nj-explosions-ahmad-khan-rahami.html'
     const parsedUrl = URL.parse(url);
 
     if (!validateUrl(parsedUrl)) {
@@ -52,41 +52,39 @@ const Mercury = {
 
     $.cleanup()
 
-    return result
-  //   const { title, next_page_url } = result;
-  //
-  //   // Fetch more pages if next_page_url found
-  //   if (fetchAllPages && next_page_url) {
-  //     result = await collectAllPages(
-  //       {
-  //         Extractor,
-  //         next_page_url,
-  //         html,
-  //         $,
-  //         metaCache,
-  //         result,
-  //         title,
-  //         url,
-  //       }
-  //     );
-  //   } else {
-  //     result = {
-  //       ...result,
-  //       total_pages: 1,
-  //       rendered_pages: 1,
-  //     };
-  //   }
-  //
-  //   return result;
-  // },
-  //
-  // // A convenience method for getting a resource
-  // // to work with, e.g., for custom extractor generator
-  // async fetchResource(url) {
-  //   return await Resource.create(url);
-  // },
+    const { title, next_page_url } = result;
 
-  }
+    // Fetch more pages if next_page_url found
+    if (fetchAllPages && next_page_url) {
+      result = await collectAllPages(
+        {
+          Extractor,
+          next_page_url,
+          html,
+          $,
+          metaCache,
+          result,
+          title,
+          url,
+        }
+      );
+    } else {
+      result = {
+        ...result,
+        total_pages: 1,
+        rendered_pages: 1,
+      };
+    }
+
+    return result;
+  },
+
+  // A convenience method for getting a resource
+  // to work with, e.g., for custom extractor generator
+  async fetchResource(url) {
+    return await Resource.create(url);
+  },
+
 };
 
 export default Mercury;
