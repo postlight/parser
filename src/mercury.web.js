@@ -9,12 +9,12 @@ import {
 } from 'utils';
 import getExtractor from 'extractors/get-extractor';
 import RootExtractor from 'extractors/root-extractor';
-// import collectAllPages from 'extractors/collect-all-pages';
+import collectAllPages from 'extractors/collect-all-pages';
 
 const Mercury = {
   async parse(html, opts = {}) {
     const {
-      fetchAllPages = false,
+      fetchAllPages = true,
       fallback = true,
     } = opts;
     //

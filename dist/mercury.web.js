@@ -945,39 +945,6 @@ if (hadRuntime) {
 
 var index = runtimeModule;
 
-// 7.1.4 ToInteger
-var ceil  = Math.ceil;
-var floor = Math.floor;
-var _toInteger = function(it){
-  return isNaN(it = +it) ? 0 : (it > 0 ? floor : ceil)(it);
-};
-
-// 7.2.1 RequireObjectCoercible(argument)
-var _defined = function(it){
-  if(it == undefined)throw TypeError("Can't call method on  " + it);
-  return it;
-};
-
-var toInteger = _toInteger;
-var defined   = _defined;
-// true  -> String#at
-// false -> String#codePointAt
-var _stringAt = function(TO_STRING){
-  return function(that, pos){
-    var s = String(defined(that))
-      , i = toInteger(pos)
-      , l = s.length
-      , a, b;
-    if(i < 0 || i >= l)return TO_STRING ? '' : undefined;
-    a = s.charCodeAt(i);
-    return a < 0xd800 || a > 0xdbff || i + 1 === l || (b = s.charCodeAt(i + 1)) < 0xdc00 || b > 0xdfff
-      ? TO_STRING ? s.charAt(i) : a
-      : TO_STRING ? s.slice(i, i + 2) : (a - 0xd800 << 10) + (b - 0xdc00) + 0x10000;
-  };
-};
-
-var _library = true;
-
 var _global = createCommonjsModule(function (module) {
 // https://github.com/zloirock/core-js/issues/86#issuecomment-115759028
 var global = module.exports = typeof window != 'undefined' && window.Math == Math
@@ -1105,7 +1072,7 @@ var _hide = _descriptors ? function(object, key, value){
 var global$2    = _global;
 var core      = _core;
 var ctx       = _ctx;
-var hide$1      = _hide;
+var hide      = _hide;
 var PROTOTYPE = 'prototype';
 
 var $export$1 = function(type, name, source){
@@ -1149,7 +1116,7 @@ var $export$1 = function(type, name, source){
     if(IS_PROTO){
       (exports.virtual || (exports.virtual = {}))[key] = out;
       // export proto methods to core.%CONSTRUCTOR%.prototype.%NAME%
-      if(type & $export$1.R && expProto && !expProto[key])hide$1(expProto, key, out);
+      if(type & $export$1.R && expProto && !expProto[key])hide(expProto, key, out);
     }
   }
 };
@@ -1164,14 +1131,10 @@ $export$1.U = 64;  // safe
 $export$1.R = 128; // real proto method for `library` 
 var _export = $export$1;
 
-var _redefine = _hide;
-
 var hasOwnProperty = {}.hasOwnProperty;
 var _has = function(it, key){
   return hasOwnProperty.call(it, key);
 };
-
-var _iterators = {};
 
 var toString$1 = {}.toString;
 
@@ -1185,25 +1148,38 @@ var _iobject = Object('z').propertyIsEnumerable(0) ? Object : function(it){
   return cof(it) == 'String' ? it.split('') : Object(it);
 };
 
+// 7.2.1 RequireObjectCoercible(argument)
+var _defined = function(it){
+  if(it == undefined)throw TypeError("Can't call method on  " + it);
+  return it;
+};
+
 // to indexed object, toObject with fallback for non-array-like ES3 strings
-var IObject = _iobject;
-var defined$1 = _defined;
+var IObject$1 = _iobject;
+var defined = _defined;
 var _toIobject = function(it){
-  return IObject(defined$1(it));
+  return IObject$1(defined(it));
+};
+
+// 7.1.4 ToInteger
+var ceil  = Math.ceil;
+var floor = Math.floor;
+var _toInteger = function(it){
+  return isNaN(it = +it) ? 0 : (it > 0 ? floor : ceil)(it);
 };
 
 // 7.1.15 ToLength
-var toInteger$1 = _toInteger;
+var toInteger = _toInteger;
 var min       = Math.min;
 var _toLength = function(it){
-  return it > 0 ? min(toInteger$1(it), 0x1fffffffffffff) : 0; // pow(2, 53) - 1 == 9007199254740991
+  return it > 0 ? min(toInteger(it), 0x1fffffffffffff) : 0; // pow(2, 53) - 1 == 9007199254740991
 };
 
-var toInteger$2 = _toInteger;
+var toInteger$1 = _toInteger;
 var max       = Math.max;
 var min$1       = Math.min;
 var _toIndex = function(index, length){
-  index = toInteger$2(index);
+  index = toInteger$1(index);
   return index < 0 ? max(index + length, 0) : min$1(index, length);
 };
 
@@ -1248,19 +1224,19 @@ var _sharedKey = function(key){
   return shared[key] || (shared[key] = uid(key));
 };
 
-var has$1          = _has;
+var has          = _has;
 var toIObject    = _toIobject;
 var arrayIndexOf = _arrayIncludes(false);
-var IE_PROTO$1     = _sharedKey('IE_PROTO');
+var IE_PROTO     = _sharedKey('IE_PROTO');
 
 var _objectKeysInternal = function(object, names){
   var O      = toIObject(object)
     , i      = 0
     , result = []
     , key;
-  for(key in O)if(key != IE_PROTO$1)has$1(O, key) && result.push(key);
+  for(key in O)if(key != IE_PROTO)has(O, key) && result.push(key);
   // Don't enum bug & hidden keys
-  while(names.length > i)if(has$1(O, key = names[i++])){
+  while(names.length > i)if(has(O, key = names[i++])){
     ~arrayIndexOf(result, key) || result.push(key);
   }
   return result;
@@ -1273,19 +1249,133 @@ var _enumBugKeys = (
 
 // 19.1.2.14 / 15.2.3.14 Object.keys(O)
 var $keys       = _objectKeysInternal;
-var enumBugKeys$1 = _enumBugKeys;
+var enumBugKeys = _enumBugKeys;
 
 var _objectKeys = Object.keys || function keys(O){
-  return $keys(O, enumBugKeys$1);
+  return $keys(O, enumBugKeys);
 };
+
+var f$1 = Object.getOwnPropertySymbols;
+
+var _objectGops = {
+	f: f$1
+};
+
+var f$2 = {}.propertyIsEnumerable;
+
+var _objectPie = {
+	f: f$2
+};
+
+// 7.1.13 ToObject(argument)
+var defined$1 = _defined;
+var _toObject = function(it){
+  return Object(defined$1(it));
+};
+
+// 19.1.2.1 Object.assign(target, source, ...)
+var getKeys  = _objectKeys;
+var gOPS     = _objectGops;
+var pIE      = _objectPie;
+var toObject = _toObject;
+var IObject  = _iobject;
+var $assign  = Object.assign;
+
+// should work with symbols and should have deterministic property order (V8 bug)
+var _objectAssign = !$assign || _fails(function(){
+  var A = {}
+    , B = {}
+    , S = Symbol()
+    , K = 'abcdefghijklmnopqrst';
+  A[S] = 7;
+  K.split('').forEach(function(k){ B[k] = k; });
+  return $assign({}, A)[S] != 7 || Object.keys($assign({}, B)).join('') != K;
+}) ? function assign(target, source){ // eslint-disable-line no-unused-vars
+  var T     = toObject(target)
+    , aLen  = arguments.length
+    , index = 1
+    , getSymbols = gOPS.f
+    , isEnum     = pIE.f;
+  while(aLen > index){
+    var S      = IObject(arguments[index++])
+      , keys   = getSymbols ? getKeys(S).concat(getSymbols(S)) : getKeys(S)
+      , length = keys.length
+      , j      = 0
+      , key;
+    while(length > j)if(isEnum.call(S, key = keys[j++]))T[key] = S[key];
+  } return T;
+} : $assign;
+
+// 19.1.3.1 Object.assign(target, source)
+var $export = _export;
+
+$export($export.S + $export.F, 'Object', {assign: _objectAssign});
+
+var assign$3 = _core.Object.assign;
+
+var assign$1 = createCommonjsModule(function (module) {
+module.exports = { "default": assign$3, __esModule: true };
+});
+
+var _extends = createCommonjsModule(function (module, exports) {
+"use strict";
+
+exports.__esModule = true;
+
+var _assign = assign$1;
+
+var _assign2 = _interopRequireDefault(_assign);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = _assign2.default || function (target) {
+  for (var i = 1; i < arguments.length; i++) {
+    var source = arguments[i];
+
+    for (var key in source) {
+      if (Object.prototype.hasOwnProperty.call(source, key)) {
+        target[key] = source[key];
+      }
+    }
+  }
+
+  return target;
+};
+});
+
+var _extends$1 = unwrapExports(_extends);
+
+var toInteger$2 = _toInteger;
+var defined$2   = _defined;
+// true  -> String#at
+// false -> String#codePointAt
+var _stringAt = function(TO_STRING){
+  return function(that, pos){
+    var s = String(defined$2(that))
+      , i = toInteger$2(pos)
+      , l = s.length
+      , a, b;
+    if(i < 0 || i >= l)return TO_STRING ? '' : undefined;
+    a = s.charCodeAt(i);
+    return a < 0xd800 || a > 0xdbff || i + 1 === l || (b = s.charCodeAt(i + 1)) < 0xdc00 || b > 0xdfff
+      ? TO_STRING ? s.charAt(i) : a
+      : TO_STRING ? s.slice(i, i + 2) : (a - 0xd800 << 10) + (b - 0xdc00) + 0x10000;
+  };
+};
+
+var _library = true;
+
+var _redefine = _hide;
+
+var _iterators = {};
 
 var dP$2       = _objectDp;
 var anObject$2 = _anObject;
-var getKeys  = _objectKeys;
+var getKeys$1  = _objectKeys;
 
 var _objectDps = _descriptors ? Object.defineProperties : function defineProperties(O, Properties){
   anObject$2(O);
-  var keys   = getKeys(Properties)
+  var keys   = getKeys$1(Properties)
     , length = keys.length
     , i = 0
     , P;
@@ -1298,8 +1388,8 @@ var _html = _global.document && document.documentElement;
 // 19.1.2.2 / 15.2.3.5 Object.create(O [, Properties])
 var anObject$1    = _anObject;
 var dPs         = _objectDps;
-var enumBugKeys = _enumBugKeys;
-var IE_PROTO    = _sharedKey('IE_PROTO');
+var enumBugKeys$1 = _enumBugKeys;
+var IE_PROTO$1    = _sharedKey('IE_PROTO');
 var Empty       = function(){ /* empty */ };
 var PROTOTYPE$1   = 'prototype';
 
@@ -1307,7 +1397,7 @@ var PROTOTYPE$1   = 'prototype';
 var createDict = function(){
   // Thrash, waste and sodomy: IE GC bug
   var iframe = _domCreate('iframe')
-    , i      = enumBugKeys.length
+    , i      = enumBugKeys$1.length
     , lt     = '<'
     , gt     = '>'
     , iframeDocument;
@@ -1321,7 +1411,7 @@ var createDict = function(){
   iframeDocument.write(lt + 'script' + gt + 'document.F=Object' + lt + '/script' + gt);
   iframeDocument.close();
   createDict = iframeDocument.F;
-  while(i--)delete createDict[PROTOTYPE$1][enumBugKeys[i]];
+  while(i--)delete createDict[PROTOTYPE$1][enumBugKeys$1[i]];
   return createDict();
 };
 
@@ -1332,7 +1422,7 @@ var _objectCreate = Object.create || function create(O, Properties){
     result = new Empty;
     Empty[PROTOTYPE$1] = null;
     // add "__proto__" for Object.getPrototypeOf polyfill
-    result[IE_PROTO] = O;
+    result[IE_PROTO$1] = O;
   } else result = createDict();
   return Properties === undefined ? result : dPs(result, Properties);
 };
@@ -1372,20 +1462,14 @@ var _iterCreate = function(Constructor, NAME, next){
   setToStringTag$1(Constructor, NAME + ' Iterator');
 };
 
-// 7.1.13 ToObject(argument)
-var defined$2 = _defined;
-var _toObject = function(it){
-  return Object(defined$2(it));
-};
-
 // 19.1.2.9 / 15.2.3.2 Object.getPrototypeOf(O)
 var has$3         = _has;
-var toObject    = _toObject;
+var toObject$1    = _toObject;
 var IE_PROTO$2    = _sharedKey('IE_PROTO');
 var ObjectProto = Object.prototype;
 
 var _objectGpo = Object.getPrototypeOf || function(O){
-  O = toObject(O);
+  O = toObject$1(O);
   if(has$3(O, IE_PROTO$2))return O[IE_PROTO$2];
   if(typeof O.constructor == 'function' && O instanceof O.constructor){
     return O.constructor.prototype;
@@ -1393,10 +1477,10 @@ var _objectGpo = Object.getPrototypeOf || function(O){
 };
 
 var LIBRARY        = _library;
-var $export        = _export;
+var $export$2        = _export;
 var redefine       = _redefine;
-var hide           = _hide;
-var has            = _has;
+var hide$1           = _hide;
+var has$1            = _has;
 var Iterators      = _iterators;
 var $iterCreate    = _iterCreate;
 var setToStringTag = _setToStringTag;
@@ -1434,7 +1518,7 @@ var _iterDefine = function(Base, NAME, Constructor, next, DEFAULT, IS_SET, FORCE
       // Set @@toStringTag to native iterators
       setToStringTag(IteratorPrototype, TAG, true);
       // fix for some old engines
-      if(!LIBRARY && !has(IteratorPrototype, ITERATOR))hide(IteratorPrototype, ITERATOR, returnThis);
+      if(!LIBRARY && !has$1(IteratorPrototype, ITERATOR))hide$1(IteratorPrototype, ITERATOR, returnThis);
     }
   }
   // fix Array#{values, @@iterator}.name in V8 / FF
@@ -1444,7 +1528,7 @@ var _iterDefine = function(Base, NAME, Constructor, next, DEFAULT, IS_SET, FORCE
   }
   // Define iterator
   if((!LIBRARY || FORCED) && (BUGGY || VALUES_BUG || !proto[ITERATOR])){
-    hide(proto, ITERATOR, $default);
+    hide$1(proto, ITERATOR, $default);
   }
   // Plug for library
   Iterators[NAME] = $default;
@@ -1457,7 +1541,7 @@ var _iterDefine = function(Base, NAME, Constructor, next, DEFAULT, IS_SET, FORCE
     };
     if(FORCED)for(key in methods){
       if(!(key in proto))redefine(proto, key, methods[key]);
-    } else $export($export.P + $export.F * (BUGGY || VALUES_BUG), NAME, methods);
+    } else $export$2($export$2.P + $export$2.F * (BUGGY || VALUES_BUG), NAME, methods);
   }
   return methods;
 };
@@ -1841,7 +1925,7 @@ var LIBRARY$1            = _library;
 var global$5             = _global;
 var ctx$1                = _ctx;
 var classof            = _classof;
-var $export$2            = _export;
+var $export$3            = _export;
 var isObject$3           = _isObject;
 var aFunction$1          = _aFunction;
 var anInstance         = _anInstance;
@@ -2067,13 +2151,13 @@ if(!USE_NATIVE){
   };
 }
 
-$export$2($export$2.G + $export$2.W + $export$2.F * !USE_NATIVE, {Promise: $Promise});
+$export$3($export$3.G + $export$3.W + $export$3.F * !USE_NATIVE, {Promise: $Promise});
 _setToStringTag($Promise, PROMISE);
 _setSpecies(PROMISE);
 Wrapper = _core[PROMISE];
 
 // statics
-$export$2($export$2.S + $export$2.F * !USE_NATIVE, PROMISE, {
+$export$3($export$3.S + $export$3.F * !USE_NATIVE, PROMISE, {
   // 25.4.4.5 Promise.reject(r)
   reject: function reject(r){
     var capability = newPromiseCapability(this)
@@ -2082,7 +2166,7 @@ $export$2($export$2.S + $export$2.F * !USE_NATIVE, PROMISE, {
     return capability.promise;
   }
 });
-$export$2($export$2.S + $export$2.F * (LIBRARY$1 || !USE_NATIVE), PROMISE, {
+$export$3($export$3.S + $export$3.F * (LIBRARY$1 || !USE_NATIVE), PROMISE, {
   // 25.4.4.6 Promise.resolve(x)
   resolve: function resolve(x){
     // instanceof instead of internal slot check because we should fix it without replacement native Promise core
@@ -2093,7 +2177,7 @@ $export$2($export$2.S + $export$2.F * (LIBRARY$1 || !USE_NATIVE), PROMISE, {
     return capability.promise;
   }
 });
-$export$2($export$2.S + $export$2.F * !(USE_NATIVE && _iterDetect(function(iter){
+$export$3($export$3.S + $export$3.F * !(USE_NATIVE && _iterDetect(function(iter){
   $Promise.all(iter)['catch'](empty);
 })), PROMISE, {
   // 25.4.4.1 Promise.all(iterable)
@@ -13380,91 +13464,177 @@ $.load = function (html) {
   return $;
 };
 
-var f$1 = Object.getOwnPropertySymbols;
+var index$6 = function (str) {
+  var offset = 0;
+  str = str.toString();
 
-var _objectGops = {
-	f: f$1
-};
+  return iterator
 
-var f$2 = {}.propertyIsEnumerable;
+  function iterator () {
+    var i1 = str.indexOf('\r\n', offset);
+    var i2 = str.indexOf('\n', offset);
+    var i3 = str.indexOf('\r', offset);
 
-var _objectPie = {
-	f: f$2
-};
+    var indexes = [i1, i2, i3];
+    var index = indexes
+      .sort(function (a, b) {
+        if (a > b) return 1
+        if (a < b) return -1
+        return 0
+      })
+      .filter(function (index) {
+        return index !== -1
+      })[0];
 
-// 19.1.2.1 Object.assign(target, source, ...)
-var getKeys$1  = _objectKeys;
-var gOPS     = _objectGops;
-var pIE      = _objectPie;
-var toObject$1 = _toObject;
-var IObject$1  = _iobject;
-var $assign  = Object.assign;
+    if (index !== undefined) return extract(index, index === i1 ? 2 : 1)
 
-// should work with symbols and should have deterministic property order (V8 bug)
-var _objectAssign = !$assign || _fails(function(){
-  var A = {}
-    , B = {}
-    , S = Symbol()
-    , K = 'abcdefghijklmnopqrst';
-  A[S] = 7;
-  K.split('').forEach(function(k){ B[k] = k; });
-  return $assign({}, A)[S] != 7 || Object.keys($assign({}, B)).join('') != K;
-}) ? function assign(target, source){ // eslint-disable-line no-unused-vars
-  var T     = toObject$1(target)
-    , aLen  = arguments.length
-    , index = 1
-    , getSymbols = gOPS.f
-    , isEnum     = pIE.f;
-  while(aLen > index){
-    var S      = IObject$1(arguments[index++])
-      , keys   = getSymbols ? getKeys$1(S).concat(getSymbols(S)) : getKeys$1(S)
-      , length = keys.length
-      , j      = 0
-      , key;
-    while(length > j)if(isEnum.call(S, key = keys[j++]))T[key] = S[key];
-  } return T;
-} : $assign;
+    var length = str.length;
+    if (length === offset) return null
 
-// 19.1.3.1 Object.assign(target, source)
-var $export$3 = _export;
-
-$export$3($export$3.S + $export$3.F, 'Object', {assign: _objectAssign});
-
-var assign$3 = _core.Object.assign;
-
-var assign$1 = createCommonjsModule(function (module) {
-module.exports = { "default": assign$3, __esModule: true };
-});
-
-var _extends = createCommonjsModule(function (module, exports) {
-"use strict";
-
-exports.__esModule = true;
-
-var _assign = assign$1;
-
-var _assign2 = _interopRequireDefault(_assign);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-exports.default = _assign2.default || function (target) {
-  for (var i = 1; i < arguments.length; i++) {
-    var source = arguments[i];
-
-    for (var key in source) {
-      if (Object.prototype.hasOwnProperty.call(source, key)) {
-        target[key] = source[key];
-      }
-    }
+    return extract(length, 0)
   }
 
-  return target;
+  function extract (index, skip) {
+    var line = str.substr(offset, index - offset);
+    offset = index + skip;
+    return line
+  }
 };
-});
 
-var _extends$1 = unwrapExports(_extends);
+var nextLine = index$6;
 
-var index$3 = createCommonjsModule(function (module, exports) {
+// RFC-2068 Start-Line definitions:
+//   Request-Line: Method SP Request-URI SP HTTP-Version CRLF
+//   Status-Line:  HTTP-Version SP Status-Code SP Reason-Phrase CRLF
+var startLine = /^[A-Z_]+(\/\d\.\d)? /;
+var requestLine = /^([A-Z_]+) (.+) [A-Z]+\/(\d)\.(\d)$/;
+var statusLine = /^[A-Z]+\/(\d)\.(\d) (\d{3}) (.*)$/;
+
+var index$4 = function (data, onlyHeaders) {
+  return parse$3(normalize(data), onlyHeaders)
+};
+
+function parse$3 (str, onlyHeaders) {
+  var line = firstLine(str);
+  var match;
+
+  if (onlyHeaders && startLine.test(line)) {
+    return parseHeaders(str)
+  } else if ((match = line.match(requestLine)) !== null) {
+    return {
+      method: match[1],
+      url: match[2],
+      version: { major: parseInt(match[3], 10), minor: parseInt(match[4], 10) },
+      headers: parseHeaders(str)
+    }
+  } else if ((match = line.match(statusLine)) !== null) {
+    return {
+      version: { major: parseInt(match[1], 10), minor: parseInt(match[2], 10) },
+      statusCode: parseInt(match[3], 10),
+      statusMessage: match[4],
+      headers: parseHeaders(str)
+    }
+  } else {
+    return parseHeaders(str)
+  }
+}
+
+function parseHeaders (str) {
+  var headers = {};
+  var next = nextLine(str);
+  var line = next();
+  var index, name, value;
+
+  if (startLine.test(line)) line = next();
+
+  while (line) {
+    // subsequent lines in multi-line headers start with whitespace
+    if (line[0] === ' ' || line[0] === '\t') {
+      value += ' ' + line.trim();
+      line = next();
+      continue
+    }
+
+    if (name) addHeaderLine(name, value, headers);
+
+    index = line.indexOf(':');
+    name = line.substr(0, index);
+    value = line.substr(index + 1).trim();
+
+    line = next();
+  }
+
+  if (name) addHeaderLine(name, value, headers);
+
+  return headers
+}
+
+function normalize (str) {
+  if (str && str._header) str = str._header; // extra headers from http.ServerResponse object
+  if (!str || typeof str.toString !== 'function') return ''
+  return str.toString().trim()
+}
+
+function firstLine (str) {
+  return str.slice(0, str.indexOf('\r\n'))
+}
+
+// The following function is lifted from:
+// https://github.com/nodejs/node/blob/f1294f5bfd7f02bce8029818be9c92de59749137/lib/_http_incoming.js#L116-L170
+//
+// Add the given (field, value) pair to the message
+//
+// Per RFC2616, section 4.2 it is acceptable to join multiple instances of the
+// same header with a ', ' if the header in question supports specification of
+// multiple values this way. If not, we declare the first instance the winner
+// and drop the second. Extended header fields (those beginning with 'x-') are
+// always joined.
+function addHeaderLine (field, value, dest) {
+  field = field.toLowerCase();
+  switch (field) {
+    // Array headers:
+    case 'set-cookie':
+      if (dest[field] !== undefined) {
+        dest[field].push(value);
+      } else {
+        dest[field] = [value];
+      }
+      break
+
+    // list is taken from:
+    // https://mxr.mozilla.org/mozilla/source/netwerk/protocol/http/src/nsHttpHeaderArray.cpp
+    case 'content-type':
+    case 'content-length':
+    case 'user-agent':
+    case 'referer':
+    case 'host':
+    case 'authorization':
+    case 'proxy-authorization':
+    case 'if-modified-since':
+    case 'if-unmodified-since':
+    case 'from':
+    case 'location':
+    case 'max-forwards':
+    case 'retry-after':
+    case 'etag':
+    case 'last-modified':
+    case 'server':
+    case 'age':
+    case 'expires':
+      // drop duplicates
+      if (dest[field] === undefined) dest[field] = value;
+      break
+
+    default:
+      // make comma-separated list
+      if (typeof dest[field] === 'string') {
+        dest[field] += ', ' + value;
+      } else {
+        dest[field] = value;
+      }
+  }
+}
+
 // Browser Request
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -13479,27 +13649,11 @@ var index$3 = createCommonjsModule(function (module, exports) {
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// UMD HEADER START 
-(function (root, factory) {
-    if (typeof define === 'function' && define.amd) {
-        // AMD. Register as an anonymous module.
-        define([], factory);
-    } else if (typeof exports === 'object') {
-        // Node. Does not work with strict CommonJS, but
-        // only CommonJS-like enviroments that support module.exports,
-        // like Node.
-        module.exports = factory();
-    } else {
-        // Browser globals (root is window)
-        root.returnExports = factory();
-  }
-}(this, function () {
-// UMD HEADER END
-
+var httpHeaders = index$4;
 var XHR = XMLHttpRequest;
 if (!XHR) throw new Error('missing XMLHttpRequest')
 request.log = {
-  'trace': noop, 'debug': noop, 'info': noop, 'warn': noop, 'error': noop
+  'trace': noop$1, 'debug': noop$1, 'info': noop$1, 'warn': noop$1, 'error': noop$1
 };
 
 var DEFAULT_TIMEOUT = 3 * 60 * 1000; // 3 minutes
@@ -13533,15 +13687,15 @@ function request(options, callback) {
   }
 
   if(!options.uri && options.uri !== "")
-    throw new Error("options.uri is a required argument");
+    throw new Error("options.uri is a required argument")
 
   if(typeof options.uri != "string")
-    throw new Error("options.uri must be a string");
+    throw new Error("options.uri must be a string")
 
   var unsupported_options = ['proxy', '_redirectsFollowed', 'maxRedirects', 'followRedirect'];
   for (var i = 0; i < unsupported_options.length; i++)
     if(options[ unsupported_options[i] ])
-      throw new Error("options." + unsupported_options[i] + " is not supported")
+    throw new Error("options." + unsupported_options[i] + " is not supported")
 
   options.callback = callback;
   options.method = options.method || 'GET';
@@ -13550,7 +13704,7 @@ function request(options, callback) {
   options.timeout = options.timeout || request.DEFAULT_TIMEOUT;
 
   if(options.headers.host)
-    throw new Error("Options.headers.host is not supported");
+    throw new Error("Options.headers.host is not supported")
 
   if(options.json) {
     options.headers.accept = options.headers.accept || 'application/json';
@@ -13562,7 +13716,7 @@ function request(options, callback) {
     else if(typeof options.body !== 'string')
       options.body = JSON.stringify(options.body);
   }
-  
+
   //BEGIN QS Hack
   var serialize = function(obj) {
     var str = [];
@@ -13570,19 +13724,19 @@ function request(options, callback) {
       if (obj.hasOwnProperty(p)) {
         str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
       }
-    return str.join("&");
+    return str.join("&")
   };
-  
+
   if(options.qs){
     var qs = (typeof options.qs == 'string')? options.qs : serialize(options.qs);
     if(options.uri.indexOf('?') !== -1){ //no get params
-        options.uri = options.uri+'&'+qs;
+      options.uri = options.uri+'&'+qs;
     }else{ //existing get params
-        options.uri = options.uri+'?'+qs;
+      options.uri = options.uri+'?'+qs;
     }
   }
   //END QS Hack
-  
+
   //BEGIN FORM Hack
   var multipart = function(obj) {
     //todo: support file type (useful?)
@@ -13590,49 +13744,49 @@ function request(options, callback) {
     result.boundry = '-------------------------------'+Math.floor(Math.random()*1000000000);
     var lines = [];
     for(var p in obj){
-        if (obj.hasOwnProperty(p)) {
-            lines.push(
-                '--'+result.boundry+"\n"+
-                'Content-Disposition: form-data; name="'+p+'"'+"\n"+
-                "\n"+
-                obj[p]+"\n"
-            );
-        }
+      if (obj.hasOwnProperty(p)) {
+        lines.push(
+          '--'+result.boundry+"\n"+
+            'Content-Disposition: form-data; name="'+p+'"'+"\n"+
+            "\n"+
+            obj[p]+"\n"
+        );
+      }
     }
     lines.push( '--'+result.boundry+'--' );
     result.body = lines.join('');
     result.length = result.body.length;
     result.type = 'multipart/form-data; boundary='+result.boundry;
-    return result;
+    return result
   };
-  
+
   if(options.form){
-    if(typeof options.form == 'string') throw('form name unsupported');
+    if(typeof options.form == 'string') throw('form name unsupported')
     if(options.method === 'POST'){
-        var encoding = (options.encoding || 'application/x-www-form-urlencoded').toLowerCase();
-        options.headers['content-type'] = encoding;
-        switch(encoding){
-            case 'application/x-www-form-urlencoded':
-                options.body = serialize(options.form).replace(/%20/g, "+");
-                break;
-            case 'multipart/form-data':
-                var multi = multipart(options.form);
-                //options.headers['content-length'] = multi.length;
-                options.body = multi.body;
-                options.headers['content-type'] = multi.type;
-                break;
-            default : throw new Error('unsupported encoding:'+encoding);
-        }
+      var encoding = (options.encoding || 'application/x-www-form-urlencoded').toLowerCase();
+      options.headers['content-type'] = encoding;
+      switch(encoding){
+        case 'application/x-www-form-urlencoded':
+          options.body = serialize(options.form).replace(/%20/g, "+");
+          break
+        case 'multipart/form-data':
+          var multi = multipart(options.form);
+          //options.headers['content-length'] = multi.length;
+          options.body = multi.body;
+          options.headers['content-type'] = multi.type;
+          break
+        default : throw new Error('unsupported encoding:'+encoding)
+      }
     }
   }
   //END FORM Hack
 
   // If onResponse is boolean true, call back immediately when the response is known,
   // not when the full request is complete.
-  options.onResponse = options.onResponse || noop;
+  options.onResponse = options.onResponse || noop$1;
   if(options.onResponse === true) {
     options.onResponse = callback;
-    options.callback = noop;
+    options.callback = noop$1;
   }
 
   // XXX Browsers do not like this.
@@ -13753,6 +13907,7 @@ function run_xhr(options) {
     request.log.debug('Request done', {'id':xhr.id});
 
     xhr.body = xhr.responseText;
+    xhr.headers = httpHeaders(xhr.getAllResponseHeaders());
     if(options.json) {
       try        { xhr.body = JSON.parse(xhr.responseText); }
       catch (er) { return options.callback(er, xhr)        }
@@ -13811,7 +13966,7 @@ shortcuts.forEach(function(shortcut) {
     }
 
     var args = [opts].concat(Array.prototype.slice.apply(arguments, [1]));
-    return request.apply(this, args);
+    return request.apply(this, args)
   };
 });
 
@@ -13829,7 +13984,7 @@ request.couch = function(options, callback) {
     options.json = options.body;
   delete options.body;
 
-  callback = callback || noop;
+  callback = callback || noop$1;
 
   var xhr = request(options, couch_handler);
   return xhr
@@ -13843,10 +13998,10 @@ request.couch = function(options, callback) {
       er = new Error('CouchDB error: ' + (body.error.reason || body.error.error));
       for (var key in body)
         er[key] = body[key];
-      return callback(er, resp, body);
+      return callback(er, resp, body)
     }
 
-    return callback(er, resp, body);
+    return callback(er, resp, body)
   }
 };
 
@@ -13854,7 +14009,7 @@ request.couch = function(options, callback) {
 // Utility
 //
 
-function noop() {}
+function noop$1() {}
 
 function getLogger() {
   var logger = {}
@@ -13864,7 +14019,7 @@ function getLogger() {
   for(i = 0; i < levels.length; i++) {
     level = levels[i];
 
-    logger[level] = noop;
+    logger[level] = noop$1;
     if(typeof console !== 'undefined' && console && console[level])
       logger[level] = formatted(console, level);
   }
@@ -13887,9 +14042,9 @@ function formatted(obj, method) {
 function is_crossDomain(url) {
   var rurl = /^([\w\+\.\-]+:)(?:\/\/([^\/?#:]*)(?::(\d+))?)?/;
 
-  // jQuery #8138, IE may throw an exception when accessing
-  // a field from window.location if document.domain has been set
-  var ajaxLocation;
+    // jQuery #8138, IE may throw an exception when accessing
+    // a field from window.location if document.domain has been set
+    var ajaxLocation;
   try { ajaxLocation = location.href; }
   catch (e) {
     // Use the href attribute of an A element since IE will modify it given document.location
@@ -13903,10 +14058,10 @@ function is_crossDomain(url) {
 
   var result = !!(
     parts &&
-    (  parts[1] != ajaxLocParts[1]
-    || parts[2] != ajaxLocParts[2]
-    || (parts[3] || (parts[1] === "http:" ? 80 : 443)) != (ajaxLocParts[3] || (ajaxLocParts[1] === "http:" ? 80 : 443))
-    )
+      (  parts[1] != ajaxLocParts[1]
+        || parts[2] != ajaxLocParts[2]
+          || (parts[3] || (parts[1] === "http:" ? 80 : 443)) != (ajaxLocParts[3] || (ajaxLocParts[1] === "http:" ? 80 : 443))
+      )
   );
 
   //console.debug('is_crossDomain('+url+') -> ' + result)
@@ -13915,51 +14070,47 @@ function is_crossDomain(url) {
 
 // MIT License from http://phpjs.org/functions/base64_encode:358
 function b64_enc (data) {
-    // Encodes string using MIME base64 algorithm
-    var b64 = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
-    var o1, o2, o3, h1, h2, h3, h4, bits, i = 0, ac = 0, enc="", tmp_arr = [];
+  // Encodes string using MIME base64 algorithm
+  var b64 = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
+  var o1, o2, o3, h1, h2, h3, h4, bits, i = 0, ac = 0, enc="", tmp_arr = [];
 
-    if (!data) {
-        return data;
-    }
+  if (!data) {
+    return data
+  }
 
-    // assume utf8 data
-    // data = this.utf8_encode(data+'');
+  // assume utf8 data
+  // data = this.utf8_encode(data+'');
 
-    do { // pack three octets into four hexets
-        o1 = data.charCodeAt(i++);
-        o2 = data.charCodeAt(i++);
-        o3 = data.charCodeAt(i++);
+  do { // pack three octets into four hexets
+    o1 = data.charCodeAt(i++);
+    o2 = data.charCodeAt(i++);
+    o3 = data.charCodeAt(i++);
 
-        bits = o1<<16 | o2<<8 | o3;
+    bits = o1<<16 | o2<<8 | o3;
 
-        h1 = bits>>18 & 0x3f;
-        h2 = bits>>12 & 0x3f;
-        h3 = bits>>6 & 0x3f;
-        h4 = bits & 0x3f;
+    h1 = bits>>18 & 0x3f;
+    h2 = bits>>12 & 0x3f;
+    h3 = bits>>6 & 0x3f;
+    h4 = bits & 0x3f;
 
-        // use hexets to index into b64, and append result to encoded string
-        tmp_arr[ac++] = b64.charAt(h1) + b64.charAt(h2) + b64.charAt(h3) + b64.charAt(h4);
-    } while (i < data.length);
+    // use hexets to index into b64, and append result to encoded string
+    tmp_arr[ac++] = b64.charAt(h1) + b64.charAt(h2) + b64.charAt(h3) + b64.charAt(h4);
+  } while (i < data.length)
 
-    enc = tmp_arr.join('');
+  enc = tmp_arr.join('');
 
-    switch (data.length % 3) {
-        case 1:
-            enc = enc.slice(0, -2) + '==';
-        break;
-        case 2:
-            enc = enc.slice(0, -1) + '=';
-        break;
-    }
+  switch (data.length % 3) {
+    case 1:
+      enc = enc.slice(0, -2) + '==';
+      break
+    case 2:
+      enc = enc.slice(0, -1) + '=';
+      break
+  }
 
-    return enc;
+  return enc
 }
-    return request;
-//UMD FOOTER START
-}));
-//UMD FOOTER END
-});
+var index$3 = request;
 
 var _marked = [range].map(index.mark);
 
@@ -14088,7 +14239,7 @@ function validateResponse(response) {
 // TODO: Ensure we are not fetching something enormous. Always return
 //       unicode content for HTML, with charset conversion.
 
-var fetchResource = (function () {
+var fetchResource$1 = (function () {
   var _ref2 = _asyncToGenerator(index.mark(function _callee(url$$1, parsedUrl) {
     var options, _ref3, response, body;
 
@@ -14099,7 +14250,7 @@ var fetchResource = (function () {
             parsedUrl = parsedUrl || url.parse(encodeURI(url$$1));
 
             options = {
-              url: parsedUrl,
+              url: parsedUrl.href,
               headers: _extends$1({}, REQUEST_HEADERS),
               timeout: FETCH_TIMEOUT,
               // Don't set encoding; fixes issues
@@ -16066,10 +16217,10 @@ _wksDefine('asyncIterator');
 
 _wksDefine('observable');
 
-var index$4 = _core.Symbol;
+var index$8 = _core.Symbol;
 
 var symbol = createCommonjsModule(function (module) {
-module.exports = { "default": index$4, __esModule: true };
+module.exports = { "default": index$8, __esModule: true };
 });
 
 var _typeof_1 = createCommonjsModule(function (module, exports) {
@@ -16406,7 +16557,7 @@ var Resource = {
 
             case 6:
               _context.next = 8;
-              return fetchResource(url, parsedUrl);
+              return fetchResource$1(url, parsedUrl);
 
             case 8:
               result = _context.sent;
@@ -17362,7 +17513,7 @@ var Extractors = _Object$keys(CustomExtractors).reduce(function (acc, key) {
   return _extends$1({}, acc, mergeSupportedDomains(extractor));
 }, {});
 
-var index$6 = createCommonjsModule(function (module, exports) {
+var index$10 = createCommonjsModule(function (module, exports) {
 (function(){
 
   var LTR_MARK = "\u200e",
@@ -17563,7 +17714,7 @@ function cleanAuthor(author) {
   return author.replace(CLEAN_AUTHOR_RE, '$2').trim();
 }
 
-var index$7 = createCommonjsModule(function (module) {
+var index$11 = createCommonjsModule(function (module) {
 (function(module) {
     'use strict';
 
@@ -17721,7 +17872,7 @@ var index$7 = createCommonjsModule(function (module) {
 
 function clean$1(leadImageUrl) {
   leadImageUrl = leadImageUrl.trim();
-  if (index$7.isWebUri(leadImageUrl)) {
+  if (index$11.isWebUri(leadImageUrl)) {
     return leadImageUrl;
   }
 
@@ -29346,7 +29497,7 @@ var tanimoto = function (a, b) {
 	return  (both / (a.length + b.length - both));
 };
 
-var index$8 = {
+var index$12 = {
 	jarowinkler: jarowinkler,
 	levenshtein: levenshtein,
 	ngram: ngram,
@@ -29425,14 +29576,14 @@ function cleanDomainFromTitle(splitTitle, url$$1) {
   var nakedDomain = host.replace(DOMAIN_ENDINGS_RE, '');
 
   var startSlug = splitTitle[0].toLowerCase().replace(' ', '');
-  var startSlugRatio = index$8.levenshtein(startSlug, nakedDomain);
+  var startSlugRatio = index$12.levenshtein(startSlug, nakedDomain);
 
   if (startSlugRatio > 0.4 && startSlug.length > 5) {
     return splitTitle.slice(2).join('');
   }
 
   var endSlug = splitTitle.slice(-1)[0].toLowerCase().replace(' ', '');
-  var endSlugRatio = index$8.levenshtein(endSlug, nakedDomain);
+  var endSlugRatio = index$12.levenshtein(endSlug, nakedDomain);
 
   if (endSlugRatio > 0.4 && endSlug.length >= 5) {
     return splitTitle.slice(0, -2).join('');
@@ -30645,7 +30796,7 @@ var heap = createCommonjsModule(function (module, exports) {
 }).call(this);
 });
 
-var index$10 = heap;
+var index$14 = heap;
 
 var difflib$1 = createCommonjsModule(function (module, exports) {
 // Generated by CoffeeScript 1.3.1
@@ -30682,7 +30833,7 @@ Class Differ:
 
   floor = Math.floor, max = Math.max, min = Math.min;
 
-  Heap = index$10;
+  Heap = index$14;
 
   _calculateRatio = function(matches, length) {
     if (length) {
@@ -32129,7 +32280,7 @@ Class Differ:
 }).call(this);
 });
 
-var index$9 = difflib$1;
+var index$13 = difflib$1;
 
 function scoreSimilarity(score, articleUrl, href) {
   // Do this last and only if we have a real candidate, because it's
@@ -32138,7 +32289,7 @@ function scoreSimilarity(score, articleUrl, href) {
   // sliding scale, subtract points from this link based on
   // similarity.
   if (score > 0) {
-    var similarity = new index$9.SequenceMatcher(null, articleUrl, href).ratio();
+    var similarity = new index$13.SequenceMatcher(null, articleUrl, href).ratio();
     // Subtract .1 from diff_percent when calculating modifier,
     // which means that if it's less than 10% different, we give a
     // bonus instead. Ex:
@@ -32555,7 +32706,7 @@ function ellipsize(str, max, ellipse, chars, truncate) {
     return str;
 }
 
-var index$12 = function(str, max, opts) {
+var index$16 = function(str, max, opts) {
     if (typeof str !== 'string' || str.length === 0) return '';
     if (max === 0) return '';
 
@@ -32578,7 +32729,7 @@ function clean$2(content, $) {
   var maxLength = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 200;
 
   content = content.replace(/[\s\n]+/g, ' ').trim();
-  return index$12(content, maxLength, { ellipse: '&hellip;' });
+  return index$16(content, maxLength, { ellipse: '&hellip;' });
 }
 
 var GenericExcerptExtractor = {
@@ -32625,7 +32776,7 @@ var GenericExtractor = {
   word_count: GenericWordCountExtractor.extract,
   direction: function direction(_ref) {
     var title = _ref.title;
-    return index$6.getDirection(title);
+    return index$10.getDirection(title);
   },
 
   extract: function extract(options) {
@@ -32881,22 +33032,103 @@ var RootExtractor = {
   }
 };
 
-/* eslint-disable */
-// import collectAllPages from 'extractors/collect-all-pages';
+var collectAllPages = (function () {
+  var _ref = _asyncToGenerator(index.mark(function _callee(_ref2) {
+    var next_page_url = _ref2.next_page_url,
+        html = _ref2.html,
+        $ = _ref2.$,
+        metaCache = _ref2.metaCache,
+        result = _ref2.result,
+        Extractor = _ref2.Extractor,
+        title = _ref2.title,
+        url = _ref2.url,
+        cheerio = _ref2.cheerio;
+    var pages, previousUrls, extractorOpts, nextPageResult, word_count;
+    return index.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            // At this point, we've fetched just the first page
+            pages = 1;
+            previousUrls = [removeAnchor(url)];
 
+            // If we've gone over 26 pages, something has
+            // likely gone wrong.
+
+          case 2:
+            if (!(next_page_url && pages < 26)) {
+              _context.next = 15;
+              break;
+            }
+
+            pages += 1;
+            _context.next = 6;
+            return Resource.create(next_page_url);
+
+          case 6:
+            $ = _context.sent;
+
+            html = $.html();
+
+            extractorOpts = {
+              url: next_page_url,
+              html: html,
+              $: $,
+              metaCache: metaCache,
+              contentOnly: true,
+              extractedTitle: title,
+              previousUrls: previousUrls,
+              cheerio: cheerio
+            };
+            nextPageResult = RootExtractor.extract(Extractor, extractorOpts);
+
+
+            previousUrls.push(next_page_url);
+            result = _extends$1({}, result, {
+              content: result.content + '<hr><h4>Page ' + pages + '</h4>' + nextPageResult.content
+            });
+
+            next_page_url = nextPageResult.next_page_url;
+            _context.next = 2;
+            break;
+
+          case 15:
+            word_count = GenericExtractor.word_count({ content: '<div>' + result.content + '</div>' });
+            return _context.abrupt('return', _extends$1({}, result, {
+              total_pages: pages,
+              pages_rendered: pages,
+              word_count: word_count
+            }));
+
+          case 17:
+          case 'end':
+            return _context.stop();
+        }
+      }
+    }, _callee, this);
+  }));
+
+  function collectAllPages(_x) {
+    return _ref.apply(this, arguments);
+  }
+
+  return collectAllPages;
+})();
+
+/* eslint-disable */
 var Mercury = {
   parse: function parse(html) {
     var _this = this;
 
     var opts = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
     return _asyncToGenerator(index.mark(function _callee() {
-      var _opts$fetchAllPages, fetchAllPages, _opts$fallback, fallback, url$$1, parsedUrl, Extractor, $$$1, metaCache, result;
+      var _opts$fetchAllPages, fetchAllPages, _opts$fallback, fallback, url$$1, parsedUrl, Extractor, $$$1, metaCache, result, _result, title, next_page_url;
 
       return index.wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              _opts$fetchAllPages = opts.fetchAllPages, fetchAllPages = _opts$fetchAllPages === undefined ? false : _opts$fetchAllPages, _opts$fallback = opts.fallback, fallback = _opts$fallback === undefined ? true : _opts$fallback;
+              _opts$fetchAllPages = opts.fetchAllPages, fetchAllPages = _opts$fetchAllPages === undefined ? true : _opts$fetchAllPages, _opts$fallback = opts.fallback, fallback = _opts$fallback === undefined ? true : _opts$fallback;
               //
 
               url$$1 = window.location.href;
@@ -32945,14 +33177,73 @@ var Mercury = {
 
               $$$1.cleanup();
 
+              _result = result, title = _result.title, next_page_url = _result.next_page_url;
+
+              // Fetch more pages if next_page_url found
+
+              if (!(fetchAllPages && next_page_url)) {
+                _context.next = 21;
+                break;
+              }
+
+              _context.next = 18;
+              return collectAllPages({
+                Extractor: Extractor,
+                next_page_url: next_page_url,
+                html: html,
+                $: $$$1,
+                metaCache: metaCache,
+                result: result,
+                title: title,
+                url: url$$1
+              });
+
+            case 18:
+              result = _context.sent;
+              _context.next = 22;
+              break;
+
+            case 21:
+              result = _extends$1({}, result, {
+                total_pages: 1,
+                rendered_pages: 1
+              });
+
+            case 22:
               return _context.abrupt('return', result);
 
-            case 15:
+            case 23:
             case 'end':
               return _context.stop();
           }
         }
       }, _callee, _this);
+    }))();
+  },
+
+
+  // A convenience method for getting a resource
+  // to work with, e.g., for custom extractor generator
+  fetchResource: function fetchResource(url$$1) {
+    var _this2 = this;
+
+    return _asyncToGenerator(index.mark(function _callee2() {
+      return index.wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              _context2.next = 2;
+              return Resource.create(url$$1);
+
+            case 2:
+              return _context2.abrupt('return', _context2.sent);
+
+            case 3:
+            case 'end':
+              return _context2.stop();
+          }
+        }
+      }, _callee2, _this2);
     }))();
   }
 };

@@ -79,7 +79,7 @@
   "dependencies": {
     "babel-polyfill": "^6.13.0",
     "babel-runtime": "^6.11.6",
-    "browser-request": "^0.3.3",
+    "browser-request": "adampash/browser-request#feat-add-headers-to-response",
     "cheerio": "^0.22.0",
     "difflib": "adampash/difflib.js",
     "ellipsize": "0.0.2",
