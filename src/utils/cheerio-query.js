@@ -19,9 +19,17 @@ const $ = (selector, context, rootjQuery, contextOverride = true) => {
 $.fn = $.prototype = jQuery.fn;
 jQuery.extend($, jQuery); // copy's trim, extend etc to $
 
+const removeScripts = ($node) => {
+  // remove scripts and stylesheets
+  $node.find('script, style, link[rel="stylesheet"]').remove()
+
+  return $node
+}
+
 $.cloneHtml = ($node) => {
-  return $('html', null, null, false).clone().children().wrap('<div />').wrap('<div />')
-  // return $('html', null, null, false).clone().children().wrap('<div />').wrap('<div />')
+  const html = removeScripts($('html', null, null, false).clone())
+
+  return html.children().wrap('<div />').wrap('<div />')
 }
 
 $.root = () => {
@@ -50,8 +58,8 @@ $.html = ($node) => {
     return $("<div>").append($node.eq(0).clone()).html()
   }
 
-  const $body = $('body', null, null, false).clone()
-  const $head = $('head', null, null, false).clone()
+  const $body = removeScripts($('body', null, null, false).clone())
+  const $head = removeScripts($('head', null, null, false).clone())
   const $parsingNode = $body.find(`.${PARSER_CLASS}`)
 
   if ($parsingNode.length > 0) {
