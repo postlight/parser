@@ -5,7 +5,7 @@ function isComment(index, node) {
 }
 
 function cleanComments($) {
-  $('*').first()
+  $.root().find('*')
           .contents()
           .filter(isComment)
           .remove();

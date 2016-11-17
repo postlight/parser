@@ -9,7 +9,7 @@ import {
   MAX_CONTENT_LENGTH,
 } from './constants';
 
-function get(options) { // eslint-disable-line
+function get(options) {
   return new Promise((resolve, reject) => {
     request(options, (err, response, body) => {
       if (err) {

@@ -42,6 +42,9 @@ describe('findTopCandidate($)', () => {
 
     const $topCandidate = findTopCandidate($);
 
+    // browser won't allow body tag to be placed
+    // arbitrarily/loaded on the page, so we tranform
+    // it in cheerio-query, so this test would fail.
     if (!$.browser) {
       assert.equal($topCandidate.get(0).tagName, 'body');
     }

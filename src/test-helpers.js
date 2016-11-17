@@ -46,6 +46,11 @@ export function record(name, options = {}) {
     after: (done) => {
       if (!has_fixtures && !cheerio.browser) {
         has_fixtures = nock.recorder.play();
+        // eslint-disable-next-line no-console
+        console.log(
+          `This is disabled for browser/node interop. To capture fixutres,
+          open ${'`src/test-helpers.js`'} and comment out lines 53 and 54.`
+        );
         // const text = `const nock = require('nock');\n${has_fixtures.join('\n')}`;
         // fs.writeFile(fp, text, done);
       } else {

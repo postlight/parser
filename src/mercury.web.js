@@ -1,4 +1,3 @@
-/* eslint-disable */
 import URL from 'url';
 import cheerio from 'cheerio';
 
@@ -18,7 +17,7 @@ const Mercury = {
       fallback = true,
     } = opts;
     //
-    const url = window.location.href;
+    const url = window.location.href; // eslint-disable-line no-undef
     // const url = 'http://www.nytimes.com/2016/09/20/nyregion/nyc-nj-explosions-ahmad-khan-rahami.html'
     const parsedUrl = URL.parse(url);
 
@@ -28,7 +27,7 @@ const Mercury = {
 
     const Extractor = getExtractor(url, parsedUrl);
 
-    html = html || cheerio.html()
+    html = html || cheerio.html();
     const $ = await Resource.create(url, html, parsedUrl);
 
   //
@@ -36,7 +35,7 @@ const Mercury = {
   //   // Used when extracting title/author/date_published/dek
     const metaCache = $('meta').map((_, node) => $(node).attr('name')).toArray();
   //
-    console.log("Using extractor for", Extractor.domain)
+    console.log('Using extractor for', Extractor.domain); // eslint-disable-line no-console
     let result = RootExtractor.extract(
       Extractor,
       {
@@ -50,7 +49,7 @@ const Mercury = {
       }
     );
 
-    $.cleanup()
+    $.cleanup();
 
     const { title, next_page_url } = result;
 

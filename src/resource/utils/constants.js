@@ -1,4 +1,7 @@
-export const REQUEST_HEADERS = {
+import cheerio from 'cheerio';
+
+// Browser does not like us setting user agent
+export const REQUEST_HEADERS = cheerio.browser ? {} : {
   'User-Agent': 'Mercury - https://mercury.postlight.com/web-parser/',
 };
 

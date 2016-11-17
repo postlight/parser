@@ -1,4 +1,3 @@
-/* eslint-disable */
 import URL from 'url';
 
 import {

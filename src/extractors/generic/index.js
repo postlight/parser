@@ -1,3 +1,4 @@
+import cheerio from 'cheerio';
 import stringDirection from 'string-direction';
 
 import GenericContentExtractor from './content/extractor';
@@ -27,7 +28,7 @@ const GenericExtractor = {
   direction: ({ title }) => stringDirection.getDirection(title),
 
   extract(options) {
-    const { html, cheerio, $ } = options;
+    const { html, $ } = options;
 
     if (html && !$) {
       const loaded = cheerio.load(html);

@@ -7,6 +7,9 @@ describe('normalizeMetaTags($)', () => {
   it('replaces "content" attributes with "value"', () => {
     const html = '<html><meta name="foo" content="bar"></html>';
     const test = '<html><meta name="foo" value="bar"></html>';
+
+    // browser cheerio/jquery will remove/replace html, so result
+    // is different
     const testBrowser = '<meta name="foo" value="bar">';
 
     const $ = cheerio.load(html);

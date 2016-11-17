@@ -6,8 +6,6 @@ import nodeResolve from 'rollup-plugin-node-resolve';
 import globals from 'rollup-plugin-node-globals';
 import uglify from 'rollup-plugin-uglify'; // eslint-disable-line import/extensions
 
-import json from 'rollup-plugin-json';
-
 const babelOpts = babelrc();
 babelOpts.runtimeHelpers = true;
 babelOpts.exclude = './node_modules/**';
@@ -20,7 +18,6 @@ export default {
       ignoreGlobal: true,
     }),
     globals(),
-    json(),
     nodeResolve({
       browser: true,
       preferBuiltins: false,

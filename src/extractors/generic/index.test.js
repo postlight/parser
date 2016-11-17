@@ -1,6 +1,5 @@
 import assert from 'assert';
 import fs from 'fs';
-import cheerio from 'cheerio';
 
 import GenericExtractor from './index';
 
@@ -15,7 +14,7 @@ describe('GenericExtractor', () => {
         date_published,
         dek,
       } = GenericExtractor.extract(
-        { url: 'http://latimes.com', html, metaCache: [], cheerio }
+        { url: 'http://latimes.com', html, metaCache: [] }
       );
 
       assert.equal(author, null);
@@ -39,7 +38,7 @@ describe('GenericExtractor', () => {
         datePublished,
         dek,
       } = GenericExtractor.extract(
-        { url: 'http://wired.com', html, metaCache: [], cheerio }
+        { url: 'http://wired.com', html, metaCache: [] }
       );
 
       assert.equal(author, 'Eric Adams');

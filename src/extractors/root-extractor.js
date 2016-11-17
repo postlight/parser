@@ -1,4 +1,3 @@
-/* eslint-disable */
 import Cleaners from 'cleaners';
 import { convertNodeTo } from 'utils/dom';
 import GenericExtractor from './generic';
@@ -46,7 +45,6 @@ function findMatchingSelector($, selectors) {
       const [s, attr] = selector;
       return $(s).length === 1 && $(s).attr(attr) && $(s).attr(attr).trim() !== '';
     }
-    // debugger
 
     return $(selector).length === 1 && $(selector).text().trim() !== '';
   });
@@ -157,8 +155,7 @@ const RootExtractor = {
     const word_count = extractResult({ ...opts, type: 'word_count', content });
     const direction = extractResult({ ...opts, type: 'direction', title });
     const { url, domain } =
-      extractResult({ ...opts, type: 'url_and_domain' })
-      || { url: null, domain: null };
+      extractResult({ ...opts, type: 'url_and_domain' }) || { url: null, domain: null };
 
     return {
       title,

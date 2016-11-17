@@ -5,9 +5,9 @@ import cheerio from 'cheerio';
 import { assertClean } from 'test-helpers';
 import {
   default as RootExtractor,
-    select,
-    cleanBySelectors,
-    transformElements,
+  select,
+  cleanBySelectors,
+  transformElements,
 } from './root-extractor';
 
 import { NYMagExtractor } from './custom/nymag.com';
@@ -93,18 +93,10 @@ describe('transformElements($content, $, { transforms })', () => {
     const opts = {
       transforms: {
         noscript: ($node, $) => {
-          if ($.browser) {
-            const $children = $($node.text());
-
-            if ($children.length === 1 && $children.get(0) !== undefined &&
-              $children.get(0).tagName.toLowerCase() === 'img') {
-              return 'figure';
-            }
-          } else {
-            const $children = $node.children();
-            if ($children.length === 1 && $children.get(0).tagName === 'img') {
-              return 'figure';
-            }
+          const $children = $.browser ? $($node.text()) : $node.children();
+          if ($children.length === 1 && $children.get(0) !== undefined &&
+            $children.get(0).tagName.toLowerCase() === 'img') {
+            return 'figure';
           }
 
           return null;

@@ -1,5 +1,4 @@
 import URL from 'url';
-import cheerio from 'cheerio';
 
 import Resource from 'resource';
 import {
@@ -48,7 +47,6 @@ const Mercury = {
         metaCache,
         parsedUrl,
         fallback,
-        cheerio,
       });
     const { title, next_page_url } = result;
 
@@ -64,7 +62,6 @@ const Mercury = {
           result,
           title,
           url,
-          cheerio,
         }
       );
     } else {

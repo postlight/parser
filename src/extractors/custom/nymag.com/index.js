@@ -26,18 +26,10 @@ export const NYMagExtractor = {
 
       // Convert lazy-loaded noscript images to figures
       noscript: ($node, $) => {
-        if ($.browser) {
-          const $children = $($node.text());
-
-          if ($children.length === 1 && $children.get(0) !== undefined &&
-            $children.get(0).tagName.toLowerCase() === 'img') {
-            return 'figure';
-          }
-        } else {
-          const $children = $node.children();
-          if ($children.length === 1 && $children.get(0).tagName === 'img') {
-            return 'figure';
-          }
+        const $children = $.browser ? $($node.text()) : $node.children();
+        if ($children.length === 1 && $children.get(0) !== undefined &&
+          $children.get(0).tagName.toLowerCase() === 'img') {
+          return 'figure';
         }
 
         return null;

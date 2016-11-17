@@ -1,6 +1,5 @@
 import assert from 'assert';
 import fs from 'fs';
-import cheerio from 'cheerio';
 
 import { clean } from 'test-helpers';
 
@@ -18,7 +17,7 @@ describe('GenericContentExtractor', () => {
       //   ))
       // })
       const result = clean(GenericContentExtractor.extract(
-        { $: null, html, url: 'http://www.vulture.com/2016/08/dc-comics-greg-berlanti-c-v-r.html', cheerio }
+        { $: null, html, url: 'http://www.vulture.com/2016/08/dc-comics-greg-berlanti-c-v-r.html' }
       ));
 
       assert(typeof result, 'string');
