@@ -39,18 +39,18 @@ if (process.env.CI) {
       assert.equal(true, true);
     })
   })
+} else {
+  describe('Is Mercury build working', () => {
+    urls.map(article =>
+      it(`gets this title right ${article.title}`, (done) => {
+        Mercury.parse(article.url).then((result) => {
+          assert.equal(article.title, result.title);
+          done();
+        }).catch(() => {
+          assert.equal(true, false);
+          done();
+        });
+      })
+    );
+  });
 }
-
-describe('Is Mercury build working', () => {
-  urls.map(article =>
-    it(`gets this title right ${article.title}`, (done) => {
-      Mercury.parse(article.url).then((result) => {
-        assert.equal(article.title, result.title);
-        done();
-      }).catch(() => {
-        assert.equal(true, false);
-        done();
-      });
-    })
-  );
-});
