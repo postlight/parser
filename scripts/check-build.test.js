@@ -32,15 +32,19 @@ const urls = [
   },
 ];
 
+// don't run this on CI b/c we want to avoid network requests
+if (process.env.CI) {
+  describe('Tests', () => {
+    it('do not run because this is CI and we do not want network requests', () => {
+      assert.equal(true, true);
+    })
+  })
+}
+
 describe('Is Mercury build working', () => {
-  // don't run this on CI b/c we want to avoid network requests
   urls.map(article =>
     it(`gets this title right ${article.title}`, (done) => {
-      if (process.env.CI) {
-        console.log('skipping...'); // eslint-disable-line no-console
-        return done()
-      };
-      return Mercury.parse(article.url).then((result) => {
+      Mercury.parse(article.url).then((result) => {
         assert.equal(article.title, result.title);
         done();
       }).catch(() => {
