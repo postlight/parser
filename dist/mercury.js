@@ -68,8 +68,9 @@ var Errors = {
   }
 };
 
-var REQUEST_HEADERS = {
-  'User-Agent': 'Readability - http://readability.com/about/'
+// Browser does not like us setting user agent
+var REQUEST_HEADERS = cheerio.browser ? {} : {
+  'User-Agent': 'Mercury - https://mercury.postlight.com/web-parser/'
 };
 
 // The number of milliseconds to attempt to fetch a resource before timing out.
@@ -89,7 +90,6 @@ var MAX_CONTENT_LENGTH = 5242880;
 // so not implementing logic in port.
 
 function get(options) {
-  // eslint-disable-line
   return new _Promise(function (resolve, reject) {
     request(options, function (err, response, body) {
       if (err) {
@@ -162,7 +162,7 @@ var fetchResource$1 = (function () {
             parsedUrl = parsedUrl || URL.parse(encodeURI(url));
 
             options = {
-              url: parsedUrl,
+              url: parsedUrl.href,
               headers: _extends({}, REQUEST_HEADERS),
               timeout: FETCH_TIMEOUT,
               // Don't set encoding; fixes issues
@@ -534,6 +534,7 @@ function convertNodeTo$$1($node, $) {
     return $;
   }
   var attrs = getAttrs(node) || {};
+  // console.log(attrs)
 
   var attribString = _Reflect$ownKeys(attrs).map(function (key) {
     return key + '=' + attrs[key];
@@ -839,7 +840,6 @@ function getWeight(node) {
 // the node's score attribute
 // returns null if no score set
 function getScore($node) {
-  // console.log("NODE", $node, $node.attr('score'))
   return parseFloat($node.attr('score')) || null;
 }
 
@@ -1063,7 +1063,6 @@ function extractFromUrl(url, regexList) {
   var matchRe = regexList.find(function (re) {
     return re.test(url);
   });
-  // const matchRe = null
   if (matchRe) {
     return matchRe.exec(url)[1];
   }
@@ -1445,7 +1444,6 @@ function rewriteTopLevel$$1(article, $) {
   return $;
 }
 
-/* eslint-disable */
 function absolutize($, rootUrl, attr, $content) {
   $('[' + attr + ']', $content).each(function (_, node) {
     var attrs = getAttrs(node);
@@ -1675,6 +1673,8 @@ function getAttrs(node) {
     var attrs = _Reflect$ownKeys(attributes).reduce(function (acc, index) {
       var attr = attributes[index];
 
+      if (!attr.name || !attr.value) return acc;
+
       acc[attr.name] = attr.value;
       return acc;
     }, {});
@@ -1694,14 +1694,15 @@ function setAttr(node, attr, val) {
   return node;
 }
 
-/* eslint-disable */
 function setAttrs(node, attrs) {
   if (node.attribs) {
     node.attribs = attrs;
   } else if (node.attributes) {
     while (node.attributes.length > 0) {
       node.removeAttribute(node.attributes[0].name);
-    }_Reflect$ownKeys(attrs).forEach(function (key) {
+    }
+
+    _Reflect$ownKeys(attrs).forEach(function (key) {
       node.setAttribute(key, attrs[key]);
     });
   }
@@ -1742,7 +1743,7 @@ function isComment(index, node) {
 }
 
 function cleanComments($) {
-  $('*').first().contents().filter(isComment).remove();
+  $.root().find('*').contents().filter(isComment).remove();
 
   return $;
 }
@@ -1832,7 +1833,7 @@ var Resource = {
 
     var $ = cheerio.load(content, { normalizeWhitespace: true });
 
-    if ($('*').first().children().length === 0) {
+    if ($.root().children().length === 0) {
       throw new Error('No children, likely a bad parse.');
     }
 
@@ -1906,17 +1907,9 @@ var NYMagExtractor = {
 
       // Convert lazy-loaded noscript images to figures
       noscript: function noscript($node, $) {
-        if ($.browser) {
-          var $children = $($node.text());
-
-          if ($children.length === 1 && $children.get(0) !== undefined && $children.get(0).tagName.toLowerCase() === 'img') {
-            return 'figure';
-          }
-        } else {
-          var _$children = $node.children();
-          if (_$children.length === 1 && _$children.get(0).tagName === 'img') {
-            return 'figure';
-          }
+        var $children = $.browser ? $($node.text()) : $node.children();
+        if ($children.length === 1 && $children.get(0) !== undefined && $children.get(0).tagName.toLowerCase() === 'img') {
+          return 'figure';
         }
 
         return null;
@@ -2030,8 +2023,6 @@ var NYTimesExtractor = {
   content: {
     selectors: ['div.g-blocks', 'article#story'],
 
-    defaultCleaner: false,
-
     transforms: {
       'img.g-lazy': function imgGLazy($node) {
         var src = $node.attr('src');
@@ -2051,7 +2042,7 @@ var NYTimesExtractor = {
       }
     },
 
-    clean: ['.ad', 'header#story-header', '.story-body-1 .lede.video', '.visually-hidden', '#newsletter-promo', '.promo', '.comments-button', '.hidden']
+    clean: ['.ad', 'header#story-header', '.story-body-1 .lede.video', '.visually-hidden', '#newsletter-promo', '.promo', '.comments-button', '.hidden', '.comments']
   },
 
   date_published: null,
@@ -3083,12 +3074,11 @@ var GenericContentExtractor = {
     var $ = _ref.$,
         html = _ref.html,
         title = _ref.title,
-        url = _ref.url,
-        cheerio$$1 = _ref.cheerio;
+        url = _ref.url;
 
     opts = _extends({}, this.defaultOpts, opts);
 
-    $ = $ || cheerio$$1.load(html);
+    $ = $ || cheerio.load(html);
 
     // Cascade through our extraction-specific opts in an ordered fashion,
     // turning them off as we try to extract content.
@@ -3111,7 +3101,7 @@ var GenericContentExtractor = {
         var key = _step.value;
 
         opts[key] = false;
-        $ = cheerio$$1.load(html);
+        $ = cheerio.load(html);
 
         node = this.getContentNode($, title, url, opts);
 
@@ -3499,7 +3489,7 @@ function scoreBySibling($img) {
   var $sibling = $img.next();
   var sibling = $sibling.get(0);
 
-  if (sibling && sibling.tagName === 'figcaption') {
+  if (sibling && sibling.tagName.toLowerCase() === 'figcaption') {
     score += 25;
   }
 
@@ -4079,6 +4069,10 @@ function scoreLinks(_ref) {
     // standardizing URLs (it's hard), we're going to do
     // some checking with and without a trailing slash
     var attrs = getAttrs(link);
+
+    // if href is undefined, return
+    if (!attrs.href) return possiblePages;
+
     var href = removeAnchor(attrs.href);
     var $link = $(link);
     var linkText = $link.text();
@@ -4120,7 +4114,6 @@ function scoreLinks(_ref) {
   return _Reflect$ownKeys(scoredPages).length === 0 ? null : scoredPages;
 }
 
-/* eslint-disable */
 // Looks for and returns next page url
 // for multi-page articles
 var GenericNextPageUrlExtractor = {
@@ -4264,12 +4257,11 @@ var GenericExtractor = {
 
   extract: function extract(options) {
     var html = options.html,
-        cheerio$$1 = options.cheerio,
         $ = options.$;
 
 
     if (html && !$) {
-      var loaded = cheerio$$1.load(html);
+      var loaded = cheerio.load(html);
       options.$ = loaded;
     }
 
@@ -4315,7 +4307,6 @@ function getExtractor(url, parsedUrl) {
   return Extractors[hostname] || Extractors[baseDomain] || GenericExtractor;
 }
 
-/* eslint-disable */
 // Remove elements by an array of selectors
 function cleanBySelectors($content, $, _ref) {
   var clean = _ref.clean;
@@ -4366,7 +4357,6 @@ function findMatchingSelector($, selectors) {
 
       return $(s).length === 1 && $(s).attr(attr) && $(s).attr(attr).trim() !== '';
     }
-    // debugger
 
     return $(selector).length === 1 && $(selector).text().trim() !== '';
   });
@@ -4524,8 +4514,7 @@ var collectAllPages = (function () {
         result = _ref2.result,
         Extractor = _ref2.Extractor,
         title = _ref2.title,
-        url = _ref2.url,
-        cheerio$$1 = _ref2.cheerio;
+        url = _ref2.url;
     var pages, previousUrls, extractorOpts, nextPageResult, word_count;
     return _regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
@@ -4560,15 +4549,14 @@ var collectAllPages = (function () {
               metaCache: metaCache,
               contentOnly: true,
               extractedTitle: title,
-              previousUrls: previousUrls,
-              cheerio: cheerio$$1
+              previousUrls: previousUrls
             };
             nextPageResult = RootExtractor.extract(Extractor, extractorOpts);
 
 
             previousUrls.push(next_page_url);
             result = _extends({}, result, {
-              content: '\n        ' + result.content + '\n        <hr>\n        <h4>Page ' + pages + '</h4>\n        ' + nextPageResult.content + '\n        '
+              content: result.content + '<hr><h4>Page ' + pages + '</h4>' + nextPageResult.content
             });
 
             next_page_url = nextPageResult.next_page_url;
@@ -4652,8 +4640,7 @@ var Mercury = {
                 $: $,
                 metaCache: metaCache,
                 parsedUrl: parsedUrl,
-                fallback: fallback,
-                cheerio: cheerio
+                fallback: fallback
               });
               _result = result, title = _result.title, next_page_url = _result.next_page_url;
 
@@ -4673,8 +4660,7 @@ var Mercury = {
                 metaCache: metaCache,
                 result: result,
                 title: title,
-                url: url,
-                cheerio: cheerio
+                url: url
               });
 
             case 17:
