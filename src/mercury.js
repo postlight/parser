@@ -89,6 +89,8 @@ const Mercury = {
     return result;
   },
 
+  browser: !!cheerio.browser,
+
   // A convenience method for getting a resource
   // to work with, e.g., for custom extractor generator
   async fetchResource(url) {

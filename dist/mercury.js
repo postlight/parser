@@ -4702,6 +4702,8 @@ var Mercury = {
   },
 
 
+  browser: !!cheerio.browser,
+
   // A convenience method for getting a resource
   // to work with, e.g., for custom extractor generator
   fetchResource: function fetchResource(url) {
