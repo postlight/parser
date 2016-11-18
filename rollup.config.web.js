@@ -4,7 +4,7 @@ import babelrc from 'babelrc-rollup'; // eslint-disable-line import/extensions
 import commonjs from 'rollup-plugin-commonjs';
 import nodeResolve from 'rollup-plugin-node-resolve';
 import globals from 'rollup-plugin-node-globals';
-import uglify from 'rollup-plugin-uglify'; // eslint-disable-line import/extensions
+// import uglify from 'rollup-plugin-uglify'; // eslint-disable-line import/extensions
 
 const babelOpts = babelrc();
 babelOpts.runtimeHelpers = true;
@@ -22,7 +22,7 @@ export default {
       browser: true,
       preferBuiltins: false,
     }),
-    uglify(),
+    // uglify(),
   ],
   format: 'iife',
   moduleName: 'Mercury',
