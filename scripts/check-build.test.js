@@ -34,10 +34,9 @@ const urls = [
 
 describe('Is Mercury build working', () => {
   // don't run this on CI b/c we want to avoid network requests
-  if (process.env.CI) return;
-
   urls.map(article =>
     it(`gets this title right ${article.title}`, (done) => {
+      if (process.env['CI']) return
       Mercury.parse(article.url).then((result) => {
         assert.equal(article.title, result.title);
         done();
