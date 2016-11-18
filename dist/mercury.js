@@ -1802,16 +1802,17 @@ var Resource = {
 
             case 9:
               if (!result.error) {
-                _context.next = 11;
+                _context.next = 12;
                 break;
               }
 
+              result.failed = true;
               return _context.abrupt('return', result);
 
-            case 11:
+            case 12:
               return _context.abrupt('return', _this.generateDoc(result));
 
-            case 12:
+            case 13:
             case 'end':
               return _context.stop();
           }
@@ -4599,35 +4600,49 @@ var Mercury = {
           switch (_context.prev = _context.next) {
             case 0:
               _opts$fetchAllPages = opts.fetchAllPages, fetchAllPages = _opts$fetchAllPages === undefined ? true : _opts$fetchAllPages, _opts$fallback = opts.fallback, fallback = _opts$fallback === undefined ? true : _opts$fallback;
+
+              // if no url was passed and this is the browser version,
+              // set url to window.location.href and load the html
+              // from the current page
+
+              if (!url && cheerio.browser) {
+                url = window.location.href; // eslint-disable-line no-undef
+                html = html || cheerio.html();
+              }
+
               parsedUrl = URL.parse(url);
 
               if (validateUrl(parsedUrl)) {
-                _context.next = 4;
+                _context.next = 5;
                 break;
               }
 
               return _context.abrupt('return', Errors.badUrl);
 
-            case 4:
+            case 5:
               Extractor = getExtractor(url, parsedUrl);
               // console.log(`Using extractor for ${Extractor.domain}`);
 
-              _context.next = 7;
+              _context.next = 8;
               return Resource.create(url, html, parsedUrl);
 
-            case 7:
+            case 8:
               $ = _context.sent;
 
-              if (!$.error) {
-                _context.next = 10;
+              if (!$.failed) {
+                _context.next = 11;
                 break;
               }
 
               return _context.abrupt('return', $);
 
-            case 10:
+            case 11:
 
-              html = $.html();
+              // if html still has not been set (i.e., url passed to Mercury.parse)
+              // set html from the response of Resource.create
+              if (!html) {
+                html = $.html();
+              }
 
               // Cached value of every meta name in our document.
               // Used when extracting title/author/date_published/dek
@@ -4647,11 +4662,11 @@ var Mercury = {
               // Fetch more pages if next_page_url found
 
               if (!(fetchAllPages && next_page_url)) {
-                _context.next = 20;
+                _context.next = 21;
                 break;
               }
 
-              _context.next = 17;
+              _context.next = 18;
               return collectAllPages({
                 Extractor: Extractor,
                 next_page_url: next_page_url,
@@ -4663,21 +4678,21 @@ var Mercury = {
                 url: url
               });
 
-            case 17:
+            case 18:
               result = _context.sent;
-              _context.next = 21;
+              _context.next = 22;
               break;
 
-            case 20:
+            case 21:
               result = _extends({}, result, {
                 total_pages: 1,
                 rendered_pages: 1
               });
 
-            case 21:
+            case 22:
               return _context.abrupt('return', result);
 
-            case 22:
+            case 23:
             case 'end':
               return _context.stop();
           }
