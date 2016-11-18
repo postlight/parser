@@ -4638,7 +4638,7 @@ var Mercury = {
 
             case 11:
 
-              // if html still has not been set (i.e., url passed to Mercury.parse)
+              // if html still has not been set (i.e., url passed to Mercury.parse),
               // set html from the response of Resource.create
               if (!html) {
                 html = $.html();
