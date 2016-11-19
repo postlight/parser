@@ -23,7 +23,7 @@ dependencies:
 ## Customize test commands
 test:
   override:
-    - nvm use 7.0 && yarn build:web && yarn test:web -- --maxWorkers=4:
+    - nvm use 7.0 && yarn test:web -- --maxWorkers=4 && yarn build:web -- --maxWorkers=4:
         parallel: true
     - nvm use 4.3.2 && yarn build && yarn test -- --maxWorkers=4:
         parallel: true
