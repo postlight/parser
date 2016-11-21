@@ -5,7 +5,8 @@
   "repository": "github:postlight/mercury-parser",
   "main": "./dist/mercury.js",
   "scripts": {
-    "lint": "eslint . --fix",
+    "lint": "if test \"$CI\" != \"true\" ; then eslint . --fix; fi",
+    "lint:ci": "eslint .",
     "lint-fix-quiet": "eslint --fix --quiet",
     "build": "yarn lint && rollup -c && yarn test:build",
     "build:web": "yarn lint && rollup -c rollup.config.web.js && yarn test:build:web",

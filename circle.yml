@@ -3,9 +3,6 @@ machine:
   pre:
     - mkdir ~/.yarn-cache
 
-  timezone:
-    America/New_York
-
   node:
     version:
       4.3.2
@@ -15,6 +12,7 @@ dependencies:
   pre:
     - curl -o- -L https://yarnpkg.com/install.sh | bash
     - nvm install 7.0.0
+    # For some reason phantomjs-prebuild is failing w/yarn, but npm installing works
     - npm install phantomjs-prebuilt
 
   cache_directories:
@@ -25,9 +23,11 @@ dependencies:
 ## Customize test commands
 test:
   override:
+    # Using 4.3.2 by default
+    - yarn build && yarn test -- --maxWorkers=4:
+        parallel: true
+    # Switch to 7 and lint
+    - nvm use 7.0 && yarn lint:ci && yarn build && yarn test -- --maxWorkers=4:
+        parallel: true
     - nvm use 7.0 && yarn test:web -- --maxWorkers=4 && yarn build:web -- --maxWorkers=4:
-        parallel: true
-    - nvm use 4.3.2 && yarn build && yarn test -- --maxWorkers=4:
-        parallel: true
-    - nvm use 7.0 && yarn build && yarn test -- --maxWorkers=4:
         parallel: true
