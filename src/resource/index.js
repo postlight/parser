@@ -34,6 +34,7 @@ const Resource = {
     }
 
     if (result.error) {
+      result.failed = true;
       return result;
     }
 

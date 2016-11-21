@@ -1,11 +1,19 @@
 import URL from 'url';
 
+import {
+  getAttrs,
+  setAttr,
+} from 'utils/dom';
+
 function absolutize($, rootUrl, attr, $content) {
   $(`[${attr}]`, $content).each((_, node) => {
-    const url = node.attribs[attr];
-    const absoluteUrl = URL.resolve(rootUrl, url);
+    const attrs = getAttrs(node);
+    const url = attrs[attr];
 
-    node.attribs[attr] = absoluteUrl;
+    if (url) {
+      const absoluteUrl = URL.resolve(rootUrl, url);
+      setAttr(node, attr, absoluteUrl);
+    }
   });
 }
 

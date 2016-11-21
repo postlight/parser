@@ -21,3 +21,6 @@ export { default as stripTags } from './strip-tags';
 export { default as withinComment } from './within-comment';
 export { default as nodeIsSufficient } from './node-is-sufficient';
 export { default as isWordpress } from './is-wordpress';
+export { default as getAttrs } from './get-attrs';
+export { default as setAttr } from './set-attr';
+export { default as setAttrs } from './set-attrs';

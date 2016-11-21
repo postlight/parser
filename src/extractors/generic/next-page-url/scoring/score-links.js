@@ -1,6 +1,9 @@
 import URL from 'url';
 
-import { isWordpress } from 'utils/dom';
+import {
+  getAttrs,
+  isWordpress,
+} from 'utils/dom';
 import {
   removeAnchor,
   pageNumFromUrl,
@@ -50,7 +53,12 @@ export default function scoreLinks({
     // Remove any anchor data since we don't do a good job
     // standardizing URLs (it's hard), we're going to do
     // some checking with and without a trailing slash
-    const href = removeAnchor(link.attribs.href);
+    const attrs = getAttrs(link);
+
+    // if href is undefined, return
+    if (!attrs.href) return possiblePages;
+
+    const href = removeAnchor(attrs.href);
     const $link = $(link);
     const linkText = $link.text();
 

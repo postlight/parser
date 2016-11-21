@@ -24,8 +24,11 @@ import {
 //   * domain
 //   * weird aspect ratio
 const GenericLeadImageUrlExtractor = {
-  extract({ $, content, metaCache }) {
+  extract({ $, content, metaCache, html }) {
     let cleanUrl;
+    if (!$.browser && $('head').length === 0) {
+      $('*').first().prepend(html);
+    }
 
     // Check to see if we have a matching meta tag that we can make use of.
     // Moving this higher because common practice is now to use large
@@ -48,7 +51,8 @@ const GenericLeadImageUrlExtractor = {
     // Next, try to find the "best" image via the content.
     // We'd rather not have to fetch each image and check dimensions,
     // so try to do some analysis and determine them instead.
-    const imgs = $('img', content).toArray();
+    const $content = $(content);
+    const imgs = $('img', $content).toArray();
     const imgScores = {};
 
     imgs.forEach((img, index) => {

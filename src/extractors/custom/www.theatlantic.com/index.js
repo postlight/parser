@@ -32,7 +32,11 @@ export const TheAtlanticExtractor = {
     ],
   },
 
-  date_published: null,
+  date_published: {
+    selectors: [
+      ['time[itemProp="datePublished"]', 'datetime'],
+    ],
+  },
 
   lead_image_url: null,
 

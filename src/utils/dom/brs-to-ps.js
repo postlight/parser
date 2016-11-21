@@ -12,11 +12,12 @@ import { paragraphize } from './index';
 export default function brsToPs($) {
   let collapsing = false;
   $('br').each((index, element) => {
-    const nextElement = $(element).next().get(0);
+    const $element = $(element);
+    const nextElement = $element.next().get(0);
 
-    if (nextElement && nextElement.tagName === 'br') {
+    if (nextElement && nextElement.tagName.toLowerCase() === 'br') {
       collapsing = true;
-      $(element).remove();
+      $element.remove();
     } else if (collapsing) {
       collapsing = false;
       // $(element).replaceWith('<p />')

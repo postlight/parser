@@ -1,4 +1,5 @@
 import URL from 'url';
+
 import {
   HAS_ALPHA_RE,
   IS_ALPHA_RE,

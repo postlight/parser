@@ -28,11 +28,11 @@ const GenericExtractor = {
   direction: ({ title }) => stringDirection.getDirection(title),
 
   extract(options) {
-    const { html } = options;
+    const { html, $ } = options;
 
-    if (html) {
-      const $ = cheerio.load(html);
-      options.$ = $;
+    if (html && !$) {
+      const loaded = cheerio.load(html);
+      options.$ = loaded;
     }
 
     const title = this.title(options);

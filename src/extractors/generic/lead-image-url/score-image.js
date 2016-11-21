@@ -80,7 +80,7 @@ export function scoreBySibling($img) {
   const $sibling = $img.next();
   const sibling = $sibling.get(0);
 
-  if (sibling && sibling.tagName === 'figcaption') {
+  if (sibling && sibling.tagName.toLowerCase() === 'figcaption') {
     score += 25;
   }
 

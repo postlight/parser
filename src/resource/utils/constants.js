@@ -1,5 +1,8 @@
-export const REQUEST_HEADERS = {
-  'User-Agent': 'Readability - http://readability.com/about/',
+import cheerio from 'cheerio';
+
+// Browser does not like us setting user agent
+export const REQUEST_HEADERS = cheerio.browser ? {} : {
+  'User-Agent': 'Mercury - https://mercury.postlight.com/web-parser/',
 };
 
 // The number of milliseconds to attempt to fetch a resource before timing out.

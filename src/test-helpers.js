@@ -1,7 +1,8 @@
 import assert from 'assert';
 import nock from 'nock'; // eslint-disable-line import/no-extraneous-dependencies
-import fs from 'fs';
+// import fs from 'fs';
 import path from 'path';
+import cheerio from 'cheerio';
 
 export function clean(string) {
   return string.trim().replace(/\r?\n|\r/g, '').replace(/\s+/g, ' ');
@@ -24,6 +25,7 @@ export function record(name, options = {}) {
   return {
     // starts recording, or ensure the fixtures exist
     before: () => {
+      if (cheerio.browser) return;
       if (!has_fixtures) {
         try {
           require(`../${fp}`); // eslint-disable-line global-require, import/no-dynamic-require, max-len
@@ -42,13 +44,37 @@ export function record(name, options = {}) {
     },
     // saves our recording if fixtures didn't already exist
     after: (done) => {
-      if (!has_fixtures) {
+      if (!has_fixtures && !cheerio.browser) {
         has_fixtures = nock.recorder.play();
-        const text = `const nock = require('nock');\n${has_fixtures.join('\n')}`;
-        fs.writeFile(fp, text, done);
+        // eslint-disable-next-line no-console
+        console.log(
+          `This is disabled for browser/node interop. To capture fixutres,
+          open ${'`src/test-helpers.js`'} and comment out lines 53 and 54.`
+        );
+        // const text = `const nock = require('nock');\n${has_fixtures.join('\n')}`;
+        // fs.writeFile(fp, text, done);
       } else {
         done();
       }
     },
   };
+}
+
+export class MockDomNode {
+  constructor() {
+    this.attributes = [
+      {
+        name: 'class',
+        value: 'foo bar',
+      },
+    ];
+  }
+
+  setAttribute(key, val) {
+    this.attributes.pop();
+    this.attributes.push({ name: key, value: val });
+  }
+  removeAttribute() {
+    this.attributes.pop();
+  }
 }

@@ -453,7 +453,7 @@ const HTML = {
   // cleanConditionally
   dropNegativeScore: {
     before: `
-      <div>
+      <div score="5">
         <p>What do you think?</p>
         <p>
           <ul score="-10">
@@ -465,10 +465,19 @@ const HTML = {
       </div>
     `,
     after: `
-      <div>
+      <div score="5">
         <p>What do you think?</p>
         <p>
         </p>
+        <p>What do you think?</p>
+      </div>
+    `,
+    afterBrowser: `
+      <div score="5">
+        <p>What do you think?</p>
+        <p>
+        </p>
+        <p></p>
         <p>What do you think?</p>
       </div>
     `,
@@ -612,7 +621,7 @@ const HTML = {
   },
   previousEndsInColon: {
     before: `
-      <div weight="40">
+      <div score="40">
         <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu.</p>
         <p>Now read these links: </p>
         <ul score="30">

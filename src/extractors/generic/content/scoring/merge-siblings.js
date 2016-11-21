@@ -29,7 +29,7 @@ export default function mergeSiblings($candidate, topScore, $) {
 
     const siblingScore = getScore($sibling);
     if (siblingScore) {
-      if ($sibling === $candidate) {
+      if ($sibling.get(0) === $candidate.get(0)) {
         wrappingDiv.append($sibling);
       } else {
         let contentBonus = 0;
@@ -73,6 +73,11 @@ export default function mergeSiblings($candidate, topScore, $) {
 
     return null;
   });
+
+  if (wrappingDiv.children().length === 1 &&
+    wrappingDiv.children().first().get(0) === $candidate.get(0)) {
+    return $candidate;
+  }
 
   return wrappingDiv;
 }

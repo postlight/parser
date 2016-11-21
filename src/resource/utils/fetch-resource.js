@@ -86,7 +86,7 @@ export default async function fetchResource(url, parsedUrl) {
   parsedUrl = parsedUrl || URL.parse(encodeURI(url));
 
   const options = {
-    url: parsedUrl,
+    url: parsedUrl.href,
     headers: { ...REQUEST_HEADERS },
     timeout: FETCH_TIMEOUT,
     // Don't set encoding; fixes issues

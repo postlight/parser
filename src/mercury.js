@@ -1,4 +1,5 @@
 import URL from 'url';
+import cheerio from 'cheerio';
 
 import Resource from 'resource';
 import {
@@ -16,6 +17,14 @@ const Mercury = {
       fallback = true,
     } = opts;
 
+    // if no url was passed and this is the browser version,
+    // set url to window.location.href and load the html
+    // from the current page
+    if (!url && cheerio.browser) {
+      url = window.location.href; // eslint-disable-line no-undef
+      html = html || cheerio.html();
+    }
+
     const parsedUrl = URL.parse(url);
 
     if (!validateUrl(parsedUrl)) {
@@ -28,17 +37,31 @@ const Mercury = {
     const $ = await Resource.create(url, html, parsedUrl);
 
     // If we found an error creating the resource, return that error
-    if ($.error) {
+    if ($.failed) {
       return $;
     }
 
-    html = $.html();
+    // if html still has not been set (i.e., url passed to Mercury.parse),
+    // set html from the response of Resource.create
+    if (!html) {
+      html = $.html();
+    }
 
     // Cached value of every meta name in our document.
     // Used when extracting title/author/date_published/dek
     const metaCache = $('meta').map((_, node) => $(node).attr('name')).toArray();
 
-    let result = RootExtractor.extract(Extractor, { url, html, $, metaCache, parsedUrl, fallback });
+    let result = RootExtractor.extract(
+      Extractor,
+      {
+        url,
+        html,
+        $,
+        metaCache,
+        parsedUrl,
+        fallback,
+      });
+
     const { title, next_page_url } = result;
 
     // Fetch more pages if next_page_url found
@@ -65,6 +88,8 @@ const Mercury = {
 
     return result;
   },
+
+  browser: !!cheerio.browser,
 
   // A convenience method for getting a resource
   // to work with, e.g., for custom extractor generator

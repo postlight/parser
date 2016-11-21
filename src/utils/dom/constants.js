@@ -304,7 +304,7 @@ export const PAGE_RE = new RegExp('pag(e|ing|inat)', 'i');
 // page. Things like: next, continue, >, >>, » but not >|, »| as those can
 // mean last page.
 // export const NEXT_LINK_TEXT_RE = new RegExp('(next|weiter|continue|>([^\|]|$)|»([^\|]|$))', 'i');
-export const NEXT_LINK_TEXT_RE = /(next|weiter|continue|>([^\|]|$)|»([^\|]|$))/i;
+export const NEXT_LINK_TEXT_RE = /(next|weiter|continue|>([^|]|$)|»([^|]|$))/i;
 
 // Match any link text/classname/id that looks like it is an end link: things
 // like "first", "last", "end", etc.

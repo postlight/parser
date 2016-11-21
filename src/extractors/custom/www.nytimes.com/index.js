@@ -22,8 +22,6 @@ export const NYTimesExtractor = {
       'article#story',
     ],
 
-    defaultCleaner: false,
-
     transforms: {
       'img.g-lazy': ($node) => {
         let src = $node.attr('src');
@@ -52,6 +50,7 @@ export const NYTimesExtractor = {
       '.promo',
       '.comments-button',
       '.hidden',
+      '.comments',
     ],
   },
 

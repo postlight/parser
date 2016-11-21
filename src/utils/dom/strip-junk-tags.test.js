@@ -1,4 +1,5 @@
 import cheerio from 'cheerio';
+import assert from 'assert';
 
 import { assertClean } from 'test-helpers';
 
@@ -14,9 +15,9 @@ describe('stripJunkTags($)', () => {
   });
 
   it('keeps youtube embeds', () => {
-    const $ = cheerio.load(HTML.ignoresKeepable.before);
+    let $ = cheerio.load(HTML.ignoresKeepable.before);
 
-    const result = stripJunkTags($('*').first(), $);
-    assertClean(result.html(), HTML.ignoresKeepable.after);
+    $ = stripJunkTags($('*').first(), $);
+    assert.equal($('iframe[src^="https://www.youtube.com"]').length, 1);
   });
 });

@@ -20,6 +20,10 @@ describe('extractCleanNode(article, { $, cleanConditionally, title } })', () => 
 
     const cleanNode = extractCleanNode(bestNode, { $, opts });
 
-    assert.equal($(cleanNode).text().length, 2834);
+    const text = $(cleanNode).text()
+                   .replace(/\n/g, '')
+                   .replace(/\s+/g, ' ')
+                   .trim();
+    assert.equal(text.length === 2656 || text.length === 2657, true);
   });
 });
