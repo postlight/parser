@@ -1,7 +1,7 @@
 ## Customize the test machine
 machine:
   pre:
-    - mkdir ~/.yarn-cache
+    # - mkdir ~/.yarn-cache
 
   timezone:
     America/New_York
@@ -17,7 +17,7 @@ dependencies:
     - nvm install 7.0.0
 
   cache_directories:
-    - ~/.yarn-cache
+    # - ~/.yarn-cache
   override:
     - yarn install
 
