@@ -64,7 +64,7 @@
     "ora": "^0.3.0",
     "phantomjs-polyfill-find": "ptim/phantomjs-polyfill-find",
     "phantomjs-polyfill-string-includes": "^1.0.0",
-    "phantomjs-prebuilt": "^2.1.13",
+    "phantomjs-prebuilt": "^2.1.7",
     "requirejs": "^2.3.2",
     "rollup": "^0.36.3",
     "rollup-plugin-babel": "^2.6.1",
