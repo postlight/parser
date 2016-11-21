@@ -1,3 +1,10 @@
+// This module attempts to square cheerio with jquery
+// so that node-specific quirks/features of cheerio
+// will also work in the browser. This mostly involves
+// shimming a few functions and rewriting the jquery
+// constructor so it sandboxes most of its operations
+// and doesn't mutate existing dom elements in the page.
+
 import jQuery from 'jquery';
 
 const PARSER_CLASS = 'mercury-parsing-container';
