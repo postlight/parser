@@ -633,7 +633,6 @@ function stripJunkTags(article, $) {
 // H1 tags are typically the article title, which should be extracted
 // by the title extractor instead. If there's less than 3 of them (<3),
 // strip them. Otherwise, turn 'em into H2s.
-
 function cleanHOnes$$1(article, $) {
   var $hOnes = $('h1', article);
 
@@ -1433,7 +1432,6 @@ function cleanHeaders($article, $) {
 
 // Rewrite the tag name to div if it's a top level node like body or
 // html to avoid later complications with multiple body tags.
-
 function rewriteTopLevel$$1(article, $) {
   // I'm not using context here because
   // it's problematic when converting the
@@ -1488,7 +1486,6 @@ function linkDensity($node) {
 
 // Given a node type to search for, and a list of meta tag names to
 // search for, find a meta tag associated.
-
 function extractFromMeta$$1($, metaNames, cachedNames) {
   var cleanTags$$1 = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
 
@@ -2819,7 +2816,6 @@ function cleanDatePublished(dateString) {
 }
 
 // Clean our article content, returning a new, cleaned node.
-
 function extractCleanNode(article, _ref) {
   var $ = _ref.$,
       _ref$cleanConditional = _ref.cleanConditionally,
