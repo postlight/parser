@@ -15,11 +15,9 @@ dependencies:
   pre:
     - curl -o- -L https://yarnpkg.com/install.sh | bash
     - nvm install 7.0.0
-    - sudo curl --output /usr/local/bin/phantomjs https://s3.amazonaws.com/circle-downloads/phantomjs-2.1.1
 
   cache_directories:
     - ~/.yarn-cache
-    - /usr/local/bin
   override:
     - yarn install
 
