@@ -1,5 +1,6 @@
 // Karma configuration
 // Generated on Mon Nov 14 2016 10:21:57 GMT-0800 (PST)
+require('phantomjs-prebuilt').path = './node_modules/.bin/phantomjs';
 
 module.exports = function (config) {
   config.set({
