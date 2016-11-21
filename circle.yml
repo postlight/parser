@@ -1,7 +1,7 @@
 ## Customize the test machine
 machine:
   pre:
-    # - mkdir ~/.yarn-cache
+    - mkdir ~/.yarn-cache
 
   timezone:
     America/New_York
@@ -15,9 +15,10 @@ dependencies:
   pre:
     - curl -o- -L https://yarnpkg.com/install.sh | bash
     - nvm install 7.0.0
+    - npm install phantomjs-prebuilt
 
   cache_directories:
-    # - ~/.yarn-cache
+    - ~/.yarn-cache
   override:
     - yarn install
 
