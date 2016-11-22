@@ -49,6 +49,7 @@ describe('fetchResource(url)', () => {
     assert.equal(typeof body, 'string');
   });
 
+  // this test addresses https://twitter.com/flikxxi/status/800074680342351872
   it('handles different encoding', async () => {
     const url = 'http://www.elmundo.es/opinion/2016/11/19/582f476846163fc65a8b4578.html';
     const { body } = await fetchResource(url);
