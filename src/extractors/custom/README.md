@@ -147,9 +147,9 @@ Now that you know the basics of how custom extractors work, let's walk through t
 First, you'll need to clone the Mercury Parser repository and install dependencies.
 
 ```bash
-git clone git@github.com:postlight/readability-parser.git
+git clone git@github.com:postlight/mercury-parser.git
 
-cd readabilty-parser
+cd mercury-parser
 
 npm install
 ```
