@@ -9,10 +9,11 @@ var URL = _interopDefault(require('url'));
 var cheerio = _interopDefault(require('cheerio'));
 var _Promise = _interopDefault(require('babel-runtime/core-js/promise'));
 var request = _interopDefault(require('request'));
+var iconv = _interopDefault(require('iconv-lite'));
+var _slicedToArray = _interopDefault(require('babel-runtime/helpers/slicedToArray'));
 var _Reflect$ownKeys = _interopDefault(require('babel-runtime/core-js/reflect/own-keys'));
 var _toConsumableArray = _interopDefault(require('babel-runtime/helpers/toConsumableArray'));
 var _defineProperty = _interopDefault(require('babel-runtime/helpers/defineProperty'));
-var _slicedToArray = _interopDefault(require('babel-runtime/helpers/slicedToArray'));
 var _typeof = _interopDefault(require('babel-runtime/helpers/typeof'));
 var _getIterator = _interopDefault(require('babel-runtime/core-js/get-iterator'));
 var _Object$keys = _interopDefault(require('babel-runtime/core-js/object/keys'));
@@ -68,6 +69,167 @@ var Errors = {
   }
 };
 
+var NORMALIZE_RE = /\s{2,}/g;
+
+function normalizeSpaces(text) {
+  return text.replace(NORMALIZE_RE, ' ').trim();
+}
+
+// Given a node type to search for, and a list of regular expressions,
+// look to see if this extraction can be found in the URL. Expects
+// that each expression in r_list will return group(1) as the proper
+// string to be cleaned.
+// Only used for date_published currently.
+function extractFromUrl(url, regexList) {
+  var matchRe = regexList.find(function (re) {
+    return re.test(url);
+  });
+  if (matchRe) {
+    return matchRe.exec(url)[1];
+  }
+
+  return null;
+}
+
+// An expression that looks to try to find the page digit within a URL, if
+// it exists.
+// Matches:
+//  page=1
+//  pg=1
+//  p=1
+//  paging=12
+//  pag=7
+//  pagination/1
+//  paging/88
+//  pa/83
+//  p/11
+//
+// Does not match:
+//  pg=102
+//  page:2
+var PAGE_IN_HREF_RE = new RegExp('(page|paging|(p(a|g|ag)?(e|enum|ewanted|ing|ination)))?(=|/)([0-9]{1,3})', 'i');
+
+var HAS_ALPHA_RE = /[a-z]/i;
+
+var IS_ALPHA_RE = /^[a-z]+$/i;
+var IS_DIGIT_RE = /^[0-9]+$/i;
+
+var ENCODING_RE = /charset=([\w-]+)\b/;
+
+function pageNumFromUrl(url) {
+  var matches = url.match(PAGE_IN_HREF_RE);
+  if (!matches) return null;
+
+  var pageNum = parseInt(matches[6], 10);
+
+  // Return pageNum < 100, otherwise
+  // return null
+  return pageNum < 100 ? pageNum : null;
+}
+
+function removeAnchor(url) {
+  return url.split('#')[0].replace(/\/$/, '');
+}
+
+function isGoodSegment(segment, index, firstSegmentHasLetters) {
+  var goodSegment = true;
+
+  // If this is purely a number, and it's the first or second
+  // url_segment, it's probably a page number. Remove it.
+  if (index < 2 && IS_DIGIT_RE.test(segment) && segment.length < 3) {
+    goodSegment = true;
+  }
+
+  // If this is the first url_segment and it's just "index",
+  // remove it
+  if (index === 0 && segment.toLowerCase() === 'index') {
+    goodSegment = false;
+  }
+
+  // If our first or second url_segment is smaller than 3 characters,
+  // and the first url_segment had no alphas, remove it.
+  if (index < 2 && segment.length < 3 && !firstSegmentHasLetters) {
+    goodSegment = false;
+  }
+
+  return goodSegment;
+}
+
+// Take a URL, and return the article base of said URL. That is, no
+// pagination data exists in it. Useful for comparing to other links
+// that might have pagination data within them.
+function articleBaseUrl(url, parsed) {
+  var parsedUrl = parsed || URL.parse(url);
+  var protocol = parsedUrl.protocol,
+      host = parsedUrl.host,
+      path = parsedUrl.path;
+
+
+  var firstSegmentHasLetters = false;
+  var cleanedSegments = path.split('/').reverse().reduce(function (acc, rawSegment, index) {
+    var segment = rawSegment;
+
+    // Split off and save anything that looks like a file type.
+    if (segment.includes('.')) {
+      var _segment$split = segment.split('.'),
+          _segment$split2 = _slicedToArray(_segment$split, 2),
+          possibleSegment = _segment$split2[0],
+          fileExt = _segment$split2[1];
+
+      if (IS_ALPHA_RE.test(fileExt)) {
+        segment = possibleSegment;
+      }
+    }
+
+    // If our first or second segment has anything looking like a page
+    // number, remove it.
+    if (PAGE_IN_HREF_RE.test(segment) && index < 2) {
+      segment = segment.replace(PAGE_IN_HREF_RE, '');
+    }
+
+    // If we're on the first segment, check to see if we have any
+    // characters in it. The first segment is actually the last bit of
+    // the URL, and this will be helpful to determine if we're on a URL
+    // segment that looks like "/2/" for example.
+    if (index === 0) {
+      firstSegmentHasLetters = HAS_ALPHA_RE.test(segment);
+    }
+
+    // If it's not marked for deletion, push it to cleaned_segments.
+    if (isGoodSegment(segment, index, firstSegmentHasLetters)) {
+      acc.push(segment);
+    }
+
+    return acc;
+  }, []);
+
+  return protocol + '//' + host + cleanedSegments.reverse().join('/');
+}
+
+// Given a string, return True if it appears to have an ending sentence
+// within it, false otherwise.
+var SENTENCE_END_RE = new RegExp('.( |$)');
+function hasSentenceEnd(text) {
+  return SENTENCE_END_RE.test(text);
+}
+
+function excerptContent(content) {
+              var words = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 10;
+
+              return content.trim().split(/\s+/).slice(0, words).join(' ');
+}
+
+// check a string for encoding; this is
+// used in our fetchResource function to
+// ensure correctly encoded responses
+function getEncoding(str) {
+  if (ENCODING_RE.test(str)) {
+    return ENCODING_RE.exec(str)[1];
+  }
+
+  return null;
+}
+
 // Browser does not like us setting user agent
 var REQUEST_HEADERS = cheerio.browser ? {} : {
   'User-Agent': 'Mercury - https://mercury.postlight.com/web-parser/'
@@ -95,6 +257,12 @@ function get(options) {
       if (err) {
         reject(err);
       } else {
+        var encoding = getEncoding(response.headers['content-type']);
+
+        if (iconv.encodingExists(encoding)) {
+          body = iconv.decode(body, encoding);
+        }
+
         resolve({ body: body, response: response });
       }
     });
@@ -1045,154 +1213,6 @@ function scoreContent$$1($) {
   scorePs($, weightNodes);
 
   return $;
-}
-
-var NORMALIZE_RE = /\s{2,}/g;
-
-function normalizeSpaces(text) {
-  return text.replace(NORMALIZE_RE, ' ').trim();
-}
-
-// Given a node type to search for, and a list of regular expressions,
-// look to see if this extraction can be found in the URL. Expects
-// that each expression in r_list will return group(1) as the proper
-// string to be cleaned.
-// Only used for date_published currently.
-function extractFromUrl(url, regexList) {
-  var matchRe = regexList.find(function (re) {
-    return re.test(url);
-  });
-  if (matchRe) {
-    return matchRe.exec(url)[1];
-  }
-
-  return null;
-}
-
-// An expression that looks to try to find the page digit within a URL, if
-// it exists.
-// Matches:
-//  page=1
-//  pg=1
-//  p=1
-//  paging=12
-//  pag=7
-//  pagination/1
-//  paging/88
-//  pa/83
-//  p/11
-//
-// Does not match:
-//  pg=102
-//  page:2
-var PAGE_IN_HREF_RE = new RegExp('(page|paging|(p(a|g|ag)?(e|enum|ewanted|ing|ination)))?(=|/)([0-9]{1,3})', 'i');
-
-var HAS_ALPHA_RE = /[a-z]/i;
-
-var IS_ALPHA_RE = /^[a-z]+$/i;
-var IS_DIGIT_RE = /^[0-9]+$/i;
-
-function pageNumFromUrl(url) {
-  var matches = url.match(PAGE_IN_HREF_RE);
-  if (!matches) return null;
-
-  var pageNum = parseInt(matches[6], 10);
-
-  // Return pageNum < 100, otherwise
-  // return null
-  return pageNum < 100 ? pageNum : null;
-}
-
-function removeAnchor(url) {
-  return url.split('#')[0].replace(/\/$/, '');
-}
-
-function isGoodSegment(segment, index, firstSegmentHasLetters) {
-  var goodSegment = true;
-
-  // If this is purely a number, and it's the first or second
-  // url_segment, it's probably a page number. Remove it.
-  if (index < 2 && IS_DIGIT_RE.test(segment) && segment.length < 3) {
-    goodSegment = true;
-  }
-
-  // If this is the first url_segment and it's just "index",
-  // remove it
-  if (index === 0 && segment.toLowerCase() === 'index') {
-    goodSegment = false;
-  }
-
-  // If our first or second url_segment is smaller than 3 characters,
-  // and the first url_segment had no alphas, remove it.
-  if (index < 2 && segment.length < 3 && !firstSegmentHasLetters) {
-    goodSegment = false;
-  }
-
-  return goodSegment;
-}
-
-// Take a URL, and return the article base of said URL. That is, no
-// pagination data exists in it. Useful for comparing to other links
-// that might have pagination data within them.
-function articleBaseUrl(url, parsed) {
-  var parsedUrl = parsed || URL.parse(url);
-  var protocol = parsedUrl.protocol,
-      host = parsedUrl.host,
-      path = parsedUrl.path;
-
-
-  var firstSegmentHasLetters = false;
-  var cleanedSegments = path.split('/').reverse().reduce(function (acc, rawSegment, index) {
-    var segment = rawSegment;
-
-    // Split off and save anything that looks like a file type.
-    if (segment.includes('.')) {
-      var _segment$split = segment.split('.'),
-          _segment$split2 = _slicedToArray(_segment$split, 2),
-          possibleSegment = _segment$split2[0],
-          fileExt = _segment$split2[1];
-
-      if (IS_ALPHA_RE.test(fileExt)) {
-        segment = possibleSegment;
-      }
-    }
-
-    // If our first or second segment has anything looking like a page
-    // number, remove it.
-    if (PAGE_IN_HREF_RE.test(segment) && index < 2) {
-      segment = segment.replace(PAGE_IN_HREF_RE, '');
-    }
-
-    // If we're on the first segment, check to see if we have any
-    // characters in it. The first segment is actually the last bit of
-    // the URL, and this will be helpful to determine if we're on a URL
-    // segment that looks like "/2/" for example.
-    if (index === 0) {
-      firstSegmentHasLetters = HAS_ALPHA_RE.test(segment);
-    }
-
-    // If it's not marked for deletion, push it to cleaned_segments.
-    if (isGoodSegment(segment, index, firstSegmentHasLetters)) {
-      acc.push(segment);
-    }
-
-    return acc;
-  }, []);
-
-  return protocol + '//' + host + cleanedSegments.reverse().join('/');
-}
-
-// Given a string, return True if it appears to have an ending sentence
-// within it, false otherwise.
-var SENTENCE_END_RE = new RegExp('.( |$)');
-function hasSentenceEnd(text) {
-  return SENTENCE_END_RE.test(text);
-}
-
-function excerptContent(content) {
-              var words = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 10;
-
-              return content.trim().split(/\s+/).slice(0, words).join(' ');
 }
 
 // Now that we have a top_candidate, look through the siblings of

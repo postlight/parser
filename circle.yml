@@ -24,10 +24,10 @@ dependencies:
 test:
   override:
     # Using 4.3.2 by default
-    - yarn build && yarn test -- --maxWorkers=4:
+    - yarn build && yarn test:node -- --maxWorkers=4:
         parallel: true
     # Switch to 7 and lint
-    - nvm use 7.0 && yarn lint:ci && yarn build && yarn test -- --maxWorkers=4:
+    - nvm use 7.0 && yarn lint:ci && yarn build && yarn test:node -- --maxWorkers=4:
         parallel: true
     - nvm use 7.0 && yarn test:web -- --maxWorkers=4 && yarn build:web -- --maxWorkers=4:
         parallel: true

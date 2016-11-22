@@ -20,3 +20,5 @@ export const HAS_ALPHA_RE = /[a-z]/i;
 
 export const IS_ALPHA_RE = /^[a-z]+$/i;
 export const IS_DIGIT_RE = /^[0-9]+$/i;
+
+export const ENCODING_RE = /charset=([\w-]+)\b/;

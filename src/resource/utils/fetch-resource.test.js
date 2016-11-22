@@ -25,27 +25,37 @@ describe('fetchResource(url)', () => {
     const url = 'http://www.nytimes.com/2016/08/16/upshot/the-state-of-the-clinton-trump-race-is-it-over.html?_r=0';
     const { body } = await fetchResource(url);
 
-    assert.equal(typeof body, 'object');
+    assert.equal(typeof body, 'string');
   });
+
   it('fetches domains', async () => {
     const url = 'http://theconcourse.deadspin.com/1786177057';
     const { body } = await fetchResource(url);
 
-    assert.equal(typeof body, 'object');
+    assert.equal(typeof body, 'string');
   });
 
   it('fetches nyt', async () => {
     const url = 'http://www.nytimes.com/2016/08/16/upshot/the-state-of-the-clinton-trump-race-is-it-over.html?_r=0';
     const { body } = await fetchResource(url);
 
-    assert.equal(typeof body, 'object');
+    assert.equal(typeof body, 'string');
   });
 
   it('handles this gzip error', async () => {
     const url = 'http://www.redcross.ca/blog/2016/11/photo-of-the-day--one-year-anniversary-of-the-end-of-ebola-in-sierra-leone';
     const { body } = await fetchResource(url);
 
-    assert.equal(typeof body, 'object');
+    assert.equal(typeof body, 'string');
+  });
+
+  it('handles different encoding', async () => {
+    const url = 'http://www.elmundo.es/opinion/2016/11/19/582f476846163fc65a8b4578.html';
+    const { body } = await fetchResource(url);
+
+    const badEncodingRe = /�/g;
+
+    assert.equal(badEncodingRe.test(body.toString()), false);
   });
 });
 
