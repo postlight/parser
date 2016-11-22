@@ -1,6 +1,8 @@
 import URL from 'url';
 import request from 'request';
+import iconv from 'iconv-lite';
 import { Errors } from 'utils';
+import { getEncoding } from 'utils/text';
 
 import {
   REQUEST_HEADERS,
@@ -15,6 +17,12 @@ function get(options) {
       if (err) {
         reject(err);
       } else {
+        const encoding = getEncoding(response.headers['content-type']);
+
+        if (iconv.encodingExists(encoding)) {
+          body = iconv.decode(body, encoding);
+        }
+
         resolve({ body, response });
       }
     });

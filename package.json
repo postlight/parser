@@ -13,7 +13,7 @@
     "build:generator": "rollup -c scripts/rollup.config.js",
     "test_build": "rollup -c",
     "test": "yarn test:node && yarn test:web",
-    "test:node": "jest",
+    "test:node": "jest ./src",
     "test:web": "./node_modules/karma/bin/karma start karma.conf.js",
     "test:build": "cd ./scripts && jest check-build.test.js",
     "test:build:web": "node ./scripts/proxy-browser-test.js",
@@ -82,6 +82,7 @@
     "cheerio": "^0.22.0",
     "difflib": "adampash/difflib.js",
     "ellipsize": "0.0.2",
+    "iconv-lite": "^0.4.15",
     "jquery": "^3.1.1",
     "moment": "^2.14.1",
     "request": "czardoz/request",
@@ -93,7 +94,8 @@
   },
   "browser": {
     "main": "./dist/mercury.web.js",
-    "cheerio": "./src/utils/cheerio-query",
-    "request": "browser-request"
+    "cheerio": "./src/shims/cheerio-query",
+    "request": "browser-request",
+    "iconv-lite": "./src/shims/iconv-lite"
   }
 }
