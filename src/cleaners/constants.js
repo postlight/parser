@@ -48,8 +48,9 @@ const months = [
 const allMonths = months.join('|');
 const timestamp1 = '[0-9]{1,2}:[0-9]{2,2}( ?[ap].?m.?)?';
 const timestamp2 = '[0-9]{1,2}[/-][0-9]{1,2}[/-][0-9]{2,4}';
+const timestamp3 = '-[0-9]{3,4}$';
 export const SPLIT_DATE_STRING =
-  new RegExp(`(${timestamp1})|(${timestamp2})|([0-9]{1,4})|(${allMonths})`, 'ig');
+  new RegExp(`(${timestamp1})|(${timestamp2})|(${timestamp3})|([0-9]{1,4})|(${allMonths})`, 'ig');
 
 // CLEAN TITLE CONSTANTS
 // A regular expression that will match separating characters on a
