@@ -51,6 +51,8 @@ export const NYTimesExtractor = {
       '.comments-button',
       '.hidden',
       '.comments',
+      '.supplemental',
+      '.nocontent',
     ],
   },
 
