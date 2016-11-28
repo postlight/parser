@@ -404,7 +404,7 @@ function normalizeMetaTags($) {
 }
 
 // Spacer images to be removed
-var SPACER_RE = new RegExp('trans|transparent|spacer|blank', 'i');
+var SPACER_RE = new RegExp('transparent|spacer|blank', 'i');
 
 // The class we will use to mark elements we want to keep
 // but would normally remove
@@ -2702,6 +2702,43 @@ var MediumExtractor = {
   }
 };
 
+var WwwTmzComExtractor = {
+  domain: 'www.tmz.com',
+
+  title: {
+    selectors: ['.post-title-breadcrumb', 'h1', '.headline']
+  },
+
+  author: 'TMZ STAFF',
+
+  date_published: {
+    selectors: ['.article-posted-date']
+  },
+
+  dek: {
+    selectors: [
+      // enter selectors
+    ]
+  },
+
+  lead_image_url: {
+    selectors: [['meta[name="og:image"]', 'value']]
+  },
+
+  content: {
+    selectors: ['.article-content', '.all-post-body'],
+
+    // Is there anything in the content you selected that needs transformed
+    // before it's consumable content? E.g., unusual lazy loaded images
+    transforms: {},
+
+    // Is there anything that is in the result that shouldn't be?
+    // The clean selectors will remove anything that matches from
+    // the result
+    clean: ['.lightbox-link']
+  }
+};
+
 
 
 var CustomExtractors = Object.freeze({
@@ -2722,7 +2759,8 @@ var CustomExtractors = Object.freeze({
 	DeadspinExtractor: DeadspinExtractor,
 	BroadwayWorldExtractor: BroadwayWorldExtractor,
 	ApartmentTherapyExtractor: ApartmentTherapyExtractor,
-	MediumExtractor: MediumExtractor
+	MediumExtractor: MediumExtractor,
+	WwwTmzComExtractor: WwwTmzComExtractor
 });
 
 var Extractors = _Object$keys(CustomExtractors).reduce(function (acc, key) {
