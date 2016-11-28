@@ -42,10 +42,10 @@ export const WwwWashingtonpostComExtractor = {
     transforms: {
       'div.inline-content': ($node) => {
         if ($node.has('img,iframe,video').length > 0) {
-          return 'figure'
+          return 'figure';
         }
 
-        $node.remove()
+        $node.remove();
         return null;
       },
       '.pb-caption': 'figcaption',
