@@ -40,13 +40,22 @@ export const WwwWashingtonpostComExtractor = {
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images
     transforms: {
+      'div.inline-content': ($node) => {
+        if ($node.has('img,iframe,video').length > 0) {
+          return 'figure'
+        }
+
+        $node.remove()
+        return null;
+      },
+      '.pb-caption': 'figcaption',
     },
 
     // Is there anything that is in the result that shouldn't be?
     // The clean selectors will remove anything that matches from
     // the result
     clean: [
-
+      '.interstitial-link',
     ],
   },
 };

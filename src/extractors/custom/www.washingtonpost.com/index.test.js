@@ -50,7 +50,7 @@ describe('WwwWashingtonpostComExtractor', () => {
     assert.equal(author, 'David A. Fahrenthold');
   });
 
-  fit('returns the date_published', async () => {
+  it('returns the date_published', async () => {
     // To pass this test, fill out the date_published selector
     // in ./src/extractors/custom/www.washingtonpost.com/index.js.
     const html =
@@ -63,7 +63,7 @@ describe('WwwWashingtonpostComExtractor', () => {
 
     // Update these values with the expected values from
     // the article.
-    assert.equal(date_published, '2016-11-22T08:00:00.000Z');
+    assert.equal(date_published, '2016-11-22T13:57:00.000Z');
   });
 
   it('returns the dek', async () => {
