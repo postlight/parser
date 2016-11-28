@@ -1,5 +1,5 @@
 // Spacer images to be removed
-export const SPACER_RE = new RegExp('trans|transparent|spacer|blank', 'i');
+export const SPACER_RE = new RegExp('transparent|spacer|blank', 'i');
 
 // The class we will use to mark elements we want to keep
 // but would normally remove
