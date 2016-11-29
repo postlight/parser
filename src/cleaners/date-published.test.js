@@ -1,4 +1,5 @@
 import assert from 'assert';
+import moment from 'moment-timezone';
 
 import {
   default as cleanDatePublished,
@@ -6,12 +7,13 @@ import {
 } from './date-published';
 
 describe('cleanDatePublished(dateString)', () => {
-  it('returns a date object', () => {
+  it('returns a date', () => {
     const datePublished = cleanDatePublished('published: 1/1/2020');
 
     assert.equal(
       datePublished,
-      new Date('1/1/2020').toISOString()
+      moment('1/1/2020', 'MM/DD/YYYY').toISOString()
+      // '2020-01-01T05:00:00.000Z',
     );
   });
 
@@ -19,6 +21,14 @@ describe('cleanDatePublished(dateString)', () => {
     const datePublished = cleanDatePublished('blargh');
 
     assert.equal(datePublished, null);
+  });
+
+  it('handles timezones', () => {
+    // The JS date parser is forgiving, but
+    // it needs am/pm separated from a time
+    const datePublished =
+      cleanDatePublished('November 29, 2016: 8:18 AM ET', { timezone: 'America/New_York' });
+    assert.equal(datePublished, '2016-11-29T13:18:00.000Z');
   });
 });
 

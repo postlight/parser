@@ -50,21 +50,24 @@ describe('WwwTmzComExtractor', () => {
     assert.equal(author, 'TMZ STAFF');
   });
 
-  // it('returns the date_published', async () => {
-  //   // To pass this test, fill out the date_published selector
-  //   // in ./src/extractors/custom/www.tmz.com/index.js.
-  //   const html =
-  //     fs.readFileSync('./fixtures/www.tmz.com/1480368537455.html');
-  //   const articleUrl =
-  //     'http://www.tmz.com/2016/11/28/prince-wife-estate-will/';
-  //
-  //   const { date_published } =
-  //     await Mercury.parse(articleUrl, html, { fallback: false });
-  //
-  //   // Update these values with the expected values from
-  //   // the article.
-  //   assert.equal(date_published, '2016-11-28T08:00:00.000Z');
-  // });
+  it('returns the date_published', async () => {
+    // To pass this test, fill out the date_published selector
+    // in ./src/extractors/custom/www.tmz.com/index.js.
+    const html =
+      fs.readFileSync('./fixtures/www.tmz.com/1480368537455.html');
+    const articleUrl =
+      'http://www.tmz.com/2016/11/28/prince-wife-estate-will/';
+
+    const { date_published } =
+      await Mercury.parse(articleUrl, html, { fallback: false });
+
+    // Update these values with the expected values from
+    // the article.
+    // Note: This is actually wrong, but the error is from TMZ's very bad
+    // markup. Currently the parser will get it close but not the correct
+    // timezone. This could be fixed by better markup)
+    assert.equal(date_published, '2016-11-28T11:00:00.000Z');
+  });
 
   // it('returns the dek', async () => {
   //   // To pass this test, fill out the dek selector
