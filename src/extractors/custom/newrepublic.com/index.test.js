@@ -63,7 +63,7 @@ describe('NewrepublicComExtractor', () => {
 
     // Update these values with the expected values from
     // the article.
-    assert.equal(date_published, '2016-11-18');
+    assert.equal(date_published, '2016-11-18T00:00:00.000Z');
   });
 
   it('returns the dek', async () => {
@@ -95,7 +95,7 @@ describe('NewrepublicComExtractor', () => {
 
     // Update these values with the expected values from
     // the article.
-    assert.equal(lead_image_url, 'https://images.newrepublic.com/29020c1e6b108813cf65b54487ad2b5a65aa6079.jpeg?w=1109&amp;h=577&amp;crop=faces&amp;fit=crop&amp;fm=jpg');
+    assert.equal(lead_image_url, 'https://images.newrepublic.com/29020c1e6b108813cf65b54487ad2b5a65aa6079.jpeg?w=1109&h=577&crop=faces&fit=crop&fm=jpg');
   });
 
   it('returns the content', async () => {

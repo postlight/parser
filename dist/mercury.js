@@ -2490,7 +2490,7 @@ var DeadspinExtractor = {
     // Is there anything that is in the result that shouldn't be?
     // The clean selectors will remove anything that matches from
     // the result
-    clean: []
+    clean: ['.magnifier', '.lightbox']
   },
 
   date_published: {
@@ -2786,6 +2786,43 @@ var WwwWashingtonpostComExtractor = {
   }
 };
 
+var NewrepublicComExtractor = {
+  domain: 'newrepublic.com',
+
+  title: {
+    selectors: ['h1.article-headline']
+  },
+
+  author: {
+    selectors: ['div.author-list']
+  },
+
+  date_published: {
+    selectors: [['meta[name="article:published_time"]', 'value']]
+  },
+
+  dek: {
+    selectors: ['h2.article-subhead']
+  },
+
+  lead_image_url: {
+    selectors: [['meta[name="og:image"]', 'value']]
+  },
+
+  content: {
+    selectors: ['div.content-body'],
+
+    // Is there anything in the content you selected that needs transformed
+    // before it's consumable content? E.g., unusual lazy loaded images
+    transforms: {},
+
+    // Is there anything that is in the result that shouldn't be?
+    // The clean selectors will remove anything that matches from
+    // the result
+    clean: ['aside']
+  }
+};
+
 
 
 var CustomExtractors = Object.freeze({
@@ -2808,7 +2845,8 @@ var CustomExtractors = Object.freeze({
 	ApartmentTherapyExtractor: ApartmentTherapyExtractor,
 	MediumExtractor: MediumExtractor,
 	WwwTmzComExtractor: WwwTmzComExtractor,
-	WwwWashingtonpostComExtractor: WwwWashingtonpostComExtractor
+	WwwWashingtonpostComExtractor: WwwWashingtonpostComExtractor,
+	NewrepublicComExtractor: NewrepublicComExtractor
 });
 
 var Extractors = _Object$keys(CustomExtractors).reduce(function (acc, key) {

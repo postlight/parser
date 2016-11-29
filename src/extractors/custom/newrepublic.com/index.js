@@ -15,7 +15,7 @@ export const NewrepublicComExtractor = {
 
   date_published: {
     selectors: [
-      ['meta[property="article:published_time"]', 'content'],
+      ['meta[name="article:published_time"]', 'value'],
     ],
   },
 
@@ -27,7 +27,7 @@ export const NewrepublicComExtractor = {
 
   lead_image_url: {
     selectors: [
-      ['meta[property="og:image"]', 'content'],
+      ['meta[name="og:image"]', 'value'],
     ],
   },
 
@@ -45,7 +45,7 @@ export const NewrepublicComExtractor = {
     // The clean selectors will remove anything that matches from
     // the result
     clean: [
-
+      'aside',
     ],
   },
 };
