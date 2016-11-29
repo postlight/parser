@@ -27,6 +27,7 @@ export const WwwLinkedinComExtractor = {
 
   lead_image_url: {
     selectors: [
+      ['meta[name="og:image"]', 'value'],
       ['img.cover-image', 'src'],
     ],
   },

@@ -79,7 +79,7 @@ describe('WwwLinkedinComExtractor', () => {
 
     // Update these values with the expected values from
     // the article.
-    assert.equal(lead_image_url, 'https://media.licdn.com/mpr/mpr/jc/AAEAAQAAAAAAAAhDAAAAJDY3MDE4MDUwLTU0YjctNDRiYS1iOTc5LWFkNzVlZTYwZjI5OQ.jpg');
+    assert.equal(lead_image_url, 'https://media.licdn.com/mpr/mpr/AAEAAQAAAAAAAAhDAAAAJDY3MDE4MDUwLTU0YjctNDRiYS1iOTc5LWFkNzVlZTYwZjI5OQ.jpg');
   });
 
   it('returns the content', async () => {
