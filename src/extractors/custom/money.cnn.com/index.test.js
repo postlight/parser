@@ -63,7 +63,7 @@ describe('MoneyCnnComExtractor', () => {
 
     // Update these values with the expected values from
     // the article.
-    assert.equal(date_published, '2016-11-29T08:33:08.000Z');
+    assert.equal(date_published, '2016-11-29T03:33:08.000Z');
   });
 
   it('returns the dek', async () => {

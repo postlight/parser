@@ -17,7 +17,7 @@
     "test:web": "./node_modules/karma/bin/karma start karma.conf.js",
     "test:build": "cd ./scripts && jest check-build.test.js",
     "test:build:web": "node ./scripts/proxy-browser-test.js",
-    "watch:test": "jest ./src --watch",
+    "watch:test": "jest --watch",
     "generate-parser": "node ./dist/generate-custom-parser.js",
     "add-contributor": "all-contributors add",
     "generate-contributors": "all-contributors generate"

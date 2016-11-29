@@ -6,6 +6,6 @@ read
 preview.html
 preview.json
 coverage
-dist/mercury.test.js
-dist/mercury.test.js.map
-dist/mercury.test.web.js
+dist/mercury_test.js
+dist/mercury_test.js.map
+dist/mercury_test.web.js

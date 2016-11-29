@@ -17,6 +17,8 @@ export const MoneyCnnComExtractor = {
     selectors: [
       ['meta[name="date"]', 'value'],
     ],
+
+    timezone: 'GMT',
   },
 
   dek: {
