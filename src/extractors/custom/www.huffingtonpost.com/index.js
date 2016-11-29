@@ -30,7 +30,7 @@ export const WwwHuffingtonpostComExtractor = {
 
   content: {
     selectors: [
-      'div.entry__content',
+      'div.entry__body',
     ],
 
     // Is there anything in the content you selected that needs transformed
@@ -43,6 +43,11 @@ export const WwwHuffingtonpostComExtractor = {
     // the result
     clean: [
       '.pull-quote',
+      '.tag-cloud',
+      '.embed-asset',
+      '.below-entry',
+      '.entry-corrections',
+      '#suggested-story',
     ],
   },
 };
