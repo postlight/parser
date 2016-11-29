@@ -1,0 +1,122 @@
+import assert from 'assert';
+import fs from 'fs';
+import URL from 'url';
+import cheerio from 'cheerio';
+
+import Mercury from 'mercury';
+import getExtractor from 'extractors/get-extractor';
+import { excerptContent } from 'utils/text';
+
+describe('WwwCnnComExtractor', () => {
+  it('is selected properly', () => {
+    // This test should be passing by default.
+    // It sanity checks that the correct parser
+    // is being selected for URLs from this domain
+    const url =
+      'http://www.cnn.com/2016/11/29/politics/donald-trump-transition-presidency/index.html';
+    const extractor = getExtractor(url);
+    assert.equal(extractor.domain, URL.parse(url).hostname);
+  });
+
+  it('returns the title', async () => {
+    // To pass this test, fill out the title selector
+    // in ./src/extractors/custom/www.cnn.com/index.js.
+    const html =
+      fs.readFileSync('./fixtures/www.cnn.com/1480458253239.html');
+    const articleUrl =
+      'http://www.cnn.com/2016/11/29/politics/donald-trump-transition-presidency/index.html';
+
+    const { title } =
+      await Mercury.parse(articleUrl, html, { fallback: false });
+
+    // Update these values with the expected values from
+    // the article.
+    assert.equal(title, 'Why Donald Trump won\'t change');
+  });
+
+  it('returns the author', async () => {
+    // To pass this test, fill out the author selector
+    // in ./src/extractors/custom/www.cnn.com/index.js.
+    const html =
+      fs.readFileSync('./fixtures/www.cnn.com/1480458253239.html');
+    const articleUrl =
+      'http://www.cnn.com/2016/11/29/politics/donald-trump-transition-presidency/index.html';
+
+    const { author } =
+      await Mercury.parse(articleUrl, html, { fallback: false });
+
+    // Update these values with the expected values from
+    // the article.
+    assert.equal(author, '');
+  });
+
+  it('returns the date_published', async () => {
+    // To pass this test, fill out the date_published selector
+    // in ./src/extractors/custom/www.cnn.com/index.js.
+    const html =
+      fs.readFileSync('./fixtures/www.cnn.com/1480458253239.html');
+    const articleUrl =
+      'http://www.cnn.com/2016/11/29/politics/donald-trump-transition-presidency/index.html';
+
+    const { date_published } =
+      await Mercury.parse(articleUrl, html, { fallback: false });
+
+    // Update these values with the expected values from
+    // the article.
+    assert.equal(date_published, '2016-11-29T10:39:35.000Z');
+  });
+
+  it('returns the dek', async () => {
+    // To pass this test, fill out the dek selector
+    // in ./src/extractors/custom/www.cnn.com/index.js.
+    const html =
+      fs.readFileSync('./fixtures/www.cnn.com/1480458253239.html');
+    const articleUrl =
+      'http://www.cnn.com/2016/11/29/politics/donald-trump-transition-presidency/index.html';
+
+    const { dek } =
+      await Mercury.parse(articleUrl, html, { fallback: false });
+
+    // Update these values with the expected values from
+    // the article.
+    assert.equal(dek, null);
+  });
+
+  it('returns the lead_image_url', async () => {
+    // To pass this test, fill out the lead_image_url selector
+    // in ./src/extractors/custom/www.cnn.com/index.js.
+    const html =
+      fs.readFileSync('./fixtures/www.cnn.com/1480458253239.html');
+    const articleUrl =
+      'http://www.cnn.com/2016/11/29/politics/donald-trump-transition-presidency/index.html';
+
+    const { lead_image_url } =
+      await Mercury.parse(articleUrl, html, { fallback: false });
+
+    // Update these values with the expected values from
+    // the article.
+    assert.equal(lead_image_url, 'http://i2.cdn.cnn.com/cnnnext/dam/assets/160508133659-trump-0507-exlarge-169.jpg');
+  });
+
+  it('returns the content', async () => {
+    // To pass this test, fill out the content selector
+    // in ./src/extractors/custom/www.cnn.com/index.js.
+    // You may also want to make use of the clean and transform
+    // options.
+    const html =
+      fs.readFileSync('./fixtures/www.cnn.com/1480458253239.html');
+    const url =
+      'http://www.cnn.com/2016/11/29/politics/donald-trump-transition-presidency/index.html';
+
+    const { content } =
+      await Mercury.parse(url, html, { fallback: false });
+
+    const $ = cheerio.load(content || '');
+
+    const first13 = excerptContent($('*').first().text(), 13);
+
+    // Update these values with the expected values from
+    // the article.
+    assert.equal(first13, 'Add the first 13 words of the article here');
+  });
+});
