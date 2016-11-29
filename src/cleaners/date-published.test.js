@@ -58,4 +58,11 @@ describe('cleanDateString(dateString)', () => {
     const date1 = cleanDateString('This page was last modified on 15 April 2016, at 10:59.');
     assert.equal(date1, '15 Apr 2016 10:59');
   });
+
+  it('massages the T out', () => {
+    // The JS date parser is forgiving, but
+    // it needs am/pm separated from a time
+    const date1 = cleanDateString('2016-11-22T08:57-500');
+    assert.equal(date1, '2016 11 22 08:57 -500');
+  });
 });
