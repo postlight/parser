@@ -19,7 +19,8 @@ var _getIterator = _interopDefault(require('babel-runtime/core-js/get-iterator')
 var _Object$keys = _interopDefault(require('babel-runtime/core-js/object/keys'));
 var stringDirection = _interopDefault(require('string-direction'));
 var validUrl = _interopDefault(require('valid-url'));
-var moment = _interopDefault(require('moment'));
+var moment = _interopDefault(require('moment-timezone'));
+var parseFormat = _interopDefault(require('moment-parseformat'));
 var wuzzy = _interopDefault(require('wuzzy'));
 var difflib = _interopDefault(require('difflib'));
 var _Array$from = _interopDefault(require('babel-runtime/core-js/array/from'));
@@ -2490,7 +2491,7 @@ var DeadspinExtractor = {
     // Is there anything that is in the result that shouldn't be?
     // The clean selectors will remove anything that matches from
     // the result
-    clean: []
+    clean: ['.magnifier', '.lightbox']
   },
 
   date_published: {
@@ -2853,6 +2854,10 @@ var timestamp2 = '[0-9]{1,2}[/-][0-9]{1,2}[/-][0-9]{2,4}';
 var timestamp3 = '-[0-9]{3,4}$';
 var SPLIT_DATE_STRING = new RegExp('(' + timestamp1 + ')|(' + timestamp2 + ')|(' + timestamp3 + ')|([0-9]{1,4})|(' + allMonths + ')', 'ig');
 
+// 2016-11-22T08:57-500
+// Check if datetime string has an offset at the end
+var TIME_WITH_OFFSET_RE = /-\d{3,4}$/;
+
 // CLEAN TITLE CONSTANTS
 // A regular expression that will match separating characters on a
 // title, that usually denote breadcrumbs or something similar.
@@ -2904,19 +2909,30 @@ function cleanDateString(dateString) {
   return (dateString.match(SPLIT_DATE_STRING) || []).join(' ').replace(TIME_MERIDIAN_DOTS_RE, 'm').replace(TIME_MERIDIAN_SPACE_RE, '$1 $2 $3').replace(CLEAN_DATE_STRING_RE, '$1').trim();
 }
 
+function createDate(dateString, timezone) {
+  if (TIME_WITH_OFFSET_RE.test(dateString)) {
+    return moment(new Date(dateString));
+  }
+
+  return timezone ? moment.tz(dateString, parseFormat(dateString), timezone) : moment(dateString, parseFormat(dateString));
+}
+
 // Take a date published string, and hopefully return a date out of
 // it. Return none if we fail.
 function cleanDatePublished(dateString) {
-  // If string is in milliseconds or seconds, convert to int
+  var _ref = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {},
+      timezone = _ref.timezone;
+
+  // If string is in milliseconds or seconds, convert to int and return
   if (MS_DATE_STRING.test(dateString) || SEC_DATE_STRING.test(dateString)) {
-    dateString = parseInt(dateString, 10);
+    return new Date(parseInt(dateString, 10)).toISOString();
   }
 
-  var date = moment(new Date(dateString));
+  var date = createDate(dateString, timezone);
 
   if (!date.isValid()) {
     dateString = cleanDateString(dateString);
-    date = moment(new Date(dateString));
+    date = createDate(dateString, timezone);
   }
 
   return date.isValid() ? date.toISOString() : null;

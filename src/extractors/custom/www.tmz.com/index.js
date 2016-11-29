@@ -15,6 +15,8 @@ export const WwwTmzComExtractor = {
     selectors: [
       '.article-posted-date',
     ],
+
+    timezone: 'America/Los_Angeles',
   },
 
   dek: {

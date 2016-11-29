@@ -52,6 +52,10 @@ const timestamp3 = '-[0-9]{3,4}$';
 export const SPLIT_DATE_STRING =
   new RegExp(`(${timestamp1})|(${timestamp2})|(${timestamp3})|([0-9]{1,4})|(${allMonths})`, 'ig');
 
+// 2016-11-22T08:57-500
+// Check if datetime string has an offset at the end
+export const TIME_WITH_OFFSET_RE = /-\d{3,4}$/;
+
 // CLEAN TITLE CONSTANTS
 // A regular expression that will match separating characters on a
 // title, that usually denote breadcrumbs or something similar.
