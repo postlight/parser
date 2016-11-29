@@ -5,7 +5,7 @@ var execSync = require('child_process').execSync
 console.log('Rebuilding Mercury')
 execSync('MERCURY_TEST_BUILD=true npm run build')
 
-var Mercury = require('./dist/mercury.test')
+var Mercury = require('./dist/mercury_test')
 
 var url = process.argv[2]
 
