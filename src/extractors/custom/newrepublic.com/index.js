@@ -4,12 +4,14 @@ export const NewrepublicComExtractor = {
   title: {
     selectors: [
       'h1.article-headline',
+      '.minutes-primary h1.minute-title',
     ],
   },
 
   author: {
     selectors: [
       'div.author-list',
+      '.minutes-primary h3.minute-byline',
     ],
   },
 
@@ -34,6 +36,7 @@ export const NewrepublicComExtractor = {
   content: {
     selectors: [
       'div.content-body',
+      '.minutes-primary div.content-body',
     ],
 
     // Is there anything in the content you selected that needs transformed
