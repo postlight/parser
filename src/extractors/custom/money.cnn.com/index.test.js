@@ -7,109 +7,106 @@ import Mercury from 'mercury';
 import getExtractor from 'extractors/get-extractor';
 import { excerptContent } from 'utils/text';
 
-describe('WwwTmzComExtractor', () => {
+describe('MoneyCnnComExtractor', () => {
   it('is selected properly', () => {
     // This test should be passing by default.
     // It sanity checks that the correct parser
     // is being selected for URLs from this domain
     const url =
-      'http://www.tmz.com/2016/11/28/prince-wife-estate-will/';
+      'http://money.cnn.com/2016/11/29/news/ohare-workers-strike/index.html';
     const extractor = getExtractor(url);
     assert.equal(extractor.domain, URL.parse(url).hostname);
   });
 
   it('returns the title', async () => {
     // To pass this test, fill out the title selector
-    // in ./src/extractors/custom/www.tmz.com/index.js.
+    // in ./src/extractors/custom/money.cnn.com/index.js.
     const html =
-      fs.readFileSync('./fixtures/www.tmz.com/1480368537455.html');
+      fs.readFileSync('./fixtures/money.cnn.com/1480437611330.html');
     const articleUrl =
-      'http://www.tmz.com/2016/11/28/prince-wife-estate-will/';
+      'http://money.cnn.com/2016/11/29/news/ohare-workers-strike/index.html';
 
     const { title } =
       await Mercury.parse(articleUrl, html, { fallback: false });
 
     // Update these values with the expected values from
     // the article.
-    assert.equal(title, 'Prince -- Woman Warns Estate ... Step Aside, I\'m His Wife!');
+    assert.equal(title, 'Hundreds of Chicago O\'Hare airport workers go on strike');
   });
 
   it('returns the author', async () => {
     // To pass this test, fill out the author selector
-    // in ./src/extractors/custom/www.tmz.com/index.js.
+    // in ./src/extractors/custom/money.cnn.com/index.js.
     const html =
-      fs.readFileSync('./fixtures/www.tmz.com/1480368537455.html');
+      fs.readFileSync('./fixtures/money.cnn.com/1480437611330.html');
     const articleUrl =
-      'http://www.tmz.com/2016/11/28/prince-wife-estate-will/';
+      'http://money.cnn.com/2016/11/29/news/ohare-workers-strike/index.html';
 
     const { author } =
       await Mercury.parse(articleUrl, html, { fallback: false });
 
     // Update these values with the expected values from
     // the article.
-    assert.equal(author, 'TMZ STAFF');
+    assert.equal(author, 'Julia Horowitz');
   });
 
   it('returns the date_published', async () => {
     // To pass this test, fill out the date_published selector
-    // in ./src/extractors/custom/www.tmz.com/index.js.
+    // in ./src/extractors/custom/money.cnn.com/index.js.
     const html =
-      fs.readFileSync('./fixtures/www.tmz.com/1480368537455.html');
+      fs.readFileSync('./fixtures/money.cnn.com/1480437611330.html');
     const articleUrl =
-      'http://www.tmz.com/2016/11/28/prince-wife-estate-will/';
+      'http://money.cnn.com/2016/11/29/news/ohare-workers-strike/index.html';
 
     const { date_published } =
       await Mercury.parse(articleUrl, html, { fallback: false });
 
     // Update these values with the expected values from
     // the article.
-    // Note: This is actually wrong, but the error is from TMZ's very bad
-    // markup. Currently the parser will get it close but not the correct
-    // timezone. This could be fixed by better markup)
-    assert.equal(date_published, '2016-11-28T11:00:00.000Z');
+    assert.equal(date_published, '2016-11-29T03:33:08.000Z');
   });
 
-  // it('returns the dek', async () => {
-  //   // To pass this test, fill out the dek selector
-  //   // in ./src/extractors/custom/www.tmz.com/index.js.
-  //   const html =
-  //     fs.readFileSync('./fixtures/www.tmz.com/1480368537455.html');
-  //   const articleUrl =
-  //     'http://www.tmz.com/2016/11/28/prince-wife-estate-will/';
-  //
-  //   const { dek } =
-  //     await Mercury.parse(articleUrl, html, { fallback: false });
-  //
-  //   // Update these values with the expected values from
-  //   // the article.
-  //   assert.equal(dek, '');
-  // });
+  it('returns the dek', async () => {
+    // To pass this test, fill out the dek selector
+    // in ./src/extractors/custom/money.cnn.com/index.js.
+    const html =
+      fs.readFileSync('./fixtures/money.cnn.com/1480437611330.html');
+    const articleUrl =
+      'http://money.cnn.com/2016/11/29/news/ohare-workers-strike/index.html';
+
+    const { dek } =
+      await Mercury.parse(articleUrl, html, { fallback: false });
+
+    // Update these values with the expected values from
+    // the article.
+    assert.equal(dek, 'Heads up, travelers: Hundreds of workers are striking at Chicago O\'Hare International Airport on Tuesday.');
+  });
 
   it('returns the lead_image_url', async () => {
     // To pass this test, fill out the lead_image_url selector
-    // in ./src/extractors/custom/www.tmz.com/index.js.
+    // in ./src/extractors/custom/money.cnn.com/index.js.
     const html =
-      fs.readFileSync('./fixtures/www.tmz.com/1480368537455.html');
+      fs.readFileSync('./fixtures/money.cnn.com/1480437611330.html');
     const articleUrl =
-      'http://www.tmz.com/2016/11/28/prince-wife-estate-will/';
+      'http://money.cnn.com/2016/11/29/news/ohare-workers-strike/index.html';
 
     const { lead_image_url } =
       await Mercury.parse(articleUrl, html, { fallback: false });
 
     // Update these values with the expected values from
     // the article.
-    assert.equal(lead_image_url, 'http://ll-media.tmz.com/2016/11/28/1128-prince-getty-03-1200x630.jpg');
+    assert.equal(lead_image_url, 'http://i2.cdn.turner.com/money/dam/assets/161118102423-ohare-airport-strike-780x439.jpg');
   });
 
   it('returns the content', async () => {
     // To pass this test, fill out the content selector
-    // in ./src/extractors/custom/www.tmz.com/index.js.
+    // in ./src/extractors/custom/money.cnn.com/index.js.
     // You may also want to make use of the clean and transform
     // options.
     const html =
-      fs.readFileSync('./fixtures/www.tmz.com/1480368537455.html');
+      fs.readFileSync('./fixtures/money.cnn.com/1480437611330.html');
     const url =
-      'http://www.tmz.com/2016/11/28/prince-wife-estate-will/';
+      'http://money.cnn.com/2016/11/29/news/ohare-workers-strike/index.html';
 
     const { content } =
       await Mercury.parse(url, html, { fallback: false });
@@ -120,6 +117,6 @@ describe('WwwTmzComExtractor', () => {
 
     // Update these values with the expected values from
     // the article.
-    assert.equal(first13, 'Prince was married when he died and wanted all of his money to');
+    assert.equal(first13, 'Janitors, baggage handlers, cabin cleaners and wheelchair attendants are asking for a $15');
   });
 });

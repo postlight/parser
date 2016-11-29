@@ -85,6 +85,8 @@
     "iconv-lite": "^0.4.15",
     "jquery": "^3.1.1",
     "moment": "^2.14.1",
+    "moment-parseformat": "^2.1.4",
+    "moment-timezone": "^0.5.10",
     "request": "czardoz/request",
     "request-promise": "^4.1.1",
     "string-direction": "^0.1.2",
@@ -96,6 +98,7 @@
     "main": "./dist/mercury.web.js",
     "cheerio": "./src/shims/cheerio-query",
     "request": "browser-request",
-    "iconv-lite": "./src/shims/iconv-lite"
+    "iconv-lite": "./src/shims/iconv-lite",
+    "moment-timezone": "./node_modules/moment-timezone/builds/moment-timezone-with-data-2010-2020.min.js"
   }
 }

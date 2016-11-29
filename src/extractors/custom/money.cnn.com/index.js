@@ -1,27 +1,29 @@
-export const WwwTmzComExtractor = {
-  domain: 'www.tmz.com',
+export const MoneyCnnComExtractor = {
+  domain: 'money.cnn.com',
 
   title: {
     selectors: [
-      '.post-title-breadcrumb',
-      'h1',
-      '.headline',
+      '.article-title',
     ],
   },
 
-  author: 'TMZ STAFF',
+  author: {
+    selectors: [
+      '.byline a',
+    ],
+  },
 
   date_published: {
     selectors: [
-      '.article-posted-date',
+      ['meta[name="date"]', 'value'],
     ],
 
-    timezone: 'America/Los_Angeles',
+    timezone: 'GMT',
   },
 
   dek: {
     selectors: [
-      // enter selectors
+      '#storytext h2',
     ],
   },
 
@@ -33,8 +35,7 @@ export const WwwTmzComExtractor = {
 
   content: {
     selectors: [
-      '.article-content',
-      '.all-post-body',
+      '#storytext',
     ],
 
     // Is there anything in the content you selected that needs transformed
@@ -46,7 +47,7 @@ export const WwwTmzComExtractor = {
     // The clean selectors will remove anything that matches from
     // the result
     clean: [
-      '.lightbox-link',
+      '.inStoryHeading',
     ],
   },
 };

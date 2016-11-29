@@ -19,3 +19,4 @@ export * from './medium.com';
 export * from './www.tmz.com';
 export * from './www.washingtonpost.com';
 export * from './www.huffingtonpost.com';
+export * from './money.cnn.com';

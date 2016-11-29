@@ -3720,9 +3720,23 @@ module-deps@^4.0.8:
     through2 "^2.0.0"
     xtend "^4.0.0"
 
+moment-parseformat:
+  version "2.1.4"
+  resolved "https://registry.yarnpkg.com/moment-parseformat/-/moment-parseformat-2.1.4.tgz#593708637858956ac327cc2f42bc0ec48900da32"
+
+moment-timezone:
+  version "0.5.10"
+  resolved "https://registry.yarnpkg.com/moment-timezone/-/moment-timezone-0.5.10.tgz#3766249c2d317d08f07d896d3033c26f87c4ae2b"
+  dependencies:
+    moment ">= 2.6.0"
+
 moment@^2.14.1:
   version "2.16.0"
   resolved "https://registry.yarnpkg.com/moment/-/moment-2.16.0.tgz#f38f2c97c9889b0ee18fc6cc392e1e443ad2da8e"
+
+"moment@>= 2.6.0":
+  version "2.17.0"
+  resolved "https://registry.yarnpkg.com/moment/-/moment-2.17.0.tgz#a4c292e02aac5ddefb29a6eed24f51938dd3b74f"
 
 ms@0.7.1:
   version "0.7.1"

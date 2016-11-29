@@ -1,6 +1,6 @@
 import assert from 'assert';
 import cheerio from 'cheerio';
-import moment from 'moment';
+import moment from 'moment-timezone';
 
 import HTML from './fixtures/html';
 import GenericDatePublishedExtractor from './extractor';
@@ -60,9 +60,9 @@ describe('GenericDatePublishedExtractor', () => {
         );
 
       assert.equal(
-          result,
-          moment(new Date('2020-01-01')).toISOString()
-        );
+        result,
+        moment('2020-01-01', 'YYYY-MM-DD').toISOString()
+      );
     });
 
     it('extracts from url formatted /2020/jan/01', () => {
