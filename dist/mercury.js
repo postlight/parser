@@ -404,7 +404,7 @@ function normalizeMetaTags($) {
 }
 
 // Spacer images to be removed
-var SPACER_RE = new RegExp('trans|transparent|spacer|blank', 'i');
+var SPACER_RE = new RegExp('transparent|spacer|blank', 'i');
 
 // The class we will use to mark elements we want to keep
 // but would normally remove
@@ -2060,7 +2060,7 @@ var NYTimesExtractor = {
       }
     },
 
-    clean: ['.ad', 'header#story-header', '.story-body-1 .lede.video', '.visually-hidden', '#newsletter-promo', '.promo', '.comments-button', '.hidden', '.comments']
+    clean: ['.ad', 'header#story-header', '.story-body-1 .lede.video', '.visually-hidden', '#newsletter-promo', '.promo', '.comments-button', '.hidden', '.comments', '.supplemental', '.nocontent']
   },
 
   date_published: null,
@@ -2702,6 +2702,90 @@ var MediumExtractor = {
   }
 };
 
+var WwwTmzComExtractor = {
+  domain: 'www.tmz.com',
+
+  title: {
+    selectors: ['.post-title-breadcrumb', 'h1', '.headline']
+  },
+
+  author: 'TMZ STAFF',
+
+  date_published: {
+    selectors: ['.article-posted-date']
+  },
+
+  dek: {
+    selectors: [
+      // enter selectors
+    ]
+  },
+
+  lead_image_url: {
+    selectors: [['meta[name="og:image"]', 'value']]
+  },
+
+  content: {
+    selectors: ['.article-content', '.all-post-body'],
+
+    // Is there anything in the content you selected that needs transformed
+    // before it's consumable content? E.g., unusual lazy loaded images
+    transforms: {},
+
+    // Is there anything that is in the result that shouldn't be?
+    // The clean selectors will remove anything that matches from
+    // the result
+    clean: ['.lightbox-link']
+  }
+};
+
+var WwwWashingtonpostComExtractor = {
+  domain: 'www.washingtonpost.com',
+
+  title: {
+    selectors: ['h1', '#topper-headline-wrapper']
+  },
+
+  author: {
+    selectors: ['.pb-byline']
+  },
+
+  date_published: {
+    selectors: [['.pb-timestamp[itemprop="datePublished"]', 'content']]
+  },
+
+  dek: {
+    selectors: [['meta[name="og:description"]', 'value']]
+  },
+
+  lead_image_url: {
+    selectors: [['meta[name="og:image"]', 'value']]
+  },
+
+  content: {
+    selectors: ['.article-body'],
+
+    // Is there anything in the content you selected that needs transformed
+    // before it's consumable content? E.g., unusual lazy loaded images
+    transforms: {
+      'div.inline-content': function divInlineContent($node) {
+        if ($node.has('img,iframe,video').length > 0) {
+          return 'figure';
+        }
+
+        $node.remove();
+        return null;
+      },
+      '.pb-caption': 'figcaption'
+    },
+
+    // Is there anything that is in the result that shouldn't be?
+    // The clean selectors will remove anything that matches from
+    // the result
+    clean: ['.interstitial-link']
+  }
+};
+
 
 
 var CustomExtractors = Object.freeze({
@@ -2722,7 +2806,9 @@ var CustomExtractors = Object.freeze({
 	DeadspinExtractor: DeadspinExtractor,
 	BroadwayWorldExtractor: BroadwayWorldExtractor,
 	ApartmentTherapyExtractor: ApartmentTherapyExtractor,
-	MediumExtractor: MediumExtractor
+	MediumExtractor: MediumExtractor,
+	WwwTmzComExtractor: WwwTmzComExtractor,
+	WwwWashingtonpostComExtractor: WwwWashingtonpostComExtractor
 });
 
 var Extractors = _Object$keys(CustomExtractors).reduce(function (acc, key) {
@@ -2764,7 +2850,8 @@ var months = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oc
 var allMonths = months.join('|');
 var timestamp1 = '[0-9]{1,2}:[0-9]{2,2}( ?[ap].?m.?)?';
 var timestamp2 = '[0-9]{1,2}[/-][0-9]{1,2}[/-][0-9]{2,4}';
-var SPLIT_DATE_STRING = new RegExp('(' + timestamp1 + ')|(' + timestamp2 + ')|([0-9]{1,4})|(' + allMonths + ')', 'ig');
+var timestamp3 = '-[0-9]{3,4}$';
+var SPLIT_DATE_STRING = new RegExp('(' + timestamp1 + ')|(' + timestamp2 + ')|(' + timestamp3 + ')|([0-9]{1,4})|(' + allMonths + ')', 'ig');
 
 // CLEAN TITLE CONSTANTS
 // A regular expression that will match separating characters on a

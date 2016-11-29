@@ -16,4 +16,6 @@ export * from './deadspin.com';
 export * from './www.broadwayworld.com';
 export * from './www.apartmenttherapy.com';
 export * from './medium.com';
+export * from './www.tmz.com';
 export * from './www.linkedin.com';
+export * from './www.washingtonpost.com';
