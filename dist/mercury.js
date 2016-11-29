@@ -2787,23 +2787,23 @@ var WwwWashingtonpostComExtractor = {
   }
 };
 
-var NewrepublicComExtractor = {
-  domain: 'newrepublic.com',
+var MoneyCnnComExtractor = {
+  domain: 'money.cnn.com',
 
   title: {
-    selectors: ['h1.article-headline', '.minutes-primary h1.minute-title']
+    selectors: ['.article-title']
   },
 
   author: {
-    selectors: ['div.author-list', '.minutes-primary h3.minute-byline']
+    selectors: ['.byline a']
   },
 
   date_published: {
-    selectors: [['meta[name="article:published_time"]', 'value']]
+    selectors: [['meta[name="date"]', 'value']]
   },
 
   dek: {
-    selectors: ['h2.article-subhead']
+    selectors: ['#storytext h2']
   },
 
   lead_image_url: {
@@ -2811,7 +2811,7 @@ var NewrepublicComExtractor = {
   },
 
   content: {
-    selectors: ['div.content-body', '.minutes-primary div.content-body'],
+    selectors: ['#storytext'],
 
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images
@@ -2820,7 +2820,7 @@ var NewrepublicComExtractor = {
     // Is there anything that is in the result that shouldn't be?
     // The clean selectors will remove anything that matches from
     // the result
-    clean: ['aside']
+    clean: ['.inStoryHeading']
   }
 };
 
@@ -2847,7 +2847,7 @@ var CustomExtractors = Object.freeze({
 	MediumExtractor: MediumExtractor,
 	WwwTmzComExtractor: WwwTmzComExtractor,
 	WwwWashingtonpostComExtractor: WwwWashingtonpostComExtractor,
-	NewrepublicComExtractor: NewrepublicComExtractor
+	MoneyCnnComExtractor: MoneyCnnComExtractor
 });
 
 var Extractors = _Object$keys(CustomExtractors).reduce(function (acc, key) {

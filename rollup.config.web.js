@@ -26,6 +26,6 @@ export default {
   ],
   format: 'iife',
   moduleName: 'Mercury',
-  dest: process.env.MERCURY_TEST_BUILD ? 'dist/mercury.test.web.js' : 'dist/mercury.web.js',
+  dest: process.env.MERCURY_TEST_BUILD ? 'dist/mercury_test.web.js' : 'dist/mercury.web.js',
   sourceMap: false,
 };
