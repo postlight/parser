@@ -13,6 +13,6 @@ export default {
     babel(babelOpts),
   ],
   format: 'cjs',
-  dest: 'dist/mercury.js', // equivalent to --output
+  dest: process.env.MERCURY_TEST_BUILD ? 'dist/mercury.test.js' : 'dist/mercury.js',
   sourceMap: true,
 };
