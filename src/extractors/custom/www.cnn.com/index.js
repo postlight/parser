@@ -1,8 +1,6 @@
 export const WwwCnnComExtractor = {
   domain: 'www.cnn.com',
 
-  defaultCleaner: false,
-
   title: {
     selectors: [
       'h1.pg-headline',
@@ -18,7 +16,6 @@ export const WwwCnnComExtractor = {
 
   date_published: {
     selectors: [
-      // ['meta[name="lastmod"]', 'value'], Do we want last modifed or published?
       ['meta[name="pubdate"]', 'value'],
     ],
   },
