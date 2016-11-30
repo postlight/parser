@@ -47,7 +47,7 @@ describe('WwwCnnComExtractor', () => {
 
     // Update these values with the expected values from
     // the article.
-    assert.equal(author, '');
+    assert.equal(author, 'Stephen Collinson, CNN');
   });
 
   it('returns the date_published', async () => {
@@ -95,7 +95,7 @@ describe('WwwCnnComExtractor', () => {
 
     // Update these values with the expected values from
     // the article.
-    assert.equal(lead_image_url, 'http://i2.cdn.cnn.com/cnnnext/dam/assets/160508133659-trump-0507-exlarge-169.jpg');
+    assert.equal(lead_image_url, 'http://i2.cdn.cnn.com/cnnnext/dam/assets/161128072443-01-trump-1128-super-tease.jpg');
   });
 
   it('returns the content', async () => {
