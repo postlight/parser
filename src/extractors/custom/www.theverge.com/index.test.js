@@ -118,6 +118,7 @@ describe('WwwThevergeComExtractor', () => {
     // Update these values with the expected values from
     // the article.
     assert.equal(first13, 'Last year we won the open internet back, but the new regulations had');
+    assert.equal($('.e-image--hero').length, 1);
   });
 
   it('returns the content from a feature', async () => {

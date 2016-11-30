@@ -33,7 +33,13 @@ export const WwwThevergeComExtractor = {
 
   content: {
     selectors: [
-      'div.l-wrapper div.l-feature',
+      // feature template multi-match
+      ['.c-entry-hero .e-image', '.c-entry-intro', '.c-entry-content'],
+      // regular post multi-match
+      ['.e-image--hero', '.c-entry-content'],
+      // feature template fallback
+      '.l-wrapper .l-feature',
+      // regular post fallback
       'div.c-entry-content',
     ],
 
