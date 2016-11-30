@@ -82,6 +82,22 @@ describe('WwwHuffingtonpostComExtractor', () => {
     assert.equal(dek, 'The $1 million question: Can you change the president-elect\'s worldview or is this all for show?');
   });
 
+  it('returns the lead_image_url', async () => {
+    // To pass this test, fill out the dek selector
+    // in ./src/extractors/custom/www.huffingtonpost.com/index.js.
+    const html =
+      fs.readFileSync('./fixtures/www.huffingtonpost.com/1480454076105.html');
+    const articleUrl =
+      'http://www.huffingtonpost.com/entry/donald-trump-obama_us_583c8f01e4b06539a789ddd4';
+
+    const { lead_image_url } =
+      await Mercury.parse(articleUrl, html, { fallback: false });
+
+    // Update these values with the expected values from
+    // the article.
+    assert.equal(lead_image_url, 'http://img.huffingtonpost.com/asset/2000_1000/583c90681a00002500cca17a.jpeg');
+  });
+
   it('returns the content', async () => {
     // To pass this test, fill out the content selector
     // in ./src/extractors/custom/www.huffingtonpost.com/index.js.
@@ -101,6 +117,6 @@ describe('WwwHuffingtonpostComExtractor', () => {
 
     // Update these values with the expected values from
     // the article.
-    assert.equal(first13, 'At numerous points during the presidential campaign, Donald Trump described the top ranks');
+    assert.equal(first13, 'ASSOCIATED PRESS Donald Trump has had several conversations with President Obama. How much');
   });
 });
