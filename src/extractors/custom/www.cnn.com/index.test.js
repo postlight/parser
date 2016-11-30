@@ -117,6 +117,7 @@ describe('WwwCnnComExtractor', () => {
 
     // Update these values with the expected values from
     // the article.
-    assert.equal(first13, 'Add the first 13 words of the article here');
+    assert.equal(first13, '(CNN)Winning the presidency didn\'t change Donald Trump -- and it\'s increasingly clear that');
+    assert.equal($('.media__video--thumbnail').length, 1);
   });
 });
