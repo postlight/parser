@@ -86,6 +86,12 @@ const Mercury = {
       };
     }
 
+    // if this parse is happening in the browser,
+    // clean up any trace from the page.
+    if (cheerio.browser) {
+      cheerio.cleanup()
+    }
+
     return result;
   },
 
