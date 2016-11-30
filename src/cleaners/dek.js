@@ -1,5 +1,8 @@
 import { stripTags } from 'utils/dom';
-import { excerptContent } from 'utils/text';
+import {
+  excerptContent,
+  normalizeSpaces,
+} from 'utils/text';
 
 import { TEXT_LINK_RE } from './constants';
 
@@ -18,5 +21,5 @@ export default function cleanDek(dek, { $, excerpt }) {
   // not a good dek - bail.
   if (TEXT_LINK_RE.test(dekText)) return null;
 
-  return dekText.trim();
+  return normalizeSpaces(dekText.trim());
 }
