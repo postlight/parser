@@ -1,4 +1,5 @@
 import { stripTags } from 'utils/dom';
+import { normalizeSpaces } from 'utils/text';
 
 import { TITLE_SPLITTERS_RE } from './constants';
 import { resolveSplitTitle } from './index';
@@ -21,5 +22,5 @@ export default function cleanTitle(title, { url, $ }) {
   }
 
   // strip any html tags in the title text
-  return stripTags(title, $).trim();
+  return normalizeSpaces(stripTags(title, $).trim());
 }
