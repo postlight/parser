@@ -161,4 +161,60 @@ describe('select(opts)', () => {
     const result = select(opts);
     assert.equal(result, '2016-09-07T09:07:59.000Z');
   });
+
+  it('returns a node\'s html when it is a content selector', () => {
+    const html = `
+      <div><div class="content-is-here"><p>Wow what a piece of content</p></div></div>
+    `;
+    const $ = cheerio.load(html);
+    const opts = {
+      type: 'content',
+      $,
+      extractionOpts: {
+        selectors: ['.content-is-here'],
+      },
+      extractHtml: true,
+    };
+
+    const result = select(opts);
+    assertClean(result, html);
+  });
+
+  it('handles multiple matches when the content selector is an array', () => {
+    const html = `
+      <div><div><img class="lead-image" src="#" /><div class="content-is-here"><p>Wow what a piece of content</p></div></div></div>
+    `;
+    const $ = cheerio.load(html);
+    const opts = {
+      type: 'content',
+      $,
+      extractionOpts: {
+        selectors: [['.lead-image', '.content-is-here']],
+      },
+      extractHtml: true,
+    };
+
+    const result = select(opts);
+    assert.equal($(result).find('img.lead-image').length, 1);
+    assert.equal($(result).find('.content-is-here').length, 1);
+  });
+
+  it('skips multi-match if not all selectors are present', () => {
+    const html = `
+      <div><div><img class="lead-image" src="#" /><div class="content-is-here"><p>Wow what a piece of content</p></div></div></div>
+    `;
+    const $ = cheerio.load(html);
+    const opts = {
+      type: 'content',
+      $,
+      extractionOpts: {
+        selectors: [['.lead-image', '.content-is-here', '.foo']],
+      },
+      extractHtml: true,
+    };
+
+    const result = select(opts);
+
+    assert.equal(result, null);
+  });
 });
