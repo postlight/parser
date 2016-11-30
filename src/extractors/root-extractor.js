@@ -43,7 +43,7 @@ function findMatchingSelector($, selectors, extractHtml) {
   return selectors.find((selector) => {
     if (Array.isArray(selector)) {
       if (extractHtml) {
-        return selector.reduce((acc, s) => acc && $(s).length > 0, true)
+        return selector.reduce((acc, s) => acc && $(s).length > 0, true);
       }
 
       const [s, attr] = selector;
