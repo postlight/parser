@@ -7,18 +7,20 @@ execSync('MERCURY_TEST_BUILD=true npm run build')
 
 var Mercury = require('./dist/mercury_test')
 
-var url = process.argv[2]
+var urls = process.argv.slice(2)
 
-console.log(`Fetching link`)
-Mercury.parse(url, null, { fallback: false }).then(function(result) {
-  var htmlFile = './preview.html'
-  var jsonFile = './preview.json'
+console.log(`Fetching link(s)`)
 
-  var html = `<h1>${result.title}</h1>${result.content}`
+urls.map(url => {
+  Mercury.parse(url, null, { fallback: false }).then(function(result) {
+    var htmlFile = './preview.html'
+    var jsonFile = './preview.json'
 
-  fs.writeFileSync(htmlFile, html)
-  fs.writeFileSync(jsonFile, JSON.stringify(result))
-  execSync(`open ${htmlFile}`)
-  execSync(`open ${jsonFile}`)
+    var html = `<h1>${result.title}</h1>${result.content}`
+
+    fs.writeFileSync(htmlFile, html)
+    fs.writeFileSync(jsonFile, JSON.stringify(result))
+    execSync(`open ${jsonFile}`)
+    execSync(`open ${htmlFile}`)
+  })
 })
-
