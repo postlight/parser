@@ -26,16 +26,26 @@ export const WwwHuffingtonpostComExtractor = {
     ],
   },
 
-  lead_image_url: null,
+  lead_image_url: {
+    selectors: [
+      ['meta[name="og:image"]', 'value'],
+    ],
+  },
 
   content: {
     selectors: [
       'div.entry__body',
     ],
 
+    defaultCleaner: false,
+
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images
     transforms: {
+      // 'div.top-media': ($node) => {
+      //   const $figure = $node.children('figure');
+      //   $node.replaceWith($figure);
+      // },
     },
 
     // Is there anything that is in the result that shouldn't be?
