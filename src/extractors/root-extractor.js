@@ -39,9 +39,13 @@ export function transformElements($content, $, { transforms }) {
   return $content;
 }
 
-function findMatchingSelector($, selectors) {
+function findMatchingSelector($, selectors, extractHtml) {
   return selectors.find((selector) => {
     if (Array.isArray(selector)) {
+      if (extractHtml) {
+        return selector.reduce((acc, s) => acc && $(s).length > 0, true);
+      }
+
       const [s, attr] = selector;
       return $(s).length === 1 && $(s).attr(attr) && $(s).attr(attr).trim() !== '';
     }
@@ -61,7 +65,7 @@ export function select(opts) {
 
   const { selectors, defaultCleaner = true } = extractionOpts;
 
-  const matchingSelector = findMatchingSelector($, selectors);
+  const matchingSelector = findMatchingSelector($, selectors, extractHtml);
 
   if (!matchingSelector) return null;
 
@@ -71,8 +75,23 @@ export function select(opts) {
 
   // If the selector type requests html as its return type
   // transform and clean the element with provided selectors
+  let $content;
   if (extractHtml) {
-    let $content = $(matchingSelector);
+    // If matching selector is an array, we're considering this a
+    // multi-match selection, which allows the parser to choose several
+    // selectors to include in the result. Note that all selectors in the
+    // array must match in order for this selector to trigger
+    if (Array.isArray(matchingSelector)) {
+      $content = $(matchingSelector.join(','));
+      const $wrapper = $('<div></div>');
+      $content.each((index, element) => {
+        $wrapper.append(element);
+      });
+
+      $content = $wrapper;
+    } else {
+      $content = $(matchingSelector);
+    }
 
     // Wrap in div so transformation can take place on root element
     $content.wrap($('<div></div>'));
