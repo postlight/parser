@@ -119,4 +119,26 @@ describe('WwwThevergeComExtractor', () => {
     // the article.
     assert.equal(first13, 'Last year we won the open internet back, but the new regulations had');
   });
+
+  it('returns the content from a feature', async () => {
+    // To pass this test, fill out the content selector
+    // in ./src/extractors/custom/www.theverge.com/index.js.
+    // You may also want to make use of the clean and transform
+    // options.
+    const html =
+      fs.readFileSync('./fixtures/www.theverge.com/1480526003318.html');
+    const url =
+      'http://www.theverge.com/2016/10/31/13478080/microsoft-surface-studio-design-engineering-interview';
+
+    const { content } =
+      await Mercury.parse(url, html, { fallback: false });
+
+    const $ = cheerio.load(content || '');
+
+    const first13 = excerptContent($('*').first().text(), 13);
+
+    // Update these values with the expected values from
+    // the article.
+    assert.equal(first13, 'Microsoft’s Surface PCs are known for their hinges. From the first, launched alongside');
+  });
 });

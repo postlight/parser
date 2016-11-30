@@ -33,6 +33,7 @@ export const WwwThevergeComExtractor = {
 
   content: {
     selectors: [
+      'div.l-wrapper div.l-feature',
       'div.c-entry-content',
     ],
 
