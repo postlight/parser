@@ -1,5 +1,5 @@
-import { CLEAN_AUTHOR_RE } from './constants';
 import { normalizeSpaces } from 'utils/text';
+import { CLEAN_AUTHOR_RE } from './constants';
 
 // Take an author string (like 'By David Smith ') and clean it to
 // just the name(s): 'David Smith'.
