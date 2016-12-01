@@ -2713,7 +2713,9 @@ var WwwTmzComExtractor = {
   author: 'TMZ STAFF',
 
   date_published: {
-    selectors: ['.article-posted-date']
+    selectors: ['.article-posted-date'],
+
+    timezone: 'America/Los_Angeles'
   },
 
   dek: {
@@ -2783,7 +2785,90 @@ var WwwWashingtonpostComExtractor = {
     // Is there anything that is in the result that shouldn't be?
     // The clean selectors will remove anything that matches from
     // the result
-    clean: ['.interstitial-link']
+    clean: ['.interstitial-link', '.newsletter-inline-unit']
+  }
+};
+
+var WwwHuffingtonpostComExtractor = {
+  domain: 'www.huffingtonpost.com',
+
+  title: {
+    selectors: ['h1.headline__title']
+  },
+
+  author: {
+    selectors: ['span.author-card__details__name']
+  },
+
+  date_published: {
+    selectors: [['meta[name="article:modified_time"]', 'value'], ['meta[name="article:published_time"]', 'value']]
+  },
+
+  dek: {
+    selectors: ['h2.headline__subtitle']
+  },
+
+  lead_image_url: {
+    selectors: [['meta[name="og:image"]', 'value']]
+  },
+
+  content: {
+    selectors: ['div.entry__body'],
+
+    defaultCleaner: false,
+
+    // Is there anything in the content you selected that needs transformed
+    // before it's consumable content? E.g., unusual lazy loaded images
+    transforms: {
+      // 'div.top-media': ($node) => {
+      //   const $figure = $node.children('figure');
+      //   $node.replaceWith($figure);
+      // },
+    },
+
+    // Is there anything that is in the result that shouldn't be?
+    // The clean selectors will remove anything that matches from
+    // the result
+    clean: ['.pull-quote', '.tag-cloud', '.embed-asset', '.below-entry', '.entry-corrections', '#suggested-story']
+  }
+};
+
+var NewrepublicComExtractor = {
+  domain: 'newrepublic.com',
+
+  title: {
+    selectors: ['h1.article-headline', '.minutes-primary h1.minute-title']
+  },
+
+  author: {
+    selectors: ['div.author-list', '.minutes-primary h3.minute-byline']
+  },
+
+  date_published: {
+    selectors: [['meta[name="article:published_time"]', 'value']],
+
+    timezone: 'America/New_York'
+  },
+
+  dek: {
+    selectors: ['h2.article-subhead']
+  },
+
+  lead_image_url: {
+    selectors: [['meta[name="og:image"]', 'value']]
+  },
+
+  content: {
+    selectors: ['div.content-body', '.minutes-primary div.content-body'],
+
+    // Is there anything in the content you selected that needs transformed
+    // before it's consumable content? E.g., unusual lazy loaded images
+    transforms: {},
+
+    // Is there anything that is in the result that shouldn't be?
+    // The clean selectors will remove anything that matches from
+    // the result
+    clean: ['aside']
   }
 };
 
@@ -2799,7 +2884,9 @@ var MoneyCnnComExtractor = {
   },
 
   date_published: {
-    selectors: [['meta[name="date"]', 'value']]
+    selectors: [['meta[name="date"]', 'value']],
+
+    timezone: 'GMT'
   },
 
   dek: {
@@ -2821,6 +2908,120 @@ var MoneyCnnComExtractor = {
     // The clean selectors will remove anything that matches from
     // the result
     clean: ['.inStoryHeading']
+  }
+};
+
+var WwwThevergeComExtractor = {
+  domain: 'www.theverge.com',
+
+  title: {
+    selectors: ['h1']
+  },
+
+  author: {
+    selectors: [['meta[name="author"]', 'value']]
+  },
+
+  date_published: {
+    selectors: [['meta[name="article:published_time"]', 'value']]
+  },
+
+  dek: {
+    selectors: ['h2.p-dek']
+  },
+
+  lead_image_url: {
+    selectors: [['meta[name="og:image"]', 'value']]
+  },
+
+  content: {
+    selectors: [
+    // feature template multi-match
+    ['.c-entry-hero .e-image', '.c-entry-intro', '.c-entry-content'],
+    // regular post multi-match
+    ['.e-image--hero', '.c-entry-content'],
+    // feature template fallback
+    '.l-wrapper .l-feature',
+    // regular post fallback
+    'div.c-entry-content'],
+
+    // Transform lazy-loaded images
+    transforms: {
+      noscript: function noscript($node) {
+        var $children = $node.children();
+        if ($children.length === 1 && $children.get(0).tagName === 'img') {
+          return 'span';
+        }
+
+        return null;
+      }
+    },
+
+    // Is there anything that is in the result that shouldn't be?
+    // The clean selectors will remove anything that matches from
+    // the result
+    clean: ['.aside', 'img.c-dynamic-image']
+  }
+};
+
+var WwwCnnComExtractor = {
+  domain: 'www.cnn.com',
+
+  title: {
+    selectors: ['h1.pg-headline', 'h1']
+  },
+
+  author: {
+    selectors: ['.metadata__byline__author']
+  },
+
+  date_published: {
+    selectors: [['meta[name="pubdate"]', 'value']]
+  },
+
+  dek: null,
+
+  lead_image_url: {
+    selectors: [['meta[name="og:image"]', 'value']]
+  },
+
+  content: {
+    selectors: [
+    // a more specific selector to grab the lead image and the body
+    ['.media__video--thumbnail', '.zn-body-text'],
+    // a fallback for the above
+    '.zn-body-text', 'div[itemprop="articleBody"]'],
+
+    // Is there anything in the content you selected that needs transformed
+    // before it's consumable content? E.g., unusual lazy loaded images
+    transforms: {
+      '.zn-body__paragraph, .el__leafmedia--sourced-paragraph': function znBody__paragraphEl__leafmediaSourcedParagraph($node) {
+        var $text = $node.html();
+        if ($text) {
+          return 'p';
+        }
+
+        return null;
+      },
+
+      // this transform cleans the short, all-link sections linking
+      // to related content but not marked as such in any way.
+      '.zn-body__paragraph': function znBody__paragraph($node) {
+        if ($node.has('a')) {
+          if ($node.text().trim() === $node.find('a').text().trim()) {
+            $node.remove();
+          }
+        }
+      },
+
+      '.media__video--thumbnail': 'figure'
+
+    },
+
+    // Is there anything that is in the result that shouldn't be?
+    // The clean selectors will remove anything that matches from
+    // the result
+    clean: []
   }
 };
 
@@ -2847,7 +3048,11 @@ var CustomExtractors = Object.freeze({
 	MediumExtractor: MediumExtractor,
 	WwwTmzComExtractor: WwwTmzComExtractor,
 	WwwWashingtonpostComExtractor: WwwWashingtonpostComExtractor,
-	MoneyCnnComExtractor: MoneyCnnComExtractor
+	WwwHuffingtonpostComExtractor: WwwHuffingtonpostComExtractor,
+	NewrepublicComExtractor: NewrepublicComExtractor,
+	MoneyCnnComExtractor: MoneyCnnComExtractor,
+	WwwThevergeComExtractor: WwwThevergeComExtractor,
+	WwwCnnComExtractor: WwwCnnComExtractor
 });
 
 var Extractors = _Object$keys(CustomExtractors).reduce(function (acc, key) {
@@ -2906,7 +3111,7 @@ var DOMAIN_ENDINGS_RE = new RegExp('.com$|.net$|.org$|.co.uk$', 'g');
 // Take an author string (like 'By David Smith ') and clean it to
 // just the name(s): 'David Smith'.
 function cleanAuthor(author) {
-  return author.replace(CLEAN_AUTHOR_RE, '$2').trim();
+  return normalizeSpaces(author.replace(CLEAN_AUTHOR_RE, '$2').trim());
 }
 
 function clean$1(leadImageUrl) {
@@ -2936,7 +3141,7 @@ function cleanDek(dek, _ref) {
   // not a good dek - bail.
   if (TEXT_LINK_RE.test(dekText)) return null;
 
-  return dekText.trim();
+  return normalizeSpaces(dekText.trim());
 }
 
 // Is there a compelling reason to use moment here?
@@ -3053,7 +3258,7 @@ function cleanTitle$$1(title, _ref) {
   }
 
   // strip any html tags in the title text
-  return stripTags(title, $).trim();
+  return normalizeSpaces(stripTags(title, $).trim());
 }
 
 function extractBreadcrumbTitle(splitTitle, text) {
@@ -4506,9 +4711,15 @@ function transformElements($content, $, _ref2) {
   return $content;
 }
 
-function findMatchingSelector($, selectors) {
+function findMatchingSelector($, selectors, extractHtml) {
   return selectors.find(function (selector) {
     if (Array.isArray(selector)) {
+      if (extractHtml) {
+        return selector.reduce(function (acc, s) {
+          return acc && $(s).length > 0;
+        }, true);
+      }
+
       var _selector = _slicedToArray(selector, 2),
           s = _selector[0],
           attr = _selector[1];
@@ -4539,7 +4750,7 @@ function select(opts) {
       defaultCleaner = _extractionOpts$defau === undefined ? true : _extractionOpts$defau;
 
 
-  var matchingSelector = findMatchingSelector($, selectors);
+  var matchingSelector = findMatchingSelector($, selectors, extractHtml);
 
   if (!matchingSelector) return null;
 
@@ -4549,8 +4760,25 @@ function select(opts) {
 
   // If the selector type requests html as its return type
   // transform and clean the element with provided selectors
+  var $content = void 0;
   if (extractHtml) {
-    var $content = $(matchingSelector);
+    // If matching selector is an array, we're considering this a
+    // multi-match selection, which allows the parser to choose several
+    // selectors to include in the result. Note that all selectors in the
+    // array must match in order for this selector to trigger
+    if (Array.isArray(matchingSelector)) {
+      (function () {
+        $content = $(matchingSelector.join(','));
+        var $wrapper = $('<div></div>');
+        $content.each(function (index, element) {
+          $wrapper.append(element);
+        });
+
+        $content = $wrapper;
+      })();
+    } else {
+      $content = $(matchingSelector);
+    }
 
     // Wrap in div so transformation can take place on root element
     $content.wrap($('<div></div>'));
@@ -4581,7 +4809,7 @@ function select(opts) {
   // Allow custom extractor to skip default cleaner
   // for this type; defaults to true
   if (defaultCleaner) {
-    return Cleaners[type](result, opts);
+    return Cleaners[type](result, _extends({}, opts, extractionOpts));
   }
 
   return result;
@@ -4847,9 +5075,16 @@ var Mercury = {
               });
 
             case 22:
+
+              // if this parse is happening in the browser,
+              // clean up any trace from the page.
+              if (cheerio.browser) {
+                cheerio.cleanup();
+              }
+
               return _context.abrupt('return', result);
 
-            case 23:
+            case 24:
             case 'end':
               return _context.stop();
           }
