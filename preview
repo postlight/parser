@@ -2,12 +2,25 @@
 var fs = require('fs')
 var execSync = require('child_process').execSync
 
-console.log('Rebuilding Mercury')
-execSync('MERCURY_TEST_BUILD=true npm run build')
+var optRe = /^--/
+var args = process.argv.slice(2).reduce((acc, arg) => {
+  if (optRe.test(arg)) {
+    acc.opts.push(arg)
+  } else {
+    acc.urls.push(arg)
+  }
+
+  return acc
+}, { opts: [], urls: [] })
+
+var urls = args.urls
+
+if (!args.opts.find(arg => arg === '--no-rebuild')) {
+  console.log('Rebuilding Mercury')
+  execSync('MERCURY_TEST_BUILD=true npm run build')
+}
 
 var Mercury = require('./dist/mercury_test')
-
-var urls = process.argv.slice(2)
 
 console.log(`Fetching link(s)`)
 
