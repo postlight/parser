@@ -25,3 +25,4 @@ export * from './www.theverge.com';
 export * from './www.cnn.com';
 export * from './www.aol.com';
 export * from './www.youtube.com';
+export * from './www.theguardian.com';
