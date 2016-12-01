@@ -35,7 +35,11 @@ export const WwwAolComExtractor = {
 
   content: {
     selectors: [
+<<<<<<< 8070e4790b070be887d3a49fb94cfbaed481ddde
       '.article-content',
+=======
+      'p.article-content',
+>>>>>>> feat: aol custom parser
     ],
 
     // Is there anything in the content you selected that needs transformed
