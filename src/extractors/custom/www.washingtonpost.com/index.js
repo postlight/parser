@@ -56,6 +56,7 @@ export const WwwWashingtonpostComExtractor = {
     // the result
     clean: [
       '.interstitial-link',
+      '.newsletter-inline-unit',
     ],
   },
 };
