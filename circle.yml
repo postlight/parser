@@ -15,8 +15,8 @@ dependencies:
     # For some reason phantomjs-prebuild is failing w/yarn, but npm installing works
     - npm install phantomjs-prebuilt
 
-  # cache_directories:
-  #   - ~/.yarn-cache
+  cache_directories:
+    - ~/.yarn-cache
   override:
     - yarn install
 
