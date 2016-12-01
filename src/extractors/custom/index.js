@@ -24,3 +24,4 @@ export * from './money.cnn.com';
 export * from './www.theverge.com';
 export * from './www.cnn.com';
 export * from './www.theguardian.com';
+export * from './www.aol.com';
