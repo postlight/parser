@@ -16,6 +16,7 @@ export const TheAtlanticExtractor = {
 
   content: {
     selectors: [
+      ['.article-cover figure.lead-img', '.article-body'],
       '.article-body',
     ],
 
