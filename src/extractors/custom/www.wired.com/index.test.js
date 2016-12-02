@@ -69,22 +69,6 @@ describe('WiredExtractor', () => {
     assert.equal(date_published, '2016-09-30T07:00:12.000Z');
   });
 
-  it('returns the dek', async () => {
-    // To pass this test, fill out the dek selector
-    // in ./src/extractors/custom/www.wired.com/index.js.
-    const html =
-      fs.readFileSync('./fixtures/www.wired.com/1475256747028.html');
-    const articleUrl =
-      'https://www.wired.com/2016/09/ode-rosetta-spacecraft-going-die-comet/';
-
-    const { dek } =
-      await Mercury.parse(articleUrl, html, { fallback: false });
-
-    // Update these values with the expected values from
-    // the article.
-    assert.equal(dek, 'Time to break out the tissues, space fans.');
-  });
-
   it('returns the lead_image_url', async () => {
     // To pass this test, fill out the lead_image_url selector
     // in ./src/extractors/custom/www.wired.com/index.js.

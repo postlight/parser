@@ -51,7 +51,6 @@ export const MSNExtractor = {
 
   dek: {
     selectors: [
-      ['meta[name="description"]', 'value'],
     ],
   },
 

@@ -69,22 +69,6 @@ describe('PoliticoExtractor', () => {
     assert.equal(date_published, '2016-10-04T09:07:00.000Z');
   });
 
-  it('returns the dek', async () => {
-    // To pass this test, fill out the dek selector
-    // in ./src/extractors/custom/www.politico.com/index.js.
-    const html =
-      fs.readFileSync('./fixtures/www.politico.com/1475617690069.html');
-    const articleUrl =
-      'http://www.politico.com/story/2016/10/who-will-win-the-vp-debate-229079?lo=ut_a1';
-
-    const { dek } =
-      await Mercury.parse(articleUrl, html, { fallback: false });
-
-    // Update these values with the expected values from
-    // the article.
-    assert.equal(dek, '"Is it just me or are the two VP candidates infinitely more appealing than their running mates?" said a Pennsylvania Republican.');
-  });
-
   it('returns the lead_image_url', async () => {
     // To pass this test, fill out the lead_image_url selector
     // in ./src/extractors/custom/www.politico.com/index.js.

@@ -69,22 +69,6 @@ describe('CustomExtractor', () => {
     assert.equal(date_published, '2016-10-13T21:00:00.000Z');
   });
 
-  it('returns the dek', async () => {
-    // To pass this test, fill out the dek selector
-    // in ./src/extractors/custom/www.apartmenttherapy.com/index.js.
-    const html =
-      fs.readFileSync('./fixtures/www.apartmenttherapy.com/1476396697639.html');
-    const articleUrl =
-      'http://www.apartmenttherapy.com/a-light-filled-la-loft-236564';
-
-    const { dek } =
-      await Mercury.parse(articleUrl, html, { fallback: false });
-
-    // Update these values with the expected values from
-    // the article.
-    assert.equal(dek, "Name: Ashley Location: Downtown — Los Angeles, California Welcome to our sunny and spacious downtown home located in the in the heart of Downtown LA's Historic Core. Inside you'll find a 1,300 square foot bi-level ground unit with loft (only three of its kind!) that offers an unparalleled, refined industrial, modern aesthetic.");
-  });
-
   it('returns the lead_image_url', async () => {
     // To pass this test, fill out the lead_image_url selector
     // in ./src/extractors/custom/www.apartmenttherapy.com/index.js.

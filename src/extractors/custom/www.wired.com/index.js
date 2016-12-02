@@ -51,7 +51,6 @@ export const WiredExtractor = {
 
   dek: {
     selectors: [
-      ['meta[name="og:description"]', 'value'],
     ],
   },
 

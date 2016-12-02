@@ -54,7 +54,6 @@ export const PoliticoExtractor = {
 
   dek: {
     selectors: [
-      ['meta[name="description"]', 'value'],
     ],
   },
 

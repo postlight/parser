@@ -69,22 +69,6 @@ describe('YahooExtractor', () => {
     assert.equal(date_published, '2016-10-03T05:00:00.000Z');
   });
 
-  it('returns the dek', async () => {
-    // To pass this test, fill out the dek selector
-    // in ./src/extractors/custom/www.yahoo.com/index.js.
-    const html =
-      fs.readFileSync('./fixtures/www.yahoo.com/1475529982399.html');
-    const articleUrl =
-      'https://www.yahoo.com/news/m/1c621104-b0eb-3b4d-9b0a-7bb979f80d7d/ss_clinton-cancels-joint-events.html';
-
-    const { dek } =
-      await Mercury.parse(articleUrl, html, { fallback: false });
-
-    // Update these values with the expected values from
-    // the article.
-    assert.equal(dek, 'The Hillary Clinton campaign has canceled joint appearances with former primary opponent Bernie Sanders after he admitted that "of course" it bothered him that Clinton seemed to be talking down to his supporters in hacked audio from a fundraiser. The two were set to have joint appearance together Monday. Instead, Sanders will appear in both Iowa and Wisconsin on Monday to boost her candidacy without her. Clinton is now scheduled to swing through Iowa later in the week, but possibly without Sanders, who was asked on CNN\'s "State of the Union" if it bothered him that Clinton had referred to his younger supporters as "the children of the great recession" who "live in their parents\' basement" to');
-  });
-
   it('returns the lead_image_url', async () => {
     // To pass this test, fill out the lead_image_url selector
     // in ./src/extractors/custom/www.yahoo.com/index.js.

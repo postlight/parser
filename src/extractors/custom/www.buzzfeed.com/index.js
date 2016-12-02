@@ -56,7 +56,6 @@ export const BuzzfeedExtractor = {
 
   dek: {
     selectors: [
-      ['meta[name="description"]', 'value'],
     ],
   },
 

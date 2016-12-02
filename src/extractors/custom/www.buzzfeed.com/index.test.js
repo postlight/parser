@@ -69,22 +69,6 @@ describe('BuzzfeedExtractor', () => {
   //   // assert.equal(date_published, 'hi');
   // });
 
-  it('returns the dek', async () => {
-    // To pass this test, fill out the dek selector
-    // in ./src/extractors/custom/www.buzzfeed.com/index.js.
-    const html =
-      fs.readFileSync('./fixtures/www.buzzfeed.com/1475531975121.html');
-    const articleUrl =
-      'https://www.buzzfeed.com/ikrd/people-are-calling-out-this-edited-picture-of-demi-lovato-fo';
-
-    const { dek } =
-      await Mercury.parse(articleUrl, html, { fallback: false });
-
-    // Update these values with the expected values from
-    // the article.
-    assert.equal(dek, 'Lovato said: "Is that how my boobs should look?"..');
-  });
-
   it('returns the lead_image_url', async () => {
     // To pass this test, fill out the lead_image_url selector
     // in ./src/extractors/custom/www.buzzfeed.com/index.js.
