@@ -48,7 +48,6 @@ export const NewYorkerExtractor = {
 
   dek: {
     selectors: [
-      ['meta[name="og:description"]', 'value'],
     ],
   },
 

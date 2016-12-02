@@ -22,7 +22,6 @@ export const WwwWashingtonpostComExtractor = {
 
   dek: {
     selectors: [
-      ['meta[name="og:description"]', 'value'],
     ],
   },
 

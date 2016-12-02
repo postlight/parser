@@ -69,22 +69,6 @@ describe('MSNExtractor', () => {
     assert.equal(date_published.split('T')[0], '2016-09-21');
   });
 
-  it('returns the dek', async () => {
-    // To pass this test, fill out the dek selector
-    // in ./src/extractors/custom/www.msn.com/index.js.
-    const html =
-      fs.readFileSync('./fixtures/www.msn.com/1475506925474.html');
-    const articleUrl =
-      'http://www.msn.com/en-us/health/wellness/this-is-your-brain-on-sad-movies-plus-5-films-to-cry-to/ar-BBwsPWG?li=BBnb2gg';
-
-    const { dek } =
-      await Mercury.parse(articleUrl, html, { fallback: false });
-
-    // Update these values with the expected values from
-    // the article.
-    assert.equal(dek, 'The psychological reason why we love to watch sad movies is linked to the release of endorphins.');
-  });
-
   it('returns the lead_image_url', async () => {
     // To pass this test, fill out the lead_image_url selector
     // in ./src/extractors/custom/www.msn.com/index.js.

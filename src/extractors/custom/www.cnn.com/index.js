@@ -20,8 +20,6 @@ export const WwwCnnComExtractor = {
     ],
   },
 
-  dek: null,
-
   lead_image_url: {
     selectors: [
       ['meta[name="og:image"]', 'value'],

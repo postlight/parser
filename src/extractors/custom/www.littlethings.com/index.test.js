@@ -53,38 +53,6 @@ describe('LittleThingsExtractor', () => {
     assert.equal(author, 'Laura Caseley');
   });
 
-  // it('returns the date_published', async () => {
-  //   // To pass this test, fill out the date_published selector
-  //   // in ./src/extractors/custom/www.littlethings.com/index.js.
-  //   const html =
-  //     fs.readFileSync('./fixtures/www.littlethings.com/1475605036506.html');
-  //   const articleUrl =
-  //     'http://www.littlethings.com/diy-pineapple-lamp/';
-  //
-  //   const { date_published } =
-  //     await Mercury.parse(articleUrl, html, { fallback: false });
-  //
-  //   // Update these values with the expected values from
-  //   // the article.
-  //   assert.equal(date_published, '');
-  // });
-
-  // it('returns the dek', async () => {
-  //   // To pass this test, fill out the dek selector
-  //   // in ./src/extractors/custom/www.littlethings.com/index.js.
-  //   const html =
-  //     fs.readFileSync('./fixtures/www.littlethings.com/1475605036506.html');
-  //   const articleUrl =
-  //     'http://www.littlethings.com/diy-pineapple-lamp/';
-  //
-  //   const { dek } =
-  //     await Mercury.parse(articleUrl, html, { fallback: false });
-  //
-  //   // Update these values with the expected values from
-  //   // the article.
-  //   assert.equal(dek, '');
-  // });
-
   it('returns the lead_image_url', async () => {
     // To pass this test, fill out the lead_image_url selector
     // in ./src/extractors/custom/www.littlethings.com/index.js.

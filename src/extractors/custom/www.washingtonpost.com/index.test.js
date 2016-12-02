@@ -66,22 +66,6 @@ describe('WwwWashingtonpostComExtractor', () => {
     assert.equal(date_published, '2016-11-22T13:57:00.000Z');
   });
 
-  it('returns the dek', async () => {
-    // To pass this test, fill out the dek selector
-    // in ./src/extractors/custom/www.washingtonpost.com/index.js.
-    const html =
-      fs.readFileSync('./fixtures/www.washingtonpost.com/1480364838420.html');
-    const articleUrl =
-      'https://www.washingtonpost.com/politics/trump-foundation-apparently-admits-to-violating-ban-on-self-dealing-new-filing-to-irs-shows/2016/11/22/893f6508-b0a9-11e6-8616-52b15787add0_story.html';
-
-    const { dek } =
-      await Mercury.parse(articleUrl, html, { fallback: false });
-
-    // Update these values with the expected values from
-    // the article.
-    assert.equal(dek, 'The foundation checked “yes” on the form for 2015 when asked whether it had transferred “income or assets to a disqualified person.”');
-  });
-
   it('returns the lead_image_url', async () => {
     // To pass this test, fill out the lead_image_url selector
     // in ./src/extractors/custom/www.washingtonpost.com/index.js.

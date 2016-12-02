@@ -47,7 +47,6 @@ export const BroadwayWorldExtractor = {
 
   dek: {
     selectors: [
-      ['meta[name="og:description"]', 'value'],
     ],
   },
 

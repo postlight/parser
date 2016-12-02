@@ -40,8 +40,6 @@ export const TheAtlanticExtractor = {
 
   lead_image_url: null,
 
-  dek: null,
-
   next_page_url: null,
 
   excerpt: null,

@@ -51,7 +51,6 @@ export const YahooExtractor = {
 
   dek: {
     selectors: [
-      ['meta[name="og:description"]', 'value'],
     // enter dek selectors
     ],
   },

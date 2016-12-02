@@ -53,7 +53,6 @@ export const ApartmentTherapyExtractor = {
 
   dek: {
     selectors: [
-      ['meta[name=description]', 'value'],
     ],
   },
 

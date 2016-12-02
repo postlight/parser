@@ -68,22 +68,6 @@ describe('NewYorkerExtractor', () => {
     assert.equal(date_published, '2016-09-26T18:04:22.000Z');
   });
 
-  it('returns the dek', async () => {
-    // To pass this test, fill out the dek selector
-    // in ./src/extractors/custom/www.newyorker.com/index.js.
-    const html =
-      fs.readFileSync('./fixtures/www.newyorker.com/1475248565793.html');
-    const articleUrl =
-      'http://www.newyorker.com/tech/elements/hacking-cryptography-and-the-countdown-to-quantum-computing';
-
-    const { dek } =
-      await Mercury.parse(articleUrl, html, { fallback: false });
-
-    // Update these values with the expected values from
-    // the article.
-    assert.equal(dek, 'In a decade, events like the recent data breach at Yahoo could become much more common, driven by a new kind of machine.');
-  });
-
   it('returns the lead_image_url', async () => {
     // To pass this test, fill out the lead_image_url selector
     // in ./src/extractors/custom/www.newyorker.com/index.js.

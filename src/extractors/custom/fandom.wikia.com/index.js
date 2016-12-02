@@ -51,7 +51,6 @@ export const WikiaExtractor = {
 
   dek: {
     selectors: [
-      ['meta[name="og:description"]', 'value'],
     ],
   },
 
