@@ -63,7 +63,7 @@ describe('WwwAolComExtractor', () => {
 
     // Update these values with the expected values from
     // the article.
-    assert.equal(date_published, '2016-12-01T05:00:00.000Z');
+    assert.equal(date_published, '2016-12-01T18:01:00.000Z');
   });
 
   it('returns the lead_image_url', async () => {
@@ -101,6 +101,6 @@ describe('WwwAolComExtractor', () => {
 
     // Update these values with the expected values from
     // the article.
-    assert.equal(first13, 'ST. LOUIS, MO (KTVI) – Amid unimaginable grief, the widow of slain Saint Louis');
+    assert.equal(first13, 'ST. LOUIS, MO (KTVI) – Amid unimaginable grief, the widow of slain Saint');
   });
 });

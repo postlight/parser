@@ -17,6 +17,8 @@ export const WwwAolComExtractor = {
     selectors: [
       '.p-article__byline__date',
     ],
+
+    timezone: 'America/New_York',
   },
 
   dek: {
@@ -33,7 +35,7 @@ export const WwwAolComExtractor = {
 
   content: {
     selectors: [
-      'p.article-content',
+      '.article-content',
     ],
 
     // Is there anything in the content you selected that needs transformed
