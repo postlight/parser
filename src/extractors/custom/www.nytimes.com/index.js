@@ -57,9 +57,17 @@ export const NYTimesExtractor = {
     ],
   },
 
-  date_published: null,
+  date_published: {
+    selectors: [
+      ['meta[name="article:published"]', 'value'],
+    ],
+  },
 
-  lead_image_url: null,
+  lead_image_url: {
+    selectors: [
+      ['meta[name="og:image"]', 'value'],
+    ],
+  },
 
   dek: null,
 
