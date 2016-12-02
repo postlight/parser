@@ -53,6 +53,7 @@ export const NYTimesExtractor = {
       '.comments',
       '.supplemental',
       '.nocontent',
+      '.story-footer-links',
     ],
   },
 
