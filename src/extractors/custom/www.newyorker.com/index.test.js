@@ -105,4 +105,33 @@ describe('NewYorkerExtractor', () => {
     // the article.
     assert.equal(first13, 'In a laboratory in Shanghai, researchers work on developing a quantum computer—a new');
   });
+
+  it('returns the dek when present', async () => {
+    const html =
+      fs.readFileSync('./fixtures/www.newyorker.com/1480713300334.html');
+
+    const url =
+      'http://www.newyorker.com/magazine/2016/12/05/lessons-from-my-mother';
+
+    const { dek } =
+      await Mercury.parse(url, html, { fallback: false });
+
+    assert.equal(
+      dek,
+      'I had a sense that she was a good teacher, but I had no idea that she was such an influential one, and in the very area I had chosen.'
+    );
+  });
+
+  it('returns the date for magazine content', async () => {
+    const html =
+      fs.readFileSync('./fixtures/www.newyorker.com/1480713300334.html');
+
+    const url =
+      'http://www.newyorker.com/magazine/2016/12/05/lessons-from-my-mother';
+
+    const { date_published } =
+      await Mercury.parse(url, html, { fallback: false });
+
+    assert.equal(date_published, '2016-11-28T05:00:00.000Z');
+  });
 });

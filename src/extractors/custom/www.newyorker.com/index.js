@@ -37,7 +37,10 @@ export const NewYorkerExtractor = {
   date_published: {
     selectors: [
       ['meta[name="article:published_time"]', 'value'],
+      ['time[itemProp="datePublished"]', 'content'],
     ],
+
+    timezone: 'America/New_York',
   },
 
   lead_image_url: {
@@ -48,6 +51,8 @@ export const NewYorkerExtractor = {
 
   dek: {
     selectors: [
+      '.dek',
+      'h2.dek',
     ],
   },
 
