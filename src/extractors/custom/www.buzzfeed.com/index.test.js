@@ -106,4 +106,50 @@ describe('BuzzfeedExtractor', () => {
     // the article.
     assert.equal(first13, 'A few months ago, Vladimir Serbanescu, a 17-year-old artist from Romania, drew this');
   });
+
+  it('returns big header images in the content', async () => {
+    // To pass this test, fill out the content selector
+    // in ./src/extractors/custom/www.buzzfeed.com/index.js.
+    // You may also want to make use of the clean and transform
+    // options.
+    const html =
+      fs.readFileSync('./fixtures/www.buzzfeed.com/1480717502688.html');
+    const url =
+      'https://www.buzzfeed.com/katiejmbaker/college-trump-supporters-the-new-counterculture?utm_term=.ckb72b58Y#.oxY8ZOWY3';
+
+    const { content } =
+      await Mercury.parse(url, html, { fallback: false });
+
+    const $ = cheerio.load(content || '');
+
+    const imgSrc = $('img').first().attr('src');
+
+    // Update these values with the expected values from
+    // the article.
+    assert.equal(imgSrc, 'https://img.buzzfeed.com/buzzfeed-static/static/2016-11/21/10/enhanced/buzzfeed-prod-fastlane03/longform-original-25748-1479741827-5.jpg');
+  });
+
+  it('transforms the splash image to a figure and caption', async () => {
+    // To pass this test, fill out the content selector
+    // in ./src/extractors/custom/www.buzzfeed.com/index.js.
+    // You may also want to make use of the clean and transform
+    // options.
+    const html =
+      fs.readFileSync('./fixtures/www.buzzfeed.com/1480717502688.html');
+    const url =
+      'https://www.buzzfeed.com/katiejmbaker/college-trump-supporters-the-new-counterculture?utm_term=.ckb72b58Y#.oxY8ZOWY3';
+
+    const { content } =
+      await Mercury.parse(url, html, { fallback: false });
+
+    const $ = cheerio.load(content || '');
+
+    const imgSrc = $('figure img').first().attr('src');
+    const figcaption = $('figure figcaption').first().text();
+
+    // Update these values with the expected values from
+    // the article.
+    assert.equal(imgSrc, 'https://img.buzzfeed.com/buzzfeed-static/static/2016-11/21/10/enhanced/buzzfeed-prod-fastlane03/longform-original-25748-1479741827-5.jpg');
+    assert.equal(figcaption, 'Adam Maida for BuzzFeed News');
+  });
 });
