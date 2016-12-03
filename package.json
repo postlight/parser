@@ -1,6 +1,6 @@
 {
   "name": "mercury-parser",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "repository": "github:postlight/mercury-parser",
   "main": "./dist/mercury.js",
@@ -10,6 +10,7 @@
     "lint-fix-quiet": "eslint --fix --quiet",
     "build": "yarn lint && rollup -c && yarn test:build",
     "build:web": "yarn lint && rollup -c rollup.config.web.js && yarn test:build:web",
+    "release": "yarn build && yarn build:web",
     "build:generator": "rollup -c scripts/rollup.config.js",
     "test_build": "rollup -c",
     "test": "yarn test:node && yarn test:web",

@@ -1,0 +1,8 @@
+* [[`19ed035382`](https://github.com/postlight/mercury-parser/commit/19ed035382)] - **release**: 1.0.1 (Adam Pash) 
+* [[`f9902cfa05`](https://github.com/postlight/mercury-parser/commit/f9902cfa05)] - **Fix**: extension bugs (#47) (Adam Pash) 
+* [[`16860f1d85`](https://github.com/postlight/mercury-parser/commit/16860f1d85)] - **feat**: improved nyt parser (#46) (Adam Pash) 
+* [[`d0453efbf8`](https://github.com/postlight/mercury-parser/commit/d0453efbf8)] - **feat**: improvements for nyer magazine articles (#45) (Adam Pash) 
+* [[`00f8965c1f`](https://github.com/postlight/mercury-parser/commit/00f8965c1f)] - **fix**: cleaning up deks (#44) (Adam Pash) 
+* [[`b415d1d37c`](https://github.com/postlight/mercury-parser/commit/b415d1d37c)] - **feat**: aol custom extractor (#42) (Janet) 
+* [[`4cc3b68b5e`](https://github.com/postlight/mercury-parser/commit/4cc3b68b5e)] - **feat**: remove footer links (#40) (Matt) 
+* [[`e9a36d6ebd`](https://github.com/postlight/mercury-parser/commit/e9a36d6ebd)] - **release**: 1.0.0 so we can start doing proper releaes (#39) (Adam Pash) 
