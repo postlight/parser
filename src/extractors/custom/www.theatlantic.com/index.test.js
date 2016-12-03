@@ -35,6 +35,6 @@ describe('CustomExtractor', () => {
 
     assert.equal(title, 'Why New Yorkers Received a Push Alert About a Manhunt');
     assert.equal(author, 'Kaveh Waddell');
-    assert.equal(text, 'Updated on September');
+    assert.equal(text, 'New York police offi');
   });
 });

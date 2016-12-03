@@ -16,6 +16,7 @@ export const TheAtlanticExtractor = {
 
   content: {
     selectors: [
+      ['.article-cover figure.lead-img', '.article-body'],
       '.article-body',
     ],
 
@@ -28,7 +29,7 @@ export const TheAtlanticExtractor = {
   // The clean selectors will remove anything that matches from
   // the result
     clean: [
-
+      '.partner-box',
     ],
   },
 

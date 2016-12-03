@@ -19,8 +19,8 @@ export const BuzzfeedExtractor = {
 
   content: {
     selectors: [
+      ['.longform_custom_header_media', '#buzz_sub_buzz'],
       '#buzz_sub_buzz',
-      // enter content selectors
     ],
 
     defaultCleaner: false,
@@ -29,6 +29,17 @@ export const BuzzfeedExtractor = {
     // before it's consumable content? E.g., unusual lazy loaded images
     transforms: {
       h2: 'b',
+
+      'div.longform_custom_header_media': ($node) => {
+        if ($node.has('img') && $node.has('.longform_header_image_source')) {
+          return 'figure';
+        }
+
+        return null;
+      },
+
+      'figure.longform_custom_header_media .longform_header_image_source':
+        'figcaption',
     },
 
     // Is there anything that is in the result that shouldn't be?
@@ -38,6 +49,7 @@ export const BuzzfeedExtractor = {
       '.instapaper_ignore',
       '.suplist_list_hide .buzz_superlist_item .buzz_superlist_number_inline',
       '.share-box',
+      '.print',
     ],
   },
 
