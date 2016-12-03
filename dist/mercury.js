@@ -2061,12 +2061,16 @@ var NYTimesExtractor = {
       }
     },
 
-    clean: ['.ad', 'header#story-header', '.story-body-1 .lede.video', '.visually-hidden', '#newsletter-promo', '.promo', '.comments-button', '.hidden', '.comments', '.supplemental', '.nocontent']
+    clean: ['.ad', 'header#story-header', '.story-body-1 .lede.video', '.visually-hidden', '#newsletter-promo', '.promo', '.comments-button', '.hidden', '.comments', '.supplemental', '.nocontent', '.story-footer-links']
   },
 
-  date_published: null,
+  date_published: {
+    selectors: [['meta[name="article:published"]', 'value']]
+  },
 
-  lead_image_url: null,
+  lead_image_url: {
+    selectors: [['meta[name="og:image"]', 'value']]
+  },
 
   dek: null,
 
@@ -2088,7 +2092,7 @@ var TheAtlanticExtractor = {
   },
 
   content: {
-    selectors: ['.article-body'],
+    selectors: [['.article-cover figure.lead-img', '.article-body'], '.article-body'],
 
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images
@@ -2097,7 +2101,7 @@ var TheAtlanticExtractor = {
     // Is there anything that is in the result that shouldn't be?
     // The clean selectors will remove anything that matches from
     // the result
-    clean: []
+    clean: ['.partner-box']
   },
 
   date_published: {
@@ -2105,8 +2109,6 @@ var TheAtlanticExtractor = {
   },
 
   lead_image_url: null,
-
-  dek: null,
 
   next_page_url: null,
 
@@ -2140,7 +2142,9 @@ var NewYorkerExtractor = {
   },
 
   date_published: {
-    selectors: [['meta[name="article:published_time"]', 'value']]
+    selectors: [['meta[name="article:published_time"]', 'value'], ['time[itemProp="datePublished"]', 'content']],
+
+    timezone: 'America/New_York'
   },
 
   lead_image_url: {
@@ -2148,7 +2152,7 @@ var NewYorkerExtractor = {
   },
 
   dek: {
-    selectors: [['meta[name="og:description"]', 'value']]
+    selectors: ['.dek', 'h2.dek']
   },
 
   next_page_url: null,
@@ -2191,7 +2195,7 @@ var WiredExtractor = {
   },
 
   dek: {
-    selectors: [['meta[name="og:description"]', 'value']]
+    selectors: []
   },
 
   next_page_url: null,
@@ -2234,7 +2238,7 @@ var MSNExtractor = {
   },
 
   dek: {
-    selectors: [['meta[name="description"]', 'value']]
+    selectors: []
   },
 
   next_page_url: null,
@@ -2279,7 +2283,9 @@ var YahooExtractor = {
   },
 
   dek: {
-    selectors: [['meta[name="og:description"]', 'value']]
+    selectors: [
+      // enter dek selectors
+    ]
   },
 
   next_page_url: null,
@@ -2301,20 +2307,30 @@ var BuzzfeedExtractor = {
   },
 
   content: {
-    selectors: ['#buzz_sub_buzz'],
+    selectors: [['.longform_custom_header_media', '#buzz_sub_buzz'], '#buzz_sub_buzz'],
 
     defaultCleaner: false,
 
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images
     transforms: {
-      h2: 'b'
+      h2: 'b',
+
+      'div.longform_custom_header_media': function divLongform_custom_header_media($node) {
+        if ($node.has('img') && $node.has('.longform_header_image_source')) {
+          return 'figure';
+        }
+
+        return null;
+      },
+
+      'figure.longform_custom_header_media .longform_header_image_source': 'figcaption'
     },
 
     // Is there anything that is in the result that shouldn't be?
     // The clean selectors will remove anything that matches from
     // the result
-    clean: ['.instapaper_ignore', '.suplist_list_hide .buzz_superlist_item .buzz_superlist_number_inline', '.share-box']
+    clean: ['.instapaper_ignore', '.suplist_list_hide .buzz_superlist_item .buzz_superlist_number_inline', '.share-box', '.print']
   },
 
   date_published: {
@@ -2326,7 +2342,7 @@ var BuzzfeedExtractor = {
   },
 
   dek: {
-    selectors: [['meta[name="description"]', 'value']]
+    selectors: []
   },
 
   next_page_url: null,
@@ -2369,7 +2385,7 @@ var WikiaExtractor = {
   },
 
   dek: {
-    selectors: [['meta[name="og:description"]', 'value']]
+    selectors: []
   },
 
   next_page_url: null,
@@ -2455,7 +2471,7 @@ var PoliticoExtractor = {
   },
 
   dek: {
-    selectors: [['meta[name="description"]', 'value']]
+    selectors: []
   },
 
   next_page_url: null,
@@ -2556,7 +2572,7 @@ var BroadwayWorldExtractor = {
   },
 
   dek: {
-    selectors: [['meta[name="og:description"]', 'value']]
+    selectors: []
   },
 
   next_page_url: {
@@ -2615,7 +2631,7 @@ var ApartmentTherapyExtractor = {
   },
 
   dek: {
-    selectors: [['meta[name=description]', 'value']]
+    selectors: []
   },
 
   next_page_url: {
@@ -2758,7 +2774,7 @@ var WwwWashingtonpostComExtractor = {
   },
 
   dek: {
-    selectors: [['meta[name="og:description"]', 'value']]
+    selectors: []
   },
 
   lead_image_url: {
@@ -2979,8 +2995,6 @@ var WwwCnnComExtractor = {
     selectors: [['meta[name="pubdate"]', 'value']]
   },
 
-  dek: null,
-
   lead_image_url: {
     selectors: [['meta[name="og:image"]', 'value']]
   },
@@ -3025,6 +3039,47 @@ var WwwCnnComExtractor = {
   }
 };
 
+var WwwAolComExtractor = {
+  domain: 'www.aol.com',
+
+  title: {
+    selectors: ['h1.p-article__title']
+  },
+
+  author: {
+    selectors: [['meta[name="author"]', 'value']]
+  },
+
+  date_published: {
+    selectors: ['.p-article__byline__date'],
+
+    timezone: 'America/New_York'
+  },
+
+  dek: {
+    selectors: [
+      // enter selectors
+    ]
+  },
+
+  lead_image_url: {
+    selectors: [['meta[name="og:image"]', 'value']]
+  },
+
+  content: {
+    selectors: ['.article-content'],
+
+    // Is there anything in the content you selected that needs transformed
+    // before it's consumable content? E.g., unusual lazy loaded images
+    transforms: {},
+
+    // Is there anything that is in the result that shouldn't be?
+    // The clean selectors will remove anything that matches from
+    // the result
+    clean: []
+  }
+};
+
 
 
 var CustomExtractors = Object.freeze({
@@ -3052,7 +3107,8 @@ var CustomExtractors = Object.freeze({
 	NewrepublicComExtractor: NewrepublicComExtractor,
 	MoneyCnnComExtractor: MoneyCnnComExtractor,
 	WwwThevergeComExtractor: WwwThevergeComExtractor,
-	WwwCnnComExtractor: WwwCnnComExtractor
+	WwwCnnComExtractor: WwwCnnComExtractor,
+	WwwAolComExtractor: WwwAolComExtractor
 });
 
 var Extractors = _Object$keys(CustomExtractors).reduce(function (acc, key) {
