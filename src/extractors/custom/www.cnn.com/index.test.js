@@ -28,7 +28,7 @@ describe('WwwCnnComExtractor', () => {
       assert.equal(extractor.domain, URL.parse(url).hostname);
     });
 
-    it('returns the title', async () => {
+    it('returns the title', () => {
       // To pass this test, fill out the title selector
       // in ./src/extractors/custom/www.cnn.com/index.js.
       const { title } = result;
@@ -38,7 +38,7 @@ describe('WwwCnnComExtractor', () => {
       assert.equal(title, 'Why Donald Trump won\'t change');
     });
 
-    it('returns the author', async () => {
+    it('returns the author', () => {
       // To pass this test, fill out the author selector
       // in ./src/extractors/custom/www.cnn.com/index.js.
       const { author } = result;
@@ -48,7 +48,7 @@ describe('WwwCnnComExtractor', () => {
       assert.equal(author, 'Stephen Collinson, CNN');
     });
 
-    it('returns the date_published', async () => {
+    it('returns the date_published', () => {
       // To pass this test, fill out the date_published selector
       // in ./src/extractors/custom/www.cnn.com/index.js.
       const { date_published } = result;
@@ -58,7 +58,7 @@ describe('WwwCnnComExtractor', () => {
       assert.equal(date_published, '2016-11-29T10:39:35.000Z');
     });
 
-    it('returns the lead_image_url', async () => {
+    it('returns the lead_image_url', () => {
       // To pass this test, fill out the lead_image_url selector
       // in ./src/extractors/custom/www.cnn.com/index.js.
       const { lead_image_url } = result;
@@ -68,7 +68,7 @@ describe('WwwCnnComExtractor', () => {
       assert.equal(lead_image_url, 'http://i2.cdn.cnn.com/cnnnext/dam/assets/161128072443-01-trump-1128-super-tease.jpg');
     });
 
-    it('returns the content', async () => {
+    it('returns the content', () => {
       // To pass this test, fill out the content selector
       // in ./src/extractors/custom/www.cnn.com/index.js.
       // You may also want to make use of the clean and transform

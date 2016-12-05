@@ -28,7 +28,7 @@ describe('WwwTmzComExtractor', () => {
       assert.equal(extractor.domain, URL.parse(url).hostname);
     });
 
-    it('returns the title', async () => {
+    it('returns the title', () => {
       // To pass this test, fill out the title selector
       // in ./src/extractors/custom/www.tmz.com/index.js.
       const { title } = result;
@@ -38,7 +38,7 @@ describe('WwwTmzComExtractor', () => {
       assert.equal(title, 'Prince -- Woman Warns Estate ... Step Aside, I\'m His Wife!');
     });
 
-    it('returns the author', async () => {
+    it('returns the author', () => {
       // To pass this test, fill out the author selector
       // in ./src/extractors/custom/www.tmz.com/index.js.
       const { author } = result;
@@ -48,7 +48,7 @@ describe('WwwTmzComExtractor', () => {
       assert.equal(author, 'TMZ STAFF');
     });
 
-    it('returns the date_published', async () => {
+    it('returns the date_published', () => {
       // To pass this test, fill out the date_published selector
       // in ./src/extractors/custom/www.tmz.com/index.js.
       const { date_published } = result;
@@ -61,7 +61,7 @@ describe('WwwTmzComExtractor', () => {
       assert.equal(date_published, '2016-11-28T11:00:00.000Z');
     });
 
-    // it('returns the dek', async () => {
+    // it('returns the dek', () => {
     //   // To pass this test, fill out the dek selector
     //   // in ./src/extractors/custom/www.tmz.com/index.js.
     //   const html =
@@ -77,7 +77,7 @@ describe('WwwTmzComExtractor', () => {
     //   assert.equal(dek, '');
     // });
 
-    it('returns the lead_image_url', async () => {
+    it('returns the lead_image_url', () => {
       // To pass this test, fill out the lead_image_url selector
       // in ./src/extractors/custom/www.tmz.com/index.js.
       const { lead_image_url } = result;
@@ -87,7 +87,7 @@ describe('WwwTmzComExtractor', () => {
       assert.equal(lead_image_url, 'http://ll-media.tmz.com/2016/11/28/1128-prince-getty-03-1200x630.jpg');
     });
 
-    it('returns the content', async () => {
+    it('returns the content', () => {
       // To pass this test, fill out the content selector
       // in ./src/extractors/custom/www.tmz.com/index.js.
       // You may also want to make use of the clean and transform

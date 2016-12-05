@@ -30,31 +30,31 @@ describe('MediumExtractor', () => {
       assert.equal(extractor.domain, URL.parse(url).hostname);
     });
 
-    it('returns the title', async () => {
+    it('returns the title', () => {
       const { title } = result;
 
       assert.equal(title, 'WTF? What’s The Future?');
     });
 
-    it('returns the author', async () => {
+    it('returns the author', () => {
       const { author } = result;
 
       assert.equal(author, 'Tim O\'Reilly');
     });
 
-    it('returns the date_published', async () => {
+    it('returns the date_published', () => {
       const { date_published } = result;
 
       assert.equal(date_published, '2016-10-19T14:24:20.323Z');
     });
 
-    it('returns the dek', async () => {
+    it('returns the dek', () => {
       const { dek } = result;
 
       assert.equal(dek, null);
     });
 
-    it('returns the lead_image_url', async () => {
+    it('returns the lead_image_url', () => {
       // To pass this test, fill out the lead_image_url selector
       // in ./src/extractors/custom/medium.com/index.js.
       const { lead_image_url } = result;
@@ -64,7 +64,7 @@ describe('MediumExtractor', () => {
       assert.equal(lead_image_url, 'https://cdn-images-1.medium.com/max/1200/1*3Gzaug9mRc8vvx1cuQWkog.png');
     });
 
-    it('returns the content', async () => {
+    it('returns the content', () => {
       const { content } = result;
 
       const $ = cheerio.load(content || '');

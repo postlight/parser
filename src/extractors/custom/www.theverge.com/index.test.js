@@ -28,7 +28,7 @@ describe('WwwThevergeComExtractor', () => {
       assert.equal(extractor.domain, URL.parse(url).hostname);
     });
 
-    it('returns the title', async () => {
+    it('returns the title', () => {
       // To pass this test, fill out the title selector
       // in ./src/extractors/custom/www.theverge.com/index.js.
       const { title } = result;
@@ -38,7 +38,7 @@ describe('WwwThevergeComExtractor', () => {
       assert.equal(title, 'AT&T just declared war on an open internet (and us)');
     });
 
-    it('returns the author', async () => {
+    it('returns the author', () => {
       // To pass this test, fill out the author selector
       // in ./src/extractors/custom/www.theverge.com/index.js.
       const { author } = result;
@@ -48,7 +48,7 @@ describe('WwwThevergeComExtractor', () => {
       assert.equal(author, 'T.C. Sottek');
     });
 
-    it('returns the date_published', async () => {
+    it('returns the date_published', () => {
       // To pass this test, fill out the date_published selector
       // in ./src/extractors/custom/www.theverge.com/index.js.
       const { date_published } = result;
@@ -58,7 +58,7 @@ describe('WwwThevergeComExtractor', () => {
       assert.equal(date_published, '2016-11-29T15:00:19.000Z');
     });
 
-    it('returns the dek', async () => {
+    it('returns the dek', () => {
       // To pass this test, fill out the dek selector
       // in ./src/extractors/custom/www.theverge.com/index.js.
       const { dek } = result;
@@ -68,7 +68,7 @@ describe('WwwThevergeComExtractor', () => {
       assert.equal(dek, '‘Mobilizing Your World’ sounds like a threat now');
     });
 
-    it('returns the lead_image_url', async () => {
+    it('returns the lead_image_url', () => {
       // To pass this test, fill out the lead_image_url selector
       // in ./src/extractors/custom/www.theverge.com/index.js.
       const { lead_image_url } = result;
@@ -78,7 +78,7 @@ describe('WwwThevergeComExtractor', () => {
       assert.equal(lead_image_url, 'https://cdn0.vox-cdn.com/thumbor/v7kU2cISjo-wm6XceGk_kBuMBlA=/0x16:1024x592/1600x900/cdn0.vox-cdn.com/uploads/chorus_image/image/52042639/vrg_tc_attarmy_1024.1480431618.jpeg');
     });
 
-    it('returns the content', async () => {
+    it('returns the content', () => {
       // To pass this test, fill out the content selector
       // in ./src/extractors/custom/www.theverge.com/index.js.
       // You may also want to make use of the clean and transform

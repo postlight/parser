@@ -31,7 +31,7 @@ describe('PoliticoExtractor', () => {
       assert.equal(extractor.domain, URL.parse(url).hostname);
     });
 
-    it('returns the title', async () => {
+    it('returns the title', () => {
       // To pass this test, fill out the title selector
       // in ./src/extractors/custom/www.politico.com/index.js.
       const { title } = result;
@@ -41,7 +41,7 @@ describe('PoliticoExtractor', () => {
       assert.equal(title, 'Insiders: Trump will sink Pence in VP debate');
     });
 
-    it('returns the author', async () => {
+    it('returns the author', () => {
       // To pass this test, fill out the author selector
       // in ./src/extractors/custom/www.politico.com/index.js.
       const { author } = result;
@@ -51,7 +51,7 @@ describe('PoliticoExtractor', () => {
       assert.equal(author, 'Steven Shepard');
     });
 
-    it('returns the date_published', async () => {
+    it('returns the date_published', () => {
       // To pass this test, fill out the date_published selector
       // in ./src/extractors/custom/www.politico.com/index.js.
       const { date_published } = result;
@@ -61,7 +61,7 @@ describe('PoliticoExtractor', () => {
       assert.equal(date_published, '2016-10-04T09:07:00.000Z');
     });
 
-    it('returns the lead_image_url', async () => {
+    it('returns the lead_image_url', () => {
       // To pass this test, fill out the lead_image_url selector
       // in ./src/extractors/custom/www.politico.com/index.js.
       const { lead_image_url } = result;
@@ -71,7 +71,7 @@ describe('PoliticoExtractor', () => {
       assert.equal(lead_image_url, 'http://static.politico.com/0f/e7/5ee9a89044d1a01f74140bcd5b9e/caucus-vp-preview.jpg');
     });
 
-    it('returns the content', async () => {
+    it('returns the content', () => {
       // To pass this test, fill out the content selector
       // in ./src/extractors/custom/www.politico.com/index.js.
       // You may also want to make use of the clean and transform

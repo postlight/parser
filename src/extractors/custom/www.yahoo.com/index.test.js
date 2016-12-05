@@ -31,7 +31,7 @@ describe('YahooExtractor', () => {
       assert.equal(extractor.domain, URL.parse(url).hostname);
     });
 
-    it('returns the title', async () => {
+    it('returns the title', () => {
       // To pass this test, fill out the title selector
       // in ./src/extractors/custom/www.yahoo.com/index.js.
       const { title } = result;
@@ -41,7 +41,7 @@ describe('YahooExtractor', () => {
       assert.equal(title, 'Clinton Cancels Joint Events with Sanders');
     });
 
-    it('returns the author', async () => {
+    it('returns the author', () => {
       // To pass this test, fill out the author selector
       // in ./src/extractors/custom/www.yahoo.com/index.js.
       const { author } = result;
@@ -51,7 +51,7 @@ describe('YahooExtractor', () => {
       assert.equal(author, 'Fox Nation');
     });
 
-    it('returns the date_published', async () => {
+    it('returns the date_published', () => {
       // To pass this test, fill out the date_published selector
       // in ./src/extractors/custom/www.yahoo.com/index.js.
       const { date_published } = result;
@@ -61,7 +61,7 @@ describe('YahooExtractor', () => {
       assert.equal(date_published, '2016-10-03T05:00:00.000Z');
     });
 
-    it('returns the lead_image_url', async () => {
+    it('returns the lead_image_url', () => {
       // To pass this test, fill out the lead_image_url selector
       // in ./src/extractors/custom/www.yahoo.com/index.js.
       const { lead_image_url } = result;
@@ -71,7 +71,7 @@ describe('YahooExtractor', () => {
       assert.equal(lead_image_url, 'https://s.yimg.com/uu/api/res/1.2/tE8CoXSgHD15n5p8wUwGJA--/aD0zMDA7dz02MjQ7c209MTthcHBpZD15dGFjaHlvbg--/http://slingstone.zenfs.com/offnetwork/218c3f97f0b7e1598b6dc9fd10126e22');
     });
 
-    it('returns the content', async () => {
+    it('returns the content', () => {
       // To pass this test, fill out the content selector
       // in ./src/extractors/custom/www.yahoo.com/index.js.
       // You may also want to make use of the clean and transform

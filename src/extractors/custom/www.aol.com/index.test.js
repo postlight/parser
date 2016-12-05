@@ -27,7 +27,7 @@ describe('WwwAolComExtractor', () => {
       assert.equal(extractor.domain, URL.parse(url).hostname);
     });
 
-    it('returns the title', async () => {
+    it('returns the title', () => {
       // To pass this test, fill out the title selector
       // in ./src/extractors/custom/www.aol.com/index.js.
       const { title } = result;
@@ -37,7 +37,7 @@ describe('WwwAolComExtractor', () => {
       assert.equal(title, 'Son of slain police officer given teddy bears made from dad\'s uniform');
     });
 
-    it('returns the author', async () => {
+    it('returns the author', () => {
       // To pass this test, fill out the author selector
       // in ./src/extractors/custom/www.aol.com/index.js.
       const { author } = result;
@@ -47,7 +47,7 @@ describe('WwwAolComExtractor', () => {
       assert.equal(author, 'AOL Staff');
     });
 
-    it('returns the date_published', async () => {
+    it('returns the date_published', () => {
       // To pass this test, fill out the date_published selector
       // in ./src/extractors/custom/www.aol.com/index.js.
       const { date_published } = result;
@@ -57,7 +57,7 @@ describe('WwwAolComExtractor', () => {
       assert.equal(date_published, '2016-12-01T18:01:00.000Z');
     });
 
-    it('returns the lead_image_url', async () => {
+    it('returns the lead_image_url', () => {
       // To pass this test, fill out the lead_image_url selector
       // in ./src/extractors/custom/www.aol.com/index.js.
       const { lead_image_url } = result;
@@ -67,7 +67,7 @@ describe('WwwAolComExtractor', () => {
       assert.equal(lead_image_url, 'http://o.aolcdn.com/dims-shared/dims3/GLOB/crop/475x312+0+0/resize/1028x675!/format/jpg/quality/85/http%3A%2F%2Fo.aolcdn.com%2Fhss%2Fstorage%2Fmidas%2Fc8242ab14e089c284b031379d025d64%2F204656928%2FScreen%2BShot%2B2016-12-01%2Bat%2B1.15.51%2BPM.png');
     });
 
-    it('returns the content', async () => {
+    it('returns the content', () => {
       // To pass this test, fill out the content selector
       // in ./src/extractors/custom/www.aol.com/index.js.
       // You may also want to make use of the clean and transform

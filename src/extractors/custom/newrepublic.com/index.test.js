@@ -27,7 +27,7 @@ describe('NewrepublicComExtractor', () => {
       assert.equal(extractor.domain, URL.parse(url).hostname);
     });
 
-    it('article returns the title', async () => {
+    it('article returns the title', () => {
       // To pass this test, fill out the title selector
       // in ./src/extractors/custom/newrepublic.com/index.js.
       const { title } = result;
@@ -37,7 +37,7 @@ describe('NewrepublicComExtractor', () => {
       assert.equal(title, 'Fantastic Beasts: A Nice Place to Visit');
     });
 
-    it('returns the author', async () => {
+    it('returns the author', () => {
       // To pass this test, fill out the author selector
       // in ./src/extractors/custom/newrepublic.com/index.js.
       const { author } = result;
@@ -47,7 +47,7 @@ describe('NewrepublicComExtractor', () => {
       assert.equal(author, 'Will Leitch');
     });
 
-    it('returns the date_published', async () => {
+    it('returns the date_published', () => {
       // To pass this test, fill out the date_published selector
       // in ./src/extractors/custom/newrepublic.com/index.js.
       const { date_published } = result;
@@ -57,7 +57,7 @@ describe('NewrepublicComExtractor', () => {
       assert.equal(date_published, '2016-11-18T05:00:00.000Z');
     });
 
-    it('returns the dek', async () => {
+    it('returns the dek', () => {
       // To pass this test, fill out the dek selector
       // in ./src/extractors/custom/newrepublic.com/index.js.
       const { dek } = result;
@@ -67,7 +67,7 @@ describe('NewrepublicComExtractor', () => {
       assert.equal(dek, 'The glorious world-building in the first Harry Potter spin-off isn\'t enough to keep viewers coming back.');
     });
 
-    it('returns the lead_image_url', async () => {
+    it('returns the lead_image_url', () => {
       // To pass this test, fill out the lead_image_url selector
       // in ./src/extractors/custom/newrepublic.com/index.js.
       const { lead_image_url } = result;
@@ -77,7 +77,7 @@ describe('NewrepublicComExtractor', () => {
       assert.equal(lead_image_url, 'https://images.newrepublic.com/29020c1e6b108813cf65b54487ad2b5a65aa6079.jpeg?w=1109&h=577&crop=faces&fit=crop&fm=jpg');
     });
 
-    it('article returns the content', async () => {
+    it('article returns the content', () => {
       // To pass this test, fill out the content selector
       // in ./src/extractors/custom/newrepublic.com/index.js.
       // You may also want to make use of the clean and transform
@@ -105,7 +105,7 @@ describe('NewrepublicComExtractor', () => {
       result = await Mercury.parse(url, html, { fallback: false });
     });
 
-    it('minute returns the title', async () => {
+    it('minute returns the title', () => {
       // To pass this test, fill out the title selector
       // in ./src/extractors/custom/newrepublic.com/index.js.
       const { title } = result;
@@ -115,7 +115,7 @@ describe('NewrepublicComExtractor', () => {
       assert.equal(title, 'Maybe Donald Trump’s Twitter account is more than just a smoke screen.');
     });
 
-    it('article returns the author', async () => {
+    it('article returns the author', () => {
       // To pass this test, fill out the author selector
       // in ./src/extractors/custom/newrepublic.com/index.js.
       const { author } = result;
@@ -125,7 +125,7 @@ describe('NewrepublicComExtractor', () => {
       assert.equal(author, 'Alex Shephard');
     });
 
-    it('minute returns the content', async () => {
+    it('minute returns the content', () => {
       // To pass this test, fill out the content selector
       // in ./src/extractors/custom/newrepublic.com/index.js.
       // You may also want to make use of the clean and transform

@@ -30,7 +30,7 @@ describe('NewYorkerExtractor', () => {
       assert.equal(extractor.domain, URL.parse(url).hostname);
     });
 
-    it('returns the title', async () => {
+    it('returns the title', () => {
       // To pass this test, fill out the title selector
       // in ./src/extractors/custom/www.newyorker.com/index.js.
       const { title } = result;
@@ -40,7 +40,7 @@ describe('NewYorkerExtractor', () => {
       assert.equal(title, 'Hacking, Cryptography, and the Countdown to Quantum Computing');
     });
 
-    it('returns the author', async () => {
+    it('returns the author', () => {
       // To pass this test, fill out the author selector
       // in ./src/extractors/custom/www.newyorker.com/index.js.
       const { author } = result;
@@ -50,7 +50,7 @@ describe('NewYorkerExtractor', () => {
       assert.equal(author, 'Alex Hutchinson');
     });
 
-    it('returns the date_published', async () => {
+    it('returns the date_published', () => {
       // To pass this test, fill out the date_published selector
       // in ./src/extractors/custom/www.newyorker.com/index.js.
       const { date_published } = result;
@@ -60,7 +60,7 @@ describe('NewYorkerExtractor', () => {
       assert.equal(date_published, '2016-09-26T18:04:22.000Z');
     });
 
-    it('returns the lead_image_url', async () => {
+    it('returns the lead_image_url', () => {
       // To pass this test, fill out the lead_image_url selector
       // in ./src/extractors/custom/www.newyorker.com/index.js.
       const { lead_image_url } = result;
@@ -70,7 +70,7 @@ describe('NewYorkerExtractor', () => {
       assert.equal(lead_image_url, 'http://www.newyorker.com/wp-content/uploads/2016/09/Hutchinson-Quantum-Computing-1200x630-1474903563.jpg');
     });
 
-    it('returns the content', async () => {
+    it('returns the content', () => {
       // To pass this test, fill out the content selector
       // in ./src/extractors/custom/www.newyorker.com/index.js.
       // You may also want to make use of the clean and transform
@@ -88,15 +88,19 @@ describe('NewYorkerExtractor', () => {
   });
 
   describe('magazine content', () => {
-    it('returns the dek when present', async () => {
+    let result;
+    let url;
+    beforeAll(async () => {
+      url =
+        'http://www.newyorker.com/magazine/2016/12/05/lessons-from-my-mother';
       const html =
         fs.readFileSync('./fixtures/www.newyorker.com/1480713300334.html');
-
-      const url =
-        'http://www.newyorker.com/magazine/2016/12/05/lessons-from-my-mother';
-
-      const { dek } =
+      result =
         await Mercury.parse(url, html, { fallback: false });
+    });
+
+    it('returns the dek when present', () => {
+      const { dek } = result
 
       assert.equal(
         dek,
@@ -104,15 +108,8 @@ describe('NewYorkerExtractor', () => {
       );
     });
 
-    it('returns the date for magazine content', async () => {
-      const html =
-        fs.readFileSync('./fixtures/www.newyorker.com/1480713300334.html');
-
-      const url =
-        'http://www.newyorker.com/magazine/2016/12/05/lessons-from-my-mother';
-
-      const { date_published } =
-        await Mercury.parse(url, html, { fallback: false });
+    it('returns the date for magazine content', () => {
+      const { date_published } = result
 
       assert.equal(date_published, '2016-11-28T05:00:00.000Z');
     });

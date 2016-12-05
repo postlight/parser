@@ -30,7 +30,7 @@ describe('NYTimesExtractor', () => {
       assert.equal(extractor.domain, URL.parse(url).hostname);
     });
 
-    it('returns the title', async () => {
+    it('returns the title', () => {
       // To pass this test, fill out the title selector
       // in ./src/extractors/custom/www.nytimes.com/index.js.
       const { title } = result;
@@ -40,7 +40,7 @@ describe('NYTimesExtractor', () => {
       assert.equal(title, 'Ahmad Khan Rahami Is Arrested in Manhattan and New Jersey Bombings');
     });
 
-    it('returns the author', async () => {
+    it('returns the author', () => {
       // To pass this test, fill out the author selector
       // in ./src/extractors/custom/www.nytimes.com/index.js.
       const { author } = result;
@@ -50,7 +50,7 @@ describe('NYTimesExtractor', () => {
       assert.equal(author, 'Marc Santora, William K. Rashbaum, Al Baker and Adam Goldman');
     });
 
-    it('returns the date_published', async () => {
+    it('returns the date_published', () => {
       // To pass this test, fill out the date_published selector
       // in ./src/extractors/custom/www.nytimes.com/index.js.
       const { date_published } = result;
@@ -60,7 +60,7 @@ describe('NYTimesExtractor', () => {
       assert.equal(date_published, '2016-09-19T11:46:01.000Z');
     });
 
-    it('returns the lead_image_url', async () => {
+    it('returns the lead_image_url', () => {
       // To pass this test, fill out the lead_image_url selector
       // in ./src/extractors/custom/www.nytimes.com/index.js.
       const { lead_image_url } = result;
@@ -70,7 +70,7 @@ describe('NYTimesExtractor', () => {
       assert.equal(lead_image_url, 'https://static01.nyt.com/images/2016/09/20/nyregion/20MANHUNT1/20MANHUNT1-facebookJumbo.jpg');
     });
 
-    it('returns the content', async () => {
+    it('returns the content', () => {
       // To pass this test, fill out the content selector
       // in ./src/extractors/custom/www.nytimes.com/index.js.
       // You may also want to make use of the clean and transform

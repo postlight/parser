@@ -31,7 +31,7 @@ describe('LittleThingsExtractor', () => {
       assert.equal(extractor.domain, URL.parse(url).hostname);
     });
 
-    it('returns the title', async () => {
+    it('returns the title', () => {
     // To pass this test, fill out the title selector
     // in ./src/extractors/custom/www.littlethings.com/index.js.
       const { title } = result;
@@ -41,7 +41,7 @@ describe('LittleThingsExtractor', () => {
       assert.equal(title, 'Snip The Stems Off Plastic Spoons To Make A Quirky Pineapple Lamp');
     });
 
-    it('returns the author', async () => {
+    it('returns the author', () => {
     // To pass this test, fill out the author selector
     // in ./src/extractors/custom/www.littlethings.com/index.js.
       const { author } = result;
@@ -51,7 +51,7 @@ describe('LittleThingsExtractor', () => {
       assert.equal(author, 'Laura Caseley');
     });
 
-    it('returns the lead_image_url', async () => {
+    it('returns the lead_image_url', () => {
     // To pass this test, fill out the lead_image_url selector
     // in ./src/extractors/custom/www.littlethings.com/index.js.
       const { lead_image_url } = result;
@@ -61,7 +61,7 @@ describe('LittleThingsExtractor', () => {
       assert.equal(lead_image_url, 'http://cdn1.littlethings.com/app/uploads/2016/09/pineapple-b-thumb-1.jpg');
     });
 
-    it('returns the content', async () => {
+    it('returns the content', () => {
     // To pass this test, fill out the content selector
     // in ./src/extractors/custom/www.littlethings.com/index.js.
     // You may also want to make use of the clean and transform

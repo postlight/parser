@@ -31,7 +31,7 @@ describe('WikiaExtractor', () => {
       assert.equal(extractor.domain, URL.parse(url).hostname);
     });
 
-    it('returns the title', async () => {
+    it('returns the title', () => {
       // To pass this test, fill out the title selector
       // in ./src/extractors/custom/fandom.wikia.com/index.js.
       const { title } = result;
@@ -41,7 +41,7 @@ describe('WikiaExtractor', () => {
       assert.equal(title, 'Box Office: It’s Good to Be ‘Peculiar’');
     });
 
-    it('returns the author', async () => {
+    it('returns the author', () => {
       // To pass this test, fill out the author selector
       // in ./src/extractors/custom/fandom.wikia.com/index.js.
       const { author } = result;
@@ -51,7 +51,7 @@ describe('WikiaExtractor', () => {
       assert.equal(author, 'Drew Dietsch');
     });
 
-    it('returns the date_published', async () => {
+    it('returns the date_published', () => {
       // To pass this test, fill out the date_published selector
       // in ./src/extractors/custom/fandom.wikia.com/index.js.
       const { date_published } = result;
@@ -61,7 +61,7 @@ describe('WikiaExtractor', () => {
       assert.equal(date_published, '2016-10-03T02:30:57.000Z');
     });
 
-    it('returns the lead_image_url', async () => {
+    it('returns the lead_image_url', () => {
       // To pass this test, fill out the lead_image_url selector
       // in ./src/extractors/custom/fandom.wikia.com/index.js.
       const { lead_image_url } = result;
@@ -71,7 +71,7 @@ describe('WikiaExtractor', () => {
       assert.equal(lead_image_url, 'http://fandom.wikia.com/wp-content/uploads/2016/10/box-office-peculiar-feature-hero.jpg');
     });
 
-    it('returns the content', async () => {
+    it('returns the content', () => {
       // To pass this test, fill out the content selector
       // in ./src/extractors/custom/fandom.wikia.com/index.js.
       // You may also want to make use of the clean and transform

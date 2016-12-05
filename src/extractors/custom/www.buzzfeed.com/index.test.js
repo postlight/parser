@@ -31,7 +31,7 @@ describe('BuzzfeedExtractor', () => {
       assert.equal(extractor.domain, URL.parse(url).hostname);
     });
 
-    it('returns the title', async () => {
+    it('returns the title', () => {
       // To pass this test, fill out the title selector
       // in ./src/extractors/custom/www.buzzfeed.com/index.js.
       const { title } = result;
@@ -41,7 +41,7 @@ describe('BuzzfeedExtractor', () => {
       assert.equal(title, 'People Are Calling Out This Edited Picture Of Demi Lovato For Body-Shaming Her');
     });
 
-    it('returns the author', async () => {
+    it('returns the author', () => {
       // To pass this test, fill out the author selector
       // in ./src/extractors/custom/www.buzzfeed.com/index.js.
       const { author } = result;
@@ -51,7 +51,7 @@ describe('BuzzfeedExtractor', () => {
       assert.equal(author, 'Ikran Dahir');
     });
 
-    it('returns the lead_image_url', async () => {
+    it('returns the lead_image_url', () => {
       // To pass this test, fill out the lead_image_url selector
       // in ./src/extractors/custom/www.buzzfeed.com/index.js.
       const { lead_image_url } = result;
@@ -61,7 +61,7 @@ describe('BuzzfeedExtractor', () => {
       assert.equal(lead_image_url, 'https://img.buzzfeed.com/buzzfeed-static/static/2016-10/3/12/social_promotion/buzzfeed-prod-fastlane01/facebook-social-promotion-17757-1475512210-1.jpg');
     });
 
-    it('returns the content', async () => {
+    it('returns the content', () => {
       // To pass this test, fill out the content selector
       // in ./src/extractors/custom/www.buzzfeed.com/index.js.
       // You may also want to make use of the clean and transform
@@ -89,7 +89,7 @@ describe('BuzzfeedExtractor', () => {
       result =
         await Mercury.parse(url, html, { fallback: false });
     });
-    it('returns big header images in the content', async () => {
+    it('returns big header images in the content', () => {
       const { content } = result;
 
       const $ = cheerio.load(content || '');
@@ -99,7 +99,7 @@ describe('BuzzfeedExtractor', () => {
       assert.equal(imgSrc, 'https://img.buzzfeed.com/buzzfeed-static/static/2016-11/21/10/enhanced/buzzfeed-prod-fastlane03/longform-original-25748-1479741827-5.jpg');
     });
 
-    it('transforms the splash image to a figure and caption', async () => {
+    it('transforms the splash image to a figure and caption', () => {
       const { content } = result;
 
       const $ = cheerio.load(content || '');

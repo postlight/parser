@@ -30,7 +30,7 @@ describe('CustomExtractor', () => {
       assert.equal(extractor.domain, URL.parse(url).hostname);
     });
 
-    it('returns the title', async () => {
+    it('returns the title', () => {
       // To pass this test, fill out the title selector
       // in ./src/extractors/custom/www.broadwayworld.com/index.js.
       const { title } = result;
@@ -40,7 +40,7 @@ describe('CustomExtractor', () => {
       assert.equal(title, 'American Theatre Wing Launches Andrew Lloyd Webber Training Scholarships');
     });
 
-    it('returns the author', async () => {
+    it('returns the author', () => {
       // To pass this test, fill out the author selector
       // in ./src/extractors/custom/www.broadwayworld.com/index.js.
       const { author } = result;
@@ -50,7 +50,7 @@ describe('CustomExtractor', () => {
       assert.equal(author, 'BWW News Desk');
     });
 
-    it('returns the date_published', async () => {
+    it('returns the date_published', () => {
       // To pass this test, fill out the date_published selector
       // in ./src/extractors/custom/www.broadwayworld.com/index.js.
       const { date_published } = result;
@@ -60,7 +60,7 @@ describe('CustomExtractor', () => {
       assert.equal(date_published, '2016-10-13T19:35:00.000Z');
     });
 
-    it('returns the lead_image_url', async () => {
+    it('returns the lead_image_url', () => {
       // To pass this test, fill out the lead_image_url selector
       // in ./src/extractors/custom/www.broadwayworld.com/index.js.
       const { lead_image_url } = result;
@@ -70,7 +70,7 @@ describe('CustomExtractor', () => {
       assert.equal(lead_image_url, 'https://images.bwwstatic.com/columnpic7/7B5FD766-A644-E386-19DE07017A3AD79C.jpg');
     });
 
-    it('returns the content', async () => {
+    it('returns the content', () => {
       // To pass this test, fill out the content selector
       // in ./src/extractors/custom/www.broadwayworld.com/index.js.
       // You may also want to make use of the clean and transform

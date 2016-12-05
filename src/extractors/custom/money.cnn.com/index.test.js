@@ -27,7 +27,7 @@ describe('MoneyCnnComExtractor', () => {
       assert.equal(extractor.domain, URL.parse(url).hostname);
     });
 
-    it('returns the title', async () => {
+    it('returns the title', () => {
       // To pass this test, fill out the title selector
       // in ./src/extractors/custom/money.cnn.com/index.js.
       const { title } = result;
@@ -37,7 +37,7 @@ describe('MoneyCnnComExtractor', () => {
       assert.equal(title, 'Hundreds of Chicago O\'Hare airport workers go on strike');
     });
 
-    it('returns the author', async () => {
+    it('returns the author', () => {
       // To pass this test, fill out the author selector
       // in ./src/extractors/custom/money.cnn.com/index.js.
       const { author } = result;
@@ -47,7 +47,7 @@ describe('MoneyCnnComExtractor', () => {
       assert.equal(author, 'Julia Horowitz');
     });
 
-    it('returns the date_published', async () => {
+    it('returns the date_published', () => {
       // To pass this test, fill out the date_published selector
       // in ./src/extractors/custom/money.cnn.com/index.js.
       const { date_published } = result;
@@ -57,7 +57,7 @@ describe('MoneyCnnComExtractor', () => {
       assert.equal(date_published, '2016-11-29T03:33:08.000Z');
     });
 
-    it('returns the dek', async () => {
+    it('returns the dek', () => {
       // To pass this test, fill out the dek selector
       // in ./src/extractors/custom/money.cnn.com/index.js.
       const { dek } = result;
@@ -67,7 +67,7 @@ describe('MoneyCnnComExtractor', () => {
       assert.equal(dek, 'Heads up, travelers: Hundreds of workers are striking at Chicago O\'Hare International Airport on Tuesday.');
     });
 
-    it('returns the lead_image_url', async () => {
+    it('returns the lead_image_url', () => {
       // To pass this test, fill out the lead_image_url selector
       // in ./src/extractors/custom/money.cnn.com/index.js.
       const { lead_image_url } = result;
@@ -77,7 +77,7 @@ describe('MoneyCnnComExtractor', () => {
       assert.equal(lead_image_url, 'http://i2.cdn.turner.com/money/dam/assets/161118102423-ohare-airport-strike-780x439.jpg');
     });
 
-    it('returns the content', async () => {
+    it('returns the content', () => {
       // To pass this test, fill out the content selector
       // in ./src/extractors/custom/money.cnn.com/index.js.
       // You may also want to make use of the clean and transform
