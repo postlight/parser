@@ -19,13 +19,7 @@ function testFor(key, value, dir, file, url) {
   it('returns the ${key}', async () => {
             // To pass this test, fill out the ${key} selector
             // in ${dir}/index.js.
-            const html =
-              fs.readFileSync('${file}');
-            const articleUrl =
-              '${url}';
-
-            const { ${key} } =
-              await Mercury.parse(articleUrl, html, { fallback: false });
+            const { ${key} } = await result
 
             // Update these values with the expected values from
             // the article.
@@ -46,38 +40,43 @@ export default function (file, url, dir, result, name) {
     import { excerptContent } from 'utils/text';
 
     describe('${name}', () => {
-      it('is selected properly', () => {
-        // This test should be passing by default.
-        // It sanity checks that the correct parser
-        // is being selected for URLs from this domain
-        const url =
-          '${url}';
-        const extractor = getExtractor(url);
-        assert.equal(extractor.domain, URL.parse(url).hostname)
-      })
+      describe('initial test case', () => {
+        let result;
+        let url;
+        beforeAll(() => {
+          url =
+            '${url}';
+          const html =
+            fs.readFileSync('${file}');
+          result =
+            Mercury.parse(url, html, { fallback: false });
+        });
 
-        ${Reflect.ownKeys(result).map(k => testFor(k, result[k], dir, file, url)).join('\n\n')}
+        it('is selected properly', () => {
+          // This test should be passing by default.
+          // It sanity checks that the correct parser
+          // is being selected for URLs from this domain
+          const extractor = getExtractor(url);
+          assert.equal(extractor.domain, URL.parse(url).hostname)
+        })
 
-      it('returns the content', async () => {
-        // To pass this test, fill out the content selector
-        // in ${dir}/index.js.
-        // You may also want to make use of the clean and transform
-        // options.
-        const html =
-          fs.readFileSync('${file}');
-        const url =
-          '${url}';
+          ${Reflect.ownKeys(result).map(k => testFor(k, result[k], dir, file, url)).join('\n\n')}
 
-        const { content } =
-          await Mercury.parse(url, html, { fallback: false });
+        it('returns the content', async () => {
+          // To pass this test, fill out the content selector
+          // in ${dir}/index.js.
+          // You may also want to make use of the clean and transform
+          // options.
+          const { content } = await result;
 
-        const $ = cheerio.load(content || '');
+          const $ = cheerio.load(content || '');
 
-        const first13 = excerptContent($('*').first().text(), 13)
+          const first13 = excerptContent($('*').first().text(), 13)
 
-        // Update these values with the expected values from
-        // the article.
-        assert.equal(first13, 'Add the first 13 words of the article here');
+          // Update these values with the expected values from
+          // the article.
+          assert.equal(first13, 'Add the first 13 words of the article here');
+        });
       });
     });
   `;
