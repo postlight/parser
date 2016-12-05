@@ -2284,7 +2284,7 @@ var _templateObject2 = _taggedTemplateLiteral(['\n    import assert from \'asser
 
 var IGNORE = ['url', 'domain', 'content', 'word_count', 'next_page_url', 'excerpt', 'direction', 'total_pages', 'rendered_pages'];
 
-function testFor(key, value, dir, file, url) {
+function testFor(key, value, dir, file) {
   if (IGNORE.find(function (k) {
     return k === key;
   })) return '';
@@ -2294,7 +2294,7 @@ function testFor(key, value, dir, file, url) {
 
 var extractorTestTemplate = function (file, url, dir, result, name) {
   return template(_templateObject2, name, url, file, _Reflect$ownKeys(result).map(function (k) {
-    return testFor(k, result[k], dir, file, url);
+    return testFor(k, result[k], dir, file);
   }).join('\n\n'), dir);
 };
 

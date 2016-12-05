@@ -12,7 +12,7 @@ const IGNORE = [
   'rendered_pages',
 ];
 
-function testFor(key, value, dir, file, url) {
+function testFor(key, value, dir, file) {
   if (IGNORE.find(k => k === key)) return '';
 
   return template`
@@ -60,7 +60,7 @@ export default function (file, url, dir, result, name) {
           assert.equal(extractor.domain, URL.parse(url).hostname)
         })
 
-          ${Reflect.ownKeys(result).map(k => testFor(k, result[k], dir, file, url)).join('\n\n')}
+          ${Reflect.ownKeys(result).map(k => testFor(k, result[k], dir, file)).join('\n\n')}
 
         it('returns the content', async () => {
           // To pass this test, fill out the content selector
