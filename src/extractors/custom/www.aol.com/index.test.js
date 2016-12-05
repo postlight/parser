@@ -9,8 +9,8 @@ import { excerptContent } from 'utils/text';
 
 describe('WwwAolComExtractor', () => {
   describe('initial test case', () => {
-    let result
-    let url
+    let result;
+    let url;
     beforeAll(async () => {
       url =
         'http://www.aol.com/article/news/2016/12/01/son-of-slain-police-officer-given-teddy-bears-made-from-dads-un/21618553/';
@@ -18,7 +18,7 @@ describe('WwwAolComExtractor', () => {
         fs.readFileSync('./fixtures/www.aol.com/1480618816916.html');
       result =
         await Mercury.parse(url, html, { fallback: false });
-    })
+    });
     it('is selected properly', () => {
       // This test should be passing by default.
       // It sanity checks that the correct parser
@@ -30,7 +30,7 @@ describe('WwwAolComExtractor', () => {
     it('returns the title', async () => {
       // To pass this test, fill out the title selector
       // in ./src/extractors/custom/www.aol.com/index.js.
-      const { title } = result
+      const { title } = result;
 
       // Update these values with the expected values from
       // the article.
@@ -40,7 +40,7 @@ describe('WwwAolComExtractor', () => {
     it('returns the author', async () => {
       // To pass this test, fill out the author selector
       // in ./src/extractors/custom/www.aol.com/index.js.
-      const { author } = result
+      const { author } = result;
 
       // Update these values with the expected values from
       // the article.
@@ -50,7 +50,7 @@ describe('WwwAolComExtractor', () => {
     it('returns the date_published', async () => {
       // To pass this test, fill out the date_published selector
       // in ./src/extractors/custom/www.aol.com/index.js.
-      const { date_published } = result
+      const { date_published } = result;
 
       // Update these values with the expected values from
       // the article.
@@ -60,7 +60,7 @@ describe('WwwAolComExtractor', () => {
     it('returns the lead_image_url', async () => {
       // To pass this test, fill out the lead_image_url selector
       // in ./src/extractors/custom/www.aol.com/index.js.
-      const { lead_image_url } = result
+      const { lead_image_url } = result;
 
       // Update these values with the expected values from
       // the article.
@@ -72,7 +72,7 @@ describe('WwwAolComExtractor', () => {
       // in ./src/extractors/custom/www.aol.com/index.js.
       // You may also want to make use of the clean and transform
       // options.
-      const { content } = result
+      const { content } = result;
 
       const $ = cheerio.load(content || '');
 

@@ -9,8 +9,8 @@ import getExtractor from 'extractors/get-extractor';
 // Rename CustomExtractor
 describe('AtlanticExtractor', () => {
   describe('initial test case', () => {
-    let result
-    let url
+    let result;
+    let url;
     beforeAll(async () => {
       url =
         'http://www.theatlantic.com/technology/archive/2016/09/why-new-yorkers-got-a-push-alert-about-a-manhunt/500591/';
@@ -18,7 +18,7 @@ describe('AtlanticExtractor', () => {
         fs.readFileSync('./fixtures/www.theatlantic.com/1474321707642.html');
       result =
         await Mercury.parse(url, html, { fallback: false });
-    })
+    });
 
     it('is selected properly', () => {
       // To pass this test, rename your extractor in
@@ -34,7 +34,7 @@ describe('AtlanticExtractor', () => {
       // selectors in ./src/extractors/custom/www.theatlantic.com/index.js. This test is just
       // a stub; you can add more fields to test as much of
       // your parser as possible.
-      const { content, title, author } = result
+      const { content, title, author } = result;
       const $ = cheerio.load(content);
       const text = $('*').first()
         .text()

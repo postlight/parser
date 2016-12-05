@@ -10,8 +10,8 @@ import { excerptContent } from 'utils/text';
 // Rename CustomExtractor
 describe('BuzzfeedExtractor', () => {
   describe('initial test case', () => {
-    let result
-    let url
+    let result;
+    let url;
     beforeAll(async () => {
       url =
         'https://www.buzzfeed.com/ikrd/people-are-calling-out-this-edited-picture-of-demi-lovato-fo';
@@ -19,7 +19,7 @@ describe('BuzzfeedExtractor', () => {
         fs.readFileSync('./fixtures/www.buzzfeed.com/1475531975121.html');
       result =
         await Mercury.parse(url, html, { fallback: false });
-    })
+    });
 
     it('is selected properly', () => {
       // To pass this test, rename your extractor in
@@ -34,7 +34,7 @@ describe('BuzzfeedExtractor', () => {
     it('returns the title', async () => {
       // To pass this test, fill out the title selector
       // in ./src/extractors/custom/www.buzzfeed.com/index.js.
-      const { title } = result
+      const { title } = result;
 
       // Update these values with the expected values from
       // the article.
@@ -44,7 +44,7 @@ describe('BuzzfeedExtractor', () => {
     it('returns the author', async () => {
       // To pass this test, fill out the author selector
       // in ./src/extractors/custom/www.buzzfeed.com/index.js.
-      const { author } = result
+      const { author } = result;
 
       // Update these values with the expected values from
       // the article.
@@ -54,7 +54,7 @@ describe('BuzzfeedExtractor', () => {
     it('returns the lead_image_url', async () => {
       // To pass this test, fill out the lead_image_url selector
       // in ./src/extractors/custom/www.buzzfeed.com/index.js.
-      const { lead_image_url } = result
+      const { lead_image_url } = result;
 
       // Update these values with the expected values from
       // the article.
@@ -66,7 +66,7 @@ describe('BuzzfeedExtractor', () => {
       // in ./src/extractors/custom/www.buzzfeed.com/index.js.
       // You may also want to make use of the clean and transform
       // options.
-      const { content } = result
+      const { content } = result;
 
       const $ = cheerio.load(content || '');
 
@@ -79,8 +79,8 @@ describe('BuzzfeedExtractor', () => {
   });
 
   describe('splash image', () => {
-    let result
-    let url
+    let result;
+    let url;
     beforeAll(async () => {
       url =
         'https://www.buzzfeed.com/katiejmbaker/college-trump-supporters-the-new-counterculture?utm_term=.ckb72b58Y#.oxY8ZOWY3';
@@ -88,9 +88,9 @@ describe('BuzzfeedExtractor', () => {
         fs.readFileSync('./fixtures/www.buzzfeed.com/1480717502688.html');
       result =
         await Mercury.parse(url, html, { fallback: false });
-    })
+    });
     it('returns big header images in the content', async () => {
-      const { content } = result
+      const { content } = result;
 
       const $ = cheerio.load(content || '');
 
@@ -100,7 +100,7 @@ describe('BuzzfeedExtractor', () => {
     });
 
     it('transforms the splash image to a figure and caption', async () => {
-      const { content } = result
+      const { content } = result;
 
       const $ = cheerio.load(content || '');
 

@@ -9,8 +9,8 @@ import { excerptContent } from 'utils/text';
 
 describe('MediumExtractor', () => {
   describe('initial test case', () => {
-    let result
-    let url
+    let result;
+    let url;
     beforeAll(async () => {
       url =
         'https://medium.com/the-wtf-economy/wtf-whats-the-future-e52ab9515573#.ilwrgwsks';
@@ -18,7 +18,7 @@ describe('MediumExtractor', () => {
         fs.readFileSync('./fixtures/medium.com/1477523363921.html');
       result =
         await Mercury.parse(url, html, { fallback: false });
-    })
+    });
 
     it('is selected properly', () => {
       // To pass this test, rename your extractor in
@@ -31,25 +31,25 @@ describe('MediumExtractor', () => {
     });
 
     it('returns the title', async () => {
-      const { title } = result
+      const { title } = result;
 
       assert.equal(title, 'WTF? What’s The Future?');
     });
 
     it('returns the author', async () => {
-      const { author } = result
+      const { author } = result;
 
       assert.equal(author, 'Tim O\'Reilly');
     });
 
     it('returns the date_published', async () => {
-      const { date_published } = result
+      const { date_published } = result;
 
       assert.equal(date_published, '2016-10-19T14:24:20.323Z');
     });
 
     it('returns the dek', async () => {
-      const { dek } = result
+      const { dek } = result;
 
       assert.equal(dek, null);
     });
@@ -57,7 +57,7 @@ describe('MediumExtractor', () => {
     it('returns the lead_image_url', async () => {
       // To pass this test, fill out the lead_image_url selector
       // in ./src/extractors/custom/medium.com/index.js.
-      const { lead_image_url } = result
+      const { lead_image_url } = result;
 
       // Update these values with the expected values from
       // the article.
@@ -65,7 +65,7 @@ describe('MediumExtractor', () => {
     });
 
     it('returns the content', async () => {
-      const { content } = result
+      const { content } = result;
 
       const $ = cheerio.load(content || '');
 

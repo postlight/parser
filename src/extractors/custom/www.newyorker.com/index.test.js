@@ -9,8 +9,8 @@ import { excerptContent } from 'utils/text';
 
 describe('NewYorkerExtractor', () => {
   describe('initial test case', () => {
-    let result
-    let url
+    let result;
+    let url;
     beforeAll(async () => {
       url =
         'http://www.newyorker.com/tech/elements/hacking-cryptography-and-the-countdown-to-quantum-computing';
@@ -18,7 +18,7 @@ describe('NewYorkerExtractor', () => {
         fs.readFileSync('./fixtures/www.newyorker.com/1475248565793.html');
       result =
         await Mercury.parse(url, html, { fallback: false });
-    })
+    });
 
     it('is selected properly', () => {
       // To pass this test, rename your extractor in
@@ -33,7 +33,7 @@ describe('NewYorkerExtractor', () => {
     it('returns the title', async () => {
       // To pass this test, fill out the title selector
       // in ./src/extractors/custom/www.newyorker.com/index.js.
-      const { title } = result
+      const { title } = result;
 
       // Update these values with the expected values from
       // the article.
@@ -43,7 +43,7 @@ describe('NewYorkerExtractor', () => {
     it('returns the author', async () => {
       // To pass this test, fill out the author selector
       // in ./src/extractors/custom/www.newyorker.com/index.js.
-      const { author } = result
+      const { author } = result;
 
       // Update these values with the expected values from
       // the article.
@@ -53,7 +53,7 @@ describe('NewYorkerExtractor', () => {
     it('returns the date_published', async () => {
       // To pass this test, fill out the date_published selector
       // in ./src/extractors/custom/www.newyorker.com/index.js.
-      const { date_published } = result
+      const { date_published } = result;
 
       // Update these values with the expected values from
       // the article.
@@ -63,7 +63,7 @@ describe('NewYorkerExtractor', () => {
     it('returns the lead_image_url', async () => {
       // To pass this test, fill out the lead_image_url selector
       // in ./src/extractors/custom/www.newyorker.com/index.js.
-      const { lead_image_url } = result
+      const { lead_image_url } = result;
 
       // Update these values with the expected values from
       // the article.
@@ -75,7 +75,7 @@ describe('NewYorkerExtractor', () => {
       // in ./src/extractors/custom/www.newyorker.com/index.js.
       // You may also want to make use of the clean and transform
       // options.
-      const { content } = result
+      const { content } = result;
 
       const $ = cheerio.load(content || '');
 
@@ -85,7 +85,9 @@ describe('NewYorkerExtractor', () => {
       // the article.
       assert.equal(first13, 'In a laboratory in Shanghai, researchers work on developing a quantum computer—a new');
     });
+  });
 
+  describe('magazine content', () => {
     it('returns the dek when present', async () => {
       const html =
         fs.readFileSync('./fixtures/www.newyorker.com/1480713300334.html');

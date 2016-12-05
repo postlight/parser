@@ -9,8 +9,8 @@ import { excerptContent } from 'utils/text';
 
 describe('DeadspinExtractor', () => {
   describe('initial test case', () => {
-    let result
-    let url
+    let result;
+    let url;
     beforeAll(async () => {
       url =
         'http://deadspin.com/the-nationals-are-stuck-with-danny-espinosa-tonight-un-1787706769';
@@ -18,7 +18,7 @@ describe('DeadspinExtractor', () => {
         fs.readFileSync('./fixtures/deadspin.com/1476389931786.html');
       result =
         await Mercury.parse(url, html, { fallback: false });
-    })
+    });
 
     it('is selected properly', () => {
       const extractor = getExtractor(url);
@@ -30,14 +30,14 @@ describe('DeadspinExtractor', () => {
       // in ./src/extractors/custom/deadspin.com/index.js.
       // Update these values with the expected values from
       // the article.
-      const { title } = result
+      const { title } = result;
       assert.equal(title, 'The Nationals Are Stuck With Danny Espinosa Tonight, Unless They Opt For The Only Thing Worse');
     });
 
     it('returns the author', async () => {
       // To pass this test, fill out the author selector
       // in ./src/extractors/custom/deadspin.com/index.js.
-      const { author } = result
+      const { author } = result;
 
       // Update these values with the expected values from
       // the article.
@@ -47,7 +47,7 @@ describe('DeadspinExtractor', () => {
     it('returns the date_published', async () => {
       // To pass this test, fill out the date_published selector
       // in ./src/extractors/custom/deadspin.com/index.js.
-      const { date_published } = result
+      const { date_published } = result;
 
       // Update these values with the expected values from
       // the article.
@@ -57,7 +57,7 @@ describe('DeadspinExtractor', () => {
     it('returns the lead_image_url', async () => {
       // To pass this test, fill out the lead_image_url selector
       // in ./src/extractors/custom/deadspin.com/index.js.
-      const { lead_image_url } = result
+      const { lead_image_url } = result;
 
       // Update these values with the expected values from
       // the article.
@@ -69,7 +69,7 @@ describe('DeadspinExtractor', () => {
       // in ./src/extractors/custom/deadspin.com/index.js.
       // You may also want to make use of the clean and transform
       // options.
-      const { content } = result
+      const { content } = result;
 
       const $ = cheerio.load(content || '');
 

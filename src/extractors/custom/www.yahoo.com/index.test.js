@@ -10,8 +10,8 @@ import { excerptContent } from 'utils/text';
 // Rename CustomExtractor
 describe('YahooExtractor', () => {
   describe('initial test case', () => {
-    let result
-    let url
+    let result;
+    let url;
     beforeAll(async () => {
       url =
         'https://www.yahoo.com/news/m/1c621104-b0eb-3b4d-9b0a-7bb979f80d7d/ss_clinton-cancels-joint-events.html';
@@ -19,7 +19,7 @@ describe('YahooExtractor', () => {
         fs.readFileSync('./fixtures/www.yahoo.com/1475529982399.html');
       result =
         await Mercury.parse(url, html, { fallback: false });
-    })
+    });
 
     it('is selected properly', () => {
       // To pass this test, rename your extractor in
@@ -34,7 +34,7 @@ describe('YahooExtractor', () => {
     it('returns the title', async () => {
       // To pass this test, fill out the title selector
       // in ./src/extractors/custom/www.yahoo.com/index.js.
-      const { title } = result
+      const { title } = result;
 
       // Update these values with the expected values from
       // the article.
@@ -44,7 +44,7 @@ describe('YahooExtractor', () => {
     it('returns the author', async () => {
       // To pass this test, fill out the author selector
       // in ./src/extractors/custom/www.yahoo.com/index.js.
-      const { author } = result
+      const { author } = result;
 
       // Update these values with the expected values from
       // the article.
@@ -54,7 +54,7 @@ describe('YahooExtractor', () => {
     it('returns the date_published', async () => {
       // To pass this test, fill out the date_published selector
       // in ./src/extractors/custom/www.yahoo.com/index.js.
-      const { date_published } = result
+      const { date_published } = result;
 
       // Update these values with the expected values from
       // the article.
@@ -64,7 +64,7 @@ describe('YahooExtractor', () => {
     it('returns the lead_image_url', async () => {
       // To pass this test, fill out the lead_image_url selector
       // in ./src/extractors/custom/www.yahoo.com/index.js.
-      const { lead_image_url } = result
+      const { lead_image_url } = result;
 
       // Update these values with the expected values from
       // the article.
@@ -76,7 +76,7 @@ describe('YahooExtractor', () => {
       // in ./src/extractors/custom/www.yahoo.com/index.js.
       // You may also want to make use of the clean and transform
       // options.
-      const { content } = result
+      const { content } = result;
 
       const $ = cheerio.load(content || '');
 

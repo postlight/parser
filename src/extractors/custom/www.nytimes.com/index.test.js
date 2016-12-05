@@ -9,8 +9,8 @@ import Mercury from 'mercury';
 
 describe('NYTimesExtractor', () => {
   describe('initial test case', () => {
-    let result
-    let url
+    let result;
+    let url;
     beforeAll(async () => {
       url =
         'http://www.nytimes.com/interactive/2016/09/15/arts/design/national-museum-of-african-american-history-and-culture.html';
@@ -18,7 +18,7 @@ describe('NYTimesExtractor', () => {
         fs.readFileSync('./fixtures/www.nytimes.com/1474318141888.html');
       result =
         await Mercury.parse(url, html, { fallback: false });
-    })
+    });
 
     it('is selected properly', () => {
       // To pass this test, rename your extractor in
@@ -33,7 +33,7 @@ describe('NYTimesExtractor', () => {
     it('returns the title', async () => {
       // To pass this test, fill out the title selector
       // in ./src/extractors/custom/www.nytimes.com/index.js.
-      const { title } = result
+      const { title } = result;
 
       // Update these values with the expected values from
       // the article.
@@ -43,7 +43,7 @@ describe('NYTimesExtractor', () => {
     it('returns the author', async () => {
       // To pass this test, fill out the author selector
       // in ./src/extractors/custom/www.nytimes.com/index.js.
-      const { author } = result
+      const { author } = result;
 
       // Update these values with the expected values from
       // the article.
@@ -53,7 +53,7 @@ describe('NYTimesExtractor', () => {
     it('returns the date_published', async () => {
       // To pass this test, fill out the date_published selector
       // in ./src/extractors/custom/www.nytimes.com/index.js.
-      const { date_published } = result
+      const { date_published } = result;
 
       // Update these values with the expected values from
       // the article.
@@ -63,7 +63,7 @@ describe('NYTimesExtractor', () => {
     it('returns the lead_image_url', async () => {
       // To pass this test, fill out the lead_image_url selector
       // in ./src/extractors/custom/www.nytimes.com/index.js.
-      const { lead_image_url } = result
+      const { lead_image_url } = result;
 
       // Update these values with the expected values from
       // the article.
@@ -75,7 +75,7 @@ describe('NYTimesExtractor', () => {
       // in ./src/extractors/custom/www.nytimes.com/index.js.
       // You may also want to make use of the clean and transform
       // options.
-      const { content } = result
+      const { content } = result;
 
       const $ = cheerio.load(content || '');
 

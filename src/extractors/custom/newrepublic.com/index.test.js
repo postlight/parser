@@ -9,8 +9,8 @@ import { excerptContent } from 'utils/text';
 
 describe('NewrepublicComExtractor', () => {
   describe('initial test case', () => {
-    let result
-    let url
+    let result;
+    let url;
     beforeAll(async () => {
       url =
         'https://newrepublic.com/article/138859/fantastic-beasts-nice-place-visit';
@@ -18,7 +18,7 @@ describe('NewrepublicComExtractor', () => {
         fs.readFileSync('./fixtures/newrepublic.com/1480434805231.html');
       result =
         await Mercury.parse(url, html, { fallback: false });
-    })
+    });
     it('is selected properly', () => {
       // This test should be passing by default.
       // It sanity checks that the correct parser
@@ -30,7 +30,7 @@ describe('NewrepublicComExtractor', () => {
     it('article returns the title', async () => {
       // To pass this test, fill out the title selector
       // in ./src/extractors/custom/newrepublic.com/index.js.
-      const { title } = result
+      const { title } = result;
 
       // Update these values with the expected values from
       // the article.
@@ -40,7 +40,7 @@ describe('NewrepublicComExtractor', () => {
     it('returns the author', async () => {
       // To pass this test, fill out the author selector
       // in ./src/extractors/custom/newrepublic.com/index.js.
-      const { author } = result
+      const { author } = result;
 
       // Update these values with the expected values from
       // the article.
@@ -50,7 +50,7 @@ describe('NewrepublicComExtractor', () => {
     it('returns the date_published', async () => {
       // To pass this test, fill out the date_published selector
       // in ./src/extractors/custom/newrepublic.com/index.js.
-      const { date_published } = result
+      const { date_published } = result;
 
       // Update these values with the expected values from
       // the article.
@@ -60,7 +60,7 @@ describe('NewrepublicComExtractor', () => {
     it('returns the dek', async () => {
       // To pass this test, fill out the dek selector
       // in ./src/extractors/custom/newrepublic.com/index.js.
-      const { dek } = result
+      const { dek } = result;
 
       // Update these values with the expected values from
       // the article.
@@ -70,7 +70,7 @@ describe('NewrepublicComExtractor', () => {
     it('returns the lead_image_url', async () => {
       // To pass this test, fill out the lead_image_url selector
       // in ./src/extractors/custom/newrepublic.com/index.js.
-      const { lead_image_url } = result
+      const { lead_image_url } = result;
 
       // Update these values with the expected values from
       // the article.
@@ -82,7 +82,7 @@ describe('NewrepublicComExtractor', () => {
       // in ./src/extractors/custom/newrepublic.com/index.js.
       // You may also want to make use of the clean and transform
       // options.
-      const { content } = result
+      const { content } = result;
 
       const $ = cheerio.load(content || '');
 
@@ -95,20 +95,20 @@ describe('NewrepublicComExtractor', () => {
   });
 
   describe('minutes', () => {
-    let result
-    let url
+    let result;
+    let url;
     beforeAll(async () => {
       url =
         'https://newrepublic.com/minutes/139022/maybe-donald-trumps-twitter-account-just-smoke-screen';
       const html =
         fs.readFileSync('./fixtures/newrepublic.com/1480446502259.html');
       result = await Mercury.parse(url, html, { fallback: false });
-    })
+    });
 
     it('minute returns the title', async () => {
       // To pass this test, fill out the title selector
       // in ./src/extractors/custom/newrepublic.com/index.js.
-      const { title } = result
+      const { title } = result;
 
       // Update these values with the expected values from
       // the article.
@@ -118,7 +118,7 @@ describe('NewrepublicComExtractor', () => {
     it('article returns the author', async () => {
       // To pass this test, fill out the author selector
       // in ./src/extractors/custom/newrepublic.com/index.js.
-      const { author } = result
+      const { author } = result;
 
       // Update these values with the expected values from
       // the article.
@@ -130,7 +130,7 @@ describe('NewrepublicComExtractor', () => {
       // in ./src/extractors/custom/newrepublic.com/index.js.
       // You may also want to make use of the clean and transform
       // options.
-      const { content } = result
+      const { content } = result;
 
       const $ = cheerio.load(content || '');
 
@@ -140,6 +140,5 @@ describe('NewrepublicComExtractor', () => {
       // the article.
       assert.equal(first13, 'It’s been one of the most persistent narratives of the last year: Whenever');
     });
-
   });
 });

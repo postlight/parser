@@ -9,8 +9,8 @@ import { excerptContent } from 'utils/text';
 
 describe('WwwWashingtonpostComExtractor', () => {
   describe('initial test case', () => {
-    let result
-    let url
+    let result;
+    let url;
     beforeAll(async () => {
       url =
         'https://www.washingtonpost.com/politics/trump-foundation-apparently-admits-to-violating-ban-on-self-dealing-new-filing-to-irs-shows/2016/11/22/893f6508-b0a9-11e6-8616-52b15787add0_story.html';
@@ -18,7 +18,7 @@ describe('WwwWashingtonpostComExtractor', () => {
         fs.readFileSync('./fixtures/www.washingtonpost.com/1480364838420.html');
       result =
         await Mercury.parse(url, html, { fallback: false });
-    })
+    });
 
     it('is selected properly', () => {
       // This test should be passing by default.
@@ -31,7 +31,7 @@ describe('WwwWashingtonpostComExtractor', () => {
     it('returns the title', async () => {
       // To pass this test, fill out the title selector
       // in ./src/extractors/custom/www.washingtonpost.com/index.js.
-      const { title } = result
+      const { title } = result;
 
       // Update these values with the expected values from
       // the article.
@@ -41,7 +41,7 @@ describe('WwwWashingtonpostComExtractor', () => {
     it('returns the author', async () => {
       // To pass this test, fill out the author selector
       // in ./src/extractors/custom/www.washingtonpost.com/index.js.
-      const { author } = result
+      const { author } = result;
 
       // Update these values with the expected values from
       // the article.
@@ -51,7 +51,7 @@ describe('WwwWashingtonpostComExtractor', () => {
     it('returns the date_published', async () => {
       // To pass this test, fill out the date_published selector
       // in ./src/extractors/custom/www.washingtonpost.com/index.js.
-      const { date_published } = result
+      const { date_published } = result;
 
       // Update these values with the expected values from
       // the article.
@@ -61,7 +61,7 @@ describe('WwwWashingtonpostComExtractor', () => {
     it('returns the lead_image_url', async () => {
       // To pass this test, fill out the lead_image_url selector
       // in ./src/extractors/custom/www.washingtonpost.com/index.js.
-      const { lead_image_url } = result
+      const { lead_image_url } = result;
 
       // Update these values with the expected values from
       // the article.
@@ -73,7 +73,7 @@ describe('WwwWashingtonpostComExtractor', () => {
       // in ./src/extractors/custom/www.washingtonpost.com/index.js.
       // You may also want to make use of the clean and transform
       // options.
-      const { content } = result
+      const { content } = result;
 
       const $ = cheerio.load(content || '');
 

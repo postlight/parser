@@ -9,8 +9,8 @@ import { excerptContent } from 'utils/text';
 
 describe('WwwCnnComExtractor', () => {
   describe('initial test case', () => {
-    let result
-    let url
+    let result;
+    let url;
     beforeAll(async () => {
       url =
         'http://www.cnn.com/2016/11/29/politics/donald-trump-transition-presidency/index.html';
@@ -18,7 +18,7 @@ describe('WwwCnnComExtractor', () => {
         fs.readFileSync('./fixtures/www.cnn.com/1480458253239.html');
       result =
         await Mercury.parse(url, html, { fallback: false });
-    })
+    });
 
     it('is selected properly', () => {
       // This test should be passing by default.
@@ -31,7 +31,7 @@ describe('WwwCnnComExtractor', () => {
     it('returns the title', async () => {
       // To pass this test, fill out the title selector
       // in ./src/extractors/custom/www.cnn.com/index.js.
-      const { title } = result
+      const { title } = result;
 
       // Update these values with the expected values from
       // the article.
@@ -41,7 +41,7 @@ describe('WwwCnnComExtractor', () => {
     it('returns the author', async () => {
       // To pass this test, fill out the author selector
       // in ./src/extractors/custom/www.cnn.com/index.js.
-      const { author } = result
+      const { author } = result;
 
       // Update these values with the expected values from
       // the article.
@@ -51,7 +51,7 @@ describe('WwwCnnComExtractor', () => {
     it('returns the date_published', async () => {
       // To pass this test, fill out the date_published selector
       // in ./src/extractors/custom/www.cnn.com/index.js.
-      const { date_published } = result
+      const { date_published } = result;
 
       // Update these values with the expected values from
       // the article.
@@ -61,7 +61,7 @@ describe('WwwCnnComExtractor', () => {
     it('returns the lead_image_url', async () => {
       // To pass this test, fill out the lead_image_url selector
       // in ./src/extractors/custom/www.cnn.com/index.js.
-      const { lead_image_url } = result
+      const { lead_image_url } = result;
 
       // Update these values with the expected values from
       // the article.
@@ -73,7 +73,7 @@ describe('WwwCnnComExtractor', () => {
       // in ./src/extractors/custom/www.cnn.com/index.js.
       // You may also want to make use of the clean and transform
       // options.
-      const { content } = result
+      const { content } = result;
 
       const $ = cheerio.load(content || '');
 
