@@ -51,7 +51,7 @@ const Resource = {
       throw new Error('Content does not appear to be text.');
     }
 
-    let $ = cheerio.load(content, { normalizeWhitespace: true });
+    let $ = cheerio.load(content);
 
     if ($.root().children().length === 0) {
       throw new Error('No children, likely a bad parse.');
