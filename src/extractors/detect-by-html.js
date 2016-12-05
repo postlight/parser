@@ -1,6 +1,11 @@
+import {
+  MediumExtractor,
+  BloggerExtractor,
+} from './custom/';
+
 const Detectors = {
-  'meta[name="al:ios:app_name"][value="Medium"]': 'medium.com',
-  'meta[name="generator"][value="blogger"]': 'blogspot.com',
+  'meta[name="al:ios:app_name"][value="Medium"]': MediumExtractor,
+  'meta[name="generator"][value="blogger"]': BloggerExtractor,
 };
 
 export default function detectByHtml($) {

@@ -10,7 +10,7 @@ describe('detectByHtml', () => {
 
     const $ = cheerio.load(html);
 
-    assert.equal(detectByHtml($), 'medium.com');
+    assert.equal(detectByHtml($).domain, 'medium.com');
   });
 
   it('returns nothing if no match is found', () => {

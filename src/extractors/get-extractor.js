@@ -10,5 +10,5 @@ export default function getExtractor(url, parsedUrl, $) {
   const baseDomain = hostname.split('.').slice(-2).join('.');
 
   return Extractors[hostname] || Extractors[baseDomain] ||
-    Extractors[detectByHtml($)] || GenericExtractor;
+    detectByHtml($) || GenericExtractor;
 }
