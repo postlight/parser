@@ -84,8 +84,6 @@ $.cleanup = () => {
 };
 
 $.load = (html, opts = {}, returnHtml = false) => {
-  const { normalizeWhitespace } = opts;
-
   if (!html) {
     html = $.cloneHtml();
   } else {
