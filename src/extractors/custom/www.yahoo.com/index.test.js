@@ -12,16 +12,16 @@ describe('YahooExtractor', () => {
   describe('initial test case', () => {
     let result;
     let url;
-    beforeAll(async () => {
+    beforeAll(() => {
       url =
         'https://www.yahoo.com/news/m/1c621104-b0eb-3b4d-9b0a-7bb979f80d7d/ss_clinton-cancels-joint-events.html';
       const html =
         fs.readFileSync('./fixtures/www.yahoo.com/1475529982399.html');
       result =
-        await Mercury.parse(url, html, { fallback: false });
+        Mercury.parse(url, html, { fallback: false });
     });
 
-    it('is selected properly', () => {
+    it('is selected properly', async () => {
       // To pass this test, rename your extractor in
       // ./src/extractors/custom/www.yahoo.com/index.js
       // (e.g., CustomExtractor => NYTimesExtractor)
@@ -31,52 +31,52 @@ describe('YahooExtractor', () => {
       assert.equal(extractor.domain, URL.parse(url).hostname);
     });
 
-    it('returns the title', () => {
+    it('returns the title', async () => {
       // To pass this test, fill out the title selector
       // in ./src/extractors/custom/www.yahoo.com/index.js.
-      const { title } = result;
+      const { title } = await result;
 
       // Update these values with the expected values from
       // the article.
       assert.equal(title, 'Clinton Cancels Joint Events with Sanders');
     });
 
-    it('returns the author', () => {
+    it('returns the author', async () => {
       // To pass this test, fill out the author selector
       // in ./src/extractors/custom/www.yahoo.com/index.js.
-      const { author } = result;
+      const { author } = await result;
 
       // Update these values with the expected values from
       // the article.
       assert.equal(author, 'Fox Nation');
     });
 
-    it('returns the date_published', () => {
+    it('returns the date_published', async () => {
       // To pass this test, fill out the date_published selector
       // in ./src/extractors/custom/www.yahoo.com/index.js.
-      const { date_published } = result;
+      const { date_published } = await result;
 
       // Update these values with the expected values from
       // the article.
       assert.equal(date_published, '2016-10-03T05:00:00.000Z');
     });
 
-    it('returns the lead_image_url', () => {
+    it('returns the lead_image_url', async () => {
       // To pass this test, fill out the lead_image_url selector
       // in ./src/extractors/custom/www.yahoo.com/index.js.
-      const { lead_image_url } = result;
+      const { lead_image_url } = await result;
 
       // Update these values with the expected values from
       // the article.
       assert.equal(lead_image_url, 'https://s.yimg.com/uu/api/res/1.2/tE8CoXSgHD15n5p8wUwGJA--/aD0zMDA7dz02MjQ7c209MTthcHBpZD15dGFjaHlvbg--/http://slingstone.zenfs.com/offnetwork/218c3f97f0b7e1598b6dc9fd10126e22');
     });
 
-    it('returns the content', () => {
+    it('returns the content', async () => {
       // To pass this test, fill out the content selector
       // in ./src/extractors/custom/www.yahoo.com/index.js.
       // You may also want to make use of the clean and transform
       // options.
-      const { content } = result;
+      const { content } = await result;
 
       const $ = cheerio.load(content || '');
 

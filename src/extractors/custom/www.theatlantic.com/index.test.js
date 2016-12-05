@@ -11,16 +11,16 @@ describe('AtlanticExtractor', () => {
   describe('initial test case', () => {
     let result;
     let url;
-    beforeAll(async () => {
+    beforeAll(() => {
       url =
         'http://www.theatlantic.com/technology/archive/2016/09/why-new-yorkers-got-a-push-alert-about-a-manhunt/500591/';
       const html =
         fs.readFileSync('./fixtures/www.theatlantic.com/1474321707642.html');
       result =
-        await Mercury.parse(url, html, { fallback: false });
+        Mercury.parse(url, html, { fallback: false });
     });
 
-    it('is selected properly', () => {
+    it('is selected properly', async () => {
       // To pass this test, rename your extractor in
       // ./src/extractors/custom/www.theatlantic.com/index.js
       // then add your new extractor to
@@ -29,12 +29,12 @@ describe('AtlanticExtractor', () => {
       assert.equal(extractor.domain, URL.parse(url).hostname);
     });
 
-    it('works with a starter story', () => {
+    it('works with a starter story', async () => {
       // To pass this test, begin filling out your
       // selectors in ./src/extractors/custom/www.theatlantic.com/index.js. This test is just
       // a stub; you can add more fields to test as much of
       // your parser as possible.
-      const { content, title, author } = result;
+      const { content, title, author } = await result;
       const $ = cheerio.load(content);
       const text = $('*').first()
         .text()

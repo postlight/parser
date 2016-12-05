@@ -11,16 +11,16 @@ describe('MediumExtractor', () => {
   describe('initial test case', () => {
     let result;
     let url;
-    beforeAll(async () => {
+    beforeAll(() => {
       url =
         'https://medium.com/the-wtf-economy/wtf-whats-the-future-e52ab9515573#.ilwrgwsks';
       const html =
         fs.readFileSync('./fixtures/medium.com/1477523363921.html');
       result =
-        await Mercury.parse(url, html, { fallback: false });
+        Mercury.parse(url, html, { fallback: false });
     });
 
-    it('is selected properly', () => {
+    it('is selected properly', async () => {
       // To pass this test, rename your extractor in
       // ./src/extractors/custom/medium.com/index.js
       // (e.g., CustomExtractor => NYTimesExtractor)
@@ -30,42 +30,42 @@ describe('MediumExtractor', () => {
       assert.equal(extractor.domain, URL.parse(url).hostname);
     });
 
-    it('returns the title', () => {
-      const { title } = result;
+    it('returns the title', async () => {
+      const { title } = await result;
 
       assert.equal(title, 'WTF? What’s The Future?');
     });
 
-    it('returns the author', () => {
-      const { author } = result;
+    it('returns the author', async () => {
+      const { author } = await result;
 
       assert.equal(author, 'Tim O\'Reilly');
     });
 
-    it('returns the date_published', () => {
-      const { date_published } = result;
+    it('returns the date_published', async () => {
+      const { date_published } = await result;
 
       assert.equal(date_published, '2016-10-19T14:24:20.323Z');
     });
 
-    it('returns the dek', () => {
-      const { dek } = result;
+    it('returns the dek', async () => {
+      const { dek } = await result;
 
       assert.equal(dek, null);
     });
 
-    it('returns the lead_image_url', () => {
+    it('returns the lead_image_url', async () => {
       // To pass this test, fill out the lead_image_url selector
       // in ./src/extractors/custom/medium.com/index.js.
-      const { lead_image_url } = result;
+      const { lead_image_url } = await result;
 
       // Update these values with the expected values from
       // the article.
       assert.equal(lead_image_url, 'https://cdn-images-1.medium.com/max/1200/1*3Gzaug9mRc8vvx1cuQWkog.png');
     });
 
-    it('returns the content', () => {
-      const { content } = result;
+    it('returns the content', async () => {
+      const { content } = await result;
 
       const $ = cheerio.load(content || '');
 
