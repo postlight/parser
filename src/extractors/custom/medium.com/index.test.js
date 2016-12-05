@@ -8,98 +8,73 @@ import getExtractor from 'extractors/get-extractor';
 import { excerptContent } from 'utils/text';
 
 describe('MediumExtractor', () => {
-  it('is selected properly', () => {
-    // To pass this test, rename your extractor in
-    // ./src/extractors/custom/medium.com/index.js
-    // (e.g., CustomExtractor => NYTimesExtractor)
-    // then add your new extractor to
-    // src/extractors/all.js
-    const url =
-      'https://medium.com/the-wtf-economy/wtf-whats-the-future-e52ab9515573#.ilwrgwsks';
-    const extractor = getExtractor(url);
-    assert.equal(extractor.domain, URL.parse(url).hostname);
-  });
+  describe('initial test case', () => {
+    let result
+    let url
+    beforeAll(async () => {
+      url =
+        'https://medium.com/the-wtf-economy/wtf-whats-the-future-e52ab9515573#.ilwrgwsks';
+      const html =
+        fs.readFileSync('./fixtures/medium.com/1477523363921.html');
+      result =
+        await Mercury.parse(url, html, { fallback: false });
+    })
 
-  it('returns the title', async () => {
-    const html =
-      fs.readFileSync('./fixtures/medium.com/1477523363921.html');
-    const articleUrl =
-      'https://medium.com/the-wtf-economy/wtf-whats-the-future-e52ab9515573#.ilwrgwsks';
+    it('is selected properly', () => {
+      // To pass this test, rename your extractor in
+      // ./src/extractors/custom/medium.com/index.js
+      // (e.g., CustomExtractor => NYTimesExtractor)
+      // then add your new extractor to
+      // src/extractors/all.js
+      const extractor = getExtractor(url);
+      assert.equal(extractor.domain, URL.parse(url).hostname);
+    });
 
-    const { title } =
-      await Mercury.parse(articleUrl, html, { fallback: false });
+    it('returns the title', async () => {
+      const { title } = result
 
-    assert.equal(title, 'WTF? What’s The Future?');
-  });
+      assert.equal(title, 'WTF? What’s The Future?');
+    });
 
-  it('returns the author', async () => {
-    const html =
-      fs.readFileSync('./fixtures/medium.com/1477523363921.html');
-    const articleUrl =
-      'https://medium.com/the-wtf-economy/wtf-whats-the-future-e52ab9515573#.ilwrgwsks';
+    it('returns the author', async () => {
+      const { author } = result
 
-    const { author } =
-      await Mercury.parse(articleUrl, html, { fallback: false });
+      assert.equal(author, 'Tim O\'Reilly');
+    });
 
-    assert.equal(author, 'Tim O\'Reilly');
-  });
+    it('returns the date_published', async () => {
+      const { date_published } = result
 
-  it('returns the date_published', async () => {
-    const html =
-      fs.readFileSync('./fixtures/medium.com/1477523363921.html');
-    const articleUrl =
-      'https://medium.com/the-wtf-economy/wtf-whats-the-future-e52ab9515573#.ilwrgwsks';
+      assert.equal(date_published, '2016-10-19T14:24:20.323Z');
+    });
 
-    const { date_published } =
-      await Mercury.parse(articleUrl, html, { fallback: false });
+    it('returns the dek', async () => {
+      const { dek } = result
 
-    assert.equal(date_published, '2016-10-19T14:24:20.323Z');
-  });
+      assert.equal(dek, null);
+    });
 
-  it('returns the dek', async () => {
-    const html =
-      fs.readFileSync('./fixtures/medium.com/1477523363921.html');
-    const articleUrl =
-      'https://medium.com/the-wtf-economy/wtf-whats-the-future-e52ab9515573#.ilwrgwsks';
+    it('returns the lead_image_url', async () => {
+      // To pass this test, fill out the lead_image_url selector
+      // in ./src/extractors/custom/medium.com/index.js.
+      const { lead_image_url } = result
 
-    const { dek } =
-      await Mercury.parse(articleUrl, html, { fallback: false });
+      // Update these values with the expected values from
+      // the article.
+      assert.equal(lead_image_url, 'https://cdn-images-1.medium.com/max/1200/1*3Gzaug9mRc8vvx1cuQWkog.png');
+    });
 
-    assert.equal(dek, null);
-  });
+    it('returns the content', async () => {
+      const { content } = result
 
-  it('returns the lead_image_url', async () => {
-    // To pass this test, fill out the lead_image_url selector
-    // in ./src/extractors/custom/medium.com/index.js.
-    const html =
-      fs.readFileSync('./fixtures/medium.com/1477523363921.html');
-    const articleUrl =
-      'https://medium.com/the-wtf-economy/wtf-whats-the-future-e52ab9515573#.ilwrgwsks';
+      const $ = cheerio.load(content || '');
 
-    const { lead_image_url } =
-      await Mercury.parse(articleUrl, html, { fallback: false });
+      const first13 = excerptContent($('*').first().text(), 13);
 
-    // Update these values with the expected values from
-    // the article.
-    assert.equal(lead_image_url, 'https://cdn-images-1.medium.com/max/1200/1*3Gzaug9mRc8vvx1cuQWkog.png');
-  });
+      // testing that youtube video transform is working
+      assert.equal(/IAoy3ia2ivI/.test(content), true);
 
-  it('returns the content', async () => {
-    const html =
-      fs.readFileSync('./fixtures/medium.com/1477523363921.html');
-    const url =
-      'https://medium.com/the-wtf-economy/wtf-whats-the-future-e52ab9515573#.ilwrgwsks';
-
-    const { content } =
-      await Mercury.parse(url, html, { fallback: false });
-
-    const $ = cheerio.load(content || '');
-
-    const first13 = excerptContent($('*').first().text(), 13);
-
-    // testing that youtube video transform is working
-    assert.equal(/IAoy3ia2ivI/.test(content), true);
-
-    assert.equal(first13, 'Video of WTF? My talk at the White House Frontiers ConferenceLast Thursday, I');
+      assert.equal(first13, 'Video of WTF? My talk at the White House Frontiers ConferenceLast Thursday, I');
+    });
   });
 });

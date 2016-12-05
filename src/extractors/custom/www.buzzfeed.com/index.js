@@ -56,7 +56,6 @@ export const BuzzfeedExtractor = {
   date_published: {
     selectors: [
       '.buzz-datetime',
-      // enter author selectors
     ],
   },
 

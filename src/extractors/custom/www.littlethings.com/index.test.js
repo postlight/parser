@@ -9,14 +9,24 @@ import { excerptContent } from 'utils/text';
 
 // Rename CustomExtractor
 describe('LittleThingsExtractor', () => {
+  describe('initial test case', () => {
+    let result
+    let url
+    beforeAll(async () => {
+      url =
+        'http://www.littlethings.com/diy-pineapple-lamp/';
+      const html =
+        fs.readFileSync('./fixtures/www.littlethings.com/1475605036506.html');
+      result =
+        await Mercury.parse(url, html, { fallback: false });
+    })
+
   it('is selected properly', () => {
     // To pass this test, rename your extractor in
     // ./src/extractors/custom/www.littlethings.com/index.js
     // (e.g., CustomExtractor => NYTimesExtractor)
     // then add your new extractor to
     // src/extractors/all.js
-    const url =
-      'http://www.littlethings.com/diy-pineapple-lamp/';
     const extractor = getExtractor(url);
     assert.equal(extractor.domain, URL.parse(url).hostname);
   });
@@ -24,13 +34,7 @@ describe('LittleThingsExtractor', () => {
   it('returns the title', async () => {
     // To pass this test, fill out the title selector
     // in ./src/extractors/custom/www.littlethings.com/index.js.
-    const html =
-      fs.readFileSync('./fixtures/www.littlethings.com/1475605036506.html');
-    const articleUrl =
-      'http://www.littlethings.com/diy-pineapple-lamp/';
-
-    const { title } =
-      await Mercury.parse(articleUrl, html, { fallback: false });
+    const { title } = result
 
     // Update these values with the expected values from
     // the article.
@@ -40,13 +44,7 @@ describe('LittleThingsExtractor', () => {
   it('returns the author', async () => {
     // To pass this test, fill out the author selector
     // in ./src/extractors/custom/www.littlethings.com/index.js.
-    const html =
-      fs.readFileSync('./fixtures/www.littlethings.com/1475605036506.html');
-    const articleUrl =
-      'http://www.littlethings.com/diy-pineapple-lamp/';
-
-    const { author } =
-      await Mercury.parse(articleUrl, html, { fallback: false });
+    const { author } = result
 
     // Update these values with the expected values from
     // the article.
@@ -56,13 +54,7 @@ describe('LittleThingsExtractor', () => {
   it('returns the lead_image_url', async () => {
     // To pass this test, fill out the lead_image_url selector
     // in ./src/extractors/custom/www.littlethings.com/index.js.
-    const html =
-      fs.readFileSync('./fixtures/www.littlethings.com/1475605036506.html');
-    const articleUrl =
-      'http://www.littlethings.com/diy-pineapple-lamp/';
-
-    const { lead_image_url } =
-      await Mercury.parse(articleUrl, html, { fallback: false });
+    const { lead_image_url } = result
 
     // Update these values with the expected values from
     // the article.
@@ -74,13 +66,7 @@ describe('LittleThingsExtractor', () => {
     // in ./src/extractors/custom/www.littlethings.com/index.js.
     // You may also want to make use of the clean and transform
     // options.
-    const html =
-      fs.readFileSync('./fixtures/www.littlethings.com/1475605036506.html');
-    const url =
-      'http://www.littlethings.com/diy-pineapple-lamp/';
-
-    const { content } =
-      await Mercury.parse(url, html, { fallback: false });
+    const { content } = result
 
     const $ = cheerio.load(content || '');
 
@@ -90,4 +76,5 @@ describe('LittleThingsExtractor', () => {
     // the article.
     assert.equal(first13, 'Every room needs light, and so lamps are pretty much a necessity for');
   });
+});
 });
