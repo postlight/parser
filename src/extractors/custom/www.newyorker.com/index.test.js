@@ -100,7 +100,7 @@ describe('NewYorkerExtractor', () => {
     });
 
     it('returns the dek when present', () => {
-      const { dek } = result
+      const { dek } = result;
 
       assert.equal(
         dek,
@@ -109,7 +109,7 @@ describe('NewYorkerExtractor', () => {
     });
 
     it('returns the date for magazine content', () => {
-      const { date_published } = result
+      const { date_published } = result;
 
       assert.equal(date_published, '2016-11-28T05:00:00.000Z');
     });
