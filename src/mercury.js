@@ -31,10 +31,10 @@ const Mercury = {
       return Errors.badUrl;
     }
 
-    const Extractor = getExtractor(url, parsedUrl);
-    // console.log(`Using extractor for ${Extractor.domain}`);
-
     const $ = await Resource.create(url, html, parsedUrl);
+
+    const Extractor = getExtractor(url, parsedUrl, $);
+    // console.log(`Using extractor for ${Extractor.domain}`);
 
     // If we found an error creating the resource, return that error
     if ($.failed) {
