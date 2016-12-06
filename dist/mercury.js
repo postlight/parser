@@ -1850,7 +1850,7 @@ var Resource = {
       throw new Error('Content does not appear to be text.');
     }
 
-    var $ = cheerio.load(content, { normalizeWhitespace: true });
+    var $ = cheerio.load(content);
 
     if ($.root().children().length === 0) {
       throw new Error('No children, likely a bad parse.');
@@ -3080,6 +3080,54 @@ var WwwAolComExtractor = {
   }
 };
 
+var WwwYoutubeComExtractor = {
+  domain: 'www.youtube.com',
+
+  title: {
+    selectors: ['.watch-title', 'h1.watch-title-container']
+  },
+
+  author: {
+    selectors: ['.yt-user-info']
+  },
+
+  date_published: {
+    selectors: [['meta[itemProp="datePublished"]', 'value']],
+
+    timezone: 'GMT'
+  },
+
+  dek: {
+    selectors: [
+      // enter selectors
+    ]
+  },
+
+  lead_image_url: {
+    selectors: [['meta[name="og:image"]', 'value']]
+  },
+
+  content: {
+    defaultCleaner: false,
+
+    selectors: [['#player-api', '#eow-description']],
+
+    // Is there anything in the content you selected that needs transformed
+    // before it's consumable content? E.g., unusual lazy loaded images
+    transforms: {
+      '#player-api': function playerApi($node, $) {
+        var videoId = $('meta[itemProp="videoId"]').attr('value');
+        $node.html('\n          <iframe src="https://www.youtube.com/embed/' + videoId + '" frameborder="0" allowfullscreen></iframe>');
+      }
+    },
+
+    // Is there anything that is in the result that shouldn't be?
+    // The clean selectors will remove anything that matches from
+    // the result
+    clean: []
+  }
+};
+
 
 
 var CustomExtractors = Object.freeze({
@@ -3108,7 +3156,8 @@ var CustomExtractors = Object.freeze({
 	MoneyCnnComExtractor: MoneyCnnComExtractor,
 	WwwThevergeComExtractor: WwwThevergeComExtractor,
 	WwwCnnComExtractor: WwwCnnComExtractor,
-	WwwAolComExtractor: WwwAolComExtractor
+	WwwAolComExtractor: WwwAolComExtractor,
+	WwwYoutubeComExtractor: WwwYoutubeComExtractor
 });
 
 var Extractors = _Object$keys(CustomExtractors).reduce(function (acc, key) {
@@ -4716,14 +4765,27 @@ var GenericExtractor = {
   }
 };
 
-function getExtractor(url, parsedUrl) {
+var Detectors = {
+  'meta[name="al:ios:app_name"][value="Medium"]': MediumExtractor,
+  'meta[name="generator"][value="blogger"]': BloggerExtractor
+};
+
+function detectByHtml($) {
+  var selector = _Reflect$ownKeys(Detectors).find(function (s) {
+    return $(s).length > 0;
+  });
+
+  return Detectors[selector];
+}
+
+function getExtractor(url, parsedUrl, $) {
   parsedUrl = parsedUrl || URL.parse(url);
   var _parsedUrl = parsedUrl,
       hostname = _parsedUrl.hostname;
 
   var baseDomain = hostname.split('.').slice(-2).join('.');
 
-  return Extractors[hostname] || Extractors[baseDomain] || GenericExtractor;
+  return Extractors[hostname] || Extractors[baseDomain] || detectByHtml($) || GenericExtractor;
 }
 
 // Remove elements by an array of selectors
@@ -5034,7 +5096,7 @@ var Mercury = {
 
     var opts = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
     return _asyncToGenerator(_regeneratorRuntime.mark(function _callee() {
-      var _opts$fetchAllPages, fetchAllPages, _opts$fallback, fallback, parsedUrl, Extractor, $, metaCache, result, _result, title, next_page_url;
+      var _opts$fetchAllPages, fetchAllPages, _opts$fallback, fallback, parsedUrl, $, Extractor, metaCache, result, _result, title, next_page_url;
 
       return _regeneratorRuntime.wrap(function _callee$(_context) {
         while (1) {
@@ -5061,14 +5123,15 @@ var Mercury = {
               return _context.abrupt('return', Errors.badUrl);
 
             case 5:
-              Extractor = getExtractor(url, parsedUrl);
-              // console.log(`Using extractor for ${Extractor.domain}`);
-
-              _context.next = 8;
+              _context.next = 7;
               return Resource.create(url, html, parsedUrl);
 
-            case 8:
+            case 7:
               $ = _context.sent;
+              Extractor = getExtractor(url, parsedUrl, $);
+              // console.log(`Using extractor for ${Extractor.domain}`);
+
+              // If we found an error creating the resource, return that error
 
               if (!$.failed) {
                 _context.next = 11;
