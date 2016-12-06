@@ -84,17 +84,9 @@ $.cleanup = () => {
 };
 
 $.load = (html, opts = {}, returnHtml = false) => {
-  const { normalizeWhitespace } = opts;
-
   if (!html) {
     html = $.cloneHtml();
   } else {
-    if (normalizeWhitespace) {
-      if (typeof html === 'string') {
-        html = html.replace(/[\s\n\r]+/g, ' ');
-      }
-    }
-
     html = $('<container />').html(html);
   }
 
