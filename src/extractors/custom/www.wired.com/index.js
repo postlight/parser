@@ -33,6 +33,7 @@ export const WiredExtractor = {
     // the result
     clean: [
       '.visually-hidden',
+      'figcaption img.photo',
 
     ],
   },
