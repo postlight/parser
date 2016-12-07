@@ -20,6 +20,7 @@ export const MediumExtractor = {
   content: {
     selectors: [
       '.section-content',
+      'article > div > section',
     ],
 
     // Is there anything in the content you selected that needs transformed
