@@ -14,7 +14,7 @@
     "build:generator": "rollup -c scripts/rollup.config.js",
     "test_build": "rollup -c",
     "test": "yarn test:node && yarn test:web",
-    "test:node": "jest ./src",
+    "test:node": "jest",
     "test:web": "./node_modules/karma/bin/karma start karma.conf.js --auto-watch",
     "test:build": "cd ./scripts && jest check-build.test.js",
     "test:build:web": "node ./scripts/proxy-browser-test.js",
