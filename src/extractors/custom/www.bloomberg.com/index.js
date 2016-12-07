@@ -8,6 +8,9 @@ export const WwwBloombergComExtractor = {
 
       // /graphics/ template
       'h1.article-title',
+
+      // /news/ template
+      'h1.lede-text-only__hed',
     ],
   },
 
@@ -18,12 +21,16 @@ export const WwwBloombergComExtractor = {
 
       // /graphics/ template
       '.bydek',
+
+      // /news/ template
+      '.author',
     ],
   },
 
   date_published: {
     selectors: [
       ['time.published-at', 'datetime'],
+      ['time[datetime]', 'datetime'],
       ['meta[name="date"]', 'value'],
       ['meta[name="parsely-pub-date"]', 'value'],
     ],
@@ -31,7 +38,6 @@ export const WwwBloombergComExtractor = {
 
   dek: {
     selectors: [
-      '.article-abstract',
     ],
   },
 
@@ -47,6 +53,9 @@ export const WwwBloombergComExtractor = {
 
       // /graphics/ template
       ['section.copy-block'],
+
+      // /news/ template
+      '.body-copy',
     ],
 
     // Is there anything in the content you selected that needs transformed
@@ -58,7 +67,8 @@ export const WwwBloombergComExtractor = {
     // The clean selectors will remove anything that matches from
     // the result
     clean: [
-
+      '.inline-newsletter',
+      '.page-ad',
     ],
   },
 };
