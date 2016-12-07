@@ -45,10 +45,8 @@ export const WwwTheguardianComExtractor = {
     // The clean selectors will remove anything that matches from
     // the result
     clean: [
-      '.block-share block-share--article hide-on-mobile',
-      '.rounded-icon block-share__item block-share__item--facebook js-blockshare-link',
-      '.inline-share-facebook inline-icon',
-      '.u-h',
+      '.hide-on-mobile',
+      '.inline-icon',
     ],
   },
 };
