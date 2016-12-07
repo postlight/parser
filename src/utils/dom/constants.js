@@ -29,7 +29,18 @@ export const STRIP_OUTPUT_TAGS = [
 export const REMOVE_ATTRS = ['style', 'align'];
 export const REMOVE_ATTR_SELECTORS = REMOVE_ATTRS.map(selector => `[${selector}]`);
 export const REMOVE_ATTR_LIST = REMOVE_ATTRS.join(',');
-export const WHITELIST_ATTRS = ['src', 'srcset', 'href', 'class', 'id', 'alt'];
+export const WHITELIST_ATTRS = [
+  'src',
+  'srcset',
+  'href',
+  'class',
+  'id',
+  'alt',
+  'xlink:href',
+  'width',
+  'height',
+];
+
 export const WHITELIST_ATTRS_RE = new RegExp(`^(${WHITELIST_ATTRS.join('|')})$`, 'i');
 
 // removeEmpty
