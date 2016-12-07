@@ -26,4 +26,5 @@ export * from './www.cnn.com';
 export * from './www.aol.com';
 export * from './www.youtube.com';
 export * from './www.theguardian.com';
-export * from './www.aol.com';export * from './www.sbnation.com';
+export * from './www.aol.com';
+export * from './www.sbnation.com';
