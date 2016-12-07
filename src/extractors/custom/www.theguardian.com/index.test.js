@@ -47,7 +47,7 @@ describe('WwwTheguardianComExtractor', () => {
 
     // Update these values with the expected values from
     // the article.
-    assert.equal(author, 'Julia Carrie Wong and  Sam Levin');
+    assert.equal(author, 'Julia Carrie Wong and Sam Levin');
   });
 
   it('returns the date_published', async () => {
