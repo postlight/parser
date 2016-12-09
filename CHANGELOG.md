@@ -1,5 +1,18 @@
 # Mercury Parser Changelog
 
+### 1.0.3 (Dec 9, 2016)
+
+##### Commits
+
+* [[`861c5f0dcb`](https://github.com/postlight/mercury-parser/commit/861c5f0dcb)] - **feat**: bustle extractor (#60) (Janet) 
+* [[`06397a4360`](https://github.com/postlight/mercury-parser/commit/06397a4360)] - **feat**: browser-friendly selector for medium (#61) (Adam Pash) 
+* [[`3297ab079d`](https://github.com/postlight/mercury-parser/commit/3297ab079d)] - **feat**: bloomberg extractor (#59) (Adam Pash) 
+* [[`e55e9da534`](https://github.com/postlight/mercury-parser/commit/e55e9da534)] - **feat**: sbnation extractor (#55) (Janet) 
+* [[`8070e4790b`](https://github.com/postlight/mercury-parser/commit/8070e4790b)] - **test**: streamlined guardian tests w/new single-extraction (#58) (Adam Pash) 
+* [[`bdb751fb53`](https://github.com/postlight/mercury-parser/commit/bdb751fb53)] - **feat**: more cleaning for wired (#56) (Adam Pash) 
+* [[`e7e41bd242`](https://github.com/postlight/mercury-parser/commit/e7e41bd242)] - **feat**: the guardian custom extractor (#41) (Janet) 
+* [[`332f85928f`](https://github.com/postlight/mercury-parser/commit/332f85928f)] - **release**: 1.0.2 (#54) (Adam Pash) 
+
 ### 1.0.2 (Dec 6, 2016)
 
 ##### Commits
