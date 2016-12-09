@@ -3,7 +3,7 @@ export const WwwUsmagazineComExtractor = {
 
   title: {
     selectors: [
-      '??',
+      'header h1',
     ],
   },
 
@@ -14,26 +14,22 @@ export const WwwUsmagazineComExtractor = {
   },
 
   date_published: {
-    selectors: [
-      '.article-published-date',
-    ],
-  },
+    timezone: 'America/New_York',
 
-  dek: {
     selectors: [
-      // enter selectors
+      'time.article-published-date',
     ],
   },
 
   lead_image_url: {
     selectors: [
-      // enter selectors
+      ['meta[name="og:image"]', 'value'],
     ],
   },
 
   content: {
     selectors: [
-      // enter content selectors
+      'div.article-body-inner',
     ],
 
     // Is there anything in the content you selected that needs transformed
@@ -45,7 +41,7 @@ export const WwwUsmagazineComExtractor = {
     // The clean selectors will remove anything that matches from
     // the result
     clean: [
-
+      '.module-related',
     ],
   },
 };

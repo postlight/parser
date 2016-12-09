@@ -19,8 +19,7 @@ var _getIterator = _interopDefault(require('babel-runtime/core-js/get-iterator')
 var _Object$keys = _interopDefault(require('babel-runtime/core-js/object/keys'));
 var stringDirection = _interopDefault(require('string-direction'));
 var validUrl = _interopDefault(require('valid-url'));
-var moment = _interopDefault(require('moment-timezone'));
-var parseFormat = _interopDefault(require('moment-parseformat'));
+var moment = _interopDefault(require('moment'));
 var wuzzy = _interopDefault(require('wuzzy'));
 var difflib = _interopDefault(require('difflib'));
 var _Array$from = _interopDefault(require('babel-runtime/core-js/array/from'));
@@ -422,8 +421,7 @@ var REMOVE_ATTR_SELECTORS = REMOVE_ATTRS.map(function (selector) {
   return '[' + selector + ']';
 });
 var REMOVE_ATTR_LIST = REMOVE_ATTRS.join(',');
-var WHITELIST_ATTRS = ['src', 'srcset', 'href', 'class', 'id', 'alt', 'xlink:href', 'width', 'height'];
-
+var WHITELIST_ATTRS = ['src', 'srcset', 'href', 'class', 'id', 'alt'];
 var WHITELIST_ATTRS_RE = new RegExp('^(' + WHITELIST_ATTRS.join('|') + ')$', 'i');
 
 // removeEmpty
@@ -1851,7 +1849,7 @@ var Resource = {
       throw new Error('Content does not appear to be text.');
     }
 
-    var $ = cheerio.load(content);
+    var $ = cheerio.load(content, { normalizeWhitespace: true });
 
     if ($.root().children().length === 0) {
       throw new Error('No children, likely a bad parse.');
@@ -2062,16 +2060,12 @@ var NYTimesExtractor = {
       }
     },
 
-    clean: ['.ad', 'header#story-header', '.story-body-1 .lede.video', '.visually-hidden', '#newsletter-promo', '.promo', '.comments-button', '.hidden', '.comments', '.supplemental', '.nocontent', '.story-footer-links']
+    clean: ['.ad', 'header#story-header', '.story-body-1 .lede.video', '.visually-hidden', '#newsletter-promo', '.promo', '.comments-button', '.hidden', '.comments', '.supplemental', '.nocontent']
   },
 
-  date_published: {
-    selectors: [['meta[name="article:published"]', 'value']]
-  },
+  date_published: null,
 
-  lead_image_url: {
-    selectors: [['meta[name="og:image"]', 'value']]
-  },
+  lead_image_url: null,
 
   dek: null,
 
@@ -2093,7 +2087,7 @@ var TheAtlanticExtractor = {
   },
 
   content: {
-    selectors: [['.article-cover figure.lead-img', '.article-body'], '.article-body'],
+    selectors: ['.article-body'],
 
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images
@@ -2102,7 +2096,7 @@ var TheAtlanticExtractor = {
     // Is there anything that is in the result that shouldn't be?
     // The clean selectors will remove anything that matches from
     // the result
-    clean: ['.partner-box']
+    clean: []
   },
 
   date_published: {
@@ -2110,6 +2104,8 @@ var TheAtlanticExtractor = {
   },
 
   lead_image_url: null,
+
+  dek: null,
 
   next_page_url: null,
 
@@ -2143,9 +2139,7 @@ var NewYorkerExtractor = {
   },
 
   date_published: {
-    selectors: [['meta[name="article:published_time"]', 'value'], ['time[itemProp="datePublished"]', 'content']],
-
-    timezone: 'America/New_York'
+    selectors: [['meta[name="article:published_time"]', 'value']]
   },
 
   lead_image_url: {
@@ -2153,7 +2147,7 @@ var NewYorkerExtractor = {
   },
 
   dek: {
-    selectors: ['.dek', 'h2.dek']
+    selectors: [['meta[name="og:description"]', 'value']]
   },
 
   next_page_url: null,
@@ -2184,7 +2178,7 @@ var WiredExtractor = {
     // Is there anything that is in the result that shouldn't be?
     // The clean selectors will remove anything that matches from
     // the result
-    clean: ['.visually-hidden', 'figcaption img.photo']
+    clean: ['.visually-hidden']
   },
 
   date_published: {
@@ -2196,7 +2190,7 @@ var WiredExtractor = {
   },
 
   dek: {
-    selectors: []
+    selectors: [['meta[name="og:description"]', 'value']]
   },
 
   next_page_url: null,
@@ -2239,7 +2233,7 @@ var MSNExtractor = {
   },
 
   dek: {
-    selectors: []
+    selectors: [['meta[name="description"]', 'value']]
   },
 
   next_page_url: null,
@@ -2284,9 +2278,7 @@ var YahooExtractor = {
   },
 
   dek: {
-    selectors: [
-      // enter dek selectors
-    ]
+    selectors: [['meta[name="og:description"]', 'value']]
   },
 
   next_page_url: null,
@@ -2308,30 +2300,20 @@ var BuzzfeedExtractor = {
   },
 
   content: {
-    selectors: [['.longform_custom_header_media', '#buzz_sub_buzz'], '#buzz_sub_buzz'],
+    selectors: ['#buzz_sub_buzz'],
 
     defaultCleaner: false,
 
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images
     transforms: {
-      h2: 'b',
-
-      'div.longform_custom_header_media': function divLongform_custom_header_media($node) {
-        if ($node.has('img') && $node.has('.longform_header_image_source')) {
-          return 'figure';
-        }
-
-        return null;
-      },
-
-      'figure.longform_custom_header_media .longform_header_image_source': 'figcaption'
+      h2: 'b'
     },
 
     // Is there anything that is in the result that shouldn't be?
     // The clean selectors will remove anything that matches from
     // the result
-    clean: ['.instapaper_ignore', '.suplist_list_hide .buzz_superlist_item .buzz_superlist_number_inline', '.share-box', '.print']
+    clean: ['.instapaper_ignore', '.suplist_list_hide .buzz_superlist_item .buzz_superlist_number_inline', '.share-box']
   },
 
   date_published: {
@@ -2343,7 +2325,7 @@ var BuzzfeedExtractor = {
   },
 
   dek: {
-    selectors: []
+    selectors: [['meta[name="description"]', 'value']]
   },
 
   next_page_url: null,
@@ -2386,7 +2368,7 @@ var WikiaExtractor = {
   },
 
   dek: {
-    selectors: []
+    selectors: [['meta[name="og:description"]', 'value']]
   },
 
   next_page_url: null,
@@ -2472,7 +2454,7 @@ var PoliticoExtractor = {
   },
 
   dek: {
-    selectors: []
+    selectors: [['meta[name="description"]', 'value']]
   },
 
   next_page_url: null,
@@ -2573,7 +2555,7 @@ var BroadwayWorldExtractor = {
   },
 
   dek: {
-    selectors: []
+    selectors: [['meta[name="og:description"]', 'value']]
   },
 
   next_page_url: {
@@ -2632,7 +2614,7 @@ var ApartmentTherapyExtractor = {
   },
 
   dek: {
-    selectors: []
+    selectors: [['meta[name=description]', 'value']]
   },
 
   next_page_url: {
@@ -2662,7 +2644,7 @@ var MediumExtractor = {
   },
 
   content: {
-    selectors: ['.section-content', 'article > div > section'],
+    selectors: ['.section-content'],
 
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images
@@ -2730,9 +2712,7 @@ var WwwTmzComExtractor = {
   author: 'TMZ STAFF',
 
   date_published: {
-    selectors: ['.article-posted-date'],
-
-    timezone: 'America/Los_Angeles'
+    selectors: ['.article-posted-date']
   },
 
   dek: {
@@ -2775,7 +2755,7 @@ var WwwWashingtonpostComExtractor = {
   },
 
   dek: {
-    selectors: []
+    selectors: [['meta[name="og:description"]', 'value']]
   },
 
   lead_image_url: {
@@ -2802,331 +2782,7 @@ var WwwWashingtonpostComExtractor = {
     // Is there anything that is in the result that shouldn't be?
     // The clean selectors will remove anything that matches from
     // the result
-    clean: ['.interstitial-link', '.newsletter-inline-unit']
-  }
-};
-
-var WwwHuffingtonpostComExtractor = {
-  domain: 'www.huffingtonpost.com',
-
-  title: {
-    selectors: ['h1.headline__title']
-  },
-
-  author: {
-    selectors: ['span.author-card__details__name']
-  },
-
-  date_published: {
-    selectors: [['meta[name="article:modified_time"]', 'value'], ['meta[name="article:published_time"]', 'value']]
-  },
-
-  dek: {
-    selectors: ['h2.headline__subtitle']
-  },
-
-  lead_image_url: {
-    selectors: [['meta[name="og:image"]', 'value']]
-  },
-
-  content: {
-    selectors: ['div.entry__body'],
-
-    defaultCleaner: false,
-
-    // Is there anything in the content you selected that needs transformed
-    // before it's consumable content? E.g., unusual lazy loaded images
-    transforms: {
-      // 'div.top-media': ($node) => {
-      //   const $figure = $node.children('figure');
-      //   $node.replaceWith($figure);
-      // },
-    },
-
-    // Is there anything that is in the result that shouldn't be?
-    // The clean selectors will remove anything that matches from
-    // the result
-    clean: ['.pull-quote', '.tag-cloud', '.embed-asset', '.below-entry', '.entry-corrections', '#suggested-story']
-  }
-};
-
-var NewrepublicComExtractor = {
-  domain: 'newrepublic.com',
-
-  title: {
-    selectors: ['h1.article-headline', '.minutes-primary h1.minute-title']
-  },
-
-  author: {
-    selectors: ['div.author-list', '.minutes-primary h3.minute-byline']
-  },
-
-  date_published: {
-    selectors: [['meta[name="article:published_time"]', 'value']],
-
-    timezone: 'America/New_York'
-  },
-
-  dek: {
-    selectors: ['h2.article-subhead']
-  },
-
-  lead_image_url: {
-    selectors: [['meta[name="og:image"]', 'value']]
-  },
-
-  content: {
-    selectors: ['div.content-body', '.minutes-primary div.content-body'],
-
-    // Is there anything in the content you selected that needs transformed
-    // before it's consumable content? E.g., unusual lazy loaded images
-    transforms: {},
-
-    // Is there anything that is in the result that shouldn't be?
-    // The clean selectors will remove anything that matches from
-    // the result
-    clean: ['aside']
-  }
-};
-
-var MoneyCnnComExtractor = {
-  domain: 'money.cnn.com',
-
-  title: {
-    selectors: ['.article-title']
-  },
-
-  author: {
-    selectors: ['.byline a']
-  },
-
-  date_published: {
-    selectors: [['meta[name="date"]', 'value']],
-
-    timezone: 'GMT'
-  },
-
-  dek: {
-    selectors: ['#storytext h2']
-  },
-
-  lead_image_url: {
-    selectors: [['meta[name="og:image"]', 'value']]
-  },
-
-  content: {
-    selectors: ['#storytext'],
-
-    // Is there anything in the content you selected that needs transformed
-    // before it's consumable content? E.g., unusual lazy loaded images
-    transforms: {},
-
-    // Is there anything that is in the result that shouldn't be?
-    // The clean selectors will remove anything that matches from
-    // the result
-    clean: ['.inStoryHeading']
-  }
-};
-
-var WwwThevergeComExtractor = {
-  domain: 'www.theverge.com',
-
-  title: {
-    selectors: ['h1']
-  },
-
-  author: {
-    selectors: [['meta[name="author"]', 'value']]
-  },
-
-  date_published: {
-    selectors: [['meta[name="article:published_time"]', 'value']]
-  },
-
-  dek: {
-    selectors: ['h2.p-dek']
-  },
-
-  lead_image_url: {
-    selectors: [['meta[name="og:image"]', 'value']]
-  },
-
-  content: {
-    selectors: [
-    // feature template multi-match
-    ['.c-entry-hero .e-image', '.c-entry-intro', '.c-entry-content'],
-    // regular post multi-match
-    ['.e-image--hero', '.c-entry-content'],
-    // feature template fallback
-    '.l-wrapper .l-feature',
-    // regular post fallback
-    'div.c-entry-content'],
-
-    // Transform lazy-loaded images
-    transforms: {
-      noscript: function noscript($node) {
-        var $children = $node.children();
-        if ($children.length === 1 && $children.get(0).tagName === 'img') {
-          return 'span';
-        }
-
-        return null;
-      }
-    },
-
-    // Is there anything that is in the result that shouldn't be?
-    // The clean selectors will remove anything that matches from
-    // the result
-    clean: ['.aside', 'img.c-dynamic-image']
-  }
-};
-
-var WwwCnnComExtractor = {
-  domain: 'www.cnn.com',
-
-  title: {
-    selectors: ['h1.pg-headline', 'h1']
-  },
-
-  author: {
-    selectors: ['.metadata__byline__author']
-  },
-
-  date_published: {
-    selectors: [['meta[name="pubdate"]', 'value']]
-  },
-
-  lead_image_url: {
-    selectors: [['meta[name="og:image"]', 'value']]
-  },
-
-  content: {
-    selectors: [
-    // a more specific selector to grab the lead image and the body
-    ['.media__video--thumbnail', '.zn-body-text'],
-    // a fallback for the above
-    '.zn-body-text', 'div[itemprop="articleBody"]'],
-
-    // Is there anything in the content you selected that needs transformed
-    // before it's consumable content? E.g., unusual lazy loaded images
-    transforms: {
-      '.zn-body__paragraph, .el__leafmedia--sourced-paragraph': function znBody__paragraphEl__leafmediaSourcedParagraph($node) {
-        var $text = $node.html();
-        if ($text) {
-          return 'p';
-        }
-
-        return null;
-      },
-
-      // this transform cleans the short, all-link sections linking
-      // to related content but not marked as such in any way.
-      '.zn-body__paragraph': function znBody__paragraph($node) {
-        if ($node.has('a')) {
-          if ($node.text().trim() === $node.find('a').text().trim()) {
-            $node.remove();
-          }
-        }
-      },
-
-      '.media__video--thumbnail': 'figure'
-
-    },
-
-    // Is there anything that is in the result that shouldn't be?
-    // The clean selectors will remove anything that matches from
-    // the result
-    clean: []
-  }
-};
-
-var WwwAolComExtractor = {
-  domain: 'www.aol.com',
-
-  title: {
-    selectors: ['h1.p-article__title']
-  },
-
-  author: {
-    selectors: [['meta[name="author"]', 'value']]
-  },
-
-  date_published: {
-    selectors: ['.p-article__byline__date'],
-
-    timezone: 'America/New_York'
-  },
-
-  dek: {
-    selectors: [
-      // enter selectors
-    ]
-  },
-
-  lead_image_url: {
-    selectors: [['meta[name="og:image"]', 'value']]
-  },
-
-  content: {
-    selectors: ['.article-content'],
-
-    // Is there anything in the content you selected that needs transformed
-    // before it's consumable content? E.g., unusual lazy loaded images
-    transforms: {},
-
-    // Is there anything that is in the result that shouldn't be?
-    // The clean selectors will remove anything that matches from
-    // the result
-    clean: []
-  }
-};
-
-var WwwYoutubeComExtractor = {
-  domain: 'www.youtube.com',
-
-  title: {
-    selectors: ['.watch-title', 'h1.watch-title-container']
-  },
-
-  author: {
-    selectors: ['.yt-user-info']
-  },
-
-  date_published: {
-    selectors: [['meta[itemProp="datePublished"]', 'value']],
-
-    timezone: 'GMT'
-  },
-
-  dek: {
-    selectors: [
-      // enter selectors
-    ]
-  },
-
-  lead_image_url: {
-    selectors: [['meta[name="og:image"]', 'value']]
-  },
-
-  content: {
-    defaultCleaner: false,
-
-    selectors: [['#player-api', '#eow-description']],
-
-    // Is there anything in the content you selected that needs transformed
-    // before it's consumable content? E.g., unusual lazy loaded images
-    transforms: {
-      '#player-api': function playerApi($node, $) {
-        var videoId = $('meta[itemProp="videoId"]').attr('value');
-        $node.html('\n          <iframe src="https://www.youtube.com/embed/' + videoId + '" frameborder="0" allowfullscreen></iframe>');
-      }
-    },
-
-    // Is there anything that is in the result that shouldn't be?
-    // The clean selectors will remove anything that matches from
-    // the result
-    clean: []
-<<<<<<< 998b5b64ca2b8c4a10b2b3ebc9a2f2e735331f6b
+    clean: ['.interstitial-link']
   }
 };
 
@@ -3167,100 +2823,6 @@ var WwwTheguardianComExtractor = {
   }
 };
 
-var WwwSbnationComExtractor = {
-  domain: 'www.sbnation.com',
-
-  title: {
-    selectors: ['h1.c-page-title']
-  },
-
-  author: {
-    selectors: [['meta[name="author"]', 'value']]
-  },
-
-  date_published: {
-    selectors: [['meta[name="article:published_time"]', 'value']]
-  },
-
-  dek: {
-    selectors: ['h2.c-entry-summary.p-dek']
-  },
-
-  lead_image_url: {
-    selectors: [['meta[name="og:image"]', 'value']]
-  },
-
-  content: {
-    selectors: ['div.c-entry-content'],
-
-    // Is there anything in the content you selected that needs transformed
-    // before it's consumable content? E.g., unusual lazy loaded images
-    transforms: {},
-
-    // Is there anything that is in the result that shouldn't be?
-    // The clean selectors will remove anything that matches from
-    // the result
-    clean: []
-  }
-};
-
-var WwwBloombergComExtractor = {
-  domain: 'www.bloomberg.com',
-
-  title: {
-    selectors: [
-    // normal articles
-    '.lede-headline',
-
-    // /graphics/ template
-    'h1.article-title',
-
-    // /news/ template
-    'h1.lede-text-only__hed']
-  },
-
-  author: {
-    selectors: [['meta[name="parsely-author"]', 'value'], '.byline-details__link',
-
-    // /graphics/ template
-    '.bydek',
-
-    // /news/ template
-    '.author']
-  },
-
-  date_published: {
-    selectors: [['time.published-at', 'datetime'], ['time[datetime]', 'datetime'], ['meta[name="date"]', 'value'], ['meta[name="parsely-pub-date"]', 'value']]
-  },
-
-  dek: {
-    selectors: []
-  },
-
-  lead_image_url: {
-    selectors: [['meta[name="og:image"]', 'value']]
-  },
-
-  content: {
-    selectors: ['.article-body__content',
-
-    // /graphics/ template
-    ['section.copy-block'],
-
-    // /news/ template
-    '.body-copy'],
-
-    // Is there anything in the content you selected that needs transformed
-    // before it's consumable content? E.g., unusual lazy loaded images
-    transforms: {},
-
-    // Is there anything that is in the result that shouldn't be?
-    // The clean selectors will remove anything that matches from
-    // the result
-    clean: ['.inline-newsletter', '.page-ad']
-  }
-};
-
 var WwwBustleComExtractor = {
   domain: 'www.bustle.com',
 
@@ -3291,8 +2853,6 @@ var WwwBustleComExtractor = {
     // The clean selectors will remove anything that matches from
     // the result
     clean: []
-=======
->>>>>>> finishing up!
   }
 };
 
@@ -3319,21 +2879,8 @@ var CustomExtractors = Object.freeze({
 	MediumExtractor: MediumExtractor,
 	WwwTmzComExtractor: WwwTmzComExtractor,
 	WwwWashingtonpostComExtractor: WwwWashingtonpostComExtractor,
-	WwwHuffingtonpostComExtractor: WwwHuffingtonpostComExtractor,
-	NewrepublicComExtractor: NewrepublicComExtractor,
-	MoneyCnnComExtractor: MoneyCnnComExtractor,
-	WwwThevergeComExtractor: WwwThevergeComExtractor,
-	WwwCnnComExtractor: WwwCnnComExtractor,
-	WwwAolComExtractor: WwwAolComExtractor,
-<<<<<<< 998b5b64ca2b8c4a10b2b3ebc9a2f2e735331f6b
-	WwwYoutubeComExtractor: WwwYoutubeComExtractor,
 	WwwTheguardianComExtractor: WwwTheguardianComExtractor,
-	WwwSbnationComExtractor: WwwSbnationComExtractor,
-	WwwBloombergComExtractor: WwwBloombergComExtractor,
 	WwwBustleComExtractor: WwwBustleComExtractor
-=======
-	WwwYoutubeComExtractor: WwwYoutubeComExtractor
->>>>>>> finishing up!
 });
 
 var Extractors = _Object$keys(CustomExtractors).reduce(function (acc, key) {
@@ -3378,10 +2925,6 @@ var timestamp2 = '[0-9]{1,2}[/-][0-9]{1,2}[/-][0-9]{2,4}';
 var timestamp3 = '-[0-9]{3,4}$';
 var SPLIT_DATE_STRING = new RegExp('(' + timestamp1 + ')|(' + timestamp2 + ')|(' + timestamp3 + ')|([0-9]{1,4})|(' + allMonths + ')', 'ig');
 
-// 2016-11-22T08:57-500
-// Check if datetime string has an offset at the end
-var TIME_WITH_OFFSET_RE = /-\d{3,4}$/;
-
 // CLEAN TITLE CONSTANTS
 // A regular expression that will match separating characters on a
 // title, that usually denote breadcrumbs or something similar.
@@ -3392,7 +2935,7 @@ var DOMAIN_ENDINGS_RE = new RegExp('.com$|.net$|.org$|.co.uk$', 'g');
 // Take an author string (like 'By David Smith ') and clean it to
 // just the name(s): 'David Smith'.
 function cleanAuthor(author) {
-  return normalizeSpaces(author.replace(CLEAN_AUTHOR_RE, '$2').trim());
+  return author.replace(CLEAN_AUTHOR_RE, '$2').trim();
 }
 
 function clean$1(leadImageUrl) {
@@ -3422,7 +2965,7 @@ function cleanDek(dek, _ref) {
   // not a good dek - bail.
   if (TEXT_LINK_RE.test(dekText)) return null;
 
-  return normalizeSpaces(dekText.trim());
+  return dekText.trim();
 }
 
 // Is there a compelling reason to use moment here?
@@ -3433,30 +2976,19 @@ function cleanDateString(dateString) {
   return (dateString.match(SPLIT_DATE_STRING) || []).join(' ').replace(TIME_MERIDIAN_DOTS_RE, 'm').replace(TIME_MERIDIAN_SPACE_RE, '$1 $2 $3').replace(CLEAN_DATE_STRING_RE, '$1').trim();
 }
 
-function createDate(dateString, timezone) {
-  if (TIME_WITH_OFFSET_RE.test(dateString)) {
-    return moment(new Date(dateString));
-  }
-
-  return timezone ? moment.tz(dateString, parseFormat(dateString), timezone) : moment(dateString, parseFormat(dateString));
-}
-
 // Take a date published string, and hopefully return a date out of
 // it. Return none if we fail.
 function cleanDatePublished(dateString) {
-  var _ref = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {},
-      timezone = _ref.timezone;
-
-  // If string is in milliseconds or seconds, convert to int and return
+  // If string is in milliseconds or seconds, convert to int
   if (MS_DATE_STRING.test(dateString) || SEC_DATE_STRING.test(dateString)) {
-    return new Date(parseInt(dateString, 10)).toISOString();
+    dateString = parseInt(dateString, 10);
   }
 
-  var date = createDate(dateString, timezone);
+  var date = moment(new Date(dateString));
 
   if (!date.isValid()) {
     dateString = cleanDateString(dateString);
-    date = createDate(dateString, timezone);
+    date = moment(new Date(dateString));
   }
 
   return date.isValid() ? date.toISOString() : null;
@@ -3539,7 +3071,7 @@ function cleanTitle$$1(title, _ref) {
   }
 
   // strip any html tags in the title text
-  return normalizeSpaces(stripTags(title, $).trim());
+  return stripTags(title, $).trim();
 }
 
 function extractBreadcrumbTitle(splitTitle, text) {
@@ -4941,27 +4473,14 @@ var GenericExtractor = {
   }
 };
 
-var Detectors = {
-  'meta[name="al:ios:app_name"][value="Medium"]': MediumExtractor,
-  'meta[name="generator"][value="blogger"]': BloggerExtractor
-};
-
-function detectByHtml($) {
-  var selector = _Reflect$ownKeys(Detectors).find(function (s) {
-    return $(s).length > 0;
-  });
-
-  return Detectors[selector];
-}
-
-function getExtractor(url, parsedUrl, $) {
+function getExtractor(url, parsedUrl) {
   parsedUrl = parsedUrl || URL.parse(url);
   var _parsedUrl = parsedUrl,
       hostname = _parsedUrl.hostname;
 
   var baseDomain = hostname.split('.').slice(-2).join('.');
 
-  return Extractors[hostname] || Extractors[baseDomain] || detectByHtml($) || GenericExtractor;
+  return Extractors[hostname] || Extractors[baseDomain] || GenericExtractor;
 }
 
 // Remove elements by an array of selectors
@@ -5005,15 +4524,9 @@ function transformElements($content, $, _ref2) {
   return $content;
 }
 
-function findMatchingSelector($, selectors, extractHtml) {
+function findMatchingSelector($, selectors) {
   return selectors.find(function (selector) {
     if (Array.isArray(selector)) {
-      if (extractHtml) {
-        return selector.reduce(function (acc, s) {
-          return acc && $(s).length > 0;
-        }, true);
-      }
-
       var _selector = _slicedToArray(selector, 2),
           s = _selector[0],
           attr = _selector[1];
@@ -5044,7 +4557,7 @@ function select(opts) {
       defaultCleaner = _extractionOpts$defau === undefined ? true : _extractionOpts$defau;
 
 
-  var matchingSelector = findMatchingSelector($, selectors, extractHtml);
+  var matchingSelector = findMatchingSelector($, selectors);
 
   if (!matchingSelector) return null;
 
@@ -5054,25 +4567,8 @@ function select(opts) {
 
   // If the selector type requests html as its return type
   // transform and clean the element with provided selectors
-  var $content = void 0;
   if (extractHtml) {
-    // If matching selector is an array, we're considering this a
-    // multi-match selection, which allows the parser to choose several
-    // selectors to include in the result. Note that all selectors in the
-    // array must match in order for this selector to trigger
-    if (Array.isArray(matchingSelector)) {
-      (function () {
-        $content = $(matchingSelector.join(','));
-        var $wrapper = $('<div></div>');
-        $content.each(function (index, element) {
-          $wrapper.append(element);
-        });
-
-        $content = $wrapper;
-      })();
-    } else {
-      $content = $(matchingSelector);
-    }
+    var $content = $(matchingSelector);
 
     // Wrap in div so transformation can take place on root element
     $content.wrap($('<div></div>'));
@@ -5103,7 +4599,7 @@ function select(opts) {
   // Allow custom extractor to skip default cleaner
   // for this type; defaults to true
   if (defaultCleaner) {
-    return Cleaners[type](result, _extends({}, opts, extractionOpts));
+    return Cleaners[type](result, opts);
   }
 
   return result;
@@ -5272,7 +4768,7 @@ var Mercury = {
 
     var opts = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
     return _asyncToGenerator(_regeneratorRuntime.mark(function _callee() {
-      var _opts$fetchAllPages, fetchAllPages, _opts$fallback, fallback, parsedUrl, $, Extractor, metaCache, result, _result, title, next_page_url;
+      var _opts$fetchAllPages, fetchAllPages, _opts$fallback, fallback, parsedUrl, Extractor, $, metaCache, result, _result, title, next_page_url;
 
       return _regeneratorRuntime.wrap(function _callee$(_context) {
         while (1) {
@@ -5299,15 +4795,14 @@ var Mercury = {
               return _context.abrupt('return', Errors.badUrl);
 
             case 5:
-              _context.next = 7;
-              return Resource.create(url, html, parsedUrl);
-
-            case 7:
-              $ = _context.sent;
-              Extractor = getExtractor(url, parsedUrl, $);
+              Extractor = getExtractor(url, parsedUrl);
               // console.log(`Using extractor for ${Extractor.domain}`);
 
-              // If we found an error creating the resource, return that error
+              _context.next = 8;
+              return Resource.create(url, html, parsedUrl);
+
+            case 8:
+              $ = _context.sent;
 
               if (!$.failed) {
                 _context.next = 11;
@@ -5370,16 +4865,9 @@ var Mercury = {
               });
 
             case 22:
-
-              // if this parse is happening in the browser,
-              // clean up any trace from the page.
-              if (cheerio.browser) {
-                cheerio.cleanup();
-              }
-
               return _context.abrupt('return', result);
 
-            case 24:
+            case 23:
             case 'end':
               return _context.stop();
           }
@@ -5418,4 +4906,4 @@ var Mercury = {
 };
 
 module.exports = Mercury;
-//# sourceMappingURL=mercury.js.map
+//# sourceMappingURL=mercury.test.js.map

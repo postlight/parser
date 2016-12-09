@@ -31,7 +31,7 @@ describe('WwwUsmagazineComExtractor', () => {
 
     // Update these values with the expected values from
     // the article.
-    assert.equal(title, 'Lady Gaga Shares Pic of Ex Taylor Kinney With Her Mom and Now We’re Confused');
+    assert.equal(title, 'Lady Gaga Shares Photo of Ex Taylor Kinney Hanging With Her Mom and Now We’re Confused');
   });
 
   it('returns the author', async () => {
@@ -63,23 +63,7 @@ describe('WwwUsmagazineComExtractor', () => {
 
     // Update these values with the expected values from
     // the article.
-    assert.equal(date_published, '2016-12-05T17:10:10+00:00');
-  });
-
-  it('returns the dek', async () => {
-    // To pass this test, fill out the dek selector
-    // in ./src/extractors/custom/www.usmagazine.com/index.js.
-    const html =
-      fs.readFileSync('./fixtures/www.usmagazine.com/1481147005164.html');
-    const articleUrl =
-      'http://www.usmagazine.com/celebrity-news/news/lady-gaga-shares-pic-of-ex-taylor-kinney-with-her-mom-w454419';
-
-    const { dek } =
-      await Mercury.parse(articleUrl, html, { fallback: false });
-
-    // Update these values with the expected values from
-    // the article.
-    assert.equal(dek, '');
+    assert.equal(date_published, '2016-12-07T20:53:00.000Z');
   });
 
   it('returns the lead_image_url', async () => {
@@ -117,6 +101,6 @@ describe('WwwUsmagazineComExtractor', () => {
 
     // Update these values with the expected values from
     // the article.
-    assert.equal(first13, 'Add the first 13 words of the article here');
+    assert.equal(first13, 'Taylor Kinney and Lady Gaga arrive at the 37th Annual Kennedy Center Honors');
   });
 });
