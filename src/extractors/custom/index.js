@@ -35,3 +35,4 @@ export * from './www.usmagazine.com';
 export * from './www.rollingstone.com';
 export * from './247sports.com';
 export * from './uproxx.com';
+export * from './www.eonline.com';
