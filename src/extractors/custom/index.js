@@ -29,3 +29,4 @@ export * from './www.theguardian.com';
 export * from './www.sbnation.com';
 export * from './www.bloomberg.com';
 export * from './www.bustle.com';
+export * from './qz.com';
