@@ -91,7 +91,7 @@ describe('WwwVoxComExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(first13, 'After the election, Twitter issued a statement to Slate that it would “take');
+      assert.equal(first13, 'Photo by Steve Pope/Getty Images After the election, Twitter issued a statement to');
     });
   });
 });

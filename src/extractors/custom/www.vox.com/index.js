@@ -33,12 +33,19 @@ export const WwwVoxComExtractor = {
 
   content: {
     selectors: [
+      ['figure.e-image--hero', '.c-entry-content'],
       '.c-entry-content',
     ],
 
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images
     transforms: {
+      'figure .e-image__image noscript': ($node) => {
+        const imgHtml = $node.html();
+        $node.parents('.e-image__image').find('.c-dynamic-image').replaceWith(imgHtml);
+      },
+
+      'figure .e-image__meta': 'figcaption',
     },
 
     // Is there anything that is in the result that shouldn't be?
