@@ -252,7 +252,7 @@ var MAX_CONTENT_LENGTH = 5242880;
 // Proxying is not currently enabled in Python source
 // so not implementing logic in port.
 
-function get(options) {
+function get$1(options) {
   return new _Promise(function (resolve, reject) {
     request(options, function (err, response, body) {
       if (err) {
@@ -345,7 +345,7 @@ var fetchResource$1 = (function () {
               followAllRedirects: true
             };
             _context.next = 4;
-            return get(options);
+            return get$1(options);
 
           case 4:
             _ref3 = _context.sent;
@@ -3293,6 +3293,50 @@ var WwwBustleComExtractor = {
   }
 };
 
+var WwwVoxComExtractor = {
+  domain: 'www.vox.com',
+
+  title: {
+    selectors: ['h1.c-page-title']
+  },
+
+  author: {
+    selectors: [['meta[name="author"]', 'value']]
+  },
+
+  date_published: {
+    selectors: [['meta[name="article:published_time"]', 'value']]
+  },
+
+  dek: {
+    selectors: ['.p-dek']
+  },
+
+  lead_image_url: {
+    selectors: [['meta[name="og:image"]', 'value']]
+  },
+
+  content: {
+    selectors: [['figure.e-image--hero', '.c-entry-content'], '.c-entry-content'],
+
+    // Is there anything in the content you selected that needs transformed
+    // before it's consumable content? E.g., unusual lazy loaded images
+    transforms: {
+      'figure .e-image__image noscript': function figureEImage__imageNoscript($node) {
+        var imgHtml = $node.html();
+        $node.parents('.e-image__image').find('.c-dynamic-image').replaceWith(imgHtml);
+      },
+
+      'figure .e-image__meta': 'figcaption'
+    },
+
+    // Is there anything that is in the result that shouldn't be?
+    // The clean selectors will remove anything that matches from
+    // the result
+    clean: []
+  }
+};
+
 
 
 var CustomExtractors = Object.freeze({
@@ -3326,7 +3370,8 @@ var CustomExtractors = Object.freeze({
 	WwwTheguardianComExtractor: WwwTheguardianComExtractor,
 	WwwSbnationComExtractor: WwwSbnationComExtractor,
 	WwwBloombergComExtractor: WwwBloombergComExtractor,
-	WwwBustleComExtractor: WwwBustleComExtractor
+	WwwBustleComExtractor: WwwBustleComExtractor,
+	WwwVoxComExtractor: WwwVoxComExtractor
 });
 
 var Extractors = _Object$keys(CustomExtractors).reduce(function (acc, key) {
@@ -5265,7 +5310,7 @@ var Mercury = {
 
     var opts = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
     return _asyncToGenerator(_regeneratorRuntime.mark(function _callee() {
-      var _opts$fetchAllPages, fetchAllPages, _opts$fallback, fallback, parsedUrl, $, Extractor, metaCache, result, _result, title, next_page_url;
+      var _opts$fetchAllPages, fetchAllPages, _opts$fallback, fallback, parsedUrl, $, $original, Extractor, metaCache, result, _result, title, next_page_url;
 
       return _regeneratorRuntime.wrap(function _callee$(_context) {
         while (1) {
@@ -5297,19 +5342,20 @@ var Mercury = {
 
             case 7:
               $ = _context.sent;
+              $original = $('html').clone();
               Extractor = getExtractor(url, parsedUrl, $);
               // console.log(`Using extractor for ${Extractor.domain}`);
 
               // If we found an error creating the resource, return that error
 
               if (!$.failed) {
-                _context.next = 11;
+                _context.next = 12;
                 break;
               }
 
               return _context.abrupt('return', $);
 
-            case 11:
+            case 12:
 
               // if html still has not been set (i.e., url passed to Mercury.parse),
               // set html from the response of Resource.create
@@ -5335,11 +5381,11 @@ var Mercury = {
               // Fetch more pages if next_page_url found
 
               if (!(fetchAllPages && next_page_url)) {
-                _context.next = 21;
+                _context.next = 22;
                 break;
               }
 
-              _context.next = 18;
+              _context.next = 19;
               return collectAllPages({
                 Extractor: Extractor,
                 next_page_url: next_page_url,
@@ -5351,18 +5397,18 @@ var Mercury = {
                 url: url
               });
 
-            case 18:
+            case 19:
               result = _context.sent;
-              _context.next = 22;
+              _context.next = 23;
               break;
 
-            case 21:
+            case 22:
               result = _extends({}, result, {
                 total_pages: 1,
                 rendered_pages: 1
               });
 
-            case 22:
+            case 23:
 
               // if this parse is happening in the browser,
               // clean up any trace from the page.
@@ -5370,9 +5416,17 @@ var Mercury = {
                 cheerio.cleanup();
               }
 
+              // Add property accessor for the original cheerio object
+              // for later use in the Mercury amp converter.
+              Object.defineProperty(result, '$original', {
+                get: function get() {
+                  return $original;
+                }
+              });
+
               return _context.abrupt('return', result);
 
-            case 24:
+            case 26:
             case 'end':
               return _context.stop();
           }
