@@ -1,5 +1,6 @@
 import assert from 'assert';
 import { Errors } from 'utils';
+import Cheerio from 'cheerio';
 
 import { record } from 'test-helpers';
 import Mercury from './mercury';
@@ -71,6 +72,12 @@ describe('Mercury', () => {
       assert.equal(pages_rendered, 3);
 
       assert.equal(result.next_page_url, `${url}2`);
+    });
+
+    it('has a reference to the original cheerio object', async () => {
+      const result = await Mercury.parse('https://postlight.com');
+
+      assert.equal(result.$original instanceof Cheerio, true);
     });
   });
 });

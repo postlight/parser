@@ -32,6 +32,7 @@ const Mercury = {
     }
 
     const $ = await Resource.create(url, html, parsedUrl);
+    const $original = $('html').clone();
 
     const Extractor = getExtractor(url, parsedUrl, $);
     // console.log(`Using extractor for ${Extractor.domain}`);
@@ -91,6 +92,12 @@ const Mercury = {
     if (cheerio.browser) {
       cheerio.cleanup();
     }
+
+    // Add property accessor for the original cheerio object
+    // for later use in the Mercury amp converter.
+    Object.defineProperty(result, '$original', {
+      get: () => $original,
+    });
 
     return result;
   },
