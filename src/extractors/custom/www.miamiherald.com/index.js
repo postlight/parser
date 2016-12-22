@@ -11,6 +11,8 @@ export const WwwMiamiheraldComExtractor = {
     selectors: [
       'p.published-date',
     ],
+
+    timezone: 'America/New_York',
   },
 
   lead_image_url: {
