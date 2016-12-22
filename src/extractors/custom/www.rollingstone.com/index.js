@@ -33,6 +33,7 @@ export const WwwRollingstoneComExtractor = {
 
   content: {
     selectors: [
+      ['.lead-container', '.article-content'],
       '.article-content',
     ],
 

@@ -15,7 +15,7 @@ describe('WwwRollingstoneComExtractor', () => {
       url =
         'http://www.rollingstone.com/movies/features/how-la-la-land-resurrected-the-hollywood-musical-w454198';
       const html =
-        fs.readFileSync('./fixtures/www.rollingstone.com/1481322080542.html');
+        fs.readFileSync('./fixtures/www.rollingstone.com/1482380017694.html');
       result =
         Mercury.parse(url, html, { fallback: false });
     });
@@ -55,7 +55,7 @@ describe('WwwRollingstoneComExtractor', () => {
 
     // Update these values with the expected values from
     // the article.
-      assert.equal(date_published, '2016-12-09T14:50:00.000Z');
+      assert.equal(date_published, '2016-12-09T08:00:00.000Z');
     });
 
     it('returns the dek', async () => {
@@ -91,7 +91,7 @@ describe('WwwRollingstoneComExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(first13, 'Ask most folks what the most iconic thing about Los Angeles is, and');
+      assert.equal(first13, 'Inside: \'La La Land\': How a young filmmaker, his best-friend composer and two');
     });
   });
 });
