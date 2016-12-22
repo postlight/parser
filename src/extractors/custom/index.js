@@ -32,3 +32,4 @@ export * from './www.bustle.com';
 export * from './www.vox.com';
 export * from './people.com';
 export * from './www.usmagazine.com';
+export * from './www.rollingstone.com';
