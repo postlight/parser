@@ -9,7 +9,7 @@ export const UproxxComExtractor = {
 
   author: {
     selectors: [
-      'span.authorname',
+      '.post-top .authorname',
     ],
   },
 
@@ -33,6 +33,8 @@ export const UproxxComExtractor = {
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images
     transforms: {
+      'div.image': 'figure',
+      'div.image .wp-media-credit': 'figcaption',
     },
 
     // Is there anything that is in the result that shouldn't be?
