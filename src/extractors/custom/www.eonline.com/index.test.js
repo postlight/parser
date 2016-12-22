@@ -55,7 +55,7 @@ describe('WwwEonlineComExtractor', () => {
 
     // Update these values with the expected values from
     // the article.
-      assert.equal(date_published, '2016-12-12T06:00:00Z');
+      assert.equal(date_published, '2016-12-12T06:00:00.000Z');
     });
 
     it('returns the lead_image_url', async () => {
@@ -81,7 +81,7 @@ describe('WwwEonlineComExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(first13, 'Ryan Gosling\'s most cherished role won\'t win him any Hollywood awards. With his');
+      assert.equal(first13, 'Ryan Gosling\'s most cherished role won\'t win him any Hollywood awards.With his musical');
     });
   });
 });

@@ -27,12 +27,14 @@ export const WwwEonlineComExtractor = {
 
   content: {
     selectors: [
-      '#article-detail',
+      ['.post-content section, .post-content div.post-content__image'],
     ],
 
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images
     transforms: {
+      'div.post-content__image': 'figure',
+      'div.post-content__image .image__credits': 'figcaption',
     },
 
     // Is there anything that is in the result that shouldn't be?
