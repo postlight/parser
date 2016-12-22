@@ -3126,7 +3126,6 @@ var WwwYoutubeComExtractor = {
     // The clean selectors will remove anything that matches from
     // the result
     clean: []
-<<<<<<< 998b5b64ca2b8c4a10b2b3ebc9a2f2e735331f6b
   }
 };
 
@@ -3291,8 +3290,6 @@ var WwwBustleComExtractor = {
     // The clean selectors will remove anything that matches from
     // the result
     clean: []
-=======
->>>>>>> finishing up!
   }
 };
 
@@ -3325,15 +3322,11 @@ var CustomExtractors = Object.freeze({
 	WwwThevergeComExtractor: WwwThevergeComExtractor,
 	WwwCnnComExtractor: WwwCnnComExtractor,
 	WwwAolComExtractor: WwwAolComExtractor,
-<<<<<<< 998b5b64ca2b8c4a10b2b3ebc9a2f2e735331f6b
 	WwwYoutubeComExtractor: WwwYoutubeComExtractor,
 	WwwTheguardianComExtractor: WwwTheguardianComExtractor,
 	WwwSbnationComExtractor: WwwSbnationComExtractor,
 	WwwBloombergComExtractor: WwwBloombergComExtractor,
 	WwwBustleComExtractor: WwwBustleComExtractor
-=======
-	WwwYoutubeComExtractor: WwwYoutubeComExtractor
->>>>>>> finishing up!
 });
 
 var Extractors = _Object$keys(CustomExtractors).reduce(function (acc, key) {
