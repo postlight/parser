@@ -17,6 +17,8 @@ export const WwwRollingstoneComExtractor = {
     selectors: [
       'time.content-published-date',
     ],
+
+    timezone: 'America/New_York',
   },
 
   dek: {
