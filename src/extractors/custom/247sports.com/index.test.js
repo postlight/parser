@@ -55,7 +55,7 @@ describe('twofortysevensportsComExtractor', () => {
 
     // Update these values with the expected values from
     // the article.
-      assert.equal(date_published, '2016-12-09 09:13:00Z');
+      assert.equal(date_published, '2016-12-09T09:13:00.000Z');
     });
 
     it('returns the lead_image_url', async () => {

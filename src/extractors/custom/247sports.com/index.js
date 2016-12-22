@@ -4,6 +4,7 @@ export const twofortysevensportsComExtractor = {
   title: {
     selectors: [
       'title',
+      'article header h1',
     ],
   },
 
