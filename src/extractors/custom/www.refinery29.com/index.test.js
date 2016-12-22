@@ -55,7 +55,7 @@ describe('WwwRefinery29ComExtractor', () => {
 
     // Update these values with the expected values from
     // the article.
-      assert.equal(date_published, '2016-12-12 20:00:00');
+      assert.equal(date_published, '2016-12-13T01:00:00.000Z');
     });
 
     it('returns the lead_image_url', async () => {
