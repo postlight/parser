@@ -48,14 +48,14 @@ describe('WwwHowtogeekComExtractor', () => {
       assert.equal(author, 'Craig Lloyd');
     });
 
-    it('returns the dek', async () => {
-    // To pass this test, fill out the dek selector
-    // in ./src/extractors/custom/www.howtogeek.com/index.js.
-      const { dek } = await result;
+    it('returns the date_published', async () => {
+    // To pass this test, fill out the date_published selector
+    // in ./src/extractors/custom/www.rawstory.com/index.js.
+      const { date_published } = await result;
 
-    // Update these values with the expected values from
-    // the article.
-      assert.equal(dek, '');
+     // Update these values with the expected values from
+     // the article.
+      assert.equal(date_published, '');
     });
 
     it('returns the lead_image_url', async () => {

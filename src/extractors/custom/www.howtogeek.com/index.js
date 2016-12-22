@@ -15,7 +15,7 @@ export const WwwHowtogeekComExtractor = {
 
   date_published: {
     selectors: [
-      // enter selectors
+      '#authorinfobox + div li',
     ],
   },
 
