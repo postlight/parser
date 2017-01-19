@@ -15,9 +15,11 @@ export const WwwNbcnewsComExtractor = {
 
   date_published: {
     selectors: [
-      'div.flag_article-wrapper.flag_article-wrapper-last',
-      ['time.timestamp_article[datetime]', 'datetime'],
+      ['.flag_article-wrapper time.timestamp_article[datetime]', 'datetime'],
+      '.flag_article-wrapper time',
     ],
+
+    timezone: 'America/New_York',
   },
 
   lead_image_url: {
