@@ -17,6 +17,8 @@ export const WwwNjComExtractor = {
     selectors: [
       ['meta[name="article_date_original"]', 'value'],
     ],
+
+    timezone: 'America/New_York',
   },
 
   lead_image_url: {
@@ -27,7 +29,7 @@ export const WwwNjComExtractor = {
 
   content: {
     selectors: [
-      'div.entry-content',
+      '.entry-content',
     ],
 
     // Is there anything in the content you selected that needs transformed
