@@ -3,19 +3,19 @@ export const WwwMacrumorsComExtractor = {
 
   title: {
     selectors: [
-      'h1.title'
+      'h1.title',
     ],
   },
 
   author: {
     selectors: [
-      'a.author-url'
+      'a.author-url',
     ],
   },
 
   date_published: {
     selectors: [
-      ['meta[name="article:published_time"]', 'value'],
+      'div.article div.byline',
     ],
   },
 
@@ -33,7 +33,7 @@ export const WwwMacrumorsComExtractor = {
 
   content: {
     selectors: [
-      'div.article'
+      'div.article',
     ],
 
     // Is there anything in the content you selected that needs transformed
