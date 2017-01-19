@@ -55,7 +55,7 @@ describe('WwwInquisitrComExtractor', () => {
 
     // Update these values with the expected values from
     // the article.
-      assert.equal(date_published, '2016-12-12T16:07:20+00:00');
+      assert.equal(date_published, '2016-12-12T16:07:20.000Z');
     });
 
     it('returns the lead_image_url', async () => {

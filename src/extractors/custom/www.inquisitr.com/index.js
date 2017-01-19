@@ -27,7 +27,8 @@ export const WwwInquisitrComExtractor = {
 
   content: {
     selectors: [
-      'div.text.entry-content.story--content',
+      'article.story',
+      '.entry-content.',
     ],
 
     // Is there anything in the content you selected that needs transformed
@@ -39,7 +40,9 @@ export const WwwInquisitrComExtractor = {
     // The clean selectors will remove anything that matches from
     // the result
     clean: [
-
+      '.post-category',
+      '.story--header--socials',
+      '.story--header--content',
     ],
   },
 };
