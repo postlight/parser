@@ -39,3 +39,4 @@ export * from './www.eonline.com';
 export * from './www.miamiherald.com';
 export * from './www.refinery29.com';
 export * from './www.nj.com';
+export * from './www.inquisitr.com';
