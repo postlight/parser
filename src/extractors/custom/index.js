@@ -30,6 +30,7 @@ export * from './www.sbnation.com';
 export * from './www.bloomberg.com';
 export * from './www.bustle.com';
 export * from './www.vox.com';
+export * from './www.popsugar.com';
 export * from './observer.com';
 export * from './people.com';
 export * from './www.usmagazine.com';
