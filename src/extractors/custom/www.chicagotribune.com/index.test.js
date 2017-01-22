@@ -55,7 +55,7 @@ describe('WwwChicagotribuneComExtractor', () => {
 
     // Update these values with the expected values from
     // the article.
-      assert.equal(date_published, '2016-12-13T13:45:00-0800');
+      assert.equal(date_published, '2016-12-13T21:45:00.000Z');
     });
 
     it('returns the lead_image_url', async () => {
