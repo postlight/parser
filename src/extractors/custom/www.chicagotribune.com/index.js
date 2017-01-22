@@ -17,7 +17,6 @@ export const WwwChicagotribuneComExtractor = {
     selectors: [
       ['meta[itemprop="datePublished"]', 'value'],
     ],
-    timezone: 'America/Chicago',
   },
 
   lead_image_url: {
