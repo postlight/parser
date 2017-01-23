@@ -9,14 +9,17 @@ export const WwwDmagazineComExtractor = {
 
   author: {
     selectors: [
-      'span.story__info__item a',
+      '.story__info .story__info__item:first-child',
     ],
   },
 
   date_published: {
     selectors: [
       // enter selectors
+      '.story__info',
     ],
+
+    timezone: 'America/Chicago',
   },
 
   dek: {
@@ -27,7 +30,7 @@ export const WwwDmagazineComExtractor = {
 
   lead_image_url: {
     selectors: [
-      'figure.wp-caption.aligncenter.size-',
+      ['article figure a:first-child', 'href'],
     ],
   },
 

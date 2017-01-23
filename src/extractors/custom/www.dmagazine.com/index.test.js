@@ -55,7 +55,7 @@ describe('WwwDmagazineComExtractor', () => {
 
     // Update these values with the expected values from
     // the article.
-      assert.equal(date_published, '');
+      assert.equal(date_published, '2016-12-14T20:24:00.000Z');
     });
 
     it('returns the dek', async () => {
@@ -75,7 +75,7 @@ describe('WwwDmagazineComExtractor', () => {
 
     // Update these values with the expected values from
     // the article.
-      assert.equal(lead_image_url, 'http://www.dmagazine.com/wp-content/uploads/media/4/tony_dorsett_1.jpg%203500w,%20http://www.dmagazine.com/wp-content/uploads/media/4/tony_dorsett_1.jpg?cropUpAlias=medium_large&width=768%20768w,%20http://www.dmagazine.com/wp-content/uploads/media/4/tony_dorsett_1.jpg?cropUpAlias=wide_4-12&width=330%20330w,%20http://www.dmagazine.com/wp-content/uploads/media/4/tony_dorsett_1.jpg?cropUpAlias=wide_6-12&width=504%20504w,%20http://www.dmagazine.com/wp-content/uploads/media/4/tony_dorsett_1.jpg?cropUpAlias=wide_8-12&width=677%20677w');
+      assert.equal(lead_image_url, 'http://www.dmagazine.com/wp-content/uploads/media/4/tony_dorsett_1.jpg');
     });
 
     it('returns the content', async () => {
