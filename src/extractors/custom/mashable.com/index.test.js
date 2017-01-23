@@ -55,7 +55,7 @@ describe('MashableComExtractor', () => {
 
     // Update these values with the expected values from
     // the article.
-      assert.equal(date_published, '2016-12-14T03:33:06.000Z');
+      assert.equal(date_published, '2016-12-13T22:33:06.000Z');
     });
 
     it('returns the lead_image_url', async () => {
