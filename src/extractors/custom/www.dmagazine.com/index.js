@@ -36,7 +36,7 @@ export const WwwDmagazineComExtractor = {
 
   content: {
     selectors: [
-      '.story__content-l.story__content.story__content--is-slideshow-closed',
+      '.story__content',
     ],
 
     // Is there anything in the content you selected that needs transformed
