@@ -27,7 +27,8 @@ export const QzComExtractor = {
 
   content: {
     selectors: [
-      'div.item-body',
+      ['figure.featured-image', '.item-body'],
+      '.item-body',
     ],
 
     // Is there anything in the content you selected that needs transformed
@@ -39,7 +40,8 @@ export const QzComExtractor = {
     // The clean selectors will remove anything that matches from
     // the result
     clean: [
-      'div.article-aside',
+      '.article-aside',
+      '.progressive-image-thumbnail',
     ],
   },
 };

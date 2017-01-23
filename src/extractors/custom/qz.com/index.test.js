@@ -48,6 +48,8 @@ describe('QzComExtractor', () => {
       assert.equal(author, 'Alison Griswold');
     });
 
+    // qz doesn't appear to pass the date from the server,
+    // so the date is unfortunately null
     it('returns the date_published', async () => {
     // To pass this test, fill out the date_published selector
     // in ./src/extractors/custom/qz.com/index.js.
@@ -55,7 +57,7 @@ describe('QzComExtractor', () => {
 
     // Update these values with the expected values from
     // the article.
-      assert.equal(date_published, '');
+      assert.equal(date_published, null);
     });
 
     it('returns the lead_image_url', async () => {
@@ -81,7 +83,7 @@ describe('QzComExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(first13, 'No one would have confused the self-driving cars Uber debuted in Pittsburgh in');
+      assert.equal(first13, 'One of the Volvo XC90s Uber is debuting in San Francisco. (Uber) No');
     });
   });
 });
