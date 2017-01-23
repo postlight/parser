@@ -30,6 +30,7 @@ export * from './www.sbnation.com';
 export * from './www.bloomberg.com';
 export * from './www.bustle.com';
 export * from './www.reuters.com';
+export * from './mashable.com';
 export * from './www.chicagotribune.com';
 export * from './www.vox.com';
 export * from './www.cnbc.com';
