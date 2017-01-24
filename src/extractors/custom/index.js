@@ -17,6 +17,7 @@ export * from './www.broadwayworld.com';
 export * from './www.apartmenttherapy.com';
 export * from './medium.com';
 export * from './www.tmz.com';
+export * from './www.linkedin.com';
 export * from './www.washingtonpost.com';
 export * from './www.huffingtonpost.com';
 export * from './newrepublic.com';
