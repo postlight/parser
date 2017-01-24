@@ -55,7 +55,7 @@ describe('WwwNprOrgExtractor', () => {
 
     // Update these values with the expected values from
     // the article.
-      assert.equal(date_published, '2016-12-15T05:00:00.000Z');
+      assert.equal(date_published, '2016-12-15T20:33:00.000Z');
     });
 
     it('returns the lead_image_url', async () => {
@@ -65,7 +65,7 @@ describe('WwwNprOrgExtractor', () => {
 
     // Update these values with the expected values from
     // the article.
-      assert.equal(lead_image_url, 'https://media.npr.org/assets/img/2016/12/15/gettyimages-540681598_wide-8b160732b96c083dc115134c3c019f3ac73586ba.jpg?s=1400');
+      assert.equal(lead_image_url, 'https://media.npr.org/assets/img/2016/12/15/ap_16342669033405_wide-e76ba54ba052acbbbe4b9bd73bd429e8d5ca58c7.jpg?s=1400');
     });
 
     it('returns the content', async () => {

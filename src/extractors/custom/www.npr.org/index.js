@@ -3,7 +3,8 @@ export const WwwNprOrgExtractor = {
 
   title: {
     selectors: [
-      'div.storytitle h1',
+      'h1',
+      '.storytitle',
     ],
   },
 
@@ -15,6 +16,7 @@ export const WwwNprOrgExtractor = {
 
   date_published: {
     selectors: [
+      ['.dateblock time[datetime]', 'datetime'],
       ['meta[name="date"]', 'value'],
     ],
   },
@@ -22,6 +24,7 @@ export const WwwNprOrgExtractor = {
   lead_image_url: {
     selectors: [
       ['meta[name="og:image"]', 'value'],
+      ['meta[name="twitter:image:src"]', 'value'],
     ],
   },
 
@@ -33,6 +36,8 @@ export const WwwNprOrgExtractor = {
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images
     transforms: {
+      '.bucketwrap.image': 'figure',
+      '.bucketwrap.image .credit-caption': 'figcaption',
     },
 
     // Is there anything that is in the result that shouldn't be?
