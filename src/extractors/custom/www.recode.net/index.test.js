@@ -91,7 +91,7 @@ describe('WwwRecodeNetExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(first13, 'U.S. Federal Communications Commission chairman Tom Wheeler announced this morning that he will');
+      assert.equal(first13, 'Photo by Mark Wilson/Getty Images U.S. Federal Communications Commission chairman Tom Wheeler announced');
     });
   });
 });

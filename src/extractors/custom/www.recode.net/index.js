@@ -33,7 +33,8 @@ export const WwwRecodeNetExtractor = {
 
   content: {
     selectors: [
-      'div.c-entry-content',
+      ['figure.e-image--hero', '.c-entry-content'],
+      '.c-entry-content',
     ],
 
     // Is there anything in the content you selected that needs transformed
