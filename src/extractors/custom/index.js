@@ -29,6 +29,7 @@ export * from './www.theguardian.com';
 export * from './www.sbnation.com';
 export * from './www.bloomberg.com';
 export * from './www.bustle.com';
+export * from './www.recode.net';
 export * from './qz.com';
 export * from './www.dmagazine.com';
 export * from './www.reuters.com';
