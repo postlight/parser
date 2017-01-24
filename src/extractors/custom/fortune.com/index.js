@@ -3,25 +3,19 @@ export const FortuneComExtractor = {
 
   title: {
     selectors: [
-      'h1.article-headline',
+      'h1',
     ],
   },
 
   author: {
     selectors: [
-      ['meta[name="sailthru.author"]', 'value'],
+      ['meta[name="author"]', 'value'],
     ],
   },
 
   date_published: {
     selectors: [
-      ['meta[name="article:published_time"]', 'value'],
-    ],
-  },
-
-  dek: {
-    selectors: [
-      ['meta[name="og:description"]', 'value'],
+      '.MblGHNMJ',
     ],
   },
 
@@ -33,7 +27,8 @@ export const FortuneComExtractor = {
 
   content: {
     selectors: [
-      'div.article-body',
+      ['picture', 'article.row'],
+      'article.row',
     ],
 
     // Is there anything in the content you selected that needs transformed

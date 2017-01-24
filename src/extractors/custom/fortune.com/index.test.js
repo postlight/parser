@@ -15,7 +15,7 @@ describe('FortuneComExtractor', () => {
       url =
         'http://fortune.com/2016/12/15/amazon-alexa-gadgets/';
       const html =
-        fs.readFileSync('./fixtures/fortune.com/1481816949736.html');
+        fs.readFileSync('./fixtures/fortune.com/1485216994169.html');
       result =
         Mercury.parse(url, html, { fallback: false });
     });
@@ -55,17 +55,7 @@ describe('FortuneComExtractor', () => {
 
     // Update these values with the expected values from
     // the article.
-      assert.equal(date_published, '2016-12-15T14:57:58.000Z');
-    });
-
-    it('returns the dek', async () => {
-    // To pass this test, fill out the dek selector
-    // in ./src/extractors/custom/fortune.com/index.js.
-      const { dek } = await result;
-
-    // Update these values with the expected values from
-    // the article.
-      assert.equal(dek, 'Gadget makers other than Amazon are adding the retailer’s Alexa AI platform to their own devices.');
+      assert.equal(date_published, '2016-12-15T22:57:00.000Z');
     });
 
     it('returns the lead_image_url', async () => {
@@ -75,7 +65,7 @@ describe('FortuneComExtractor', () => {
 
     // Update these values with the expected values from
     // the article.
-      assert.equal(lead_image_url, 'https://fortunedotcom.files.wordpress.com/2016/05/amazon-echo-2.jpg?w=820&h=570&crop=1');
+      assert.equal(lead_image_url, 'https://fortunedotcom.files.wordpress.com/2016/05/amazon-echo-2.jpg?w=720');
     });
 
     it('returns the content', async () => {
