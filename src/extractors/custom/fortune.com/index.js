@@ -17,6 +17,8 @@ export const FortuneComExtractor = {
     selectors: [
       '.MblGHNMJ',
     ],
+
+    timezone: 'UTC',
   },
 
   lead_image_url: {
