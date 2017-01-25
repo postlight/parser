@@ -3,10 +3,6 @@ import assert from 'assert';
 import cheerio from 'cheerio';
 
 let urls = [
-  // {
-  //   url: 'https://bordeltabernacle.github.io/2016/01/04/notes-on-elixir-pattern-matching-maps.html',
-  //   title: 'Notes on Elixir: Pattern-Matching Maps',
-  // },
   {
     url: 'http://www.cnn.com/2016/11/05/middleeast/iraq-mosul-isis-offensive/',
     title: 'Iraqi troops storm town south of Mosul',
