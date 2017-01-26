@@ -54,3 +54,4 @@ export * from './www.nj.com';
 export * from './www.inquisitr.com';
 export * from './www.nbcnews.com';
 export * from './fortune.com';
+export * from './www.linkedin.com';
