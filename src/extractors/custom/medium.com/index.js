@@ -19,6 +19,7 @@ export const MediumExtractor = {
 
   content: {
     selectors: [
+      ['.section-content'],
       '.section-content',
       'article > div > section',
     ],
@@ -39,6 +40,16 @@ export const MediumExtractor = {
           $parent.prepend($node.clone());
           $node.remove();
         }
+      },
+
+      // rewrite figures to pull out image and caption, remove rest
+      figure: ($node) => {
+        // ignore if figure has an iframe
+        if ($node.find('iframe').length > 0) return;
+
+        const $img = $node.find('img').slice(-1)[0];
+        const $caption = $node.find('figcaption');
+        $node.empty().append([$img, $caption]);
       },
     },
 
