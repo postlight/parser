@@ -37,8 +37,8 @@ export const MediumExtractor = {
           const [_, youtubeId] = thumb.match(ytRe) // eslint-disable-line
           $node.attr('src', `https://www.youtube.com/embed/${youtubeId}`);
           const $parent = $node.parents('figure');
-          $parent.prepend($node.clone());
-          $node.remove();
+          const $caption = $parent.find('figcaption');
+          $parent.empty().append([$node, $caption]);
         }
       },
 
