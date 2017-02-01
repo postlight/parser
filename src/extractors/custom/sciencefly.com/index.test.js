@@ -65,7 +65,7 @@ describe('ScienceflyComExtractor', () => {
 
     // Update these values with the expected values from
     // the article.
-      assert.equal(lead_image_url, 'http://sciencefly.com/wp-content/uploads/2016/12/Video-shows-false-killer-whale-snagging-tuna-bait.jpg');
+      assert.equal(lead_image_url, 'http://cdnph.upi.com/rss/i/14825077851993/Video-shows-false-killer-whale-snagging-tuna-bait_f.jpg');
     });
 
     it('returns the content', async () => {

@@ -29,13 +29,14 @@ export const ScienceflyComExtractor = {
 
   lead_image_url: {
     selectors: [
+      ['div.theiaPostSlider_slides img', 'src'],
       ['meta[name="twitter:image"]', 'value'],
     ],
   },
 
   content: {
     selectors: [
-      'div#article',
+      'div.theiaPostSlider_slides',
     ],
 
     // Is there anything in the content you selected that needs transformed
