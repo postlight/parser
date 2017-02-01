@@ -30,7 +30,6 @@ export const ScienceflyComExtractor = {
   lead_image_url: {
     selectors: [
       ['div.theiaPostSlider_slides img', 'src'],
-      ['meta[name="twitter:image"]', 'value'],
     ],
   },
 
