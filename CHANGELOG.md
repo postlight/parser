@@ -1,5 +1,16 @@
 # Mercury Parser Changelog
 
+### 1.0.5 (Feb 1, 2017)
+
+##### Commits
+
+* [[`6bd6278a07`](https://github.com/postlight/mercury-parser/commit/6bd6278a07)] - **feat**: custom parser for wh blog (#130) (Adam Pash) 
+* [[`aa682d71e8`](https://github.com/postlight/mercury-parser/commit/aa682d71e8)] - **fix**: medium bug (#129) (Adam Pash) 
+* [[`4e049de61a`](https://github.com/postlight/mercury-parser/commit/4e049de61a)] - **fix**: i put a bad comment in .gitattributes (#125) (Adam Pash) 
+* [[`8aa215c4c2`](https://github.com/postlight/mercury-parser/commit/8aa215c4c2)] - **chore**: marking html fixtures as "vendored" (#124) (Adam Pash) 
+* [[`31eb4f9222`](https://github.com/postlight/mercury-parser/commit/31eb4f9222)] - **Feat**: LinkedIn parser (#123) (Adam Pash) 
+* [[`dbc706410b`](https://github.com/postlight/mercury-parser/commit/dbc706410b)] - **release**: 1.0.4 (#122) (Adam Pash) 
+
 ### 1.0.4 (Jan 26, 2017)
 
 ##### Commits
