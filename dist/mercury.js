@@ -2662,7 +2662,7 @@ var MediumExtractor = {
   },
 
   content: {
-    selectors: ['.section-content', 'article > div > section'],
+    selectors: [['.section-content'], '.section-content', 'article > div > section'],
 
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images
@@ -2681,9 +2681,19 @@ var MediumExtractor = {
 
           $node.attr('src', 'https://www.youtube.com/embed/' + youtubeId);
           var $parent = $node.parents('figure');
-          $parent.prepend($node.clone());
-          $node.remove();
+          var $caption = $parent.find('figcaption');
+          $parent.empty().append([$node, $caption]);
         }
+      },
+
+      // rewrite figures to pull out image and caption, remove rest
+      figure: function figure($node) {
+        // ignore if figure has an iframe
+        if ($node.find('iframe').length > 0) return;
+
+        var $img = $node.find('img').slice(-1)[0];
+        var $caption = $node.find('figcaption');
+        $node.empty().append([$img, $caption]);
       }
     },
 
@@ -4183,6 +4193,86 @@ var FortuneComExtractor = {
   }
 };
 
+var WwwLinkedinComExtractor = {
+  domain: 'www.linkedin.com',
+
+  title: {
+    selectors: ['.article-title', 'h1']
+  },
+
+  author: {
+    selectors: [['meta[name="article:author"]', 'value'], '.entity-name a[rel=author]']
+  },
+
+  date_published: {
+    selectors: [['time[itemprop="datePublished"]', 'datetime']],
+
+    timezone: 'America/Los_Angeles'
+  },
+
+  dek: {
+    selectors: [
+      // enter selectors
+    ]
+  },
+
+  lead_image_url: {
+    selectors: [['meta[name="og:image"]', 'value']]
+  },
+
+  content: {
+    selectors: [['header figure', '.prose'], '.prose'],
+
+    // Is there anything in the content you selected that needs transformed
+    // before it's consumable content? E.g., unusual lazy loaded images
+    transforms: {},
+
+    // Is there anything that is in the result that shouldn't be?
+    // The clean selectors will remove anything that matches from
+    // the result
+    clean: ['.entity-image']
+  }
+};
+
+var ObamawhitehouseArchivesGovExtractor = {
+  domain: 'obamawhitehouse.archives.gov',
+
+  supportedDomains: ['whitehouse.gov'],
+
+  title: {
+    selectors: ['h1', '.pane-node-title']
+  },
+
+  author: {
+    selectors: ['.blog-author-link', '.node-person-name-link']
+  },
+
+  date_published: {
+    selectors: [['meta[name="article:published_time"]', 'value']]
+  },
+
+  dek: {
+    selectors: ['.field-name-field-forall-summary']
+  },
+
+  lead_image_url: {
+    selectors: [['meta[name="og:image"]', 'value']]
+  },
+
+  content: {
+    selectors: ['.pane-node-field-forall-body'],
+
+    // Is there anything in the content you selected that needs transformed
+    // before it's consumable content? E.g., unusual lazy loaded images
+    transforms: {},
+
+    // Is there anything that is in the result that shouldn't be?
+    // The clean selectors will remove anything that matches from
+    // the result
+    clean: []
+  }
+};
+
 
 
 var CustomExtractors = Object.freeze({
@@ -4241,7 +4331,9 @@ var CustomExtractors = Object.freeze({
 	WwwNjComExtractor: WwwNjComExtractor,
 	WwwInquisitrComExtractor: WwwInquisitrComExtractor,
 	WwwNbcnewsComExtractor: WwwNbcnewsComExtractor,
-	FortuneComExtractor: FortuneComExtractor
+	FortuneComExtractor: FortuneComExtractor,
+	WwwLinkedinComExtractor: WwwLinkedinComExtractor,
+	ObamawhitehouseArchivesGovExtractor: ObamawhitehouseArchivesGovExtractor
 });
 
 var Extractors = _Object$keys(CustomExtractors).reduce(function (acc, key) {
