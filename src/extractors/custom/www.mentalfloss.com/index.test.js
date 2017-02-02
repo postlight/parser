@@ -55,6 +55,7 @@ describe('WwwMentalflossComExtractor', () => {
 
     // Update these values with the expected values from
     // the article.
+      console.log(date_published);
       assert.equal(date_published, '2016-12-19T17:29:00.000Z');
     });
 

@@ -11,7 +11,7 @@ export const WwwMentalflossComExtractor = {
 
   author: {
     selectors: [
-      'div.field.field-name-field-enhanced-authors.field-type-computed.field-label-hidden',
+      '.field-name-field-enhanced-authors',
     ],
   },
 
