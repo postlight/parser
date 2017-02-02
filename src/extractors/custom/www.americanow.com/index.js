@@ -34,6 +34,7 @@ export const WwwAmericanowComExtractor = {
 
   content: {
     selectors: [
+      ['.article-content', '.image', '.body'],
       '.body',
     ],
 
@@ -47,6 +48,7 @@ export const WwwAmericanowComExtractor = {
     // the result
     clean: [
       '.article-video-wrapper',
+      '.show-for-small-only',
     ],
   },
 };
