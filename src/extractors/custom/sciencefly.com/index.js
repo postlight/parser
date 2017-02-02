@@ -11,7 +11,8 @@ export const ScienceflyComExtractor = {
 
   author: {
     selectors: [
-      'span.cb-title-fi div.cb-byline.cb-font-header div.cb-author.cb-byline-element',
+      'span.cb-title-fi div.cb-author',
+      'div.cb-author-title',
     ],
   },
 

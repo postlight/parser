@@ -43,6 +43,8 @@ describe('ScienceflyComExtractor', () => {
     // in ./src/extractors/custom/sciencefly.com/index.js.
       const { author } = await result;
 
+      console.log(author);
+
     // Update these values with the expected values from
     // the article.
       assert.equal(author, 'Paul');
