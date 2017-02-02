@@ -11,6 +11,9 @@ export const AbcnewsGoComExtractor = {
     selectors: [
       'ul.authors',
     ],
+    clean: [
+      'div.author-overlay',
+    ],
   },
 
   date_published: {

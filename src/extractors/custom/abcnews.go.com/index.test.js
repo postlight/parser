@@ -45,6 +45,7 @@ describe('AbcnewsGoComExtractor', () => {
 
     // Update these values with the expected values from
     // the article.
+    console.log(author);
       assert.equal(author, 'Josh Haskell, David Caplan and Patrick Reevell');
     });
 
