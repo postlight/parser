@@ -35,6 +35,7 @@ export const FusionNetExtractor = {
 
   content: {
     selectors: [
+      ['.post-featured-media', '.article-content'],
       '.article-content',
     ],
 
