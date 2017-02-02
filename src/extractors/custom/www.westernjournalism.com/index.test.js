@@ -91,7 +91,7 @@ describe('WwwWesternjournalismComExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(first13, 'Advertisement - story continues belowA rookie Italian police officer shot Europe’s most wanted');
+      assert.equal(first13, 'A rookie Italian police officer shot Europe’s most wanted terrorist to death, Berlin');
     });
   });
 });
