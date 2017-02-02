@@ -11,7 +11,7 @@ export const FusionNetExtractor = {
 
   author: {
     selectors: [
-      'div.post-meta-details.show-for-medium span.byline.byline-article a',
+      '.show-for-medium .byline',
     ],
   },
 
