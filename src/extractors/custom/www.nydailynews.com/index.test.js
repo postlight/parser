@@ -55,7 +55,8 @@ describe('WwwNydailynewsComExtractor', () => {
 
     // Update these values with the expected values from
     // the article.
-      assert.equal(date_published, '2016-12-16T13:38:14-0500');
+
+      assert.equal(date_published, '2016-12-16T18:38:14.000Z');
     });
 
     it('returns the lead_image_url', async () => {
