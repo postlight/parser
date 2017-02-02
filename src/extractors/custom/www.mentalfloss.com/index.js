@@ -19,6 +19,7 @@ export const WwwMentalflossComExtractor = {
     selectors: [
       '.date-display-single',
     ],
+    timezone: 'America/New_York',
   },
 
   lead_image_url: {
