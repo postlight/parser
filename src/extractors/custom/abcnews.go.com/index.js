@@ -3,22 +3,23 @@ export const AbcnewsGoComExtractor = {
 
   title: {
     selectors: [
-      'header.article-header h1',
+      '.article-header h1',
     ],
   },
 
   author: {
     selectors: [
-      'ul.authors',
+      '.authors',
     ],
     clean: [
-      'div.author-overlay',
+      '.author-overlay',
+      '.by-text',
     ],
   },
 
   date_published: {
     selectors: [
-      'span.timestamp',
+      '.timestamp',
     ],
     timezone: 'America/New_York',
 
@@ -32,7 +33,7 @@ export const AbcnewsGoComExtractor = {
 
   content: {
     selectors: [
-      'div.article-copy',
+      '.article-copy',
     ],
 
     // Is there anything in the content you selected that needs transformed
