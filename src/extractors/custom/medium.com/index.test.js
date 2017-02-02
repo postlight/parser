@@ -77,4 +77,26 @@ describe('MediumExtractor', () => {
       assert.equal(first13, 'Video of WTF? My talk at the White House Frontiers ConferenceLast Thursday, I');
     });
   });
+
+  describe('works with another url', () => {
+    let result;
+    let url;
+    beforeAll(() => {
+      url =
+        'https://medium.com/@JakobUlbrich/flag-attributes-in-android-how-to-use-them-ac4ec8aee7d1#.h949wjmyw';
+      const html = fs.readFileSync('./fixtures/medium.com/1485902752952.html');
+      result =
+        Mercury.parse(url, html, { fallback: false });
+    });
+
+    it('returns the content', async () => {
+      const { content } = await result;
+
+      const $ = cheerio.load(content || '');
+
+      const first13 = excerptContent($.text(), 13);
+
+      assert.equal(first13, 'I’m sure you have seen something like the following line very often while');
+    });
+  });
 });
