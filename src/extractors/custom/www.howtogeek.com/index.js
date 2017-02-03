@@ -17,6 +17,7 @@ export const WwwHowtogeekComExtractor = {
     selectors: [
       '#authorinfobox + div li',
     ],
+    timezone: 'GMT',
   },
 
   lead_image_url: {
