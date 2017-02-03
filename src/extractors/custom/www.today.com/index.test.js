@@ -81,7 +81,7 @@ describe('WwwTodayComExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(first13, 'comment () “I am a marvelous housekeeper. Every time I leave a man,');
+      assert.equal(first13, '“I am a marvelous housekeeper. Every time I leave a man, I keep');
     });
   });
 });
