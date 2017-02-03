@@ -17,6 +17,7 @@ export const WwwThepoliticalinsiderComExtractor = {
     selectors: [
       ['meta[name="sailthru.date"]', 'value'],
     ],
+    timezone: 'America/New_York',
   },
 
   dek: {
