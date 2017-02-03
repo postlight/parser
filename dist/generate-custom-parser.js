@@ -50,7 +50,8 @@ var REMOVE_ATTR_SELECTORS = REMOVE_ATTRS.map(function (selector) {
   return '[' + selector + ']';
 });
 var REMOVE_ATTR_LIST = REMOVE_ATTRS.join(',');
-var WHITELIST_ATTRS = ['src', 'srcset', 'href', 'class', 'id', 'alt'];
+var WHITELIST_ATTRS = ['src', 'srcset', 'href', 'class', 'id', 'alt', 'xlink:href', 'width', 'height'];
+
 var WHITELIST_ATTRS_RE = new RegExp('^(' + WHITELIST_ATTRS.join('|') + ')$', 'i');
 
 // removeEmpty
@@ -1081,7 +1082,7 @@ var SENTENCE_END_RE$1=new RegExp('.( |$)');function hasSentenceEnd$1(text){retur
 // used in our fetchResource function to
 // ensure correctly encoded responses
 function getEncoding$1(str){if(ENCODING_RE$1.test(str)){return ENCODING_RE$1.exec(str)[1];}return null;}// Browser does not like us setting user agent
-var REQUEST_HEADERS=cheerio$1.browser?{}:{'User-Agent':'Mercury - https://mercury.postlight.com/web-parser/'};// The number of milliseconds to attempt to fetch a resource before timing out.
+var REQUEST_HEADERS=cheerio$1.browser?{}:{'User-Agent':'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36'};// The number of milliseconds to attempt to fetch a resource before timing out.
 var FETCH_TIMEOUT=10000;// Content types that we do not extract content from
 var BAD_CONTENT_TYPES=['audio/mpeg','image/gif','image/jpeg','image/jpg'];var BAD_CONTENT_TYPES_RE=new RegExp('^('+BAD_CONTENT_TYPES.join('|')+')$','i');// Use this setting as the maximum size an article can be
 // for us to attempt parsing. Defaults to 5 MB.
@@ -1123,7 +1124,7 @@ var SPACER_RE$1=new RegExp('transparent|spacer|blank','i');// The class we will 
 // but would normally remove
 var KEEP_CLASS$1='mercury-parser-keep';var KEEP_SELECTORS$1=['iframe[src^="https://www.youtube.com"]','iframe[src^="http://www.youtube.com"]','iframe[src^="https://player.vimeo"]','iframe[src^="http://player.vimeo"]'];// A list of tags to strip from the output if we encounter them.
 var STRIP_OUTPUT_TAGS$1=['title','script','noscript','link','style','hr','embed','iframe','object'];// cleanAttributes
-var REMOVE_ATTRS$1=['style','align'];var REMOVE_ATTR_SELECTORS$1=REMOVE_ATTRS$1.map(function(selector){return'['+selector+']';});var REMOVE_ATTR_LIST$1=REMOVE_ATTRS$1.join(',');var WHITELIST_ATTRS$1=['src','srcset','href','class','id','alt'];var WHITELIST_ATTRS_RE$1=new RegExp('^('+WHITELIST_ATTRS$1.join('|')+')$','i');// removeEmpty
+var REMOVE_ATTRS$1=['style','align'];var REMOVE_ATTR_SELECTORS$1=REMOVE_ATTRS$1.map(function(selector){return'['+selector+']';});var REMOVE_ATTR_LIST$1=REMOVE_ATTRS$1.join(',');var WHITELIST_ATTRS$1=['src','srcset','href','class','id','alt','xlink:href','width','height'];var WHITELIST_ATTRS_RE$1=new RegExp('^('+WHITELIST_ATTRS$1.join('|')+')$','i');// removeEmpty
 var REMOVE_EMPTY_TAGS$1=['p'];var REMOVE_EMPTY_SELECTORS$1=REMOVE_EMPTY_TAGS$1.map(function(tag){return tag+':empty';}).join(',');// cleanTags
 var CLEAN_CONDITIONALLY_TAGS$1=['ul','ol','table','div','button','form'].join(',');// cleanHeaders
 var HEADER_TAGS$1=['h2','h3','h4','h5','h6'];var HEADER_TAG_LIST$1=HEADER_TAGS$1.join(',');// // CONTENT FETCHING CONSTANTS ////
@@ -1466,7 +1467,7 @@ function convertLazyLoadedImages($){$('img').each(function(_,img){var attrs=getA
 //                  string.
 create:function create(url,preparedResponse,parsedUrl){var _this=this;return _asyncToGenerator(_regeneratorRuntime.mark(function _callee(){var result,validResponse;return _regeneratorRuntime.wrap(function _callee$(_context){while(1){switch(_context.prev=_context.next){case 0:result=void 0;if(!preparedResponse){_context.next=6;break;}validResponse={statusMessage:'OK',statusCode:200,headers:{'content-type':'text/html','content-length':500}};result={body:preparedResponse,response:validResponse};_context.next=9;break;case 6:_context.next=8;return fetchResource$1(url,parsedUrl);case 8:result=_context.sent;case 9:if(!result.error){_context.next=12;break;}result.failed=true;return _context.abrupt('return',result);case 12:return _context.abrupt('return',_this.generateDoc(result));case 13:case'end':return _context.stop();}}},_callee,_this);}))();},generateDoc:function generateDoc(_ref){var content=_ref.body,response=_ref.response;var contentType=response.headers['content-type'];// TODO: Implement is_text function from
 // https://github.com/ReadabilityHoldings/readability/blob/8dc89613241d04741ebd42fa9fa7df1b1d746303/readability/utils/text.py#L57
-if(!contentType.includes('html')&&!contentType.includes('text')){throw new Error('Content does not appear to be text.');}var $=cheerio$1.load(content,{normalizeWhitespace:true});if($.root().children().length===0){throw new Error('No children, likely a bad parse.');}$=normalizeMetaTags($);$=convertLazyLoadedImages($);$=clean($);return $;}};var merge=function merge(extractor,domains){return domains.reduce(function(acc,domain){acc[domain]=extractor;return acc;},{});};function mergeSupportedDomains(extractor){return extractor.supportedDomains?merge(extractor,[extractor.domain].concat(_toConsumableArray$1(extractor.supportedDomains))):merge(extractor,[extractor.domain]);}var BloggerExtractor={domain:'blogspot.com',content:{// Blogger is insane and does not load its content
+if(!contentType.includes('html')&&!contentType.includes('text')){throw new Error('Content does not appear to be text.');}var $=cheerio$1.load(content);if($.root().children().length===0){throw new Error('No children, likely a bad parse.');}$=normalizeMetaTags($);$=convertLazyLoadedImages($);$=clean($);return $;}};var merge=function merge(extractor,domains){return domains.reduce(function(acc,domain){acc[domain]=extractor;return acc;},{});};function mergeSupportedDomains(extractor){return extractor.supportedDomains?merge(extractor,[extractor.domain].concat(_toConsumableArray$1(extractor.supportedDomains))):merge(extractor,[extractor.domain]);}var BloggerExtractor={domain:'blogspot.com',content:{// Blogger is insane and does not load its content
 // initially in the page, but it's all there
 // in noscript
 selectors:['.post-content noscript'],// Selectors to remove from the extracted content
@@ -1522,7 +1523,7 @@ var WiredExtractor={domain:'www.wired.com',title:{selectors:['h1.post-title']},a
 transforms:[],// Is there anything that is in the result that shouldn't be?
 // The clean selectors will remove anything that matches from
 // the result
-clean:['.visually-hidden']},date_published:{selectors:[['meta[itemprop="datePublished"]','value']]},lead_image_url:{selectors:[['meta[name="og:image"]','value']]},dek:{selectors:[]},next_page_url:null,excerpt:null};// Rename CustomExtractor
+clean:['.visually-hidden','figcaption img.photo']},date_published:{selectors:[['meta[itemprop="datePublished"]','value']]},lead_image_url:{selectors:[['meta[name="og:image"]','value']]},dek:{selectors:[]},next_page_url:null,excerpt:null};// Rename CustomExtractor
 // to fit your publication
 // (e.g., NYTimesExtractor)
 var MSNExtractor={domain:'www.msn.com',title:{selectors:['h1']},author:{selectors:['span.authorname-txt']},content:{selectors:['div.richtext'],// Is there anything in the content you selected that needs transformed
@@ -1604,7 +1605,7 @@ transforms:{'div[data-render-react-id="images/LazyPicture"]':function divDataRen
 // the result
 clean:[]},date_published:{selectors:[['.PostByline__timestamp[datetime]','datetime']]},lead_image_url:{selectors:[['meta[name="og:image"]','value']]},dek:{selectors:[]},next_page_url:{selectors:[// enter selectors
 ]},excerpt:{selectors:[// enter selectors
-]}};var MediumExtractor={domain:'medium.com',supportedDomains:['trackchanges.postlight.com'],title:{selectors:['h1']},author:{selectors:[['meta[name="author"]','value']]},content:{selectors:['.section-content'],// Is there anything in the content you selected that needs transformed
+]}};var MediumExtractor={domain:'medium.com',supportedDomains:['trackchanges.postlight.com'],title:{selectors:['h1']},author:{selectors:[['meta[name="author"]','value']]},content:{selectors:['.section-content','article > div > section'],// Is there anything in the content you selected that needs transformed
 // before it's consumable content? E.g., unusual lazy loaded images
 transforms:{// Re-write lazy-loaded youtube videos
 iframe:function iframe($node){var ytRe=/https:\/\/i.embed.ly\/.+url=https:\/\/i\.ytimg\.com\/vi\/(\w+)\//;var thumb=decodeURIComponent($node.attr('data-thumbnail'));if(ytRe.test(thumb)){var _thumb$match=thumb.match(ytRe),_thumb$match2=_slicedToArray$1(_thumb$match,2),_=_thumb$match2[0],youtubeId=_thumb$match2[1];// eslint-disable-line
@@ -1667,7 +1668,166 @@ clean:[]}};var WwwAolComExtractor={domain:'www.aol.com',title:{selectors:['h1.p-
 transforms:{},// Is there anything that is in the result that shouldn't be?
 // The clean selectors will remove anything that matches from
 // the result
-clean:[]}};var CustomExtractors=_Object$freeze({BloggerExtractor:BloggerExtractor,NYMagExtractor:NYMagExtractor,WikipediaExtractor:WikipediaExtractor,TwitterExtractor:TwitterExtractor,NYTimesExtractor:NYTimesExtractor,TheAtlanticExtractor:TheAtlanticExtractor,NewYorkerExtractor:NewYorkerExtractor,WiredExtractor:WiredExtractor,MSNExtractor:MSNExtractor,YahooExtractor:YahooExtractor,BuzzfeedExtractor:BuzzfeedExtractor,WikiaExtractor:WikiaExtractor,LittleThingsExtractor:LittleThingsExtractor,PoliticoExtractor:PoliticoExtractor,DeadspinExtractor:DeadspinExtractor,BroadwayWorldExtractor:BroadwayWorldExtractor,ApartmentTherapyExtractor:ApartmentTherapyExtractor,MediumExtractor:MediumExtractor,WwwTmzComExtractor:WwwTmzComExtractor,WwwWashingtonpostComExtractor:WwwWashingtonpostComExtractor,WwwHuffingtonpostComExtractor:WwwHuffingtonpostComExtractor,NewrepublicComExtractor:NewrepublicComExtractor,MoneyCnnComExtractor:MoneyCnnComExtractor,WwwThevergeComExtractor:WwwThevergeComExtractor,WwwCnnComExtractor:WwwCnnComExtractor,WwwAolComExtractor:WwwAolComExtractor});var Extractors=_Object$keys(CustomExtractors).reduce(function(acc,key){var extractor=CustomExtractors[key];return _extends$1({},acc,mergeSupportedDomains(extractor));},{});// CLEAN AUTHOR CONSTANTS
+clean:[]}};var WwwYoutubeComExtractor={domain:'www.youtube.com',title:{selectors:['.watch-title','h1.watch-title-container']},author:{selectors:['.yt-user-info']},date_published:{selectors:[['meta[itemProp="datePublished"]','value']],timezone:'GMT'},dek:{selectors:[// enter selectors
+]},lead_image_url:{selectors:[['meta[name="og:image"]','value']]},content:{defaultCleaner:false,selectors:[['#player-api','#eow-description']],// Is there anything in the content you selected that needs transformed
+// before it's consumable content? E.g., unusual lazy loaded images
+transforms:{'#player-api':function playerApi($node,$){var videoId=$('meta[itemProp="videoId"]').attr('value');$node.html('\n          <iframe src="https://www.youtube.com/embed/'+videoId+'" frameborder="0" allowfullscreen></iframe>');}},// Is there anything that is in the result that shouldn't be?
+// The clean selectors will remove anything that matches from
+// the result
+clean:[]}};var WwwTheguardianComExtractor={domain:'www.theguardian.com',title:{selectors:['.content__headline']},author:{selectors:['p.byline']},date_published:{selectors:[['meta[name="article:published_time"]','value']]},dek:{selectors:['.content__standfirst']},lead_image_url:{selectors:[['meta[name="og:image"]','value']]},content:{selectors:['.content__article-body'],// Is there anything in the content you selected that needs transformed
+// before it's consumable content? E.g., unusual lazy loaded images
+transforms:{},// Is there anything that is in the result that shouldn't be?
+// The clean selectors will remove anything that matches from
+// the result
+clean:['.hide-on-mobile','.inline-icon']}};var WwwSbnationComExtractor={domain:'www.sbnation.com',title:{selectors:['h1.c-page-title']},author:{selectors:[['meta[name="author"]','value']]},date_published:{selectors:[['meta[name="article:published_time"]','value']]},dek:{selectors:['h2.c-entry-summary.p-dek']},lead_image_url:{selectors:[['meta[name="og:image"]','value']]},content:{selectors:['div.c-entry-content'],// Is there anything in the content you selected that needs transformed
+// before it's consumable content? E.g., unusual lazy loaded images
+transforms:{},// Is there anything that is in the result that shouldn't be?
+// The clean selectors will remove anything that matches from
+// the result
+clean:[]}};var WwwBloombergComExtractor={domain:'www.bloomberg.com',title:{selectors:[// normal articles
+'.lede-headline',// /graphics/ template
+'h1.article-title',// /news/ template
+'h1.lede-text-only__hed']},author:{selectors:[['meta[name="parsely-author"]','value'],'.byline-details__link',// /graphics/ template
+'.bydek',// /news/ template
+'.author']},date_published:{selectors:[['time.published-at','datetime'],['time[datetime]','datetime'],['meta[name="date"]','value'],['meta[name="parsely-pub-date"]','value']]},dek:{selectors:[]},lead_image_url:{selectors:[['meta[name="og:image"]','value']]},content:{selectors:['.article-body__content',// /graphics/ template
+['section.copy-block'],// /news/ template
+'.body-copy'],// Is there anything in the content you selected that needs transformed
+// before it's consumable content? E.g., unusual lazy loaded images
+transforms:{},// Is there anything that is in the result that shouldn't be?
+// The clean selectors will remove anything that matches from
+// the result
+clean:['.inline-newsletter','.page-ad']}};var WwwBustleComExtractor={domain:'www.bustle.com',title:{selectors:['h1.post-page__title']},author:{selectors:['div.content-meta__author']},date_published:{selectors:[['time.content-meta__published-date[datetime]','datetime']]},lead_image_url:{selectors:[['meta[name="og:image"]','value']]},content:{selectors:['.post-page__body'],// Is there anything in the content you selected that needs transformed
+// before it's consumable content? E.g., unusual lazy loaded images
+transforms:{},// Is there anything that is in the result that shouldn't be?
+// The clean selectors will remove anything that matches from
+// the result
+clean:[]}};var WwwNprOrgExtractor={domain:'www.npr.org',title:{selectors:['h1','.storytitle']},author:{selectors:['p.byline__name.byline__name--block']},date_published:{selectors:[['.dateblock time[datetime]','datetime'],['meta[name="date"]','value']]},lead_image_url:{selectors:[['meta[name="og:image"]','value'],['meta[name="twitter:image:src"]','value']]},content:{selectors:['.storytext'],// Is there anything in the content you selected that needs transformed
+// before it's consumable content? E.g., unusual lazy loaded images
+transforms:{'.bucketwrap.image':'figure','.bucketwrap.image .credit-caption':'figcaption'},// Is there anything that is in the result that shouldn't be?
+// The clean selectors will remove anything that matches from
+// the result
+clean:['div.enlarge_measure']}};var WwwRecodeNetExtractor={domain:'www.recode.net',title:{selectors:['h1.c-page-title']},author:{selectors:[['meta[name="author"]','value']]},date_published:{selectors:[['meta[name="article:published_time"]','value']]},dek:{selectors:['h2.c-entry-summary.p-dek']},lead_image_url:{selectors:[['meta[name="og:image"]','value']]},content:{selectors:[['figure.e-image--hero','.c-entry-content'],'.c-entry-content'],// Is there anything in the content you selected that needs transformed
+// before it's consumable content? E.g., unusual lazy loaded images
+transforms:{},// Is there anything that is in the result that shouldn't be?
+// The clean selectors will remove anything that matches from
+// the result
+clean:[]}};var QzComExtractor={domain:'qz.com',title:{selectors:['header.item-header.content-width-responsive']},author:{selectors:[['meta[name="author"]','value']]},date_published:{selectors:['.timestamp']},lead_image_url:{selectors:[['meta[name="og:image"]','value']]},content:{selectors:[['figure.featured-image','.item-body'],'.item-body'],// Is there anything in the content you selected that needs transformed
+// before it's consumable content? E.g., unusual lazy loaded images
+transforms:{},// Is there anything that is in the result that shouldn't be?
+// The clean selectors will remove anything that matches from
+// the result
+clean:['.article-aside','.progressive-image-thumbnail']}};var WwwDmagazineComExtractor={domain:'www.dmagazine.com',title:{selectors:['h1.story__title']},author:{selectors:['.story__info .story__info__item:first-child']},date_published:{selectors:[// enter selectors
+'.story__info'],timezone:'America/Chicago'},dek:{selectors:['.story__subhead']},lead_image_url:{selectors:[['article figure a:first-child','href']]},content:{selectors:['.story__content'],// Is there anything in the content you selected that needs transformed
+// before it's consumable content? E.g., unusual lazy loaded images
+transforms:{},// Is there anything that is in the result that shouldn't be?
+// The clean selectors will remove anything that matches from
+// the result
+clean:[]}};var WwwReutersComExtractor={domain:'www.reuters.com',title:{selectors:['h1.article-headline']},author:{selectors:['.author']},date_published:{selectors:[['meta[name="og:article:published_time"]','value']]},lead_image_url:{selectors:[['meta[name="og:image"]','value']]},content:{selectors:['#article-text'],// Is there anything in the content you selected that needs transformed
+// before it's consumable content? E.g., unusual lazy loaded images
+transforms:{'.article-subtitle':'h4'},// Is there anything that is in the result that shouldn't be?
+// The clean selectors will remove anything that matches from
+// the result
+clean:['#article-byline .author']}};var MashableComExtractor={domain:'mashable.com',title:{selectors:['h1.title']},author:{selectors:['span.author_name a']},date_published:{selectors:[['meta[name="og:article:published_time"]','value']]},lead_image_url:{selectors:[['meta[name="og:image"]','value']]},content:{selectors:['section.article-content.blueprint'],// Is there anything in the content you selected that needs transformed
+// before it's consumable content? E.g., unusual lazy loaded images
+transforms:{'.image-credit':'figcaption'},// Is there anything that is in the result that shouldn't be?
+// The clean selectors will remove anything that matches from
+// the result
+clean:[]}};var WwwChicagotribuneComExtractor={domain:'www.chicagotribune.com',title:{selectors:['h1.trb_ar_hl_t']},author:{selectors:['span.trb_ar_by_nm_au']},date_published:{selectors:[['meta[itemprop="datePublished"]','value']]},lead_image_url:{selectors:[['meta[name="og:image"]','value']]},content:{selectors:['div.trb_ar_page'],// Is there anything in the content you selected that needs transformed
+// before it's consumable content? E.g., unusual lazy loaded images
+transforms:{},// Is there anything that is in the result that shouldn't be?
+// The clean selectors will remove anything that matches from
+// the result
+clean:[]}};var WwwVoxComExtractor={domain:'www.vox.com',title:{selectors:['h1.c-page-title']},author:{selectors:[['meta[name="author"]','value']]},date_published:{selectors:[['meta[name="article:published_time"]','value']]},dek:{selectors:['.p-dek']},lead_image_url:{selectors:[['meta[name="og:image"]','value']]},content:{selectors:[['figure.e-image--hero','.c-entry-content'],'.c-entry-content'],// Is there anything in the content you selected that needs transformed
+// before it's consumable content? E.g., unusual lazy loaded images
+transforms:{'figure .e-image__image noscript':function figureEImage__imageNoscript($node){var imgHtml=$node.html();$node.parents('.e-image__image').find('.c-dynamic-image').replaceWith(imgHtml);},'figure .e-image__meta':'figcaption'},// Is there anything that is in the result that shouldn't be?
+// The clean selectors will remove anything that matches from
+// the result
+clean:[]}};var WwwCnbcComExtractor={domain:'www.cnbc.com',title:{selectors:['h1.title']},author:{selectors:[['meta[name="author"]','value']]},date_published:{selectors:[['meta[name="article:published_time"]','value']]},lead_image_url:{selectors:[['meta[name="og:image"]','value']]},content:{selectors:['div#article_body.content','div.story'],// Is there anything in the content you selected that needs transformed
+// before it's consumable content? E.g., unusual lazy loaded images
+transforms:{},// Is there anything that is in the result that shouldn't be?
+// The clean selectors will remove anything that matches from
+// the result
+clean:[]}};var WwwPopsugarComExtractor={domain:'www.popsugar.com',title:{selectors:['h2.post-title','title-text']},author:{selectors:[['meta[name="article:author"]','value']]},date_published:{selectors:[['meta[name="article:published_time"]','value']]},lead_image_url:{selectors:[['meta[name="og:image"]','value']]},content:{selectors:['#content'],// Is there anything in the content you selected that needs transformed
+// before it's consumable content? E.g., unusual lazy loaded images
+transforms:{},// Is there anything that is in the result that shouldn't be?
+// The clean selectors will remove anything that matches from
+// the result
+clean:['.share-copy-title','.post-tags','.reactions']}};var ObserverComExtractor={domain:'observer.com',title:{selectors:['h1.entry-title']},author:{selectors:['.author','.vcard']},date_published:{selectors:[['meta[name="article:published_time"]','value']]},dek:{selectors:['h2.dek']},lead_image_url:{selectors:[['meta[name="og:image"]','value']]},content:{selectors:['div.entry-content'],// Is there anything in the content you selected that needs transformed
+// before it's consumable content? E.g., unusual lazy loaded images
+transforms:{},// Is there anything that is in the result that shouldn't be?
+// The clean selectors will remove anything that matches from
+// the result
+clean:[]}};var PeopleComExtractor={domain:'people.com',title:{selectors:[['meta[name="og:title"]','value']]},author:{selectors:['a.author.url.fn']},date_published:{selectors:[['meta[name="article:published_time"]','value']]},lead_image_url:{selectors:[['meta[name="og:image"]','value']]},content:{selectors:['div.article-body__inner'],// Is there anything in the content you selected that needs transformed
+// before it's consumable content? E.g., unusual lazy loaded images
+transforms:{},// Is there anything that is in the result that shouldn't be?
+// The clean selectors will remove anything that matches from
+// the result
+clean:[]}};var WwwUsmagazineComExtractor={domain:'www.usmagazine.com',title:{selectors:['header h1']},author:{selectors:['a.article-byline.tracked-offpage']},date_published:{timezone:'America/New_York',selectors:['time.article-published-date']},lead_image_url:{selectors:[['meta[name="og:image"]','value']]},content:{selectors:['div.article-body-inner'],// Is there anything in the content you selected that needs transformed
+// before it's consumable content? E.g., unusual lazy loaded images
+transforms:{},// Is there anything that is in the result that shouldn't be?
+// The clean selectors will remove anything that matches from
+// the result
+clean:['.module-related']}};var WwwRollingstoneComExtractor={domain:'www.rollingstone.com',title:{selectors:['h1.content-title']},author:{selectors:['a.content-author.tracked-offpage']},date_published:{selectors:['time.content-published-date'],timezone:'America/New_York'},dek:{selectors:['.content-description']},lead_image_url:{selectors:[['meta[name="og:image"]','value']]},content:{selectors:[['.lead-container','.article-content'],'.article-content'],// Is there anything in the content you selected that needs transformed
+// before it's consumable content? E.g., unusual lazy loaded images
+transforms:{},// Is there anything that is in the result that shouldn't be?
+// The clean selectors will remove anything that matches from
+// the result
+clean:['.module-related']}};var twofortysevensportsComExtractor={domain:'247sports.com',title:{selectors:['title','article header h1']},author:{selectors:['.author']},date_published:{selectors:[['time[data-published]','data-published']]},lead_image_url:{selectors:[['meta[name="og:image"]','value']]},content:{selectors:['section.body.article'],// Is there anything in the content you selected that needs transformed
+// before it's consumable content? E.g., unusual lazy loaded images
+transforms:{},// Is there anything that is in the result that shouldn't be?
+// The clean selectors will remove anything that matches from
+// the result
+clean:[]}};var UproxxComExtractor={domain:'uproxx.com',title:{selectors:['div.post-top h1']},author:{selectors:['.post-top .authorname']},date_published:{selectors:[['meta[name="article:published_time"]','value']]},lead_image_url:{selectors:[['meta[name="og:image"]','value']]},content:{selectors:['.post-body'],// Is there anything in the content you selected that needs transformed
+// before it's consumable content? E.g., unusual lazy loaded images
+transforms:{'div.image':'figure','div.image .wp-media-credit':'figcaption'},// Is there anything that is in the result that shouldn't be?
+// The clean selectors will remove anything that matches from
+// the result
+clean:[]}};var WwwEonlineComExtractor={domain:'www.eonline.com',title:{selectors:['h1.article__title']},author:{selectors:['.entry-meta__author a']},date_published:{selectors:[['meta[itemprop="datePublished"]','value']]},lead_image_url:{selectors:[['meta[name="og:image"]','value']]},content:{selectors:[['.post-content section, .post-content div.post-content__image']],// Is there anything in the content you selected that needs transformed
+// before it's consumable content? E.g., unusual lazy loaded images
+transforms:{'div.post-content__image':'figure','div.post-content__image .image__credits':'figcaption'},// Is there anything that is in the result that shouldn't be?
+// The clean selectors will remove anything that matches from
+// the result
+clean:[]}};var WwwMiamiheraldComExtractor={domain:'www.miamiherald.com',title:{selectors:['h1.title']},date_published:{selectors:['p.published-date'],timezone:'America/New_York'},lead_image_url:{selectors:[['meta[name="og:image"]','value']]},content:{selectors:['div.dateline-storybody'],// Is there anything in the content you selected that needs transformed
+// before it's consumable content? E.g., unusual lazy loaded images
+transforms:{},// Is there anything that is in the result that shouldn't be?
+// The clean selectors will remove anything that matches from
+// the result
+clean:[]}};var WwwRefinery29ComExtractor={domain:'www.refinery29.com',title:{selectors:['h1.title']},author:{selectors:['.contributor']},date_published:{selectors:[['meta[name="sailthru.date"]','value']],timezone:'America/New_York'},lead_image_url:{selectors:[['meta[name="og:image"]','value']]},content:{selectors:[['.full-width-opener','.article-content'],'.article-content','.body'],// Is there anything in the content you selected that needs transformed
+// before it's consumable content? E.g., unusual lazy loaded images
+transforms:{'div.loading noscript':function divLoadingNoscript($node){var imgHtml=$node.html();$node.parents('.loading').replaceWith(imgHtml);},'.section-image':'figure','.section-image .content-caption':'figcaption','.section-text':'p'},// Is there anything that is in the result that shouldn't be?
+// The clean selectors will remove anything that matches from
+// the result
+clean:['.story-share']}};var HellogigglesComExtractor={domain:'hellogiggles.com',title:{selectors:['.title']},author:{selectors:['.author-link']},date_published:{selectors:[['meta[name="article:published_time"]','value']]},lead_image_url:{selectors:[['meta[name="og:image"]','value']]},content:{selectors:['.entry-content'],// Is there anything in the content you selected that needs transformed
+// before it's consumable content? E.g., unusual lazy loaded images
+transforms:{},// Is there anything that is in the result that shouldn't be?
+// The clean selectors will remove anything that matches from
+// the result
+clean:[]}};var ThoughtcatalogComExtractor={domain:'thoughtcatalog.com',title:{selectors:['h1.title',['meta[name="og:title"]','value']]},author:{selectors:['div.col-xs-12.article_header div.writer-container.writer-container-inline.writer-no-avatar h4.writer-name','h1.writer-name']},date_published:{selectors:[['meta[name="article:published_time"]','value']]},lead_image_url:{selectors:[['meta[name="og:image"]','value']]},content:{selectors:['.entry.post'],// Is there anything in the content you selected that needs transformed
+// before it's consumable content? E.g., unusual lazy loaded images
+transforms:{},// Is there anything that is in the result that shouldn't be?
+// The clean selectors will remove anything that matches from
+// the result
+clean:['.tc_mark']}};var WwwNjComExtractor={domain:'www.nj.com',title:{selectors:[['meta[name="title"]','value']]},author:{selectors:[['meta[name="article_author"]','value']]},date_published:{selectors:[['meta[name="article_date_original"]','value']],timezone:'America/New_York'},lead_image_url:{selectors:[['meta[name="og:image"]','value']]},content:{selectors:['.entry-content'],// Is there anything in the content you selected that needs transformed
+// before it's consumable content? E.g., unusual lazy loaded images
+transforms:{},// Is there anything that is in the result that shouldn't be?
+// The clean selectors will remove anything that matches from
+// the result
+clean:[]}};var WwwInquisitrComExtractor={domain:'www.inquisitr.com',title:{selectors:['h1.entry-title.story--header--title']},author:{selectors:['div.story--header--author']},date_published:{selectors:[['meta[name="datePublished"]','value']]},lead_image_url:{selectors:[['meta[name="og:image"]','value']]},content:{selectors:['article.story','.entry-content.'],// Is there anything in the content you selected that needs transformed
+// before it's consumable content? E.g., unusual lazy loaded images
+transforms:{},// Is there anything that is in the result that shouldn't be?
+// The clean selectors will remove anything that matches from
+// the result
+clean:['.post-category','.story--header--socials','.story--header--content']}};var WwwNbcnewsComExtractor={domain:'www.nbcnews.com',title:{selectors:['div.article-hed h1']},author:{selectors:['span.byline_author']},date_published:{selectors:[['.flag_article-wrapper time.timestamp_article[datetime]','datetime'],'.flag_article-wrapper time'],timezone:'America/New_York'},lead_image_url:{selectors:[['meta[name="og:image"]','value']]},content:{selectors:['div.article-body'],// Is there anything in the content you selected that needs transformed
+// before it's consumable content? E.g., unusual lazy loaded images
+transforms:{},// Is there anything that is in the result that shouldn't be?
+// The clean selectors will remove anything that matches from
+// the result
+clean:[]}};var FortuneComExtractor={domain:'fortune.com',title:{selectors:['h1']},author:{selectors:[['meta[name="author"]','value']]},date_published:{selectors:['.MblGHNMJ'],timezone:'UTC'},lead_image_url:{selectors:[['meta[name="og:image"]','value']]},content:{selectors:[['picture','article.row'],'article.row'],// Is there anything in the content you selected that needs transformed
+// before it's consumable content? E.g., unusual lazy loaded images
+transforms:{},// Is there anything that is in the result that shouldn't be?
+// The clean selectors will remove anything that matches from
+// the result
+clean:[]}};var CustomExtractors=_Object$freeze({BloggerExtractor:BloggerExtractor,NYMagExtractor:NYMagExtractor,WikipediaExtractor:WikipediaExtractor,TwitterExtractor:TwitterExtractor,NYTimesExtractor:NYTimesExtractor,TheAtlanticExtractor:TheAtlanticExtractor,NewYorkerExtractor:NewYorkerExtractor,WiredExtractor:WiredExtractor,MSNExtractor:MSNExtractor,YahooExtractor:YahooExtractor,BuzzfeedExtractor:BuzzfeedExtractor,WikiaExtractor:WikiaExtractor,LittleThingsExtractor:LittleThingsExtractor,PoliticoExtractor:PoliticoExtractor,DeadspinExtractor:DeadspinExtractor,BroadwayWorldExtractor:BroadwayWorldExtractor,ApartmentTherapyExtractor:ApartmentTherapyExtractor,MediumExtractor:MediumExtractor,WwwTmzComExtractor:WwwTmzComExtractor,WwwWashingtonpostComExtractor:WwwWashingtonpostComExtractor,WwwHuffingtonpostComExtractor:WwwHuffingtonpostComExtractor,NewrepublicComExtractor:NewrepublicComExtractor,MoneyCnnComExtractor:MoneyCnnComExtractor,WwwThevergeComExtractor:WwwThevergeComExtractor,WwwCnnComExtractor:WwwCnnComExtractor,WwwAolComExtractor:WwwAolComExtractor,WwwYoutubeComExtractor:WwwYoutubeComExtractor,WwwTheguardianComExtractor:WwwTheguardianComExtractor,WwwSbnationComExtractor:WwwSbnationComExtractor,WwwBloombergComExtractor:WwwBloombergComExtractor,WwwBustleComExtractor:WwwBustleComExtractor,WwwNprOrgExtractor:WwwNprOrgExtractor,WwwRecodeNetExtractor:WwwRecodeNetExtractor,QzComExtractor:QzComExtractor,WwwDmagazineComExtractor:WwwDmagazineComExtractor,WwwReutersComExtractor:WwwReutersComExtractor,MashableComExtractor:MashableComExtractor,WwwChicagotribuneComExtractor:WwwChicagotribuneComExtractor,WwwVoxComExtractor:WwwVoxComExtractor,WwwCnbcComExtractor:WwwCnbcComExtractor,WwwPopsugarComExtractor:WwwPopsugarComExtractor,ObserverComExtractor:ObserverComExtractor,PeopleComExtractor:PeopleComExtractor,WwwUsmagazineComExtractor:WwwUsmagazineComExtractor,WwwRollingstoneComExtractor:WwwRollingstoneComExtractor,twofortysevensportsComExtractor:twofortysevensportsComExtractor,UproxxComExtractor:UproxxComExtractor,WwwEonlineComExtractor:WwwEonlineComExtractor,WwwMiamiheraldComExtractor:WwwMiamiheraldComExtractor,WwwRefinery29ComExtractor:WwwRefinery29ComExtractor,HellogigglesComExtractor:HellogigglesComExtractor,ThoughtcatalogComExtractor:ThoughtcatalogComExtractor,WwwNjComExtractor:WwwNjComExtractor,WwwInquisitrComExtractor:WwwInquisitrComExtractor,WwwNbcnewsComExtractor:WwwNbcnewsComExtractor,FortuneComExtractor:FortuneComExtractor});var Extractors=_Object$keys(CustomExtractors).reduce(function(acc,key){var extractor=CustomExtractors[key];return _extends$1({},acc,mergeSupportedDomains(extractor));},{});// CLEAN AUTHOR CONSTANTS
 var CLEAN_AUTHOR_RE=/^\s*(posted |written )?by\s*:?\s*(.*)/i;//     author = re.sub(r'^\s*(posted |written )?by\s*:?\s*(.*)(?i)',
 // CLEAN DEK CONSTANTS
 var TEXT_LINK_RE=new RegExp('http(s)?://','i');// An ordered list of meta tag names that denote likely article deks.
@@ -2174,7 +2334,7 @@ var topPage=_Reflect$ownKeys$1(scoredLinks).reduce(function(acc,link){var scored
 // so we fail.
 if(topPage.score>=50){return topPage.href;}return null;}};var CANONICAL_META_SELECTORS=['og:url'];function parseDomain(url){var parsedUrl=URL$1.parse(url);var hostname=parsedUrl.hostname;return hostname;}function result(url){return{url:url,domain:parseDomain(url)};}var GenericUrlExtractor={extract:function extract(_ref){var $=_ref.$,url=_ref.url,metaCache=_ref.metaCache;var $canonical=$('link[rel=canonical]');if($canonical.length!==0){var href=$canonical.attr('href');if(href){return result(href);}}var metaUrl=extractFromMeta$$1($,CANONICAL_META_SELECTORS,metaCache);if(metaUrl){return result(metaUrl);}return result(url);}};var EXCERPT_META_SELECTORS=['og:description','twitter:description'];function clean$2(content,$){var maxLength=arguments.length>2&&arguments[2]!==undefined?arguments[2]:200;content=content.replace(/[\s\n]+/g,' ').trim();return ellipsize$1(content,maxLength,{ellipse:'&hellip;'});}var GenericExcerptExtractor={extract:function extract(_ref){var $=_ref.$,content=_ref.content,metaCache=_ref.metaCache;var excerpt=extractFromMeta$$1($,EXCERPT_META_SELECTORS,metaCache);if(excerpt){return clean$2(stripTags$1(excerpt,$));}// Fall back to excerpting from the extracted content
 var maxLength=200;var shortContent=content.slice(0,maxLength*5);return clean$2($(shortContent).text(),$,maxLength);}};var GenericWordCountExtractor={extract:function extract(_ref){var content=_ref.content;var $=cheerio$1.load(content);var $content=$('div').first();var text=normalizeSpaces$1($content.text());return text.split(/\s/).length;}};var GenericExtractor={// This extractor is the default for all domains
-domain:'*',title:GenericTitleExtractor.extract,date_published:GenericDatePublishedExtractor.extract,author:GenericAuthorExtractor.extract,content:GenericContentExtractor.extract.bind(GenericContentExtractor),lead_image_url:GenericLeadImageUrlExtractor.extract,dek:GenericDekExtractor.extract,next_page_url:GenericNextPageUrlExtractor.extract,url_and_domain:GenericUrlExtractor.extract,excerpt:GenericExcerptExtractor.extract,word_count:GenericWordCountExtractor.extract,direction:function direction(_ref){var title=_ref.title;return stringDirection$1.getDirection(title);},extract:function extract(options){var html=options.html,$=options.$;if(html&&!$){var loaded=cheerio$1.load(html);options.$=loaded;}var title=this.title(options);var date_published=this.date_published(options);var author=this.author(options);var content=this.content(_extends$1({},options,{title:title}));var lead_image_url=this.lead_image_url(_extends$1({},options,{content:content}));var dek=this.dek(_extends$1({},options,{content:content}));var next_page_url=this.next_page_url(options);var excerpt=this.excerpt(_extends$1({},options,{content:content}));var word_count=this.word_count(_extends$1({},options,{content:content}));var direction=this.direction({title:title});var _url_and_domain=this.url_and_domain(options),url=_url_and_domain.url,domain=_url_and_domain.domain;return{title:title,author:author,date_published:date_published||null,dek:dek,lead_image_url:lead_image_url,content:content,next_page_url:next_page_url,url:url,domain:domain,excerpt:excerpt,word_count:word_count,direction:direction};}};function getExtractor(url,parsedUrl){parsedUrl=parsedUrl||URL$1.parse(url);var _parsedUrl=parsedUrl,hostname=_parsedUrl.hostname;var baseDomain=hostname.split('.').slice(-2).join('.');return Extractors[hostname]||Extractors[baseDomain]||GenericExtractor;}// Remove elements by an array of selectors
+domain:'*',title:GenericTitleExtractor.extract,date_published:GenericDatePublishedExtractor.extract,author:GenericAuthorExtractor.extract,content:GenericContentExtractor.extract.bind(GenericContentExtractor),lead_image_url:GenericLeadImageUrlExtractor.extract,dek:GenericDekExtractor.extract,next_page_url:GenericNextPageUrlExtractor.extract,url_and_domain:GenericUrlExtractor.extract,excerpt:GenericExcerptExtractor.extract,word_count:GenericWordCountExtractor.extract,direction:function direction(_ref){var title=_ref.title;return stringDirection$1.getDirection(title);},extract:function extract(options){var html=options.html,$=options.$;if(html&&!$){var loaded=cheerio$1.load(html);options.$=loaded;}var title=this.title(options);var date_published=this.date_published(options);var author=this.author(options);var content=this.content(_extends$1({},options,{title:title}));var lead_image_url=this.lead_image_url(_extends$1({},options,{content:content}));var dek=this.dek(_extends$1({},options,{content:content}));var next_page_url=this.next_page_url(options);var excerpt=this.excerpt(_extends$1({},options,{content:content}));var word_count=this.word_count(_extends$1({},options,{content:content}));var direction=this.direction({title:title});var _url_and_domain=this.url_and_domain(options),url=_url_and_domain.url,domain=_url_and_domain.domain;return{title:title,author:author,date_published:date_published||null,dek:dek,lead_image_url:lead_image_url,content:content,next_page_url:next_page_url,url:url,domain:domain,excerpt:excerpt,word_count:word_count,direction:direction};}};var Detectors={'meta[name="al:ios:app_name"][value="Medium"]':MediumExtractor,'meta[name="generator"][value="blogger"]':BloggerExtractor};function detectByHtml($){var selector=_Reflect$ownKeys$1(Detectors).find(function(s){return $(s).length>0;});return Detectors[selector];}function getExtractor(url,parsedUrl,$){parsedUrl=parsedUrl||URL$1.parse(url);var _parsedUrl=parsedUrl,hostname=_parsedUrl.hostname;var baseDomain=hostname.split('.').slice(-2).join('.');return Extractors[hostname]||Extractors[baseDomain]||detectByHtml($)||GenericExtractor;}// Remove elements by an array of selectors
 function cleanBySelectors($content,$,_ref){var clean=_ref.clean;if(!clean)return $content;$(clean.join(','),$content).remove();return $content;}// Transform matching elements
 function transformElements($content,$,_ref2){var transforms=_ref2.transforms;if(!transforms)return $content;_Reflect$ownKeys$1(transforms).forEach(function(key){var $matches=$(key,$content);var value=transforms[key];// If value is a string, convert directly
 if(typeof value==='string'){$matches.each(function(index,node){convertNodeTo$$1($(node),$,transforms[key]);});}else if(typeof value==='function'){// If value is function, apply function to node
@@ -2203,12 +2363,13 @@ if(fallback)return GenericExtractor[type](opts);return null;}var RootExtractor={
 if(extractor.domain==='*')return extractor.extract(opts);opts=_extends$1({},opts,{extractor:extractor});if(contentOnly){var _content=extractResult(_extends$1({},opts,{type:'content',extractHtml:true,title:extractedTitle}));return{content:_content};}var title=extractResult(_extends$1({},opts,{type:'title'}));var date_published=extractResult(_extends$1({},opts,{type:'date_published'}));var author=extractResult(_extends$1({},opts,{type:'author'}));var next_page_url=extractResult(_extends$1({},opts,{type:'next_page_url'}));var content=extractResult(_extends$1({},opts,{type:'content',extractHtml:true,title:title}));var lead_image_url=extractResult(_extends$1({},opts,{type:'lead_image_url',content:content}));var excerpt=extractResult(_extends$1({},opts,{type:'excerpt',content:content}));var dek=extractResult(_extends$1({},opts,{type:'dek',content:content,excerpt:excerpt}));var word_count=extractResult(_extends$1({},opts,{type:'word_count',content:content}));var direction=extractResult(_extends$1({},opts,{type:'direction',title:title}));var _ref3=extractResult(_extends$1({},opts,{type:'url_and_domain'}))||{url:null,domain:null},url=_ref3.url,domain=_ref3.domain;return{title:title,content:content,author:author,date_published:date_published,lead_image_url:lead_image_url,dek:dek,next_page_url:next_page_url,url:url,domain:domain,excerpt:excerpt,word_count:word_count,direction:direction};}};var collectAllPages=function(){var _ref=_asyncToGenerator(_regeneratorRuntime.mark(function _callee(_ref2){var next_page_url=_ref2.next_page_url,html=_ref2.html,$=_ref2.$,metaCache=_ref2.metaCache,result=_ref2.result,Extractor=_ref2.Extractor,title=_ref2.title,url=_ref2.url;var pages,previousUrls,extractorOpts,nextPageResult,word_count;return _regeneratorRuntime.wrap(function _callee$(_context){while(1){switch(_context.prev=_context.next){case 0:// At this point, we've fetched just the first page
 pages=1;previousUrls=[removeAnchor$1(url)];// If we've gone over 26 pages, something has
 // likely gone wrong.
-case 2:if(!(next_page_url&&pages<26)){_context.next=15;break;}pages+=1;_context.next=6;return Resource.create(next_page_url);case 6:$=_context.sent;html=$.html();extractorOpts={url:next_page_url,html:html,$:$,metaCache:metaCache,contentOnly:true,extractedTitle:title,previousUrls:previousUrls};nextPageResult=RootExtractor.extract(Extractor,extractorOpts);previousUrls.push(next_page_url);result=_extends$1({},result,{content:result.content+'<hr><h4>Page '+pages+'</h4>'+nextPageResult.content});next_page_url=nextPageResult.next_page_url;_context.next=2;break;case 15:word_count=GenericExtractor.word_count({content:'<div>'+result.content+'</div>'});return _context.abrupt('return',_extends$1({},result,{total_pages:pages,pages_rendered:pages,word_count:word_count}));case 17:case'end':return _context.stop();}}},_callee,this);}));function collectAllPages(_x){return _ref.apply(this,arguments);}return collectAllPages;}();var Mercury={parse:function parse(url,html){var _this=this;var opts=arguments.length>2&&arguments[2]!==undefined?arguments[2]:{};return _asyncToGenerator(_regeneratorRuntime.mark(function _callee(){var _opts$fetchAllPages,fetchAllPages,_opts$fallback,fallback,parsedUrl,Extractor,$,metaCache,result,_result,title,next_page_url;return _regeneratorRuntime.wrap(function _callee$(_context){while(1){switch(_context.prev=_context.next){case 0:_opts$fetchAllPages=opts.fetchAllPages,fetchAllPages=_opts$fetchAllPages===undefined?true:_opts$fetchAllPages,_opts$fallback=opts.fallback,fallback=_opts$fallback===undefined?true:_opts$fallback;// if no url was passed and this is the browser version,
+case 2:if(!(next_page_url&&pages<26)){_context.next=15;break;}pages+=1;_context.next=6;return Resource.create(next_page_url);case 6:$=_context.sent;html=$.html();extractorOpts={url:next_page_url,html:html,$:$,metaCache:metaCache,contentOnly:true,extractedTitle:title,previousUrls:previousUrls};nextPageResult=RootExtractor.extract(Extractor,extractorOpts);previousUrls.push(next_page_url);result=_extends$1({},result,{content:result.content+'<hr><h4>Page '+pages+'</h4>'+nextPageResult.content});next_page_url=nextPageResult.next_page_url;_context.next=2;break;case 15:word_count=GenericExtractor.word_count({content:'<div>'+result.content+'</div>'});return _context.abrupt('return',_extends$1({},result,{total_pages:pages,pages_rendered:pages,word_count:word_count}));case 17:case'end':return _context.stop();}}},_callee,this);}));function collectAllPages(_x){return _ref.apply(this,arguments);}return collectAllPages;}();var Mercury={parse:function parse(url,html){var _this=this;var opts=arguments.length>2&&arguments[2]!==undefined?arguments[2]:{};return _asyncToGenerator(_regeneratorRuntime.mark(function _callee(){var _opts$fetchAllPages,fetchAllPages,_opts$fallback,fallback,parsedUrl,$,Extractor,metaCache,result,_result,title,next_page_url;return _regeneratorRuntime.wrap(function _callee$(_context){while(1){switch(_context.prev=_context.next){case 0:_opts$fetchAllPages=opts.fetchAllPages,fetchAllPages=_opts$fetchAllPages===undefined?true:_opts$fetchAllPages,_opts$fallback=opts.fallback,fallback=_opts$fallback===undefined?true:_opts$fallback;// if no url was passed and this is the browser version,
 // set url to window.location.href and load the html
 // from the current page
 if(!url&&cheerio$1.browser){url=window.location.href;// eslint-disable-line no-undef
-html=html||cheerio$1.html();}parsedUrl=URL$1.parse(url);if(validateUrl(parsedUrl)){_context.next=5;break;}return _context.abrupt('return',Errors.badUrl);case 5:Extractor=getExtractor(url,parsedUrl);// console.log(`Using extractor for ${Extractor.domain}`);
-_context.next=8;return Resource.create(url,html,parsedUrl);case 8:$=_context.sent;if(!$.failed){_context.next=11;break;}return _context.abrupt('return',$);case 11:// if html still has not been set (i.e., url passed to Mercury.parse),
+html=html||cheerio$1.html();}parsedUrl=URL$1.parse(url);if(validateUrl(parsedUrl)){_context.next=5;break;}return _context.abrupt('return',Errors.badUrl);case 5:_context.next=7;return Resource.create(url,html,parsedUrl);case 7:$=_context.sent;Extractor=getExtractor(url,parsedUrl,$);// console.log(`Using extractor for ${Extractor.domain}`);
+// If we found an error creating the resource, return that error
+if(!$.failed){_context.next=11;break;}return _context.abrupt('return',$);case 11:// if html still has not been set (i.e., url passed to Mercury.parse),
 // set html from the response of Resource.create
 if(!html){html=$.html();}// Cached value of every meta name in our document.
 // Used when extracting title/author/date_published/dek
@@ -2284,7 +2445,7 @@ var _templateObject2 = _taggedTemplateLiteral(['\n    import assert from \'asser
 
 var IGNORE = ['url', 'domain', 'content', 'word_count', 'next_page_url', 'excerpt', 'direction', 'total_pages', 'rendered_pages'];
 
-function testFor(key, value, dir, file) {
+function testFor(key, value, dir) {
   if (IGNORE.find(function (k) {
     return k === key;
   })) return '';
@@ -2294,7 +2455,7 @@ function testFor(key, value, dir, file) {
 
 var extractorTestTemplate = function (file, url, dir, result, name) {
   return template(_templateObject2, name, url, file, _Reflect$ownKeys(result).map(function (k) {
-    return testFor(k, result[k], dir, file);
+    return testFor(k, result[k], dir);
   }).join('\n\n'), dir);
 };
 
