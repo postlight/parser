@@ -1,6 +1,10 @@
 export const PagesixComExtractor = {
   domain: 'pagesix.com',
 
+  supportedDomains: [
+    'nypost.com',
+  ],
+
   title: {
     selectors: [
       'h1 a',
@@ -21,7 +25,7 @@ export const PagesixComExtractor = {
 
   dek: {
     selectors: [
-      // enter selectors
+      ['meta[name="description"]', 'value'],
     ],
   },
 
@@ -33,19 +37,27 @@ export const PagesixComExtractor = {
 
   content: {
     selectors: [
-      'div.entry-content',
+      '.article-header',
     ],
 
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images
     transforms: {
+      '#featured-image-wrapper': 'figure',
     },
 
     // Is there anything that is in the result that shouldn't be?
     // The clean selectors will remove anything that matches from
     // the result
     clean: [
-
+      '.flag-region',
+      'h1',
+      '.author-byline',
+      '.byline-date',
+      '.double-rule',
+      '.in-line-column',
+      '.modal-trigger',
+      '.wp-caption-text',
     ],
   },
 };
