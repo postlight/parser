@@ -55,7 +55,7 @@ describe('WwwHowtogeekComExtractor', () => {
 
      // Update these values with the expected values from
      // the article.
-      assert.equal(date_published, '');
+      assert.equal(date_published, '2016-12-10T07:00:00.000Z');
     });
 
     it('returns the lead_image_url', async () => {
