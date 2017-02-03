@@ -27,6 +27,7 @@ export const WwwThepennyhoarderComExtractor = {
 
   content: {
     selectors: [
+      ['.post-img', '.post-text'],
       '.post-text',
     ],
 
