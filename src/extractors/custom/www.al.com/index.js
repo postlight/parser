@@ -17,6 +17,7 @@ export const WwwAlComExtractor = {
     selectors: [
       ['meta[name="article_date_original"]', 'value'],
     ],
+    timezone: 'EST',
   },
 
   lead_image_url: {
