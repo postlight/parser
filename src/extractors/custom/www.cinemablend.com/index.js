@@ -17,6 +17,8 @@ export const WwwCinemablendComExtractor = {
     selectors: [
       ['meta[name="article:published_time"]', 'value'],
     ],
+
+    timezone: 'EST',
   },
 
   lead_image_url: {
