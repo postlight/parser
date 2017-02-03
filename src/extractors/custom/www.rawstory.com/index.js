@@ -17,6 +17,8 @@ export const WwwRawstoryComExtractor = {
     selectors: [
       '.blog-author a:last-of-type',
     ],
+
+    timezone: 'EST',
   },
 
   lead_image_url: {
