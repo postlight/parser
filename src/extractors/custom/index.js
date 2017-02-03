@@ -38,6 +38,7 @@ export * from './mashable.com';
 export * from './www.chicagotribune.com';
 export * from './www.vox.com';
 export * from './www.mentalfloss.com';
+export * from './abcnews.go.com';
 export * from './www.nydailynews.com';
 export * from './www.cnbc.com';
 export * from './www.popsugar.com';
