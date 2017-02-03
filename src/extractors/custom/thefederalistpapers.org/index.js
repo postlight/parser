@@ -39,7 +39,7 @@ export const ThefederalistpapersOrgExtractor = {
     // The clean selectors will remove anything that matches from
     // the result
     clean: [
-
+      ['p[style]'],
     ],
   },
 };
