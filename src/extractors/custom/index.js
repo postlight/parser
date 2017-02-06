@@ -68,3 +68,4 @@ export * from './www.nbcnews.com';
 export * from './fortune.com';
 export * from './www.linkedin.com';
 export * from './obamawhitehouse.archives.gov';
+export * from './www.opposingviews.com';
