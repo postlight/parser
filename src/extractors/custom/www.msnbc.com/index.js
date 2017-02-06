@@ -3,6 +3,7 @@ export const WwwMsnbcComExtractor = {
 
   title: {
     selectors: [
+      'h1',
       'h1.is-title-pane',
     ],
   },
@@ -21,7 +22,7 @@ export const WwwMsnbcComExtractor = {
 
   dek: {
     selectors: [
-      // enter selectors
+      ['meta[name="description"]', 'value'],
     ],
   },
 
@@ -33,12 +34,19 @@ export const WwwMsnbcComExtractor = {
 
   content: {
     selectors: [
-      'div.panel-pane.pane-entity-field.pane-node-body',
+      '.pane-node-body',
     ],
 
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images
     transforms: {
+      '.pane-node-body': ($node, $) => {
+        const [selector, attr] = WwwMsnbcComExtractor.lead_image_url.selectors[0];
+        const src = $(selector).attr(attr);
+        if (src) {
+          $node.prepend(`<img src="${src}" />`);
+        }
+      },
     },
 
     // Is there anything that is in the result that shouldn't be?
