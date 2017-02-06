@@ -53,6 +53,7 @@ export * from './www.eonline.com';
 export * from './www.miamiherald.com';
 export * from './www.refinery29.com';
 export * from './www.cinemablend.com';
+export * from './www.today.com';
 export * from './www.al.com';
 export * from './www.thepennyhoarder.com';
 export * from './www.westernjournalism.com';
