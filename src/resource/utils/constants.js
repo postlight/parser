@@ -2,7 +2,7 @@ import cheerio from 'cheerio';
 
 // Browser does not like us setting user agent
 export const REQUEST_HEADERS = cheerio.browser ? {} : {
-  'User-Agent': 'Mercury - https://mercury.postlight.com/web-parser/',
+  'User-Agent': 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36',
 };
 
 // The number of milliseconds to attempt to fetch a resource before timing out.

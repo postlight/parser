@@ -19,6 +19,7 @@ export const MediumExtractor = {
 
   content: {
     selectors: [
+      ['.section-content'],
       '.section-content',
       'article > div > section',
     ],
@@ -36,9 +37,19 @@ export const MediumExtractor = {
           const [_, youtubeId] = thumb.match(ytRe) // eslint-disable-line
           $node.attr('src', `https://www.youtube.com/embed/${youtubeId}`);
           const $parent = $node.parents('figure');
-          $parent.prepend($node.clone());
-          $node.remove();
+          const $caption = $parent.find('figcaption');
+          $parent.empty().append([$node, $caption]);
         }
+      },
+
+      // rewrite figures to pull out image and caption, remove rest
+      figure: ($node) => {
+        // ignore if figure has an iframe
+        if ($node.find('iframe').length > 0) return;
+
+        const $img = $node.find('img').slice(-1)[0];
+        const $caption = $node.find('figcaption');
+        $node.empty().append([$img, $caption]);
       },
     },
 
