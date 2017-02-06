@@ -9,7 +9,7 @@ export const WwwHowtogeekComExtractor = {
 
   author: {
     selectors: [
-      'div#authorinfobox a',
+      '#authorinfobox a',
     ],
   },
 
