@@ -13,7 +13,7 @@ export const PagesixComExtractor = {
 
   author: {
     selectors: [
-      'p.byline',
+      '.byline',
     ],
   },
 
@@ -43,7 +43,11 @@ export const PagesixComExtractor = {
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images
     transforms: {
-      '#featured-image-wrapper': 'figure',
+      '#featured-image-wrapper': ($node) => {
+        const sourceSet = $node.find('source').first().attr('srcset');
+        const largestImg = sourceSet.split(' ')[0];
+        $node.replaceWith(`<img src="${largestImg}" />`);
+      },
     },
 
     // Is there anything that is in the result that shouldn't be?
