@@ -15,7 +15,7 @@ export const WwwLatimesComExtractor = {
 
   date_published: {
     selectors: [
-      ['meta[name="date"]', 'value'],
+      ['meta[itemprop="datePublished"]', 'value'],
     ],
   },
 
@@ -27,19 +27,25 @@ export const WwwLatimesComExtractor = {
 
   content: {
     selectors: [
-      'div.trb_ar_page',
+      '.trb_ar_main',
     ],
 
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images
     transforms: {
+      '.trb_ar_la': ($node) => {
+        const sourceSet = $node.find('.trb_embed_media img').attr('srcset');
+        const sourceSizes = sourceSet.split(',');
+        const largestImg = sourceSizes[sourceSizes.length - 1].trim().split(' ')[0];
+        $node.replaceWith(`<img src="${largestImg}" />`);
+      },
     },
 
     // Is there anything that is in the result that shouldn't be?
     // The clean selectors will remove anything that matches from
     // the result
     clean: [
-
+      ['.trb_ar_by'],
     ],
   },
 };
