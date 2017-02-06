@@ -34,10 +34,8 @@ export const WwwLatimesComExtractor = {
     // before it's consumable content? E.g., unusual lazy loaded images
     transforms: {
       '.trb_ar_la': ($node) => {
-        const sourceSet = $node.find('.trb_embed_media img').attr('srcset');
-        const sourceSizes = sourceSet.split(',');
-        const largestImg = sourceSizes[sourceSizes.length - 1].trim().split(' ')[0];
-        $node.replaceWith(`<img src="${largestImg}" />`);
+        const $figure = $node.find('figure');
+        $node.replaceWith($figure);
       },
     },
 
