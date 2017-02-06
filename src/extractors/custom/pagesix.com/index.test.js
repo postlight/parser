@@ -82,7 +82,7 @@ describe('PagesixComExtractor', () => {
       // Update these values with the expected values from
       // the article.
 
-      assert.equal(first13, 'In the latest twist in the wild battle over Sofía Vergara and Nick');
+      assert.equal(first13, 'Nick Loeb and Sofia Vergara Shutterstock / Getty Images (Composite) In the latest');
     });
   });
 });
