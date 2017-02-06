@@ -3,7 +3,7 @@ export const WwwCbssportsComExtractor = {
 
   title: {
     selectors: [
-      'h1.article-headline',
+      '.article-headline',
     ],
   },
 
@@ -15,14 +15,14 @@ export const WwwCbssportsComExtractor = {
 
   date_published: {
     selectors: [
-      '.date-published',
+      ['.date-original-reading-time time', 'datetime'],
     ],
-    timezone: 'America/New_York',
+    timezone: 'UTC',
   },
 
   dek: {
     selectors: [
-      'h2.article-subline',
+      '.article-subline',
     ],
   },
 
@@ -34,7 +34,7 @@ export const WwwCbssportsComExtractor = {
 
   content: {
     selectors: [
-      'div.article',
+      '.article',
     ],
 
     // Is there anything in the content you selected that needs transformed

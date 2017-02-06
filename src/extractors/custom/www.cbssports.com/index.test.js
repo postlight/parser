@@ -55,7 +55,7 @@ describe('WwwCbssportsComExtractor', () => {
 
     // Update these values with the expected values from
     // the article.
-      assert.equal(date_published, '2016-12-22T09:00:00.000Z');
+      assert.equal(date_published, '2016-12-19T19:19:00.000Z');
     });
 
     it('returns the dek', async () => {
