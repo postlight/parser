@@ -1,6 +1,8 @@
 export const WwwThevergeComExtractor = {
   domain: 'www.theverge.com',
 
+  supportedDomains: ['www.polygon.com'],
+
   title: {
     selectors: [
       'h1',
