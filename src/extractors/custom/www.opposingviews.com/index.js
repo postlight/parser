@@ -33,7 +33,7 @@ export const WwwOpposingviewsComExtractor = {
 
   content: {
     selectors: [
-      'div.body',
+      '.article-content',
     ],
 
     // Is there anything in the content you selected that needs transformed
@@ -45,7 +45,7 @@ export const WwwOpposingviewsComExtractor = {
     // The clean selectors will remove anything that matches from
     // the result
     clean: [
-
+      '.show-for-small-only',
     ],
   },
 };
