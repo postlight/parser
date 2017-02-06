@@ -17,6 +17,8 @@ export const WwwCnetComExtractor = {
     selectors: [
       'time',
     ],
+
+    timezone: 'America/Los_Angeles',
   },
 
   dek: {
