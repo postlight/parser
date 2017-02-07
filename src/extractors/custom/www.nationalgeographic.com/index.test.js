@@ -91,7 +91,7 @@ describe('WwwNationalgeographicComExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(first13, 'This story appears in the January 2017 issue of National Geographic magazine. Read./p');
+      assert.equal(first13, 'This story appears in the January 2017 issue of National Geographic magazine. Read');
     });
   });
 });
