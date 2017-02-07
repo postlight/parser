@@ -18,6 +18,16 @@ export const WwwMacrumorsComExtractor = {
     selectors: [
       '.article .byline',
     ],
+
+    transforms: {
+      '*': ($node, $) => {
+        const $parent = $node.parent();
+        const text = $parent.text().split(' by')[0];
+        $parent.empty().text(text);
+
+        $('body').after($node);
+      },
+    },
     
     timezone: 'America/Los_Angeles',
   },

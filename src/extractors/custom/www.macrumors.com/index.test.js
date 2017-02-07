@@ -55,7 +55,7 @@ describe('WwwMacrumorsComExtractor', () => {
 
     // Update these values with the expected values from
     // the article.
-      assert.equal(date_published, '2017-01-18T05:00:00.000Z');
+      assert.equal(date_published, '2017-01-18T19:44:00.000Z');
     });
 
     it('returns the dek', async () => {
