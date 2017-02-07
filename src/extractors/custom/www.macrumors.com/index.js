@@ -28,7 +28,7 @@ export const WwwMacrumorsComExtractor = {
         $('body').after($node);
       },
     },
-    
+
     timezone: 'America/Los_Angeles',
   },
 
