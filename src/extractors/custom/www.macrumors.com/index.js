@@ -3,20 +3,23 @@ export const WwwMacrumorsComExtractor = {
 
   title: {
     selectors: [
+      'h1',
       'h1.title',
     ],
   },
 
   author: {
     selectors: [
-      'a.author-url',
+      '.author-url',
     ],
   },
 
   date_published: {
     selectors: [
-      'div.article div.byline',
+      '.article .byline',
     ],
+    
+    timezone: 'America/Los_Angeles',
   },
 
   dek: {
@@ -33,7 +36,7 @@ export const WwwMacrumorsComExtractor = {
 
   content: {
     selectors: [
-      'div.article',
+      '.article',
     ],
 
     // Is there anything in the content you selected that needs transformed
