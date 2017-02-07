@@ -9,7 +9,7 @@ export const WwwNationalgeographicComExtractor = {
 
   author: {
     selectors: [
-      'span.byline-component__contributors',
+      '.byline-component__contributors b span',
     ],
   },
 
