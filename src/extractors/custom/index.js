@@ -38,6 +38,8 @@ export * from './mashable.com';
 export * from './www.chicagotribune.com';
 export * from './www.vox.com';
 export * from './pagesix.com';
+export * from './www.cbssports.com';
+export * from './www.msnbc.com';
 export * from './www.thepoliticalinsider.com';
 export * from './www.mentalfloss.com';
 export * from './abcnews.go.com';
