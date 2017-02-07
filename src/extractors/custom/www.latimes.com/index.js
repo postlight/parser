@@ -43,7 +43,8 @@ export const WwwLatimesComExtractor = {
     // The clean selectors will remove anything that matches from
     // the result
     clean: [
-      ['.trb_ar_by'],
+      '.trb_ar_by',
+      '.trb_ar_cr',
     ],
   },
 };
