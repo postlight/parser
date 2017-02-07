@@ -3,13 +3,14 @@ export const WwwAndroidcentralComExtractor = {
 
   title: {
     selectors: [
+      'h1',
       'h1.main-title',
     ],
   },
 
   author: {
     selectors: [
-      'span.meta-by',
+      '.meta-by',
     ],
   },
 
@@ -27,13 +28,13 @@ export const WwwAndroidcentralComExtractor = {
 
   lead_image_url: {
     selectors: [
-      ['img.image-large.aligncenter', 'src'],
+      ['.image-large', 'src'],
     ],
   },
 
   content: {
     selectors: [
-      'div.article-body',
+      '.article-body',
     ],
 
     // Is there anything in the content you selected that needs transformed
@@ -45,7 +46,7 @@ export const WwwAndroidcentralComExtractor = {
     // The clean selectors will remove anything that matches from
     // the result
     clean: [
-      'p.intro',
+      '.intro',
       'blockquote',
     ],
   },
