@@ -3,6 +3,7 @@ export const WwwSiComExtractor = {
 
   title: {
     selectors: [
+      'h1',
       'h1.headline',
     ],
   },
@@ -15,13 +16,13 @@ export const WwwSiComExtractor = {
 
   date_published: {
     selectors: [
-      'div.timestamp',
+      '.timestamp',
     ],
   },
 
   dek: {
     selectors: [
-      'div.quick-hit ul li',
+      '.quick-hit ul',
     ],
   },
 
@@ -33,18 +34,33 @@ export const WwwSiComExtractor = {
 
   content: {
     selectors: [
-      'div.article.content.body.padded',
+      ['p', '.marquee_large_2x', '.component.image'],
     ],
 
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images
     transforms: {
+
+      noscript: ($node) => {
+        const $children = $node.children();
+        if ($children.length === 1 && $children.get(0).tagName === 'img') {
+          return 'figure';
+        }
+
+        return null;
+      },
     },
 
     // Is there anything that is in the result that shouldn't be?
     // The clean selectors will remove anything that matches from
     // the result
     clean: [
+      [
+        '.inline-thumb',
+        '.primary-message',
+        '.description',
+        '.instructions',
+      ],
     ],
   },
 };
