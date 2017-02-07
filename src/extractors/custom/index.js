@@ -37,6 +37,7 @@ export * from './www.reuters.com';
 export * from './mashable.com';
 export * from './www.chicagotribune.com';
 export * from './www.vox.com';
+export * from './thefederalistpapers.org';
 export * from './www.cbssports.com';
 export * from './www.msnbc.com';
 export * from './www.thepoliticalinsider.com';
