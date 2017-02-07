@@ -18,6 +18,8 @@ export const WwwSiComExtractor = {
     selectors: [
       '.timestamp',
     ],
+
+    timezone: 'America/New_York',
   },
 
   dek: {
