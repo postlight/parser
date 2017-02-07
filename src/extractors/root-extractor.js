@@ -113,7 +113,12 @@ export function select(opts) {
     const [selector, attr] = matchingSelector;
     result = $(selector).attr(attr).trim();
   } else {
-    result = $(matchingSelector).text().trim();
+    let $node = $(matchingSelector);
+
+    $node = cleanBySelectors($node, $, extractionOpts);
+    $node = transformElements($node, $, extractionOpts);
+
+    result = $node.text().trim();
   }
 
   // Allow custom extractor to skip default cleaner

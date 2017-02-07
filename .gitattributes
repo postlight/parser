@@ -1,0 +1,4 @@
+# All html files are fixtures, so marking as vendored
+# so Linguist (https://github.com/github/linguist)
+# ignores them for the purpose of language detection
+*.html linguist-vendored
