@@ -23,29 +23,29 @@ export function cleanDateString(dateString) {
                    .trim();
 }
 
-export function createDate(dateString, timezone) {
+export function createDate(dateString, timezone, format) {
   if (TIME_WITH_OFFSET_RE.test(dateString)) {
     return moment(new Date(dateString));
   }
 
   return timezone ?
-    moment.tz(dateString, parseFormat(dateString), timezone) :
-    moment(dateString, parseFormat(dateString));
+    moment.tz(dateString, format || parseFormat(dateString), timezone) :
+    moment(dateString, format || parseFormat(dateString));
 }
 
 // Take a date published string, and hopefully return a date out of
 // it. Return none if we fail.
-export default function cleanDatePublished(dateString, { timezone } = {}) {
+export default function cleanDatePublished(dateString, { timezone, format } = {}) {
   // If string is in milliseconds or seconds, convert to int and return
   if (MS_DATE_STRING.test(dateString) || SEC_DATE_STRING.test(dateString)) {
     return new Date(parseInt(dateString, 10)).toISOString();
   }
 
-  let date = createDate(dateString, timezone);
+  let date = createDate(dateString, timezone, format);
 
   if (!date.isValid()) {
     dateString = cleanDateString(dateString);
-    date = createDate(dateString, timezone);
+    date = createDate(dateString, timezone, format);
   }
 
   return date.isValid() ? date.toISOString() : null;

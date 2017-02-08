@@ -30,6 +30,14 @@ describe('cleanDatePublished(dateString)', () => {
       cleanDatePublished('November 29, 2016: 8:18 AM ET', { timezone: 'America/New_York' });
     assert.equal(datePublished, '2016-11-29T13:18:00.000Z');
   });
+
+  it('accepts a custom date format', () => {
+    // The JS date parser is forgiving, but
+    // it needs am/pm separated from a time
+    const datePublished =
+      cleanDatePublished('Mon Aug 03 12:45:00 EDT 2015', { timezone: 'America/New_York', format: 'ddd MMM DD HH:mm:ss zz YYYY' });
+    assert.equal(datePublished, '2015-08-03T16:45:00.000Z');
+  });
 });
 
 describe('cleanDateString(dateString)', () => {
