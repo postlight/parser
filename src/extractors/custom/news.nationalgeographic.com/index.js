@@ -15,8 +15,14 @@ export const NewsNationalgeographicComExtractor = {
 
   date_published: {
     selectors: [
-        ['meta[name="article:published_time"]', 'value'],
+        'meta[name="article:published_time"]',
     ],
+    transforms: {
+      '*': ($node, $) => {
+        const date = $('meta[name="article:published_time"]').attr('value');
+        console.log(date);
+      },
+    },
   },
 
   dek: {
