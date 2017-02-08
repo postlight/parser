@@ -33,13 +33,31 @@ export const WwwNationalgeographicComExtractor = {
 
   content: {
     selectors: [
-      '.parsys',
+      ['.parsys.content', '.__image-lead__'],
       '.content',
     ],
 
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images
     transforms: {
+      '.parsys.content': ($node, $) => {
+        const $imageParent = $node.children().first();
+        if ($imageParent.hasClass('imageGroup')) {
+          const $dataAttrContainer = $imageParent.find('.media--medium__container').children().first();
+          const imgPath1 = $dataAttrContainer.data('platform-image1-path');
+          const imgPath2 = $dataAttrContainer.data('platform-image2-path');
+          $node.prepend($(`<div class="__image-lead__">
+            <img src="${imgPath1}"/>
+            <img src="${imgPath2}"/>
+          </div>`));
+        } else {
+          const $imgSrc = $node.find('.image.parbase.section')
+            .find('.picturefill')
+            .first()
+            .data('platform-src');
+          $node.prepend($(`<img class="__image-lead__" src="${$imgSrc}"/>`));
+        }
+      },
     },
 
     // Is there anything that is in the result that shouldn't be?
