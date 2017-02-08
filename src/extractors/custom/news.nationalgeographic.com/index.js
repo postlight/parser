@@ -47,7 +47,9 @@ export const NewsNationalgeographicComExtractor = {
             .find('.picturefill')
             .first()
             .data('platform-src');
-        $node.prepend($(`<img class="__image-lead__" src="${$imgSrc}"/>`));
+        if ($imgSrc) {
+          $node.prepend($(`<img class="__image-lead__" src="${$imgSrc}"/>`));
+        }
       },
     },
 
@@ -55,7 +57,7 @@ export const NewsNationalgeographicComExtractor = {
     // The clean selectors will remove anything that matches from
     // the result
     clean: [
-      // 'div.pull-quote.pull-quote--large',
+      'div.pull-quote.pull-quote--large',
     ],
   },
 };
