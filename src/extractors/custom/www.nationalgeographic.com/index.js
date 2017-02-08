@@ -46,16 +46,20 @@ export const WwwNationalgeographicComExtractor = {
           const $dataAttrContainer = $imageParent.find('.media--medium__container').children().first();
           const imgPath1 = $dataAttrContainer.data('platform-image1-path');
           const imgPath2 = $dataAttrContainer.data('platform-image2-path');
-          $node.prepend($(`<div class="__image-lead__">
-            <img src="${imgPath1}"/>
-            <img src="${imgPath2}"/>
-          </div>`));
+          if (imgPath2 && imgPath1) {
+            $node.prepend($(`<div class="__image-lead__">
+                <img src="${imgPath1}"/>
+                <img src="${imgPath2}"/>
+              </div>`));
+          }
         } else {
           const $imgSrc = $node.find('.image.parbase.section')
             .find('.picturefill')
             .first()
             .data('platform-src');
-          $node.prepend($(`<img class="__image-lead__" src="${$imgSrc}"/>`));
+          if ($imgSrc) {
+            $node.prepend($(`<img class="__image-lead__" src="${$imgSrc}"/>`));
+          }
         }
       },
     },
