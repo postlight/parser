@@ -38,16 +38,6 @@ describe('NewsNationalgeographicComExtractor', () => {
       assert.equal(title, 'Here’s Why Your Office May Be Too Hot or Cold: Gender Bias');
     });
 
-    it.skip('returns the author', async () => {
-    // To pass this test, fill out the author selector
-    // in ./src/extractors/custom/news.nationalgeographic.com/index.js.
-      const { author } = await result;
-
-    // Update these values with the expected values from
-    // the article.
-      assert.equal(author, 'Wendy Koch');
-    });
-
     it('returns the date_published', async () => {
     // To pass this test, fill out the date_published selector
     // in ./src/extractors/custom/news.nationalgeographic.com/index.js.
