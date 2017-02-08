@@ -3,6 +3,7 @@ export const NewsNationalgeographicComExtractor = {
 
   title: {
     selectors: [
+      'h1',
       'h1.main-title',
     ],
   },
@@ -23,7 +24,7 @@ export const NewsNationalgeographicComExtractor = {
 
   dek: {
     selectors: [
-      'div.article__deck',
+      '.article__deck',
     ],
   },
 
@@ -57,7 +58,7 @@ export const NewsNationalgeographicComExtractor = {
     // The clean selectors will remove anything that matches from
     // the result
     clean: [
-      'div.pull-quote.pull-quote--large',
+      '.pull-quote.pull-quote--large',
     ],
   },
 };
