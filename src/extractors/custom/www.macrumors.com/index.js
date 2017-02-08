@@ -19,15 +19,8 @@ export const WwwMacrumorsComExtractor = {
       '.article .byline',
     ],
 
-    transforms: {
-      '*': ($node, $) => {
-        const $parent = $node.parent();
-        const text = $parent.text().split(' by')[0];
-        $parent.empty().text(text);
-
-        $('body').after($node);
-      },
-    },
+    // Wednesday January 18, 2017 11:44 am PST
+    format: 'dddd MMMM D, YYYY h:mm A zz',
 
     timezone: 'America/Los_Angeles',
   },
