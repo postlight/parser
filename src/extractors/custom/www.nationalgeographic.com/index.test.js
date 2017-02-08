@@ -38,16 +38,6 @@ describe('WwwNationalgeographicComExtractor', () => {
       assert.equal(title, 'How Today\'s Toys May Be Harming Your Daughter');
     });
 
-    it.skip('returns the author', async () => {
-    // To pass this test, fill out the author selector
-    // in ./src/extractors/custom/www.nationalgeographic.com/index.js.
-      const { author } = await result;
-
-    // Update these values with the expected values from
-    // the article.
-      assert.equal(author, 'Natasha Daly');
-    });
-
     it('returns the date_published', async () => {
     // To pass this test, fill out the date_published selector
     // in ./src/extractors/custom/www.nationalgeographic.com/index.js.
