@@ -3,6 +3,7 @@ export const WwwNationalgeographicComExtractor = {
 
   title: {
     selectors: [
+      'h1',
       'h1.main-title',
     ],
   },
@@ -21,7 +22,7 @@ export const WwwNationalgeographicComExtractor = {
 
   dek: {
     selectors: [
-      'div.article__deck',
+      '.article__deck',
     ],
   },
 
