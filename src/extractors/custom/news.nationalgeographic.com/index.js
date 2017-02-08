@@ -35,20 +35,27 @@ export const NewsNationalgeographicComExtractor = {
 
   content: {
     selectors: [
-      '.parsys',
+      ['.parsys.content', '.__image-lead__'],
       '.content',
     ],
 
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images
     transforms: {
+      '.parsys.content': ($node, $) => {
+        const $imgSrc = $node.find('.image.parbase.section')
+            .find('.picturefill')
+            .first()
+            .data('platform-src');
+        $node.prepend($(`<img class="__image-lead__" src="${$imgSrc}"/>`));
+      },
     },
 
     // Is there anything that is in the result that shouldn't be?
     // The clean selectors will remove anything that matches from
     // the result
     clean: [
-      'div.pull-quote.pull-quote--large',
+      // 'div.pull-quote.pull-quote--large',
     ],
   },
 };
