@@ -1,5 +1,40 @@
 # Mercury Parser Changelog
 
+### 1.0.6 (Feb 9, 2017)
+
+##### Commits
+
+* [[`93d2baf5cf`](https://github.com/postlight/mercury-parser/commit/93d2baf5cf)] - **feat**: news.natgeo parser (#88) (Janet) 
+* [[`2279c2d486`](https://github.com/postlight/mercury-parser/commit/2279c2d486)] - **feat**: natgeo parser (#89) (Janet) 
+* [[`08b5bb7ff1`](https://github.com/postlight/mercury-parser/commit/08b5bb7ff1)] - **feat**: allow parser to define custom date formats (#141) (Adam Pash) 
+* [[`11f466ccb3`](https://github.com/postlight/mercury-parser/commit/11f466ccb3)] - **feat**: latimes parser (#92) (Janet) 
+* [[`26a8e4f75a`](https://github.com/postlight/mercury-parser/commit/26a8e4f75a)] - **feat**: macrumors parser (#120) (Kevin Ngao) 
+* [[`b4fec6af98`](https://github.com/postlight/mercury-parser/commit/b4fec6af98)] - **feat**: androidcentral parser (#119) (Kevin Ngao) 
+* [[`beb0b89a4f`](https://github.com/postlight/mercury-parser/commit/beb0b89a4f)] - **feat**: pagesix parser (#97) (Janet) 
+* [[`f2160eb5b6`](https://github.com/postlight/mercury-parser/commit/f2160eb5b6)] - **feat**: si parser (#118) (Janet) 
+* [[`2af0f6179a`](https://github.com/postlight/mercury-parser/commit/2af0f6179a)] - **feat**: rawstory parser (#109) (Janet) 
+* [[`765032452d`](https://github.com/postlight/mercury-parser/commit/765032452d)] - **feat**: thefederalistpapers parser (#101) (Janet) 
+* [[`fb5eb2e104`](https://github.com/postlight/mercury-parser/commit/fb5eb2e104)] - **feat**: cnet parser (#104) (Janet) 
+* [[`3c5fa28f10`](https://github.com/postlight/mercury-parser/commit/3c5fa28f10)] - **feat**: cbs sports parser (#98) (Janet) 
+* [[`3cf2d0d3ef`](https://github.com/postlight/mercury-parser/commit/3cf2d0d3ef)] - **feat**: msnbc parser (#100) (Janet) 
+* [[`f9ab9eb885`](https://github.com/postlight/mercury-parser/commit/f9ab9eb885)] - **feat**: howtogeek extractor (#108) (Janet) 
+* [[`258acdfd02`](https://github.com/postlight/mercury-parser/commit/258acdfd02)] - **feat**: opposing views parser (#103) (Janet) 
+* [[`b63dd33579`](https://github.com/postlight/mercury-parser/commit/b63dd33579)] - **feat**: today parser (#106) (Janet) 
+* [[`c94eee7f92`](https://github.com/postlight/mercury-parser/commit/c94eee7f92)] - **feat**: cinema blend parser (#105) (Janet) 
+* [[`64e3c205e8`](https://github.com/postlight/mercury-parser/commit/64e3c205e8)] - **feat**: the political insider parser (#99) (Janet) 
+* [[`7b52d3d1fc`](https://github.com/postlight/mercury-parser/commit/7b52d3d1fc)] - **feat**: al.com parser (#110) (Janet) 
+* [[`15df58496f`](https://github.com/postlight/mercury-parser/commit/15df58496f)] - **feat**: westernjournalism parser (#113) (Janet) 
+* [[`ae12a1d701`](https://github.com/postlight/mercury-parser/commit/ae12a1d701)] - **feat**: mental floss parser (#94) (Janet) 
+* [[`bf29291395`](https://github.com/postlight/mercury-parser/commit/bf29291395)] - **feat**: thepennyhoarder parser (#112) (Janet) 
+* [[`fadd198d04`](https://github.com/postlight/mercury-parser/commit/fadd198d04)] - **feat**: abcnewsgo parser (#90) (Janet) 
+* [[`25d9642ff9`](https://github.com/postlight/mercury-parser/commit/25d9642ff9)] - **feat**: support cleaning and transforms for all fields (#138) (Adam Pash) 
+* [[`1054d854dd`](https://github.com/postlight/mercury-parser/commit/1054d854dd)] - **feat**: america now parser (#114) (Janet) 
+* [[`4c48acba59`](https://github.com/postlight/mercury-parser/commit/4c48acba59)] - **feat**: fusion parser (Janet) 
+* [[`d292d8ef3a`](https://github.com/postlight/mercury-parser/commit/d292d8ef3a)] - **feat**: ny daily news parser (#87) (Janet) 
+* [[`a53587acef`](https://github.com/postlight/mercury-parser/commit/a53587acef)] - **feat**: adds www.polygon.com to list of www.theverge.com supportedDomains (dviramontes) 
+* [[`385b9d76a3`](https://github.com/postlight/mercury-parser/commit/385b9d76a3)] - **feat**: sciencefly extractor (#116) (Janet) 
+* [[`601b0fac16`](https://github.com/postlight/mercury-parser/commit/601b0fac16)] - **release**: 1.0.5 (#136) (Adam Pash) 
+
 ### 1.0.5 (Feb 1, 2017)
 
 ##### Commits
@@ -8,7 +43,7 @@
 * [[`aa682d71e8`](https://github.com/postlight/mercury-parser/commit/aa682d71e8)] - **fix**: medium bug (#129) (Adam Pash) 
 * [[`4e049de61a`](https://github.com/postlight/mercury-parser/commit/4e049de61a)] - **fix**: i put a bad comment in .gitattributes (#125) (Adam Pash) 
 * [[`8aa215c4c2`](https://github.com/postlight/mercury-parser/commit/8aa215c4c2)] - **chore**: marking html fixtures as "vendored" (#124) (Adam Pash) 
-* [[`31eb4f9222`](https://github.com/postlight/mercury-parser/commit/31eb4f9222)] - **Feat**: LinkedIn parser (#123) (Adam Pash) 
+* [[`31eb4f9222`](https://github.com/postlight/mercury-parser/commit/31eb4f9222)] - **feat**: LinkedIn parser (#123) (Adam Pash) 
 * [[`dbc706410b`](https://github.com/postlight/mercury-parser/commit/dbc706410b)] - **release**: 1.0.4 (#122) (Adam Pash) 
 
 ### 1.0.4 (Jan 26, 2017)
@@ -61,7 +96,7 @@
 ##### Commits
 
 * [[`81aa89f2c1`](https://github.com/postlight/mercury-parser/commit/81aa89f2c1)] - **feat**: youtube custom extractor (#53) (Adam Pash)
-* [[`2fb47640f2`](https://github.com/postlight/mercury-parser/commit/2fb47640f2)] - **Feat**: detect platforms (#52) (Adam Pash)
+* [[`2fb47640f2`](https://github.com/postlight/mercury-parser/commit/2fb47640f2)] - **feat**: detect platforms (#52) (Adam Pash)
 * [[`64c0fad2fd`](https://github.com/postlight/mercury-parser/commit/64c0fad2fd)] - **fix**: preserve whitespace (#51) (Adam Pash)
 * [[`15656cb3e1`](https://github.com/postlight/mercury-parser/commit/15656cb3e1)] - **Refactor**: running tests more efficiently (#49) (Adam Pash)
 * [[`edcb7295d1`](https://github.com/postlight/mercury-parser/commit/edcb7295d1)] - **release**: 1.0.1 (#48) (Adam Pash)
