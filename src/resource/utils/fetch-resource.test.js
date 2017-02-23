@@ -42,6 +42,13 @@ describe('fetchResource(url)', () => {
     assert.equal(typeof body, 'string');
   });
 
+  it('handles different encoding on body', async () => {
+    const url = 'http://www.playnation.de/spiele-news/kojima-productions/hideo-kojima-reflektiert-ueber-seinen-werdegang-bei-konami-id68950.html';
+    const { body } = await fetchResource(url);
+
+    assert.equal(typeof body, 'string');
+  });
+
   it('handles this gzip error', async () => {
     const url = 'http://www.redcross.ca/blog/2016/11/photo-of-the-day--one-year-anniversary-of-the-end-of-ebola-in-sierra-leone';
     const { body } = await fetchResource(url);

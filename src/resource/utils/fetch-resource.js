@@ -1,6 +1,7 @@
 import URL from 'url';
 import request from 'request';
 import iconv from 'iconv-lite';
+import cheerio from 'cheerio';
 import { Errors } from 'utils';
 import { getEncoding } from 'utils/text';
 
@@ -21,6 +22,15 @@ function get(options) {
 
         if (iconv.encodingExists(encoding)) {
           body = iconv.decode(body, encoding);
+        }
+
+        if (typeof body != 'string') {
+          const $ = cheerio.load(iconv.decode(body, 'utf8'));
+          const contentType = $('meta[http-equiv=content-type]').attr('content');
+          const properEncoding = getEncoding(contentType);
+          if (iconv.encodingExists(properEncoding)) {
+            body = iconv.decode(body, properEncoding);
+          }
         }
 
         resolve({ body, response });
