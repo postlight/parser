@@ -24,7 +24,7 @@ function get(options) {
           body = iconv.decode(body, encoding);
         }
 
-        if (typeof body != 'string') {
+        if (typeof body !== 'string') {
           const $ = cheerio.load(iconv.decode(body, 'utf8'));
           const contentType = $('meta[http-equiv=content-type]').attr('content');
           const properEncoding = getEncoding(contentType);
