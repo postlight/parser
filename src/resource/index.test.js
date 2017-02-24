@@ -34,6 +34,16 @@ describe('Resource', () => {
       assert.equal(getEncoding(metaContentType), 'iso-8859-1');
       assert.equal(typeof $, 'function');
     });
+
+    it('handles special encoding', async () => {
+      const url = 'http://www.elmundo.es/opinion/2016/11/19/582f476846163fc65a8b4578.html';
+      const $ = await Resource.create(url);
+
+      const badEncodingRe = /�/g;
+
+      assert.equal(badEncodingRe.test($.html()), false);
+      assert.equal(typeof $, 'function');
+    });
   });
 
   describe('generateDoc({ body, response })', () => {

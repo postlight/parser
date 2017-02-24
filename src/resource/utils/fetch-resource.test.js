@@ -55,18 +55,6 @@ describe('fetchResource(url)', () => {
 
     assert.equal(response.statusCode, 200);
   });
-
-  // this test addresses https://twitter.com/flikxxi/status/800074680342351872
-  it('handles different encoding', async () => {
-    const url = 'http://www.elmundo.es/opinion/2016/11/19/582f476846163fc65a8b4578.html';
-    const { response } = await fetchResource(url);
-
-    assert.equal(response.statusCode, 200);
-
-    // const badEncodingRe = /�/g;
-    //
-    // assert.equal(badEncodingRe.test(body.toString()), false);
-  });
 });
 
 describe('validateResponse(response)', () => {
