@@ -1,5 +1,7 @@
 import cheerio from 'cheerio';
+import iconv from 'iconv-lite';
 
+import { getEncoding } from 'utils/text';
 import { fetchResource } from './utils';
 import {
   normalizeMetaTags,
@@ -41,7 +43,8 @@ const Resource = {
     return this.generateDoc(result);
   },
 
-  generateDoc({ body: content, response }) {
+  // set utf8 as default encoding if encoding not found in headers
+  generateDoc({ body: content, response, encoding = 'utf8' }) {
     const { 'content-type': contentType } = response.headers;
 
     // TODO: Implement is_text function from
@@ -51,7 +54,19 @@ const Resource = {
       throw new Error('Content does not appear to be text.');
     }
 
+    // decode if encoding exists
+    if (iconv.encodingExists(encoding)) {
+      content = iconv.decode(content, encoding);
+    }
     let $ = cheerio.load(content);
+
+    // after first cheerio.load, check to see if encoding matches
+    const metaContentType = $('meta[http-equiv=content-type]').attr('content');
+    const properEncoding = getEncoding(metaContentType);
+    if (properEncoding && properEncoding !== encoding && iconv.encodingExists(properEncoding)) {
+      content = iconv.decode(content, properEncoding);
+      $ = cheerio.load(content);
+    }
 
     if ($.root().children().length === 0) {
       throw new Error('No children, likely a bad parse.');
