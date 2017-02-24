@@ -1,6 +1,7 @@
 import assert from 'assert';
 import cheerio from 'cheerio';
 import { Errors } from 'utils';
+import { getEncoding } from 'utils/text';
 
 import { record } from 'test-helpers';
 import Resource from './index';
@@ -24,6 +25,15 @@ describe('Resource', () => {
 
       assert.equal(error, Errors.badUrl);
     });
+
+    it('fetches with different encoding on body', async () => {
+      const url = 'http://www.playnation.de/spiele-news/kojima-productions/hideo-kojima-reflektiert-ueber-seinen-werdegang-bei-konami-id68950.html';
+      const $ = await Resource.create(url);
+      const metaContentType = $('meta[http-equiv=content-type]').attr('value');
+
+      assert.equal(getEncoding(metaContentType), 'iso-8859-1');
+      assert.equal(typeof $, 'function');
+    });
   });
 
   describe('generateDoc({ body, response })', () => {
@@ -31,7 +41,8 @@ describe('Resource', () => {
       const response = { headers: { 'content-type': 'text/html' } };
 
       const body = '<div><p>Hi</p></div>';
-      const $ = Resource.generateDoc({ body, response });
+      const buffer = Buffer.from(body, 'utf-8');
+      const $ = Resource.generateDoc({ body: buffer, response });
 
       assert.equal($.html(), body);
     });
@@ -62,10 +73,11 @@ describe('Resource', () => {
           },
         };
         const body = '';
+        const buffer = Buffer.from(body, 'utf-8');
 
         assert.throws(
           () => {
-            Resource.generateDoc({ body, response });
+            Resource.generateDoc({ body: buffer, response });
           },
             /no children/i
         );

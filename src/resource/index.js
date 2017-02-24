@@ -43,8 +43,7 @@ const Resource = {
     return this.generateDoc(result);
   },
 
-  // set utf8 as default encoding if encoding not found in headers
-  generateDoc({ body: content, response, encoding = 'utf8' }) {
+  generateDoc({ body: content, response }) {
     const { 'content-type': contentType } = response.headers;
 
     // TODO: Implement is_text function from
@@ -54,19 +53,8 @@ const Resource = {
       throw new Error('Content does not appear to be text.');
     }
 
-    // decode if encoding exists
-    if (iconv.encodingExists(encoding)) {
-      content = iconv.decode(content, encoding);
-    }
-    let $ = cheerio.load(content);
-
-    // after first cheerio.load, check to see if encoding matches
-    const metaContentType = $('meta[http-equiv=content-type]').attr('content');
-    const properEncoding = getEncoding(metaContentType);
-    if (properEncoding && properEncoding !== encoding && iconv.encodingExists(properEncoding)) {
-      content = iconv.decode(content, properEncoding);
-      $ = cheerio.load(content);
-    }
+    const encoding = getEncoding(contentType);
+    let $ = this.encodeDoc({ content, encoding });
 
     if ($.root().children().length === 0) {
       throw new Error('No children, likely a bad parse.');
@@ -75,6 +63,29 @@ const Resource = {
     $ = normalizeMetaTags($);
     $ = convertLazyLoadedImages($);
     $ = clean($);
+
+    return $;
+  },
+
+  // set utf-8 as default encoding if encoding not found in headers
+  encodeDoc({ content, encoding }) {
+    let decodedContent = '';
+    if (encoding === null) {
+      encoding = 'utf-8';
+    }
+
+    if (iconv.encodingExists(encoding)) {
+      decodedContent = iconv.decode(content, encoding);
+    }
+    let $ = cheerio.load(decodedContent);
+
+    // after first cheerio.load, check to see if encoding matches
+    const metaContentType = $('meta[http-equiv=content-type]').attr('content');
+    const properEncoding = getEncoding(metaContentType);
+    if (properEncoding && properEncoding !== encoding && iconv.encodingExists(properEncoding)) {
+      decodedContent = iconv.decode(content, properEncoding);
+      $ = cheerio.load(decodedContent);
+    }
 
     return $;
   },
