@@ -32,6 +32,9 @@ describe('Resource', () => {
       const metaContentType = $('meta[http-equiv=content-type]').attr('value');
 
       assert.equal(getEncoding(metaContentType), 'iso-8859-1');
+      const encodedU = /&#xFC;/g;
+
+      assert.equal(encodedU.test($.html()), true);
       assert.equal(typeof $, 'function');
     });
 
