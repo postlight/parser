@@ -57,7 +57,7 @@ describe('Resource', () => {
       const buffer = Buffer.from(body);
       const $ = Resource.generateDoc({ body: buffer, response });
 
-      assert.equal($.html(), body);
+      assert.equal(typeof $, 'function');
     });
 
     it('throws an error if the content is not text', () => {
