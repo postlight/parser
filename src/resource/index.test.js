@@ -50,16 +50,6 @@ describe('Resource', () => {
   });
 
   describe('generateDoc({ body, response })', () => {
-    it('returns a cheerio object if valid', () => {
-      const response = { headers: { 'content-type': 'text/html' } };
-
-      const body = '<div><p>Hi</p></div>';
-      const buffer = Buffer.from(body);
-      const $ = Resource.generateDoc({ body: buffer, response });
-
-      assert.equal(typeof $, 'function');
-    });
-
     it('throws an error if the content is not text', () => {
       const response = {
         headers: {

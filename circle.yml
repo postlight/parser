@@ -5,7 +5,7 @@ machine:
 
   node:
     version:
-      6.4.0
+      4.3.2
 
 ## Customize dependencies
 dependencies:
@@ -28,6 +28,6 @@ test:
         parallel: true
     - nvm use 7.0 && yarn test:web -- --maxWorkers=4 && yarn build:web -- --maxWorkers=4:
         parallel: true
-    # Switch to check on 6.4.0
-    - nvm use 6.4.0 && yarn build && yarn test:node -- --maxWorkers=4:
+    # Switch to check on 4.3.2
+    - nvm use 4.3.2 && yarn build && yarn test:node -- --maxWorkers=4:
         parallel: true
