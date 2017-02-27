@@ -54,7 +54,7 @@ describe('Resource', () => {
       const response = { headers: { 'content-type': 'text/html' } };
 
       const body = '<div><p>Hi</p></div>';
-      const buffer = Buffer.from(body, 'utf8');
+      const buffer = Buffer.from(body);
       const $ = Resource.generateDoc({ body: buffer, response });
 
       assert.equal($.html(), body);
@@ -86,7 +86,7 @@ describe('Resource', () => {
           },
         };
         const body = '';
-        const buffer = Buffer.from(body, 'utf8');
+        const buffer = Buffer.from(body);
 
         assert.throws(
           () => {
