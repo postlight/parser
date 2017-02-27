@@ -76,11 +76,10 @@ describe('Resource', () => {
           },
         };
         const body = '';
-        const buffer = Buffer.from(body);
 
         assert.throws(
           () => {
-            Resource.generateDoc({ body: buffer, response });
+            Resource.generateDoc({ body, response });
           },
             /no children/i
         );
