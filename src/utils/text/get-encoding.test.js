@@ -8,8 +8,8 @@ describe('getEncoding(str)', () => {
     assert.equal(getEncoding(contentType), 'iso-8859-15');
   });
 
-  it('returns null if no encoding found', () => {
+  it('returns utf-8 as a default if no encoding found', () => {
     const contentType = 'text/html';
-    assert.equal(getEncoding(contentType), null);
+    assert.equal(getEncoding(contentType), 'utf-8');
   });
 });

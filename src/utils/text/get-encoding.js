@@ -8,5 +8,5 @@ export default function getEncoding(str) {
     return ENCODING_RE.exec(str)[1];
   }
 
-  return null;
+  return 'utf-8';
 }

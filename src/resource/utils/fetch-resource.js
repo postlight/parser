@@ -16,8 +16,7 @@ function get(options) {
       if (err) {
         reject(err);
       } else {
-        const encoding = getEncoding(response.headers['content-type']);
-        resolve({ body, response, encoding });
+        resolve({ body, response });
       }
     });
   });
@@ -91,9 +90,6 @@ export default async function fetchResource(url, parsedUrl) {
     url: parsedUrl.href,
     headers: { ...REQUEST_HEADERS },
     timeout: FETCH_TIMEOUT,
-    // Don't set encoding; fixes issues
-    // w/gzipped responses
-    encoding: null,
     // Accept cookies
     jar: true,
     // Accept and decode gzip

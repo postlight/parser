@@ -67,12 +67,8 @@ const Resource = {
     return $;
   },
 
-  // set utf-8 as default encoding if encoding not found in headers
   encodeDoc({ content, encoding }) {
     let decodedContent = '';
-    if (encoding === null) {
-      encoding = 'utf-8';
-    }
 
     if (iconv.encodingExists(encoding)) {
       decodedContent = iconv.decode(content, encoding);
@@ -82,7 +78,7 @@ const Resource = {
     // after first cheerio.load, check to see if encoding matches
     const metaContentType = $('meta[http-equiv=content-type]').attr('content');
     const properEncoding = getEncoding(metaContentType);
-    if (properEncoding && properEncoding !== encoding && iconv.encodingExists(properEncoding)) {
+    if (properEncoding !== encoding && iconv.encodingExists(properEncoding)) {
       decodedContent = iconv.decode(content, properEncoding);
       $ = cheerio.load(decodedContent);
     }
