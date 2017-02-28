@@ -1,0 +1,845 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+ <meta name="google-site-verification" value="rhjBJdaWAfYTRyzXO8JA89fZW9VyPDcXiTq7dImURXo">
+
+<title>ACCU  :: Defining Concepts</title>
+<meta name="author" value="ACCU Members">
+
+
+ <meta http-equiv="Content-Type" value="text/html; charset=utf-8">
+ <meta name="Generator" value="Xaraya :: 1.2.3">
+ <meta name="Keywords" value="computer, professionalism, conference, programmer, organisation, community, programming, language, journal, book, review, cvu, overload, c, c++, java">
+ <meta name="Description" value="Concepts provide a new way of constraining code. Andrew Sutton shows us how to define and use them.">
+ <meta name="author" value="ACCU ">
+ <meta name="rating" value="General">
+ <link rel="Top" type="text/html" href="https://accu.org/">
+ <link rel="contents" type="text/html" href="https://accu.org/index.php/articles/map/">
+ <link rel="alternate" type="application/rss+xml" title="RSS" href="https://accu.org/index.php/journals/2198?theme=rss">
+ <link rel="alternate" type="text/html" title="Print" href="https://accu.org/index.php/journals/2198?theme=print">
+  <link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://accu.org/index.php?module=xmlrpcserver">
+ <link rel="pingback" href="https://accu.org/ws.php">
+
+
+ <link rel="stylesheet" media="screen" type="text/css" href="https://accu.org/themes/AccuBimini/style/style.css">
+ <link rel="stylesheet" media="screen" type="text/css" href="https://accu.org/themes/AccuBimini/style/accu.css">
+ <link rel="stylesheet" media="screen" type="text/css" href="https://accu.org/modules/base/xarstyles/xarcore-xhtml1-strict.css">
+
+ <link rel="shortcut icon" href="https://accu.org/favicon.png">
+ <link rel="stylesheet" media="print" type="text/css" href="https://accu.org/content/print.css">
+ <link rel="stylesheet" media="screen" type="text/css" href="https://accu.org/content/content.css">
+  
+</head>
+
+<body>
+ <div class="page_margins">
+   <div class="page">
+
+<div id="headerbox">
+   <div id="headerboxinner">
+       <a href="https://accu.org/index.php">
+           <img src="https://accu.org/themes/AccuBimini/graphics/accu_logo.png" alt="ACCU Home page" id="homespot">
+       </a><span style="padding-left:50px"></span>
+       
+       <a class="conf-button" href="https://conference.accu.org/">
+          <img src="https://accu.org/themes/AccuBimini/graphics/accu2017_363x124.png" title="ACCU Conference Page" alt="ACCU Conference Page" style="padding-bottom:6px; width:198px;opacity: 0.7;">
+       </a><span style="padding-left:15px"></span>
+       <a class="conf-button" href="http://www.cvent.com/d/dvqxq2">
+          <img src="https://accu.org/themes/AccuBimini/graphics/accu2017-register.png" title="Register for ACCU 2017 Conference" alt="ACCU 2017 Conference Registration Page" style="padding-bottom:6px; width:167px;opacity: 0.7;"></a>
+          
+       <div id="search" style="display:none;position:absolute;top:60px;right:100px;word-spacing:0.2em;">
+           <a href="https://accu.org/index.php/find">
+           <img src="https://accu.org/themes/AccuBimini/graphics/search.png" title="Search website" alt="Search"></a>
+       </div>
+
+       <div style="position:absolute;top:60px;right:14px;word-spacing:0.2em;">
+           <a style="" href="https://accu.org/index.php/find">
+           <img src="https://accu.org/themes/AccuBimini/graphics/search.png" title="Search website" alt="Search"></a>
+           &#x2002;
+
+           <a href="https://accu.org/index.php/aboutus/contact">
+           <img src="https://accu.org/themes/AccuBimini/graphics/email.png" title="Contact us" alt="Contact us"></a>
+
+           <a target="_new" href="http://www.flickr.com/groups/accu-org/">
+           <img src="https://accu.org/themes/AccuBimini/graphics/flickr.png" title="ACCU at Flickr" alt="ACCU at Flickr"></a>
+
+           <a target="_new" href="https://github.com/accu-org">
+           <img src="https://accu.org/themes/AccuBimini/graphics/github.png" title="ACCU at GitHib" alt="ACCU at GitHib"></a>
+
+           <a target="_new" href="https://plus.google.com/116911016935308947868" rel="publisher">
+           <img src="https://accu.org/themes/AccuBimini/graphics/google-plus.png" title="ACCU at Google+" alt="ACCU at Google+"></a>
+
+           <a target="_new" href="https://www.facebook.com/accuorg/">
+           <img src="https://accu.org/themes/AccuBimini/graphics/facebook.png" title="ACCU at Facebook" alt="ACCU at Facebook"></a>
+
+           <a target="_new" href="http://www.linkedin.com/groups?home=&amp;gid=1908">
+           <img src="https://accu.org/themes/AccuBimini/graphics/linkedin.png" title="ACCU at Linked-in" alt="ACCU at Linked-in"></a>
+
+           <a target="_new" href="https://twitter.com/accuorg">
+           <img src="https://accu.org/themes/AccuBimini/graphics/twitter.png" title="ACCU at Twitter" alt="ACCU at Twitter"></a>
+
+           <a href="https://accu.org/index.php/journals/2198#skipnav">
+           <img style="display:none" src="https://accu.org/themes/AccuBimini/graphics/icons/navigator.png" title="Skip Navigation" alt="Skip Navigation">
+           </a>
+       </div>
+
+   </div>
+</div>
+
+     <div id="main">
+
+       <div id="col1">
+         <div id="col1_content" class="clearfix">
+<div class="menubox">
+      <h3 class="menuhead" title="ACCU Menu">ACCU Menu</h3>
+      
+        <ul class="menucontent">
+
+
+
+
+                  <li class="">
+
+                          <a href="https://accu.org/index.php/conferences" title="ACCU Conferences - Schedule - Speakers - Sessions - Slides - Videos - Archive from 2002.">
+                                  Conferences</a>
+
+
+
+
+
+
+
+
+
+</li>
+
+
+
+
+                  <li class="">
+
+                          <a href="https://accu.org/index.php/journal" title="CVu, Overload Journal - Archives - Bibliographies - Covers.">
+                                  Journals</a>
+
+
+
+
+
+
+
+
+
+</li>
+
+
+
+
+                  <li class="">
+
+                          <a href="https://accu.org/index.php/book_reviews_redirect" title="Our collection of book reviews.">
+                                  Book Reviews</a>
+
+
+
+
+
+
+
+
+</li>
+
+
+
+
+                  <li class="">
+
+                          <a href="https://accu.org/index.php/accu_branches" title="Meetup Page - Twitter Handle - Facebook Handle - Archives">
+                                  Local Groups</a>
+
+
+
+
+
+
+
+
+
+</li>
+
+
+
+
+                  <li class="">
+
+                          <a href="https://accu.org/index.php/community" title="Calendar - Mailing Lists - Online Study Groups - Social Media - Essential Books Wiki - News Archive">
+                                  Community </a>
+
+
+
+
+
+
+
+
+
+</li>
+
+
+
+
+                  <li class="">
+
+                          <a href="https://accu.org/index.php/membership" title="Why Join? - Types of Membership - Membership Fees - Join ACCU - Renew Membership - Change Membership Information - Change Profile Information - Login - Logout">
+                                  Membership</a>
+
+
+
+
+
+
+
+
+
+</li>
+
+
+
+
+                  <li class="">
+
+                          <a href="https://accu.org/index.php/aboutus" title="What is ACCU? - Contact - History - Help.">
+                                  About</a>
+
+
+
+
+
+
+
+
+
+</li>
+</ul>
+</div>
+<div class="menubox">
+      <h3 class="menuhead" title="Advertisement">Advertisement</h3>
+      <div class="menucontent" style="text-align:center;">
+	
+
+
+
+<noscript><a href="https://ads.accu.org/www/delivery/ck.php?n=a9881bcb&amp;cb=9876984867596" target="_blank"><img src="https://ads.accu.org/www/delivery/avw.php?zoneid=1&amp;cb=9876984867596&amp;n=a9881bcb" border="0" alt=""></a></noscript>
+</div>
+<div class="menufooter">
+</div>
+</div>
+</div>
+       </div>
+
+
+       <div id="col2">
+         <div id="col2_content" class="clearfix">
+	<h3 class="menuhead">Advertisement</h3>
+<div class="menucontent">
+	<div class="menucontent" style="text-align:center;">
+	
+
+
+
+<noscript><a href="http://ads.accu.org/www/delivery/ck.php?n=ac1df087&amp;cb=879648978587659" target="_blank"><img src="http://ads.accu.org/www/delivery/avw.php?zoneid=2&amp;cb=879648978587659&amp;n=ac1df087" border="0" alt=""></a></noscript></div>
+<div class="menufooter">
+</div>
+</div>
+<div class="menufooter">
+</div>
+	<h3 class="menuhead">Membership</h3>
+<div class="menucontent">
+	<a href="https://accu.org/index.php/joining" title="Becoming a member of ACCU" style="padding:4px 8px;margin-top:5px"><image src="https://accu.org/content/images/button-accu-join-h75.png" style="border: 1px solid lightgrey" alt="Join ACCU" width="100%"></image></a></div>
+<div class="menufooter">
+</div>
+	<h3 class="menuhead">Login</h3>
+<div class="menucontent">
+	
+</div>
+<div class="menufooter">
+</div>
+	<h3 class="menuhead">ACCU Buttons</h3>
+<div class="menucontent">
+	<div class="dbx-content" style="text-align:center;padding:5px 0;">
+<span style="font-size:9pt;">Add them to your site:</span><br>
+<br>
+
+<a href="https://accu.org/" title="ACCU: professionalism in programming (120x32 px)">
+<img src="https://accu.org/content/images/button-logo-120x32.png" alt="ACCU: professionalism in programming (116x31 px)">
+</a><br>
+
+<a href="https://accu.org/" title="ACCU: professionalism in programming (225x60 px)">
+<img width="95%" src="https://accu.org/content/images/button-logo-225x60.png" alt="ACCU: professionalism in programming (225x60 px)">
+</a><br>
+
+
+</div>
+</div>
+<div class="menufooter">
+</div>
+</div>
+       </div>
+
+
+       <div id="col3">
+ 
+         <div id="col3_content" class="clearfix">
+
+
+
+
+
+<div class="journals">
+
+
+
+      <h1 style="clear:right;"><img src="https://accu.org/themes/AccuBimini/graphics/pad_pin.gif" id="pingraphic" alt="pin">Defining Concepts</h1>
+
+     <div class="journal-sub">
+
+
+<span class="xar-mod-title">Overload Journal #131 - February 2016 + Programming Topics</span>
+
+&#xA0;&#xA0;Author: 
+            <a href="mailto:">Andrew Sutton</a>      </div>
+
+    <div class="article-content">
+      <div style="font-style:italic;margin:20px;">Concepts provide a new way of constraining code. Andrew Sutton shows us how to define and use them.</div>
+      <div><p>This article is the second in a series that describe concepts and their use. In the first article, I describe how concepts are used to declare and constrain generic algorithms [<a href="https://accu.org/index.php/journals/2198#[Sutton15]">Sutton15</a>]. In this article, I discuss how to define and use concepts: the building blocks of the constraints used in the previous article. The next article will focus on systems of concepts, overloading, and specialization.</p>
+
+<p>The features described in this article are based on the ISO Concepts Technical Specification (TS) [<a href="https://accu.org/index.php/journals/2198#[N4549]">N4549</a>], a formal extension of the C++ Programming Language. The specification is implemented in GCC and will be part of the forthcoming 6.0 release. Eric Niebler and Casey Carter are also working on a Ranges TS [<a href="https://accu.org/index.php/journals/2198#[N4560]">N4560</a>] that incorporates these language features and will define the base set of concepts needed for the C++ Standard Library.</p>
+
+<h2>Recap</h2>
+
+<p>In my previous article, I wrote about a simple generic algorithm, <code>in()</code>, which determines whether an element can be found in a range of iterators. Here is its declaration, modified slightly to suit the purposes of this article.</p>
+
+<pre class="programlisting">
+  template&lt;Range R, Equality_comparable T&gt;
+    requires Same&lt;T, Value_type&lt;R&gt;&gt;()
+  bool in(R const&amp; range, T const&amp; value);</pre>
+  
+<p>The function <code>in</code> takes a <code>range</code> and a <code>value</code> as arguments. To specify the requirements on those arguments, the declaration uses three concepts:</p>
+
+<ul>
+	<li>the type of the <code>range</code> must be a <code>Range</code>,</li>
+	
+	<li>the type of the <code>value</code> must be <code>Equality_comparable</code>, and</li>
+	
+	<li>the type of the <code>value</code> and that of the elements in the <code>range</code> must be the <code>Same</code>.</li>
+</ul>
+
+<p><code>Value_type</code> is not a concept. It is an alias of an internal type trait:</p>
+
+<pre class="programlisting">
+  template&lt;typename T&gt;
+  using Value_type = typename value_type&lt;T&gt;::type;</pre>
+  
+<p>We&#x2019;ll see how <code>value_type</code> can be defined later in this article.</p>
+
+<p>Recall that the compiler internally transforms the concepts in the declaration into a single constraint. In order to use this function, any template arguments must satisfy this predicate:</p>
+
+<pre class="programlisting">
+  Range&lt;R&gt;()
+  &amp;&amp; Equality_comparable&lt;T&gt;()
+  &amp;&amp; Same&lt;T, Value_type&lt;R&gt;&gt;()</pre>
+  
+<p>If this expression does not evaluate to <code>true</code> (given concrete template arguments for <code>R</code> and <code>T</code>), then the function cannot be called, and the compiler emits a useful error message. For example, compiling this program:</p>
+
+<pre class="programlisting">
+  std::vector&lt;std::string&gt; cities { ... };
+  assert(in(cities, &quot;Akron&quot;));</pre>
+  
+<p>will yield an error such as that shown in Figure 1.<a href="https://accu.org/index.php/journals/2198#FN01"><sup>1</sup></a></p>
+
+<table class="sidebartable">
+	<tr>
+		<td>
+			<pre class="programlisting">
+error: cannot call function &#x2018;bool in(const R&amp;, const T&amp;)
+[with R = std::vector&lt;std::string&gt;; T = char [6]]&#x2019;
+in(v, &quot;Akron&quot;);
+^
+note: constraints not satisfied
+in(R const&amp; range, T const&amp; value)
+note: concept &#x2018;Same&lt;char [6], std::string&gt;()&#x2019; was not satisfied
+note: within the concept template&lt;class T, class U&gt; concept bool Same()
+[with T = char [6]; U = std::string]
+concept bool Same() { ... }
+             ^~~~
+note: &#x2018;char [6]&#x2019; is not the same as &#x2018;std::string&#x2019;
+			</pre>
+		</td>
+	</tr>
+	<tr>
+		<td class="title">Figure 1</td>
+	</tr>
+</table>
+
+<p>What exactly are <code>Same</code>, <code>Equality_comparable</code>, and <code>Range</code>, and how are they defined?</p>
+
+<h2>Concept definitions</h2>
+
+<p>A concept is a predicate on template arguments. In the Concepts TS, concepts are defined as a slightly simplified form of <code>constexpr</code> functions. Here is the declaration of <code>Same</code>:</p>
+
+<pre class="programlisting">
+  template&lt;typename T, typename U&gt;
+  concept bool Same() { ... }</pre>
+  
+<p>Concepts are defined by using the concept keyword in place of constexpr, and they must return bool. In order to make concepts simple to implement, fast to compile, yet sufficient to test properties of types, we impose a few restrictions on their definition:</p>
+
+<ul>
+	<li>concepts must be defined at namespace scope,</li>
+	
+	<li>concepts cannot be forward declarations,</li>
+	
+	<li>concepts cannot take function arguments,</li>
+	
+	<li>concepts cannot be recursive,</li>
+	
+	<li>concepts cannot be explicitly specialized,</li>
+	
+	<li>concept definitions are limited to a single return statement, and</li>
+	
+	<li>the returned expression must be a logical proposition (i.e., convertible to bool).</li>
+</ul>
+
+<p>The language syntactically limits concepts to simple logical propositions, but this isn&#x2019;t quite as restrictive as it sounds. Those propositions can evaluate any other constant expression. For example, here is the definition of the <code>Same</code> concept:</p>
+
+<pre class="programlisting">
+  template&lt;typename T, typename U&gt;
+  concept bool Same() {
+    return std::is_same&lt;T, U&gt;::value;
+  }</pre>
+  
+<p>This concept expresses the requirement that two types must be the same. The concept is satisfied whenever <code>std::is_same&lt;T, U&gt;::value</code> is <code>true</code>. Of course, this concept is so fundamental and obvious that it may as well be defined by the compiler.</p>
+
+<p>Concepts can also be defined as variable templates. For example, we could have defined <code>Same</code> like this:</p>
+
+<pre class="programlisting">
+  template&lt;typename T, typename U&gt;
+  concept bool Same = std::is_same&lt;T, U&gt;::value;</pre>
+  
+<p>Variable templates [<a href="https://accu.org/index.php/journals/2198#[N3615]">N3615</a>] were added to C++14 at the 2013 Bristol meeting, the same meeting at which the ISO Concepts TS was formally created. A variable template declares a family of variables whose values depend on template arguments. For example, the value of <code>Same</code> would depend on the types given for <code>T</code> and <code>U</code>.</p>
+
+<p>Variable concepts are restricted in many of the same ways that function concepts are restricted:</p>
+
+<ul>
+	<li>concepts must be defined at namespace scope,</li>
+	
+	<li>concepts cannot be explicitly or partially specialized, and</li>
+	
+	<li>the initializer expression must be a logical proposition.</li>
+</ul>
+
+<p>Defining concepts in this way means that you can leave off the extra parentheses when using concepts in a <code>requires</code> clause:</p>
+
+<pre class="programlisting">
+  template&lt;Range R, Equality_comparable T&gt;
+    requires Same&lt;T, Value_type&lt;R&gt;&gt; // no parens!
+
+  bool in(R const&amp; range, T const&amp; value)</pre>
+  
+<p>We&#x2019;ve found that some developers prefer concepts to be declared and written this way despite the lack of overloading. The Concepts TS supports variable templates specifically because of this concern. Variable concepts were added to the TS only after variable templates were added for C++14. My preference is to define concepts as functions, so I use that style throughout this and the other articles in the series.</p>
+
+<h2>Syntactic requirements</h2>
+
+<p>While every type trait is potentially a concept, the most useful concepts are much more than simple wrappers. Think about <code>Equality_comparable</code>. It requires its template arguments to be usable with <code>==</code> and <code>!=</code> operators. In C++14, we might express those requirements using a conjunction of type traits or some other advanced mechanism. Listing 1 is a trait-based implementation. Here, <code>has_equal</code> and <code>has_not_equal</code> are type traits that rely on subtle use of language features to determine the availability of an expression for a type. Their definitions are not shown here.</p>
+
+<table class="sidebartable">
+	<tr>
+		<td>
+			<pre class="programlisting">
+template&lt;typename T&gt;
+concept bool Equality_comparable()
+{
+  return has_equal&lt;T&gt;::value &amp;&amp;
+    has_not_equal&lt;T&gt;::value;
+}
+			</pre>
+		</td>
+	</tr>
+	<tr>
+		<td class="title">Listing 1</td>
+	</tr>
+</table>
+
+<p>This approach is both simple and powerful, yet indirect and totally inadequate to the task at hand. Using traits to state requirements obfuscates the intent, making concepts more difficult to read and write. It can also slow compilations, especially when the use of such constraints is ubiquitous throughout a library. More recent concept emulation techniques improve on readability [<a href="https://accu.org/index.php/journals/2198#[Niebler13]">Niebler13</a>], but we can do better still. The Concepts TS provides direct language support that makes writing concepts simpler, faster to compile, and allows the compiler to produce far better error messages.</p>
+
+<p>To do this, we introduced a new kind of expression: the <code>requires</code> expression. Here is a complete definition of the <code>Equality_comparable</code> concept (see Listing 2). The <code>requires</code> keyword can be followed by a parameter list introducing names to be used to express requirements. Here, we have declarations of <code>a</code> and <code>b</code>.</p>
+
+<table class="sidebartable">
+	<tr>
+		<td>
+			<pre class="programlisting">
+template&lt;typename T&gt;
+concept bool Equality_comparable() {
+  return requires (T a, T b) {
+    { a == b } -&gt; bool;
+    { a != b } -&gt; bool;
+  };
+}
+			</pre>
+		</td>
+	</tr>
+	<tr>
+		<td class="title">Listing 2</td>
+	</tr>
+</table>
+
+<p>The body of a <code>requires</code> expression is a sequence of <em>requirements</em>, each of which specifies one or more constraints for expressions and types related to a template argument. We refer to these as a concept&#x2019;s <em>syntactic requirements</em>.</p>
+
+<p>In the <code>Equality_comparable</code> concept, both requirements are <em>compound requirements</em>, meaning they introduce multiple constraints: The expression enclosed within braces (e.g., <code>a == b</code>) denotes a constraint for a <em>valid expression</em>. When the concept is checked against a (concrete) template argument, the constraint is satisfied if the substitution of the template argument into the expression does not result in an error.</p>
+
+<p>The trailing <code>-&gt; bool</code> denotes an <em>implicit conversion constraint</em> on the result type of the instantiated expression. That constraint is satisfied only if the result is implicitly convertible to <code>bool</code>.</p>
+
+<p>The <code>Range</code> concept has more interesting requirements. Let us define it in stages, starting with a first and na&#xEF;ve version (Listing 3).  That is, a <code>Range</code> must supply a <code>begin()</code> and an <code>end()</code> function, each taking a <code>Range</code> argument.  That&#x2019;s correct, but not every <code>begin()</code> and an <code>end()</code> function will do.</p>
+
+<table class="sidebartable">
+	<tr>
+		<td>
+			<pre class="programlisting">
+template&lt;typename R&gt;
+concept bool Range() {
+  return requires (R range) {
+    begin(range);
+    end(range);
+  };
+}
+			</pre>
+		</td>
+	</tr>
+	<tr>
+		<td class="title">Listing 3</td>
+	</tr>
+</table>
+
+<p>To be a <code>Range</code>, they must return input iterators:</p>
+
+<pre class="programlisting">
+  requires (R range) {
+    { begin(range) } -&gt; Input_iterator;
+    { end(range) } -&gt; Input_iterator;
+  }</pre>
+  
+<p><code>Input_iterator</code> in another useful concept. When defining new concepts, we almost always build on a library of existing ones. <code>Input_iterator</code> is the representation in code of what is defined in English text in the ISO C++ standard.</p>
+
+<p>When the type following the <code>-&gt;</code> is a concept name (or placeholder), the result type is deduced from the required expression. This is called an <em>argument deduction</em> constraint. If deduction fails, or if the deduced type does not satisfy the named concept, the constraint is not satisfied.</p>
+
+<p>With this definition of <code>Range</code>, the result types of <code>begin()</code> and <code>end()</code> are deduced separately, which means that they can differ. This may not be your intent. As a general rule, if you have several operations that you intend to be the same type, give it a name:</p>
+
+<pre class="programlisting">
+  requires (R range) {
+    typename Iterator_type&lt;R&gt;;
+      { begin(range) } -&gt; Iterator_type&lt;R&gt;;
+      { end(range) } -&gt; Iterator_type&lt;R&gt;;
+    requires Input_iterator&lt;Iterator_type&lt;R&gt;&gt;();
+  };</pre>
+  
+<p>That is, <code>begin()</code> and <code>end()</code> must return the same type (here called <code>Iterator_type&lt;R&gt;</code>) and that type must be an <code>Input_iterator</code>. This last requirement is added by the nested <code>requires</code> clause within the body of the requires expression.</p>
+
+<p>To be useful for our purposes, a <code>Range</code> must also name the type of its elements, its <code>Value_type</code>. For example, <code>in()</code> requires that the <code>Value_type</code> of its <code>range</code> is the same type as the type of its <code>value</code> argument. To complete the <code>Range</code> concept we require that it have a <code>Value_type</code> in addition to its <code>Iterator_type</code> (see Listing 4).</p>
+
+<table class="sidebartable">
+	<tr>
+		<td>
+			<pre class="programlisting">
+template&lt;typename R&gt;
+concept bool Range() {
+  return requires (R range) {
+    typename Value_type&lt;R&gt;;    // Must have a 
+                               // value type.
+    typename Iterator_type&lt;R&gt;; // Must have an
+                               // iterator type.
+    { begin(range) } -&gt; Iterator_type&lt;R&gt;;
+    { end(range) } -&gt; Iterator_type&lt;R&gt;;
+    // The iterator type must really be an 
+    // input iterator.
+    requires Input_iterator&lt;Iterator_type&lt;R&gt;&gt;();
+    // The value of R is the same as its
+    // iterator&apos;s value type.
+    requires Same&lt;Value_type&lt;R&gt;,
+             Value_type&lt;Iterator_type&lt;R&gt;&gt;&gt;().
+  };
+}
+			</pre>
+		</td>
+	</tr>
+	<tr>
+		<td class="title">Listing 4</td>
+	</tr>
+</table>
+
+<p>To ensure consistency, the value type of a range and its iterators must be the <code>Same</code>. Beyond that, however, there are no other requirements we want to make of <code>Value_type</code>. Those other requirements are imposed by algorithms. For example, the <code>in()</code> algorithm requires equality comparison, whereas <code>std::sort()</code> requires a total order. A concept should include requirements for only the types and operations needed for its intended abstraction. Including extra requirements can make a concept too strict (i.e., not broadly applicable).</p>
+
+<p>When defining requirements for a concept, I introduce type requirements first, then simple and compound requirements, and nested requirements last. This is because constraint checking, the substitution of arguments into constraints to test for satisfaction, follows the short-circuiting logic of the <code>&amp;&amp;</code> and <code>||</code> operators. This means that failures detected earlier are less likely to result in unrecoverable instantiation failures later.</p>
+
+<h2>Ad hoc requirements</h2>
+
+<p>The use of alias templates to refer to associated types greatly reduces the verbosity of template declarations. Alias templates like <code>Value_type</code> and <code>Iterator_type</code> refer to facilities that compute associated types based on pattern matching on the &#x2018;shape&#x2019; of the template argument. Listing 5 is a first na&#xEF;ve attempt to define <code>Value_type</code>.</p>
+
+<table class="sidebartable">
+	<tr>
+		<td>
+			<pre class="programlisting">
+template&lt;typename T&gt; struct value_type;
+
+template&lt;typename T&gt;
+using Value_type = typename value_type&lt;T&gt;::type;
+
+// The value_type of a class is a member type.
+template&lt;typename T&gt;
+struct value_type {
+  using type = typename T::value_type;
+};
+
+// The value_type of a pointer is the type of
+// element pointed to.
+template&lt;typename T&gt;
+struct value_type&lt;T*&gt; {
+  using type = T;
+};
+
+// The value_type of an array is its element type.
+template&lt;typename T, int N&gt;
+struct value_type&lt;T[N]&gt; {
+ using type = T;
+};
+			</pre>
+		</td>
+	</tr>
+	<tr>
+		<td class="title">Listing 5</td>
+	</tr>
+</table>
+
+<p>This seems reasonable at first glance. However, we have not constrained the primary template of the trait definition, and that can cause problems. When the compiler selects the primary template for a template argument that does not have a nested <code>::value_type</code>, compilation will fail. This is an unrecoverable error that breaks concept checking.</p>
+
+<p>We want to define the <code>value_type</code> trait so that it is instantiated if and only if there is a specialization that provides an appropriate type. To do this, we factor a new constrained specialization out of the primary template leaving it unconstrained and undefined (see Listing 6). Now, the <code>value_type</code> is defined only where it is meaningful. The new specialization is chosen only for classes that have a member called <code>value_type</code>.</p>
+
+<table class="sidebartable">
+	<tr>
+		<td>
+			<pre class="programlisting">
+template&lt;typename T&gt;
+struct value_type;
+
+// The value_type of a class is a member type.
+template&lt;typename T&gt;
+  requires requires { typename T::value_type; }
+struct iterator_type&lt;T&gt; {
+  using type = typename T::value_type;
+};
+			</pre>
+		</td>
+	</tr>
+	<tr>
+		<td class="title">Listing 6</td>
+	</tr>
+</table>
+
+<p>To avoid verbosity, I did not define a new concept like <code>Has_value_type</code>. Instead, I used a <code>requires</code> expression directly within the <code>requires</code> clause. Yes, <code>requires requires</code> is syntactically correct &#x2013; it is not a typo. The first <code>requires</code> introduces the <code>requires</code> clause, the second starts the <code>requires</code> expression.</p>
+
+<p>This syntax for ad hoc constraints is not optimized (i.e., gross) on purpose. Providing a more elegant syntax for these kinds of constraints might encourage programmers to think about generic code in terms of small syntactic fragments (although these are sometimes helpful when laying the foundations of higher level abstractions). In general, useful concepts have obvious and meaningful names.</p>
+
+<p>Writing fundamental concepts requires an understanding of the way the type system and other language rules interact. For example, we cannot constrain the primary template directly because constraints are checked after name lookup. Every lookup for <code>T*</code> would fail because pointers do not have nested members. Libraries of concepts saves us from having to consider such subtleties all the time.</p>
+
+<p>When the type trait is instantiated during concept checking, the compiler considers each partial specialization, if none match (e.g., <code>int</code> is neither an array, nor does it have nested type names), then the compiler selects the primary template, which happens to be undefined. The result is a substitution failure that gets &#x2018;trapped&#x2019; by the <code>requires</code> expression that causes the instantiation, and this causes enclosing concept to be unsatisfied.</p>
+
+<p>In other words, <code>value_type</code> is a recipe for writing SFINAE-friendly type traits using concepts. The definition of the <code>Iterator_type</code> and its underlying trait have similar definitions.</p>
+
+<h2>Mixed-type requirements</h2>
+
+<p>Listing 7 is our working definition for the <code>in()</code> algorithm. As declared, the value type of <code>R</code> must be the same as <code>T</code>, which would make the following program ill-formed.</p>
+
+<table class="sidebartable">
+	<tr>
+		<td>
+			<pre class="programlisting">
+template&lt;Range R, Equality_comparable T&gt;
+  requires Same&lt;T, Value_type&lt;R&gt;&gt;()
+bool in(R const&amp; range, T const&amp; value) {
+  for (Equality_comparable const&amp; x : range) {
+    if (x == value)
+      return true;
+  }
+  return false;
+}
+			</pre>
+		</td>
+	</tr>
+	<tr>
+		<td class="title">Listing 7</td>
+	</tr>
+</table>
+
+<pre class="programlisting">
+  std::vector&lt;std::string&gt; cities { ... };
+  assert(in(cities, &quot;Akron&quot;));</pre>
+  
+<p>A string literal does not have the same type as <code>std::string</code>, so the constraints are not satisfied. That&#x2019;s not good enough. The <code>std::string</code> class provides a number of overloads to make it work seamlessly with C-strings, and we should be able to use those in our generic algorithms. How can we change the algorithm to support these kinds of mixed-type operations?</p>
+
+<p>We could redefine the algorithm so that <code>value</code> was a <code>Value_type&lt;R&gt;</code>. However, this would always require a conversion at the call site, which would almost certainly be a pessimization (converting a C-string to a <code>std::string</code> may require an allocation).</p>
+
+<p>We could drop the <code>Same</code> requirement. But then the interface would not express how the elements in <code>range</code> are related to <code>value</code>, and we want our constraints to fully express the syntax used within the definition.</p>
+
+<p>Our best choice is to change the <code>Same</code> requirement to something more permissive: a concept that supports equality comparisons between values of different types. Rather creating a concept with a different, name we can extend <code>Equality_comparable</code> by adding a new definition that takes two arguments instead of one. That is, we overload the <code>Equality_comparable()</code> function. That concept must express requirements for all the ways in which we can compare values of different types for equality (see Listing 8).</p>
+
+<table class="sidebartable">
+	<tr>
+		<td>
+			<pre class="programlisting">
+template&lt;typename T, typename U&gt;
+concept bool Equality_comparable() {
+  return requires(T t, U u) {
+    { t == u } -&gt; bool;
+    { u == t } -&gt; bool;
+    { t != u } -&gt; bool;
+    { u != t } -&gt; bool;
+  };
+}
+			</pre>
+		</td>
+	</tr>
+	<tr>
+		<td class="title">Listing 8</td>
+	</tr>
+</table>
+
+<p>This concept requires the symmetric comparison of values of type <code>T</code> and <code>U</code>.</p>
+
+<p>We can now use the mixed-type <code>Equality_comparable</code> concept to weaken the constraints on the <code>in()</code>.</p>
+
+<pre class="programlisting">
+ template&lt;Range R, Equality_comparable T&gt;
+   requires Equality_comparable&lt;T, Value_type&lt;R&gt;&gt;()
+ bool in(R const&amp; range, T const&amp; value);</pre>
+
+<p>These constraints fully specify the syntax used within the implementation, the program compiles as expected, and it does not introduce any additional runtime overhead. This is a better declaration of <code>in()</code>; it&#x2019;s also the version we used in the first article. The ability to extend a concept to support mixed-type requirements is an essential tool for making algorithms more broadly applicable, without extra notational or runtime overheads. The Palo Alto report, for example, uses this technique for total ordered types, all binary relations, and all binary operations.</p>
+
+<p>These extended definitions are not available for variable concepts because the capability is based on function overloading. This is not a limitation imposed by concepts; you simply cannot overload variables in C++.</p>
+
+<h2>Semantic requirements</h2>
+
+<p>The syntactic requirements of a concept only tells us what expressions and associated types can be used with a template argument (or template arguments). In general, we would very much like to know what those expressions and types actually mean. Just as importantly, it would be helpful for the compiler and other tools to be able to reason about the meaning of such expressions in order to support optimization and verification. Unfortunately, the Concepts TS does not provide direct language support for writing semantic requirements. Instead, we must rely on conventional forms of documentation to specify the semantics of operations operations.</p>
+
+<p>C++0x concepts supported a feature called &#x2018;axioms&#x2019;, but it was added late in the development of C++11 [<a href="https://accu.org/index.php/journals/2198#[N2887]">N2887</a>], and their utility had not been fully explored by the time concepts were removed. Axioms were also major feature of the Palo Alto report [<a href="https://accu.org/index.php/journals/2198#[N3351]">N3351</a>]. However, as the proposal for Concepts Lite evolved, the Concepts Study Group (SG8) decided to leave axioms out pending further exploration. There is ongoing research related to compile-time checking of semantic requirements [<a href="https://accu.org/index.php/journals/2198#[DosReis09]">DosReis09</a>], so we hope to see axioms in the future.</p>
+
+<h2>Conclusions</h2>
+
+<p>Concepts are fundamental building blocks for our thinking and for our code; they provide the foundation upon which we design and implement software. The Concepts TS provides direct language support for the specification of concepts and their syntactic requirements. However, we must not forget or downplay the importance of the semantic aspects of concepts. A concept without semantics is merely a snippet of code.</p>
+
+<p>In the next article, I will discuss systems of concepts, and how overloading and specialization based on constraints can be used to select optimal algorithms at compile time.</p>
+
+<h2>Acknowledgements</h2>
+
+<p>The design of the features in the Concepts TS was the result of collaboration with Bjarne Stroustrup and Gabriel Dos Reis. That material is based upon work supported by the National Science Foundation under Grant No. ACI-1148461. Bjarne Stroustrup also provided valuable feedback on drafts of this paper.</p>
+
+<p>The WG21 Core Working group spent many, many hours over several meetings and teleconferences reviewing the Concepts TS design and wording. This work would not have been possible without their patience and attention to detail. Many people have submitted pull requests to the TS or emailed me separately to describe issues or suggest solutions. I am grateful for their contributions.</p>
+
+<p>I would also like to acknowledge all of the early adopters of the GCC concepts implementation. Their feedback (often in the form of bug reports) has been invaluable.</p>
+
+<h2>References</h2>
+
+<p class="bibliomixed"><a id="[DosReis09]"></a>[DosReis09] Dos Reis, G. &#x2018;A System for Axiomatic Programming&#x2019; <em>Lecture Notes in Compute Science</em>. Vol. 7362. 2012. pp 295-309.</p>
+
+<p class="bibliomixed"><a id="[N2887]"></a>[N2887] Dos Reis, G., Stroustrup. B., Merideth, A. &#x2018;Axioms: Semantics Aspects of C++ Concepts&#x2019; ISO/IEC WG21 N2887, Jun 2009.</p>
+
+<p class="bibliomixed"><a id="[N3351]"></a>[N3351] Stroustrup, B., Sutton, A. (eds). &#x2018;A Concept Design for the STL&#x2019; ISO/IEC WG21 N3351, Feb 2012.</p>
+
+<p class="bibliomixed"><a id="[N3615]"></a>[N3615] Dos Reis, G.. &#x2018;Constexpr Variable Templates&#x2019; ISO/IEC WG21 N3615, Mar 2013.</p>
+
+<p class="bibliomixed"><a id="[N4549]"></a>[N4549] Sutton, A. (ed). ISO/IEC Technical Specification 19217. &#x2018;Programming Languages &#x2013; C++ Extensions for Concepts&#x2019;, Aug 2015.</p>
+
+<p class="bibliomixed"><a id="[N4560]"></a>[N4560] Niebler, Eric, Carter, C. Working Draft, &#x2018;C++ Extensions for Concepts&#x2019;, ISO/IEC WG21 N450. Nov 2015. pp. 213.</p>
+
+<p class="bibliomixed"><a id="[Niebler13]"></a>[Niebler13] Niebler, E. &#x2018;Concept Checking in C++11&#x2019; 23 Nov 2013. Web.</p>
+
+<p class="bibliomixed"><a id="[Sutton15]"></a>[Sutton15] Sutton, A. &#x2018;Introducing Concepts&#x2019; ACCU <em>Overload</em>. Vol 129. Oct 2015. pp. 4&#x2013;8.</p>
+
+<p class="footnotes"></p>
+
+<ol>
+	<li><a id="FN01"></a>This error is generated by GCC (compiled from trunk) with an extra patch (pending review) to improve concept checking diagnostics. The message has been modified for better presentation. Some type names have been shortened and the definition of <code>Same</code> is elided (...)</li>
+</ol>
+</div>
+
+   <div class="xar-sub" style="padding:10px 3px;color:gray;">
+<h2>Overload Journal #131 - February 2016 + Programming Topics</h2>
+
+<table border="0" cellpadding="1" cellspacing="0" class="nav-trails">
+<tr>
+    <td valign="top">
+        Browse in :
+   </td>
+   <td valign="top">
+
+                                    <a href="https://accu.org/index.php/journals/">All</a>
+
+                 &gt;                     <a href="https://accu.org/index.php/journals/c76/">Journals</a>
+
+                 &gt;                     <a href="https://accu.org/index.php/journals/c78/">Overload</a>
+
+                 &gt;                     <a href="https://accu.org/index.php/journals/c358/">o131</a>
+                (7)
+<br>
+
+                                    <a href="https://accu.org/index.php/journals/">All</a>
+
+                 &gt;                     <a href="https://accu.org/index.php/journals/c13/">Topics</a>
+
+                 &gt;                     <a href="https://accu.org/index.php/journals/c65/">Programming</a>
+                (766)
+<br>
+
+                                    <a href="https://accu.org/index.php/journals/c358-65/">Any of these categories</a>
+
+                -                    <a href="https://accu.org/index.php/journals/c358+65/">All of these categories</a>
+<br>
+</td>
+</tr>
+</table>
+
+
+
+
+
+
+<div class="xar-normal xar-overflow-auto">
+            <a class="xar-floatleft" href="https://accu.org/index.php/journals/2199">&lt;
+prev</a>&#xA0;                <a class="xar-floatright" href="https://accu.org/index.php/journals/2197">
+next&gt;</a>
+</div>
+</div>
+
+
+<div style="float:right; margin-right:25px;">
+   
+   
+   </div>
+</div>
+</div>
+
+         </div>
+       </div>
+
+     </div>
+     <div id="footer">
+<div class="footer">
+        
+</div><div class="footer">
+        Copyright 1994-<span id="spanDate"><noscript>2013</noscript></span> ACCU. 
+Site powered by <a href="http://xaraya.com/" rel="external">Xaraya</a>. 
+Design and implementation by <a href="http://gnomedia.com/" rel="external">gnomedia</a>. Hosting donated by <a href="http://www.bytemark.co.uk/r/accu" rel="external">Bytemark</a>.
+Contact: <a href="mailto:webeditor@accu.org">Site editor</a>, <a href="mailto:webmaster@accu.org">Site hosting</a>
+</div></div>
+   </div>
+ </div>
+
+</body>
+</html>
