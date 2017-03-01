@@ -12,4 +12,9 @@ describe('getEncoding(str)', () => {
     const contentType = 'text/html';
     assert.equal(getEncoding(contentType), 'utf-8');
   });
+
+  it('returns utf-8 if there is an invalid encoding', () => {
+    const contentType = 'text/html; charset=fake-charset';
+    assert.equal(getEncoding(contentType), 'utf-8');
+  });
 });
