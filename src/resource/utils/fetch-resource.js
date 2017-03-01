@@ -1,7 +1,6 @@
 import URL from 'url';
 import request from 'request';
 import { Errors } from 'utils';
-import { getEncoding } from 'utils/text';
 
 import {
   REQUEST_HEADERS,

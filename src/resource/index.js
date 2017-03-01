@@ -53,8 +53,7 @@ const Resource = {
       throw new Error('Content does not appear to be text.');
     }
 
-    const encoding = getEncoding(contentType);
-    let $ = this.encodeDoc({ content, encoding });
+    let $ = this.encodeDoc({ content, contentType });
 
     if ($.root().children().length === 0) {
       throw new Error('No children, likely a bad parse.');
@@ -67,7 +66,8 @@ const Resource = {
     return $;
   },
 
-  encodeDoc({ content, encoding }) {
+  encodeDoc({ content, contentType }) {
+    const encoding = getEncoding(contentType);
     let decodedContent = iconv.decode(content, encoding);
     let $ = cheerio.load(decodedContent);
 
