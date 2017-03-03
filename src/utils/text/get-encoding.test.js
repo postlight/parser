@@ -2,6 +2,10 @@ import assert from 'assert';
 
 import getEncoding from './get-encoding';
 
+// The browser based tests use /src/shims/iconv-lite.js in
+// order to test this, since loading the full iconv-lite
+// doubles the build size.
+
 describe('getEncoding(str)', () => {
   it('returns the encoding as a string', () => {
     const contentType = 'text/html; charset=iso-8859-15';
