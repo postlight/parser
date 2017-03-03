@@ -2,9 +2,8 @@
 // iconv-lite doubles build size, and we
 // don't need it for already rendered text
 const iconv = {
-  encodingExists: () => (
-    false
-  ),
+  encodingExists: () => false,
+  decode: s => s,
 };
 
 export default iconv;
