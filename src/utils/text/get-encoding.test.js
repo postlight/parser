@@ -1,4 +1,5 @@
 import assert from 'assert';
+import cheerio from 'cheerio';
 
 import getEncoding from './get-encoding';
 
@@ -7,6 +8,8 @@ import getEncoding from './get-encoding';
 // doubles the build size.
 
 describe('getEncoding(str)', () => {
+  if (cheerio.browser) return;
+
   it('returns the encoding as a string', () => {
     const contentType = 'text/html; charset=iso-8859-15';
     assert.equal(getEncoding(contentType), 'iso-8859-15');
