@@ -264,6 +264,15 @@ function get(options) {
           body = iconv.decode(body, encoding);
         }
 
+        if (typeof body !== 'string') {
+          var $ = cheerio.load(iconv.decode(body, 'utf8'));
+          var contentType = $('meta[http-equiv=content-type]').attr('content');
+          var properEncoding = getEncoding(contentType);
+          if (iconv.encodingExists(properEncoding)) {
+            body = iconv.decode(body, properEncoding);
+          }
+        }
+
         resolve({ body: body, response: response });
       }
     });
