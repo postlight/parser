@@ -3,9 +3,8 @@ import cheerio from 'cheerio';
 
 import getEncoding from './get-encoding';
 
-// The browser based tests use /src/shims/iconv-lite.js in
-// order to test this, since loading the full iconv-lite
-// doubles the build size.
+// Tests are bypassed in the browser because it has an encoding
+// A shim is used /src/shims/iconv-lite.js to decrease load size
 
 describe('getEncoding(str)', () => {
   if (cheerio.browser) return;
