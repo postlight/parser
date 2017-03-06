@@ -45,6 +45,7 @@ const Resource = {
 
   generateDoc({ body: content, response }) {
     const { 'content-type': contentType } = response.headers;
+    const { headers } = response;
 
     // TODO: Implement is_text function from
     // https://github.com/ReadabilityHoldings/readability/blob/8dc89613241d04741ebd42fa9fa7df1b1d746303/readability/utils/text.py#L57
@@ -53,17 +54,29 @@ const Resource = {
       throw new Error('Content does not appear to be text.');
     }
 
-    let $ = this.encodeDoc({ content, contentType });
+    let $ = '';
 
-    if ($.root().children().length === 0) {
+    if (contentType.includes('html')) {
+      $ = this.processHtml({ content, contentType });
+    } else {
+      $ = content;
+    }
+
+    return { $, headers };
+  },
+
+  processHtml({ content, contentType }) {
+    let doc = this.encodeDoc({ content, contentType });
+
+    if (doc.root().children().length === 0) {
       throw new Error('No children, likely a bad parse.');
     }
 
-    $ = normalizeMetaTags($);
-    $ = convertLazyLoadedImages($);
-    $ = clean($);
+    doc = normalizeMetaTags(doc);
+    doc = convertLazyLoadedImages(doc);
+    doc = clean(doc);
 
-    return $;
+    return doc;
   },
 
   encodeDoc({ content, contentType }) {

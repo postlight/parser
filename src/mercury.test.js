@@ -22,10 +22,15 @@ describe('Mercury', () => {
       assert.equal(error, Errors.badUrl);
     });
 
+    it('text file URL', async () => {
+      const result = await Mercury.parse('https://www.bvestation.com/worktest/text.txt');
+
+      // assert.equal(error, Errors.badUrl);
+    });
+
     it('does the whole thing', async () => {
       const result =
         await Mercury.parse('http://deadspin.com/remember-when-donald-trump-got-booed-for-butchering-ta-1788216229');
-
       assert.equal(typeof result, 'object');
       assert.equal(result.content.indexOf('score="') === -1, true);
     });

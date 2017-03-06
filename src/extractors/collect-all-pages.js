@@ -23,7 +23,7 @@ export default async function collectAllPages(
   // likely gone wrong.
   while (next_page_url && pages < 26) {
     pages += 1;
-    $ = await Resource.create(next_page_url);
+    let { $ } = await Resource.create(next_page_url);
     html = $.html();
 
     const extractorOpts = {
