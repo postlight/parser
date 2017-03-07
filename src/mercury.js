@@ -40,6 +40,7 @@ const Mercury = {
       result = this.htmlExtractor({ url, parsedUrl, $, html, fallback, fetchAllPages });
     } else {
       result = textExtractor({ $, parsedUrl, headers });
+      console.log(result);
     }
 
     // if this parse is happening in the browser,

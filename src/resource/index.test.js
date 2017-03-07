@@ -91,6 +91,5 @@ describe('Resource', () => {
     //   const $ = await Resource.create(url);
     //
     // });
-
   });
 });
