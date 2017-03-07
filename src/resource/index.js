@@ -17,18 +17,21 @@ const Resource = {
   // :param response: If set, use as the response rather than
   //                  attempting to fetch it ourselves. Expects a
   //                  string.
-  async create(url, preparedResponse, parsedUrl) {
+  async create(url, preparedResponse, parsedUrl, opts) {
     let result;
 
     if (preparedResponse) {
-      const validResponse = {
-        statusMessage: 'OK',
-        statusCode: 200,
-        headers: {
-          'content-type': 'text/html',
-          'content-length': 500,
-        },
-      };
+      // let validResponse = {
+      //   statusMessage: 'OK',
+      //   statusCode: 200,
+      //   headers: {
+      //     'content-type': 'text/html',
+      //     'content-length': 500,
+      //   },
+      // };
+      // if (opts.customHeader) {
+      let validResponse = opts.customHeader;
+      // }
 
       result = { body: preparedResponse, response: validResponse };
     } else {

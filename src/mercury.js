@@ -16,6 +16,7 @@ const Mercury = {
     const {
       fetchAllPages = true,
       fallback = true,
+      customHeader = null,
     } = opts;
 
     // if no url was passed and this is the browser version,
@@ -23,7 +24,7 @@ const Mercury = {
     // from the current page
     if (!url && cheerio.browser) {
       url = window.location.href; // eslint-disable-line no-undef
-      html = html || cheerio.html();
+      html = customHeader ? html : cheerio.html();
     }
 
     const parsedUrl = URL.parse(url);
@@ -32,7 +33,7 @@ const Mercury = {
       return Errors.badUrl;
     }
 
-    const { $, headers } = await Resource.create(url, html, parsedUrl);
+    const { $, headers } = await Resource.create(url, html, parsedUrl, opts);
 
     let result = '';
 
@@ -40,7 +41,6 @@ const Mercury = {
       result = this.htmlExtractor({ url, parsedUrl, $, html, fallback, fetchAllPages });
     } else {
       result = textExtractor({ $, parsedUrl, headers });
-      console.log(result);
     }
 
     // if this parse is happening in the browser,

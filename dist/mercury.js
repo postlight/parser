@@ -2,15 +2,15 @@
 
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
 
-var _regeneratorRuntime = _interopDefault(require('babel-runtime/regenerator'));
 var _extends = _interopDefault(require('babel-runtime/helpers/extends'));
+var _regeneratorRuntime = _interopDefault(require('babel-runtime/regenerator'));
 var _asyncToGenerator = _interopDefault(require('babel-runtime/helpers/asyncToGenerator'));
 var URL = _interopDefault(require('url'));
 var cheerio = _interopDefault(require('cheerio'));
-var _Promise = _interopDefault(require('babel-runtime/core-js/promise'));
-var request = _interopDefault(require('request'));
 var iconv = _interopDefault(require('iconv-lite'));
 var _slicedToArray = _interopDefault(require('babel-runtime/helpers/slicedToArray'));
+var _Promise = _interopDefault(require('babel-runtime/core-js/promise'));
+var request = _interopDefault(require('request'));
 var _Reflect$ownKeys = _interopDefault(require('babel-runtime/core-js/reflect/own-keys'));
 var _toConsumableArray = _interopDefault(require('babel-runtime/helpers/toConsumableArray'));
 var _defineProperty = _interopDefault(require('babel-runtime/helpers/defineProperty'));
@@ -25,50 +25,6 @@ var wuzzy = _interopDefault(require('wuzzy'));
 var difflib = _interopDefault(require('difflib'));
 var _Array$from = _interopDefault(require('babel-runtime/core-js/array/from'));
 var ellipsize = _interopDefault(require('ellipsize'));
-
-var _marked = [range].map(_regeneratorRuntime.mark);
-
-function range() {
-  var start = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
-  var end = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
-  return _regeneratorRuntime.wrap(function range$(_context) {
-    while (1) {
-      switch (_context.prev = _context.next) {
-        case 0:
-          if (!(start <= end)) {
-            _context.next = 5;
-            break;
-          }
-
-          _context.next = 3;
-          return start += 1;
-
-        case 3:
-          _context.next = 0;
-          break;
-
-        case 5:
-        case "end":
-          return _context.stop();
-      }
-    }
-  }, _marked[0], this);
-}
-
-// extremely simple url validation as a first step
-function validateUrl(_ref) {
-  var hostname = _ref.hostname;
-
-  // If this isn't a valid url, return an error message
-  return !!hostname;
-}
-
-var Errors = {
-  badUrl: {
-    error: true,
-    messages: 'The url parameter passed does not look like a valid URL. Please check your data and try again.'
-  }
-};
 
 var NORMALIZE_RE = /\s{2,}/g;
 
@@ -116,6 +72,7 @@ var IS_ALPHA_RE = /^[a-z]+$/i;
 var IS_DIGIT_RE = /^[0-9]+$/i;
 
 var ENCODING_RE = /charset=([\w-]+)\b/;
+var DEFAULT_ENCODING = 'utf-8';
 
 function pageNumFromUrl(url) {
   var matches = url.match(PAGE_IN_HREF_RE);
@@ -224,12 +181,59 @@ function excerptContent(content) {
 // used in our fetchResource function to
 // ensure correctly encoded responses
 function getEncoding(str) {
+  var encoding = DEFAULT_ENCODING;
   if (ENCODING_RE.test(str)) {
-    return ENCODING_RE.exec(str)[1];
+    var testEncode = ENCODING_RE.exec(str)[1];
+    if (iconv.encodingExists(testEncode)) {
+      encoding = testEncode;
+    }
   }
-
-  return null;
+  return encoding;
 }
+
+var _marked = [range].map(_regeneratorRuntime.mark);
+
+function range() {
+  var start = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+  var end = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
+  return _regeneratorRuntime.wrap(function range$(_context) {
+    while (1) {
+      switch (_context.prev = _context.next) {
+        case 0:
+          if (!(start <= end)) {
+            _context.next = 5;
+            break;
+          }
+
+          _context.next = 3;
+          return start += 1;
+
+        case 3:
+          _context.next = 0;
+          break;
+
+        case 5:
+        case "end":
+          return _context.stop();
+      }
+    }
+  }, _marked[0], this);
+}
+
+// extremely simple url validation as a first step
+function validateUrl(_ref) {
+  var hostname = _ref.hostname;
+
+  // If this isn't a valid url, return an error message
+  return !!hostname;
+}
+
+var Errors = {
+  badUrl: {
+    error: true,
+    messages: 'The url parameter passed does not look like a valid URL. Please check your data and try again.'
+  }
+};
 
 // Browser does not like us setting user agent
 var REQUEST_HEADERS = cheerio.browser ? {} : {
@@ -258,21 +262,6 @@ function get(options) {
       if (err) {
         reject(err);
       } else {
-        var encoding = getEncoding(response.headers['content-type']);
-
-        if (iconv.encodingExists(encoding)) {
-          body = iconv.decode(body, encoding);
-        }
-
-        if (typeof body !== 'string') {
-          var $ = cheerio.load(iconv.decode(body, 'utf8'));
-          var contentType = $('meta[http-equiv=content-type]').attr('content');
-          var properEncoding = getEncoding(contentType);
-          if (iconv.encodingExists(properEncoding)) {
-            body = iconv.decode(body, properEncoding);
-          }
-        }
-
         resolve({ body: body, response: response });
       }
     });
@@ -343,9 +332,6 @@ var fetchResource$1 = (function () {
               url: parsedUrl.href,
               headers: _extends({}, REQUEST_HEADERS),
               timeout: FETCH_TIMEOUT,
-              // Don't set encoding; fixes issues
-              // w/gzipped responses
-              encoding: null,
               // Accept cookies
               jar: true,
               // Accept and decode gzip
@@ -1852,6 +1838,7 @@ var Resource = {
     var content = _ref.body,
         response = _ref.response;
     var contentType = response.headers['content-type'];
+    var headers = response.headers;
 
     // TODO: Implement is_text function from
     // https://github.com/ReadabilityHoldings/readability/blob/8dc89613241d04741ebd42fa9fa7df1b1d746303/readability/utils/text.py#L57
@@ -1860,15 +1847,49 @@ var Resource = {
       throw new Error('Content does not appear to be text.');
     }
 
-    var $ = cheerio.load(content);
+    var $ = '';
 
-    if ($.root().children().length === 0) {
+    if (contentType.includes('html')) {
+      $ = this.processHtml({ content: content, contentType: contentType });
+    } else {
+      $ = content;
+    }
+
+    return { $: $, headers: headers };
+  },
+  processHtml: function processHtml(_ref2) {
+    var content = _ref2.content,
+        contentType = _ref2.contentType;
+
+    var doc = this.encodeDoc({ content: content, contentType: contentType });
+
+    if (doc.root().children().length === 0) {
       throw new Error('No children, likely a bad parse.');
     }
 
-    $ = normalizeMetaTags($);
-    $ = convertLazyLoadedImages($);
-    $ = clean($);
+    doc = normalizeMetaTags(doc);
+    doc = convertLazyLoadedImages(doc);
+    doc = clean(doc);
+
+    return doc;
+  },
+  encodeDoc: function encodeDoc(_ref3) {
+    var content = _ref3.content,
+        contentType = _ref3.contentType;
+
+    var encoding = getEncoding(contentType);
+    var decodedContent = iconv.decode(content, encoding);
+    var $ = cheerio.load(decodedContent);
+
+    // after first cheerio.load, check to see if encoding matches
+    var metaContentType = $('meta[http-equiv=content-type]').attr('content');
+    var properEncoding = getEncoding(metaContentType);
+
+    // if encodings in the header/body dont match, use the one in the body
+    if (properEncoding !== encoding) {
+      decodedContent = iconv.decode(content, properEncoding);
+      $ = cheerio.load(decodedContent);
+    }
 
     return $;
   }
@@ -6911,26 +6932,38 @@ var GenericExcerptExtractor = {
     var $ = _ref.$,
         content = _ref.content,
         metaCache = _ref.metaCache;
+    var isHtml = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
 
-    var excerpt = extractFromMeta$$1($, EXCERPT_META_SELECTORS, metaCache);
-    if (excerpt) {
-      return clean$2(stripTags(excerpt, $));
+    if (isHtml) {
+      var excerpt = extractFromMeta$$1($, EXCERPT_META_SELECTORS, metaCache);
+      if (excerpt) {
+        return clean$2(stripTags(excerpt, $));
+      }
     }
+
     // Fall back to excerpting from the extracted content
     var maxLength = 200;
     var shortContent = content.slice(0, maxLength * 5);
-    return clean$2($(shortContent).text(), $, maxLength);
+
+    if (isHtml) {
+      return clean$2($(shortContent).text(), $, maxLength);
+    }
+    return shortContent;
   }
 };
 
 var GenericWordCountExtractor = {
   extract: function extract(_ref) {
     var content = _ref.content;
+    var isHtml = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
 
-    var $ = cheerio.load(content);
-    var $content = $('div').first();
+    var text = normalizeSpaces(content);
+    if (isHtml) {
+      var $ = cheerio.load(content);
+      var $content = $('div').first();
 
-    var text = normalizeSpaces($content.text());
+      text = normalizeSpaces($content.text());
+    }
     return text.split(/\s/).length;
   }
 };
@@ -7248,13 +7281,14 @@ var collectAllPages = (function () {
   var _ref = _asyncToGenerator(_regeneratorRuntime.mark(function _callee(_ref2) {
     var next_page_url = _ref2.next_page_url,
         html = _ref2.html,
-        $ = _ref2.$,
         metaCache = _ref2.metaCache,
         result = _ref2.result,
         Extractor = _ref2.Extractor,
         title = _ref2.title,
         url = _ref2.url;
-    var pages, previousUrls, extractorOpts, nextPageResult, word_count;
+
+    var pages, previousUrls, _ref3, el, extractorOpts, nextPageResult, word_count;
+
     return _regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
@@ -7268,7 +7302,7 @@ var collectAllPages = (function () {
 
           case 2:
             if (!(next_page_url && pages < 26)) {
-              _context.next = 15;
+              _context.next = 16;
               break;
             }
 
@@ -7277,14 +7311,15 @@ var collectAllPages = (function () {
             return Resource.create(next_page_url);
 
           case 6:
-            $ = _context.sent;
+            _ref3 = _context.sent;
+            el = _ref3.$;
 
-            html = $.html();
+            html = el.html();
 
             extractorOpts = {
               url: next_page_url,
               html: html,
-              $: $,
+              el: el,
               metaCache: metaCache,
               contentOnly: true,
               extractedTitle: title,
@@ -7302,7 +7337,7 @@ var collectAllPages = (function () {
             _context.next = 2;
             break;
 
-          case 15:
+          case 16:
             word_count = GenericExtractor.word_count({ content: '<div>' + result.content + '</div>' });
             return _context.abrupt('return', _extends({}, result, {
               total_pages: pages,
@@ -7310,7 +7345,7 @@ var collectAllPages = (function () {
               word_count: word_count
             }));
 
-          case 17:
+          case 18:
           case 'end':
             return _context.stop();
         }
@@ -7325,13 +7360,59 @@ var collectAllPages = (function () {
   return collectAllPages;
 })();
 
+function textExtractor(_ref) {
+  var $ = _ref.$,
+      parsedUrl = _ref.parsedUrl,
+      headers = _ref.headers;
+
+  // Extract the filename to be the title
+  var path = parsedUrl.path;
+
+
+  var size = path.split('/').length;
+  var title = path.split('/')[size - 1];
+
+  // Extract content
+  var content = $;
+
+  // Date Published
+  var date_published = cleanDatePublished(headers['last-modified']);
+
+  // URL
+  var url = parsedUrl.href;
+
+  // Domain
+  var domain = parsedUrl.hostname;
+
+  // Excerpt
+  var excerpt = GenericExtractor.excerpt({ content: content }, false);
+
+  // Word Count
+  var word_count = GenericExtractor.word_count({ content: content }, false);
+
+  return {
+    title: title,
+    content: content,
+    author: null,
+    date_published: date_published,
+    lead_image_url: null,
+    dek: null,
+    next_page_url: null,
+    url: url,
+    domain: domain,
+    excerpt: excerpt,
+    word_count: word_count,
+    direction: null
+  };
+}
+
 var Mercury = {
   parse: function parse(url, html) {
     var _this = this;
 
     var opts = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
     return _asyncToGenerator(_regeneratorRuntime.mark(function _callee() {
-      var _opts$fetchAllPages, fetchAllPages, _opts$fallback, fallback, parsedUrl, $, Extractor, metaCache, result, _result, title, next_page_url;
+      var _opts$fetchAllPages, fetchAllPages, _opts$fallback, fallback, parsedUrl, _ref, $, headers, result;
 
       return _regeneratorRuntime.wrap(function _callee$(_context) {
         while (1) {
@@ -7346,6 +7427,7 @@ var Mercury = {
               if (!url && cheerio.browser) {
                 url = window.location.href; // eslint-disable-line no-undef
                 html = html || cheerio.html();
+                console.log(html);
               }
 
               parsedUrl = URL.parse(url);
@@ -7362,83 +7444,29 @@ var Mercury = {
               return Resource.create(url, html, parsedUrl);
 
             case 7:
-              $ = _context.sent;
-              Extractor = getExtractor(url, parsedUrl, $);
-              // console.log(`Using extractor for ${Extractor.domain}`);
+              _ref = _context.sent;
+              $ = _ref.$;
+              headers = _ref.headers;
+              result = '';
 
-              // If we found an error creating the resource, return that error
 
-              if (!$.failed) {
-                _context.next = 11;
-                break;
+              if (headers['content-type'].includes('text/html')) {
+                result = _this.htmlExtractor({ url: url, parsedUrl: parsedUrl, $: $, html: html, fallback: fallback, fetchAllPages: fetchAllPages });
+              } else {
+                result = textExtractor({ $: $, parsedUrl: parsedUrl, headers: headers });
+                console.log('text extractor used');
               }
-
-              return _context.abrupt('return', $);
-
-            case 11:
-
-              // if html still has not been set (i.e., url passed to Mercury.parse),
-              // set html from the response of Resource.create
-              if (!html) {
-                html = $.html();
-              }
-
-              // Cached value of every meta name in our document.
-              // Used when extracting title/author/date_published/dek
-              metaCache = $('meta').map(function (_, node) {
-                return $(node).attr('name');
-              }).toArray();
-              result = RootExtractor.extract(Extractor, {
-                url: url,
-                html: html,
-                $: $,
-                metaCache: metaCache,
-                parsedUrl: parsedUrl,
-                fallback: fallback
-              });
-              _result = result, title = _result.title, next_page_url = _result.next_page_url;
-
-              // Fetch more pages if next_page_url found
-
-              if (!(fetchAllPages && next_page_url)) {
-                _context.next = 21;
-                break;
-              }
-
-              _context.next = 18;
-              return collectAllPages({
-                Extractor: Extractor,
-                next_page_url: next_page_url,
-                html: html,
-                $: $,
-                metaCache: metaCache,
-                result: result,
-                title: title,
-                url: url
-              });
-
-            case 18:
-              result = _context.sent;
-              _context.next = 22;
-              break;
-
-            case 21:
-              result = _extends({}, result, {
-                total_pages: 1,
-                rendered_pages: 1
-              });
-
-            case 22:
 
               // if this parse is happening in the browser,
               // clean up any trace from the page.
               if (cheerio.browser) {
                 cheerio.cleanup();
+                console.log(result);
               }
 
               return _context.abrupt('return', result);
 
-            case 24:
+            case 14:
             case 'end':
               return _context.stop();
           }
@@ -7472,6 +7500,102 @@ var Mercury = {
           }
         }
       }, _callee2, _this2);
+    }))();
+  },
+  htmlExtractor: function htmlExtractor(_ref2) {
+    var _this3 = this;
+
+    var url = _ref2.url,
+        parsedUrl = _ref2.parsedUrl,
+        $ = _ref2.$,
+        parsedHtml = _ref2.parsedHtml,
+        fallback = _ref2.fallback,
+        fetchAllPages = _ref2.fetchAllPages;
+    return _asyncToGenerator(_regeneratorRuntime.mark(function _callee3() {
+      var Extractor, html, metaCache, result, _result, title, next_page_url;
+
+      return _regeneratorRuntime.wrap(function _callee3$(_context3) {
+        while (1) {
+          switch (_context3.prev = _context3.next) {
+            case 0:
+              Extractor = getExtractor(url, parsedUrl, $);
+              // console.log(`Using extractor for ${Extractor.domain}`);
+
+              // If we found an error creating the resource, return that error
+
+              if (!$.failed) {
+                _context3.next = 3;
+                break;
+              }
+
+              return _context3.abrupt('return', $);
+
+            case 3:
+
+              // if html still has not been set (i.e., url passed to Mercury.parse),
+              // set html from the response of Resource.create
+              html = '';
+
+              if (!parsedHtml) {
+                html = $.html();
+              } else {
+                html = parsedHtml;
+              }
+
+              // Cached value of every meta name in our document.
+              // Used when extracting title/author/date_published/dek
+              metaCache = $('meta').map(function (_, node) {
+                return $(node).attr('name');
+              }).toArray();
+              result = RootExtractor.extract(Extractor, {
+                url: url,
+                html: html,
+                $: $,
+                metaCache: metaCache,
+                parsedUrl: parsedUrl,
+                fallback: fallback
+              });
+              _result = result, title = _result.title, next_page_url = _result.next_page_url;
+
+              // Fetch more pages if next_page_url found
+
+              if (!(fetchAllPages && next_page_url)) {
+                _context3.next = 14;
+                break;
+              }
+
+              _context3.next = 11;
+              return collectAllPages({
+                Extractor: Extractor,
+                next_page_url: next_page_url,
+                html: html,
+                $: $,
+                metaCache: metaCache,
+                result: result,
+                title: title,
+                url: url
+              });
+
+            case 11:
+              result = _context3.sent;
+              _context3.next = 15;
+              break;
+
+            case 14:
+              result = _extends({}, result, {
+                total_pages: 1,
+                rendered_pages: 1
+              });
+
+            case 15:
+              return _context3.abrupt('return', result);
+
+            case 16:
+            case 'end':
+              return _context3.stop();
+          }
+        }
+      }, _callee3, _this3);
     }))();
   }
 };
