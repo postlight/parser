@@ -1,0 +1,2441 @@
+
+
+    <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+            "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+    <!--[if lt IE 7]>  <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" class="browser_ie6"> <![endif]-->
+    <!--[if IE 7]>     <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" class="browser_ie7"> <![endif]-->
+    <!--[if IE 8]>     <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" class="browser_ie8"> <![endif]-->
+    <!--[if IE 9]>     <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" class="browser_ie9"> <![endif]-->
+    <!--[if (gt IE 9)|(!IE)]><!-->
+    <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de"> 
+                            
+        <head>
+                                        
+
+
+
+
+
+
+
+
+
+
+
+                                
+        
+
+<meta http-equiv="X-UA-Compatible" value="IE=Edge">
+<meta name="viewport" value="width=device-width">
+                                          
+                        <meta value="Fehlende Datensicherheit: Angriff mit dem Roboter" name="og:title">
+                    <meta value="Roboter k&#xF6;nnen immer mehr, doch Sicherheit ist f&#xFC;r viele Hersteller nicht so wichtig. Wer eine der Maschinen hackt, verf&#xFC;gt &#xFC;ber einen Spion - oder eine t&#xF6;dliche Waffe." name="og:description">
+                    <meta value="http://www.faz.net/1.4910628" name="og:url">
+                    <meta value="http://media1.faz.net/ppmedia/aktuell/3666612632/1.4911859/article_multimedia_overview/gita-ist-eine-art-rollende.jpg" name="og:image">
+                    <meta value="FAZ.NET" name="og:site_name">
+                    <meta value="https://www.facebook.com/faz" name="article:publisher">
+                    <meta value="https://www.facebook.com/faz" name="article:author">
+                    <meta value="346392590975" name="fb:page_id">
+                    <meta value="@faznet" name="twitter:site">
+                    <meta value="summary_large_image" name="twitter:card">
+                    <meta value="http://www.faz.net" name="twitter:domain">
+                    <meta value="@faznet" name="twitter:creator">
+                    <meta value="Fehlende Datensicherheit: Angriff mit dem Roboter" name="twitter:title">
+                    <meta value="Roboter k&#xF6;nnen immer mehr, doch Sicherheit ist f&#xFC;r viele Hersteller nicht so wichtig. Wer eine der Maschinen hackt, verf&#xFC;gt &#xFC;ber einen Spion - oder eine t&#xF6;dliche Waffe." name="twitter:description">
+                    <meta value="http://media1.faz.net/ppmedia/aktuell/3666612632/1.4911859/article_multimedia_overview/gita-ist-eine-art-rollende.jpg" name="twitter:image:src">
+                    <meta value="http://www.faz.net/1.4910628" name="twitter:url">
+                                    <title>IOActive deckt Sicherheitsl&#xFC;cken bei Robotern auf</title>
+                                <meta name="DC.date.issued" value="2017-03-06T15:37:51+0100">
+                                    <meta name="last-modified" value="2017-03-06T16:17:14+0100">
+            <meta http-equiv="last-modified" value="2017-03-06T16:17:14+0100">
+                                
+        			            <meta name="description" value="Roboter k&#xF6;nnen immer mehr, doch Sicherheit ist f&#xFC;r viele Hersteller nicht so wichtig. Wer eine der Maschinen hackt, verf&#xFC;gt &#xFC;ber einen...">
+				            <meta name="keywords" value="Isaac Asimov, Roboter, Lieferdrohne, Datensicherheit, Angriff">
+        <meta name="news_keywords" value="Isaac Asimov, Roboter, Lieferdrohne, Datensicherheit, Angriff">
+				  
+<meta http-equiv="Content-Type" value="text/html; charset=utf-8">
+<meta name="MSSmartTagsPreventParsing" value="true">
+<meta name="author" value="Frankfurter Allgemeine Zeitung GmbH">
+<meta name="publisher" value="Frankfurter Allgemeine Zeitung GmbH">
+<meta name="copyright" value="Frankfurter Allgemeine Zeitung GmbH 2001 - 2017">
+<meta name="distribution" value="global">
+<meta http-equiv="Imagetoolbar" value="no">
+<meta http-equiv="Content-Script-Type" value="text/javascript">
+<meta http-equiv="Content-Style-Type" value="text/css">
+<meta name="msApplication-ID" value="microsoft.build.App">
+<meta name="msApplication-PackageFamilyName" value="microsoft.build_8wekyb3d8bbwe">
+
+<meta name="robots" value="index, follow, noarchive">
+
+
+<link rel="stylesheet" type="text/css" href="http://www.faz.net/css/jquery-ui-1.11.1.min.a51b8eb6.css">
+<link rel="stylesheet" type="text/css" href="http://www.faz.net/css/all_styles.min.08c796df.css">
+<link rel="stylesheet" type="text/css" href="http://www.faz.net/css/f50-blogs.min.7dbab823.css">
+
+
+    <link rel="stylesheet" type="text/css" href="http://media1.faz.net/polopoly_fs/7.4586505.1453818633!/fieldsetCssAround/uploadedcssfiles/mobile-view.css">
+    <link rel="stylesheet" type="text/css" href="http://media0.faz.net/polopoly_fs/7.4186814.1442555390!/fieldsetCssAround/uploadedcssfiles/TickerBoxTeaser.css">
+    <link rel="stylesheet" type="text/css" href="http://media1.faz.net/polopoly_fs/7.4749697.1457703242!/fieldsetCssAround/uploadedcssfiles/FTK-3546.css">
+    <link rel="stylesheet" type="text/css" href="http://media1.faz.net/polopoly_fs/7.3981625.1435912700!/fieldsetCssAround/uploadedcssfiles/FTK-2909.css">
+
+<link rel="stylesheet" type="text/css" href="http://www.faz.net/css/f50_browser.min.bd538f77.css">
+
+<link href="http://www.faz.net/sharebuttons/css/sharebuttons-1.1.7.min.css" rel="stylesheet">
+
+    
+    
+
+
+
+    
+
+
+
+        
+    
+        
+    
+
+
+
+
+
+
+
+
+
+            
+    	    <link rel="canonical" href="http://www.faz.net/aktuell/feuilleton/aus-dem-maschinenraum/ioactive-deckt-sicherheitsluecken-bei-robotern-auf-14910628.html">
+                            <link rel="next" href="http://www.faz.net/aktuell/feuilleton/aus-dem-maschinenraum/ioactive-deckt-sicherheitsluecken-bei-robotern-auf-14910628-p2.html">
+                        
+                        <link rel="amphtml" href="http://m.faz.net/aktuell/feuilleton/aus-dem-maschinenraum/ioactive-deckt-sicherheitsluecken-bei-robotern-auf-14910628.amp.html">
+            
+                                    <link rel="alternate" media="only screen and (max-width: 1080px)" href="http://m.faz.net/aktuell/feuilleton/aus-dem-maschinenraum/ioactive-deckt-sicherheitsluecken-bei-robotern-auf-14910628.html">
+            
+    
+<link rel="shortcut icon" type="image/x-icon" href="http://www.faz.net/favicon.ico">
+
+
+                </head>
+                <body class="FAZPartner ">
+        
+                        
+
+		
+                                                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                
+        <div id="cookieContainer">
+    </div>
+    
+        <div class="FAZPageWrapper" id="TOP">
+    
+                    	
+        
+
+
+
+	
+                	
+        
+
+
+	
+    
+    
+    
+    
+    <div id="FAZSeite">
+        
+<div class="prnShortURL">http://www.faz.net/-gqz-8vl44</div>
+
+    <div id="FAZHeaderNeu" class="clearfix">
+    
+
+
+
+
+
+
+<div class="HeaderRowTop clearfix"> 
+    <div class="portalLinks">
+        <a class="" target="_blank" title="Stellenangebote bei FAZjob.NET" href="http://fazjob.net/">FAZJOB.NET</a>
+        <a class="" target="_blank" title="LEBENSWEGE" href="http://lebenswege.faz.net/">LEBENSWEGE</a>
+        <a class="" target="_blank" title="FAZSCHULE" href="http://www.fazschule.net/">SCHULE</a>
+        <span class="icon-fbook-newheader" id="icon-fbook-newheader">
+            <a class="" href="https://www.facebook.com/faz" target="_blank">Facebook</a>
+        </span>
+        <span class="icon-twitter-newheader" id="icon-twitter-newheader">
+            <a class="" href="https://www.twitter.com/faznet" target="_blank">Twitter</a>
+        </span>
+    </div>
+
+    <ul class="EpaperLinks">
+        <li id="LinkFAZnet" class="Active"><a class="" title="Zur FAZ.NET Homepage" href="http://www.faz.net/">FAZ.NET</a></li>
+                            <li id="FAZPLUSNAVILINK" class="inActive "><a href="http://plus.faz.net/faz-kiosk/" title="Zu F+"><span class="icon-fazplus">&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</span></a></li>
+                                                <li id="EpaperLinkEPaperFAZ" class="inActive"><a class="" title="Zur F.A.Z. als E-Paper" href="http://epaper.faz.net/#FAZ">E-PAPER</a></li>
+            </ul>
+
+	<ul class="MetaNavNeu">
+        <li class="pullDown">
+                            			<span id="loginbox">
+            <img class="invisible" src="http://www.faz.net/img/ajax-loader_16x16.gif">
+            <a id="logoutLink" class="MetaLink invisible" href="https://www.faz.net/membership/logoutNoScript?redirectUrl=%2Faktuell%2Ffeuilleton%2Faus-dem-maschinenraum%2Fioactive-deckt-sicherheitsluecken-bei-robotern-auf-14910628.html" rel="nofollow" title="Abmelden">Abmelden</a>
+            <a id="loginLink" data-login-modal="" data-login-modal-nop-if-logged-in="" data-login-modal-todo="" href="http://www.faz.net/aktuell/feuilleton/aus-dem-maschinenraum/ioactive-deckt-sicherheitsluecken-bei-robotern-auf-14910628.html" rel="nofollow" class="MetaLink" title="Anmelden">
+			    <span>Anmelden</span>
+		    </a>
+                <ul>
+                    <li><a title="Meine Beitr&#xE4;ge" data-login-modal="" data-login-modal-todo="" class="" rel="nofollow" href="https://www.faz.net/mein-faz-net/meine-beitraege/">Meine Beitr&#xE4;ge</a></li>
+                    <li><a title="Meine Autoren" data-login-modal="" data-login-modal-todo="" class="" rel="nofollow" href="https://www.faz.net/mein-faz-net/meine-autoren/">Meine Autoren</a></li>
+                    <li><a title="Merkzettel" data-login-modal="" data-login-modal-todo="" class="" rel="nofollow" href="https://www.faz.net/mein-faz-net/merkzettel/">Merkzettel</a></li>
+                    <li><a title="Mein Depot&#xA0;/&#xA0;Watchlist" data-login-modal="" data-login-modal-todo="" class="" rel="nofollow" href="https://www.faz.net/mein-faz-net/musterdepot-watchlist/">Mein&#xA0;Depot&#xA0;/&#xA0;Watchlist</a></li>
+                    <li><a title="Mein Abo" data-login-modal="" data-login-modal-todo="" class="" data-login-modal-redirect="$osc$" rel="nofollow" href="https://meinabo.faz.net/">Mein Abo</a></li>
+                    <li><a title="Profil" data-login-modal="" data-login-modal-todo="" class="" rel="nofollow" href="https://www.faz.net/mein-faz-net/profil/">Profil</a></li>
+                </ul>
+            </span>
+
+                </li>
+        <li class="pullDown">
+            <a class="Abo" href="https://abo.faz.net/">Abo</a>
+            <ul>
+                <li><a title="Abo-Shop" class="" href="https://abo.faz.net/">Abo-Shop</a></li>
+                <li><a title="Online-Kundenservice" class="" href="https://meinabo.faz.net/">Online-Kundenservice</a></li>
+            </ul>
+        </li>
+                                <li>
+            <a href="http://www.faz.net/f-a-z-mobil/" title="F.A.Z. Mobil" class="">Mobil</a>
+        </li>
+        <li><a id="newsletterAboIfLoggedIn" class="" href="https://www.faz.net/newsletter-auth/">
+            Newsletter</a></li>
+        <li class="pullDown">
+            <a class="" href="http://www.faz.net/aktuell/feuilleton/aus-dem-maschinenraum/ioactive-deckt-sicherheitsluecken-bei-robotern-auf-14910628.html#void">Mehr</a>
+            <ul>
+                <li><a href="http://www.faz.net/faz-net-services/" title="Services" class="">Services</a></li>
+                <li><a href="http://www.hochschulanzeiger.de/" title="Hochschulanzeiger" class="">Hochschulanzeiger</a></li>
+                <li><a href="http://verlag.faz.net/unternehmen/" title="&#xDC;ber die F.A.Z." class="">&#xDC;ber die F.A.Z.</a></li>
+                <li><a href="http://verlag.faz.net/unternehmen/presse/" title="Presse" class="">Presse</a></li>
+                <li><a href="http://verlag.faz.net/jobs-bei-der-f-a-z/" title="Jobs bei der F.A.Z." class="">Jobs bei der F.A.Z.</a></li>
+                <li><a href="http://verlag.faz.net/mediaportal/" title="Zum Anzeigenportal" class="">Anzeigen</a></li>
+                <li><a title="Hilfe" href="https://www.faz.net/hilfe/">Hilfe</a></li>
+            </ul>
+        </li>
+	</ul>
+
+	<div class="clear"></div>
+</div> 
+
+<div class="HeaderRowCenter clearfix">
+    <div class="Editors">
+                    HERAUSGEGEBEN VON WERNER D&apos;INKA, J&#xDC;RGEN KAUBE, BERTHOLD KOHLER, HOLGER STELTZNER
+            </div>
+
+<div class="HeaderMiddleLeft">
+                        <div class="Anzeige HeaderSponsor">
+                
+                
+
+
+
+
+
+
+
+                
+            </div>
+                <div id="EventBox" class="EventButton clearfix">
+                                        
+            <div class="active">
+            
+
+                		    <a title="Krimi-Bestenliste" href="http://www.faz.net/aktuell/feuilleton/buecher/krimi/">
+                    
+        
+
+
+
+
+
+
+
+
+                        
+                                                        
+    
+    <img title="Krimi-Bestenliste" height="163" alt="Krimi-Bestenliste" width="290" class="media" src="http://media1.faz.net/ppmedia/aktuell/feuilleton/1996940460/1.4877405/article_teaser_marginal/eventbutton-krimi-bestenliste.jpg">    
+
+    <span class="EventHead left">
+        Krimi-Bestenliste
+    </span>
+
+        	    </a>
+            </div>
+    
+                    </div>
+     </div>
+
+                            <div class="HeaderMiddleRight">
+                        
+            
+            <a href="http://www.faz.net/digital-abo" title="F.A.Z. PLUS abonnieren" class="redBackground" style="padding: 5px 10px 0px 10px; float: right;" target="_blank">
+            <img id="fazPlusIcon" style="padding-right: 5px;" width="35" height="35" alt="F+ Icon" title="FAZ Plus">
+            <div style="float: right; text-align: left; padding-top: 2px;">
+            F.A.Z. PLUS <br>
+            abonnieren
+            </div>
+            </a>
+
+            
+        
+    </div>            
+        
+                <div class="HeaderMiddleCenter">
+                                                            <a class="Ressortlogo" href="http://www.faz.net/">
+                    <img width="143" height="19" alt="F.A.Z." src="http://www.faz.net/img/fazlogo_ressort.png">
+                </a>
+                <a href="http://www.faz.net/aktuell/feuilleton/"><span class="Ressortkennung">Feuilleton</span></a>
+                    </div>
+        </div>
+    <div class="HeaderRowBottom">
+
+            <div id="AreaNaviOuter" style="height: 25px">
+                                                            
+                        <ul id="AreaNavi" class="right">                                                                                                 
+                                                                                                
+                                                                                                                        <li><a title="Video" href="http://www.faz.net/video/">Video</a></li>
+                    
+                                                                                                                        <li><a title="Themen" href="http://www.faz.net/themen/">Themen</a></li>
+                    
+                                                                                                
+                                                                                                                        <li class="serviceLink"><a title="Blogs" href="http://blogs.faz.net/" target="_blank">Blogs</a></li>
+                    
+                                                                                                                        <li class="serviceLink"><a title="Archiv" href="http://fazarchiv.faz.net/" target="_blank">Archiv</a></li>
+                    
+                                                                                                
+                                                                                                
+                            </ul>
+            <div class="Date">
+                                
+                                        <a title="Alle Meldungen vom 08. 03." class="" href="http://www.faz.net/FAZ-Live">Mittwoch, 08. M&#xE4;rz 2017</a>
+
+                            </div>
+        </div>
+
+        
+        <div class="RessortNaviOuter">
+                    <a class="left" title="Zu www.faz.net" href="http://www.faz.net/">
+                <span class="icon-home_small" id="home_small"></span>
+            </a>
+            <ul id="nav" class="RessortNavi">                                                                             <li>
+                        <a href="http://www.faz.net/aktuell/politik/">Politik</a>
+                                                    <ul>
+                                                                                                                                                                                                                                                    <li><a href="http://www.faz.net/aktuell/politik/inland/">Inland</a></li>
+                                                                                                                                                                                                                    <li><a href="http://www.faz.net/aktuell/politik/ausland/">Ausland</a></li>
+                                                                                                                                                                                                                    <li><a href="http://www.faz.net/aktuell/politik/wahl-im-saarland/">Wahl im Saarland</a></li>
+                                                                                                                                                                                                                    <li><a href="http://www.faz.net/aktuell/politik/anschlag-in-berlin/">Anschlag in Berlin</a></li>
+                                                                                                                                                                                                                    <li><a href="http://www.faz.net/aktuell/politik/trumps-praesidentschaft/">Trumps Pr&#xE4;sidentschaft</a></li>
+                                                                                                                                                                                                                    <li><a href="http://www.faz.net/aktuell/politik/der-erste-weltkrieg/">Der Erste Weltkrieg</a></li>
+                                                                                                                                                                                                                    <li><a href="http://www.faz.net/aktuell/politik/staat-und-recht/">Staat und Recht</a></li>
+                                                                                                                                                                                                                    <li><a href="http://www.faz.net/aktuell/politik/die-gegenwart/">Die Gegenwart</a></li>
+                                                                                                                                                                                                                    <li><a href="http://www.faz.net/aktuell/politik/politische-buecher/">Politische B&#xFC;cher</a></li>
+                                                            </ul>
+                                            </li>
+                                                                            <li>
+                        <a href="http://www.faz.net/aktuell/wirtschaft/">Wirtschaft</a>
+                                                    <ul>
+                                                                                                                                                                                                                                                    <li><a href="http://www.faz.net/aktuell/wirtschaft/brexit/">Brexit</a></li>
+                                                                                                                                                                                                                    <li><a href="http://www.faz.net/aktuell/wirtschaft/was-wird-aus-der-rente/">Was wird aus der Rente?</a></li>
+                                                                                                                                                                                                                    <li><a href="http://www.faz.net/aktuell/wirtschaft/arm-und-reich/">Arm und reich</a></li>
+                                                                                                                                                                                                                    <li><a href="http://www.faz.net/aktuell/wirtschaft/neue-mobilitaet/">Neue Mobilit&#xE4;t</a></li>
+                                                                                                                                                                                                                    <li><a href="http://www.faz.net/aktuell/wirtschaft/energiepolitik/">Energiepolitik</a></li>
+                                                                                                                                                                                                                    <li><a href="http://www.faz.net/aktuell/wirtschaft/macht-im-internet/">Macht im Internet</a></li>
+                                                                                                                                                                                                                    <li><a href="http://www.faz.net/aktuell/wirtschaft/internet-in-der-industrie/">Internet in der Industrie</a></li>
+                                                                                                                                                                                                                    <li><a href="http://www.faz.net/aktuell/wirtschaft/ttip-und-freihandel/">TTIP und Freihandel</a></li>
+                                                                                                                                                                                                                    <li><a href="http://www.faz.net/aktuell/wirtschaft/netzwirtschaft/">Netzwirtschaft</a></li>
+                                                                                                                                                                                                                    <li><a href="http://www.faz.net/aktuell/wirtschaft/eurokrise/">Eurokrise</a></li>
+                                                                                                                                                                                                                    <li><a href="http://www.faz.net/aktuell/wirtschaft/wirtschaftspolitik/">Wirtschaftspolitik</a></li>
+                                                                                                                                                                                                                    <li><a href="http://www.faz.net/aktuell/wirtschaft/unternehmen/">Unternehmen</a></li>
+                                                                                                                                                                                                                    <li><a href="http://www.faz.net/aktuell/wirtschaft/konjunktur/">Konjunktur</a></li>
+                                                                                                                                                                                                                    <li><a href="http://www.faz.net/aktuell/wirtschaft/recht-steuern/">Recht &amp; Steuern</a></li>
+                                                                                                                                                                                                                    <li class="lastBefSrv"><a href="http://www.faz.net/aktuell/wirtschaft/immobilien/">Immobilien</a></li>
+                                                                                                                                                                                                                    <li class="ASVAreaLink serviceLink lastBefSrv"><a href="http://www.faz.net/asv/waermedaemmung/" style="color:#ffffff; background-color: #52616b ;">W&#xE4;rmed&#xE4;mmung</a></li>
+                                                                                                                                                                                                                    <li class="ASVAreaLink serviceLink"><a href="http://www.faz.net/asv/impulsgeber-indien/" style="color:#ffffff; background-color:#f3953a;">Impulsgeber Indien</a></li>
+                                                            </ul>
+                                            </li>
+                                                                            <li>
+                        <a href="http://www.faz.net/aktuell/finanzen/">Finanzen</a>
+                                                    <ul>
+                                                                                                                                                                                                                                                    <li><a href="http://www.faz.net/aktuell/finanzen/meine-finanzen/">Meine Finanzen</a></li>
+                                                                                                                                                                                                                    <li><a href="http://www.faz.net/aktuell/finanzen/geldanlage-trotz-niedrigzinsen/">Geldanlage trotz Niedrigzinsen</a></li>
+                                                                                                                                                                                                                    <li><a href="http://www.faz.net/aktuell/finanzen/digital-bezahlen/">Digital bezahlen</a></li>
+                                                                                                                                                                                                                    <li><a href="http://www.faz.net/aktuell/finanzen/aktien/">Aktien</a></li>
+                                                                                                                                                                                                                    <li><a href="http://www.faz.net/aktuell/finanzen/fonds-mehr/">Fonds &amp; Mehr</a></li>
+                                                                                                                                                                                                                    <li><a href="http://www.faz.net/aktuell/finanzen/anleihen-zinsen/">Anleihen &amp; Zinsen</a></li>
+                                                                                                                                                                                                                    <li><a href="http://www.faz.net/aktuell/finanzen/devisen-rohstoffe/">Devisen &amp; Rohstoffe</a></li>
+                                                                                                                                                                                                                    <li><a href="http://www.faz.net/aktuell/finanzen/sparkassen-check/">Sparkassen-Check</a></li>
+                                                                                                                                                                                                                    <li class="lastBefSrv"><a href="http://www.faz.net/aktuell/finanzen/f-a-z-indizes/">F.A.Z.-Indizes</a></li>
+                                                                                                                                                                                                                    <li class="serviceLink"><a href="http://www.faz.net/aktuell/finanzen/boersen-maerkte/">B&#xF6;rsen &amp; M&#xE4;rkte</a></li>
+                                                                                                                                                                                                                    <li class="serviceLink lastBefSrv"><a href="http://musterdepot.faz.net/" rel="nofollow">Mein Depot </a></li>
+                                                                                                                                                                                                                    <li class="lastBefSrv"><a href="http://orakel.faz.net/">Orakel</a></li>
+                                                                                                                                                                                                                    <li class="serviceLink"><a href="http://boersenlexikon.faz.net/" target="_blank">B&#xF6;rsenlexikon</a></li>
+                                                                                                                                                                                                                    <li class="serviceLink lastBefSrv"><a href="http://boersenspiel.faz.net/">B&#xF6;rsenspiel</a></li>
+                                                                                                                                                                                                                    <li class="ASVAreaLink serviceLink"><a href="http://www.faz.net/asv/vermoegens-check/" style="color:#FFFFFF; background-color:#e61d50;">Verm&#xF6;gens-Check</a></li>
+                                                            </ul>
+                                            </li>
+                                                                            <li class="Selected">
+                        <a href="http://www.faz.net/aktuell/feuilleton/">Feuilleton</a>
+                                                    <ul>
+                                                                                                                                                                                                                                                    <li><a href="http://www.faz.net/aktuell/feuilleton/debatten/">Debatten</a></li>
+                                                                                                                                                                                                                    <li><a href="http://www.faz.net/aktuell/feuilleton/buecher/">B&#xFC;cher</a></li>
+                                                                                                                                                                                                                    <li><a href="http://www.faz.net/aktuell/feuilleton/medien/">Medien</a></li>
+                                                                                                                                                                                                                    <li><a href="http://www.faz.net/aktuell/feuilleton/kino/">Kino</a></li>
+                                                                                                                                                                                                                    <li><a href="http://www.faz.net/aktuell/feuilleton/pop/">Pop</a></li>
+                                                                                                                                                                                                                    <li><a href="http://www.faz.net/aktuell/feuilleton/buehne-und-konzert/">B&#xFC;hne und Konzert</a></li>
+                                                                                                                                                                                                                    <li><a href="http://www.faz.net/aktuell/feuilleton/kunst/">Kunst</a></li>
+                                                                                                                                                                                                                    <li><a href="http://www.faz.net/aktuell/feuilleton/kunstmarkt/">Kunstmarkt</a></li>
+                                                                                                                                                                                                                    <li><a href="http://www.faz.net/aktuell/feuilleton/forschung-und-lehre/">Forschung und Lehre</a></li>
+                                                                                                                                                                                                                    <li><a href="http://www.faz.net/aktuell/feuilleton/geisteswissenschaften/">Geisteswissenschaften</a></li>
+                                                                                                                                                                                                                    <li class="lastBefSrv"><a href="http://www.faz.net/aktuell/feuilleton/familie/">Familie</a></li>
+                                                                                                                                                                                                                    <li class="serviceLink"><a href="http://tv.faz.net/" target="_blank">TV- &amp; Radioprogramm</a></li>
+                                                                                                                                                                                                                    <li class="serviceLink"><a href="http://kulturkalender.faz.net/" target="_blank">Kulturkalender</a></li>
+                                                                                                                                                                                                                    <li class="serviceLink"><a href="http://literaturkalender.faz.net/" target="_blank">Literaturkalender </a></li>
+                                                                                                                                                                                                                    <li class="serviceLink lastBefSrv"><a href="http://ticket-portal.faz.net/" target="_blank">Ticket-Portal</a></li>
+                                                                                                                                                                                                                    <li class="ASVAreaLink serviceLink lastBefSrv"><a href="http://www.faz.net/asv/deutsche-weinregionen/" style="color:#FFFFFF; background-color:#35822b;">Deutsche Weinregionen</a></li>
+                                                                                                                                                                                                                    <li class="ASVAreaLink serviceLink"><a href="http://www.faz.net/asv/bibliothek/" style="color:#FFFFFF; background-color:#27547e;">Bibliothek</a></li>
+                                                            </ul>
+                                            </li>
+                                                                            <li>
+                        <a href="http://www.faz.net/aktuell/sport/">Sport</a>
+                                                    <ul>
+                                                                                                                                                                                                                                                    <li><a href="http://www.faz.net/aktuell/sport/fussball/">Fu&#xDF;ball</a></li>
+                                                                                                                                                                                                                    <li><a href="http://www.faz.net/aktuell/sport/formel-1/">Formel 1</a></li>
+                                                                                                                                                                                                                    <li><a href="http://www.faz.net/aktuell/sport/mehr-sport/">Mehr Sport</a></li>
+                                                                                                                                                                                                                    <li><a href="http://www.faz.net/aktuell/sport/wintersport/">Wintersport</a></li>
+                                                                                                                                                                                                                    <li class="lastBefSrv"><a href="http://www.faz.net/aktuell/sport/sportpolitik/">Sportpolitik</a></li>
+                                                                                                                                                                                                                    <li class="serviceLink"><a href="http://www.faz.net/faz-net-services/sport-live-ticker/" target="_blank">Sport Live</a></li>
+                                                                                                                                                                                                                    <li class="serviceLink"><a href="http://www.faz.net/aktuell/sport/sport-in-zahlen/fussball-bundesliga/">Sport in Zahlen</a></li>
+                                                            </ul>
+                                            </li>
+                                                                            <li>
+                        <a href="http://www.faz.net/aktuell/gesellschaft/">Gesellschaft</a>
+                                                    <ul>
+                                                                                                                                                                                                                                                    <li><a href="http://www.faz.net/aktuell/gesellschaft/menschen/">Menschen</a></li>
+                                                                                                                                                                                                                    <li><a href="http://www.faz.net/aktuell/gesellschaft/kriminalitaet/">Kriminalit&#xE4;t</a></li>
+                                                                                                                                                                                                                    <li><a href="http://www.faz.net/aktuell/gesellschaft/ungluecke/">Ungl&#xFC;cke</a></li>
+                                                                                                                                                                                                                    <li><a href="http://www.faz.net/aktuell/gesellschaft/gesundheit/">Gesundheit</a></li>
+                                                                                                                                                                                                                    <li><a href="http://www.faz.net/aktuell/gesellschaft/tiere/">Tiere</a></li>
+                                                                                                                                                                                                                    <li class="lastBefSrv"><a href="http://www.faz.net/aktuell/gesellschaft/jugend-schreibt/">Jugend schreibt</a></li>
+                                                                                                                                                                                                                    <li class="ASVAreaLink serviceLink"><a href="http://www.faz.net/asv/best-ager-fuer-senioren-und-angehoerige/" style="color:#ffffff; background-color:#cf7f1f;">Best Ager - F&#xFC;r Senioren und Angeh&#xF6;rige</a></li>
+                                                            </ul>
+                                            </li>
+                                                                            <li>
+                        <a href="http://www.faz.net/aktuell/stil/">Stil</a>
+                                                    <ul>
+                                                                                                                                                                                                                                                    <li><a href="http://www.faz.net/aktuell/stil/mode-design/">Mode &amp; Design</a></li>
+                                                                                                                                                                                                                    <li><a href="http://www.faz.net/aktuell/stil/essen-trinken/">Essen &amp; Trinken</a></li>
+                                                                                                                                                                                                                    <li><a href="http://www.faz.net/aktuell/stil/leib-seele/">Leib &amp; Seele</a></li>
+                                                                                                                                                                                                                    <li><a href="http://www.faz.net/aktuell/stil/drinnen-draussen/">Drinnen &amp; Drau&#xDF;en</a></li>
+                                                                                                                                                                                                                    <li><a href="http://www.faz.net/aktuell/stil/neue-haeuser/">Neue H&#xE4;user</a></li>
+                                                            </ul>
+                                            </li>
+                                                                            <li>
+                        <a href="http://www.faz.net/aktuell/technik-motor/">Technik &amp; Motor</a>
+                                                    <ul>
+                                                                                                                                                                                                                                                    <li><a href="http://www.faz.net/aktuell/technik-motor/auto-verkehr/">Auto &amp; Verkehr</a></li>
+                                                                                                                                                                                                                    <li><a href="http://www.faz.net/aktuell/technik-motor/computer-internet/">Computer &amp; Internet</a></li>
+                                                                                                                                                                                                                    <li><a href="http://www.faz.net/aktuell/technik-motor/audio-video/">Audio &amp; Video</a></li>
+                                                                                                                                                                                                                    <li><a href="http://www.faz.net/aktuell/technik-motor/umwelt-technik/">Umwelt &amp; Technik</a></li>
+                                                            </ul>
+                                            </li>
+                                                                            <li>
+                        <a href="http://www.faz.net/aktuell/wissen/">Wissen</a>
+                                                    <ul>
+                                                                                                                                                                                                                                                    <li><a href="http://www.faz.net/aktuell/wissen/nobelpreise/">Nobelpreise</a></li>
+                                                                                                                                                                                                                    <li><a href="http://www.faz.net/aktuell/wissen/medizin-ernaehrung/">Medizin &amp; Ern&#xE4;hrung</a></li>
+                                                                                                                                                                                                                    <li><a href="http://www.faz.net/aktuell/wissen/weltraum/">Weltraum</a></li>
+                                                                                                                                                                                                                    <li><a href="http://www.faz.net/aktuell/wissen/leben-gene/">Leben &amp; Gene</a></li>
+                                                                                                                                                                                                                    <li><a href="http://www.faz.net/aktuell/wissen/erde-klima/">Erde &amp; Klima</a></li>
+                                                                                                                                                                                                                    <li><a href="http://www.faz.net/aktuell/wissen/archaeologie-altertum/">Arch&#xE4;ologie &amp; Altertum</a></li>
+                                                                                                                                                                                                                    <li><a href="http://www.faz.net/aktuell/wissen/physik-mehr/">Physik &amp; Mehr</a></li>
+                                                                                                                                                                                                                    <li><a href="http://www.faz.net/aktuell/wissen/geist-soziales/">Geist &amp; Soziales</a></li>
+                                                                                                                                                                                                                    <li><a href="http://www.faz.net/aktuell/wissen/forschung-politik-1/">Forschung &amp; Politik</a></li>
+                                                                                                                                                                                                                    <li class="lastBefSrv"><a href="http://www.faz.net/aktuell/wissen/dritte-kultur/">Dritte Kultur</a></li>
+                                                                                                                                                                                                                    <li class="serviceLink"><a href="http://www.faz.net/faz-net-services/unterhaltung/gehirntraining/">Gehirntraining</a></li>
+                                                            </ul>
+                                            </li>
+                                                                            <li>
+                        <a href="http://www.faz.net/aktuell/reise/">Reise</a>
+                                                    <ul>
+                                                                                                                                                                                                                                                    <li class="serviceLink lastBefSrv"><a href="http://www.faz.net/aktuell/reise/reisekompass" target="_blank">Reisekompass</a></li>
+                                                                                                                                                                                                                    <li class="serviceLink"><a href="http://wetter.faz.net/" target="_blank">Wetter</a></li>
+                                                                                                                                                                                                                    <li class="serviceLink lastBefSrv"><a href="http://www.faz.net/aktuell/reise/routenplaner/routenplaner-11128820.html" target="_blank">Routenplaner</a></li>
+                                                                                                                                                                                                                    <li class="ASVAreaLink serviceLink"><a href="http://www.faz.net/asv/leserreisen/" style="color:#ffffff; background-color:#0d94b9;">Leserreisen</a></li>
+                                                            </ul>
+                                            </li>
+                                                                            <li>
+                        <a href="http://www.faz.net/aktuell/beruf-chance/">Beruf &amp; Chance</a>
+                                                    <ul>
+                                                                                                                                                                                                                                                    <li><a href="http://www.faz.net/aktuell/beruf-chance/arbeitswelt/">Arbeitswelt</a></li>
+                                                                                                                                                                                                                    <li><a href="http://www.faz.net/aktuell/beruf-chance/recht-und-gehalt/">Recht und Gehalt</a></li>
+                                                                                                                                                                                                                    <li class="lastBefSrv"><a href="http://www.faz.net/aktuell/beruf-chance/campus/">Campus</a></li>
+                                                                                                                                                                                                                    <li class="serviceLink"><a href="https://stellenmarkt.faz.net/" target="_blank">Aktuelle Stellenangebote</a></li>
+                                                                                                                                                                                                                    <li class="serviceLink"><a href="https://stellenmarkt.faz.net/executive-channel/" target="_blank">Executive Channel</a></li>
+                                                                                                                                                                                                                    <li class="serviceLink"><a href="https://stellenmarkt.faz.net/executive-channel/executive-lounge/" target="_blank">Executive Lounge</a></li>
+                                                                                                                                                                                                                    <li class="serviceLink"><a href="https://stellenmarkt.faz.net/fuer-arbeitgeber/" target="_blank">Recruiting leicht gemacht</a></li>
+                                                                                                                                                                                                                    <li class="serviceLink lastBefSrv"><a href="http://hochschulanzeiger.faz.net/" target="_blank">Hochschulanzeiger</a></li>
+                                                                                                                                                                                                                    <li class="ASVAreaLink serviceLink"><a href="http://www.faz.net/asv/karrieremoeglichkeiten-fuer-berufserfahrene/" style="color:#ffffff; background-color:#004f9f;">Karrierem&#xF6;glichkeiten f&#xFC;r Berufserfahrene</a></li>
+                                                            </ul>
+                                            </li>
+                                                                            <li>
+                        <a href="http://www.faz.net/aktuell/rhein-main/">Rhein-Main</a>
+                                                    <ul>
+                                                                                                                                                                                                                                                    <li><a href="http://www.faz.net/aktuell/rhein-main/frankfurt/">Frankfurt</a></li>
+                                                                                                                                                                                                                    <li><a href="http://www.faz.net/aktuell/rhein-main/region/">Region</a></li>
+                                                                                                                                                                                                                    <li><a href="http://www.faz.net/aktuell/rhein-main/hessen/">Hessen</a></li>
+                                                                                                                                                                                                                    <li><a href="http://www.faz.net/aktuell/rhein-main/wirtschaft/">Wirtschaft</a></li>
+                                                                                                                                                                                                                    <li><a href="http://www.faz.net/aktuell/rhein-main/sport/">Sport</a></li>
+                                                                                                                                                                                                                    <li class="lastBefSrv"><a href="http://www.faz.net/aktuell/rhein-main/kultur/">Kultur</a></li>
+                                                                                                                                                                                                                    <li class="serviceLink"><a href="http://www.faz-leser-helfen.de/" target="_blank">F.A.Z. Leser helfen</a></li>
+                                                                                                                                                                                                                    <li><a href="http://www.faz.net/aktuell/rhein-main/frankfurter-allgemeine-buergergespraech/">Frankfurter Allgemeine B&#xFC;rgergespr&#xE4;ch</a></li>
+                                                            </ul>
+                                            </li>
+                            </ul>        </div>
+
+    </div>
+
+<div class="HeaderRowBelow">
+        
+    <div class="HeaderRowShadow"></div>
+
+    
+                
+
+
+        <div class="Breadcrumbs" itemscope="" itemtype="http://schema.org/BreadcrumbList">
+        <ul>
+                                                        <li class="First" itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
+                                                                                                                                <a href="http://www.faz.net/" class="NavStep First" itemprop="item">
+    <span itemprop="name">Home</span>
+        <meta itemprop="position" value="1">
+    </a>
+                                                                                                        </li>
+                                                                <li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
+                                                                                                                                <a href="http://www.faz.net/aktuell/feuilleton/" class="NavStep" itemprop="item">
+    <span itemprop="name">Feuilleton</span>
+        <meta itemprop="position" value="2">
+    </a>
+                                                                                                        </li>
+                                                                <li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
+                                                                                                                                <a href="http://www.faz.net/aktuell/feuilleton/aus-dem-maschinenraum/" class="NavStep" itemprop="item">
+    <span itemprop="name">Aus dem Maschinenraum</span>
+        <meta itemprop="position" value="3">
+    </a>
+                                                                                                        </li>
+                                        </ul>
+                            <h1 itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
+                <span itemprop="name">IOActive deckt Sicherheitsl&#xFC;cken bei Robotern auf</span>
+        <meta itemprop="position" value="4">
+                </h1>
+            </div>
+
+        
+    
+            </div>
+</div>
+
+        
+
+                                                <div class="billboard">
+        	<div class="Anzeige MonsterAd">         
+
+
+
+
+
+
+	</div>     </div>
+
+
+
+
+<div id="FAZContent" class="Artikel " itemscope="" itemtype="http://schema.org/NewsArticle">
+        <meta itemscope="" itemprop="mainEntityOfPage" itemtype="https://schema.org/WebPage" itemid="http://www.faz.net/aktuell/feuilleton/aus-dem-maschinenraum/ioactive-deckt-sicherheitsluecken-bei-robotern-auf-14910628.html">
+            <div itemprop="publisher" itemscope="" itemtype="https://schema.org/Organization">
+        <meta itemprop="name" value="Frankfurter Allgemeine Zeitung">
+        <div itemprop="logo" itemscope="" itemtype="https://schema.org/ImageObject">
+            <meta itemprop="url" value="http://www.faz.net/img/fazlogo_home.png">
+            <meta itemprop="width" value="390">
+            <meta itemprop="height" value="60">
+        </div>
+    </div>
+    
+    
+    
+    
+        
+                    
+
+
+    
+                            
+    <img src="http://faz.met.vgwort.de/na/8b440dafe7a6412bacafcf149faa2910" width="1" height="1" alt="">
+
+
+    <div id="artikelEinleitung" class="FAZArtikelEinleitung">
+	
+			
+
+
+<div id="mailLB" style="display: none; width: 260px; padding: 20px; margin: auto; text-align: left; background: rgba(255,255,255,1);">
+    <div id="mailContent" class="InformPerMailTab ArtikelFunktionPulldownInner" style="">
+    <a class="SchliessenIcon right" title="Schlie&#xDF;en" onclick="$.modal.close()">&#xA0;</a>
+    <span class="Head">Beitrag per E-Mail versenden</span>
+
+    <div class="LargeLeft">
+        <div class="PulldownVersandTeaser">
+
+            <p style="display: none" class="Content HeadlineShort">Fehlende Datensicherheit: Angriff mit dem Roboter</p>
+            <p class="Content Stichwort">Fehlende Datensicherheit</p>
+
+            <p class="Content Headline">Angriff mit dem Roboter</p>
+        			<span class="Autor" style="display: none;">
+                Von <span class="Content Autor caps" style="display: none;">Constanze Kurz</span>
+            </span>
+
+            <p class="Content Copy" style="display: none;">Roboter k&#xF6;nnen immer mehr, doch Sicherheit ist f&#xFC;r viele Hersteller nicht so wichtig. Wer eine der Maschinen hackt, verf&#xFC;gt &#xFC;ber einen Spion - oder eine t&#xF6;dliche Waffe. </p>
+        </div>
+        <div style="display: none;" class="PulldownVersandTeaser ErrMsg">
+            <p>Ein Fehler ist aufgetreten. Bitte &#xFC;berpr&#xFC;fen Sie Ihre Eingaben.</p>
+        </div>
+    </div>
+
+    
+    <div class="clear"></div>
+</div>
+
+
+<div id="email-confirmation" style="display: none;" class="ArtikelFunktionPulldownInner">
+
+    <a title="Schlie&#xDF;en" class="SchliessenIcon right" onclick="$.modal.close()">&#xA0;</a>
+
+    <span class="Head">Beitrag per E-Mail versenden</span>
+
+    <div class="PulldownVersandTeaser">
+        <p class="Copy">Vielen Dank<br>Der Beitrag wurde erfolgreich versandt.</p>
+    </div>
+</div>
+
+</div>
+
+
+
+<div id="beitragMerkenModal" class="LightBoxContent W400 Community simplemodal-data" style="display:none;">
+    <a title="Schlie&#xDF;en" class="bold right simplemodal-close">Schlie&#xDF;en<span class="icon-close"></span></a>
+    <div class="clear">&#xA0;</div>
+    <div style="display: none;" id="msgMerkzettel">
+        <p id="msgTitle"></p><p id="msg"></p><div class="SepLine"></div>
+        <div class="right"><a class="ArrowLink" href="https://www.faz.net/mein-faz-net/merkzettel/">Meine gespeicherten Beitr&#xE4;ge ansehen</a></div>
+    </div>
+</div>
+
+<div class="FAZArtikelFunktionen">
+
+    <div class="FAZArtikelFunktionZeile clearfix">
+        <div class="col">
+			<div class="sharebuttons" data-services="merken" data-mode="short-with-text" data-mail-onclick="toggleMailLb();" data-drucken-onclick="ArtikelDrucken();" data-permalink-onclick="showPermaLink(this);" data-weitersagen-onclick="openSharebuttonDropDown(this);" data-comment-displayif-fn="document.querySelector(&apos;div#lesermeinungscontainer&apos;) !== null;"></div>
+        </div>
+        <div class="col">
+			<div class="sharebuttons" data-services="drucken" data-mode="short-with-text" data-mail-onclick="toggleMailLb();" data-drucken-onclick="ArtikelDrucken();" data-permalink-onclick="showPermaLink(this);" data-weitersagen-onclick="openSharebuttonDropDown(this);" data-comment-displayif-fn="document.querySelector(&apos;div#lesermeinungscontainer&apos;) !== null;"></div>
+        </div>
+    </div>
+
+    <div class="FAZArtikelFunktionZeile clearfix">
+        <div id="socialmediaboxRecomm" class="col recomm">
+			<div class="sharebuttons " data-services="empfehlen" data-mode="short-with-text" data-mail-onclick="toggleMailLb();" data-empfehlen-class="1_4910628" data-drucken-onclick="ArtikelDrucken();" data-permalink-onclick="showPermaLink(this);" data-comment-displayif-fn="document.querySelector(&apos;div#lesermeinungscontainer&apos;) !== null;"></div>
+        </div>
+        <div class="col">
+			<div class="sharebuttons" data-services="permalink" data-mode="short-with-text" data-mail-onclick="toggleMailLb();" data-drucken-onclick="ArtikelDrucken();" data-permalink-onclick="showPermaLink(this);" data-weitersagen-onclick="openSharebuttonDropDown(this);" data-comment-displayif-fn="document.querySelector(&apos;div#lesermeinungscontainer&apos;) !== null;"></div>
+        </div>
+    </div>
+
+    <div class="FAZArtikelFunktionZeile clearfix">
+		<div class="col">
+			<div class="sharebuttons" data-services="comment" data-mode="short-with-text" data-mail-onclick="toggleMailLb();" data-drucken-onclick="ArtikelDrucken();" data-permalink-onclick="showPermaLink(this);" data-weitersagen-onclick="openSharebuttonDropDown(this);" data-comment-displayif-fn="document.querySelector(&apos;div#lesermeinungscontainer&apos;) !== null;"></div>
+		</div>
+	</div>
+</div>
+
+    <div class="clearfix lastUpdatedDiv">
+        <p class="lastUpdated" itemprop="dateModified" content="2017-03-06T15:37:51+0100">Ver&#xF6;ffentlicht: 06.03.2017, 15:37 Uhr</p>
+    </div>
+
+	
+    <h2 itemprop="headline">
+        <span class="Stichwort">Fehlende Datensicherheit</span>
+                    Angriff mit dem Roboter
+            </h2>
+
+    <p class="Copy" itemprop="description">
+                                                	                                    Roboter k&#xF6;nnen immer mehr, doch Sicherheit ist f&#xFC;r viele Hersteller nicht so wichtig. Wer eine der Maschinen hackt, verf&#xFC;gt &#xFC;ber einen Spion - oder eine t&#xF6;dliche Waffe.
+                                        </p>
+
+                                                                                                                                    <span class="Autor">
+                                                            <span class="Datum" itemprop="datePublished" content="2017-03-06T15:37:51+0100">06.03.2017,</span>
+                                    
+                von
+                <span class="caps last"><span class="caps last">Constanze Kurz</span></span>
+            </span>
+                            <div itemprop="author" itemscope="" itemtype="http://schema.org/Organization">
+                <meta itemprop="name" value="F.A.Z.">
+            </div>
+            
+    
+				
+	<div class="sharebuttons" data-services="facebook,twitter,xing,mail" data-mode="" data-mail-onclick="toggleMailLb();" data-drucken-onclick="ArtikelDrucken();" data-permalink-onclick="showPermaLink(this);" data-weitersagen-onclick="openSharebuttonDropDown(this);" data-comment-displayif-fn="document.querySelector(&apos;div#lesermeinungscontainer&apos;) !== null;"></div>
+</div> 
+<div class="clear"></div>
+
+<div id="ArtikelTabContent_0" class="FAZArtikelContent">
+    
+
+
+
+<div class="FAZArtikelText" itemprop="articleBody">
+        
+                    
+                
+                                                    
+
+
+
+
+
+    
+
+
+
+
+
+
+<div id="aufmacherOverlay" class="LightBoxBgnd multiMediaObject" style="display: none;">
+    <div class="LightBoxOverlay Foto"></div>
+    <div class="LightBoxContent Fullscreen Foto Artikel">
+        
+
+                        
+
+
+
+
+
+
+
+    
+<div id="aufmacherOverlay_content" class="FullscreenFotoInner">
+    <a class="exitLarge right" onclick="ToggleSingle(&apos;aufmacherOverlay&apos;,&apos;handleAds&apos;); scrollToSavedFAZSiteScrollPosition();" href="http://www.faz.net/aktuell/feuilleton/aus-dem-maschinenraum/ioactive-deckt-sicherheitsluecken-bei-robotern-auf-14910628.html#aufmacherBildJumpTarget" title="Schlie&#xDF;en"><img src="http://www.faz.net/img/schliessen-gross.png"></a>
+
+    <div class="PagerBox w300 clearfix">
+
+                    <div class="clear"></div>
+        <div class="clear"></div>
+    </div>
+
+    <div>
+                                        
+
+
+
+
+
+
+
+
+                        
+                                                    
+                
+            
+    
+    <img data-src="http://media1.faz.net/ppmedia/aktuell/3666612632/1.4911859/default/gita-ist-eine-art-rollende.jpg" data-process-retina="1" height="626" data-lazy-src="http://media1.faz.net/ppmedia/aktuell/3666612632/1.4911859/default/gita-ist-eine-art-rollende.jpg" onload="processRetinaDerivate(this);" width="940" class="media" src="http://media1.faz.net/ppmedia/aktuell/3666612632/1.4911859/default/gita-ist-eine-art-rollende.jpg">    
+        
+            <span class="Bildnachweis ">&#xA9; Piaggio</span>
+
+            <p class="Bildunterschrift ">&#x201E;Gita&#x201C; ist eine Art rollende Einkaufst&#xFC;te. Dringen aber Hacker in das System dieser oder anderer Roboter ein, droht Gefahr.</p>
+
+            <p class="Bildueberschrift "></p>
+
+            <p class="Bildbeschreibung "></p>
+
+                            
+        
+        
+
+        <div class="clear"></div>
+    </div>
+</div>
+    </div> </div>
+
+        <div class="ArtikelBild610" itemprop="image" itemscope="" itemtype="http://schema.org/ImageObject">
+
+<div class="MediaLink">
+            
+                                                <a href="http://www.faz.net/aktuell/feuilleton/aus-dem-maschinenraum/ioactive-deckt-sicherheitsluecken-bei-robotern-auf-14910628/gita-ist-eine-art-rollende-14911859.html" title="45160487">
+        
+
+
+
+
+
+
+
+
+                        
+                                                                        
+                
+            
+    
+    <img data-src="http://media1.faz.net/ppmedia/aktuell/3666612632/1.4911859/article_multimedia_overview/gita-ist-eine-art-rollende.jpg" title="&#x201E;Gita&#x201C; ist eine Art rollende Einkaufst&#xFC;te. Dringen aber Hacker in das System dieser oder anderer Roboter ein, droht Gefahr." data-process-retina="1" height="344" onload="processRetinaDerivate(this);" alt="45160487" width="610" class="media" src="http://media1.faz.net/ppmedia/aktuell/3666612632/1.4911859/article_multimedia_overview/gita-ist-eine-art-rollende.jpg">            <meta itemprop="url" value="http://media1.faz.net/ppmedia/aktuell/3666612632/1.4911859/article_multimedia_overview/gita-ist-eine-art-rollende.jpg">
+        <meta itemprop="width" value="610">
+        <meta itemprop="height" value="344">
+    
+    
+                </a>
+    </div>
+
+<span class="Bildnachweis">&#xA9; Piaggio
+
+                <a href="http://www.faz.net/aktuell/feuilleton/aus-dem-maschinenraum/ioactive-deckt-sicherheitsluecken-bei-robotern-auf-14910628.html#aufmacherOverlay" title="Vergr&#xF6;&#xDF;ern" data-trackivw="1" class="BildGroesse right" onclick="imgSetSrc(&apos;aufmacherOverlay&apos;); saveFAZSiteScrollPosition(); ToggleSingle(&apos;aufmacherOverlay&apos;,&apos;handleAds&apos;); imgTxtsize(&apos;aufmacherOverlay&apos;);">
+            <span class="icon-video_enlarge"></span>
+        </a>
+          </span>
+
+        <span class="Bildunterschrift" style="top: 5px;" itemprop="description" title="&#x201E;Gita&#x201C; ist eine Art rollende Einkaufst&#xFC;te. Dringen aber Hacker in das System dieser oder anderer Roboter ein, droht Gefahr.">&#x201E;Gita&#x201C; ist eine Art rollende Einkaufst&#xFC;te. Dringen aber Hacker in das System dieser oder anderer Roboter ein, droht Gefahr.</span>
+    </div>
+
+                            
+                <div class="">
+        
+
+
+    
+    
+    
+        
+        
+                                                            <p class="First PreviewPagemarker" id="pageIndex_1">Ob es autonome Fahrzeuge sind, humanoid wirkende Assistenten, herumlaufende Spielzeuge oder Lieferdrohnen: 2017 wird das Jahr der <a class="rtr-entity" data-rtr-id="eddc356f7e1fba3b7ebf072cd38a8355bbe3b7f5" href="http://www.faz.net/aktuell/wissen/thema/roboter">Roboter</a>. Die International Federation of Robotics (IFR) beziffert den Markt f&#xFC;r Roboter aller Arten auf knapp f&#xFC;nfzig Milliarden Euro. Im Jahr 2016 wuchs er allein f&#xFC;r industrielle Roboter um vierzehn Prozent, mit 290.000 neu installierten Systemen im letzten Jahr. F&#xFC;r die n&#xE4;chsten drei Jahre prognostiziert die IFR ein weiteres Wachstum von jeweils mindestens dreizehn Prozent.</p>
+                        
+        
+        
+                                                            
+                                <p>Die Roboter werden mit uns kommunizieren, uns unterhalten, f&#xFC;r und mit uns arbeiten, vielleicht werden sie uns in Zukunft sogar aus misslichen Lagen retten. Sie werden uns aber auch vor Probleme und ethische Dilemmata stellen. Ob wir wollen oder nicht: Wir werden uns mit Robotern mehr und mehr anfreunden m&#xFC;ssen und sie in unsere Leben integrieren. Keine schlechte Idee also, dass auch IT-Sicherheitsexperten einmal ein Auge auf diese Systeme werfen.</p>
+                        
+        
+        
+                                                            <h2>Der Roboter als Killer</h2><p>Denn anders als bei den sonstigen Computersystemen, die uns &#xFC;berall umgeben und deren Sicherheitsmacken viele als eine Art Naturgesetz hinnehmen, kann ein sabotierter oder b&#xF6;swillig &#xFC;bernommener mobiler Roboter physischen Schaden verursachen: Er besitzt Fortbewegungsmethoden, zuweilen Arme und Beine, aber auch Sensoren und bewegt sich au&#xDF;erhalb der virtuellen Welt. Ein autonom fahrendes Shuttle beispielsweise oder ein Lieferroboter, dessen Software manipuliert wird, k&#xF6;nnte absichtlich auf Menschen zusteuern statt ihnen auszuweichen.</p>
+                        
+        
+        
+                                    
+
+                        
+        
+
+
+
+
+
+
+
+
+
+
+
+<div id="mmo_1_4889914Id" class="ArtikelBildergalerieInline additionalStylesAudioVideo" itemscope="" itemtype="http://schema.org/VideoObject">
+                
+
+        <meta itemprop="name" value="Erfolgreiche Tests in Dubai Mit dem Drohnen-Taxi durch die Luft">
+            <meta itemprop="description" value="Mit dem Drohnen-Taxi schnell ans Ziel: In Dubai soll dies bald m&#xF6;glich sein. Tests sind nach Angaben der zust&#xE4;ndigen Beh&#xF6;rde erfolgreich verlaufen, sodass Fahrg&#xE4;ste wom&#xF6;glich schon ab Juli die selbstfliegenden Mini-Helikopter nutzen k&#xF6;nnten.">
+            <meta itemprop="uploadDate" value="2017-02-22T08:27:24+0100">
+            <meta itemprop="thumbnailUrl" value="http://www.faz.net/ppmedia/aktuell/MMV996292_TDE/1.4889913/article_aufmacher_klein/mit-dem-drohnen-taxi-durch-die.jpg">
+            <meta itemprop="duration" value="57">
+            <meta itemprop="contentUrl" value="http://video.faz.net/v/video/afp/2017/2/MMV996292_TDE.1280x720_hq.mp4">
+            <div class="Rubrikenkopf BildergalerieInlineHead">
+      </div>
+
+    <div id="bildergalerieContentContainer" class="BildergalerieInlineContent">
+                                  
+
+
+
+
+
+<div class="VideoContainer withCopyrightNoteAndBildunterschrift">
+   
+
+
+
+
+
+    <div id="fazVideo11856164">
+    <div id="fazVideo11856164_content">
+        <div class="VdoPlayerCtrls" style="display:none">
+            <div class="CtrlText">$stleKurz</div>
+        </div>
+        <video id="fazVideo11856164_contentElement" class="video-js vjs-default-skin vjs-big-play-centered" style="display:none">
+            <p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a></p>
+        </video>
+    </div>
+</div>
+</div>
+        
+        
+
+
+
+                        
+<span class="Bildnachweis">&#xA9; afp
+                  
+                        
+                                                 </span>
+
+
+                       <span class="Bildunterschrift">Mit dem Drohnen-Taxi durch die Luft</span>
+        
+                    </div>
+</div>
+                        
+        
+        
+                                                            <p>Wir kennen es aus jedem zweiten Science-Fiction-Film, in dem Roboter eine Rolle spielen: B&#xF6;sewichter &#xFC;bernehmen die Kontrolle und programmieren die Maschinen in ihrem Sinne um. Selbst der menschlichste aller androiden Roboter - &#x201E;Data&#x201C; aus Star Trek - wurde gleich mehrfach &#x201E;umgedreht&#x201C; und beinahe als Killermaschine missbraucht.</p>
+                        
+        
+        
+                                                            <h2>Wandelnde &#xDC;berwachungsmaschinen</h2><p>Zieht man die altehrw&#xFC;rdigen Regeln von Isaac Asimov aus dem Jahr 1942 heran, verst&#xF6;&#xDF;t der umprogrammierte &#x201E;Data&#x201C; gegen das erste Prinzip, dass n&#xE4;mlich der Roboter kein menschliches Wesen verletzen soll. Auch mit Asimovs zweiter Regel, der zufolge einem Befehl unbedingt Folge zu leisten ist, sofern er nicht mit der ersten Ma&#xDF;gabe kollidiert, steht &#x201E;Data&#x201C; in Konflikt. Aber Asimov hatte es auch noch nicht mit Hackern zu tun.</p>
+                        
+        
+        
+                                                            <p>Neben den physischen Gefahren, die in Filmen gern aus dramaturgischen Gr&#xFC;nden aufgegriffen werden, k&#xF6;nnen Roboter auch zu praktischen Datendieben umfunktioniert werden: Mit all ihren Sensoren und Speichern und wegen ihrer Interaktion mit Menschen eignen sie sich gut als wandelnde &#xDC;berwachungsmaschinen - zumindest in den H&#xE4;nden B&#xF6;swilliger. Man kann auch ihre Auftr&#xE4;ge sabotieren oder manipulieren und ihnen als fiesen Schabernack noch schlechte Manieren beibringen.</p>
+                        
+        
+        
+                                                            <h2>Simple Fehler</h2><p>F&#xFC;r den kommerziellen Markt von Robotern sind das keine guten Aussichten. Die Firma Piaggio stellte soeben den Gep&#xE4;ckroboter &#x201E;Gita&#x201C; vor, der geneigten Kunden selbstt&#xE4;tig folgen und ihnen etwa ihren Einkauf hinterhertragen soll. Dubai k&#xFC;ndigte grade an, im Juli dieses Jahres die ersten Testroboter f&#xFC;r den Lufttransport von Passagieren einsetzen zu wollen. Da kommt eine Diskussion um die IT-Sicherheit von Robotern ungelegen, denn mit Hacking oder Sabotage wollen die Anbieter sicher nicht in Verbindung gebracht werden.</p>
+                                </div>
+                
+    
+                    
+        <div class="clear"></div>
+    
+						<div id="ArticlePagerBottom">
+															1
+								 | 												<a class="redLink" href="http://www.faz.net/aktuell/feuilleton/aus-dem-maschinenraum/ioactive-deckt-sicherheitsluecken-bei-robotern-auf-14910628-p2.html" title="Seite 2">2</a>
+																		<a class="redLink" style="padding: 0 15px 0 15px;" href="http://www.faz.net/aktuell/feuilleton/aus-dem-maschinenraum/ioactive-deckt-sicherheitsluecken-bei-robotern-auf-14910628-p2.html" title="N&#xE4;chste Seite">N&#xE4;chste Seite</a>
+												<span>&#xA0;&#xA0;|&#xA0;&#xA0;<span id="artikelInOne" class="redLink" onclick="loadFullArticleContent(2)" rel="nofollow">Artikel&#xA0;auf&#xA0;einer&#xA0;Seite</span><span>
+			
+			</span></span></div>
+			
+
+</div><div class="FAZArtikelText js-article-footer">
+
+    <div class="ArtikelFooter">
+    <div><a class="small redLinkButton" id="backToHome" href="http://www.faz.net/" title="Zur Homepage FAZ.NET">Zur Homepage</a></div>
+        </div>     
+
+<div class="clear">&#xA0;</div>
+<div class="ArtikelAbbinder clearfix">
+	<div style="width: 30%; display: inline-block;">
+	<div class="sharebuttons" data-services="facebook,twitter,xing,mail" data-mode="short" data-mail-onclick="toggleMailLb();" data-drucken-onclick="ArtikelDrucken();" data-permalink-onclick="showPermaLink(this);" data-weitersagen-onclick="openSharebuttonDropDown(this);" data-comment-displayif-fn="document.querySelector(&apos;div#lesermeinungscontainer&apos;) !== null;"></div>
+    </div><div style="width: 65%; float:right; display: inline-block; text-align: right; padding-right: 10px;">
+	<div class="sharebuttons " data-services="comment,empfehlen,permalink,merken,drucken" data-mode="short" data-mail-onclick="toggleMailLb();" data-empfehlen-class="1_4910628" data-drucken-onclick="ArtikelDrucken();" data-permalink-onclick="showPermaLink(this);" data-comment-displayif-fn="document.querySelector(&apos;div#lesermeinungscontainer&apos;) !== null;"></div>
+	</div>
+</div>
+
+            <div id="lesermeinungscontainer" style="margin:40px 0px 0px;padding:0px;"></div>
+        
+    
+    
+    <p>        <div class="ThemenLinks">
+	Themen zu diesem Beitrag:
+	<ul>
+                            				<li>
+					<a class="redlink" title="Roboter" href="http://www.faz.net/aktuell/wissen/thema/roboter">Roboter</a>
+				</li>
+                    
+    		<li>
+			<a class="redlink" title="Alle Themen auf FAZ.NET" href="http://www.faz.net/themen/">Alle Themen</a>
+		</li>
+	</ul>
+</div>
+
+        
+    </p><p>
+	<span class="rechtehinweis">
+		<a href="http://www.faz-rechte.de/startseite.htm" class="LinkMehr">Hier k&#xF6;nnen Sie die Rechte an diesem Artikel erwerben</a>
+	</span>
+</p>
+    <p></p>
+                            <div class="stageModule Ressortmodul Rubrikenkopf clearfix" style="margin-bottom:0px; margin-top: 40px; width: 610px">Weitere Empfehlungen</div>
+    <div class="stageModule clearfix GETS;tk;artikel.empfehlungen.weitere-artikel;tp;content" style="width: 610px">
+        
+        
+        
+        
+            
+                <div class="Teaser620">
+                    
+                    <div class="MediaLink">
+                        <a title="Verschl&#xFC;sselung von Whatsapp wohl nicht geknackt" href="http://www.faz.net/aktuell/wirtschaft/netzwirtschaft/whatsapp-verschluesselung-konnte-cia-nicht-knacken-14914835.html">
+                            <img title="Verschl&#xFC;sselung von Whatsapp wohl nicht geknackt" height="107" alt="Verschl&#xFC;sselung von Whatsapp wohl nicht geknackt" width="190" class="media Teaserbild" src="http://media0.faz.net/ppmedia/aktuell/wirtschaft/1074319042/1.4914914/article_teaser/das-amerikanische.jpg">
+                            
+                        </a>
+                    </div>
+                    
+                    <a href="http://www.faz.net/aktuell/wirtschaft/netzwirtschaft/whatsapp-verschluesselung-konnte-cia-nicht-knacken-14914835.html" class="TeaserHeadLink">
+                        <span class="Stichwort">Wikileaks-Enth&#xFC;llungen</span>
+                        <span class="Headline">Verschl&#xFC;sselung von Whatsapp wohl nicht geknackt</span>
+                        
+                    </a>
+                    <p class="Copy">
+                        <span class="TeaserText">Die Sicherheitssoftware, die Messagingdienste einsetzen, ist offenbar von der CIA nicht angegriffen worden. Trotzdem kann der Geheimdienst Konversationen per Telefon mitlesen.</span>
+
+                        <a class="LinkMehr" title="Verschl&#xFC;sselung von Whatsapp wohl nicht geknackt" href="http://www.faz.net/aktuell/wirtschaft/netzwirtschaft/whatsapp-verschluesselung-konnte-cia-nicht-knacken-14914835.html">Mehr</a>
+                        
+                    </p>
+
+                    <div class="TeaserInfo">
+                        <span class="Date">08.03.2017, 12:36 Uhr</span> | Wirtschaft
+                    </div>
+
+                    <div class="clear"></div>
+                </div>
+            
+
+            
+                <div class="Teaser620">
+                    <div data-widget="plista_widget_retrescoAd_1">
+                    </div>
+                </div>
+            
+        
+            
+                <div class="Teaser620">
+                    
+                    <div class="MediaLink">
+                        <a title="Der Einkaufsroller" href="http://www.faz.net/aktuell/technik-motor/piaggio-gita-der-einkaufsroller-14911846.html">
+                            <img title="Der Einkaufsroller" height="107" alt="Der Einkaufsroller" width="190" class="media Teaserbild" src="http://media1.faz.net/ppmedia/aktuell/technik-motor/piaggiogit_06032017-1454/1.4911845/article_teaser/der-einkaufsroller.jpg">
+                            
+                            <img class="MediaIcon large Video first" src="http://www.faz.net/img/pixel.gif">
+                            
+                        </a>
+                    </div>
+                    
+                    <a href="http://www.faz.net/aktuell/technik-motor/piaggio-gita-der-einkaufsroller-14911846.html" class="TeaserHeadLink">
+                        <span class="Stichwort">Piaggio Gita</span>
+                        <span class="Headline">Der Einkaufsroller</span>
+                        
+                    </a>
+                    <p class="Copy">
+                        <span class="TeaserText">Gita ist ein kleiner Roller, der dem Besitzer immer folgt und seine Eink&#xE4;ufe tr&#xE4;gt. Doch einen Schwachpunkt hat der rollende Roboter von Piaggio.</span>
+
+                        <a class="LinkMehr" title="Der Einkaufsroller" href="http://www.faz.net/aktuell/technik-motor/piaggio-gita-der-einkaufsroller-14911846.html">Mehr</a>
+                        
+                    </p>
+
+                    <div class="TeaserInfo">
+                        <span class="Date">06.03.2017, 15:01 Uhr</span> | Technik-Motor
+                    </div>
+
+                    <div class="clear"></div>
+                </div>
+            
+
+            
+                <div class="Teaser620">
+                    <div data-widget="plista_widget_retrescoAd_2">
+                    </div>
+                </div>
+            
+        
+            
+                <div class="Teaser620">
+                    
+                    <div class="MediaLink">
+                        <a title="Schwunghafter Handel mit Sicherheitsl&#xFC;cken" href="http://www.faz.net/aktuell/wirtschaft/netzwirtschaft/cia-informierte-hersteller-nicht-ueber-sicherheitsluecken-14914952.html">
+                            <img title="Schwunghafter Handel mit Sicherheitsl&#xFC;cken" height="107" alt="Schwunghafter Handel mit Sicherheitsl&#xFC;cken" width="190" class="media Teaserbild" src="http://media0.faz.net/ppmedia/aktuell/wirtschaft/1074319042/1.4914914/article_teaser/das-amerikanische.jpg">
+                            
+                        </a>
+                    </div>
+                    
+                    <a href="http://www.faz.net/aktuell/wirtschaft/netzwirtschaft/cia-informierte-hersteller-nicht-ueber-sicherheitsluecken-14914952.html" class="TeaserHeadLink">
+                        <span class="Stichwort">&quot;Zero Day Exploits&quot;</span>
+                        <span class="Headline">Schwunghafter Handel mit Sicherheitsl&#xFC;cken</span>
+                        
+                    </a>
+                    <p class="Copy">
+                        <span class="TeaserText">Zero Day Exploits sind Sicherheitsl&#xFC;cken, von denen die Hersteller nichts wissen. Der Chaos Computer Club fordert gegen&#xFC;ber FAZ.NET nun eine Pflicht zur Ver&#xF6;ffentlichung.</span>
+
+                        <a class="LinkMehr" title="Schwunghafter Handel mit Sicherheitsl&#xFC;cken" href="http://www.faz.net/aktuell/wirtschaft/netzwirtschaft/cia-informierte-hersteller-nicht-ueber-sicherheitsluecken-14914952.html">Mehr</a>
+                        
+                        <span class="Autor">Von
+                            <span class="caps last">Michael Ashelm</span>
+                        </span>
+                        
+                    </p>
+
+                    <div class="TeaserInfo">
+                        <span class="Date">08.03.2017, 13:05 Uhr</span> | Wirtschaft
+                    </div>
+
+                    <div class="clear"></div>
+                </div>
+            
+
+            
+        
+            
+                <div class="Teaser620">
+                    
+                    <div class="MediaLink">
+                        <a title="Schwieriger Kampf gegen Strahlen und Atomm&#xFC;ll " href="http://www.faz.net/aktuell/wirtschaft/sechs-jahre-nach-fukushima-schwieriger-kampf-gegen-strahlen-und-atommuell-14905819.html">
+                            <img title="Schwieriger Kampf gegen Strahlen und Atomm&#xFC;ll " height="107" alt="Schwieriger Kampf gegen Strahlen und Atomm&#xFC;ll " width="190" class="media Teaserbild" src="http://media0.faz.net/ppmedia/aktuell/2691412307/1.4905826/article_teaser/45086778.jpg">
+                            
+                            <img class="MediaIcon large Video first" src="http://www.faz.net/img/pixel.gif">
+                            
+                        </a>
+                    </div>
+                    
+                    <a href="http://www.faz.net/aktuell/wirtschaft/sechs-jahre-nach-fukushima-schwieriger-kampf-gegen-strahlen-und-atommuell-14905819.html" class="TeaserHeadLink">
+                        <span class="Stichwort">Sechs Jahre nach Fukushima</span>
+                        <span class="Headline">Schwieriger Kampf gegen Strahlen und Atomm&#xFC;ll </span>
+                        
+                    </a>
+                    <p class="Copy">
+                        <span class="TeaserText">Rund sechs Jahre nach der Atomkatastrophe im japanischen Fukushima k&#xE4;mpfen die Verantwortlichen immer noch mit der Beseitigung der Folgen. Die Arbeiten gestalten sich schwierig: Die Werte sind immer noch so hoch, dass selbst Roboter-Technik versagt. </span>
+
+                        <a class="LinkMehr" title="Schwieriger Kampf gegen Strahlen und Atomm&#xFC;ll " href="http://www.faz.net/aktuell/wirtschaft/sechs-jahre-nach-fukushima-schwieriger-kampf-gegen-strahlen-und-atommuell-14905819.html">Mehr</a>
+                        
+                    </p>
+
+                    <div class="TeaserInfo">
+                        <span class="Date">02.03.2017, 14:12 Uhr</span> | Wirtschaft
+                    </div>
+
+                    <div class="clear"></div>
+                </div>
+            
+
+            
+        
+            
+                <div class="Teaser620">
+                    
+                    <div class="MediaLink">
+                        <a title="Tippfehler l&#xF6;ste Amazon-St&#xF6;rung aus" href="http://www.faz.net/aktuell/wirtschaft/netzwirtschaft/amazon-stoerung-kam-durch-tippfehler-snapchat-andere-betroffen-14907190.html">
+                            <img title="Tippfehler l&#xF6;ste Amazon-St&#xF6;rung aus" height="107" alt="Tippfehler l&#xF6;ste Amazon-St&#xF6;rung aus" width="190" class="media Teaserbild" src="http://media1.faz.net/ppmedia/aktuell/wirtschaft/429195526/1.4907207/article_teaser/ein-ausfall-bei-amazons-web.jpg">
+                            
+                        </a>
+                    </div>
+                    
+                    <a href="http://www.faz.net/aktuell/wirtschaft/netzwirtschaft/amazon-stoerung-kam-durch-tippfehler-snapchat-andere-betroffen-14907190.html" class="TeaserHeadLink">
+                        <span class="Stichwort">Snapchat und andere betroffen</span>
+                        <span class="Headline">Tippfehler l&#xF6;ste Amazon-St&#xF6;rung aus</span>
+                        
+                    </a>
+                    <p class="Copy">
+                        <span class="TeaserText">Die St&#xF6;rung bei Amazon, die den Ausfall vieler Websites nach sich zog, ist nicht durch Hackerangriffe verursacht worden. Der Fehler ist viel simpler.</span>
+
+                        <a class="LinkMehr" title="Tippfehler l&#xF6;ste Amazon-St&#xF6;rung aus" href="http://www.faz.net/aktuell/wirtschaft/netzwirtschaft/amazon-stoerung-kam-durch-tippfehler-snapchat-andere-betroffen-14907190.html">Mehr</a>
+                        
+                    </p>
+
+                    <div class="TeaserInfo">
+                        <span class="Date">03.03.2017, 09:56 Uhr</span> | Wirtschaft
+                    </div>
+
+                    <div class="clear"></div>
+                </div>
+            
+
+            
+        
+    </div>
+
+
+
+            
+    <div class="Anzeige GoogleAdsBuehne">
+    
+    	<div class="Anzeige BannerAd">         
+
+	</div>     	
+    	<div class="Anzeige BannerAd">         
+
+
+<div id="plista_widget_belowArticle" style="display:none"></div>
+
+
+
+	</div>     </div></div>
+</div>
+
+
+
+    <div id="ArtikelTabContent_1" class="FAZArtikelFotos" style="display:none">
+    </div>
+
+    <div id="ArtikelTabContent_2" class="FAZArtikelVideo" style="display:none">
+    </div>
+
+
+
+
+    <img src="http://www.faz.net/l.gif?a=1.4910628&amp;d=/2.252/2.1648/2.1707/2.1788">
+
+
+
+
+        <div id="FAZContentRight">
+        <div id="FAZContentRightInner">
+
+                    
+
+
+
+
+
+
+                    
+                                                                                                                                
+                                                                                <div class="MediaBox">
+	<div class="Rubrikenkopf">
+                                                        <a href="http://www.faz.net/aktuell/feuilleton/aus-dem-maschinenraum/eu-parlament-beschliesst-datenspeicherung-ab-2018-14889201.html" class="hover-parent">Aus dem Maschinenraum<span class="icon-forward_small"></span></a>
+                                    	</div>
+	<div class="MediaBoxInner">     
+			<div class="MediaLink">
+                                                					<a title="Allm&#xE4;hlich wird die Ausnahme zur Regel" href="http://www.faz.net/aktuell/feuilleton/aus-dem-maschinenraum/eu-parlament-beschliesst-datenspeicherung-ab-2018-14889201.html">
+                        
+
+
+
+
+
+
+
+
+                        
+                                                        
+    
+    <img title="Aus dem Maschinenraum: Allm&#xE4;hlich wird die Ausnahme zur Regel" height="163" alt="Aus dem Maschinenraum: Allm&#xE4;hlich wird die Ausnahme zur Regel" width="290" class="media" src="http://media1.faz.net/ppmedia/aktuell/feuilleton/1169897072/1.4890129/article_teaser_marginal/von-2018-an-werden-an.jpg">    
+			    	
+
+
+
+
+
+
+
+					</a>
+                			</div>
+        		<div class="MediaBoxTeaserThema">
+		    		    		                				<a class="TeaserHeadLink" href="http://www.faz.net/aktuell/feuilleton/aus-dem-maschinenraum/eu-parlament-beschliesst-datenspeicherung-ab-2018-14889201.html">
+					    <span class="Headline LinkMehr"><span class="">Allm&#xE4;hlich wird die Ausnahme zur Regel</span></span>
+				</a>
+            		</div>
+	</div>
+</div>                                                             	<div class="Anzeige MediumRectangle">      
+
+
+	</div>                                                 
+                                                                                <div class="MediaBox">
+	<div class="Rubrikenkopf">
+                                                        <a href="http://www.faz.net/aktuell/feuilleton/aus-dem-maschinenraum/aus-dem-maschinenraum-jetzt-ist-es-an-der-zeit-die-luecken-zu-schliessen-14852507.html" class="hover-parent">Aus dem Maschinenraum<span class="icon-forward_small"></span></a>
+                                    	</div>
+	<div class="MediaBoxInner">     
+			<div class="MediaLink">
+                                                					<a title="Jetzt ist es an der Zeit, die L&#xFC;cken zu schlie&#xDF;en" href="http://www.faz.net/aktuell/feuilleton/aus-dem-maschinenraum/aus-dem-maschinenraum-jetzt-ist-es-an-der-zeit-die-luecken-zu-schliessen-14852507.html">
+                        
+
+
+
+
+
+
+
+
+                        
+                                                        
+    
+    <img title="Kolumne &#x201E;Aus dem Maschinenraum&#x201C;: Jetzt ist es an der Zeit, die L&#xFC;cken zu schlie&#xDF;en" height="163" alt="Kolumne &#x201E;Aus dem Maschinenraum&#x201C;: Jetzt ist es an der Zeit, die L&#xFC;cken zu schlie&#xDF;en" width="290" class="media" src="http://media0.faz.net/ppmedia/aktuell/feuilleton/335973788/1.4858466/article_teaser_marginal/leeor-ben-peretz-vizechef-des.jpg">    
+			    	
+
+
+
+
+
+
+
+					</a>
+                			</div>
+        		<div class="MediaBoxTeaserThema">
+		    		    		                				<a class="TeaserHeadLink" href="http://www.faz.net/aktuell/feuilleton/aus-dem-maschinenraum/aus-dem-maschinenraum-jetzt-ist-es-an-der-zeit-die-luecken-zu-schliessen-14852507.html">
+					    <span class="Headline LinkMehr"><span class="">Jetzt ist es an der Zeit, die L&#xFC;cken zu schlie&#xDF;en</span></span>
+				</a>
+            		</div>
+	</div>
+</div>                                                             	<div class="Anzeige MediumRectangle">      
+	</div>                                                 
+                                                                        <div id="KM_7_1074826" class="KommentarBox">
+	<div class="Rubrikenkopf">
+        			<div class="right page_navigation"><a title="Vorheriger" onclick="previous(&quot;KM&quot;);" href="http://www.faz.net/aktuell/feuilleton/aus-dem-maschinenraum/ioactive-deckt-sicherheitsluecken-bei-robotern-auf-14910628.html#Zur&#xFC;ck" class="PfeilNavigation previous previous_link"><span class="icon-page_previous"></span></a>&#xA0;<a title="N&#xE4;chster" onclick="next(&quot;KM&quot;);" href="http://www.faz.net/aktuell/feuilleton/aus-dem-maschinenraum/ioactive-deckt-sicherheitsluecken-bei-robotern-auf-14910628.html#Vor" class="PfeilNavigation next next_link "><span class="icon-page_next"></span></a></div>        			<a title="Glosse" class="hover-parent" href="http://www.faz.net/uebersichten/kommentare/cid-7-1074826/">Glosse<span class="icon-forward_small"></span></a>
+        	</div>
+	<input type="hidden" class="current_page" value="0">
+	<input type="hidden" class="show_per_page" value="1">
+
+	<div class="pagerContent">
+
+            	                 
+                        <div style="display:block; background: url(&apos;http://media0.faz.net/ppmedia/redaktion/2644469990/1.2978716/avatarAuthor/kommentarportraet-spreckelsen.jpg&apos;) no-repeat scroll right bottom transparent;" class="KommentarBoxTeaser pagerBoxContentInner">
+	<div class="KommentarBoxTeaserInner ">
+		<p class="Headline"><a title="Lies dies!" class="" href="http://www.faz.net/aktuell/feuilleton/buecher/die-zehn-meistverkauften-reclam-titel-14913493.html">Lies dies!</a></p>
+        <span class="Autor">Von <span class="caps">Tilman Spreckelsen</span></span>		<p class="Copy">
+            <span style="cursor: pointer;" onclick="location=&apos;/aktuell/feuilleton/buecher/die-zehn-meistverkauften-reclam-titel-14913493.html&apos;">
+                Was verraten uns die zehn meistverkauften Reclam-Titel &#xFC;ber den Zeitgeist? Und &#xFC;ber das, was an den Schulen gelesen wird? Eine Klassiker-D&#xE4;mmerung erleben wir jedenfalls nicht.
+			</span>
+			<a title="Lies dies!" class="LinkMehr" href="http://www.faz.net/aktuell/feuilleton/buecher/die-zehn-meistverkauften-reclam-titel-14913493.html">Mehr</a>
+                        <span class="SocialMediaStatus">
+	                            <span class="icon-favorite 1_4913493" title="15 Mal empfohlen"></span><span class="SocialMediaStatusNumber">15</span>
+                </span>
+		</p>
+                        	
+	
+	</div>
+	<div class="clear"></div>
+</div>        	                 
+                        <div style="display:none; background: url(&apos;http://media1.faz.net/ppmedia/redaktion/1631830224/1.2973557/avatarAuthor/kommentarportraet-holm-kerstin.jpg&apos;) no-repeat scroll right bottom transparent;" class="KommentarBoxTeaser pagerBoxContentInner">
+	<div class="KommentarBoxTeaserInner ">
+		<p class="Headline"><a title="Ministerschl&#xE4;ue" class="" href="http://www.faz.net/aktuell/feuilleton/russlands-kulturminister-wladimir-medinski-unter-druck-14912036.html">Ministerschl&#xE4;ue</a></p>
+        <span class="Autor">Von <span class="caps">Kerstin Holm</span></span>		<p class="Copy">
+            <span style="cursor: pointer;" onclick="location=&apos;/aktuell/feuilleton/russlands-kulturminister-wladimir-medinski-unter-druck-14912036.html&apos;">
+                Den Mitarbeitern russischer Kultureinrichtungen wurden die Geh&#xE4;lter nicht gezahlt. Verantwortlich daf&#xFC;r ist der Kulturminister. Er ist damit besch&#xE4;ftigt, seine Dissertation zu verteidigen.
+			</span>
+			<a title="Ministerschl&#xE4;ue" class="LinkMehr" href="http://www.faz.net/aktuell/feuilleton/russlands-kulturminister-wladimir-medinski-unter-druck-14912036.html">Mehr</a>
+                        <span class="SocialMediaStatus">
+			<span class="icon-readercomment" title="3 Mal kommentiert"></span><span class="SocialMediaStatusNumber">3</span>
+                                <span class="icon-favorite 1_4912036" title="4 Mal empfohlen"></span><span class="SocialMediaStatusNumber">4</span>
+                </span>
+		</p>
+                        	
+	
+	</div>
+	<div class="clear"></div>
+</div>        	                 
+                        <div style="display:none; background: url(&apos;http://media0.faz.net/ppmedia/redaktion/1290917118/1.2978714/avatarAuthor/kommentarportraet-thomas-gina.jpg&apos;) no-repeat scroll right bottom transparent;" class="KommentarBoxTeaser pagerBoxContentInner">
+	<div class="KommentarBoxTeaserInner ">
+		<p class="Headline"><a title="Sie wollen keine James Bonds mehr" class="" href="http://www.faz.net/aktuell/feuilleton/der-britische-geheimdienst-sucht-neue-rekruten-14910365.html">Sie wollen keine James Bonds mehr</a></p>
+        <span class="Autor">Von <span class="caps">Gina Thomas, London</span></span>		<p class="Copy">
+            <span style="cursor: pointer;" onclick="location=&apos;/aktuell/feuilleton/der-britische-geheimdienst-sucht-neue-rekruten-14910365.html&apos;">
+                Der Geheimdienst seiner Majest&#xE4;t braucht im Kampf gegen den Terror neue Agenten. Die sollen aber nicht in jeder Lage zur Waffe greifen, sondern etwas ganz anderes k&#xF6;nnen. Die aktuelle Stellenbeschreibung l&#xE4;sst aufhorchen.
+			</span>
+			<a title="Sie wollen keine James Bonds mehr" class="LinkMehr" href="http://www.faz.net/aktuell/feuilleton/der-britische-geheimdienst-sucht-neue-rekruten-14910365.html">Mehr</a>
+                        <span class="SocialMediaStatus">
+			<span class="icon-readercomment" title="3 Mal kommentiert"></span><span class="SocialMediaStatusNumber">3</span>
+                                <span class="icon-favorite 1_4910365" title="3 Mal empfohlen"></span><span class="SocialMediaStatusNumber">3</span>
+                </span>
+		</p>
+                        	
+	
+	</div>
+	<div class="clear"></div>
+</div>        	                 
+                        <div style="display:none; background: url(&apos;http://media1.faz.net/ppmedia/redaktion/3621562117/1.2973551/avatarAuthor/kommentarportraet-hanfeld.jpg&apos;) no-repeat scroll right bottom transparent;" class="KommentarBoxTeaser pagerBoxContentInner">
+	<div class="KommentarBoxTeaserInner ">
+		<p class="Headline"><a title="Warum man mit dem Zweiten jetzt noch besser sieht" class="" href="http://www.faz.net/aktuell/feuilleton/fake-news-warum-man-mit-dem-zweiten-jetzt-noch-besser-sieht-14907888.html">Warum man mit dem Zweiten jetzt noch besser sieht</a></p>
+        <span class="Autor">Von <span class="caps">Michael Hanfeld</span></span>		<p class="Copy">
+            <span style="cursor: pointer;" onclick="location=&apos;/aktuell/feuilleton/fake-news-warum-man-mit-dem-zweiten-jetzt-noch-besser-sieht-14907888.html&apos;">
+                Die ARD baut eine Anti-Fake-News-Einheit auf, das ZDF sagt den Faktenfeinden den Kampf an. Nicht ganz uneigenn&#xFC;tzig, wenn man genauer hinschaut.
+			</span>
+			<a title="Warum man mit dem Zweiten jetzt noch besser sieht" class="LinkMehr" href="http://www.faz.net/aktuell/feuilleton/fake-news-warum-man-mit-dem-zweiten-jetzt-noch-besser-sieht-14907888.html">Mehr</a>
+                        <span class="SocialMediaStatus">
+			<span class="icon-readercomment" title="120 Mal kommentiert"></span><span class="SocialMediaStatusNumber">120</span>
+                                <span class="icon-favorite 1_4907888" title="233 Mal empfohlen"></span><span class="SocialMediaStatusNumber">233</span>
+                </span>
+		</p>
+                        	
+	
+	</div>
+	<div class="clear"></div>
+</div>        	                 
+                        <div style="display:none; background: url(&apos;http://media0.faz.net/ppmedia/redaktion/1818306529/1.3656356/avatarAuthor/kommentarportraet-diener.jpg&apos;) no-repeat scroll right bottom transparent;" class="KommentarBoxTeaser pagerBoxContentInner">
+	<div class="KommentarBoxTeaserInner ">
+		<p class="Headline"><a title="Computerspiel f&#xFC;r Aussteiger" class="" href="http://www.faz.net/aktuell/feuilleton/nach-thoreaus-walden-computerspiel-fuer-aussteiger-14907765.html">Computerspiel f&#xFC;r Aussteiger</a></p>
+        <span class="Autor">Von <span class="caps">Andrea Diener</span></span>		<p class="Copy">
+            <span style="cursor: pointer;" onclick="location=&apos;/aktuell/feuilleton/nach-thoreaus-walden-computerspiel-fuer-aussteiger-14907765.html&apos;">
+                Ausgerechnet der naturphilosophische Urtext aller Aussteiger, n&#xE4;mlich Henry David Thoreaus &#x201E;Walden&#x201C;, wurde als Computerspiel adaptiert. Herausgekommen ist ein Non-Action-Adventure, in dem Nichtstun belohnt wird.
+			</span>
+			<a title="Computerspiel f&#xFC;r Aussteiger" class="LinkMehr" href="http://www.faz.net/aktuell/feuilleton/nach-thoreaus-walden-computerspiel-fuer-aussteiger-14907765.html">Mehr</a>
+                        <span class="SocialMediaStatus">
+	                            <span class="icon-favorite 1_4907765" title="13 Mal empfohlen"></span><span class="SocialMediaStatusNumber">13</span>
+                </span>
+		</p>
+                        	
+	
+	</div>
+	<div class="clear"></div>
+</div>        	                 
+                        <div style="display:none; background: url(&apos;http://media1.faz.net/ppmedia/redaktion/732514321/1.2979363/avatarAuthor/kommentarportraet-rossmann.jpg&apos;) no-repeat scroll right bottom transparent;" class="KommentarBoxTeaser pagerBoxContentInner">
+	<div class="KommentarBoxTeaserInner ">
+		<p class="Headline"><a title="Ein Bild der Stadt" class="" href="http://www.faz.net/aktuell/feuilleton/acht-jahre-nach-einsturz-des-koelner-stadtarchivs-14906209.html">Ein Bild der Stadt</a></p>
+        <span class="Autor">Von <span class="caps">Andreas Rossmann</span></span>		<p class="Copy">
+            <span style="cursor: pointer;" onclick="location=&apos;/aktuell/feuilleton/acht-jahre-nach-einsturz-des-koelner-stadtarchivs-14906209.html&apos;">
+                Heute vor acht Jahren ist das K&#xF6;lner Stadtarchiv in ein tiefes Loch gefallen, doch die Stadt hat sich noch immer nicht wieder heraus gearbeitet. Der Fall droht zu einem Sinnbild verkorkster K&#xF6;lner Stadtpolitik zu werden. 
+			</span>
+			<a title="Ein Bild der Stadt" class="LinkMehr" href="http://www.faz.net/aktuell/feuilleton/acht-jahre-nach-einsturz-des-koelner-stadtarchivs-14906209.html">Mehr</a>
+                        <span class="SocialMediaStatus">
+	                            <span class="icon-favorite 1_4906209" title="8 Mal empfohlen"></span><span class="SocialMediaStatusNumber">8</span>
+                </span>
+		</p>
+                        	
+	
+	</div>
+	<div class="clear"></div>
+</div>        	                 
+                        <div style="display:none; background: url(&apos;http://media0.faz.net/ppmedia/redaktion/2644469990/1.2978716/avatarAuthor/kommentarportraet-spreckelsen.jpg&apos;) no-repeat scroll right bottom transparent;" class="KommentarBoxTeaser pagerBoxContentInner">
+	<div class="KommentarBoxTeaserInner ">
+		<p class="Headline"><a title="Trumps Wiederkehr" class="" href="http://www.faz.net/aktuell/feuilleton/wie-aus-dem-kinderbuch-trump-redivivus-14904274.html">Trumps Wiederkehr</a></p>
+        <span class="Autor">Von <span class="caps">Tilman Spreckelsen</span></span>		<p class="Copy">
+            <span style="cursor: pointer;" onclick="location=&apos;/aktuell/feuilleton/wie-aus-dem-kinderbuch-trump-redivivus-14904274.html&apos;">
+                An die Macht kam er, weil er den Gegner vor der entscheidenden Abstimmung heimt&#xFC;ckisch schw&#xE4;chte, und er verbreitet Angst und Schrecken: &#xFC;ber die R&#xFC;ckkehr eines Widersachers wie aus dem Kinderbuch.
+			</span>
+			<a title="Trumps Wiederkehr" class="LinkMehr" href="http://www.faz.net/aktuell/feuilleton/wie-aus-dem-kinderbuch-trump-redivivus-14904274.html">Mehr</a>
+                        <span class="SocialMediaStatus">
+	                            <span class="icon-favorite 1_4904274" title="11 Mal empfohlen"></span><span class="SocialMediaStatusNumber">11</span>
+                </span>
+		</p>
+                        	
+	
+	</div>
+	<div class="clear"></div>
+</div>    	</div>
+	<div class="clear"></div>
+</div>
+
+    	
+                    
+                                                                                                                                            
+                                                                        
+
+<div class="SammelTeaserBox" id="blogBox">
+    <div class="Rubrikenkopf">
+        <div class="right page_navigation"></div>
+        <a title="F.A.Z.-Blogs" class="hover-parent" href="http://blogs.faz.net/">F.A.Z.-Blogs<span class="icon-forward_small"></span></a>
+    </div>
+    <input type="hidden" class="current_page">
+    <input type="hidden" class="show_per_page">
+
+    <div class="pagerContent">
+  <div class="pagerBoxContentInner">
+    <ul class="blogList">
+      <li>
+              <a href="http://blogs.faz.net/blogseminar/rollenspiel-statt-urwaldvoelker-feldforschung-2-0/" class="clearfix hover-parent" title="Blogseminar" alt="Blogseminar">
+          <span class="brTxt left">
+            <span class="author">Katharina Wilhelm</span>
+            <span class="blogTitle">Blogseminar<span style="margin-left:5px;line-height:11px" class="icon-forward_small">&#xA0;</span></span>
+            <span class="Headline">
+              Ein Rollenspiel ist keine Feldforschung<span class="redArrow">&#xA0;</span>
+            </span>
+          </span>
+
+
+          <img class="brImg" src="http://www.faz.net/cp10800/-blogs-/statictimthumb/wp-content/blogs.dir/92/files/2016/12/cropped-Blogseminar1-111x60_c.jpg" alt="Blogseminar">
+        </a>
+      </li>
+      <li>
+              <a href="http://blogs.faz.net/foodaffair/2017/03/08/fasten-himmel-oder-hoelle-1373/" class="clearfix hover-parent" title="Food Affair" alt="Food Affair">
+          <span class="brTxt left">
+            <span class="author">Diana von Kopp</span>
+            <span class="blogTitle">Food Affair<span style="margin-left:5px;line-height:11px" class="icon-forward_small">&#xA0;</span></span>
+            <span class="Headline">
+              Fasten: Himmel oder H&#xF6;lle?<span class="redArrow">&#xA0;</span>
+            </span>
+          </span>
+
+
+          <img class="brImg" src="http://www.faz.net/cp10800/-blogs-/statictimthumb/wp-content/blogs.dir/81/files/2015/05/cropped-Essen-neu-Headerbild-111x60_c.jpg" alt="Food Affair">
+        </a>
+      </li>
+      <li>
+              <a href="http://blogs.faz.net/comic/2017/03/07/maerchenhaft-irritieren-986/" class="clearfix hover-parent" title="Comic" alt="Comic">
+          <span class="brTxt left">
+            <span class="author">Andreas Platthaus</span>
+            <span class="blogTitle">Comic<span style="margin-left:5px;line-height:11px" class="icon-forward_small">&#xA0;</span></span>
+            <span class="Headline">
+              M&#xE4;rchenhaft irritieren<span class="redArrow">&#xA0;</span>
+            </span>
+          </span>
+
+
+          <img class="brImg" src="http://www.faz.net/cp10800/-blogs-/statictimthumb/wp-content/blogs.dir/16/files/2014/11/cropped-Comic-111x60_c.jpg" alt="Comic">
+        </a>
+      </li>
+    </ul> 
+  </div> 
+  <div class="pagerBoxContentInner">
+    <ul class="blogList">
+      <li>
+              <a href="http://blogs.faz.net/stuetzen/2017/03/06/das-grosse-stimmenfasten-bei-den-gruenen-7505/" class="clearfix hover-parent" title="St&#xFC;tzen der Gesellschaft" alt="St&#xFC;tzen der Gesellschaft">
+          <span class="brTxt left">
+            <span class="author">Don Alphonso</span>
+            <span class="blogTitle">St&#xFC;tzen der Gesellschaft<span style="margin-left:5px;line-height:11px" class="icon-forward_small">&#xA0;</span></span>
+            <span class="Headline">
+              Das grosse Stimmenfasten bei den Gr&#xFC;nen<span class="redArrow">&#xA0;</span>
+            </span>
+          </span>
+
+
+          <img class="brImg" src="http://www.faz.net/cp10800/-blogs-/statictimthumb/wp-content/blogs.dir/11/files/2014/11/cropped-St&#xFC;tzen-der-Gesellschaft-111x60_c.jpg" alt="St&#xFC;tzen der Gesellschaft">
+        </a>
+      </li>
+      <li>
+              <a href="http://blogs.faz.net/pop-anthologie/2017/03/03/the-shins-new-slang-316/" class="clearfix hover-parent" title="Pop-Anthologie" alt="Pop-Anthologie">
+          <span class="brTxt left">
+            <span class="author">Jan Wiele</span>
+            <span class="blogTitle">Pop-Anthologie<span style="margin-left:5px;line-height:11px" class="icon-forward_small">&#xA0;</span></span>
+            <span class="Headline">
+              The Shins: &#x201E;New Slang&#x201C;<span class="redArrow">&#xA0;</span>
+            </span>
+          </span>
+
+
+          <img class="brImg" src="http://www.faz.net/cp10800/-blogs-/statictimthumb/wp-content/blogs.dir/94/files/2016/12/cropped-NEUFFMPopanthologie_NEU-1-111x60_c.jpg" alt="Pop-Anthologie">
+        </a>
+      </li>
+      <li>
+              <a href="http://blogs.faz.net/deus/2017/03/03/europaeischer-tod-in-la-la-land-4185/" class="clearfix hover-parent" title="Deus ex Machina" alt="Deus ex Machina">
+          <span class="brTxt left">
+            <span class="author">Don Alphonso</span>
+            <span class="blogTitle">Deus ex Machina<span style="margin-left:5px;line-height:11px" class="icon-forward_small">&#xA0;</span></span>
+            <span class="Headline">
+              Europ&#xE4;ischer Tod in La La Land<span class="redArrow">&#xA0;</span>
+            </span>
+          </span>
+
+
+          <img class="brImg" src="http://www.faz.net/cp10800/-blogs-/statictimthumb/wp-content/blogs.dir/14/files/2014/11/cropped-Deus-ex-machina-111x60_c.jpg" alt="Deus ex Machina">
+        </a>
+      </li>
+    </ul> 
+  </div> 
+  <div class="pagerBoxContentInner">
+    <ul class="blogList">
+      <li>
+              <a href="http://blogs.faz.net/bierblog/2017/03/02/ist-berliner-weisse-doch-trinkbar-1726/" class="clearfix hover-parent" title="Reinheitsgebot" alt="Reinheitsgebot">
+          <span class="brTxt left">
+            <span class="author">Uwe Ebbinghaus</span>
+            <span class="blogTitle">Reinheitsgebot<span style="margin-left:5px;line-height:11px" class="icon-forward_small">&#xA0;</span></span>
+            <span class="Headline">
+              Ist Berliner Wei&#xDF;e doch trinkbar?<span class="redArrow">&#xA0;</span>
+            </span>
+          </span>
+
+
+          <img class="brImg" src="http://www.faz.net/cp10800/-blogs-/statictimthumb/wp-content/blogs.dir/89/files/2016/02/cropped-blogbild-bier-final-3-111x60_c.jpg" alt="Reinheitsgebot">
+        </a>
+      </li>
+      <li>
+              <a href="http://blogs.faz.net/schachblog/2017/02/28/carlsen-in-karlsruhe-und-bei-den-simpsons-817/" class="clearfix hover-parent" title="Ber&#xFC;hrt, gef&#xFC;hrt" alt="Ber&#xFC;hrt, gef&#xFC;hrt">
+          <span class="brTxt left">
+            <span class="author">Stefan L&#xF6;ffler</span>
+            <span class="blogTitle">Ber&#xFC;hrt, gef&#xFC;hrt<span style="margin-left:5px;line-height:11px" class="icon-forward_small">&#xA0;</span></span>
+            <span class="Headline">
+              Carlsen in Karlsruhe &#x2013; und bei den Simpsons<span class="redArrow">&#xA0;</span>
+            </span>
+          </span>
+
+
+          <img class="brImg" src="http://www.faz.net/cp10800/-blogs-/statictimthumb/wp-content/blogs.dir/91/files/2016/07/cropped-blog_schach_uebersichtbox-111x60_c.jpg" alt="Ber&#xFC;hrt, gef&#xFC;hrt">
+        </a>
+      </li>
+      <li>
+              <a href="http://blogs.faz.net/digital/2017/02/25/hermann-goering-inbegriff-des-faschismus-und-die-unmoeglichkeit-geschichtlicher-wiederkehr-1180/" class="clearfix hover-parent" title="Digital/Pausen" alt="Digital/Pausen">
+          <span class="brTxt left">
+            <span class="author">Hans Ulrich Gumbrecht</span>
+            <span class="blogTitle">Digital/Pausen<span style="margin-left:5px;line-height:11px" class="icon-forward_small">&#xA0;</span></span>
+            <span class="Headline">
+              Hermann G&#xF6;ring, Inbegriff des Faschismus, und die (Un)M&#xF6;glichkeit geschichtlicher Wiederkehr<span class="redArrow">&#xA0;</span>
+            </span>
+          </span>
+
+
+          <img class="brImg" src="http://www.faz.net/cp10800/-blogs-/statictimthumb/wp-content/blogs.dir/10/files/2014/11/cropped-Digital-Pausen-111x60_c.jpg" alt="Digital/Pausen">
+        </a>
+      </li>
+    </ul> 
+  </div> 
+
+  </div>    
+</div>
+
+
+
+
+
+                
+                                                                                                        
+                                                                                            <div class="TickerBox NLForm">
+
+<div class="Rubrikenkopf "><a href="https://www.faz.net/newsletter-auth/" title="Zur &#xDC;bersicht aller Newsletter" class="hover-parent">F.A.Z.-Newsletter<span class="icon-forward_small"></span></a></div>
+                                                                                                                                    
+<div class="Teaser300 First NLSignUp">
+<img src="http://media0.faz.net/ppmedia/aktuell/2893616798/1.3790289/default/newsletter-box-literatur.jpg" width="300">
+  <div class="teaserInner linkable">   
+  <h2>
+ <span class="Headline" style="font-size:13px;color:#333">Abonnieren Sie den Newsletter &#x201E;Literatur&#x201C;</span>
+  </h2>
+
+<div id="success" class="ErrMsg"></div>
+
+                
+</div> 
+               
+</div> 
+</div> 
+</div> 
+
+
+
+
+
+
+                    
+                                                                                                                                            
+                                                                        
+
+
+
+                                
+    
+
+        
+    
+
+<div class="MediaBox">
+    <div class="Rubrikenkopf">
+                    <a href="http://www.faz.net/uebersichten/multimedia/feuilleton-2-1707/?cid=" class="linkExtern hover-parent">Videos &amp; Multimedia: Feuilleton<span class="icon-external_link"></span></a>
+            </div>
+
+
+            <div class="BoxenReiter">
+                                	<a id="MediaBoxTab_7.1595238_0" class="Reiter Selected " data-trackivw="1" onclick="ToggleTabsNoRemove(&apos;MediaBoxTab_7.1595238&apos;,0,1, false);">Video</a>
+                                                	<a id="MediaBoxTab_7.1595238_1" class="Reiter " data-trackivw="1" onclick="ToggleTabsNoRemove(&apos;MediaBoxTab_7.1595238&apos;,1,1, false);">Top 2</a>
+                                                                                                                                                                                                            <div class="clear"></div>
+        </div>
+    
+    <div class="MediaBoxInner">
+
+                                        
+                            
+                                <div style="display: block;" id="MediaBoxTab_7.1595238Content_0">
+
+            
+                                                                                                                                                            
+
+
+                
+
+<div class="VideoContainer">
+                    
+        <div id="DivFlash_1_4914981">
+            <a title="Video abspielen" href="http://www.faz.net/aktuell/feuilleton/kino/video-filmkritiken/filmkritik-videos/filmkritik-moonlight-der-oscargewinner-ist-da-14914981.html">
+                            
+
+
+
+
+
+
+
+
+                        
+                                                        
+    
+    <img height="163" width="290" class="media" src="http://media0.faz.net/ppmedia/aktuell/feuilleton/moonlight_c_a24_dc_07032017-1854/1.4914984/article_teaser_marginal/kopie-von-moonlight.jpg">    
+                            
+
+
+
+
+
+    <span class="MediaIcon large first">
+        <span class="icon-play30"></span>
+    </span>
+                                                            <div class="VdoTeaserOverlay290">
+                                                            <span class="Headline left">Verena Lueken &#xFC;ber den Oscargewinner &#x201E;Moonlight&#x201C;</span>
+                                                    </div>
+                                                </a>
+
+            <div class="clear"></div>
+        </div>
+    </div>
+                                                                                                                                                                                                                                                    
+
+
+                
+
+<div class="VideoContainer">
+                    
+        <div id="DivFlash_1_4914586">
+            <a title="Video abspielen" href="http://www.faz.net/aktuell/feuilleton/fluechtling-gegen-internetriese-erfolg-fuer-facebook-in-wuerzburger-fake-news-prozess-14914586.html">
+                            
+
+
+
+
+
+
+
+
+                        
+                                                        
+    
+    <img height="163" width="290" class="media" src="http://media0.faz.net/ppmedia/video/2817996368/1.4914638/article_teaser_marginal/45188009.jpg">    
+                            
+
+
+
+
+
+    <span class="MediaIcon large first">
+        <span class="icon-play30"></span>
+    </span>
+                                                            <div class="VdoTeaserOverlay290">
+                                                            <span class="Headline left">Erfolg f&#xFC;r Facebook in W&#xFC;rzburger Fake-News-Prozess</span>
+                                                    </div>
+                                                </a>
+
+            <div class="clear"></div>
+        </div>
+    </div>
+                                                                                                                                                                                                                                                    
+
+
+                
+
+<div class="VideoContainer">
+                    
+        <div id="DivFlash_1_4914213">
+            <a title="Video abspielen" href="http://www.faz.net/aktuell/feuilleton/kairo-lebendige-menschen-als-gemaelde-14914213.html">
+                            
+
+
+
+
+
+
+
+
+                        
+                                                        
+    
+    <img height="163" width="290" class="media" src="http://media0.faz.net/ppmedia/aktuell/2980705081/1.4914216/article_teaser_marginal/45180519.jpg">    
+                            
+
+
+
+
+
+    <span class="MediaIcon large first">
+        <span class="icon-play30"></span>
+    </span>
+                                                            <div class="VdoTeaserOverlay290">
+                                                            <span class="Headline left">Lebendige Menschen als Gem&#xE4;lde</span>
+                                                    </div>
+                                                </a>
+
+            <div class="clear"></div>
+        </div>
+    </div>
+                                                                                                    
+            <div class="clear"></div>
+            <div class="linkAlle">
+                <a class="hover-parent" href="http://www.faz.net/uebersichten/multimedia/mmotype-video/" title="Alle Videos">Alle Videos<span class="icon-forward_small"></span></a>
+            </div>
+        </div>
+                        
+                                                        <div style="display: none;" id="MediaBoxTab_7.1595238Content_1">
+        
+        
+                                            <div class="TopListenBoxTeaser clearfix" style="padding-top: 0px;">
+                <div class="teaserInner">
+
+                    <div class="MediaLink" title="Filmkritik &#x201E;Moonlight&#x201C;: Der Oscargewinner ist da" onclick="window.location.href=&apos;/aktuell/feuilleton/kino/video-filmkritiken/filmkritik-videos/filmkritik-moonlight-der-oscargewinner-ist-da-14914981.html&apos;">
+                                                                                                                                            
+
+    
+
+
+
+
+
+
+                        
+                                                        
+    
+    <img height="109" width="290" class="media TeaserBild" src="http://media0.faz.net/ppmedia/aktuell/feuilleton/moonlight_c_a24_dc_07032017-1854/1.4914984/teaser_290_109/kopie-von-moonlight.jpg">    
+                        
+
+
+
+
+
+
+
+        <a title="Video" href="http://www.faz.net/aktuell/feuilleton/kino/video-filmkritiken/filmkritik-videos/filmkritik-moonlight-der-oscargewinner-ist-da-14914981.html">
+                <div class="MediaIcon large first">
+            <span class="icon-play30"></span>
+        </div>
+    </a>
+                                        </div>
+
+
+                    <span class="Rank" title="Filmkritik &#x201E;Moonlight&#x201C;: Der Oscargewinner ist da">1</span>
+                    <p class="Headline" title="Filmkritik &#x201E;Moonlight&#x201C;: Der Oscargewinner ist da" onclick="window.location.href=&apos;/aktuell/feuilleton/kino/video-filmkritiken/filmkritik-videos/filmkritik-moonlight-der-oscargewinner-ist-da-14914981.html&apos;">
+                        <a href="http://www.faz.net/aktuell/feuilleton/kino/video-filmkritiken/filmkritik-videos/filmkritik-moonlight-der-oscargewinner-ist-da-14914981.html" title="Filmkritik &#x201E;Moonlight&#x201C;: Der Oscargewinner ist da" class="arrowLink">
+                            <span class="Stichwort">Filmkritik &#x201E;Moonlight&#x201C;</span><br>Der Oscargewinner ist da</a>
+                    </p>
+                </div>
+
+            </div>
+                                <div class="TopListenBoxTeaser clearfix" style="">
+                <div class="teaserInner">
+
+                    <div class="MediaLink" title="Kairo: Lebendige Menschen als Gem&#xE4;lde" onclick="window.location.href=&apos;/aktuell/feuilleton/kairo-lebendige-menschen-als-gemaelde-14914213.html&apos;">
+                                                                                                                                            
+
+    
+
+
+
+
+
+
+                        
+                                                        
+    
+    <img height="80" width="80" class="media TeaserBild right" src="http://media0.faz.net/ppmedia/aktuell/2980705081/1.4914216/stoerer/45180519.jpg">    
+                        
+
+
+
+
+
+
+
+        <a title="Video" href="http://www.faz.net/aktuell/feuilleton/kairo-lebendige-menschen-als-gemaelde-14914213.html">
+                <div class="MediaIcon small first">
+            <span class="icon-play25"></span>
+        </div>
+    </a>
+                                        </div>
+
+
+                    <span class="Rank" title="Kairo: Lebendige Menschen als Gem&#xE4;lde">2</span>
+                    <p class="Headline" title="Kairo: Lebendige Menschen als Gem&#xE4;lde" onclick="window.location.href=&apos;/aktuell/feuilleton/kairo-lebendige-menschen-als-gemaelde-14914213.html&apos;">
+                        <a href="http://www.faz.net/aktuell/feuilleton/kairo-lebendige-menschen-als-gemaelde-14914213.html" title="Kairo: Lebendige Menschen als Gem&#xE4;lde" class="arrowLink">
+                            <span class="Stichwort">Kairo</span><br>Lebendige Menschen als Gem&#xE4;lde</a>
+                    </p>
+                </div>
+
+            </div>
+                <div class="clear"></div>
+    </div>
+            
+                                            
+            
+                                            
+            
+                                            
+            
+                                            
+            
+    </div>
+</div>
+                
+                                                                                                 	<div class="Anzeige MediumRectangle">      
+	</div>                                                                                 
+        
+    </div>      <div id="FAZContentRightInnerEmpty">
+    </div>      <div class="clear"></div>
+</div>             
+        
+
+            
+    <div class="clear"></div>
+</div> 
+<div class="ContentFooter js-content-footer">
+                    
+
+
+    <div class="Breadcrumbs">
+        <ul>
+                                                        <li class="First">
+                                                                                                                                <a href="http://www.faz.net/" class="NavStep First">
+    <span>Home</span>
+    </a>
+                                                                                                        </li>
+                                                                <li>
+                                                                                                                                <a href="http://www.faz.net/aktuell/feuilleton/" class="NavStep">
+    <span>Feuilleton</span>
+    </a>
+                                                                                                        </li>
+                                                                <li>
+                                                                                                                                <a href="http://www.faz.net/aktuell/feuilleton/aus-dem-maschinenraum/" class="NavStep">
+    <span>Aus dem Maschinenraum</span>
+    </a>
+                                                                                                        </li>
+                                        </ul>
+                            <span class="h1">IOActive deckt Sicherheitsl&#xFC;cken bei Robotern auf</span>
+            </div>
+        <a class="PagetopLink" href="http://www.faz.net/aktuell/feuilleton/aus-dem-maschinenraum/ioactive-deckt-sicherheitsluecken-bei-robotern-auf-14910628.html#TOP">Nach oben</a>
+    <div class="clear"></div>
+</div>                                 
+
+<div class="ServicesFooter">
+    <div class="Rubrikenkopf">
+		<a class="linkIntern hover-parent" href="http://www.faz.net/faz-net-services">Top-Services<span class="icon-forward_small"></span></a>
+    </div>
+    <div class="ServicesList15 clearfix">
+        <a class="icon-services_abo-services" href="https://abo.faz.net/" title="Abo-Services"><span class="services-txt">Abo-Services</span></a>
+        <a class="icon-services_boersen_und_maerkte GETS;lk;top.finanzservices;lp;finanzservices" href="http://www.faz.net/aktuell/finanzen/boersen-maerkte/" title="B&#xF6;rsen &amp; M&#xE4;rkte"><span class="services-txt">B&#xF6;rsen &amp; M&#xE4;rkte</span></a>
+        <a class="icon-services_faznet_als-startseite GETS;lk;top.faz-net-startseite;lp;servicebox" href="http://www.faz.net/faz-net-services/meine-services/faz-net-als-startseite/" title="FAZ.NET als Startseite" id="faz4startseite"><span class="services-txt">FAZ.NET als Startseite</span></a>
+        <a class="icon-services_faznet_mobil GETS;lk;top.faz-net-mobil;lp;servicebox" href="http://www.faz.net/faz-net-services/mobil/faz-net-mobil-die-mobile-webseite-von-faz-net-11127238.html" title="FAZ.NET-Mobil"><span class="services-txt">FAZ.NET-Mobil</span></a>
+        <a class="icon-services_finanz-services GETS;lk;top.finanzcheck;lp;servicebox" href="http://www.faz.net/faz-net-services/finanz-services/" title="Finanz-Services"><span class="services-txt">Finanz-Services</span></a>
+        <a class="icon-services_gastarife GETS;lk;top.gastarife;lp;servicebox" href="http://tarife.faz.net/gas/" title="Gastarife"><span class="services-txt">Gastarife</span></a>
+        <a class="icon-services_tablet_applikation" href="http://www.faz.net/f-a-z-mobil/die-faz-und-fas-fuer-ios-android-kindle-und-windows-12931896.html" title="Tablet Apps"><span class="services-txt">Tablet Apps</span></a>
+        <a class="icon-services_smartphone-apps" href="http://www.faz.net/f-a-z-mobil/unsere-angebote-fuer-ihr-smartphone/" title="Smartphone Apps"><span class="services-txt">Smartphone Apps</span></a>
+        <a class="icon-services_kulturkalender GETS;lk;top.kulturkalender;lp;servicebox" href="http://kulturkalender.faz.net/" title="Kulturkalender"><span class="services-txt">Kulturkalender</span></a>
+        <a class="icon-services_live-ticker GETS;lk;top.sportliveticker;lp;servicebox" href="http://www.faz.net/faz-net-services/sport-live-ticker/" title="Live-Ticker"><span class="services-txt">Live-Ticker</span></a>
+        <a class="icon-services_newsletter GETS;lk;top.newsletter;lp;servicebox" href="http://www.faz.net/hilfe/welche-newsletter-gibt-es-und-wie-koennen-sie-diese-abonnieren-11131621.html" title="Newsletter"><span class="services-txt">Newsletter</span></a>
+        <a class="icon-services_rezensionen GETS;lk;top.rezensionen;lp;servicebox" href="http://www.faz.net/aktuell/feuilleton/buecher/rezensionen/" title="Rezensionen"><span class="services-txt">Rezensionen</span></a>
+        <a class="icon-services_routenplaner GETS;lk;top.routenplaner;lp;servicebox" href="http://www.faz.net/aktuell/reise/routenplaner/routenplaner-11128820.html" title="Routenplaner"><span class="services-txt">Routenplaner</span></a>
+        <a class="icon-services_rss-feed GETS;lk;top.rss-feed;lp;servicebox" href="http://www.faz.net/faz-net-services/mobil/rss-feed-nichts-verpassen-mit-den-rss-angeboten-von-faz-net-11124617.html" title="RSS-Feed"><span class="services-txt">RSS-Feed</span></a>
+        <a class="icon-services_spiele GETS;lk;top.wetter;lp;servicebox" href="http://www.faz.net/faz-net-services/unterhaltung/" title="Spiele"><span class="services-txt">Spiele</span></a>
+        <a class="icon-services_stromtarife GETS;lk;top.stromtarife;lp;servicebox" href="http://tarife.faz.net/strom/" title="Stromtarife"><span class="services-txt">Stromtarife</span></a>
+        <a class="icon-services_telefon-konferenz GETS;lk;top.telefonkonferenz;lp;telefonkonferenz First" href="http://www.faz.net/faz-net-services/meine-services/telefonkonferenzen-kostenlos-online-buchen-11127214.html" title="F.A.Z. Telefonkonferenz"><span class="services-txt">F.A.Z. Telefonkonferenz</span></a>
+        <a class="icon-services_ticket-portal GETS;lk;top.ticket-portal;lp;servicebox" href="http://www.faz.net/aktuell/feuilleton/eventim-ticketportal-11228131.html" title="Ticket-Portal"><span class="services-txt">Ticket-Portal</span></a>
+        <a class="icon-services_tv-programm GETS;lk;top.tv-programm;lp;servicebox" href="http://tv.faz.net/programmvorschau.php" title="TV-Programm"><span class="services-txt">TV-Programm</span></a>
+        <a class="icon-services_wetter GETS;lk;top.wetter;lp;servicebox" href="http://wetter.faz.net/" title="Wetter"><span class="services-txt">Wetter</span></a>
+        <a class="icon-services_50-plus GETS;lk;top.Fuenfzigplus;lp;servicebox" href="http://50plus.faz.net/" title="50 Plus"><span class="services-txt">50 Plus</span></a>
+      </div>
+</div>
+                  
+    <div id="FAZFooter">
+      <div id="FooterLogo">
+			<div style="height:61px;">
+				<img style="margin-top:16px;" src="http://www.faz.net/img/fazlogo_footer.png" width="161" height="auto" alt="Frankfurter Allgemeine Zeitung - FAZ.NET">
+		    </div>
+      
+
+   <div class="QuickSearchBox" style="margin-top:-54px;border:0 !important;">
+    
+  </div> 
+
+
+      </div>
+      
+      <div id="FooterSitemap">
+
+        
+     <ul>
+            <li><a href="http://www.faz.net/" class="HeadLink">Startseite</a></li>
+    </ul>
+    
+     <ul>
+            <li><a href="http://www.faz.net/aktuell/politik/">Politik</a></li>
+            <li><a href="http://www.faz.net/aktuell/wirtschaft/">Wirtschaft</a></li>
+			<li><a href="http://www.faz.net/aktuell/finanzen/">Finanzen</a></li>
+            
+    </ul>
+    
+    <ul>
+            <li><a href="http://www.faz.net/aktuell/feuilleton/">Feuilleton</a></li>
+			<li><a href="http://www.faz.net/aktuell/sport/">Sport</a></li>
+            <li><a href="http://www.faz.net/aktuell/gesellschaft/">Gesellschaft</a></li>      
+            
+    </ul>
+    
+    
+        <ul>
+          <li><a href="http://www.faz.net/aktuell/stil/">Stil</a></li>            
+          <li><a href="http://www.faz.net/aktuell/technik-motor/">Technik &amp; Motor</a></li>
+            <li><a href="http://www.faz.net/aktuell/wissen/">Wissen</a></li>
+    </ul>
+        <ul>
+            <li><a href="http://www.faz.net/aktuell/reise/">Reise</a></li>
+            <li><a href="http://www.faz.net/aktuell/beruf-chance/">Beruf &amp; Chance</a></li>          
+            <li><a href="http://www.faz.net/aktuell/rhein-main/">Rhein-Main</a></li>
+    </ul>
+    <ul class="last">
+            <li><a href="http://www.faz.net/video/">Video</a></li>
+            <li><a href="http://www.faz.net/themen/">Themen</a></li>
+            <li><a href="http://blogs.faz.net/">Blogs</a></li>
+    </ul>
+
+    <div class="FooterHSpace clear"></div>
+    <div class="FooterHRule clear"></div>
+    <div class="FooterHSpace clear"></div>        
+    
+
+        
+
+
+    <ul class="leftmargin">
+      <li><strong><a href="http://www.faz.net/aktuell/feuilleton/">Feuilleton</a></strong></li>
+        </ul>
+
+        <ul>
+
+      <li><a href="http://www.faz.net/aktuell/feuilleton/buecher/">B&#xFC;cher</a></li>
+      <li><a href="http://www.faz.net/aktuell/feuilleton/buehne-und-konzert/">B&#xFC;hne &amp; Konzert</a></li>
+      <li><a href="http://www.faz.net/aktuell/feuilleton/kino/">Kino</a></li>
+
+
+    </ul>
+
+
+        <ul>
+             <li><a href="http://www.faz.net/aktuell/feuilleton/kunst/">Kunst</a></li>
+
+            <li><a href="http://www.faz.net/aktuell/feuilleton/kunstmarkt/">Kunstmarkt</a></li>
+
+            <li><a href="http://www.faz.net/aktuell/feuilleton/medien/">Medien</a></li>
+    </ul>
+
+    <ul>
+              <li><a href="http://www.faz.net/aktuell/feuilleton/pop/">Pop</a></li>
+            <li><a href="http://www.faz.net/aktuell/feuilleton/debatten/">Debatten</a></li>
+            <li><a href="http://www.faz.net/aktuell/feuilleton/forschung-und-lehre/">Forschung &amp; Lehre</a></li>
+    </ul>
+
+    <ul class="last">
+
+            <li><a href="http://www.faz.net/aktuell/feuilleton/geisteswissenschaften/">Geisteswissenschaften</a></li>
+            <li><a href="http://tv.faz.net/programmvorschau.php">TV-Programm</a></li>
+            <li><a href="http://www.faz.net/aktuell/feuilleton/kino/video-filmkritiken/">Film-Kritiken</a></li>
+    </ul>
+
+    <div class="FooterHSpace clear"></div>
+    <div class="FooterHRule clear"></div>
+    <div class="FooterHSpace clear"></div>
+
+
+         <div class="FooterHSpace clear"></div>
+        <ul class="leftmargin">
+          <li><strong>Information</strong></li>
+          <li><a href="http://verlag.faz.net/unternehmen/kontakt/schreiben-sie-uns-11127932.html">Kontakt</a></li>        
+          <li><a href="http://www.faz.net/hilfe/">Hilfe</a></li>   
+          <li><a href="http://www.faz.net/archiv/">Archiv</a></li>         
+          <li><a href="http://www.faz.net/weiteres/datenschutzerklaerung-11228151.html">Datenschutz</a></li>
+          <li><a href="http://www.faz.net/weiteres/allgemeine-nutzungsbedingungen-von-faz-net-und-seinen-teilbereichen-11228149.html">Nutzungsbedingungen</a></li>
+          <li><a href="http://www.iqm.de/Medien/Online/nutzungsbasierte_onlinewerbung.html">Nutzungsbasierte Onlinewerbung</a></li>
+          <li><a href="http://www.faz.net/ueber-uns/faz-net-impressum-112096.html">Impressum</a></li>  
+        </ul>
+        
+        <ul>
+          <li><strong>Verlag</strong></li>
+          <li><a href="https://abo.faz.net/">Abo-Angebote</a></li>
+          <li><a href="http://www.faz.media/">Mediadaten/Werbung</a></li>
+          <li><a href="http://www.faz.media/">Digital Sales/Werbung</a></li> 
+          <li><a href="http://www.faz.media/rubrikenanzeigen/traueranzeigen/">Traueranzeigen</a></li>
+          <li><a href="http://verlag.faz.net/unternehmen/presse/">Presse</a></li>
+          <li><a href="http://verlag.faz.net/unternehmen/">&#xDC;ber die F.A.Z.</a></li>
+          <li><a href="http://verlag.faz.net/jobs-bei-der-f-a-z/">Jobs bei der F.A.Z.</a></li>                   
+          <li><a href="http://hochschulanzeiger.faz.net/magazin/">Hochschulanzeiger</a></li>
+		  <li><a href="https://www.easyfolio.de/?utm_source=FAZ.NET%20&amp;utm_medium=Externe%20Verweise&amp;utm_content=Homepage%20Footer-Link&amp;utm_campaign=Zuleitung%20FAZ.NET">Easyfolio</a></li>
+		  <li><a href="http://www.fuer-gruender.de/">F&#xFC;r-Gr&#xFC;nder.de</a></li>
+        </ul>
+ 
+        <ul>
+          <li><strong>FAZ.NET</strong></li>
+          <li><a href="http://www.faz.net/redaktion/">Redaktion</a></li>
+          <li><a href="http://blogs.faz.net/">Blogs</a></li>
+          <li><a href="https://www.faz.net/mein-faz-net/richtlinien-fuer-lesermeinungen-160626.html">Lesermeinungen</a></li>
+          <li><a href="http://www.faz.net/hilfe/welche-newsletter-gibt-es-und-wie-koennen-sie-diese-abonnieren-11131621.html">Newsletter</a></li>
+          <li><a href="http://epaper.faz.net/">e-paper</a></li>
+                                
+          <li><a href="http://www.faz.net/faz-net-services/mobil/">Mobile Angebote</a></li>
+          <li><a href="http://verlag.faz.net/unternehmen/kontakt/leserbriefe-an-die-f-a-z-11948105.html">Leserbriefe an die F.A.Z.</a></li>
+        </ul>  
+
+        <ul>
+          <li><strong>Services</strong></li>
+          <li><a href="http://www.faz.net/multimedia/interaktiv/interaktiv-der-f-a-z-romanatlas-1535124.html">Romanatlas</a></li>
+          <li><a href="http://www.faz.net/aktuell/feuilleton/cartoons/">Cartoons</a></li>
+          <li><a href="http://www.faz.net/multimedia/interaktiv/quiz/quiz-sind-sie-ein-tatort-experte-11899744.html">Tatort-Quiz</a></li>
+		  <li><a href="http://lebenswege.faz.net/" target="_blank">LEBENSWEGE</a></li>        
+</ul>
+
+        <ul class="last">
+		  <li class="HeadLink"><strong><a href="http://www.faz.net/aktuell/feuilleton/thema/">Oft gesucht</a></strong></li>
+          <li><a href="http://www.faz.net/aktuell/feuilleton/thema/maybrit-illner">Maybrit Illner</a></li>                                                
+          <li><a href="http://www.faz.net/aktuell/feuilleton/thema/hart-aber-fair">Hart aber Fair</a></li> 
+		  <li><a href="http://www.faz.net/aktuell/feuilleton/thema/heute-show">heute-show</a></li>
+		  <li><a href="http://www.faz.net/aktuell/feuilleton/thema/tatort">Tatort</a></li>
+		  <li><a href="http://www.faz.net/aktuell/feuilleton/thema/talkshow">Talkshow</a></li>
+		  <li><a href="http://www.faz.net/aktuell/feuilleton/thema/gez">GEZ</a></li>
+          <li><a href="http://www.faz.net/aktuell/feuilleton/thema/tagesschau">Tagesschau</a></li>
+		</ul>
+
+
+        <div class="FooterHSpace clear"></div>
+      </div>
+      
+
+
+      <div class="CopyRight">
+        &#xA9; Frankfurter Allgemeine Zeitung GmbH 2001 - 2017
+        <br>Alle Rechte vorbehalten.
+      </div>
+
+
+
+
+    </div>
+    
+
+    
+                    
+
+<div id="FAZStickyHeader" class="stickySmall" style="display: none">
+    <div class="stickyPos" style="width: 1000px;">
+        <div class="stickyWrapper stickySmall">
+            <div id="FAZSlimHeaderInner">
+
+                            
+
+
+<div>
+    <div id="StickyHomeLink">
+        <a class="stickyHome hover-parent" title="Zur FAZ.NET Startseite" href="http://www.faz.net/">
+                            <span class="icon-home_black"></span>
+                <span class="icon-header_white"> </span>
+                    </a>
+    </div>
+
+    
+        <div class="sandwichMenu hover-parent">
+            <a id="HeadMenuIcon" title="Navigation" class="icon-menu"></a>
+            <div id="HeadMenu">
+                <img width="20" height="11" class="anchor" src="http://www.faz.net/img/box-anchor-top.png">
+                <ul>
+                                            <li>
+                                                                                    <a href="http://www.faz.net/aktuell/politik/" class="">Politik
+                            </a>
+                        </li>
+                                            <li>
+                                                                                    <a href="http://www.faz.net/aktuell/wirtschaft/" class="">Wirtschaft
+                            </a>
+                        </li>
+                                            <li>
+                                                                                    <a href="http://www.faz.net/aktuell/finanzen/" class="">Finanzen
+                            </a>
+                        </li>
+                                            <li>
+                                                                                    <a href="http://www.faz.net/aktuell/feuilleton/" class="">Feuilleton
+                            </a>
+                        </li>
+                                            <li>
+                                                                                    <a href="http://www.faz.net/aktuell/sport/" class="">Sport
+                            </a>
+                        </li>
+                                            <li>
+                                                                                    <a href="http://www.faz.net/aktuell/gesellschaft/" class="">Gesellschaft
+                            </a>
+                        </li>
+                                            <li>
+                                                                                    <a href="http://www.faz.net/aktuell/stil/" class="">Stil
+                            </a>
+                        </li>
+                                            <li>
+                                                                                    <a href="http://www.faz.net/aktuell/technik-motor/" class="">Technik &amp; Motor
+                            </a>
+                        </li>
+                                            <li>
+                                                                                    <a href="http://www.faz.net/aktuell/wissen/" class="">Wissen
+                            </a>
+                        </li>
+                                            <li>
+                                                                                    <a href="http://www.faz.net/aktuell/reise/" class="">Reise
+                            </a>
+                        </li>
+                                            <li>
+                                                                                    <a href="http://www.faz.net/aktuell/beruf-chance/" class="">Beruf &amp; Chance
+                            </a>
+                        </li>
+                                            <li>
+                                                                                    <a href="http://www.faz.net/aktuell/rhein-main/" class="">Rhein-Main
+                            </a>
+                        </li>
+                                    </ul>
+            </div>
+        </div>
+    </div>
+
+                <div>
+                    <div class="sHNav prev hideIfNoDataAvailable icon-back_red">
+                                                <a class="articleNav" href="" id="articleNavSHNavprev"> </a>
+<div class="articlePreview Teaser190">
+    <img width="20" height="11" src="http://www.faz.net/img/box-anchor-top.png" class="anchor">
+
+    <div class="MediaLink" id="mediaLinkSHNavprev">
+        <a title="" href="">
+            <img width="190" height="107" title="">
+        </a>
+    </div>
+    <a href="" class="TeaserHeadLink defaultLink" id="teaserHeadLinkSHNavprev">
+        <span class="Stichwort"></span><br>
+        <span class="Headline small serif"></span>
+    </a>
+</div>
+                    </div>
+
+                    <span title="Fehlende Datensicherheit: Angriff mit dem Roboter" class="HL">Fehlende Datensicherheit: Angriff mit dem Roboter</span>
+
+                    <div class="sHNav next hideIfNoDataAvailable icon-forward_red">
+                                                <a class="articleNav" href="" id="articleNavSHNavnext"> </a>
+<div class="articlePreview Teaser190">
+    <img width="20" height="11" src="http://www.faz.net/img/box-anchor-top.png" class="anchor">
+
+    <div class="MediaLink" id="mediaLinkSHNavnext">
+        <a title="" href="">
+            <img width="190" height="107" title="">
+        </a>
+    </div>
+    <a href="" class="TeaserHeadLink defaultLink" id="teaserHeadLinkSHNavnext">
+        <span class="Stichwort"></span><br>
+        <span class="Headline small serif"></span>
+    </a>
+</div>
+                    </div>
+                </div>
+
+                                <div class="FAZArtikelFunktionZeile socialMediaButtons withDropDown headerSocialMediaButtons">
+	<div class="sharebuttons" data-services="facebook,twitter,mail,weitersagen" data-mode="short" data-mail-onclick="toggleMailLb();" data-drucken-onclick="ArtikelDrucken();" data-permalink-onclick="showPermaLink(this);" data-weitersagen-onclick="openSharebuttonDropDown(this);" data-comment-displayif-fn="document.querySelector(&apos;div#lesermeinungscontainer&apos;) !== null;"></div>
+</div>
+
+<div id="nBsharing">
+    <img width="20" height="11" class="anchor" src="http://www.faz.net/img/box-anchor-top.png">
+    <p style="margin-bottom: 10px" class="shHead">Weitersagen</p>
+	<div class="sharebuttons" data-services="xing,drucken,merken,empfehlen,comment,permalink" data-mode="short-with-text" data-mail-onclick="toggleMailLb();" data-drucken-onclick="ArtikelDrucken();" data-permalink-appendix-fn="createPermalinkInput();" data-permalink-class="visiblePermalink" data-orientation="vertical" data-comment-displayif-fn="document.querySelector(&apos;div#lesermeinungscontainer&apos;) !== null;"></div>
+</div>
+
+                <div>
+                                        
+<a title="Zur Suche" href="http://www.faz.net/suche" class="suchIcon">
+            <span class="icon-search"></span>
+    </a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+        
+
+<div id="FAZStickyHeader" class="stickyLarge" style="display: none">
+    <div class="stickyPos" style="width: 1000px;">
+    <div class="stickyWrapper">
+        <div id="FAZSlimHeaderInner">
+
+                        
+
+
+<div>
+    <div id="StickyHomeLink">
+        <a class="stickyHome hover-parent" title="Zur FAZ.NET Startseite" href="http://www.faz.net/">
+                            <span class="icon-home_black"></span>
+                <span class="icon-header_white"> </span>
+                    </a>
+    </div>
+
+    
+        <div class="sandwichMenu hover-parent">
+            <a id="HeadMenuIcon" title="Navigation" class="icon-menu"></a>
+            <div id="HeadMenu">
+                <img width="20" height="11" class="anchor" src="http://www.faz.net/img/box-anchor-top.png">
+                <ul>
+                                            <li>
+                                                                                    <a href="http://www.faz.net/aktuell/politik/" class="">Politik
+                            </a>
+                        </li>
+                                            <li>
+                                                                                    <a href="http://www.faz.net/aktuell/wirtschaft/" class="">Wirtschaft
+                            </a>
+                        </li>
+                                            <li>
+                                                                                    <a href="http://www.faz.net/aktuell/finanzen/" class="">Finanzen
+                            </a>
+                        </li>
+                                            <li>
+                                                                                    <a href="http://www.faz.net/aktuell/feuilleton/" class="">Feuilleton
+                            </a>
+                        </li>
+                                            <li>
+                                                                                    <a href="http://www.faz.net/aktuell/sport/" class="">Sport
+                            </a>
+                        </li>
+                                            <li>
+                                                                                    <a href="http://www.faz.net/aktuell/gesellschaft/" class="">Gesellschaft
+                            </a>
+                        </li>
+                                            <li>
+                                                                                    <a href="http://www.faz.net/aktuell/stil/" class="">Stil
+                            </a>
+                        </li>
+                                            <li>
+                                                                                    <a href="http://www.faz.net/aktuell/technik-motor/" class="">Technik &amp; Motor
+                            </a>
+                        </li>
+                                            <li>
+                                                                                    <a href="http://www.faz.net/aktuell/wissen/" class="">Wissen
+                            </a>
+                        </li>
+                                            <li>
+                                                                                    <a href="http://www.faz.net/aktuell/reise/" class="">Reise
+                            </a>
+                        </li>
+                                            <li>
+                                                                                    <a href="http://www.faz.net/aktuell/beruf-chance/" class="">Beruf &amp; Chance
+                            </a>
+                        </li>
+                                            <li>
+                                                                                    <a href="http://www.faz.net/aktuell/rhein-main/" class="">Rhein-Main
+                            </a>
+                        </li>
+                                    </ul>
+            </div>
+        </div>
+    </div>
+
+            <div>
+                <div class="sHNav prev hideIfNoDataAvailable">
+                    <a class="articleNav" href="" id="articleNavSHNavnext"> </a>
+<div class="articlePreview Teaser190">
+    <img width="20" height="11" src="http://www.faz.net/img/box-anchor-top.png" class="anchor">
+
+    <div class="MediaLink" id="mediaLinkSHNavnext">
+        <a title="" href="">
+            <img width="190" height="107" title="">
+        </a>
+    </div>
+    <a href="" class="TeaserHeadLink defaultLink" id="teaserHeadLinkSHNavnext">
+        <span class="Stichwort"></span><br>
+        <span class="Headline small serif"></span>
+    </a>
+</div>
+                </div>
+
+                <span title="Fehlende Datensicherheit: Angriff mit dem Roboter" class="HL">Fehlende Datensicherheit: Angriff mit dem Roboter</span>
+
+                <div class="sHNav next hideIfNoDataAvailable">
+                    <a class="articleNav" href="" id="articleNavSHNavnext"> </a>
+<div class="articlePreview Teaser190">
+    <img width="20" height="11" src="http://www.faz.net/img/box-anchor-top.png" class="anchor">
+
+    <div class="MediaLink" id="mediaLinkSHNavnext">
+        <a title="" href="">
+            <img width="190" height="107" title="">
+        </a>
+    </div>
+    <a href="" class="TeaserHeadLink defaultLink" id="teaserHeadLinkSHNavnext">
+        <span class="Stichwort"></span><br>
+        <span class="Headline small serif"></span>
+    </a>
+</div>
+                </div>
+            </div>
+
+                        <div class="FAZArtikelFunktionZeile socialMediaButtons withDropDown headerSocialMediaButtons">
+	<div class="sharebuttons" data-services="facebook,twitter,mail,weitersagen" data-mode="short" data-mail-onclick="toggleMailLb();" data-drucken-onclick="ArtikelDrucken();" data-permalink-onclick="showPermaLink(this);" data-weitersagen-onclick="openSharebuttonDropDown(this);" data-comment-displayif-fn="document.querySelector(&apos;div#lesermeinungscontainer&apos;) !== null;"></div>
+</div>
+
+<div id="nBsharing">
+    <img width="20" height="11" class="anchor" src="http://www.faz.net/img/box-anchor-top.png">
+    <p style="margin-bottom: 10px" class="shHead">Weitersagen</p>
+	<div class="sharebuttons" data-services="xing,drucken,merken,empfehlen,comment,permalink" data-mode="short-with-text" data-mail-onclick="toggleMailLb();" data-drucken-onclick="ArtikelDrucken();" data-permalink-appendix-fn="createPermalinkInput();" data-permalink-class="visiblePermalink" data-orientation="vertical" data-comment-displayif-fn="document.querySelector(&apos;div#lesermeinungscontainer&apos;) !== null;"></div>
+</div>
+
+            <div>
+                                
+<a title="Zur Suche" href="http://www.faz.net/suche" class="suchIcon">
+            <span class="icon-search"></span>
+    </a>
+            </div>
+
+        </div>
+    </div>
+        </div>
+</div>
+    
+                                                        <div class="Anzeige BannerAd">
+                    
+                </div>
+                                                                </div>
+
+
+    
+                                            
+                                        
+                        
+                            
+                        
+            
+                                        
+                                        
+
+
+
+                                        
+
+
+                                                    
+
+
+                
+
+
+
+                
+                        
+
+
+                        
+
+                        
+            
+        </body>
+                                            </html>
+            
