@@ -1777,7 +1777,7 @@ var Resource = {
   // :param response: If set, use as the response rather than
   //                  attempting to fetch it ourselves. Expects a
   //                  string.
-  create: function create(url, preparedResponse, parsedUrl) {
+  create: function create(url, preparedResponse, parsedUrl, opts) {
     var _this = this;
 
     return _asyncToGenerator(_regeneratorRuntime.mark(function _callee() {
@@ -1787,46 +1787,49 @@ var Resource = {
           switch (_context.prev = _context.next) {
             case 0:
               result = void 0;
+              validResponse = '';
 
               if (!preparedResponse) {
-                _context.next = 6;
+                _context.next = 7;
                 break;
               }
 
-              validResponse = {
-                statusMessage: 'OK',
-                statusCode: 200,
-                headers: {
-                  'content-type': 'text/html',
-                  'content-length': 500
-                }
-              };
-
-
+              if (opts.customHeader) {
+                validResponse = opts.customHeader;
+              } else {
+                validResponse = {
+                  statusMessage: 'OK',
+                  statusCode: 200,
+                  headers: {
+                    'content-type': 'text/html',
+                    'content-length': 500
+                  }
+                };
+              }
               result = { body: preparedResponse, response: validResponse };
-              _context.next = 9;
+              _context.next = 10;
               break;
 
-            case 6:
-              _context.next = 8;
+            case 7:
+              _context.next = 9;
               return fetchResource$1(url, parsedUrl);
 
-            case 8:
+            case 9:
               result = _context.sent;
 
-            case 9:
+            case 10:
               if (!result.error) {
-                _context.next = 12;
+                _context.next = 13;
                 break;
               }
 
               result.failed = true;
               return _context.abrupt('return', result);
 
-            case 12:
+            case 13:
               return _context.abrupt('return', _this.generateDoc(result));
 
-            case 13:
+            case 14:
             case 'end':
               return _context.stop();
           }
@@ -7412,13 +7415,13 @@ var Mercury = {
 
     var opts = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
     return _asyncToGenerator(_regeneratorRuntime.mark(function _callee() {
-      var _opts$fetchAllPages, fetchAllPages, _opts$fallback, fallback, parsedUrl, _ref, $, headers, result;
+      var _opts$fetchAllPages, fetchAllPages, _opts$fallback, fallback, _opts$customHeader, customHeader, parsedUrl, _ref, $, headers, result;
 
       return _regeneratorRuntime.wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              _opts$fetchAllPages = opts.fetchAllPages, fetchAllPages = _opts$fetchAllPages === undefined ? true : _opts$fetchAllPages, _opts$fallback = opts.fallback, fallback = _opts$fallback === undefined ? true : _opts$fallback;
+              _opts$fetchAllPages = opts.fetchAllPages, fetchAllPages = _opts$fetchAllPages === undefined ? true : _opts$fetchAllPages, _opts$fallback = opts.fallback, fallback = _opts$fallback === undefined ? true : _opts$fallback, _opts$customHeader = opts.customHeader, customHeader = _opts$customHeader === undefined ? null : _opts$customHeader;
 
               // if no url was passed and this is the browser version,
               // set url to window.location.href and load the html
@@ -7426,8 +7429,7 @@ var Mercury = {
 
               if (!url && cheerio.browser) {
                 url = window.location.href; // eslint-disable-line no-undef
-                html = html || cheerio.html();
-                console.log(html);
+                html = customHeader ? html : cheerio.html();
               }
 
               parsedUrl = URL.parse(url);
@@ -7441,7 +7443,7 @@ var Mercury = {
 
             case 5:
               _context.next = 7;
-              return Resource.create(url, html, parsedUrl);
+              return Resource.create(url, html, parsedUrl, opts);
 
             case 7:
               _ref = _context.sent;
@@ -7454,14 +7456,12 @@ var Mercury = {
                 result = _this.htmlExtractor({ url: url, parsedUrl: parsedUrl, $: $, html: html, fallback: fallback, fetchAllPages: fetchAllPages });
               } else {
                 result = textExtractor({ $: $, parsedUrl: parsedUrl, headers: headers });
-                console.log('text extractor used');
               }
 
               // if this parse is happening in the browser,
               // clean up any trace from the page.
               if (cheerio.browser) {
                 cheerio.cleanup();
-                console.log(result);
               }
 
               return _context.abrupt('return', result);

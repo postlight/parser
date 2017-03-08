@@ -22,11 +22,11 @@ describe('Mercury', () => {
       assert.equal(error, Errors.badUrl);
     });
 
-    // it('text file URL', async () => {
-    //   const result = await Mercury.parse('https://www.bvestation.com/worktest/text.txt');
-    //
-    //   // assert.equal(error, Errors.badUrl);
-    // });
+    it('text file URL', async () => {
+      const result = await Mercury.parse('https://www.bvestation.com/worktest/text.txt');
+
+      assert.equal(typeof result, 'object');
+    });
 
     it('does the whole thing', async () => {
       const result =

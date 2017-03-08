@@ -20,19 +20,20 @@ const Resource = {
   async create(url, preparedResponse, parsedUrl, opts) {
     let result;
 
+    let validResponse = '';
     if (preparedResponse) {
-      // let validResponse = {
-      //   statusMessage: 'OK',
-      //   statusCode: 200,
-      //   headers: {
-      //     'content-type': 'text/html',
-      //     'content-length': 500,
-      //   },
-      // };
-      // if (opts.customHeader) {
-      let validResponse = opts.customHeader;
-      // }
-
+      if (opts.customHeader) {
+        validResponse = opts.customHeader;
+      } else {
+        validResponse = {
+          statusMessage: 'OK',
+          statusCode: 200,
+          headers: {
+            'content-type': 'text/html',
+            'content-length': 500,
+          },
+        };
+      }
       result = { body: preparedResponse, response: validResponse };
     } else {
       result = await fetchResource(url, parsedUrl);
