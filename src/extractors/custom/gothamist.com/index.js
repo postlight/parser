@@ -11,7 +11,8 @@ export const GothamistComExtractor = {
 
   title: {
     selectors: [
-      '.entry-header h1',
+      'h1',
+      'h1.entry-header',
     ],
   },
 
@@ -23,6 +24,7 @@ export const GothamistComExtractor = {
 
   date_published: {
     selectors: [
+      'abbr',
       'abbr.published',
     ],
 
