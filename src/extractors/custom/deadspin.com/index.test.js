@@ -17,7 +17,7 @@ describe('DeadspinExtractor', () => {
       const html =
         fs.readFileSync('./fixtures/deadspin.com/1476389931786.html');
       result =
-        Mercury.parse(url, html, { fallback: false });
+        Mercury.parse(url, { html, fallback: false });
     });
 
     it('is selected properly', async () => {
@@ -92,7 +92,7 @@ describe('DeadspinExtractor', () => {
       'http://deadspin.com/remember-when-donald-trump-got-booed-for-butchering-ta-1788216229';
 
     const { content } =
-      await Mercury.parse(url, html, { fallback: false });
+      await Mercury.parse(url, { html, fallback: false });
 
     const $ = cheerio.load(content || '');
 

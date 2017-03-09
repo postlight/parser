@@ -17,7 +17,7 @@ describe('WwwTheguardianComExtractor', () => {
       const html =
         fs.readFileSync('./fixtures/www.theguardian.com/1480457558008.html');
       result =
-        Mercury.parse(url, html, { fallback: false });
+        Mercury.parse(url, { html, fallback: false });
     });
 
     it('is selected properly', () => {

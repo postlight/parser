@@ -17,7 +17,7 @@ describe('WwwBloombergComExtractor', () => {
       const html =
         fs.readFileSync('./fixtures/www.bloomberg.com/1481135708958.html');
       result =
-        Mercury.parse(url, html, { fallback: false });
+        Mercury.parse(url, { html, fallback: false });
     });
 
     it('is selected properly', () => {
@@ -94,7 +94,7 @@ describe('WwwBloombergComExtractor', () => {
       const html =
         fs.readFileSync('./fixtures/www.bloomberg.com/1481136509532.html');
       result =
-        Mercury.parse(url, html, { fallback: false });
+        Mercury.parse(url, { html, fallback: false });
     });
 
     it('is selected properly', () => {
@@ -171,7 +171,7 @@ describe('WwwBloombergComExtractor', () => {
       const html =
         fs.readFileSync('./fixtures/www.bloomberg.com/1481138014494.html');
       result =
-        Mercury.parse(url, html, { fallback: false });
+        Mercury.parse(url, { html, fallback: false });
     });
 
     it('is selected properly', () => {

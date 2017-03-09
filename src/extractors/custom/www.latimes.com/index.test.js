@@ -17,7 +17,7 @@ describe('WwwLatimesComExtractor', () => {
       const html =
         fs.readFileSync('./fixtures/www.latimes.com/1481928636876.html');
       result =
-        Mercury.parse(url, html, { fallback: false });
+        Mercury.parse(url, { html, fallback: false });
     });
 
     it('is selected properly', () => {

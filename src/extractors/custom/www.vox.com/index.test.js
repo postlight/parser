@@ -17,7 +17,7 @@ describe('WwwVoxComExtractor', () => {
       const html =
         fs.readFileSync('./fixtures/www.vox.com/1481563623532.html');
       result =
-        Mercury.parse(url, html, { fallback: false });
+        Mercury.parse(url, { html, fallback: false });
     });
 
     it('is selected properly', () => {

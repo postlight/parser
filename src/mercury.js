@@ -12,8 +12,9 @@ import collectAllPages from 'extractors/collect-all-pages';
 import textExtractor from 'extractors/document/text-file';
 
 const Mercury = {
-  async parse(url, html, opts = {}) {
-    const {
+  async parse(url, opts = {}) {
+    let {
+      html = false,
       fetchAllPages = true,
       fallback = true,
     } = opts;

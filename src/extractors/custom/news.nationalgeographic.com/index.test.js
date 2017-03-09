@@ -17,7 +17,7 @@ describe('NewsNationalgeographicComExtractor', () => {
       const html =
         fs.readFileSync('./fixtures/news.nationalgeographic.com/1481919545107.html');
       result =
-        Mercury.parse(url, html, { fallback: false });
+        Mercury.parse(url, { html, fallback: false });
     });
 
     it('is selected properly', () => {

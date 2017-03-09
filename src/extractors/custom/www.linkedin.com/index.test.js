@@ -17,7 +17,7 @@ describe('WwwLinkedinComExtractor', () => {
       const html =
         fs.readFileSync('./fixtures/www.linkedin.com/1485452542218.html');
       result =
-        Mercury.parse(url, html, { fallback: false });
+        Mercury.parse(url, { html, fallback: false });
     });
 
     it('is selected properly', () => {

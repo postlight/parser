@@ -17,7 +17,7 @@ describe('WwwNationalgeographicComExtractor', () => {
       const html =
         fs.readFileSync('./fixtures/www.nationalgeographic.com/1481921323654.html');
       result =
-        Mercury.parse(url, html, { fallback: false });
+        Mercury.parse(url, { html, fallback: false });
     });
 
     it('is selected properly', () => {

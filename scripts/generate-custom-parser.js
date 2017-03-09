@@ -110,7 +110,7 @@ function savePage($, [url], newParser) {
 
   fs.writeFileSync(file, html);
 
-  Mercury.parse(url, html).then((result) => {
+  Mercury.parse(url, { html }).then((result) => {
     if (newParser) {
       confirm(generateScaffold, [url, file, result], 'Generating parser and tests');
       console.log(`Your custom site extractor has been set up. To get started building it, run

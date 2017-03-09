@@ -17,7 +17,7 @@ describe('AtlanticExtractor', () => {
       const html =
         fs.readFileSync('./fixtures/www.theatlantic.com/1474321707642.html');
       result =
-        Mercury.parse(url, html, { fallback: false });
+        Mercury.parse(url, { html, fallback: false });
     });
 
     it('is selected properly', async () => {

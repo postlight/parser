@@ -49,7 +49,7 @@ export default function (file, url, dir, result, name) {
           const html =
             fs.readFileSync('${file}');
           result =
-            Mercury.parse(url, html, { fallback: false });
+            Mercury.parse(url, { html, fallback: false });
         });
 
         it('is selected properly', () => {

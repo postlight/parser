@@ -17,7 +17,7 @@ describe('WwwDmagazineComExtractor', () => {
       const html =
         fs.readFileSync('./fixtures/www.dmagazine.com/1481755804475.html');
       result =
-        Mercury.parse(url, html, { fallback: false });
+        Mercury.parse(url, { html, fallback: false });
     });
 
     it('is selected properly', () => {

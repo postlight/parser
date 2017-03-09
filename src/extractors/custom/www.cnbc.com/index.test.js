@@ -17,7 +17,7 @@ describe('WwwCnbcComExtractor', () => {
       const html =
         fs.readFileSync('./fixtures/www.cnbc.com/1482251664848.html');
       result =
-        Mercury.parse(url, html, { fallback: false });
+        Mercury.parse(url, { html, fallback: false });
     });
 
     it('is selected properly', () => {

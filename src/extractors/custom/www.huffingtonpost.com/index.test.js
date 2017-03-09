@@ -17,7 +17,7 @@ describe('WwwHuffingtonpostComExtractor', () => {
       const html =
         fs.readFileSync('./fixtures/www.huffingtonpost.com/1480454076105.html');
       result =
-        Mercury.parse(url, html, { fallback: false });
+        Mercury.parse(url, { html, fallback: false });
     });
 
     it('is selected properly', async () => {

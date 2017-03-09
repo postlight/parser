@@ -66,7 +66,6 @@ describe('Mercury', () => {
       const url = 'http://arstechnica.com/gadgets/2016/08/the-connected-renter-how-to-make-your-apartment-smarter/';
       const result = await Mercury.parse(
         url,
-        null,
         { fetchAllPages: true }
       );
 

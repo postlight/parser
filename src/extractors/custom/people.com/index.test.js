@@ -17,7 +17,7 @@ describe('PeopleComExtractor', () => {
       const html =
         fs.readFileSync('./fixtures/people.com/1481580462922.html');
       result =
-        Mercury.parse(url, html, { fallback: false });
+        Mercury.parse(url, { html, fallback: false });
     });
 
     it('is selected properly', () => {

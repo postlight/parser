@@ -17,7 +17,7 @@ describe('WwwTmzComExtractor', () => {
       const html =
         fs.readFileSync('./fixtures/www.tmz.com/1480368537455.html');
       result =
-        Mercury.parse(url, html, { fallback: false });
+        Mercury.parse(url, { html, fallback: false });
     });
 
     it('is selected properly', async () => {
@@ -70,7 +70,7 @@ describe('WwwTmzComExtractor', () => {
     //     'http://www.tmz.com/2016/11/28/prince-wife-estate-will/';
     //
     //   const { dek } =
-    //     await Mercury.parse(articleUrl, html, { fallback: false });
+    //     await Mercury.parse(articleUrl, { html, fallback: false });
     //
     //   // Update these values with the expected values from
     //   // the article.

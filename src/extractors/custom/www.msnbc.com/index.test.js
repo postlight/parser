@@ -17,7 +17,7 @@ describe('WwwMsnbcComExtractor', () => {
       const html =
         fs.readFileSync('./fixtures/www.msnbc.com/1482261084088.html');
       result =
-        Mercury.parse(url, html, { fallback: false });
+        Mercury.parse(url, { html, fallback: false });
     });
 
     it('is selected properly', () => {

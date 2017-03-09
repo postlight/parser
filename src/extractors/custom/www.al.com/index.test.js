@@ -17,7 +17,7 @@ describe('WwwAlComExtractor', () => {
       const html =
         fs.readFileSync('./fixtures/www.al.com/1482445422101.html');
       result =
-        Mercury.parse(url, html, { fallback: false });
+        Mercury.parse(url, { html, fallback: false });
     });
 
     it('is selected properly', () => {

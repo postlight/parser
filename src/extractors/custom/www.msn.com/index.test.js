@@ -18,7 +18,7 @@ describe('MSNExtractor', () => {
       const html =
         fs.readFileSync('./fixtures/www.msn.com/1475506925474.html');
       result =
-        Mercury.parse(url, html, { fallback: false });
+        Mercury.parse(url, { html, fallback: false });
     });
 
     it('is selected properly', async () => {

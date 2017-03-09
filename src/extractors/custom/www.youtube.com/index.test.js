@@ -17,7 +17,7 @@ describe('WwwYoutubeComExtractor', () => {
       const html =
         fs.readFileSync('./fixtures/www.youtube.com/1481042537359.html');
       result =
-        Mercury.parse(url, html, { fallback: false });
+        Mercury.parse(url, { html, fallback: false });
     });
 
     it('is selected properly', () => {

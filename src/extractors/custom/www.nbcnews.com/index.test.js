@@ -17,7 +17,7 @@ describe('WwwNbcnewsComExtractor', () => {
       const html =
         fs.readFileSync('./fixtures/www.nbcnews.com/1481667763790.html');
       result =
-        Mercury.parse(url, html, { fallback: false });
+        Mercury.parse(url, { html, fallback: false });
     });
 
     it('is selected properly', () => {
