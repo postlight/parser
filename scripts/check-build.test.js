@@ -7,6 +7,10 @@ let urls = [
     url: 'http://www.cnn.com/2016/11/05/middleeast/iraq-mosul-isis-offensive/',
     title: 'Iraqi troops storm town south of Mosul',
   },
+  {		
+    url: 'https://www.washingtonpost.com/news/post-nation/wp/2016/11/05/a-vile-and-disgusting-act-officer-accused-of-giving-fecal-sandwich-to-homeless-man-is-fired/',
+    title: '‘A vile and disgusting act’: Officer accused of giving fecal sandwich to homeless man is fired',
+  },
 ];
 
 // don't run this on CI b/c we want to avoid network requests
