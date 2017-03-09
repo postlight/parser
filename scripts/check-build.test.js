@@ -39,7 +39,7 @@ if (process.env.CI) {
 
     urls.map(article =>
       it(`gets this title right ${article.title}`, (done) => {
-        Merc.parse(article.url, { fallback: false }).then((result) => {
+        Merc.parse(article.url).then((result) => {
           assert.equal(article.title, result.title);
           done();
         }).catch((e) => {
