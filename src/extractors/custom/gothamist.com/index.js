@@ -23,7 +23,7 @@ export const GothamistComExtractor = {
 
   date_published: {
     selectors: [
-      'abbr.published',
+      ['abbr.published', 'title'],
     ],
   },
 
