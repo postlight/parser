@@ -16,7 +16,6 @@ const Mercury = {
     const {
       fetchAllPages = true,
       fallback = true,
-      customHeader = null,
     } = opts;
 
     // if no url was passed and this is the browser version,
@@ -24,7 +23,14 @@ const Mercury = {
     // from the current page
     if (!url && cheerio.browser) {
       url = window.location.href; // eslint-disable-line no-undef
-      html = customHeader ? html : cheerio.html();
+      if (!html) {
+        if (document.doctype === null) { // eslint-disable-line no-undef
+          // Non-HTML doctype, we set it to false, so resource can fetch.
+          html = false;
+        } else {
+          html = cheerio.html();
+        }
+      }
     }
 
     const parsedUrl = URL.parse(url);
@@ -33,7 +39,7 @@ const Mercury = {
       return Errors.badUrl;
     }
 
-    const { $, headers } = await Resource.create(url, html, parsedUrl, opts);
+    const { $, headers } = await Resource.create(url, html, parsedUrl);
 
     let result = '';
 
