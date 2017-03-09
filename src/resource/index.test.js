@@ -85,11 +85,5 @@ describe('Resource', () => {
         );
       }
     });
-
-    // it('handles a text file properly', async () => {
-    //   const url = 'https://bvestation.com/worktest/text.txt';
-    //   const $ = await Resource.create(url);
-    //
-    // });
   });
 });

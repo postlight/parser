@@ -23,7 +23,7 @@ describe('Mercury', () => {
     });
 
     it('text file URL', async () => {
-      const result = await Mercury.parse('https://www.bvestation.com/worktest/text.txt');
+      const result = await Mercury.parse('https://www.bvestation.com/worktest/readme.txt');
 
       assert.equal(typeof result, 'object');
     });

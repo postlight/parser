@@ -9,7 +9,7 @@ export default function textExtractor({ $, parsedUrl, headers }) {
   const title = path.split('/')[size - 1];
 
   // Extract content
-  const content = $;
+  const content = $.replace(/(?:\r\n|\r|\n)/g, '<br />');
 
   // Date Published
   const date_published = cleanDatePublished(headers['last-modified']);
@@ -21,7 +21,7 @@ export default function textExtractor({ $, parsedUrl, headers }) {
   const domain = parsedUrl.hostname;
 
   // Excerpt
-  const excerpt = GenericExtractor.excerpt({ content }, false);
+  // const excerpt = GenericExtractor.excerpt({ content }, false);
 
   // Word Count
   const word_count = GenericExtractor.word_count({ content }, false);
@@ -36,7 +36,7 @@ export default function textExtractor({ $, parsedUrl, headers }) {
     next_page_url: null,
     url,
     domain,
-    excerpt,
+    excerpt: null,
     word_count,
     direction: null,
   };

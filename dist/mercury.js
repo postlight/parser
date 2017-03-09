@@ -7372,7 +7372,7 @@ function textExtractor(_ref) {
   var title = path.split('/')[size - 1];
 
   // Extract content
-  var content = $;
+  var content = $.replace(/(?:\r\n|\r|\n)/g, '<br />');
 
   // Date Published
   var date_published = cleanDatePublished(headers['last-modified']);
@@ -7384,7 +7384,7 @@ function textExtractor(_ref) {
   var domain = parsedUrl.hostname;
 
   // Excerpt
-  var excerpt = GenericExtractor.excerpt({ content: content }, false);
+  // const excerpt = GenericExtractor.excerpt({ content }, false);
 
   // Word Count
   var word_count = GenericExtractor.word_count({ content: content }, false);
@@ -7399,24 +7399,25 @@ function textExtractor(_ref) {
     next_page_url: null,
     url: url,
     domain: domain,
-    excerpt: excerpt,
+    excerpt: null,
     word_count: word_count,
     direction: null
   };
 }
 
 var Mercury = {
-  parse: function parse(url, html) {
+  parse: function parse(url) {
     var _this = this;
 
-    var opts = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+    var opts = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
     return _asyncToGenerator(_regeneratorRuntime.mark(function _callee() {
-      var _opts$fetchAllPages, fetchAllPages, _opts$fallback, fallback, parsedUrl, _ref, $, headers, result;
+      var _opts$html, html, _opts$fetchAllPages, fetchAllPages, _opts$fallback, fallback, parsedUrl, _ref, $, headers, result;
 
       return _regeneratorRuntime.wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
+              _opts$html = opts.html, html = _opts$html === undefined ? false : _opts$html;
               _opts$fetchAllPages = opts.fetchAllPages, fetchAllPages = _opts$fetchAllPages === undefined ? true : _opts$fetchAllPages, _opts$fallback = opts.fallback, fallback = _opts$fallback === undefined ? true : _opts$fallback;
 
               // if no url was passed and this is the browser version,
@@ -7439,17 +7440,17 @@ var Mercury = {
               parsedUrl = URL.parse(url);
 
               if (validateUrl(parsedUrl)) {
-                _context.next = 5;
+                _context.next = 6;
                 break;
               }
 
               return _context.abrupt('return', Errors.badUrl);
 
-            case 5:
-              _context.next = 7;
+            case 6:
+              _context.next = 8;
               return Resource.create(url, html, parsedUrl);
 
-            case 7:
+            case 8:
               _ref = _context.sent;
               $ = _ref.$;
               headers = _ref.headers;
@@ -7460,6 +7461,7 @@ var Mercury = {
                 result = _this.htmlExtractor({ url: url, parsedUrl: parsedUrl, $: $, html: html, fallback: fallback, fetchAllPages: fetchAllPages });
               } else {
                 result = textExtractor({ $: $, parsedUrl: parsedUrl, headers: headers });
+                // console.log(result);
               }
 
               // if this parse is happening in the browser,
@@ -7470,7 +7472,7 @@ var Mercury = {
 
               return _context.abrupt('return', result);
 
-            case 14:
+            case 15:
             case 'end':
               return _context.stop();
           }
