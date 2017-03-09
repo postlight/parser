@@ -23,8 +23,10 @@ export const GothamistComExtractor = {
 
   date_published: {
     selectors: [
-      ['abbr.published', 'title'],
+      'abbr.published',
     ],
+
+    timezone: 'America/New_York',
   },
 
   dek: {
