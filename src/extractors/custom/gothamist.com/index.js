@@ -1,6 +1,14 @@
 export const GothamistComExtractor = {
   domain: 'gothamist.com',
 
+  supportedDomains: [
+    'chicagoist.com',
+    'laist.com',
+    'sfist.com',
+    'shanghaiist.com',
+    'dcist.com',
+  ],
+
   title: {
     selectors: [
       '.entry-header h1',
