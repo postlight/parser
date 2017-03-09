@@ -11,8 +11,7 @@ export const GothamistComExtractor = {
 
   title: {
     selectors: [
-      'h1',
-      'h1.entry-header',
+      '.entry-header h1',
     ],
   },
 
