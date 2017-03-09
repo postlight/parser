@@ -44,8 +44,8 @@ if (process.env.CI) {
           done();
         }).catch((e) => {
           console.log('There was an error', e.message); // eslint-disable-line no-console
-          console.log('e.fileName', e.fileName);
-          console.log('e.lineNumber', e.lineNumber);
+          console.log('e.fileName', e.fileName); // eslint-disable-line no-console
+          console.log('e.lineNumber', e.lineNumber); // eslint-disable-line no-console
           assert.equal(true, false);
           done();
         });

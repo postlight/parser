@@ -13,8 +13,8 @@ import textExtractor from 'extractors/document/text-file';
 
 const Mercury = {
   async parse(url, opts = {}) {
-    let {
-      html = false,
+    let { html = false } = opts;
+    const {
       fetchAllPages = true,
       fallback = true,
     } = opts;
