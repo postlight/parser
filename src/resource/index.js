@@ -9,6 +9,8 @@ import {
   clean,
 } from './utils/dom';
 
+iconv.skipDecodeWarning = true;
+
 const Resource = {
 
   // Create a Resource.

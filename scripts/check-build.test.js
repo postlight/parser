@@ -43,9 +43,7 @@ if (process.env.CI) {
           assert.equal(article.title, result.title);
           done();
         }).catch((e) => {
-          console.log('There was an error', e.message); // eslint-disable-line no-console
-          console.log('e.fileName', e.fileName);
-          console.log('e.lineNumber', e.lineNumber);
+          console.log(e.name, e.message); // eslint-disable-line no-console
           assert.equal(true, false);
           done();
         });
