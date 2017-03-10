@@ -18,6 +18,8 @@ export const WwwSlateComExtractor = {
     selectors: [
       '.pub-date',
     ],
+
+    timezone: 'America/New_York',
   },
 
   dek: {
