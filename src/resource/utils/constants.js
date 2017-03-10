@@ -35,3 +35,14 @@ export const DOMAINS_TO_PROXY = [
   'nih.gov',
   'gutenberg.org',
 ];
+
+// Supported content types
+const SUPPORTED_CONTENT_TYPES = [
+  'text/html',
+  'text/plain',
+  'application/pdf',
+  'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+  'application/msword',
+];
+
+export const SUPPORTED_CONTENT_TYPES_RE = new RegExp(`^(${SUPPORTED_CONTENT_TYPES.join('|')})$`, 'i');

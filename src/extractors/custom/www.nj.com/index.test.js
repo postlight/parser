@@ -17,7 +17,7 @@ describe('WwwNjComExtractor', () => {
       const html =
         fs.readFileSync('./fixtures/www.nj.com/1481666201503.html');
       result =
-        Mercury.parse(url, html, { fallback: false });
+        Mercury.parse(url, { html, fallback: false });
     });
 
     it('is selected properly', () => {

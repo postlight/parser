@@ -17,7 +17,7 @@ describe('MediumExtractor', () => {
       const html =
         fs.readFileSync('./fixtures/medium.com/1477523363921.html');
       result =
-        Mercury.parse(url, html, { fallback: false });
+        Mercury.parse(url, { html, fallback: false });
     });
 
     it('is selected properly', async () => {
@@ -86,7 +86,7 @@ describe('MediumExtractor', () => {
         'https://medium.com/@JakobUlbrich/flag-attributes-in-android-how-to-use-them-ac4ec8aee7d1#.h949wjmyw';
       const html = fs.readFileSync('./fixtures/medium.com/1485902752952.html');
       result =
-        Mercury.parse(url, html, { fallback: false });
+        Mercury.parse(url, { html, fallback: false });
     });
 
     it('returns the content', async () => {

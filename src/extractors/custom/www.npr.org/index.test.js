@@ -17,7 +17,7 @@ describe('WwwNprOrgExtractor', () => {
       const html =
         fs.readFileSync('./fixtures/www.npr.org/1481842125199.html');
       result =
-        Mercury.parse(url, html, { fallback: false });
+        Mercury.parse(url, { html, fallback: false });
     });
 
     it('is selected properly', () => {

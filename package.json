@@ -12,7 +12,6 @@
     "build:web": "yarn lint && rollup -c rollup.config.web.js && yarn test:build:web",
     "release": "yarn build && yarn build:web",
     "build:generator": "rollup -c scripts/rollup.config.js",
-    "test_build": "rollup -c",
     "test": "yarn test:node && yarn test:web",
     "test:node": "jest",
     "test:web": "./node_modules/karma/bin/karma start karma.conf.js --auto-watch",

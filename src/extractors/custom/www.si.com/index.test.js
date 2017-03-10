@@ -17,7 +17,7 @@ describe('WwwSiComExtractor', () => {
       const html =
         fs.readFileSync('./fixtures/www.si.com/1484253704408.html');
       result =
-        Mercury.parse(url, html, { fallback: false });
+        Mercury.parse(url, { html, fallback: false });
     });
 
     it('is selected properly', () => {

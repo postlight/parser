@@ -22,10 +22,15 @@ describe('Mercury', () => {
       assert.equal(error, Errors.badUrl);
     });
 
+    it('text file URL', async () => {
+      const result = await Mercury.parse('https://www.bvestation.com/worktest/readme.txt');
+
+      assert.equal(typeof result, 'object');
+    });
+
     it('does the whole thing', async () => {
       const result =
         await Mercury.parse('http://deadspin.com/remember-when-donald-trump-got-booed-for-butchering-ta-1788216229');
-
       assert.equal(typeof result, 'object');
       assert.equal(result.content.indexOf('score="') === -1, true);
     });
@@ -61,7 +66,6 @@ describe('Mercury', () => {
       const url = 'http://arstechnica.com/gadgets/2016/08/the-connected-renter-how-to-make-your-apartment-smarter/';
       const result = await Mercury.parse(
         url,
-        null,
         { fetchAllPages: true }
       );
 

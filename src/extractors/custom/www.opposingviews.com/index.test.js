@@ -17,7 +17,7 @@ describe('WwwOpposingviewsComExtractor', () => {
       const html =
         fs.readFileSync('./fixtures/www.opposingviews.com/1482427531189.html');
       result =
-        Mercury.parse(url, html, { fallback: false });
+        Mercury.parse(url, { html, fallback: false });
     });
 
     it('is selected properly', () => {

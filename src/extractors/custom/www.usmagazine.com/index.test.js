@@ -27,7 +27,7 @@ describe('WwwUsmagazineComExtractor', () => {
       'http://www.usmagazine.com/celebrity-news/news/lady-gaga-shares-pic-of-ex-taylor-kinney-with-her-mom-w454419';
 
     const { title } =
-      await Mercury.parse(articleUrl, html, { fallback: false });
+      await Mercury.parse(articleUrl, { html, fallback: false });
 
     // Update these values with the expected values from
     // the article.
@@ -43,7 +43,7 @@ describe('WwwUsmagazineComExtractor', () => {
       'http://www.usmagazine.com/celebrity-news/news/lady-gaga-shares-pic-of-ex-taylor-kinney-with-her-mom-w454419';
 
     const { author } =
-      await Mercury.parse(articleUrl, html, { fallback: false });
+      await Mercury.parse(articleUrl, { html, fallback: false });
 
     // Update these values with the expected values from
     // the article.
@@ -59,7 +59,7 @@ describe('WwwUsmagazineComExtractor', () => {
       'http://www.usmagazine.com/celebrity-news/news/lady-gaga-shares-pic-of-ex-taylor-kinney-with-her-mom-w454419';
 
     const { date_published } =
-      await Mercury.parse(articleUrl, html, { fallback: false });
+      await Mercury.parse(articleUrl, { html, fallback: false });
 
     // Update these values with the expected values from
     // the article.
@@ -75,7 +75,7 @@ describe('WwwUsmagazineComExtractor', () => {
       'http://www.usmagazine.com/celebrity-news/news/lady-gaga-shares-pic-of-ex-taylor-kinney-with-her-mom-w454419';
 
     const { lead_image_url } =
-      await Mercury.parse(articleUrl, html, { fallback: false });
+      await Mercury.parse(articleUrl, { html, fallback: false });
 
     // Update these values with the expected values from
     // the article.
@@ -93,7 +93,7 @@ describe('WwwUsmagazineComExtractor', () => {
       'http://www.usmagazine.com/celebrity-news/news/lady-gaga-shares-pic-of-ex-taylor-kinney-with-her-mom-w454419';
 
     const { content } =
-      await Mercury.parse(url, html, { fallback: false });
+      await Mercury.parse(url, { html, fallback: false });
 
     const $ = cheerio.load(content || '');
 

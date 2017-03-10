@@ -14,7 +14,7 @@ describe('Resource', () => {
   describe('create(url)', () => {
     it('fetches the page and returns a cheerio object', async () => {
       const url = 'http://theconcourse.deadspin.com/1786177057';
-      const $ = await Resource.create(url);
+      const { $ } = await Resource.create(url);
 
       assert.equal(typeof $, 'function');
     });
@@ -28,7 +28,7 @@ describe('Resource', () => {
 
     it('fetches with different encoding on body', async () => {
       const url = 'http://www.playnation.de/spiele-news/kojima-productions/hideo-kojima-reflektiert-ueber-seinen-werdegang-bei-konami-id68950.html';
-      const $ = await Resource.create(url);
+      const { $ } = await Resource.create(url);
       const metaContentType = $('meta[http-equiv=content-type]').attr('value');
 
       assert.equal(getEncoding(metaContentType), 'iso-8859-1');
@@ -40,7 +40,7 @@ describe('Resource', () => {
 
     it('handles special encoding', async () => {
       const url = 'http://www.elmundo.es/opinion/2016/11/19/582f476846163fc65a8b4578.html';
-      const $ = await Resource.create(url);
+      const { $ } = await Resource.create(url);
 
       const badEncodingRe = /�/g;
 

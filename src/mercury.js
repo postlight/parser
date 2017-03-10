@@ -9,9 +9,11 @@ import {
 import getExtractor from 'extractors/get-extractor';
 import RootExtractor from 'extractors/root-extractor';
 import collectAllPages from 'extractors/collect-all-pages';
+import textExtractor from 'extractors/document/text-file';
 
 const Mercury = {
-  async parse(url, html, opts = {}) {
+  async parse(url, opts = {}) {
+    let { html = false } = opts;
     const {
       fetchAllPages = true,
       fallback = true,
@@ -22,7 +24,14 @@ const Mercury = {
     // from the current page
     if (!url && cheerio.browser) {
       url = window.location.href; // eslint-disable-line no-undef
-      html = html || cheerio.html();
+      if (!html) {
+        if (document.doctype === null) { // eslint-disable-line no-undef
+          // Non-HTML doctype, we set it to false, so resource can fetch.
+          html = false;
+        } else {
+          html = cheerio.html();
+        }
+      }
     }
 
     const parsedUrl = URL.parse(url);
@@ -31,8 +40,34 @@ const Mercury = {
       return Errors.badUrl;
     }
 
-    const $ = await Resource.create(url, html, parsedUrl);
+    const { $, headers } = await Resource.create(url, html, parsedUrl);
 
+    let result = '';
+
+    if (headers['content-type'].includes('text/html')) {
+      result = this.htmlExtractor({ url, parsedUrl, $, html, fallback, fetchAllPages });
+    } else {
+      result = textExtractor({ $, parsedUrl, headers });
+    }
+
+    // if this parse is happening in the browser,
+    // clean up any trace from the page.
+    if (cheerio.browser) {
+      cheerio.cleanup();
+    }
+
+    return result;
+  },
+
+  browser: !!cheerio.browser,
+
+  // A convenience method for getting a resource
+  // to work with, e.g., for custom extractor generator
+  async fetchResource(url) {
+    return await Resource.create(url);
+  },
+
+  async htmlExtractor({ url, parsedUrl, $, parsedHtml, fallback, fetchAllPages }) {
     const Extractor = getExtractor(url, parsedUrl, $);
     // console.log(`Using extractor for ${Extractor.domain}`);
 
@@ -43,8 +78,11 @@ const Mercury = {
 
     // if html still has not been set (i.e., url passed to Mercury.parse),
     // set html from the response of Resource.create
-    if (!html) {
+    let html = '';
+    if (!parsedHtml) {
       html = $.html();
+    } else {
+      html = parsedHtml;
     }
 
     // Cached value of every meta name in our document.
@@ -86,21 +124,7 @@ const Mercury = {
       };
     }
 
-    // if this parse is happening in the browser,
-    // clean up any trace from the page.
-    if (cheerio.browser) {
-      cheerio.cleanup();
-    }
-
     return result;
-  },
-
-  browser: !!cheerio.browser,
-
-  // A convenience method for getting a resource
-  // to work with, e.g., for custom extractor generator
-  async fetchResource(url) {
-    return await Resource.create(url);
   },
 
 };

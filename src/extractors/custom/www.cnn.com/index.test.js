@@ -17,7 +17,7 @@ describe('WwwCnnComExtractor', () => {
       const html =
         fs.readFileSync('./fixtures/www.cnn.com/1480458253239.html');
       result =
-        Mercury.parse(url, html, { fallback: false });
+        Mercury.parse(url, { html, fallback: false });
     });
 
     it('is selected properly', async () => {

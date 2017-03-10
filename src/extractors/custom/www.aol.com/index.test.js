@@ -17,7 +17,7 @@ describe('WwwAolComExtractor', () => {
       const html =
         fs.readFileSync('./fixtures/www.aol.com/1480618816916.html');
       result =
-        Mercury.parse(url, html, { fallback: false });
+        Mercury.parse(url, { html, fallback: false });
     });
     it('is selected properly', async () => {
       // This test should be passing by default.

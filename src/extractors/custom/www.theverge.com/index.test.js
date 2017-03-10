@@ -17,7 +17,7 @@ describe('WwwThevergeComExtractor', () => {
       const html =
         fs.readFileSync('./fixtures/www.theverge.com/1480520999617.html');
       result =
-        Mercury.parse(url, html, { fallback: false });
+        Mercury.parse(url, { html, fallback: false });
     });
 
     it('is selected properly', async () => {
@@ -106,7 +106,7 @@ describe('WwwThevergeComExtractor', () => {
       'http://www.theverge.com/2016/10/31/13478080/microsoft-surface-studio-design-engineering-interview';
 
     const { content } =
-      await Mercury.parse(url, html, { fallback: false });
+      await Mercury.parse(url, { html, fallback: false });
 
     const $ = cheerio.load(content || '');
 

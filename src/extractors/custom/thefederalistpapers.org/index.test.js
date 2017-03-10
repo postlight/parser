@@ -17,7 +17,7 @@ describe('ThefederalistpapersOrgExtractor', () => {
       const html =
         fs.readFileSync('./fixtures/thefederalistpapers.org/1482344359572.html');
       result =
-        Mercury.parse(url, html, { fallback: false });
+        Mercury.parse(url, { html, fallback: false });
     });
 
     it('is selected properly', () => {

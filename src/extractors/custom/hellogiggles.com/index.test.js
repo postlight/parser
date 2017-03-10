@@ -17,7 +17,7 @@ describe('HellogigglesComExtractor', () => {
       const html =
         fs.readFileSync('./fixtures/hellogiggles.com/1482437663500.html');
       result =
-        Mercury.parse(url, html, { fallback: false });
+        Mercury.parse(url, { html, fallback: false });
     });
 
     it('is selected properly', () => {

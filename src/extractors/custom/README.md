@@ -41,7 +41,7 @@ As you might guess, the selectors key provides an array of selectors that Mercur
 The selector you choose should return one element. If more than one element is returned by your selector, it will fail (and Mercury will fall back to its generic extractor).
 
 #### Selecting an attribute
-Sometimes the information you want to return lives in an element's attribute rather than its text — e.g., sometimes a more exact ISO-formatted date/time will be stored in an attribute of an element. 
+Sometimes the information you want to return lives in an element's attribute rather than its text — e.g., sometimes a more exact ISO-formatted date/time will be stored in an attribute of an element.
 
 So your element looks like this:
 
@@ -71,7 +71,7 @@ This is all you'll need to know to handle most of the fields Mercury parses (tit
 
 An article's content can be more complex than the other fields, meaning you sometimes need to do more than just provide the selector(s) in order to return clean content.
 
-For example, sometimes an article's content will contain related content that doesn't translate or render well when you just want to see the article's content. The clean key allows you to provide an array of selectors identifying elements that should be removed from the content. 
+For example, sometimes an article's content will contain related content that doesn't translate or render well when you just want to see the article's content. The clean key allows you to provide an array of selectors identifying elements that should be removed from the content.
 
 Here's an example:
 
@@ -204,7 +204,7 @@ By default, the first test, which ensures your custom extractor is being selecte
       'http://www.newyorker.com/tech/elements/hacking-cryptography-and-the-countdown-to-quantum-computing';
 
     const { title } =
-      await Mercury.parse(articleUrl, html, { fallback: false });
+      await Mercury.parse(articleUrl, { html, fallback: false });
 
     // Update these values with the expected values from
     // the article.

@@ -17,7 +17,7 @@ describe('WwwRefinery29ComExtractor', () => {
       const html =
         fs.readFileSync('./fixtures/www.refinery29.com/1481661863250.html');
       result =
-        Mercury.parse(url, html, { fallback: false });
+        Mercury.parse(url, { html, fallback: false });
     });
 
     it('is selected properly', () => {

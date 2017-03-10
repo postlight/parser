@@ -18,7 +18,7 @@ describe('YahooExtractor', () => {
       const html =
         fs.readFileSync('./fixtures/www.yahoo.com/1475529982399.html');
       result =
-        Mercury.parse(url, html, { fallback: false });
+        Mercury.parse(url, { html, fallback: false });
     });
 
     it('is selected properly', async () => {

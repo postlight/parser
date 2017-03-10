@@ -17,7 +17,7 @@ describe('WwwSbnationComExtractor', () => {
       const html =
         fs.readFileSync('./fixtures/www.sbnation.com/1481062909839.html');
       result =
-        Mercury.parse(url, html, { fallback: false });
+        Mercury.parse(url, { html, fallback: false });
     });
     it('is selected properly', () => {
       // This test should be passing by default.

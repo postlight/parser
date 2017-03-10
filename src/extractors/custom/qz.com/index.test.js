@@ -17,7 +17,7 @@ describe('QzComExtractor', () => {
       const html =
         fs.readFileSync('./fixtures/qz.com/1481758330660.html');
       result =
-        Mercury.parse(url, html, { fallback: false });
+        Mercury.parse(url, { html, fallback: false });
     });
 
     it('is selected properly', () => {

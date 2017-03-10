@@ -18,7 +18,7 @@ describe('BuzzfeedExtractor', () => {
       const html =
         fs.readFileSync('./fixtures/www.buzzfeed.com/1475531975121.html');
       result =
-        Mercury.parse(url, html, { fallback: false });
+        Mercury.parse(url, { html, fallback: false });
     });
 
     it('is selected properly', async () => {
@@ -87,7 +87,7 @@ describe('BuzzfeedExtractor', () => {
       const html =
         fs.readFileSync('./fixtures/www.buzzfeed.com/1480717502688.html');
       result =
-        Mercury.parse(url, html, { fallback: false });
+        Mercury.parse(url, { html, fallback: false });
     });
 
     it('returns big header images in the content', async () => {
