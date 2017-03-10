@@ -20,9 +20,6 @@ export default function textExtractor({ $, parsedUrl, headers }) {
   // Domain
   const domain = parsedUrl.hostname;
 
-  // Excerpt
-  // const excerpt = GenericExtractor.excerpt({ content }, false);
-
   // Word Count
   const word_count = GenericExtractor.word_count({ content }, false);
 

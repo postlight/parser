@@ -15,31 +15,10 @@ describe('fetchResource(url)', () => {
   afterAll(recorder.after);
 
   it('properly fetches a text file', async () => {
-    const url = 'https://bvestation.com/worktest/text.txt';
+    const url = 'https://bvestation.com/worktest/readme.txt';
     const { response } = await fetchResource(url);
 
     assert.equal(response.headers['content-type'], 'text/plain');
-  });
-
-  it('properly fetches a pdf file', async () => {
-    const url = 'https://bvestation.com/worktest/pdf.pdf';
-    const { response } = await fetchResource(url);
-
-    assert.equal(response.headers['content-type'], 'application/pdf');
-  });
-
-  it('properly fetches a docx file', async () => {
-    const url = 'https://bvestation.com/worktest/docx.docx';
-    const { response } = await fetchResource(url);
-
-    assert.equal(response.headers['content-type'], 'application/vnd.openxmlformats-officedocument.wordprocessingml.document');
-  });
-
-  it('properly fetches a doc file', async () => {
-    const url = 'https://bvestation.com/worktest/doc.doc';
-    const { response } = await fetchResource(url);
-
-    assert.equal(response.headers['content-type'], 'application/msword');
   });
 
   it('returns appropriate json for bad url', async () => {

@@ -13,22 +13,15 @@ export function clean(content, $, maxLength = 200) {
 }
 
 const GenericExcerptExtractor = {
-  extract({ $, content, metaCache }, isHtml = true) {
-    if (isHtml) {
-      const excerpt = extractFromMeta($, EXCERPT_META_SELECTORS, metaCache);
-      if (excerpt) {
-        return clean(stripTags(excerpt, $));
-      }
+  extract({ $, content, metaCache }) {
+    const excerpt = extractFromMeta($, EXCERPT_META_SELECTORS, metaCache);
+    if (excerpt) {
+      return clean(stripTags(excerpt, $));
     }
-
     // Fall back to excerpting from the extracted content
     const maxLength = 200;
     const shortContent = content.slice(0, maxLength * 5);
-
-    if (isHtml) {
-      return clean($(shortContent).text(), $, maxLength);
-    }
-    return shortContent;
+    return clean($(shortContent).text(), $, maxLength);
   },
 };
 
