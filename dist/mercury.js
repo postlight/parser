@@ -1772,8 +1772,6 @@ function clean($) {
   return $;
 }
 
-iconv.skipDecodeWarning = true;
-
 var Resource = {
 
   // Create a Resource.
