@@ -50,6 +50,9 @@ describe('Resource', () => {
   });
 
   describe('generateDoc({ body, response })', () => {
+    // Ideally the body would be a buffer, because of potential issues with
+    // string re-encoding, since these strings are blank, it should be fine
+    // but this is why iconv is throwing warnings.
     it('throws an error if the content is not text', () => {
       const response = {
         headers: {
