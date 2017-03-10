@@ -91,6 +91,9 @@ export default async function fetchResource(url, parsedUrl) {
     timeout: FETCH_TIMEOUT,
     // Accept cookies
     jar: true,
+    // Set to null so the response returns as binary and body as buffer
+    // https://github.com/request/request#requestoptions-callback
+    encoding: null,
     // Accept and decode gzip
     gzip: true,
     // Follow any redirect

@@ -334,6 +334,9 @@ var fetchResource$1 = (function () {
               timeout: FETCH_TIMEOUT,
               // Accept cookies
               jar: true,
+              // Set to null so the response returns as binary and body as buffer
+              // https://github.com/request/request#requestoptions-callback
+              encoding: null,
               // Accept and decode gzip
               gzip: true,
               // Follow any redirect
@@ -5320,6 +5323,54 @@ var WwwOpposingviewsComExtractor = {
   }
 };
 
+var GothamistComExtractor = {
+  domain: 'gothamist.com',
+
+  supportedDomains: ['chicagoist.com', 'laist.com', 'sfist.com', 'shanghaiist.com', 'dcist.com'],
+
+  title: {
+    selectors: ['h1', '.entry-header h1']
+  },
+
+  author: {
+    selectors: ['.author']
+  },
+
+  date_published: {
+    selectors: ['abbr', 'abbr.published'],
+
+    timezone: 'America/New_York'
+  },
+
+  dek: {
+    selectors: [null]
+  },
+
+  lead_image_url: {
+    selectors: [['meta[name="og:image"]', 'value']]
+  },
+
+  content: {
+    selectors: ['.entry-body'],
+
+    // Is there anything in the content you selected that needs transformed
+    // before it's consumable content? E.g., unusual lazy loaded images
+    transforms: {
+      'div.image-none': 'figure',
+      '.image-none i': 'figcaption',
+      'div.image-left': 'figure',
+      '.image-left i': 'figcaption',
+      'div.image-right': 'figure',
+      '.image-right i': 'figcaption'
+    },
+
+    // Is there anything that is in the result that shouldn't be?
+    // The clean selectors will remove anything that matches from
+    // the result
+    clean: ['.image-none br', '.image-left br', '.image-right br', '.galleryEase']
+  }
+};
+
 
 
 var CustomExtractors = Object.freeze({
@@ -5406,7 +5457,8 @@ var CustomExtractors = Object.freeze({
 	FortuneComExtractor: FortuneComExtractor,
 	WwwLinkedinComExtractor: WwwLinkedinComExtractor,
 	ObamawhitehouseArchivesGovExtractor: ObamawhitehouseArchivesGovExtractor,
-	WwwOpposingviewsComExtractor: WwwOpposingviewsComExtractor
+	WwwOpposingviewsComExtractor: WwwOpposingviewsComExtractor,
+	GothamistComExtractor: GothamistComExtractor
 });
 
 var Extractors = _Object$keys(CustomExtractors).reduce(function (acc, key) {
@@ -6931,23 +6983,15 @@ var GenericExcerptExtractor = {
     var $ = _ref.$,
         content = _ref.content,
         metaCache = _ref.metaCache;
-    var isHtml = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
 
-    if (isHtml) {
-      var excerpt = extractFromMeta$$1($, EXCERPT_META_SELECTORS, metaCache);
-      if (excerpt) {
-        return clean$2(stripTags(excerpt, $));
-      }
+    var excerpt = extractFromMeta$$1($, EXCERPT_META_SELECTORS, metaCache);
+    if (excerpt) {
+      return clean$2(stripTags(excerpt, $));
     }
-
     // Fall back to excerpting from the extracted content
     var maxLength = 200;
     var shortContent = content.slice(0, maxLength * 5);
-
-    if (isHtml) {
-      return clean$2($(shortContent).text(), $, maxLength);
-    }
-    return shortContent;
+    return clean$2($(shortContent).text(), $, maxLength);
   }
 };
 
@@ -7383,9 +7427,6 @@ function textExtractor(_ref) {
   // Domain
   var domain = parsedUrl.hostname;
 
-  // Excerpt
-  // const excerpt = GenericExtractor.excerpt({ content }, false);
-
   // Word Count
   var word_count = GenericExtractor.word_count({ content: content }, false);
 
@@ -7461,7 +7502,6 @@ var Mercury = {
                 result = _this.htmlExtractor({ url: url, parsedUrl: parsedUrl, $: $, html: html, fallback: fallback, fetchAllPages: fetchAllPages });
               } else {
                 result = textExtractor({ $: $, parsedUrl: parsedUrl, headers: headers });
-                // console.log(result);
               }
 
               // if this parse is happening in the browser,

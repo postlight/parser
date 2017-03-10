@@ -28,6 +28,13 @@ describe('fetchResource(url)', () => {
     assert.equal(error, true);
   });
 
+  it('returns a buffer as its body', async () => {
+    const url = 'https://www.washingtonpost.com/news/post-nation/wp/2016/11/05/a-vile-and-disgusting-act-officer-accused-of-giving-fecal-sandwich-to-homeless-man-is-fired/';
+    const result = await fetchResource(url);
+
+    assert.equal(typeof result.body, 'object');
+  });
+
   it('fetches nyt', async () => {
     const url = 'http://www.nytimes.com/2016/08/16/upshot/the-state-of-the-clinton-trump-race-is-it-over.html?_r=0';
     const { response } = await fetchResource(url);
