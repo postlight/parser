@@ -4,6 +4,7 @@ export const WwwSlateComExtractor = {
   title: {
     selectors: [
       '.hed',
+      'h1',
     ],
   },
 
@@ -21,7 +22,7 @@ export const WwwSlateComExtractor = {
 
   dek: {
     selectors: [
-      'h2.dek',
+      '.dek',
     ],
   },
 
