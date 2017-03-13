@@ -30,6 +30,7 @@ export const TheAtlanticExtractor = {
   // the result
     clean: [
       '.partner-box',
+      '.callout',
     ],
   },
 
