@@ -25,5 +25,4 @@ describe('getSupportedMime(str)', () => {
     const contentType = 'application/msword';
     assert.equal(getSupportedMime(contentType), false);
   });
-
 });

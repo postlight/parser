@@ -1,4 +1,4 @@
-import { SUPPORTED_CONTENT_TYPES, SUPPORTED_CONTENT_TYPES_RE } from './constants';
+import { SUPPORTED_CONTENT_TYPES_RE } from './constants';
 
 // check a string for its mime type
 export default function getSupportedMime(str) {

@@ -54,7 +54,7 @@ const Resource = {
     let $ = '';
     content = this.encodeDoc({ content, contentType });
     if (contentType.includes('html')) {
-      $ = this.processHtml({ content, contentType });
+      $ = this.processHtml({ content });
     } else {
       $ = content;
     }
@@ -62,7 +62,7 @@ const Resource = {
     return { $, headers };
   },
 
-  processHtml({ content, contentType }) {
+  processHtml({ content }) {
     if (content.root().children().length === 0) {
       throw new Error('No children, likely a bad parse.');
     }
@@ -75,7 +75,7 @@ const Resource = {
   },
 
   encodeDoc({ content, contentType }) {
-    let mimeType = getSupportedMime(contentType);
+    const mimeType = getSupportedMime(contentType);
     const encoding = getEncoding(contentType);
 
     let decodedContent = iconv.decode(content, encoding);

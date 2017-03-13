@@ -1,5 +1,4 @@
 import cleanDatePublished from '../../cleaners/date-published';
-import GenericExtractor from '../generic';
 
 export default function textExtractor({ $, parsedUrl, headers }) {
   // Extract the filename to be the title
