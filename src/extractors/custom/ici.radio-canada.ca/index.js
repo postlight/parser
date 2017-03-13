@@ -17,6 +17,8 @@ export const IciRadioCanadaCaExtractor = {
     selectors: [
       ['meta[name="dc.date.created"]', 'value'],
     ],
+
+    timezone: 'America/New_York',
   },
 
   dek: {
