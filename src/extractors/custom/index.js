@@ -84,3 +84,4 @@ export * from './obamawhitehouse.archives.gov';
 export * from './www.opposingviews.com';
 export * from './gothamist.com';
 export * from './www.slate.com';
+export * from './ici.radio-canada.ca';
