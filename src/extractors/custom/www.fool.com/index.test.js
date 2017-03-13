@@ -91,7 +91,7 @@ describe('WwwFoolComExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(first13, 'The idea that video games are on track to be the next big');
+      assert.equal(first13, 'Image source: Getty Images. The idea that video games are on track to');
     });
   });
 });
