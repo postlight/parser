@@ -1,7 +1,7 @@
 import cheerio from 'cheerio';
 import iconv from 'iconv-lite';
 
-import { getEncoding } from 'utils/text';
+import { getEncoding, getSupportedMime } from 'utils/text';
 import { fetchResource } from './utils';
 import {
   normalizeMetaTags,
@@ -42,18 +42,17 @@ const Resource = {
   },
 
   generateDoc({ body: content, response }) {
-    const { 'content-type': contentType } = response.headers;
     const { headers } = response;
+    const { 'content-type': contentType } = headers;
 
     // TODO: Implement is_text function from
     // https://github.com/ReadabilityHoldings/readability/blob/8dc89613241d04741ebd42fa9fa7df1b1d746303/readability/utils/text.py#L57
-    if (!contentType.includes('html') &&
-        !contentType.includes('text')) {
+    if (!getSupportedMime(contentType)) {
       throw new Error('Content does not appear to be text.');
     }
 
     let $ = '';
-
+    content = this.encodeDoc({ content, contentType });
     if (contentType.includes('html')) {
       $ = this.processHtml({ content, contentType });
     } else {
@@ -64,32 +63,37 @@ const Resource = {
   },
 
   processHtml({ content, contentType }) {
-    let doc = this.encodeDoc({ content, contentType });
-
-    if (doc.root().children().length === 0) {
+    if (content.root().children().length === 0) {
       throw new Error('No children, likely a bad parse.');
     }
 
-    doc = normalizeMetaTags(doc);
-    doc = convertLazyLoadedImages(doc);
-    doc = clean(doc);
+    content = normalizeMetaTags(content);
+    content = convertLazyLoadedImages(content);
+    content = clean(content);
 
-    return doc;
+    return content;
   },
 
   encodeDoc({ content, contentType }) {
+    let mimeType = getSupportedMime(contentType);
     const encoding = getEncoding(contentType);
+
     let decodedContent = iconv.decode(content, encoding);
-    let $ = cheerio.load(decodedContent);
+    let $ = '';
 
-    // after first cheerio.load, check to see if encoding matches
-    const metaContentType = $('meta[http-equiv=content-type]').attr('content');
-    const properEncoding = getEncoding(metaContentType);
-
-    // if encodings in the header/body dont match, use the one in the body
-    if (properEncoding !== encoding) {
-      decodedContent = iconv.decode(content, properEncoding);
+    if (mimeType === 'text/html') {
       $ = cheerio.load(decodedContent);
+      // after first cheerio.load, check to see if encoding matches
+      const metaContentType = $('meta[http-equiv=content-type]').attr('content');
+      const properEncoding = getEncoding(metaContentType);
+
+      // if encodings in the header/body dont match, use the one in the body
+      if (properEncoding !== encoding) {
+        decodedContent = iconv.decode(content, properEncoding);
+        $ = cheerio.load(decodedContent);
+      }
+    } else {
+      $ = decodedContent;
     }
 
     return $;

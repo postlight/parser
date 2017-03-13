@@ -4,7 +4,6 @@ import GenericExtractor from '../generic';
 export default function textExtractor({ $, parsedUrl, headers }) {
   // Extract the filename to be the title
   const { path } = parsedUrl;
-
   const size = path.split('/').length;
   const title = path.split('/')[size - 1];
 
@@ -20,9 +19,6 @@ export default function textExtractor({ $, parsedUrl, headers }) {
   // Domain
   const domain = parsedUrl.hostname;
 
-  // Word Count
-  const word_count = GenericExtractor.word_count({ content }, false);
-
   return {
     title,
     content,
@@ -33,8 +29,6 @@ export default function textExtractor({ $, parsedUrl, headers }) {
     next_page_url: null,
     url,
     domain,
-    excerpt: null,
-    word_count,
     direction: null,
   };
 }

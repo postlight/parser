@@ -43,7 +43,6 @@ const Mercury = {
     const { $, headers } = await Resource.create(url, html, parsedUrl);
 
     let result = '';
-
     if (headers['content-type'].includes('text/html')) {
       result = this.htmlExtractor({ url, parsedUrl, $, html, fallback, fetchAllPages });
     } else {

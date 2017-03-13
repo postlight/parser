@@ -23,3 +23,10 @@ export const IS_DIGIT_RE = /^[0-9]+$/i;
 
 export const ENCODING_RE = /charset=([\w-]+)\b/;
 export const DEFAULT_ENCODING = 'utf-8';
+
+export const SUPPORTED_CONTENT_TYPES = [
+  'text/html',
+  'text/plain',
+];
+
+export const SUPPORTED_CONTENT_TYPES_RE = new RegExp(`(${SUPPORTED_CONTENT_TYPES.join('|')})`);
