@@ -78,16 +78,6 @@ describe('WwwQdailyComExtractor', () => {
       assert.equal(lead_image_url, 'http://img.qdaily.com/article/article_show/20170228225314Dh4XvM63TzkWPNHJ.png?imageMogr2/auto-orient/thumbnail/!755x450r/gravity/Center/crop/755x450/quality/85/format/jpg/ignore-error/1');
     });
 
-    it('returns the pages_rendered', async () => {
-    // To pass this test, fill out the pages_rendered selector
-    // in ./src/extractors/custom/www.qdaily.com/index.js.
-      const { pages_rendered } = await result;
-
-    // Update these values with the expected values from
-    // the article.
-      assert.equal(pages_rendered, '2');
-    });
-
     it('returns the content', async () => {
       // To pass this test, fill out the content selector
       // in ./src/extractors/custom/www.qdaily.com/index.js.
@@ -97,11 +87,11 @@ describe('WwwQdailyComExtractor', () => {
 
       const $ = cheerio.load(content || '');
 
-      const first13 = excerptContent($('*').first().text(), 13);
+      const first3 = excerptContent($('*').first().text(), 3);
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(first13, '无法忍受乡村音乐？ 对某某明星迷之厌恶？ 讨厌特朗普？不爱自拍？ 人们对于讨厌的事物总是能很有共同话题。约会软件也深谙这一点了，最近在美国，有一个叫做 Hater 的约会软件就是通过匹配用户共同讨厌的事情，来为彼此进行配对。 与让你直接刷脸看颜值的约会软');
+      assert.equal(first3, '无法忍受乡村音乐？ 对某某明星迷之厌恶？ 讨厌特朗普？不爱自拍？');
     });
   });
 });

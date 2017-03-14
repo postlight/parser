@@ -27,7 +27,7 @@ export const WwwQdailyComExtractor = {
 
   lead_image_url: {
     selectors: [
-    ['div.article-detail-hd img', 'src'],
+      ['div.article-detail-hd img', 'src'],
     ],
   },
 
@@ -45,6 +45,7 @@ export const WwwQdailyComExtractor = {
     // The clean selectors will remove anything that matches from
     // the result
     clean: [
+      '.lazyload',
       '.lazylad',
       '.lazylood',
     ],
