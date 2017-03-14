@@ -37,8 +37,8 @@ export const NewrepublicComExtractor = {
 
   content: {
     selectors: [
-      'div.content-body',
-      '.minutes-primary div.content-body',
+      ['.article-cover', 'div.content-body'],
+      ['.minute-image', '.minutes-primary div.content-body'],
     ],
 
     // Is there anything in the content you selected that needs transformed
