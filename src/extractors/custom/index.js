@@ -86,5 +86,6 @@ export * from './www.prospectmagazine.co.uk';
 export * from './forward.com';
 export * from './www.qdaily.com';
 export * from './gothamist.com';
+export * from './www.fool.com';
 export * from './www.slate.com';
 export * from './ici.radio-canada.ca';
