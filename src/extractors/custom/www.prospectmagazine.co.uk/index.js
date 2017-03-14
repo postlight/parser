@@ -9,7 +9,7 @@ export const WwwProspectmagazineCoUkExtractor = {
 
   author: {
     selectors: [
-      'div.aside_author div.title',
+      '.aside_author .title',
     ],
   },
 
@@ -36,7 +36,7 @@ export const WwwProspectmagazineCoUkExtractor = {
   content: {
     selectors: [
       // ['article.type-post div.post_content p'],
-      'article.type-post div.post_content',
+      'article .post_content',
     ],
 
     // Is there anything in the content you selected that needs transformed
