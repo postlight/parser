@@ -83,6 +83,7 @@ export * from './www.linkedin.com';
 export * from './obamawhitehouse.archives.gov';
 export * from './www.opposingviews.com';
 export * from './forward.com';
+export * from './www.qdaily.com';
 export * from './gothamist.com';
 export * from './www.slate.com';
 export * from './ici.radio-canada.ca';
