@@ -33,7 +33,7 @@ export const ForwardComExtractor = {
 
   content: {
     selectors: [
-      ['.post-item p'],
+      ['.post-item-media-wrap', '.post-item p'],
     ],
 
     // Is there anything in the content you selected that needs transformed

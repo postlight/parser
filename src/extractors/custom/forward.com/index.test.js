@@ -91,7 +91,7 @@ describe('ForwardComExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(first13, 'Sometimes (okay, a lot of the time), if I’m in the middle of');
+      assert.equal(first13, 'Getty Images Sometimes (okay, a lot of the time), if I’m in the');
     });
   });
 });
