@@ -39,7 +39,8 @@ const Mercury = {
 
     let result = '';
     if (headers['content-type'].includes('text/html')) {
-      result = this.htmlExtractor({ url, parsedUrl, $, html, fallback, fetchAllPages });
+      const Extractor = getExtractor(url, parsedUrl, $, headers);
+      result = this.htmlExtractor(Extractor, { url, parsedUrl, $, html, fallback, fetchAllPages });
     } else {
       result = textExtractor({ $, parsedUrl, headers });
     }
@@ -61,8 +62,8 @@ const Mercury = {
     return await Resource.create(url);
   },
 
-  async htmlExtractor({ url, parsedUrl, $, parsedHtml, fallback, fetchAllPages }) {
-    const Extractor = getExtractor(url, parsedUrl, $);
+  async htmlExtractor(extractor, { url, parsedUrl, $, parsedHtml, fallback, fetchAllPages }) {
+    // const Extractor = getExtractor(url, parsedUrl, $);
     // console.log(`Using extractor for ${Extractor.domain}`);
 
     // If we found an error creating the resource, return that error
@@ -84,7 +85,7 @@ const Mercury = {
     const metaCache = $('meta').map((_, node) => $(node).attr('name')).toArray();
 
     let result = RootExtractor.extract(
-      Extractor,
+      extractor,
       {
         url,
         html,
@@ -100,7 +101,7 @@ const Mercury = {
     if (fetchAllPages && next_page_url) {
       result = await collectAllPages(
         {
-          Extractor,
+          extractor,
           next_page_url,
           html,
           $,
