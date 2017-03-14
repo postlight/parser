@@ -3,6 +3,7 @@ export const WwwQdailyComExtractor = {
 
   title: {
     selectors: [
+      'h2',
       'h2.title',
     ],
   },
@@ -15,7 +16,7 @@ export const WwwQdailyComExtractor = {
 
   date_published: {
     selectors: [
-      ['span.date.smart-date', 'data-origindate'],
+      ['.date.smart-date', 'data-origindate'],
     ],
   },
 
@@ -27,7 +28,7 @@ export const WwwQdailyComExtractor = {
 
   lead_image_url: {
     selectors: [
-      ['div.article-detail-hd img', 'src'],
+      ['.article-detail-hd img', 'src'],
     ],
   },
 
