@@ -15,7 +15,7 @@ export const WwwProspectmagazineCoUkExtractor = {
 
   date_published: {
     selectors: [
-      // enter selectors
+      '.post-info',
     ],
   },
 
