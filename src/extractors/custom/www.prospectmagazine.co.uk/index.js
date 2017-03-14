@@ -17,6 +17,8 @@ export const WwwProspectmagazineCoUkExtractor = {
     selectors: [
       '.post-info',
     ],
+
+    timezone: 'Europe/London',
   },
 
   dek: {
