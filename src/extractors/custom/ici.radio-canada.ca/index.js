@@ -1,23 +1,21 @@
-export const NewrepublicComExtractor = {
-  domain: 'newrepublic.com',
+export const IciRadioCanadaCaExtractor = {
+  domain: 'ici.radio-canada.ca',
 
   title: {
     selectors: [
-      'h1.article-headline',
-      '.minutes-primary h1.minute-title',
+      'h1',
     ],
   },
 
   author: {
     selectors: [
-      'div.author-list',
-      '.minutes-primary h3.minute-byline',
+      ['meta[name="dc.creator"]', 'value'],
     ],
   },
 
   date_published: {
     selectors: [
-      ['meta[name="article:published_time"]', 'value'],
+      ['meta[name="dc.date.created"]', 'value'],
     ],
 
     timezone: 'America/New_York',
@@ -25,7 +23,7 @@ export const NewrepublicComExtractor = {
 
   dek: {
     selectors: [
-      'h2.article-subhead',
+      '.bunker-component.lead',
     ],
   },
 
@@ -37,8 +35,7 @@ export const NewrepublicComExtractor = {
 
   content: {
     selectors: [
-      ['.article-cover', 'div.content-body'],
-      ['.minute-image', '.minutes-primary div.content-body'],
+      ['.main-multimedia-item', '.news-story-content'],
     ],
 
     // Is there anything in the content you selected that needs transformed
@@ -50,7 +47,7 @@ export const NewrepublicComExtractor = {
     // The clean selectors will remove anything that matches from
     // the result
     clean: [
-      'aside',
+
     ],
   },
 };
