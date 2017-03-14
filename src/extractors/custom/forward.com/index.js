@@ -46,9 +46,9 @@ export const ForwardComExtractor = {
     // The clean selectors will remove anything that matches from
     // the result
     clean: [
-      'div.donate-box',
-      'p.message',
-      'p.subtitle',
+      '.donate-box',
+      '.message',
+      '.subtitle',
     ],
   },
 };
