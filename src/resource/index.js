@@ -1,5 +1,7 @@
 import cheerio from 'cheerio';
+import iconv from 'iconv-lite';
 
+import { getEncoding } from 'utils/text';
 import { fetchResource } from './utils';
 import {
   normalizeMetaTags,
@@ -51,7 +53,7 @@ const Resource = {
       throw new Error('Content does not appear to be text.');
     }
 
-    let $ = cheerio.load(content);
+    let $ = this.encodeDoc({ content, contentType });
 
     if ($.root().children().length === 0) {
       throw new Error('No children, likely a bad parse.');
@@ -60,6 +62,24 @@ const Resource = {
     $ = normalizeMetaTags($);
     $ = convertLazyLoadedImages($);
     $ = clean($);
+
+    return $;
+  },
+
+  encodeDoc({ content, contentType }) {
+    const encoding = getEncoding(contentType);
+    let decodedContent = iconv.decode(content, encoding);
+    let $ = cheerio.load(decodedContent);
+
+    // after first cheerio.load, check to see if encoding matches
+    const metaContentType = $('meta[http-equiv=content-type]').attr('content');
+    const properEncoding = getEncoding(metaContentType);
+
+    // if encodings in the header/body dont match, use the one in the body
+    if (properEncoding !== encoding) {
+      decodedContent = iconv.decode(content, properEncoding);
+      $ = cheerio.load(decodedContent);
+    }
 
     return $;
   },

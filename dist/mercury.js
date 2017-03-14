@@ -7,10 +7,10 @@ var _extends = _interopDefault(require('babel-runtime/helpers/extends'));
 var _asyncToGenerator = _interopDefault(require('babel-runtime/helpers/asyncToGenerator'));
 var URL = _interopDefault(require('url'));
 var cheerio = _interopDefault(require('cheerio'));
-var _Promise = _interopDefault(require('babel-runtime/core-js/promise'));
-var request = _interopDefault(require('request'));
 var iconv = _interopDefault(require('iconv-lite'));
 var _slicedToArray = _interopDefault(require('babel-runtime/helpers/slicedToArray'));
+var _Promise = _interopDefault(require('babel-runtime/core-js/promise'));
+var request = _interopDefault(require('request'));
 var _Reflect$ownKeys = _interopDefault(require('babel-runtime/core-js/reflect/own-keys'));
 var _toConsumableArray = _interopDefault(require('babel-runtime/helpers/toConsumableArray'));
 var _defineProperty = _interopDefault(require('babel-runtime/helpers/defineProperty'));
@@ -25,50 +25,6 @@ var wuzzy = _interopDefault(require('wuzzy'));
 var difflib = _interopDefault(require('difflib'));
 var _Array$from = _interopDefault(require('babel-runtime/core-js/array/from'));
 var ellipsize = _interopDefault(require('ellipsize'));
-
-var _marked = [range].map(_regeneratorRuntime.mark);
-
-function range() {
-  var start = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
-  var end = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
-  return _regeneratorRuntime.wrap(function range$(_context) {
-    while (1) {
-      switch (_context.prev = _context.next) {
-        case 0:
-          if (!(start <= end)) {
-            _context.next = 5;
-            break;
-          }
-
-          _context.next = 3;
-          return start += 1;
-
-        case 3:
-          _context.next = 0;
-          break;
-
-        case 5:
-        case "end":
-          return _context.stop();
-      }
-    }
-  }, _marked[0], this);
-}
-
-// extremely simple url validation as a first step
-function validateUrl(_ref) {
-  var hostname = _ref.hostname;
-
-  // If this isn't a valid url, return an error message
-  return !!hostname;
-}
-
-var Errors = {
-  badUrl: {
-    error: true,
-    messages: 'The url parameter passed does not look like a valid URL. Please check your data and try again.'
-  }
-};
 
 var NORMALIZE_RE = /\s{2,}/g;
 
@@ -116,6 +72,7 @@ var IS_ALPHA_RE = /^[a-z]+$/i;
 var IS_DIGIT_RE = /^[0-9]+$/i;
 
 var ENCODING_RE = /charset=([\w-]+)\b/;
+var DEFAULT_ENCODING = 'utf-8';
 
 function pageNumFromUrl(url) {
   var matches = url.match(PAGE_IN_HREF_RE);
@@ -224,12 +181,59 @@ function excerptContent(content) {
 // used in our fetchResource function to
 // ensure correctly encoded responses
 function getEncoding(str) {
+  var encoding = DEFAULT_ENCODING;
   if (ENCODING_RE.test(str)) {
-    return ENCODING_RE.exec(str)[1];
+    var testEncode = ENCODING_RE.exec(str)[1];
+    if (iconv.encodingExists(testEncode)) {
+      encoding = testEncode;
+    }
   }
-
-  return null;
+  return encoding;
 }
+
+var _marked = [range].map(_regeneratorRuntime.mark);
+
+function range() {
+  var start = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+  var end = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
+  return _regeneratorRuntime.wrap(function range$(_context) {
+    while (1) {
+      switch (_context.prev = _context.next) {
+        case 0:
+          if (!(start <= end)) {
+            _context.next = 5;
+            break;
+          }
+
+          _context.next = 3;
+          return start += 1;
+
+        case 3:
+          _context.next = 0;
+          break;
+
+        case 5:
+        case "end":
+          return _context.stop();
+      }
+    }
+  }, _marked[0], this);
+}
+
+// extremely simple url validation as a first step
+function validateUrl(_ref) {
+  var hostname = _ref.hostname;
+
+  // If this isn't a valid url, return an error message
+  return !!hostname;
+}
+
+var Errors = {
+  badUrl: {
+    error: true,
+    messages: 'The url parameter passed does not look like a valid URL. Please check your data and try again.'
+  }
+};
 
 // Browser does not like us setting user agent
 var REQUEST_HEADERS = cheerio.browser ? {} : {
@@ -258,12 +262,6 @@ function get(options) {
       if (err) {
         reject(err);
       } else {
-        var encoding = getEncoding(response.headers['content-type']);
-
-        if (iconv.encodingExists(encoding)) {
-          body = iconv.decode(body, encoding);
-        }
-
         resolve({ body: body, response: response });
       }
     });
@@ -334,11 +332,11 @@ var fetchResource$1 = (function () {
               url: parsedUrl.href,
               headers: _extends({}, REQUEST_HEADERS),
               timeout: FETCH_TIMEOUT,
-              // Don't set encoding; fixes issues
-              // w/gzipped responses
-              encoding: null,
               // Accept cookies
               jar: true,
+              // Set to null so the response returns as binary and body as buffer
+              // https://github.com/request/request#requestoptions-callback
+              encoding: null,
               // Accept and decode gzip
               gzip: true,
               // Follow any redirect
@@ -1851,7 +1849,7 @@ var Resource = {
       throw new Error('Content does not appear to be text.');
     }
 
-    var $ = cheerio.load(content);
+    var $ = this.encodeDoc({ content: content, contentType: contentType });
 
     if ($.root().children().length === 0) {
       throw new Error('No children, likely a bad parse.');
@@ -1860,6 +1858,26 @@ var Resource = {
     $ = normalizeMetaTags($);
     $ = convertLazyLoadedImages($);
     $ = clean($);
+
+    return $;
+  },
+  encodeDoc: function encodeDoc(_ref2) {
+    var content = _ref2.content,
+        contentType = _ref2.contentType;
+
+    var encoding = getEncoding(contentType);
+    var decodedContent = iconv.decode(content, encoding);
+    var $ = cheerio.load(decodedContent);
+
+    // after first cheerio.load, check to see if encoding matches
+    var metaContentType = $('meta[http-equiv=content-type]').attr('content');
+    var properEncoding = getEncoding(metaContentType);
+
+    // if encodings in the header/body dont match, use the one in the body
+    if (properEncoding !== encoding) {
+      decodedContent = iconv.decode(content, properEncoding);
+      $ = cheerio.load(decodedContent);
+    }
 
     return $;
   }
@@ -5291,6 +5309,54 @@ var WwwOpposingviewsComExtractor = {
   }
 };
 
+var GothamistComExtractor = {
+  domain: 'gothamist.com',
+
+  supportedDomains: ['chicagoist.com', 'laist.com', 'sfist.com', 'shanghaiist.com', 'dcist.com'],
+
+  title: {
+    selectors: ['h1', '.entry-header h1']
+  },
+
+  author: {
+    selectors: ['.author']
+  },
+
+  date_published: {
+    selectors: ['abbr', 'abbr.published'],
+
+    timezone: 'America/New_York'
+  },
+
+  dek: {
+    selectors: [null]
+  },
+
+  lead_image_url: {
+    selectors: [['meta[name="og:image"]', 'value']]
+  },
+
+  content: {
+    selectors: ['.entry-body'],
+
+    // Is there anything in the content you selected that needs transformed
+    // before it's consumable content? E.g., unusual lazy loaded images
+    transforms: {
+      'div.image-none': 'figure',
+      '.image-none i': 'figcaption',
+      'div.image-left': 'figure',
+      '.image-left i': 'figcaption',
+      'div.image-right': 'figure',
+      '.image-right i': 'figcaption'
+    },
+
+    // Is there anything that is in the result that shouldn't be?
+    // The clean selectors will remove anything that matches from
+    // the result
+    clean: ['.image-none br', '.image-left br', '.image-right br', '.galleryEase']
+  }
+};
+
 
 
 var CustomExtractors = Object.freeze({
@@ -5377,7 +5443,8 @@ var CustomExtractors = Object.freeze({
 	FortuneComExtractor: FortuneComExtractor,
 	WwwLinkedinComExtractor: WwwLinkedinComExtractor,
 	ObamawhitehouseArchivesGovExtractor: ObamawhitehouseArchivesGovExtractor,
-	WwwOpposingviewsComExtractor: WwwOpposingviewsComExtractor
+	WwwOpposingviewsComExtractor: WwwOpposingviewsComExtractor,
+	GothamistComExtractor: GothamistComExtractor
 });
 
 var Extractors = _Object$keys(CustomExtractors).reduce(function (acc, key) {

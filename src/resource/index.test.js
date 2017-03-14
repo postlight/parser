@@ -1,6 +1,7 @@
 import assert from 'assert';
 import cheerio from 'cheerio';
 import { Errors } from 'utils';
+import { getEncoding } from 'utils/text';
 
 import { record } from 'test-helpers';
 import Resource from './index';
@@ -24,18 +25,34 @@ describe('Resource', () => {
 
       assert.equal(error, Errors.badUrl);
     });
+
+    it('fetches with different encoding on body', async () => {
+      const url = 'http://www.playnation.de/spiele-news/kojima-productions/hideo-kojima-reflektiert-ueber-seinen-werdegang-bei-konami-id68950.html';
+      const $ = await Resource.create(url);
+      const metaContentType = $('meta[http-equiv=content-type]').attr('value');
+
+      assert.equal(getEncoding(metaContentType), 'iso-8859-1');
+      const encodedU = /&#xFC;/g;
+
+      assert.equal(encodedU.test($.html()), true);
+      assert.equal(typeof $, 'function');
+    });
+
+    it('handles special encoding', async () => {
+      const url = 'http://www.elmundo.es/opinion/2016/11/19/582f476846163fc65a8b4578.html';
+      const $ = await Resource.create(url);
+
+      const badEncodingRe = /�/g;
+
+      assert.equal(badEncodingRe.test($.html()), false);
+      assert.equal(typeof $, 'function');
+    });
   });
 
   describe('generateDoc({ body, response })', () => {
-    it('returns a cheerio object if valid', () => {
-      const response = { headers: { 'content-type': 'text/html' } };
-
-      const body = '<div><p>Hi</p></div>';
-      const $ = Resource.generateDoc({ body, response });
-
-      assert.equal($.html(), body);
-    });
-
+    // Ideally the body would be a buffer, because of potential issues with
+    // string re-encoding, since these strings are blank, it should be fine
+    // but this is why iconv is throwing warnings.
     it('throws an error if the content is not text', () => {
       const response = {
         headers: {
