@@ -1,10 +1,9 @@
 import cleanDatePublished from '../../cleaners/date-published';
+import titleFromFilename from '../../utils/text/title-from-filename';
 
 export default function textExtractor({ $, parsedUrl, headers }) {
   // Extract the filename to be the title
-  const { path } = parsedUrl;
-  const size = path.split('/').length;
-  const title = path.split('/')[size - 1];
+  const title = titleFromFilename(parsedUrl);
 
   // Extract content
   const content = $.replace(/(?:\r\n|\r|\n)/g, '<br />');

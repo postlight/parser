@@ -24,13 +24,8 @@ const Mercury = {
     // from the current page
     if (!url && cheerio.browser) {
       url = window.location.href; // eslint-disable-line no-undef
-      if (!html) {
-        if (document.doctype === null) { // eslint-disable-line no-undef
-          // Non-HTML doctype, we set it to false, so resource can fetch.
-          html = false;
-        } else {
-          html = cheerio.html();
-        }
+      if (document.doctype !== null) { // eslint-disable-line no-undef
+        html = cheerio.html();
       }
     }
 
