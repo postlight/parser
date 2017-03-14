@@ -3,12 +3,13 @@ export const ForwardComExtractor = {
 
   title: {
     selectors: [
-      ['meta[name="sailthru.title"]', 'value'],
+      ['meta[name="og:title"]', 'value'],
     ],
   },
 
   author: {
     selectors: [
+      '.author-name',
       ['meta[name="sailthru.author"]', 'value'],
     ],
   },
