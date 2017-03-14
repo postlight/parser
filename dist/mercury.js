@@ -5357,49 +5357,6 @@ var GothamistComExtractor = {
   }
 };
 
-var WwwFoolComExtractor = {
-  domain: 'www.fool.com',
-
-  title: {
-    selectors: ['h1']
-  },
-
-  author: {
-    selectors: ['.author-inline .author-name']
-  },
-
-  date_published: {
-    selectors: [['meta[name="date"]', 'value']]
-  },
-
-  dek: {
-    selectors: ['header h2']
-  },
-
-  lead_image_url: {
-    selectors: [['meta[name="og:image"]', 'value']]
-  },
-
-  content: {
-    selectors: ['.article-content'],
-
-    // Is there anything in the content you selected that needs transformed
-    // before it's consumable content? E.g., unusual lazy loaded images
-    transforms: {
-      '.caption img': function captionImg($node) {
-        var src = $node.attr('src');
-        $node.parent().replaceWith('<figure style="width: 100% !important"><img src="' + src + '" style="width: 100% !important"/></figure>');
-      },
-      '.caption': 'figcaption'
-    },
-
-    // Is there anything that is in the result that shouldn't be?
-    // The clean selectors will remove anything that matches from
-    // the result
-    clean: ['#pitch']
-  }
-};
-
 
 
 var CustomExtractors = Object.freeze({
@@ -5487,8 +5444,7 @@ var CustomExtractors = Object.freeze({
 	WwwLinkedinComExtractor: WwwLinkedinComExtractor,
 	ObamawhitehouseArchivesGovExtractor: ObamawhitehouseArchivesGovExtractor,
 	WwwOpposingviewsComExtractor: WwwOpposingviewsComExtractor,
-	GothamistComExtractor: GothamistComExtractor,
-	WwwFoolComExtractor: WwwFoolComExtractor
+	GothamistComExtractor: GothamistComExtractor
 });
 
 var Extractors = _Object$keys(CustomExtractors).reduce(function (acc, key) {
