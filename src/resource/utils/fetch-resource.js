@@ -1,8 +1,6 @@
 import URL from 'url';
 import request from 'request';
-import iconv from 'iconv-lite';
 import { Errors } from 'utils';
-import { getEncoding } from 'utils/text';
 
 import {
   REQUEST_HEADERS,
@@ -17,12 +15,6 @@ function get(options) {
       if (err) {
         reject(err);
       } else {
-        const encoding = getEncoding(response.headers['content-type']);
-
-        if (iconv.encodingExists(encoding)) {
-          body = iconv.decode(body, encoding);
-        }
-
         resolve({ body, response });
       }
     });
@@ -97,11 +89,11 @@ export default async function fetchResource(url, parsedUrl) {
     url: parsedUrl.href,
     headers: { ...REQUEST_HEADERS },
     timeout: FETCH_TIMEOUT,
-    // Don't set encoding; fixes issues
-    // w/gzipped responses
-    encoding: null,
     // Accept cookies
     jar: true,
+    // Set to null so the response returns as binary and body as buffer
+    // https://github.com/request/request#requestoptions-callback
+    encoding: null,
     // Accept and decode gzip
     gzip: true,
     // Follow any redirect
