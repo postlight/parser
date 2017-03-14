@@ -27,7 +27,7 @@ export const WwwElmercurioComExtractor = {
 
   lead_image_url: {
     selectors: [
-
+      null,
     ],
   },
 

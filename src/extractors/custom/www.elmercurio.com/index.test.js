@@ -75,7 +75,7 @@ describe('WwwElmercurioComExtractor', () => {
 
     // Update these values with the expected values from
     // the article.
-      assert.equal(lead_image_url, 'http://www.elmercurio.com/blogs/fotos/columnistas/1.jpg');
+      assert.equal(lead_image_url, null);
     });
 
     it('returns the content', async () => {
