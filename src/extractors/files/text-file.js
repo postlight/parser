@@ -1,12 +1,13 @@
 import cleanDatePublished from '../../cleaners/date-published';
 import titleFromFilename from '../../utils/text/title-from-filename';
+import textToHtml from '../../utils/text/text-to-html';
 
 export default function textExtractor({ $, parsedUrl, headers }) {
   // Extract the filename to be the title
   const title = titleFromFilename(parsedUrl);
 
   // Extract content
-  const content = $.replace(/(?:\r\n|\r|\n)/g, '<br />');
+  const content = textToHtml($);
 
   // Date Published
   const date_published = cleanDatePublished(headers['last-modified']);

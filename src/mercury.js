@@ -9,7 +9,7 @@ import {
 import getExtractor from 'extractors/get-extractor';
 import RootExtractor from 'extractors/root-extractor';
 import collectAllPages from 'extractors/collect-all-pages';
-import textExtractor from 'extractors/document/text-file';
+import textExtractor from 'extractors/files/text-file';
 
 const Mercury = {
   async parse(url, opts = {}) {

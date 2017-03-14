@@ -7,3 +7,5 @@ export { default as hasSentenceEnd } from './has-sentence-end';
 export { default as excerptContent } from './excerpt-content';
 export { default as getEncoding } from './get-encoding';
 export { default as getSupportedMime } from './get-supported-mime';
+export { default as titleFromFilename } from './title-from-filename';
+export { default as textToHtml } from './text-to-html';
