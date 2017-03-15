@@ -34,8 +34,8 @@ export const NextwarezComExtractor = {
 
   content: {
     selectors: [
-      ['.post-content.description p', 'h5', 'h2', 'h3'],
-      ['div[itemProp="articleBody"]'],
+      ['article.post', 'header .featured a', 'p:not(:last-child)', 'h5', 'h2', 'h3'],
+      ['article.post', 'header .featured a', 'div[itemProp="articleBody"]'],
     ],
 
     // Is there anything in the content you selected that needs transformed
@@ -51,9 +51,17 @@ export const NextwarezComExtractor = {
     // The clean selectors will remove anything that matches from
     // the result
     clean: [
+      '.heading',
+      '.post-meta',
+      '.post-share',
       '.review-box',
       '.tagcloud',
       'h2 a',
+      '.bio',
+      '.logo-text',
+      '.author-info',
+      '.about-widget',
+      'footer',
     ],
   },
 };
