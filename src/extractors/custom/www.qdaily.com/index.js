@@ -1,44 +1,40 @@
-export const NewrepublicComExtractor = {
-  domain: 'newrepublic.com',
+export const WwwQdailyComExtractor = {
+  domain: 'www.qdaily.com',
 
   title: {
     selectors: [
-      'h1.article-headline',
-      '.minutes-primary h1.minute-title',
+      'h2',
+      'h2.title',
     ],
   },
 
   author: {
     selectors: [
-      'div.author-list',
-      '.minutes-primary h3.minute-byline',
+      '.name',
     ],
   },
 
   date_published: {
     selectors: [
-      ['meta[name="article:published_time"]', 'value'],
+      ['.date.smart-date', 'data-origindate'],
     ],
-
-    timezone: 'America/New_York',
   },
 
   dek: {
     selectors: [
-      'h2.article-subhead',
+      '.excerpt',
     ],
   },
 
   lead_image_url: {
     selectors: [
-      ['meta[name="og:image"]', 'value'],
+      ['.article-detail-hd img', 'src'],
     ],
   },
 
   content: {
     selectors: [
-      ['.article-cover', 'div.content-body'],
-      ['.minute-image', '.minutes-primary div.content-body'],
+      '.detail',
     ],
 
     // Is there anything in the content you selected that needs transformed
@@ -50,7 +46,9 @@ export const NewrepublicComExtractor = {
     // The clean selectors will remove anything that matches from
     // the result
     clean: [
-      'aside',
+      '.lazyload',
+      '.lazylad',
+      '.lazylood',
     ],
   },
 };
