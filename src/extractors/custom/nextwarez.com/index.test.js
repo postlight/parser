@@ -16,6 +16,7 @@ describe('NextwarezComExtractor', () => {
         'http://nextwarez.com/10-plus-gros-trackers-torrents-monde/';
       const html =
         fs.readFileSync('./fixtures/nextwarez.com/1488394551752.html');
+        // fs.readFileSync('./fixtures/nextwarez.com/1489594296783.html');
       result =
         Mercury.parse(url, html, { fallback: false });
     });
