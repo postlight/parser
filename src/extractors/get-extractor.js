@@ -9,7 +9,8 @@ export default function getExtractor(url, parsedUrl, $, headers) {
   parsedUrl = parsedUrl || URL.parse(url);
   const { hostname } = parsedUrl;
   const baseDomain = hostname.split('.').slice(-2).join('.');
+  console.log(headers);
 
-  return Extractors[hostname] || Extractors[baseDomain] ||
-    detectByHtml($) || checkByFile(headers) || GenericExtractor;
+  return checkByFile(headers) || Extractors[hostname] || Extractors[baseDomain] ||
+    detectByHtml($) || GenericExtractor;
 }

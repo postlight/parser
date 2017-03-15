@@ -2,7 +2,7 @@ import URL from 'url';
 import fs from 'fs';
 import assert from 'assert';
 
-import textExtractor from './text-file';
+import TextExtractor from './text-file';
 
 describe('textExtractor(obj)', () => {
   it('fetches text file', async () => {
@@ -20,7 +20,7 @@ CONTENTS OF A TEXT FILE
       'content-type': 'text/plain'
     };
 
-    const extracted = textExtractor({ $, parsedUrl, headers });
+    const extracted = TextExtractor.extract({ $, parsedUrl, headers });
 
     assert.equal(typeof extracted, 'object');
     assert.equal(extracted.title, 'readme.txt');

@@ -1,33 +1,35 @@
 import cleanDatePublished from '../../cleaners/date-published';
 import titleFromFilename from '../../utils/text/title-from-filename';
 import textToHtml from '../../utils/text/text-to-html';
+import stringDirection from 'string-direction';
 
-export default function textExtractor({ $, parsedUrl, headers }) {
-  // Extract the filename to be the title
-  const title = titleFromFilename(parsedUrl);
+const TextExtractor = {
+  domain: '*',
+  title: titleFromFilename,
+  date_published: cleanDatePublished,
+  content: textToHtml,
+  direction: ({ title }) => stringDirection.getDirection(title),
 
-  // Extract content
-  const content = textToHtml($);
+  extract(options) {
+    const { $, parsedUrl, headers } = options;
 
-  // Date Published
-  const date_published = cleanDatePublished(headers['last-modified']);
+    console.log(options);
+    const title = this.title(parsedUrl);
+    const content = this.content($);
+    const date_published = this.date_published(headers['last-modified']);
+    const url = parsedUrl.href;
+    const domain = parsedUrl.hostname;
+    const direction = this.direction({ title });
 
-  // URL
-  const url = parsedUrl.href;
+    return {
+      title,
+      content,
+      date_published: date_published || null,
+      url,
+      domain,
+      direction,
+    };
+  },
+};
 
-  // Domain
-  const domain = parsedUrl.hostname;
-
-  return {
-    title,
-    content,
-    author: null,
-    date_published,
-    lead_image_url: null,
-    dek: null,
-    next_page_url: null,
-    url,
-    domain,
-    direction: null,
-  };
-}
+export default TextExtractor;

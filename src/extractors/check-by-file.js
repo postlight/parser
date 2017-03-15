@@ -5,8 +5,10 @@ import getSupportedMime from '../utils/text/get-supported-mime'
 export default function checkByFile(headers) {
   if (headers) {
     switch (getSupportedMime(headers['content-type'])) {
-      case 'text/html':
+      case 'text/plain':
         return textExtractor;
+        break;
+      default:
         break;
     }
   }

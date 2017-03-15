@@ -36,13 +36,56 @@ const Mercury = {
     }
 
     const { $, headers } = await Resource.create(url, html, parsedUrl);
+    const Extractor = getExtractor(url, parsedUrl, $, headers);
 
-    let result = '';
-    if (headers['content-type'].includes('text/html')) {
-      const Extractor = getExtractor(url, parsedUrl, $, headers);
-      result = this.htmlExtractor(Extractor, { url, parsedUrl, $, html, fallback, fetchAllPages });
+    // If we found an error creating the resource, return that error
+    if ($.failed) {
+      return $;
+    }
+
+    // if html still has not been set (i.e., url passed to Mercury.parse),
+    // set html from the response of Resource.create
+    if (typeof $ !== 'string' && !html) {
+      html = $.html();
+    }
+
+    // Cached value of every meta name in our document.
+    // Used when extracting title/author/date_published/dek
+    let extractorOpts = {
+      url,
+      html,
+      $,
+      parsedUrl,
+      fallback,
+    };
+    let pageCollectOpts = {
+      Extractor,
+      next_page_url,
+      html,
+      $,
+      result,
+      title,
+      url,
+    }
+    if (typeof $ !== 'string') {
+      const metaCache = $('meta').map((_, node) => $(node).attr('name')).toArray();
+      extractorOpts = { ...extractorOpts, metaCache };
+      pageCollectOpts = { ...pageCollectOpts, metaCache };
+    }
+
+    let result = RootExtractor.extract(Extractor, extractorOpts);
+
+    const { title, next_page_url } = result;
+
+    // Fetch more pages if next_page_url found
+    if (fetchAllPages && next_page_url) {
+      result = await collectAllPages(pageCollectOpts);
     } else {
-      result = textExtractor({ $, parsedUrl, headers });
+      result = {
+        ...result,
+        total_pages: 1,
+        rendered_pages: 1,
+      };
     }
 
     // if this parse is happening in the browser,
@@ -61,67 +104,6 @@ const Mercury = {
   async fetchResource(url) {
     return await Resource.create(url);
   },
-
-  async htmlExtractor(extractor, { url, parsedUrl, $, parsedHtml, fallback, fetchAllPages }) {
-    // const Extractor = getExtractor(url, parsedUrl, $);
-    // console.log(`Using extractor for ${Extractor.domain}`);
-
-    // If we found an error creating the resource, return that error
-    if ($.failed) {
-      return $;
-    }
-
-    // if html still has not been set (i.e., url passed to Mercury.parse),
-    // set html from the response of Resource.create
-    let html = '';
-    if (!parsedHtml) {
-      html = $.html();
-    } else {
-      html = parsedHtml;
-    }
-
-    // Cached value of every meta name in our document.
-    // Used when extracting title/author/date_published/dek
-    const metaCache = $('meta').map((_, node) => $(node).attr('name')).toArray();
-
-    let result = RootExtractor.extract(
-      extractor,
-      {
-        url,
-        html,
-        $,
-        metaCache,
-        parsedUrl,
-        fallback,
-      });
-
-    const { title, next_page_url } = result;
-
-    // Fetch more pages if next_page_url found
-    if (fetchAllPages && next_page_url) {
-      result = await collectAllPages(
-        {
-          extractor,
-          next_page_url,
-          html,
-          $,
-          metaCache,
-          result,
-          title,
-          url,
-        }
-      );
-    } else {
-      result = {
-        ...result,
-        total_pages: 1,
-        rendered_pages: 1,
-      };
-    }
-
-    return result;
-  },
-
 };
 
 export default Mercury;
