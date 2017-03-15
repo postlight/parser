@@ -1,23 +1,31 @@
-export const NewrepublicComExtractor = {
-  domain: 'newrepublic.com',
+export const GothamistComExtractor = {
+  domain: 'gothamist.com',
+
+  supportedDomains: [
+    'chicagoist.com',
+    'laist.com',
+    'sfist.com',
+    'shanghaiist.com',
+    'dcist.com',
+  ],
 
   title: {
     selectors: [
-      'h1.article-headline',
-      '.minutes-primary h1.minute-title',
+      'h1',
+      '.entry-header h1',
     ],
   },
 
   author: {
     selectors: [
-      'div.author-list',
-      '.minutes-primary h3.minute-byline',
+      '.author',
     ],
   },
 
   date_published: {
     selectors: [
-      ['meta[name="article:published_time"]', 'value'],
+      'abbr',
+      'abbr.published',
     ],
 
     timezone: 'America/New_York',
@@ -25,7 +33,7 @@ export const NewrepublicComExtractor = {
 
   dek: {
     selectors: [
-      'h2.article-subhead',
+      null,
     ],
   },
 
@@ -37,20 +45,28 @@ export const NewrepublicComExtractor = {
 
   content: {
     selectors: [
-      ['.article-cover', 'div.content-body'],
-      ['.minute-image', '.minutes-primary div.content-body'],
+      '.entry-body',
     ],
 
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images
     transforms: {
+      'div.image-none': 'figure',
+      '.image-none i': 'figcaption',
+      'div.image-left': 'figure',
+      '.image-left i': 'figcaption',
+      'div.image-right': 'figure',
+      '.image-right i': 'figcaption',
     },
 
     // Is there anything that is in the result that shouldn't be?
     // The clean selectors will remove anything that matches from
     // the result
     clean: [
-      'aside',
+      '.image-none br',
+      '.image-left br',
+      '.image-right br',
+      '.galleryEase',
     ],
   },
 };
