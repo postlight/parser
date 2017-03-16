@@ -93,7 +93,8 @@
     "string-direction": "^0.1.2",
     "url": "adampash/node-url#feat-remove-punycode",
     "valid-url": "^1.0.9",
-    "wuzzy": "adampash/wuzzy#feat-array-is-array"
+    "wuzzy": "adampash/wuzzy#feat-array-is-array",
+    "escape-html": "1.0.3"
   },
   "browser": {
     "main": "./dist/mercury.web.js",

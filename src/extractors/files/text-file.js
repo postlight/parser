@@ -3,10 +3,17 @@ import cleanDatePublished from '../../cleaners/date-published';
 import titleFromFilename from '../../utils/text/title-from-filename';
 import textToHtml from '../../utils/text/text-to-html';
 
+function checkPublishDate(headers) {
+  if (headers['last-modified']) {
+    return cleanDatePublished(headers['last-modified'], { format: 'ddd, DD MMM YYYY hh:mm:ss zz' });
+  }
+  return null;
+}
+
 const TextExtractor = {
   domain: '*',
   title: titleFromFilename,
-  date_published: cleanDatePublished,
+  date_published: checkPublishDate,
   content: textToHtml,
   direction: ({ title }) => stringDirection.getDirection(title),
 
@@ -15,8 +22,7 @@ const TextExtractor = {
 
     const title = this.title(parsedUrl);
     const content = this.content($);
-    const date_published =
-      this.date_published(headers['last-modified'] ? headers['last-modified'] : '');
+    const date_published = this.date_published(headers);
     const url = parsedUrl.href;
     const domain = parsedUrl.hostname;
     const direction = this.direction({ title });

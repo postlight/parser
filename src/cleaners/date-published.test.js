@@ -38,6 +38,12 @@ describe('cleanDatePublished(dateString)', () => {
       cleanDatePublished('Mon Aug 03 12:45:00 EDT 2015', { timezone: 'America/New_York', format: 'ddd MMM DD HH:mm:ss zz YYYY' });
     assert.equal(datePublished, '2015-08-03T16:45:00.000Z');
   });
+
+  it('accepts a custom date format from headers', () => {
+    const datePublished =
+      cleanDatePublished('Thu, 09 Mar 2017 21:52:56 GMT', { timezone: 'GMT', format: 'ddd, DD MMM YYYY hh:mm:ss z' });
+    assert.equal(datePublished, '2017-03-09T21:52:56.000Z');
+  });
 });
 
 describe('cleanDateString(dateString)', () => {

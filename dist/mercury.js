@@ -2,13 +2,14 @@
 
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
 
-var _extends = _interopDefault(require('babel-runtime/helpers/extends'));
 var _regeneratorRuntime = _interopDefault(require('babel-runtime/regenerator'));
+var _extends = _interopDefault(require('babel-runtime/helpers/extends'));
 var _asyncToGenerator = _interopDefault(require('babel-runtime/helpers/asyncToGenerator'));
 var URL = _interopDefault(require('url'));
 var cheerio = _interopDefault(require('cheerio'));
 var iconv = _interopDefault(require('iconv-lite'));
 var _slicedToArray = _interopDefault(require('babel-runtime/helpers/slicedToArray'));
+var escapeHtml = _interopDefault(require('escape-html'));
 var _Promise = _interopDefault(require('babel-runtime/core-js/promise'));
 var request = _interopDefault(require('request'));
 var _Reflect$ownKeys = _interopDefault(require('babel-runtime/core-js/reflect/own-keys'));
@@ -73,6 +74,10 @@ var IS_DIGIT_RE = /^[0-9]+$/i;
 
 var ENCODING_RE = /charset=([\w-]+)\b/;
 var DEFAULT_ENCODING = 'utf-8';
+
+var SUPPORTED_CONTENT_TYPES = ['text/html', 'text/plain'];
+
+var SUPPORTED_CONTENT_TYPES_RE = new RegExp('(' + SUPPORTED_CONTENT_TYPES.join('|') + ')');
 
 function pageNumFromUrl(url) {
   var matches = url.match(PAGE_IN_HREF_RE);
@@ -189,6 +194,33 @@ function getEncoding(str) {
     }
   }
   return encoding;
+}
+
+// check a string for its mime type
+function getSupportedMime(str) {
+  if (SUPPORTED_CONTENT_TYPES_RE.test(str)) {
+    return SUPPORTED_CONTENT_TYPES_RE.exec(str)[1];
+  }
+  return false;
+}
+
+function titleFromFilename(url) {
+  if (typeof url === 'string') {
+    url = URL.parse(url);
+  }
+  var _url = url,
+      path = _url.path;
+
+  var size = path.split('/').length;
+  var filename = path.split('/')[size - 1];
+  return filename;
+}
+
+function textToHtml(text) {
+  text = escapeHtml(text);
+  text = text.replace(/(?:\n\n)/g, '<p />');
+  text = text.replace(/(?:\r\n|\r|\n)/g, '<br />');
+  return text;
 }
 
 var _marked = [range].map(_regeneratorRuntime.mark);
@@ -1839,20 +1871,20 @@ var Resource = {
   generateDoc: function generateDoc(_ref) {
     var content = _ref.body,
         response = _ref.response;
-    var contentType = response.headers['content-type'];
     var headers = response.headers;
+    var contentType = headers['content-type'];
 
     // TODO: Implement is_text function from
     // https://github.com/ReadabilityHoldings/readability/blob/8dc89613241d04741ebd42fa9fa7df1b1d746303/readability/utils/text.py#L57
 
-    if (!contentType.includes('html') && !contentType.includes('text')) {
+    if (!getSupportedMime(contentType)) {
       throw new Error('Content does not appear to be text.');
     }
 
     var $ = '';
-
+    content = this.encodeDoc({ content: content, contentType: contentType });
     if (contentType.includes('html')) {
-      $ = this.processHtml({ content: content, contentType: contentType });
+      $ = this.processHtml({ content: content });
     } else {
       $ = content;
     }
@@ -1860,37 +1892,41 @@ var Resource = {
     return { $: $, headers: headers };
   },
   processHtml: function processHtml(_ref2) {
-    var content = _ref2.content,
-        contentType = _ref2.contentType;
+    var content = _ref2.content;
 
-    var doc = this.encodeDoc({ content: content, contentType: contentType });
-
-    if (doc.root().children().length === 0) {
+    if (content.root().children().length === 0) {
       throw new Error('No children, likely a bad parse.');
     }
 
-    doc = normalizeMetaTags(doc);
-    doc = convertLazyLoadedImages(doc);
-    doc = clean(doc);
+    content = normalizeMetaTags(content);
+    content = convertLazyLoadedImages(content);
+    content = clean(content);
 
-    return doc;
+    return content;
   },
   encodeDoc: function encodeDoc(_ref3) {
     var content = _ref3.content,
         contentType = _ref3.contentType;
 
+    var mimeType = getSupportedMime(contentType);
     var encoding = getEncoding(contentType);
+
     var decodedContent = iconv.decode(content, encoding);
-    var $ = cheerio.load(decodedContent);
+    var $ = '';
 
-    // after first cheerio.load, check to see if encoding matches
-    var metaContentType = $('meta[http-equiv=content-type]').attr('content');
-    var properEncoding = getEncoding(metaContentType);
-
-    // if encodings in the header/body dont match, use the one in the body
-    if (properEncoding !== encoding) {
-      decodedContent = iconv.decode(content, properEncoding);
+    if (mimeType === 'text/html') {
       $ = cheerio.load(decodedContent);
+      // after first cheerio.load, check to see if encoding matches
+      var metaContentType = $('meta[http-equiv=content-type]').attr('content');
+      var properEncoding = getEncoding(metaContentType);
+
+      // if encodings in the header/body dont match, use the one in the body
+      if (properEncoding !== encoding) {
+        decodedContent = iconv.decode(content, properEncoding);
+        $ = cheerio.load(decodedContent);
+      }
+    } else {
+      $ = decodedContent;
     }
 
     return $;
@@ -6998,15 +7034,11 @@ var GenericExcerptExtractor = {
 var GenericWordCountExtractor = {
   extract: function extract(_ref) {
     var content = _ref.content;
-    var isHtml = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
 
-    var text = normalizeSpaces(content);
-    if (isHtml) {
-      var $ = cheerio.load(content);
-      var $content = $('div').first();
+    var $ = cheerio.load(content);
+    var $content = $('div').first();
 
-      text = normalizeSpaces($content.text());
-    }
+    var text = normalizeSpaces($content.text());
     return text.split(/\s/).length;
   }
 };
@@ -7084,14 +7116,60 @@ function detectByHtml($) {
   return Detectors[selector];
 }
 
-function getExtractor(url, parsedUrl, $) {
+var TextExtractor = {
+  domain: '*',
+  title: titleFromFilename,
+  date_published: cleanDatePublished,
+  content: textToHtml,
+  direction: function direction(_ref) {
+    var title = _ref.title;
+    return stringDirection.getDirection(title);
+  },
+
+  extract: function extract(options) {
+    var $ = options.$,
+        parsedUrl = options.parsedUrl,
+        headers = options.headers;
+
+
+    var title = this.title(parsedUrl);
+    var content = this.content($);
+    var date_published = this.date_published(headers['last-modified'] ? headers['last-modified'] : '');
+    var url = parsedUrl.href;
+    var domain = parsedUrl.hostname;
+    var direction = this.direction({ title: title });
+
+    return {
+      title: title,
+      content: content,
+      date_published: date_published || null,
+      url: url,
+      domain: domain,
+      direction: direction
+    };
+  }
+};
+
+function checkByFile(headers) {
+  if (headers) {
+    switch (getSupportedMime(headers['content-type'])) {
+      case 'text/plain':
+        return TextExtractor;
+      default:
+        break;
+    }
+  }
+  return false;
+}
+
+function getExtractor(url, parsedUrl, $, headers) {
   parsedUrl = parsedUrl || URL.parse(url);
   var _parsedUrl = parsedUrl,
       hostname = _parsedUrl.hostname;
 
   var baseDomain = hostname.split('.').slice(-2).join('.');
 
-  return Extractors[hostname] || Extractors[baseDomain] || detectByHtml($) || GenericExtractor;
+  return checkByFile(headers) || Extractors[hostname] || Extractors[baseDomain] || detectByHtml($) || GenericExtractor;
 }
 
 // Remove elements by an array of selectors
@@ -7330,7 +7408,7 @@ var collectAllPages = (function () {
         title = _ref2.title,
         url = _ref2.url;
 
-    var pages, previousUrls, _ref3, el, extractorOpts, nextPageResult, word_count;
+    var pages, previousUrls, _ref3, $, extractorOpts, nextPageResult, word_count;
 
     return _regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
@@ -7355,14 +7433,14 @@ var collectAllPages = (function () {
 
           case 6:
             _ref3 = _context.sent;
-            el = _ref3.$;
+            $ = _ref3.$;
 
-            html = el.html();
+            html = $.html();
 
             extractorOpts = {
               url: next_page_url,
               html: html,
-              el: el,
+              $: $,
               metaCache: metaCache,
               contentOnly: true,
               extractedTitle: title,
@@ -7403,56 +7481,13 @@ var collectAllPages = (function () {
   return collectAllPages;
 })();
 
-function textExtractor(_ref) {
-  var $ = _ref.$,
-      parsedUrl = _ref.parsedUrl,
-      headers = _ref.headers;
-
-  // Extract the filename to be the title
-  var path = parsedUrl.path;
-
-
-  var size = path.split('/').length;
-  var title = path.split('/')[size - 1];
-
-  // Extract content
-  var content = $.replace(/(?:\r\n|\r|\n)/g, '<br />');
-
-  // Date Published
-  var date_published = cleanDatePublished(headers['last-modified']);
-
-  // URL
-  var url = parsedUrl.href;
-
-  // Domain
-  var domain = parsedUrl.hostname;
-
-  // Word Count
-  var word_count = GenericExtractor.word_count({ content: content }, false);
-
-  return {
-    title: title,
-    content: content,
-    author: null,
-    date_published: date_published,
-    lead_image_url: null,
-    dek: null,
-    next_page_url: null,
-    url: url,
-    domain: domain,
-    excerpt: null,
-    word_count: word_count,
-    direction: null
-  };
-}
-
 var Mercury = {
   parse: function parse(url) {
     var _this = this;
 
     var opts = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
     return _asyncToGenerator(_regeneratorRuntime.mark(function _callee() {
-      var _opts$html, html, _opts$fetchAllPages, fetchAllPages, _opts$fallback, fallback, parsedUrl, _ref, $, headers, result;
+      var _opts$html, html, _opts$fetchAllPages, fetchAllPages, _opts$fallback, fallback, parsedUrl, _ref, $, headers, Extractor, extractorOpts, pageCollectOpts, metaCache, result, _result, title, next_page_url;
 
       return _regeneratorRuntime.wrap(function _callee$(_context) {
         while (1) {
@@ -7467,14 +7502,9 @@ var Mercury = {
 
               if (!url && cheerio.browser) {
                 url = window.location.href; // eslint-disable-line no-undef
-                if (!html) {
-                  if (document.doctype === null) {
-                    // eslint-disable-line no-undef
-                    // Non-HTML doctype, we set it to false, so resource can fetch.
-                    html = false;
-                  } else {
-                    html = cheerio.html();
-                  }
+                if (document.doctype !== null) {
+                  // eslint-disable-line no-undef
+                  html = cheerio.html();
                 }
               }
 
@@ -7495,14 +7525,83 @@ var Mercury = {
               _ref = _context.sent;
               $ = _ref.$;
               headers = _ref.headers;
-              result = '';
+              Extractor = getExtractor(url, parsedUrl, $, headers);
 
+              // If we found an error creating the resource, return that error
 
-              if (headers['content-type'].includes('text/html')) {
-                result = _this.htmlExtractor({ url: url, parsedUrl: parsedUrl, $: $, html: html, fallback: fallback, fetchAllPages: fetchAllPages });
-              } else {
-                result = textExtractor({ $: $, parsedUrl: parsedUrl, headers: headers });
+              if (!$.failed) {
+                _context.next = 14;
+                break;
               }
+
+              return _context.abrupt('return', $);
+
+            case 14:
+
+              // if html still has not been set (i.e., url passed to Mercury.parse),
+              // set html from the response of Resource.create
+              if (typeof $ !== 'string' && !html) {
+                html = $.html();
+              }
+
+              // Cached value of every meta name in our document.
+              // Used when extracting title/author/date_published/dek
+              extractorOpts = {
+                url: url,
+                html: html,
+                $: $,
+                parsedUrl: parsedUrl,
+                fallback: fallback,
+                headers: headers
+              };
+              pageCollectOpts = {
+                Extractor: Extractor,
+                html: html,
+                $: $,
+                url: url
+              };
+
+              if (typeof $ !== 'string') {
+                metaCache = $('meta').map(function (_, node) {
+                  return $(node).attr('name');
+                }).toArray();
+
+                extractorOpts = _extends({}, extractorOpts, { metaCache: metaCache });
+                pageCollectOpts = _extends({}, pageCollectOpts, { metaCache: metaCache });
+              }
+
+              result = RootExtractor.extract(Extractor, extractorOpts);
+              _result = result, title = _result.title, next_page_url = _result.next_page_url;
+
+
+              pageCollectOpts = _extends({}, pageCollectOpts, {
+                next_page_url: next_page_url,
+                title: title,
+                result: result
+              });
+
+              // Fetch more pages if next_page_url found
+
+              if (!(fetchAllPages && next_page_url)) {
+                _context.next = 27;
+                break;
+              }
+
+              _context.next = 24;
+              return collectAllPages(pageCollectOpts);
+
+            case 24:
+              result = _context.sent;
+              _context.next = 28;
+              break;
+
+            case 27:
+              result = _extends({}, result, {
+                total_pages: 1,
+                rendered_pages: 1
+              });
+
+            case 28:
 
               // if this parse is happening in the browser,
               // clean up any trace from the page.
@@ -7512,7 +7611,7 @@ var Mercury = {
 
               return _context.abrupt('return', result);
 
-            case 15:
+            case 30:
             case 'end':
               return _context.stop();
           }
@@ -7546,102 +7645,6 @@ var Mercury = {
           }
         }
       }, _callee2, _this2);
-    }))();
-  },
-  htmlExtractor: function htmlExtractor(_ref2) {
-    var _this3 = this;
-
-    var url = _ref2.url,
-        parsedUrl = _ref2.parsedUrl,
-        $ = _ref2.$,
-        parsedHtml = _ref2.parsedHtml,
-        fallback = _ref2.fallback,
-        fetchAllPages = _ref2.fetchAllPages;
-    return _asyncToGenerator(_regeneratorRuntime.mark(function _callee3() {
-      var Extractor, html, metaCache, result, _result, title, next_page_url;
-
-      return _regeneratorRuntime.wrap(function _callee3$(_context3) {
-        while (1) {
-          switch (_context3.prev = _context3.next) {
-            case 0:
-              Extractor = getExtractor(url, parsedUrl, $);
-              // console.log(`Using extractor for ${Extractor.domain}`);
-
-              // If we found an error creating the resource, return that error
-
-              if (!$.failed) {
-                _context3.next = 3;
-                break;
-              }
-
-              return _context3.abrupt('return', $);
-
-            case 3:
-
-              // if html still has not been set (i.e., url passed to Mercury.parse),
-              // set html from the response of Resource.create
-              html = '';
-
-              if (!parsedHtml) {
-                html = $.html();
-              } else {
-                html = parsedHtml;
-              }
-
-              // Cached value of every meta name in our document.
-              // Used when extracting title/author/date_published/dek
-              metaCache = $('meta').map(function (_, node) {
-                return $(node).attr('name');
-              }).toArray();
-              result = RootExtractor.extract(Extractor, {
-                url: url,
-                html: html,
-                $: $,
-                metaCache: metaCache,
-                parsedUrl: parsedUrl,
-                fallback: fallback
-              });
-              _result = result, title = _result.title, next_page_url = _result.next_page_url;
-
-              // Fetch more pages if next_page_url found
-
-              if (!(fetchAllPages && next_page_url)) {
-                _context3.next = 14;
-                break;
-              }
-
-              _context3.next = 11;
-              return collectAllPages({
-                Extractor: Extractor,
-                next_page_url: next_page_url,
-                html: html,
-                $: $,
-                metaCache: metaCache,
-                result: result,
-                title: title,
-                url: url
-              });
-
-            case 11:
-              result = _context3.sent;
-              _context3.next = 15;
-              break;
-
-            case 14:
-              result = _extends({}, result, {
-                total_pages: 1,
-                rendered_pages: 1
-              });
-
-            case 15:
-              return _context3.abrupt('return', result);
-
-            case 16:
-            case 'end':
-              return _context3.stop();
-          }
-        }
-      }, _callee3, _this3);
     }))();
   }
 };
