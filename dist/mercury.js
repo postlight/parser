@@ -9,7 +9,6 @@ var URL = _interopDefault(require('url'));
 var cheerio = _interopDefault(require('cheerio'));
 var iconv = _interopDefault(require('iconv-lite'));
 var _slicedToArray = _interopDefault(require('babel-runtime/helpers/slicedToArray'));
-var escapeHtml = _interopDefault(require('escape-html'));
 var _Promise = _interopDefault(require('babel-runtime/core-js/promise'));
 var request = _interopDefault(require('request'));
 var _Reflect$ownKeys = _interopDefault(require('babel-runtime/core-js/reflect/own-keys'));
@@ -74,10 +73,6 @@ var IS_DIGIT_RE = /^[0-9]+$/i;
 
 var ENCODING_RE = /charset=([\w-]+)\b/;
 var DEFAULT_ENCODING = 'utf-8';
-
-var SUPPORTED_CONTENT_TYPES = ['text/html', 'text/plain'];
-
-var SUPPORTED_CONTENT_TYPES_RE = new RegExp('(' + SUPPORTED_CONTENT_TYPES.join('|') + ')');
 
 function pageNumFromUrl(url) {
   var matches = url.match(PAGE_IN_HREF_RE);
@@ -194,33 +189,6 @@ function getEncoding(str) {
     }
   }
   return encoding;
-}
-
-// check a string for its mime type
-function getSupportedMime(str) {
-  if (SUPPORTED_CONTENT_TYPES_RE.test(str)) {
-    return SUPPORTED_CONTENT_TYPES_RE.exec(str)[1];
-  }
-  return false;
-}
-
-function titleFromFilename(url) {
-  if (typeof url === 'string') {
-    url = URL.parse(url);
-  }
-  var _url = url,
-      path = _url.path;
-
-  var size = path.split('/').length;
-  var filename = path.split('/')[size - 1];
-  return filename;
-}
-
-function textToHtml(text) {
-  text = escapeHtml(text);
-  text = text.replace(/(?:\n\n)/g, '<p />');
-  text = text.replace(/(?:\r\n|\r|\n)/g, '<br />');
-  return text;
 }
 
 var _marked = [range].map(_regeneratorRuntime.mark);
@@ -1837,6 +1805,7 @@ var Resource = {
                 }
               };
 
+
               result = { body: preparedResponse, response: validResponse };
               _context.next = 9;
               break;
@@ -1871,62 +1840,43 @@ var Resource = {
   generateDoc: function generateDoc(_ref) {
     var content = _ref.body,
         response = _ref.response;
-    var headers = response.headers;
-    var contentType = headers['content-type'];
+    var contentType = response.headers['content-type'];
 
     // TODO: Implement is_text function from
     // https://github.com/ReadabilityHoldings/readability/blob/8dc89613241d04741ebd42fa9fa7df1b1d746303/readability/utils/text.py#L57
 
-    if (!getSupportedMime(contentType)) {
+    if (!contentType.includes('html') && !contentType.includes('text')) {
       throw new Error('Content does not appear to be text.');
     }
 
-    var $ = '';
-    content = this.encodeDoc({ content: content, contentType: contentType });
-    if (contentType.includes('html')) {
-      $ = this.processHtml({ content: content });
-    } else {
-      $ = content;
-    }
+    var $ = this.encodeDoc({ content: content, contentType: contentType });
 
-    return { $: $, headers: headers };
-  },
-  processHtml: function processHtml(_ref2) {
-    var content = _ref2.content;
-
-    if (content.root().children().length === 0) {
+    if ($.root().children().length === 0) {
       throw new Error('No children, likely a bad parse.');
     }
 
-    content = normalizeMetaTags(content);
-    content = convertLazyLoadedImages(content);
-    content = clean(content);
+    $ = normalizeMetaTags($);
+    $ = convertLazyLoadedImages($);
+    $ = clean($);
 
-    return content;
+    return $;
   },
-  encodeDoc: function encodeDoc(_ref3) {
-    var content = _ref3.content,
-        contentType = _ref3.contentType;
+  encodeDoc: function encodeDoc(_ref2) {
+    var content = _ref2.content,
+        contentType = _ref2.contentType;
 
-    var mimeType = getSupportedMime(contentType);
     var encoding = getEncoding(contentType);
-
     var decodedContent = iconv.decode(content, encoding);
-    var $ = '';
+    var $ = cheerio.load(decodedContent);
 
-    if (mimeType === 'text/html') {
+    // after first cheerio.load, check to see if encoding matches
+    var metaContentType = $('meta[http-equiv=content-type]').attr('content');
+    var properEncoding = getEncoding(metaContentType);
+
+    // if encodings in the header/body dont match, use the one in the body
+    if (properEncoding !== encoding) {
+      decodedContent = iconv.decode(content, properEncoding);
       $ = cheerio.load(decodedContent);
-      // after first cheerio.load, check to see if encoding matches
-      var metaContentType = $('meta[http-equiv=content-type]').attr('content');
-      var properEncoding = getEncoding(metaContentType);
-
-      // if encodings in the header/body dont match, use the one in the body
-      if (properEncoding !== encoding) {
-        decodedContent = iconv.decode(content, properEncoding);
-        $ = cheerio.load(decodedContent);
-      }
-    } else {
-      $ = decodedContent;
     }
 
     return $;
@@ -2170,7 +2120,7 @@ var TheAtlanticExtractor = {
     // Is there anything that is in the result that shouldn't be?
     // The clean selectors will remove anything that matches from
     // the result
-    clean: ['.partner-box']
+    clean: ['.partner-box', '.callout']
   },
 
   date_published: {
@@ -2954,7 +2904,7 @@ var NewrepublicComExtractor = {
   },
 
   content: {
-    selectors: ['div.content-body', '.minutes-primary div.content-body'],
+    selectors: [['.article-cover', 'div.content-body'], ['.minute-image', '.minutes-primary div.content-body']],
 
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images
@@ -5359,6 +5309,123 @@ var WwwOpposingviewsComExtractor = {
   }
 };
 
+var WwwProspectmagazineCoUkExtractor = {
+  domain: 'www.prospectmagazine.co.uk',
+
+  title: {
+    selectors: ['.page-title']
+  },
+
+  author: {
+    selectors: ['.aside_author .title']
+  },
+
+  date_published: {
+    selectors: ['.post-info'],
+
+    timezone: 'Europe/London'
+  },
+
+  dek: {
+    selectors: ['.page-subtitle']
+  },
+
+  lead_image_url: {
+    selectors: [['meta[name="og:image"]', 'value']]
+  },
+
+  content: {
+    selectors: [
+    // ['article.type-post div.post_content p'],
+    'article .post_content'],
+
+    // Is there anything in the content you selected that needs transformed
+    // before it's consumable content? E.g., unusual lazy loaded images
+    transforms: {},
+
+    // Is there anything that is in the result that shouldn't be?
+    // The clean selectors will remove anything that matches from
+    // the result
+    clean: []
+  }
+};
+
+var ForwardComExtractor = {
+  domain: 'forward.com',
+
+  title: {
+    selectors: [['meta[name="og:title"]', 'value']]
+  },
+
+  author: {
+    selectors: ['.author-name', ['meta[name="sailthru.author"]', 'value']]
+  },
+
+  date_published: {
+    selectors: [['meta[name="date"]', 'value']]
+  },
+
+  dek: {
+    selectors: [
+      // enter selectors
+    ]
+  },
+
+  lead_image_url: {
+    selectors: [['meta[name="og:image"]', 'value']]
+  },
+
+  content: {
+    selectors: [['.post-item-media-wrap', '.post-item p']],
+
+    // Is there anything in the content you selected that needs transformed
+    // before it's consumable content? E.g., unusual lazy loaded images
+    transforms: {},
+
+    // Is there anything that is in the result that shouldn't be?
+    // The clean selectors will remove anything that matches from
+    // the result
+    clean: ['.donate-box', '.message', '.subtitle']
+  }
+};
+
+var WwwQdailyComExtractor = {
+  domain: 'www.qdaily.com',
+
+  title: {
+    selectors: ['h2', 'h2.title']
+  },
+
+  author: {
+    selectors: ['.name']
+  },
+
+  date_published: {
+    selectors: [['.date.smart-date', 'data-origindate']]
+  },
+
+  dek: {
+    selectors: ['.excerpt']
+  },
+
+  lead_image_url: {
+    selectors: [['.article-detail-hd img', 'src']]
+  },
+
+  content: {
+    selectors: ['.detail'],
+
+    // Is there anything in the content you selected that needs transformed
+    // before it's consumable content? E.g., unusual lazy loaded images
+    transforms: {},
+
+    // Is there anything that is in the result that shouldn't be?
+    // The clean selectors will remove anything that matches from
+    // the result
+    clean: ['.lazyload', '.lazylad', '.lazylood']
+  }
+};
+
 var GothamistComExtractor = {
   domain: 'gothamist.com',
 
@@ -5404,6 +5471,127 @@ var GothamistComExtractor = {
     // The clean selectors will remove anything that matches from
     // the result
     clean: ['.image-none br', '.image-left br', '.image-right br', '.galleryEase']
+  }
+};
+
+var WwwFoolComExtractor = {
+  domain: 'www.fool.com',
+
+  title: {
+    selectors: ['h1']
+  },
+
+  author: {
+    selectors: ['.author-inline .author-name']
+  },
+
+  date_published: {
+    selectors: [['meta[name="date"]', 'value']]
+  },
+
+  dek: {
+    selectors: ['header h2']
+  },
+
+  lead_image_url: {
+    selectors: [['meta[name="og:image"]', 'value']]
+  },
+
+  content: {
+    selectors: ['.article-content'],
+
+    // Is there anything in the content you selected that needs transformed
+    // before it's consumable content? E.g., unusual lazy loaded images
+    transforms: {
+      '.caption img': function captionImg($node) {
+        var src = $node.attr('src');
+        $node.parent().replaceWith('<figure><img src="' + src + '"/></figure>');
+      },
+      '.caption': 'figcaption'
+    },
+
+    // Is there anything that is in the result that shouldn't be?
+    // The clean selectors will remove anything that matches from
+    // the result
+    clean: ['#pitch']
+  }
+};
+
+var WwwSlateComExtractor = {
+  domain: 'www.slate.com',
+
+  title: {
+    selectors: ['.hed', 'h1']
+  },
+
+  author: {
+    selectors: ['a[rel=author]']
+  },
+
+  date_published: {
+    selectors: ['.pub-date'],
+
+    timezone: 'America/New_York'
+  },
+
+  dek: {
+    selectors: ['.dek']
+  },
+
+  lead_image_url: {
+    selectors: [['meta[name="og:image"]', 'value']]
+  },
+
+  content: {
+    selectors: ['.body'],
+
+    // Is there anything in the content you selected that needs transformed
+    // before it's consumable content? E.g., unusual lazy loaded images
+    transforms: {},
+
+    // Is there anything that is in the result that shouldn't be?
+    // The clean selectors will remove anything that matches from
+    // the result
+    clean: ['.about-the-author', '.pullquote', '.newsletter-signup-component', '.top-comment']
+  }
+};
+
+var IciRadioCanadaCaExtractor = {
+  domain: 'ici.radio-canada.ca',
+
+  title: {
+    selectors: ['h1']
+  },
+
+  author: {
+    selectors: [['meta[name="dc.creator"]', 'value']]
+  },
+
+  date_published: {
+    selectors: [['meta[name="dc.date.created"]', 'value']],
+
+    timezone: 'America/New_York'
+  },
+
+  dek: {
+    selectors: ['.bunker-component.lead']
+  },
+
+  lead_image_url: {
+    selectors: [['meta[name="og:image"]', 'value']]
+  },
+
+  content: {
+    selectors: [['.main-multimedia-item', '.news-story-content']],
+
+    // Is there anything in the content you selected that needs transformed
+    // before it's consumable content? E.g., unusual lazy loaded images
+    transforms: {},
+
+    // Is there anything that is in the result that shouldn't be?
+    // The clean selectors will remove anything that matches from
+    // the result
+    clean: []
   }
 };
 
@@ -5494,7 +5682,13 @@ var CustomExtractors = Object.freeze({
 	WwwLinkedinComExtractor: WwwLinkedinComExtractor,
 	ObamawhitehouseArchivesGovExtractor: ObamawhitehouseArchivesGovExtractor,
 	WwwOpposingviewsComExtractor: WwwOpposingviewsComExtractor,
-	GothamistComExtractor: GothamistComExtractor
+	WwwProspectmagazineCoUkExtractor: WwwProspectmagazineCoUkExtractor,
+	ForwardComExtractor: ForwardComExtractor,
+	WwwQdailyComExtractor: WwwQdailyComExtractor,
+	GothamistComExtractor: GothamistComExtractor,
+	WwwFoolComExtractor: WwwFoolComExtractor,
+	WwwSlateComExtractor: WwwSlateComExtractor,
+	IciRadioCanadaCaExtractor: IciRadioCanadaCaExtractor
 });
 
 var Extractors = _Object$keys(CustomExtractors).reduce(function (acc, key) {
@@ -5615,6 +5809,7 @@ function cleanDatePublished(dateString) {
   }
 
   var date = createDate(dateString, timezone, format);
+
   if (!date.isValid()) {
     dateString = cleanDateString(dateString);
     date = createDate(dateString, timezone, format);
@@ -7115,67 +7310,14 @@ function detectByHtml($) {
   return Detectors[selector];
 }
 
-function checkPublishDate(headers) {
-  if (headers['last-modified']) {
-    return cleanDatePublished(headers['last-modified'], { format: 'ddd, DD MMM YYYY hh:mm:ss zz' });
-  }
-  return null;
-}
-
-var TextExtractor = {
-  domain: '*',
-  title: titleFromFilename,
-  date_published: checkPublishDate,
-  content: textToHtml,
-  direction: function direction(_ref) {
-    var title = _ref.title;
-    return stringDirection.getDirection(title);
-  },
-
-  extract: function extract(options) {
-    var $ = options.$,
-        parsedUrl = options.parsedUrl,
-        headers = options.headers;
-
-
-    var title = this.title(parsedUrl);
-    var content = this.content($);
-    var date_published = this.date_published(headers);
-    var url = parsedUrl.href;
-    var domain = parsedUrl.hostname;
-    var direction = this.direction({ title: title });
-
-    return {
-      title: title,
-      content: content,
-      date_published: date_published || null,
-      url: url,
-      domain: domain,
-      direction: direction
-    };
-  }
-};
-
-function checkByFile(headers) {
-  if (headers) {
-    switch (getSupportedMime(headers['content-type'])) {
-      case 'text/plain':
-        return TextExtractor;
-      default:
-        break;
-    }
-  }
-  return false;
-}
-
-function getExtractor(url, parsedUrl, $, headers) {
+function getExtractor(url, parsedUrl, $) {
   parsedUrl = parsedUrl || URL.parse(url);
   var _parsedUrl = parsedUrl,
       hostname = _parsedUrl.hostname;
 
   var baseDomain = hostname.split('.').slice(-2).join('.');
 
-  return checkByFile(headers) || Extractors[hostname] || Extractors[baseDomain] || detectByHtml($) || GenericExtractor;
+  return Extractors[hostname] || Extractors[baseDomain] || detectByHtml($) || GenericExtractor;
 }
 
 // Remove elements by an array of selectors
@@ -7408,14 +7550,13 @@ var collectAllPages = (function () {
   var _ref = _asyncToGenerator(_regeneratorRuntime.mark(function _callee(_ref2) {
     var next_page_url = _ref2.next_page_url,
         html = _ref2.html,
+        $ = _ref2.$,
         metaCache = _ref2.metaCache,
         result = _ref2.result,
         Extractor = _ref2.Extractor,
         title = _ref2.title,
         url = _ref2.url;
-
-    var pages, previousUrls, _ref3, $, extractorOpts, nextPageResult, word_count;
-
+    var pages, previousUrls, extractorOpts, nextPageResult, word_count;
     return _regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
@@ -7429,7 +7570,7 @@ var collectAllPages = (function () {
 
           case 2:
             if (!(next_page_url && pages < 26)) {
-              _context.next = 16;
+              _context.next = 15;
               break;
             }
 
@@ -7438,8 +7579,7 @@ var collectAllPages = (function () {
             return Resource.create(next_page_url);
 
           case 6:
-            _ref3 = _context.sent;
-            $ = _ref3.$;
+            $ = _context.sent;
 
             html = $.html();
 
@@ -7464,7 +7604,7 @@ var collectAllPages = (function () {
             _context.next = 2;
             break;
 
-          case 16:
+          case 15:
             word_count = GenericExtractor.word_count({ content: '<div>' + result.content + '</div>' });
             return _context.abrupt('return', _extends({}, result, {
               total_pages: pages,
@@ -7472,7 +7612,7 @@ var collectAllPages = (function () {
               word_count: word_count
             }));
 
-          case 18:
+          case 17:
           case 'end':
             return _context.stop();
         }
@@ -7488,18 +7628,17 @@ var collectAllPages = (function () {
 })();
 
 var Mercury = {
-  parse: function parse(url) {
+  parse: function parse(url, html) {
     var _this = this;
 
-    var opts = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+    var opts = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
     return _asyncToGenerator(_regeneratorRuntime.mark(function _callee() {
-      var _opts$html, html, _opts$fetchAllPages, fetchAllPages, _opts$fallback, fallback, parsedUrl, _ref, $, headers, Extractor, extractorOpts, pageCollectOpts, metaCache, result, _result, title, next_page_url;
+      var _opts$fetchAllPages, fetchAllPages, _opts$fallback, fallback, parsedUrl, $, Extractor, metaCache, result, _result, title, next_page_url;
 
       return _regeneratorRuntime.wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              _opts$html = opts.html, html = _opts$html === undefined ? false : _opts$html;
               _opts$fetchAllPages = opts.fetchAllPages, fetchAllPages = _opts$fetchAllPages === undefined ? true : _opts$fetchAllPages, _opts$fallback = opts.fallback, fallback = _opts$fallback === undefined ? true : _opts$fallback;
 
               // if no url was passed and this is the browser version,
@@ -7508,106 +7647,90 @@ var Mercury = {
 
               if (!url && cheerio.browser) {
                 url = window.location.href; // eslint-disable-line no-undef
-                if (document.doctype !== null) {
-                  // eslint-disable-line no-undef
-                  html = cheerio.html();
-                }
+                html = html || cheerio.html();
               }
 
               parsedUrl = URL.parse(url);
 
               if (validateUrl(parsedUrl)) {
-                _context.next = 6;
+                _context.next = 5;
                 break;
               }
 
               return _context.abrupt('return', Errors.badUrl);
 
-            case 6:
-              _context.next = 8;
+            case 5:
+              _context.next = 7;
               return Resource.create(url, html, parsedUrl);
 
-            case 8:
-              _ref = _context.sent;
-              $ = _ref.$;
-              headers = _ref.headers;
-              Extractor = getExtractor(url, parsedUrl, $, headers);
+            case 7:
+              $ = _context.sent;
+              Extractor = getExtractor(url, parsedUrl, $);
+              // console.log(`Using extractor for ${Extractor.domain}`);
 
               // If we found an error creating the resource, return that error
 
               if (!$.failed) {
-                _context.next = 14;
+                _context.next = 11;
                 break;
               }
 
               return _context.abrupt('return', $);
 
-            case 14:
+            case 11:
 
               // if html still has not been set (i.e., url passed to Mercury.parse),
               // set html from the response of Resource.create
-              if (typeof $ !== 'string' && !html) {
+              if (!html) {
                 html = $.html();
               }
 
               // Cached value of every meta name in our document.
               // Used when extracting title/author/date_published/dek
-              extractorOpts = {
+              metaCache = $('meta').map(function (_, node) {
+                return $(node).attr('name');
+              }).toArray();
+              result = RootExtractor.extract(Extractor, {
                 url: url,
                 html: html,
                 $: $,
+                metaCache: metaCache,
                 parsedUrl: parsedUrl,
-                fallback: fallback,
-                headers: headers
-              };
-              pageCollectOpts = {
-                Extractor: Extractor,
-                html: html,
-                $: $,
-                url: url
-              };
-
-              if (typeof $ !== 'string') {
-                metaCache = $('meta').map(function (_, node) {
-                  return $(node).attr('name');
-                }).toArray();
-
-                extractorOpts = _extends({}, extractorOpts, { metaCache: metaCache });
-                pageCollectOpts = _extends({}, pageCollectOpts, { metaCache: metaCache });
-              }
-
-              result = RootExtractor.extract(Extractor, extractorOpts);
-              _result = result, title = _result.title, next_page_url = _result.next_page_url;
-
-
-              pageCollectOpts = _extends({}, pageCollectOpts, {
-                next_page_url: next_page_url,
-                title: title,
-                result: result
+                fallback: fallback
               });
+              _result = result, title = _result.title, next_page_url = _result.next_page_url;
 
               // Fetch more pages if next_page_url found
 
               if (!(fetchAllPages && next_page_url)) {
-                _context.next = 27;
+                _context.next = 21;
                 break;
               }
 
-              _context.next = 24;
-              return collectAllPages(pageCollectOpts);
+              _context.next = 18;
+              return collectAllPages({
+                Extractor: Extractor,
+                next_page_url: next_page_url,
+                html: html,
+                $: $,
+                metaCache: metaCache,
+                result: result,
+                title: title,
+                url: url
+              });
 
-            case 24:
+            case 18:
               result = _context.sent;
-              _context.next = 28;
+              _context.next = 22;
               break;
 
-            case 27:
+            case 21:
               result = _extends({}, result, {
                 total_pages: 1,
                 rendered_pages: 1
               });
 
-            case 28:
+            case 22:
 
               // if this parse is happening in the browser,
               // clean up any trace from the page.
@@ -7617,7 +7740,7 @@ var Mercury = {
 
               return _context.abrupt('return', result);
 
-            case 30:
+            case 24:
             case 'end':
               return _context.stop();
           }
