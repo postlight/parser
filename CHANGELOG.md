@@ -1,5 +1,22 @@
 # Mercury Parser Changelog
 
+### 1.0.7 (Mar 15, 2017)
+
+##### Commits
+
+* [[`f13bb721f6`](https://github.com/postlight/mercury-parser/commit/f13bb721f6)] - **feat**: prospect magazine parser (#147) (Janet) 
+* [[`1b28713cf5`](https://github.com/postlight/mercury-parser/commit/1b28713cf5)] - **feat**: fool.com parser (#158) (Kevin Ngao) 
+* [[`c18959779d`](https://github.com/postlight/mercury-parser/commit/c18959779d)] - **feat**: forward.com parser (#144) (Janet) 
+* [[`50e548bac2`](https://github.com/postlight/mercury-parser/commit/50e548bac2)] - **feat**: qdaily parser (#146) (Janet) 
+* [[`51a4d1d12f`](https://github.com/postlight/mercury-parser/commit/51a4d1d12f)] - **feat**: newrepublic parser shows image on page (#159) (Silas Burton) 
+* [[`11382ce651`](https://github.com/postlight/mercury-parser/commit/11382ce651)] - **feat**: Slate extractor (#153) (Silas Burton) 
+* [[`5acaa6ab56`](https://github.com/postlight/mercury-parser/commit/5acaa6ab56)] - **feat**: ici.radio-canada.ca extractor (#156) (Silas Burton) 
+* [[`4509b341e6`](https://github.com/postlight/mercury-parser/commit/4509b341e6)] - **feat**: better cleanup of atlantic articles (#157) (Silas Burton) 
+* [[`f2e3f055c2`](https://github.com/postlight/mercury-parser/commit/f2e3f055c2)] - **fix**: an issue with encoding (#154) (Kevin Ngao) 
+* [[`9b371e51ac`](https://github.com/postlight/mercury-parser/commit/9b371e51ac)] - **feat**: gothamist extractor (#151) (Silas Burton) 
+* [[`afbef9bc39`](https://github.com/postlight/mercury-parser/commit/afbef9bc39)] - **fix**: Encoding on Body (#143) (Kevin Ngao) 
+* [[`9d4c883d51`](https://github.com/postlight/mercury-parser/commit/9d4c883d51)] - **release**: 1.0.6 (#142) (Adam Pash) 
+
 ### 1.0.6 (Feb 9, 2017)
 
 ##### Commits

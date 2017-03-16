@@ -1,23 +1,22 @@
-export const NewrepublicComExtractor = {
-  domain: 'newrepublic.com',
+export const WwwSlateComExtractor = {
+  domain: 'www.slate.com',
 
   title: {
     selectors: [
-      'h1.article-headline',
-      '.minutes-primary h1.minute-title',
+      '.hed',
+      'h1',
     ],
   },
 
   author: {
     selectors: [
-      'div.author-list',
-      '.minutes-primary h3.minute-byline',
+      'a[rel=author]',
     ],
   },
 
   date_published: {
     selectors: [
-      ['meta[name="article:published_time"]', 'value'],
+      '.pub-date',
     ],
 
     timezone: 'America/New_York',
@@ -25,7 +24,7 @@ export const NewrepublicComExtractor = {
 
   dek: {
     selectors: [
-      'h2.article-subhead',
+      '.dek',
     ],
   },
 
@@ -37,8 +36,7 @@ export const NewrepublicComExtractor = {
 
   content: {
     selectors: [
-      ['.article-cover', 'div.content-body'],
-      ['.minute-image', '.minutes-primary div.content-body'],
+      '.body',
     ],
 
     // Is there anything in the content you selected that needs transformed
@@ -50,7 +48,10 @@ export const NewrepublicComExtractor = {
     // The clean selectors will remove anything that matches from
     // the result
     clean: [
-      'aside',
+      '.about-the-author',
+      '.pullquote',
+      '.newsletter-signup-component',
+      '.top-comment',
     ],
   },
 };

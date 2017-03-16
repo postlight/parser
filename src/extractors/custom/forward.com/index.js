@@ -1,31 +1,28 @@
-export const NewrepublicComExtractor = {
-  domain: 'newrepublic.com',
+export const ForwardComExtractor = {
+  domain: 'forward.com',
 
   title: {
     selectors: [
-      'h1.article-headline',
-      '.minutes-primary h1.minute-title',
+      ['meta[name="og:title"]', 'value'],
     ],
   },
 
   author: {
     selectors: [
-      'div.author-list',
-      '.minutes-primary h3.minute-byline',
+      '.author-name',
+      ['meta[name="sailthru.author"]', 'value'],
     ],
   },
 
   date_published: {
     selectors: [
-      ['meta[name="article:published_time"]', 'value'],
+      ['meta[name="date"]', 'value'],
     ],
-
-    timezone: 'America/New_York',
   },
 
   dek: {
     selectors: [
-      'h2.article-subhead',
+      // enter selectors
     ],
   },
 
@@ -37,8 +34,7 @@ export const NewrepublicComExtractor = {
 
   content: {
     selectors: [
-      ['.article-cover', 'div.content-body'],
-      ['.minute-image', '.minutes-primary div.content-body'],
+      ['.post-item-media-wrap', '.post-item p'],
     ],
 
     // Is there anything in the content you selected that needs transformed
@@ -50,7 +46,9 @@ export const NewrepublicComExtractor = {
     // The clean selectors will remove anything that matches from
     // the result
     clean: [
-      'aside',
+      '.donate-box',
+      '.message',
+      '.subtitle',
     ],
   },
 };

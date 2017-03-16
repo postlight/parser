@@ -1,31 +1,27 @@
-export const NewrepublicComExtractor = {
-  domain: 'newrepublic.com',
+export const WwwFoolComExtractor = {
+  domain: 'www.fool.com',
 
   title: {
     selectors: [
-      'h1.article-headline',
-      '.minutes-primary h1.minute-title',
+      'h1',
     ],
   },
 
   author: {
     selectors: [
-      'div.author-list',
-      '.minutes-primary h3.minute-byline',
+      '.author-inline .author-name',
     ],
   },
 
   date_published: {
     selectors: [
-      ['meta[name="article:published_time"]', 'value'],
+      ['meta[name="date"]', 'value'],
     ],
-
-    timezone: 'America/New_York',
   },
 
   dek: {
     selectors: [
-      'h2.article-subhead',
+      'header h2',
     ],
   },
 
@@ -37,20 +33,24 @@ export const NewrepublicComExtractor = {
 
   content: {
     selectors: [
-      ['.article-cover', 'div.content-body'],
-      ['.minute-image', '.minutes-primary div.content-body'],
+      '.article-content',
     ],
 
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images
     transforms: {
+      '.caption img': ($node) => {
+        const src = $node.attr('src');
+        $node.parent().replaceWith(`<figure><img src="${src}"/></figure>`);
+      },
+      '.caption': 'figcaption',
     },
 
     // Is there anything that is in the result that shouldn't be?
     // The clean selectors will remove anything that matches from
     // the result
     clean: [
-      'aside',
+      '#pitch',
     ],
   },
 };
