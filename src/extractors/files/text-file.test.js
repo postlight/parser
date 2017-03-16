@@ -24,6 +24,6 @@ CONTENTS OF A TEXT FILE
     assert.equal(typeof extracted, 'object');
     assert.equal(extracted.title, 'LICENSE');
     assert.equal(extracted.content, '<br />CONTENTS OF A TEXT FILE<br />-----------------------<p />1. Test a text file.<br />2. Test another text file.<br />');
-    assert.equal(extracted.date_published, '2017-03-10T02:52:56.000Z');
+    assert.equal(extracted.date_published, '2017-03-09T21:52:56.000Z');
   });
 });

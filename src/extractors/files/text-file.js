@@ -5,7 +5,7 @@ import textToHtml from '../../utils/text/text-to-html';
 
 function checkPublishDate(headers) {
   if (headers['last-modified']) {
-    return cleanDatePublished(headers['last-modified'], { format: 'ddd, DD MMM YYYY hh:mm:ss zz' });
+    return cleanDatePublished(headers['last-modified'], { timezone: 'GMT', format: 'ddd, DD MMM YYYY hh:mm:ss zz' });
   }
   return null;
 }
