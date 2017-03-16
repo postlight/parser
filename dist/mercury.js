@@ -5615,7 +5615,6 @@ function cleanDatePublished(dateString) {
   }
 
   var date = createDate(dateString, timezone, format);
-
   if (!date.isValid()) {
     dateString = cleanDateString(dateString);
     date = createDate(dateString, timezone, format);
@@ -7116,10 +7115,17 @@ function detectByHtml($) {
   return Detectors[selector];
 }
 
+function checkPublishDate(headers) {
+  if (headers['last-modified']) {
+    return cleanDatePublished(headers['last-modified'], { format: 'ddd, DD MMM YYYY hh:mm:ss zz' });
+  }
+  return null;
+}
+
 var TextExtractor = {
   domain: '*',
   title: titleFromFilename,
-  date_published: cleanDatePublished,
+  date_published: checkPublishDate,
   content: textToHtml,
   direction: function direction(_ref) {
     var title = _ref.title;
@@ -7134,7 +7140,7 @@ var TextExtractor = {
 
     var title = this.title(parsedUrl);
     var content = this.content($);
-    var date_published = this.date_published(headers['last-modified'] ? headers['last-modified'] : '');
+    var date_published = this.date_published(headers);
     var url = parsedUrl.href;
     var domain = parsedUrl.hostname;
     var direction = this.direction({ title: title });

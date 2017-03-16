@@ -35,7 +35,9 @@ const Mercury = {
     }
 
     const { $, headers } = await Resource.create(url, html, parsedUrl);
+
     const Extractor = getExtractor(url, parsedUrl, $, headers);
+    // console.log(`Using extractor for ${Extractor.domain}`);
 
     // If we found an error creating the resource, return that error
     if ($.failed) {
@@ -48,22 +50,14 @@ const Mercury = {
       html = $.html();
     }
 
+    // Set parameters to pass to the extractors
+    const defaultOpts = { url, html, $ };
+    let extractorOpts = { ...defaultOpts, parsedUrl, fallback, headers };
+    let pageCollectOpts = { ...defaultOpts, Extractor };
+
     // Cached value of every meta name in our document.
     // Used when extracting title/author/date_published/dek
-    let extractorOpts = {
-      url,
-      html,
-      $,
-      parsedUrl,
-      fallback,
-      headers,
-    };
-    let pageCollectOpts = {
-      Extractor,
-      html,
-      $,
-      url,
-    };
+    // Only do this if $ is a cherrio dom object
     if (typeof $ !== 'string') {
       const metaCache = $('meta').map((_, node) => $(node).attr('name')).toArray();
       extractorOpts = { ...extractorOpts, metaCache };
@@ -74,15 +68,10 @@ const Mercury = {
 
     const { title, next_page_url } = result;
 
-    pageCollectOpts = {
-      ...pageCollectOpts,
-      next_page_url,
-      title,
-      result,
-    };
-
     // Fetch more pages if next_page_url found
     if (fetchAllPages && next_page_url) {
+      // Pass additional options to collect the next pages
+      pageCollectOpts = { ...pageCollectOpts, next_page_url, title, result };
       result = await collectAllPages(pageCollectOpts);
     } else {
       result = {

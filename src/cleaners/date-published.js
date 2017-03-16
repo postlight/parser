@@ -42,6 +42,7 @@ export default function cleanDatePublished(dateString, { timezone, format } = {}
   }
 
   let date = createDate(dateString, timezone, format);
+
   if (!date.isValid()) {
     dateString = cleanDateString(dateString);
     date = createDate(dateString, timezone, format);

@@ -30,7 +30,7 @@ const TextExtractor = {
     return {
       title,
       content,
-      date_published: date_published || null,
+      date_published,
       url,
       domain,
       direction,
