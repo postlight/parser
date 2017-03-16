@@ -17,7 +17,7 @@ describe('WwwSlateComExtractor', () => {
       const html =
         fs.readFileSync('./fixtures/www.slate.com/1489160616058.html');
       result =
-        Mercury.parse(url, html, { fallback: false });
+        Mercury.parse(url, { html, fallback: false });
     });
 
     it('is selected properly', () => {

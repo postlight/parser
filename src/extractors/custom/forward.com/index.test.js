@@ -17,7 +17,7 @@ describe('ForwardComExtractor', () => {
       const html =
         fs.readFileSync('./fixtures/forward.com/1488392273490.html');
       result =
-        Mercury.parse(url, html, { fallback: false });
+        Mercury.parse(url, { html, fallback: false });
     });
 
     it('is selected properly', () => {
