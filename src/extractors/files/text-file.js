@@ -1,7 +1,7 @@
+import stringDirection from 'string-direction';
 import cleanDatePublished from '../../cleaners/date-published';
 import titleFromFilename from '../../utils/text/title-from-filename';
 import textToHtml from '../../utils/text/text-to-html';
-import stringDirection from 'string-direction';
 
 const TextExtractor = {
   domain: '*',
@@ -15,7 +15,8 @@ const TextExtractor = {
 
     const title = this.title(parsedUrl);
     const content = this.content($);
-    const date_published = this.date_published(headers['last-modified']);
+    const date_published =
+      this.date_published(headers['last-modified'] ? headers['last-modified'] : '');
     const url = parsedUrl.href;
     const domain = parsedUrl.hostname;
     const direction = this.direction({ title });

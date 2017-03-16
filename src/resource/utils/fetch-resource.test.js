@@ -15,10 +15,10 @@ describe('fetchResource(url)', () => {
   afterAll(recorder.after);
 
   it('properly fetches a text file', async () => {
-    const url = 'https://bvestation.com/worktest/readme.txt';
+    const url = 'https://raw.githubusercontent.com/postlight/awesome-cms/master/LICENSE';
     const { response } = await fetchResource(url);
 
-    assert.equal(response.headers['content-type'], 'text/plain');
+    assert.equal(response.headers['content-type'], 'text/plain; charset=utf-8');
   });
 
   it('returns appropriate json for bad url', async () => {

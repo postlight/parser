@@ -9,7 +9,6 @@ import {
 import getExtractor from 'extractors/get-extractor';
 import RootExtractor from 'extractors/root-extractor';
 import collectAllPages from 'extractors/collect-all-pages';
-import textExtractor from 'extractors/files/text-file';
 
 const Mercury = {
   async parse(url, opts = {}) {
@@ -79,7 +78,7 @@ const Mercury = {
       ...pageCollectOpts,
       next_page_url,
       title,
-      result
+      result,
     };
 
     // Fetch more pages if next_page_url found

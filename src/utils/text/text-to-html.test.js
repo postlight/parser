@@ -1,4 +1,3 @@
-import URL from 'url';
 import assert from 'assert';
 
 import textToHtml from './text-to-html';

@@ -27,7 +27,7 @@ describe('Resource', () => {
     });
 
     it('fetches with text with default content type', async () => {
-      const url = 'https://www.bvestation.com/worktest/readme.txt';
+      const url = 'https://raw.githubusercontent.com/postlight/awesome-cms/master/LICENSE';
       const { $, headers } = await Resource.create(url);
 
       assert.equal(getEncoding(headers['content-type']), 'utf-8');
