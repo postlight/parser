@@ -21,7 +21,7 @@ export const WwwFoolComExtractor = {
 
   dek: {
     selectors: [
-      'header h2',
+      ['meta[name="description"]', 'value'],
     ],
   },
 
