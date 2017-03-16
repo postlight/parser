@@ -57,16 +57,14 @@ const Mercury = {
       $,
       parsedUrl,
       fallback,
+      headers,
     };
     let pageCollectOpts = {
       Extractor,
-      next_page_url,
       html,
       $,
-      result,
-      title,
       url,
-    }
+    };
     if (typeof $ !== 'string') {
       const metaCache = $('meta').map((_, node) => $(node).attr('name')).toArray();
       extractorOpts = { ...extractorOpts, metaCache };
@@ -76,6 +74,13 @@ const Mercury = {
     let result = RootExtractor.extract(Extractor, extractorOpts);
 
     const { title, next_page_url } = result;
+
+    pageCollectOpts = {
+      ...pageCollectOpts,
+      next_page_url,
+      title,
+      result
+    };
 
     // Fetch more pages if next_page_url found
     if (fetchAllPages && next_page_url) {

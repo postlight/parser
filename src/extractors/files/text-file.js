@@ -13,7 +13,6 @@ const TextExtractor = {
   extract(options) {
     const { $, parsedUrl, headers } = options;
 
-    console.log(options);
     const title = this.title(parsedUrl);
     const content = this.content($);
     const date_published = this.date_published(headers['last-modified']);
