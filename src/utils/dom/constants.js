@@ -7,6 +7,7 @@ export const KEEP_CLASS = 'mercury-parser-keep';
 
 export const KEEP_SELECTORS = [
   'iframe[src^="https://www.youtube.com"]',
+  'iframe[src^="https://www.youtube-nocookie.com"]',
   'iframe[src^="http://www.youtube.com"]',
   'iframe[src^="https://player.vimeo"]',
   'iframe[src^="http://player.vimeo"]',
