@@ -1,5 +1,12 @@
 # Mercury Parser Changelog
 
+### 1.0.8 (Mar 22, 2017)
+
+##### Commits
+
+* [[`453419de72`](https://github.com/postlight/mercury-parser/commit/453419de72)] - **feat**: improve wh.gov parser (#163) (Adam Pash) 
+* [[`e267d57d78`](https://github.com/postlight/mercury-parser/commit/e267d57d78)] - **release**: 1.0.7 (#160) (Adam Pash) 
+
 ### 1.0.7 (Mar 15, 2017)
 
 ##### Commits
