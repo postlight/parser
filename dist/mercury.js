@@ -409,7 +409,7 @@ var SPACER_RE = new RegExp('transparent|spacer|blank', 'i');
 // but would normally remove
 var KEEP_CLASS = 'mercury-parser-keep';
 
-var KEEP_SELECTORS = ['iframe[src^="https://www.youtube.com"]', 'iframe[src^="http://www.youtube.com"]', 'iframe[src^="https://player.vimeo"]', 'iframe[src^="http://player.vimeo"]'];
+var KEEP_SELECTORS = ['iframe[src^="https://www.youtube.com"]', 'iframe[src^="https://www.youtube-nocookie.com"]', 'iframe[src^="http://www.youtube.com"]', 'iframe[src^="https://player.vimeo"]', 'iframe[src^="http://player.vimeo"]'];
 
 // A list of tags to strip from the output if we encounter them.
 var STRIP_OUTPUT_TAGS = ['title', 'script', 'noscript', 'link', 'style', 'hr', 'embed', 'iframe', 'object'];
@@ -5257,16 +5257,20 @@ var ObamawhitehouseArchivesGovExtractor = {
   },
 
   content: {
-    selectors: ['.pane-node-field-forall-body'],
+    selectors: ['div#content-start', '.pane-node-field-forall-body'],
 
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images
-    transforms: {},
+    transforms: {
+      'iframe[src*=youtube]': function iframeSrcYoutube($node) {
+        $node.parents('.panel-pane').replaceWith($node);
+      }
+    },
 
     // Is there anything that is in the result that shouldn't be?
     // The clean selectors will remove anything that matches from
     // the result
-    clean: []
+    clean: ['.pane-node-title', '.pane-custom.pane-1']
   }
 };
 
