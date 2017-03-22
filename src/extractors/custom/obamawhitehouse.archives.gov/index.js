@@ -39,19 +39,24 @@ export const ObamawhitehouseArchivesGovExtractor = {
 
   content: {
     selectors: [
+      'div#content-start',
       '.pane-node-field-forall-body',
     ],
 
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images
     transforms: {
+      'iframe[src*=youtube]': ($node) => {
+        $node.parents('.panel-pane').replaceWith($node);
+      },
     },
 
     // Is there anything that is in the result that shouldn't be?
     // The clean selectors will remove anything that matches from
     // the result
     clean: [
-
+      '.pane-node-title',
+      '.pane-custom.pane-1',
     ],
   },
 };

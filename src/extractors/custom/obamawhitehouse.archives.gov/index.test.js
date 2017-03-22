@@ -94,4 +94,25 @@ describe('ObamawhitehouseArchivesGovExtractor', () => {
       assert.equal(first13, 'Over the past eight years, the President, the First Lady, and the Obama');
     });
   });
+
+  describe('wh.gov speeches', () => {
+    let result;
+    let url;
+    beforeAll(() => {
+      url =
+        'https://obamawhitehouse.archives.gov/the-press-office/2015/04/11/weekly-address-tuition-free-community-college';
+      const html =
+        fs.readFileSync('./fixtures/obamawhitehouse.archives.gov/1490209983872.html');
+      result =
+        Mercury.parse(url, html, { fallback: false });
+    });
+
+    it('includes this youtube video', async () => {
+      const { content } = await result;
+
+      const $ = cheerio.load(content || '');
+
+      assert.equal($('iframe[src*="youtube"]').length, 1);
+    });
+  });
 });
