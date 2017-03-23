@@ -792,9 +792,6 @@ function stripJunkTags(article, $) {
   // any element with a class of mercury-parser-keep
   $(tags.join(','), article).not('.' + KEEP_CLASS).remove();
 
-  // Remove the mercury-parser-keep class from result
-  $('.' + KEEP_CLASS, article).removeClass(KEEP_CLASS);
-
   return $;
 }
 
@@ -817,7 +814,7 @@ function cleanHOnes$$1(article, $) {
   return $;
 }
 
-function removeAllButWhitelist($article) {
+function removeAllButWhitelist($article, $) {
   $article.find('*').each(function (index, node) {
     var attrs = getAttrs(node);
 
@@ -830,6 +827,9 @@ function removeAllButWhitelist($article) {
     }, {}));
   });
 
+  // Remove the mercury-parser-keep class from result
+  $('.' + KEEP_CLASS, $article).removeClass(KEEP_CLASS);
+
   return $article;
 }
 
@@ -840,11 +840,11 @@ function removeAllButWhitelist($article) {
 // }
 
 // Remove attributes like style or align
-function cleanAttributes$$1($article) {
+function cleanAttributes$$1($article, $) {
   // Grabbing the parent because at this point
   // $article will be wrapped in a div which will
   // have a score set on it.
-  return removeAllButWhitelist($article.parent().length ? $article.parent() : $article);
+  return removeAllButWhitelist($article.parent().length ? $article.parent() : $article, $);
 }
 
 function removeEmpty($article, $) {
@@ -1402,6 +1402,9 @@ function removeUnlessContent($node, $, weight) {
 function cleanTags$$1($article, $) {
   $(CLEAN_CONDITIONALLY_TAGS, $article).each(function (index, node) {
     var $node = $(node);
+    // If marked to keep, skip it
+    if ($node.hasClass(KEEP_CLASS) || $node.find('.' + KEEP_CLASS).length > 0) return;
+
     var weight = getScore($node);
     if (!weight) {
       weight = getOrInitScore$$1($node, $);
@@ -5261,11 +5264,7 @@ var ObamawhitehouseArchivesGovExtractor = {
 
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images
-    transforms: {
-      'iframe[src*=youtube]': function iframeSrcYoutube($node) {
-        $node.parents('.panel-pane').replaceWith($node);
-      }
-    },
+    transforms: {},
 
     // Is there anything that is in the result that shouldn't be?
     // The clean selectors will remove anything that matches from
@@ -5843,6 +5842,9 @@ function extractCleanNode(article, _ref) {
   // this can sometimes be too aggressive.
   if (defaultCleaner) cleanImages(article, $);
 
+  // Make links absolute
+  makeLinksAbsolute$$1(article, $, url);
+
   // Mark elements to keep that would normally be removed.
   // E.g., stripJunkTags will remove iframes, so we're going to mark
   // YouTube/Vimeo videos as elements we want to keep.
@@ -5859,9 +5861,6 @@ function extractCleanNode(article, _ref) {
 
   // Clean headers
   cleanHeaders(article, $, title);
-
-  // Make links absolute
-  makeLinksAbsolute$$1(article, $, url);
 
   // We used to clean UL's and OL's here, but it was leading to
   // too many in-article lists being removed. Consider a better
