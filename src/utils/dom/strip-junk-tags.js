@@ -12,8 +12,5 @@ export default function stripJunkTags(article, $, tags = []) {
   // any element with a class of mercury-parser-keep
   $(tags.join(','), article).not(`.${KEEP_CLASS}`).remove();
 
-  // Remove the mercury-parser-keep class from result
-  $(`.${KEEP_CLASS}`, article).removeClass(KEEP_CLASS);
-
   return $;
 }

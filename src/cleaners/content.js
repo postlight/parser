@@ -31,6 +31,9 @@ export default function extractCleanNode(
   // this can sometimes be too aggressive.
   if (defaultCleaner) cleanImages(article, $);
 
+  // Make links absolute
+  makeLinksAbsolute(article, $, url);
+
   // Mark elements to keep that would normally be removed.
   // E.g., stripJunkTags will remove iframes, so we're going to mark
   // YouTube/Vimeo videos as elements we want to keep.
@@ -47,9 +50,6 @@ export default function extractCleanNode(
 
   // Clean headers
   cleanHeaders(article, $, title);
-
-  // Make links absolute
-  makeLinksAbsolute(article, $, url);
 
   // We used to clean UL's and OL's here, but it was leading to
   // too many in-article lists being removed. Consider a better

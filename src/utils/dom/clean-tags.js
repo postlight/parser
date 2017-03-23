@@ -5,7 +5,10 @@ import {
   scoreCommas,
 } from 'extractors/generic/content/scoring';
 
-import { CLEAN_CONDITIONALLY_TAGS } from './constants';
+import {
+  CLEAN_CONDITIONALLY_TAGS,
+  KEEP_CLASS,
+} from './constants';
 import { normalizeSpaces } from '../text';
 import { linkDensity } from './index';
 
@@ -89,6 +92,9 @@ function removeUnlessContent($node, $, weight) {
 export default function cleanTags($article, $) {
   $(CLEAN_CONDITIONALLY_TAGS, $article).each((index, node) => {
     const $node = $(node);
+    // If marked to keep, skip it
+    if ($node.hasClass(KEEP_CLASS) || $node.find(`.${KEEP_CLASS}`).length > 0) return;
+
     let weight = getScore($node);
     if (!weight) {
       weight = getOrInitScore($node, $);

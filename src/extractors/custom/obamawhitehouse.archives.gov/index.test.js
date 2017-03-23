@@ -115,4 +115,30 @@ describe('ObamawhitehouseArchivesGovExtractor', () => {
       assert.equal($('iframe[src*="youtube"]').length, 1);
     });
   });
+
+  describe('gets more failing blogs', () => {
+    let result;
+    let url;
+    beforeAll(() => {
+      url =
+        'https://obamawhitehouse.archives.gov/the-press-office/2016/12/24/weekly-address-merry-christmas-president-and-first-lady';
+      const html =
+        fs.readFileSync('./fixtures/obamawhitehouse.archives.gov/1490227791307.html');
+      result =
+        Mercury.parse(url, html, { fallback: false });
+    });
+
+    it('gets the words and video', async () => {
+      const { content } = await result;
+
+      const $ = cheerio.load(content || '');
+
+      const first13 = excerptContent($('*').first().text(), 13);
+
+      // Update these values with the expected values from
+      // the article.
+      assert.equal(first13, 'In this week’s address, the President and the First Lady wished all Americans');
+      assert.equal($('iframe[src*="youtube"]').length, 1);
+    });
+  });
 });
