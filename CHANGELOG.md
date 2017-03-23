@@ -1,5 +1,14 @@
 # Mercury Parser Changelog
 
+### 1.0.9 (Mar 23, 2017)
+
+##### Commits
+
+* [[`61f0f4e1af`](https://github.com/postlight/mercury-parser/commit/61f0f4e1af)] - **fix**: kept elements being removed (#166) (Adam Pash) 
+* [[`5741910fdc`](https://github.com/postlight/mercury-parser/commit/5741910fdc)] - **docs**: update changelog (#165) (Adam Pash) 
+* [[`321c087be6`](https://github.com/postlight/mercury-parser/commit/321c087be6)] - **release**: 1.0.8 (#164) (Adam Pash) 
+
+
 ### 1.0.8 (Mar 22, 2017)
 
 ##### Commits
