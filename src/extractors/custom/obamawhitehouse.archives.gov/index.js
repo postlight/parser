@@ -38,6 +38,8 @@ export const ObamawhitehouseArchivesGovExtractor = {
   },
 
   content: {
+    defaultCleaner: false,
+
     selectors: [
       'div#content-start',
       '.pane-node-field-forall-body',

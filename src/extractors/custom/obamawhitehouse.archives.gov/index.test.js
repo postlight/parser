@@ -141,4 +141,27 @@ describe('ObamawhitehouseArchivesGovExtractor', () => {
       assert.equal($('iframe[src*="youtube"]').length, 1);
     });
   });
+
+  describe('handles this previously empty post', () => {
+    let result;
+    let url;
+    beforeAll(() => {
+      url =
+        'https://obamawhitehouse.archives.gov/blog/2011/09/10/serve-and-remember';
+      const html =
+        fs.readFileSync('./fixtures/obamawhitehouse.archives.gov/1490375478954.html');
+      result =
+        Mercury.parse(url, html, { fallback: false });
+    });
+
+    it('gets the content', async () => {
+      const { content } = await result;
+
+      const $ = cheerio.load(content || '');
+
+      const first13 = excerptContent($('*').first().text(), 13);
+
+      assert.equal(first13, 'September 11th has been designated as a National Day of Service and Remembrance.');
+    });
+  });
 });
