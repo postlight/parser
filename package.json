@@ -1,6 +1,6 @@
 {
   "name": "mercury-parser",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "",
   "repository": "github:postlight/mercury-parser",
   "main": "./dist/mercury.js",

@@ -1,5 +1,12 @@
 # Mercury Parser Changelog
 
+### 1.0.10 (Mar 24, 2017)
+
+##### Commits
+
+* [[`b8aa87c777`](https://github.com/postlight/mercury-parser/commit/b8aa87c777)] - **feat**: improve wh parser (#168) (Adam Pash) 
+* [[`e56e8e24cd`](https://github.com/postlight/mercury-parser/commit/e56e8e24cd)] - **release**: 1.0.9 (#167) (Adam Pash) 
+
 ### 1.0.9 (Mar 23, 2017)
 
 ##### Commits
