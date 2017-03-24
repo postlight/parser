@@ -5260,6 +5260,8 @@ var ObamawhitehouseArchivesGovExtractor = {
   },
 
   content: {
+    defaultCleaner: false,
+
     selectors: ['div#content-start', '.pane-node-field-forall-body'],
 
     // Is there anything in the content you selected that needs transformed
