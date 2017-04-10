@@ -1,5 +1,12 @@
 # Mercury Parser Changelog
 
+### 1.0.11 (Apr 10, 2017)
+
+##### Commits
+
+* [[`e92e798880`](https://github.com/postlight/mercury-parser/commit/e92e798880)] - **fix**: viewport tags leaking to parent page (#170) (Jeremy Mack) 
+* [[`86d6bd1dc1`](https://github.com/postlight/mercury-parser/commit/86d6bd1dc1)] - **release**: 1.0.10 (#169) (Adam Pash) 
+
 ### 1.0.10 (Mar 24, 2017)
 
 ##### Commits
