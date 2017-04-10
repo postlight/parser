@@ -1,5 +1,12 @@
 # Mercury Parser Changelog
 
+### 1.0.12 (Apr 10, 2017)
+
+##### Commits
+
+* [[`5fcea1c5c3`](https://github.com/postlight/mercury-parser/commit/5fcea1c5c3)] - **fix**: PARSING_NODE undefined (#172) (Jeremy Mack) 
+* [[`a51cc81c27`](https://github.com/postlight/mercury-parser/commit/a51cc81c27)] - **release**: 1.0.11 (#171) (Adam Pash) 
+
 ### 1.0.11 (Apr 10, 2017)
 
 ##### Commits
