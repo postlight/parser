@@ -65,7 +65,7 @@ $.html = ($node) => {
   const $body = removeUnusedTags($('body', null, null, false).clone());
   const $head = removeUnusedTags($('head', null, null, false).clone());
 
-  if (PARSING_NODE.length > 0) {
+  if (PARSING_NODE && PARSING_NODE.length > 0) {
     return PARSING_NODE.children().html();
   }
 
