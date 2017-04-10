@@ -25,15 +25,15 @@ const $ = (selector, context, rootjQuery, contextOverride = true) => {
 $.fn = $.prototype = jQuery.fn;
 jQuery.extend($, jQuery); // copy's trim, extend etc to $
 
-const removeScripts = ($node) => {
+const removeUnusedTags = ($node) => {
   // remove scripts and stylesheets
-  $node.find('script, style, link[rel="stylesheet"]').remove();
+  $node.find('script, style, link[rel="stylesheet"], meta[name="viewport"]').remove();
 
   return $node;
 };
 
 $.cloneHtml = () => {
-  const html = removeScripts($('html', null, null, false).clone());
+  const html = removeUnusedTags($('html', null, null, false).clone());
 
   return html.children().wrap('<div />').wrap('<div />');
 };
@@ -61,8 +61,8 @@ $.html = ($node) => {
     return $('<div>').append($node.eq(0).clone()).html();
   }
 
-  const $body = removeScripts($('body', null, null, false).clone());
-  const $head = removeScripts($('head', null, null, false).clone());
+  const $body = removeUnusedTags($('body', null, null, false).clone());
+  const $head = removeUnusedTags($('head', null, null, false).clone());
   const $parsingNode = $body.find(`.${PARSER_CLASS}`);
 
   if ($parsingNode.length > 0) {
@@ -100,7 +100,7 @@ $.load = (html, opts = {}, returnHtml = false) => {
   }
 
   // Strip scripts
-  html = removeScripts(html);
+  html = removeUnusedTags(html);
 
   // Remove comments
   html.find('*').contents().each(function () {
