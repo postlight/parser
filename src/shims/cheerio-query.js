@@ -79,10 +79,6 @@ $.html = ($node) => {
   return html;
 };
 
-$.cleanup = () => {
-  $(`.${PARSER_CLASS}`, null, null, false).remove();
-};
-
 $.load = (html, opts = {}, returnHtml = false) => {
   if (!html) {
     html = $.cloneHtml();
