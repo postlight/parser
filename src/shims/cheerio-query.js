@@ -8,14 +8,15 @@
 import jQuery from 'jquery';
 
 const PARSER_CLASS = 'mercury-parsing-container';
+let PARSING_NODE;
 
 jQuery.noConflict();
 const $ = (selector, context, rootjQuery, contextOverride = true) => {
   if (contextOverride) {
     if (context && typeof context === 'string') {
-      context = `.${PARSER_CLASS} ${context}`;
+      context = PARSING_NODE.find(context);
     } else if (!context) {
-      context = `.${PARSER_CLASS}`;
+      context = PARSING_NODE;
     }
   }
 
@@ -25,7 +26,7 @@ const $ = (selector, context, rootjQuery, contextOverride = true) => {
 $.fn = $.prototype = jQuery.fn;
 jQuery.extend($, jQuery); // copy's trim, extend etc to $
 
-const removeScripts = ($node) => {
+const removeUnusedTags = ($node) => {
   // remove scripts and stylesheets
   $node.find('script, style, link[rel="stylesheet"]').remove();
 
@@ -33,7 +34,7 @@ const removeScripts = ($node) => {
 };
 
 $.cloneHtml = () => {
-  const html = removeScripts($('html', null, null, false).clone());
+  const html = removeUnusedTags($('html', null, null, false).clone());
 
   return html.children().wrap('<div />').wrap('<div />');
 };
@@ -61,12 +62,11 @@ $.html = ($node) => {
     return $('<div>').append($node.eq(0).clone()).html();
   }
 
-  const $body = removeScripts($('body', null, null, false).clone());
-  const $head = removeScripts($('head', null, null, false).clone());
-  const $parsingNode = $body.find(`.${PARSER_CLASS}`);
+  const $body = removeUnusedTags($('body', null, null, false).clone());
+  const $head = removeUnusedTags($('head', null, null, false).clone());
 
-  if ($parsingNode.length > 0) {
-    return $parsingNode.children().html();
+  if (PARSING_NODE.length > 0) {
+    return PARSING_NODE.children().html();
   }
 
   const html = $('<container />')
@@ -90,17 +90,10 @@ $.load = (html, opts = {}, returnHtml = false) => {
     html = $('<container />').html(html);
   }
 
-  const $body = $('body', null, null, false);
-  // $('script', null, null, false).remove()
-  let $parsingNode = $body.find(`.${PARSER_CLASS}`);
-
-  if (!$parsingNode[0]) {
-    $body.append(`<div class="${PARSER_CLASS}" style="display: none;" />`);
-    $parsingNode = $body.find(`.${PARSER_CLASS}`);
-  }
+  PARSING_NODE = PARSING_NODE || $(`<div class="${PARSER_CLASS}" style="display:none;" />`);
 
   // Strip scripts
-  html = removeScripts(html);
+  html = removeUnusedTags(html);
 
   // Remove comments
   html.find('*').contents().each(function () {
@@ -108,7 +101,7 @@ $.load = (html, opts = {}, returnHtml = false) => {
       $(this).remove();
     }
   });
-  $parsingNode.html(html);
+  PARSING_NODE.html(html);
 
   if (returnHtml) return { $, html: html.html() };
 
