@@ -7736,16 +7736,9 @@ var Mercury = {
               });
 
             case 22:
-
-              // if this parse is happening in the browser,
-              // clean up any trace from the page.
-              if (cheerio.browser) {
-                cheerio.cleanup();
-              }
-
               return _context.abrupt('return', result);
 
-            case 24:
+            case 23:
             case 'end':
               return _context.stop();
           }
