@@ -4,13 +4,16 @@
   "description": "",
   "repository": "github:postlight/mercury-parser",
   "main": "./dist/mercury.js",
+  "bin": {
+    "mercury-parser": "scripts/mercury-cli.js"
+  },
   "scripts": {
     "lint": "if test \"$CI\" != \"true\" ; then eslint . --fix; fi",
     "lint:ci": "eslint .",
     "lint-fix-quiet": "eslint --fix --quiet",
     "build": "yarn lint && rollup -c && yarn test:build",
     "build:web": "yarn lint && rollup -c rollup.config.web.js && yarn test:build:web",
-    "release": "yarn build && yarn build:web",
+    "release": "yarn build && yarn build:web && yarn pkg",
     "build:generator": "rollup -c scripts/rollup.config.js",
     "test_build": "rollup -c",
     "test": "yarn test:node && yarn test:web",
@@ -21,6 +24,7 @@
     "watch:test": "jest --watch",
     "generate-parser": "node ./dist/generate-custom-parser.js",
     "add-contributor": "all-contributors add",
+    "pkg": "pkg scripts/mercury-cli.js --targets macos,linux,windows-x64,windows-x86",
     "generate-contributors": "all-contributors generate"
   },
   "author": "Postlight",
@@ -88,6 +92,7 @@
     "moment": "^2.14.1",
     "moment-parseformat": "^2.1.4",
     "moment-timezone": "^0.5.10",
+    "pkg": "^4.2.6",
     "request": "czardoz/request",
     "request-promise": "^4.1.1",
     "string-direction": "^0.1.2",
