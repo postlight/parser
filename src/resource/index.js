@@ -40,7 +40,7 @@ const Resource = {
   },
 
   generateDoc({ body: content, response }) {
-    const { 'content-type': contentType } = response.headers;
+    const { 'content-type': contentType = '' } = response.headers;
 
     // TODO: Implement is_text function from
     // https://github.com/ReadabilityHoldings/readability/blob/8dc89613241d04741ebd42fa9fa7df1b1d746303/readability/utils/text.py#L57
