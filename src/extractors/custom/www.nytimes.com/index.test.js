@@ -102,4 +102,13 @@ describe('NYTimesExtractor', () => {
     assert.equal(author, 'The New York Times');
     assert.equal(text, 'T he Smithsonian’s N');
   });
+
+  it('returns the title on most recent articles', async () => {
+    const html = fs.readFileSync('./fixtures/www.nytimes.com/1539194812689.html');
+    const uri = 'https://www.nytimes.com/2018/10/09/us/politics/nikki-haley-united-nations.html';
+
+    const { title } = await Mercury.parse(uri, html);
+
+    assert.equal(title, 'Nikki Haley to Resign as Trump’s Ambassador to the U.N.');
+  });
 });

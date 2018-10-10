@@ -3,7 +3,8 @@ export const NYTimesExtractor = {
 
   title: {
     selectors: [
-      '.g-headline',
+      'h1.g-headline',
+      'h1[itemprop="headline"]',
       'h1.headline',
     ],
   },
