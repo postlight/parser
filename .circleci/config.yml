@@ -1,0 +1,30 @@
+version: 2
+jobs:
+  test-node:
+    docker:
+      - image: circleci/node:6.14-stretch
+    steps:
+      - checkout
+      - run: "yarn install"
+      - run: "yarn lint:ci"
+      - run: "yarn build"
+      - run: "yarn test:node -- --maxWorkers=4"
+  test-web:
+    docker:
+      - image: circleci/node:6.14-stretch
+    steps:
+      - checkout
+      - run: "yarn install"
+      # For some reason phantomjs-prebuild is failing w/yarn, but npm installing works
+      - run: "npm install phantomjs-prebuilt"
+      # Switch to 7 and lint
+      - run: "yarn test:web -- --maxWorkers=4"
+      - run: "yarn build:web -- --maxWorkers=4"
+
+
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - test-node
+      - test-web
