@@ -8,8 +8,8 @@ let urls = [
     title: 'Iraqi troops storm town south of Mosul',
   },
   {
-    url: 'https://www.washingtonpost.com/news/post-nation/wp/2016/11/05/a-vile-and-disgusting-act-officer-accused-of-giving-fecal-sandwich-to-homeless-man-is-fired/',
-    title: '‘A vile and disgusting act’: Officer accused of giving fecal sandwich to homeless man is fired',
+    url: 'https://www.cnn.com/2018/10/12/us/before-after-aerial-images-mexico-beach-devastation-trnd/index.html',
+    title: 'Before and after images show there\'s nothing left in some parts of Mexico Beach',
   },
 ];
 
