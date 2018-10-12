@@ -2054,7 +2054,7 @@ var NYTimesExtractor = {
   domain: 'www.nytimes.com',
 
   title: {
-    selectors: ['.g-headline', 'h1.headline']
+    selectors: ['h1.g-headline', 'h1[itemprop="headline"]', 'h1.headline']
   },
 
   author: {
