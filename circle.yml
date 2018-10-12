@@ -12,6 +12,7 @@ dependencies:
   pre:
     - curl -o- -L https://yarnpkg.com/install.sh | bash
     - nvm install 7.0.0
+    - nvm install 6.10.0
     # For some reason phantomjs-prebuild is failing w/yarn, but npm installing works
     - npm install phantomjs-prebuilt
 
