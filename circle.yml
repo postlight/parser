@@ -5,13 +5,14 @@ machine:
 
   node:
     version:
-      4.3.2
+      6.10
 
 ## Customize dependencies
 dependencies:
   pre:
     - curl -o- -L https://yarnpkg.com/install.sh | bash
     - nvm install 7.0.0
+    - nvm install 6.10.0
     # For some reason phantomjs-prebuild is failing w/yarn, but npm installing works
     - npm install phantomjs-prebuilt
 
@@ -29,5 +30,5 @@ test:
     - nvm use 7.0 && yarn test:web -- --maxWorkers=4 && yarn build:web -- --maxWorkers=4:
         parallel: true
     # Switch to check on 4.3.2
-    - nvm use 4.3.2 && yarn build && yarn test:node -- --maxWorkers=4:
+    - nvm use 6.10 && yarn build && yarn test:node -- --maxWorkers=4:
         parallel: true
