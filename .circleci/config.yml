@@ -6,8 +6,8 @@ jobs:
     steps:
       - checkout
       - run: "yarn install"
-      - run: "yarn lint:ci -- --maxWorkers=4"
-      - run: "yarn build -- --maxWorkers=4"
+      - run: "yarn lint:ci"
+      - run: "yarn build"
       - run: "yarn test:node -- --maxWorkers=4"
   test-web:
     docker:
