@@ -44,6 +44,7 @@
     "babelrc-rollup": "^3.0.0",
     "brfs-babel": "^1.0.0",
     "browserify": "^13.1.1",
+    "changelog-maker": "^2.3.0",
     "eslint": "^3.8.1",
     "eslint-config-airbnb": "^12.0.0",
     "eslint-import-resolver-babel-module": "^2.0.1",
