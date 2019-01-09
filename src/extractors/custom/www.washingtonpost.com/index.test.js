@@ -14,8 +14,10 @@ describe('WwwWashingtonpostComExtractor', () => {
     beforeAll(() => {
       url =
         'https://www.washingtonpost.com/news/opinions/wp/2018/10/29/enough-platitudes-lets-name-names/';
-      const html = fs.readFileSync('./fixtures/www.washingtonpost.com/1546958901450.html');
-      result = Mercury.parse(url, html, { fallback: false });
+      const html =
+        fs.readFileSync('./fixtures/www.washingtonpost.com/1546958901450.html');
+      result =
+        Mercury.parse(url, html, { fallback: false });
     });
 
     it('is selected properly', async () => {
@@ -63,10 +65,7 @@ describe('WwwWashingtonpostComExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(
-        lead_image_url,
-        'https://www.washingtonpost.com/resizer/E6j9aM5bx4fpPedpdl2KxcSIci4=/1484x0/arc-anglerfish-washpost-prod-washpost.s3.amazonaws.com/public/GRLSHYNYVQZJBAUBKSFA26NTO4.jpg'
-      );
+      assert.equal(lead_image_url, 'https://www.washingtonpost.com/resizer/E6j9aM5bx4fpPedpdl2KxcSIci4=/1484x0/arc-anglerfish-washpost-prod-washpost.s3.amazonaws.com/public/GRLSHYNYVQZJBAUBKSFA26NTO4.jpg');
     });
 
     it('returns the content', async () => {
@@ -78,19 +77,11 @@ describe('WwwWashingtonpostComExtractor', () => {
 
       const $ = cheerio.load(content || '');
 
-      const first13 = excerptContent(
-        $('*')
-          .first()
-          .text(),
-        13
-      );
+      const first13 = excerptContent($('*').first().text(), 13);
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(
-        first13,
-        'Pittsburgh Mayor Bill Peduto on Sunday near the Tree of Life synagogue in'
-      );
+      assert.equal(first13, 'Pittsburgh Mayor Bill Peduto on Sunday near the Tree of Life synagogue in');
     });
   });
 });
