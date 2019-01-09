@@ -1,3 +1,5 @@
+import cheerio from 'cheerio';
+
 export const WwwFortinetComExtractor = {
   domain: 'www.fortinet.com',
 
@@ -26,16 +28,15 @@ export const WwwFortinetComExtractor = {
   },
 
   content: {
-    defaultCleaner: false,
-
     selectors: [
       'div.responsivegrid.aem-GridColumn.aem-GridColumn--default--12',
     ],
 
     transforms: {
       noscript: ($node) => {
-        const $children = $node.children();
-        if ($children.length === 1 && $children.get(0).tagName === 'img') {
+        const $ = cheerio.load(`<div>${$node.html()}</div>`);
+        const $children = $('div').children();
+        if ($children.length === 1 && $children.get(0).tagName === 'IMG') {
           return 'figure';
         }
 
