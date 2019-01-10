@@ -1,4 +1,5 @@
 import URL from 'url';
+import parseSrcset from 'parse-srcset';
 
 import { getAttrs, setAttr } from 'utils/dom';
 
@@ -14,20 +15,31 @@ function absolutize($, rootUrl, attr, $content) {
   });
 }
 
+function stringifySetCandidate(candidate) {
+  let candidateString = candidate.url;
+  if (candidate.d) {
+    candidateString = `${candidateString} ${candidate.d}x`;
+  }
+  if (candidate.w) {
+    candidateString = `${candidateString} ${candidate.w}w`;
+  }
+  if (candidate.h) {
+    candidateString = `${candidateString} ${candidate.h}h`;
+  }
+  return candidateString;
+}
+
 function absolutizeSet($, rootUrl, attr, $content) {
   $(`[${attr}]`, $content).each((_, node) => {
     const attrs = getAttrs(node);
     const urlSet = attrs[attr];
 
     if (urlSet) {
-      const absoluteUrlSet = urlSet.split(',').map((url) => {
-        const urlParts = url.trim().split(/\s+/);
-        let absoluteUrl = URL.resolve(rootUrl, urlParts[0]);
-        if (urlParts[1]) {
-          absoluteUrl = `${absoluteUrl} ${urlParts[1]}`;
-        }
-        return absoluteUrl;
-      }).join(',');
+      const parsedSet = parseSrcset(urlSet);
+      const absoluteUrlSet = parsedSet.map((candidate) => {
+        const absoluteUrl = URL.resolve(rootUrl, candidate.url);
+        return stringifySetCandidate({ ...candidate, url: absoluteUrl });
+      }).join(', ');
       setAttr(node, attr, absoluteUrlSet);
     }
   });

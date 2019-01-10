@@ -96,6 +96,7 @@
     "moment": "^2.14.1",
     "moment-parseformat": "^2.1.4",
     "moment-timezone": "^0.5.10",
+    "parse-srcset": "^1.0.2",
     "request": "czardoz/request",
     "request-promise": "^4.1.1",
     "string-direction": "^0.1.2",
