@@ -55,7 +55,7 @@ describe('WwwFastcompanyComExtractor', () => {
 
     // Update these values with the expected values from
     // the article.
-      assert.equal(date_published, '2017-01-09T03:00:00.000Z');
+      assert.equal(date_published, '2017-01-09T05:00:00.000Z');
     });
 
     it('returns the dek', async () => {
