@@ -1270,6 +1270,10 @@ cipher-base@^1.0.0, cipher-base@^1.0.1:
   dependencies:
     inherits "^2.0.1"
 
+circle-github-bot@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/circle-github-bot/-/circle-github-bot-2.0.1.tgz#feefa4c7f788ce842307e00d290d264728689f69"
+
 circular-json@^0.3.0:
   version "0.3.1"
   resolved "https://registry.yarnpkg.com/circular-json/-/circular-json-0.3.1.tgz#be8b36aefccde8b3ca7aa2d6afc07a37242c0d2d"
