@@ -2,6 +2,10 @@
 # yarn lockfile v1
 
 
+"@jesses/circle-github-bot@^2.1.0":
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/@jesses/circle-github-bot/-/circle-github-bot-2.1.0.tgz#0f43429ff7bc17a962812c22adb25b890367b16d"
+
 JSONStream@^1.0.3:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/JSONStream/-/JSONStream-1.2.1.tgz#32aa5790e799481083b49b4b7fa94e23bae69bf9"
@@ -1269,10 +1273,6 @@ cipher-base@^1.0.0, cipher-base@^1.0.1:
   resolved "https://registry.yarnpkg.com/cipher-base/-/cipher-base-1.0.3.tgz#eeabf194419ce900da3018c207d212f2a6df0a07"
   dependencies:
     inherits "^2.0.1"
-
-circle-github-bot@^2.0.1:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/circle-github-bot/-/circle-github-bot-2.0.1.tgz#feefa4c7f788ce842307e00d290d264728689f69"
 
 circular-json@^0.3.0:
   version "0.3.1"

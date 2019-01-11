@@ -33,6 +33,7 @@ function capturePage() {
     page.evaluateJavaScript(script);
 
     var filename = new Date();
+    page.clipRect = { top: 0, left: 0, width: 1366, height: 768 };
     page.render('tmp/artifacts/' + fixturePath + '.png');
     pageRenderComplete();
   });

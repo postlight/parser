@@ -1,6 +1,6 @@
 #!/bin/bash
 
-changes=( `git diff master --name-only` )
+changes=( `git diff origin/master --name-only` )
 
 for fixture in "${changes[@]}"
 do
