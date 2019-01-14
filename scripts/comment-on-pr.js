@@ -21,7 +21,7 @@ const run = () => {
       Object.assign(json, { url, domain, word_count, direction });
 
       // a quick preview of the parsed content in an html file
-      const previewHtml = `<h1>${json.title}</h1><p>${json.author}</p>${json.content}`
+      const previewHtml = `<h1>${json.title}</h1><img src=${json.lead_image_url} /><p>${json.author}</p>${json.content}`
 
 
       const jsonPath = `${screenshotPath}-parsed.json`;
@@ -36,6 +36,8 @@ const run = () => {
 **Commit:** \`${bot.env.commitMessage}\`
 
 ![Screenshot of fixture (this embed should work after repo is public)](${bot.artifactUrl(screenshotPath)})
+
+**[Original Article](${url})**
 
 **${bot.artifactLink(fixtureArtifactPath, 'HTML Fixture')}**
 
