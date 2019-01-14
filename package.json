@@ -26,6 +26,7 @@
   "author": "Postlight",
   "license": "ISC",
   "devDependencies": {
+    "@jesses/circle-github-bot": "^2.1.0",
     "all-contributors-cli": "^3.0.7",
     "babel-eslint": "^7.1.0",
     "babel-jest": "^16.0.0",
@@ -45,7 +46,6 @@
     "brfs-babel": "^1.0.0",
     "browserify": "^13.1.1",
     "changelog-maker": "^2.3.0",
-    "circle-github-bot": "^2.0.1",
     "eslint": "^3.8.1",
     "eslint-config-airbnb": "^12.0.0",
     "eslint-import-resolver-babel-module": "^2.0.1",

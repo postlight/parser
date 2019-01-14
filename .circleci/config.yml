@@ -12,7 +12,7 @@ jobs:
       - run: "./scripts/pr-parser-preview.sh"
 
       - store_artifacts:
-          path: /tmp/artifacts
+          path: tmp/artifacts
 
   test-web:
     docker:
