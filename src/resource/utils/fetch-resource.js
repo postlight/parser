@@ -83,7 +83,6 @@ export function baseDomain({ host }) {
 //       unicode content for HTML, with charset conversion.
 
 export default async function fetchResource(url, parsedUrl) {
-  console.log('parsed url', parsedUrl);
   parsedUrl = parsedUrl || URL.parse(encodeURI(url));
   const options = {
     url: parsedUrl.href,
