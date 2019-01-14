@@ -83,8 +83,8 @@ export function baseDomain({ host }) {
 //       unicode content for HTML, with charset conversion.
 
 export default async function fetchResource(url, parsedUrl) {
+  console.log('parsed url', parsedUrl);
   parsedUrl = parsedUrl || URL.parse(encodeURI(url));
-
   const options = {
     url: parsedUrl.href,
     headers: { ...REQUEST_HEADERS },
@@ -97,7 +97,7 @@ export default async function fetchResource(url, parsedUrl) {
     // Accept and decode gzip
     gzip: true,
     // Follow any redirect
-    followAllRedirects: true,
+    followAllRedirects: false,
   };
 
   const { response, body } = await get(options);
