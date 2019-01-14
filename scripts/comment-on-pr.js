@@ -37,11 +37,7 @@ const run = () => {
 
 ![Screenshot of fixture (this embed should work after repo is public)](${bot.artifactUrl(screenshotPath)})
 
-**[Original Article](${url})**
-
-**${bot.artifactLink(fixtureArtifactPath, 'HTML Fixture')}**
-
-**${bot.artifactLink(previewPath, 'Parsed Content Preview')}**
+[Original Article](${url}) | ${bot.artifactLink(fixtureArtifactPath, 'HTML Fixture')} | ${bot.artifactLink(previewPath, 'Parsed Content Preview')}
 
 <details>
 <summary><b>Parsed JSON</b></summary>
