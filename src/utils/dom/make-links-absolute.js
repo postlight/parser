@@ -6,14 +6,19 @@ import {
 } from 'utils/dom';
 
 function absolutize($, rootUrl, attr, $content) {
+  const baseUrl = $('base').attr('href');
+
   $(`[${attr}]`, $content).each((_, node) => {
     const attrs = getAttrs(node);
     const url = attrs[attr];
+    let absoluteUrl = '';
 
-    if (url) {
-      const absoluteUrl = URL.resolve(rootUrl, url);
-      setAttr(node, attr, absoluteUrl);
+    if (url && !baseUrl) {
+      absoluteUrl = URL.resolve(rootUrl, url);
+    } else {
+      absoluteUrl = baseUrl.concat(url);
     }
+    setAttr(node, attr, absoluteUrl);
   });
 }
 
