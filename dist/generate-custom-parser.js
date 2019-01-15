@@ -2713,7 +2713,6 @@ function scaffoldCustomParser(url) {
 
 // if has arg, just assume that arg is a url and skip prmopt
 var url = process.argv[2];
-console.log('process.argv', process.argv);
 if (url) {
   scaffoldCustomParser(url);
 } else {
