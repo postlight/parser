@@ -70,9 +70,9 @@ function scaffoldCustomParser(url) {
 }
 
 // if has arg, just assume that arg is a url and skip prmopt
-const url = process.argv[2];
-if (url) {
-  scaffoldCustomParser(url);
+const urlArg = process.argv[2];
+if (urlArg) {
+  scaffoldCustomParser(urlArg);
 } else {
   inquirer.prompt(questions).then((answers) => {
     scaffoldCustomParser(answers.website);
