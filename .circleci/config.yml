@@ -33,3 +33,13 @@ workflows:
     jobs:
       - test-node
       - test-web
+  # UNCOMMENT WHEN READY TO AUTOMATE THIS TASK
+  # scheduled_tasks:
+  #   triggers:
+  #     # run once per hour
+  #     - schedule:
+  #       cron: "0 * * * *"
+  #       filters:
+  #         branches:
+  #           only:
+  #             - master
