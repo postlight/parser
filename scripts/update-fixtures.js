@@ -141,7 +141,7 @@ const createPR = ({ branchName, title, body = '' }) => {
   })
 
   octokit.pulls.create({
-    owner: 'postlight-bot', 
+    owner: 'postlight', 
     repo: 'mercury-parser',
     title, 
     head: branchName, 
