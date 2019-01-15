@@ -69,9 +69,15 @@ function scaffoldCustomParser(url) {
   confirm(Mercury.fetchResource, [url], 'Fetching fixture', newParser);
 }
 
-inquirer.prompt(questions).then((answers) => {
-  scaffoldCustomParser(answers.website);
-});
+// if has arg, just assume that arg is a url and skip prmopt
+const url = process.argv[2];
+if (url) {
+  scaffoldCustomParser(url);
+} else {
+  inquirer.prompt(questions).then((answers) => {
+    scaffoldCustomParser(answers.website);
+  });
+}
 
 function generateScaffold(url, file, result) {
   const { hostname } = URL.parse(url);
