@@ -26,6 +26,7 @@
   "author": "Postlight",
   "license": "ISC",
   "devDependencies": {
+    "@jesses/circle-github-bot": "^2.1.0",
     "all-contributors-cli": "^3.0.7",
     "babel-eslint": "^7.1.0",
     "babel-jest": "^16.0.0",
