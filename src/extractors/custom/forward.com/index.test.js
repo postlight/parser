@@ -12,8 +12,7 @@ describe('ForwardComExtractor', () => {
     let result;
     let url;
     beforeAll(() => {
-      url =
-        'http://forward.com/schmooze/358592/why-does-slack-want-me-to-say-hummus/';
+      url = 'http://forward.com/schmooze/358592/why-does-slack-want-me-to-say-hummus/';
       const html = fs.readFileSync('./fixtures/forward.com/1488392273490.html');
       result = Mercury.parse(url, html, { fallback: false });
     });
@@ -33,10 +32,7 @@ describe('ForwardComExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(
-        title,
-        'The Adorable Reason You Can Set Your Alert Sound to “Hummus” on Slack'
-      );
+      assert.equal(title, 'The Adorable Reason You Can Set Your Alert Sound to “Hummus” on Slack');
     });
 
     it('returns the author', async () => {
@@ -58,16 +54,6 @@ describe('ForwardComExtractor', () => {
       // the article.
       assert.equal(date_published, '2016-12-28T20:32:00.000Z');
     });
-
-    // it('returns the dek', async () => {
-    // // To pass this test, fill out the dek selector
-    // // in ./src/extractors/custom/forward.com/index.js.
-    //   const { dek } = await result;
-    //
-    // // Update these values with the expected values from
-    // // the article.
-    //   assert.equal(dek, '');
-    // });
 
     it('returns the lead_image_url', async () => {
       // To pass this test, fill out the lead_image_url selector
