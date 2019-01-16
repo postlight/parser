@@ -32,10 +32,7 @@ describe('WwwTmzComExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(
-        title,
-        "Prince -- Woman Warns Estate ... Step Aside, I'm His Wife!"
-      );
+      assert.equal(title, "Prince -- Woman Warns Estate ... Step Aside, I'm His Wife!");
     });
 
     it('returns the author', async () => {
@@ -60,22 +57,6 @@ describe('WwwTmzComExtractor', () => {
       // timezone. This could be fixed by better markup)
       assert.equal(date_published, '2016-11-28T11:00:00.000Z');
     });
-
-    // it('returns the dek', async () => {
-    //   // To pass this test, fill out the dek selector
-    //   // in ./src/extractors/custom/www.tmz.com/index.js.
-    //   const html =
-    //     fs.readFileSync('./fixtures/www.tmz.com/1480368537455.html');
-    //   const articleUrl =
-    //     'http://www.tmz.com/2016/11/28/prince-wife-estate-will/';
-    //
-    //   const { dek } =
-    //     await Mercury.parse(articleUrl, html, { fallback: false });
-    //
-    //   // Update these values with the expected values from
-    //   // the article.
-    //   assert.equal(dek, '');
-    // });
 
     it('returns the lead_image_url', async () => {
       // To pass this test, fill out the lead_image_url selector
