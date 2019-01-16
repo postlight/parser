@@ -2,7 +2,7 @@ version: 2
 jobs:
   test-node:
     docker:
-      - image: circleci/node:8
+      - image: circleci/node:8.10
     steps:
       - checkout
       - run: "yarn install"
@@ -19,7 +19,7 @@ jobs:
 
   test-web:
     docker:
-      - image: circleci/node:8
+      - image: circleci/node:8.10-browsers
     steps:
       - checkout
       - run: "yarn install"
