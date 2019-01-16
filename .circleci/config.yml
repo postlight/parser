@@ -8,8 +8,10 @@ jobs:
       - run: "yarn install"
       - run: "yarn lint:ci"
       - run: "yarn build"
-      - run: "./scripts/pr-parser-preview.sh"
-      - run: "yarn test:node -- --maxWorkers=4"
+      - run: "yarn test:node -- --maxWorkers=4 --json --outputFile=tmp/artifacts/test-output.json"
+      - run: 
+          command: "./scripts/pr-parser-preview.sh"
+          when: "always"
 
       - store_artifacts:
           path: tmp/artifacts
