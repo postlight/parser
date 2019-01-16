@@ -5,7 +5,7 @@ changes=( `git diff origin/master --name-only` )
 for fixture in "${changes[@]}"
 do
 	# If one of the changed files is a fixture, hold onto it
-  if [[ $fixture == "fixtures/"* ]]; then
+  if [[ $fixture == "fixtures/"*  ]] &&  [[ -e "$fixture" ]]; then
     fixtures=$fixture,$fixtures
   fi
 done
