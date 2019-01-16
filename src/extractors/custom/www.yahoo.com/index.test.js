@@ -15,10 +15,10 @@ describe('YahooExtractor', () => {
     beforeAll(() => {
       url =
         'https://www.yahoo.com/news/m/1c621104-b0eb-3b4d-9b0a-7bb979f80d7d/ss_clinton-cancels-joint-events.html';
-      const html =
-        fs.readFileSync('./fixtures/www.yahoo.com/1475529982399.html');
-      result =
-        Mercury.parse(url, html, { fallback: false });
+      const html = fs.readFileSync(
+        './fixtures/www.yahoo.com/1475529982399.html'
+      );
+      result = Mercury.parse(url, html, { fallback: false });
     });
 
     it('is selected properly', async () => {
@@ -68,7 +68,10 @@ describe('YahooExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(lead_image_url, 'https://s.yimg.com/uu/api/res/1.2/tE8CoXSgHD15n5p8wUwGJA--/aD0zMDA7dz02MjQ7c209MTthcHBpZD15dGFjaHlvbg--/http://slingstone.zenfs.com/offnetwork/218c3f97f0b7e1598b6dc9fd10126e22');
+      assert.equal(
+        lead_image_url,
+        'https://s.yimg.com/uu/api/res/1.2/tE8CoXSgHD15n5p8wUwGJA--/aD0zMDA7dz02MjQ7c209MTthcHBpZD15dGFjaHlvbg--/http://slingstone.zenfs.com/offnetwork/218c3f97f0b7e1598b6dc9fd10126e22'
+      );
     });
 
     it('returns the content', async () => {
@@ -80,11 +83,19 @@ describe('YahooExtractor', () => {
 
       const $ = cheerio.load(content || '');
 
-      const first13 = excerptContent($('*').first().text(), 13);
+      const first13 = excerptContent(
+        $('*')
+          .first()
+          .text(),
+        13
+      );
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(first13, 'The Hillary Clinton campaign has canceled joint appearances with former primary opponent Bernie');
+      assert.equal(
+        first13,
+        'The Hillary Clinton campaign has canceled joint appearances with former primary opponent Bernie'
+      );
     });
   });
 });

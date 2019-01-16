@@ -5,7 +5,10 @@ import path from 'path';
 import cheerio from 'cheerio';
 
 export function clean(string) {
-  return string.trim().replace(/\r?\n|\r/g, '').replace(/\s+/g, ' ');
+  return string
+    .trim()
+    .replace(/\r?\n|\r/g, '')
+    .replace(/\s+/g, ' ');
 }
 
 export function assertClean(a, b) {
@@ -43,7 +46,7 @@ export function record(name, options = {}) {
       }
     },
     // saves our recording if fixtures didn't already exist
-    after: (done) => {
+    after: done => {
       if (!has_fixtures && !cheerio.browser) {
         has_fixtures = nock.recorder.play();
         // eslint-disable-next-line no-console

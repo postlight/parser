@@ -14,13 +14,21 @@ import { NYMagExtractor } from './custom/nymag.com';
 
 describe('RootExtractor', () => {
   it('only returns what the custom parser gives it if fallback is disabled', () => {
-    const fullUrl = 'http://nymag.com/daily/intelligencer/2016/09/trump-discussed-usd25k-donation-with-florida-ag-not-fraud.html';
-    const html = fs.readFileSync('./src/extractors/custom/nymag.com/fixtures/test.html', 'utf8');
+    const fullUrl =
+      'http://nymag.com/daily/intelligencer/2016/09/trump-discussed-usd25k-donation-with-florida-ag-not-fraud.html';
+    const html = fs.readFileSync(
+      './src/extractors/custom/nymag.com/fixtures/test.html',
+      'utf8'
+    );
     const $ = cheerio.load(html);
 
-    const { url } = RootExtractor.extract(
-      NYMagExtractor, { url: fullUrl, html, $, metaCache: [], fallback: false }
-    );
+    const { url } = RootExtractor.extract(NYMagExtractor, {
+      url: fullUrl,
+      html,
+      $,
+      metaCache: [],
+      fallback: false,
+    });
 
     assert.equal(url, null);
   });
@@ -94,8 +102,11 @@ describe('transformElements($content, $, { transforms })', () => {
       transforms: {
         noscript: ($node, $) => {
           const $children = $.browser ? $($node.text()) : $node.children();
-          if ($children.length === 1 && $children.get(0) !== undefined &&
-            $children.get(0).tagName.toLowerCase() === 'img') {
+          if (
+            $children.length === 1 &&
+            $children.get(0) !== undefined &&
+            $children.get(0).tagName.toLowerCase() === 'img'
+          ) {
             return 'figure';
           }
 
@@ -124,7 +135,7 @@ describe('transformElements($content, $, { transforms })', () => {
 });
 
 describe('select(opts)', () => {
-  it('returns a node\'s text with a simple selector', () => {
+  it("returns a node's text with a simple selector", () => {
     const html = `
       <div><div class="author">Bob</div></div>
     `;
@@ -141,7 +152,7 @@ describe('select(opts)', () => {
     assert.equal(result, 'Bob');
   });
 
-  it('returns a node\'s attr with an attr selector', () => {
+  it("returns a node's attr with an attr selector", () => {
     const html = `
       <div>
         <time datetime="2016-09-07T05:07:59-04:00">
@@ -162,7 +173,7 @@ describe('select(opts)', () => {
     assert.equal(result, '2016-09-07T09:07:59.000Z');
   });
 
-  it('returns a node\'s html when it is a content selector', () => {
+  it("returns a node's html when it is a content selector", () => {
     const html = `
       <div><div class="content-is-here"><p>Wow what a piece of content</p></div></div>
     `;

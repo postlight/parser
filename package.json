@@ -49,12 +49,14 @@
     "changelog-maker": "^2.3.0",
     "eslint": "^3.8.1",
     "eslint-config-airbnb": "^12.0.0",
+    "eslint-config-prettier": "^3.5.0",
     "eslint-import-resolver-babel-module": "^2.0.1",
     "eslint-plugin-babel": "^3.3.0",
     "eslint-plugin-import": "^1.16.0",
     "eslint-plugin-jsx-a11y": "^2.2.3",
     "eslint-plugin-react": "^6.4.1",
     "express": "^4.14.0",
+    "husky": "^1.3.1",
     "inquirer": "^1.1.3",
     "jasmine-core": "^2.5.2",
     "jest": "^16.0.2",
@@ -66,12 +68,14 @@
     "karma-mocha": "^1.3.0",
     "karma-phantomjs-launcher": "^1.0.2",
     "karma-requirejs": "^1.1.0",
+    "lint-staged": "^8.1.0",
     "mocha": "^3.1.2",
     "nock": "^9.0.2",
     "ora": "^0.3.0",
     "phantomjs-polyfill-find": "ptim/phantomjs-polyfill-find",
     "phantomjs-polyfill-string-includes": "^1.0.0",
     "phantomjs-prebuilt": "^2.1.14",
+    "prettier": "^1.15.3",
     "requirejs": "^2.3.2",
     "rollup": "^0.36.3",
     "rollup-plugin-babel": "^2.6.1",
@@ -104,5 +108,21 @@
     "request": "browser-request",
     "iconv-lite": "./src/shims/iconv-lite",
     "moment-timezone": "./node_modules/moment-timezone/builds/moment-timezone-with-data-2010-2020.min.js"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js}": [
+      "eslint --fix",
+      "prettier --write",
+      "git add"
+    ],
+    "*.{json,css,md}": [
+      "prettier --write",
+      "git add"
+    ]
   }
 }

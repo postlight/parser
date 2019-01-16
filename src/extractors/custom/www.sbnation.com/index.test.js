@@ -14,10 +14,10 @@ describe('WwwSbnationComExtractor', () => {
     beforeAll(() => {
       url =
         'http://www.sbnation.com/mlb/2016/12/6/13857040/chris-sale-red-sox-trade-white-sox';
-      const html =
-        fs.readFileSync('./fixtures/www.sbnation.com/1481062909839.html');
-      result =
-        Mercury.parse(url, html, { fallback: false });
+      const html = fs.readFileSync(
+        './fixtures/www.sbnation.com/1481062909839.html'
+      );
+      result = Mercury.parse(url, html, { fallback: false });
     });
     it('is selected properly', () => {
       // This test should be passing by default.
@@ -34,7 +34,10 @@ describe('WwwSbnationComExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(title, 'The Red Sox traded for Chris Sale, and they’re going to be ridiculously loaded for a long time');
+      assert.equal(
+        title,
+        'The Red Sox traded for Chris Sale, and they’re going to be ridiculously loaded for a long time'
+      );
     });
 
     it('returns the author', async () => {
@@ -64,7 +67,10 @@ describe('WwwSbnationComExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(dek, 'The Chris Sale trade doesn’t mean that they’ve won the 2017 World Series, but they’re building a juggernaut in Boston.');
+      assert.equal(
+        dek,
+        'The Chris Sale trade doesn’t mean that they’ve won the 2017 World Series, but they’re building a juggernaut in Boston.'
+      );
     });
 
     it('returns the lead_image_url', async () => {
@@ -74,7 +80,10 @@ describe('WwwSbnationComExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(lead_image_url, 'https://cdn0.vox-cdn.com/thumbor/VfeYqqHzPEOqSIXXAF-yK-1e4LQ=/0x0:1710x962/1600x900/cdn0.vox-cdn.com/uploads/chorus_image/image/52164267/592603330.0.jpeg');
+      assert.equal(
+        lead_image_url,
+        'https://cdn0.vox-cdn.com/thumbor/VfeYqqHzPEOqSIXXAF-yK-1e4LQ=/0x0:1710x962/1600x900/cdn0.vox-cdn.com/uploads/chorus_image/image/52164267/592603330.0.jpeg'
+      );
     });
 
     it('returns the content', async () => {
@@ -86,11 +95,19 @@ describe('WwwSbnationComExtractor', () => {
 
       const $ = cheerio.load(content || '');
 
-      const first13 = excerptContent($('*').first().text(), 13);
+      const first13 = excerptContent(
+        $('*')
+          .first()
+          .text(),
+        13
+      );
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(first13, 'Chris Sale, whose delivery is reminiscent of a cyclone tearing through a tetherball');
+      assert.equal(
+        first13,
+        'Chris Sale, whose delivery is reminiscent of a cyclone tearing through a tetherball'
+      );
     });
   });
 });

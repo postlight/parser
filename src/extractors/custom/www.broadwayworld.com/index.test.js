@@ -15,10 +15,10 @@ describe('CustomExtractor', () => {
     beforeAll(() => {
       url =
         'http://www.broadwayworld.com/article/American-Theatre-Wing-Launches-Andrew-Lloyd-Webber-Training-Scholarships-20161013';
-      const html =
-        fs.readFileSync('./fixtures/www.broadwayworld.com/1476392567143.html');
-      result =
-        Mercury.parse(url, html, { fallback: false });
+      const html = fs.readFileSync(
+        './fixtures/www.broadwayworld.com/1476392567143.html'
+      );
+      result = Mercury.parse(url, html, { fallback: false });
     });
     it('is selected properly', async () => {
       // To pass this test, rename your extractor in
@@ -37,7 +37,10 @@ describe('CustomExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(title, 'American Theatre Wing Launches Andrew Lloyd Webber Training Scholarships');
+      assert.equal(
+        title,
+        'American Theatre Wing Launches Andrew Lloyd Webber Training Scholarships'
+      );
     });
 
     it('returns the author', async () => {
@@ -67,7 +70,10 @@ describe('CustomExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(lead_image_url, 'https://images.bwwstatic.com/columnpic7/7B5FD766-A644-E386-19DE07017A3AD79C.jpg');
+      assert.equal(
+        lead_image_url,
+        'https://images.bwwstatic.com/columnpic7/7B5FD766-A644-E386-19DE07017A3AD79C.jpg'
+      );
     });
 
     it('returns the content', async () => {
@@ -79,11 +85,19 @@ describe('CustomExtractor', () => {
 
       const $ = cheerio.load(content || '');
 
-      const first13 = excerptContent($('*').first().text(), 13);
+      const first13 = excerptContent(
+        $('*')
+          .first()
+          .text(),
+        13
+      );
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(first13, 'The American Theatre Wing announced today that their Andrew Lloyd Webber Initiative has');
+      assert.equal(
+        first13,
+        'The American Theatre Wing announced today that their Andrew Lloyd Webber Initiative has'
+      );
     });
   });
 });

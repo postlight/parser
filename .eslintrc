@@ -2,7 +2,7 @@
 // Copy this file, and add rule overrides as needed.
 {
   "parser": "babel-eslint",
-  "extends": "airbnb",
+  "extends": ["airbnb", "prettier"],
   "plugins": [
     "babel"
   ],

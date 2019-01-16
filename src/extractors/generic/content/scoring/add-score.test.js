@@ -1,14 +1,11 @@
 import assert from 'assert';
 import cheerio from 'cheerio';
 
-import {
-  addScore,
-  getScore,
-} from './index';
+import { addScore, getScore } from './index';
 
 describe('Scoring utils', () => {
   describe('addScore(node, $, amount)', () => {
-    it('adds the specified amount to a node\'s score', () => {
+    it("adds the specified amount to a node's score", () => {
       const $ = cheerio.load('<p score="25">Foo</p>');
       let $node = $('p').first();
 

@@ -13,12 +13,11 @@ describe('ApartmentTherapyExtractor', () => {
     let result;
     let url;
     beforeAll(() => {
-      url =
-        'http://www.apartmenttherapy.com/a-light-filled-la-loft-236564';
-      const html =
-        fs.readFileSync('./fixtures/www.apartmenttherapy.com/1476396697639.html');
-      result =
-        Mercury.parse(url, html, { fallback: false });
+      url = 'http://www.apartmenttherapy.com/a-light-filled-la-loft-236564';
+      const html = fs.readFileSync(
+        './fixtures/www.apartmenttherapy.com/1476396697639.html'
+      );
+      result = Mercury.parse(url, html, { fallback: false });
     });
     it('is selected properly', async () => {
       // To pass this test, rename your extractor in
@@ -67,7 +66,10 @@ describe('ApartmentTherapyExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(lead_image_url, 'http://atmedia.imgix.net/9332fdca908b1fcc5c9a6891b458820718239950?w=1500&fit=max');
+      assert.equal(
+        lead_image_url,
+        'http://atmedia.imgix.net/9332fdca908b1fcc5c9a6891b458820718239950?w=1500&fit=max'
+      );
     });
 
     it('returns the content', async () => {
@@ -79,11 +81,19 @@ describe('ApartmentTherapyExtractor', () => {
 
       const $ = cheerio.load(content || '');
 
-      const first13 = excerptContent($('*').first().text(), 13);
+      const first13 = excerptContent(
+        $('*')
+          .first()
+          .text(),
+        13
+      );
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(first13, 'Name: Ashley Location: Downtown — Los Angeles, California Welcome to our sunny and');
+      assert.equal(
+        first13,
+        'Name: Ashley Location: Downtown — Los Angeles, California Welcome to our sunny and'
+      );
     });
   });
 });

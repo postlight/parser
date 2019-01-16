@@ -1,9 +1,6 @@
 import ellipsize from 'ellipsize';
 
-import {
-  extractFromMeta,
-  stripTags,
-} from 'utils/dom';
+import { extractFromMeta, stripTags } from 'utils/dom';
 
 import { EXCERPT_META_SELECTORS } from './constants';
 

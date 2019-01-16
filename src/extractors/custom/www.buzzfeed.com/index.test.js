@@ -15,10 +15,10 @@ describe('BuzzfeedExtractor', () => {
     beforeAll(() => {
       url =
         'https://www.buzzfeed.com/ikrd/people-are-calling-out-this-edited-picture-of-demi-lovato-fo';
-      const html =
-        fs.readFileSync('./fixtures/www.buzzfeed.com/1475531975121.html');
-      result =
-        Mercury.parse(url, html, { fallback: false });
+      const html = fs.readFileSync(
+        './fixtures/www.buzzfeed.com/1475531975121.html'
+      );
+      result = Mercury.parse(url, html, { fallback: false });
     });
 
     it('is selected properly', async () => {
@@ -38,7 +38,10 @@ describe('BuzzfeedExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(title, 'People Are Calling Out This Edited Picture Of Demi Lovato For Body-Shaming Her');
+      assert.equal(
+        title,
+        'People Are Calling Out This Edited Picture Of Demi Lovato For Body-Shaming Her'
+      );
     });
 
     it('returns the author', async () => {
@@ -58,7 +61,10 @@ describe('BuzzfeedExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(lead_image_url, 'https://img.buzzfeed.com/buzzfeed-static/static/2016-10/3/12/social_promotion/buzzfeed-prod-fastlane01/facebook-social-promotion-17757-1475512210-1.jpg');
+      assert.equal(
+        lead_image_url,
+        'https://img.buzzfeed.com/buzzfeed-static/static/2016-10/3/12/social_promotion/buzzfeed-prod-fastlane01/facebook-social-promotion-17757-1475512210-1.jpg'
+      );
     });
 
     it('returns the content', async () => {
@@ -70,11 +76,19 @@ describe('BuzzfeedExtractor', () => {
 
       const $ = cheerio.load(content || '');
 
-      const first13 = excerptContent($('*').first().text(), 13);
+      const first13 = excerptContent(
+        $('*')
+          .first()
+          .text(),
+        13
+      );
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(first13, 'A few months ago, Vladimir Serbanescu, a 17-year-old artist from Romania, drew this');
+      assert.equal(
+        first13,
+        'A few months ago, Vladimir Serbanescu, a 17-year-old artist from Romania, drew this'
+      );
     });
   });
 
@@ -84,10 +98,10 @@ describe('BuzzfeedExtractor', () => {
     beforeAll(() => {
       url =
         'https://www.buzzfeed.com/katiejmbaker/college-trump-supporters-the-new-counterculture?utm_term=.ckb72b58Y#.oxY8ZOWY3';
-      const html =
-        fs.readFileSync('./fixtures/www.buzzfeed.com/1480717502688.html');
-      result =
-        Mercury.parse(url, html, { fallback: false });
+      const html = fs.readFileSync(
+        './fixtures/www.buzzfeed.com/1480717502688.html'
+      );
+      result = Mercury.parse(url, html, { fallback: false });
     });
 
     it('returns big header images in the content', async () => {
@@ -95,9 +109,14 @@ describe('BuzzfeedExtractor', () => {
 
       const $ = cheerio.load(content || '');
 
-      const imgSrc = $('img').first().attr('src');
+      const imgSrc = $('img')
+        .first()
+        .attr('src');
 
-      assert.equal(imgSrc, 'https://img.buzzfeed.com/buzzfeed-static/static/2016-11/21/10/enhanced/buzzfeed-prod-fastlane03/longform-original-25748-1479741827-5.jpg');
+      assert.equal(
+        imgSrc,
+        'https://img.buzzfeed.com/buzzfeed-static/static/2016-11/21/10/enhanced/buzzfeed-prod-fastlane03/longform-original-25748-1479741827-5.jpg'
+      );
     });
 
     it('transforms the splash image to a figure and caption', async () => {
@@ -105,12 +124,19 @@ describe('BuzzfeedExtractor', () => {
 
       const $ = cheerio.load(content || '');
 
-      const imgSrc = $('figure img').first().attr('src');
-      const figcaption = $('figure figcaption').first().text();
+      const imgSrc = $('figure img')
+        .first()
+        .attr('src');
+      const figcaption = $('figure figcaption')
+        .first()
+        .text();
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(imgSrc, 'https://img.buzzfeed.com/buzzfeed-static/static/2016-11/21/10/enhanced/buzzfeed-prod-fastlane03/longform-original-25748-1479741827-5.jpg');
+      assert.equal(
+        imgSrc,
+        'https://img.buzzfeed.com/buzzfeed-static/static/2016-11/21/10/enhanced/buzzfeed-prod-fastlane03/longform-original-25748-1479741827-5.jpg'
+      );
       assert.equal(figcaption, 'Adam Maida for BuzzFeed News');
     });
   });

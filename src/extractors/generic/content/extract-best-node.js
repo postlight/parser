@@ -1,12 +1,6 @@
-import {
-  stripUnlikelyCandidates,
-  convertToParagraphs,
-} from 'utils/dom';
+import { stripUnlikelyCandidates, convertToParagraphs } from 'utils/dom';
 
-import {
-  scoreContent,
-  findTopCandidate,
-} from './scoring';
+import { scoreContent, findTopCandidate } from './scoring';
 
 // Using a variety of scoring techniques, extract the content most
 // likely to be article text.

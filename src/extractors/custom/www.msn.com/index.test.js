@@ -15,10 +15,8 @@ describe('MSNExtractor', () => {
     beforeAll(() => {
       url =
         'http://www.msn.com/en-us/health/wellness/this-is-your-brain-on-sad-movies-plus-5-films-to-cry-to/ar-BBwsPWG?li=BBnb2gg';
-      const html =
-        fs.readFileSync('./fixtures/www.msn.com/1475506925474.html');
-      result =
-        Mercury.parse(url, html, { fallback: false });
+      const html = fs.readFileSync('./fixtures/www.msn.com/1475506925474.html');
+      result = Mercury.parse(url, html, { fallback: false });
     });
 
     it('is selected properly', async () => {
@@ -38,7 +36,10 @@ describe('MSNExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(title, 'This Is Your Brain On Sad Movies; Plus 5 Films To Cry To');
+      assert.equal(
+        title,
+        'This Is Your Brain On Sad Movies; Plus 5 Films To Cry To'
+      );
     });
 
     it('returns the author', async () => {
@@ -80,11 +81,19 @@ describe('MSNExtractor', () => {
 
       const $ = cheerio.load(content || '');
 
-      const first13 = excerptContent($('*').first().text(), 13);
+      const first13 = excerptContent(
+        $('*')
+          .first()
+          .text(),
+        13
+      );
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(first13, 'The psychological reason why we love to watch sad movies is linked to');
+      assert.equal(
+        first13,
+        'The psychological reason why we love to watch sad movies is linked to'
+      );
     });
   });
 });
