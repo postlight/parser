@@ -9,6 +9,10 @@ const run = () => {
   const fixture = screenshotPath.split('tmp/artifacts/')[1].slice(0, -4);
 
   const html = fs.readFileSync(`${fixture}`);
+  const testResultsPath = 'tmp/artifacts/test-output.json';
+  const testResults =
+    fs.existsSync(testResultsPath) &&
+    JSON.parse(fs.readFileSync(testResultsPath));
 
   // first parse is just to get the url
   Mercury.parse('http://example.com', html, { fallback: false }).then(({ url, domain, excerpt, word_count, direction }) => {
@@ -32,12 +36,29 @@ const run = () => {
       fs.writeFileSync(jsonPath, JSON.stringify(json));
       fs.writeFileSync(fixtureArtifactPath, html);
 
+      const testResultsOutput = !testResults ? '' : `
+<details>
+<summary><b>Test Results: ${testResults.numFailedTests} failed tests</b></summary>
+
+Failed tests:
+
+<ul>
+${testResults.testResults.assertionResults.filter(({ status }) => status === 'failed')
+    .map(({ fullName, failureMessages }) =>
+      `<li>${fullName}<br /><pre>${failureMessages.join("\n\n")}</pre></li>`
+    ) || 'None'
+  }
+</ul>
+
+</details>
+<br />`
+
       bot.comment(process.env.GH_AUTH_TOKEN, `### 🤖 Automated Parsing Preview 🤖
 **Commit:** \`${bot.env.commitMessage}\`
 
 ![Screenshot of fixture (this embed should work after repo is public)](${bot.artifactUrl(screenshotPath)})
 
-[Original Article](${url}) | ${bot.artifactLink(fixtureArtifactPath, 'HTML Fixture')} | ${bot.artifactLink(previewPath, 'Parsed Content Preview')}
+[Original Article](${url}) | ${bot.artifactLink(fixtureArtifactPath, 'HTML Fixture')} | ${bot.artifactLink(previewPath, 'Parsed Content Preview')} | ${bot.artifactLink(testResultsPath, "Test results")}
 
 <details>
 <summary><b>Parsed JSON</b></summary>
@@ -52,7 +73,7 @@ ${JSON.stringify(json, null, 2)}
 
 **\`null\` fields**
 
-${Object.keys(json).map(key => json[key] !== null ? '' : `  * \`${key}\n\``).join('') || 'None'}
+${Object.keys(json).map(key => json[key] !== null ? '' : `  * \`${key}\`\n\n`).join('') || 'None'}
 
 `
       );
