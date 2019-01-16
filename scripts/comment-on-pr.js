@@ -43,40 +43,42 @@ const run = () => {
 Failed tests:
 
 <ul>
-${testResults.testResults.assertionResults.filter(({ status }) => status === 'failed')
-    .map(({ fullName, failureMessages }) =>
+${testResults.testResults.map(({ assertionResults }) => assertionResults
+  .filter(({ status }) => status === 'failed')
+  .map(({ fullName, failureMessages }) =>
       `<li>${fullName}<br /><pre>${failureMessages.join("\n\n")}</pre></li>`
-    ) || 'None'
-  }
+  ))
+  .reduce((acc, arr) => acc.concat(arr), [])
+  .join("")}
 </ul>
 
 </details>
 <br />`
 
-      bot.comment(process.env.GH_AUTH_TOKEN, `### 🤖 Automated Parsing Preview 🤖
-**Commit:** \`${bot.env.commitMessage}\`
-
-![Screenshot of fixture (this embed should work after repo is public)](${bot.artifactUrl(screenshotPath)})
-
-[Original Article](${url}) | ${bot.artifactLink(fixtureArtifactPath, 'HTML Fixture')} | ${bot.artifactLink(previewPath, 'Parsed Content Preview')} | ${bot.artifactLink(testResultsPath, "Test results")}
-
-<details>
-<summary><b>Parsed JSON</b></summary>
-
-\`\`\`json
-${JSON.stringify(json, null, 2)}
-\`\`\`
-
-</details>
-<br />
-
-
-**\`null\` fields**
-
-${Object.keys(json).map(key => json[key] !== null ? '' : `  * \`${key}\`\n\n`).join('') || 'None'}
-
-`
-      );
+//       bot.comment(process.env.GH_AUTH_TOKEN, `### 🤖 Automated Parsing Preview 🤖
+// **Commit:** \`${bot.env.commitMessage}\`
+//
+// ![Screenshot of fixture (this embed should work after repo is public)](${bot.artifactUrl(screenshotPath)})
+//
+// [Original Article](${url}) | ${bot.artifactLink(fixtureArtifactPath, 'HTML Fixture')} | ${bot.artifactLink(previewPath, 'Parsed Content Preview')} | ${bot.artifactLink(testResultsPath, "Test results")}
+//
+// <details>
+// <summary><b>Parsed JSON</b></summary>
+//
+// \`\`\`json
+// ${JSON.stringify(json, null, 2)}
+// \`\`\`
+//
+// </details>
+// <br />
+//
+//
+// **\`null\` fields**
+//
+// ${Object.keys(json).map(key => json[key] !== null ? '' : `  * \`${key}\`\n\n`).join('') || 'None'}
+//
+// `
+//       );
     });
   });
 }
