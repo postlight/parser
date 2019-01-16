@@ -88,7 +88,7 @@ describe('NYTimesExtractor', () => {
   });
 
   it('works with a feature story', async () => {
-    const html = fs.readFileSync('./fixtures/www.nytimes.com/1474061823854.html');
+    const html = fs.readFileSync('./fixtures/www.nytimes.com/1547598600341.html');
     const uri = 'http://www.nytimes.com/interactive/2016/09/15/arts/design/national-museum-of-african-american-history-and-culture.html';
 
     const { content, title, author } = await Mercury.parse(uri, html);
