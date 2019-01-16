@@ -17,16 +17,19 @@ execFile('find', ['fixtures', '-type', 'f'], (err, stdout) => {
 
   // iterate through fixtures for fixtures older than 2 weeks
   console.log('Finding fixtures to update...');
-  const fixturesToUpdate = fixtures.filter(fixture => {
+  const fixturesToUpdate = fixtures.map(fixture => {
     const timestamp = path.basename(fixture).split(/\.html$/)[0].trim();
     try {
       const date = new Date(parseInt(timestamp, 10));
-      return now - date > twoWeeks;
+      return { date, fixture }
     } catch (e) {
       // if fixture isn't a timestamp, ignore it
       return false;
     }
-  }).slice(0, 1);
+  }).filter(({ date }) => now - date > twoWeeks)
+    .sort(({ date: date1 }, { date: date2 }) => date1 - date2)
+    .map(({ fixture }) => fixture)
+    .slice(0, 1);
   console.log(`${fixturesToUpdate.length} fixtures are out of date`);
 
   // iterate through fixtures and extract their URLs.
