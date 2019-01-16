@@ -8,6 +8,7 @@ jobs:
       - run: "yarn install"
       - run: "yarn lint:ci"
       - run: "yarn build"
+      - run: "mkdir -p tmp/artifacts"
       - run: "yarn test:node -- --maxWorkers=4 --json --outputFile=tmp/artifacts/test-output.json"
       - run: 
           command: "./scripts/pr-parser-preview.sh"
