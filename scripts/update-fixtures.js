@@ -101,7 +101,7 @@ const updateFixture = (({ fixture, url, baseDomain }) => {
           }
 
           createAndPushBranch({ branchName, commitMessage })
-          createPR({ branchName, title: commitMessage })
+          setTimeout(() => createPR({ branchName, title: commitMessage }), 3000);
         });
       });
     }).catch(e => {
