@@ -8,8 +8,8 @@ jobs:
       - run: "yarn install"
       - run: "yarn lint:ci"
       - run: "yarn build"
-      - run: "yarn test:node -- --maxWorkers=4"
       - run: "./scripts/pr-parser-preview.sh"
+      - run: "yarn test:node -- --maxWorkers=4"
 
       - store_artifacts:
           path: tmp/artifacts
@@ -26,6 +26,14 @@ jobs:
       - run: "yarn test:web -- --maxWorkers=4"
       - run: "yarn build:web -- --maxWorkers=4"
 
+  update-fixtures:
+    docker:
+      - image: circleci/node:6.14-stretch
+    steps:
+      - checkout
+      - run: "yarn install"
+      - run: "node ./scripts/update-fixtures.js"
+
 
 workflows:
   version: 2
@@ -33,3 +41,15 @@ workflows:
     jobs:
       - test-node
       - test-web
+  # UNCOMMENT WHEN READY TO AUTOMATE THIS TASK
+  # scheduled_tasks:
+  #   triggers:
+  #     # run once per hour
+  #     - schedule:
+  #       cron: "0 * * * *"
+  #       filters:
+  #         branches:
+  #           only:
+  #             - master
+  #   jobs:
+  #     - update-fixtures
