@@ -9,7 +9,7 @@ jobs:
       - run: "yarn lint:ci"
       - run: "yarn build"
       - run: "./scripts/pr-parser-preview.sh"
-      - run: "yarn test:node -- --maxWorkers=4"
+      - run: "yarn test:node --maxWorkers=4"
 
       - store_artifacts:
           path: tmp/artifacts
@@ -20,12 +20,11 @@ jobs:
     steps:
       - checkout
       - run: "yarn install"
-      - run: "yarn add karma-cli --dev"
       # For some reason phantomjs-prebuild is failing w/yarn, but npm installing works
-      # - run: "npm install phantomjs-prebuilt"
-      # Switch to 7 and lint
-      - run: "yarn test:web -- --maxWorkers=4"
-      - run: "yarn build:web -- --maxWorkers=4"
+      - run: "npm install phantomjs-prebuilt"
+      - run: "yarn add karma-cli --dev"
+      - run: "yarn test:web --maxWorkers=4"
+      - run: "yarn build:web --maxWorkers=4"
 
   update-fixtures:
     docker:
