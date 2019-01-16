@@ -2,7 +2,7 @@ version: 2
 jobs:
   test-node:
     docker:
-      - image: circleci/node:6.14-stretch
+      - image: circleci/node:8
     steps:
       - checkout
       - run: "yarn install"
