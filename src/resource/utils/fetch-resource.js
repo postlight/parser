@@ -96,7 +96,7 @@ export default async function fetchResource(url, parsedUrl) {
     // Accept and decode gzip
     gzip: true,
     // Follow any redirect
-    followAllRedirects: false,
+    followAllRedirects: true,
   };
 
   const { response, body } = await get(options);
