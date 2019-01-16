@@ -20,6 +20,7 @@ jobs:
     steps:
       - checkout
       - run: "yarn install"
+      - run: "yarn add karma-cli --dev"
       # For some reason phantomjs-prebuild is failing w/yarn, but npm installing works
       - run: "npm install phantomjs-prebuilt"
       # Switch to 7 and lint
