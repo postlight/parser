@@ -13,7 +13,7 @@ function absolutize($, rootUrl, attr, $content) {
     if (url && !baseUrl) {
       absoluteUrl = URL.resolve(rootUrl, url);
     } else {
-      absoluteUrl = baseUrl + url;
+      absoluteUrl = URL.resolve(baseUrl, url);
     }
     setAttr(node, attr, absoluteUrl);
   });
