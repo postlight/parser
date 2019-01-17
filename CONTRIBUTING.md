@@ -22,7 +22,7 @@ of contribution and appreciate your help.
 Here are a few examples of what we consider a contribution:
 
 *   Updates to source code
-*   For Answering questions and chatting, contact [Cody Cowan](mailto:cody.cowan@postlight.com) directly
+*   For Answering questions and chatting, contact us on mercury@postlight.com
 *   Filing, organizing, and commenting on issues in the [issue tracker](https://github.com/postlight/mercury-parser/issues)
 *   Teaching others how to use Mercury
 *   Community building and outreach
