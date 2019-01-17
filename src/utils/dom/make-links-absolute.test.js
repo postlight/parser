@@ -11,7 +11,10 @@ describe('makeLinksAbsolute($)', () => {
 
     const result = $.html(makeLinksAbsolute($content, $, 'http://example.com'));
 
-    assert.equal(result, '<div><a href="http://example.com/#foo">bar</a></div>');
+    assert.equal(
+      result,
+      '<div><a href="http://example.com/#foo">bar</a></div>'
+    );
   });
 
   it('makes relative ./relative paths absolute', () => {
@@ -19,9 +22,14 @@ describe('makeLinksAbsolute($)', () => {
     const $ = cheerio.load(html);
     const $content = $('*').first();
 
-    const result = $.html(makeLinksAbsolute($content, $, 'http://example.com/baz/bat'));
+    const result = $.html(
+      makeLinksAbsolute($content, $, 'http://example.com/baz/bat')
+    );
 
-    assert.equal(result, '<div><a href="http://example.com/baz/foo/bar">bar</a></div>');
+    assert.equal(
+      result,
+      '<div><a href="http://example.com/baz/foo/bar">bar</a></div>'
+    );
   });
 
   it('makes relative /root/paths absolute', () => {
@@ -29,9 +37,14 @@ describe('makeLinksAbsolute($)', () => {
     const $ = cheerio.load(html);
     const $content = $('*').first();
 
-    const result = $.html(makeLinksAbsolute($content, $, 'http://example.com/baz/bat'));
+    const result = $.html(
+      makeLinksAbsolute($content, $, 'http://example.com/baz/bat')
+    );
 
-    assert.equal(result, '<div><a href="http://example.com/foo/bar">bar</a></div>');
+    assert.equal(
+      result,
+      '<div><a href="http://example.com/foo/bar">bar</a></div>'
+    );
   });
 
   it('makes relative srcs absolute', () => {

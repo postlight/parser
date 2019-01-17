@@ -23,34 +23,42 @@ describe('Mercury', () => {
     });
 
     it('does the whole thing', async () => {
-      const result =
-        await Mercury.parse('http://deadspin.com/remember-when-donald-trump-got-booed-for-butchering-ta-1788216229');
+      const result = await Mercury.parse(
+        'http://deadspin.com/remember-when-donald-trump-got-booed-for-butchering-ta-1788216229'
+      );
 
       assert.equal(typeof result, 'object');
       assert.equal(result.content.indexOf('score="') === -1, true);
     });
 
     it('does blogger', async () => {
-      const result =
-        await Mercury.parse('https://googleblog.blogspot.com/2016/08/onhub-turns-one-today.html');
+      const result = await Mercury.parse(
+        'https://googleblog.blogspot.com/2016/08/onhub-turns-one-today.html'
+      );
 
       assert.equal(typeof result, 'object');
     });
 
     it('does blogger', async () => {
-      const result = await Mercury.parse('https://googleblog.blogspot.com/2016/08/onhub-turns-one-today.html');
+      const result = await Mercury.parse(
+        'https://googleblog.blogspot.com/2016/08/onhub-turns-one-today.html'
+      );
 
       assert.equal(typeof result, 'object');
     });
 
     it('does wikipedia', async () => {
-      const result = await Mercury.parse('https://en.wikipedia.org/wiki/Brihadeeswarar_Temple_fire');
+      const result = await Mercury.parse(
+        'https://en.wikipedia.org/wiki/Brihadeeswarar_Temple_fire'
+      );
 
       assert.equal(typeof result, 'object');
     });
 
     it('does the nyt', async () => {
-      const result = await Mercury.parse('http://www.nytimes.com/2016/08/16/upshot/the-state-of-the-clinton-trump-race-is-it-over.html?_r=0');
+      const result = await Mercury.parse(
+        'http://www.nytimes.com/2016/08/16/upshot/the-state-of-the-clinton-trump-race-is-it-over.html?_r=0'
+      );
 
       assert.equal(typeof result, 'object');
       assert.equal(result.total_pages, 1);
@@ -58,12 +66,9 @@ describe('Mercury', () => {
 
     it('does ars pagination', async () => {
       jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000;
-      const url = 'http://arstechnica.com/gadgets/2016/08/the-connected-renter-how-to-make-your-apartment-smarter/';
-      const result = await Mercury.parse(
-        url,
-        null,
-        { fetchAllPages: true }
-      );
+      const url =
+        'http://arstechnica.com/gadgets/2016/08/the-connected-renter-how-to-make-your-apartment-smarter/';
+      const result = await Mercury.parse(url, null, { fetchAllPages: true });
 
       const { total_pages, pages_rendered } = result;
 

@@ -1,20 +1,14 @@
 export const MediumExtractor = {
   domain: 'medium.com',
 
-  supportedDomains: [
-    'trackchanges.postlight.com',
-  ],
+  supportedDomains: ['trackchanges.postlight.com'],
 
   title: {
-    selectors: [
-      'h1',
-    ],
+    selectors: ['h1'],
   },
 
   author: {
-    selectors: [
-      ['meta[name="author"]', 'value'],
-    ],
+    selectors: [['meta[name="author"]', 'value']],
   },
 
   content: {
@@ -28,13 +22,12 @@ export const MediumExtractor = {
     // before it's consumable content? E.g., unusual lazy loaded images
     transforms: {
       // Re-write lazy-loaded youtube videos
-      iframe: ($node) => {
-        const ytRe =
-          /https:\/\/i.embed.ly\/.+url=https:\/\/i\.ytimg\.com\/vi\/(\w+)\//;
+      iframe: $node => {
+        const ytRe = /https:\/\/i.embed.ly\/.+url=https:\/\/i\.ytimg\.com\/vi\/(\w+)\//;
         const thumb = decodeURIComponent($node.attr('data-thumbnail'));
 
         if (ytRe.test(thumb)) {
-          const [_, youtubeId] = thumb.match(ytRe) // eslint-disable-line
+          const [_, youtubeId] = thumb.match(ytRe); // eslint-disable-line
           $node.attr('src', `https://www.youtube.com/embed/${youtubeId}`);
           const $parent = $node.parents('figure');
           const $caption = $parent.find('figcaption');
@@ -43,7 +36,7 @@ export const MediumExtractor = {
       },
 
       // rewrite figures to pull out image and caption, remove rest
-      figure: ($node) => {
+      figure: $node => {
         // ignore if figure has an iframe
         if ($node.find('iframe').length > 0) return;
 
@@ -56,21 +49,15 @@ export const MediumExtractor = {
     // Is there anything that is in the result that shouldn't be?
     // The clean selectors will remove anything that matches from
     // the result
-    clean: [
-
-    ],
+    clean: [],
   },
 
   date_published: {
-    selectors: [
-      ['time[datetime]', 'datetime'],
-    ],
+    selectors: [['time[datetime]', 'datetime']],
   },
 
   lead_image_url: {
-    selectors: [
-      ['meta[name="og:image"]', 'value'],
-    ],
+    selectors: [['meta[name="og:image"]', 'value']],
   },
 
   dek: {

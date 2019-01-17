@@ -15,10 +15,10 @@ describe('WiredExtractor', () => {
     beforeAll(() => {
       url =
         'https://www.wired.com/2016/09/ode-rosetta-spacecraft-going-die-comet/';
-      const html =
-        fs.readFileSync('./fixtures/www.wired.com/1475256747028.html');
-      result =
-        Mercury.parse(url, html, { fallback: false });
+      const html = fs.readFileSync(
+        './fixtures/www.wired.com/1475256747028.html'
+      );
+      result = Mercury.parse(url, html, { fallback: false });
     });
 
     it('is selected properly', async () => {
@@ -38,7 +38,10 @@ describe('WiredExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(title, 'An Ode to the Rosetta Spacecraft as It Flings Itself Into a Comet');
+      assert.equal(
+        title,
+        'An Ode to the Rosetta Spacecraft as It Flings Itself Into a Comet'
+      );
     });
 
     it('returns the author', async () => {
@@ -68,7 +71,10 @@ describe('WiredExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(lead_image_url, 'https://www.wired.com/wp-content/uploads/2016/09/Rosetta_impact-1-1200x630.jpg');
+      assert.equal(
+        lead_image_url,
+        'https://www.wired.com/wp-content/uploads/2016/09/Rosetta_impact-1-1200x630.jpg'
+      );
     });
 
     it('returns the content', async () => {
@@ -80,11 +86,19 @@ describe('WiredExtractor', () => {
 
       const $ = cheerio.load(content || '');
 
-      const first13 = excerptContent($('*').first().text(), 13);
+      const first13 = excerptContent(
+        $('*')
+          .first()
+          .text(),
+        13
+      );
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(first13, 'Today, the European Space Agency’s Rosetta spacecraft will engage its thrusters for one');
+      assert.equal(
+        first13,
+        'Today, the European Space Agency’s Rosetta spacecraft will engage its thrusters for one'
+      );
     });
   });
 });

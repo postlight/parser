@@ -14,10 +14,10 @@ describe('WwwBustleComExtractor', () => {
     beforeAll(() => {
       url =
         'https://www.bustle.com/articles/194709-13-ways-to-compliment-women-in-the-most-empowering-transformative-way-possible';
-      const html =
-        fs.readFileSync('./fixtures/www.bustle.com/1481129185239.html');
-      result =
-        Mercury.parse(url, html, { fallback: false });
+      const html = fs.readFileSync(
+        './fixtures/www.bustle.com/1481129185239.html'
+      );
+      result = Mercury.parse(url, html, { fallback: false });
     });
 
     it('is selected properly', () => {
@@ -35,7 +35,10 @@ describe('WwwBustleComExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(title, '13 Ways To Compliment Women In The Most Empowering, Transformative Way Possible');
+      assert.equal(
+        title,
+        '13 Ways To Compliment Women In The Most Empowering, Transformative Way Possible'
+      );
     });
 
     it('returns the author', async () => {
@@ -65,7 +68,10 @@ describe('WwwBustleComExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(lead_image_url, 'https://typeset-beta.imgix.net/rehost/2016/12/2/2fa248d4-0035-403f-a18d-3aeca6929b98.jpg?w=1200&h=630&fit=crop&crop=faces&auto=format&q=70');
+      assert.equal(
+        lead_image_url,
+        'https://typeset-beta.imgix.net/rehost/2016/12/2/2fa248d4-0035-403f-a18d-3aeca6929b98.jpg?w=1200&h=630&fit=crop&crop=faces&auto=format&q=70'
+      );
     });
 
     it('returns the content', async () => {
@@ -77,11 +83,19 @@ describe('WwwBustleComExtractor', () => {
 
       const $ = cheerio.load(content || '');
 
-      const first13 = excerptContent($('*').first().text(), 13);
+      const first13 = excerptContent(
+        $('*')
+          .first()
+          .text(),
+        13
+      );
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(first13, 'When I log into my Facebook these days, I\'m pretty much prepared for');
+      assert.equal(
+        first13,
+        "When I log into my Facebook these days, I'm pretty much prepared for"
+      );
     });
   });
 });

@@ -2,15 +2,11 @@ export const WwwHuffingtonpostComExtractor = {
   domain: 'www.huffingtonpost.com',
 
   title: {
-    selectors: [
-      'h1.headline__title',
-    ],
+    selectors: ['h1.headline__title'],
   },
 
   author: {
-    selectors: [
-      'span.author-card__details__name',
-    ],
+    selectors: ['span.author-card__details__name'],
   },
 
   date_published: {
@@ -21,21 +17,15 @@ export const WwwHuffingtonpostComExtractor = {
   },
 
   dek: {
-    selectors: [
-      'h2.headline__subtitle',
-    ],
+    selectors: ['h2.headline__subtitle'],
   },
 
   lead_image_url: {
-    selectors: [
-      ['meta[name="og:image"]', 'value'],
-    ],
+    selectors: [['meta[name="og:image"]', 'value']],
   },
 
   content: {
-    selectors: [
-      'div.entry__body',
-    ],
+    selectors: ['div.entry__body'],
 
     defaultCleaner: false,
 

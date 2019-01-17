@@ -14,10 +14,8 @@ describe('WwwAolComExtractor', () => {
     beforeAll(() => {
       url =
         'http://www.aol.com/article/news/2016/12/01/son-of-slain-police-officer-given-teddy-bears-made-from-dads-un/21618553/';
-      const html =
-        fs.readFileSync('./fixtures/www.aol.com/1480618816916.html');
-      result =
-        Mercury.parse(url, html, { fallback: false });
+      const html = fs.readFileSync('./fixtures/www.aol.com/1480618816916.html');
+      result = Mercury.parse(url, html, { fallback: false });
     });
     it('is selected properly', async () => {
       // This test should be passing by default.
@@ -34,7 +32,10 @@ describe('WwwAolComExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(title, 'Son of slain police officer given teddy bears made from dad\'s uniform');
+      assert.equal(
+        title,
+        "Son of slain police officer given teddy bears made from dad's uniform"
+      );
     });
 
     it('returns the author', async () => {
@@ -64,7 +65,10 @@ describe('WwwAolComExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(lead_image_url, 'http://o.aolcdn.com/dims-shared/dims3/GLOB/crop/475x312+0+0/resize/1028x675!/format/jpg/quality/85/http%3A%2F%2Fo.aolcdn.com%2Fhss%2Fstorage%2Fmidas%2Fc8242ab14e089c284b031379d025d64%2F204656928%2FScreen%2BShot%2B2016-12-01%2Bat%2B1.15.51%2BPM.png');
+      assert.equal(
+        lead_image_url,
+        'http://o.aolcdn.com/dims-shared/dims3/GLOB/crop/475x312+0+0/resize/1028x675!/format/jpg/quality/85/http%3A%2F%2Fo.aolcdn.com%2Fhss%2Fstorage%2Fmidas%2Fc8242ab14e089c284b031379d025d64%2F204656928%2FScreen%2BShot%2B2016-12-01%2Bat%2B1.15.51%2BPM.png'
+      );
     });
 
     it('returns the content', async () => {
@@ -76,11 +80,19 @@ describe('WwwAolComExtractor', () => {
 
       const $ = cheerio.load(content || '');
 
-      const first13 = excerptContent($('*').first().text(), 13);
+      const first13 = excerptContent(
+        $('*')
+          .first()
+          .text(),
+        13
+      );
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(first13, 'ST. LOUIS, MO (KTVI) – Amid unimaginable grief, the widow of slain Saint');
+      assert.equal(
+        first13,
+        'ST. LOUIS, MO (KTVI) – Amid unimaginable grief, the widow of slain Saint'
+      );
     });
   });
 });

@@ -14,10 +14,8 @@ describe('WwwCnnComExtractor', () => {
     beforeAll(() => {
       url =
         'http://www.cnn.com/2016/11/29/politics/donald-trump-transition-presidency/index.html';
-      const html =
-        fs.readFileSync('./fixtures/www.cnn.com/1480458253239.html');
-      result =
-        Mercury.parse(url, html, { fallback: false });
+      const html = fs.readFileSync('./fixtures/www.cnn.com/1480458253239.html');
+      result = Mercury.parse(url, html, { fallback: false });
     });
 
     it('is selected properly', async () => {
@@ -35,7 +33,7 @@ describe('WwwCnnComExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(title, 'Why Donald Trump won\'t change');
+      assert.equal(title, "Why Donald Trump won't change");
     });
 
     it('returns the author', async () => {
@@ -65,7 +63,10 @@ describe('WwwCnnComExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(lead_image_url, 'http://i2.cdn.cnn.com/cnnnext/dam/assets/161128072443-01-trump-1128-super-tease.jpg');
+      assert.equal(
+        lead_image_url,
+        'http://i2.cdn.cnn.com/cnnnext/dam/assets/161128072443-01-trump-1128-super-tease.jpg'
+      );
     });
 
     it('returns the content', async () => {
@@ -77,11 +78,19 @@ describe('WwwCnnComExtractor', () => {
 
       const $ = cheerio.load(content || '');
 
-      const first13 = excerptContent($('*').first().text(), 13);
+      const first13 = excerptContent(
+        $('*')
+          .first()
+          .text(),
+        13
+      );
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(first13, '(CNN)Winning the presidency didn\'t change Donald Trump -- and it\'s increasingly clear that');
+      assert.equal(
+        first13,
+        "(CNN)Winning the presidency didn't change Donald Trump -- and it's increasingly clear that"
+      );
       assert.equal($('.media__video--thumbnail').length, 1);
     });
   });

@@ -2,14 +2,11 @@ import assert from 'assert';
 import cheerio from 'cheerio';
 
 import HTML from './fixtures/html';
-import {
-  getOrInitScore,
-  getScore,
-} from './index';
+import { getOrInitScore, getScore } from './index';
 
 describe('getOrInitScore(node, $)', () => {
   describe('when score set', () => {
-    it('returns score if node\'s score already set', () => {
+    it("returns score if node's score already set", () => {
       const html = '<p score="40">Foo</p>';
       const $ = cheerio.load(html);
       const node = $('p').first();

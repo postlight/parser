@@ -10,7 +10,8 @@ describe('scoreLinks(links)', () => {
 
     const $ = cheerio.load(html);
     const links = $('a[href]').toArray();
-    const url = 'http://arstechnica.com/gadgets/2016/08/the-connected-renter-how-to-make-your-apartment-smarter/';
+    const url =
+      'http://arstechnica.com/gadgets/2016/08/the-connected-renter-how-to-make-your-apartment-smarter/';
 
     const scoredPages = scoreLinks({
       links,
@@ -27,7 +28,8 @@ describe('scoreLinks(links)', () => {
 
     const $ = cheerio.load(html);
     const links = $('a[href]').toArray();
-    const url = 'http://arstechnica.com/gadgets/2016/08/the-connected-renter-how-to-make-your-apartment-smarter/';
+    const url =
+      'http://arstechnica.com/gadgets/2016/08/the-connected-renter-how-to-make-your-apartment-smarter/';
 
     const scoredPages = scoreLinks({
       links,

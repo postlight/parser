@@ -27,20 +27,21 @@ const GenericLeadImageUrlExtractor = {
   extract({ $, content, metaCache, html }) {
     let cleanUrl;
     if (!$.browser && $('head').length === 0) {
-      $('*').first().prepend(html);
+      $('*')
+        .first()
+        .prepend(html);
     }
 
     // Check to see if we have a matching meta tag that we can make use of.
     // Moving this higher because common practice is now to use large
     // images on things like Open Graph or Twitter cards.
     // images usually have for things like Open Graph.
-    const imageUrl =
-      extractFromMeta(
-        $,
-        LEAD_IMAGE_URL_META_TAGS,
-        metaCache,
-        false
-      );
+    const imageUrl = extractFromMeta(
+      $,
+      LEAD_IMAGE_URL_META_TAGS,
+      metaCache,
+      false
+    );
 
     if (imageUrl) {
       cleanUrl = cleanImage(imageUrl);
@@ -71,10 +72,10 @@ const GenericLeadImageUrlExtractor = {
       imgScores[src] = score;
     });
 
-    const [topUrl, topScore] =
-      Reflect.ownKeys(imgScores).reduce((acc, key) =>
-        imgScores[key] > acc[1] ? [key, imgScores[key]] : acc
-      , [null, 0]);
+    const [topUrl, topScore] = Reflect.ownKeys(imgScores).reduce(
+      (acc, key) => (imgScores[key] > acc[1] ? [key, imgScores[key]] : acc),
+      [null, 0]
+    );
 
     if (topScore > 0) {
       cleanUrl = cleanImage(topUrl);

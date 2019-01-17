@@ -19,19 +19,19 @@ export default function extractFromMeta(
     // Get the unique value of every matching node, in case there
     // are two meta tags with the same name and value.
     // Remove empty values.
-    const values =
-      nodes.map((index, node) => $(node).attr(value))
-           .toArray()
-           .filter(text => text !== '');
+    const values = nodes
+      .map((index, node) => $(node).attr(value))
+      .toArray()
+      .filter(text => text !== '');
 
-      // If we have more than one value for the same name, we have a
-      // conflict and can't trust any of them. Skip this name. If we have
-      // zero, that means our meta tags had no values. Skip this name
-      // also.
+    // If we have more than one value for the same name, we have a
+    // conflict and can't trust any of them. Skip this name. If we have
+    // zero, that means our meta tags had no values. Skip this name
+    // also.
     if (values.length === 1) {
       let metaValue;
-        // Meta values that contain HTML should be stripped, as they
-        // weren't subject to cleaning previously.
+      // Meta values that contain HTML should be stripped, as they
+      // weren't subject to cleaning previously.
       if (cleanTags) {
         metaValue = stripTags(values[0], $);
       } else {
