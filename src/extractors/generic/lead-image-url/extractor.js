@@ -1,7 +1,10 @@
 import { extractFromMeta } from 'utils/dom';
 import { cleanImage } from 'cleaners';
 
-import { LEAD_IMAGE_URL_META_TAGS, LEAD_IMAGE_URL_SELECTORS } from './constants';
+import {
+  LEAD_IMAGE_URL_META_TAGS,
+  LEAD_IMAGE_URL_SELECTORS,
+} from './constants';
 
 import {
   scoreImageUrl,
@@ -33,7 +36,12 @@ const GenericLeadImageUrlExtractor = {
     // Moving this higher because common practice is now to use large
     // images on things like Open Graph or Twitter cards.
     // images usually have for things like Open Graph.
-    const imageUrl = extractFromMeta($, LEAD_IMAGE_URL_META_TAGS, metaCache, false);
+    const imageUrl = extractFromMeta(
+      $,
+      LEAD_IMAGE_URL_META_TAGS,
+      metaCache,
+      false
+    );
 
     if (imageUrl) {
       cleanUrl = cleanImage(imageUrl);

@@ -12,7 +12,8 @@ describe('ForwardComExtractor', () => {
     let result;
     let url;
     beforeAll(() => {
-      url = 'http://forward.com/schmooze/358592/why-does-slack-want-me-to-say-hummus/';
+      url =
+        'http://forward.com/schmooze/358592/why-does-slack-want-me-to-say-hummus/';
       const html = fs.readFileSync('./fixtures/forward.com/1488392273490.html');
       result = Mercury.parse(url, html, { fallback: false });
     });
@@ -32,7 +33,10 @@ describe('ForwardComExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(title, 'The Adorable Reason You Can Set Your Alert Sound to “Hummus” on Slack');
+      assert.equal(
+        title,
+        'The Adorable Reason You Can Set Your Alert Sound to “Hummus” on Slack'
+      );
     });
 
     it('returns the author', async () => {

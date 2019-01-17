@@ -27,7 +27,20 @@ export const SEC_DATE_STRING = /^\d{10}$/i;
 export const CLEAN_DATE_STRING_RE = /^\s*published\s*:?\s*(.*)/i;
 export const TIME_MERIDIAN_SPACE_RE = /(.*\d)(am|pm)(.*)/i;
 export const TIME_MERIDIAN_DOTS_RE = /\.m\./i;
-const months = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
+const months = [
+  'jan',
+  'feb',
+  'mar',
+  'apr',
+  'may',
+  'jun',
+  'jul',
+  'aug',
+  'sep',
+  'oct',
+  'nov',
+  'dec',
+];
 const allMonths = months.join('|');
 const timestamp1 = '[0-9]{1,2}:[0-9]{2,2}( ?[ap].?m.?)?';
 const timestamp2 = '[0-9]{1,2}[/-][0-9]{1,2}[/-][0-9]{2,4}';

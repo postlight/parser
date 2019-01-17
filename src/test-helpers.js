@@ -44,7 +44,7 @@ export function record(name, options = {}) {
       }
     },
 
-    after: (done) => {
+    after: done => {
       if (!has_fixtures && !cheerio.browser) {
         has_fixtures = nock.recorder.play();
         // eslint-disable-next-line no-console

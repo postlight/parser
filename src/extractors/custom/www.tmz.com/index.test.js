@@ -32,7 +32,10 @@ describe('WwwTmzComExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(title, "Prince -- Woman Warns Estate ... Step Aside, I'm His Wife!");
+      assert.equal(
+        title,
+        "Prince -- Woman Warns Estate ... Step Aside, I'm His Wife!"
+      );
     });
 
     it('returns the author', async () => {

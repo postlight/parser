@@ -13,7 +13,8 @@ describe('GenericContentExtractor', () => {
         GenericContentExtractor.extract({
           $: null,
           html,
-          url: 'http://www.vulture.com/2016/08/dc-comics-greg-berlanti-c-v-r.html',
+          url:
+            'http://www.vulture.com/2016/08/dc-comics-greg-berlanti-c-v-r.html',
         })
       );
 
