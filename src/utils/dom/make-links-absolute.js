@@ -14,10 +14,10 @@ function absolutize($, rootUrl, attr, $content) {
   });
 }
 
-function absolutizeSet($, rootUrl, attr, $content) {
-  $(`[${attr}]`, $content).each((_, node) => {
+function absolutizeSet($, rootUrl, $content) {
+  $('[srcset]', $content).each((_, node) => {
     const attrs = getAttrs(node);
-    const urlSet = attrs[attr];
+    const urlSet = attrs.srcset;
 
     if (urlSet) {
       // a comma should be considered part of the candidate URL unless preceded by a descriptor
@@ -32,14 +32,14 @@ function absolutizeSet($, rootUrl, attr, $content) {
         return parts.join(' ');
       });
       const absoluteUrlSet = [...new Set(absoluteCandidates)].join(', ');
-      setAttr(node, attr, absoluteUrlSet);
+      setAttr(node, 'srcset', absoluteUrlSet);
     }
   });
 }
 
 export default function makeLinksAbsolute($content, $, url) {
   ['href', 'src'].forEach(attr => absolutize($, url, attr, $content));
-  ['srcset'].forEach(attr => absolutizeSet($, url, attr, $content));
+  absolutizeSet($, url, $content);
 
   return $content;
 }
