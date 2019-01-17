@@ -3,8 +3,7 @@ import fs from 'fs';
 import cheerio from 'cheerio';
 
 import { assertClean } from 'test-helpers';
-import {
-  default as RootExtractor,
+import RootExtractor, {
   select,
   cleanBySelectors,
   transformElements,

@@ -4,17 +4,20 @@
     "transform-es2015-destructuring",
     "transform-object-rest-spread",
     "transform-async-to-generator",
-    ["module-resolver", {
-      "root": ["./src"],
-      "alias": {
-        "./utils": "utils",
-        "./cleaners": "cleaners",
-        "./resource": "resource",
-        "./extractors": "extractors",
-        "./test-helpers.js": "test-helpers",
-        "./mercury.js": "mercury"
+    [
+      "module-resolver",
+      {
+        "root": ["./src"],
+        "alias": {
+          "./utils": "utils",
+          "./cleaners": "cleaners",
+          "./resource": "resource",
+          "./extractors": "extractors",
+          "./test-helpers.js": "test-helpers",
+          "./mercury.js": "mercury"
+        }
       }
-    }]
+    ]
   ],
   "env": {
     "development": {

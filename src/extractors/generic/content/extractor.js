@@ -47,6 +47,7 @@ const GenericContentExtractor = {
 
     // We didn't succeed on first pass, one by one disable our
     // extraction opts and try again.
+    // eslint-disable-next-line no-restricted-syntax
     for (const key of Reflect.ownKeys(opts).filter(k => opts[k] === true)) {
       opts[key] = false;
       $ = cheerio.load(html);

@@ -78,6 +78,7 @@ export class MockDomNode {
     this.attributes.pop();
     this.attributes.push({ name: key, value: val });
   }
+
   removeAttribute() {
     this.attributes.pop();
   }

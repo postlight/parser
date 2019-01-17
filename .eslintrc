@@ -1,17 +1,15 @@
 {
   "parser": "babel-eslint",
   "extends": ["airbnb", "prettier"],
-  "plugins": [
-    "babel"
-  ],
+  "plugins": ["babel"],
   "globals": {
-    "describe",
-    "it",
-    "fit",
-    "jasmine",
-    "beforeEach",
-    "beforeAll",
-    "afterAll",
+    "describe": true,
+    "it": true,
+    "fit": true,
+    "jasmine": true,
+    "beforeEach": true,
+    "beforeAll": true,
+    "afterAll": true
   },
   "rules": {
     "no-param-reassign": 0,
@@ -22,19 +20,11 @@
     "func-names": 0,
     "no-confusing-arrow": 0,
     "camelcase": 0,
-    "no-multiple-empty-lines": [
-      "error", {"max": 1, "maxEOF": 0, "maxBOF": 0}
-    ],
-  },
-  "options": {
-    "no-multiple-empty-lines": {
-      "max": 1,
-      "maxEOF": 0,
-    },
+    "no-multiple-empty-lines": ["error", { "max": 1, "maxEOF": 0, "maxBOF": 0 }]
   },
   "settings": {
     "import/resolver": {
       "babel-module": {}
     }
-  },
+  }
 }
