@@ -91,7 +91,9 @@ describe('makeLinksAbsolute($)', () => {
       const $ = cheerio.load(html);
       const $content = $('*').first();
 
-      const result = $.html(makeLinksAbsolute($content, $, 'http://example.com'));
+      const result = $.html(
+        makeLinksAbsolute($content, $, 'http://example.com')
+      );
 
       assert.equal(
         result,
@@ -117,7 +119,9 @@ describe('makeLinksAbsolute($)', () => {
       const $ = cheerio.load(html);
       const $content = $('*').first();
 
-      const result = $.html(makeLinksAbsolute($content, $, 'http://example.com'));
+      const result = $.html(
+        makeLinksAbsolute($content, $, 'http://example.com')
+      );
 
       assert.equal(
         result,
@@ -142,7 +146,9 @@ describe('makeLinksAbsolute($)', () => {
       const $ = cheerio.load(html);
       const $content = $('*').first();
 
-      const result = $.html(makeLinksAbsolute($content, $, 'http://example.com'));
+      const result = $.html(
+        makeLinksAbsolute($content, $, 'http://example.com')
+      );
 
       assert.equal(
         result,
@@ -163,7 +169,9 @@ describe('makeLinksAbsolute($)', () => {
       const $ = cheerio.load(html);
       const $content = $('*').first();
 
-      const result = $.html(makeLinksAbsolute($content, $, 'http://example.com'));
+      const result = $.html(
+        makeLinksAbsolute($content, $, 'http://example.com')
+      );
 
       assert.equal(
         result,
@@ -182,7 +190,9 @@ describe('makeLinksAbsolute($)', () => {
       const $ = cheerio.load(html);
       const $content = $('*').first();
 
-      const result = $.html(makeLinksAbsolute($content, $, 'http://example.com'));
+      const result = $.html(
+        makeLinksAbsolute($content, $, 'http://example.com')
+      );
 
       assert.equal(
         result,
@@ -199,7 +209,9 @@ describe('makeLinksAbsolute($)', () => {
       const $ = cheerio.load(html);
       const $content = $('*').first();
 
-      const result = $.html(makeLinksAbsolute($content, $, 'https://media.newyorker.com/'));
+      const result = $.html(
+        makeLinksAbsolute($content, $, 'https://media.newyorker.com/')
+      );
 
       assert.equal(
         result,
