@@ -3,18 +3,16 @@ import RootExtractor from 'extractors/root-extractor';
 import GenericExtractor from 'extractors/generic';
 import Resource from 'resource';
 
-export default async function collectAllPages(
-  {
-    next_page_url,
-    html,
-    $,
-    metaCache,
-    result,
-    Extractor,
-    title,
-    url,
-  }
-) {
+export default async function collectAllPages({
+  next_page_url,
+  html,
+  $,
+  metaCache,
+  result,
+  Extractor,
+  title,
+  url,
+}) {
   // At this point, we've fetched just the first page
   let pages = 1;
   const previousUrls = [removeAnchor(url)];
@@ -41,13 +39,17 @@ export default async function collectAllPages(
     previousUrls.push(next_page_url);
     result = {
       ...result,
-      content: `${result.content}<hr><h4>Page ${pages}</h4>${nextPageResult.content}`,
+      content: `${result.content}<hr><h4>Page ${pages}</h4>${
+        nextPageResult.content
+      }`,
     };
 
     next_page_url = nextPageResult.next_page_url;
   }
 
-  const word_count = GenericExtractor.word_count({ content: `<div>${result.content}</div>` });
+  const word_count = GenericExtractor.word_count({
+    content: `<div>${result.content}</div>`,
+  });
   return {
     ...result,
     total_pages: pages,

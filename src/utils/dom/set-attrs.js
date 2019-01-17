@@ -6,7 +6,7 @@ export default function setAttrs(node, attrs) {
       node.removeAttribute(node.attributes[0].name);
     }
 
-    Reflect.ownKeys(attrs).forEach((key) => {
+    Reflect.ownKeys(attrs).forEach(key => {
       node.setAttribute(key, attrs[key]);
     });
   }

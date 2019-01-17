@@ -2,9 +2,7 @@ import assert from 'assert';
 import cheerio from 'cheerio';
 
 import HTML from './fixtures/get-weight';
-import {
-  getWeight,
-} from './index';
+import { getWeight } from './index';
 
 describe('Generic Extractor Utils', () => {
   describe('getWeight(node)', () => {

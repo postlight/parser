@@ -4,10 +4,7 @@ import fs from 'fs';
 
 import HTML from './fixtures/html';
 
-import {
-  scoreContent,
-  getScore,
-} from './index';
+import { scoreContent, getScore } from './index';
 
 // TODO: Walk through these and sanity check my scores
 // Commented out scores were what I expected, but I was also
@@ -78,7 +75,12 @@ describe('scoreContent($, weightNodes)', () => {
     let $ = cheerio.load(html);
     $ = scoreContent($);
 
-    assert.equal($('p').first().attr('score'), '5');
+    assert.equal(
+      $('p')
+        .first()
+        .attr('score'),
+      '5'
+    );
     assert.equal($('div div').attr('score'), '30');
   });
 });

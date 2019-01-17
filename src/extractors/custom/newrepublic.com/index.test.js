@@ -14,10 +14,10 @@ describe('NewrepublicComExtractor', () => {
     beforeAll(() => {
       url =
         'https://newrepublic.com/article/138859/fantastic-beasts-nice-place-visit';
-      const html =
-        fs.readFileSync('./fixtures/newrepublic.com/1480434805231.html');
-      result =
-        Mercury.parse(url, html, { fallback: false });
+      const html = fs.readFileSync(
+        './fixtures/newrepublic.com/1480434805231.html'
+      );
+      result = Mercury.parse(url, html, { fallback: false });
     });
     it('is selected properly', async () => {
       // This test should be passing by default.
@@ -64,7 +64,10 @@ describe('NewrepublicComExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(dek, 'The glorious world-building in the first Harry Potter spin-off isn\'t enough to keep viewers coming back.');
+      assert.equal(
+        dek,
+        "The glorious world-building in the first Harry Potter spin-off isn't enough to keep viewers coming back."
+      );
     });
 
     it('returns the lead_image_url', async () => {
@@ -74,7 +77,10 @@ describe('NewrepublicComExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(lead_image_url, 'https://images.newrepublic.com/29020c1e6b108813cf65b54487ad2b5a65aa6079.jpeg?w=1109&h=577&crop=faces&fit=crop&fm=jpg');
+      assert.equal(
+        lead_image_url,
+        'https://images.newrepublic.com/29020c1e6b108813cf65b54487ad2b5a65aa6079.jpeg?w=1109&h=577&crop=faces&fit=crop&fm=jpg'
+      );
     });
 
     it('article returns the content', async () => {
@@ -86,11 +92,19 @@ describe('NewrepublicComExtractor', () => {
 
       const $ = cheerio.load(content || '');
 
-      const first13 = excerptContent($('*').first().text(), 13);
+      const first13 = excerptContent(
+        $('*')
+          .first()
+          .text(),
+        13
+      );
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(first13, 'The eight Harry Potter films, which stretched out over nearly a decade, had');
+      assert.equal(
+        first13,
+        'The eight Harry Potter films, which stretched out over nearly a decade, had'
+      );
     });
   });
 
@@ -100,8 +114,9 @@ describe('NewrepublicComExtractor', () => {
     beforeAll(async () => {
       url =
         'https://newrepublic.com/minutes/139022/maybe-donald-trumps-twitter-account-just-smoke-screen';
-      const html =
-        fs.readFileSync('./fixtures/newrepublic.com/1480446502259.html');
+      const html = fs.readFileSync(
+        './fixtures/newrepublic.com/1480446502259.html'
+      );
       result = await Mercury.parse(url, html, { fallback: false });
     });
 
@@ -112,7 +127,10 @@ describe('NewrepublicComExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(title, 'Maybe Donald Trump’s Twitter account is more than just a smoke screen.');
+      assert.equal(
+        title,
+        'Maybe Donald Trump’s Twitter account is more than just a smoke screen.'
+      );
     });
 
     it('article returns the author', async () => {
@@ -134,11 +152,19 @@ describe('NewrepublicComExtractor', () => {
 
       const $ = cheerio.load(content || '');
 
-      const first13 = excerptContent($('*').first().text(), 13);
+      const first13 = excerptContent(
+        $('*')
+          .first()
+          .text(),
+        13
+      );
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(first13, 'It’s been one of the most persistent narratives of the last year: Whenever');
+      assert.equal(
+        first13,
+        'It’s been one of the most persistent narratives of the last year: Whenever'
+      );
     });
   });
 });

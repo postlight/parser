@@ -4,9 +4,8 @@
 //   require('phantomjs-prebuilt').path = './node_modules/.bin/phantomjs';
 // }
 
-module.exports = function (config) {
+module.exports = function(config) {
   config.set({
-
     // base path that will be used to resolve all patterns (eg. files, exclude)
     basePath: '',
 
@@ -23,8 +22,7 @@ module.exports = function (config) {
     ],
 
     // list of files to exclude
-    exclude: [
-    ],
+    exclude: [],
 
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
@@ -34,10 +32,7 @@ module.exports = function (config) {
 
     browserify: {
       debug: true,
-      transform: [
-        'brfs-babel',
-        'babelify',
-      ],
+      transform: ['brfs-babel', 'babelify'],
     },
 
     // test results reporter to use
@@ -61,7 +56,7 @@ module.exports = function (config) {
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
     // browsers: ['PhantomJS'],
-    browsers: [(process.env.CI ? 'PhantomJS' : 'Chrome')],
+    browsers: [process.env.CI ? 'PhantomJS' : 'Chrome'],
     // browsers: ['Chrome'],
 
     // Continuous Integration mode
@@ -71,6 +66,5 @@ module.exports = function (config) {
     // Concurrency level
     // how many browser should be started simultaneous
     concurrency: Infinity,
-
   });
 };

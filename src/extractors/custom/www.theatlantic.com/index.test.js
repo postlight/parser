@@ -14,10 +14,10 @@ describe('AtlanticExtractor', () => {
     beforeAll(() => {
       url =
         'http://www.theatlantic.com/technology/archive/2016/09/why-new-yorkers-got-a-push-alert-about-a-manhunt/500591/';
-      const html =
-        fs.readFileSync('./fixtures/www.theatlantic.com/1474321707642.html');
-      result =
-        Mercury.parse(url, html, { fallback: false });
+      const html = fs.readFileSync(
+        './fixtures/www.theatlantic.com/1474321707642.html'
+      );
+      result = Mercury.parse(url, html, { fallback: false });
     });
 
     it('is selected properly', async () => {
@@ -36,12 +36,16 @@ describe('AtlanticExtractor', () => {
       // your parser as possible.
       const { content, title, author } = await result;
       const $ = cheerio.load(content);
-      const text = $('*').first()
+      const text = $('*')
+        .first()
         .text()
         .trim()
         .slice(0, 20);
 
-      assert.equal(title, 'Why New Yorkers Received a Push Alert About a Manhunt');
+      assert.equal(
+        title,
+        'Why New Yorkers Received a Push Alert About a Manhunt'
+      );
       assert.equal(author, 'Kaveh Waddell');
       assert.equal(text, 'New York police offi');
     });

@@ -35,7 +35,7 @@ export function validateResponse(response, parseNon2xx = false) {
   // in tests
   if (
     (response.statusMessage && response.statusMessage !== 'OK') ||
-      response.statusCode !== 200
+    response.statusCode !== 200
   ) {
     if (!response.statusCode) {
       throw new Error(
@@ -43,7 +43,9 @@ export function validateResponse(response, parseNon2xx = false) {
       );
     } else if (!parseNon2xx) {
       throw new Error(
-        `Resource returned a response status code of ${response.statusCode} and resource was instructed to reject non-2xx level status codes.`
+        `Resource returned a response status code of ${
+          response.statusCode
+        } and resource was instructed to reject non-2xx level status codes.`
       );
     }
   }
@@ -73,7 +75,10 @@ export function validateResponse(response, parseNon2xx = false) {
 // Grabs the last two pieces of the URL and joins them back together
 // This is to get the 'livejournal.com' from 'erotictrains.livejournal.com'
 export function baseDomain({ host }) {
-  return host.split('.').slice(-2).join('.');
+  return host
+    .split('.')
+    .slice(-2)
+    .join('.');
 }
 
 // Set our response attribute to the result of fetching our URL.

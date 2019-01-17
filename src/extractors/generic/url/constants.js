@@ -1,3 +1,1 @@
-export const CANONICAL_META_SELECTORS = [
-  'og:url',
-];
+export const CANONICAL_META_SELECTORS = ['og:url'];

@@ -3,7 +3,10 @@ const page = require('webpage').create();
 const system = require('system');
 const args = system.args;
 
-const fixtures = args.slice(1)[0].slice(0, -1).split(',');
+const fixtures = args
+  .slice(1)[0]
+  .slice(0, -1)
+  .split(',');
 const totalRenders = fixtures.length;
 
 var renderCount = 0;
@@ -17,12 +20,13 @@ function pageRenderComplete() {
 }
 
 function capturePage() {
-  const fixturePath = fixtures[renderCount]
+  const fixturePath = fixtures[renderCount];
   page.viewportSize = { width: 1366, height: 768 };
 
   page.open(fixturePath, function() {
     // set default background to white (otherwise can sometimes get transparent bg in png
-    const script = "function() { \
+    const script =
+      "function() { \
       var style = document.createElement('style'); \
       var text = document.createTextNode('body { background: #fff }'); \
       style.setAttribute('type', 'text/css'); \

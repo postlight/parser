@@ -2,28 +2,19 @@ export const WwwCnnComExtractor = {
   domain: 'www.cnn.com',
 
   title: {
-    selectors: [
-      'h1.pg-headline',
-      'h1',
-    ],
+    selectors: ['h1.pg-headline', 'h1'],
   },
 
   author: {
-    selectors: [
-      '.metadata__byline__author',
-    ],
+    selectors: ['.metadata__byline__author'],
   },
 
   date_published: {
-    selectors: [
-      ['meta[name="pubdate"]', 'value'],
-    ],
+    selectors: [['meta[name="pubdate"]', 'value']],
   },
 
   lead_image_url: {
-    selectors: [
-      ['meta[name="og:image"]', 'value'],
-    ],
+    selectors: [['meta[name="og:image"]', 'value']],
   },
 
   content: {
@@ -38,7 +29,7 @@ export const WwwCnnComExtractor = {
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images
     transforms: {
-      '.zn-body__paragraph, .el__leafmedia--sourced-paragraph': ($node) => {
+      '.zn-body__paragraph, .el__leafmedia--sourced-paragraph': $node => {
         const $text = $node.html();
         if ($text) {
           return 'p';
@@ -49,22 +40,26 @@ export const WwwCnnComExtractor = {
 
       // this transform cleans the short, all-link sections linking
       // to related content but not marked as such in any way.
-      '.zn-body__paragraph': ($node) => {
+      '.zn-body__paragraph': $node => {
         if ($node.has('a')) {
-          if ($node.text().trim() === $node.find('a').text().trim()) {
+          if (
+            $node.text().trim() ===
+            $node
+              .find('a')
+              .text()
+              .trim()
+          ) {
             $node.remove();
           }
         }
       },
 
       '.media__video--thumbnail': 'figure',
-
     },
 
     // Is there anything that is in the result that shouldn't be?
     // The clean selectors will remove anything that matches from
     // the result
-    clean: [
-    ],
+    clean: [],
   },
 };

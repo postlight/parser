@@ -4,11 +4,7 @@ import fs from 'fs';
 
 import HTML from './fixtures/html';
 
-import {
-  getScore,
-  findTopCandidate,
-  scoreContent,
-} from './index';
+import { getScore, findTopCandidate, scoreContent } from './index';
 
 describe('findTopCandidate($)', () => {
   it('finds the top candidate from simple case', () => {

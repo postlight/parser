@@ -14,10 +14,10 @@ describe('WwwWashingtonpostComExtractor', () => {
     beforeAll(() => {
       url =
         'https://www.washingtonpost.com/politics/trump-foundation-apparently-admits-to-violating-ban-on-self-dealing-new-filing-to-irs-shows/2016/11/22/893f6508-b0a9-11e6-8616-52b15787add0_story.html';
-      const html =
-        fs.readFileSync('./fixtures/www.washingtonpost.com/1480364838420.html');
-      result =
-        Mercury.parse(url, html, { fallback: false });
+      const html = fs.readFileSync(
+        './fixtures/www.washingtonpost.com/1480364838420.html'
+      );
+      result = Mercury.parse(url, html, { fallback: false });
     });
 
     it('is selected properly', async () => {
@@ -35,7 +35,10 @@ describe('WwwWashingtonpostComExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(title, 'Trump Foundation admits to violating ban on ‘self-dealing,’ new filing to IRS shows');
+      assert.equal(
+        title,
+        'Trump Foundation admits to violating ban on ‘self-dealing,’ new filing to IRS shows'
+      );
     });
 
     it('returns the author', async () => {
@@ -65,7 +68,10 @@ describe('WwwWashingtonpostComExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(lead_image_url, 'https://img.washingtonpost.com/rf/image_1484w/2010-2019/WashingtonPost/2016/11/01/Others/Images/2016-11-01/Trump-HomeSafe-News-131478026931.jpg');
+      assert.equal(
+        lead_image_url,
+        'https://img.washingtonpost.com/rf/image_1484w/2010-2019/WashingtonPost/2016/11/01/Others/Images/2016-11-01/Trump-HomeSafe-News-131478026931.jpg'
+      );
     });
 
     it('returns the content', async () => {
@@ -77,11 +83,19 @@ describe('WwwWashingtonpostComExtractor', () => {
 
       const $ = cheerio.load(content || '');
 
-      const first13 = excerptContent($('*').first().text(), 13);
+      const first13 = excerptContent(
+        $('*')
+          .first()
+          .text(),
+        13
+      );
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(first13, 'Painter Michael Israel, left, poses with Donald and Melania Trump in 2007 at');
+      assert.equal(
+        first13,
+        'Painter Michael Israel, left, poses with Donald and Melania Trump in 2007 at'
+      );
     });
   });
 });

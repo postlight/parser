@@ -1,7 +1,5 @@
 export function textLength(text) {
-  return text.trim()
-             .replace(/\s+/g, ' ')
-             .length;
+  return text.trim().replace(/\s+/g, ' ').length;
 }
 
 // Determines what percentage of the text

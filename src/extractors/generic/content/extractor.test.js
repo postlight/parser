@@ -16,9 +16,14 @@ describe('GenericContentExtractor', () => {
       //     { $: null, html, url: 'http://example.com' }
       //   ))
       // })
-      const result = clean(GenericContentExtractor.extract(
-        { $: null, html, url: 'http://www.vulture.com/2016/08/dc-comics-greg-berlanti-c-v-r.html' }
-      ));
+      const result = clean(
+        GenericContentExtractor.extract({
+          $: null,
+          html,
+          url:
+            'http://www.vulture.com/2016/08/dc-comics-greg-berlanti-c-v-r.html',
+        })
+      );
 
       assert(typeof result, 'string');
       // console.log(result)
