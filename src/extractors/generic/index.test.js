@@ -8,38 +8,29 @@ describe('GenericExtractor', () => {
     it('extracts this old LA Times article', () => {
       const html = fs.readFileSync('./fixtures/latimes.html', 'utf-8');
 
-      const {
-        title,
-        author,
-        date_published,
-        dek,
-      } = GenericExtractor.extract(
-        { url: 'http://latimes.com', html, metaCache: [] }
-      );
+      const { title, author, date_published, dek } = GenericExtractor.extract({
+        url: 'http://latimes.com',
+        html,
+        metaCache: [],
+      });
 
       assert.equal(author, null);
       assert.equal(
         title,
         'California appears poised to be first to ban power-guzzling big-screen TVs'
       );
-      assert.equal(
-        date_published.split('T')[0],
-        '2009-10-14'
-      );
+      assert.equal(date_published.split('T')[0], '2009-10-14');
       assert.equal(dek, null);
     });
 
     it('extracts html and returns the article title', () => {
       const html = fs.readFileSync('./fixtures/wired.html', 'utf-8');
 
-      const {
-        author,
-        title,
-        datePublished,
-        dek,
-      } = GenericExtractor.extract(
-        { url: 'http://wired.com', html, metaCache: [] }
-      );
+      const { author, title, datePublished, dek } = GenericExtractor.extract({
+        url: 'http://wired.com',
+        html,
+        metaCache: [],
+      });
 
       assert.equal(author, 'Eric Adams');
       assert.equal(

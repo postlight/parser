@@ -10,7 +10,10 @@ describe('convertLazyLoadedImages($)', () => {
 
     const result = convertLazyLoadedImages($).html();
 
-    assert.equal(result, '<img data-src="http://example.com/foo.jpg" src="http://example.com/foo.jpg">');
+    assert.equal(
+      result,
+      '<img data-src="http://example.com/foo.jpg" src="http://example.com/foo.jpg">'
+    );
   });
 
   it('does nothing when value is not a link', () => {

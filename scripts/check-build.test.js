@@ -8,8 +8,10 @@ let urls = [
     title: 'Iraqi troops storm town south of Mosul',
   },
   {
-    url: 'https://www.cnn.com/2018/10/12/us/before-after-aerial-images-mexico-beach-devastation-trnd/index.html',
-    title: 'Before and after images show there\'s nothing left in some parts of Mexico Beach',
+    url:
+      'https://www.cnn.com/2018/10/12/us/before-after-aerial-images-mexico-beach-devastation-trnd/index.html',
+    title:
+      "Before and after images show there's nothing left in some parts of Mexico Beach",
   },
 ];
 
@@ -24,7 +26,8 @@ if (process.env.CI) {
   if (cheerio.browser) {
     require('../dist/mercury.web');
   }
-  const Merc = typeof Mercury === 'undefined' ? require('../dist/mercury') : Mercury;
+  const Merc =
+    typeof Mercury === 'undefined' ? require('../dist/mercury') : Mercury;
 
   describe('Is Mercury build working', () => {
     beforeAll(() => {
@@ -38,15 +41,17 @@ if (process.env.CI) {
     });
 
     urls.map(article =>
-      it(`gets this title right ${article.title}`, (done) => {
-        Merc.parse(article.url).then((result) => {
-          assert.equal(article.title, result.title);
-          done();
-        }).catch((e) => {
-          console.log(e.name, e.message); // eslint-disable-line no-console
-          assert.equal(true, false);
-          done();
-        });
+      it(`gets this title right ${article.title}`, done => {
+        Merc.parse(article.url)
+          .then(result => {
+            assert.equal(article.title, result.title);
+            done();
+          })
+          .catch(e => {
+            console.log(e.name, e.message); // eslint-disable-line no-console
+            assert.equal(true, false);
+            done();
+          });
       })
     );
   });

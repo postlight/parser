@@ -1,6 +1,6 @@
 // CLEAN AUTHOR CONSTANTS
 export const CLEAN_AUTHOR_RE = /^\s*(posted |written )?by\s*:?\s*(.*)/i;
-    //     author = re.sub(r'^\s*(posted |written )?by\s*:?\s*(.*)(?i)',
+//     author = re.sub(r'^\s*(posted |written )?by\s*:?\s*(.*)(?i)',
 
 // CLEAN DEK CONSTANTS
 export const TEXT_LINK_RE = new RegExp('http(s)?://', 'i');
@@ -13,17 +13,14 @@ export const TEXT_LINK_RE = new RegExp('http(s)?://', 'i');
 //  - dc.description
 // However, these tags often have SEO-specific junk in them that's not
 // header-worthy like a dek is. Excerpt material at best.
-export const DEK_META_TAGS = [
-];
+export const DEK_META_TAGS = [];
 
 // An ordered list of Selectors to find likely article deks. From
 // most explicit to least explicit.
 //
 // Should be more restrictive than not, as a failed dek can be pretty
 // detrimental to the aesthetics of an article.
-export const DEK_SELECTORS = [
-  '.entry-summary',
-];
+export const DEK_SELECTORS = ['.entry-summary'];
 
 // CLEAN DATE PUBLISHED CONSTANTS
 export const MS_DATE_STRING = /^\d{13}$/i;
@@ -49,8 +46,10 @@ const allMonths = months.join('|');
 const timestamp1 = '[0-9]{1,2}:[0-9]{2,2}( ?[ap].?m.?)?';
 const timestamp2 = '[0-9]{1,2}[/-][0-9]{1,2}[/-][0-9]{2,4}';
 const timestamp3 = '-[0-9]{3,4}$';
-export const SPLIT_DATE_STRING =
-  new RegExp(`(${timestamp1})|(${timestamp2})|(${timestamp3})|([0-9]{1,4})|(${allMonths})`, 'ig');
+export const SPLIT_DATE_STRING = new RegExp(
+  `(${timestamp1})|(${timestamp2})|(${timestamp3})|([0-9]{1,4})|(${allMonths})`,
+  'ig'
+);
 
 // 2016-11-22T08:57-500
 // Check if datetime string has an offset at the end
@@ -61,5 +60,4 @@ export const TIME_WITH_OFFSET_RE = /-\d{3,4}$/;
 // title, that usually denote breadcrumbs or something similar.
 export const TITLE_SPLITTERS_RE = /(: | - | \| )/g;
 
-export const DOMAIN_ENDINGS_RE =
-  new RegExp('.com$|.net$|.org$|.co.uk$', 'g');
+export const DOMAIN_ENDINGS_RE = new RegExp('.com$|.net$|.org$|.co.uk$', 'g');

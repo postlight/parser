@@ -13,7 +13,7 @@ describe('cleanDek(dekString, { $ })', () => {
     const $ = cheerio.load('<div></div>');
     const longDek =
       // generate a string that is 1,280 chars
-      [0, 1, 2, 3, 4, 5, 6].reduce((acc) => {
+      [0, 1, 2, 3, 4, 5, 6].reduce(acc => {
         acc += acc;
         return acc;
       }, '0123456789');

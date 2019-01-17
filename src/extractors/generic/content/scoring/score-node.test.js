@@ -3,10 +3,7 @@ import cheerio from 'cheerio';
 
 import HTML from './fixtures/html';
 
-import {
-  scoreNode,
-  scoreParagraph,
-} from './index';
+import { scoreNode, scoreParagraph } from './index';
 
 describe('scoreNode(node)', () => {
   it('scores P, LI, SPAN, and PRE using scoreParagraph', () => {

@@ -63,14 +63,12 @@ const GenericContentExtractor = {
 
   // Get node given current options
   getContentNode($, title, url, opts) {
-    return cleanContent(
-              extractBestNode($, opts),
-      {
-        $,
-        cleanConditionally: opts.cleanConditionally,
-        title,
-        url,
-      });
+    return cleanContent(extractBestNode($, opts), {
+      $,
+      cleanConditionally: opts.cleanConditionally,
+      title,
+      url,
+    });
   },
 
   // Once we got here, either we're at our last-resort node, or
@@ -88,7 +86,6 @@ const GenericContentExtractor = {
     // else:
     //     return node
   },
-
 };
 
 export default GenericContentExtractor;

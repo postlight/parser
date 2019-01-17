@@ -6,7 +6,7 @@
 //
 describe('collectAllPages(opts)', () => {
   it('fetches additional pages', () => {
-//     const html = fs.readFileSync('./fixtures/ars.html');
-//     const $ = cheerio.load(html);
+    //     const html = fs.readFileSync('./fixtures/ars.html');
+    //     const $ = cheerio.load(html);
   });
 });

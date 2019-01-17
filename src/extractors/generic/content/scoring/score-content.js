@@ -1,12 +1,7 @@
 import { convertNodeTo } from 'utils/dom';
 
 import { HNEWS_CONTENT_SELECTORS } from './constants';
-import {
-  scoreNode,
-  setScore,
-  getOrInitScore,
-  addScore,
-} from './index';
+import { scoreNode, setScore, getOrInitScore, addScore } from './index';
 
 function convertSpans($node, $) {
   if ($node.get(0)) {
@@ -27,22 +22,24 @@ function addScoreTo($node, $, score) {
 }
 
 function scorePs($, weightNodes) {
-  $('p, pre').not('[score]').each((index, node) => {
-    // The raw score for this paragraph, before we add any parent/child
-    // scores.
-    let $node = $(node);
-    $node = setScore($node, $, getOrInitScore($node, $, weightNodes));
+  $('p, pre')
+    .not('[score]')
+    .each((index, node) => {
+      // The raw score for this paragraph, before we add any parent/child
+      // scores.
+      let $node = $(node);
+      $node = setScore($node, $, getOrInitScore($node, $, weightNodes));
 
-    const $parent = $node.parent();
-    const rawScore = scoreNode($node);
+      const $parent = $node.parent();
+      const rawScore = scoreNode($node);
 
-    addScoreTo($parent, $, rawScore, weightNodes);
-    if ($parent) {
-      // Add half of the individual content score to the
-      // grandparent
-      addScoreTo($parent.parent(), $, rawScore / 2, weightNodes);
-    }
-  });
+      addScoreTo($parent, $, rawScore, weightNodes);
+      if ($parent) {
+        // Add half of the individual content score to the
+        // grandparent
+        addScoreTo($parent.parent(), $, rawScore / 2, weightNodes);
+      }
+    });
 
   return $;
 }
