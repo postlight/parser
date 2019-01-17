@@ -2501,9 +2501,9 @@ elegant-spinner@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/elegant-spinner/-/elegant-spinner-1.0.1.tgz#db043521c95d7e303fd8f345bedc3349cfb0729e"
 
-ellipsize@0.0.2:
-  version "0.0.2"
-  resolved "https://registry.yarnpkg.com/ellipsize/-/ellipsize-0.0.2.tgz#b56b952a7b40f0a6cd11e1c86d23d6acdffcb1fe"
+ellipsize@0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/ellipsize/-/ellipsize-0.1.0.tgz#9d43682d44b91ad16ebd84268ac103170a6553f8"
 
 elliptic@^6.0.0:
   version "6.3.2"
@@ -5432,9 +5432,9 @@ module-deps@^6.0.0:
     through2 "^2.0.0"
     xtend "^4.0.0"
 
-moment-parseformat:
-  version "2.1.4"
-  resolved "https://registry.yarnpkg.com/moment-parseformat/-/moment-parseformat-2.1.4.tgz#593708637858956ac327cc2f42bc0ec48900da32"
+moment-parseformat@3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/moment-parseformat/-/moment-parseformat-3.0.0.tgz#3a1dc438b4bc073b7e93cc298cfb6c5daac26dba"
 
 moment-timezone@0.5.23:
   version "0.5.23"
