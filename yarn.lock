@@ -1507,15 +1507,9 @@ browser-pack@^6.0.1:
     through2 "^2.0.0"
     umd "^3.0.0"
 
-browser-process-hrtime@^0.1.2:
-  version "0.1.3"
-  resolved "https://registry.yarnpkg.com/browser-process-hrtime/-/browser-process-hrtime-0.1.3.tgz#616f00faef1df7ec1b5bf9cfe2bdc3170f26c7b4"
-
-browser-request@adampash/browser-request#feat-add-headers-to-response:
-  version "0.3.2"
-  resolved "https://codeload.github.com/adampash/browser-request/tar.gz/38faa5b85741aabfca61aa37d1ef044d68969ddf"
-  dependencies:
-    http-headers "^3.0.1"
+browser-request@^0.3.3:
+  version "0.3.3"
+  resolved "https://registry.yarnpkg.com/browser-request/-/browser-request-0.3.3.tgz#9ece5b5aca89a29932242e18bf933def9876cc17"
 
 browser-resolve@^1.11.0, browser-resolve@^1.7.0:
   version "1.11.2"
@@ -2549,9 +2543,9 @@ diffie-hellman@^5.0.0:
     miller-rabin "^4.0.0"
     randombytes "^2.0.0"
 
-difflib@adampash/difflib.js:
-  version "0.2.6"
-  resolved "https://codeload.github.com/adampash/difflib.js/tar.gz/32e8e38c7fcd935241b9baab71bb432fd9b166ed"
+difflib@^0.2.4:
+  version "0.2.4"
+  resolved "https://registry.yarnpkg.com/difflib/-/difflib-0.2.4.tgz#b5e30361a6db023176d562892db85940a718f47e"
   dependencies:
     heap ">= 0.2.0"
 
@@ -3913,12 +3907,6 @@ http-errors@1.6.3, http-errors@~1.6.2, http-errors@~1.6.3:
     inherits "2.0.3"
     setprototypeof "1.1.0"
     statuses ">= 1.4.0 < 2"
-
-http-headers@^3.0.1:
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/http-headers/-/http-headers-3.0.1.tgz#1cbc691c45cdf6d6c1dc63bf368b2505f56ef839"
-  dependencies:
-    next-line "^1.0.0"
 
 http-proxy@^1.13.0:
   version "1.15.2"
@@ -5747,14 +5735,6 @@ needle@^2.2.1:
 negotiator@0.6.1:
   version "0.6.1"
   resolved "https://registry.yarnpkg.com/negotiator/-/negotiator-0.6.1.tgz#2b327184e8992101177b28563fb5e7102acd0ca9"
-
-next-line@^1.0.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/next-line/-/next-line-1.1.0.tgz#fcae57853052b6a9bae8208e40dd7d3c2d304603"
-
-next-tick@1:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/next-tick/-/next-tick-1.0.0.tgz#ca86d1fe8828169b0120208e3dc8424b9db8342c"
 
 nice-try@^1.0.4:
   version "1.0.5"
@@ -8399,13 +8379,7 @@ url-template@^2.0.8:
   version "2.0.8"
   resolved "https://registry.yarnpkg.com/url-template/-/url-template-2.0.8.tgz#fc565a3cccbff7730c775f5641f9555791439f21"
 
-url@adampash/node-url#feat-remove-punycode:
-  version "0.11.1"
-  resolved "https://codeload.github.com/adampash/node-url/tar.gz/01ff22ebee841a0053330d45f221371b41effbbf"
-  dependencies:
-    querystring "0.2.0"
-
-url@~0.11.0:
+url@^0.11.0, url@~0.11.0:
   version "0.11.0"
   resolved "https://registry.yarnpkg.com/url/-/url-0.11.0.tgz#3838e97cfc60521eb73c525a8e55bfdd9e2e28f1"
   dependencies:
@@ -8692,9 +8666,9 @@ ws@~3.3.1:
     safe-buffer "~5.1.0"
     ultron "~1.1.0"
 
-wuzzy@adampash/wuzzy#feat-array-is-array:
-  version "0.1.4"
-  resolved "https://codeload.github.com/adampash/wuzzy/tar.gz/63b6c6e25325c5c95b08689bd8b31a42197db143"
+wuzzy@^0.1.3:
+  version "0.1.3"
+  resolved "https://registry.yarnpkg.com/wuzzy/-/wuzzy-0.1.3.tgz#a88515e269fb3851f24c251f0884dd76be30c300"
   dependencies:
     lodash "~2.4.x"
 
