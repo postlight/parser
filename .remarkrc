@@ -1,0 +1,5 @@
+{
+  "presets": [
+    "lint-recommended"
+  ]
+}
