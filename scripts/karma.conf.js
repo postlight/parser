@@ -15,8 +15,6 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      '../node_modules/phantomjs-polyfill-find/find-polyfill.js',
-      '../node_modules/phantomjs-polyfill-string-includes/index.js',
       '../dist/mercury.web.js',
       { pattern: 'check-build.test.js', included: true },
     ],
@@ -56,7 +54,7 @@ module.exports = function(config) {
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
     // browsers: ['PhantomJS'],
-    browsers: [process.env.CI ? 'PhantomJS' : 'Chrome'],
+    browsers: ['Chrome'],
     // browsers: ['Chrome'],
 
     // Continuous Integration mode

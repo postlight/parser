@@ -5,8 +5,6 @@ module.exports = function (config) {
 
     frameworks: ['jasmine', 'browserify'],
     files: [
-      './node_modules/phantomjs-polyfill-find/find-polyfill.js',
-      './node_modules/phantomjs-polyfill-string-includes/index.js',
       { pattern: 'src/**/*.test.js', included: true },
     ],
 
@@ -26,7 +24,7 @@ module.exports = function (config) {
     colors: true,
     logLevel: config.LOG_INFO,
     autoWatch: false,
-    browsers: [(process.env.CI ? 'PhantomJS' : 'Chrome')],
+    browsers: ['Chrome'],
     singleRun: true,
     concurrency: Infinity,
   });
