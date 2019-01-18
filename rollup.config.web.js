@@ -21,6 +21,7 @@ export default {
     }),
     uglify(),
   ],
+  treeshake: true,
   output: {
     file: process.env.MERCURY_TEST_BUILD
       ? 'dist/mercury_test.web.js'
