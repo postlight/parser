@@ -11,7 +11,7 @@ module.exports = function(config) {
 
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-    frameworks: ['jasmine', 'browserify'],
+    frameworks: ['browserify', 'jasmine'],
 
     // list of files / patterns to load in the browser
     files: [
@@ -32,7 +32,7 @@ module.exports = function(config) {
 
     browserify: {
       debug: true,
-      transform: ['brfs-babel', 'babelify'],
+      transform: [['babelify', { presets: ['@babel/preset-env'] }], 'brfs'],
     },
 
     // test results reporter to use

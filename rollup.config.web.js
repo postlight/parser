@@ -33,16 +33,12 @@ import globals from 'rollup-plugin-node-globals';
 import babel from 'rollup-plugin-babel';
 import commonjs from 'rollup-plugin-commonjs';
 
-// const babelOpts = babelrc();
-// console.log(`babelOpts`, babelOpts);
-// babelOpts.runtimeHelpers = false;
-
 export default {
   input: 'src/mercury.js',
   plugins: [
     babel({
       runtimeHelpers: true,
-      exclude: 'node_modules/**',
+      exclude: './node_modules#<{(|*',
     }),
     commonjs({
       ignoreGlobal: true,
