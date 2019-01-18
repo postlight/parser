@@ -1,7 +1,8 @@
 import assert from 'assert';
-import fs from 'fs';
 
 import GenericExtractor from './index';
+
+const fs = require('fs');
 
 describe('GenericExtractor', () => {
   describe('extract(opts)', () => {

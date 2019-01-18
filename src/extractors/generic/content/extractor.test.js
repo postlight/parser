@@ -1,9 +1,10 @@
 import assert from 'assert';
-import fs from 'fs';
 
 import { clean } from 'test-helpers';
 
 import GenericContentExtractor from './extractor';
+
+const fs = require('fs');
 
 describe('GenericContentExtractor', () => {
   describe('extract($, html, opts)', () => {
