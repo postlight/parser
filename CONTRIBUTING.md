@@ -102,6 +102,13 @@ We use a slightly modified version of the Airbnb JavaScript [Style Guide](https:
 To enforce this, all pull requests must pass [ESLint](http://eslint.org/) before
 they can merge.
 
+#### Markdown
+
+In addition to enforcing a JavaScript style guide, we also require that markdown
+files pass [remarklint](https://github.com/wooorm/remark-lint) with the recommended
+preset. This helps keep our markdown tidy, consistent, and compatible with a range of
+markdown parsers used for generating documentation.
+
 ### Node.js Version Requirements
 
 Mercury is built against Node `>= v6`. Since this is the latest LTS release and the
