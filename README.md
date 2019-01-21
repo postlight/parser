@@ -48,7 +48,7 @@ Licensed under either of the below, at your preference:
 
 ## Contributing
 
-If you'd like to write a custom parser for a site, [here's how](src/extractors/custom/README.md).
+Unless it is explicitly state otherwise, any contribution intentionally submitted for inclusion in the work, as defined in the Apache-2.0 license, shall be dual licensed as above without any additional terms or conditions.
 
 ## Contributors
 
