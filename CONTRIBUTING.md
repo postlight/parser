@@ -1,8 +1,8 @@
 # Contributing to Mercury Parser
 
-Thank you for your interest in contributing to Mercury Parser! It's people like you that make Mercury such a parsefull tool to use. the below guidelines will help answer any questions you may have about the contribution process. We are looking forward to receive contributions from you — our community!
+Thank you for your interest in contributing to Mercury Parser! It's people like you that make Mercury such a useful tool. The below guidelines will help answer any questions you may have about the contribution process. We are looking forward to receive contributions from you — our community!
 
-*Please read the [Code of Conduct]() before you participate in community.*
+*Please read our [Code of Conduct]() before participating in our community.*
 
 ## Contents
 
@@ -34,7 +34,7 @@ don't know about, so please report liberally. If you're not sure if something is
 a bug or not, feel free to file a bug anyway.
 
 If you have the chance, before reporting a bug, please search existing issues,
-as it's possible that someone else has already reported your error. This doesn't
+as it's possible that someone else has already reported the error. This doesn't
 always work, and sometimes it's hard to know what to search for, so consider
 this extra credit. We won't mind if you accidentally file a duplicate report.
 
@@ -48,19 +48,16 @@ to [mercury+security@postlight.com](mailto:mercury+security@postlight.com). If y
 you’ve found a serious vulnerability, please do not file a public issue.
 
 Your report will go to Mercury's core development team. You will receive
-acknowledgement of the report in 24-48 hours, and what our next steps will be to
-release a fix. If you don’t get a report acknowledgement in 48 hours, contact
-[Adam Pash](mailto:adam.pash@postlight.com) directly.
+acknowledgement of the report in 24-48 hours, and our next steps should be to
+release a fix. If you don’t get a report acknowledgement in 48 hours, send an email to
+[mercury@postlight.com](mailto:mercury@postlight.com).
 
 A working list of public, known security-related issues can be found in the
 [issue tracker](https://github.com/postlight/mercury-parser/issues?q=is%3Aopen+is%3Aissue+label%3Asecurity).
 
 ## Requesting a Feature
 
-To request a change to the way that Mercury works, please open an issue in the RFCs
-repository rather than this one. New features and other significant API changes
-must go through the RFC process. For more information about the RFC process, head
-over to the [mercury-rfcs repository](https://github.com/postlight/mercury-rfcs).
+To request a change to the way that Mercury works, please open an issue in this repository named, "Feature Request: ", followed by your suggestion.
 
 ## Development Workflow
 
@@ -80,17 +77,32 @@ cd mercury-parser
 # Install local dependencies.
 yarn install
 
-# Run the build tools.
+# Run the node release
+yarn build
+
+# Build the web release
 yarn build:web
 ```
 
 ### Testing
 
-Mercury is a test driven application, each component has its own jest test file. To run a test, execute the following command:
+Mercury is a test driven application; each component has its own test file. Tests are run for both node and web builds, our testing frameworks are:  
+*   `Jest` for node build
+*   `Karma` for web build  
+
+For the code to be accepted, All tests for both the node and browser must pass. To run the required tests for local development, execute the following commands:  
 
 ```bash
-# Run the test from the root of this repository.
-# e.g. of a test file mercury.test.js
+# Run the full test suite
+yarn test
+
+# Run the tests for node build only
+yarn test:node
+
+# Run the tests for web build only
+yarn test:web
+
+# Run the test for a single file
 yarn watch:test <test_file>
 ```
 
@@ -145,8 +157,7 @@ load-nvmrc
 ## Writing Documentation
 
 Improvements to documentation are a great way to start contributing to Mercury. The
-sources for the official documentation are generated from source code comments
-and markdown files that live in this repository.
+source for the official documentation are markdown files that live in this repository.
 
 ## Submitting a Pull Request
 
@@ -184,15 +195,15 @@ Commit messages should follow the format outlined below:
 
 Once you have submitted a pull request, a member of the core team must review it
 before it is merged. We try to review pull requests within 3 days but sometimes
-fall behind. Feel free to reach out to someone in the community if you have not received a review after 3 days.
+fall behind. Feel free to reach out to the core team if you have not received a review after 3 days.
 
 ## Helpful Links and Information
 
 Some useful places to look for information are:
 
-*   
-*   
-*   
+*   The main [readme](./README.md) for this repository.
+*   The Mercury custom parser [readme](./src/extractors/custom/README.md)
+*   The Mercury parser api [repository](https://github.com/postlight/mercury-parser-api)
 
 *Adapted from [Contributing to Node.js](https://github.com/nodejs/node/blob/master/CONTRIBUTING.md)
 and [ThinkUp Security and Data Privacy](http://thinkup.readthedocs.io/en/latest/install/security.html#thinkup-security-and-data-privacy).*
