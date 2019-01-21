@@ -1,6 +1,5 @@
 // CLEAN AUTHOR CONSTANTS
 export const CLEAN_AUTHOR_RE = /^\s*(posted |written )?by\s*:?\s*(.*)/i;
-//     author = re.sub(r'^\s*(posted |written )?by\s*:?\s*(.*)(?i)',
 
 // CLEAN DEK CONSTANTS
 export const TEXT_LINK_RE = new RegExp('http(s)?://', 'i');

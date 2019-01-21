@@ -9,13 +9,6 @@ describe('GenericContentExtractor', () => {
   describe('extract($, html, opts)', () => {
     it('extracts html and returns the article', () => {
       const html = fs.readFileSync('./fixtures/vulture.html', 'utf-8');
-
-      // Array.from(range(1, 100)).map((i) => {
-      //   console.log(i)
-      //   clean(GenericContentExtractor.extract(
-      //     { $: null, html, url: 'http://example.com' }
-      //   ))
-      // })
       const result = clean(
         GenericContentExtractor.extract({
           $: null,
@@ -26,7 +19,6 @@ describe('GenericContentExtractor', () => {
       );
 
       assert(typeof result, 'string');
-      // console.log(result)
     });
   });
 });
