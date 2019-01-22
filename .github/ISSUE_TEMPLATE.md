@@ -31,7 +31,10 @@ problem, keeping it as simple and free of external dependencies as you are able.
 <!--- reproduce this bug. Include code to reproduce, if relevant.  -->
 <!--- It would be better to include screenshots -->
 
-1. 2. 3. 4.
+1.
+2.
+3.
+4.
 
 ## Detailed Description
 
