@@ -6,13 +6,24 @@ Thank you for your interest in contributing to Mercury Parser! It's people like 
 
 ## Contents
 
-*   [Ways to Contribute](#ways-to-contribute)
-*   [Reporting a Bug](#reporting-a-bug)
-*   [Requesting a Feature](#requesting-a-feature)
-*   [Development Workflow](#development-workflow)
-*   [Writing Documentation](#writing-documentation)
-*   [Submitting a Pull Request](#submitting-a-pull-request)
-*   [Helpful Links and Information](#helpful-links-and-information)
+- [Contributing to Mercury Parser](#contributing-to-mercury-parser)
+  - [Contents](#contents)
+  - [Ways to Contribute](#ways-to-contribute)
+  - [Reporting a Bug](#reporting-a-bug)
+    - [Security](#security)
+  - [Requesting a Feature](#requesting-a-feature)
+  - [Development Workflow](#development-workflow)
+    - [Building](#building)
+    - [Testing](#testing)
+    - [Code Style](#code-style)
+      - [JavaScript](#javascript)
+      - [Markdown](#markdown)
+    - [Node.js Version Requirements](#nodejs-version-requirements)
+  - [Writing Documentation](#writing-documentation)
+  - [Submitting a Pull Request](#submitting-a-pull-request)
+    - [Commit Style](#commit-style)
+    - [Code Reviews](#code-reviews)
+  - [Helpful Links and Information](#helpful-links-and-information)
 
 ## Ways to Contribute
 
@@ -183,7 +194,7 @@ Commit messages should follow the format outlined below:
        chore | does not effect the production version of the app in any way.
         deps | add, update, or remove a dependency.
         docs | add, update, or remove documentation. no code changes.
-          dx | improve the development experience of lux core.
+          dx | improve the development experience of mercury core.
         feat | a feature or enhancement. can be incredibly small.
          fix | a bug fix for something that was broken.
         perf | add, update, or fix a test.
