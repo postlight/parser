@@ -80,11 +80,6 @@ const GenericContentExtractor = {
     }
 
     return normalizeSpaces($.html(node));
-
-    // if return_type == "html":
-    //     return normalize_spaces(node_to_html(node))
-    // else:
-    //     return node
   },
 };
 

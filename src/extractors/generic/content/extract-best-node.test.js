@@ -1,9 +1,6 @@
 import assert from 'assert';
 import cheerio from 'cheerio';
 import fs from 'fs';
-
-// import HTML from './fixtures/html'
-
 import extractBestNode from './extract-best-node';
 
 describe('extractBestNode($, flags)', () => {
