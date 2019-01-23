@@ -1,7 +1,7 @@
 import assert from 'assert';
 import cheerio from 'cheerio';
 
-import { default as GenericExcerptExtractor, clean } from './extractor';
+import GenericExcerptExtractor, { clean } from './extractor';
 
 describe('GenericExcerptExtractor', () => {
   describe('extract({ $, content, metaCache })', () => {

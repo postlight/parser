@@ -5,13 +5,6 @@ import HTML from './fixtures/html';
 import { cleanTitle } from './index';
 
 describe('cleanTitle(title, { url, $ })', () => {
-  it('uses a single h1 if the title is too short or too long', () => {
-    // const title = "Too Short"
-    // const $ = cheerio.load(HTML.docWithH1)
-    //
-    // assert.equal(cleanTitle(title, { url: '', $ }), $('h1').text())
-  });
-
   it('only uses h1 if there is only one on the page', () => {
     const title = 'Too Short';
     const $ = cheerio.load(HTML.docWith2H1s);

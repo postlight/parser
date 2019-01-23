@@ -52,7 +52,7 @@ if (process.env.CI) {
             assert.equal(true, false);
             done();
           });
-      })
+      }, 10000)
     );
   });
 }

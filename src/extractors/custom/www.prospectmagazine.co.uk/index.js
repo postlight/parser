@@ -24,10 +24,7 @@ export const WwwProspectmagazineCoUkExtractor = {
   },
 
   content: {
-    selectors: [
-      // ['article.type-post div.post_content p'],
-      'article .post_content',
-    ],
+    selectors: ['article .post_content'],
 
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images

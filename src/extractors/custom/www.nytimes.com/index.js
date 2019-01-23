@@ -15,15 +15,6 @@ export const NYTimesExtractor = {
     transforms: {
       'img.g-lazy': $node => {
         let src = $node.attr('src');
-        // const widths = $node.attr('data-widths')
-        //                   .slice(1)
-        //                   .slice(0, -1)
-        //                   .split(',');
-        // if (widths.length) {
-        //   width = widths.slice(-1);
-        // } else {
-        //   width = '900';
-        // }
         const width = 640;
 
         src = src.replace('{{size}}', width);

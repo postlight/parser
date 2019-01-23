@@ -1,11 +1,12 @@
 import assert from 'assert';
-import fs from 'fs';
 import URL from 'url';
 import cheerio from 'cheerio';
 
 import Mercury from 'mercury';
 import getExtractor from 'extractors/get-extractor';
 import { excerptContent } from 'utils/text';
+
+const fs = require('fs');
 
 describe('ForwardComExtractor', () => {
   describe('initial test case', () => {
@@ -58,16 +59,6 @@ describe('ForwardComExtractor', () => {
       // the article.
       assert.equal(date_published, '2016-12-28T20:32:00.000Z');
     });
-
-    // it('returns the dek', async () => {
-    // // To pass this test, fill out the dek selector
-    // // in ./src/extractors/custom/forward.com/index.js.
-    //   const { dek } = await result;
-    //
-    // // Update these values with the expected values from
-    // // the article.
-    //   assert.equal(dek, '');
-    // });
 
     it('returns the lead_image_url', async () => {
       // To pass this test, fill out the lead_image_url selector

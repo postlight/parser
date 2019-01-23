@@ -31,9 +31,6 @@ export const TwitterExtractor = {
   },
 
   date_published: {
-    selectors: [
-      ['.permalink-tweet ._timestamp[data-time-ms]', 'data-time-ms'],
-      // '.tweet.permalink-tweet .metadata',
-    ],
+    selectors: [['.permalink-tweet ._timestamp[data-time-ms]', 'data-time-ms']],
   },
 };

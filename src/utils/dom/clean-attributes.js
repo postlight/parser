@@ -24,12 +24,6 @@ function removeAllButWhitelist($article, $) {
   return $article;
 }
 
-// function removeAttrs(article, $) {
-//   REMOVE_ATTRS.forEach((attr) => {
-//     $(`[${attr}]`, article).removeAttr(attr);
-//   });
-// }
-
 // Remove attributes like style or align
 export default function cleanAttributes($article, $) {
   // Grabbing the parent because at this point
