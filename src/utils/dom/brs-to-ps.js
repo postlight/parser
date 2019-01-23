@@ -20,7 +20,6 @@ export default function brsToPs($) {
       $element.remove();
     } else if (collapsing) {
       collapsing = false;
-      // $(element).replaceWith('<p />')
       paragraphize(element, $, true);
     }
   });

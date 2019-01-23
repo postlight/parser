@@ -6,7 +6,6 @@ export default function convertNodeTo($node, $, tag = 'p') {
     return $;
   }
   const attrs = getAttrs(node) || {};
-  // console.log(attrs)
 
   const attribString = Reflect.ownKeys(attrs)
     .map(key => `${key}=${attrs[key]}`)
