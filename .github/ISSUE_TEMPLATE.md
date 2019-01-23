@@ -1,7 +1,7 @@
 <!--
 Thanks for reporting an issue!
 
-This issue tracker is for bugs and issues found within Mercury-Parser.
+This issue tracker is for bugs and issues found within Mercury Parser.
 
 Please fill in as much of the template below as you're able.
 
@@ -15,7 +15,8 @@ problem, keeping it as simple and free of external dependencies as you are able.
 
 - **Platform**:
 - **Mercury Parser Version**:
-- **Node Version**:
+- **Node Version (if a Node bug)**:
+- **Browser Version (if a browser bug)**:
 
 ## Expected Behavior
 
@@ -29,21 +30,18 @@ problem, keeping it as simple and free of external dependencies as you are able.
 
 <!--- Provide a link to a live example, or an unambiguous set of steps to -->
 <!--- reproduce this bug. Include code to reproduce, if relevant.  -->
-<!--- It would be better to include screenshots -->
+<!--- Screenshots are helpful when appropriate. -->
 
-1.
-2.
-3.
-4.
+1. 2. 3. 4.
 
 ## Detailed Description
 
-<!--- Provide a detailed description of the change or addition you are proposing -->
 <!--- How has this issue affected you? What are you trying to accomplish? -->
 <!--- Providing context helps us come up with a solution that is most useful in the real world -->
-<!--- for example, the website URL you are dealing with  -->
+<!--- For example, what website URL are you dealing with? -->
 <!--- What is the request you are sending? What type of response are you getting? -->
 <!--- What is missing from the response? -->
+<!--- If you have a feature request, provide a detailed description of the change or addition you are proposing -->
 
 ## Possible Solution
 
