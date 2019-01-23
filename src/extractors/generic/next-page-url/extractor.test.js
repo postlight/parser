@@ -1,8 +1,9 @@
 import assert from 'assert';
-import fs from 'fs';
 import cheerio from 'cheerio';
 
 import GenericNextPageUrlExtractor from './extractor';
+
+const fs = require('fs');
 
 describe('GenericNextPageUrlExtractor', () => {
   it('returns most likely next page url', () => {

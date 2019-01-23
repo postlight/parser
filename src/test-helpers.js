@@ -2,7 +2,8 @@ import assert from 'assert';
 import nock from 'nock'; // eslint-disable-line import/no-extraneous-dependencies
 import path from 'path';
 import cheerio from 'cheerio';
-// import fs from 'fs';	
+
+// const fs = require('fs');
 
 export function clean(string) {
   return string
@@ -78,6 +79,7 @@ export class MockDomNode {
     this.attributes.pop();
     this.attributes.push({ name: key, value: val });
   }
+
   removeAttribute() {
     this.attributes.pop();
   }

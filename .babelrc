@@ -1,29 +1,33 @@
 {
-  "presets": ["es2015"],
+  "presets": ["@babel/preset-env"],
   "plugins": [
-    "transform-es2015-destructuring",
-    "transform-object-rest-spread",
-    "transform-async-to-generator",
-    ["module-resolver", {
-      "root": ["./src"],
-      "alias": {
-        "./utils": "utils",
-        "./cleaners": "cleaners",
-        "./resource": "resource",
-        "./extractors": "extractors",
-        "./test-helpers.js": "test-helpers",
-        "./mercury.js": "mercury"
+    "@babel/plugin-transform-destructuring",
+    "@babel/plugin-proposal-object-rest-spread",
+    "@babel/plugin-transform-async-to-generator",
+    [
+      "module-resolver",
+      {
+        "root": ["./src"],
+        "alias": {
+          "./utils": "utils",
+          "./cleaners": "cleaners",
+          "./resource": "resource",
+          "./extractors": "extractors",
+          "./test-helpers.js": "test-helpers",
+          "./mercury.js": "mercury"
+        }
       }
-    }]
+    ]
   ],
   "env": {
     "development": {
       "plugins": [
-        "transform-export-extensions",
+        ["@babel/plugin-proposal-export-default-from"],
+        ["@babel/plugin-proposal-export-namespace-from"],
         [
-          "transform-runtime",
+          "@babel/plugin-transform-runtime",
           {
-            "polyfill": true,
+            "corejs": 2,
             "regenerator": true
           }
         ]

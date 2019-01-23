@@ -1,7 +1,8 @@
 import assert from 'assert';
-import fs from 'fs';
 
 import Mercury from 'mercury';
+
+const fs = require('fs');
 
 describe('TwitterExtractor', () => {
   it('works with a feature story', async () => {

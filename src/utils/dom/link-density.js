@@ -13,7 +13,7 @@ export function linkDensity($node) {
 
   if (totalTextLength > 0) {
     return linkLength / totalTextLength;
-  } else if (totalTextLength === 0 && linkLength > 0) {
+  } if (totalTextLength === 0 && linkLength > 0) {
     return 1;
   }
 

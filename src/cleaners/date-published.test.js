@@ -1,8 +1,7 @@
 import assert from 'assert';
 import moment from 'moment-timezone';
 
-import {
-  default as cleanDatePublished,
+import cleanDatePublished, {
   cleanDateString,
 } from './date-published';
 

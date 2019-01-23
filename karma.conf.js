@@ -4,15 +4,11 @@ module.exports = function (config) {
     basePath: '',
 
     frameworks: ['jasmine', 'browserify'],
-
     files: [
-      './node_modules/phantomjs-polyfill-find/find-polyfill.js',
-      './node_modules/phantomjs-polyfill-string-includes/index.js',
       { pattern: 'src/**/*.test.js', included: true },
     ],
 
-    exclude: [
-    ],
+    exclude: [],
 
     preprocessors: {
       'src/**/*.js': ['browserify'],
@@ -20,10 +16,7 @@ module.exports = function (config) {
 
     browserify: {
       debug: true,
-      transform: [
-        'brfs-babel',
-        'babelify',
-      ],
+      transform: ['babelify', 'brfs'],
     },
 
     reporters: ['progress'],
@@ -31,7 +24,7 @@ module.exports = function (config) {
     colors: true,
     logLevel: config.LOG_INFO,
     autoWatch: false,
-    browsers: [(process.env.CI ? 'PhantomJS' : 'Chrome')],
+    browsers: ['Chrome'],
     singleRun: true,
     concurrency: Infinity,
   });

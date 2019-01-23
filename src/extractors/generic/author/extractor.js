@@ -27,6 +27,7 @@ const GenericAuthorExtractor = {
 
     // Last, use our looser regular-expression based selectors for
     // potential authors.
+    // eslint-disable-next-line no-restricted-syntax
     for (const [selector, regex] of BYLINE_SELECTORS_RE) {
       const node = $(selector);
       if (node.length === 1) {
