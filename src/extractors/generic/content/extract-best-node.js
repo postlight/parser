@@ -14,11 +14,6 @@ import { scoreContent, findTopCandidate } from './scoring';
 //
 // Returns a cheerio object $
 export default function extractBestNode($, opts) {
-  // clone the node so we can get back to our
-  // initial parsed state if needed
-  // TODO Do I need this? – AP
-  // let $root = $.root().clone()
-
   if (opts.stripUnlikelyCandidates) {
     $ = stripUnlikelyCandidates($);
   }

@@ -1,11 +1,12 @@
 import assert from 'assert';
-import fs from 'fs';
 import cheerio from 'cheerio';
 import URL from 'url';
 
 import getExtractor from 'extractors/get-extractor';
 import { excerptContent } from 'utils/text';
 import Mercury from 'mercury';
+
+const fs = require('fs');
 
 describe('NYTimesExtractor', () => {
   describe('initial test case', () => {

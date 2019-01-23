@@ -1,10 +1,11 @@
 import assert from 'assert';
 import cheerio from 'cheerio';
-import fs from 'fs';
 
 import HTML from './fixtures/html';
 
 import { scoreContent, getScore } from './index';
+
+const fs = require('fs');
 
 // TODO: Walk through these and sanity check my scores
 // Commented out scores were what I expected, but I was also
