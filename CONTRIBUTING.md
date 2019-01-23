@@ -1,6 +1,6 @@
 # Contributing to Mercury Parser
 
-Thank you for your interest in contributing to Mercury Parser! It's people like you that make Mercury such a useful tool. The below guidelines will help answer any questions you may have about the contribution process. We are looking forward to receive contributions from you — our community!
+Thank you for your interest in contributing to Mercury Parser! It's people like you that make Mercury such a useful tool. The below guidelines will help answer any questions you may have about the contribution process. We look forward to receiving contributions from you — our community!
 
 *Please read our [Code of Conduct]() before participating in our community.*
 
@@ -112,7 +112,8 @@ yarn test:node
 # Run the tests for web build only
 yarn test:web
 
-# Run the tests, then re-run tests on file changes. If an optional <test_file> is passed, only tests matching that string will be re-run.
+# Run the tests, then re-run tests on file changes.
+# If an optional <test_file> string is passed, only tests matching that string will be re-run.
 yarn watch:test <test_file>
 ```
 
@@ -124,6 +125,10 @@ We use a slightly modified version of the Airbnb JavaScript [Style Guide](https:
 To enforce this, all pull requests must pass [ESLint](http://eslint.org/) before
 they can merge.
 
+All code is also formatted with [Prettier](https://github.com/prettier/prettier).
+This is done automatically when you commit code, so whether or not you use Prettier
+as you develop is up to you.
+
 #### Markdown
 
 In addition to enforcing a JavaScript style guide, we also require that Markdown
@@ -133,7 +138,7 @@ Markdown parsers used for generating documentation.
 
 ### Node.js Version Requirements
 
-Mercury is built against Node `>= v8.10`. Since this is the latest LTS release and the
+Mercury is built against Node `>= v8.10`. Since this is the
 version we run in our CI environments, we recommend you use it when working on
 the Mercury codebase.
 
@@ -212,8 +217,8 @@ fall behind. Feel free to reach out to the core team if you have not received a 
 Some useful places to look for information are:
 
 *   The main [README](./README.md) for this repository.
-*   The Mercury Custom Parser [README](./src/extractors/custom/README.md)
-*   The Mercury Parser API [repository](https://github.com/postlight/mercury-parser-api)
+*   The Mercury Custom Parser [README](./src/extractors/custom/README.md).
+*   The Mercury Parser API [repository](https://github.com/postlight/mercury-parser-api).
 
 *Adapted from [Contributing to Node.js](https://github.com/nodejs/node/blob/master/CONTRIBUTING.md)
 and [ThinkUp Security and Data Privacy](http://thinkup.readthedocs.io/en/latest/install/security.html#thinkup-security-and-data-privacy).*
