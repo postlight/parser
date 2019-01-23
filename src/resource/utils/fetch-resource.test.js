@@ -2,8 +2,7 @@ import assert from 'assert';
 import URL from 'url';
 
 import { record } from 'test-helpers';
-import {
-  default as fetchResource,
+import fetchResource, {
   baseDomain,
   validateResponse,
 } from './fetch-resource';

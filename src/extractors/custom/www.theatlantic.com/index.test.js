@@ -1,10 +1,11 @@
 import assert from 'assert';
-import fs from 'fs';
 import URL from 'url';
 import cheerio from 'cheerio';
 
 import Mercury from 'mercury';
 import getExtractor from 'extractors/get-extractor';
+
+const fs = require('fs');
 
 // Rename CustomExtractor
 describe('AtlanticExtractor', () => {

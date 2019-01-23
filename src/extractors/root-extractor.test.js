@@ -1,16 +1,16 @@
 import assert from 'assert';
-import fs from 'fs';
 import cheerio from 'cheerio';
 
 import { assertClean } from 'test-helpers';
-import {
-  default as RootExtractor,
+import RootExtractor, {
   select,
   cleanBySelectors,
   transformElements,
 } from './root-extractor';
 
 import { NYMagExtractor } from './custom/nymag.com';
+
+const fs = require('fs');
 
 describe('RootExtractor', () => {
   it('only returns what the custom parser gives it if fallback is disabled', () => {

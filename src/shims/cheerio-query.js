@@ -23,6 +23,7 @@ const $ = (selector, context, rootjQuery, contextOverride = true) => {
   return new jQuery.fn.init(selector, context, rootjQuery); // eslint-disable-line new-cap
 };
 
+// eslint-disable-next-line no-multi-assign
 $.fn = $.prototype = jQuery.fn;
 jQuery.extend($, jQuery); // copy's trim, extend etc to $
 
@@ -84,6 +85,7 @@ $.html = $node => {
   return html;
 };
 
+// eslint-disable-next-line no-unused-vars
 $.load = (html, opts = {}, returnHtml = false) => {
   if (!html) {
     html = $.cloneHtml();

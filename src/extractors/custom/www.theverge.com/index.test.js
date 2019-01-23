@@ -1,11 +1,12 @@
 import assert from 'assert';
-import fs from 'fs';
 import URL from 'url';
 import cheerio from 'cheerio';
 
 import Mercury from 'mercury';
 import getExtractor from 'extractors/get-extractor';
 import { excerptContent } from 'utils/text';
+
+const fs = require('fs');
 
 describe('WwwThevergeComExtractor', () => {
   describe('initial test case', () => {
