@@ -4,33 +4,23 @@ export const WwwThevergeComExtractor = {
   supportedDomains: ['www.polygon.com'],
 
   title: {
-    selectors: [
-      'h1',
-    ],
+    selectors: ['h1'],
   },
 
   author: {
-    selectors: [
-      ['meta[name="author"]', 'value'],
-    ],
+    selectors: [['meta[name="author"]', 'value']],
   },
 
   date_published: {
-    selectors: [
-      ['meta[name="article:published_time"]', 'value'],
-    ],
+    selectors: [['meta[name="article:published_time"]', 'value']],
   },
 
   dek: {
-    selectors: [
-      'h2.p-dek',
-    ],
+    selectors: ['h2.p-dek'],
   },
 
   lead_image_url: {
-    selectors: [
-      ['meta[name="og:image"]', 'value'],
-    ],
+    selectors: [['meta[name="og:image"]', 'value']],
   },
 
   content: {
@@ -47,7 +37,7 @@ export const WwwThevergeComExtractor = {
 
     // Transform lazy-loaded images
     transforms: {
-      noscript: ($node) => {
+      noscript: $node => {
         const $children = $node.children();
         if ($children.length === 1 && $children.get(0).tagName === 'img') {
           return 'span';

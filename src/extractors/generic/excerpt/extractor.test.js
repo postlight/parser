@@ -1,10 +1,7 @@
 import assert from 'assert';
 import cheerio from 'cheerio';
 
-import {
-  default as GenericExcerptExtractor,
-  clean,
-} from './extractor';
+import GenericExcerptExtractor, { clean } from './extractor';
 
 describe('GenericExcerptExtractor', () => {
   describe('extract({ $, content, metaCache })', () => {
@@ -20,7 +17,11 @@ describe('GenericExcerptExtractor', () => {
       const $ = cheerio.load(html);
       const metaCache = ['og:description'];
 
-      const excerpt = GenericExcerptExtractor.extract({ $, content: '', metaCache });
+      const excerpt = GenericExcerptExtractor.extract({
+        $,
+        content: '',
+        metaCache,
+      });
 
       assert.equal(excerpt, actualExcerpt);
     });
@@ -37,7 +38,11 @@ describe('GenericExcerptExtractor', () => {
       const $ = cheerio.load(html);
       const metaCache = ['twitter:description'];
 
-      const excerpt = GenericExcerptExtractor.extract({ $, content: '', metaCache });
+      const excerpt = GenericExcerptExtractor.extract({
+        $,
+        content: '',
+        metaCache,
+      });
 
       assert.equal(excerpt, actualExcerpt);
     });
@@ -50,10 +55,15 @@ describe('GenericExcerptExtractor', () => {
         </html>
       `;
       const $ = cheerio.load(html);
-      const content = '<div><p>Wow <b>this</b> is going to be something good.</p></div>';
+      const content =
+        '<div><p>Wow <b>this</b> is going to be something good.</p></div>';
       const metaCache = [];
 
-      const excerpt = GenericExcerptExtractor.extract({ $, content, metaCache });
+      const excerpt = GenericExcerptExtractor.extract({
+        $,
+        content,
+        metaCache,
+      });
 
       assert.equal(excerpt, 'Wow this is going to be something good.');
     });

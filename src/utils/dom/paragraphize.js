@@ -20,8 +20,11 @@ export default function paragraphize(node, $, br = false) {
 
     // while the next node is text or not a block level element
     // append it to a new p node
-    while (sibling && !(sibling.tagName && BLOCK_LEVEL_TAGS_RE.test(sibling.tagName))) {
-      const nextSibling = sibling.nextSibling;
+    while (
+      sibling &&
+      !(sibling.tagName && BLOCK_LEVEL_TAGS_RE.test(sibling.tagName))
+    ) {
+      const { nextSibling } = sibling;
       $(sibling).appendTo(p);
       sibling = nextSibling;
     }

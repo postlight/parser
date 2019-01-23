@@ -1,7 +1,5 @@
 export function textLength(text) {
-  return text.trim()
-             .replace(/\s+/g, ' ')
-             .length;
+  return text.trim().replace(/\s+/g, ' ').length;
 }
 
 // Determines what percentage of the text
@@ -15,7 +13,7 @@ export function linkDensity($node) {
 
   if (totalTextLength > 0) {
     return linkLength / totalTextLength;
-  } else if (totalTextLength === 0 && linkLength > 0) {
+  } if (totalTextLength === 0 && linkLength > 0) {
     return 1;
   }
 

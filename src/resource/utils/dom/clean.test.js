@@ -5,7 +5,7 @@ import clean from './clean';
 
 describe('clean($)', () => {
   it('removes script elements', () => {
-    const html = '<div><script>alert(\'hi\')</script></div>';
+    const html = "<div><script>alert('hi')</script></div>";
     const $ = cheerio.load(html);
 
     assert.equal(clean($).html(), '<div></div>');

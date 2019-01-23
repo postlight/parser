@@ -12,7 +12,8 @@ export const BuzzfeedExtractor = {
 
   author: {
     selectors: [
-      'a[data-action="user/username"]', 'byline__author',
+      'a[data-action="user/username"]',
+      'byline__author',
       // enter author selectors
     ],
   },
@@ -30,7 +31,7 @@ export const BuzzfeedExtractor = {
     transforms: {
       h2: 'b',
 
-      'div.longform_custom_header_media': ($node) => {
+      'div.longform_custom_header_media': $node => {
         if ($node.has('img') && $node.has('.longform_header_image_source')) {
           return 'figure';
         }
@@ -54,20 +55,15 @@ export const BuzzfeedExtractor = {
   },
 
   date_published: {
-    selectors: [
-      '.buzz-datetime',
-    ],
+    selectors: ['.buzz-datetime'],
   },
 
   lead_image_url: {
-    selectors: [
-      ['meta[name="og:image"]', 'value'],
-    ],
+    selectors: [['meta[name="og:image"]', 'value']],
   },
 
   dek: {
-    selectors: [
-    ],
+    selectors: [],
   },
 
   next_page_url: null,

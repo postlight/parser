@@ -8,10 +8,7 @@ babelOpts.runtimeHelpers = true;
 
 export default {
   entry: './scripts/generate-custom-parser.js',
-  plugins: [
-    commonjs(),
-    babel(babelOpts),
-  ],
+  plugins: [commonjs(), babel(babelOpts)],
   format: 'cjs',
   dest: 'dist/generate-custom-parser.js', // equivalent to --output
   sourceMap: true,

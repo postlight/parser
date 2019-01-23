@@ -1,8 +1,7 @@
 import assert from 'assert';
 import moment from 'moment-timezone';
 
-import {
-  default as cleanDatePublished,
+import cleanDatePublished, {
   cleanDateString,
 } from './date-published';
 
@@ -10,11 +9,7 @@ describe('cleanDatePublished(dateString)', () => {
   it('returns a date', () => {
     const datePublished = cleanDatePublished('published: 1/1/2020');
 
-    assert.equal(
-      datePublished,
-      moment('1/1/2020', 'MM/DD/YYYY').toISOString()
-      // '2020-01-01T05:00:00.000Z',
-    );
+    assert.equal(datePublished, moment('1/1/2020', 'MM/DD/YYYY').toISOString());
   });
 
   it('returns null if date is invalid', () => {
@@ -26,16 +21,19 @@ describe('cleanDatePublished(dateString)', () => {
   it('handles timezones', () => {
     // The JS date parser is forgiving, but
     // it needs am/pm separated from a time
-    const datePublished =
-      cleanDatePublished('November 29, 2016: 8:18 AM ET', { timezone: 'America/New_York' });
+    const datePublished = cleanDatePublished('November 29, 2016: 8:18 AM ET', {
+      timezone: 'America/New_York',
+    });
     assert.equal(datePublished, '2016-11-29T13:18:00.000Z');
   });
 
   it('accepts a custom date format', () => {
     // The JS date parser is forgiving, but
     // it needs am/pm separated from a time
-    const datePublished =
-      cleanDatePublished('Mon Aug 03 12:45:00 EDT 2015', { timezone: 'America/New_York', format: 'ddd MMM DD HH:mm:ss zz YYYY' });
+    const datePublished = cleanDatePublished('Mon Aug 03 12:45:00 EDT 2015', {
+      timezone: 'America/New_York',
+      format: 'ddd MMM DD HH:mm:ss zz YYYY',
+    });
     assert.equal(datePublished, '2015-08-03T16:45:00.000Z');
   });
 });
@@ -73,7 +71,9 @@ describe('cleanDateString(dateString)', () => {
   it('can handle some tough timestamps', () => {
     // The JS date parser is forgiving, but
     // it needs am/pm separated from a time
-    const date1 = cleanDateString('This page was last modified on 15 April 2016, at 10:59.');
+    const date1 = cleanDateString(
+      'This page was last modified on 15 April 2016, at 10:59.'
+    );
     assert.equal(date1, '15 Apr 2016 10:59');
   });
 

@@ -1,12 +1,10 @@
 const HTML = {
-  tooShort:
-    `
+  tooShort: `
     <div class="foo bar">
       <p>This is too short</p>
     </div>
    `,
-  longEnough:
-    `
+  longEnough: `
     <div class="foo bar">
       <p>
 Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean m
