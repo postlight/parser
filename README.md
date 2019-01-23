@@ -8,6 +8,14 @@ The Mercury Parser module powers the [Mercury Parser API](https://mercury.postli
 
 ## How? Like this.
 
+### Installation
+
+```bash
+yarn add mercury-parser
+```
+
+### Usage
+
 ```javascript
 import Mercury from 'mercury-parser';
 
