@@ -51,5 +51,5 @@ export default function cleanDatePublished(
     date = createDate(dateString, timezone, format);
   }
 
-  return date.isValid() ? date.format() : null;
+  return date.isValid() ? date.toISOString() : null;
 }
