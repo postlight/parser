@@ -33,7 +33,6 @@ of contribution and appreciate your help.
 Here are a few examples of what we consider a contribution:
 
 *   Updates to source code
-*   For Answering questions and chatting, contact us on [mercury@postlight.com](mailto:mercury@postlight.com)
 *   Filing, organizing, and commenting on issues in the [issue tracker](https://github.com/postlight/mercury-parser/issues)
 *   Teaching others how to use Mercury
 *   Community building and outreach
@@ -50,7 +49,7 @@ always work, and sometimes it's hard to know what to search for, so consider
 this extra credit. We won't mind if you accidentally file a duplicate report.
 
 Opening an issue is as easy as following [this link](https://github.com/postlight/mercury-parser/issues/new)
-and filling out the fields.
+and filling out the template.
 
 ### Security
 
@@ -68,7 +67,7 @@ A working list of public, known security-related issues can be found in the
 
 ## Requesting a Feature
 
-To request a change to the way that Mercury works, please open an issue in this repository named, "Feature Request: ", followed by your suggestion.
+To request a change to the way that Mercury works, please open an issue in this repository named, "Feature Request: [Your Feature Idea]," followed by your suggestion.
 
 ## Development Workflow
 
@@ -97,14 +96,14 @@ yarn build:web
 
 ### Testing
 
-Mercury is a test driven application; each component has its own test file. Tests are run for both node and web builds, our testing frameworks are:  
-*   `Jest` for node build
-*   `Karma` for web build  
+Mercury is a test-driven application; each component has its own test file. Tests are run for both node and web builds. Our testing frameworks are:  
+*   `Jest` for the node build
+*   `Karma` for the web build  
 
-For the code to be accepted, All tests for both the node and browser must pass. To run the required tests for local development, execute the following commands:  
+For new code to be accepted, all tests must pass in both environments. To run the required tests for local development, execute the following commands:  
 
 ```bash
-# Run the full test suite
+# Run the full test suite for both node and the browser
 yarn test
 
 # Run the tests for node build only
@@ -113,7 +112,7 @@ yarn test:node
 # Run the tests for web build only
 yarn test:web
 
-# Run the test for a single file
+# Run the tests, then re-run tests on file changes. If an optional <test_file> is passed, only tests matching that string will be re-run.
 yarn watch:test <test_file>
 ```
 
@@ -127,14 +126,14 @@ they can merge.
 
 #### Markdown
 
-In addition to enforcing a JavaScript style guide, we also require that markdown
+In addition to enforcing a JavaScript style guide, we also require that Markdown
 files pass [remarklint](https://github.com/wooorm/remark-lint) with the recommended
-preset. This helps keep our markdown tidy, consistent, and compatible with a range of
-markdown parsers used for generating documentation.
+preset. This helps keep our Markdown tidy, consistent, and compatible with a range of
+Markdown parsers used for generating documentation.
 
 ### Node.js Version Requirements
 
-Mercury is built against Node `>= v6`. Since this is the latest LTS release and the
+Mercury is built against Node `>= v8.10`. Since this is the latest LTS release and the
 version we run in our CI environments, we recommend you use it when working on
 the Mercury codebase.
 
@@ -168,7 +167,7 @@ load-nvmrc
 ## Writing Documentation
 
 Improvements to documentation are a great way to start contributing to Mercury. The
-source for the official documentation are markdown files that live in this repository.
+source for the official documentation are Markdown files that live in this repository.
 
 ## Submitting a Pull Request
 
@@ -189,18 +188,18 @@ Commit messages should follow the format outlined below:
 
 `prefix: message in present tense`
 
- Prefix      | Description
-------------:|:-------------------------------------------------------------------------
-       chore | does not effect the production version of the app in any way.
-        deps | add, update, or remove a dependency.
-        docs | add, update, or remove documentation. no code changes.
-          dx | improve the development experience of mercury core.
-        feat | a feature or enhancement. can be incredibly small.
-         fix | a bug fix for something that was broken.
-        perf | add, update, or fix a test.
-    refactor | change code, but not functionality.
-       style | change code style, like removing whitespace. no functional code changes.
-        test | add, update, or fix a test.
+Prefix   | Description
+-------: | :----------
+chore    | does not effect the production version of the app in any way.
+deps     | add, update, or remove a dependency.
+doc      | add, update, or remove documentation. no code changes.
+dx       | improve the development experience of mercury core.
+feat     | a feature or enhancement. can be incredibly small.
+fix      | a bug fix for something that was broken.
+perf     | add, update, or fix a test.
+refactor | change code, but not functionality.
+style    | change code style, like removing whitespace. no functional code changes.
+test     | add, update, or fix a test.
 
 ### Code Reviews
 
@@ -212,9 +211,9 @@ fall behind. Feel free to reach out to the core team if you have not received a 
 
 Some useful places to look for information are:
 
-*   The main [readme](./README.md) for this repository.
-*   The Mercury custom parser [readme](./src/extractors/custom/README.md)
-*   The Mercury parser api [repository](https://github.com/postlight/mercury-parser-api)
+*   The main [README](./README.md) for this repository.
+*   The Mercury Custom Parser [README](./src/extractors/custom/README.md)
+*   The Mercury Parser API [repository](https://github.com/postlight/mercury-parser-api)
 
 *Adapted from [Contributing to Node.js](https://github.com/nodejs/node/blob/master/CONTRIBUTING.md)
 and [ThinkUp Security and Data Privacy](http://thinkup.readthedocs.io/en/latest/install/security.html#thinkup-security-and-data-privacy).*
