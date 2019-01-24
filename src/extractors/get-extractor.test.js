@@ -5,7 +5,11 @@ import getExtractor from './get-extractor';
 
 describe('getExtractor(url)', () => {
   it('returns GenericExtractor if no custom extractor is found', () => {
-    const extractor = getExtractor('http://example.com', null, cheerio.load('<div />'));
+    const extractor = getExtractor(
+      'http://example.com',
+      null,
+      cheerio.load('<div />')
+    );
 
     assert.equal(extractor.domain, '*');
   });
@@ -29,8 +33,7 @@ describe('getExtractor(url)', () => {
   });
 
   it('returns a custom extractor based on detectors', () => {
-    const html =
-      '<head><meta name="al:ios:app_name" value="Medium" /></head>';
+    const html = '<head><meta name="al:ios:app_name" value="Medium" /></head>';
 
     const $ = cheerio.load(html);
     const extractor = getExtractor('http://foo.com', null, $);

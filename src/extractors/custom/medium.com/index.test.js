@@ -1,11 +1,12 @@
 import assert from 'assert';
-import fs from 'fs';
 import URL from 'url';
 import cheerio from 'cheerio';
 
 import Mercury from 'mercury';
 import getExtractor from 'extractors/get-extractor';
 import { excerptContent } from 'utils/text';
+
+const fs = require('fs');
 
 describe('MediumExtractor', () => {
   describe('initial test case', () => {
@@ -14,10 +15,8 @@ describe('MediumExtractor', () => {
     beforeAll(() => {
       url =
         'https://medium.com/the-wtf-economy/wtf-whats-the-future-e52ab9515573#.ilwrgwsks';
-      const html =
-        fs.readFileSync('./fixtures/medium.com/1477523363921.html');
-      result =
-        Mercury.parse(url, html, { fallback: false });
+      const html = fs.readFileSync('./fixtures/medium.com/1477523363921.html');
+      result = Mercury.parse(url, html, { fallback: false });
     });
 
     it('is selected properly', async () => {
@@ -39,7 +38,7 @@ describe('MediumExtractor', () => {
     it('returns the author', async () => {
       const { author } = await result;
 
-      assert.equal(author, 'Tim O\'Reilly');
+      assert.equal(author, "Tim O'Reilly");
     });
 
     it('returns the date_published', async () => {
@@ -61,7 +60,10 @@ describe('MediumExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(lead_image_url, 'https://cdn-images-1.medium.com/max/1200/1*3Gzaug9mRc8vvx1cuQWkog.png');
+      assert.equal(
+        lead_image_url,
+        'https://cdn-images-1.medium.com/max/1200/1*3Gzaug9mRc8vvx1cuQWkog.png'
+      );
     });
 
     it('returns the content', async () => {
@@ -69,12 +71,20 @@ describe('MediumExtractor', () => {
 
       const $ = cheerio.load(content || '');
 
-      const first13 = excerptContent($('*').first().text(), 13);
+      const first13 = excerptContent(
+        $('*')
+          .first()
+          .text(),
+        13
+      );
 
       // testing that youtube video transform is working
       assert.equal(/IAoy3ia2ivI/.test(content), true);
 
-      assert.equal(first13, 'Video of WTF? My talk at the White House Frontiers ConferenceLast Thursday, I');
+      assert.equal(
+        first13,
+        'Video of WTF? My talk at the White House Frontiers ConferenceLast Thursday, I'
+      );
     });
   });
 
@@ -85,8 +95,7 @@ describe('MediumExtractor', () => {
       url =
         'https://medium.com/@JakobUlbrich/flag-attributes-in-android-how-to-use-them-ac4ec8aee7d1#.h949wjmyw';
       const html = fs.readFileSync('./fixtures/medium.com/1485902752952.html');
-      result =
-        Mercury.parse(url, html, { fallback: false });
+      result = Mercury.parse(url, html, { fallback: false });
     });
 
     it('returns the content', async () => {
@@ -96,7 +105,10 @@ describe('MediumExtractor', () => {
 
       const first13 = excerptContent($.text(), 13);
 
-      assert.equal(first13, 'I’m sure you have seen something like the following line very often while');
+      assert.equal(
+        first13,
+        'I’m sure you have seen something like the following line very often while'
+      );
     });
   });
 });

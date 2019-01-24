@@ -1,13 +1,7 @@
 import URL from 'url';
 
-import {
-  getAttrs,
-  isWordpress,
-} from 'utils/dom';
-import {
-  removeAnchor,
-  pageNumFromUrl,
-} from 'utils/text';
+import { getAttrs, isWordpress } from 'utils/dom';
+import { removeAnchor, pageNumFromUrl } from 'utils/text';
 
 import {
   scoreSimilarity,
@@ -27,7 +21,9 @@ export function makeBaseRegex(baseUrl) {
 }
 
 function makeSig($link, linkText) {
-  return `${linkText || $link.text()} ${$link.attr('class') || ''} ${$link.attr('id') || ''}`;
+  return `${linkText || $link.text()} ${$link.attr('class') || ''} ${$link.attr(
+    'id'
+  ) || ''}`;
 }
 
 export default function scoreLinks({
@@ -62,7 +58,9 @@ export default function scoreLinks({
     const $link = $(link);
     const linkText = $link.text();
 
-    if (!shouldScore(href, articleUrl, baseUrl, parsedUrl, linkText, previousUrls)) {
+    if (
+      !shouldScore(href, articleUrl, baseUrl, parsedUrl, linkText, previousUrls)
+    ) {
       return possiblePages;
     }
 
@@ -74,7 +72,9 @@ export default function scoreLinks({
         href,
       };
     } else {
-      possiblePages[href].linkText = `${possiblePages[href].linkText}|${linkText}`;
+      possiblePages[href].linkText = `${
+        possiblePages[href].linkText
+      }|${linkText}`;
     }
 
     const possiblePage = possiblePages[href];

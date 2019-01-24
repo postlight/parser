@@ -1,8 +1,5 @@
 import { stripTags } from 'utils/dom';
-import {
-  excerptContent,
-  normalizeSpaces,
-} from 'utils/text';
+import { excerptContent, normalizeSpaces } from 'utils/text';
 
 import { TEXT_LINK_RE } from './constants';
 
@@ -13,7 +10,8 @@ export default function cleanDek(dek, { $, excerpt }) {
   if (dek.length > 1000 || dek.length < 5) return null;
 
   // Check that dek isn't the same as excerpt
-  if (excerpt && excerptContent(excerpt, 10) === excerptContent(dek, 10)) return null;
+  if (excerpt && excerptContent(excerpt, 10) === excerptContent(dek, 10))
+    return null;
 
   const dekText = stripTags(dek, $);
 

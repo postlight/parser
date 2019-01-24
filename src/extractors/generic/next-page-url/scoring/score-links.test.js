@@ -1,8 +1,9 @@
 import assert from 'assert';
 import cheerio from 'cheerio';
-import fs from 'fs';
 
 import scoreLinks from './score-links';
+
+const fs = require('fs');
 
 describe('scoreLinks(links)', () => {
   it('returns an object of scored links', () => {
@@ -10,7 +11,8 @@ describe('scoreLinks(links)', () => {
 
     const $ = cheerio.load(html);
     const links = $('a[href]').toArray();
-    const url = 'http://arstechnica.com/gadgets/2016/08/the-connected-renter-how-to-make-your-apartment-smarter/';
+    const url =
+      'http://arstechnica.com/gadgets/2016/08/the-connected-renter-how-to-make-your-apartment-smarter/';
 
     const scoredPages = scoreLinks({
       links,
@@ -27,7 +29,8 @@ describe('scoreLinks(links)', () => {
 
     const $ = cheerio.load(html);
     const links = $('a[href]').toArray();
-    const url = 'http://arstechnica.com/gadgets/2016/08/the-connected-renter-how-to-make-your-apartment-smarter/';
+    const url =
+      'http://arstechnica.com/gadgets/2016/08/the-connected-renter-how-to-make-your-apartment-smarter/';
 
     const scoredPages = scoreLinks({
       links,

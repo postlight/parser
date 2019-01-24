@@ -1,11 +1,12 @@
 import assert from 'assert';
-import fs from 'fs';
 import URL from 'url';
 import cheerio from 'cheerio';
 
 import Mercury from 'mercury';
 import getExtractor from 'extractors/get-extractor';
 import { excerptContent } from 'utils/text';
+
+const fs = require('fs');
 
 describe('WwwWashingtonpostComExtractor', () => {
   describe('initial test case', () => {
@@ -65,7 +66,10 @@ describe('WwwWashingtonpostComExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(lead_image_url, 'https://www.washingtonpost.com/resizer/E6j9aM5bx4fpPedpdl2KxcSIci4=/1484x0/arc-anglerfish-washpost-prod-washpost.s3.amazonaws.com/public/GRLSHYNYVQZJBAUBKSFA26NTO4.jpg');
+      assert.equal(
+        lead_image_url,
+        'https://www.washingtonpost.com/resizer/E6j9aM5bx4fpPedpdl2KxcSIci4=/1484x0/arc-anglerfish-washpost-prod-washpost.s3.amazonaws.com/public/GRLSHYNYVQZJBAUBKSFA26NTO4.jpg'
+      );
     });
 
     it('returns the content', async () => {
@@ -77,11 +81,19 @@ describe('WwwWashingtonpostComExtractor', () => {
 
       const $ = cheerio.load(content || '');
 
-      const first13 = excerptContent($('*').first().text(), 13);
+      const first13 = excerptContent(
+        $('*')
+          .first()
+          .text(),
+        13
+      );
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(first13, 'Pittsburgh Mayor Bill Peduto on Sunday near the Tree of Life synagogue in');
+      assert.equal(
+        first13,
+        'Pittsburgh Mayor Bill Peduto on Sunday near the Tree of Life synagogue in'
+      );
     });
   });
 });

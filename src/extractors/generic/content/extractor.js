@@ -47,6 +47,7 @@ const GenericContentExtractor = {
 
     // We didn't succeed on first pass, one by one disable our
     // extraction opts and try again.
+    // eslint-disable-next-line no-restricted-syntax
     for (const key of Reflect.ownKeys(opts).filter(k => opts[k] === true)) {
       opts[key] = false;
       $ = cheerio.load(html);
@@ -63,14 +64,12 @@ const GenericContentExtractor = {
 
   // Get node given current options
   getContentNode($, title, url, opts) {
-    return cleanContent(
-              extractBestNode($, opts),
-      {
-        $,
-        cleanConditionally: opts.cleanConditionally,
-        title,
-        url,
-      });
+    return cleanContent(extractBestNode($, opts), {
+      $,
+      cleanConditionally: opts.cleanConditionally,
+      title,
+      url,
+    });
   },
 
   // Once we got here, either we're at our last-resort node, or
@@ -82,13 +81,7 @@ const GenericContentExtractor = {
     }
 
     return normalizeSpaces($.html(node));
-
-    // if return_type == "html":
-    //     return normalize_spaces(node_to_html(node))
-    // else:
-    //     return node
   },
-
 };
 
 export default GenericContentExtractor;

@@ -7,7 +7,11 @@ export default function scoreSimilarity(score, articleUrl, href) {
   // sliding scale, subtract points from this link based on
   // similarity.
   if (score > 0) {
-    const similarity = new difflib.SequenceMatcher(null, articleUrl, href).ratio();
+    const similarity = new difflib.SequenceMatcher(
+      null,
+      articleUrl,
+      href
+    ).ratio();
     // Subtract .1 from diff_percent when calculating modifier,
     // which means that if it's less than 10% different, we give a
     // bonus instead. Ex:

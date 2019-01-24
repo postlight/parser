@@ -16,11 +16,11 @@ import {
 
 export function cleanDateString(dateString) {
   return (dateString.match(SPLIT_DATE_STRING) || [])
-                   .join(' ')
-                   .replace(TIME_MERIDIAN_DOTS_RE, 'm')
-                   .replace(TIME_MERIDIAN_SPACE_RE, '$1 $2 $3')
-                   .replace(CLEAN_DATE_STRING_RE, '$1')
-                   .trim();
+    .join(' ')
+    .replace(TIME_MERIDIAN_DOTS_RE, 'm')
+    .replace(TIME_MERIDIAN_SPACE_RE, '$1 $2 $3')
+    .replace(CLEAN_DATE_STRING_RE, '$1')
+    .trim();
 }
 
 export function createDate(dateString, timezone, format) {
@@ -28,14 +28,17 @@ export function createDate(dateString, timezone, format) {
     return moment(new Date(dateString));
   }
 
-  return timezone ?
-    moment.tz(dateString, format || parseFormat(dateString), timezone) :
-    moment(dateString, format || parseFormat(dateString));
+  return timezone
+    ? moment.tz(dateString, format || parseFormat(dateString), timezone)
+    : moment(dateString, format || parseFormat(dateString));
 }
 
 // Take a date published string, and hopefully return a date out of
 // it. Return none if we fail.
-export default function cleanDatePublished(dateString, { timezone, format } = {}) {
+export default function cleanDatePublished(
+  dateString,
+  { timezone, format } = {}
+) {
   // If string is in milliseconds or seconds, convert to int and return
   if (MS_DATE_STRING.test(dateString) || SEC_DATE_STRING.test(dateString)) {
     return new Date(parseInt(dateString, 10)).toISOString();

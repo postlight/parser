@@ -28,16 +28,17 @@ function testFor(key, value, dir) {
     `;
 }
 
-export default function (file, url, dir, result, name) {
+export default function(file, url, dir, result, name) {
   return template`
     import assert from 'assert';
-    import fs from 'fs';
     import URL from 'url';
     import cheerio from 'cheerio';
 
     import Mercury from 'mercury';
     import getExtractor from 'extractors/get-extractor';
     import { excerptContent } from 'utils/text';
+
+    const fs = require('fs');
 
     describe('${name}', () => {
       describe('initial test case', () => {
@@ -60,7 +61,9 @@ export default function (file, url, dir, result, name) {
           assert.equal(extractor.domain, URL.parse(url).hostname)
         })
 
-          ${Reflect.ownKeys(result).map(k => testFor(k, result[k], dir)).join('\n\n')}
+          ${Reflect.ownKeys(result)
+            .map(k => testFor(k, result[k], dir))
+            .join('\n\n')}
 
         it('returns the content', async () => {
           // To pass this test, fill out the content selector
