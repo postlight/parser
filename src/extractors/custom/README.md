@@ -185,7 +185,7 @@ For our New Yorker example, we're going to use [this story](http://www.newyorker
 When the generator script completes, you'll be prompted to run:
 
 ```bash
-yarn watch:test -- www.newyorker.com
+yarn watch:test www.newyorker.com
 ```
 
 This will run the tests for the parser you just generated, which should fail (which makes sense — you haven't written it yet!). Your goal now is to follow the instructions in the generated `www.newyorker.com/index.test.js` and `www.newyorker.com/index.js` files until they pass!
@@ -253,7 +253,7 @@ AssertionError: 'Hacking, Cryptography, and the Countdown to Quantum Computing' 
   'Schrödinger’s Hack';
 ```
 
-When Mercury generated our test, it took a guess at the page's title, and in this case, it got it wrong. So update the test with thte title we expect, save it, and your test should pass!
+When Mercury generated our test, it took a guess at the page's title, and in this case, it got it wrong. So update the test with the title we expect, save it, and your test should pass!
 
 ### Step 3: Speed it up
 
