@@ -92,9 +92,9 @@
     "watchify": "^3.11.0"
   },
   "dependencies": {
-    "browser-request": "adampash/browser-request#feat-add-headers-to-response",
+    "browser-request": "^0.3.3",
     "cheerio": "^0.22.0",
-    "difflib": "adampash/difflib.js",
+    "difflib": "^0.2.4",
     "ellipsize": "0.1.0",
     "iconv-lite": "0.4.24",
     "jquery": "^3.3.1",
@@ -104,9 +104,9 @@
     "request": "czardoz/request",
     "request-promise": "^4.2.2",
     "string-direction": "^0.1.2",
-    "url": "adampash/node-url#feat-remove-punycode",
+    "url": "^0.11.0",
     "valid-url": "^1.0.9",
-    "wuzzy": "adampash/wuzzy#feat-array-is-array"
+    "wuzzy": "^0.1.3"
   },
   "browser": {
     "main": "./dist/mercury.web.js",
