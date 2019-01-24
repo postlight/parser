@@ -2,7 +2,7 @@
 
 Thank you for your interest in contributing to Mercury Parser! It's people like you that make Mercury such a useful tool. The below guidelines will help answer any questions you may have about the contribution process. We look forward to receiving contributions from you — our community!
 
-*Please read our [Code of Conduct]() before participating in our community.*
+_Please read our [Code of Conduct](./CODE_OF_CONDUCT.md) before participating in our community._
 
 ## Contents
 
@@ -32,10 +32,10 @@ of contribution and appreciate your help.
 
 Here are a few examples of what we consider a contribution:
 
-*   Updates to source code
-*   Filing, organizing, and commenting on issues in the [issue tracker](https://github.com/postlight/mercury-parser/issues)
-*   Teaching others how to use Mercury
-*   Community building and outreach
+- Updates to source code
+- Filing, organizing, and commenting on issues in the [issue tracker](https://github.com/postlight/mercury-parser/issues)
+- Teaching others how to use Mercury
+- Community building and outreach
 
 ## Reporting a Bug
 
@@ -96,11 +96,12 @@ yarn build:web
 
 ### Testing
 
-Mercury is a test-driven application; each component has its own test file. Tests are run for both node and web builds. Our testing frameworks are:  
-*   `Jest` for the node build
-*   `Karma` for the web build  
+Mercury is a test-driven application; each component has its own test file. Tests are run for both node and web builds. Our testing frameworks are:
 
-For new code to be accepted, all tests must pass in both environments. To run the required tests for local development, execute the following commands:  
+- `Jest` for the node build
+- `Karma` for the web build
+
+For new code to be accepted, all tests must pass in both environments. To run the required tests for local development, execute the following commands:
 
 ```bash
 # Run the full test suite for both node and the browser
@@ -181,11 +182,11 @@ model [described here](https://help.github.com/articles/creating-a-pull-request-
 
 **Before submitting a pull request**, please make sure:
 
-*   [X] You have added tests for modifications you made to the codebase.
-*   [X] You have updated any documentation in the source code comments for APIs
-that you may have changed.
-*   [X] You have no linter errors to correct after running `yarn lint`.
-*   [X] You have run the test suite via `yarn test` and it passed.
+- [x] You have added tests for modifications you made to the codebase.
+- [x] You have updated any documentation in the source code comments for APIs
+      that you may have changed.
+- [x] You have no linter errors to correct after running `yarn lint`.
+- [x] You have run the test suite via `yarn test` and it passed.
 
 ### Commit Style
 
@@ -193,18 +194,18 @@ Commit messages should follow the format outlined below:
 
 `prefix: message in present tense`
 
-Prefix   | Description
--------: | :----------
-chore    | does not effect the production version of the app in any way.
-deps     | add, update, or remove a dependency.
-doc      | add, update, or remove documentation. no code changes.
-dx       | improve the development experience of mercury core.
-feat     | a feature or enhancement. can be incredibly small.
-fix      | a bug fix for something that was broken.
-perf     | add, update, or fix a test.
-refactor | change code, but not functionality.
-style    | change code style, like removing whitespace. no functional code changes.
-test     | add, update, or fix a test.
+|   Prefix | Description                                                              |
+| -------: | :----------------------------------------------------------------------- |
+|    chore | does not effect the production version of the app in any way.            |
+|     deps | add, update, or remove a dependency.                                     |
+|      doc | add, update, or remove documentation. no code changes.                   |
+|       dx | improve the development experience of mercury core.                      |
+|     feat | a feature or enhancement. can be incredibly small.                       |
+|      fix | a bug fix for something that was broken.                                 |
+|     perf | add, update, or fix a test.                                              |
+| refactor | change code, but not functionality.                                      |
+|    style | change code style, like removing whitespace. no functional code changes. |
+|     test | add, update, or fix a test.                                              |
 
 ### Code Reviews
 
@@ -216,9 +217,9 @@ fall behind. Feel free to reach out to the core team if you have not received a 
 
 Some useful places to look for information are:
 
-*   The main [README](./README.md) for this repository.
-*   The Mercury Custom Parser [README](./src/extractors/custom/README.md).
-*   The Mercury Parser API [repository](https://github.com/postlight/mercury-parser-api).
+- The main [README](./README.md) for this repository.
+- The Mercury Custom Parser [README](./src/extractors/custom/README.md).
+- The Mercury Parser API [repository](https://github.com/postlight/mercury-parser-api).
 
-*Adapted from [Contributing to Node.js](https://github.com/nodejs/node/blob/master/CONTRIBUTING.md)
-and [ThinkUp Security and Data Privacy](http://thinkup.readthedocs.io/en/latest/install/security.html#thinkup-security-and-data-privacy).*
+_Adapted from [Contributing to Node.js](https://github.com/nodejs/node/blob/master/CONTRIBUTING.md)
+and [ThinkUp Security and Data Privacy](http://thinkup.readthedocs.io/en/latest/install/security.html#thinkup-security-and-data-privacy)._
