@@ -48,7 +48,7 @@ Licensed under either of the below, at your preference:
 
 ## Contributing
 
-Unless it is explicitly state otherwise, any contribution intentionally submitted for inclusion in the work, as defined in the Apache-2.0 license, shall be dual licensed as above without any additional terms or conditions.
+Unless it is explicitly stated otherwise, any contribution intentionally submitted for inclusion in the work, as defined in the Apache-2.0 license, shall be dual licensed as above without any additional terms or conditions.
 
 ## Contributors
 
