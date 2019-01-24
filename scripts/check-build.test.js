@@ -22,6 +22,8 @@ if (process.env.CI) {
     // correctly/isn't broken
     if (cheerio.browser) {
       require('../dist/mercury.web');
+      // eslint-disable-next-line no-unused-expressions
+      typeof Mercury === 'undefined' && require('../dist/mercury');
     }
     it('do not run because this is CI and we do not want network requests', () => {
       assert.equal(true, true);
