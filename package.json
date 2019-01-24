@@ -6,7 +6,7 @@
   "main": "./dist/mercury.js",
   "scripts": {
     "lint": "if test \"$CI\" != \"true\" ; then eslint . --fix; fi",
-    "lint:ci": "eslint .",
+    "lint:ci": "remark . && eslint .",
     "lint-fix-quiet": "eslint --fix --quiet",
     "build": "yarn lint && rollup -c && yarn test:build",
     "build:web": "yarn lint && rollup -c rollup.config.web.js && yarn test:build:web",
@@ -79,6 +79,9 @@
     "nock": "^10.0.6",
     "ora": "^3.0.0",
     "prettier": "^1.15.3",
+    "remark-cli": "^6.0.1",
+    "remark-lint": "^6.0.4",
+    "remark-preset-lint-recommended": "^3.0.2",
     "requirejs": "^2.3.6",
     "rollup": "^1.1.0",
     "rollup-plugin-babel": "^4.0.1",
@@ -125,6 +128,7 @@
       "git add"
     ],
     "*.{json,css,md}": [
+      "remark .",
       "prettier --write",
       "git add"
     ]
