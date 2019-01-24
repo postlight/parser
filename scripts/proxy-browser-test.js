@@ -31,11 +31,11 @@ const stop = () => {
   server && server.close();
 };
 
-if (!process.env.CI) {
-  start();
-  require('child_process').execSync(
-    'node ./node_modules/karma/bin/karma start ./scripts/karma.conf.js',
-    { stdio: [0, 1, 2] }
-  );
-  stop();
-}
+// if (!process.env.CI) {
+start();
+require('child_process').execSync(
+  'node ./node_modules/karma/bin/karma start ./scripts/karma.conf.js',
+  { stdio: [0, 1, 2] }
+);
+stop();
+// }

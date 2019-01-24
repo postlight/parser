@@ -18,6 +18,11 @@ let urls = [
 // don't run this on CI b/c we want to avoid network requests
 if (process.env.CI) {
   describe('Tests', () => {
+    // We still want to require mercury here to ensure the web build loads
+    // correctly/isn't broken
+    if (cheerio.browser) {
+      require('../dist/mercury.web');
+    }
     it('do not run because this is CI and we do not want network requests', () => {
       assert.equal(true, true);
     });
