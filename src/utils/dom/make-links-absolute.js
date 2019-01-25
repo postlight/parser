@@ -1,9 +1,6 @@
 import URL from 'url';
 
-import {
-  getAttrs,
-  setAttr,
-} from 'utils/dom';
+import { getAttrs, setAttr } from 'utils/dom';
 
 function absolutize($, rootUrl, attr, $content) {
   $(`[${attr}]`, $content).each((_, node) => {

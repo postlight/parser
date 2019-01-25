@@ -1,9 +1,6 @@
 import URL from 'url';
 
-import {
-  articleBaseUrl,
-  removeAnchor,
-} from 'utils/text';
+import { articleBaseUrl, removeAnchor } from 'utils/text';
 import scoreLinks from './scoring/score-links';
 
 // Looks for and returns next page url
@@ -31,10 +28,13 @@ const GenericNextPageUrlExtractor = {
 
     // now that we've scored all possible pages,
     // find the biggest one.
-    const topPage = Reflect.ownKeys(scoredLinks).reduce((acc, link) => {
-      const scoredLink = scoredLinks[link];
-      return scoredLink.score > acc.score ? scoredLink : acc;
-    }, { score: -100 });
+    const topPage = Reflect.ownKeys(scoredLinks).reduce(
+      (acc, link) => {
+        const scoredLink = scoredLinks[link];
+        return scoredLink.score > acc.score ? scoredLink : acc;
+      },
+      { score: -100 }
+    );
 
     // If the score is less than 50, we're not confident enough to use it,
     // so we fail.

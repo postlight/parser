@@ -1,5 +1,4 @@
 import assert from 'assert';
-import fs from 'fs';
 import URL from 'url';
 import cheerio from 'cheerio';
 
@@ -7,17 +6,18 @@ import Mercury from 'mercury';
 import getExtractor from 'extractors/get-extractor';
 import { excerptContent } from 'utils/text';
 
+const fs = require('fs');
+
 describe('HellogigglesComExtractor', () => {
   describe('initial test case', () => {
     let result;
     let url;
     beforeAll(() => {
-      url =
-        'http://hellogiggles.com/comfy-chic-holiday-outfit-illustrated/';
-      const html =
-        fs.readFileSync('./fixtures/hellogiggles.com/1482437663500.html');
-      result =
-        Mercury.parse(url, html, { fallback: false });
+      url = 'http://hellogiggles.com/comfy-chic-holiday-outfit-illustrated/';
+      const html = fs.readFileSync(
+        './fixtures/hellogiggles.com/1482437663500.html'
+      );
+      result = Mercury.parse(url, html, { fallback: false });
     });
 
     it('is selected properly', () => {
@@ -29,43 +29,46 @@ describe('HellogigglesComExtractor', () => {
     });
 
     it('returns the title', async () => {
-    // To pass this test, fill out the title selector
-    // in ./src/extractors/custom/hellogiggles.com/index.js.
+      // To pass this test, fill out the title selector
+      // in ./src/extractors/custom/hellogiggles.com/index.js.
       const { title } = await result;
 
-    // Update these values with the expected values from
-    // the article.
+      // Update these values with the expected values from
+      // the article.
       assert.equal(title, 'Your comfy-chic holiday outfit, illustrated');
     });
 
     it('returns the author', async () => {
-    // To pass this test, fill out the author selector
-    // in ./src/extractors/custom/hellogiggles.com/index.js.
+      // To pass this test, fill out the author selector
+      // in ./src/extractors/custom/hellogiggles.com/index.js.
       const { author } = await result;
 
-    // Update these values with the expected values from
-    // the article.
+      // Update these values with the expected values from
+      // the article.
       assert.equal(author, 'Cindy Mangomini');
     });
 
     it('returns the date_published', async () => {
-    // To pass this test, fill out the date_published selector
-    // in ./src/extractors/custom/hellogiggles.com/index.js.
+      // To pass this test, fill out the date_published selector
+      // in ./src/extractors/custom/hellogiggles.com/index.js.
       const { date_published } = await result;
 
-    // Update these values with the expected values from
-    // the article.
+      // Update these values with the expected values from
+      // the article.
       assert.equal(date_published, '2016-12-22T00:05:23.000Z');
     });
 
     it('returns the lead_image_url', async () => {
-    // To pass this test, fill out the lead_image_url selector
-    // in ./src/extractors/custom/hellogiggles.com/index.js.
+      // To pass this test, fill out the lead_image_url selector
+      // in ./src/extractors/custom/hellogiggles.com/index.js.
       const { lead_image_url } = await result;
 
-    // Update these values with the expected values from
-    // the article.
-      assert.equal(lead_image_url, 'http://images.hellogiggles.com/uploads/2016/12/21073729/HG-Xmas-NY-Cindy-Mangomini1.jpg');
+      // Update these values with the expected values from
+      // the article.
+      assert.equal(
+        lead_image_url,
+        'http://images.hellogiggles.com/uploads/2016/12/21073729/HG-Xmas-NY-Cindy-Mangomini1.jpg'
+      );
     });
 
     it('returns the content', async () => {
@@ -77,11 +80,19 @@ describe('HellogigglesComExtractor', () => {
 
       const $ = cheerio.load(content || '');
 
-      const first13 = excerptContent($('*').first().text(), 13);
+      const first13 = excerptContent(
+        $('*')
+          .first()
+          .text(),
+        13
+      );
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(first13, 'It’s almost that time! The time to quietly panic and throw all the');
+      assert.equal(
+        first13,
+        'It’s almost that time! The time to quietly panic and throw all the'
+      );
     });
   });
 });

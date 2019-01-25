@@ -1,11 +1,12 @@
 import assert from 'assert';
-import fs from 'fs';
 import URL from 'url';
 import cheerio from 'cheerio';
 
 import Mercury from 'mercury';
 import getExtractor from 'extractors/get-extractor';
 import { excerptContent } from 'utils/text';
+
+const fs = require('fs');
 
 // Rename CustomExtractor
 describe('PoliticoExtractor', () => {
@@ -15,10 +16,10 @@ describe('PoliticoExtractor', () => {
     beforeAll(() => {
       url =
         'http://www.politico.com/story/2016/10/who-will-win-the-vp-debate-229079?lo=ut_a1';
-      const html =
-        fs.readFileSync('./fixtures/www.politico.com/1475617690069.html');
-      result =
-        Mercury.parse(url, html, { fallback: false });
+      const html = fs.readFileSync(
+        './fixtures/www.politico.com/1475617690069.html'
+      );
+      result = Mercury.parse(url, html, { fallback: false });
     });
 
     it('is selected properly', async () => {
@@ -68,7 +69,10 @@ describe('PoliticoExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(lead_image_url, 'http://static.politico.com/0f/e7/5ee9a89044d1a01f74140bcd5b9e/caucus-vp-preview.jpg');
+      assert.equal(
+        lead_image_url,
+        'http://static.politico.com/0f/e7/5ee9a89044d1a01f74140bcd5b9e/caucus-vp-preview.jpg'
+      );
     });
 
     it('returns the content', async () => {
@@ -80,11 +84,19 @@ describe('PoliticoExtractor', () => {
 
       const $ = cheerio.load(content || '');
 
-      const first13 = excerptContent($('*').first().text(), 13);
+      const first13 = excerptContent(
+        $('*')
+          .first()
+          .text(),
+        13
+      );
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(first13, 'Tim Kaine isn’t Mike Pence’s only opponent Tuesday night in the only debate');
+      assert.equal(
+        first13,
+        'Tim Kaine isn’t Mike Pence’s only opponent Tuesday night in the only debate'
+      );
     });
   });
 });

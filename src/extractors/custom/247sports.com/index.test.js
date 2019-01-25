@@ -1,11 +1,12 @@
 import assert from 'assert';
-import fs from 'fs';
 import URL from 'url';
 import cheerio from 'cheerio';
 
 import Mercury from 'mercury';
 import getExtractor from 'extractors/get-extractor';
 import { excerptContent } from 'utils/text';
+
+const fs = require('fs');
 
 describe('twofortysevensportsComExtractor', () => {
   describe('initial test case', () => {
@@ -14,10 +15,10 @@ describe('twofortysevensportsComExtractor', () => {
     beforeAll(() => {
       url =
         'http://247sports.com/Bolt/Breaking-Houston-hires-Major-Applewhite-as-head-coach-49676932';
-      const html =
-        fs.readFileSync('./fixtures/247sports.com/1481309665090.html');
-      result =
-        Mercury.parse(url, html, { fallback: false });
+      const html = fs.readFileSync(
+        './fixtures/247sports.com/1481309665090.html'
+      );
+      result = Mercury.parse(url, html, { fallback: false });
     });
 
     it('is selected properly', () => {
@@ -29,43 +30,49 @@ describe('twofortysevensportsComExtractor', () => {
     });
 
     it('returns the title', async () => {
-    // To pass this test, fill out the title selector
-    // in ./src/extractors/custom/247sports.com/index.js.
+      // To pass this test, fill out the title selector
+      // in ./src/extractors/custom/247sports.com/index.js.
       const { title } = await result;
 
-    // Update these values with the expected values from
-    // the article.
-      assert.equal(title, 'Breaking: Houston hires Major Applewhite as head coach');
+      // Update these values with the expected values from
+      // the article.
+      assert.equal(
+        title,
+        'Breaking: Houston hires Major Applewhite as head coach'
+      );
     });
 
     it('returns the author', async () => {
-    // To pass this test, fill out the author selector
-    // in ./src/extractors/custom/247sports.com/index.js.
+      // To pass this test, fill out the author selector
+      // in ./src/extractors/custom/247sports.com/index.js.
       const { author } = await result;
 
-    // Update these values with the expected values from
-    // the article.
+      // Update these values with the expected values from
+      // the article.
       assert.equal(author, 'Travis Haney');
     });
 
     it('returns the date_published', async () => {
-    // To pass this test, fill out the date_published selector
-    // in ./src/extractors/custom/247sports.com/index.js.
+      // To pass this test, fill out the date_published selector
+      // in ./src/extractors/custom/247sports.com/index.js.
       const { date_published } = await result;
 
-    // Update these values with the expected values from
-    // the article.
+      // Update these values with the expected values from
+      // the article.
       assert.equal(date_published, '2016-12-09T09:13:00.000Z');
     });
 
     it('returns the lead_image_url', async () => {
-    // To pass this test, fill out the lead_image_url selector
-    // in ./src/extractors/custom/247sports.com/index.js.
+      // To pass this test, fill out the lead_image_url selector
+      // in ./src/extractors/custom/247sports.com/index.js.
       const { lead_image_url } = await result;
 
-    // Update these values with the expected values from
-    // the article.
-      assert.equal(lead_image_url, 'https://s3media.247sports.com/Uploads/Assets/149/971/26_4971149.jpg');
+      // Update these values with the expected values from
+      // the article.
+      assert.equal(
+        lead_image_url,
+        'https://s3media.247sports.com/Uploads/Assets/149/971/26_4971149.jpg'
+      );
     });
 
     it('returns the content', async () => {
@@ -77,11 +84,19 @@ describe('twofortysevensportsComExtractor', () => {
 
       const $ = cheerio.load(content || '');
 
-      const first13 = excerptContent($('*').first().text(), 13);
+      const first13 = excerptContent(
+        $('*')
+          .first()
+          .text(),
+        13
+      );
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(first13, '(Photo: Brett Davis, USA TODAY Sports) Houston has promoted offensive coordinator Major Applewhite');
+      assert.equal(
+        first13,
+        '(Photo: Brett Davis, USA TODAY Sports) Houston has promoted offensive coordinator Major Applewhite'
+      );
     });
   });
 });

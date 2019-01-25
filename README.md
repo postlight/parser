@@ -8,6 +8,14 @@ The Mercury Parser module powers the [Mercury Parser API](https://mercury.postli
 
 ## How? Like this.
 
+### Installation
+
+```bash
+yarn add mercury-parser
+```
+
+### Usage
+
 ```javascript
 import Mercury from 'mercury-parser';
 
@@ -37,15 +45,27 @@ The result looks like this:
 
 If Mercury is unable to find a field, that field will return `null`.
 
+## License
+
+Licensed under either of the below, at your preference:
+
+- Apache License, Version 2.0
+  ([LICENSE-APACHE](LICENSE-APACHE) or http://www.apache.org/licenses/LICENSE-2.0)
+- MIT license
+  ([LICENSE-MIT](LICENSE-MIT) or http://opensource.org/licenses/MIT)
+
 ## Contributing
 
-If you'd like to write a custom parser for a site, [here's how](src/extractors/custom/README.md).
+Unless it is explicitly stated otherwise, any contribution intentionally submitted for inclusion in the work, as defined in the Apache-2.0 license, shall be dual licensed as above without any additional terms or conditions.
 
 ## Contributors
 
 [![All Contributors](https://img.shields.io/badge/all_contributors-4-orange.svg?style=flat-square)](#contributors)
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+
 | [<img src="https://avatars.githubusercontent.com/u/64131?v=3" width="100px;"/><br /><sub>Adam Pash</sub>](http://adampash.com)<br />📝 [💻](https://github.com/postlight/readability-parser/commits?author=adampash) [📖](https://github.com/postlight/readability-parser/commits?author=adampash) 💡 | [<img src="https://avatars.githubusercontent.com/u/19412836?v=3" width="100px;"/><br /><sub>Toy Vano</sub>](https://github.com/spiffytoy)<br />[💻](https://github.com/postlight/readability-parser/commits?author=spiffytoy) | [<img src="https://avatars.githubusercontent.com/u/183608?v=3" width="100px;"/><br /><sub>Drew Bell</sub>](droob.org)<br />[💻](https://github.com/postlight/readability-parser/commits?author=droob) | [<img src="https://avatars.githubusercontent.com/u/305901?v=3" width="100px;"/><br /><sub>Jeremy Mack</sub>](https://twitter.com/mutewinter)<br />[💻](https://github.com/postlight/readability-parser/commits?author=mutewinter) |
-| :---: | :---: | :---: | :---: |
+| :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
+
+
 <!-- ALL-CONTRIBUTORS-LIST:END -->

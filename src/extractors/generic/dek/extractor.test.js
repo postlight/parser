@@ -8,8 +8,7 @@ describe('GenericDekExtractor', () => {
     it('returns null if no dek can be found', () => {
       const $ = cheerio.load('<div></div>');
       const metaCache = [];
-      const result =
-        GenericDekExtractor.extract({ $, metaCache });
+      const result = GenericDekExtractor.extract({ $, metaCache });
 
       assert.equal(result, null);
     });

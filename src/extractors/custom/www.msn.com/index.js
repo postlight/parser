@@ -25,33 +25,24 @@ export const MSNExtractor = {
 
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images
-    transforms: [
-    ],
+    transforms: [],
 
     // Is there anything that is in the result that shouldn't be?
     // The clean selectors will remove anything that matches from
     // the result
-    clean: [
-      'span.caption',
-
-    ],
+    clean: ['span.caption'],
   },
 
   date_published: {
-    selectors: [
-      'span.time',
-    ],
+    selectors: ['span.time'],
   },
 
   lead_image_url: {
-    selectors: [
-
-    ],
+    selectors: [],
   },
 
   dek: {
-    selectors: [
-    ],
+    selectors: [],
   },
 
   next_page_url: null,

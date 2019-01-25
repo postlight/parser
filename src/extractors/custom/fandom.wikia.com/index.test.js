@@ -1,5 +1,4 @@
 import assert from 'assert';
-import fs from 'fs';
 import URL from 'url';
 import cheerio from 'cheerio';
 
@@ -7,18 +6,19 @@ import Mercury from 'mercury';
 import getExtractor from 'extractors/get-extractor';
 import { excerptContent } from 'utils/text';
 
+const fs = require('fs');
+
 // Rename CustomExtractor
 describe('WikiaExtractor', () => {
   describe('initial test case', () => {
     let result;
     let url;
     beforeAll(() => {
-      url =
-        'http://fandom.wikia.com/articles/box-office-good-peculiar';
-      const html =
-        fs.readFileSync('./fixtures/fandom.wikia.com/1475595373938.html');
-      result =
-        Mercury.parse(url, html, { fallback: false });
+      url = 'http://fandom.wikia.com/articles/box-office-good-peculiar';
+      const html = fs.readFileSync(
+        './fixtures/fandom.wikia.com/1475595373938.html'
+      );
+      result = Mercury.parse(url, html, { fallback: false });
     });
 
     it('is selected properly', async () => {
@@ -68,7 +68,10 @@ describe('WikiaExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(lead_image_url, 'http://fandom.wikia.com/wp-content/uploads/2016/10/box-office-peculiar-feature-hero.jpg');
+      assert.equal(
+        lead_image_url,
+        'http://fandom.wikia.com/wp-content/uploads/2016/10/box-office-peculiar-feature-hero.jpg'
+      );
     });
 
     it('returns the content', async () => {
@@ -80,11 +83,19 @@ describe('WikiaExtractor', () => {
 
       const $ = cheerio.load(content || '');
 
-      const first13 = excerptContent($('*').first().text(), 13);
+      const first13 = excerptContent(
+        $('*')
+          .first()
+          .text(),
+        13
+      );
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(first13, 'Tim Burton once again claimed the top spot at the box office. Miss');
+      assert.equal(
+        first13,
+        'Tim Burton once again claimed the top spot at the box office. Miss'
+      );
     });
   });
 });

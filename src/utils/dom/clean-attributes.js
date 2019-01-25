@@ -1,24 +1,21 @@
-import {
-  getAttrs,
-  setAttrs,
-} from 'utils/dom';
+import { getAttrs, setAttrs } from 'utils/dom';
 
-import {
-  WHITELIST_ATTRS_RE,
-  KEEP_CLASS,
-} from './constants';
+import { WHITELIST_ATTRS_RE, KEEP_CLASS } from './constants';
 
 function removeAllButWhitelist($article, $) {
   $article.find('*').each((index, node) => {
     const attrs = getAttrs(node);
 
-    setAttrs(node, Reflect.ownKeys(attrs).reduce((acc, attr) => {
-      if (WHITELIST_ATTRS_RE.test(attr)) {
-        return { ...acc, [attr]: attrs[attr] };
-      }
+    setAttrs(
+      node,
+      Reflect.ownKeys(attrs).reduce((acc, attr) => {
+        if (WHITELIST_ATTRS_RE.test(attr)) {
+          return { ...acc, [attr]: attrs[attr] };
+        }
 
-      return acc;
-    }, {}));
+        return acc;
+      }, {})
+    );
   });
 
   // Remove the mercury-parser-keep class from result
@@ -27,12 +24,6 @@ function removeAllButWhitelist($article, $) {
   return $article;
 }
 
-// function removeAttrs(article, $) {
-//   REMOVE_ATTRS.forEach((attr) => {
-//     $(`[${attr}]`, article).removeAttr(attr);
-//   });
-// }
-
 // Remove attributes like style or align
 export default function cleanAttributes($article, $) {
   // Grabbing the parent because at this point
@@ -40,6 +31,6 @@ export default function cleanAttributes($article, $) {
   // have a score set on it.
   return removeAllButWhitelist(
     $article.parent().length ? $article.parent() : $article,
-    $,
+    $
   );
 }

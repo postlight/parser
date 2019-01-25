@@ -4,21 +4,15 @@
 export const ApartmentTherapyExtractor = {
   domain: 'www.apartmenttherapy.com',
   title: {
-    selectors: [
-      'h1.headline',
-    ],
+    selectors: ['h1.headline'],
   },
 
   author: {
-    selectors: [
-      '.PostByline__name',
-    ],
+    selectors: ['.PostByline__name'],
   },
 
   content: {
-    selectors: [
-      'div.post__content',
-    ],
+    selectors: ['div.post__content'],
 
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images
@@ -34,26 +28,19 @@ export const ApartmentTherapyExtractor = {
     // Is there anything that is in the result that shouldn't be?
     // The clean selectors will remove anything that matches from
     // the result
-    clean: [
-
-    ],
+    clean: [],
   },
 
   date_published: {
-    selectors: [
-      ['.PostByline__timestamp[datetime]', 'datetime'],
-    ],
+    selectors: [['.PostByline__timestamp[datetime]', 'datetime']],
   },
 
   lead_image_url: {
-    selectors: [
-      ['meta[name="og:image"]', 'value'],
-    ],
+    selectors: [['meta[name="og:image"]', 'value']],
   },
 
   dek: {
-    selectors: [
-    ],
+    selectors: [],
   },
 
   next_page_url: {
