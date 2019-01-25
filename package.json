@@ -94,9 +94,9 @@
     "watchify": "^3.11.0"
   },
   "dependencies": {
-    "browser-request": "adampash/browser-request#feat-add-headers-to-response",
+    "browser-request": "postlight/browser-request#feat-add-headers-to-response",
     "cheerio": "^0.22.0",
-    "difflib": "adampash/difflib.js",
+    "difflib": "postlight/difflib.js",
     "ellipsize": "0.1.0",
     "iconv-lite": "0.4.24",
     "jquery": "^3.3.1",
