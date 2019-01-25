@@ -15,9 +15,7 @@ export const STRONG_TITLE_META_TAGS = [
 
 // og:title is weak because it typically contains context that we don't like,
 // for example the source site's name. Gotta get that brand into facebook!
-export const WEAK_TITLE_META_TAGS = [
-  'og:title',
-];
+export const WEAK_TITLE_META_TAGS = ['og:title'];
 
 // An ordered list of XPath Selectors to find likely article titles. From
 // most explicit to least explicit.

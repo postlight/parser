@@ -1,8 +1,5 @@
 import { cleanDatePublished } from 'cleaners';
-import {
-  extractFromMeta,
-  extractFromSelectors,
-} from 'utils/dom';
+import { extractFromMeta, extractFromSelectors } from 'utils/dom';
 import { extractFromUrl } from 'utils/text';
 
 import {
@@ -17,7 +14,12 @@ const GenericDatePublishedExtractor = {
     // First, check to see if we have a matching meta tag
     // that we can make use of.
     // Don't try cleaning tags from this string
-    datePublished = extractFromMeta($, DATE_PUBLISHED_META_TAGS, metaCache, false);
+    datePublished = extractFromMeta(
+      $,
+      DATE_PUBLISHED_META_TAGS,
+      metaCache,
+      false
+    );
     if (datePublished) return cleanDatePublished(datePublished);
 
     // Second, look through our selectors looking for potential

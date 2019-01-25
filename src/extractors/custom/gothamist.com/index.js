@@ -10,43 +10,29 @@ export const GothamistComExtractor = {
   ],
 
   title: {
-    selectors: [
-      'h1',
-      '.entry-header h1',
-    ],
+    selectors: ['h1', '.entry-header h1'],
   },
 
   author: {
-    selectors: [
-      '.author',
-    ],
+    selectors: ['.author'],
   },
 
   date_published: {
-    selectors: [
-      'abbr',
-      'abbr.published',
-    ],
+    selectors: ['abbr', 'abbr.published'],
 
     timezone: 'America/New_York',
   },
 
   dek: {
-    selectors: [
-      null,
-    ],
+    selectors: [null],
   },
 
   lead_image_url: {
-    selectors: [
-      ['meta[name="og:image"]', 'value'],
-    ],
+    selectors: [['meta[name="og:image"]', 'value']],
   },
 
   content: {
-    selectors: [
-      '.entry-body',
-    ],
+    selectors: ['.entry-body'],
 
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images

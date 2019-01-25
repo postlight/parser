@@ -1,7 +1,4 @@
-import {
-  NEXT_LINK_TEXT_RE,
-  CAP_LINK_TEXT_RE,
-} from '../constants';
+import { NEXT_LINK_TEXT_RE, CAP_LINK_TEXT_RE } from '../constants';
 
 export default function scoreCapLinks(linkData) {
   // Cap links are links like "last", etc.

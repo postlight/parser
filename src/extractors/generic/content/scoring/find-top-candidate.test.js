@@ -1,14 +1,11 @@
 import assert from 'assert';
 import cheerio from 'cheerio';
-import fs from 'fs';
 
 import HTML from './fixtures/html';
 
-import {
-  getScore,
-  findTopCandidate,
-  scoreContent,
-} from './index';
+import { getScore, findTopCandidate, scoreContent } from './index';
+
+const fs = require('fs');
 
 describe('findTopCandidate($)', () => {
   it('finds the top candidate from simple case', () => {

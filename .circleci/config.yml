@@ -2,29 +2,36 @@ version: 2
 jobs:
   test-node:
     docker:
-      - image: circleci/node:6.14-stretch
+      - image: circleci/node:8.10
     steps:
       - checkout
       - run: "yarn install"
       - run: "yarn lint:ci"
-      - run: "yarn build"
-      - run: "yarn test:node -- --maxWorkers=4"
+      - run: "yarn build:ci"
       - run: "./scripts/pr-parser-preview.sh"
+      - run: "yarn test:node --maxWorkers=4"
 
       - store_artifacts:
           path: tmp/artifacts
 
   test-web:
     docker:
-      - image: circleci/node:6.14-stretch
+      - image: circleci/node:8.10-browsers
     steps:
       - checkout
       - run: "yarn install"
       # For some reason phantomjs-prebuild is failing w/yarn, but npm installing works
-      - run: "npm install phantomjs-prebuilt"
-      # Switch to 7 and lint
-      - run: "yarn test:web -- --maxWorkers=4"
-      - run: "yarn build:web -- --maxWorkers=4"
+      - run: "yarn add karma-cli --dev"
+      - run: "yarn test:web --maxWorkers=4"
+      - run: "yarn build:web:ci --maxWorkers=4"
+
+  update-fixtures:
+    docker:
+      - image: circleci/node:8.10
+    steps:
+      - checkout
+      - run: "yarn install"
+      - run: "node ./scripts/update-fixtures.js"
 
 
 workflows:
@@ -33,3 +40,15 @@ workflows:
     jobs:
       - test-node
       - test-web
+  # UNCOMMENT WHEN READY TO AUTOMATE THIS TASK
+  # scheduled_tasks:
+  #   triggers:
+  #     # run once per hour
+  #     - schedule:
+  #       cron: "0 * * * *"
+  #       filters:
+  #         branches:
+  #           only:
+  #             - master
+  #   jobs:
+  #     - update-fixtures

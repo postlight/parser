@@ -27,7 +27,8 @@ describe('Resource', () => {
     });
 
     it('fetches with different encoding on body', async () => {
-      const url = 'http://www.playnation.de/spiele-news/kojima-productions/hideo-kojima-reflektiert-ueber-seinen-werdegang-bei-konami-id68950.html';
+      const url =
+        'http://www.playnation.de/spiele-news/kojima-productions/hideo-kojima-reflektiert-ueber-seinen-werdegang-bei-konami-id68950.html';
       const $ = await Resource.create(url);
       const metaContentType = $('meta[http-equiv=content-type]').attr('value');
 
@@ -39,7 +40,8 @@ describe('Resource', () => {
     });
 
     it('handles special encoding', async () => {
-      const url = 'http://www.elmundo.es/opinion/2016/11/19/582f476846163fc65a8b4578.html';
+      const url =
+        'http://www.elmundo.es/opinion/2016/11/19/582f476846163fc65a8b4578.html';
       const $ = await Resource.create(url);
 
       const badEncodingRe = /�/g;
@@ -61,12 +63,9 @@ describe('Resource', () => {
       };
       const body = '';
 
-      assert.throws(
-        () => {
-          Resource.generateDoc({ body, response });
-        },
-          /content does not appear to be text/i
-      );
+      assert.throws(() => {
+        Resource.generateDoc({ body, response });
+      }, /content does not appear to be text/i);
     });
 
     it('throws an error if the content has no children', () => {
@@ -80,12 +79,9 @@ describe('Resource', () => {
         };
         const body = '';
 
-        assert.throws(
-          () => {
-            Resource.generateDoc({ body, response });
-          },
-            /no children/i
-        );
+        assert.throws(() => {
+          Resource.generateDoc({ body, response });
+        }, /no children/i);
       }
     });
   });

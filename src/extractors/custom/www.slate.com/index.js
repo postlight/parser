@@ -2,47 +2,33 @@ export const WwwSlateComExtractor = {
   domain: 'www.slate.com',
 
   title: {
-    selectors: [
-      '.hed',
-      'h1',
-    ],
+    selectors: ['.hed', 'h1'],
   },
 
   author: {
-    selectors: [
-      'a[rel=author]',
-    ],
+    selectors: ['a[rel=author]'],
   },
 
   date_published: {
-    selectors: [
-      '.pub-date',
-    ],
+    selectors: ['.pub-date'],
 
     timezone: 'America/New_York',
   },
 
   dek: {
-    selectors: [
-      '.dek',
-    ],
+    selectors: ['.dek'],
   },
 
   lead_image_url: {
-    selectors: [
-      ['meta[name="og:image"]', 'value'],
-    ],
+    selectors: [['meta[name="og:image"]', 'value']],
   },
 
   content: {
-    selectors: [
-      '.body',
-    ],
+    selectors: ['.body'],
 
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images
-    transforms: {
-    },
+    transforms: {},
 
     // Is there anything that is in the result that shouldn't be?
     // The clean selectors will remove anything that matches from

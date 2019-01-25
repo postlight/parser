@@ -15,13 +15,13 @@ export default function scoreNode($node) {
   // Could save doing that regex test on every node – AP
   if (PARAGRAPH_SCORE_TAGS.test(tagName)) {
     return scoreParagraph($node);
-  } else if (tagName.toLowerCase() === 'div') {
+  } if (tagName.toLowerCase() === 'div') {
     return 5;
-  } else if (CHILD_CONTENT_TAGS.test(tagName)) {
+  } if (CHILD_CONTENT_TAGS.test(tagName)) {
     return 3;
-  } else if (BAD_TAGS.test(tagName)) {
+  } if (BAD_TAGS.test(tagName)) {
     return -3;
-  } else if (tagName.toLowerCase() === 'th') {
+  } if (tagName.toLowerCase() === 'th') {
     return -5;
   }
 

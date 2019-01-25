@@ -9,10 +9,7 @@ describe('shouldScore(href, articleUrl, baseUrl, parsedUrl, linkText, previousUr
     const href = 'http://example.com/foo/bar/2';
     const parsedUrl = URL.parse(href);
 
-    assert.equal(
-      shouldScore(href, '', '', parsedUrl, '', previousUrls),
-      false
-    );
+    assert.equal(shouldScore(href, '', '', parsedUrl, '', previousUrls), false);
   });
 
   it('returns true if href has not been fetched', () => {
@@ -20,9 +17,6 @@ describe('shouldScore(href, articleUrl, baseUrl, parsedUrl, linkText, previousUr
     const href = 'http://example.com/foo/bar/2';
     const parsedUrl = URL.parse(href);
 
-    assert.equal(
-      shouldScore(href, '', '', parsedUrl, '', previousUrls),
-      true
-    );
+    assert.equal(shouldScore(href, '', '', parsedUrl, '', previousUrls), true);
   });
 });

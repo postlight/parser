@@ -2,16 +2,11 @@ export const WwwNprOrgExtractor = {
   domain: 'www.npr.org',
 
   title: {
-    selectors: [
-      'h1',
-      '.storytitle',
-    ],
+    selectors: ['h1', '.storytitle'],
   },
 
   author: {
-    selectors: [
-      'p.byline__name.byline__name--block',
-    ],
+    selectors: ['p.byline__name.byline__name--block'],
   },
 
   date_published: {
@@ -29,9 +24,7 @@ export const WwwNprOrgExtractor = {
   },
 
   content: {
-    selectors: [
-      '.storytext',
-    ],
+    selectors: ['.storytext'],
 
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images
@@ -43,8 +36,6 @@ export const WwwNprOrgExtractor = {
     // Is there anything that is in the result that shouldn't be?
     // The clean selectors will remove anything that matches from
     // the result
-    clean: [
-      'div.enlarge_measure',
-    ],
+    clean: ['div.enlarge_measure'],
   },
 };

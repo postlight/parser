@@ -64,7 +64,7 @@ export function scoreByParents($img) {
     $gParent = $parent.parent();
   }
 
-  [$parent, $gParent].forEach(($node) => {
+  [$parent, $gParent].forEach($node => {
     if (PHOTO_HINTS_RE.test(getSig($node))) {
       score += 15;
     }
@@ -110,7 +110,8 @@ export function scoreByDimensions($img) {
 
   if (width && height && !src.includes('sprite')) {
     const area = width * height;
-    if (area < 5000) { // Smaller than 50 x 100
+    if (area < 5000) {
+      // Smaller than 50 x 100
       score -= 100;
     } else {
       score += Math.round(area / 1000);
@@ -121,5 +122,5 @@ export function scoreByDimensions($img) {
 }
 
 export function scoreByPosition($imgs, index) {
-  return ($imgs.length / 2) - index;
+  return $imgs.length / 2 - index;
 }

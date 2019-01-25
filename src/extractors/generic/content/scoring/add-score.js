@@ -1,7 +1,4 @@
-import {
-  getOrInitScore,
-  setScore,
-} from './index';
+import { getOrInitScore, setScore } from './index';
 
 export default function addScore($node, $, amount) {
   try {

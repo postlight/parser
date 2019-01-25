@@ -1,8 +1,5 @@
 import { cleanTitle } from 'cleaners';
-import {
-  extractFromMeta,
-  extractFromSelectors,
-} from 'utils/dom';
+import { extractFromMeta, extractFromSelectors } from 'utils/dom';
 
 import {
   STRONG_TITLE_META_TAGS,
