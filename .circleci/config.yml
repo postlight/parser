@@ -2,14 +2,16 @@ version: 2
 jobs:
   test-node:
     docker:
-      - image: circleci/node:8.10
+      - image: circleci/node:8.10-browsers
     steps:
       - checkout
+      # For some reason phantomjs-prebuild is failing w/yarn, but npm installing works
+      - run: "npm install phantomjs-prebuilt"
       - run: "yarn install"
       - run: "yarn lint:ci"
       - run: "yarn build:ci"
-      - run: "./scripts/pr-parser-preview.sh"
       - run: "yarn test:node --maxWorkers=4"
+      - run: "./scripts/pr-parser-preview.sh"
 
       - store_artifacts:
           path: tmp/artifacts
@@ -20,7 +22,6 @@ jobs:
     steps:
       - checkout
       - run: "yarn install"
-      # For some reason phantomjs-prebuild is failing w/yarn, but npm installing works
       - run: "yarn add karma-cli --dev"
       - run: "yarn test:web --maxWorkers=4"
       - run: "yarn build:web:ci --maxWorkers=4"
