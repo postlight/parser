@@ -56,7 +56,7 @@ describe('Mercury', () => {
     });
 
     it('does washingtonpost', async () => {
-      jasmine.DEFAULT_TIMEOUT_INTERVAL = 50000;
+      jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000;
       const result = await Mercury.parse(
         'https://www.washingtonpost.com/news/opinions/wp/2018/10/29/enough-platitudes-lets-name-names/'
       );
@@ -81,7 +81,7 @@ describe('Mercury', () => {
     it('does ars pagination', async () => {
       jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000;
       const url =
-        'http://arstechnica.com/gadgets/2016/08/the-connected-renter-how-to-make-your-apartment-smarter/';
+        'https://arstechnica.com/gadgets/2016/08/the-connected-renter-how-to-make-your-apartment-smarter/';
       const result = await Mercury.parse(url, null, { fetchAllPages: true });
 
       const { total_pages, pages_rendered } = result;
