@@ -7,10 +7,7 @@ describe('scoreSimilarity(score, articleUrl, href)', () => {
     const articleUrl = 'http://example.com/foo/bar';
     const href = 'http://example.com/foo/bar/2';
     const score = 25;
-    assert.equal(
-      Math.round(scoreSimilarity(score, articleUrl, href)),
-      66
-    );
+    assert.equal(Math.round(scoreSimilarity(score, articleUrl, href)), 66);
   });
 
   it('returns 0 is current score <= 0', () => {

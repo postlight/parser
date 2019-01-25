@@ -1,9 +1,6 @@
 import URL from 'url';
 
-import {
-  DIGIT_RE,
-  EXTRANEOUS_LINK_HINTS_RE,
-} from '../constants';
+import { DIGIT_RE, EXTRANEOUS_LINK_HINTS_RE } from '../constants';
 
 export default function shouldScore(
   href,

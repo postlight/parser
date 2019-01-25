@@ -2,8 +2,7 @@ import assert from 'assert';
 import URL from 'url';
 
 import { record } from 'test-helpers';
-import {
-  default as fetchResource,
+import fetchResource, {
   baseDomain,
   validateResponse,
 } from './fetch-resource';
@@ -22,14 +21,16 @@ describe('fetchResource(url)', () => {
   });
 
   it('returns a buffer as its body', async () => {
-    const url = 'http://www.nytimes.com/2016/08/16/upshot/the-state-of-the-clinton-trump-race-is-it-over.html?_r=0';
+    const url =
+      'http://www.nytimes.com/2016/08/16/upshot/the-state-of-the-clinton-trump-race-is-it-over.html?_r=0';
     const result = await fetchResource(url);
 
     assert.equal(typeof result.body, 'object');
   });
 
   it('fetches nyt', async () => {
-    const url = 'http://www.nytimes.com/2016/08/16/upshot/the-state-of-the-clinton-trump-race-is-it-over.html?_r=0';
+    const url =
+      'http://www.nytimes.com/2016/08/16/upshot/the-state-of-the-clinton-trump-race-is-it-over.html?_r=0';
     const { response } = await fetchResource(url);
 
     assert.equal(response.statusCode, 200);
@@ -43,14 +44,16 @@ describe('fetchResource(url)', () => {
   });
 
   it('fetches nyt', async () => {
-    const url = 'http://www.nytimes.com/2016/08/16/upshot/the-state-of-the-clinton-trump-race-is-it-over.html?_r=0';
+    const url =
+      'http://www.nytimes.com/2016/08/16/upshot/the-state-of-the-clinton-trump-race-is-it-over.html?_r=0';
     const { response } = await fetchResource(url);
 
     assert.equal(response.statusCode, 200);
   });
 
   it('handles this gzip error', async () => {
-    const url = 'http://www.redcross.ca/blog/2016/11/photo-of-the-day--one-year-anniversary-of-the-end-of-ebola-in-sierra-leone';
+    const url =
+      'http://www.redcross.ca/blog/2016/11/photo-of-the-day--one-year-anniversary-of-the-end-of-ebola-in-sierra-leone';
     const { response } = await fetchResource(url);
 
     assert.equal(response.statusCode, 200);
@@ -72,15 +75,11 @@ describe('validateResponse(response)', () => {
   });
 
   it('throws an error if there is no status code', () => {
-    const invalidResponse = {
-    };
+    const invalidResponse = {};
 
-    assert.throws(
-      () => {
-        validateResponse(invalidResponse);
-      },
-      /unable to fetch content/i
-    );
+    assert.throws(() => {
+      validateResponse(invalidResponse);
+    }, /unable to fetch content/i);
   });
 
   it('throws an error if response code is not 2xx', () => {
@@ -88,12 +87,9 @@ describe('validateResponse(response)', () => {
       statusCode: 500,
     };
 
-    assert.throws(
-      () => {
-        validateResponse(invalidResponse);
-      },
-      /instructed to reject non-2xx/i
-    );
+    assert.throws(() => {
+      validateResponse(invalidResponse);
+    }, /instructed to reject non-2xx/i);
   });
 
   it('throws an error if response has bad content-type', () => {
@@ -106,12 +102,9 @@ describe('validateResponse(response)', () => {
       },
     };
 
-    assert.throws(
-      () => {
-        validateResponse(invalidResponse);
-      },
-      /content-type for this resource/i
-    );
+    assert.throws(() => {
+      validateResponse(invalidResponse);
+    }, /content-type for this resource/i);
   });
 
   it('throws an error if response length is > max', () => {
@@ -124,12 +117,9 @@ describe('validateResponse(response)', () => {
       },
     };
 
-    assert.throws(
-      () => {
-        validateResponse(invalidResponse);
-      },
-      /Content for this resource was too large/i
-    );
+    assert.throws(() => {
+      validateResponse(invalidResponse);
+    }, /Content for this resource was too large/i);
   });
 });
 

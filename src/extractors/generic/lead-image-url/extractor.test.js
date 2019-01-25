@@ -12,10 +12,11 @@ describe('GenericLeadImageUrlExtractor', () => {
       const content = $('*').first();
       const metaCache = ['og:image'];
 
-      const result =
-        GenericLeadImageUrlExtractor.extract(
-          { $, content, metaCache }
-        );
+      const result = GenericLeadImageUrlExtractor.extract({
+        $,
+        content,
+        metaCache,
+      });
 
       assert.equal(result, HTML.og.result);
     });
@@ -25,10 +26,11 @@ describe('GenericLeadImageUrlExtractor', () => {
       const content = $('*').first();
       const metaCache = ['twitter:image'];
 
-      const result =
-        GenericLeadImageUrlExtractor.extract(
-          { $, content, metaCache }
-        );
+      const result = GenericLeadImageUrlExtractor.extract({
+        $,
+        content,
+        metaCache,
+      });
 
       assert.equal(result, HTML.twitter.result);
     });
@@ -38,10 +40,11 @@ describe('GenericLeadImageUrlExtractor', () => {
       const content = $('*').first();
       const metaCache = [];
 
-      const result =
-        GenericLeadImageUrlExtractor.extract(
-          { $, content, metaCache }
-        );
+      const result = GenericLeadImageUrlExtractor.extract({
+        $,
+        content,
+        metaCache,
+      });
 
       assert.equal(result, HTML.scoring.result);
     });
@@ -51,10 +54,11 @@ describe('GenericLeadImageUrlExtractor', () => {
       const content = $('*').first();
       const metaCache = [];
 
-      const result =
-        GenericLeadImageUrlExtractor.extract(
-          { $, content, metaCache }
-        );
+      const result = GenericLeadImageUrlExtractor.extract({
+        $,
+        content,
+        metaCache,
+      });
 
       assert.equal(result, HTML.selectors.result);
     });

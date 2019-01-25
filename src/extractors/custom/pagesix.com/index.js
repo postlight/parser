@@ -1,38 +1,26 @@
 export const PagesixComExtractor = {
   domain: 'pagesix.com',
 
-  supportedDomains: [
-    'nypost.com',
-  ],
+  supportedDomains: ['nypost.com'],
 
   title: {
-    selectors: [
-      'h1 a',
-    ],
+    selectors: ['h1 a'],
   },
 
   author: {
-    selectors: [
-      '.byline',
-    ],
+    selectors: ['.byline'],
   },
 
   date_published: {
-    selectors: [
-      ['meta[name="article:published_time"]', 'value'],
-    ],
+    selectors: [['meta[name="article:published_time"]', 'value']],
   },
 
   dek: {
-    selectors: [
-      ['meta[name="description"]', 'value'],
-    ],
+    selectors: [['meta[name="description"]', 'value']],
   },
 
   lead_image_url: {
-    selectors: [
-      ['meta[name="og:image"]', 'value'],
-    ],
+    selectors: [['meta[name="og:image"]', 'value']],
   },
 
   content: {
@@ -51,8 +39,6 @@ export const PagesixComExtractor = {
     // Is there anything that is in the result that shouldn't be?
     // The clean selectors will remove anything that matches from
     // the result
-    clean: [
-      '.modal-trigger',
-    ],
+    clean: ['.modal-trigger'],
   },
 };

@@ -33,7 +33,6 @@ const GenericUrlExtractor = {
 
     return result(url);
   },
-
 };
 
 export default GenericUrlExtractor;

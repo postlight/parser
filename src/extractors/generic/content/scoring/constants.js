@@ -23,13 +23,13 @@ export const UNLIKELY_CANDIDATES_BLACKLIST = [
   'header',
   'hidden',
   'loader',
-  'login',                     // Note: This can hit 'blogindex'.
+  'login', // Note: This can hit 'blogindex'.
   'menu',
   'meta',
   'nav',
   'pager',
   'pagination',
-  'predicta',                  // readwriteweb inline ad box
+  'predicta', // readwriteweb inline ad box
   'presence_control_external', // lifehacker.com container full of false positives
   'popup',
   'printfriendly',
@@ -105,8 +105,10 @@ export const NON_TOP_CANDIDATE_TAGS = [
   'meta',
 ];
 
-export const NON_TOP_CANDIDATE_TAGS_RE =
-  new RegExp(`^(${NON_TOP_CANDIDATE_TAGS.join('|')})$`, 'i');
+export const NON_TOP_CANDIDATE_TAGS_RE = new RegExp(
+  `^(${NON_TOP_CANDIDATE_TAGS.join('|')})$`,
+  'i'
+);
 
 // A list of selectors that specify, very clearly, either hNews or other
 // very content-specific style content, like Blogger templates.
@@ -120,12 +122,7 @@ export const HNEWS_CONTENT_SELECTORS = [
   ['.post', '.post-body'],
 ];
 
-export const PHOTO_HINTS = [
-  'figure',
-  'photo',
-  'image',
-  'caption',
-];
+export const PHOTO_HINTS = ['figure', 'photo', 'image', 'caption'];
 export const PHOTO_HINTS_RE = new RegExp(PHOTO_HINTS.join('|'), 'i');
 
 // A list of strings that denote a positive scoring for this content as being
@@ -155,7 +152,10 @@ export const POSITIVE_SCORE_HINTS = [
 ];
 
 // The above list, joined into a matching regular expression
-export const POSITIVE_SCORE_RE = new RegExp(POSITIVE_SCORE_HINTS.join('|'), 'i');
+export const POSITIVE_SCORE_RE = new RegExp(
+  POSITIVE_SCORE_HINTS.join('|'),
+  'i'
+);
 
 // Readability publisher-specific guidelines
 export const READABILITY_ASSET = new RegExp('entry-content-asset', 'i');
@@ -222,7 +222,10 @@ export const NEGATIVE_SCORE_HINTS = [
   'widget',
 ];
 // The above list, joined into a matching regular expression
-export const NEGATIVE_SCORE_RE = new RegExp(NEGATIVE_SCORE_HINTS.join('|'), 'i');
+export const NEGATIVE_SCORE_RE = new RegExp(
+  NEGATIVE_SCORE_HINTS.join('|'),
+  'i'
+);
 
 // Match a digit. Pretty clear.
 export const DIGIT_RE = new RegExp('[0-9]');
@@ -284,7 +287,10 @@ export const BLOCK_LEVEL_TAGS = [
   'ul',
   'video',
 ];
-export const BLOCK_LEVEL_TAGS_RE = new RegExp(`^(${BLOCK_LEVEL_TAGS.join('|')})$`, 'i');
+export const BLOCK_LEVEL_TAGS_RE = new RegExp(
+  `^(${BLOCK_LEVEL_TAGS.join('|')})$`,
+  'i'
+);
 
 // The removal is implemented as a blacklist and whitelist, this test finds
 // blacklisted elements that aren't whitelisted. We do this all in one
@@ -296,7 +302,10 @@ export const CANDIDATES_BLACKLIST = new RegExp(candidatesBlacklist, 'i');
 const candidatesWhitelist = UNLIKELY_CANDIDATES_WHITELIST.join('|');
 export const CANDIDATES_WHITELIST = new RegExp(candidatesWhitelist, 'i');
 
-export const UNLIKELY_RE = new RegExp(`!(${candidatesWhitelist})|(${candidatesBlacklist})`, 'i');
+export const UNLIKELY_RE = new RegExp(
+  `!(${candidatesWhitelist})|(${candidatesBlacklist})`,
+  'i'
+);
 
 export const PARAGRAPH_SCORE_TAGS = new RegExp('^(p|li|span|pre)$', 'i');
 export const CHILD_CONTENT_TAGS = new RegExp('^(td|blockquote|ol|ul|dl)$', 'i');

@@ -1,5 +1,3 @@
-const Extractor = {
-
-};
+const Extractor = {};
 
 export default Extractor;

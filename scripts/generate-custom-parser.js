@@ -7,10 +7,7 @@ import inquirer from 'inquirer';
 import ora from 'ora';
 import { exec } from 'child_process';
 
-import {
-  stripJunkTags,
-  makeLinksAbsolute,
-} from 'utils/dom';
+import { stripJunkTags, makeLinksAbsolute } from 'utils/dom';
 import Mercury from '../dist/mercury';
 import extractorTemplate from './templates/custom-extractor';
 import extractorTestTemplate from './templates/custom-extractor-test';
@@ -19,7 +16,8 @@ const questions = [
   {
     type: 'input',
     name: 'website',
-    message: 'Paste a url to an article you\'d like to create or extend a parser for:',
+    message:
+      "Paste a url to an article you'd like to create or extend a parser for:",
     validate(value) {
       const { hostname } = URL.parse(value);
       if (hostname) return true;
@@ -69,24 +67,30 @@ function scaffoldCustomParser(url) {
   confirm(Mercury.fetchResource, [url], 'Fetching fixture', newParser);
 }
 
-inquirer.prompt(questions).then((answers) => {
-  scaffoldCustomParser(answers.website);
-});
+// if has arg, just assume that arg is a url and skip prmopt
+const urlArg = process.argv[2];
+if (urlArg) {
+  scaffoldCustomParser(urlArg);
+} else {
+  inquirer.prompt(questions).then(answers => {
+    scaffoldCustomParser(answers.website);
+  });
+}
 
 function generateScaffold(url, file, result) {
   const { hostname } = URL.parse(url);
   const extractor = extractorTemplate(hostname, extractorName(hostname));
-  const extractorTest =
-    extractorTestTemplate(
-      file, url, getDir(url), result, extractorName(hostname)
-    );
+  const extractorTest = extractorTestTemplate(
+    file,
+    url,
+    getDir(url),
+    result,
+    extractorName(hostname)
+  );
 
   fs.writeFileSync(`${getDir(url)}/index.js`, extractor);
   fs.writeFileSync(`${getDir(url)}/index.test.js`, extractorTest);
-  fs.appendFileSync(
-    './src/extractors/custom/index.js',
-    exportString(url),
-  );
+  fs.appendFileSync('./src/extractors/custom/index.js', exportString(url));
   exec(`npm run lint-fix-quiet -- ${getDir(url)}/*.js`);
 }
 
@@ -110,9 +114,13 @@ function savePage($, [url], newParser) {
 
   fs.writeFileSync(file, html);
 
-  Mercury.parse(url, html).then((result) => {
+  Mercury.parse(url, html).then(result => {
     if (newParser) {
-      confirm(generateScaffold, [url, file, result], 'Generating parser and tests');
+      confirm(
+        generateScaffold,
+        [url, file, result],
+        'Generating parser and tests'
+      );
       console.log(`Your custom site extractor has been set up. To get started building it, run
       yarn watch:test -- ${hostname}
         -- OR --

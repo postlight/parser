@@ -2,10 +2,7 @@ export const ThoughtcatalogComExtractor = {
   domain: 'thoughtcatalog.com',
 
   title: {
-    selectors: [
-      'h1.title',
-      ['meta[name="og:title"]', 'value'],
-    ],
+    selectors: ['h1.title', ['meta[name="og:title"]', 'value']],
   },
 
   author: {
@@ -16,32 +13,23 @@ export const ThoughtcatalogComExtractor = {
   },
 
   date_published: {
-    selectors: [
-      ['meta[name="article:published_time"]', 'value'],
-    ],
+    selectors: [['meta[name="article:published_time"]', 'value']],
   },
 
   lead_image_url: {
-    selectors: [
-      ['meta[name="og:image"]', 'value'],
-    ],
+    selectors: [['meta[name="og:image"]', 'value']],
   },
 
   content: {
-    selectors: [
-      '.entry.post',
-    ],
+    selectors: ['.entry.post'],
 
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images
-    transforms: {
-    },
+    transforms: {},
 
     // Is there anything that is in the result that shouldn't be?
     // The clean selectors will remove anything that matches from
     // the result
-    clean: [
-      '.tc_mark',
-    ],
+    clean: ['.tc_mark'],
   },
 };

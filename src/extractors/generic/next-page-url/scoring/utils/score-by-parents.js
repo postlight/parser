@@ -36,8 +36,11 @@ export default function scoreByParents($link) {
     // If we have 'comment' or something in our data, and
     // we don't have something like 'content' as well, that's
     // a bad sign. Give a penalty.
-    if (!negativeMatch && NEGATIVE_SCORE_RE.test(parentData)
-       && EXTRANEOUS_LINK_HINTS_RE.test(parentData)) {
+    if (
+      !negativeMatch &&
+      NEGATIVE_SCORE_RE.test(parentData) &&
+      EXTRANEOUS_LINK_HINTS_RE.test(parentData)
+    ) {
       if (!POSITIVE_SCORE_RE.test(parentData)) {
         negativeMatch = true;
         score -= 25;

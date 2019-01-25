@@ -1,11 +1,13 @@
 import assert from 'assert';
-import fs from 'fs';
 import URL from 'url';
 import cheerio from 'cheerio';
+import moment from 'moment';
 
 import Mercury from 'mercury';
 import getExtractor from 'extractors/get-extractor';
 import { excerptContent } from 'utils/text';
+
+const fs = require('fs');
 
 // Rename CustomExtractor
 describe('MSNExtractor', () => {
@@ -15,10 +17,8 @@ describe('MSNExtractor', () => {
     beforeAll(() => {
       url =
         'http://www.msn.com/en-us/health/wellness/this-is-your-brain-on-sad-movies-plus-5-films-to-cry-to/ar-BBwsPWG?li=BBnb2gg';
-      const html =
-        fs.readFileSync('./fixtures/www.msn.com/1475506925474.html');
-      result =
-        Mercury.parse(url, html, { fallback: false });
+      const html = fs.readFileSync('./fixtures/www.msn.com/1475506925474.html');
+      result = Mercury.parse(url, html, { fallback: false });
     });
 
     it('is selected properly', async () => {
@@ -38,7 +38,10 @@ describe('MSNExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(title, 'This Is Your Brain On Sad Movies; Plus 5 Films To Cry To');
+      assert.equal(
+        title,
+        'This Is Your Brain On Sad Movies; Plus 5 Films To Cry To'
+      );
     });
 
     it('returns the author', async () => {
@@ -55,10 +58,11 @@ describe('MSNExtractor', () => {
       // To pass this test, fill out the date_published selector
       // in ./src/extractors/custom/www.msn.com/index.js.
       const { date_published } = await result;
+      const newDatePublished = moment(date_published).format();
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(date_published.split('T')[0], '2016-09-21');
+      assert.equal(newDatePublished.split('T')[0], '2016-09-21');
     });
 
     it('returns the lead_image_url', async () => {
@@ -80,11 +84,19 @@ describe('MSNExtractor', () => {
 
       const $ = cheerio.load(content || '');
 
-      const first13 = excerptContent($('*').first().text(), 13);
+      const first13 = excerptContent(
+        $('*')
+          .first()
+          .text(),
+        13
+      );
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(first13, 'The psychological reason why we love to watch sad movies is linked to');
+      assert.equal(
+        first13,
+        'The psychological reason why we love to watch sad movies is linked to'
+      );
     });
   });
 });

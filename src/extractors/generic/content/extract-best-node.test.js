@@ -1,10 +1,8 @@
 import assert from 'assert';
 import cheerio from 'cheerio';
-import fs from 'fs';
-
-// import HTML from './fixtures/html'
-
 import extractBestNode from './extract-best-node';
+
+const fs = require('fs');
 
 describe('extractBestNode($, flags)', () => {
   it('scores the dom nodes and returns the best option', () => {

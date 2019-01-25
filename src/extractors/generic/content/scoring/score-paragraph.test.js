@@ -2,9 +2,7 @@ import assert from 'assert';
 import cheerio from 'cheerio';
 
 import HTML from './fixtures/html';
-import {
-  scoreParagraph,
-} from './index';
+import { scoreParagraph } from './index';
 
 describe('Scoring utils', () => {
   describe('scoreParagraph(node)', () => {

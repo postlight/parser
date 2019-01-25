@@ -1,12 +1,6 @@
-import {
-  stripUnlikelyCandidates,
-  convertToParagraphs,
-} from 'utils/dom';
+import { stripUnlikelyCandidates, convertToParagraphs } from 'utils/dom';
 
-import {
-  scoreContent,
-  findTopCandidate,
-} from './scoring';
+import { scoreContent, findTopCandidate } from './scoring';
 
 // Using a variety of scoring techniques, extract the content most
 // likely to be article text.
@@ -20,11 +14,6 @@ import {
 //
 // Returns a cheerio object $
 export default function extractBestNode($, opts) {
-  // clone the node so we can get back to our
-  // initial parsed state if needed
-  // TODO Do I need this? – AP
-  // let $root = $.root().clone()
-
   if (opts.stripUnlikelyCandidates) {
     $ = stripUnlikelyCandidates($);
   }

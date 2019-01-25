@@ -1,7 +1,4 @@
-import {
-  STRIP_OUTPUT_TAGS,
-  KEEP_CLASS,
-} from './constants';
+import { STRIP_OUTPUT_TAGS, KEEP_CLASS } from './constants';
 
 export default function stripJunkTags(article, $, tags = []) {
   if (tags.length === 0) {
@@ -10,7 +7,9 @@ export default function stripJunkTags(article, $, tags = []) {
 
   // Remove matching elements, but ignore
   // any element with a class of mercury-parser-keep
-  $(tags.join(','), article).not(`.${KEEP_CLASS}`).remove();
+  $(tags.join(','), article)
+    .not(`.${KEEP_CLASS}`)
+    .remove();
 
   return $;
 }

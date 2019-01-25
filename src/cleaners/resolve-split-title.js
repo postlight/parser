@@ -1,10 +1,7 @@
 import URL from 'url';
 import wuzzy from 'wuzzy';
 
-import {
-  TITLE_SPLITTERS_RE,
-  DOMAIN_ENDINGS_RE,
-} from './constants';
+import { TITLE_SPLITTERS_RE, DOMAIN_ENDINGS_RE } from './constants';
 
 function extractBreadcrumbTitle(splitTitle, text) {
   // This must be a very breadcrumbed title, like:
@@ -19,15 +16,16 @@ function extractBreadcrumbTitle(splitTitle, text) {
       return acc;
     }, {});
 
-    const [maxTerm, termCount] =
-      Reflect.ownKeys(termCounts)
-             .reduce((acc, key) => {
-               if (acc[1] < termCounts[key]) {
-                 return [key, termCounts[key]];
-               }
+    const [maxTerm, termCount] = Reflect.ownKeys(termCounts).reduce(
+      (acc, key) => {
+        if (acc[1] < termCounts[key]) {
+          return [key, termCounts[key]];
+        }
 
-               return acc;
-             }, [0, 0]);
+        return acc;
+      },
+      [0, 0]
+    );
 
     // We found a splitter that was used more than once, so it
     // is probably the breadcrumber. Split our title on that instead.
@@ -38,7 +36,10 @@ function extractBreadcrumbTitle(splitTitle, text) {
     }
 
     const splitEnds = [splitTitle[0], splitTitle.slice(-1)];
-    const longestEnd = splitEnds.reduce((acc, end) => acc.length > end.length ? acc : end, '');
+    const longestEnd = splitEnds.reduce(
+      (acc, end) => (acc.length > end.length ? acc : end),
+      ''
+    );
 
     if (longestEnd.length > 10) {
       return longestEnd;
@@ -67,7 +68,10 @@ function cleanDomainFromTitle(splitTitle, url) {
     return splitTitle.slice(2).join('');
   }
 
-  const endSlug = splitTitle.slice(-1)[0].toLowerCase().replace(' ', '');
+  const endSlug = splitTitle
+    .slice(-1)[0]
+    .toLowerCase()
+    .replace(' ', '');
   const endSlugRatio = wuzzy.levenshtein(endSlug, nakedDomain);
 
   if (endSlugRatio > 0.4 && endSlug.length >= 5) {
