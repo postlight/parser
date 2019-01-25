@@ -55,6 +55,20 @@ describe('Mercury', () => {
       assert.equal(typeof result, 'object');
     });
 
+    it('does washingtonpost', async () => {
+      jasmine.DEFAULT_TIMEOUT_INTERVAL = 50000;
+      const result = await Mercury.parse(
+        'https://www.washingtonpost.com/news/opinions/wp/2018/10/29/enough-platitudes-lets-name-names/'
+      );
+
+      assert.equal(typeof result, 'object');
+      assert.equal(result.total_pages, 1);
+      assert.equal(
+        result.url,
+        'https://www.washingtonpost.com/news/opinions/wp/2018/10/29/enough-platitudes-lets-name-names/'
+      );
+    });
+
     it('does the nyt', async () => {
       const result = await Mercury.parse(
         'http://www.nytimes.com/2016/08/16/upshot/the-state-of-the-clinton-trump-race-is-it-over.html?_r=0'
