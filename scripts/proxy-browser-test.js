@@ -33,7 +33,8 @@ const stop = () => {
 
 start();
 require('child_process').execSync(
-  'node ./node_modules/karma/bin/karma start ./scripts/karma.conf.js',
+  'node ./node_modules/karma/bin/karma start ./scripts/karma.conf.js' +
+    (process.env.CI ? ' --CI' : ''),
   { stdio: [0, 1, 2] }
 );
 stop();
