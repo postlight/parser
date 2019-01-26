@@ -24,7 +24,7 @@ export default function paragraphize(node, $, br = false) {
       sibling &&
       !(sibling.tagName && BLOCK_LEVEL_TAGS_RE.test(sibling.tagName))
     ) {
-      const nextSibling = sibling.nextSibling;
+      const { nextSibling } = sibling;
       $(sibling).appendTo(p);
       sibling = nextSibling;
     }

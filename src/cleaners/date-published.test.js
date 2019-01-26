@@ -1,8 +1,7 @@
 import assert from 'assert';
 import moment from 'moment-timezone';
 
-import {
-  default as cleanDatePublished,
+import cleanDatePublished, {
   cleanDateString,
 } from './date-published';
 
@@ -10,11 +9,7 @@ describe('cleanDatePublished(dateString)', () => {
   it('returns a date', () => {
     const datePublished = cleanDatePublished('published: 1/1/2020');
 
-    assert.equal(
-      datePublished,
-      moment('1/1/2020', 'MM/DD/YYYY').toISOString()
-      // '2020-01-01T05:00:00.000Z',
-    );
+    assert.equal(datePublished, moment('1/1/2020', 'MM/DD/YYYY').toISOString());
   });
 
   it('returns null if date is invalid', () => {

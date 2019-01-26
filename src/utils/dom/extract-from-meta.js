@@ -10,6 +10,7 @@ export default function extractFromMeta(
 ) {
   const foundNames = metaNames.filter(name => cachedNames.indexOf(name) !== -1);
 
+  // eslint-disable-next-line no-restricted-syntax
   for (const name of foundNames) {
     const type = 'name';
     const value = 'value';
@@ -35,7 +36,7 @@ export default function extractFromMeta(
       if (cleanTags) {
         metaValue = stripTags(values[0], $);
       } else {
-        metaValue = values[0];
+        [metaValue] = values;
       }
 
       return metaValue;

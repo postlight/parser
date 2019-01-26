@@ -57,13 +57,13 @@ export default function mergeSiblings($candidate, topScore, $) {
 
           if (newScore >= siblingScoreThreshold) {
             return wrappingDiv.append($sibling);
-          } else if (sibling.tagName === 'p') {
+          } if (sibling.tagName === 'p') {
             const siblingContent = $sibling.text();
             const siblingContentLength = textLength(siblingContent);
 
             if (siblingContentLength > 80 && density < 0.25) {
               return wrappingDiv.append($sibling);
-            } else if (
+            } if (
               siblingContentLength <= 80 &&
               density === 0 &&
               hasSentenceEnd(siblingContent)
