@@ -16,7 +16,15 @@ let urls = [
 ];
 
 // don't run this on CI b/c we want to avoid network requests
-if (process.env.CI) {
+if (
+  process.env.CI ||
+  (typeof __karma__ !== 'undefined' && __karma__.config.args[0] === '--CI')
+) {
+  if (cheerio.browser) {
+    require('../dist/mercury.web');
+  }
+  // eslint-disable-next-line no-unused-expressions
+  typeof Mercury === 'undefined' && require('../dist/mercury');
   describe('Tests', () => {
     it('do not run because this is CI and we do not want network requests', () => {
       assert.equal(true, true);
