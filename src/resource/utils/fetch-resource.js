@@ -102,8 +102,12 @@ export default async function fetchResource(url, parsedUrl) {
     gzip: true,
     // Follow any non-GET redirects
     followAllRedirects: true,
-    // Follow GET redirects
-    followRedirect: true,
+    ...(typeof window !== 'undefined'
+      ? {}
+      : {
+          // Follow GET redirects; this option is for Node only
+          followRedirect: true,
+        }),
   };
 
   const { response, body } = await get(options);
