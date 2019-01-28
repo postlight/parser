@@ -1,6 +1,6 @@
 {
   "name": "@postlight/mercury-parser",
-  "version": "1.0.13",
+  "version": "1.0.14",
   "description": "Mercury transforms web pages into clean text. Publishers and programmers use it to make the web make sense, and readers use it to read any web article comfortably.",
   "author": "Postlight <mercury+security@postlight.com>",
   "homepage": "https://mercury.postlight.com",
