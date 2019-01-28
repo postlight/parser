@@ -1,5 +1,5 @@
 {
-  "name": "mercury-parser",
+  "name": "@postlight/mercury-parser",
   "version": "1.0.13",
   "description": "Mercury transforms web pages into clean text. Publishers and programmers use it to make the web make sense, and readers use it to read any web article comfortably.",
   "author": "Postlight <mercury+security@postlight.com>",
@@ -7,7 +7,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/postlight/mercury-parser"
+    "url": "git+https://github.com/postlight/mercury-parser.git"
   },
   "bugs": {
     "url": "https://github.com/postlight/mercury-parser/issues"
@@ -111,16 +111,16 @@
     "watchify": "^3.11.0"
   },
   "dependencies": {
-    "browser-request": "postlight/browser-request#feat-add-headers-to-response",
+    "browser-request": "github:postlight/browser-request#feat-add-headers-to-response",
     "cheerio": "^0.22.0",
-    "difflib": "postlight/difflib.js",
+    "difflib": "github:postlight/difflib.js",
     "ellipsize": "0.1.0",
     "iconv-lite": "0.4.24",
     "jquery": "^3.3.1",
     "moment": "^2.23.0",
     "moment-parseformat": "3.0.0",
     "moment-timezone": "0.5.23",
-    "request": "czardoz/request",
+    "request": "github:czardoz/request",
     "request-promise": "^4.2.2",
     "string-direction": "^0.1.2",
     "url": "^0.11.0",
