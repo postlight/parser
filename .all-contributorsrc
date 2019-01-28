@@ -55,6 +55,16 @@
         "code",
         "doc"
       ]
+    },
+    {
+      "login": "toufic-m",
+      "name": "Toufic Mouallem",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/13136721?v=4",
+      "profile": "https://github.com/toufic-m",
+      "contributions": [
+        "code",
+        "doc"
+      ]
     }
   ],
   "repoType": "github"
