@@ -75,6 +75,16 @@
         "code",
         "doc"
       ]
+    },
+    {
+      "login": "e55o",
+      "name": "Marc Esso",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/31523264?v=4",
+      "profile": "https://github.com/e55o",
+      "contributions": [
+        "code",
+        "doc"
+      ]
     }
   ],
   "repoType": "github"
