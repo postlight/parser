@@ -11,12 +11,10 @@ module.exports = function(config) {
 
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-    frameworks: ['jasmine', 'browserify'],
+    frameworks: ['browserify', 'jasmine'],
 
     // list of files / patterns to load in the browser
     files: [
-      '../node_modules/phantomjs-polyfill-find/find-polyfill.js',
-      '../node_modules/phantomjs-polyfill-string-includes/index.js',
       '../dist/mercury.web.js',
       { pattern: 'check-build.test.js', included: true },
     ],
@@ -32,7 +30,7 @@ module.exports = function(config) {
 
     browserify: {
       debug: true,
-      transform: ['brfs-babel', 'babelify'],
+      transform: [['babelify', { presets: ['@babel/preset-env'] }], 'brfs'],
     },
 
     // test results reporter to use
@@ -56,7 +54,7 @@ module.exports = function(config) {
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
     // browsers: ['PhantomJS'],
-    browsers: [process.env.CI ? 'PhantomJS' : 'Chrome'],
+    browsers: ['Chrome'],
     // browsers: ['Chrome'],
 
     // Continuous Integration mode
@@ -66,5 +64,9 @@ module.exports = function(config) {
     // Concurrency level
     // how many browser should be started simultaneous
     concurrency: Infinity,
+
+    client: {
+      args: config.CI ? ['--CI'] : [],
+    },
   });
 };

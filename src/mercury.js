@@ -85,8 +85,8 @@ const Mercury = {
 
   // A convenience method for getting a resource
   // to work with, e.g., for custom extractor generator
-  async fetchResource(url) {
-    return await Resource.create(url);
+  fetchResource(url) {
+    return Resource.create(url);
   },
 };
 

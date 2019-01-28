@@ -21,6 +21,7 @@ export default async function collectAllPages({
   // likely gone wrong.
   while (next_page_url && pages < 26) {
     pages += 1;
+    // eslint-disable-next-line no-await-in-loop
     $ = await Resource.create(next_page_url);
     html = $.html();
 
@@ -44,6 +45,7 @@ export default async function collectAllPages({
       }`,
     };
 
+    // eslint-disable-next-line prefer-destructuring
     next_page_url = nextPageResult.next_page_url;
   }
 

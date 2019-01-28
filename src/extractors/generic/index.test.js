@@ -1,7 +1,9 @@
 import assert from 'assert';
-import fs from 'fs';
+import moment from 'moment';
 
 import GenericExtractor from './index';
+
+const fs = require('fs');
 
 describe('GenericExtractor', () => {
   describe('extract(opts)', () => {
@@ -13,13 +15,14 @@ describe('GenericExtractor', () => {
         html,
         metaCache: [],
       });
+      const newDatePublished = moment(date_published).format();
 
       assert.equal(author, null);
       assert.equal(
         title,
         'California appears poised to be first to ban power-guzzling big-screen TVs'
       );
-      assert.equal(date_published.split('T')[0], '2009-10-14');
+      assert.equal(newDatePublished.split('T')[0], '2009-10-14');
       assert.equal(dek, null);
     });
 
