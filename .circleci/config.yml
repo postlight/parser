@@ -12,7 +12,6 @@ jobs:
       - run: "yarn build:ci"
       - run: "yarn test:node --maxWorkers=4"
       - run: "./scripts/pr-parser-preview.sh"
-
       - store_artifacts:
           path: tmp/artifacts
 
@@ -27,6 +26,8 @@ jobs:
       - run: "yarn build:web:ci --maxWorkers=4"
 
   deploy:
+    docker:
+      - image: circleci/node:8.10-browsers
     steps:
       - run:
           name: Authenticate with registry
