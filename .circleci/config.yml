@@ -30,8 +30,7 @@ jobs:
       - run: "yarn build:web:ci --maxWorkers=4"
 
   deploy:
-    docker:
-      <<: *defaults
+    <<: *defaults
     steps:
       - run:
           name: Authenticate with registry
