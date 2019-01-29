@@ -11,7 +11,7 @@ The Mercury Parser module powers the [Mercury Parser API](https://mercury.postli
 ### Installation
 
 ```bash
-yarn add mercury-parser
+yarn add @postlight/mercury-parser
 ```
 
 ### Usage
