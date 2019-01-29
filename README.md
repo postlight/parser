@@ -17,7 +17,7 @@ yarn add @postlight/mercury-parser
 ### Usage
 
 ```javascript
-import Mercury from 'mercury-parser';
+import Mercury from '@postlight/mercury-parser';
 
 Mercury.parse(url).then(result => console.log(result););
 ```
