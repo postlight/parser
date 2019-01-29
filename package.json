@@ -10,7 +10,7 @@
     "lint-fix-quiet": "eslint --fix --quiet",
     "build": "yarn lint && rollup -c && yarn test:build",
     "build:ci": "rollup -c && yarn test:build",
-    "build:web": "rollup -c rollup.config.web.js",
+    "build:web": "yarn lint && rollup -c rollup.config.web.js && yarn test:build:web",
     "build:web:ci": "rollup -c rollup.config.web.js && yarn test:build:web",
     "release": "yarn build && yarn build:web",
     "build:generator": "rollup -c scripts/rollup.config.js",
