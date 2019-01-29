@@ -1,8 +1,13 @@
 version: 2
+
+defaults: &defaults
+  working_directory: ~/repo
+  docker:
+    - image: circleci/node:8.10-browsers
+
 jobs:
   test-node:
-    docker:
-      - image: circleci/node:8.10-browsers
+    <<: *defaults 
     steps:
       - checkout
       # For some reason phantomjs-prebuild is failing w/yarn, but npm installing works
@@ -12,19 +17,35 @@ jobs:
       - run: "yarn build:ci"
       - run: "yarn test:node --maxWorkers=4"
       - run: "./scripts/pr-parser-preview.sh"
-
       - store_artifacts:
           path: tmp/artifacts
+      - persist_to_workspace:
+          root: ~/repo
+          paths: .
 
   test-web:
-    docker:
-      - image: circleci/node:8.10-browsers
+    <<: *defaults
     steps:
+      - attach_workspace:
+          at: ~/repo
       - checkout
       - run: "yarn install"
       - run: "yarn add karma-cli --dev"
       - run: "yarn test:web --maxWorkers=4"
       - run: "yarn build:web:ci --maxWorkers=4"
+
+
+  deploy:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: ~/repo
+      - run:
+          name: Authenticate with registry
+          command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/repo/.npmrc
+      - run:
+          name: Publish package
+          command: npm publish
 
   update-fixtures:
     docker:
@@ -34,13 +55,21 @@ jobs:
       - run: "yarn install"
       - run: "node ./scripts/update-fixtures.js"
 
-
 workflows:
   version: 2
   build_and_test:
     jobs:
       - test-node
       - test-web
+      - deploy:
+          requires:
+            - test-node
+            - test-web
+          # filters:
+          #   tags:
+          #     only: /^v.*/
+          #   branches:
+          #     ignore: /.*/
   # UNCOMMENT WHEN READY TO AUTOMATE THIS TASK
   # scheduled_tasks:
   #   triggers:
