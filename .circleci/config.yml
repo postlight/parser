@@ -1,8 +1,13 @@
 version: 2
+
+defaults: &defaults
+  working_directory: ~/repo
+  docker:
+    - image: circleci/node:8.10-browsers
+
 jobs:
   test-node:
-    docker:
-      - image: circleci/node:8.10-browsers
+    <<: *defaults 
     steps:
       - checkout
       # For some reason phantomjs-prebuild is failing w/yarn, but npm installing works
@@ -16,8 +21,7 @@ jobs:
           path: tmp/artifacts
 
   test-web:
-    docker:
-      - image: circleci/node:8.10-browsers
+    <<: *defaults
     steps:
       - checkout
       - run: "yarn install"
@@ -27,11 +31,11 @@ jobs:
 
   deploy:
     docker:
-      - image: circleci/node:8.10-browsers
+      <<: *defaults
     steps:
       - run:
           name: Authenticate with registry
-          command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/.npmrc
+          command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/repo/.npmrc
       - run:
           name: Publish package
           command: npm publish
