@@ -4,8 +4,9 @@
   "files": [
     "README.md"
   ],
-  "imageSize": 100,
+  "imageSize": 50,
   "commit": true,
+  "contributorsPerLine": 6,
   "contributors": [
     {
       "login": "adampash",
