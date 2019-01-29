@@ -19,6 +19,9 @@ jobs:
       - run: "./scripts/pr-parser-preview.sh"
       - store_artifacts:
           path: tmp/artifacts
+      - persist_to_workspace:
+          root: ~/repo
+          paths: .
 
   test-web:
     <<: *defaults
@@ -28,10 +31,15 @@ jobs:
       - run: "yarn add karma-cli --dev"
       - run: "yarn test:web --maxWorkers=4"
       - run: "yarn build:web:ci --maxWorkers=4"
+      - persist_to_workspace:
+          root: ~/repo
+          paths: .
 
   deploy:
     <<: *defaults
     steps:
+      - attach_workspace:
+          at: ~/repo
       - run:
           name: Authenticate with registry
           command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/repo/.npmrc
