@@ -1,7 +1,6 @@
 import assert from 'assert';
 import URL from 'url';
 import cheerio from 'cheerio';
-import moment from 'moment';
 
 import Mercury from 'mercury';
 import getExtractor from 'extractors/get-extractor';
@@ -57,11 +56,10 @@ describe('WwwFastcompanyComExtractor', () => {
       // To pass this test, fill out the date_published selector
       // in ./src/extractors/custom/www.fastcompany.com/index.js.
       const { date_published } = await result;
-      const newDatePublished = moment(date_published).toISOString(true);
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(newDatePublished, '2017-01-09T05:00:00.000+02:00');
+      assert.equal(date_published.split('T')[0], '2017-01-09');
     });
 
     it('returns the dek', async () => {
