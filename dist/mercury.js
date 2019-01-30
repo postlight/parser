@@ -38,6 +38,7 @@ var _defineProperty = _interopDefault(
 var _parseFloat = _interopDefault(
   require('@babel/runtime-corejs2/core-js/parse-float')
 );
+var _Set = _interopDefault(require('@babel/runtime-corejs2/core-js/set'));
 var _typeof = _interopDefault(require('@babel/runtime-corejs2/helpers/typeof'));
 var _getIterator = _interopDefault(
   require('@babel/runtime-corejs2/core-js/get-iterator')
@@ -391,20 +392,28 @@ function _fetchResource() {
             switch ((_context.prev = _context.next)) {
               case 0:
                 parsedUrl = parsedUrl || URL.parse(encodeURI(url));
-                options = {
-                  url: parsedUrl.href,
-                  headers: _objectSpread({}, REQUEST_HEADERS),
-                  timeout: FETCH_TIMEOUT,
-                  // Accept cookies
-                  jar: true,
-                  // Set to null so the response returns as binary and body as buffer
-                  // https://github.com/request/request#requestoptions-callback
-                  encoding: null,
-                  // Accept and decode gzip
-                  gzip: true,
-                  // Follow any redirect
-                  followAllRedirects: true,
-                };
+                options = _objectSpread(
+                  {
+                    url: parsedUrl.href,
+                    headers: _objectSpread({}, REQUEST_HEADERS),
+                    timeout: FETCH_TIMEOUT,
+                    // Accept cookies
+                    jar: true,
+                    // Set to null so the response returns as binary and body as buffer
+                    // https://github.com/request/request#requestoptions-callback
+                    encoding: null,
+                    // Accept and decode gzip
+                    gzip: true,
+                    // Follow any non-GET redirects
+                    followAllRedirects: true,
+                  },
+                  typeof window !== 'undefined'
+                    ? {}
+                    : {
+                        // Follow GET redirects; this option is for Node only
+                        followRedirect: true,
+                      }
+                );
                 _context.next = 4;
                 return get(options);
 
@@ -803,8 +812,7 @@ function brsToPs$$1($) {
       collapsing = true;
       $element.remove();
     } else if (collapsing) {
-      collapsing = false; // $(element).replaceWith('<p />')
-
+      collapsing = false;
       paragraphize(element, $, true);
     }
   });
@@ -899,7 +907,7 @@ function convertNodeTo$$1($node, $) {
     return $;
   }
 
-  var attrs = getAttrs(node) || {}; // console.log(attrs)
+  var attrs = getAttrs(node) || {};
 
   var attribString = _Reflect$ownKeys(attrs)
     .map(function(key) {
@@ -1039,12 +1047,7 @@ function removeAllButWhitelist($article, $) {
 
   $('.'.concat(KEEP_CLASS), $article).removeClass(KEEP_CLASS);
   return $article;
-} // function removeAttrs(article, $) {
-//   REMOVE_ATTRS.forEach((attr) => {
-//     $(`[${attr}]`, article).removeAttr(attr);
-//   });
-// }
-// Remove attributes like style or align
+} // Remove attributes like style or align
 
 function cleanAttributes$$1($article, $) {
   // Grabbing the parent because at this point
@@ -1709,13 +1712,43 @@ function rewriteTopLevel$$1(article, $) {
 }
 
 function absolutize($, rootUrl, attr, $content) {
+  var baseUrl = $('base').attr('href');
   $('['.concat(attr, ']'), $content).each(function(_, node) {
     var attrs = getAttrs(node);
     var url = attrs[attr];
+    var absoluteUrl = URL.resolve(baseUrl || rootUrl, url);
+    setAttr(node, attr, absoluteUrl);
+  });
+}
 
-    if (url) {
-      var absoluteUrl = URL.resolve(rootUrl, url);
-      setAttr(node, attr, absoluteUrl);
+function absolutizeSet($, rootUrl, $content) {
+  $('[srcset]', $content).each(function(_, node) {
+    var attrs = getAttrs(node);
+    var urlSet = attrs.srcset;
+
+    if (urlSet) {
+      // a comma should be considered part of the candidate URL unless preceded by a descriptor
+      // descriptors can only contain positive numbers followed immediately by either 'w' or 'x'
+      // space characters inside the URL should be encoded (%20 or +)
+      var candidates = urlSet.match(
+        /(?:\s*)(\S+(?:\s*[\d.]+[wx])?)(?:\s*,\s*)?/g
+      );
+      var absoluteCandidates = candidates.map(function(candidate) {
+        // a candidate URL cannot start or end with a comma
+        // descriptors are separated from the URLs by unescaped whitespace
+        var parts = candidate
+          .trim()
+          .replace(/,$/, '')
+          .split(/\s+/);
+        parts[0] = URL.resolve(rootUrl, parts[0]);
+        return parts.join(' ');
+      });
+
+      var absoluteUrlSet = _toConsumableArray(
+        new _Set(absoluteCandidates)
+      ).join(', ');
+
+      setAttr(node, 'srcset', absoluteUrlSet);
     }
   });
 }
@@ -1724,6 +1757,7 @@ function makeLinksAbsolute$$1($content, $, url) {
   ['href', 'src'].forEach(function(attr) {
     return absolutize($, url, attr, $content);
   });
+  absolutizeSet($, url, $content);
   return $content;
 }
 
@@ -2301,16 +2335,7 @@ var NYTimesExtractor = {
     selectors: ['div.g-blocks', 'article#story'],
     transforms: {
       'img.g-lazy': function imgGLazy($node) {
-        var src = $node.attr('src'); // const widths = $node.attr('data-widths')
-        //                   .slice(1)
-        //                   .slice(0, -1)
-        //                   .split(',');
-        // if (widths.length) {
-        //   width = widths.slice(-1);
-        // } else {
-        //   width = '900';
-        // }
-
+        var src = $node.attr('src');
         var width = 640;
         src = src.replace('{{size}}', width);
         $node.attr('src', src);
@@ -2944,10 +2969,10 @@ var WwwWashingtonpostComExtractor = {
     selectors: ['h1', '#topper-headline-wrapper'],
   },
   author: {
-    selectors: ['.pb-byline'],
+    selectors: ['.pb-author-name'],
   },
   date_published: {
-    selectors: [['.pb-timestamp[itemprop="datePublished"]', 'content']],
+    selectors: [['.author-timestamp[itemprop="datePublished"]', 'content']],
   },
   dek: {
     selectors: [],
@@ -3002,12 +3027,7 @@ var WwwHuffingtonpostComExtractor = {
     defaultCleaner: false,
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images
-    transforms: {
-      // 'div.top-media': ($node) => {
-      //   const $figure = $node.children('figure');
-      //   $node.replaceWith($figure);
-      // },
-    },
+    transforms: {},
     // Is there anything that is in the result that shouldn't be?
     // The clean selectors will remove anything that matches from
     // the result
@@ -5065,10 +5085,7 @@ var WwwProspectmagazineCoUkExtractor = {
     selectors: [['meta[name="og:image"]', 'value']],
   },
   content: {
-    selectors: [
-      // ['article.type-post div.post_content p'],
-      'article .post_content',
-    ],
+    selectors: ['article .post_content'],
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images
     transforms: {},
@@ -5290,6 +5307,60 @@ var IciRadioCanadaCaExtractor = {
   },
 };
 
+var WwwFortinetComExtractor = {
+  domain: 'www.fortinet.com',
+  title: {
+    selectors: ['h1'],
+  },
+  author: {
+    selectors: ['.b15-blog-meta__author'],
+  },
+  date_published: {
+    selectors: [['meta[name="article:published_time"]', 'value']],
+  },
+  lead_image_url: {
+    selectors: [['meta[name="og:image"]', 'value']],
+  },
+  content: {
+    selectors: [
+      'div.responsivegrid.aem-GridColumn.aem-GridColumn--default--12',
+    ],
+    transforms: {
+      noscript: function noscript($node) {
+        var $children = $node.children();
+
+        if ($children.length === 1 && $children.get(0).tagName === 'img') {
+          return 'figure';
+        }
+
+        return null;
+      },
+    },
+  },
+};
+
+var WwwFastcompanyComExtractor = {
+  domain: 'www.fastcompany.com',
+  title: {
+    selectors: ['h1'],
+  },
+  author: {
+    selectors: ['.post__by'],
+  },
+  date_published: {
+    selectors: [['meta[name="article:published_time"]', 'value']],
+  },
+  dek: {
+    selectors: ['.post__deck'],
+  },
+  lead_image_url: {
+    selectors: [['meta[name="og:image"]', 'value']],
+  },
+  content: {
+    selectors: ['.post__article'],
+  },
+};
+
 var CustomExtractors = /*#__PURE__*/ Object.freeze({
   BloggerExtractor: BloggerExtractor,
   NYMagExtractor: NYMagExtractor,
@@ -5382,6 +5453,8 @@ var CustomExtractors = /*#__PURE__*/ Object.freeze({
   WwwFoolComExtractor: WwwFoolComExtractor,
   WwwSlateComExtractor: WwwSlateComExtractor,
   IciRadioCanadaCaExtractor: IciRadioCanadaCaExtractor,
+  WwwFortinetComExtractor: WwwFortinetComExtractor,
+  WwwFastcompanyComExtractor: WwwFastcompanyComExtractor,
 });
 
 var Extractors = _Object$keys(CustomExtractors).reduce(function(acc, key) {
@@ -5390,8 +5463,7 @@ var Extractors = _Object$keys(CustomExtractors).reduce(function(acc, key) {
 }, {});
 
 // CLEAN AUTHOR CONSTANTS
-var CLEAN_AUTHOR_RE = /^\s*(posted |written )?by\s*:?\s*(.*)/i; //     author = re.sub(r'^\s*(posted |written )?by\s*:?\s*(.*)(?i)',
-// CLEAN DEK CONSTANTS
+var CLEAN_AUTHOR_RE = /^\s*(posted |written )?by\s*:?\s*(.*)/i; // CLEAN DEK CONSTANTS
 
 var TEXT_LINK_RE = new RegExp('http(s)?://', 'i'); // An ordered list of meta tag names that denote likely article deks.
 
@@ -5699,10 +5771,6 @@ var Cleaners = {
 // Returns a cheerio object $
 
 function extractBestNode($, opts) {
-  // clone the node so we can get back to our
-  // initial parsed state if needed
-  // TODO Do I need this? – AP
-  // let $root = $.root().clone()
   if (opts.stripUnlikelyCandidates) {
     $ = stripUnlikelyCandidates($);
   }
@@ -5813,10 +5881,7 @@ var GenericContentExtractor = {
       return null;
     }
 
-    return normalizeSpaces($.html(node)); // if return_type == "html":
-    //     return normalize_spaces(node_to_html(node))
-    // else:
-    //     return node
+    return normalizeSpaces($.html(node));
   },
 };
 
@@ -6078,11 +6143,8 @@ var DATE_PUBLISHED_SELECTORS = [
 
 var abbrevMonthsStr = '(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)';
 var DATE_PUBLISHED_URL_RES = [
-  // /2012/01/27/ but not /2012/01/293
-  new RegExp('/(20\\d{2}/\\d{2}/\\d{2})/', 'i'), // 20120127 or 20120127T but not 2012012733 or 8201201733
-  // /[^0-9](20\d{2}[01]\d[0-3]\d)([^0-9]|$)/i,
-  // 2012-01-27
-  new RegExp('(20\\d{2}-[01]\\d-[0-3]\\d)', 'i'), // /2012/jan/27/
+  new RegExp('/(20\\d{2}/\\d{2}/\\d{2})/', 'i'),
+  new RegExp('(20\\d{2}-[01]\\d-[0-3]\\d)', 'i'),
   new RegExp('/(20\\d{2}/'.concat(abbrevMonthsStr, '/[0-3]\\d)/'), 'i'),
 ];
 
@@ -6113,50 +6175,15 @@ var GenericDatePublishedExtractor = {
   },
 };
 
-// import {
-//   DEK_META_TAGS,
-//   DEK_SELECTORS,
-//   DEK_URL_RES,
-// } from './constants';
-// import { cleanDek } from 'cleaners';
-// import {
-//   extractFromMeta,
-//   extractFromSelectors,
-// } from 'utils/dom';
 // Currently there is only one selector for
 // deks. We should simply return null here
 // until we have a more robust generic option.
 // Below is the original source for this, for reference.
 var GenericDekExtractor = {
-  // extract({ $, content, metaCache }) {
   extract: function extract() {
     return null;
   },
 };
-//     # First, check to see if we have a matching meta tag that we can make
-//     # use of.
-//     dek = self.extract_from_meta('dek', constants.DEK_META_TAGS)
-//     if not dek:
-//         # Second, look through our CSS/XPath selectors. This may return
-//         # an HTML fragment.
-//         dek = self.extract_from_selectors('dek',
-//                                            constants.DEK_SELECTORS,
-//                                            text_only=False)
-//
-//     if dek:
-//         # Make sure our dek isn't in the first few thousand characters
-//         # of the content, otherwise it's just the start of the article
-//         # and not a true dek.
-//         content = self.extract_content()
-//         content_chunk = normalize_spaces(strip_tags(content[:2000]))
-//         dek_chunk = normalize_spaces(dek[:100]) # Already has no tags.
-//
-//         # 80% or greater similarity means the dek was very similar to some
-//         # of the starting content, so we skip it.
-//         if fuzz.partial_ratio(content_chunk, dek_chunk) < 80:
-//             return dek
-//
-//     return None
 
 // An ordered list of meta tag names that denote likely article leading images.
 // All attributes should be lowercase for faster case-insensitive matching.
@@ -6443,159 +6470,6 @@ var GenericLeadImageUrlExtractor = {
     return null;
   },
 };
-//     """
-//     # First, try to find the "best" image via the content.
-//     # We'd rather not have to fetch each image and check dimensions,
-//     # so try to do some analysis and determine them instead.
-//     content = self.extractor.extract_content(return_type="node")
-//     imgs = content.xpath('.//img')
-//     img_scores = defaultdict(int)
-//     logger.debug('Scoring %d images from content', len(imgs))
-//     for (i, img) in enumerate(imgs):
-//         img_score = 0
-//
-//         if not 'src' in img.attrib:
-//             logger.debug('No src attribute found')
-//             continue
-//
-//         try:
-//             parsed_img = urlparse(img.attrib['src'])
-//             img_path = parsed_img.path.lower()
-//         except ValueError:
-//             logger.debug('ValueError getting img path.')
-//             continue
-//         logger.debug('Image path is %s', img_path)
-//
-//         if constants.POSITIVE_LEAD_IMAGE_URL_HINTS_RE.match(img_path):
-//             logger.debug('Positive URL hints match. Adding 20.')
-//             img_score += 20
-//
-//         if constants.NEGATIVE_LEAD_IMAGE_URL_HINTS_RE.match(img_path):
-//             logger.debug('Negative URL hints match. Subtracting 20.')
-//             img_score -= 20
-//
-//         # Gifs are more often structure than photos
-//         if img_path.endswith('gif'):
-//             logger.debug('gif found. Subtracting 10.')
-//             img_score -= 10
-//
-//         # JPGs are more often photographs
-//         if img_path.endswith('jpg'):
-//             logger.debug('jpg found. Adding 10.')
-//             img_score += 10
-//
-//         # PNGs are neutral.
-//
-//         # Alt attribute usually means non-presentational image.
-//         if 'alt' in img.attrib and len(img.attrib['alt']) > 5:
-//             logger.debug('alt attribute found. Adding 5.')
-//             img_score += 5
-//
-//         # Look through our parent and grandparent for figure-like
-//         # container elements, give a bonus if we find them
-//         parents = [img.getparent()]
-//         if parents[0] is not None and parents[0].getparent() is not None:
-//             parents.append(parents[0].getparent())
-//         for p in parents:
-//             if p.tag == 'figure':
-//                 logger.debug('Parent with <figure> tag found. Adding 25.')
-//                 img_score += 25
-//
-//             p_sig = ' '.join([p.get('id', ''), p.get('class', '')])
-//             if constants.PHOTO_HINTS_RE.search(p_sig):
-//                 logger.debug('Photo hints regex match. Adding 15.')
-//                 img_score += 15
-//
-//         # Look at our immediate sibling and see if it looks like it's a
-//         # caption. Bonus if so.
-//         sibling = img.getnext()
-//         if sibling is not None:
-//             if sibling.tag == 'figcaption':
-//                 img_score += 25
-//
-//             sib_sig = ' '.join([sibling.get('id', ''),
-//                                 sibling.get('class', '')]).lower()
-//             if 'caption' in sib_sig:
-//                 img_score += 15
-//
-//         # Pull out width/height if they were set.
-//         img_width = None
-//         img_height = None
-//         if 'width' in img.attrib:
-//             try:
-//                 img_width = float(img.get('width'))
-//             except ValueError:
-//                 pass
-//         if 'height' in img.attrib:
-//             try:
-//                 img_height = float(img.get('height'))
-//             except ValueError:
-//                 pass
-//
-//         # Penalty for skinny images
-//         if img_width and img_width <= 50:
-//             logger.debug('Skinny image found. Subtracting 50.')
-//             img_score -= 50
-//
-//         # Penalty for short images
-//         if img_height and img_height <= 50:
-//             # Wide, short images are more common than narrow, tall ones
-//             logger.debug('Short image found. Subtracting 25.')
-//             img_score -= 25
-//
-//         if img_width and img_height and not 'sprite' in img_path:
-//             area = img_width * img_height
-//
-//             if area < 5000: # Smaller than 50x100
-//                 logger.debug('Image with small area found. Subtracting 100.')
-//                 img_score -= 100
-//             else:
-//                 img_score += round(area/1000.0)
-//
-//         # If the image is higher on the page than other images,
-//         # it gets a bonus. Penalty if lower.
-//         logger.debug('Adding page placement bonus of %d.', len(imgs)/2 - i)
-//         img_score += len(imgs)/2 - i
-//
-//         # Use the raw src here because we munged img_path for case
-//         # insensitivity
-//         logger.debug('Final score is %d.', img_score)
-//         img_scores[img.attrib['src']] += img_score
-//
-//     top_score = 0
-//     top_url = None
-//     for (url, score) in img_scores.items():
-//         if score > top_score:
-//             top_url = url
-//             top_score = score
-//
-//     if top_score > 0:
-//         logger.debug('Using top score image from content. Score was %d', top_score)
-//         return top_url
-//
-//
-//     # If nothing else worked, check to see if there are any really
-//     # probable nodes in the doc, like <link rel="image_src" />.
-//     logger.debug('Trying to find lead image in probable nodes')
-//     for selector in constants.LEAD_IMAGE_URL_SELECTORS:
-//         nodes = self.resource.extract_by_selector(selector)
-//         for node in nodes:
-//             clean_value = None
-//             if node.attrib.get('src'):
-//                 clean_value = self.clean(node.attrib['src'])
-//
-//             if not clean_value and node.attrib.get('href'):
-//                 clean_value = self.clean(node.attrib['href'])
-//
-//             if not clean_value and node.attrib.get('value'):
-//                 clean_value = self.clean(node.attrib['value'])
-//
-//             if clean_value:
-//                 logger.debug('Found lead image in probable nodes.')
-//                 logger.debug('Node was: %s', node)
-//                 return clean_value
-//
-//     return None
 
 function scoreSimilarity(score, articleUrl, href) {
   // Do this last and only if we have a real candidate, because it's
