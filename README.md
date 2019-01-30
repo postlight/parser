@@ -11,13 +11,13 @@ The Mercury Parser module powers the [Mercury Parser API](https://mercury.postli
 ### Installation
 
 ```bash
-yarn add mercury-parser
+yarn add @postlight/mercury-parser
 ```
 
 ### Usage
 
 ```javascript
-import Mercury from 'mercury-parser';
+import Mercury from '@postlight/mercury-parser';
 
 Mercury.parse(url).then(result => console.log(result););
 ```
