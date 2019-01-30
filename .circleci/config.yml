@@ -7,16 +7,16 @@ defaults: &defaults
 
 jobs:
   test-node:
-    <<: *defaults 
+    <<: *defaults
     steps:
       - checkout
       # For some reason phantomjs-prebuild is failing w/yarn, but npm installing works
-      - run: "npm install phantomjs-prebuilt"
-      - run: "yarn install"
-      - run: "yarn lint:ci"
-      - run: "yarn build:ci"
-      - run: "yarn test:node --maxWorkers=4"
-      - run: "./scripts/pr-parser-preview.sh"
+      - run: 'npm install phantomjs-prebuilt'
+      - run: 'yarn install'
+      - run: 'yarn lint:ci'
+      - run: 'yarn build:ci'
+      - run: 'yarn test:node --maxWorkers=4'
+      - run: './scripts/pr-parser-preview.sh'
       - store_artifacts:
           path: tmp/artifacts
       - persist_to_workspace:
@@ -29,11 +29,10 @@ jobs:
       - attach_workspace:
           at: ~/repo
       - checkout
-      - run: "yarn install"
-      - run: "yarn add karma-cli --dev"
-      - run: "yarn test:web --maxWorkers=4"
-      - run: "yarn build:web:ci --maxWorkers=4"
-
+      - run: 'yarn install'
+      - run: 'yarn add karma-cli --dev'
+      - run: 'yarn test:web --maxWorkers=4'
+      - run: 'yarn build:web:ci --maxWorkers=4'
 
   deploy:
     <<: *defaults
@@ -52,8 +51,8 @@ jobs:
       - image: circleci/node:8.10
     steps:
       - checkout
-      - run: "yarn install"
-      - run: "node ./scripts/update-fixtures.js"
+      - run: 'yarn install'
+      - run: 'node ./scripts/update-fixtures.js'
 
 workflows:
   version: 2
@@ -65,11 +64,11 @@ workflows:
           requires:
             - test-node
             - test-web
-          # filters:
-          #   tags:
-          #     only: /^v.*/
-          #   branches:
-          #     ignore: /.*/
+          filters:
+            tags:
+              only: /^v.*/
+            branches:
+              ignore: /.*/
   # UNCOMMENT WHEN READY TO AUTOMATE THIS TASK
   # scheduled_tasks:
   #   triggers:
