@@ -1,9 +1,6 @@
 {
   "presets": ["@babel/preset-env"],
   "plugins": [
-    "@babel/plugin-transform-destructuring",
-    "@babel/plugin-proposal-object-rest-spread",
-    "@babel/plugin-transform-async-to-generator",
     [
       "module-resolver",
       {
@@ -22,8 +19,6 @@
   "env": {
     "development": {
       "plugins": [
-        ["@babel/plugin-proposal-export-default-from"],
-        ["@babel/plugin-proposal-export-namespace-from"],
         [
           "@babel/plugin-transform-runtime",
           {
