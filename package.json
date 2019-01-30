@@ -1,6 +1,6 @@
 {
   "name": "@postlight/mercury-parser",
-  "version": "1.0.19",
+  "version": "1.0.20",
   "description": "Mercury transforms web pages into clean text. Publishers and programmers use it to make the web make sense, and readers use it to read any web article comfortably.",
   "author": "Postlight <mercury@postlight.com>",
   "homepage": "https://mercury.postlight.com",
@@ -130,10 +130,10 @@
   "browser": {
     "main": "./dist/mercury.web.js",
     "cheerio": "./src/shims/cheerio-query",
-    "jquery": "./node_modules/jquery/dist/jquery.min.js",
+    "jquery": "jquery",
     "request": "browser-request",
     "iconv-lite": "./src/shims/iconv-lite",
-    "moment-timezone": "./node_modules/moment-timezone/builds/moment-timezone-with-data-2012-2022.min.js"
+    "moment-timezone": "moment-timezone"
   },
   "husky": {
     "hooks": {
