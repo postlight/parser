@@ -14,11 +14,11 @@ describe('WwwWashingtonpostComExtractor', () => {
     let url;
     beforeAll(() => {
       url =
-        'https://www.washingtonpost.com/politics/trump-foundation-apparently-admits-to-violating-ban-on-self-dealing-new-filing-to-irs-shows/2016/11/22/893f6508-b0a9-11e6-8616-52b15787add0_story.html';
-      const html = fs.readFileSync(
-        './fixtures/www.washingtonpost.com/1480364838420.html'
-      );
-      result = Mercury.parse(url, html, { fallback: false });
+        'https://www.washingtonpost.com/news/opinions/wp/2018/10/29/enough-platitudes-lets-name-names/';
+      const html =
+        fs.readFileSync('./fixtures/www.washingtonpost.com/1546958901450.html');
+      result =
+        Mercury.parse(url, html, { fallback: false });
     });
 
     it('is selected properly', async () => {
@@ -36,10 +36,7 @@ describe('WwwWashingtonpostComExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(
-        title,
-        'Trump Foundation admits to violating ban on ‘self-dealing,’ new filing to IRS shows'
-      );
+      assert.equal(title, 'Enough platitudes: Let’s name names');
     });
 
     it('returns the author', async () => {
@@ -49,7 +46,7 @@ describe('WwwWashingtonpostComExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(author, 'David A. Fahrenthold');
+      assert.equal(author, 'Jennifer Rubin');
     });
 
     it('returns the date_published', async () => {
@@ -59,7 +56,7 @@ describe('WwwWashingtonpostComExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(date_published, '2016-11-22T13:57:00.000Z');
+      assert.equal(date_published, '2018-10-29T15:15:00.000Z');
     });
 
     it('returns the lead_image_url', async () => {
@@ -71,7 +68,7 @@ describe('WwwWashingtonpostComExtractor', () => {
       // the article.
       assert.equal(
         lead_image_url,
-        'https://img.washingtonpost.com/rf/image_1484w/2010-2019/WashingtonPost/2016/11/01/Others/Images/2016-11-01/Trump-HomeSafe-News-131478026931.jpg'
+        'https://www.washingtonpost.com/resizer/E6j9aM5bx4fpPedpdl2KxcSIci4=/1484x0/arc-anglerfish-washpost-prod-washpost.s3.amazonaws.com/public/GRLSHYNYVQZJBAUBKSFA26NTO4.jpg'
       );
     });
 
@@ -95,7 +92,7 @@ describe('WwwWashingtonpostComExtractor', () => {
       // the article.
       assert.equal(
         first13,
-        'Painter Michael Israel, left, poses with Donald and Melania Trump in 2007 at'
+        'Pittsburgh Mayor Bill Peduto on Sunday near the Tree of Life synagogue in'
       );
     });
   });

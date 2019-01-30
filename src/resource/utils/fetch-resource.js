@@ -89,7 +89,6 @@ export function baseDomain({ host }) {
 
 export default async function fetchResource(url, parsedUrl) {
   parsedUrl = parsedUrl || URL.parse(encodeURI(url));
-
   const options = {
     url: parsedUrl.href,
     headers: { ...REQUEST_HEADERS },
@@ -101,8 +100,14 @@ export default async function fetchResource(url, parsedUrl) {
     encoding: null,
     // Accept and decode gzip
     gzip: true,
-    // Follow any redirect
+    // Follow any non-GET redirects
     followAllRedirects: true,
+    ...(typeof window !== 'undefined'
+      ? {}
+      : {
+          // Follow GET redirects; this option is for Node only
+          followRedirect: true,
+        }),
   };
 
   const { response, body } = await get(options);

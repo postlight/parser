@@ -55,6 +55,20 @@ describe('Mercury', () => {
       assert.equal(typeof result, 'object');
     });
 
+    it('does washingtonpost', async () => {
+      jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000;
+      const result = await Mercury.parse(
+        'https://www.washingtonpost.com/news/opinions/wp/2018/10/29/enough-platitudes-lets-name-names/'
+      );
+
+      assert.equal(typeof result, 'object');
+      assert.equal(result.total_pages, 1);
+      assert.equal(
+        result.url,
+        'https://www.washingtonpost.com/news/opinions/wp/2018/10/29/enough-platitudes-lets-name-names/'
+      );
+    });
+
     it('does the nyt', async () => {
       const result = await Mercury.parse(
         'http://www.nytimes.com/2016/08/16/upshot/the-state-of-the-clinton-trump-race-is-it-over.html?_r=0'
@@ -67,7 +81,7 @@ describe('Mercury', () => {
     it('does ars pagination', async () => {
       jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000;
       const url =
-        'http://arstechnica.com/gadgets/2016/08/the-connected-renter-how-to-make-your-apartment-smarter/';
+        'https://arstechnica.com/gadgets/2016/08/the-connected-renter-how-to-make-your-apartment-smarter/';
       const result = await Mercury.parse(url, null, { fetchAllPages: true });
 
       const { total_pages, pages_rendered } = result;

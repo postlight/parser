@@ -16,7 +16,7 @@
     "build:generator": "rollup -c scripts/rollup.config.js",
     "test_build": "rollup -c",
     "test": "yarn test:node && yarn test:web",
-    "test:node": "jest",
+    "test:node": "jest --json --outputFile test-output.json",
     "test:web": "node ./node_modules/karma/bin/karma start karma.conf.js --auto-watch",
     "test:build": "cd ./scripts && jest check-build.test.js",
     "test:build:web": "node ./scripts/proxy-browser-test.js",
@@ -94,9 +94,9 @@
     "watchify": "^3.11.0"
   },
   "dependencies": {
-    "browser-request": "^0.3.3",
+    "browser-request": "postlight/browser-request#feat-add-headers-to-response",
     "cheerio": "^0.22.0",
-    "difflib": "^0.2.4",
+    "difflib": "postlight/difflib.js",
     "ellipsize": "0.1.0",
     "iconv-lite": "0.4.24",
     "jquery": "^3.3.1",
