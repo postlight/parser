@@ -90,3 +90,4 @@ export * from './www.fool.com';
 export * from './www.slate.com';
 export * from './ici.radio-canada.ca';
 export * from './www.fortinet.com';
+export * from './www.fastcompany.com';
