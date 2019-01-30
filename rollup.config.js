@@ -11,6 +11,7 @@ export default {
       runtimeHelpers: true,
     }),
   ],
+  treeshake: true,
   output: {
     file: process.env.MERCURY_TEST_BUILD
       ? 'dist/mercury_test.js'
