@@ -6,8 +6,8 @@ const app = express();
 var server;
 
 const start = () => {
-  app.use('/', (req, res) => {
-    const url = req.url.slice(1);
+  app.use('/:url', (req, res) => {
+    const url = req.originalUrl.slice(1);
 
     const options = {
       url,
@@ -32,9 +32,17 @@ const stop = () => {
 };
 
 start();
-require('child_process').execSync(
+require('child_process').exec(
   'node ./node_modules/karma/bin/karma start ./scripts/karma.conf.js' +
     (process.env.CI ? ' --CI' : ''),
-  { stdio: [0, 1, 2] }
+  { stdio: [0, 1, 2] },
+  (err, stdout) => {
+    if (err) {
+      console.log('stdout', stdout);
+      process.exit(1);
+    } else {
+      console.log('stdout', stdout);
+    }
+    stop();
+  }
 );
-stop();

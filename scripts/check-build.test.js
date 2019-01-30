@@ -9,9 +9,9 @@ let urls = [
   },
   {
     url:
-      'https://www.cnn.com/2018/10/12/us/before-after-aerial-images-mexico-beach-devastation-trnd/index.html',
+      'https://www.cnn.com/2019/01/30/politics/trump-intel-chiefs-foreign-policy-iran-isis-north-korea/index.html',
     title:
-      "Before and after images show there's nothing left in some parts of Mexico Beach",
+      'Trump chastises intel chiefs after they contradict him on Iran and claims of foreign policy success',
   },
 ];
 
@@ -38,16 +38,13 @@ if (
     typeof Mercury === 'undefined' ? require('../dist/mercury') : Mercury;
 
   describe('Is Mercury build working', () => {
-    beforeAll(() => {
-      if (Merc.browser) {
-        const proxyUrl = 'http://localhost:3000/';
-        urls = urls.map(article => ({
-          title: article.title,
-          url: proxyUrl + article.url,
-        }));
-      }
-    });
-
+    if (Merc.browser) {
+      const proxyUrl = 'http://localhost:3000/';
+      urls = urls.map(article => ({
+        title: article.title,
+        url: proxyUrl + article.url,
+      }));
+    }
     urls.map(article =>
       it(`gets this title right ${article.title}`, done => {
         Merc.parse(article.url)
@@ -60,7 +57,7 @@ if (
             assert.equal(true, false);
             done();
           });
-      }, 10000)
+      }, 15000)
     );
   });
 }
