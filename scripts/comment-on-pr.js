@@ -2,6 +2,7 @@
 const bot = require('@jesses/circle-github-bot').default.create();
 const Mercury = require('../dist/mercury.js');
 const fs = require('fs');
+const getTestReport = require('./get-test-report');
 
 const run = () => {
   const screenshotPath = process.argv[2];
@@ -34,6 +35,9 @@ const run = () => {
         fs.writeFileSync(jsonPath, JSON.stringify(json));
         fs.writeFileSync(fixtureArtifactPath, html);
 
+        const testReport =
+          getTestReport('./test-output.json') || '✅ All tests passed';
+
         bot.comment(
           process.env.GH_AUTH_TOKEN,
           `### 🤖 Automated Parsing Preview 🤖
@@ -63,8 +67,10 @@ ${JSON.stringify(json, null, 2)}
 
 ${Object.keys(json)
             .map(key => (json[key] !== null ? '' : `  * \`${key}\n\``))
-            .join('') || 'None'}
+            .join('\n\n') || 'None'}
 
+
+${testReport}
 `
         );
       });
