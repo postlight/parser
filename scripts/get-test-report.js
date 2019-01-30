@@ -1,19 +1,20 @@
 const fs = require('fs');
 
 const getTestReport = path => {
-  const testReport = JSON.parse(fs.readFileSync(path));
-  const { numFailedTests } = testReport;
-  if (numFailedTests === 0) {
-    return false;
-  }
-  const { testResults } = testReport;
-  const failedTests = testResults
-    .map(({ assertionResults }) =>
-      assertionResults.filter(({ status }) => status !== 'passed')
-    )
-    .reduce((acc, arr) => acc.concat(arr));
+  try {
+    const testReport = JSON.parse(fs.readFileSync(path));
+    const { numFailedTests } = testReport;
+    if (numFailedTests === 0) {
+      return false;
+    }
+    const { testResults } = testReport;
+    const failedTests = testResults
+      .map(({ assertionResults }) =>
+        assertionResults.filter(({ status }) => status !== 'passed')
+      )
+      .reduce((acc, arr) => acc.concat(arr));
 
-  const failureReport = `
+    const failureReport = `
 <details>
 <summary>
 <b>${numFailedTests} failed tests 😱</b>
@@ -22,9 +23,9 @@ const getTestReport = path => {
 ---
 
 ${failedTests
-    .map(
-      ({ fullName, failureMessages }) =>
-        `
+      .map(
+        ({ fullName, failureMessages }) =>
+          `
 **${fullName}**
 
   <details>
@@ -40,12 +41,16 @@ ${failedTests
 
 ---
   `
-    )
-    .join('\n\n')}
+      )
+      .join('\n\n')}
 
 </details>
   `;
-  return failureReport;
+    return failureReport;
+  } catch (e) {
+    console.log('Error generating test report', e);
+    return false;
+  }
 };
 
 module.exports = getTestReport;
