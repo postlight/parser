@@ -122,7 +122,8 @@
   },
   "bundleDependencies": [
     "jquery",
-    "moment-timezone"
+    "moment-timezone",
+    "browser-request"
   ],
   "browser": {
     "main": "./dist/mercury.web.js",
