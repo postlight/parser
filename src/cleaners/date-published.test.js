@@ -1,9 +1,7 @@
 import assert from 'assert';
 import moment from 'moment-timezone';
 
-import cleanDatePublished, {
-  cleanDateString,
-} from './date-published';
+import cleanDatePublished, { cleanDateString } from './date-published';
 
 describe('cleanDatePublished(dateString)', () => {
   it('returns a date', () => {

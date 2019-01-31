@@ -15,7 +15,9 @@ describe('WwwFortinetComExtractor', () => {
     beforeAll(() => {
       url =
         'https://www.fortinet.com/blog/threat-research/defeating-an-android-packer-with-frida.html';
-      const html = fs.readFileSync('./fixtures/www.fortinet.com/1546954846985.html');
+      const html = fs.readFileSync(
+        './fixtures/www.fortinet.com/1546954846985.html'
+      );
       result = Mercury.parse(url, html, { fallback: false });
     });
 
@@ -34,7 +36,10 @@ describe('WwwFortinetComExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(title, 'How-to Guide: Defeating an Android Packer with FRIDA');
+      assert.equal(
+        title,
+        'How-to Guide: Defeating an Android Packer with FRIDA'
+      );
     });
 
     it('returns the author', async () => {
