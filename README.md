@@ -65,7 +65,7 @@ Licensed under either of the below, at your preference:
 
 ## Contributing
 
-See [CONTRIBUTING.md](https://github.com/postlight/mercury-parser/blob/master/CONTRIBUTING.md)
+For details on how to contribute to Mercury, including how to write a custom content extractor for any site, see [CONTRIBUTING.md](https://github.com/postlight/mercury-parser/blob/master/CONTRIBUTING.md)
 
 Unless it is explicitly stated otherwise, any contribution intentionally submitted for inclusion in the work, as defined in the Apache-2.0 license, shall be dual licensed as above without any additional terms or conditions.
 
