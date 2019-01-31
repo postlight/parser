@@ -18,10 +18,12 @@ export const WwwFortinetComExtractor = {
   },
 
   content: {
-    selectors: ['div.responsivegrid.aem-GridColumn.aem-GridColumn--default--12'],
+    selectors: [
+      'div.responsivegrid.aem-GridColumn.aem-GridColumn--default--12',
+    ],
 
     transforms: {
-      noscript: ($node) => {
+      noscript: $node => {
         const $children = $node.children();
         if ($children.length === 1 && $children.get(0).tagName === 'img') {
           return 'figure';

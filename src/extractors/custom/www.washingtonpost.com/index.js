@@ -6,15 +6,11 @@ export const WwwWashingtonpostComExtractor = {
   },
 
   author: {
-    selectors: [
-      '.pb-author-name',
-    ],
+    selectors: ['.pb-author-name'],
   },
 
   date_published: {
-    selectors: [
-      ['.author-timestamp[itemprop="datePublished"]', 'content'],
-    ],
+    selectors: [['.author-timestamp[itemprop="datePublished"]', 'content']],
   },
 
   dek: {
