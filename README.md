@@ -1,9 +1,11 @@
 # Mercury Parser - Extracting content from chaos
 
-[![CircleCI](https://circleci.com/gh/postlight/mercury-parser.svg?style=svg&circle-token=3026c2b527d3767750e767872d08991aeb4f8f10)](https://circleci.com/gh/postlight/mercury-parser) [![Build status](https://ci.appveyor.com/api/projects/status/bxwqp6mn8ijycqh4?svg=true)](https://ci.appveyor.com/project/adampash/mercury-parser) [![Apache License][license-badge]][license]
+[![CircleCI](https://circleci.com/gh/postlight/mercury-parser.svg?style=svg&circle-token=3026c2b527d3767750e767872d08991aeb4f8f10)](https://circleci.com/gh/postlight/mercury-parser) [![Build status](https://ci.appveyor.com/api/projects/status/bxwqp6mn8ijycqh4?svg=true)](https://ci.appveyor.com/project/adampash/mercury-parser) [![Apache License][license-apach-badge]][license-apach] [![MITC License][license-mit-badge]][license-mit]
 
-[license-badge]: https://img.shields.io/badge/License-Apache%202.0-blue.svg?style=flat-square
-[license]: https://github.com/postlight/mercury-parser/blob/master/LICENSE-APACHE
+[license-apach-badge]: https://img.shields.io/badge/License-Apache%202.0-blue.svg?style=flat-square
+[license-apach]: https://github.com/postlight/mercury-parser/blob/master/LICENSE-APACHE
+[license-mit-badge]: https://img.shields.io/badge/License-MIT%202.0-blue.svg?style=flat-square
+[license-mit]: https://github.com/postlight/mercury-parser/blob/master/LICENSE-MIT
 
 The Mercury Parser extracts the bits that humans care about from any URL you give it. That includes article content, titles, authors, published dates, excerpts, lead images, and more.
 
