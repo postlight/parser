@@ -33,6 +33,7 @@ of contribution and appreciate your help.
 Here are a few examples of what we consider a contribution:
 
 - Updates to source code
+- Answering questions and chatting with the community in the [Gitter](https://gitter.im/postlight/mercury) room
 - Filing, organizing, and commenting on issues in the [issue tracker](https://github.com/postlight/mercury-parser/issues)
 - Teaching others how to use Mercury
 - Community building and outreach
@@ -55,7 +56,7 @@ and filling out the template.
 
 If you find a security bug in Mercury, send an email with a descriptive subject line
 to [mercury+security@postlight.com](mailto:mercury+security@postlight.com). If you think
-you’ve found a serious vulnerability, please do not file a public issue.
+you’ve found a serious vulnerability, please do not file a public issue or share in the Mercury Gitter room.
 
 Your report will go to Mercury's core development team. You will receive
 acknowledgement of the report in 24-48 hours, and our next steps should be to
@@ -219,6 +220,7 @@ Some useful places to look for information are:
 
 - The main [README](./README.md) for this repository.
 - The Mercury Custom Parser [README](./src/extractors/custom/README.md).
+- The postlight/mercury room on [Gitter](https://gitter.im/postlight/mercury)
 - The Mercury Parser API [repository](https://github.com/postlight/mercury-parser-api).
 
 _Adapted from [Contributing to Node.js](https://github.com/nodejs/node/blob/master/CONTRIBUTING.md)
