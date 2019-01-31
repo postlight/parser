@@ -9,7 +9,7 @@
 
 The Mercury Parser extracts the bits that humans care about from any URL you give it. That includes article content, titles, authors, published dates, excerpts, lead images, and more.
 
-The Mercury Parser module powers the [Mercury Parser API](https://mercury.postlight.com/web-parser/), a free API from [Postlight](https://www.postlight.com/) that puts all of this information one API request away..
+The Mercury Parser module powers the [Mercury Parser AMP Converter](https://mercury.postlight.com/amp-converter/) and [Mercury Reader](https://mercury.postlight.com/reader/) a Chrome extension that puts all this information one click away.
 
 ## How? Like this.
 
