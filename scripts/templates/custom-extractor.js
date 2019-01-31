@@ -1,6 +1,6 @@
 import template from './index';
 
-export default function (hostname, name) {
+export default function(hostname, name) {
   return template`
     export const ${name} = {
       domain: '${hostname}',

@@ -21,7 +21,8 @@ export default function stripUnlikelyCandidates($) {
       const classAndId = `${classes || ''} ${id || ''}`;
       if (CANDIDATES_WHITELIST.test(classAndId)) {
         return;
-      } if (CANDIDATES_BLACKLIST.test(classAndId)) {
+      }
+      if (CANDIDATES_BLACKLIST.test(classAndId)) {
         $node.remove();
       }
     });

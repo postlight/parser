@@ -13,9 +13,10 @@ export default function template(strings, ...values) {
     indentLevel = /^\s{0,2}(.+)$/g;
   }
 
-  return body.split('\n')
+  return body
+    .split('\n')
     .slice(1)
-    .map((line) => {
+    .map(line => {
       line = line.replace(indentLevel, '$1');
 
       if (trailingWhitespace.test(line)) {
