@@ -2,10 +2,7 @@ import assert from 'assert';
 import URL from 'url';
 
 import { record } from 'test-helpers';
-import fetchResource, {
-  baseDomain,
-  validateResponse,
-} from './fetch-resource';
+import fetchResource, { baseDomain, validateResponse } from './fetch-resource';
 import { MAX_CONTENT_LENGTH } from './constants';
 
 describe('fetchResource(url)', () => {

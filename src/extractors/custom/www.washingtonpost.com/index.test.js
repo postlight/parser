@@ -15,10 +15,10 @@ describe('WwwWashingtonpostComExtractor', () => {
     beforeAll(() => {
       url =
         'https://www.washingtonpost.com/news/opinions/wp/2018/10/29/enough-platitudes-lets-name-names/';
-      const html =
-        fs.readFileSync('./fixtures/www.washingtonpost.com/1546958901450.html');
-      result =
-        Mercury.parse(url, html, { fallback: false });
+      const html = fs.readFileSync(
+        './fixtures/www.washingtonpost.com/1546958901450.html'
+      );
+      result = Mercury.parse(url, html, { fallback: false });
     });
 
     it('is selected properly', async () => {

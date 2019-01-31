@@ -77,7 +77,6 @@ function removeUnlessContent($node, $, weight) {
     // Too many script tags, not enough content.
     if (scriptCount > 0 && contentLength < 150) {
       $node.remove();
-      
     }
   }
 }
