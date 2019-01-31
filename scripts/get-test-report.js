@@ -48,6 +48,7 @@ ${failedTests
   `;
     return failureReport;
   } catch (e) {
+    // eslint-disable-next-line no-console
     console.log('Error generating test report', e);
     return false;
   }
