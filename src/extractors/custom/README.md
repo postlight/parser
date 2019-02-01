@@ -1,27 +1,29 @@
 # Custom Parsers
 
-Mercury can extract meaningful content from almost any web site, but custom parsers allow the Mercury parser to find the content more quickly and more accurately than it might otherwise do. Our goal is to include custom parsers as many sites as we can, and we'd love your help!
+Mercury can extract meaningful content from almost any web site, but custom parsers/extractors allow the Mercury Parser to find the content more quickly and more accurately than it might otherwise do. Our goal is to include custom parsers as many sites as we can, and we'd love your help!
 
-## The basics of parsing a site with a Mercury custom parser
+## The basics of parsing a site with a custom parser
 
 Custom parsers allow you to write CSS selectors that will find the content you're looking for on the page you're testing against. If you've written any CSS or jQuery, CSS selectors should be very familiar to you.
 
 You can query for every field returned by the Mercury Parser:
 
-- title
-- author
-- content
-- date_published
-- lead_image_url
-- dek
-- next_page_url
-- excerpt
+- `title`
+- `author`
+- `content`
+- `date_published`
+- `lead_image_url`
+- `dek`
+- `next_page_url`
+- `excerpt`
 
 ### Using selectors
 
+CSS selectors allow you to target any content in the HTML document for extraction.
+
 #### Basic selectors
 
-To demonstrate, let's start with something simple: Your selector for the page's title might look something like this:
+To demonstrate, let's start with something simple. A selector for the page's title might look something like this (you can ignore the boilerplate on top and bottom for now and just focus on the `title` key):
 
 ```javascript
 export const ExampleExtractor = {
@@ -37,21 +39,23 @@ export const ExampleExtractor = {
     ...
 ```
 
-As you might guess, the selectors key provides an array of selectors that Mercury will check to find your title text. In our ExampleExtractor, we're saying that the title can be found in the text of an `h1` header with a class name of `hed`.
+As you might guess, the selectors key provides an array of selectors that Mercury will check to find your title text. In our `ExampleExtractor`, we're saying that the title can be found in the text of an `h1` header with a class name of `hed`.
 
 The selector you choose should return one element. If more than one element is returned by your selector, it will fail (and Mercury will fall back to its generic extractor).
 
+Because the `selectors` property returns an array, you to write more than one selector for a property extractor. This is particularly useful for sites that have multiple templates for articles. If you provide an array of selectors, Mercury will try each in order, falling back to the next until it finds a match or exhausts the options (in which case it will fall back to its default generic extractor).
+
 #### Selecting an attribute
 
-Sometimes the information you want to return lives in an element's attribute rather than its text — e.g., sometimes a more exact ISO-formatted date/time will be stored in an attribute of an element.
+Sometimes the information you want to return lives in an element's attribute rather than its text — e.g., often a more exact ISO-formatted date/time will be stored in an attribute of an element.
 
-So your element looks like this:
+Say your element looks like this:
 
 ```html
 <time class="article-timestamp" datetime="2016-09-02T07:30:01-04:00"></time>
 ```
 
-The text you want isn't the text inside a matching element, but rather, inside the datetime attribute. To write a selector that returns an attribute, you provide your custom parser with a two-element array. The first element is your selector; the second element is the attribute you'd like to return.
+The text you want isn't the text inside a matching element, but rather, inside the `datetime` attribute. To write a selector that returns an attribute, you provide your custom parser with a two-element array. The first element is your selector; the second element is the attribute you'd like to return.
 
 ```javascript
 export const ExampleExtractor = {
@@ -69,11 +73,11 @@ export const ExampleExtractor = {
 
 This is all you'll need to know to handle most of the fields Mercury parses (titles, authors, date published, etc.). Article content is the exception.
 
-### Cleaning content
+### Cleaning content from an article
 
 An article's content can be more complex than the other fields, meaning you sometimes need to do more than just provide the selector(s) in order to return clean content.
 
-For example, sometimes an article's content will contain related content that doesn't translate or render well when you just want to see the article's content. The clean key allows you to provide an array of selectors identifying elements that should be removed from the content.
+For example, sometimes an article's content will contain related content (e.g., _Read also_) that doesn't translate or render well when you just want to see the article. The `clean` key allows you to provide an array of selectors identifying elements that should be removed from the content.
 
 Here's an example:
 
@@ -98,11 +102,13 @@ export const ExampleExtractor = {
 }
 ```
 
+The above example will first select the content based on either of the two `content` selectors, then it will clean any nodes from the selected content that matches the selectors defined by `clean`.
+
 ### Using transforms
 
 Occasionally, in order to mold the article content to a form that's readable outside the page, you need to transform a few elements inside the content you've chosen. That's where `transforms` come in.
 
-This example demonstrates a simple tranform that converts h1 headers to h2 headers, along with a more complex transform that transforms lazy-loaded images to images that will render as you would expect outside the context of the site you're extracting from.
+This example demonstrates a simple tranform that converts `h1` headers to `h2` headers, along with a more complex transform that transforms lazy-loaded images to images that will render as you would expect outside the context of the site you're extracting from.
 
 ```javascript
 export const ExampleExtractor = {
@@ -126,7 +132,7 @@ export const ExampleExtractor = {
       // the transformation.
 
       // Convert lazy-loaded noscript images to figures
-      noscript: ($node) => {
+      noscript: $node => {
         const $children = $node.children();
         if ($children.length === 1 && $children.get(0).tagName === 'img') {
           return 'figure';
@@ -138,11 +144,11 @@ export const ExampleExtractor = {
   },
 ```
 
-For much more complex tranforms, you can perform dom manipulation within the tranform function, but this is discouraged unless absolutely necessary. See, for example, the lazy-loaded image transform in [the NYTimesExtractor](www.nytimes.com/index.js#L25), which transforms the src attribute on the lazy-loaded image.
+For much more complex tranforms, you can perform dom manipulation within the tranform function, but this is discouraged unless absolutely necessary. See, for example, the lazy-loaded image transform in [the NYTimesExtractor](www.nytimes.com/index.js#L25), which transforms the `src` attribute on the lazy-loaded image.
 
 ## How to generate a custom parser
 
-Now that you know the basics of how custom extractors work, let's walk through the workflow for how to write and submit one. For our example, we're going to use [The New Yorker](http://www.newyorker.com/). (You can find the results of this tutorial [in the NewYorkerExtractor source](www.newyorker.com).)
+Now that you know the basics of how custom extractors work, let's walk through the workflow for how to write and submit one. For our example, we're going to create a custom parser for [The New Yorker](http://www.newyorker.com/). (You can find the results of this tutorial [in the NewYorkerExtractor source](www.newyorker.com).)
 
 ### Step 0: Installation
 
@@ -162,13 +168,13 @@ If you don't have already have watchman installed, you'll also need to install t
 brew install watchman
 ```
 
-You should also create a new git branch for your custom extractor:
+Take a look at the existing custom parsers in [`src/extractors/custom`](/src/extractors/custom) for examples and to check if the site you want to write a parser for already exists.
+
+If not, go ahead and create a new git branch for your custom extractor:
 
 ```bash
 git checkout -b feat-new-yorker-extractor
 ```
-
-Now that you're ready to go, take a look at the live custom parsers in [`src/extractors/custom`](/src/extractors/custom) for examples and to check if the site you want to write a parser for already exists.
 
 ### Step 1: Generate your custom parser
 
@@ -188,7 +194,7 @@ When the generator script completes, you'll be prompted to run:
 yarn watch:test www.newyorker.com
 ```
 
-This will run the tests for the parser you just generated, which should fail (which makes sense — you haven't written it yet!). Your goal now is to follow the instructions in the generated `www.newyorker.com/index.test.js` and `www.newyorker.com/index.js` files until they pass!
+This will run the tests for the parser you just generated, which should fail (which makes sense — you haven't written any selectors yet!). Your goal now is to follow the instructions in the generated `www.newyorker.com/index.test.js` and `www.newyorker.com/index.js` files until they pass!
 
 ### Step 2: Passing your first test: Title extraction
 

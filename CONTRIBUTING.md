@@ -2,7 +2,7 @@
 
 Thank you for your interest in contributing to Mercury Parser! It's people like you that make Mercury such a useful tool. The below guidelines will help answer any questions you may have about the contribution process. We look forward to receiving contributions from you — our community!
 
-_Please read our [Code of Conduct](./CODE_OF_CONDUCT.md) before participating in our community._
+_Please read our [Code of Conduct](./CODE_OF_CONDUCT.md) before participating._
 
 ## Contents
 
@@ -32,7 +32,7 @@ of contribution and appreciate your help.
 
 Here are a few examples of what we consider a contribution:
 
-- Updates to source code
+- Updates to source code, including bug fixes, improvements, or [creating new custom site extractors](./src/extractors/custom/README.md)
 - Answering questions and chatting with the community in the [Gitter](https://gitter.im/postlight/mercury) room
 - Filing, organizing, and commenting on issues in the [issue tracker](https://github.com/postlight/mercury-parser/issues)
 - Teaching others how to use Mercury
@@ -76,7 +76,7 @@ This section of the document outlines how to build, run, and test Mercury locall
 
 ### Building
 
-To build the required modules for local development, execute the following commands:
+To build the Mercury Parser locally, execute the following commands:
 
 ```bash
 # Clone this repository from GitHub.
@@ -105,7 +105,7 @@ Mercury is a test-driven application; each component has its own test file. Test
 For new code to be accepted, all tests must pass in both environments. To run the required tests for local development, execute the following commands:
 
 ```bash
-# Run the full test suite for both node and the browser
+# Run the full test suite once, for both node and the browser
 yarn test
 
 # Run the tests for node build only
@@ -114,8 +114,12 @@ yarn test:node
 # Run the tests for web build only
 yarn test:web
 
-# Run the tests, then re-run tests on file changes.
-# If an optional <test_file> string is passed, only tests matching that string will be re-run.
+# Run the tests in node, then re-run tests on file changes.
+# If an optional <test_file> string is passed, only tests
+# matching that string will be re-run.
+#
+# E.g., `yarn watch:test nytimes` will run the tests for
+# `./src/extractors/custom/www.www.nytimes.com/index.test.js`
 yarn watch:test <test_file>
 ```
 
@@ -135,8 +139,7 @@ as you develop is up to you.
 
 In addition to enforcing a JavaScript style guide, we also require that Markdown
 files pass [remarklint](https://github.com/wooorm/remark-lint) with the recommended
-preset. This helps keep our Markdown tidy, consistent, and compatible with a range of
-Markdown parsers used for generating documentation.
+preset. This helps keep our Markdown tidy and consistent.
 
 ### Node.js Version Requirements
 
