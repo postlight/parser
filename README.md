@@ -1,6 +1,5 @@
 ![Mercury Parser](https://13c27d41k2ud2vkddp226w55-wpengine.netdna-ssl.com/wp-content/uploads/2018/02/7bacd-16qwcaegges3hkrw70doz4w.png)
 
-
 # Mercury Parser - Extracting content from chaos
 
 [![CircleCI](https://circleci.com/gh/postlight/mercury-parser.svg?style=svg&circle-token=3026c2b527d3767750e767872d08991aeb4f8f10)](https://circleci.com/gh/postlight/mercury-parser) [![Build status](https://ci.appveyor.com/api/projects/status/bxwqp6mn8ijycqh4?svg=true)](https://ci.appveyor.com/project/adampash/mercury-parser) [![Apache License][license-apach-badge]][license-apach] [![MITC License][license-mit-badge]][license-mit]
@@ -19,7 +18,11 @@ Mercury Parser powers the [Mercury AMP Converter](https://mercury.postlight.com/
 ### Installation
 
 ```bash
+# If you're using yarn
 yarn add @postlight/mercury-parser
+
+# If you're using npm
+npm install @postlight/mercury-parser
 ```
 
 ### Usage
