@@ -58,8 +58,18 @@ workflows:
   version: 2
   build_and_test:
     jobs:
-      - test-node
-      - test-web
+      - test-node:
+          filters:  # required since `deploy` has tag filters AND requires `test-node`
+            branches:
+              only: /.*/
+            tags:
+              only: /.*/
+      - test-web:
+          filters:  # required since `deploy` has tag filters AND requires `test-web`
+            branches:
+              only: /.*/
+            tags:
+              only: /.*/
       - deploy:
           requires:
             - test-node
