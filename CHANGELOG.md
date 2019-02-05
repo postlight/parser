@@ -1,5 +1,30 @@
 # Mercury Parser Changelog
 
+### 1.1.0 (Feb 5, 2019)
+
+##### Commits
+
+- [[`6844975c94`](https://github.com/postlight/mercury-parser/commit/6844975c94)] - **feat**: add mercury-parser cli (#244) (Adam Pash)
+- [[`7bdbbc8ed8`](https://github.com/postlight/mercury-parser/commit/7bdbbc8ed8)] - **deps**: update dependencies to enable Greenkeeper 🌴 (#243) (greenkeeper[bot])
+- [[`e38aff9c17`](https://github.com/postlight/mercury-parser/commit/e38aff9c17)] - **docs**: add npm install instructions (#240) (Adam Pash)
+- [[`dc3dff6584`](https://github.com/postlight/mercury-parser/commit/dc3dff6584)] - **docs**: add hero to README (#239) (Gina Trapani)
+- [[`15f7fa1e27`](https://github.com/postlight/mercury-parser/commit/15f7fa1e27)] - a more explicit .prettierrc (Adam Pash)
+- [[`c6f42c1278`](https://github.com/postlight/mercury-parser/commit/c6f42c1278)] - **docs**: cleanup and update docs (#238) (Adam Pash)
+- [[`92de5ce4ed`](https://github.com/postlight/mercury-parser/commit/92de5ce4ed)] - **docs**: remove contributors (github already has this covered) (#237) (Adam Pash)
+- [[`2845a1bb7e`](https://github.com/postlight/mercury-parser/commit/2845a1bb7e)] - **docs**: add gitter room text and link (#235) (George Haddad)
+- [[`380196b709`](https://github.com/postlight/mercury-parser/commit/380196b709)] - **docs**: change text to include AMP and Reader (#236) (George Haddad)
+- [[`33bf5882b9`](https://github.com/postlight/mercury-parser/commit/33bf5882b9)] - **docs**: add mit license badge (#234) (George Haddad)
+- [[`5c0325f5a7`](https://github.com/postlight/mercury-parser/commit/5c0325f5a7)] - **feat**: hook up ci to publish to npm (#226) (George Haddad)
+- [[`663cc45bf4`](https://github.com/postlight/mercury-parser/commit/663cc45bf4)] - fresh run of prettier; remove NOTES.md (#233) (Adam Pash)
+- [[`244d17ddd3`](https://github.com/postlight/mercury-parser/commit/244d17ddd3)] - **fix**: proxy browser in build tests (#232) (Adam Pash)
+- [[`0668f5d75b`](https://github.com/postlight/mercury-parser/commit/0668f5d75b)] - **docs**: add instructions for browser usage to parse current page (#231) (Toufic Mouallem)
+- [[`4ab50133f4`](https://github.com/postlight/mercury-parser/commit/4ab50133f4)] - **chore**: update node rollup config (#229) (Jad Termsani)
+- [[`1ccd14e1e9`](https://github.com/postlight/mercury-parser/commit/1ccd14e1e9)] - **feat**: add fortinet custom parser (#188) (Wajeeh Zantout)
+- [[`9b36003b62`](https://github.com/postlight/mercury-parser/commit/9b36003b62)] - **feat**: add fastcompany custom parser (#191) (Wajeeh Zantout)
+- [[`199fe70b03`](https://github.com/postlight/mercury-parser/commit/199fe70b03)] - Docs contributors (#227) (Ralph Jbeily)
+- [[`9756e6ee67`](https://github.com/postlight/mercury-parser/commit/9756e6ee67)] - **docs**: update mercury parser installation (#228) (Ralph Jbeily)
+- [[`1c7ae48de0`](https://github.com/postlight/mercury-parser/commit/1c7ae48de0)] - **dx**: include test results in comment (#230) (Adam Pash)
+
 ### 1.0.13 (Oct 11, 2018)
 
 ##### Commits

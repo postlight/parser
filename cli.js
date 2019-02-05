@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-/* eslint-disable no-multi-str */
+/* eslint-disable */
 
 const Mercury = require('./dist/mercury');
 
