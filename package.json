@@ -20,6 +20,9 @@
     "content"
   ],
   "main": "./dist/mercury.js",
+  "bin": {
+    "mercury-parser": "./cli.js"
+  },
   "scripts": {
     "lint": "eslint . --fix",
     "lint:ci": "remark . && eslint .",
