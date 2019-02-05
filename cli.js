@@ -1,11 +1,12 @@
 #!/usr/bin/env node
+/* eslint-disable no-multi-str */
+
 const Mercury = require('./dist/mercury');
 
 const [, , url] = process.argv;
 
 (async urlToParse => {
   if (!urlToParse) {
-    // eslint-disable-next-line no-multi-str
     console.log(
       '\n\
 mercury-parser\n\n\
