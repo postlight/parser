@@ -63,6 +63,19 @@ The result looks like this:
 
 If Mercury is unable to find a field, that field will return `null`.
 
+Mercury Parser also ships with a CLI, meaning you can use the Mercury Parser
+from your command line like so:
+
+```javascript
+# Install Mercury globally
+yarn global add @postlight/mercury-parser
+#   or
+npm -g install @postlight/mercury-parser
+
+# Then
+mercury-parser https://postlight.com/trackchanges/mercury-goes-open-source
+```
+
 ## License
 
 Licensed under either of the below, at your preference:
