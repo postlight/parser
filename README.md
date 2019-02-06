@@ -66,7 +66,7 @@ If Mercury is unable to find a field, that field will return `null`.
 Mercury Parser also ships with a CLI, meaning you can use the Mercury Parser
 from your command line like so:
 
-```javascript
+```bash
 # Install Mercury globally
 yarn global add @postlight/mercury-parser
 #   or
