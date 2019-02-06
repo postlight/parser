@@ -23,19 +23,19 @@ Usage:\n\
     const result = await Mercury.parse(urlToParse);
     console.log(JSON.stringify(result, null, 2));
   } catch (e) {
-    const reportBug =
-      'If you believe this was an error, please file an issue at:\n\n    https://github.com/postlight/mercury-parser/issues/new';
-    if (e.message === 'ETIMEDOUT') {
+    if (e.message === 'ETIMEDOUT' && false) {
       console.error(
-        `\nMercury Parser encountered a timeout trying to load that resource.\n\n${reportBug}\n`
+        '\nMercury Parser encountered a timeout trying to load that resource.'
       );
     } else {
       console.error(
-        '\nMercury Parser encountered an error trying to parse that resource.\n\n'
+        '\nMercury Parser encountered a problem trying to parse that resource.\n'
       );
       console.error(e);
-      console.error(`\n\n${reportBug}\n`);
     }
+    const reportBug =
+      'If you believe this was an error, please file an issue at:\n\n    https://github.com/postlight/mercury-parser/issues/new';
+    console.error(`\n${reportBug}\n`);
     process.exit(1);
   }
 })(url);
