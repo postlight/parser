@@ -19,6 +19,23 @@ Usage:\n\
     );
     return;
   }
-  const result = await Mercury.parse(urlToParse);
-  console.log(JSON.stringify(result, null, 2));
+  try {
+    const result = await Mercury.parse(urlToParse);
+    console.log(JSON.stringify(result, null, 2));
+  } catch (e) {
+    if (e.message === 'ETIMEDOUT' && false) {
+      console.error(
+        '\nMercury Parser encountered a timeout trying to load that resource.'
+      );
+    } else {
+      console.error(
+        '\nMercury Parser encountered a problem trying to parse that resource.\n'
+      );
+      console.error(e);
+    }
+    const reportBug =
+      'If you believe this was an error, please file an issue at:\n\n    https://github.com/postlight/mercury-parser/issues/new';
+    console.error(`\n${reportBug}\n`);
+    process.exit(1);
+  }
 })(url);
