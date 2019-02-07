@@ -40,9 +40,7 @@
     "test:build": "cd ./scripts && jest check-build.test.js",
     "test:build:web": "node ./scripts/proxy-browser-test.js",
     "watch:test": "jest --watch",
-    "generate-parser": "node ./dist/generate-custom-parser.js",
-    "add-contributor": "all-contributors add",
-    "generate-contributors": "all-contributors generate"
+    "generate-parser": "node ./dist/generate-custom-parser.js"
   },
   "engines": {
     "node": ">=8.10"
@@ -55,7 +53,6 @@
     "@babel/runtime": "^7.0.0",
     "@jesses/circle-github-bot": "^2.1.0",
     "@octokit/rest": "^16.9.0",
-    "all-contributors-cli": "^5.10.0",
     "babel-core": "^7.0.0-bridge.0",
     "babel-eslint": "^10.0.1",
     "babel-jest": "^23.4.2",
@@ -106,6 +103,7 @@
     "watchify": "^3.11.0"
   },
   "dependencies": {
+    "@babel/runtime-corejs2": "^7.2.0",
     "browser-request": "github:postlight/browser-request#feat-add-headers-to-response",
     "cheerio": "^0.22.0",
     "difflib": "github:postlight/difflib.js",
@@ -120,8 +118,7 @@
     "string-direction": "^0.1.2",
     "url": "^0.11.0",
     "valid-url": "^1.0.9",
-    "wuzzy": "^0.1.3",
-    "@babel/runtime-corejs2": "^7.2.0"
+    "wuzzy": "^0.1.3"
   },
   "bundleDependencies": [
     "jquery",
