@@ -1,5 +1,17 @@
 # Mercury Parser Changelog
 
+### 1.1.1 (Feb 7, 2019)
+
+##### Commits
+
+- [[`b15948f3f4`](https://github.com/postlight/mercury-parser/commit/b15948f3f4)] - **chore**: remove all-contributors-cli deps and script since no longer used (#253) (George Haddad)
+- [[`02476f4336`](https://github.com/postlight/mercury-parser/commit/02476f4336)] - **docs**: add instructions for cli to README (#251) (Adam Pash)
+- [[`b77a236dbe`](https://github.com/postlight/mercury-parser/commit/b77a236dbe)] - **feat**: handle cli errors/timeout (#250) (Adam Pash)
+- [[`44edcda53f`](https://github.com/postlight/mercury-parser/commit/44edcda53f)] - **docs**: added gitter badge (#249) (Keith Mancuso)
+- [[`cfd9b59345`](https://github.com/postlight/mercury-parser/commit/cfd9b59345)] - **docs**: add custom parsers to README (Paul Ford)
+- [[`d0726a2d32`](https://github.com/postlight/mercury-parser/commit/d0726a2d32)] - **chor**: remove appveyor yml and badge (#247) (Adam Pash)
+- [[`03c7040065`](https://github.com/postlight/mercury-parser/commit/03c7040065)] - **fix**: ci config (#246) (Adam Pash)
+
 ### 1.1.0 (Feb 5, 2019)
 
 ##### Commits
