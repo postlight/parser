@@ -2,10 +2,14 @@
 /* eslint-disable */
 
 const Mercury = require('./dist/mercury');
+const argv = require('yargs-parser')(process.argv.slice(2));
 
-const [, , url, contentType = 'html'] = process.argv;
-
-(async urlToParse => {
+const {
+  _: [url],
+  format,
+  f,
+} = argv;
+(async (urlToParse, contentType) => {
   if (!urlToParse) {
     console.log(
       '\n\
@@ -13,8 +17,7 @@ mercury-parser\n\n\
     The Mercury Parser extracts semantic content from any url\n\n\
 Usage:\n\
 \n\
-    # Default content format is html\n\
-    $ mercury-parser url-to-parse [html|text|markdown]\n\
+    $ mercury-parser url-to-parse [--format=html|text|markdown]\n\
 \n\
 '
     );
@@ -24,7 +27,9 @@ Usage:\n\
     const contentTypeMap = {
       html: 'html',
       markdown: 'markdown',
+      md: 'markdown',
       text: 'text',
+      txt: 'text',
     };
     const result = await Mercury.parse(urlToParse, null, {
       contentType: contentTypeMap[contentType],
@@ -46,4 +51,4 @@ Usage:\n\
     console.error(`\n${reportBug}\n`);
     process.exit(1);
   }
-})(url);
+})(url, format || f);
