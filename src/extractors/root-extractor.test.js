@@ -50,8 +50,6 @@ describe('RootExtractor', () => {
       contentType: 'text',
     });
 
-    console.log(`content`, content);
-
     const htmlRe = /<[a-z][\s\S]*>/g;
 
     assert.equal(htmlRe.test(content), false);

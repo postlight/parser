@@ -3,7 +3,7 @@
 
 const Mercury = require('./dist/mercury');
 
-const [, , url] = process.argv;
+const [, , url, contentType = 'html'] = process.argv;
 
 (async urlToParse => {
   if (!urlToParse) {
@@ -13,14 +13,22 @@ mercury-parser\n\n\
     The Mercury Parser extracts semantic content from any url\n\n\
 Usage:\n\
 \n\
-    mercury-parser [url-to-parse]\n\
+    # Default content format is html\n\
+    $ mercury-parser url-to-parse [html|text|markdown]\n\
 \n\
 '
     );
     return;
   }
   try {
-    const result = await Mercury.parse(urlToParse);
+    const contentTypeMap = {
+      html: 'html',
+      markdown: 'markdown',
+      text: 'text',
+    };
+    const result = await Mercury.parse(urlToParse, null, {
+      contentType: contentTypeMap[contentType],
+    });
     console.log(JSON.stringify(result, null, 2));
   } catch (e) {
     if (e.message === 'ETIMEDOUT' && false) {
