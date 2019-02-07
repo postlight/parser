@@ -9,7 +9,11 @@ import collectAllPages from 'extractors/collect-all-pages';
 
 const Mercury = {
   async parse(url, html, opts = {}) {
-    const { fetchAllPages = true, fallback = true } = opts;
+    const {
+      fetchAllPages = true,
+      fallback = true,
+      contentType = 'html',
+    } = opts;
 
     // if no url was passed and this is the browser version,
     // set url to window.location.href and load the html
@@ -54,6 +58,7 @@ const Mercury = {
       metaCache,
       parsedUrl,
       fallback,
+      contentType,
     });
 
     const { title, next_page_url } = result;
