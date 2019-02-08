@@ -18,7 +18,7 @@ describe('WwwFoolComExtractor', () => {
       const html = fs.readFileSync(
         './fixtures/www.fool.com/1489175437362.html'
       );
-      result = Mercury.parse(url, html, { fallback: false });
+      result = Mercury.parse(url, { html, fallback: false });
     });
 
     it('is selected properly', () => {

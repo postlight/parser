@@ -18,7 +18,7 @@ describe('DeadspinExtractor', () => {
       const html = fs.readFileSync(
         './fixtures/deadspin.com/1476389931786.html'
       );
-      result = Mercury.parse(url, html, { fallback: false });
+      result = Mercury.parse(url, { html, fallback: false });
     });
 
     it('is selected properly', async () => {

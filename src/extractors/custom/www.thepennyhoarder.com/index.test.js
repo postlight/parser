@@ -17,7 +17,7 @@ describe('WwwThepennyhoarderComExtractor', () => {
       const html = fs.readFileSync(
         './fixtures/www.thepennyhoarder.com/1482509014877.html'
       );
-      result = Mercury.parse(url, html, { fallback: false });
+      result = Mercury.parse(url, { html, fallback: false });
     });
 
     it('is selected properly', () => {

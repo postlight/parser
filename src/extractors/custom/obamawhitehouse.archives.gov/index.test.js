@@ -18,7 +18,7 @@ describe('ObamawhitehouseArchivesGovExtractor', () => {
       const html = fs.readFileSync(
         './fixtures/obamawhitehouse.archives.gov/1485905445365.html'
       );
-      result = Mercury.parse(url, html, { fallback: false });
+      result = Mercury.parse(url, { html, fallback: false });
     });
 
     it('is selected properly', () => {
@@ -125,7 +125,7 @@ describe('ObamawhitehouseArchivesGovExtractor', () => {
       const html = fs.readFileSync(
         './fixtures/obamawhitehouse.archives.gov/1490209983872.html'
       );
-      result = Mercury.parse(url, html, { fallback: false });
+      result = Mercury.parse(url, { html, fallback: false });
     });
 
     it('includes this youtube video', async () => {
@@ -146,7 +146,7 @@ describe('ObamawhitehouseArchivesGovExtractor', () => {
       const html = fs.readFileSync(
         './fixtures/obamawhitehouse.archives.gov/1490227791307.html'
       );
-      result = Mercury.parse(url, html, { fallback: false });
+      result = Mercury.parse(url, { html, fallback: false });
     });
 
     it('gets the words and video', async () => {
@@ -180,7 +180,7 @@ describe('ObamawhitehouseArchivesGovExtractor', () => {
       const html = fs.readFileSync(
         './fixtures/obamawhitehouse.archives.gov/1490375478954.html'
       );
-      result = Mercury.parse(url, html, { fallback: false });
+      result = Mercury.parse(url, { html, fallback: false });
     });
 
     it('gets the content', async () => {

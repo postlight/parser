@@ -25,7 +25,7 @@ var Mercury = require('./dist/mercury_test')
 console.log(`Fetching link(s)`)
 
 urls.map(url => {
-  Mercury.parse(url, null, { fallback: false }).then(function(result) {
+  Mercury.parse(url, { fallback: false }).then(function(result) {
     var htmlFile = './preview.html'
     var jsonFile = './preview.json'
 

@@ -18,7 +18,7 @@ describe('WwwProspectmagazineCoUkExtractor', () => {
       const html = fs.readFileSync(
         './fixtures/www.prospectmagazine.co.uk/1488476298434.html'
       );
-      result = Mercury.parse(url, html, { fallback: false });
+      result = Mercury.parse(url, { html, fallback: false });
     });
 
     it('is selected properly', () => {

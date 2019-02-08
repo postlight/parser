@@ -18,7 +18,7 @@ describe('WwwFastcompanyComExtractor', () => {
       const html = fs.readFileSync(
         './fixtures/www.fastcompany.com/1547124373499.html'
       );
-      result = Mercury.parse(url, html, { fallback: false });
+      result = Mercury.parse(url, { html, fallback: false });
     });
 
     it('is selected properly', () => {

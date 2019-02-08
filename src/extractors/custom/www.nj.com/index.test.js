@@ -16,7 +16,7 @@ describe('WwwNjComExtractor', () => {
       url =
         'http://www.nj.com/essex/index.ssf/2016/12/man_sentenced_for_stealing_millions_from_nj_atms_i.html#incart_river_home';
       const html = fs.readFileSync('./fixtures/www.nj.com/1481666201503.html');
-      result = Mercury.parse(url, html, { fallback: false });
+      result = Mercury.parse(url, { html, fallback: false });
     });
 
     it('is selected properly', () => {

@@ -18,7 +18,7 @@ describe('WwwCinemablendComExtractor', () => {
       const html = fs.readFileSync(
         './fixtures/www.cinemablend.com/1482432215722.html'
       );
-      result = Mercury.parse(url, html, { fallback: false });
+      result = Mercury.parse(url, { html, fallback: false });
     });
 
     it('is selected properly', () => {

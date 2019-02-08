@@ -18,7 +18,7 @@ describe('WwwPopsugarComExtractor', () => {
       const html = fs.readFileSync(
         './fixtures/www.popsugar.com/1482182390796.html'
       );
-      result = Mercury.parse(url, html, { fallback: false });
+      result = Mercury.parse(url, { html, fallback: false });
     });
 
     it('is selected properly', () => {

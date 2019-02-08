@@ -18,7 +18,7 @@ describe('ApartmentTherapyExtractor', () => {
       const html = fs.readFileSync(
         './fixtures/www.apartmenttherapy.com/1476396697639.html'
       );
-      result = Mercury.parse(url, html, { fallback: false });
+      result = Mercury.parse(url, { html, fallback: false });
     });
     it('is selected properly', async () => {
       // To pass this test, rename your extractor in

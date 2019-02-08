@@ -18,7 +18,7 @@ describe('WikiaExtractor', () => {
       const html = fs.readFileSync(
         './fixtures/fandom.wikia.com/1475595373938.html'
       );
-      result = Mercury.parse(url, html, { fallback: false });
+      result = Mercury.parse(url, { html, fallback: false });
     });
 
     it('is selected properly', async () => {

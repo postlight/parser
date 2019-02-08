@@ -18,7 +18,7 @@ describe('NewrepublicComExtractor', () => {
       const html = fs.readFileSync(
         './fixtures/newrepublic.com/1480434805231.html'
       );
-      result = Mercury.parse(url, html, { fallback: false });
+      result = Mercury.parse(url, { html, fallback: false });
     });
     it('is selected properly', async () => {
       // This test should be passing by default.

@@ -15,7 +15,7 @@ describe('PeopleComExtractor', () => {
     beforeAll(() => {
       url = 'http://people.com/style/jennifer-aniston-coat-tags-jimmy-kimmel/';
       const html = fs.readFileSync('./fixtures/people.com/1481580462922.html');
-      result = Mercury.parse(url, html, { fallback: false });
+      result = Mercury.parse(url, { html, fallback: false });
     });
 
     it('is selected properly', () => {

@@ -40,7 +40,7 @@ execFile('find', ['fixtures', '-type', 'f'], (err, stdout) => {
   Promise.all(
     fixturesToUpdate.map((fixture, i) => {
       const html = fs.readFileSync(fixture);
-      return Mercury.parse(`http://${baseDomains[i]}`, html);
+      return Mercury.parse(`http://${baseDomains[i]}`, { html });
     })
   ).then(parsedFixture => {
     const fixturesAndUrls = fixturesToUpdate.reduce(

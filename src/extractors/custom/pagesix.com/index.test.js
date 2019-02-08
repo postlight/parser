@@ -16,7 +16,7 @@ describe('PagesixComExtractor', () => {
       url =
         'http://pagesix.com/2016/12/19/sofia-vergara-and-nick-loebs-embryo-drama-taking-a-detour/';
       const html = fs.readFileSync('./fixtures/pagesix.com/1482254007534.html');
-      result = Mercury.parse(url, html, { fallback: false });
+      result = Mercury.parse(url, { html, fallback: false });
     });
 
     it('is selected properly', () => {

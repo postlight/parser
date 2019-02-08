@@ -18,7 +18,7 @@ describe('WwwMiamiheraldComExtractor', () => {
       const html = fs.readFileSync(
         './fixtures/www.miamiherald.com/1481571585318.html'
       );
-      result = Mercury.parse(url, html, { fallback: false });
+      result = Mercury.parse(url, { html, fallback: false });
     });
 
     it('is selected properly', () => {

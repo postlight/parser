@@ -17,7 +17,7 @@ describe('WwwReutersComExtractor', () => {
       const html = fs.readFileSync(
         './fixtures/www.reuters.com/1481754223635.html'
       );
-      result = Mercury.parse(url, html, { fallback: false });
+      result = Mercury.parse(url, { html, fallback: false });
     });
 
     it('is selected properly', () => {

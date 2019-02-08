@@ -2,10 +2,14 @@
 /* eslint-disable */
 
 const Mercury = require('./dist/mercury');
+const argv = require('yargs-parser')(process.argv.slice(2));
 
-const [, , url] = process.argv;
-
-(async urlToParse => {
+const {
+  _: [url],
+  format,
+  f,
+} = argv;
+(async (urlToParse, contentType) => {
   if (!urlToParse) {
     console.log(
       '\n\
@@ -13,14 +17,23 @@ mercury-parser\n\n\
     The Mercury Parser extracts semantic content from any url\n\n\
 Usage:\n\
 \n\
-    mercury-parser [url-to-parse]\n\
+    $ mercury-parser url-to-parse [--format=html|text|markdown]\n\
 \n\
 '
     );
     return;
   }
   try {
-    const result = await Mercury.parse(urlToParse);
+    const contentTypeMap = {
+      html: 'html',
+      markdown: 'markdown',
+      md: 'markdown',
+      text: 'text',
+      txt: 'text',
+    };
+    const result = await Mercury.parse(urlToParse, null, {
+      contentType: contentTypeMap[contentType],
+    });
     console.log(JSON.stringify(result, null, 2));
   } catch (e) {
     if (e.message === 'ETIMEDOUT' && false) {
@@ -38,4 +51,4 @@ Usage:\n\
     console.error(`\n${reportBug}\n`);
     process.exit(1);
   }
-})(url);
+})(url, format || f);

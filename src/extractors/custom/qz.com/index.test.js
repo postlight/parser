@@ -16,7 +16,7 @@ describe('QzComExtractor', () => {
       url =
         'http://qz.com/863015/uber-is-rolling-out-self-driving-cars-in-san-francisco-in-open-defiance-of-california-dmv/';
       const html = fs.readFileSync('./fixtures/qz.com/1481758330660.html');
-      result = Mercury.parse(url, html, { fallback: false });
+      result = Mercury.parse(url, { html, fallback: false });
     });
 
     it('is selected properly', () => {

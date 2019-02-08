@@ -18,7 +18,7 @@ describe('WwwInquisitrComExtractor', () => {
       const html = fs.readFileSync(
         './fixtures/www.inquisitr.com/1481665067498.html'
       );
-      result = Mercury.parse(url, html, { fallback: false });
+      result = Mercury.parse(url, { html, fallback: false });
     });
 
     it('is selected properly', () => {

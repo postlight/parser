@@ -18,7 +18,7 @@ describe('NewYorkerExtractor', () => {
       const html = fs.readFileSync(
         './fixtures/www.newyorker.com/1475248565793.html'
       );
-      result = Mercury.parse(url, html, { fallback: false });
+      result = Mercury.parse(url, { html, fallback: false });
     });
 
     it('is selected properly', async () => {
@@ -111,7 +111,7 @@ describe('NewYorkerExtractor', () => {
       const html = fs.readFileSync(
         './fixtures/www.newyorker.com/1480713300334.html'
       );
-      result = Mercury.parse(url, html, { fallback: false });
+      result = Mercury.parse(url, { html, fallback: false });
     });
 
     it('returns the dek when present', async () => {

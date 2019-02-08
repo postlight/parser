@@ -12,10 +12,10 @@ const run = () => {
   const html = fs.readFileSync(`${fixture}`);
 
   // first parse is just to get the url
-  Mercury.parse('http://example.com', html, { fallback: false }).then(
+  Mercury.parse('http://example.com', { html, fallback: false }).then(
     ({ url, domain, excerpt, word_count, direction }) => {
       // with the url, second pass will test the correct parser
-      Mercury.parse(url, html, { fallback: false }).then(json => {
+      Mercury.parse(url, { html, fallback: false }).then(json => {
         // removing excerpt b/c this comes from content, not necessary
         delete json.excerpt;
 

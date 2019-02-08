@@ -18,7 +18,7 @@ describe('WwwMentalflossComExtractor', () => {
       const html = fs.readFileSync(
         './fixtures/www.mentalfloss.com/1482186439659.html'
       );
-      result = Mercury.parse(url, html, { fallback: false });
+      result = Mercury.parse(url, { html, fallback: false });
     });
 
     it('is selected properly', () => {
