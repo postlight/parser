@@ -31,7 +31,7 @@ Usage:\n\
       text: 'text',
       txt: 'text',
     };
-    const result = await Mercury.parse(urlToParse, null, {
+    const result = await Mercury.parse(urlToParse, {
       contentType: contentTypeMap[contentType],
     });
     console.log(JSON.stringify(result, null, 2));
