@@ -1,5 +1,18 @@
 # Mercury Parser Changelog
 
+### 2.0.0 (Feb 7, 2019)
+
+##### Commits
+
+yarn run v1.9.4
+\$ /Users/ap/code/postlight/labs/mercury-parser/node_modules/.bin/changelog-maker postlight mercury-parser
+
+- [[`e033835c72`](https://github.com/postlight/mercury-parser/commit/e033835c72)] - **fix**: parse signature in cli (#259) (Adam Pash)
+- [[`32748ad4c5`](https://github.com/postlight/mercury-parser/commit/32748ad4c5)] - **dx**: add .prettierignore (#258) (Adam Pash)
+- [[`2d0f10a888`](https://github.com/postlight/mercury-parser/commit/2d0f10a888)] - **dx**: add .prettierignore (#257) (Adam Pash)
+- [[`9b0664bc91`](https://github.com/postlight/mercury-parser/commit/9b0664bc91)] - **feat**: add content format output options (#256) (Adam Pash)
+- [[`a57f29eec3`](https://github.com/postlight/mercury-parser/commit/a57f29eec3)] - **release**: 1.1.1 (#254) (Adam Pash)
+
 ### 1.1.1 (Feb 7, 2019)
 
 ##### Commits
