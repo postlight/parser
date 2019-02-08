@@ -16,7 +16,7 @@ describe('WwwNprOrgExtractor', () => {
       url =
         'http://www.npr.org/sections/thetwo-way/2016/12/15/505723552/jury-finds-dylann-roof-guilty-in-s-c-church-shooting';
       const html = fs.readFileSync('./fixtures/www.npr.org/1481842125199.html');
-      result = Mercury.parse(url, html, { fallback: false });
+      result = Mercury.parse(url, { html, fallback: false });
     });
 
     it('is selected properly', () => {

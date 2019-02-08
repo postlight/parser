@@ -18,7 +18,7 @@ describe('WwwRollingstoneComExtractor', () => {
       const html = fs.readFileSync(
         './fixtures/www.rollingstone.com/1482380017694.html'
       );
-      result = Mercury.parse(url, html, { fallback: false });
+      result = Mercury.parse(url, { html, fallback: false });
     });
 
     it('is selected properly', () => {

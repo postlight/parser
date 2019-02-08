@@ -16,7 +16,7 @@ describe('FusionNetExtractor', () => {
       url =
         'http://fusion.net/story/377467/la-la-land-oscar-hollywood-musicals-race/';
       const html = fs.readFileSync('./fixtures/fusion.net/1482529202024.html');
-      result = Mercury.parse(url, html, { fallback: false });
+      result = Mercury.parse(url, { html, fallback: false });
     });
 
     it('is selected properly', () => {

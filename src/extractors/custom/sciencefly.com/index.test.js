@@ -18,7 +18,7 @@ describe('ScienceflyComExtractor', () => {
       const html = fs.readFileSync(
         './fixtures/sciencefly.com/1482530492413.html'
       );
-      result = Mercury.parse(url, html, { fallback: false });
+      result = Mercury.parse(url, { html, fallback: false });
     });
 
     it('is selected properly', () => {

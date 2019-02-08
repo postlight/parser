@@ -18,7 +18,7 @@ describe('WwwHowtogeekComExtractor', () => {
       const html = fs.readFileSync(
         './fixtures/www.howtogeek.com/1482438125052.html'
       );
-      result = Mercury.parse(url, html, { fallback: false });
+      result = Mercury.parse(url, { html, fallback: false });
     });
 
     it('is selected properly', () => {

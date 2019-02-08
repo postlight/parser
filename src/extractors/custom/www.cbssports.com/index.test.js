@@ -18,7 +18,7 @@ describe('WwwCbssportsComExtractor', () => {
       const html = fs.readFileSync(
         './fixtures/www.cbssports.com/1482254907948.html'
       );
-      result = Mercury.parse(url, html, { fallback: false });
+      result = Mercury.parse(url, { html, fallback: false });
     });
 
     it('is selected properly', () => {

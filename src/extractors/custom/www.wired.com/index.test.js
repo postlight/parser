@@ -19,7 +19,7 @@ describe('WiredExtractor', () => {
       const html = fs.readFileSync(
         './fixtures/www.wired.com/1475256747028.html'
       );
-      result = Mercury.parse(url, html, { fallback: false });
+      result = Mercury.parse(url, { html, fallback: false });
     });
 
     it('is selected properly', async () => {

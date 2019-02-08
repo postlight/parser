@@ -16,7 +16,7 @@ describe('WwwCnnComExtractor', () => {
       url =
         'http://www.cnn.com/2016/11/29/politics/donald-trump-transition-presidency/index.html';
       const html = fs.readFileSync('./fixtures/www.cnn.com/1480458253239.html');
-      result = Mercury.parse(url, html, { fallback: false });
+      result = Mercury.parse(url, { html, fallback: false });
     });
 
     it('is selected properly', async () => {

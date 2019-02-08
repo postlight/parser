@@ -18,7 +18,7 @@ describe('LittleThingsExtractor', () => {
       const html = fs.readFileSync(
         './fixtures/www.littlethings.com/1475605036506.html'
       );
-      result = Mercury.parse(url, html, { fallback: false });
+      result = Mercury.parse(url, { html, fallback: false });
     });
 
     it('is selected properly', async () => {

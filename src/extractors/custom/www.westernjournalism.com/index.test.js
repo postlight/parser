@@ -18,7 +18,7 @@ describe('WwwWesternjournalismComExtractor', () => {
       const html = fs.readFileSync(
         './fixtures/www.westernjournalism.com/1482520953825.html'
       );
-      result = Mercury.parse(url, html, { fallback: false });
+      result = Mercury.parse(url, { html, fallback: false });
     });
 
     it('is selected properly', () => {

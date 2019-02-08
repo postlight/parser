@@ -16,7 +16,7 @@ describe('WwwAolComExtractor', () => {
       url =
         'http://www.aol.com/article/news/2016/12/01/son-of-slain-police-officer-given-teddy-bears-made-from-dads-un/21618553/';
       const html = fs.readFileSync('./fixtures/www.aol.com/1480618816916.html');
-      result = Mercury.parse(url, html, { fallback: false });
+      result = Mercury.parse(url, { html, fallback: false });
     });
     it('is selected properly', async () => {
       // This test should be passing by default.

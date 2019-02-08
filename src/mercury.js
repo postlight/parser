@@ -8,7 +8,7 @@ import RootExtractor from 'extractors/root-extractor';
 import collectAllPages from 'extractors/collect-all-pages';
 
 const Mercury = {
-  async parse(url, html, opts = {}) {
+  async parse(url, { html, ...opts } = {}) {
     const {
       fetchAllPages = true,
       fallback = true,

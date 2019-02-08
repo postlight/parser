@@ -18,7 +18,7 @@ describe('AbcnewsGoComExtractor', () => {
       const html = fs.readFileSync(
         './fixtures/abcnews.go.com/1481922563840.html'
       );
-      result = Mercury.parse(url, html, { fallback: false });
+      result = Mercury.parse(url, { html, fallback: false });
     });
 
     it('is selected properly', () => {

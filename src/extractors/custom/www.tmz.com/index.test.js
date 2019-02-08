@@ -15,7 +15,7 @@ describe('WwwTmzComExtractor', () => {
     beforeAll(() => {
       url = 'http://www.tmz.com/2016/11/28/prince-wife-estate-will/';
       const html = fs.readFileSync('./fixtures/www.tmz.com/1480368537455.html');
-      result = Mercury.parse(url, html, { fallback: false });
+      result = Mercury.parse(url, { html, fallback: false });
     });
 
     it('is selected properly', async () => {

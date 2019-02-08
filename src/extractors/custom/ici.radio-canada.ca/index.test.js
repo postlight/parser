@@ -18,7 +18,7 @@ describe('IciRadioCanadaCaExtractor', () => {
       const html = fs.readFileSync(
         './fixtures/ici.radio-canada.ca/1489433621634.html'
       );
-      result = Mercury.parse(url, html, { fallback: false });
+      result = Mercury.parse(url, { html, fallback: false });
     });
 
     it('is selected properly', () => {

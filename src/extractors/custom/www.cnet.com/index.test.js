@@ -18,7 +18,7 @@ describe('WwwCnetComExtractor', () => {
       const html = fs.readFileSync(
         './fixtures/www.cnet.com/1482428196806.html'
       );
-      result = Mercury.parse(url, html, { fallback: false });
+      result = Mercury.parse(url, { html, fallback: false });
     });
 
     it('is selected properly', () => {

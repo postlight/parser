@@ -19,7 +19,7 @@ describe('CustomExtractor', () => {
       const html = fs.readFileSync(
         './fixtures/www.broadwayworld.com/1476392567143.html'
       );
-      result = Mercury.parse(url, html, { fallback: false });
+      result = Mercury.parse(url, { html, fallback: false });
     });
     it('is selected properly', async () => {
       // To pass this test, rename your extractor in

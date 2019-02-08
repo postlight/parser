@@ -18,7 +18,7 @@ describe('WwwNydailynewsComExtractor', () => {
       const html = fs.readFileSync(
         './fixtures/www.nydailynews.com/1481917212613.html'
       );
-      result = Mercury.parse(url, html, { fallback: false });
+      result = Mercury.parse(url, { html, fallback: false });
     });
 
     it('is selected properly', () => {

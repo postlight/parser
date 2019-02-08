@@ -19,7 +19,7 @@ describe('PoliticoExtractor', () => {
       const html = fs.readFileSync(
         './fixtures/www.politico.com/1475617690069.html'
       );
-      result = Mercury.parse(url, html, { fallback: false });
+      result = Mercury.parse(url, { html, fallback: false });
     });
 
     it('is selected properly', async () => {

@@ -82,7 +82,7 @@ describe('Mercury', () => {
       jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000;
       const url =
         'https://arstechnica.com/gadgets/2016/08/the-connected-renter-how-to-make-your-apartment-smarter/';
-      const result = await Mercury.parse(url, null, { fetchAllPages: true });
+      const result = await Mercury.parse(url, { fetchAllPages: true });
 
       const { total_pages, pages_rendered } = result;
 

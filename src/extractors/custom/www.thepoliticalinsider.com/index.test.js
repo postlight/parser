@@ -18,7 +18,7 @@ describe('WwwThepoliticalinsiderComExtractor', () => {
       const html = fs.readFileSync(
         './fixtures/www.thepoliticalinsider.com/1482255981213.html'
       );
-      result = Mercury.parse(url, html, { fallback: false });
+      result = Mercury.parse(url, { html, fallback: false });
     });
 
     it('is selected properly', () => {

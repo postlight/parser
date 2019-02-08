@@ -18,7 +18,7 @@ describe('WwwWashingtonpostComExtractor', () => {
       const html = fs.readFileSync(
         './fixtures/www.washingtonpost.com/1546958901450.html'
       );
-      result = Mercury.parse(url, html, { fallback: false });
+      result = Mercury.parse(url, { html, fallback: false });
     });
 
     it('is selected properly', async () => {

@@ -18,7 +18,7 @@ describe('MoneyCnnComExtractor', () => {
       const html = fs.readFileSync(
         './fixtures/money.cnn.com/1480437611330.html'
       );
-      result = Mercury.parse(url, html, { fallback: false });
+      result = Mercury.parse(url, { html, fallback: false });
     });
     it('is selected properly', async () => {
       // This test should be passing by default.

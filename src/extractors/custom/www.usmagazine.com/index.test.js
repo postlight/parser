@@ -28,7 +28,8 @@ describe('WwwUsmagazineComExtractor', () => {
     const articleUrl =
       'http://www.usmagazine.com/celebrity-news/news/lady-gaga-shares-pic-of-ex-taylor-kinney-with-her-mom-w454419';
 
-    const { title } = await Mercury.parse(articleUrl, html, {
+    const { title } = await Mercury.parse(articleUrl, {
+      html,
       fallback: false,
     });
 
@@ -67,7 +68,8 @@ describe('WwwUsmagazineComExtractor', () => {
     const articleUrl =
       'http://www.usmagazine.com/celebrity-news/news/lady-gaga-shares-pic-of-ex-taylor-kinney-with-her-mom-w454419';
 
-    const { date_published } = await Mercury.parse(articleUrl, html, {
+    const { date_published } = await Mercury.parse(articleUrl, {
+      html,
       fallback: false,
     });
 
@@ -85,7 +87,8 @@ describe('WwwUsmagazineComExtractor', () => {
     const articleUrl =
       'http://www.usmagazine.com/celebrity-news/news/lady-gaga-shares-pic-of-ex-taylor-kinney-with-her-mom-w454419';
 
-    const { lead_image_url } = await Mercury.parse(articleUrl, html, {
+    const { lead_image_url } = await Mercury.parse(articleUrl, {
+      html,
       fallback: false,
     });
 
@@ -108,7 +111,7 @@ describe('WwwUsmagazineComExtractor', () => {
     const url =
       'http://www.usmagazine.com/celebrity-news/news/lady-gaga-shares-pic-of-ex-taylor-kinney-with-her-mom-w454419';
 
-    const { content } = await Mercury.parse(url, html, { fallback: false });
+    const { content } = await Mercury.parse(url, { html, fallback: false });
 
     const $ = cheerio.load(content || '');
 

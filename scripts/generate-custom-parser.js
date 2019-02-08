@@ -114,7 +114,7 @@ function savePage($, [url], newParser) {
 
   fs.writeFileSync(file, html);
 
-  Mercury.parse(url, html).then(result => {
+  Mercury.parse(url, { html }).then(result => {
     if (newParser) {
       confirm(
         generateScaffold,

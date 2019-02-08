@@ -18,7 +18,7 @@ describe('NYTimesExtractor', () => {
       const html = fs.readFileSync(
         './fixtures/www.nytimes.com/1474318141888.html'
       );
-      result = Mercury.parse(url, html, { fallback: false });
+      result = Mercury.parse(url, { html, fallback: false });
     });
 
     it('is selected properly', async () => {
@@ -112,7 +112,7 @@ describe('NYTimesExtractor', () => {
     const uri =
       'http://www.nytimes.com/interactive/2016/09/15/arts/design/national-museum-of-african-american-history-and-culture.html';
 
-    const { content, title, author } = await Mercury.parse(uri, html);
+    const { content, title, author } = await Mercury.parse(uri, { html });
     const $ = cheerio.load(content);
     const text = $('*')
       .first()
@@ -132,7 +132,7 @@ describe('NYTimesExtractor', () => {
     const uri =
       'https://www.nytimes.com/2018/10/09/us/politics/nikki-haley-united-nations.html';
 
-    const { title } = await Mercury.parse(uri, html);
+    const { title } = await Mercury.parse(uri, { html });
 
     assert.equal(
       title,
