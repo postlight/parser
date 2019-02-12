@@ -67,7 +67,8 @@ const Resource = {
 
     // after first cheerio.load, check to see if encoding matches
     const metaContentType = $('meta[http-equiv=content-type]').attr('content');
-    const properEncoding = getEncoding(metaContentType);
+    const metaCharset = $('meta[charset]').attr('charset');
+    const properEncoding = metaCharset || getEncoding(metaContentType);
 
     // if encodings in the header/body dont match, use the one in the body
     if (properEncoding !== encoding) {
