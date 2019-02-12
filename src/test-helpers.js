@@ -52,12 +52,11 @@ export function record(name, options = {}) {
         // eslint-disable-next-line no-console
         console.log(
           `This is disabled for browser/node interop. To capture fixutres,
-          open ${'`src/test-helpers.js`'} and comment out lines 57 and 58 and
-          uncomment the fs import at top of file.`
+          open ${'`src/test-helpers.js`'} and uncomment lines 58 and 59 and
+          the fs import at top of file.`
         );
         // const text = `const nock = require('nock');\n${has_fixtures.join('\n')}`;
         // fs.writeFile(fp, text, done);
-
       } else {
         done();
       }
