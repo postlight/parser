@@ -19,6 +19,10 @@
     "web",
     "content"
   ],
+  "files": [
+    "dist",
+    "cli.js"
+  ],
   "main": "./dist/mercury.js",
   "bin": {
     "mercury-parser": "./cli.js"
