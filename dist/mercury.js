@@ -1705,7 +1705,8 @@ var Resource = {
     var decodedContent = iconv.decode(content, encoding);
     var $ = cheerio.load(decodedContent); // after first cheerio.load, check to see if encoding matches
 
-    var metaContentType = $('meta[http-equiv=content-type i]').attr('content') || $('meta[charset]').attr('charset');
+    var contentTypeSelector = cheerio.browser ? 'meta[http-equiv=content-type]' : 'meta[http-equiv=content-type i]';
+    var metaContentType = $(contentTypeSelector).attr('content') || $('meta[charset]').attr('charset');
     var properEncoding = getEncoding(metaContentType); // if encodings in the header/body dont match, use the one in the body
 
     if (metaContentType && properEncoding !== encoding) {
