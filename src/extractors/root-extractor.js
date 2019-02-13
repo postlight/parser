@@ -1,4 +1,3 @@
-import TurndownService from 'turndown';
 import Cleaners from 'cleaners';
 import { convertNodeTo } from 'utils/dom';
 import GenericExtractor from './generic';
@@ -67,13 +66,7 @@ function findMatchingSelector($, selectors, extractHtml) {
 }
 
 export function select(opts) {
-  const {
-    $,
-    type,
-    extractionOpts,
-    extractHtml = false,
-    contentType = 'html',
-  } = opts;
+  const { $, type, extractionOpts, extractHtml = false } = opts;
   // Skip if there's not extraction for this type
   if (!extractionOpts) return null;
 
@@ -120,16 +113,7 @@ export function select(opts) {
 
     $content = Cleaners[type]($content, { ...opts, defaultCleaner });
 
-    if (contentType === 'html') {
-      return $.html($content);
-    }
-    if (contentType === 'text') {
-      return $.text($content);
-    }
-    if (contentType === 'markdown') {
-      const turndownService = new TurndownService();
-      return turndownService.turndown($.html($content));
-    }
+    return $.html($content);
   }
 
   let result;
@@ -178,7 +162,7 @@ function extractResult(opts) {
 
 const RootExtractor = {
   extract(extractor = GenericExtractor, opts) {
-    const { contentOnly, extractedTitle, contentType = 'html' } = opts;
+    const { contentOnly, extractedTitle } = opts;
     // This is the generic extractor. Run its extract method
     if (extractor.domain === '*') return extractor.extract(opts);
 
@@ -193,7 +177,6 @@ const RootExtractor = {
         type: 'content',
         extractHtml: true,
         title: extractedTitle,
-        contentType,
       });
       return {
         content,

@@ -4,6 +4,8 @@ import { Errors } from 'utils';
 import { record } from 'test-helpers';
 import Mercury from './mercury';
 
+const fs = require('fs');
+
 describe('Mercury', () => {
   const recorder = record('mercury-test');
   beforeAll(recorder.before);
@@ -91,5 +93,38 @@ describe('Mercury', () => {
 
       assert.equal(result.next_page_url, `${url}2`);
     });
+  });
+
+  it('returns text content if text is passed as contentType', async () => {
+    const url =
+      'http://nymag.com/daily/intelligencer/2016/09/trump-discussed-usd25k-donation-with-florida-ag-not-fraud.html';
+    const html = fs.readFileSync(
+      './src/extractors/custom/nymag.com/fixtures/test.html',
+      'utf8'
+    );
+    const { content } = await Mercury.parse(url, { html, contentType: 'text' });
+
+    const htmlRe = /<[a-z][\s\S]*>/g;
+
+    assert.equal(htmlRe.test(content), false);
+  });
+
+  it('returns markdown if markdown is passed as contentType', async () => {
+    const url =
+      'http://nymag.com/daily/intelligencer/2016/09/trump-discussed-usd25k-donation-with-florida-ag-not-fraud.html';
+    const html = fs.readFileSync(
+      './src/extractors/custom/nymag.com/fixtures/test.html',
+      'utf8'
+    );
+    const { content } = await Mercury.parse(url, {
+      html,
+      contentType: 'markdown',
+    });
+
+    const htmlRe = /<[a-z][\s\S]*>/;
+    const markdownRe = /\[[\w\s]+\]\(.*\)/;
+
+    assert.equal(htmlRe.test(content), false);
+    assert.equal(markdownRe.test(content), true);
   });
 });
