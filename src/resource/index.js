@@ -66,8 +66,11 @@ const Resource = {
     let $ = cheerio.load(decodedContent);
 
     // after first cheerio.load, check to see if encoding matches
+    const contentTypeSelector = cheerio.browser
+      ? 'meta[http-equiv=content-type]'
+      : 'meta[http-equiv=content-type i]';
     const metaContentType =
-      $('meta[http-equiv=content-type i]').attr('content') ||
+      $(contentTypeSelector).attr('content') ||
       $('meta[charset]').attr('charset');
     const properEncoding = getEncoding(metaContentType);
 
