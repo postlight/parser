@@ -4,7 +4,7 @@ import { normalizeSpaces } from 'utils/text';
 
 const GenericWordCountExtractor = {
   extract({ content }) {
-    const $ = cheerio.load(content);
+    const $ = cheerio.load(content, { decodeEntities: false });
     const $content = $('div').first();
 
     const text = normalizeSpaces($content.text());

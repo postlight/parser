@@ -69,6 +69,16 @@ describe('Resource', () => {
       assert.equal(typeof $, 'function');
     });
 
+    it('leaves entities and special characters intact', async () => {
+      const url =
+        'https://gist.githubusercontent.com/benubois/397678cb7deeb4d91ad61d2d9b05a0fc/raw/8c5f504c6a8d18d8ab2cc119fd3481764b16ce5f/entities.html';
+      const $ = await Resource.create(url);
+
+      const result = /😀&quot;/g;
+
+      assert.equal(result.test($.html()), true);
+    });
+
     it('handles special encoding', async () => {
       const url =
         'http://www.elmundo.es/opinion/2016/11/19/582f476846163fc65a8b4578.html';

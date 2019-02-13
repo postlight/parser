@@ -35,7 +35,7 @@ const GenericContentExtractor = {
   extract({ $, html, title, url }, opts) {
     opts = { ...this.defaultOpts, ...opts };
 
-    $ = $ || cheerio.load(html);
+    $ = $ || cheerio.load(html, { decodeEntities: false });
 
     // Cascade through our extraction-specific opts in an ordered fashion,
     // turning them off as we try to extract content.
@@ -50,7 +50,7 @@ const GenericContentExtractor = {
     // eslint-disable-next-line no-restricted-syntax
     for (const key of Reflect.ownKeys(opts).filter(k => opts[k] === true)) {
       opts[key] = false;
-      $ = cheerio.load(html);
+      $ = cheerio.load(html, { decodeEntities: false });
 
       node = this.getContentNode($, title, url, opts);
 
@@ -80,7 +80,7 @@ const GenericContentExtractor = {
       return null;
     }
 
-    return normalizeSpaces($.html(node));
+    return normalizeSpaces($.html(node, { decodeEntities: false }));
   },
 };
 

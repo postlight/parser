@@ -32,7 +32,7 @@ const GenericExtractor = {
     const { html, $, contentType = 'html' } = options;
 
     if (html && !$) {
-      const loaded = cheerio.load(html);
+      const loaded = cheerio.load(html, { decodeEntities: false });
       options.$ = loaded;
     }
 
@@ -53,7 +53,9 @@ const GenericExtractor = {
     if (contentType === 'html') {
       convertedContent = content;
     } else if (contentType === 'text') {
-      convertedContent = $.text(cheerio.load(content));
+      convertedContent = $.text(
+        cheerio.load(content, { decodeEntities: false })
+      );
     } else if (contentType === 'markdown') {
       const turndownService = new TurndownService();
       convertedContent = turndownService.turndown(content);
