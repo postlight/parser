@@ -1,5 +1,4 @@
 import cheerio from 'cheerio';
-import TurndownService from 'turndown';
 import stringDirection from 'string-direction';
 
 import GenericContentExtractor from './content/extractor';
@@ -29,7 +28,7 @@ const GenericExtractor = {
   direction: ({ title }) => stringDirection.getDirection(title),
 
   extract(options) {
-    const { html, $, contentType = 'html' } = options;
+    const { html, $ } = options;
 
     if (html && !$) {
       const loaded = cheerio.load(html);
@@ -48,24 +47,13 @@ const GenericExtractor = {
     const direction = this.direction({ title });
     const { url, domain } = this.url_and_domain(options);
 
-    let convertedContent;
-
-    if (contentType === 'html') {
-      convertedContent = content;
-    } else if (contentType === 'text') {
-      convertedContent = $.text(cheerio.load(content));
-    } else if (contentType === 'markdown') {
-      const turndownService = new TurndownService();
-      convertedContent = turndownService.turndown(content);
-    }
-
     return {
       title,
       author,
       date_published: date_published || null,
       dek,
       lead_image_url,
-      content: convertedContent,
+      content,
       next_page_url,
       url,
       domain,
