@@ -6,11 +6,12 @@ import { DEFAULT_ENCODING, ENCODING_RE } from './constants';
 // ensure correctly encoded responses
 export default function getEncoding(str) {
   let encoding = DEFAULT_ENCODING;
-  if (ENCODING_RE.test(str)) {
-    const testEncode = ENCODING_RE.exec(str)[1];
-    if (iconv.encodingExists(testEncode)) {
-      encoding = testEncode;
-    }
+  const matches = ENCODING_RE.exec(str);
+  if (matches !== null) {
+    [, str] = matches;
+  }
+  if (iconv.encodingExists(str)) {
+    encoding = str;
   }
   return encoding;
 }
