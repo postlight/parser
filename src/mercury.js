@@ -1,5 +1,6 @@
 import URL from 'url';
 import cheerio from 'cheerio';
+import TurndownService from 'turndown';
 
 import Resource from 'resource';
 import { validateUrl, Errors } from 'utils';
@@ -81,6 +82,13 @@ const Mercury = {
         total_pages: 1,
         rendered_pages: 1,
       };
+    }
+
+    if (contentType === 'markdown') {
+      const turndownService = new TurndownService();
+      result.content = turndownService.turndown(result.content);
+    } else if (contentType === 'text') {
+      result.content = $.text($(result.content));
     }
 
     return result;

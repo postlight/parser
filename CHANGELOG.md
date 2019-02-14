@@ -1,5 +1,21 @@
 # Mercury Parser Changelog
 
+### 2.0.0 (Feb 13, 2019)
+
+##### Commits
+
+- [[`2afd8c9fa8`](https://github.com/postlight/mercury-parser/commit/2afd8c9fa8)] - **fix**: jquery doesn't like the case insensitive selector (#274) (Adam Pash)
+- [[`9bf88b0ba3`](https://github.com/postlight/mercury-parser/commit/9bf88b0ba3)] - **chore**: refactor format output adjustments (#272) (Adam Pash)
+- [[`867623ab33`](https://github.com/postlight/mercury-parser/commit/867623ab33)] - **chore**: add files to package.json (#269) (David Brownman)
+- [[`ab56ce0de3`](https://github.com/postlight/mercury-parser/commit/ab56ce0de3)] - **fix**: custom parser generator (#271) (Adam Pash)
+- [[`0e27448866`](https://github.com/postlight/mercury-parser/commit/0e27448866)] - **feat**: Various Character Encoding Improvements (#270) (Ben Ubois)
+- [[`b3fa18b6d9`](https://github.com/postlight/mercury-parser/commit/b3fa18b6d9)] - **docs**: delete extra semicolon (#266) (Madison Kanna)
+- [[`e033835c72`](https://github.com/postlight/mercury-parser/commit/e033835c72)] - **fix**: parse signature in cli (#259) (Adam Pash)
+- [[`32748ad4c5`](https://github.com/postlight/mercury-parser/commit/32748ad4c5)] - **dx**: add .prettierignore (#258) (Adam Pash)
+- [[`2d0f10a888`](https://github.com/postlight/mercury-parser/commit/2d0f10a888)] - **dx**: add .prettierignore (#257) (Adam Pash)
+- [[`9b0664bc91`](https://github.com/postlight/mercury-parser/commit/9b0664bc91)] - **feat**: add content format output options (#256) (Adam Pash)
+- [[`a57f29eec3`](https://github.com/postlight/mercury-parser/commit/a57f29eec3)] - **release**: 1.1.1 (#254) (Adam Pash)
+
 ### 1.1.1 (Feb 7, 2019)
 
 ##### Commits
