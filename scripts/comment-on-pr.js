@@ -71,7 +71,7 @@ ${Object.keys(json)
 
 ${testReport}
 `;
-        const commentPath = 'artifacts/comment.txt';
+        const commentPath = 'tmp/artifacts/comment.txt';
         fs.writeFileSync(
           commentPath,
           JSON.stringify({
