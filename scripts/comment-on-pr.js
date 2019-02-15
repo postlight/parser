@@ -71,22 +71,13 @@ ${Object.keys(json)
 
 ${testReport}
 `;
-        const commentPath = 'tmp/artifacts/comment.txt';
+        const commentPath = 'tmp/artifacts/comment.json';
         fs.writeFileSync(
           commentPath,
           JSON.stringify({
             body: comment,
             issue: process.env.CIRCLE_PULL_REQUEST,
           })
-        );
-        const commentUrl = bot.artifactUrl(commentPath);
-
-        execSync(
-          `curl --silent -H "x-api-key: ${
-            process.env.KEY
-          }" -H "Content-Type: application/json" ${
-            process.env.URL
-          }?url=${commentUrl}`
         );
       });
     }
