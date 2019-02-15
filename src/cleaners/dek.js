@@ -1,5 +1,5 @@
 import { stripTags } from 'utils/dom';
-import { excerptContent, normalizeSpaces } from 'utils/text';
+import { excerptContent, decodeEntities, normalizeSpaces } from 'utils/text';
 
 import { TEXT_LINK_RE } from './constants';
 
@@ -13,11 +13,14 @@ export default function cleanDek(dek, { $, excerpt }) {
   if (excerpt && excerptContent(excerpt, 10) === excerptContent(dek, 10))
     return null;
 
-  const dekText = stripTags(dek, $);
+  let dekText = stripTags(dek, $);
 
   // Plain text links shouldn't exist in the dek. If we have some, it's
   // not a good dek - bail.
   if (TEXT_LINK_RE.test(dekText)) return null;
+
+  // Convert HTML encoded entities back to into characters
+  dekText = decodeEntities(dekText);
 
   return normalizeSpaces(dekText.trim());
 }

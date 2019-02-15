@@ -1,5 +1,5 @@
 import { stripTags } from 'utils/dom';
-import { normalizeSpaces } from 'utils/text';
+import { decodeEntities, normalizeSpaces } from 'utils/text';
 
 import { TITLE_SPLITTERS_RE } from './constants';
 import { resolveSplitTitle } from './index';
@@ -20,6 +20,9 @@ export default function cleanTitle(title, { url, $ }) {
       title = h1.text();
     }
   }
+
+  // Convert HTML encoded entities back to into characters
+  title = decodeEntities(title);
 
   // strip any html tags in the title text
   return normalizeSpaces(stripTags(title, $).trim());
