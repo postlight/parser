@@ -3,6 +3,7 @@ const bot = require('@jesses/circle-github-bot').default.create();
 const Mercury = require('../dist/mercury.js');
 const fs = require('fs');
 const getTestReport = require('./get-test-report');
+const execSync = require('child_process').execSync;
 
 const run = () => {
   const screenshotPath = process.argv[2];
@@ -38,19 +39,17 @@ const run = () => {
         const testReport =
           getTestReport('./test-output.json') || '✅ All tests passed';
 
-        bot.comment(
-          process.env.GH_AUTH_TOKEN,
-          `### 🤖 Automated Parsing Preview 🤖
+        const comment = `### 🤖 Automated Parsing Preview 🤖
 **Commit:** \`${bot.env.commitMessage}\`
 
 ![Screenshot of fixture (this embed should work after repo is public)](${bot.artifactUrl(
-            screenshotPath
-          )})
+          screenshotPath
+        )})
 
 [Original Article](${url}) | ${bot.artifactLink(
-            fixtureArtifactPath,
-            'HTML Fixture'
-          )} | ${bot.artifactLink(previewPath, 'Parsed Content Preview')}
+          fixtureArtifactPath,
+          'HTML Fixture'
+        )} | ${bot.artifactLink(previewPath, 'Parsed Content Preview')}
 
 <details>
 <summary><b>Parsed JSON</b></summary>
@@ -66,12 +65,28 @@ ${JSON.stringify(json, null, 2)}
 **\`null\` fields**
 
 ${Object.keys(json)
-            .map(key => (json[key] !== null ? '' : `  * \`${key}\n\``))
-            .join('\n\n') || 'None'}
+          .map(key => (json[key] !== null ? '' : `  * \`${key}\n\``))
+          .join('\n\n') || 'None'}
 
 
 ${testReport}
-`
+`;
+        const commentPath = 'artifacts/comment.txt';
+        fs.writeFileSync(
+          commentPath,
+          JSON.stringify({
+            body: comment,
+            issue: process.env.CIRCLE_PULL_REQUEST,
+          })
+        );
+        const commentUrl = bot.artifactUrl(commentPath);
+
+        execSync(
+          `curl --silent -H "x-api-key: ${
+            process.env.KEY
+          }" -H "Content-Type: application/json" ${
+            process.env.URL
+          }?url=${commentUrl}`
         );
       });
     }
