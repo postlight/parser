@@ -13,9 +13,9 @@ describe('WwwFtchineseComExtractor', () => {
     let result;
     let url;
     beforeAll(() => {
-      url = 'http://www.ftchinese.com/story/001081367';
+      url = 'http://www.ftchinese.com/story/001081496';
       const html = fs.readFileSync(
-        './fixtures/www.ftchinese.com/1549682835827.html'
+        './fixtures/www.ftchinese.com/1550454222229.html'
       );
       result = Mercury.parse(url, html, { fallback: false });
     });
@@ -35,7 +35,7 @@ describe('WwwFtchineseComExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(title, `欧盟否决西门子-阿尔斯通铁路业务合并案`);
+      assert.equal(title, `英国认为华为风险可控`);
     });
 
     it('returns the author', async () => {
@@ -45,7 +45,10 @@ describe('WwwFtchineseComExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(author, '罗谢尔•托普兰斯基');
+      assert.equal(
+        author,
+        '英国《金融时报》 迪米 华盛顿 ， 戴维•邦德 慕尼黑报道'
+      );
     });
 
     it('returns the date_published', async () => {
@@ -55,7 +58,7 @@ describe('WwwFtchineseComExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(date_published, '2019-01-02T06:21:00.000Z');
+      assert.equal(date_published, '2018-01-02T07:17:00.000Z');
     });
 
     it('returns the dek', async () => {
@@ -77,7 +80,7 @@ describe('WwwFtchineseComExtractor', () => {
       // the article.
       assert.equal(
         lead_image_url,
-        `http://i.ftimg.net/picture/7/000083507_piclink.jpg`
+        `http://i.ftimg.net/picture/3/000082493_piclink.jpg`
       );
     });
 
@@ -101,7 +104,7 @@ describe('WwwFtchineseComExtractor', () => {
       // the article.
       assert.equal(
         first1,
-        '德国和法国铁路设备制造商西门子(Siemens)与阿尔斯通(Alstom)之间的合并已被欧盟竞争执法机构否决，监管者不接受这样一个观点，即这一联姻对于欧洲与由国家支持的中国竞争对手竞争是必要的。欧盟竞争事务专员玛格丽特•维斯特格(Margrethe'
+        '英国政府得出结论认为，它能够缓解在5G网络中使用华为(Huawei)设备的风险。这个结论沉重打击了美国说服盟国把华为挡在高速电信系统门外的努力。两位知情人士将这一尚未公开的结论告诉英国《金融时报》，称英国国家网络安全中心(National'
       );
     });
   });
