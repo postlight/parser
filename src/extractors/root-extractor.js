@@ -121,10 +121,11 @@ export function select(opts) {
   // if selector is an array (e.g., ['img', 'src']),
   // extract the attr
   if (Array.isArray(matchingSelector)) {
-    const [selector, attr] = matchingSelector;
+    const [selector, attr, transform] = matchingSelector;
     result = $(selector)
       .attr(attr)
       .trim();
+    if (transform) result = transform(result);
   } else {
     let $node = $(matchingSelector);
 
