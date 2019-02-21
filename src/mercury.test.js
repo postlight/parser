@@ -33,6 +33,14 @@ describe('Mercury', () => {
       assert.equal(result.content.indexOf('score="') === -1, true);
     });
 
+    it('returns an error on non-2xx responses', async () => {
+      const error = await Mercury.parse(
+        'https://www.thekitchn.com/instant-pot-chicken-pesto-pasta-eating-instantly-267141'
+      );
+
+      assert.equal(error, Errors.badUrl);
+    });
+
     it('does blogger', async () => {
       const result = await Mercury.parse(
         'https://googleblog.blogspot.com/2016/08/onhub-turns-one-today.html'
