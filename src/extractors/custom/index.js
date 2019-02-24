@@ -91,3 +91,4 @@ export * from './www.slate.com';
 export * from './ici.radio-canada.ca';
 export * from './www.fortinet.com';
 export * from './www.fastcompany.com';
+export * from './kaden.watch.impress.co.jp';
