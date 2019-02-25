@@ -1,6 +1,16 @@
 export const AvWatchImpressCoJpExtractor = {
   domain: 'av.watch.impress.co.jp',
 
+  supportedDomains: [
+    'akiba-pc.watch.impress.co.jp',
+    'cloud.watch.impress.co.jp',
+    'forest.watch.impress.co.jp',
+    'internet.watch.impress.co.jp',
+    'k-tai.watch.impress.co.jp',
+    'kaden.watch.impress.co.jp',
+    'pc.watch.impress.co.jp',
+  ],
+
   title: {
     selectors: [['meta[name="og:title"]', 'value']],
   },
@@ -23,6 +33,8 @@ export const AvWatchImpressCoJpExtractor = {
 
   content: {
     selectors: ['#main article div div.main-contents.mainContents'],
+
+    defaultCleaner: false,
 
     transforms: {
       img: $node => {
