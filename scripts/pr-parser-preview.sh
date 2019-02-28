@@ -20,7 +20,7 @@ if [[ $fixtures ]]; then
   do
     # Create a comment with a link to the screenshot
     # and json output for the fixture
-    node scripts/comment-on-pr.js $screenshot
+    node scripts/comment-for-pr.js $screenshot
   done
 else
   echo "No fixtures added in this PR, so no preview needed"
