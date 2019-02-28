@@ -1,7 +1,7 @@
 version: 2
 
 defaults: &defaults
-  working_directory: ~/repo
+  working_directory: ~/project
   docker:
     - image: circleci/node:8.10-browsers
 
@@ -20,14 +20,14 @@ jobs:
       - store_artifacts:
           path: tmp/artifacts
       - persist_to_workspace:
-          root: ~/repo
+          root: ~/project
           paths: .
 
   test-web:
     <<: *defaults
     steps:
       - attach_workspace:
-          at: ~/repo
+          at: ~/project
       - checkout
       - run: 'yarn install'
       - run: 'yarn add karma-cli --dev'
@@ -38,10 +38,10 @@ jobs:
     <<: *defaults
     steps:
       - attach_workspace:
-          at: ~/repo
+          at: ~/project
       - run:
           name: Authenticate with registry
-          command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/repo/.npmrc
+          command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/project/.npmrc
       - run:
           name: Publish package
           command: npm publish --access public
