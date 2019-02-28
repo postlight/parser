@@ -873,3 +873,36 @@ nock('https://arstechnica.com:443', { encodedQueryParams: true })
       'gzip',
     ]
   );
+
+nock('https://www.thekitchn.com:443', { encodedQueryParams: true })
+  .get('/instant-pot-chicken-pesto-pasta-eating-instantly-267141')
+  .reply(
+    403,
+    '<!DOCTYPE html> <html lang="en"> <head> <meta charset="utf-8"> <meta name="viewport" content="width=device-width, initial-scale=1"> <title>Access to this page has been denied.</title> <link href="https://fonts.googleapis.com/css?family=Open+Sans:300" rel="stylesheet"> <style> html, body { margin: 0; padding: 0; font-family: \'Open Sans\', sans-serif; color: #000; } a { color: #c5c5c5; text-decoration: none; } .container { align-items: center; display: flex; flex: 1; justify-content: space-between; flex-direction: column; height: 100%; } .container > div { width: 100%; display: flex; justify-content: center; } .container > div > div { display: flex; width: 80%; } .customer-logo-wrapper { padding-top: 2rem; flex-grow: 0; background-color: #fff; visibility: hidden; } .customer-logo { border-bottom: 1px solid #000; } .customer-logo > img { padding-bottom: 1rem; max-height: 50px; max-width: 100%; } .page-title-wrapper { flex-grow: 2; } .page-title { flex-direction: column-reverse; } .content-wrapper { flex-grow: 5; } .content { flex-direction: column; } .page-footer-wrapper { align-items: center; flex-grow: 0.2; background-color: #000; color: #c5c5c5; font-size: 70%; } @media (min-width: 768px) { html, body { height: 100%; } } </style> <!-- Custom CSS -->  </head> <body> <section class="container"> <div class="customer-logo-wrapper"> <div class="customer-logo"> <img src="" alt="Logo"/> </div> </div> <div class="page-title-wrapper"> <div class="page-title"> <h1>Please verify you are a human</h1> </div> </div> <div class="content-wrapper"> <div class="content"> <div id="px-captcha"> </div> <p> Access to this page has been denied because we believe you are using automation tools to browse the website. </p> <p> This may happen as a result of the following: </p> <ul> <li> Javascript is disabled or blocked by an extension (ad blockers for example) </li> <li> Your browser does not support cookies </li> </ul> <p> Please make sure that Javascript and cookies are enabled on your browser and that you are not blocking them from loading. </p> <p> Reference ID: #c4e15ee0-3554-11e9-bb10-5f753aa9b727 </p> </div> </div> <div class="page-footer-wrapper"> <div class="page-footer"> <p> Powered by <a href="https://www.perimeterx.com/whywasiblocked">PerimeterX</a> , Inc. </p> </div> </div> </section> <!-- Px --> <script> window._pxAppId = \'PXjAYekY18\'; window._pxJsClientSrc = \'/jAYekY18/init.js\'; window._pxFirstPartyEnabled = true; window._pxVid = \'\'; window._pxUuid = \'c4e15ee0-3554-11e9-bb10-5f753aa9b727\'; window._pxHostUrl = \'/jAYekY18/xhr\'; </script> <script> var s = document.createElement(\'script\'); s.src = \'/jAYekY18/captcha/captcha.js?a=c&u=c4e15ee0-3554-11e9-bb10-5f753aa9b727&v=&m=0\'; var p = document.getElementsByTagName(\'head\')[0]; p.insertBefore(s, null); if (true ){s.onerror = function () {s = document.createElement(\'script\'); var suffixIndex = \'/jAYekY18/captcha/captcha.js?a=c&u=c4e15ee0-3554-11e9-bb10-5f753aa9b727&v=&m=0\'.indexOf(\'/captcha.js\'); var temperedBlockScript = \'/jAYekY18/captcha/captcha.js?a=c&u=c4e15ee0-3554-11e9-bb10-5f753aa9b727&v=&m=0\'.substring(suffixIndex); s.src = \'//captcha.px-cdn.net/PXjAYekY18\' + temperedBlockScript; p.parentNode.insertBefore(s, p);};}</script> <!-- Custom Script -->  </body> </html>',
+    [
+      'Server',
+      'Varnish',
+      'Retry-After',
+      '0',
+      'Content-Length',
+      '3264',
+      'Content-Type',
+      'text/html',
+      'Accept-Ranges',
+      'bytes',
+      'Date',
+      'Wed, 20 Feb 2019 21:16:20 GMT',
+      'Via',
+      '1.1 varnish',
+      'Connection',
+      'close',
+      'X-Served-By',
+      'cache-pao17433-PAO',
+      'X-Cache',
+      'MISS',
+      'X-Cache-Hits',
+      '0',
+      'X-flog',
+      'static',
+    ]
+  );

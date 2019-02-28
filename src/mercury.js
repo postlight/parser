@@ -32,13 +32,13 @@ const Mercury = {
 
     const $ = await Resource.create(url, html, parsedUrl);
 
-    const Extractor = getExtractor(url, parsedUrl, $);
-    // console.log(`Using extractor for ${Extractor.domain}`);
-
     // If we found an error creating the resource, return that error
     if ($.failed) {
       return $;
     }
+
+    const Extractor = getExtractor(url, parsedUrl, $);
+    // console.log(`Using extractor for ${Extractor.domain}`);
 
     // if html still has not been set (i.e., url passed to Mercury.parse),
     // set html from the response of Resource.create
