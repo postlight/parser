@@ -6,9 +6,7 @@ export const NewsMynaviJpExtractor = {
   },
 
   author: {
-    selectors: [
-      'body > div.wrapper > div.container > div.body > main > div.article-author > a',
-    ],
+    selectors: ['main div.article-author a.article-author__name'],
   },
 
   date_published: {
@@ -24,9 +22,7 @@ export const NewsMynaviJpExtractor = {
   },
 
   content: {
-    selectors: [
-      'body > div.wrapper > div.container > div.body > main > article > div',
-    ],
+    selectors: [['meta[name="og:image"]', 'value']],
 
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images
