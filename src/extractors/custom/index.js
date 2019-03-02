@@ -92,3 +92,4 @@ export * from './ici.radio-canada.ca';
 export * from './www.fortinet.com';
 export * from './www.fastcompany.com';
 export * from './blisterreview.com';
+export * from './news.mynavi.jp';
