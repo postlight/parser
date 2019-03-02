@@ -43,7 +43,7 @@ As you might guess, the selectors key provides an array of selectors that Mercur
 
 The selector you choose should return one element. If more than one element is returned by your selector, it will fail (and Mercury will fall back to its generic extractor).
 
-Because the `selectors` property returns an array, you to write more than one selector for a property extractor. This is particularly useful for sites that have multiple templates for articles. If you provide an array of selectors, Mercury will try each in order, falling back to the next until it finds a match or exhausts the options (in which case it will fall back to its default generic extractor).
+Because the `selectors` property returns an array, you can write more than one selector for a property extractor. This is particularly useful for sites that have multiple templates for articles. If you provide an array of selectors, Mercury will try each in order, falling back to the next until it finds a match or exhausts the options (in which case it will fall back to its default generic extractor).
 
 #### Selecting an attribute
 
