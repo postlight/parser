@@ -14,13 +14,7 @@ import {
 // Clean our article content, returning a new, cleaned node.
 export default function extractCleanNode(
   article,
-  {
-    $,
-    cleanConditionally = true,
-    title = '',
-    url = '',
-    defaultCleaner = true,
-  }
+  { $, cleanConditionally = true, title = '', url = '', defaultCleaner = true }
 ) {
   // Rewrite the tag name to div if it's a top level node like body or
   // html to avoid later complications with multiple body tags.

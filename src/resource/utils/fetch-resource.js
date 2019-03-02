@@ -35,7 +35,7 @@ export function validateResponse(response, parseNon2xx = false) {
   // in tests
   if (
     (response.statusMessage && response.statusMessage !== 'OK') ||
-      response.statusCode !== 200
+    response.statusCode !== 200
   ) {
     if (!response.statusCode) {
       throw new Error(
@@ -43,7 +43,9 @@ export function validateResponse(response, parseNon2xx = false) {
       );
     } else if (!parseNon2xx) {
       throw new Error(
-        `Resource returned a response status code of ${response.statusCode} and resource was instructed to reject non-2xx level status codes.`
+        `Resource returned a response status code of ${
+          response.statusCode
+        } and resource was instructed to reject non-2xx level status codes.`
       );
     }
   }
@@ -73,7 +75,10 @@ export function validateResponse(response, parseNon2xx = false) {
 // Grabs the last two pieces of the URL and joins them back together
 // This is to get the 'livejournal.com' from 'erotictrains.livejournal.com'
 export function baseDomain({ host }) {
-  return host.split('.').slice(-2).join('.');
+  return host
+    .split('.')
+    .slice(-2)
+    .join('.');
 }
 
 // Set our response attribute to the result of fetching our URL.
@@ -84,7 +89,6 @@ export function baseDomain({ host }) {
 
 export default async function fetchResource(url, parsedUrl) {
   parsedUrl = parsedUrl || URL.parse(encodeURI(url));
-
   const options = {
     url: parsedUrl.href,
     headers: { ...REQUEST_HEADERS },
@@ -96,8 +100,14 @@ export default async function fetchResource(url, parsedUrl) {
     encoding: null,
     // Accept and decode gzip
     gzip: true,
-    // Follow any redirect
+    // Follow any non-GET redirects
     followAllRedirects: true,
+    ...(typeof window !== 'undefined'
+      ? {}
+      : {
+          // Follow GET redirects; this option is for Node only
+          followRedirect: true,
+        }),
   };
 
   const { response, body } = await get(options);

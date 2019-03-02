@@ -11,27 +11,20 @@ export const DeadspinExtractor = {
   ],
 
   title: {
-    selectors: [
-      'h1.headline',
-    ],
+    selectors: ['h1.headline'],
   },
 
   author: {
-    selectors: [
-      '.author',
-    ],
+    selectors: ['.author'],
   },
 
   content: {
-    selectors: [
-      '.post-content',
-      '.entry-content',
-    ],
+    selectors: ['.post-content', '.entry-content'],
 
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images
     transforms: {
-      'iframe.lazyload[data-recommend-id^="youtube://"]': ($node) => {
+      'iframe.lazyload[data-recommend-id^="youtube://"]': $node => {
         const youtubeId = $node.attr('id').split('youtube-')[1];
         $node.attr('src', `https://www.youtube.com/embed/${youtubeId}`);
       },
@@ -40,22 +33,15 @@ export const DeadspinExtractor = {
     // Is there anything that is in the result that shouldn't be?
     // The clean selectors will remove anything that matches from
     // the result
-    clean: [
-      '.magnifier',
-      '.lightbox',
-    ],
+    clean: ['.magnifier', '.lightbox'],
   },
 
   date_published: {
-    selectors: [
-      ['time.updated[datetime]', 'datetime'],
-    ],
+    selectors: [['time.updated[datetime]', 'datetime']],
   },
 
   lead_image_url: {
-    selectors: [
-      ['meta[name="og:image"]', 'value'],
-    ],
+    selectors: [['meta[name="og:image"]', 'value']],
   },
 
   dek: {

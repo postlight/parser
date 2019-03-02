@@ -1,11 +1,12 @@
 import assert from 'assert';
-import fs from 'fs';
 import URL from 'url';
 import cheerio from 'cheerio';
 
 import Mercury from 'mercury';
 import getExtractor from 'extractors/get-extractor';
 import { excerptContent } from 'utils/text';
+
+const fs = require('fs');
 
 describe('WwwHuffingtonpostComExtractor', () => {
   describe('initial test case', () => {
@@ -14,10 +15,10 @@ describe('WwwHuffingtonpostComExtractor', () => {
     beforeAll(() => {
       url =
         'http://www.huffingtonpost.com/entry/donald-trump-obama_us_583c8f01e4b06539a789ddd4';
-      const html =
-        fs.readFileSync('./fixtures/www.huffingtonpost.com/1480454076105.html');
-      result =
-        Mercury.parse(url, html, { fallback: false });
+      const html = fs.readFileSync(
+        './fixtures/www.huffingtonpost.com/1480454076105.html'
+      );
+      result = Mercury.parse(url, { html, fallback: false });
     });
 
     it('is selected properly', async () => {
@@ -35,7 +36,10 @@ describe('WwwHuffingtonpostComExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(title, 'Trump Has Shown Receptiveness To Obama\'s Agenda. Does He Actually Mean It?');
+      assert.equal(
+        title,
+        "Trump Has Shown Receptiveness To Obama's Agenda. Does He Actually Mean It?"
+      );
     });
 
     it('returns the author', async () => {
@@ -65,7 +69,10 @@ describe('WwwHuffingtonpostComExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(dek, 'The $1 million question: Can you change the president-elect\'s worldview or is this all for show?');
+      assert.equal(
+        dek,
+        "The $1 million question: Can you change the president-elect's worldview or is this all for show?"
+      );
     });
 
     it('returns the lead_image_url', async () => {
@@ -75,7 +82,10 @@ describe('WwwHuffingtonpostComExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(lead_image_url, 'http://img.huffingtonpost.com/asset/2000_1000/583c90681a00002500cca17a.jpeg');
+      assert.equal(
+        lead_image_url,
+        'http://img.huffingtonpost.com/asset/2000_1000/583c90681a00002500cca17a.jpeg'
+      );
     });
 
     it('returns the content', async () => {
@@ -87,11 +97,19 @@ describe('WwwHuffingtonpostComExtractor', () => {
 
       const $ = cheerio.load(content || '');
 
-      const first13 = excerptContent($('*').first().text(), 13);
+      const first13 = excerptContent(
+        $('*')
+          .first()
+          .text(),
+        13
+      );
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(first13, 'ASSOCIATED PRESS Donald Trump has had several conversations with President Obama. How much');
+      assert.equal(
+        first13,
+        'ASSOCIATED PRESS Donald Trump has had several conversations with President Obama. How much'
+      );
     });
   });
 });

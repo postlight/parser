@@ -1,11 +1,12 @@
 import assert from 'assert';
-import fs from 'fs';
 import URL from 'url';
 import cheerio from 'cheerio';
 
 import Mercury from 'mercury';
 import getExtractor from 'extractors/get-extractor';
 import { excerptContent } from 'utils/text';
+
+const fs = require('fs');
 
 describe('NewYorkerExtractor', () => {
   describe('initial test case', () => {
@@ -14,10 +15,10 @@ describe('NewYorkerExtractor', () => {
     beforeAll(() => {
       url =
         'http://www.newyorker.com/tech/elements/hacking-cryptography-and-the-countdown-to-quantum-computing';
-      const html =
-        fs.readFileSync('./fixtures/www.newyorker.com/1475248565793.html');
-      result =
-        Mercury.parse(url, html, { fallback: false });
+      const html = fs.readFileSync(
+        './fixtures/www.newyorker.com/1475248565793.html'
+      );
+      result = Mercury.parse(url, { html, fallback: false });
     });
 
     it('is selected properly', async () => {
@@ -37,7 +38,10 @@ describe('NewYorkerExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(title, 'Hacking, Cryptography, and the Countdown to Quantum Computing');
+      assert.equal(
+        title,
+        'Hacking, Cryptography, and the Countdown to Quantum Computing'
+      );
     });
 
     it('returns the author', async () => {
@@ -67,7 +71,10 @@ describe('NewYorkerExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(lead_image_url, 'http://www.newyorker.com/wp-content/uploads/2016/09/Hutchinson-Quantum-Computing-1200x630-1474903563.jpg');
+      assert.equal(
+        lead_image_url,
+        'http://www.newyorker.com/wp-content/uploads/2016/09/Hutchinson-Quantum-Computing-1200x630-1474903563.jpg'
+      );
     });
 
     it('returns the content', async () => {
@@ -79,11 +86,19 @@ describe('NewYorkerExtractor', () => {
 
       const $ = cheerio.load(content || '');
 
-      const first13 = excerptContent($('*').first().text(), 13);
+      const first13 = excerptContent(
+        $('*')
+          .first()
+          .text(),
+        13
+      );
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(first13, 'In a laboratory in Shanghai, researchers work on developing a quantum computer—a new');
+      assert.equal(
+        first13,
+        'In a laboratory in Shanghai, researchers work on developing a quantum computer—a new'
+      );
     });
   });
 
@@ -93,10 +108,10 @@ describe('NewYorkerExtractor', () => {
     beforeAll(() => {
       url =
         'http://www.newyorker.com/magazine/2016/12/05/lessons-from-my-mother';
-      const html =
-        fs.readFileSync('./fixtures/www.newyorker.com/1480713300334.html');
-      result =
-        Mercury.parse(url, html, { fallback: false });
+      const html = fs.readFileSync(
+        './fixtures/www.newyorker.com/1480713300334.html'
+      );
+      result = Mercury.parse(url, { html, fallback: false });
     });
 
     it('returns the dek when present', async () => {

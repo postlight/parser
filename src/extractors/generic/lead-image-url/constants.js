@@ -7,9 +7,7 @@ export const LEAD_IMAGE_URL_META_TAGS = [
   'image_src',
 ];
 
-export const LEAD_IMAGE_URL_SELECTORS = [
-  'link[rel=image_src]',
-];
+export const LEAD_IMAGE_URL_SELECTORS = ['link[rel=image_src]'];
 
 export const POSITIVE_LEAD_IMAGE_URL_HINTS = [
   'upload',
@@ -18,7 +16,10 @@ export const POSITIVE_LEAD_IMAGE_URL_HINTS = [
   'photo',
   'wp-image',
 ];
-export const POSITIVE_LEAD_IMAGE_URL_HINTS_RE = new RegExp(POSITIVE_LEAD_IMAGE_URL_HINTS.join('|'), 'i');
+export const POSITIVE_LEAD_IMAGE_URL_HINTS_RE = new RegExp(
+  POSITIVE_LEAD_IMAGE_URL_HINTS.join('|'),
+  'i'
+);
 
 export const NEGATIVE_LEAD_IMAGE_URL_HINTS = [
   'spacer',
@@ -47,7 +48,10 @@ export const NEGATIVE_LEAD_IMAGE_URL_HINTS = [
   'ads',
   'wp-includes',
 ];
-export const NEGATIVE_LEAD_IMAGE_URL_HINTS_RE = new RegExp(NEGATIVE_LEAD_IMAGE_URL_HINTS.join('|'), 'i');
+export const NEGATIVE_LEAD_IMAGE_URL_HINTS_RE = new RegExp(
+  NEGATIVE_LEAD_IMAGE_URL_HINTS.join('|'),
+  'i'
+);
 
 export const GIF_RE = /\.gif(\?.*)?$/i;
 export const JPG_RE = /\.jpe?g(\?.*)?$/i;

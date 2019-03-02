@@ -2,23 +2,15 @@ export const FusionNetExtractor = {
   domain: 'fusion.net',
 
   title: {
-    selectors: [
-      '.post-title',
-      '.single-title',
-      '.headline',
-    ],
+    selectors: ['.post-title', '.single-title', '.headline'],
   },
 
   author: {
-    selectors: [
-      '.show-for-medium .byline',
-    ],
+    selectors: ['.show-for-medium .byline'],
   },
 
   date_published: {
-    selectors: [
-        ['time.local-time', 'datetime'],
-    ],
+    selectors: [['time.local-time', 'datetime']],
   },
 
   dek: {
@@ -28,9 +20,7 @@ export const FusionNetExtractor = {
   },
 
   lead_image_url: {
-    selectors: [
-      ['meta[name="og:image"]', 'value'],
-    ],
+    selectors: [['meta[name="og:image"]', 'value']],
   },
 
   content: {
@@ -48,8 +38,6 @@ export const FusionNetExtractor = {
     // Is there anything that is in the result that shouldn't be?
     // The clean selectors will remove anything that matches from
     // the result
-    clean: [
-
-    ],
+    clean: [],
   },
 };

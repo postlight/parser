@@ -23,10 +23,11 @@ const $ = (selector, context, rootjQuery, contextOverride = true) => {
   return new jQuery.fn.init(selector, context, rootjQuery); // eslint-disable-line new-cap
 };
 
+// eslint-disable-next-line no-multi-assign
 $.fn = $.prototype = jQuery.fn;
 jQuery.extend($, jQuery); // copy's trim, extend etc to $
 
-const removeUnusedTags = ($node) => {
+const removeUnusedTags = $node => {
   // remove scripts and stylesheets
   $node.find('script, style, link[rel="stylesheet"]').remove();
 
@@ -36,14 +37,17 @@ const removeUnusedTags = ($node) => {
 $.cloneHtml = () => {
   const html = removeUnusedTags($('html', null, null, false).clone());
 
-  return html.children().wrap('<div />').wrap('<div />');
+  return html
+    .children()
+    .wrap('<div />')
+    .wrap('<div />');
 };
 
 $.root = () => $('*').first();
 
 $.browser = true;
 
-const isContainer = ($node) => {
+const isContainer = $node => {
   const el = $node.get(0);
   if (el && el.tagName) {
     return el.tagName.toLowerCase() === 'container';
@@ -52,14 +56,16 @@ const isContainer = ($node) => {
   return false;
 };
 
-$.html = ($node) => {
+$.html = $node => {
   if ($node) {
     // we never want to return a parsing container, only its children
     if (isContainer($node) || isContainer($node.children('container'))) {
       return $node.children('container').html() || $node.html();
     }
 
-    return $('<div>').append($node.eq(0).clone()).html();
+    return $('<div>')
+      .append($node.eq(0).clone())
+      .html();
   }
 
   const $body = removeUnusedTags($('body', null, null, false).clone());
@@ -79,6 +85,7 @@ $.html = ($node) => {
   return html;
 };
 
+// eslint-disable-next-line no-unused-vars
 $.load = (html, opts = {}, returnHtml = false) => {
   if (!html) {
     html = $.cloneHtml();
@@ -86,17 +93,22 @@ $.load = (html, opts = {}, returnHtml = false) => {
     html = $('<container />').html(html);
   }
 
-  PARSING_NODE = PARSING_NODE || $(`<div class="${PARSER_CLASS}" style="display:none;" />`);
+  PARSING_NODE =
+    PARSING_NODE || $(`<div class="${PARSER_CLASS}" style="display:none;" />`);
 
   // Strip scripts
   html = removeUnusedTags(html);
 
   // Remove comments
-  html.find('*').contents().each(function () {
-    if (this.nodeType === Node.COMMENT_NODE) { // eslint-disable-line no-undef
-      $(this).remove();
-    }
-  });
+  html
+    .find('*')
+    .contents()
+    .each(function() {
+      // eslint-disable-next-line no-undef
+      if (this.nodeType === Node.COMMENT_NODE) {
+        $(this).remove();
+      }
+    });
   PARSING_NODE.html(html);
 
   if (returnHtml) return { $, html: html.html() };

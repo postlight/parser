@@ -5,8 +5,7 @@ import detectByHtml from './detect-by-html';
 
 describe('detectByHtml', () => {
   it('detects a medium post from the html', () => {
-    const html =
-      '<head><meta name="al:ios:app_name" value="Medium" /></head>';
+    const html = '<head><meta name="al:ios:app_name" value="Medium" /></head>';
 
     const $ = cheerio.load(html);
 
@@ -14,8 +13,7 @@ describe('detectByHtml', () => {
   });
 
   it('returns nothing if no match is found', () => {
-    const html =
-      '<div></div>';
+    const html = '<div></div>';
 
     const $ = cheerio.load(html);
 

@@ -1,17 +1,43 @@
+![Mercury Parser](https://13c27d41k2ud2vkddp226w55-wpengine.netdna-ssl.com/wp-content/uploads/2018/02/7bacd-16qwcaegges3hkrw70doz4w.png)
+
 # Mercury Parser - Extracting content from chaos
 
-[![CircleCI](https://circleci.com/gh/postlight/mercury-parser.svg?style=svg&circle-token=3026c2b527d3767750e767872d08991aeb4f8f10)](https://circleci.com/gh/postlight/mercury-parser) [![Build status](https://ci.appveyor.com/api/projects/status/bxwqp6mn8ijycqh4?svg=true)](https://ci.appveyor.com/project/adampash/mercury-parser)
+[![CircleCI](https://circleci.com/gh/postlight/mercury-parser.svg?style=svg&circle-token=3026c2b527d3767750e767872d08991aeb4f8f10)](https://circleci.com/gh/postlight/mercury-parser) [![Greenkeeper badge](https://badges.greenkeeper.io/postlight/mercury-parser.svg)](https://greenkeeper.io/) [![Apache License][license-apach-badge]][license-apach] [![MITC License][license-mit-badge]][license-mit]
+[![Gitter chat](https://badges.gitter.im/postlight/mercury.png)](https://gitter.im/postlight/mercury)
+
+[license-apach-badge]: https://img.shields.io/badge/License-Apache%202.0-blue.svg?style=flat-square
+[license-apach]: https://github.com/postlight/mercury-parser/blob/master/LICENSE-APACHE
+[license-mit-badge]: https://img.shields.io/badge/License-MIT%202.0-blue.svg?style=flat-square
+[license-mit]: https://github.com/postlight/mercury-parser/blob/master/LICENSE-MIT
 
 The Mercury Parser extracts the bits that humans care about from any URL you give it. That includes article content, titles, authors, published dates, excerpts, lead images, and more.
 
-The Mercury Parser module powers the [Mercury Parser API](https://mercury.postlight.com/web-parser/), a free API from [Postlight](https://www.postlight.com/) that puts all of this information one API request away..
+Mercury Parser powers the [Mercury AMP Converter](https://mercury.postlight.com/amp-converter/) and [Mercury Reader](https://mercury.postlight.com/reader/), a Chrome extension that removes ads and distractions, leaving only text and images for a beautiful reading view on any site.
+
+Mercury Parser allows you to easily create custom parsers using simple JavaScript and CSS selectors. This allows you to proactively manage parsing and migration edge cases. There are [many examples available](https://github.com/postlight/mercury-parser/tree/master/src/extractors/custom) along with [documentation](https://github.com/postlight/mercury-parser/blob/master/src/extractors/custom/README.md).
 
 ## How? Like this.
 
-```javascript
-import Mercury from 'mercury-parser';
+### Installation
 
-Mercury.parse(url).then(result => console.log(result););
+```bash
+# If you're using yarn
+yarn add @postlight/mercury-parser
+
+# If you're using npm
+npm install @postlight/mercury-parser
+```
+
+### Usage
+
+```javascript
+import Mercury from '@postlight/mercury-parser';
+
+Mercury.parse(url).then(result => console.log(result));
+
+// NOTE: When used in the browser, you can omit the URL argument
+// and simply run `Mercury.parse()` to parse the current page.
+
 ```
 
 The result looks like this:
@@ -37,15 +63,30 @@ The result looks like this:
 
 If Mercury is unable to find a field, that field will return `null`.
 
+Mercury Parser also ships with a CLI, meaning you can use the Mercury Parser
+from your command line like so:
+
+```bash
+# Install Mercury globally
+yarn global add @postlight/mercury-parser
+#   or
+npm -g install @postlight/mercury-parser
+
+# Then
+mercury-parser https://postlight.com/trackchanges/mercury-goes-open-source
+```
+
+## License
+
+Licensed under either of the below, at your preference:
+
+- Apache License, Version 2.0
+  ([LICENSE-APACHE](LICENSE-APACHE) or http://www.apache.org/licenses/LICENSE-2.0)
+- MIT license
+  ([LICENSE-MIT](LICENSE-MIT) or http://opensource.org/licenses/MIT)
+
 ## Contributing
 
-If you'd like to write a custom parser for a site, [here's how](src/extractors/custom/README.md).
+For details on how to contribute to Mercury, including how to write a custom content extractor for any site, see [CONTRIBUTING.md](./CONTRIBUTING.md)
 
-## Contributors
-
-[![All Contributors](https://img.shields.io/badge/all_contributors-4-orange.svg?style=flat-square)](#contributors)
-
-<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
-| [<img src="https://avatars.githubusercontent.com/u/64131?v=3" width="100px;"/><br /><sub>Adam Pash</sub>](http://adampash.com)<br />📝 [💻](https://github.com/postlight/readability-parser/commits?author=adampash) [📖](https://github.com/postlight/readability-parser/commits?author=adampash) 💡 | [<img src="https://avatars.githubusercontent.com/u/19412836?v=3" width="100px;"/><br /><sub>Toy Vano</sub>](https://github.com/spiffytoy)<br />[💻](https://github.com/postlight/readability-parser/commits?author=spiffytoy) | [<img src="https://avatars.githubusercontent.com/u/183608?v=3" width="100px;"/><br /><sub>Drew Bell</sub>](droob.org)<br />[💻](https://github.com/postlight/readability-parser/commits?author=droob) | [<img src="https://avatars.githubusercontent.com/u/305901?v=3" width="100px;"/><br /><sub>Jeremy Mack</sub>](https://twitter.com/mutewinter)<br />[💻](https://github.com/postlight/readability-parser/commits?author=mutewinter) |
-| :---: | :---: | :---: | :---: |
-<!-- ALL-CONTRIBUTORS-LIST:END -->
+Unless it is explicitly stated otherwise, any contribution intentionally submitted for inclusion in the work, as defined in the Apache-2.0 license, shall be dual licensed as above without any additional terms or conditions.

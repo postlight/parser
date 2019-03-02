@@ -1,11 +1,12 @@
 import assert from 'assert';
-import fs from 'fs';
 import cheerio from 'cheerio';
 import URL from 'url';
 
 import getExtractor from 'extractors/get-extractor';
 import { excerptContent } from 'utils/text';
 import Mercury from 'mercury';
+
+const fs = require('fs');
 
 describe('NYTimesExtractor', () => {
   describe('initial test case', () => {
@@ -14,10 +15,10 @@ describe('NYTimesExtractor', () => {
     beforeAll(() => {
       url =
         'http://www.nytimes.com/interactive/2016/09/15/arts/design/national-museum-of-african-american-history-and-culture.html';
-      const html =
-        fs.readFileSync('./fixtures/www.nytimes.com/1474318141888.html');
-      result =
-        Mercury.parse(url, html, { fallback: false });
+      const html = fs.readFileSync(
+        './fixtures/www.nytimes.com/1474318141888.html'
+      );
+      result = Mercury.parse(url, { html, fallback: false });
     });
 
     it('is selected properly', async () => {
@@ -37,7 +38,10 @@ describe('NYTimesExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(title, 'Ahmad Khan Rahami Is Arrested in Manhattan and New Jersey Bombings');
+      assert.equal(
+        title,
+        'Ahmad Khan Rahami Is Arrested in Manhattan and New Jersey Bombings'
+      );
     });
 
     it('returns the author', async () => {
@@ -47,7 +51,10 @@ describe('NYTimesExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(author, 'Marc Santora, William K. Rashbaum, Al Baker and Adam Goldman');
+      assert.equal(
+        author,
+        'Marc Santora, William K. Rashbaum, Al Baker and Adam Goldman'
+      );
     });
 
     it('returns the date_published', async () => {
@@ -67,7 +74,10 @@ describe('NYTimesExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(lead_image_url, 'https://static01.nyt.com/images/2016/09/20/nyregion/20MANHUNT1/20MANHUNT1-facebookJumbo.jpg');
+      assert.equal(
+        lead_image_url,
+        'https://static01.nyt.com/images/2016/09/20/nyregion/20MANHUNT1/20MANHUNT1-facebookJumbo.jpg'
+      );
     });
 
     it('returns the content', async () => {
@@ -79,21 +89,33 @@ describe('NYTimesExtractor', () => {
 
       const $ = cheerio.load(content || '');
 
-      const first13 = excerptContent($('*').first().text(), 13);
+      const first13 = excerptContent(
+        $('*')
+          .first()
+          .text(),
+        13
+      );
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(first13, 'The man believed to be responsible for the explosion in Manhattan on Saturday');
+      assert.equal(
+        first13,
+        'The man believed to be responsible for the explosion in Manhattan on Saturday'
+      );
     });
   });
 
   it('works with a feature story', async () => {
-    const html = fs.readFileSync('./fixtures/www.nytimes.com/1474061823854.html');
-    const uri = 'http://www.nytimes.com/interactive/2016/09/15/arts/design/national-museum-of-african-american-history-and-culture.html';
+    const html = fs.readFileSync(
+      './fixtures/www.nytimes.com/1474061823854.html'
+    );
+    const uri =
+      'http://www.nytimes.com/interactive/2016/09/15/arts/design/national-museum-of-african-american-history-and-culture.html';
 
-    const { content, title, author } = await Mercury.parse(uri, html);
+    const { content, title, author } = await Mercury.parse(uri, { html });
     const $ = cheerio.load(content);
-    const text = $('*').first()
+    const text = $('*')
+      .first()
       .text()
       .trim()
       .slice(0, 20);
@@ -101,5 +123,20 @@ describe('NYTimesExtractor', () => {
     assert.equal(title, 'I, Too, Sing America');
     assert.equal(author, 'The New York Times');
     assert.equal(text, 'T he Smithsonian’s N');
+  });
+
+  it('returns the title on most recent articles', async () => {
+    const html = fs.readFileSync(
+      './fixtures/www.nytimes.com/1539194812689.html'
+    );
+    const uri =
+      'https://www.nytimes.com/2018/10/09/us/politics/nikki-haley-united-nations.html';
+
+    const { title } = await Mercury.parse(uri, { html });
+
+    assert.equal(
+      title,
+      'Nikki Haley to Resign as Trump’s Ambassador to the U.N.'
+    );
   });
 });

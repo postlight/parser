@@ -3,9 +3,7 @@ import cheerio from 'cheerio';
 
 import { clean } from 'test-helpers';
 import HTML from './fixtures/html';
-import {
-  paragraphize,
-} from './index';
+import { paragraphize } from './index';
 
 describe('Generic Extractor Utils', () => {
   describe('paragraphize(node)', () => {

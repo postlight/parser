@@ -14,7 +14,9 @@ describe('cleanTags($)', () => {
     // not functionally significant
     assertClean(
       result.html(),
-      cheerio.browser ? HTML.dropNegativeScore.afterBrowser : HTML.dropNegativeScore.after
+      cheerio.browser
+        ? HTML.dropNegativeScore.afterBrowser
+        : HTML.dropNegativeScore.after
     );
   });
 

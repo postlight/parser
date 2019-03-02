@@ -15,7 +15,7 @@ export function cleanBySelectors($content, $, { clean }) {
 export function transformElements($content, $, { transforms }) {
   if (!transforms) return $content;
 
-  Reflect.ownKeys(transforms).forEach((key) => {
+  Reflect.ownKeys(transforms).forEach(key => {
     const $matches = $(key, $content);
     const value = transforms[key];
 
@@ -40,17 +40,28 @@ export function transformElements($content, $, { transforms }) {
 }
 
 function findMatchingSelector($, selectors, extractHtml) {
-  return selectors.find((selector) => {
+  return selectors.find(selector => {
     if (Array.isArray(selector)) {
       if (extractHtml) {
         return selector.reduce((acc, s) => acc && $(s).length > 0, true);
       }
 
       const [s, attr] = selector;
-      return $(s).length === 1 && $(s).attr(attr) && $(s).attr(attr).trim() !== '';
+      return (
+        $(s).length === 1 &&
+        $(s).attr(attr) &&
+        $(s)
+          .attr(attr)
+          .trim() !== ''
+      );
     }
 
-    return $(selector).length === 1 && $(selector).text().trim() !== '';
+    return (
+      $(selector).length === 1 &&
+      $(selector)
+        .text()
+        .trim() !== ''
+    );
   });
 }
 
@@ -111,7 +122,9 @@ export function select(opts) {
   // extract the attr
   if (Array.isArray(matchingSelector)) {
     const [selector, attr] = matchingSelector;
-    result = $(selector).attr(attr).trim();
+    result = $(selector)
+      .attr(attr)
+      .trim();
   } else {
     let $node = $(matchingSelector);
 
@@ -160,7 +173,10 @@ const RootExtractor = {
 
     if (contentOnly) {
       const content = extractResult({
-        ...opts, type: 'content', extractHtml: true, title: extractedTitle,
+        ...opts,
+        type: 'content',
+        extractHtml: true,
+        title: extractedTitle,
       });
       return {
         content,
@@ -171,15 +187,24 @@ const RootExtractor = {
     const author = extractResult({ ...opts, type: 'author' });
     const next_page_url = extractResult({ ...opts, type: 'next_page_url' });
     const content = extractResult({
-      ...opts, type: 'content', extractHtml: true, title,
+      ...opts,
+      type: 'content',
+      extractHtml: true,
+      title,
     });
-    const lead_image_url = extractResult({ ...opts, type: 'lead_image_url', content });
+    const lead_image_url = extractResult({
+      ...opts,
+      type: 'lead_image_url',
+      content,
+    });
     const excerpt = extractResult({ ...opts, type: 'excerpt', content });
     const dek = extractResult({ ...opts, type: 'dek', content, excerpt });
     const word_count = extractResult({ ...opts, type: 'word_count', content });
     const direction = extractResult({ ...opts, type: 'direction', title });
-    const { url, domain } =
-      extractResult({ ...opts, type: 'url_and_domain' }) || { url: null, domain: null };
+    const { url, domain } = extractResult({
+      ...opts,
+      type: 'url_and_domain',
+    }) || { url: null, domain: null };
 
     return {
       title,

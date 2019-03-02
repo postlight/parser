@@ -3,11 +3,11 @@ const express = require('express'); // eslint-disable-line import/no-extraneous-
 const request = require('request');
 
 const app = express();
-var server
+var server;
 
 const start = () => {
-  app.use('/', (req, res) => {
-    const url = req.url.slice(1);
+  app.use('/:url', (req, res) => {
+    const url = req.originalUrl.slice(1);
 
     const options = {
       url,
@@ -25,15 +25,24 @@ const start = () => {
   });
 
   server = app.listen(process.env.PORT || 3000);
-}
+};
 
 const stop = () => {
-  server && server.close()
-}
+  server && server.close();
+};
 
-if (!process.env.CI) {
-  start()
-  require('child_process').execSync('./node_modules/karma/bin/karma start ./scripts/karma.conf.js', {stdio:[0,1,2]});
-  stop()
-}
-
+start();
+require('child_process').exec(
+  'node ./node_modules/karma/bin/karma start ./scripts/karma.conf.js' +
+    (process.env.CI ? ' --CI' : ''),
+  { stdio: [0, 1, 2] },
+  (err, stdout) => {
+    if (err) {
+      console.log('stdout', stdout);
+      process.exit(1);
+    } else {
+      console.log('stdout', stdout);
+    }
+    stop();
+  }
+);

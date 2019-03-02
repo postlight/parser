@@ -27,7 +27,8 @@ describe('Resource', () => {
     });
 
     it('fetches with different encoding on body', async () => {
-      const url = 'http://www.playnation.de/spiele-news/kojima-productions/hideo-kojima-reflektiert-ueber-seinen-werdegang-bei-konami-id68950.html';
+      const url =
+        'http://www.playnation.de/spiele-news/kojima-productions/hideo-kojima-reflektiert-ueber-seinen-werdegang-bei-konami-id68950.html';
       const $ = await Resource.create(url);
       const metaContentType = $('meta[http-equiv=content-type]').attr('value');
 
@@ -38,8 +39,39 @@ describe('Resource', () => {
       assert.equal(typeof $, 'function');
     });
 
+    it('fetches with different encoding and case insensitive regex', async () => {
+      const url =
+        'https://www.finam.ru/analysis/newsitem/putin-nagradil-grefa-ordenom-20190208-203615/';
+      const $ = await Resource.create(url);
+      const metaContentType = $('meta[http-equiv=content-type i]').attr(
+        'value'
+      );
+
+      assert.equal(getEncoding(metaContentType), 'windows-1251');
+
+      const badEncodingRe = /&#xFFFD;/g;
+
+      assert.equal(badEncodingRe.test($.html()), false);
+      assert.equal(typeof $, 'function');
+    });
+
+    it('fetches with different encoding and HTML5 charset tag', async () => {
+      const url =
+        'https://www.idnes.cz/fotbal/prvni-liga/fotbalova-liga-8-kolo-slovan-liberec-slovacko.A170925_173123_fotbal_min';
+      const $ = await Resource.create(url);
+      const metaContentType = $('meta[charset]').attr('charset');
+
+      assert.equal(getEncoding(metaContentType), 'windows-1250');
+
+      const badEncodingRe = /&#xFFFD;/g;
+
+      assert.equal(badEncodingRe.test($.html()), false);
+      assert.equal(typeof $, 'function');
+    });
+
     it('handles special encoding', async () => {
-      const url = 'http://www.elmundo.es/opinion/2016/11/19/582f476846163fc65a8b4578.html';
+      const url =
+        'http://www.elmundo.es/opinion/2016/11/19/582f476846163fc65a8b4578.html';
       const $ = await Resource.create(url);
 
       const badEncodingRe = /�/g;
@@ -61,12 +93,9 @@ describe('Resource', () => {
       };
       const body = '';
 
-      assert.throws(
-        () => {
-          Resource.generateDoc({ body, response });
-        },
-          /content does not appear to be text/i
-      );
+      assert.throws(() => {
+        Resource.generateDoc({ body, response });
+      }, /content does not appear to be text/i);
     });
 
     it('throws an error if the content has no children', () => {
@@ -80,12 +109,9 @@ describe('Resource', () => {
         };
         const body = '';
 
-        assert.throws(
-          () => {
-            Resource.generateDoc({ body, response });
-          },
-            /no children/i
-        );
+        assert.throws(() => {
+          Resource.generateDoc({ body, response });
+        }, /no children/i);
       }
     });
   });

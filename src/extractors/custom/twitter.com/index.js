@@ -19,30 +19,18 @@ export const TwitterExtractor = {
       s: 'span',
     },
 
-    selectors: [
-      '.permalink[role=main]',
-    ],
+    selectors: ['.permalink[role=main]'],
 
     defaultCleaner: false,
 
-    clean: [
-      '.stream-item-footer',
-      'button',
-      '.tweet-details-fixer',
-    ],
+    clean: ['.stream-item-footer', 'button', '.tweet-details-fixer'],
   },
 
   author: {
-    selectors: [
-      '.tweet.permalink-tweet .username',
-    ],
+    selectors: ['.tweet.permalink-tweet .username'],
   },
 
   date_published: {
-    selectors: [
-      ['.permalink-tweet ._timestamp[data-time-ms]', 'data-time-ms'],
-      // '.tweet.permalink-tweet .metadata',
-    ],
+    selectors: [['.permalink-tweet ._timestamp[data-time-ms]', 'data-time-ms']],
   },
-
 };

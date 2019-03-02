@@ -1,11 +1,12 @@
 import assert from 'assert';
-import fs from 'fs';
 import URL from 'url';
 import cheerio from 'cheerio';
 
 import Mercury from 'mercury';
 import getExtractor from 'extractors/get-extractor';
 import { excerptContent } from 'utils/text';
+
+const fs = require('fs');
 
 describe('MoneyCnnComExtractor', () => {
   describe('initial test case', () => {
@@ -14,10 +15,10 @@ describe('MoneyCnnComExtractor', () => {
     beforeAll(() => {
       url =
         'http://money.cnn.com/2016/11/29/news/ohare-workers-strike/index.html';
-      const html =
-        fs.readFileSync('./fixtures/money.cnn.com/1480437611330.html');
-      result =
-        Mercury.parse(url, html, { fallback: false });
+      const html = fs.readFileSync(
+        './fixtures/money.cnn.com/1480437611330.html'
+      );
+      result = Mercury.parse(url, { html, fallback: false });
     });
     it('is selected properly', async () => {
       // This test should be passing by default.
@@ -34,7 +35,10 @@ describe('MoneyCnnComExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(title, 'Hundreds of Chicago O\'Hare airport workers go on strike');
+      assert.equal(
+        title,
+        "Hundreds of Chicago O'Hare airport workers go on strike"
+      );
     });
 
     it('returns the author', async () => {
@@ -64,7 +68,10 @@ describe('MoneyCnnComExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(dek, 'Heads up, travelers: Hundreds of workers are striking at Chicago O\'Hare International Airport on Tuesday.');
+      assert.equal(
+        dek,
+        "Heads up, travelers: Hundreds of workers are striking at Chicago O'Hare International Airport on Tuesday."
+      );
     });
 
     it('returns the lead_image_url', async () => {
@@ -74,7 +81,10 @@ describe('MoneyCnnComExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(lead_image_url, 'http://i2.cdn.turner.com/money/dam/assets/161118102423-ohare-airport-strike-780x439.jpg');
+      assert.equal(
+        lead_image_url,
+        'http://i2.cdn.turner.com/money/dam/assets/161118102423-ohare-airport-strike-780x439.jpg'
+      );
     });
 
     it('returns the content', async () => {
@@ -86,11 +96,19 @@ describe('MoneyCnnComExtractor', () => {
 
       const $ = cheerio.load(content || '');
 
-      const first13 = excerptContent($('*').first().text(), 13);
+      const first13 = excerptContent(
+        $('*')
+          .first()
+          .text(),
+        13
+      );
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(first13, 'Janitors, baggage handlers, cabin cleaners and wheelchair attendants are asking for a $15');
+      assert.equal(
+        first13,
+        'Janitors, baggage handlers, cabin cleaners and wheelchair attendants are asking for a $15'
+      );
     });
   });
 });

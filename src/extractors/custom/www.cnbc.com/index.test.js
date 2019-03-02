@@ -1,11 +1,12 @@
 import assert from 'assert';
-import fs from 'fs';
 import URL from 'url';
 import cheerio from 'cheerio';
 
 import Mercury from 'mercury';
 import getExtractor from 'extractors/get-extractor';
 import { excerptContent } from 'utils/text';
+
+const fs = require('fs');
 
 describe('WwwCnbcComExtractor', () => {
   describe('initial test case', () => {
@@ -14,10 +15,10 @@ describe('WwwCnbcComExtractor', () => {
     beforeAll(() => {
       url =
         'http://www.cnbc.com/2016/12/20/coals-us-stronghold-is-losing-steam-even-as-trump-aims-for-a-revival.html';
-      const html =
-        fs.readFileSync('./fixtures/www.cnbc.com/1482251664848.html');
-      result =
-        Mercury.parse(url, html, { fallback: false });
+      const html = fs.readFileSync(
+        './fixtures/www.cnbc.com/1482251664848.html'
+      );
+      result = Mercury.parse(url, { html, fallback: false });
     });
 
     it('is selected properly', () => {
@@ -29,43 +30,49 @@ describe('WwwCnbcComExtractor', () => {
     });
 
     it('returns the title', async () => {
-    // To pass this test, fill out the title selector
-    // in ./src/extractors/custom/www.cnbc.com/index.js.
+      // To pass this test, fill out the title selector
+      // in ./src/extractors/custom/www.cnbc.com/index.js.
       const { title } = await result;
 
-    // Update these values with the expected values from
-    // the article.
-      assert.equal(title, 'Coal\'s big US stronghold is losing steam, even as Trump aims for a revival');
+      // Update these values with the expected values from
+      // the article.
+      assert.equal(
+        title,
+        "Coal's big US stronghold is losing steam, even as Trump aims for a revival"
+      );
     });
 
     it('returns the author', async () => {
-    // To pass this test, fill out the author selector
-    // in ./src/extractors/custom/www.cnbc.com/index.js.
+      // To pass this test, fill out the author selector
+      // in ./src/extractors/custom/www.cnbc.com/index.js.
       const { author } = await result;
 
-    // Update these values with the expected values from
-    // the article.
+      // Update these values with the expected values from
+      // the article.
       assert.equal(author, 'Tom DiChristopher');
     });
 
     it('returns the date_published', async () => {
-    // To pass this test, fill out the date_published selector
-    // in ./src/extractors/custom/www.cnbc.com/index.js.
+      // To pass this test, fill out the date_published selector
+      // in ./src/extractors/custom/www.cnbc.com/index.js.
       const { date_published } = await result;
 
-    // Update these values with the expected values from
-    // the article.
+      // Update these values with the expected values from
+      // the article.
       assert.equal(date_published, '2016-12-20T15:32:57.000Z');
     });
 
     it('returns the lead_image_url', async () => {
-    // To pass this test, fill out the lead_image_url selector
-    // in ./src/extractors/custom/www.cnbc.com/index.js.
+      // To pass this test, fill out the lead_image_url selector
+      // in ./src/extractors/custom/www.cnbc.com/index.js.
       const { lead_image_url } = await result;
 
-    // Update these values with the expected values from
-    // the article.
-      assert.equal(lead_image_url, 'http://fm.cnbc.com/applications/cnbc.com/resources/img/editorial/2016/12/19/104176162-GettyImages-161350847.1910x1000.jpg');
+      // Update these values with the expected values from
+      // the article.
+      assert.equal(
+        lead_image_url,
+        'http://fm.cnbc.com/applications/cnbc.com/resources/img/editorial/2016/12/19/104176162-GettyImages-161350847.1910x1000.jpg'
+      );
     });
 
     it('returns the content', async () => {
@@ -77,11 +84,19 @@ describe('WwwCnbcComExtractor', () => {
 
       const $ = cheerio.load(content || '');
 
-      const first13 = excerptContent($('*').first().text(), 13);
+      const first13 = excerptContent(
+        $('*')
+          .first()
+          .text(),
+        13
+      );
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(first13, 'Brian Brainerd | The Denver Post | Getty Images The U.S. Mountain States');
+      assert.equal(
+        first13,
+        'Brian Brainerd | The Denver Post | Getty Images The U.S. Mountain States'
+      );
     });
   });
 });

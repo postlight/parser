@@ -1,11 +1,12 @@
 import assert from 'assert';
-import fs from 'fs';
 import URL from 'url';
 import cheerio from 'cheerio';
 
 import Mercury from 'mercury';
 import getExtractor from 'extractors/get-extractor';
 import { excerptContent } from 'utils/text';
+
+const fs = require('fs');
 
 describe('DeadspinExtractor', () => {
   describe('initial test case', () => {
@@ -14,10 +15,10 @@ describe('DeadspinExtractor', () => {
     beforeAll(() => {
       url =
         'http://deadspin.com/the-nationals-are-stuck-with-danny-espinosa-tonight-un-1787706769';
-      const html =
-        fs.readFileSync('./fixtures/deadspin.com/1476389931786.html');
-      result =
-        Mercury.parse(url, html, { fallback: false });
+      const html = fs.readFileSync(
+        './fixtures/deadspin.com/1476389931786.html'
+      );
+      result = Mercury.parse(url, { html, fallback: false });
     });
 
     it('is selected properly', async () => {
@@ -31,7 +32,10 @@ describe('DeadspinExtractor', () => {
       // Update these values with the expected values from
       // the article.
       const { title } = await result;
-      assert.equal(title, 'The Nationals Are Stuck With Danny Espinosa Tonight, Unless They Opt For The Only Thing Worse');
+      assert.equal(
+        title,
+        'The Nationals Are Stuck With Danny Espinosa Tonight, Unless They Opt For The Only Thing Worse'
+      );
     });
 
     it('returns the author', async () => {
@@ -61,7 +65,10 @@ describe('DeadspinExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(lead_image_url, 'https://i.kinja-img.com/gawker-media/image/upload/s--SUEXWZgf--/c_fill,fl_progressive,g_center,h_450,q_80,w_800/vmeayd7lteyycwzcdlju.jpg');
+      assert.equal(
+        lead_image_url,
+        'https://i.kinja-img.com/gawker-media/image/upload/s--SUEXWZgf--/c_fill,fl_progressive,g_center,h_450,q_80,w_800/vmeayd7lteyycwzcdlju.jpg'
+      );
     });
 
     it('returns the content', async () => {
@@ -73,11 +80,19 @@ describe('DeadspinExtractor', () => {
 
       const $ = cheerio.load(content || '');
 
-      const first13 = excerptContent($('*').first().text(), 13);
+      const first13 = excerptContent(
+        $('*')
+          .first()
+          .text(),
+        13
+      );
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(first13, 'Photo credit: Rob Carr/Getty Washington’s Danny Espinosa problem is inextricably linked to its');
+      assert.equal(
+        first13,
+        'Photo credit: Rob Carr/Getty Washington’s Danny Espinosa problem is inextricably linked to its'
+      );
     });
   });
 
@@ -86,13 +101,11 @@ describe('DeadspinExtractor', () => {
     // in ./src/extractors/custom/deadspin.com/index.js.
     // You may also want to make use of the clean and transform
     // options.
-    const html =
-      fs.readFileSync('./fixtures/deadspin.com/1477505848605.html');
+    const html = fs.readFileSync('./fixtures/deadspin.com/1477505848605.html');
     const url =
       'http://deadspin.com/remember-when-donald-trump-got-booed-for-butchering-ta-1788216229';
 
-    const { content } =
-      await Mercury.parse(url, html, { fallback: false });
+    const { content } = await Mercury.parse(url, html, { fallback: false });
 
     const $ = cheerio.load(content || '');
 
