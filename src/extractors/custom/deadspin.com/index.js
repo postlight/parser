@@ -8,6 +8,13 @@ export const DeadspinExtractor = {
     'gizmodo.com',
     'jalopnik.com',
     'kinja.com',
+    'avclub.com',
+    'clickhole.com',
+    'splinternews.com',
+    'theonion.com',
+    'theroot.com',
+    'thetakeout.com',
+    'theinventory.com',
   ],
 
   title: {
