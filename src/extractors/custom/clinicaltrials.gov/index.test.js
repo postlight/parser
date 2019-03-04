@@ -80,7 +80,10 @@ describe('ClinicaltrialsGovExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(first13, 'Add the first 13 words of the article here');
+      assert.equal(
+        first13,
+        'The purpose of this research study is to evaluate a blood test to'
+      );
     });
   });
 });
