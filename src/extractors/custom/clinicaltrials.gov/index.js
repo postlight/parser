@@ -2,33 +2,16 @@ export const ClinicaltrialsGovExtractor = {
   domain: 'clinicaltrials.gov',
 
   title: {
-    selectors: [
-      // enter title selectors
-    ],
+    selectors: ['h1.solo_record'],
   },
 
   author: {
-    selectors: [
-      // enter author selectors
-    ],
+    selectors: ['div#sponsor.info-text'],
   },
 
   date_published: {
-    selectors: [
-      // enter selectors
-    ],
-  },
-
-  dek: {
-    selectors: [
-      // enter selectors
-    ],
-  },
-
-  lead_image_url: {
-    selectors: [
-      // enter selectors
-    ],
+    // selectors: ['span.term[data-term="Last Update Posted"]'],
+    selectors: ['div:has(> span.term[data-term="Last Update Posted"])'],
   },
 
   content: {

@@ -38,7 +38,7 @@ describe('ClinicaltrialsGovExtractor', () => {
       // the article.
       assert.equal(
         title,
-        `Changes in Circulating Tumor-Specific DNA in Patients With Non-Metastatic Non-Small Cell Lung Cancer - Full Text View`
+        `Changes in Circulating Tumor-Specific DNA in Patients With Non-Metastatic Non-Small Cell Lung Cancer`
       );
     });
 
@@ -49,7 +49,7 @@ describe('ClinicaltrialsGovExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(author, '');
+      assert.equal(author, 'Wake Forest University Health Sciences');
     });
 
     it('returns the date_published', async () => {
@@ -59,30 +59,7 @@ describe('ClinicaltrialsGovExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(date_published, '');
-    });
-
-    it('returns the dek', async () => {
-      // To pass this test, fill out the dek selector
-      // in ./src/extractors/custom/clinicaltrials.gov/index.js.
-      const { dek } = await result;
-
-      // Update these values with the expected values from
-      // the article.
-      assert.equal(dek, '');
-    });
-
-    it('returns the lead_image_url', async () => {
-      // To pass this test, fill out the lead_image_url selector
-      // in ./src/extractors/custom/clinicaltrials.gov/index.js.
-      const { lead_image_url } = await result;
-
-      // Update these values with the expected values from
-      // the article.
-      assert.equal(
-        lead_image_url,
-        `https://clinicaltrials.gov/ct2/html/images/ct.gov-nlm-nih-logo.png`
-      );
+      assert.equal(date_published, '2018-11-21T08:00:00.000Z');
     });
 
     it('returns the content', async () => {
