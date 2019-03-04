@@ -4677,6 +4677,99 @@ var WwwFastcompanyComExtractor = {
   }
 };
 
+var BlisterreviewComExtractor = {
+  domain: 'blisterreview.com',
+  title: {
+    selectors: [['meta[name="og:title"]', 'value'], 'h1.entry-title']
+  },
+  author: {
+    selectors: ['span.author-name']
+  },
+  date_published: {
+    selectors: [['meta[name="article:published_time"]', 'value'], ['time.entry-date', 'datetime'], ['meta[itemprop="datePublished"]', 'content']]
+  },
+  dek: {
+    selectors: [// enter selectors
+    ]
+  },
+  lead_image_url: {
+    selectors: [['meta[name="og:image"]', 'value'], ['meta[property="og:image"]', 'content'], ['meta[itemprop="image"]', 'content'], ['meta[name="twitter:image"]', 'content'], ['img.attachment-large', 'src']]
+  },
+  content: {
+    selectors: [['.elementor-section-wrap', '.elementor-text-editor > p, .elementor-text-editor > ul > li, .attachment-large, .wp-caption-text']],
+    // Is there anything in the content you selected that needs transformed
+    // before it's consumable content? E.g., unusual lazy loaded images
+    transforms: {
+      figcaption: 'p'
+    },
+    // Is there anything that is in the result that shouldn't be?
+    // The clean selectors will remove anything that matches from
+    // the result
+    clean: ['.comments-area']
+  }
+};
+
+var NewsMynaviJpExtractor = {
+  domain: 'news.mynavi.jp',
+  title: {
+    selectors: [['meta[name="og:title"]', 'value']]
+  },
+  author: {
+    selectors: ['main div.article-author a.article-author__name']
+  },
+  date_published: {
+    selectors: [['meta[name="article:published_time"]', 'value']]
+  },
+  dek: {
+    selectors: [['meta[name="og:description"]', 'value']]
+  },
+  lead_image_url: {
+    selectors: [['meta[name="og:image"]', 'value']]
+  },
+  content: {
+    selectors: ['main article div'],
+    // Is there anything in the content you selected that needs transformed
+    // before it's consumable content? E.g., unusual lazy loaded images
+    transforms: {
+      img: function img($node) {
+        var src = $node.attr('data-original');
+
+        if (src !== '') {
+          $node.attr('src', src);
+        }
+      }
+    },
+    // Is there anything that is in the result that shouldn't be?
+    // The clean selectors will remove anything that matches from
+    // the result
+    clean: []
+  }
+};
+
+var ClinicaltrialsGovExtractor = {
+  domain: 'clinicaltrials.gov',
+  title: {
+    selectors: ['h1.solo_record']
+  },
+  author: {
+    selectors: ['div#sponsor.info-text']
+  },
+  date_published: {
+    // selectors: ['span.term[data-term="Last Update Posted"]'],
+    selectors: ['div:has(> span.term[data-term="Last Update Posted"])']
+  },
+  content: {
+    selectors: ['div#tab-body'],
+    // Is there anything in the content you selected that needs transformed
+    // before it's consumable content? E.g., unusual lazy loaded images
+    transforms: {},
+    // Is there anything that is in the result that shouldn't be?
+    // The clean selectors will remove anything that matches from
+    // the result
+    clean: ['.usa-alert> img']
+  }
+};
+
 
 
 var CustomExtractors = /*#__PURE__*/Object.freeze({
@@ -4772,7 +4865,10 @@ var CustomExtractors = /*#__PURE__*/Object.freeze({
   WwwSlateComExtractor: WwwSlateComExtractor,
   IciRadioCanadaCaExtractor: IciRadioCanadaCaExtractor,
   WwwFortinetComExtractor: WwwFortinetComExtractor,
-  WwwFastcompanyComExtractor: WwwFastcompanyComExtractor
+  WwwFastcompanyComExtractor: WwwFastcompanyComExtractor,
+  BlisterreviewComExtractor: BlisterreviewComExtractor,
+  NewsMynaviJpExtractor: NewsMynaviJpExtractor,
+  ClinicaltrialsGovExtractor: ClinicaltrialsGovExtractor
 });
 
 var Extractors = _Object$keys(CustomExtractors).reduce(function (acc, key) {
@@ -6455,19 +6551,19 @@ var Mercury = {
 
             case 8:
               $ = _context.sent;
-              Extractor = getExtractor(url, parsedUrl, $); // console.log(`Using extractor for ${Extractor.domain}`);
-              // If we found an error creating the resource, return that error
 
               if (!$.failed) {
-                _context.next = 12;
+                _context.next = 11;
                 break;
               }
 
               return _context.abrupt("return", $);
 
-            case 12:
+            case 11:
+              Extractor = getExtractor(url, parsedUrl, $); // console.log(`Using extractor for ${Extractor.domain}`);
               // if html still has not been set (i.e., url passed to Mercury.parse),
               // set html from the response of Resource.create
+
               if (!html) {
                 html = $.html();
               } // Cached value of every meta name in our document.
