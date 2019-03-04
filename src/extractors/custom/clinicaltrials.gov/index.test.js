@@ -1,6 +1,7 @@
 import assert from 'assert';
 import URL from 'url';
 import cheerio from 'cheerio';
+import moment from 'moment-timezone';
 
 import Mercury from 'mercury';
 import getExtractor from 'extractors/get-extractor';
@@ -59,7 +60,7 @@ describe('ClinicaltrialsGovExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(date_published, '2018-11-21T08:00:00.000Z');
+      assert.equal(moment(date_published).format('YYYY-MM-DD'), '2018-11-21');
     });
 
     it('returns the content', async () => {
