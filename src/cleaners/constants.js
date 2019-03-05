@@ -27,6 +27,21 @@ export const SEC_DATE_STRING = /^\d{10}$/i;
 export const CLEAN_DATE_STRING_RE = /^\s*published\s*:?\s*(.*)/i;
 export const TIME_MERIDIAN_SPACE_RE = /(.*\d)(am|pm)(.*)/i;
 export const TIME_MERIDIAN_DOTS_RE = /\.m\./i;
+export const TIME_NOW_STRING = /^\s*(just|right)?\s*now\s*/i;
+const timeUnits = [
+  'seconds?',
+  'minutes?',
+  'hours?',
+  'days?',
+  'weeks?',
+  'months?',
+  'years?',
+];
+const allTimeUnits = timeUnits.join('|');
+export const TIME_AGO_STRING = new RegExp(
+  `(\\d+)\\s+(${allTimeUnits})\\s+ago`,
+  'i'
+);
 const months = [
   'jan',
   'feb',
