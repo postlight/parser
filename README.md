@@ -37,7 +37,6 @@ Mercury.parse(url).then(result => console.log(result));
 
 // NOTE: When used in the browser, you can omit the URL argument
 // and simply run `Mercury.parse()` to parse the current page.
-
 ```
 
 The result looks like this:
@@ -65,6 +64,8 @@ If Mercury is unable to find a field, that field will return `null`.
 
 Mercury Parser also ships with a CLI, meaning you can use the Mercury Parser
 from your command line like so:
+
+![Mercury Parser CLI Basic Usage](./assets/mercury-basic-usage.gif)
 
 ```bash
 # Install Mercury globally
