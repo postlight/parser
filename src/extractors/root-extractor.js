@@ -206,6 +206,18 @@ const RootExtractor = {
       type: 'url_and_domain',
     }) || { url: null, domain: null };
 
+    const extendedResults = {};
+    if (extractor.extend) {
+      Object.keys(extractor.extend).forEach(t => {
+        const r = select({
+          $: opts.$,
+          type: t,
+          extractionOpts: extractor.extend[t],
+        });
+        extendedResults[t] = r;
+      });
+    }
+
     return {
       title,
       content,
@@ -219,6 +231,7 @@ const RootExtractor = {
       excerpt,
       word_count,
       direction,
+      ...extendedResults,
     };
   },
 };

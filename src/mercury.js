@@ -5,7 +5,7 @@ import TurndownService from 'turndown';
 import Resource from 'resource';
 import { validateUrl } from 'utils';
 import getExtractor from 'extractors/get-extractor';
-import RootExtractor from 'extractors/root-extractor';
+import RootExtractor, { select } from 'extractors/root-extractor';
 import collectAllPages from 'extractors/collect-all-pages';
 
 const Mercury = {
@@ -14,6 +14,7 @@ const Mercury = {
       fetchAllPages = true,
       fallback = true,
       contentType = 'html',
+      extend,
     } = opts;
 
     // if no url was passed and this is the browser version,
@@ -65,6 +66,19 @@ const Mercury = {
       fallback,
       contentType,
     });
+
+    if (extend) {
+      const extendedTypes = Object.keys(extend);
+      const extendedResults = {};
+      extendedTypes.forEach(t => {
+        const r = select({ $, type: t, extractionOpts: extend[t] });
+        extendedResults[t] = r;
+      });
+      result = {
+        ...result,
+        ...extendedResults,
+      };
+    }
 
     const { title, next_page_url } = result;
 

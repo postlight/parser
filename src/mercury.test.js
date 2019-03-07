@@ -48,14 +48,6 @@ describe('Mercury', () => {
       assert(/content-type for this resource/i.test(error.message));
     });
 
-    it('does blogger', async () => {
-      const result = await Mercury.parse(
-        'https://googleblog.blogspot.com/2016/08/onhub-turns-one-today.html'
-      );
-
-      assert.equal(typeof result, 'object');
-    });
-
     it('does wikipedia', async () => {
       const result = await Mercury.parse(
         'https://en.wikipedia.org/wiki/Brihadeeswarar_Temple_fire'
@@ -133,5 +125,25 @@ describe('Mercury', () => {
 
     assert.equal(htmlRe.test(content), false);
     assert.equal(markdownRe.test(content), true);
+  });
+
+  it('returns custom elements if an extend object is passed', async () => {
+    const url =
+      'http://nymag.com/daily/intelligencer/2016/09/trump-discussed-usd25k-donation-with-florida-ag-not-fraud.html';
+    const html = fs.readFileSync(
+      './src/extractors/custom/nymag.com/fixtures/test.html',
+      'utf8'
+    );
+    const { site } = await Mercury.parse(url, {
+      html,
+      extend: {
+        site: {
+          selectors: ['li:first-of-type a.site-name'],
+          defaultCleaner: false,
+        },
+      },
+    });
+    assert.ok(site);
+    assert.equal(site, 'NYMag.com');
   });
 });
