@@ -121,7 +121,7 @@ describe('WwwThevergeComExtractor', () => {
     const url =
       'http://www.theverge.com/2016/10/31/13478080/microsoft-surface-studio-design-engineering-interview';
 
-    const { content } = await Mercury.parse(url, html, { fallback: false });
+    const { content } = await Mercury.parse(url, { html, fallback: false });
 
     const $ = cheerio.load(content || '');
 

@@ -105,7 +105,7 @@ describe('DeadspinExtractor', () => {
     const url =
       'http://deadspin.com/remember-when-donald-trump-got-booed-for-butchering-ta-1788216229';
 
-    const { content } = await Mercury.parse(url, html, { fallback: false });
+    const { content } = await Mercury.parse(url, { html, fallback: false });
 
     const $ = cheerio.load(content || '');
 
