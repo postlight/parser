@@ -14,7 +14,12 @@ export default function convertLazyLoadedImages($) {
     Reflect.ownKeys(attrs).forEach(attr => {
       const value = attrs[attr];
 
-      if (attr !== 'src' && IS_LINK.test(value) && IS_IMAGE.test(value)) {
+      if (
+        attr !== 'src' &&
+        attr !== 'srcset' &&
+        IS_LINK.test(value) &&
+        IS_IMAGE.test(value)
+      ) {
         $(img).attr('src', value);
       }
     });

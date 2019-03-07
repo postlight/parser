@@ -44,4 +44,17 @@ describe('convertLazyLoadedImages($)', () => {
 
     assert.equal(result, '<img src="http://example.com/foo.jpg">');
   });
+
+  it('does not replace an img src with srcset value', () => {
+    const html =
+      '<img src="http://example.com/foo.jpg" srcset="http://example.com/foo2x.jpg 2x, http://example.com/foo.jpg">';
+    const $ = cheerio.load(html);
+
+    const result = convertLazyLoadedImages($).html();
+
+    assert.equal(
+      result,
+      '<img src="http://example.com/foo.jpg" srcset="http://example.com/foo2x.jpg 2x, http://example.com/foo.jpg">'
+    );
+  });
 });
