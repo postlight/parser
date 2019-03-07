@@ -208,7 +208,7 @@ const RootExtractor = {
 
     const extendedResults = {};
     if (extractor.extend) {
-      Object.keys(extractor.extend).forEach(t => {
+      Reflect.ownKeys(extractor.extend).forEach(t => {
         const r = select({
           $: opts.$,
           type: t,

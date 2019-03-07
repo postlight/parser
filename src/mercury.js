@@ -68,7 +68,7 @@ const Mercury = {
     });
 
     if (extend) {
-      const extendedTypes = Object.keys(extend);
+      const extendedTypes = Reflect.ownKeys(extend);
       const extendedResults = {};
       extendedTypes.forEach(t => {
         const r = select({ $, type: t, extractionOpts: extend[t] });
