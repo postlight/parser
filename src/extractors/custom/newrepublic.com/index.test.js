@@ -118,7 +118,7 @@ describe('NewrepublicComExtractor', () => {
       const html = fs.readFileSync(
         './fixtures/newrepublic.com/1480446502259.html'
       );
-      result = await Mercury.parse(url, html, { fallback: false });
+      result = await Mercury.parse(url, { html, fallback: false });
     });
 
     it('minute returns the title', async () => {

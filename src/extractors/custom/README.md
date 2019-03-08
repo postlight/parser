@@ -234,7 +234,7 @@ it('returns the title', async () => {
   const articleUrl =
     'http://www.newyorker.com/tech/elements/hacking-cryptography-and-the-countdown-to-quantum-computing';
 
-  const { title } = await Mercury.parse(articleUrl, html, { fallback: false });
+  const { title } = await Mercury.parse(articleUrl, { html, fallback: false });
 
   // Update these values with the expected values from
   // the article.
