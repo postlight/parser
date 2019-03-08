@@ -1,6 +1,6 @@
 import { getAttrs } from 'utils/dom';
 
-import { IS_LINK, IS_IMAGE } from './constants';
+import { IS_LINK, IS_IMAGE, IS_SRCSET } from './constants';
 
 // Convert all instances of images with potentially
 // lazy loaded images into normal images.
@@ -14,7 +14,9 @@ export default function convertLazyLoadedImages($) {
     Reflect.ownKeys(attrs).forEach(attr => {
       const value = attrs[attr];
 
-      if (
+      if (attr !== 'srcset' && IS_LINK.test(value) && IS_SRCSET.test(value)) {
+        $(img).attr('srcset', value);
+      } else if (
         attr !== 'src' &&
         attr !== 'srcset' &&
         IS_LINK.test(value) &&

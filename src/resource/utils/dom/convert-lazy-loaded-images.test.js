@@ -16,6 +16,31 @@ describe('convertLazyLoadedImages($)', () => {
     );
   });
 
+  it('moves image source candidates to srcset if placed in another attribute', () => {
+    const html = '<img data-srcset="http://example.com/foo.jpg 2x">';
+    const $ = cheerio.load(html);
+
+    const result = convertLazyLoadedImages($).html();
+
+    assert.equal(
+      result,
+      '<img data-srcset="http://example.com/foo.jpg 2x" srcset="http://example.com/foo.jpg 2x">'
+    );
+  });
+
+  it('properly handles src and srcset attributes', () => {
+    const html =
+      '<img data-src="http://example.com/foo.jpg" data-srcset="http://example.com/foo.jpg 2x">';
+    const $ = cheerio.load(html);
+
+    const result = convertLazyLoadedImages($).html();
+
+    assert.equal(
+      result,
+      '<img data-src="http://example.com/foo.jpg" data-srcset="http://example.com/foo.jpg 2x" src="http://example.com/foo.jpg" srcset="http://example.com/foo.jpg 2x">'
+    );
+  });
+
   it('does nothing when value is not a link', () => {
     // This is far from perfect, since a relative url could
     // be perfectly correct.
