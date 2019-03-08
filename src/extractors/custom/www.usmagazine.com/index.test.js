@@ -50,7 +50,8 @@ describe('WwwUsmagazineComExtractor', () => {
     const articleUrl =
       'http://www.usmagazine.com/celebrity-news/news/lady-gaga-shares-pic-of-ex-taylor-kinney-with-her-mom-w454419';
 
-    const { author } = await Mercury.parse(articleUrl, html, {
+    const { author } = await Mercury.parse(articleUrl, {
+      html,
       fallback: false,
     });
 
