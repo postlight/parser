@@ -1,5 +1,5 @@
 import URL from 'url';
-import request from 'request';
+import request from 'postman-request';
 import { Errors } from 'utils';
 
 import {
