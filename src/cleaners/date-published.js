@@ -9,6 +9,8 @@ import {
   SEC_DATE_STRING,
   CLEAN_DATE_STRING_RE,
   SPLIT_DATE_STRING,
+  TIME_AGO_STRING,
+  TIME_NOW_STRING,
   TIME_MERIDIAN_SPACE_RE,
   TIME_MERIDIAN_DOTS_RE,
   TIME_WITH_OFFSET_RE,
@@ -26,6 +28,15 @@ export function cleanDateString(dateString) {
 export function createDate(dateString, timezone, format) {
   if (TIME_WITH_OFFSET_RE.test(dateString)) {
     return moment(new Date(dateString));
+  }
+
+  if (TIME_AGO_STRING.test(dateString)) {
+    const fragments = TIME_AGO_STRING.exec(dateString);
+    return moment().subtract(fragments[1], fragments[2]);
+  }
+
+  if (TIME_NOW_STRING.test(dateString)) {
+    return moment();
   }
 
   return timezone

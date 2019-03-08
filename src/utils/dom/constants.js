@@ -11,6 +11,7 @@ export const KEEP_SELECTORS = [
   'iframe[src^="http://www.youtube.com"]',
   'iframe[src^="https://player.vimeo"]',
   'iframe[src^="http://player.vimeo"]',
+  'iframe[src^="https://www.redditmedia.com"]',
 ];
 
 // A list of tags to strip from the output if we encounter them.
