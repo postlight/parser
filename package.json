@@ -117,7 +117,7 @@
     "moment": "^2.23.0",
     "moment-parseformat": "3.0.0",
     "moment-timezone": "0.5.23",
-    "request": "github:czardoz/request",
+    "postman-request": "^2.88.1-postman.7.1",
     "request-promise": "^4.2.2",
     "string-direction": "^0.1.2",
     "turndown": "^5.0.3",
