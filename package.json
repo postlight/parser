@@ -117,7 +117,7 @@
     "moment": "^2.23.0",
     "moment-parseformat": "3.0.0",
     "moment-timezone": "0.5.23",
-    "request": "github:czardoz/request",
+    "postman-request": "^2.88.1-postman.7.1",
     "request-promise": "^4.2.2",
     "string-direction": "^0.1.2",
     "turndown": "^5.0.3",
@@ -135,7 +135,7 @@
     "main": "./dist/mercury.web.js",
     "cheerio": "./src/shims/cheerio-query",
     "jquery": "./node_modules/jquery/dist/jquery.min.js",
-    "request": "browser-request",
+    "postman-request": "browser-request",
     "iconv-lite": "./src/shims/iconv-lite",
     "moment-timezone": "./node_modules/moment-timezone/builds/moment-timezone-with-data-2012-2022.min.js"
   },
