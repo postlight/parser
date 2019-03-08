@@ -2,15 +2,17 @@ export const WwwRedditComExtractor = {
   domain: 'www.reddit.com',
 
   title: {
-    selectors: [['meta[name="og:title"]', 'value']],
+    selectors: ['div[data-test-id="post-content"] h2'],
   },
 
   author: {
-    selectors: ['._2tbHP6ZydRpjI44J3syuqC.s1461iz-1.gWXVVu'],
+    selectors: ['div[data-test-id="post-content"] a[href*="user/"]'],
   },
 
   date_published: {
-    selectors: ['a[data-click-id="timestamp"]'],
+    selectors: [
+      'div[data-test-id="post-content"] a[data-click-id="timestamp"]',
+    ],
   },
 
   lead_image_url: {

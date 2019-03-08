@@ -39,7 +39,7 @@ describe('WwwRedditComExtractor', () => {
       // the article.
       assert.equal(
         title,
-        `r/Showerthoughts - Vanilla becoming the default flavour of ice cream is the greatest underdog story of all time.`
+        `Vanilla becoming the default flavour of ice cream is the greatest underdog story of all time.`
       );
     });
 
