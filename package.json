@@ -135,7 +135,7 @@
     "main": "./dist/mercury.web.js",
     "cheerio": "./src/shims/cheerio-query",
     "jquery": "./node_modules/jquery/dist/jquery.min.js",
-    "request": "browser-request",
+    "postman-request": "browser-request",
     "iconv-lite": "./src/shims/iconv-lite",
     "moment-timezone": "./node_modules/moment-timezone/builds/moment-timezone-with-data-2012-2022.min.js"
   },
