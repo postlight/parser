@@ -8,8 +8,10 @@ const {
   _: [url],
   format,
   f,
+  extend,
+  e,
 } = argv;
-(async (urlToParse, contentType) => {
+(async (urlToParse, contentType, extendedTypes) => {
   if (!urlToParse) {
     console.log(
       '\n\
@@ -31,8 +33,14 @@ Usage:\n\
       text: 'text',
       txt: 'text',
     };
+    const extensions = {};
+    [].concat(extendedTypes).forEach(t => {
+      [name, selector] = t.split('=');
+      extensions[name] = { selectors: [selector], defaultCleaner: false };
+    });
     const result = await Mercury.parse(urlToParse, {
       contentType: contentTypeMap[contentType],
+      extend: extensions,
     });
     console.log(JSON.stringify(result, null, 2));
   } catch (e) {
@@ -51,4 +59,4 @@ Usage:\n\
     console.error(`\n${reportBug}\n`);
     process.exit(1);
   }
-})(url, format || f);
+})(url, format || f, extend || e);
