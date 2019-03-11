@@ -5,7 +5,7 @@ import TurndownService from 'turndown';
 import Resource from 'resource';
 import { validateUrl } from 'utils';
 import getExtractor from 'extractors/get-extractor';
-import RootExtractor, { select } from 'extractors/root-extractor';
+import RootExtractor, { selectExtendedTypes } from 'extractors/root-extractor';
 import collectAllPages from 'extractors/collect-all-pages';
 
 const Mercury = {
@@ -68,15 +68,9 @@ const Mercury = {
     });
 
     if (extend) {
-      const extendedTypes = Reflect.ownKeys(extend);
-      const extendedResults = {};
-      extendedTypes.forEach(t => {
-        const r = select({ $, type: t, extractionOpts: extend[t] });
-        extendedResults[t] = r;
-      });
       result = {
         ...result,
-        ...extendedResults,
+        ...selectExtendedTypes($, extend),
       };
     }
 

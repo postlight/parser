@@ -143,6 +143,14 @@ export function select(opts) {
   return result;
 }
 
+export function selectExtendedTypes($, extend) {
+  const results = {};
+  Reflect.ownKeys(extend).forEach(t => {
+    results[t] = select({ $, type: t, extractionOpts: extend[t] });
+  });
+  return results;
+}
+
 function extractResult(opts) {
   const { type, extractor, fallback = true } = opts;
 
@@ -206,16 +214,9 @@ const RootExtractor = {
       type: 'url_and_domain',
     }) || { url: null, domain: null };
 
-    const extendedResults = {};
+    let extendedResults = {};
     if (extractor.extend) {
-      Reflect.ownKeys(extractor.extend).forEach(t => {
-        const r = select({
-          $: opts.$,
-          type: t,
-          extractionOpts: extractor.extend[t],
-        });
-        extendedResults[t] = r;
-      });
+      extendedResults = selectExtendedTypes(opts.$, extractor.extend);
     }
 
     return {
