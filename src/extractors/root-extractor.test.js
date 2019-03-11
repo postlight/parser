@@ -228,4 +228,29 @@ describe('select(opts)', () => {
 
     assert.equal(result, null);
   });
+
+  it('returns an array of results if allowMultiple is true', () => {
+    const html = `
+      <div><div><ul><li class="item">One</li><li class="item">Two</li></ul></div></div>
+      `;
+    const $ = cheerio.load(html);
+    const opts = {
+      type: 'content',
+      $,
+      extractionOpts: {
+        selectors: ['.item'],
+        allowMultiple: true,
+        defaultCleaner: false,
+      },
+      extractHtml: true,
+    };
+
+    const result = select(opts);
+
+    assert.equal(result.length, 2);
+    assert.deepEqual(result, [
+      '<li class="item">One</li>',
+      '<li class="item">Two</li>',
+    ]);
+  });
 });

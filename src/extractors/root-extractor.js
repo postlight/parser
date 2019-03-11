@@ -39,7 +39,7 @@ export function transformElements($content, $, { transforms }) {
   return $content;
 }
 
-function findMatchingSelector($, selectors, extractHtml) {
+function findMatchingSelector($, selectors, extractHtml, allowMultiple) {
   return selectors.find(selector => {
     if (Array.isArray(selector)) {
       if (extractHtml) {
@@ -57,10 +57,15 @@ function findMatchingSelector($, selectors, extractHtml) {
     }
 
     return (
-      $(selector).length === 1 &&
-      $(selector)
-        .text()
-        .trim() !== ''
+      (allowMultiple &&
+        $(selector)
+          .text()
+          .trim() !== '') ||
+      (!allowMultiple &&
+        $(selector).length === 1 &&
+        $(selector)
+          .text()
+          .trim() !== '')
     );
   });
 }
@@ -76,9 +81,31 @@ export function select(opts) {
 
   const { selectors, defaultCleaner = true } = extractionOpts;
 
-  const matchingSelector = findMatchingSelector($, selectors, extractHtml);
+  const matchingSelector = findMatchingSelector(
+    $,
+    selectors,
+    extractHtml,
+    extractionOpts.allowMultiple
+  );
 
   if (!matchingSelector) return null;
+
+  function transformAndCleanContent(_, el) {
+    // Wrap in div so transformation can take place on root element
+    let $content = $(el).wrap($('<div></div>'));
+    $content = $content.parent();
+
+    $content = transformElements($content, $, extractionOpts);
+    $content = cleanBySelectors($content, $, extractionOpts);
+    $content = Cleaners[type]($content, { ...opts, defaultCleaner });
+    return $content;
+  }
+
+  function transformAndCleanNode(_, $node) {
+    $node = cleanBySelectors($node, $, extractionOpts);
+    $node = transformElements($node, $, extractionOpts);
+    return $node;
+  }
 
   // Declaring result; will contain either
   // text or html, which will be cleaned
@@ -104,16 +131,13 @@ export function select(opts) {
       $content = $(matchingSelector);
     }
 
-    // Wrap in div so transformation can take place on root element
-    $content.wrap($('<div></div>'));
-    $content = $content.parent();
-
-    $content = transformElements($content, $, extractionOpts);
-    $content = cleanBySelectors($content, $, extractionOpts);
-
-    $content = Cleaners[type]($content, { ...opts, defaultCleaner });
-
-    return $.html($content);
+    if ($content.length > 1) {
+      return $content
+        .map(transformAndCleanContent)
+        .map((_, el) => el.html())
+        .toArray();
+    }
+    return $.html(transformAndCleanContent(null, $content));
   }
 
   let result;
@@ -126,12 +150,22 @@ export function select(opts) {
       .attr(attr)
       .trim();
   } else {
-    let $node = $(matchingSelector);
+    const $node = $(matchingSelector);
 
-    $node = cleanBySelectors($node, $, extractionOpts);
-    $node = transformElements($node, $, extractionOpts);
-
-    result = $node.text().trim();
+    if ($node.length > 1) {
+      result = $node
+        .map(transformAndCleanNode)
+        .map((_, el) =>
+          $(el)
+            .text()
+            .trim()
+        )
+        .toArray();
+    } else {
+      result = transformAndCleanNode(null, $node)
+        .text()
+        .trim();
+    }
   }
 
   // Allow custom extractor to skip default cleaner
