@@ -19,7 +19,7 @@ mercury-parser\n\n\
     The Mercury Parser extracts semantic content from any url\n\n\
 Usage:\n\
 \n\
-    $ mercury-parser url-to-parse [--format=html|text|markdown]\n\
+    $ mercury-parser url-to-parse [--format=html|text|markdown] [--extend type=selector]... \n\
 \n\
 '
     );
