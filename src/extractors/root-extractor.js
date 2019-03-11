@@ -146,7 +146,9 @@ export function select(opts) {
 export function selectExtendedTypes($, extend) {
   const results = {};
   Reflect.ownKeys(extend).forEach(t => {
-    results[t] = select({ $, type: t, extractionOpts: extend[t] });
+    if (!results[t]) {
+      results[t] = select({ $, type: t, extractionOpts: extend[t] });
+    }
   });
   return results;
 }
