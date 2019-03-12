@@ -48,7 +48,7 @@ function findMatchingSelector($, selectors, extractHtml, allowMultiple) {
 
       const [s, attr] = selector;
       return (
-        $(s).length === 1 &&
+        (allowMultiple || (!allowMultiple && $(s).length === 1)) &&
         $(s).attr(attr) &&
         $(s)
           .attr(attr)
@@ -57,15 +57,10 @@ function findMatchingSelector($, selectors, extractHtml, allowMultiple) {
     }
 
     return (
-      (allowMultiple &&
-        $(selector)
-          .text()
-          .trim() !== '') ||
-      (!allowMultiple &&
-        $(selector).length === 1 &&
-        $(selector)
-          .text()
-          .trim() !== '')
+      (allowMultiple || (!allowMultiple && $(selector).length === 1)) &&
+      $(selector)
+        .text()
+        .trim() !== ''
     );
   });
 }
@@ -146,9 +141,19 @@ export function select(opts) {
   // extract the attr
   if (Array.isArray(matchingSelector)) {
     const [selector, attr] = matchingSelector;
-    result = $(selector)
-      .attr(attr)
-      .trim();
+    const $nodeWithAttr = $(selector);
+
+    if ($nodeWithAttr.length > 1) {
+      result = $nodeWithAttr
+        .map((_, el) =>
+          $(el)
+            .attr(attr)
+            .trim()
+        )
+        .toArray();
+    } else {
+      result = $nodeWithAttr.attr(attr).trim();
+    }
   } else {
     const $node = $(matchingSelector);
 

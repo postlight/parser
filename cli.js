@@ -38,12 +38,16 @@ Usage:\n\
     const extensions = {};
     [].concat(extendedTypes || []).forEach(t => {
       const [name, selector] = t.split('=');
-      extensions[name] = { selectors: [selector], defaultCleaner: false };
+      const fullSelector =
+        selector.indexOf('|') > 0 ? selector.split('|') : selector;
+      extensions[name] = { selectors: [fullSelector], defaultCleaner: false };
     });
     [].concat(extendedListTypes || []).forEach(t => {
       const [name, selector] = t.split('=');
+      const fullSelector =
+        selector.indexOf('|') > 0 ? selector.split('|') : selector;
       extensions[name] = {
-        selectors: [selector],
+        selectors: [fullSelector],
         defaultCleaner: false,
         allowMultiple: true,
       };
