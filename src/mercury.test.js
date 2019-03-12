@@ -140,7 +140,6 @@ describe('Mercury', () => {
         sites: {
           selectors: ['a.site-name'],
           allowMultiple: true,
-          defaultCleaner: false,
         },
       },
     });
@@ -162,7 +161,6 @@ describe('Mercury', () => {
         sites: {
           selectors: [['a.site-name', 'href']],
           allowMultiple: true,
-          defaultCleaner: false,
         },
       },
     });

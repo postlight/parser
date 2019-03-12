@@ -175,7 +175,7 @@ export function select(opts) {
 
   // Allow custom extractor to skip default cleaner
   // for this type; defaults to true
-  if (defaultCleaner) {
+  if (defaultCleaner && Cleaners[type]) {
     return Cleaners[type](result, { ...opts, ...extractionOpts });
   }
 

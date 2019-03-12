@@ -240,7 +240,6 @@ describe('select(opts)', () => {
       extractionOpts: {
         selectors: ['.item'],
         allowMultiple: true,
-        defaultCleaner: false,
       },
       extractHtml: true,
     };

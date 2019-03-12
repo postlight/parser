@@ -40,7 +40,7 @@ Usage:\n\
       const [name, selector] = t.split('=');
       const fullSelector =
         selector.indexOf('|') > 0 ? selector.split('|') : selector;
-      extensions[name] = { selectors: [fullSelector], defaultCleaner: false };
+      extensions[name] = { selectors: [fullSelector] };
     });
     [].concat(extendedListTypes || []).forEach(t => {
       const [name, selector] = t.split('=');
@@ -48,7 +48,6 @@ Usage:\n\
         selector.indexOf('|') > 0 ? selector.split('|') : selector;
       extensions[name] = {
         selectors: [fullSelector],
-        defaultCleaner: false,
         allowMultiple: true,
       };
     });
