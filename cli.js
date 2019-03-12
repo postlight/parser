@@ -10,8 +10,10 @@ const {
   f,
   extend,
   e,
+  extendList,
+  l,
 } = argv;
-(async (urlToParse, contentType, extendedTypes) => {
+(async (urlToParse, contentType, extendedTypes, extendedListTypes) => {
   if (!urlToParse) {
     console.log(
       '\n\
@@ -19,7 +21,7 @@ mercury-parser\n\n\
     The Mercury Parser extracts semantic content from any url\n\n\
 Usage:\n\
 \n\
-    $ mercury-parser url-to-parse [--format=html|text|markdown] [--extend type=selector]... \n\
+    $ mercury-parser url-to-parse [--format=html|text|markdown] [--extend type=selector]... [--extend-list type=selector]... \n\
 \n\
 '
     );
@@ -34,9 +36,17 @@ Usage:\n\
       txt: 'text',
     };
     const extensions = {};
-    [].concat(extendedTypes).forEach(t => {
-      [name, selector] = t.split('=');
+    [].concat(extendedTypes || []).forEach(t => {
+      const [name, selector] = t.split('=');
       extensions[name] = { selectors: [selector], defaultCleaner: false };
+    });
+    [].concat(extendedListTypes || []).forEach(t => {
+      const [name, selector] = t.split('=');
+      extensions[name] = {
+        selectors: [selector],
+        defaultCleaner: false,
+        allowMultiple: true,
+      };
     });
     const result = await Mercury.parse(urlToParse, {
       contentType: contentTypeMap[contentType],
@@ -59,4 +69,4 @@ Usage:\n\
     console.error(`\n${reportBug}\n`);
     process.exit(1);
   }
-})(url, format || f, extend || e);
+})(url, format || f, extend || e, extendList || l);
