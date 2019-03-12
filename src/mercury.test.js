@@ -134,16 +134,40 @@ describe('Mercury', () => {
       './src/extractors/custom/nymag.com/fixtures/test.html',
       'utf8'
     );
-    const { site } = await Mercury.parse(url, {
+    const { sites } = await Mercury.parse(url, {
       html,
       extend: {
-        site: {
-          selectors: ['li:first-of-type a.site-name'],
+        sites: {
+          selectors: ['a.site-name'],
+          allowMultiple: true,
           defaultCleaner: false,
         },
       },
     });
-    assert.ok(site);
-    assert.equal(site, 'NYMag.com');
+    assert.ok(sites);
+    assert.equal(sites.length, 8);
+    assert.equal(sites[0], 'NYMag.com');
+  });
+
+  it('returns custom attributes if an extend object is passed', async () => {
+    const url =
+      'http://nymag.com/daily/intelligencer/2016/09/trump-discussed-usd25k-donation-with-florida-ag-not-fraud.html';
+    const html = fs.readFileSync(
+      './src/extractors/custom/nymag.com/fixtures/test.html',
+      'utf8'
+    );
+    const { sites } = await Mercury.parse(url, {
+      html,
+      extend: {
+        sites: {
+          selectors: [['a.site-name', 'href']],
+          allowMultiple: true,
+          defaultCleaner: false,
+        },
+      },
+    });
+    assert.ok(sites);
+    assert.equal(sites.length, 8);
+    assert.equal(sites[1], '//nymag.com/daily/intelligencer/');
   });
 });
