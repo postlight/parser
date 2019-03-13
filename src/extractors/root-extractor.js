@@ -76,6 +76,48 @@ export function select(opts) {
 
   const { selectors, defaultCleaner = true } = extractionOpts;
 
+  function selectHtml(selector) {
+    // If the selector type requests html as its return type
+    // transform and clean the element with provided selectors
+    let $content;
+
+    // If matching selector is an array, we're considering this a
+    // multi-match selection, which allows the parser to choose several
+    // selectors to include in the result. Note that all selectors in the
+    // array must match in order for this selector to trigger
+    if (Array.isArray(selector)) {
+      $content = $(selector.join(','));
+      const $wrapper = $('<div></div>');
+      $content.each((_, element) => {
+        $wrapper.append(element);
+      });
+
+      $content = $wrapper;
+    } else {
+      $content = $(selector);
+    }
+
+    if ($content.length > 1) {
+      return $content.toArray().map(el => $.html(el));
+    }
+
+    // Wrap in div so transformation can take place on root element
+    $content.wrap($('<div></div>'));
+    $content = $content.parent();
+    $content = transformElements($content, $, extractionOpts);
+    $content = cleanBySelectors($content, $, extractionOpts);
+    if (Cleaners[type]) {
+      $content = Cleaners[type]($content, { ...opts, defaultCleaner });
+    }
+    return $.html($content);
+  }
+
+  function transformAndCleanNode(_, $node) {
+    $node = cleanBySelectors($node, $, extractionOpts);
+    $node = transformElements($node, $, extractionOpts);
+    return $node;
+  }
+
   const matchingSelector = findMatchingSelector(
     $,
     selectors,
@@ -85,60 +127,14 @@ export function select(opts) {
 
   if (!matchingSelector) return null;
 
-  function transformAndCleanContent(_, el) {
-    // Wrap in div so transformation can take place on root element
-    let $content = $(el).wrap($('<div></div>'));
-    $content = $content.parent();
-
-    $content = transformElements($content, $, extractionOpts);
-    $content = cleanBySelectors($content, $, extractionOpts);
-    $content = Cleaners[type]($content, { ...opts, defaultCleaner });
-    return $content;
-  }
-
-  function transformAndCleanNode(_, $node) {
-    $node = cleanBySelectors($node, $, extractionOpts);
-    $node = transformElements($node, $, extractionOpts);
-    return $node;
-  }
-
   // Declaring result; will contain either
   // text or html, which will be cleaned
   // by the appropriate cleaner type
-
-  // If the selector type requests html as its return type
-  // transform and clean the element with provided selectors
-  let $content;
-  if (extractHtml) {
-    // If matching selector is an array, we're considering this a
-    // multi-match selection, which allows the parser to choose several
-    // selectors to include in the result. Note that all selectors in the
-    // array must match in order for this selector to trigger
-    if (Array.isArray(matchingSelector)) {
-      $content = $(matchingSelector.join(','));
-      const $wrapper = $('<div></div>');
-      $content.each((index, element) => {
-        $wrapper.append(element);
-      });
-
-      $content = $wrapper;
-    } else {
-      $content = $(matchingSelector);
-    }
-
-    if ($content.length > 1) {
-      return $content
-        .map(transformAndCleanContent)
-        .map((_, el) => el.html())
-        .toArray();
-    }
-    const transformedContent = $.html(transformAndCleanContent(null, $content));
-    return extractionOpts.allowMultiple
-      ? [transformedContent]
-      : transformedContent;
-  }
-
   let result;
+
+  if (extractHtml) {
+    return selectHtml(matchingSelector);
+  }
 
   // if selector is an array (e.g., ['img', 'src']),
   // extract the attr

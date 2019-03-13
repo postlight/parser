@@ -235,7 +235,7 @@ describe('select(opts)', () => {
       `;
     const $ = cheerio.load(html);
     const opts = {
-      type: 'content',
+      type: 'items',
       $,
       extractionOpts: {
         selectors: ['.item'],
