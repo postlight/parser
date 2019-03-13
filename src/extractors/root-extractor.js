@@ -74,7 +74,7 @@ export function select(opts) {
   // contributors), return the string
   if (typeof extractionOpts === 'string') return extractionOpts;
 
-  const { selectors, defaultCleaner = true } = extractionOpts;
+  const { selectors, defaultCleaner = true, allowMultiple } = extractionOpts;
 
   function selectHtml(selector) {
     // If the selector type requests html as its return type
@@ -122,7 +122,7 @@ export function select(opts) {
     $,
     selectors,
     extractHtml,
-    extractionOpts.allowMultiple
+    allowMultiple
   );
 
   if (!matchingSelector) return null;
@@ -152,7 +152,7 @@ export function select(opts) {
         .toArray();
     } else {
       const matchingAttr = $nodeWithAttr.attr(attr).trim();
-      result = extractionOpts.allowMultiple ? [matchingAttr] : matchingAttr;
+      result = allowMultiple ? [matchingAttr] : matchingAttr;
     }
   } else {
     const $node = $(matchingSelector);
@@ -170,9 +170,7 @@ export function select(opts) {
       const transformedNode = transformAndCleanNode(null, $node)
         .text()
         .trim();
-      result = extractionOpts.allowMultiple
-        ? [transformedNode]
-        : transformedNode;
+      result = allowMultiple ? [transformedNode] : transformedNode;
     }
   }
 
