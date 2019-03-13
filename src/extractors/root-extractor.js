@@ -98,7 +98,7 @@ export function select(opts) {
     }
 
     if ($content.length > 1) {
-      return $content.toArray().map(el => $.html(el));
+      return $content.toArray().map(el => $.html($(el)));
     }
 
     // Wrap in div so transformation can take place on root element
