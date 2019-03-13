@@ -132,7 +132,10 @@ export function select(opts) {
         .map((_, el) => el.html())
         .toArray();
     }
-    return $.html(transformAndCleanContent(null, $content));
+    const transformedContent = $.html(transformAndCleanContent(null, $content));
+    return extractionOpts.allowMultiple
+      ? [transformedContent]
+      : transformedContent;
   }
 
   let result;
@@ -152,7 +155,8 @@ export function select(opts) {
         )
         .toArray();
     } else {
-      result = $nodeWithAttr.attr(attr).trim();
+      const matchingAttr = $nodeWithAttr.attr(attr).trim();
+      result = extractionOpts.allowMultiple ? [matchingAttr] : matchingAttr;
     }
   } else {
     const $node = $(matchingSelector);
@@ -167,9 +171,12 @@ export function select(opts) {
         )
         .toArray();
     } else {
-      result = transformAndCleanNode(null, $node)
+      const transformedNode = transformAndCleanNode(null, $node)
         .text()
         .trim();
+      result = extractionOpts.allowMultiple
+        ? [transformedNode]
+        : transformedNode;
     }
   }
 
