@@ -57,6 +57,11 @@ const Mercury = {
       .map((_, node) => $(node).attr('name'))
       .toArray();
 
+    let extendedTypes = {};
+    if (extend) {
+      extendedTypes = selectExtendedTypes($, extend);
+    }
+
     let result = RootExtractor.extract(Extractor, {
       url,
       html,
@@ -66,13 +71,6 @@ const Mercury = {
       fallback,
       contentType,
     });
-
-    if (extend) {
-      result = {
-        ...result,
-        ...selectExtendedTypes($, extend),
-      };
-    }
 
     const { title, next_page_url } = result;
 
@@ -103,7 +101,7 @@ const Mercury = {
       result.content = $.text($(result.content));
     }
 
-    return result;
+    return { ...result, ...extendedTypes };
   },
 
   browser: !!cheerio.browser,
