@@ -148,6 +148,26 @@ describe('Mercury', () => {
     assert.equal(sites[0], 'NYMag.com');
   });
 
+  it('returns an array if a single element matches a custom extend', async () => {
+    const url =
+      'http://nymag.com/daily/intelligencer/2016/09/trump-discussed-usd25k-donation-with-florida-ag-not-fraud.html';
+    const html = fs.readFileSync(
+      './src/extractors/custom/nymag.com/fixtures/test.html',
+      'utf8'
+    );
+    const { sites } = await Mercury.parse(url, {
+      html,
+      extend: {
+        sites: {
+          selectors: [['li:first-child a.site-name', 'href']],
+          allowMultiple: true,
+        },
+      },
+    });
+    assert.ok(sites);
+    assert.equal(sites.length, 1);
+  });
+
   it('returns custom attributes if an extend object is passed', async () => {
     const url =
       'http://nymag.com/daily/intelligencer/2016/09/trump-discussed-usd25k-donation-with-florida-ag-not-fraud.html';
