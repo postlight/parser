@@ -3,7 +3,7 @@ import cheerio from 'cheerio';
 import TurndownService from 'turndown';
 
 import Resource from 'resource';
-import { validateUrl, Errors } from 'utils';
+import { validateUrl } from 'utils';
 import getExtractor from 'extractors/get-extractor';
 import RootExtractor from 'extractors/root-extractor';
 import collectAllPages from 'extractors/collect-all-pages';
@@ -27,7 +27,11 @@ const Mercury = {
     const parsedUrl = URL.parse(url);
 
     if (!validateUrl(parsedUrl)) {
-      return Errors.badUrl;
+      return {
+        error: true,
+        messages:
+          'The url parameter passed does not look like a valid URL. Please check your data and try again.',
+      };
     }
 
     const $ = await Resource.create(url, html, parsedUrl);

@@ -1,5 +1,4 @@
 import assert from 'assert';
-import { Errors } from 'utils';
 
 import { record } from 'test-helpers';
 import Mercury from './mercury';
@@ -15,13 +14,13 @@ describe('Mercury', () => {
     it('returns an error if a malformed url is passed', async () => {
       const error = await Mercury.parse('foo.com');
 
-      assert.equal(error, Errors.badUrl);
+      assert(/does not look like a valid URL/i.test(error.messages));
     });
 
     it('returns an error if a bad url is passed', async () => {
       const error = await Mercury.parse('foo.com');
 
-      assert.equal(error, Errors.badUrl);
+      assert(/does not look like a valid URL/i.test(error.messages));
     });
 
     it('does the whole thing', async () => {
