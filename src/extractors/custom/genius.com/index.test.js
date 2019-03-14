@@ -33,7 +33,7 @@ describe('GeniusComExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(title, `Purple Rain`);
+      assert.equal(title, `Purple Rain `);
     });
 
     it('returns the author', async () => {
