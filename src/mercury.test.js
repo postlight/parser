@@ -38,15 +38,15 @@ describe('Mercury', () => {
         'https://www.thekitchn.com/instant-pot-chicken-pesto-pasta-eating-instantly-267141'
       );
 
-      assert.equal(error, Errors.badUrl);
+      assert(/instructed to reject non-2xx/i.test(error.messages));
     });
 
-    it('does blogger', async () => {
-      const result = await Mercury.parse(
-        'https://googleblog.blogspot.com/2016/08/onhub-turns-one-today.html'
+    it('returns an error on invalid content types', async () => {
+      const error = await Mercury.parse(
+        'https://upload.wikimedia.org/wikipedia/commons/5/52/Spacer.gif'
       );
 
-      assert.equal(typeof result, 'object');
+      assert(/content-type for this resource/i.test(error.messages));
     });
 
     it('does blogger', async () => {
