@@ -93,4 +93,5 @@ export * from './www.fortinet.com';
 export * from './www.fastcompany.com';
 export * from './blisterreview.com';
 export * from './news.mynavi.jp';
+export * from './github.com';
 export * from './www.reddit.com';
