@@ -44,7 +44,7 @@ The result looks like this:
 ```json
 {
   "title": "Thunder (mascot)",
-  "content": "<div><div><p>This is the content of the page!</div></div>",
+  "content": "... <p><b>Thunder</b> is the <a href=\"https://en.wikipedia.org/wiki/Stage_name\">stage name</a> for the...",
   "author": "Wikipedia Contributors",
   "date_published": "2016-09-16T20:56:00.000Z",
   "lead_image_url": null,
@@ -62,6 +62,22 @@ The result looks like this:
 
 If Mercury is unable to find a field, that field will return `null`.
 
+#### `parse()` Options
+
+By default, Mercury Parser returns the `content` field as HTML. However, you can override this behavior by passing in options to the `parse` function, specifying whether or not to scrape all pages of an article, and what type of output to return (valid values are `'html'`, `'markdown'`, and `'text'`). For example:
+
+```javascript
+Mercury.parse(url, { contentType: 'markdown' }).then(result => console.log(result));
+```
+
+This returns the the page's `content` as GitHub-flavored Markdown:
+
+```json
+"content": "...**Thunder** is the [stage name](https://en.wikipedia.org/wiki/Stage_name) for the..."
+```
+
+#### The command-line parser
+
 Mercury Parser also ships with a CLI, meaning you can use the Mercury Parser
 from your command line like so:
 
@@ -75,6 +91,9 @@ npm -g install @postlight/mercury-parser
 
 # Then
 mercury-parser https://postlight.com/trackchanges/mercury-goes-open-source
+
+# Pass optional --format argument to set content type (html|markdown|text)
+mercury-parser https://postlight.com/trackchanges/mercury-goes-open-source --format=markdown
 ```
 
 ## License
