@@ -30,7 +30,7 @@ const Mercury = {
       return {
         error: true,
         message:
-          'The url parameter passed does not look like a valid URL. Please check your data and try again.',
+          'The url parameter passed does not look like a valid URL. Please check your URL and try again.',
       };
     }
 
