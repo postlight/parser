@@ -82,7 +82,7 @@ This returns the the page's `content` as GitHub-flavored Markdown:
 
 ##### Custom HTML
 
-You can use Mercury Parser to parse custom or pre-fetched HTML, by passing in an HTML string to the `parse` function as follows:
+You can use Mercury Parser to parse custom or pre-fetched HTML by passing an HTML string to the `parse` function as follows:
 
 ```javascript
 Mercury.parse(url, {
