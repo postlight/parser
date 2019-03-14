@@ -14,13 +14,13 @@ describe('Mercury', () => {
     it('returns an error if a malformed url is passed', async () => {
       const error = await Mercury.parse('foo.com');
 
-      assert(/does not look like a valid URL/i.test(error.messages));
+      assert(/does not look like a valid URL/i.test(error.message));
     });
 
     it('returns an error if a bad url is passed', async () => {
       const error = await Mercury.parse('foo.com');
 
-      assert(/does not look like a valid URL/i.test(error.messages));
+      assert(/does not look like a valid URL/i.test(error.message));
     });
 
     it('does the whole thing', async () => {
@@ -37,7 +37,7 @@ describe('Mercury', () => {
         'https://www.thekitchn.com/instant-pot-chicken-pesto-pasta-eating-instantly-267141'
       );
 
-      assert(/instructed to reject non-2xx/i.test(error.messages));
+      assert(/instructed to reject non-2xx/i.test(error.message));
     });
 
     it('returns an error on invalid content types', async () => {
@@ -45,7 +45,7 @@ describe('Mercury', () => {
         'https://upload.wikimedia.org/wikipedia/commons/5/52/Spacer.gif'
       );
 
-      assert(/content-type for this resource/i.test(error.messages));
+      assert(/content-type for this resource/i.test(error.message));
     });
 
     it('does blogger', async () => {

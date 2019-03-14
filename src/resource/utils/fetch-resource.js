@@ -120,7 +120,7 @@ export default async function fetchResource(url, parsedUrl) {
   } catch (e) {
     return {
       error: true,
-      messages: e.message,
+      message: e.message,
     };
   }
 }

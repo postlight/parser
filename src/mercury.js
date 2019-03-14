@@ -29,7 +29,7 @@ const Mercury = {
     if (!validateUrl(parsedUrl)) {
       return {
         error: true,
-        messages:
+        message:
           'The url parameter passed does not look like a valid URL. Please check your data and try again.',
       };
     }
