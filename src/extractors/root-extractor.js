@@ -1,5 +1,5 @@
 import Cleaners from 'cleaners';
-import { convertNodeTo } from 'utils/dom';
+import { convertNodeTo, makeLinksAbsolute } from 'utils/dom';
 import GenericExtractor from './generic';
 
 // Remove elements by an array of selectors
@@ -97,25 +97,40 @@ export function select(opts) {
       $content = $(selector);
     }
 
-    if ($content.length > 1) {
-      return $content.toArray().map(el => $.html($(el)));
-    }
-
     // Wrap in div so transformation can take place on root element
     $content.wrap($('<div></div>'));
     $content = $content.parent();
-    $content = transformElements($content, $, extractionOpts);
-    $content = cleanBySelectors($content, $, extractionOpts);
+    transformElements($content, $, extractionOpts);
+    cleanBySelectors($content, $, extractionOpts);
     if (Cleaners[type]) {
-      $content = Cleaners[type]($content, { ...opts, defaultCleaner });
+      Cleaners[type]($content, { ...opts, defaultCleaner });
     }
+    makeLinksAbsolute($content, $, opts.url || '');
+
+    if (allowMultiple) {
+      return $content
+        .children()
+        .toArray()
+        .map(el => $.html($(el)));
+    }
+
     return $.html($content);
   }
 
   function transformAndCleanNode(_, $node) {
-    $node = cleanBySelectors($node, $, extractionOpts);
-    $node = transformElements($node, $, extractionOpts);
+    cleanBySelectors($node, $, extractionOpts);
+    transformElements($node, $, extractionOpts);
     return $node;
+  }
+
+  function absolutifyNode(_, $node) {
+    if (this.name !== 'a' && this.name !== 'img') return this;
+
+    const $wrapper = $('<div></div>');
+    $wrapper.append($node);
+    $node = $wrapper;
+    makeLinksAbsolute($node, $, opts.url);
+    return $.html($node.children().first());
   }
 
   const matchingSelector = findMatchingSelector(
@@ -127,53 +142,41 @@ export function select(opts) {
 
   if (!matchingSelector) return null;
 
-  // Declaring result; will contain either
-  // text or html, which will be cleaned
-  // by the appropriate cleaner type
-  let result;
-
   if (extractHtml) {
     return selectHtml(matchingSelector);
   }
 
+  let $match;
+  let result;
   // if selector is an array (e.g., ['img', 'src']),
   // extract the attr
   if (Array.isArray(matchingSelector)) {
     const [selector, attr] = matchingSelector;
-    const $nodeWithAttr = $(selector);
-
-    if ($nodeWithAttr.length > 1) {
-      result = $nodeWithAttr
-        .map((_, el) =>
-          $(el)
-            .attr(attr)
-            .trim()
-        )
-        .toArray();
-    } else {
-      const matchingAttr = $nodeWithAttr.attr(attr).trim();
-      result = allowMultiple ? [matchingAttr] : matchingAttr;
-    }
+    $match = $(selector);
+    result = $match
+      .map(transformAndCleanNode)
+      .map(absolutifyNode)
+      .map((_, el) =>
+        $(el)
+          .attr(attr)
+          .trim()
+      );
   } else {
-    const $node = $(matchingSelector);
-
-    if ($node.length > 1) {
-      result = $node
-        .map(transformAndCleanNode)
-        .map((_, el) =>
-          $(el)
-            .text()
-            .trim()
-        )
-        .toArray();
-    } else {
-      const transformedNode = transformAndCleanNode(null, $node)
-        .text()
-        .trim();
-      result = allowMultiple ? [transformedNode] : transformedNode;
-    }
+    $match = $(matchingSelector);
+    result = $match
+      .map(transformAndCleanNode)
+      .map(absolutifyNode)
+      .map((_, el) =>
+        $(el)
+          .text()
+          .trim()
+      );
   }
 
+  result =
+    Array.isArray(result.toArray()) && allowMultiple
+      ? result.toArray()
+      : result[0];
   // Allow custom extractor to skip default cleaner
   // for this type; defaults to true
   if (defaultCleaner && Cleaners[type]) {
@@ -183,11 +186,11 @@ export function select(opts) {
   return result;
 }
 
-export function selectExtendedTypes($, extend) {
+export function selectExtendedTypes(extend, opts) {
   const results = {};
   Reflect.ownKeys(extend).forEach(t => {
     if (!results[t]) {
-      results[t] = select({ $, type: t, extractionOpts: extend[t] });
+      results[t] = select({ ...opts, type: t, extractionOpts: extend[t] });
     }
   });
   return results;
@@ -258,7 +261,7 @@ const RootExtractor = {
 
     let extendedResults = {};
     if (extractor.extend) {
-      extendedResults = selectExtendedTypes(opts.$, extractor.extend);
+      extendedResults = selectExtendedTypes(extractor.extend, opts);
     }
 
     return {

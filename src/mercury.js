@@ -59,7 +59,7 @@ const Mercury = {
 
     let extendedTypes = {};
     if (extend) {
-      extendedTypes = selectExtendedTypes($, extend);
+      extendedTypes = selectExtendedTypes(extend, { $, url, html });
     }
 
     let result = RootExtractor.extract(Extractor, {

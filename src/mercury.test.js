@@ -186,6 +186,6 @@ describe('Mercury', () => {
     });
     assert.ok(sites);
     assert.equal(sites.length, 8);
-    assert.equal(sites[1], '//nymag.com/daily/intelligencer/');
+    assert.equal(sites[1], 'http://nymag.com/daily/intelligencer/');
   });
 });
