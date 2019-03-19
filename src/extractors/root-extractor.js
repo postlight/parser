@@ -76,7 +76,23 @@ export function select(opts) {
 
   const { selectors, defaultCleaner = true, allowMultiple } = extractionOpts;
 
-  function selectHtml(selector) {
+  const matchingSelector = findMatchingSelector(
+    $,
+    selectors,
+    extractHtml,
+    allowMultiple
+  );
+
+  if (!matchingSelector) return null;
+
+  function transformAndClean($node) {
+    makeLinksAbsolute($node, $, opts.url || '');
+    cleanBySelectors($node, $, extractionOpts);
+    transformElements($node, $, extractionOpts);
+    return $node;
+  }
+
+  function selectHtml() {
     // If the selector type requests html as its return type
     // transform and clean the element with provided selectors
     let $content;
@@ -85,8 +101,8 @@ export function select(opts) {
     // multi-match selection, which allows the parser to choose several
     // selectors to include in the result. Note that all selectors in the
     // array must match in order for this selector to trigger
-    if (Array.isArray(selector)) {
-      $content = $(selector.join(','));
+    if (Array.isArray(matchingSelector)) {
+      $content = $(matchingSelector.join(','));
       const $wrapper = $('<div></div>');
       $content.each((_, element) => {
         $wrapper.append(element);
@@ -94,18 +110,16 @@ export function select(opts) {
 
       $content = $wrapper;
     } else {
-      $content = $(selector);
+      $content = $(matchingSelector);
     }
 
     // Wrap in div so transformation can take place on root element
     $content.wrap($('<div></div>'));
     $content = $content.parent();
-    transformElements($content, $, extractionOpts);
-    cleanBySelectors($content, $, extractionOpts);
+    $content = transformAndClean($content);
     if (Cleaners[type]) {
       Cleaners[type]($content, { ...opts, defaultCleaner });
     }
-    makeLinksAbsolute($content, $, opts.url || '');
 
     if (allowMultiple) {
       return $content
@@ -116,31 +130,6 @@ export function select(opts) {
 
     return $.html($content);
   }
-
-  function transformAndCleanNode(_, $node) {
-    cleanBySelectors($node, $, extractionOpts);
-    transformElements($node, $, extractionOpts);
-    return $node;
-  }
-
-  function absolutifyNode(_, $node) {
-    if (this.name !== 'a' && this.name !== 'img') return this;
-
-    const $wrapper = $('<div></div>');
-    $wrapper.append($node);
-    $node = $wrapper;
-    makeLinksAbsolute($node, $, opts.url);
-    return $.html($node.children().first());
-  }
-
-  const matchingSelector = findMatchingSelector(
-    $,
-    selectors,
-    extractHtml,
-    allowMultiple
-  );
-
-  if (!matchingSelector) return null;
 
   if (extractHtml) {
     return selectHtml(matchingSelector);
@@ -153,24 +142,20 @@ export function select(opts) {
   if (Array.isArray(matchingSelector)) {
     const [selector, attr] = matchingSelector;
     $match = $(selector);
-    result = $match
-      .map(transformAndCleanNode)
-      .map(absolutifyNode)
-      .map((_, el) =>
-        $(el)
-          .attr(attr)
-          .trim()
-      );
+    $match = transformAndClean($match);
+    result = $match.map((_, el) =>
+      $(el)
+        .attr(attr)
+        .trim()
+    );
   } else {
     $match = $(matchingSelector);
-    result = $match
-      .map(transformAndCleanNode)
-      .map(absolutifyNode)
-      .map((_, el) =>
-        $(el)
-          .text()
-          .trim()
-      );
+    $match = transformAndClean($match);
+    result = $match.map((_, el) =>
+      $(el)
+        .text()
+        .trim()
+    );
   }
 
   result =
