@@ -16,4 +16,11 @@ describe('normalizeSpaces(text)', () => {
     );
     assert.equal(result, HTML.normalizeSpaces.after);
   });
+
+  it('preserves spaces in preformatted text blocks', () => {
+    const $ = cheerio.load(HTML.normalizeSpacesPreserve.before);
+
+    const result = normalizeSpaces($.html());
+    assert.equal(result, HTML.normalizeSpacesPreserve.after);
+  });
 });

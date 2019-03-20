@@ -610,6 +610,16 @@ const HTML = {
     `,
     after: 'What do you think?',
   },
+  normalizeSpacesPreserve: {
+    before: `
+      <div>
+        <p>What   do  you    think?</p>
+        <pre>  What     happens to        spaces?    </pre>
+      </div>
+    `,
+    after:
+      '<div> <p>What do you think?</p> <pre>  What     happens to        spaces?    </pre> </div>',
+  },
 
   // cleanHeaders
   cleanFirstHeds: {

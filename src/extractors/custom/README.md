@@ -43,7 +43,7 @@ As you might guess, the selectors key provides an array of selectors that Mercur
 
 The selector you choose should return one element. If more than one element is returned by your selector, it will fail (and Mercury will fall back to its generic extractor).
 
-Because the `selectors` property returns an array, you to write more than one selector for a property extractor. This is particularly useful for sites that have multiple templates for articles. If you provide an array of selectors, Mercury will try each in order, falling back to the next until it finds a match or exhausts the options (in which case it will fall back to its default generic extractor).
+Because the `selectors` property returns an array, you can write more than one selector for a property extractor. This is particularly useful for sites that have multiple templates for articles. If you provide an array of selectors, Mercury will try each in order, falling back to the next until it finds a match or exhausts the options (in which case it will fall back to its default generic extractor).
 
 #### Selecting an attribute
 
@@ -72,6 +72,28 @@ export const ExampleExtractor = {
 ```
 
 This is all you'll need to know to handle most of the fields Mercury parses (titles, authors, date published, etc.). Article content is the exception.
+
+#### Content selectors
+
+If you pass an array selector for the content selection, it behaves differently from the attribute selectors on other types. In such cases, it will be considered as a multi-match selection, which allows the parser to choose several selectors to include in the result, and will include all occurrences of each matching selector in the result.
+
+Note that all selectors in the array must match in order for this selector to trigger.
+
+```javascript
+export const ExampleExtractor = {
+    ...
+
+    // Attempt to match both the content and image
+    // before falling back to just the content
+    content: {
+      selectors: [
+        ['.parsys.content', '.__image-lead__'],
+        '.content'
+      ],
+    },
+
+    ...
+```
 
 ### Cleaning content from an article
 
@@ -212,7 +234,7 @@ it('returns the title', async () => {
   const articleUrl =
     'http://www.newyorker.com/tech/elements/hacking-cryptography-and-the-countdown-to-quantum-computing';
 
-  const { title } = await Mercury.parse(articleUrl, html, { fallback: false });
+  const { title } = await Mercury.parse(articleUrl, { html, fallback: false });
 
   // Update these values with the expected values from
   // the article.

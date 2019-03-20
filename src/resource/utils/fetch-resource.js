@@ -1,6 +1,5 @@
 import URL from 'url';
-import request from 'request';
-import { Errors } from 'utils';
+import request from 'postman-request';
 
 import {
   REQUEST_HEADERS,
@@ -119,6 +118,9 @@ export default async function fetchResource(url, parsedUrl) {
       response,
     };
   } catch (e) {
-    return Errors.badUrl;
+    return {
+      error: true,
+      message: e.message,
+    };
   }
 }

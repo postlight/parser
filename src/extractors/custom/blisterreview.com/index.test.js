@@ -8,72 +8,82 @@ import { excerptContent } from 'utils/text';
 
 const fs = require('fs');
 
-describe('DeadspinExtractor', () => {
+describe('BlisterreviewComExtractor', () => {
   describe('initial test case', () => {
     let result;
     let url;
     beforeAll(() => {
-      url =
-        'http://deadspin.com/the-nationals-are-stuck-with-danny-espinosa-tonight-un-1787706769';
+      url = 'https://blisterreview.com/gear-reviews/2019-2020-line-outline';
       const html = fs.readFileSync(
-        './fixtures/deadspin.com/1476389931786.html'
+        './fixtures/blisterreview.com/1551128228532.html'
       );
       result = Mercury.parse(url, { html, fallback: false });
     });
 
-    it('is selected properly', async () => {
+    it('is selected properly', () => {
+      // This test should be passing by default.
+      // It sanity checks that the correct parser
+      // is being selected for URLs from this domain
       const extractor = getExtractor(url);
       assert.equal(extractor.domain, URL.parse(url).hostname);
     });
 
     it('returns the title', async () => {
       // To pass this test, fill out the title selector
-      // in ./src/extractors/custom/deadspin.com/index.js.
+      // in ./src/extractors/custom/blisterreview.com/index.js.
+      const { title } = await result;
+
       // Update these values with the expected values from
       // the article.
-      const { title } = await result;
-      assert.equal(
-        title,
-        'The Nationals Are Stuck With Danny Espinosa Tonight, Unless They Opt For The Only Thing Worse'
-      );
+      assert.equal(title, `2019-2020 Line Outline`);
     });
 
     it('returns the author', async () => {
       // To pass this test, fill out the author selector
-      // in ./src/extractors/custom/deadspin.com/index.js.
+      // in ./src/extractors/custom/blisterreview.com/index.js.
       const { author } = await result;
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(author, 'Chris Thompson');
+      assert.equal(author, `Sam Shaheen`);
     });
 
     it('returns the date_published', async () => {
       // To pass this test, fill out the date_published selector
-      // in ./src/extractors/custom/deadspin.com/index.js.
+      // in ./src/extractors/custom/blisterreview.com/index.js.
       const { date_published } = await result;
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(date_published, '2016-10-13T16:34:00.000Z');
+      assert.equal(date_published, `2019-02-20T15:18:15.000Z`);
     });
+
+    // it('returns the dek', async () => {
+    //     // To pass this test, fill out the dek selector
+    //     // in ./src/extractors/custom/blisterreview.com/index.js.
+    //     const { dek } = await result
+
+    //     // Update these values with the expected values from
+    //     // the article.
+    //     assert.equal(dek, '')
+    //   });
 
     it('returns the lead_image_url', async () => {
       // To pass this test, fill out the lead_image_url selector
-      // in ./src/extractors/custom/deadspin.com/index.js.
+      // in ./src/extractors/custom/blisterreview.com/index.js.
       const { lead_image_url } = await result;
 
       // Update these values with the expected values from
       // the article.
       assert.equal(
         lead_image_url,
-        'https://i.kinja-img.com/gawker-media/image/upload/s--SUEXWZgf--/c_fill,fl_progressive,g_center,h_450,q_80,w_800/vmeayd7lteyycwzcdlju.jpg'
+        `https://blisterreview.com/wp-content/uploads/2019/02/thumb-6.jpg`
       );
     });
 
     it('returns the content', async () => {
       // To pass this test, fill out the content selector
-      // in ./src/extractors/custom/deadspin.com/index.js.
+      // in ./src/extractors/custom/blisterreview.com/index.js.
       // You may also want to make use of the clean and transform
       // options.
       const { content } = await result;
@@ -91,28 +101,8 @@ describe('DeadspinExtractor', () => {
       // the article.
       assert.equal(
         first13,
-        'Photo credit: Rob Carr/Getty Washington’s Danny Espinosa problem is inextricably linked to its'
+        'Ski: 2019-2020 Line Outline, 186 cmAvailable Lengths: 178, 186 cmBlister’s Measured Tip-to-Tail Length:'
       );
     });
-  });
-
-  it('handles lazy-loaded video', async () => {
-    // To pass this test, fill out the content selector
-    // in ./src/extractors/custom/deadspin.com/index.js.
-    // You may also want to make use of the clean and transform
-    // options.
-    const html = fs.readFileSync('./fixtures/deadspin.com/1477505848605.html');
-    const url =
-      'http://deadspin.com/remember-when-donald-trump-got-booed-for-butchering-ta-1788216229';
-
-    const { content } = await Mercury.parse(url, { html, fallback: false });
-
-    const $ = cheerio.load(content || '');
-
-    const youtube = $('iframe[src]');
-
-    // Update these values with the expected values from
-    // the article.
-    assert.equal(youtube.length, 1);
   });
 });

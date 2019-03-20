@@ -8,72 +8,88 @@ import { excerptContent } from 'utils/text';
 
 const fs = require('fs');
 
-describe('DeadspinExtractor', () => {
+describe('NewsMynaviJpExtractor', () => {
   describe('initial test case', () => {
     let result;
     let url;
     beforeAll(() => {
-      url =
-        'http://deadspin.com/the-nationals-are-stuck-with-danny-espinosa-tonight-un-1787706769';
+      url = 'https://news.mynavi.jp/article/20190222-775563/';
       const html = fs.readFileSync(
-        './fixtures/deadspin.com/1476389931786.html'
+        './fixtures/news.mynavi.jp/1550913587143.html'
       );
       result = Mercury.parse(url, { html, fallback: false });
     });
 
-    it('is selected properly', async () => {
+    it('is selected properly', () => {
+      // This test should be passing by default.
+      // It sanity checks that the correct parser
+      // is being selected for URLs from this domain
       const extractor = getExtractor(url);
       assert.equal(extractor.domain, URL.parse(url).hostname);
     });
 
     it('returns the title', async () => {
       // To pass this test, fill out the title selector
-      // in ./src/extractors/custom/deadspin.com/index.js.
+      // in ./src/extractors/custom/news.mynavi.jp/index.js.
+      const { title } = await result;
+
       // Update these values with the expected values from
       // the article.
-      const { title } = await result;
       assert.equal(
         title,
-        'The Nationals Are Stuck With Danny Espinosa Tonight, Unless They Opt For The Only Thing Worse'
+        `人気の圧縮・解凍ソフト「WinRAR」に脆弱性、アップデートを`
       );
     });
 
     it('returns the author', async () => {
       // To pass this test, fill out the author selector
-      // in ./src/extractors/custom/deadspin.com/index.js.
+      // in ./src/extractors/custom/news.mynavi.jp/index.js.
       const { author } = await result;
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(author, 'Chris Thompson');
+      assert.equal(author, '後藤大地');
     });
 
     it('returns the date_published', async () => {
       // To pass this test, fill out the date_published selector
-      // in ./src/extractors/custom/deadspin.com/index.js.
+      // in ./src/extractors/custom/news.mynavi.jp/index.js.
       const { date_published } = await result;
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(date_published, '2016-10-13T16:34:00.000Z');
+      assert.equal(date_published, `2019-02-22T08:23:44.000Z`);
+    });
+
+    it('returns the dek', async () => {
+      // To pass this test, fill out the dek selector
+      // in ./src/extractors/custom/news.mynavi.jp/index.js.
+      const { dek } = await result;
+
+      // Update these values with the expected values from
+      // the article.
+      assert.equal(
+        dek,
+        'Check Point Software Technologiesは2月20日(米国時間)、人気の高い圧縮・解凍ソフトウェアであるWinRARに長年にわたって脆弱性が存在していると伝えた。この脆弱性の影響で、細工されたファイルを展開する段階でマルウェアに感染させられる可能性があるという。'
+      );
     });
 
     it('returns the lead_image_url', async () => {
       // To pass this test, fill out the lead_image_url selector
-      // in ./src/extractors/custom/deadspin.com/index.js.
+      // in ./src/extractors/custom/news.mynavi.jp/index.js.
       const { lead_image_url } = await result;
 
       // Update these values with the expected values from
       // the article.
       assert.equal(
         lead_image_url,
-        'https://i.kinja-img.com/gawker-media/image/upload/s--SUEXWZgf--/c_fill,fl_progressive,g_center,h_450,q_80,w_800/vmeayd7lteyycwzcdlju.jpg'
+        `https://news.mynavi.jp/article/20190222-775563/index_images/index.jpg`
       );
     });
 
     it('returns the content', async () => {
       // To pass this test, fill out the content selector
-      // in ./src/extractors/custom/deadspin.com/index.js.
+      // in ./src/extractors/custom/news.mynavi.jp/index.js.
       // You may also want to make use of the clean and transform
       // options.
       const { content } = await result;
@@ -91,28 +107,8 @@ describe('DeadspinExtractor', () => {
       // the article.
       assert.equal(
         first13,
-        'Photo credit: Rob Carr/Getty Washington’s Danny Espinosa problem is inextricably linked to its'
+        'Check Point Software Technologiesは2月20日(米国時間)、「Extracting a 19 Year Old Code Execution from WinRAR -'
       );
     });
-  });
-
-  it('handles lazy-loaded video', async () => {
-    // To pass this test, fill out the content selector
-    // in ./src/extractors/custom/deadspin.com/index.js.
-    // You may also want to make use of the clean and transform
-    // options.
-    const html = fs.readFileSync('./fixtures/deadspin.com/1477505848605.html');
-    const url =
-      'http://deadspin.com/remember-when-donald-trump-got-booed-for-butchering-ta-1788216229';
-
-    const { content } = await Mercury.parse(url, { html, fallback: false });
-
-    const $ = cheerio.load(content || '');
-
-    const youtube = $('iframe[src]');
-
-    // Update these values with the expected values from
-    // the article.
-    assert.equal(youtube.length, 1);
   });
 });
