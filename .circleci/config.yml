@@ -16,7 +16,11 @@ jobs:
       - run: 'yarn lint:ci'
       - run: 'yarn build:ci'
       - run: 'yarn test:node --maxWorkers=4'
-      - run: './scripts/pr-parser-preview.sh'
+      - run:
+          name: Parser Preview
+          command: ./scripts/pr-parser-preview.sh
+          when: always
+
       - store_artifacts:
           path: tmp/artifacts
       - persist_to_workspace:
