@@ -80,7 +80,7 @@ This returns the the page's `content` as GitHub-flavored Markdown:
 "content": "...**Thunder** is the [stage name](https://en.wikipedia.org/wiki/Stage_name) for the..."
 ```
 
-##### Custom HTML
+##### Pre-fetched HTML
 
 You can use Mercury Parser to parse custom or pre-fetched HTML by passing an HTML string to the `parse` function as follows:
 
