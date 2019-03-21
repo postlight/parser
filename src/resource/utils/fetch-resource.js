@@ -86,11 +86,11 @@ export function baseDomain({ host }) {
 // TODO: Ensure we are not fetching something enormous. Always return
 //       unicode content for HTML, with charset conversion.
 
-export default async function fetchResource(url, parsedUrl) {
+export default async function fetchResource(url, parsedUrl, headers = {}) {
   parsedUrl = parsedUrl || URL.parse(encodeURI(url));
   const options = {
     url: parsedUrl.href,
-    headers: { ...REQUEST_HEADERS },
+    headers: { ...REQUEST_HEADERS, ...headers },
     timeout: FETCH_TIMEOUT,
     // Accept cookies
     jar: true,

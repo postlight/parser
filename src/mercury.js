@@ -14,6 +14,7 @@ const Mercury = {
       fetchAllPages = true,
       fallback = true,
       contentType = 'html',
+      headers = {},
     } = opts;
 
     // if no url was passed and this is the browser version,
@@ -34,7 +35,7 @@ const Mercury = {
       };
     }
 
-    const $ = await Resource.create(url, html, parsedUrl);
+    const $ = await Resource.create(url, html, parsedUrl, headers);
 
     // If we found an error creating the resource, return that error
     if ($.failed) {

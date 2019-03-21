@@ -8,8 +8,10 @@ const {
   _: [url],
   format,
   f,
+  header,
+  h,
 } = argv;
-(async (urlToParse, contentType) => {
+(async (urlToParse, contentType, headers) => {
   if (!urlToParse) {
     console.log(
       '\n\
@@ -17,7 +19,7 @@ mercury-parser\n\n\
     The Mercury Parser extracts semantic content from any url\n\n\
 Usage:\n\
 \n\
-    $ mercury-parser url-to-parse [--format=html|text|markdown]\n\
+    $ mercury-parser url-to-parse [--format=html|text|markdown] [--header.name=value]...\n\
 \n\
 '
     );
@@ -33,6 +35,7 @@ Usage:\n\
     };
     const result = await Mercury.parse(urlToParse, {
       contentType: contentTypeMap[contentType],
+      headers,
     });
     console.log(JSON.stringify(result, null, 2));
   } catch (e) {
@@ -51,4 +54,4 @@ Usage:\n\
     console.error(`\n${reportBug}\n`);
     process.exit(1);
   }
-})(url, format || f);
+})(url, format || f, header || h);

@@ -12,7 +12,8 @@ const Resource = {
   // :param response: If set, use as the response rather than
   //                  attempting to fetch it ourselves. Expects a
   //                  string.
-  async create(url, preparedResponse, parsedUrl) {
+  // :param headers: Custom headers to be included in the request
+  async create(url, preparedResponse, parsedUrl, headers = {}) {
     let result;
 
     if (preparedResponse) {
@@ -27,7 +28,7 @@ const Resource = {
 
       result = { body: preparedResponse, response: validResponse };
     } else {
-      result = await fetchResource(url, parsedUrl);
+      result = await fetchResource(url, parsedUrl, headers);
     }
 
     if (result.error) {

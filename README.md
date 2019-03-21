@@ -64,16 +64,34 @@ If Mercury is unable to find a field, that field will return `null`.
 
 #### `parse()` Options
 
+##### Content Formats
+
 By default, Mercury Parser returns the `content` field as HTML. However, you can override this behavior by passing in options to the `parse` function, specifying whether or not to scrape all pages of an article, and what type of output to return (valid values are `'html'`, `'markdown'`, and `'text'`). For example:
 
 ```javascript
-Mercury.parse(url, { contentType: 'markdown' }).then(result => console.log(result));
+Mercury.parse(url, { contentType: 'markdown' }).then(result =>
+  console.log(result)
+);
 ```
 
 This returns the the page's `content` as GitHub-flavored Markdown:
 
 ```json
 "content": "...**Thunder** is the [stage name](https://en.wikipedia.org/wiki/Stage_name) for the..."
+```
+
+##### Custom Request Headers
+
+You can include custom headers in requests by passing name-value pairs to the `parse` function as follows:
+
+```javascript
+Mercury.parse(url, {
+  headers: {
+    Cookie: 'name=value; name2=value2; name3=value3',
+    'User-Agent':
+      'Mozilla/5.0 (iPhone; CPU iPhone OS 10_3_1 like Mac OS X) AppleWebKit/603.1.30 (KHTML, like Gecko) Version/10.0 Mobile/14E304 Safari/602.1',
+  },
+}).then(result => console.log(result));
 ```
 
 #### The command-line parser
@@ -94,6 +112,9 @@ mercury-parser https://postlight.com/trackchanges/mercury-goes-open-source
 
 # Pass optional --format argument to set content type (html|markdown|text)
 mercury-parser https://postlight.com/trackchanges/mercury-goes-open-source --format=markdown
+
+# Pass optional --header.name=value arguments to include custom headers in the request
+mercury-parser https://postlight.com/trackchanges/mercury-goes-open-source --header.Cookie="name=value; name2=value2; name3=value3" --header.User-Agent="Mozilla/5.0 (iPhone; CPU iPhone OS 10_3_1 like Mac OS X) AppleWebKit/603.1.30 (KHTML, like Gecko) Version/10.0 Mobile/14E304 Safari/602.1"
 ```
 
 ## License
