@@ -13,7 +13,7 @@ var iconv = _interopDefault(require('iconv-lite'));
 var _parseInt = _interopDefault(require('@babel/runtime-corejs2/core-js/parse-int'));
 var _slicedToArray = _interopDefault(require('@babel/runtime-corejs2/helpers/slicedToArray'));
 var _Promise = _interopDefault(require('@babel/runtime-corejs2/core-js/promise'));
-var request = _interopDefault(require('request'));
+var request = _interopDefault(require('postman-request'));
 var _Reflect$ownKeys = _interopDefault(require('@babel/runtime-corejs2/core-js/reflect/own-keys'));
 var _toConsumableArray = _interopDefault(require('@babel/runtime-corejs2/helpers/toConsumableArray'));
 var _defineProperty = _interopDefault(require('@babel/runtime-corejs2/helpers/defineProperty'));
@@ -32,7 +32,7 @@ var _Array$from = _interopDefault(require('@babel/runtime-corejs2/core-js/array/
 var ellipsize = _interopDefault(require('ellipsize'));
 var _Array$isArray = _interopDefault(require('@babel/runtime-corejs2/core-js/array/is-array'));
 
-var NORMALIZE_RE = /\s{2,}/g;
+var NORMALIZE_RE = /\s{2,}(?![^<>]*<\/(pre|code|textarea)>)/g;
 function normalizeSpaces(text) {
   return text.replace(NORMALIZE_RE, ' ').trim();
 }
@@ -400,10 +400,10 @@ var SPACER_RE = new RegExp('transparent|spacer|blank', 'i'); // The class we wil
 // but would normally remove
 
 var KEEP_CLASS = 'mercury-parser-keep';
-var KEEP_SELECTORS = ['iframe[src^="https://www.youtube.com"]', 'iframe[src^="https://www.youtube-nocookie.com"]', 'iframe[src^="http://www.youtube.com"]', 'iframe[src^="https://player.vimeo"]', 'iframe[src^="http://player.vimeo"]']; // A list of tags to strip from the output if we encounter them.
+var KEEP_SELECTORS = ['iframe[src^="https://www.youtube.com"]', 'iframe[src^="https://www.youtube-nocookie.com"]', 'iframe[src^="http://www.youtube.com"]', 'iframe[src^="https://player.vimeo"]', 'iframe[src^="http://player.vimeo"]', 'iframe[src^="https://www.redditmedia.com"]']; // A list of tags to strip from the output if we encounter them.
 
 var STRIP_OUTPUT_TAGS = ['title', 'script', 'noscript', 'link', 'style', 'hr', 'embed', 'iframe', 'object']; // cleanAttributes
-var WHITELIST_ATTRS = ['src', 'srcset', 'href', 'class', 'id', 'alt', 'xlink:href', 'width', 'height'];
+var WHITELIST_ATTRS = ['src', 'srcset', 'sizes', 'type', 'href', 'class', 'id', 'alt', 'xlink:href', 'width', 'height'];
 var WHITELIST_ATTRS_RE = new RegExp("^(".concat(WHITELIST_ATTRS.join('|'), ")$"), 'i'); // removeEmpty
 
 var CLEAN_CONDITIONALLY_TAGS = ['ul', 'ol', 'table', 'div', 'button', 'form'].join(','); // cleanHeaders
@@ -1284,9 +1284,9 @@ function rewriteTopLevel$$1(article, $) {
   return $;
 }
 
-function absolutize($, rootUrl, attr, $content) {
+function absolutize($, rootUrl, attr) {
   var baseUrl = $('base').attr('href');
-  $("[".concat(attr, "]"), $content).each(function (_, node) {
+  $("[".concat(attr, "]")).each(function (_, node) {
     var attrs = getAttrs(node);
     var url = attrs[attr];
     var absoluteUrl = URL.resolve(baseUrl || rootUrl, url);
@@ -1321,7 +1321,7 @@ function absolutizeSet($, rootUrl, $content) {
 
 function makeLinksAbsolute$$1($content, $, url) {
   ['href', 'src'].forEach(function (attr) {
-    return absolutize($, url, attr, $content);
+    return absolutize($, url, attr);
   });
   absolutizeSet($, url, $content);
   return $content;
@@ -1567,7 +1567,9 @@ function setAttrs(node, attrs) {
 // DOM manipulation
 
 var IS_LINK = new RegExp('https?://', 'i');
-var IS_IMAGE = new RegExp('.(png|gif|jpe?g)', 'i');
+var IMAGE_RE = '.(png|gif|jpe?g)';
+var IS_IMAGE = new RegExp("".concat(IMAGE_RE), 'i');
+var IS_SRCSET = new RegExp("".concat(IMAGE_RE, "(\\s*[\\d.]+[wx])"), 'i');
 var TAGS_TO_REMOVE = ['script', 'style', 'form'].join(',');
 
 // lazy loaded images into normal images.
@@ -1582,7 +1584,9 @@ function convertLazyLoadedImages($) {
     _Reflect$ownKeys(attrs).forEach(function (attr) {
       var value = attrs[attr];
 
-      if (attr !== 'src' && IS_LINK.test(value) && IS_IMAGE.test(value)) {
+      if (attr !== 'srcset' && IS_LINK.test(value) && IS_SRCSET.test(value)) {
+        $(img).attr('srcset', value);
+      } else if (attr !== 'src' && attr !== 'srcset' && IS_LINK.test(value) && IS_IMAGE.test(value)) {
         $(img).attr('src', value);
       }
     });
@@ -2200,7 +2204,7 @@ var PoliticoExtractor = {
 
 var DeadspinExtractor = {
   domain: 'deadspin.com',
-  supportedDomains: ['jezebel.com', 'lifehacker.com', 'kotaku.com', 'gizmodo.com', 'jalopnik.com', 'kinja.com'],
+  supportedDomains: ['jezebel.com', 'lifehacker.com', 'kotaku.com', 'gizmodo.com', 'jalopnik.com', 'kinja.com', 'avclub.com', 'clickhole.com', 'splinternews.com', 'theonion.com', 'theroot.com', 'thetakeout.com', 'theinventory.com'],
   title: {
     selectors: ['h1.headline']
   },
@@ -4677,6 +4681,149 @@ var WwwFastcompanyComExtractor = {
   }
 };
 
+var BlisterreviewComExtractor = {
+  domain: 'blisterreview.com',
+  title: {
+    selectors: [['meta[name="og:title"]', 'value'], 'h1.entry-title']
+  },
+  author: {
+    selectors: ['span.author-name']
+  },
+  date_published: {
+    selectors: [['meta[name="article:published_time"]', 'value'], ['time.entry-date', 'datetime'], ['meta[itemprop="datePublished"]', 'content']]
+  },
+  dek: {
+    selectors: [// enter selectors
+    ]
+  },
+  lead_image_url: {
+    selectors: [['meta[name="og:image"]', 'value'], ['meta[property="og:image"]', 'content'], ['meta[itemprop="image"]', 'content'], ['meta[name="twitter:image"]', 'content'], ['img.attachment-large', 'src']]
+  },
+  content: {
+    selectors: [['.elementor-section-wrap', '.elementor-text-editor > p, .elementor-text-editor > ul > li, .attachment-large, .wp-caption-text']],
+    // Is there anything in the content you selected that needs transformed
+    // before it's consumable content? E.g., unusual lazy loaded images
+    transforms: {
+      figcaption: 'p'
+    },
+    // Is there anything that is in the result that shouldn't be?
+    // The clean selectors will remove anything that matches from
+    // the result
+    clean: ['.comments-area']
+  }
+};
+
+var NewsMynaviJpExtractor = {
+  domain: 'news.mynavi.jp',
+  title: {
+    selectors: [['meta[name="og:title"]', 'value']]
+  },
+  author: {
+    selectors: ['main div.article-author a.article-author__name']
+  },
+  date_published: {
+    selectors: [['meta[name="article:published_time"]', 'value']]
+  },
+  dek: {
+    selectors: [['meta[name="og:description"]', 'value']]
+  },
+  lead_image_url: {
+    selectors: [['meta[name="og:image"]', 'value']]
+  },
+  content: {
+    selectors: ['main article div'],
+    // Is there anything in the content you selected that needs transformed
+    // before it's consumable content? E.g., unusual lazy loaded images
+    transforms: {
+      img: function img($node) {
+        var src = $node.attr('data-original');
+
+        if (src !== '') {
+          $node.attr('src', src);
+        }
+      }
+    },
+    // Is there anything that is in the result that shouldn't be?
+    // The clean selectors will remove anything that matches from
+    // the result
+    clean: []
+  }
+};
+
+var GithubComExtractor = {
+  domain: 'github.com',
+  title: {
+    selectors: [['meta[name="og:title"]', 'value']]
+  },
+  author: {
+    selectors: [// enter author selectors
+    ]
+  },
+  date_published: {
+    selectors: [['span[itemprop="dateModified"] relative-time', 'datetime']]
+  },
+  dek: {
+    selectors: ['span[itemprop="about"]']
+  },
+  lead_image_url: {
+    selectors: [['meta[name="og:image"]', 'value']]
+  },
+  content: {
+    selectors: [['#readme article']],
+    // Is there anything in the content you selected that needs transformed
+    // before it's consumable content? E.g., unusual lazy loaded images
+    transforms: {},
+    // Is there anything that is in the result that shouldn't be?
+    // The clean selectors will remove anything that matches from
+    // the result
+    clean: []
+  }
+};
+
+var WwwRedditComExtractor = {
+  domain: 'www.reddit.com',
+  title: {
+    selectors: ['div[data-test-id="post-content"] h2']
+  },
+  author: {
+    selectors: ['div[data-test-id="post-content"] a[href*="user/"]']
+  },
+  date_published: {
+    selectors: ['div[data-test-id="post-content"] a[data-click-id="timestamp"]']
+  },
+  lead_image_url: {
+    selectors: [['meta[name="og:image"]', 'value']]
+  },
+  content: {
+    selectors: [['div[data-test-id="post-content"] p'], // text post
+    ['div[data-test-id="post-content"] a[target="_blank"]:not([data-click-id="timestamp"])', // external link
+    'div[data-test-id="post-content"] div[data-click-id="media"]'], // external link with media preview (YouTube, imgur album, etc...)
+    ['div[data-test-id="post-content"] div[data-click-id="media"]'], // Embedded media (Reddit video)
+    ['div[data-test-id="post-content"] a[target="_blank"]:not([data-click-id="timestamp"])'], // external link
+    'div[data-test-id="post-content"]'],
+    // Is there anything in the content you selected that needs transformed
+    // before it's consumable content? E.g., unusual lazy loaded images
+    transforms: {
+      'div[role="img"]': function divRoleImg($node) {
+        // External link image preview
+        var $img = $node.find('img');
+        var bgImg = $node.css('background-image');
+
+        if ($img.length === 1 && bgImg) {
+          $img.attr('src', bgImg.match(/\((.*?)\)/)[1].replace(/('|")/g, ''));
+          return $img;
+        }
+
+        return $node;
+      }
+    },
+    // Is there anything that is in the result that shouldn't be?
+    // The clean selectors will remove anything that matches from
+    // the result
+    clean: ['.icon']
+  }
+};
+
 
 
 var CustomExtractors = /*#__PURE__*/Object.freeze({
@@ -4772,7 +4919,11 @@ var CustomExtractors = /*#__PURE__*/Object.freeze({
   WwwSlateComExtractor: WwwSlateComExtractor,
   IciRadioCanadaCaExtractor: IciRadioCanadaCaExtractor,
   WwwFortinetComExtractor: WwwFortinetComExtractor,
-  WwwFastcompanyComExtractor: WwwFastcompanyComExtractor
+  WwwFastcompanyComExtractor: WwwFastcompanyComExtractor,
+  BlisterreviewComExtractor: BlisterreviewComExtractor,
+  NewsMynaviJpExtractor: NewsMynaviJpExtractor,
+  GithubComExtractor: GithubComExtractor,
+  WwwRedditComExtractor: WwwRedditComExtractor
 });
 
 var Extractors = _Object$keys(CustomExtractors).reduce(function (acc, key) {
@@ -4790,6 +4941,10 @@ var SEC_DATE_STRING = /^\d{10}$/i;
 var CLEAN_DATE_STRING_RE = /^\s*published\s*:?\s*(.*)/i;
 var TIME_MERIDIAN_SPACE_RE = /(.*\d)(am|pm)(.*)/i;
 var TIME_MERIDIAN_DOTS_RE = /\.m\./i;
+var TIME_NOW_STRING = /^\s*(just|right)?\s*now\s*/i;
+var timeUnits = ['seconds?', 'minutes?', 'hours?', 'days?', 'weeks?', 'months?', 'years?'];
+var allTimeUnits = timeUnits.join('|');
+var TIME_AGO_STRING = new RegExp("(\\d+)\\s+(".concat(allTimeUnits, ")\\s+ago"), 'i');
 var months = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
 var allMonths = months.join('|');
 var timestamp1 = '[0-9]{1,2}:[0-9]{2,2}( ?[ap].?m.?)?';
@@ -4843,6 +4998,15 @@ function cleanDateString(dateString) {
 function createDate(dateString, timezone, format) {
   if (TIME_WITH_OFFSET_RE.test(dateString)) {
     return moment(new Date(dateString));
+  }
+
+  if (TIME_AGO_STRING.test(dateString)) {
+    var fragments = TIME_AGO_STRING.exec(dateString);
+    return moment().subtract(fragments[1], fragments[2]);
+  }
+
+  if (TIME_NOW_STRING.test(dateString)) {
+    return moment();
   }
 
   return timezone ? moment.tz(dateString, format || parseFormat(dateString), timezone) : moment(dateString, format || parseFormat(dateString));
@@ -6124,7 +6288,7 @@ function transformElements($content, $, _ref2) {
   return $content;
 }
 
-function findMatchingSelector($, selectors, extractHtml) {
+function findMatchingSelector($, selectors, extractHtml, allowMultiple) {
   return selectors.find(function (selector) {
     if (_Array$isArray(selector)) {
       if (extractHtml) {
@@ -6137,10 +6301,10 @@ function findMatchingSelector($, selectors, extractHtml) {
           s = _selector[0],
           attr = _selector[1];
 
-      return $(s).length === 1 && $(s).attr(attr) && $(s).attr(attr).trim() !== '';
+      return (allowMultiple || !allowMultiple && $(s).length === 1) && $(s).attr(attr) && $(s).attr(attr).trim() !== '';
     }
 
-    return $(selector).length === 1 && $(selector).text().trim() !== '';
+    return (allowMultiple || !allowMultiple && $(selector).length === 1) && $(selector).text().trim() !== '';
   });
 }
 
@@ -6157,25 +6321,30 @@ function select(opts) {
   if (typeof extractionOpts === 'string') return extractionOpts;
   var selectors = extractionOpts.selectors,
       _extractionOpts$defau = extractionOpts.defaultCleaner,
-      defaultCleaner = _extractionOpts$defau === void 0 ? true : _extractionOpts$defau;
-  var matchingSelector = findMatchingSelector($, selectors, extractHtml);
-  if (!matchingSelector) return null; // Declaring result; will contain either
-  // text or html, which will be cleaned
-  // by the appropriate cleaner type
-  // If the selector type requests html as its return type
-  // transform and clean the element with provided selectors
+      defaultCleaner = _extractionOpts$defau === void 0 ? true : _extractionOpts$defau,
+      allowMultiple = extractionOpts.allowMultiple;
+  var matchingSelector = findMatchingSelector($, selectors, extractHtml, allowMultiple);
+  if (!matchingSelector) return null;
 
-  var $content;
+  function transformAndClean($node) {
+    makeLinksAbsolute$$1($node, $, opts.url || '');
+    cleanBySelectors($node, $, extractionOpts);
+    transformElements($node, $, extractionOpts);
+    return $node;
+  }
 
-  if (extractHtml) {
-    // If matching selector is an array, we're considering this a
+  function selectHtml() {
+    // If the selector type requests html as its return type
+    // transform and clean the element with provided selectors
+    var $content; // If matching selector is an array, we're considering this a
     // multi-match selection, which allows the parser to choose several
     // selectors to include in the result. Note that all selectors in the
     // array must match in order for this selector to trigger
+
     if (_Array$isArray(matchingSelector)) {
       $content = $(matchingSelector.join(','));
       var $wrapper = $('<div></div>');
-      $content.each(function (index, element) {
+      $content.each(function (_, element) {
         $wrapper.append(element);
       });
       $content = $wrapper;
@@ -6186,14 +6355,28 @@ function select(opts) {
 
     $content.wrap($('<div></div>'));
     $content = $content.parent();
-    $content = transformElements($content, $, extractionOpts);
-    $content = cleanBySelectors($content, $, extractionOpts);
-    $content = Cleaners[type]($content, _objectSpread({}, opts, {
-      defaultCleaner: defaultCleaner
-    }));
+    $content = transformAndClean($content);
+
+    if (Cleaners[type]) {
+      Cleaners[type]($content, _objectSpread({}, opts, {
+        defaultCleaner: defaultCleaner
+      }));
+    }
+
+    if (allowMultiple) {
+      return $content.children().toArray().map(function (el) {
+        return $.html($(el));
+      });
+    }
+
     return $.html($content);
   }
 
+  if (extractHtml) {
+    return selectHtml(matchingSelector);
+  }
+
+  var $match;
   var result; // if selector is an array (e.g., ['img', 'src']),
   // extract the attr
 
@@ -6202,21 +6385,41 @@ function select(opts) {
         selector = _matchingSelector[0],
         attr = _matchingSelector[1];
 
-    result = $(selector).attr(attr).trim();
+    $match = $(selector);
+    $match = transformAndClean($match);
+    result = $match.map(function (_, el) {
+      return $(el).attr(attr).trim();
+    });
   } else {
-    var $node = $(matchingSelector);
-    $node = cleanBySelectors($node, $, extractionOpts);
-    $node = transformElements($node, $, extractionOpts);
-    result = $node.text().trim();
-  } // Allow custom extractor to skip default cleaner
+    $match = $(matchingSelector);
+    $match = transformAndClean($match);
+    result = $match.map(function (_, el) {
+      return $(el).text().trim();
+    });
+  }
+
+  result = _Array$isArray(result.toArray()) && allowMultiple ? result.toArray() : result[0]; // Allow custom extractor to skip default cleaner
   // for this type; defaults to true
 
-
-  if (defaultCleaner) {
+  if (defaultCleaner && Cleaners[type]) {
     return Cleaners[type](result, _objectSpread({}, opts, extractionOpts));
   }
 
   return result;
+}
+function selectExtendedTypes(extend, opts) {
+  var results = {};
+
+  _Reflect$ownKeys(extend).forEach(function (t) {
+    if (!results[t]) {
+      results[t] = select(_objectSpread({}, opts, {
+        type: t,
+        extractionOpts: extend[t]
+      }));
+    }
+  });
+
+  return results;
 }
 
 function extractResult(opts) {
@@ -6311,7 +6514,13 @@ var RootExtractor = {
         url = _ref3.url,
         domain = _ref3.domain;
 
-    return {
+    var extendedResults = {};
+
+    if (extractor.extend) {
+      extendedResults = selectExtendedTypes(extractor.extend, opts);
+    }
+
+    return _objectSpread({
       title: title,
       content: content,
       author: author,
@@ -6324,7 +6533,7 @@ var RootExtractor = {
       excerpt: excerpt,
       word_count: word_count,
       direction: direction
-    };
+    }, extendedResults);
   }
 };
 
@@ -6414,10 +6623,12 @@ var Mercury = {
           fallback,
           _opts$contentType,
           contentType,
+          extend,
           parsedUrl,
           $,
           Extractor,
           metaCache,
+          extendedTypes,
           result,
           _result,
           title,
@@ -6430,7 +6641,7 @@ var Mercury = {
           switch (_context.prev = _context.next) {
             case 0:
               _ref = _args.length > 1 && _args[1] !== undefined ? _args[1] : {}, html = _ref.html, opts = _objectWithoutProperties(_ref, ["html"]);
-              _opts$fetchAllPages = opts.fetchAllPages, fetchAllPages = _opts$fetchAllPages === void 0 ? true : _opts$fetchAllPages, _opts$fallback = opts.fallback, fallback = _opts$fallback === void 0 ? true : _opts$fallback, _opts$contentType = opts.contentType, contentType = _opts$contentType === void 0 ? 'html' : _opts$contentType; // if no url was passed and this is the browser version,
+              _opts$fetchAllPages = opts.fetchAllPages, fetchAllPages = _opts$fetchAllPages === void 0 ? true : _opts$fetchAllPages, _opts$fallback = opts.fallback, fallback = _opts$fallback === void 0 ? true : _opts$fallback, _opts$contentType = opts.contentType, contentType = _opts$contentType === void 0 ? 'html' : _opts$contentType, extend = opts.extend; // if no url was passed and this is the browser version,
               // set url to window.location.href and load the html
               // from the current page
 
@@ -6455,19 +6666,19 @@ var Mercury = {
 
             case 8:
               $ = _context.sent;
-              Extractor = getExtractor(url, parsedUrl, $); // console.log(`Using extractor for ${Extractor.domain}`);
-              // If we found an error creating the resource, return that error
 
               if (!$.failed) {
-                _context.next = 12;
+                _context.next = 11;
                 break;
               }
 
               return _context.abrupt("return", $);
 
-            case 12:
+            case 11:
+              Extractor = getExtractor(url, parsedUrl, $); // console.log(`Using extractor for ${Extractor.domain}`);
               // if html still has not been set (i.e., url passed to Mercury.parse),
               // set html from the response of Resource.create
+
               if (!html) {
                 html = $.html();
               } // Cached value of every meta name in our document.
@@ -6477,6 +6688,16 @@ var Mercury = {
               metaCache = $('meta').map(function (_, node) {
                 return $(node).attr('name');
               }).toArray();
+              extendedTypes = {};
+
+              if (extend) {
+                extendedTypes = selectExtendedTypes(extend, {
+                  $: $,
+                  url: url,
+                  html: html
+                });
+              }
+
               result = RootExtractor.extract(Extractor, {
                 url: url,
                 html: html,
@@ -6489,11 +6710,11 @@ var Mercury = {
               _result = result, title = _result.title, next_page_url = _result.next_page_url; // Fetch more pages if next_page_url found
 
               if (!(fetchAllPages && next_page_url)) {
-                _context.next = 22;
+                _context.next = 24;
                 break;
               }
 
-              _context.next = 19;
+              _context.next = 21;
               return collectAllPages({
                 Extractor: Extractor,
                 next_page_url: next_page_url,
@@ -6505,18 +6726,18 @@ var Mercury = {
                 url: url
               });
 
-            case 19:
+            case 21:
               result = _context.sent;
-              _context.next = 23;
+              _context.next = 25;
               break;
 
-            case 22:
+            case 24:
               result = _objectSpread({}, result, {
                 total_pages: 1,
                 rendered_pages: 1
               });
 
-            case 23:
+            case 25:
               if (contentType === 'markdown') {
                 turndownService = new TurndownService();
                 result.content = turndownService.turndown(result.content);
@@ -6524,9 +6745,9 @@ var Mercury = {
                 result.content = $.text($(result.content));
               }
 
-              return _context.abrupt("return", result);
+              return _context.abrupt("return", _objectSpread({}, result, extendedTypes));
 
-            case 25:
+            case 27:
             case "end":
               return _context.stop();
           }
