@@ -1,6 +1,5 @@
 import assert from 'assert';
 import cheerio from 'cheerio';
-import { Errors } from 'utils';
 import { getEncoding } from 'utils/text';
 
 import { record } from 'test-helpers';
@@ -23,7 +22,7 @@ describe('Resource', () => {
       const url = 'http://nytimes.com/500';
       const error = await Resource.create(url);
 
-      assert.equal(error, Errors.badUrl);
+      assert(/instructed to reject non-2xx/i.test(error.message));
     });
 
     it('fetches with different encoding on body', async () => {

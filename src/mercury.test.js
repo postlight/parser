@@ -1,5 +1,4 @@
 import assert from 'assert';
-import { Errors } from 'utils';
 
 import { record } from 'test-helpers';
 import Mercury from './mercury';
@@ -15,13 +14,13 @@ describe('Mercury', () => {
     it('returns an error if a malformed url is passed', async () => {
       const error = await Mercury.parse('foo.com');
 
-      assert.equal(error, Errors.badUrl);
+      assert(/does not look like a valid URL/i.test(error.message));
     });
 
     it('returns an error if a bad url is passed', async () => {
       const error = await Mercury.parse('foo.com');
 
-      assert.equal(error, Errors.badUrl);
+      assert(/does not look like a valid URL/i.test(error.message));
     });
 
     it('does the whole thing', async () => {
@@ -38,15 +37,15 @@ describe('Mercury', () => {
         'https://www.thekitchn.com/instant-pot-chicken-pesto-pasta-eating-instantly-267141'
       );
 
-      assert.equal(error, Errors.badUrl);
+      assert(/instructed to reject non-2xx/i.test(error.message));
     });
 
-    it('does blogger', async () => {
-      const result = await Mercury.parse(
-        'https://googleblog.blogspot.com/2016/08/onhub-turns-one-today.html'
+    it('returns an error on invalid content types', async () => {
+      const error = await Mercury.parse(
+        'https://upload.wikimedia.org/wikipedia/commons/5/52/Spacer.gif'
       );
 
-      assert.equal(typeof result, 'object');
+      assert(/content-type for this resource/i.test(error.message));
     });
 
     it('does blogger', async () => {
