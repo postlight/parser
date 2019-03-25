@@ -64,10 +64,14 @@ If Mercury is unable to find a field, that field will return `null`.
 
 #### `parse()` Options
 
+##### Content Formats
+
 By default, Mercury Parser returns the `content` field as HTML. However, you can override this behavior by passing in options to the `parse` function, specifying whether or not to scrape all pages of an article, and what type of output to return (valid values are `'html'`, `'markdown'`, and `'text'`). For example:
 
 ```javascript
-Mercury.parse(url, { contentType: 'markdown' }).then(result => console.log(result));
+Mercury.parse(url, { contentType: 'markdown' }).then(result =>
+  console.log(result)
+);
 ```
 
 This returns the the page's `content` as GitHub-flavored Markdown:
@@ -75,6 +79,19 @@ This returns the the page's `content` as GitHub-flavored Markdown:
 ```json
 "content": "...**Thunder** is the [stage name](https://en.wikipedia.org/wiki/Stage_name) for the..."
 ```
+
+##### Pre-fetched HTML
+
+You can use Mercury Parser to parse custom or pre-fetched HTML by passing an HTML string to the `parse` function as follows:
+
+```javascript
+Mercury.parse(url, {
+  html:
+    '<html><body><article><h1>Thunder (mascot)</h1><p>Thunder is the stage name for the horse who is the official live animal mascot for the Denver Broncos</p></article></body></html>',
+}).then(result => console.log(result));
+```
+
+Note that the URL argument is still supplied, in order to identify the web site and use its custom parser, if it has any, though it will not be used for fetching content.
 
 #### The command-line parser
 
@@ -94,6 +111,15 @@ mercury-parser https://postlight.com/trackchanges/mercury-goes-open-source
 
 # Pass optional --format argument to set content type (html|markdown|text)
 mercury-parser https://postlight.com/trackchanges/mercury-goes-open-source --format=markdown
+
+# Pass optional --extend-list argument to add a custom type to the response
+mercury-parser https://postlight.com/trackchanges/mercury-goes-open-source --extend credit="p:last-child em"
+
+# Pass optional --extend-list argument to add a custom type with multiple matches
+mercury-parser https://postlight.com/trackchanges/mercury-goes-open-source --extend-list categories=".meta__tags-list a"
+
+# Get the value of attributes by adding a pipe to --extend or --extend-list
+mercury-parser https://postlight.com/trackchanges/mercury-goes-open-source --extend-list links=".body a|href"
 ```
 
 ## License
