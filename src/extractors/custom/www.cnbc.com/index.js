@@ -2,7 +2,7 @@ export const WwwCnbcComExtractor = {
   domain: 'www.cnbc.com',
 
   title: {
-    selectors: ['h1.title'],
+    selectors: ['h1.title', 'h1.ArticleHeader-headline'],
   },
 
   author: {
@@ -18,7 +18,11 @@ export const WwwCnbcComExtractor = {
   },
 
   content: {
-    selectors: ['div#article_body.content', 'div.story'],
+    selectors: [
+      'div#article_body.content',
+      'div.story',
+      'div.ArticleBody-articleBody',
+    ],
 
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images
