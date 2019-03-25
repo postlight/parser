@@ -111,6 +111,15 @@ mercury-parser https://postlight.com/trackchanges/mercury-goes-open-source
 
 # Pass optional --format argument to set content type (html|markdown|text)
 mercury-parser https://postlight.com/trackchanges/mercury-goes-open-source --format=markdown
+
+# Pass optional --extend-list argument to add a custom type to the response
+mercury-parser https://postlight.com/trackchanges/mercury-goes-open-source --extend credit="p:last-child em"
+
+# Pass optional --extend-list argument to add a custom type with multiple matches
+mercury-parser https://postlight.com/trackchanges/mercury-goes-open-source --extend-list categories=".meta__tags-list a"
+
+# Get the value of attributes by adding a pipe to --extend or --extend-list
+mercury-parser https://postlight.com/trackchanges/mercury-goes-open-source --extend-list links=".body a|href"
 ```
 
 ## License
