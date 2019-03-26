@@ -12,8 +12,10 @@ const {
   e,
   extendList,
   l,
+  header,
+  h,
 } = argv;
-(async (urlToParse, contentType, extendedTypes, extendedListTypes) => {
+(async (urlToParse, contentType, extendedTypes, extendedListTypes, headers) => {
   if (!urlToParse) {
     console.log(
       '\n\
@@ -21,7 +23,7 @@ mercury-parser\n\n\
     The Mercury Parser extracts semantic content from any url\n\n\
 Usage:\n\
 \n\
-    $ mercury-parser url-to-parse [--format=html|text|markdown] [--extend type=selector]... [--extend-list type=selector]... \n\
+    $ mercury-parser url-to-parse [--format=html|text|markdown] [--header.name=value]... [--extend type=selector]... [--extend-list type=selector]... \n\
 \n\
 '
     );
@@ -54,6 +56,7 @@ Usage:\n\
     const result = await Mercury.parse(urlToParse, {
       contentType: contentTypeMap[contentType],
       extend: extensions,
+      headers,
     });
     console.log(JSON.stringify(result, null, 2));
   } catch (e) {
@@ -72,4 +75,4 @@ Usage:\n\
     console.error(`\n${reportBug}\n`);
     process.exit(1);
   }
-})(url, format || f, extend || e, extendList || l);
+})(url, format || f, extend || e, extendList || l, header || h);

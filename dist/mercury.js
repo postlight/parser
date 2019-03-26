@@ -194,56 +194,6 @@ function getEncoding(str) {
   return encoding;
 }
 
-var _marked =
-/*#__PURE__*/
-_regeneratorRuntime.mark(range);
-
-function range() {
-  var start,
-      end,
-      _args = arguments;
-  return _regeneratorRuntime.wrap(function range$(_context) {
-    while (1) {
-      switch (_context.prev = _context.next) {
-        case 0:
-          start = _args.length > 0 && _args[0] !== undefined ? _args[0] : 1;
-          end = _args.length > 1 && _args[1] !== undefined ? _args[1] : 1;
-
-        case 2:
-          if (!(start <= end)) {
-            _context.next = 7;
-            break;
-          }
-
-          _context.next = 5;
-          return start += 1;
-
-        case 5:
-          _context.next = 2;
-          break;
-
-        case 7:
-        case "end":
-          return _context.stop();
-      }
-    }
-  }, _marked, this);
-}
-
-// extremely simple url validation as a first step
-function validateUrl(_ref) {
-  var hostname = _ref.hostname;
-  // If this isn't a valid url, return an error message
-  return !!hostname;
-}
-
-var Errors = {
-  badUrl: {
-    error: true,
-    messages: 'The url parameter passed does not look like a valid URL. Please check your data and try again.'
-  }
-};
-
 var REQUEST_HEADERS = cheerio.browser ? {} : {
   'User-Agent': 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36'
 }; // The number of milliseconds to attempt to fetch a resource before timing out.
@@ -320,16 +270,22 @@ function _fetchResource() {
   _fetchResource = _asyncToGenerator(
   /*#__PURE__*/
   _regeneratorRuntime.mark(function _callee(url, parsedUrl) {
-    var options, _ref2, response, body;
+    var headers,
+        options,
+        _ref2,
+        response,
+        body,
+        _args = arguments;
 
     return _regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
+            headers = _args.length > 2 && _args[2] !== undefined ? _args[2] : {};
             parsedUrl = parsedUrl || URL.parse(encodeURI(url));
             options = _objectSpread({
               url: parsedUrl.href,
-              headers: _objectSpread({}, REQUEST_HEADERS),
+              headers: _objectSpread({}, REQUEST_HEADERS, headers),
               timeout: FETCH_TIMEOUT,
               // Accept cookies
               jar: true,
@@ -344,31 +300,34 @@ function _fetchResource() {
               // Follow GET redirects; this option is for Node only
               followRedirect: true
             });
-            _context.next = 4;
+            _context.next = 5;
             return get(options);
 
-          case 4:
+          case 5:
             _ref2 = _context.sent;
             response = _ref2.response;
             body = _ref2.body;
-            _context.prev = 7;
+            _context.prev = 8;
             validateResponse(response);
             return _context.abrupt("return", {
               body: body,
               response: response
             });
 
-          case 12:
-            _context.prev = 12;
-            _context.t0 = _context["catch"](7);
-            return _context.abrupt("return", Errors.badUrl);
+          case 13:
+            _context.prev = 13;
+            _context.t0 = _context["catch"](8);
+            return _context.abrupt("return", {
+              error: true,
+              message: _context.t0.message
+            });
 
-          case 15:
+          case 16:
           case "end":
             return _context.stop();
         }
       }
-    }, _callee, this, [[7, 12]]);
+    }, _callee, this, [[8, 13]]);
   }));
   return _fetchResource.apply(this, arguments);
 }
@@ -1616,17 +1575,23 @@ var Resource = {
   // :param response: If set, use as the response rather than
   //                  attempting to fetch it ourselves. Expects a
   //                  string.
+  // :param headers: Custom headers to be included in the request
   create: function () {
     var _create = _asyncToGenerator(
     /*#__PURE__*/
     _regeneratorRuntime.mark(function _callee(url, preparedResponse, parsedUrl) {
-      var result, validResponse;
+      var headers,
+          result,
+          validResponse,
+          _args = arguments;
       return _regeneratorRuntime.wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
+              headers = _args.length > 3 && _args[3] !== undefined ? _args[3] : {};
+
               if (!preparedResponse) {
-                _context.next = 5;
+                _context.next = 6;
                 break;
               }
 
@@ -1642,29 +1607,29 @@ var Resource = {
                 body: preparedResponse,
                 response: validResponse
               };
-              _context.next = 8;
+              _context.next = 9;
               break;
 
-            case 5:
-              _context.next = 7;
-              return fetchResource(url, parsedUrl);
-
-            case 7:
-              result = _context.sent;
+            case 6:
+              _context.next = 8;
+              return fetchResource(url, parsedUrl, headers);
 
             case 8:
+              result = _context.sent;
+
+            case 9:
               if (!result.error) {
-                _context.next = 11;
+                _context.next = 12;
                 break;
               }
 
               result.failed = true;
               return _context.abrupt("return", result);
 
-            case 11:
+            case 12:
               return _context.abrupt("return", this.generateDoc(result));
 
-            case 12:
+            case 13:
             case "end":
               return _context.stop();
           }
@@ -1721,6 +1686,49 @@ var Resource = {
     return $;
   }
 };
+
+var _marked =
+/*#__PURE__*/
+_regeneratorRuntime.mark(range);
+
+function range() {
+  var start,
+      end,
+      _args = arguments;
+  return _regeneratorRuntime.wrap(function range$(_context) {
+    while (1) {
+      switch (_context.prev = _context.next) {
+        case 0:
+          start = _args.length > 0 && _args[0] !== undefined ? _args[0] : 1;
+          end = _args.length > 1 && _args[1] !== undefined ? _args[1] : 1;
+
+        case 2:
+          if (!(start <= end)) {
+            _context.next = 7;
+            break;
+          }
+
+          _context.next = 5;
+          return start += 1;
+
+        case 5:
+          _context.next = 2;
+          break;
+
+        case 7:
+        case "end":
+          return _context.stop();
+      }
+    }
+  }, _marked, this);
+}
+
+// extremely simple url validation as a first step
+function validateUrl(_ref) {
+  var hostname = _ref.hostname;
+  // If this isn't a valid url, return an error message
+  return !!hostname;
+}
 
 var merge = function merge(extractor, domains) {
   return domains.reduce(function (acc, domain) {
@@ -3432,7 +3440,7 @@ var WwwNydailynewsComExtractor = {
 var WwwCnbcComExtractor = {
   domain: 'www.cnbc.com',
   title: {
-    selectors: ['h1.title']
+    selectors: ['h1.title', 'h1.ArticleHeader-headline']
   },
   author: {
     selectors: [['meta[name="author"]', 'value']]
@@ -3444,7 +3452,7 @@ var WwwCnbcComExtractor = {
     selectors: [['meta[name="og:image"]', 'value']]
   },
   content: {
-    selectors: ['div#article_body.content', 'div.story'],
+    selectors: ['div#article_body.content', 'div.story', 'div.ArticleBody-articleBody'],
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images
     transforms: {},
@@ -6623,6 +6631,8 @@ var Mercury = {
           fallback,
           _opts$contentType,
           contentType,
+          _opts$headers,
+          headers,
           extend,
           parsedUrl,
           $,
@@ -6641,7 +6651,7 @@ var Mercury = {
           switch (_context.prev = _context.next) {
             case 0:
               _ref = _args.length > 1 && _args[1] !== undefined ? _args[1] : {}, html = _ref.html, opts = _objectWithoutProperties(_ref, ["html"]);
-              _opts$fetchAllPages = opts.fetchAllPages, fetchAllPages = _opts$fetchAllPages === void 0 ? true : _opts$fetchAllPages, _opts$fallback = opts.fallback, fallback = _opts$fallback === void 0 ? true : _opts$fallback, _opts$contentType = opts.contentType, contentType = _opts$contentType === void 0 ? 'html' : _opts$contentType, extend = opts.extend; // if no url was passed and this is the browser version,
+              _opts$fetchAllPages = opts.fetchAllPages, fetchAllPages = _opts$fetchAllPages === void 0 ? true : _opts$fetchAllPages, _opts$fallback = opts.fallback, fallback = _opts$fallback === void 0 ? true : _opts$fallback, _opts$contentType = opts.contentType, contentType = _opts$contentType === void 0 ? 'html' : _opts$contentType, _opts$headers = opts.headers, headers = _opts$headers === void 0 ? {} : _opts$headers, extend = opts.extend; // if no url was passed and this is the browser version,
               // set url to window.location.href and load the html
               // from the current page
 
@@ -6658,11 +6668,14 @@ var Mercury = {
                 break;
               }
 
-              return _context.abrupt("return", Errors.badUrl);
+              return _context.abrupt("return", {
+                error: true,
+                message: 'The url parameter passed does not look like a valid URL. Please check your URL and try again.'
+              });
 
             case 6:
               _context.next = 8;
-              return Resource.create(url, html, parsedUrl);
+              return Resource.create(url, html, parsedUrl, headers);
 
             case 8:
               $ = _context.sent;
