@@ -129,7 +129,7 @@ mercury-parser https://postlight.com/trackchanges/mercury-goes-open-source --for
 # Pass optional --header.name=value arguments to include custom headers in the request
 mercury-parser https://postlight.com/trackchanges/mercury-goes-open-source --header.Cookie="name=value; name2=value2; name3=value3" --header.User-Agent="Mozilla/5.0 (iPhone; CPU iPhone OS 10_3_1 like Mac OS X) AppleWebKit/603.1.30 (KHTML, like Gecko) Version/10.0 Mobile/14E304 Safari/602.1"
 
-# Pass optional --extend-list argument to add a custom type to the response
+# Pass optional --extend argument to add a custom type to the response
 mercury-parser https://postlight.com/trackchanges/mercury-goes-open-source --extend credit="p:last-child em"
 
 # Pass optional --extend-list argument to add a custom type with multiple matches
