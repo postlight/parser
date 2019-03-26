@@ -2,10 +2,10 @@ import URL from 'url';
 
 import { getAttrs, setAttr } from 'utils/dom';
 
-function absolutize($, rootUrl, attr, $content) {
+function absolutize($, rootUrl, attr) {
   const baseUrl = $('base').attr('href');
 
-  $(`[${attr}]`, $content).each((_, node) => {
+  $(`[${attr}]`).each((_, node) => {
     const attrs = getAttrs(node);
     const url = attrs[attr];
     const absoluteUrl = URL.resolve(baseUrl || rootUrl, url);
@@ -43,7 +43,7 @@ function absolutizeSet($, rootUrl, $content) {
 }
 
 export default function makeLinksAbsolute($content, $, url) {
-  ['href', 'src'].forEach(attr => absolutize($, url, attr, $content));
+  ['href', 'src'].forEach(attr => absolutize($, url, attr));
   absolutizeSet($, url, $content);
 
   return $content;
