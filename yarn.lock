@@ -597,10 +597,10 @@
     universal-user-agent "^2.0.0"
     url-template "^2.0.8"
 
-"@postlight/ci-failed-test-reporter@^1.0.17":
-  version "1.0.17"
-  resolved "https://registry.yarnpkg.com/@postlight/ci-failed-test-reporter/-/ci-failed-test-reporter-1.0.17.tgz#260cca0fd68125b0d187f7264ca62abda8b19a7c"
-  integrity sha512-xohlpXD8+adU5u5aUA83WyctGxL06Cggdwl3GfveyDME7T1ONIk7jQzcCGX800aGL0iokCs4bXt9e+3BrpKGYg==
+"@postlight/ci-failed-test-reporter@^1.0":
+  version "1.0.19"
+  resolved "https://registry.yarnpkg.com/@postlight/ci-failed-test-reporter/-/ci-failed-test-reporter-1.0.19.tgz#d8abc255356aebb2707e8b6207ea4ce41a6575a0"
+  integrity sha512-GdlGO8GzX8sx+caaU/FtPPYYp8TmvhS/V4m7RdngEpAkPfywg8FSgOgY0J/Q2c7ZKeOHB7Fqzfa+WmVtXWLV2w==
   dependencies:
     dotenv "^6.2.0"
     node-fetch "^2.3.0"
