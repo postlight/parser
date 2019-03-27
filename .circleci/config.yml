@@ -20,6 +20,10 @@ jobs:
           name: Parser Preview
           command: ./scripts/pr-parser-preview.sh
           when: always
+      - run: 
+          name: Failed Test Reporter
+          command: ./scripts/run-test-report.js
+          when: on_fail
 
       - store_artifacts:
           path: tmp/artifacts
