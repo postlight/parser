@@ -598,9 +598,9 @@
     url-template "^2.0.8"
 
 "@postlight/ci-failed-test-reporter@^1.0":
-  version "1.0.19"
-  resolved "https://registry.yarnpkg.com/@postlight/ci-failed-test-reporter/-/ci-failed-test-reporter-1.0.19.tgz#d8abc255356aebb2707e8b6207ea4ce41a6575a0"
-  integrity sha512-GdlGO8GzX8sx+caaU/FtPPYYp8TmvhS/V4m7RdngEpAkPfywg8FSgOgY0J/Q2c7ZKeOHB7Fqzfa+WmVtXWLV2w==
+  version "1.0.20"
+  resolved "https://registry.yarnpkg.com/@postlight/ci-failed-test-reporter/-/ci-failed-test-reporter-1.0.20.tgz#937df541db7f63d9f49d34d806dfbfd9920cc9df"
+  integrity sha512-W4vrgfhRAQuhfV+vmBY88CtjpuvIDK6Wq3VDPs5AbMo4c41CiBcTZwPgZCYaScp/+Rd5n7ydixZ4EaEz/CgdXA==
   dependencies:
     dotenv "^6.2.0"
     node-fetch "^2.3.0"
@@ -5650,6 +5650,7 @@ node-environment-flags@1.0.4:
 node-fetch@^2.3.0:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.3.0.tgz#1a1d940bbfb916a1d3e0219f037e89e71f8c5fa5"
+  integrity sha512-MOd8pV3fxENbryESLgVIeaGKrdl+uaYhCSSVkjeOb/31/njTpcis5aWfdqgNlHIrKOLRbMnfPINPOML2CIFeXA==
 
 node-int64@^0.4.0:
   version "0.4.0"
