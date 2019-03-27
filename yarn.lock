@@ -598,9 +598,9 @@
     url-template "^2.0.8"
 
 "@postlight/ci-failed-test-reporter@^1.0":
-  version "1.0.20"
-  resolved "https://registry.yarnpkg.com/@postlight/ci-failed-test-reporter/-/ci-failed-test-reporter-1.0.20.tgz#937df541db7f63d9f49d34d806dfbfd9920cc9df"
-  integrity sha512-W4vrgfhRAQuhfV+vmBY88CtjpuvIDK6Wq3VDPs5AbMo4c41CiBcTZwPgZCYaScp/+Rd5n7ydixZ4EaEz/CgdXA==
+  version "1.0.21"
+  resolved "https://registry.yarnpkg.com/@postlight/ci-failed-test-reporter/-/ci-failed-test-reporter-1.0.21.tgz#955f5d8f2a21b1c02e32a48c05fb6759f6430067"
+  integrity sha512-KQlKq1PMdashXxA+FatKZnOPQn0OtpK/YxbOrKZqAes/TXI95aIGkZ77Cf4DUYItGBK66oMu3yYQBpbOzqqsUw==
   dependencies:
     dotenv "^6.2.0"
     node-fetch "^2.3.0"
