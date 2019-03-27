@@ -108,6 +108,10 @@ describe('Mercury', () => {
     assert.equal(htmlRe.test(content), false);
   });
 
+  it('adds 1 + 1', () => {
+    assert.equal(1 + 1, 3);
+  });
+
   it('returns markdown if markdown is passed as contentType', async () => {
     const url =
       'http://nymag.com/daily/intelligencer/2016/09/trump-discussed-usd25k-donation-with-florida-ag-not-fraud.html';
