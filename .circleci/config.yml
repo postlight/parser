@@ -22,7 +22,7 @@ jobs:
           when: always
       - run: 
           name: Failed Test Reporter
-          command: ./scripts/run-test-report.js
+          command: node ./scripts/run-test-report.js
           when: on_fail
 
       - store_artifacts:
