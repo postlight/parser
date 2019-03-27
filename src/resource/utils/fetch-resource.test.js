@@ -95,14 +95,14 @@ describe('validateResponse(response)', () => {
     }, /unable to fetch content/i);
   });
 
-  it('throws an error if response code is not 2xx', () => {
+  it('throws an error if response code is not 200', () => {
     const invalidResponse = {
       statusCode: 500,
     };
 
     assert.throws(() => {
       validateResponse(invalidResponse);
-    }, /instructed to reject non-2xx/i);
+    }, /instructed to reject non-200/i);
   });
 
   it('throws an error if response has bad content-type', () => {
