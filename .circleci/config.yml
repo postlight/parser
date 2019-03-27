@@ -22,7 +22,7 @@ jobs:
           when: always
       - run: 
           name: Failed Test Reporter
-          command: node ./scripts/run-test-report.js
+          command: yarn run-test-report
           when: on_fail
 
       - store_artifacts:

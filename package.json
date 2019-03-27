@@ -37,6 +37,7 @@
     "build:web:ci": "rollup -c rollup.config.web.js && yarn test:build:web",
     "release": "yarn build && yarn build:web",
     "build:generator": "rollup -c scripts/rollup.config.js",
+    "run-test-report": "node ./scripts/run-test-report.js",
     "test_build": "rollup -c",
     "test": "yarn test:node && yarn test:web",
     "test:node": "jest --json --outputFile test-output.json",
