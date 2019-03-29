@@ -22,7 +22,7 @@ describe('Resource', () => {
       const url = 'http://nytimes.com/500';
       const error = await Resource.create(url);
 
-      assert(/instructed to reject non-2xx/i.test(error.message));
+      assert(/instructed to reject non-200/i.test(error.message));
     });
 
     it('fetches with different encoding on body', async () => {
