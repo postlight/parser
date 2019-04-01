@@ -32,12 +32,12 @@ describe('Mercury', () => {
       assert.equal(result.content.indexOf('score="') === -1, true);
     });
 
-    it('returns an error on non-2xx responses', async () => {
+    it('returns an error on non-200 responses', async () => {
       const error = await Mercury.parse(
         'https://www.thekitchn.com/instant-pot-chicken-pesto-pasta-eating-instantly-267141'
       );
 
-      assert(/instructed to reject non-2xx/i.test(error.message));
+      assert(/instructed to reject non-200/i.test(error.message));
     });
 
     it('returns an error on invalid content types', async () => {
