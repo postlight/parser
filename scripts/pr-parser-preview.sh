@@ -24,4 +24,5 @@ if [[ $fixtures ]]; then
   done
 else
   echo "No fixtures added in this PR, so no preview needed"
+  node scripts/write-test-report.js
 fi
