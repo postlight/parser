@@ -597,6 +597,14 @@
     universal-user-agent "^2.0.0"
     url-template "^2.0.8"
 
+"@postlight/ci-failed-test-reporter@^1.0":
+  version "1.0.22"
+  resolved "https://registry.yarnpkg.com/@postlight/ci-failed-test-reporter/-/ci-failed-test-reporter-1.0.22.tgz#c382c3e75a4bcf078e4ed1abf14ea63d074d56b3"
+  integrity sha512-k8YkZgrxgnYoju6Y0XZTXKk2fFeWBZ0+voA3WyVvEK3i9FsExCNMoKb5s0VBSqO6V9FxIQDXhjmcwn6t8cIDWA==
+  dependencies:
+    dotenv "^6.2.0"
+    node-fetch "^2.3.0"
+
 "@samverschueren/stream-to-observable@^0.3.0":
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/@samverschueren/stream-to-observable/-/stream-to-observable-0.3.0.tgz#ecdf48d532c58ea477acfcab80348424f8d0662f"
@@ -2512,6 +2520,11 @@ domutils@1.5.1, domutils@^1.5.1:
   dependencies:
     dom-serializer "0"
     domelementtype "1"
+
+dotenv@^6.2.0:
+  version "6.2.0"
+  resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-6.2.0.tgz#941c0410535d942c8becf28d3f357dbd9d476064"
+  integrity sha512-HygQCKUBSFl8wKQZBSemMywRWcEDNidvNbjGVyZu3nbZ8qq9ubiPoGLMdRDpfSrpkkm9BXYFkpKxxFX38o/76w==
 
 duplexer2@^0.1.2, duplexer2@~0.1.0, duplexer2@~0.1.2, duplexer2@~0.1.4:
   version "0.1.4"
@@ -5637,6 +5650,7 @@ node-environment-flags@1.0.4:
 node-fetch@^2.3.0:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.3.0.tgz#1a1d940bbfb916a1d3e0219f037e89e71f8c5fa5"
+  integrity sha512-MOd8pV3fxENbryESLgVIeaGKrdl+uaYhCSSVkjeOb/31/njTpcis5aWfdqgNlHIrKOLRbMnfPINPOML2CIFeXA==
 
 node-int64@^0.4.0:
   version "0.4.0"

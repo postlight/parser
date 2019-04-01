@@ -108,6 +108,7 @@
   },
   "dependencies": {
     "@babel/runtime-corejs2": "^7.2.0",
+    "@postlight/ci-failed-test-reporter": "^1.0",
     "browser-request": "github:postlight/browser-request#feat-add-headers-to-response",
     "cheerio": "^0.22.0",
     "difflib": "github:postlight/difflib.js",
