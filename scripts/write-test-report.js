@@ -5,6 +5,7 @@ const { getReport } = require('@postlight/ci-failed-test-reporter');
 
 const report = getReport(path.join(__dirname, '../', '/test-output.json'));
 const commentPath = 'tmp/artifacts/comment.json';
+fs.mkdirSync('tmp/artifacts', { recursive: true });
 fs.writeFileSync(
   commentPath,
   JSON.stringify({
