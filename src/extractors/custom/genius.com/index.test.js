@@ -1,6 +1,7 @@
 import assert from 'assert';
 import URL from 'url';
 import cheerio from 'cheerio';
+import moment from 'moment';
 
 import Mercury from 'mercury';
 import getExtractor from 'extractors/get-extractor';
@@ -33,7 +34,7 @@ describe('GeniusComExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(title, `Purple Rain `);
+      assert.equal(title, `Purple Rain`);
     });
 
     it('returns the author', async () => {
@@ -50,10 +51,11 @@ describe('GeniusComExtractor', () => {
       // To pass this test, fill out the date_published selector
       // in ./src/extractors/custom/genius.com/index.js.
       const { date_published } = await result;
+      const newDatePublished = moment(date_published).format();
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(date_published.split('T')[0], '1984-06-25');
+      assert.equal(newDatePublished.split('T')[0], '1984-06-25');
     });
 
     it('returns the lead_image_url', async () => {
