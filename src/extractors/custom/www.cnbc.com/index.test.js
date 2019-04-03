@@ -99,4 +99,54 @@ describe('WwwCnbcComExtractor', () => {
       );
     });
   });
+
+  describe('website redesign', () => {
+    let result;
+    let url;
+    beforeAll(() => {
+      url =
+        'https://www.cnbc.com/2019/03/18/heres-how-cybersecurity-vendors-drive-the-hacking-news-cycle.html';
+      const html = fs.readFileSync(
+        './fixtures/www.cnbc.com/1553160766510.html'
+      );
+      result = Mercury.parse(url, { html, fallback: false });
+    });
+
+    it('returns the title', async () => {
+      // To pass this test, fill out the title selector
+      // in ./src/extractors/custom/www.cnbc.com/index.js.
+      const { title } = await result;
+
+      // Update these values with the expected values from
+      // the article.
+      assert.equal(
+        title,
+        'Desperate to get through to executives, some cybersecurity vendors are resorting to lies and blackmail'
+      );
+    });
+
+    it('returns the content', async () => {
+      // To pass this test, fill out the content selector
+      // in ./src/extractors/custom/www.cnbc.com/index.js.
+      // You may also want to make use of the clean and transform
+      // options.
+      const { content } = await result;
+
+      const $ = cheerio.load(content || '');
+
+      const first13 = excerptContent(
+        $('*')
+          .first()
+          .text(),
+        13
+      );
+
+      // Update these values with the expected values from
+      // the article.
+      assert.equal(
+        first13,
+        'The cybersecurity vendor marketplace is growing so crowded that some companies have been'
+      );
+    });
+  });
 });

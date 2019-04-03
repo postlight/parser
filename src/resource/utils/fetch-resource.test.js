@@ -17,6 +17,22 @@ describe('fetchResource(url)', () => {
     assert.equal(error, true);
   });
 
+  it('passes custom headers in requests', async () => {
+    // A GET request to this endpoint returns the list of all request headers as part of the response JSON
+    const url = 'https://postman-echo.com/headers';
+    const parsedUrl = URL.parse(url);
+    const headers = {
+      'my-custom-header': 'Lorem ipsum dolor sit amet',
+    };
+    const result = await fetchResource(url, parsedUrl, headers);
+    const body = JSON.parse(result.body.toString());
+
+    assert.equal(
+      body.headers['my-custom-header'],
+      'Lorem ipsum dolor sit amet'
+    );
+  });
+
   it('returns a buffer as its body', async () => {
     const url =
       'http://www.nytimes.com/2016/08/16/upshot/the-state-of-the-clinton-trump-race-is-it-over.html?_r=0';
@@ -79,14 +95,14 @@ describe('validateResponse(response)', () => {
     }, /unable to fetch content/i);
   });
 
-  it('throws an error if response code is not 2xx', () => {
+  it('throws an error if response code is not 200', () => {
     const invalidResponse = {
       statusCode: 500,
     };
 
     assert.throws(() => {
       validateResponse(invalidResponse);
-    }, /instructed to reject non-2xx/i);
+    }, /instructed to reject non-200/i);
   });
 
   it('throws an error if response has bad content-type', () => {

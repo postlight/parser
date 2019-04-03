@@ -8,8 +8,14 @@ const {
   _: [url],
   format,
   f,
+  extend,
+  e,
+  extendList,
+  l,
+  header,
+  h,
 } = argv;
-(async (urlToParse, contentType) => {
+(async (urlToParse, contentType, extendedTypes, extendedListTypes, headers) => {
   if (!urlToParse) {
     console.log(
       '\n\
@@ -17,7 +23,7 @@ mercury-parser\n\n\
     The Mercury Parser extracts semantic content from any url\n\n\
 Usage:\n\
 \n\
-    $ mercury-parser url-to-parse [--format=html|text|markdown]\n\
+    $ mercury-parser url-to-parse [--format=html|text|markdown] [--header.name=value]... [--extend type=selector]... [--extend-list type=selector]... \n\
 \n\
 '
     );
@@ -31,8 +37,26 @@ Usage:\n\
       text: 'text',
       txt: 'text',
     };
+    const extensions = {};
+    [].concat(extendedTypes || []).forEach(t => {
+      const [name, selector] = t.split('=');
+      const fullSelector =
+        selector.indexOf('|') > 0 ? selector.split('|') : selector;
+      extensions[name] = { selectors: [fullSelector] };
+    });
+    [].concat(extendedListTypes || []).forEach(t => {
+      const [name, selector] = t.split('=');
+      const fullSelector =
+        selector.indexOf('|') > 0 ? selector.split('|') : selector;
+      extensions[name] = {
+        selectors: [fullSelector],
+        allowMultiple: true,
+      };
+    });
     const result = await Mercury.parse(urlToParse, {
       contentType: contentTypeMap[contentType],
+      extend: extensions,
+      headers,
     });
     console.log(JSON.stringify(result, null, 2));
   } catch (e) {
@@ -51,4 +75,4 @@ Usage:\n\
     console.error(`\n${reportBug}\n`);
     process.exit(1);
   }
-})(url, format || f);
+})(url, format || f, extend || e, extendList || l, header || h);
