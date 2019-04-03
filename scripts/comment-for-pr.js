@@ -2,7 +2,6 @@
 const bot = require('@jesses/circle-github-bot').default.create();
 const Mercury = require('../dist/mercury.js');
 const fs = require('fs');
-const getTestReport = require('./get-test-report');
 const execSync = require('child_process').execSync;
 const { getReport } = require('@postlight/ci-failed-test-reporter');
 
