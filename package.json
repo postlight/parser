@@ -21,7 +21,8 @@
   ],
   "files": [
     "dist",
-    "cli.js"
+    "cli.js",
+    "src/shims/"
   ],
   "main": "./dist/mercury.js",
   "bin": {
