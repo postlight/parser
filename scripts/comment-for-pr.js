@@ -2,8 +2,8 @@
 const bot = require('@jesses/circle-github-bot').default.create();
 const Mercury = require('../dist/mercury.js');
 const fs = require('fs');
-const getTestReport = require('./get-test-report');
 const execSync = require('child_process').execSync;
+const { getReport } = require('@postlight/ci-failed-test-reporter');
 
 const run = () => {
   const screenshotPath = process.argv[2];
@@ -37,7 +37,7 @@ const run = () => {
         fs.writeFileSync(fixtureArtifactPath, html);
 
         const testReport =
-          getTestReport('./test-output.json') || '✅ All tests passed';
+          getReport('./test-output.json') || '✅ All tests passed';
 
         const comment = `### 🤖 Automated Parsing Preview 🤖
 **Commit:** \`${bot.env.commitMessage}\`

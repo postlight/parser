@@ -73,6 +73,49 @@ export const ExampleExtractor = {
 
 This is all you'll need to know to handle most of the fields Mercury parses (titles, authors, date published, etc.). Article content is the exception.
 
+#### Content selectors
+
+If you pass an array selector for the content selection, it behaves differently from the attribute selectors on other types. In such cases, it will be considered as a multi-match selection, which allows the parser to choose several selectors to include in the result, and will include all occurrences of each matching selector in the result.
+
+Note that all selectors in the array must match in order for this selector to trigger.
+
+```javascript
+export const ExampleExtractor = {
+    ...
+
+    // Attempt to match both the content and image
+    // before falling back to just the content
+    content: {
+      selectors: [
+        ['.parsys.content', '.__image-lead__'],
+        '.content'
+      ],
+    },
+
+    ...
+```
+
+### Custom types
+
+To add a custom key to the response, add an `extend` object. The response will include
+results for each key of this object (`categories` in the example below). Setting
+`allowMultiple` to `true` means Mercury will find all the content that matches the
+selectors, and will always return an array of results for that key.
+
+```javascript
+export const ExampleExtractorWithExtend = {
+    ...
+
+    extend: {
+      categories: {
+        selectors: ['.post-taglist a'],
+        allowMultiple: true,
+      }
+    },
+
+    ...
+```
+
 ### Cleaning content from an article
 
 An article's content can be more complex than the other fields, meaning you sometimes need to do more than just provide the selector(s) in order to return clean content.
@@ -212,7 +255,7 @@ it('returns the title', async () => {
   const articleUrl =
     'http://www.newyorker.com/tech/elements/hacking-cryptography-and-the-countdown-to-quantum-computing';
 
-  const { title } = await Mercury.parse(articleUrl, html, { fallback: false });
+  const { title } = await Mercury.parse(articleUrl, { html, fallback: false });
 
   // Update these values with the expected values from
   // the article.

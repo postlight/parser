@@ -1,6 +1,5 @@
 import URL from 'url';
-import request from 'request';
-import { Errors } from 'utils';
+import request from 'postman-request';
 
 import {
   REQUEST_HEADERS,
@@ -22,11 +21,11 @@ function get(options) {
 }
 
 // Evaluate a response to ensure it's something we should be keeping.
-// This does not validate in the sense of a response being 200 level or
-// not. Validation here means that we haven't found reason to bail from
+// This does not validate in the sense of a response being 200 or not.
+// Validation here means that we haven't found reason to bail from
 // further processing of this url.
 
-export function validateResponse(response, parseNon2xx = false) {
+export function validateResponse(response, parseNon200 = false) {
   // Check if we got a valid status code
   // This isn't great, but I'm requiring a statusMessage to be set
   // before short circuiting b/c nock doesn't set it in tests
@@ -41,11 +40,11 @@ export function validateResponse(response, parseNon2xx = false) {
       throw new Error(
         `Unable to fetch content. Original exception was ${response.error}`
       );
-    } else if (!parseNon2xx) {
+    } else if (!parseNon200) {
       throw new Error(
         `Resource returned a response status code of ${
           response.statusCode
-        } and resource was instructed to reject non-2xx level status codes.`
+        } and resource was instructed to reject non-200 status codes.`
       );
     }
   }
@@ -87,11 +86,11 @@ export function baseDomain({ host }) {
 // TODO: Ensure we are not fetching something enormous. Always return
 //       unicode content for HTML, with charset conversion.
 
-export default async function fetchResource(url, parsedUrl) {
+export default async function fetchResource(url, parsedUrl, headers = {}) {
   parsedUrl = parsedUrl || URL.parse(encodeURI(url));
   const options = {
     url: parsedUrl.href,
-    headers: { ...REQUEST_HEADERS },
+    headers: { ...REQUEST_HEADERS, ...headers },
     timeout: FETCH_TIMEOUT,
     // Accept cookies
     jar: true,
@@ -119,6 +118,9 @@ export default async function fetchResource(url, parsedUrl) {
       response,
     };
   } catch (e) {
-    return Errors.badUrl;
+    return {
+      error: true,
+      message: e.message,
+    };
   }
 }

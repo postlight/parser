@@ -1,6 +1,5 @@
 import assert from 'assert';
 import cheerio from 'cheerio';
-import { Errors } from 'utils';
 import { getEncoding } from 'utils/text';
 
 import { record } from 'test-helpers';
@@ -23,7 +22,7 @@ describe('Resource', () => {
       const url = 'http://nytimes.com/500';
       const error = await Resource.create(url);
 
-      assert.equal(error, Errors.badUrl);
+      assert(/instructed to reject non-200/i.test(error.message));
     });
 
     it('fetches with different encoding on body', async () => {
@@ -96,6 +95,25 @@ describe('Resource', () => {
       assert.throws(() => {
         Resource.generateDoc({ body, response });
       }, /content does not appear to be text/i);
+    });
+
+    it('throws an error if the response has no Content-Type header', () => {
+      const response = {
+        headers: {},
+      };
+      const body = '';
+
+      // This assertion is more elaborate than the others to be sure that we're
+      // throwing an `Error` and not raising a runtime exception.
+      assert.throws(
+        () => {
+          Resource.generateDoc({ body, response });
+        },
+        err => (
+          (err instanceof Error) &&
+          /content does not appear to be text/i.test(err)
+        )
+      );
     });
 
     it('throws an error if the content has no children', () => {

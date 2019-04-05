@@ -34,6 +34,70 @@ describe('cleanDatePublished(dateString)', () => {
     });
     assert.equal(datePublished, '2015-08-03T16:45:00.000Z');
   });
+
+  it('can handle dates formatted as "[just|right] now"', () => {
+    const date1 = cleanDatePublished('now');
+    const newDate1 = moment(date1)
+      .format()
+      .split('T')[0];
+    const expectedDate1 = moment()
+      .format()
+      .split('T')[0];
+    assert.equal(newDate1, expectedDate1);
+
+    const date2 = cleanDatePublished('just now');
+    const newDate2 = moment(date2)
+      .format()
+      .split('T')[0];
+    const expectedDate2 = moment()
+      .format()
+      .split('T')[0];
+    assert.equal(newDate2, expectedDate2);
+
+    const date3 = cleanDatePublished('right now');
+    const newDate3 = moment(date3)
+      .format()
+      .split('T')[0];
+    const expectedDate3 = moment()
+      .format()
+      .split('T')[0];
+    assert.equal(newDate3, expectedDate3);
+  });
+
+  it('can handle dates formatted as "[amount] [time unit] ago"', () => {
+    // This generates an approximate date with a margin of error, for example:
+    // "X days ago" will not be accurate down to the exact time
+    // "X months ago" will not be accurate down to the exact day
+    const date1 = cleanDatePublished('1 hour ago');
+    const newDate1 = moment(date1)
+      .format()
+      .split('T')[0];
+    const expectedDate1 = moment()
+      .subtract(1, 'hour')
+      .format()
+      .split('T')[0];
+    assert.equal(newDate1, expectedDate1);
+
+    const date2 = cleanDatePublished('5 days ago');
+    const newDate2 = moment(date2)
+      .format()
+      .split('T')[0];
+    const expectedDate2 = moment()
+      .subtract(5, 'days')
+      .format()
+      .split('T')[0];
+    assert.equal(newDate2, expectedDate2);
+
+    const date3 = cleanDatePublished('10 months ago');
+    const newDate3 = moment(date3)
+      .format()
+      .split('T')[0];
+    const expectedDate3 = moment()
+      .subtract(10, 'months')
+      .format()
+      .split('T')[0];
+    assert.equal(newDate3, expectedDate3);
+  });
 });
 
 describe('cleanDateString(dateString)', () => {

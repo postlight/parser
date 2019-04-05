@@ -11,6 +11,7 @@ export const KEEP_SELECTORS = [
   'iframe[src^="http://www.youtube.com"]',
   'iframe[src^="https://player.vimeo"]',
   'iframe[src^="http://player.vimeo"]',
+  'iframe[src^="https://www.redditmedia.com"]',
 ];
 
 // A list of tags to strip from the output if we encounter them.
@@ -35,6 +36,8 @@ export const REMOVE_ATTR_LIST = REMOVE_ATTRS.join(',');
 export const WHITELIST_ATTRS = [
   'src',
   'srcset',
+  'sizes',
+  'type',
   'href',
   'class',
   'id',

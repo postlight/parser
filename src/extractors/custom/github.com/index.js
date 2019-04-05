@@ -1,16 +1,22 @@
-export const WwwCnbcComExtractor = {
-  domain: 'www.cnbc.com',
+export const GithubComExtractor = {
+  domain: 'github.com',
 
   title: {
-    selectors: ['h1.title', 'h1.ArticleHeader-headline'],
+    selectors: [['meta[name="og:title"]', 'value']],
   },
 
   author: {
-    selectors: [['meta[name="author"]', 'value']],
+    selectors: [
+      // enter author selectors
+    ],
   },
 
   date_published: {
-    selectors: [['meta[name="article:published_time"]', 'value']],
+    selectors: [['span[itemprop="dateModified"] relative-time', 'datetime']],
+  },
+
+  dek: {
+    selectors: ['span[itemprop="about"]'],
   },
 
   lead_image_url: {
@@ -18,11 +24,7 @@ export const WwwCnbcComExtractor = {
   },
 
   content: {
-    selectors: [
-      'div#article_body.content',
-      'div.story',
-      'div.ArticleBody-articleBody',
-    ],
+    selectors: [['#readme article']],
 
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images
