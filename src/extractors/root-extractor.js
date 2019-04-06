@@ -74,7 +74,12 @@ export function select(opts) {
   // contributors), return the string
   if (typeof extractionOpts === 'string') return extractionOpts;
 
-  const { selectors, defaultCleaner = true, allowMultiple } = extractionOpts;
+  const {
+    selectors,
+    defaultCleaner = true,
+    allowMultiple,
+    headersCleaner = true,
+  } = extractionOpts;
 
   const matchingSelector = findMatchingSelector(
     $,
@@ -118,7 +123,7 @@ export function select(opts) {
     $content = $content.parent();
     $content = transformAndClean($content);
     if (Cleaners[type]) {
-      Cleaners[type]($content, { ...opts, defaultCleaner });
+      Cleaners[type]($content, { ...opts, defaultCleaner, headersCleaner });
     }
 
     if (allowMultiple) {

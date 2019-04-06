@@ -14,7 +14,14 @@ import {
 // Clean our article content, returning a new, cleaned node.
 export default function extractCleanNode(
   article,
-  { $, cleanConditionally = true, title = '', url = '', defaultCleaner = true }
+  {
+    $,
+    cleanConditionally = true,
+    title = '',
+    url = '',
+    defaultCleaner = true,
+    headersCleaner = true,
+  }
 ) {
   // Rewrite the tag name to div if it's a top level node like body or
   // html to avoid later complications with multiple body tags.
@@ -43,7 +50,7 @@ export default function extractCleanNode(
   cleanHOnes(article, $);
 
   // Clean headers
-  cleanHeaders(article, $, title);
+  if (headersCleaner) cleanHeaders(article, $, title);
 
   // We used to clean UL's and OL's here, but it was leading to
   // too many in-article lists being removed. Consider a better
