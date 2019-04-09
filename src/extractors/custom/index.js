@@ -100,3 +100,4 @@ export * from './www.ossnews.jp';
 export * from './buzzap.jp';
 export * from './www.asahi.com';
 export * from './www.sanwa.co.jp';
+export * from './www.elecom.co.jp';
