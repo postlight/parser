@@ -140,14 +140,15 @@ export function select(opts) {
   // if selector is an array (e.g., ['img', 'src']),
   // extract the attr
   if (Array.isArray(matchingSelector)) {
-    const [selector, attr] = matchingSelector;
+    const [selector, attr, transform] = matchingSelector;
     $match = $(selector);
     $match = transformAndClean($match);
-    result = $match.map((_, el) =>
-      $(el)
+    result = $match.map((_, el) => {
+      const item = $(el)
         .attr(attr)
-        .trim()
-    );
+        .trim();
+      return transform ? transform(item) : item;
+    });
   } else {
     $match = $(matchingSelector);
     $match = transformAndClean($match);

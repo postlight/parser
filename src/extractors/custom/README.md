@@ -328,6 +328,8 @@ As [explained above](#selecting-an-attribute), to return an attribute rather tha
   ...
 ```
 
+In rare circumstances, you may want to manipulate the result of the attribute value. In these cases, you can add a third element to the selector array above — a function that will take the value of the attribute and return a value you've transformed it to. E.g., imagine that you want to access a JSON value that's been stringified into an attribute. Your function could take the stringified JSON, parse it, and return just the piece of it you want.
+
 You can refer to the [NewYorkerExtractor](www.newyorker.com/index.js) to see more the rest of the basic selectors.
 
 ### Step 4: Content extraction
