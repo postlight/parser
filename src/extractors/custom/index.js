@@ -96,3 +96,4 @@ export * from './news.mynavi.jp';
 export * from './github.com';
 export * from './www.reddit.com';
 export * from './otrs.com';
+export * from './www.ossnews.jp';
