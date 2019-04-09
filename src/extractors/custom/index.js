@@ -99,3 +99,4 @@ export * from './otrs.com';
 export * from './www.ossnews.jp';
 export * from './buzzap.jp';
 export * from './www.asahi.com';
+export * from './www.sanwa.co.jp';
