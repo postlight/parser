@@ -101,3 +101,4 @@ export * from './buzzap.jp';
 export * from './www.asahi.com';
 export * from './www.sanwa.co.jp';
 export * from './www.elecom.co.jp';
+export * from './scan.netsecurity.ne.jp';
