@@ -8,6 +8,7 @@ function absolutize($, rootUrl, attr) {
   $(`[${attr}]`).each((_, node) => {
     const attrs = getAttrs(node);
     const url = attrs[attr];
+    if (!url) return;
     const absoluteUrl = URL.resolve(baseUrl || rootUrl, url);
 
     setAttr(node, attr, absoluteUrl);
