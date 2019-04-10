@@ -220,13 +220,13 @@ function get(options) {
     });
   });
 } // Evaluate a response to ensure it's something we should be keeping.
-// This does not validate in the sense of a response being 200 level or
-// not. Validation here means that we haven't found reason to bail from
+// This does not validate in the sense of a response being 200 or not.
+// Validation here means that we haven't found reason to bail from
 // further processing of this url.
 
 
 function validateResponse(response) {
-  var parseNon2xx = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+  var parseNon200 = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
 
   // Check if we got a valid status code
   // This isn't great, but I'm requiring a statusMessage to be set
@@ -237,8 +237,8 @@ function validateResponse(response) {
   if (response.statusMessage && response.statusMessage !== 'OK' || response.statusCode !== 200) {
     if (!response.statusCode) {
       throw new Error("Unable to fetch content. Original exception was ".concat(response.error));
-    } else if (!parseNon2xx) {
-      throw new Error("Resource returned a response status code of ".concat(response.statusCode, " and resource was instructed to reject non-2xx level status codes."));
+    } else if (!parseNon200) {
+      throw new Error("Resource returned a response status code of ".concat(response.statusCode, " and resource was instructed to reject non-200 status codes."));
     }
   }
 
@@ -1248,6 +1248,7 @@ function absolutize($, rootUrl, attr) {
   $("[".concat(attr, "]")).each(function (_, node) {
     var attrs = getAttrs(node);
     var url = attrs[attr];
+    if (!url) return;
     var absoluteUrl = URL.resolve(baseUrl || rootUrl, url);
     setAttr(node, attr, absoluteUrl);
   });
@@ -1646,7 +1647,8 @@ var Resource = {
   generateDoc: function generateDoc(_ref) {
     var content = _ref.body,
         response = _ref.response;
-    var contentType = response.headers['content-type']; // TODO: Implement is_text function from
+    var _response$headers$con = response.headers['content-type'],
+        contentType = _response$headers$con === void 0 ? '' : _response$headers$con; // TODO: Implement is_text function from
     // https://github.com/ReadabilityHoldings/readability/blob/8dc89613241d04741ebd42fa9fa7df1b1d746303/readability/utils/text.py#L57
 
     if (!contentType.includes('html') && !contentType.includes('text')) {
@@ -4832,6 +4834,236 @@ var WwwRedditComExtractor = {
   }
 };
 
+var OtrsComExtractor = {
+  domain: 'otrs.com',
+  title: {
+    selectors: ['#main article h1']
+  },
+  author: {
+    selectors: ['div.dateplusauthor a']
+  },
+  date_published: {
+    selectors: [['meta[name="article:published_time"]', 'value']]
+  },
+  dek: {
+    selectors: [['meta[name="og:description"]', 'value']]
+  },
+  lead_image_url: {
+    selectors: [['meta[name="og:image"]', 'value']]
+  },
+  content: {
+    selectors: ['#main article'],
+    defaultCleaner: false,
+    transforms: {},
+    clean: ['div.dateplusauthor', 'div.gr-12.push-6.footershare', '#atftbx', 'div.category-modul']
+  }
+};
+
+var WwwOssnewsJpExtractor = {
+  domain: 'www.ossnews.jp',
+  title: {
+    selectors: ['#alpha-block h1.hxnewstitle']
+  },
+  author: null,
+  date_published: null,
+  dek: null,
+  lead_image_url: {
+    selectors: [['meta[name="og:image"]', 'value']]
+  },
+  content: {
+    selectors: ['#alpha-block .section:has(h1.hxnewstitle)'],
+    defaultCleaner: false,
+    transforms: {},
+    clean: []
+  }
+};
+
+var BuzzapJpExtractor = {
+  domain: 'buzzap.jp',
+  title: {
+    selectors: ['h1.entry-title']
+  },
+  author: null,
+  date_published: {
+    selectors: [['time.entry-date', 'datetime']]
+  },
+  dek: null,
+  lead_image_url: {
+    selectors: [['meta[name="og:image"]', 'value']]
+  },
+  content: {
+    selectors: ['div.ctiframe'],
+    defaultCleaner: false,
+    transforms: {},
+    clean: []
+  }
+};
+
+var WwwAsahiComExtractor = {
+  domain: 'www.asahi.com',
+  title: {
+    selectors: ['.ArticleTitle h1']
+  },
+  author: {
+    selectors: [['meta[name="article:author"]', 'value']]
+  },
+  date_published: {
+    selectors: [['meta[name="pubdate"]', 'value']]
+  },
+  dek: null,
+  excerpt: {
+    selectors: [['meta[name="og:description"]', 'value']]
+  },
+  lead_image_url: {
+    selectors: [['meta[name="og:image"]', 'value']]
+  },
+  content: {
+    selectors: ['#MainInner div.ArticleBody'],
+    defaultCleaner: false,
+    transforms: {},
+    clean: ['div.AdMod', 'div.LoginSelectArea']
+  }
+};
+
+var WwwSanwaCoJpExtractor = {
+  domain: 'www.sanwa.co.jp',
+  title: {
+    selectors: ['#newsContent h1']
+  },
+  author: null,
+  date_published: null,
+  dek: {
+    selectors: [['meta[name="og:description"]', 'value']]
+  },
+  lead_image_url: {
+    selectors: [['meta[name="og:image"]', 'value']]
+  },
+  content: {
+    selectors: ['#newsContent'],
+    defaultCleaner: false,
+    transforms: {},
+    clean: ['#smartphone', 'div.sns_box', 'div.contentFoot']
+  }
+};
+
+var WwwElecomCoJpExtractor = {
+  domain: 'www.elecom.co.jp',
+  title: {
+    selectors: ['title']
+  },
+  author: null,
+  date_published: null,
+  dek: null,
+  lead_image_url: null,
+  content: {
+    selectors: ['td.TableMain2'],
+    defaultCleaner: false,
+    transforms: {
+      table: function table($node) {
+        $node.attr('width', 'auto');
+      }
+    },
+    clean: []
+  }
+};
+
+var ScanNetsecurityNeJpExtractor = {
+  domain: 'scan.netsecurity.ne.jp',
+  title: {
+    selectors: ['header.arti-header h1.head']
+  },
+  author: null,
+  date_published: {
+    selectors: [['meta[name="article:modified_time"]', 'value']]
+  },
+  dek: {
+    selectors: ['header.arti-header p.arti-summary']
+  },
+  lead_image_url: {
+    selectors: [['meta[name="og:image"]', 'value']]
+  },
+  content: {
+    selectors: ['div.arti-content.arti-content--thumbnail'],
+    defaultCleaner: false,
+    transforms: {},
+    clean: ['aside.arti-giga']
+  }
+};
+
+var JvndbJvnJpExtractor = {
+  domain: 'jvndb.jvn.jp',
+  title: {
+    selectors: ['title']
+  },
+  author: null,
+  date_published: null,
+  dek: null,
+  lead_image_url: null,
+  content: {
+    selectors: ['#news-list'],
+    defaultCleaner: false,
+    transforms: {},
+    clean: []
+  }
+};
+
+var GeniusComExtractor = {
+  domain: 'genius.com',
+  title: {
+    selectors: ['h1']
+  },
+  author: {
+    selectors: ['h2 a']
+  },
+  date_published: {
+    selectors: [['meta[itemprop=page_data]', 'value', function (res) {
+      var json = JSON.parse(res);
+      return json.song.release_date;
+    }]]
+  },
+  dek: {
+    selectors: [// enter selectors
+    ]
+  },
+  lead_image_url: {
+    selectors: [['meta[itemprop=page_data]', 'value', function (res) {
+      var json = JSON.parse(res);
+      return json.song.album.cover_art_url;
+    }]]
+  },
+  content: {
+    selectors: ['.lyrics'],
+    // Is there anything in the content you selected that needs transformed
+    // before it's consumable content? E.g., unusual lazy loaded images
+    transforms: {},
+    // Is there anything that is in the result that shouldn't be?
+    // The clean selectors will remove anything that matches from
+    // the result
+    clean: []
+  }
+};
+
+var WwwJnsaOrgExtractor = {
+  domain: 'www.jnsa.org',
+  title: {
+    selectors: ['#wgtitle h2']
+  },
+  author: null,
+  date_published: null,
+  dek: null,
+  excerpt: {
+    selectors: [['meta[name="og:description"]', 'value']]
+  },
+  lead_image_url: {
+    selectors: [['meta[name="og:image"]', 'value']]
+  },
+  content: {
+    selectors: ['#main_area'],
+    transforms: {},
+    clean: ['#pankuzu', '#side']
+  }
+};
+
 
 
 var CustomExtractors = /*#__PURE__*/Object.freeze({
@@ -4931,7 +5163,17 @@ var CustomExtractors = /*#__PURE__*/Object.freeze({
   BlisterreviewComExtractor: BlisterreviewComExtractor,
   NewsMynaviJpExtractor: NewsMynaviJpExtractor,
   GithubComExtractor: GithubComExtractor,
-  WwwRedditComExtractor: WwwRedditComExtractor
+  WwwRedditComExtractor: WwwRedditComExtractor,
+  OtrsComExtractor: OtrsComExtractor,
+  WwwOssnewsJpExtractor: WwwOssnewsJpExtractor,
+  BuzzapJpExtractor: BuzzapJpExtractor,
+  WwwAsahiComExtractor: WwwAsahiComExtractor,
+  WwwSanwaCoJpExtractor: WwwSanwaCoJpExtractor,
+  WwwElecomCoJpExtractor: WwwElecomCoJpExtractor,
+  ScanNetsecurityNeJpExtractor: ScanNetsecurityNeJpExtractor,
+  JvndbJvnJpExtractor: JvndbJvnJpExtractor,
+  GeniusComExtractor: GeniusComExtractor,
+  WwwJnsaOrgExtractor: WwwJnsaOrgExtractor
 });
 
 var Extractors = _Object$keys(CustomExtractors).reduce(function (acc, key) {
@@ -6389,14 +6631,16 @@ function select(opts) {
   // extract the attr
 
   if (_Array$isArray(matchingSelector)) {
-    var _matchingSelector = _slicedToArray(matchingSelector, 2),
+    var _matchingSelector = _slicedToArray(matchingSelector, 3),
         selector = _matchingSelector[0],
-        attr = _matchingSelector[1];
+        attr = _matchingSelector[1],
+        transform = _matchingSelector[2];
 
     $match = $(selector);
     $match = transformAndClean($match);
     result = $match.map(function (_, el) {
-      return $(el).attr(attr).trim();
+      var item = $(el).attr(attr).trim();
+      return transform ? transform(item) : item;
     });
   } else {
     $match = $(matchingSelector);
