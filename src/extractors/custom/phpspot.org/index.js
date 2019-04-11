@@ -7,7 +7,11 @@ export const PhpspotOrgExtractor = {
 
   author: null,
 
-  date_published: null,
+  date_published: {
+    selectors: ['h4.hl'],
+    format: 'YYYY年MM月DD日',
+    timezone: 'Asia/Tokyo',
+  },
 
   dek: null,
 

@@ -56,7 +56,7 @@ describe('PhpspotOrgExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(date_published, null);
+      assert.equal(date_published, '2019-04-03T15:00:00.000Z');
     });
 
     it('returns the dek', async () => {
