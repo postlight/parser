@@ -9,6 +9,7 @@ export const WwwMoongiftJpExtractor = {
 
   date_published: {
     selectors: ['ul.meta li:not(.social):first-of-type'],
+    timezone: 'Asia/Tokyo',
   },
 
   dek: {
