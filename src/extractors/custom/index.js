@@ -112,3 +112,4 @@ export * from './www.itmedia.co.jp';
 export * from './www.publickey1.jp';
 export * from './takagi-hiromitsu.jp';
 export * from './bookwalker.jp';
+export * from './www.yomiuri.co.jp';
