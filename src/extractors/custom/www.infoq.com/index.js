@@ -9,7 +9,11 @@ export const WwwInfoqComExtractor = {
     selectors: ['div.widget.article__authors'],
   },
 
-  date_published: null,
+  date_published: {
+    selectors: ['.article__readTime.date'],
+    format: 'YYYY年MM月DD日',
+    timezone: 'Asia/Tokyo',
+  },
 
   dek: {
     selectors: [['meta[name="og:description"]', 'value']],
