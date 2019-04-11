@@ -7,7 +7,9 @@ export const WwwMoongiftJpExtractor = {
 
   author: null,
 
-  date_published: null,
+  date_published: {
+    selectors: ['ul.meta li:not(.social):first-of-type'],
+  },
 
   dek: {
     selectors: [['meta[name="og:description"]', 'value']],
