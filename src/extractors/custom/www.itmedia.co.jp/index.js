@@ -1,14 +1,18 @@
 export const WwwItmediaCoJpExtractor = {
   domain: 'www.itmedia.co.jp',
 
-  supportedDomains: ['www.atmarkit.co.jp', 'techtarget.itmedia.co.jp'],
+  supportedDomains: [
+    'www.atmarkit.co.jp',
+    'techtarget.itmedia.co.jp',
+    'nlab.itmedia.co.jp',
+  ],
 
   title: {
     selectors: ['#cmsTitle div.inner h1'],
   },
 
   author: {
-    selectors: ['div#byline.inner'],
+    selectors: ['#byline'],
   },
 
   date_published: {
@@ -16,7 +20,7 @@ export const WwwItmediaCoJpExtractor = {
   },
 
   dek: {
-    selectors: [['meta[name="og:description"]', 'value']],
+    selectors: ['#cmsAbstract h2'],
   },
 
   lead_image_url: {
@@ -24,7 +28,7 @@ export const WwwItmediaCoJpExtractor = {
   },
 
   content: {
-    selectors: ['#cmsBody div.inner'],
+    selectors: ['#cmsBody'],
 
     defaultCleaner: false,
 
