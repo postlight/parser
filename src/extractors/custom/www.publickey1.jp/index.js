@@ -9,7 +9,11 @@ export const WwwPublickey1JpExtractor = {
     selectors: ['#subcol p:has(img)'],
   },
 
-  date_published: null,
+  date_published: {
+    selectors: ['div.pubdate'],
+    format: 'YYYY年MM月DD日',
+    timezone: 'Asia/Tokyo',
+  },
 
   dek: null,
 
