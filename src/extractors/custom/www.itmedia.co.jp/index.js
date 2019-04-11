@@ -8,7 +8,7 @@ export const WwwItmediaCoJpExtractor = {
   ],
 
   title: {
-    selectors: ['#cmsTitle div.inner h1'],
+    selectors: ['#cmsTitle h1'],
   },
 
   author: {
