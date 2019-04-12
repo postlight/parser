@@ -106,3 +106,4 @@ export * from './jvndb.jvn.jp';
 export * from './genius.com';
 export * from './www.jnsa.org';
 export * from './phpspot.org';
+export * from './www.infoq.com';
