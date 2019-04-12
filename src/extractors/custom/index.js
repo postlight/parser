@@ -110,3 +110,4 @@ export * from './www.infoq.com';
 export * from './www.moongift.jp';
 export * from './www.itmedia.co.jp';
 export * from './www.publickey1.jp';
+export * from './takagi-hiromitsu.jp';
