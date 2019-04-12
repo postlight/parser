@@ -1,0 +1,1928 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        <title>Google Chrome&#x306E;Never-Slow Mode</title>
+        <link rel="canonical" href="https://www.infoq.com/jp/news/2019/02/chrome-never-slow-mode">
+        <link rel="alternate" href="https://www.infoq.com/jp/news/2019/02/chrome-never-slow-mode" hreflang="ja">
+        
+
+
+
+
+
+
+    
+        
+            
+            <link rel="alternate" href="https://www.infoq.com/br/news/2019/03/chrome-never-slow-mode" hreflang="pt">
+        
+        
+            
+            <link rel="alternate" href="https://www.infoq.com/news/2019/02/chrome-never-slow-mode" hreflang="en">
+            
+            <link rel="alternate" href="https://www.infoq.com/news/2019/02/chrome-never-slow-mode" hreflang="x-default">
+        
+        
+    
+    
+
+
+
+
+
+
+
+        
+        <meta http-equiv="pragma" value="no-cache">
+<meta http-equiv="cache-control" value="private,no-cache,no-store,must-revalidate">
+<meta http-equiv="expires" value="0">
+<meta http-equiv="content-type" value="text/html; charset=utf-8">
+<meta name="copyright" value="&#xA9; 2006 C4Media">
+
+<meta name="google-site-verification" value="0qInQx_1WYOeIIbxnh7DnXlw1XOxNgAYakO2k4GhNnY">
+<meta name="msapplication-TileColor" value="#ffffff">
+<meta name="msapplication-TileImage" value="/styles/i/logo.jpg">
+<meta value="3eac1729a8bbe046" name="wb:webmaster">
+<meta name="viewport" value="width=device-width,initial-scale=1">
+<meta http-equiv="X-UA-Compatible" value="IE=10, IE=edge">
+
+        
+		
+			
+		
+		
+			
+		
+        <link rel="stylesheet" type="text/css" media="screen" href="https://cdn.infoq.com/statics_s2_20190403-0313/styles/style.css">
+        <link rel="stylesheet" type="text/css" media="print" href="https://cdn.infoq.com/statics_s2_20190403-0313/styles/print.css">
+        <link rel="stylesheet" type="text/css" href="https://cdn.infoq.com/statics_s2_20190403-0313/styles/style_ja.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="https://cdn.infoq.com/statics_s2_20190403-0313/styles/icons.css">
+
+
+    
+        <link rel="stylesheet" type="text/css" media="screen" href="https://cdn.infoq.com/statics_s2_20190403-0313/styles/style_extra.css">
+
+        <link rel="shortcut icon" href="https://cdn.infoq.com/statics_s2_20190403-0313/favicon.ico" type="image/x-icon">
+        <link rel="apple-touch-icon" href="https://cdn.infoq.com/statics_s2_20190403-0313/apple-touch-icon.png">
+
+        
+
+        
+        
+        
+
+        
+
+
+
+
+
+
+
+
+
+
+        
+        
+        
+
+        
+	
+
+
+
+
+
+
+    
+    
+    
+    
+    
+        
+    
+
+
+
+
+
+	<meta name="ifq:pageType" value="NEWS_PAGE">
+	
+	
+		
+		
+		<link rel="stylesheet" href="https://cdn.infoq.com/statics_s2_20190403-0313/styles/prism.css">
+		<meta name="keywords" value="chrome never slow mode,&#x30C7;&#x30D9;&#x30ED;&#x30C3;&#x30D7;&#x30E1;&#x30F3;&#x30C8;,HTML5,RIA,JavaScript,Chrome,Web Browser,&#x52D5;&#x7684;&#x8A00;&#x8A9E;,Markup Languages,OS,">
+		<meta name="description" value="Google&#x306F;Never-Slow Mode&#x3068;&#x547C;&#x3070;&#x308C;&#x308B;&#x30D7;&#x30ED;&#x30C8;&#x30BF;&#x30A4;&#x30D7;&#x6A5F;&#x80FD;&#x306B;&#x53D6;&#x308A;&#x7D44;&#x3093;&#x3067;&#x3044;&#x308B;&#x3002;&#x3053;&#x306E;&#x30D7;&#x30ED;&#x30C8;&#x30BF;&#x30A4;&#x30D7;&#x6A5F;&#x80FD;&#x306F;Chromium &#x30D7;&#x30ED;&#x30B8;&#x30A7;&#x30AF;&#x30C8;&#x3067;&#x30B3;&#x30DF;&#x30C3;&#x30C8;&#x4F5C;&#x696D;&#x9032;&#x884C;&#x4E2D;&#x3067;&#x3042;&#x308A;&#x3001;&#x30E6;&#x30FC;&#x30B6;&#x30FC;&#x30A8;&#x30AF;&#x30B9;&#x30DA;&#x30EA;&#x30A8;&#x30F3;&#x30B9;&#x306E;&#x5411;&#x4E0A;&#x3001;&#x4E00;&#x8CAB;&#x6027;&#x306E;&#x3042;&#x308B;&#x8FC5;&#x901F;&#x306A;&#x30D6;&#x30E9;&#x30A6;&#x30B8;&#x30F3;&#x30B0;&#x306E;&#x63D0;&#x4F9B;&#x3092;&#x76EE;&#x7684;&#x3068;&#x3057;&#x3066;&#x3044;&#x308B;&#x3002;">
+		<meta name="tprox" value="1551257160000">
+		
+    	
+
+
+
+
+
+
+
+<meta value="website" name="og:type">
+
+
+    
+
+
+
+
+
+
+
+    
+    
+    
+    
+    
+        <meta value="https://cdn.infoq.com/statics_s2_20190403-0313/styles/i/logo-big.jpg" name="og:image">
+        <meta value="https://cdn.infoq.com/statics_s2_20190403-0313/styles/i/logo-big.jpg" name="twitter:image">
+    
+
+<meta value="Google Chrome&#x306E;Never-Slow Mode " name="og:title">
+<meta value="Google&#x306F;Never-Slow Mode&#x3068;&#x547C;&#x3070;&#x308C;&#x308B;&#x30D7;&#x30ED;&#x30C8;&#x30BF;&#x30A4;&#x30D7;&#x6A5F;&#x80FD;&#x306B;&#x53D6;&#x308A;&#x7D44;&#x3093;&#x3067;&#x3044;&#x308B;&#x3002;&#x3053;&#x306E;&#x30D7;&#x30ED;&#x30C8;&#x30BF;&#x30A4;&#x30D7;&#x6A5F;&#x80FD;&#x306F;Chromium &#x30D7;&#x30ED;&#x30B8;&#x30A7;&#x30AF;&#x30C8;&#x3067;&#x30B3;&#x30DF;&#x30C3;&#x30C8;&#x4F5C;&#x696D;&#x9032;&#x884C;&#x4E2D;&#x3067;&#x3042;&#x308A;&#x3001;&#x30E6;&#x30FC;&#x30B6;&#x30FC;&#x30A8;&#x30AF;&#x30B9;&#x30DA;&#x30EA;&#x30A8;&#x30F3;&#x30B9;&#x306E;&#x5411;&#x4E0A;&#x3001;&#x4E00;&#x8CAB;&#x6027;&#x306E;&#x3042;&#x308B;&#x8FC5;&#x901F;&#x306A;&#x30D6;&#x30E9;&#x30A6;&#x30B8;&#x30F3;&#x30B0;&#x306E;&#x63D0;&#x4F9B;&#x3092;&#x76EE;&#x7684;&#x3068;&#x3057;&#x3066;&#x3044;&#x308B;&#x3002;" name="og:description">
+<meta value="InfoQ" name="og:site_name">
+
+<meta name="twitter:card" value="summary">
+<meta name="twitter:title" value="Google Chrome&#x306E;Never-Slow Mode ">
+<meta name="twitter:description" value="Google&#x306F;Never-Slow Mode&#x3068;&#x547C;&#x3070;&#x308C;&#x308B;&#x30D7;&#x30ED;&#x30C8;&#x30BF;&#x30A4;&#x30D7;&#x6A5F;&#x80FD;&#x306B;&#x53D6;&#x308A;&#x7D44;&#x3093;&#x3067;&#x3044;&#x308B;&#x3002;&#x3053;&#x306E;&#x30D7;&#x30ED;&#x30C8;&#x30BF;&#x30A4;&#x30D7;&#x6A5F;&#x80FD;&#x306F;Chromium &#x30D7;&#x30ED;&#x30B8;&#x30A7;&#x30AF;&#x30C8;&#x3067;&#x30B3;&#x30DF;&#x30C3;&#x30C8;&#x4F5C;&#x696D;&#x9032;&#x884C;&#x4E2D;&#x3067;&#x3042;&#x308A;&#x3001;&#x30E6;&#x30FC;&#x30B6;&#x30FC;&#x30A8;&#x30AF;&#x30B9;&#x30DA;&#x30EA;&#x30A8;&#x30F3;&#x30B9;&#x306E;&#x5411;&#x4E0A;&#x3001;&#x4E00;&#x8CAB;&#x6027;&#x306E;&#x3042;&#x308B;&#x8FC5;&#x901F;&#x306A;&#x30D6;&#x30E9;&#x30A6;&#x30B8;&#x30F3;&#x30B0;&#x306E;&#x63D0;&#x4F9B;&#x3092;&#x76EE;&#x7684;&#x3068;&#x3057;&#x3066;&#x3044;&#x308B;&#x3002;">
+
+		
+		
+		
+	
+	
+	
+
+	
+
+        
+        
+        
+        
+        
+
+        
+
+    </head>
+
+    <body>
+        
+
+
+
+
+
+
+
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W9GJ5DL" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+        
+            <div class="intbt">
+                <a href="https://www.infoq.com/int/bt" title="bt">BT</a>
+            </div>
+        
+
+        
+
+
+
+
+
+
+
+ 
+
+
+        
+        <div class="infoq" id="infoq">
+
+            
+            
+
+
+
+
+
+
+
+
+
+
+
+<header class="header nocontent">
+    <button aria-label="Toggle Navigation" tabindex="0" class="burger header__toggle button">Toggle Navigation <span></span><span></span><span></span></button>
+    <div class="header__container container">
+        <div class="container__inner">
+            <div class="actions header__top">
+                <div class="actions__left">
+                    <p class="header__desc">
+                        &#x6700;&#x65B0;&#x6280;&#x8853;&#x3092;&#x8FFD;&#x3044;&#x6C42;&#x3081;&#x308B;&#x30C7;&#x30D9;&#x30ED;&#x30C3;&#x30D1;&#x306E;&#x305F;&#x3081;&#x306E;&#x60C5;&#x5831;&#x30B3;&#x30DF;&#x30E5;&#x30CB;&#x30C6;&#x30A3;
+                    </p>
+                    <div class="button__dropdown dropdown header__more dropdown__center">
+                        <button aria-label="&#x3082;&#x3063;&#x3068;&#x8A73;&#x3057;&#x304F;" class="button__small button__unstyled">&#x3082;&#x3063;&#x3068;&#x8A73;&#x3057;&#x304F;</button>
+                        <div class="dropdown__holder">
+                            <div class="dropdown__content">
+                                <ul class="no-style dropdown__nav">
+                                    
+                                        <li>
+                                            <a href="https://www.infoq.com/jp/about-infoq" title="InfoQ&#x306B;&#x3064;&#x3044;&#x3066;">
+                                                InfoQ&#x306B;&#x3064;&#x3044;&#x3066;
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="https://www.infoq.com/jp/infoq-writers" title="InfoQ&#x306E;&#x30E9;&#x30A4;&#x30BF;&#x30FC;">
+                                                InfoQ&#x306E;&#x30E9;&#x30A4;&#x30BF;&#x30FC;
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="https://www.infoq.com/jp/contribute" title="&#x5BC4;&#x7A3F;">
+                                                &#x5BC4;&#x7A3F;
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="https://www.infoq.com/jp/about-c4media" title="C4Media&#x306B;&#x3064;&#x3044;&#x3066;">
+                                                C4Media&#x306B;&#x3064;&#x3044;&#x3066;
+                                            </a>
+                                        </li>
+                                    
+                                    
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="actions__right">
+                    <div>
+                        
+                    </div>
+                    
+
+
+
+
+
+
+
+
+	<div class="button__dropdown dropdown user__login">
+		<button aria-label="&#x30B5;&#x30A4;&#x30F3;&#x30A2;&#x30C3;&#x30D7;/&#x30ED;&#x30B0;&#x30A4;&#x30F3;" class="button button__small button__green button__arrow arrow__true button__icon icon icon__user icon--only">&#x30B5;&#x30A4;&#x30F3;&#x30A2;&#x30C3;&#x30D7;/&#x30ED;&#x30B0;&#x30A4;&#x30F3;</button>
+		<div class="dropdown__holder">
+			<div class="dropdown__content">
+				<div class="login__dropdown">
+					<div class="login__module">
+						<div class="login__username">
+							
+							
+							
+						</div>
+						<div class="login__social">
+							<h4 class="heading">Login with:</h4>
+							<div class="social__connect form__row login__socials">
+								<a href="https://www.infoq.com/jp/social/googleLogin.action?fl=login" onclick="return UserActions_Login.addLoginInfo(this);" class="button button__medium button__gray button__icon icon icon__google" title="Google&#x30A2;&#x30AB;&#x30A6;&#x30F3;&#x30C8;&#x3067;&#x30ED;&#x30B0;&#x30A4;&#x30F3;">Google</a>
+								<a href="https://www.infoq.com/jp/social/liveLogin.action?fl=login" onclick="return UserActions_Login.addLoginInfo(this);" class="button button__medium button__icon icon icon__microsoft" title="Microsoft&#x30A2;&#x30AB;&#x30A6;&#x30F3;&#x30C8;&#x3067;&#x30ED;&#x30B0;&#x30A4;&#x30F3;">Microsoft</a>
+								
+									<a href="https://www.infoq.com/jp/social/twitterLogin.action?fl=login" onclick="return UserActions_Login.addLoginInfo(this);" class="button button__medium button__icon icon icon__twitter" title="Twitter&#x30A2;&#x30AB;&#x30A6;&#x30F3;&#x30C8;&#x3067;&#x30ED;&#x30B0;&#x30A4;&#x30F3;">Twitter</a>
+									<a href="https://www.infoq.com/jp/social/facebookLogin.action?fl=login" onclick="return UserActions_Login.addLoginInfo(this);" class="button button__medium button__icon icon icon__fb" title="Facebook&#x30A2;&#x30AB;&#x30A6;&#x30F3;&#x30C8;&#x3067;&#x30ED;&#x30B0;&#x30A4;&#x30F3;">Facebook</a>
+								
+								
+							</div>
+						</div>
+						<div class="login__signup">
+							<h4 class="heading">&#x30A2;&#x30AB;&#x30A6;&#x30F3;&#x30C8;&#x3092;&#x304A;&#x6301;&#x3061;&#x3067;&#x306A;&#x3044;&#x65B9;</h4>
+							<a href="https://www.infoq.com/jp/reginit.action?" onclick="return UserActions_Login.addLoginInfo(this);" class="button button__medium button__green">&#x30B5;&#x30A4;&#x30F3;&#x30A2;&#x30C3;&#x30D7;/&#x30ED;&#x30B0;&#x30A4;&#x30F3;</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+                    
+
+
+
+
+
+
+
+
+    <div class="button__dropdown dropdown user__notifications">
+        <button aria-label="Notifications" class="button button__small button__green button__icon icon icon__notifications icon--only">&#x901A;&#x77E5;<div class="badge"><span class="notifications__badge">1</span></div></button>
+        
+
+
+
+
+
+
+<div class="dropdown__holder">
+    <div class="dropdown__header">
+        <div class="heading__container actions notifications__header">
+            <div class="actions__left">
+                <h5 class="heading">&#x30ED;&#x30B0;&#x30A4;&#x30F3;&#x3057;&#x3066; InfoQ &#x306E;&#x65B0;&#x6A5F;&#x80FD;&#x3092;&#x5229;&#x7528;&#x3059;&#x308B;</h5>
+            </div>
+        </div>
+    </div>
+    <div class="dropdown__content">
+        <ul class="notifications__welcome no-style">
+            <li class="icon__up-to-date">&#x5E38;&#x306B;&#x65B0;&#x3057;&#x3044;&#x6295;&#x7A3F;&#x306E;&#x901A;&#x77E5;&#x3092;&#x53D7;&#x3051;&#x308B;</li>
+            <li class="icon__like-content">&#x304A;&#x6C17;&#x306B;&#x5165;&#x308A;&#x30B3;&#x30F3;&#x30C6;&#x30F3;&#x30C4;&#x306B;&#x3044;&#x3044;&#x306D;&#xFF01;&#x3092;&#x3064;&#x3051;&#x308B;</li>
+            <li class="icon__follow-favorites">&#x304A;&#x6C17;&#x306B;&#x5165;&#x308A;&#x306E;&#x7DE8;&#x96C6;&#x8005;&#x3068;&#x4EF2;&#x9593;&#x3092;&#x30D5;&#x30A9;&#x30ED;&#x30FC;&#x3059;&#x308B;</li>
+        </ul>
+        <button aria-label="Login" class="login button button__medium button__green">&#x30B5;&#x30A4;&#x30F3;&#x30A2;&#x30C3;&#x30D7;/&#x30ED;&#x30B0;&#x30A4;&#x30F3;</button>
+        <a href="https://www.infoq.com/reginit.action" class="button button__unstyled">&#x30A2;&#x30AB;&#x30A6;&#x30F3;&#x30C8;&#x3092;&#x304A;&#x6301;&#x3061;&#x3067;&#x3057;&#x3087;&#x3046;&#x304B;&#xFF1F; &#x3053;&#x3061;&#x3089;&#x304B;&#x3089;&#x767B;&#x9332;</a>
+    </div>
+</div>
+    </div>
+
+
+                </div>
+            </div>
+            <div class="header__middle">
+                <div class="logo header__logo">
+                    <a href="https://www.infoq.com/jp/" class="logo__symbol active">
+                        Logo - Back to homepage
+                    </a>
+                    
+
+
+
+
+
+
+
+<ul class="language__switcher no-style logo__languages">
+	<li><a href="https://www.infoq.com/">En</a></li>
+	<li><a href="https://www.infoq.cn/">&#x4E2D;&#x6587;</a></li>
+	<li class="active"><a href="https://www.infoq.com/jp/news/2019/02/chrome-never-slow-mode#" onclick="return false;" title="InfoQ Japan">&#x65E5;&#x672C;</a></li>
+    <li><a href="https://www.infoq.com/fr/">Fr</a></li>
+	<li><a href="https://www.infoq.com/br/">Br</a></li>
+</ul>
+
+
+                </div>
+                
+                <div class="content-items">
+                    <a href="https://www.infoq.com/jp/news" class="icon icon__news">&#x30CB;&#x30E5;&#x30FC;&#x30B9;</a>
+                    <a href="https://www.infoq.com/jp/articles" class="icon icon__articles">&#x30A2;&#x30FC;&#x30C6;&#x30A3;&#x30AF;&#x30EB;</a>
+                    <a href="https://www.infoq.com/jp/presentations" class="icon icon__presentations">&#x30D7;&#x30EC;&#x30BC;&#x30F3;&#x30C6;&#x30FC;&#x30B7;&#x30E7;&#x30F3;</a>
+                    <a href="https://www.infoq.com/jp/podcasts" class="icon icon__podcasts">&#x30DD;&#x30C3;&#x30C9;&#x30AD;&#x30E3;&#x30B9;&#x30C8;</a>
+                    <a href="https://www.infoq.com/jp/minibooks" class="icon icon__guides">E&#x30D6;&#x30C3;&#x30AF;</a>
+                </div>
+                <div class="header__items columns">
+                    
+
+
+
+
+
+
+
+<div>
+    <h3 class="widget__heading">Topics</h3>
+    <nav class="nav header__nav topics" data-trk-ref="header_personas">
+        <li class="has--subnav">
+            <a href="https://www.infoq.com/jp/development" title="Development" class="nav__category">&#x30C7;&#x30D9;&#x30ED;&#x30C3;&#x30D7;&#x30E1;&#x30F3;&#x30C8;</a>
+            <div class="nav__subnav subnav">
+                <ul class="subnav__categories no-style">
+                    <li><a href="https://www.infoq.com/jp/java/?itm_source=infoq&amp;itm_medium=header_graybar&amp;itm_campaign=topic_clk" title="Java">Java</a></li>
+                    <li><a href="https://www.infoq.com/jp/clojure/?itm_source=infoq&amp;itm_medium=header_graybar&amp;itm_campaign=topic_clk" title="Clojure">Clojure</a></li>
+                    <li><a href="https://www.infoq.com/jp/scala/?itm_source=infoq&amp;itm_medium=header_graybar&amp;itm_campaign=topic_clk" title="Scala">Scala</a></li>
+                    <li><a href="https://www.infoq.com/jp/dotnet/?itm_source=infoq&amp;itm_medium=header_graybar&amp;itm_campaign=topic_clk" title=".Net">.Net</a></li>
+                    <li><a href="https://www.infoq.com/jp/mobile/?itm_source=infoq&amp;itm_medium=header_graybar&amp;itm_campaign=topic_clk" title="&#x30E2;&#x30D0;&#x30A4;&#x30EB;">&#x30E2;&#x30D0;&#x30A4;&#x30EB;</a></li>
+                    <li><a href="https://www.infoq.com/jp/android/?itm_source=infoq&amp;itm_medium=header_graybar&amp;itm_campaign=topic_clk" title="Android">Android</a></li>
+                    <li><a href="https://www.infoq.com/jp/iot/?itm_source=infoq&amp;itm_medium=header_graybar&amp;itm_campaign=topic_clk" title="IoT">IoT</a></li>
+                    <li><a href="https://www.infoq.com/jp/HTML5Topic/?itm_source=infoq&amp;itm_medium=header_graybar&amp;itm_campaign=topic_clk" title="HTML5">HTML5</a></li>
+                    <li><a href="https://www.infoq.com/jp/javascript/?itm_source=infoq&amp;itm_medium=header_graybar&amp;itm_campaign=topic_clk" title="JavaScript">JavaScript</a></li>
+                    <li><a href="https://www.infoq.com/jp/fp/?itm_source=infoq&amp;itm_medium=header_graybar&amp;itm_campaign=topic_clk" title="Functional Programming">Functional Programming</a></li>
+                </ul>
+                <div class="subnav__content" data-id="6830">
+                    
+                        
+                        
+                        
+                        
+                        
+                        
+                    
+
+
+
+
+
+
+    
+    
+    
+
+
+<div class="heading__container actions">
+    <div class="actions__left">
+        <h3 class="heading section__heading">&#x6CE8;&#x76EE;&#x306E; &#x30C7;&#x30D9;&#x30ED;&#x30C3;&#x30D7;&#x30E1;&#x30F3;&#x30C8;</h3>
+    </div>
+</div>
+<ul data-size="large" data-horizontal="true" data-tax taxonomy="articles" class="cards no-style">
+    <li>
+        <div class="card__content">
+            <div class="card__data">
+                <h4 class="card__title">
+                    <a href="https://www.infoq.com/jp/articles/api-gateway-clojure-golang">API Gateway&#x30B5;&#x30FC;&#x30D3;&#x30B9;&#x3092;Clojure&#x304B;&#x3089;Go&#x8A00;&#x8A9E;&#x306B;&#x66F8;&#x304D;&#x76F4;&#x3059; - AppsFlyer&#x306B;&#x3088;&#x308B;&#x5B9F;&#x4F8B;&#x5831;&#x544A;</a>
+                </h4>
+                <p class="card__excerpt">AppsFlyer&#x306F;&#x30DE;&#x30A4;&#x30AF;&#x30ED;&#x30B5;&#x30FC;&#x30D3;&#x30B9;&#x30A2;&#x30FC;&#x30AD;&#x30C6;&#x30AF;&#x30C1;&#x30E3;&#x65B9;&#x5F0F;&#x3067;&#x69CB;&#x7BC9;&#x3055;&#x308C;&#x3066;&#x304A;&#x308A;&#xFF0C;&#xFF11;&#x65E5;700&#x5104;&#x8FD1;&#x3044;HTTP&#x30EA;&#x30AF;&#x30A8;&#x30B9;&#x30C8;&#x3092;&#x51E6;&#x7406;&#x3057;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;&#x3059;&#x3079;&#x3066;&#x306E;&#x30D5;&#x30ED;&#x30F3;&#x30C8;&#x30A8;&#x30F3;&#x30C9;&#x30B5;&#x30FC;&#x30D3;&#x30B9;&#x3092;&#x30E9;&#x30C3;&#x30D7;&#x3057;&#x3066;&#x30B7;&#x30B9;&#x30C6;&#x30E0;&#x3078;&#x306E;&#x30A8;&#x30F3;&#x30C8;&#x30EA;&#x30DD;&#x30A4;&#x30F3;&#x30C8;&#x3068;&#x306A;&#x308B;&#x306E;&#x306F;&#xFF0C;API Gateway&#x3068;&#x547C;&#x3070;&#x308C;&#x308B;&#x30DF;&#x30C3;&#x30B7;&#x30E7;&#x30F3;&#x30AF;&#x30EA;&#x30C6;&#x30A3;&#x30AB;&#x30EB;&#x306A;(&#x975E;&#x30DE;&#x30A4;&#x30AF;&#x30ED;)&#x30B5;&#x30FC;&#x30D3;&#x30B9;&#x3067;&#x3059;&#x3002;&#x3053;&#x306E;&#x8A18;&#x4E8B;&#x3067;&#x306F;&#xFF0C;Clojure&#x30D9;&#x30FC;&#x30B9;&#x306E;&#x30B2;&#x30FC;&#x30C8;&#x30A6;&#x30A7;&#x30A4;&#x304B;&#x3089;&#xFF0C;&#x65B0;&#x305F;&#x306B;&#x8A2D;&#x8A08;&#x3055;&#x308C;&#x305F;Go&#x30D9;&#x30FC;&#x30B9;&#x306E;&#x5B9F;&#x88C5;&#x306B;&#x79FB;&#x884C;&#x3057;&#x305F;&#x7D4C;&#x9A13;&#x3092;&#x5831;&#x544A;&#x3057;&#x307E;...</p>
+                <div class="card__footer"></div>
+            </div>
+            
+                <a href="https://www.infoq.com/jp/articles/api-gateway-clojure-golang" class="card__header">
+                    <img alt="API Gateway&#x30B5;&#x30FC;&#x30D3;&#x30B9;&#x3092;Clojure&#x304B;&#x3089;Go&#x8A00;&#x8A9E;&#x306B;&#x66F8;&#x304D;&#x76F4;&#x3059; - AppsFlyer&#x306B;&#x3088;&#x308B;&#x5B9F;&#x4F8B;&#x5831;&#x544A;" src="https://res.infoq.com/articles/api-gateway-clojure-golang/ja/smallimage/api-gateway-clojure-golang-s-1548715717206.jpg" class="card__image">
+                </a>
+            
+        </div>
+    </li>
+</ul>
+
+
+    
+    
+
+<a href="https://www.infoq.com/jp/development" class="button__more button button__large button__arrow arrow__right">&#x306E;&#x3059;&#x3079;&#x3066;&#x3092;&#x898B;&#x308B; development</a>
+
+                </div>
+            </div>
+        </li>
+        <li class="has--subnav">
+            <a href="https://www.infoq.com/jp/architecture-design" title="&#x8A2D;&#x8A08;/&#x30A2;&#x30FC;&#x30AD;&#x30C6;&#x30AF;&#x30C1;&#x30E3;" class="nav__category">&#x8A2D;&#x8A08;/&#x30A2;&#x30FC;&#x30AD;&#x30C6;&#x30AF;&#x30C1;&#x30E3;</a>
+            <div class="nav__subnav subnav">
+                <ul class="subnav__categories no-style">
+                    <li><a href="https://www.infoq.com/jp/architecture/?itm_source=infoq&amp;itm_medium=header_graybar&amp;itm_campaign=topic_clk" title="Architecture">Architecture</a></li>
+                    <li><a href="https://www.infoq.com/jp/enterprise-architecture/?itm_source=infoq&amp;itm_medium=header_graybar&amp;itm_campaign=topic_clk" title="&#x30A8;&#x30F3;&#x30BF;&#x30FC;&#x30D7;&#x30E9;&#x30A4;&#x30BA;&#x30A2;&#x30FC;&#x30AD;&#x30C6;&#x30AF;&#x30C1;&#x30E3;">&#x30A8;&#x30F3;&#x30BF;&#x30FC;&#x30D7;&#x30E9;&#x30A4;&#x30BA;&#x30A2;&#x30FC;&#x30AD;&#x30C6;&#x30AF;&#x30C1;&#x30E3;</a></li>
+                    <li><a href="https://www.infoq.com/jp/performance-scalability/?itm_source=infoq&amp;itm_medium=header_graybar&amp;itm_campaign=topic_clk" title="&#x30D1;&#x30D5;&#x30A9;&#x30FC;&#x30DE;&#x30F3;&#x30B9;&amp;&#x30B9;&#x30B1;&#x30FC;&#x30E9;&#x30D3;&#x30EA;&#x30C6;&#x30A3;">&#x30D1;&#x30D5;&#x30A9;&#x30FC;&#x30DE;&#x30F3;&#x30B9;&amp;&#x30B9;&#x30B1;&#x30FC;&#x30E9;&#x30D3;&#x30EA;&#x30C6;&#x30A3;</a></li>
+                    <li><a href="https://www.infoq.com/jp/design/?itm_source=infoq&amp;itm_medium=header_graybar&amp;itm_campaign=topic_clk" title="Design">Design</a></li>
+                    <li><a href="https://www.infoq.com/jp/DesignPattern/?itm_source=infoq&amp;itm_medium=header_graybar&amp;itm_campaign=topic_clk" title="&#x30C7;&#x30B6;&#x30A4;&#x30F3;&#x30D1;&#x30BF;&#x30FC;&#x30F3;">&#x30C7;&#x30B6;&#x30A4;&#x30F3;&#x30D1;&#x30BF;&#x30FC;&#x30F3;</a></li>
+                    <li><a href="https://www.infoq.com/jp/Security/?itm_source=infoq&amp;itm_medium=header_graybar&amp;itm_campaign=topic_clk" title="&#x30BB;&#x30AD;&#x30E5;&#x30EA;&#x30C6;&#x30A3;">&#x30BB;&#x30AD;&#x30E5;&#x30EA;&#x30C6;&#x30A3;</a></li>
+                </ul>
+                <div class="subnav__content" data-id="6831">
+                    
+                        
+                        
+                        
+                        
+                        
+                        
+                    
+
+
+
+
+
+
+    
+    
+    
+
+
+<div class="heading__container actions">
+    <div class="actions__left">
+        <h3 class="heading section__heading">&#x6CE8;&#x76EE;&#x306E; &#x8A2D;&#x8A08;/&#x30A2;&#x30FC;&#x30AD;&#x30C6;&#x30AF;&#x30C1;&#x30E3;</h3>
+    </div>
+</div>
+<ul data-size="large" data-horizontal="true" data-tax taxonomy="articles" class="cards no-style">
+    <li>
+        <div class="card__content">
+            <div class="card__data">
+                <h4 class="card__title">
+                    <a href="https://www.infoq.com/jp/articles/overcoming-restlessness">RESTlessness&#x306B;&#x6253;&#x3061;&#x52DD;&#x3064;</a>
+                </h4>
+                <p class="card__excerpt">GraphQL&#x3084;gRPC&#xFF0C;Apache Kafka&#x3068;&#x3044;&#x3063;&#x305F;&#x65B0;&#x3057;&#x3044;API&#x30D7;&#x30ED;&#x30C8;&#x30B3;&#x30EB;&#x304C;&#xFF0C;REST&#x306B;&#x57FA;&#x3065;&#x3044;&#x305F;HTTP API&#x306B;&#x4EE3;&#x308F;&#x308B;&#x3082;&#x306E;&#x3068;&#x3057;&#x3066;&#x4EBA;&#x6C17;&#x3092;&#x96C6;&#x3081;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;REST&#x306E;&#x4EE3;&#x308F;&#x308A;&#x3092;&#x63A2;&#x3059;&#x306E;&#x3067;&#x306F;&#x306A;&#x304F;&#xFF0C;&#x30BD;&#x30D5;&#x30C8;&#x30A6;&#x30A7;&#x30A2;&#x30A8;&#x30F3;&#x30B8;&#x30CB;&#x30A2;&#x7523;&#x696D;&#x306F;&#xFF0C;&#x6210;&#x719F;&#x3057;&#x305F;REST&#x30A8;&#x30B3;&#x30B7;&#x30B9;&#x30C6;&#x30E0;&#x3092;&#x57FA;&#x76E4;&#x3068;&#x3057;&#x3066;&#xFF0C;&#x65B0;&#x305F;&#x306A;&#x30D7;&#x30ED;&#x30C8;&#x30B3;&#x30EB;&#x306E;&#x6280;&#x8853;&#x7684;&#x9577;&#x6240;&#x3092;&#x63A2;&#x6C42;&#x3059;&#x308B;&#x624B;&#x6BB5;&#x3092;&#x6A21;&#x7D22;&#x3059;&#x308B;&#x3079;&#x304D;&#x3067;&#x3059;&#x3002;</p>
+                <div class="card__footer"></div>
+            </div>
+            
+                <a href="https://www.infoq.com/jp/articles/overcoming-restlessness" class="card__header">
+                    <img alt="RESTlessness&#x306B;&#x6253;&#x3061;&#x52DD;&#x3064;" src="https://res.infoq.com/articles/overcoming-restlessness/ja/smallimage/overcoming-restlessness-s-1548835990305.jpeg" class="card__image">
+                </a>
+            
+        </div>
+    </li>
+</ul>
+
+
+    
+    
+
+<a href="https://www.infoq.com/jp/architecture-design" class="button__more button button__large button__arrow arrow__right">&#x306E;&#x3059;&#x3079;&#x3066;&#x3092;&#x898B;&#x308B; architecture-design</a>
+
+                </div>
+            </div>
+        </li>
+        <li class="has--subnav">
+            <a href="https://www.infoq.com/jp/ai-ml-data-eng" title="AI&#x3068;&#x6A5F;&#x68B0;&#x5B66;&#x7FD2;&#x3001;&#x30C7;&#x30FC;&#x30BF;&#x30A8;&#x30F3;&#x30B8;&#x30CB;&#x30A2;&#x30EA;&#x30F3;&#x30B0;" class="nav__category">AI&#x3068;&#x6A5F;&#x68B0;&#x5B66;&#x7FD2;&#x3001;&#x30C7;&#x30FC;&#x30BF;&#x30A8;&#x30F3;&#x30B8;&#x30CB;&#x30A2;&#x30EA;&#x30F3;&#x30B0;</a>
+            <div class="nav__subnav subnav">
+                <ul class="subnav__categories no-style">
+                    <li><a href="https://www.infoq.com/jp/bigdata/?itm_source=infoq&amp;itm_medium=header_graybar&amp;itm_campaign=topic_clk" title="Big Data">Big Data</a></li>
+                    <li><a href="https://www.infoq.com/jp/database/?itm_source=infoq&amp;itm_medium=header_graybar&amp;itm_campaign=topic_clk" title="&#x30C7;&#x30FC;&#x30BF;&#x30D9;&#x30FC;&#x30B9;">&#x30C7;&#x30FC;&#x30BF;&#x30D9;&#x30FC;&#x30B9;</a></li>
+                </ul>
+                <div class="subnav__content" data-id="16691">
+                    
+                        
+                        
+                        
+                        
+                        
+                        
+                    
+
+
+
+
+
+
+    
+    
+    
+
+
+<div class="heading__container actions">
+    <div class="actions__left">
+        <h3 class="heading section__heading">&#x6CE8;&#x76EE;&#x306E; AI&#x3068;&#x6A5F;&#x68B0;&#x5B66;&#x7FD2;&#x3001;&#x30C7;&#x30FC;&#x30BF;&#x30A8;&#x30F3;&#x30B8;&#x30CB;&#x30A2;&#x30EA;&#x30F3;&#x30B0;</h3>
+    </div>
+</div>
+<ul data-size="large" data-horizontal="true" data-tax taxonomy="articles" class="cards no-style">
+    <li>
+        <div class="card__content">
+            <div class="card__data">
+                <h4 class="card__title">
+                    <a href="https://www.infoq.com/jp/articles/relational-nosql-fauna">&#x30EA;&#x30EC;&#x30FC;&#x30B7;&#x30E7;&#x30CA;&#x30EB; NoSQL&#x306B;&#x3088;&#x308B;&quot;&#x30D0;&#x30C3;&#x30AF;&#x30C8;&#x30A5;&#x30B6;&#x30D5;&#x30E5;&#x30FC;&#x30C1;&#x30E3;&#x30FC;&quot;</a>
+                </h4>
+                <p class="card__excerpt">&#x3053;&#x306E;&#x8A18;&#x4E8B;&#x3067;&#x306F;&#x3001;&#x5206;&#x6563;&#x30C8;&#x30E9;&#x30F3;&#x30B6;&#x30AF;&#x30B7;&#x30E7;&#x30F3;&#x3092;&#x5099;&#x3048;&#x305F;NoSQL&#x30C7;&#x30FC;&#x30BF;&#x30D9;&#x30FC;&#x30B9;&#x306E;&#x4E00;&#x8CAB;&#x6027;&#x306B;&#x95A2;&#x3059;&#x308B;&#x3044;&#x304F;&#x3064;&#x304B;&#x306E;&#x554F;&#x984C;&#x3092;&#x53D6;&#x308A;&#x4E0A;&#x3052;&#x308B;&#x3068;&#x3068;&#x3082;&#x306B;&#x3001;FanuaDB&#x304C;Calvin&#x30D7;&#x30ED;&#x30C8;&#x30B3;&#x30EB;&#x3068;&#x4EEE;&#x60F3;&#x30AF;&#x30ED;&#x30C3;&#x30AF;&#x3092;&#x4F7F;&#x3063;&#x3066;&#x3001;&#x305D;&#x308C;&#x3089;&#x306E;&#x554F;&#x984C;&#x3092;&#x3044;&#x304B;&#x306B;&#x89E3;&#x6C7A;&#x3057;&#x3066;&#x3044;&#x308B;&#x304B;&#x3092;&#x7D39;&#x4ECB;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+                <div class="card__footer"></div>
+            </div>
+            
+                <a href="https://www.infoq.com/jp/articles/relational-nosql-fauna" class="card__header">
+                    <img alt="&#x30EA;&#x30EC;&#x30FC;&#x30B7;&#x30E7;&#x30CA;&#x30EB; NoSQL&#x306B;&#x3088;&#x308B;&quot;&#x30D0;&#x30C3;&#x30AF;&#x30C8;&#x30A5;&#x30B6;&#x30D5;&#x30E5;&#x30FC;&#x30C1;&#x30E3;&#x30FC;&quot;" src="https://res.infoq.com/articles/relational-nosql-fauna/ja/smallimage/relational-nosql-fauna-s-1543858323385.jpeg" class="card__image">
+                </a>
+            
+        </div>
+    </li>
+</ul>
+
+
+    
+    
+
+<a href="https://www.infoq.com/jp/ai-ml-data-eng" class="button__more button button__large button__arrow arrow__right">&#x306E;&#x3059;&#x3079;&#x3066;&#x3092;&#x898B;&#x308B; ai-ml-data-eng</a>
+
+                </div>
+            </div>
+        </li>
+        <li class="has--subnav">
+            <a href="https://www.infoq.com/jp/culture-methods" title="&#x30AB;&#x30EB;&#x30C1;&#x30E3;&#x30FC;&#xFF06;&#x624B;&#x6CD5;" class="nav__category">&#x30AB;&#x30EB;&#x30C1;&#x30E3;&#x30FC;&#xFF06;&#x624B;&#x6CD5;</a>
+            <div class="nav__subnav subnav">
+                <ul class="subnav__categories no-style">
+                    <li><a href="https://www.infoq.com/jp/agile/?itm_source=infoq&amp;itm_medium=header_graybar&amp;itm_campaign=topic_clk" title="Agile">Agile</a></li>
+                    <li><a href="https://www.infoq.com/jp/Leadership/?itm_source=infoq&amp;itm_medium=header_graybar&amp;itm_campaign=topic_clk" title="&#x30EA;&#x30FC;&#x30C0;&#x30FC;&#x30B7;&#x30C3;&#x30D7;">&#x30EA;&#x30FC;&#x30C0;&#x30FC;&#x30B7;&#x30C3;&#x30D7;</a></li>
+                    <li><a href="https://www.infoq.com/jp/team-collaboration/?itm_source=infoq&amp;itm_medium=header_graybar&amp;itm_campaign=topic_clk" title="Team Collaboration">Team Collaboration</a></li>
+                    <li><a href="https://www.infoq.com/jp/testing/?itm_source=infoq&amp;itm_medium=header_graybar&amp;itm_campaign=topic_clk" title="&#x30C6;&#x30B9;&#x30C8;">&#x30C6;&#x30B9;&#x30C8;</a></li>
+                    <li><a href="https://www.infoq.com/jp/ux/?itm_source=infoq&amp;itm_medium=header_graybar&amp;itm_campaign=topic_clk" title="UX">UX</a></li>
+                    <li><a href="https://www.infoq.com/jp/scrum/?itm_source=infoq&amp;itm_medium=header_graybar&amp;itm_campaign=topic_clk" title="Scrum">Scrum</a></li>
+                    <li><a href="https://www.infoq.com/jp/lean/?itm_source=infoq&amp;itm_medium=header_graybar&amp;itm_campaign=topic_clk" title="Lean/Kanban">Lean/Kanban</a></li>
+                </ul>
+                <div class="subnav__content" data-id="6832">
+                    
+                        
+                        
+                        
+                        
+                        
+                        
+                    
+
+
+
+
+
+
+    
+    
+    
+
+
+<div class="heading__container actions">
+    <div class="actions__left">
+        <h3 class="heading section__heading">&#x6CE8;&#x76EE;&#x306E; &#x30AB;&#x30EB;&#x30C1;&#x30E3;&#x30FC;&#xFF06;&#x624B;&#x6CD5;</h3>
+    </div>
+</div>
+<ul data-size="large" data-horizontal="true" data-tax taxonomy="articles" class="cards no-style">
+    <li>
+        <div class="card__content">
+            <div class="card__data">
+                <h4 class="card__title">
+                    <a href="https://www.infoq.com/jp/articles/agile-implementation-manager">&#x30DE;&#x30CD;&#x30FC;&#x30B8;&#x30E3;&#x306E;&#x8996;&#x70B9;&#x304B;&#x3089;&#x306E;&#x30A2;&#x30B8;&#x30E3;&#x30A4;&#x30EB;&#x306E;&#x5B9F;&#x8DF5;</a>
+                </h4>
+                <p class="card__excerpt">&#x201C;&#x5B8C;&#x74A7;&#x306F;&#x5584;&#x306E;&#x6575;&#x201D;&#x3001;&#x305D;&#x308C;&#x306A;&#x3089;&#x306A;&#x305C;&#x3046;&#x307E;&#x304F;&#x3044;&#x3063;&#x3066;&#x3044;&#x308B;&#x3053;&#x3068;&#x3092;&#x5909;&#x3048;&#x308B;&#x306E;&#x3060;&#x308D;&#x3046;&#x304B;&#xFF1F; 
+&#x3053;&#x306E;&#x8A18;&#x4E8B;&#x306F;&#x30A2;&#x30B8;&#x30E3;&#x30A4;&#x30EB;&#x306E;&#x5B9F;&#x8DF5;&#x306B;&#x3064;&#x3044;&#x3066;&#x306E;&#x5B9F;&#x8A71;&#x306B;&#x57FA;&#x3065;&#x3044;&#x3066;&#x304A;&#x308A;&#x3001;&#x3042;&#x306A;&#x305F;&#x306F;&#x4EE5;&#x4E0B;&#x306E;&#x8CEA;&#x554F;&#x306B;&#x5BFE;&#x3059;&#x308B;&#x7B54;&#x3048;&#x3092;&#x898B;&#x3064;&#x3051;&#x308B;&#x3060;&#x308D;&#x3046;&#xFF1A;
+&#x306A;&#x305C;&#x30DE;&#x30CD;&#x30FC;&#x30B8;&#x30E3;&#x306F;&#x30A6;&#x30A9;&#x30FC;&#x30BF;&#x30FC;&#x30D5;&#x30A9;&#x30FC;&#x30EB;&#x30C1;&#x30FC;&#x30E0;&#x304C;&#x30A2;&#x30B8;&#x30E3;&#x30A4;&#x30EB;&#x306B;&#x306A;&#x308B;&#x3053;&#x3068;&#x3092;&#x6050;&#x308C;&#x3066;&#x3044;&#x308B;&#x306E;&#x304B;&#xFF1F; 
+&#x30A6;&#x30A9;&#x30FC;&#x30BF;&#x30FC;&#x30D5;&#x30A9;&#x30FC;&#x30EB;&#x306E;&#x74B0;&#x5883;&#x3067;&#x50CD;&#x304F;&#x3068;&#x304D;&#x3001;&#x3042;&#x306A;&#x305F;&#x306E;&#x30DE;&#x30CD;&#x30FC;&#x30B8;&#x30E3;&#x306F;&#x3069;&#x3093;&#x306A;&#x30B8;&#x30EC;&#x30F3;&#x30DE;&#x3092;&#x62B1;&#x3048;&#x308B;&#x304B;&#xFF1F;&#x3055;&#x3066;&#x3001;&#x5909;&#x5316;&#x3059;&#x308B;&#x3079;&#x304D;&#x304B;&#x3001;&#x3057;&#x306A;&#x3044;&#x3079;&#x304D;&#x304B;&#xFF1F;</p>
+                <div class="card__footer"></div>
+            </div>
+            
+                <a href="https://www.infoq.com/jp/articles/agile-implementation-manager" class="card__header">
+                    <img alt="&#x30DE;&#x30CD;&#x30FC;&#x30B8;&#x30E3;&#x306E;&#x8996;&#x70B9;&#x304B;&#x3089;&#x306E;&#x30A2;&#x30B8;&#x30E3;&#x30A4;&#x30EB;&#x306E;&#x5B9F;&#x8DF5;" src="https://res.infoq.com/articles/agile-implementation-manager/ja/smallimage/agile-implementation-manager-s-1539816405168.jpeg" class="card__image">
+                </a>
+            
+        </div>
+    </li>
+</ul>
+
+
+    
+    
+
+<a href="https://www.infoq.com/jp/culture-methods" class="button__more button button__large button__arrow arrow__right">&#x306E;&#x3059;&#x3079;&#x3066;&#x3092;&#x898B;&#x308B; culture-methods</a>
+
+                </div>
+            </div>
+        </li>
+        <li class="has--subnav">
+            <a href="https://www.infoq.com/jp/devops" title="&#x904B;&#x7528;/&#x30A4;&#x30F3;&#x30D5;&#x30E9;" class="nav__category">&#x904B;&#x7528;/&#x30A4;&#x30F3;&#x30D5;&#x30E9;</a>
+            <div class="nav__subnav subnav">
+                <ul class="subnav__categories no-style">
+                    <li><a href="https://www.infoq.com/jp/automation/?itm_source=infoq&amp;itm_medium=header_graybar&amp;itm_campaign=topic_clk" title="Automation">Automation</a></li>
+                    <li><a href="https://www.infoq.com/jp/containers/?itm_source=infoq&amp;itm_medium=header_graybar&amp;itm_campaign=topic_clk" title="Containers">Containers</a></li>
+                    <li><a href="https://www.infoq.com/jp/cloud-computing/?itm_source=infoq&amp;itm_medium=header_graybar&amp;itm_campaign=topic_clk" title="&#x30AF;&#x30E9;&#x30A6;&#x30C9;&#x30B3;&#x30F3;&#x30D4;&#x30E5;&#x30FC;&#x30C6;&#x30A3;&#x30F3;&#x30B0;">&#x30AF;&#x30E9;&#x30A6;&#x30C9;&#x30B3;&#x30F3;&#x30D4;&#x30E5;&#x30FC;&#x30C6;&#x30A3;&#x30F3;&#x30B0;</a></li>
+                </ul>
+                <div class="subnav__content" data-id="16689">
+                    
+                        
+                        
+                        
+                        
+                        
+                        
+                    
+
+
+
+
+
+
+    
+    
+    
+
+
+<div class="heading__container actions">
+    <div class="actions__left">
+        <h3 class="heading section__heading">&#x6CE8;&#x76EE;&#x306E; DevOps</h3>
+    </div>
+</div>
+<ul data-size="large" data-horizontal="true" data-tax taxonomy="articles" class="cards no-style">
+    <li>
+        <div class="card__content">
+            <div class="card__data">
+                <h4 class="card__title">
+                    <a href="https://www.infoq.com/jp/articles/container-runtimes-kubernetes">&#x4F55;&#x304C;Kubernetes Pod&#x3092;&#x52D5;&#x304B;&#x3059;&#x306E;&#x304B; - &#x30B3;&#x30F3;&#x30C6;&#x30CA;&#x30E9;&#x30F3;&#x30BF;&#x30A4;&#x30E0;&#x306E;&#x904E;&#x53BB;&#x3001;&#x73FE;&#x5728;&#x3001;&#x672A;&#x6765;</a>
+                </h4>
+                <p class="card__excerpt">&#x30B3;&#x30F3;&#x30C6;&#x30CA;&#x30E9;&#x30F3;&#x30BF;&#x30A4;&#x30E0;&#x306E;&#x9078;&#x629E;&#x7BC4;&#x56F2;&#x306F;&#x6642;&#x3068;&#x3068;&#x3082;&#x306B;&#x62E1;&#x5927;&#x3057;&#x3001;&#x4E00;&#x822C;&#x7684;&#x306A;Docker&#x30A8;&#x30F3;&#x30B8;&#x30F3;&#x4EE5;&#x5916;&#x306E;&#x9078;&#x629E;&#x80A2;&#x3092;&#x6301;&#x3064;&#x306B;&#x81F3;&#x3063;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;OCI(Open Container Initiative)&#x304C;&#x30B3;&#x30F3;&#x30C6;&#x30CA;&#x306E;&#x6982;&#x5FF5;&#x3068;&#x30B3;&#x30F3;&#x30C6;&#x30CA;&#x30A4;&#x30E1;&#x30FC;&#x30B8;&#x306E;&#x6A19;&#x6E96;&#x5316;&#x306B;&#x6210;&#x529F;&#x3057;&#x305F;&#x3053;&#x3068;&#x306B;&#x3088;&#x308A;&#x3001;&#x30E9;&#x30F3;&#x30BF;&#x30A4;&#x30E0;&#x9593;&#x306E;&#x76F8;&#x4E92;&#x904B;&#x7528;&#x6027;&#x304C;&#x4FDD;&#x8A3C;&#x3055;&#x308C;&#x308B;&#x306B;&#x81F3;&#x308A;&#x307E;&#x3057;&#x305F;&#x3002;&#x3053;&#x306E;&#x8A18;&#x4E8B;&#x3067;&#x306F;&#x3001;&#x30B3;&#x30F3;&#x30C6;&#x30CA;&#x30A8;&#x30F3;&#x30B8;&#x30F3;&#x5B9F;&#x88C5;&#x306E;&#x904E;&#x53BB;&#x3001;&#x73FE;&#x5728;&#x3001;&#x305D;&#x3057;&#x3066;&#x672A;&#x6765;&#x3092;&#x8AD6;&#x3058;&#x307E;&#x3059;&#x3002;</p>
+                <div class="card__footer"></div>
+            </div>
+            
+                <a href="https://www.infoq.com/jp/articles/container-runtimes-kubernetes" class="card__header">
+                    <img alt="&#x4F55;&#x304C;Kubernetes Pod&#x3092;&#x52D5;&#x304B;&#x3059;&#x306E;&#x304B; - &#x30B3;&#x30F3;&#x30C6;&#x30CA;&#x30E9;&#x30F3;&#x30BF;&#x30A4;&#x30E0;&#x306E;&#x904E;&#x53BB;&#x3001;&#x73FE;&#x5728;&#x3001;&#x672A;&#x6765;" src="https://res.infoq.com/articles/container-runtimes-kubernetes/ja/smallimage/container-runtimes-kubernetes-s-1541285919013.jpeg" class="card__image">
+                </a>
+            
+        </div>
+    </li>
+</ul>
+
+
+    
+    
+
+<a href="https://www.infoq.com/jp/devops" class="button__more button button__large button__arrow arrow__right">&#x306E;&#x3059;&#x3079;&#x3066;&#x3092;&#x898B;&#x308B; devops</a>
+
+                </div>
+            </div>
+        </li>
+    </nav>
+</div>
+
+<div>
+    <h3 class="widget__heading">&#x5F79;&#x306B;&#x7ACB;&#x3064;&#x30EA;&#x30F3;&#x30AF;&#x96C6;</h3>
+    <ul class="no-style header__nav">
+        <li>
+            <a href="https://www.infoq.com/jp/about-infoq" title="InfoQ&#x306B;&#x3064;&#x3044;&#x3066;">
+                InfoQ&#x306B;&#x3064;&#x3044;&#x3066;
+            </a>
+        </li>
+        <li>
+            <a href="https://www.infoq.com/jp/infoq-writers" title="InfoQ&#x306E;&#x30E9;&#x30A4;&#x30BF;&#x30FC;">
+                InfoQ&#x306E;&#x30E9;&#x30A4;&#x30BF;&#x30FC;
+            </a>
+        </li>
+        <li>
+            <a href="https://www.infoq.com/jp/contribute" title="&#x5BC4;&#x7A3F;">
+                &#x5BC4;&#x7A3F;
+            </a>
+        </li>
+        <li>
+            <a href="https://www.infoq.com/jp/about-c4media" title="C4Media&#x306B;&#x3064;&#x3044;&#x3066;">
+                C4Media&#x306B;&#x3064;&#x3044;&#x3066;
+            </a>
+        </li>
+    </ul>
+</div>
+                    
+
+
+
+
+
+
+<div>
+    <div class="qcons">
+        <div class="qcon__logo-holder">
+            <div class="qcon__logo">QCon</div>
+        </div>
+        <ul class="qcons__list no-style">
+            <li class="qcon">
+                <a target="_blank" href="http://www.mamezou.com/index.html">
+					<img src="https://cdn.infoq.com/statics_s2_20190403-0313/images/sponsors/jp/mamezou140x60.jpg">
+				</a>
+            </li>
+        </ul>
+    </div>
+</div>
+                    <div>
+                        <h3 class="widget__heading">&#x5730;&#x57DF;&#x3092;&#x9078;&#x3076;</h3>
+                        
+
+
+
+
+
+
+
+<ul class="language__switcher no-style">
+	<li><a href="https://www.infoq.com/" title="InfoQ English">En</a><span></span></li>
+	<li><a href="https://www.infoq.cn/">&#x4E2D;&#x6587;</a><span></span></li>
+	<li class="active"><a href="https://www.infoq.com/jp/news/2019/02/chrome-never-slow-mode#" onclick="return false;">&#x65E5;&#x672C;</a><span></span></li>
+	<li><a href="https://www.infoq.com/fr/">Fr</a><span></span></li>
+	<li><a href="https://www.infoq.com/br/">Br</a></li>
+</ul>
+                    </div>
+                </div>
+                    
+            </div>
+            <div class="actions header__bottom">
+                
+
+
+
+
+
+
+
+    <div class="actions__left">
+        <span class="icon icon__trending trending__title">&#x7279;&#x96C6;:</span>
+        <nav class="trending">
+            <button id="trendingNav" class="button__unstyled trending__more">&#x3082;&#x3063;&#x3068;&#x8A73;&#x3057;&#x304F;</button>
+            <ul class="no-style">
+                <li><a href="https://www.infoq.com/jp/mobile/?itm_source=infoq&amp;itm_medium=header_graybar&amp;itm_campaign=topic_clk" title="&#x30E2;&#x30D0;&#x30A4;&#x30EB;">&#x30E2;&#x30D0;&#x30A4;&#x30EB;</a></li>
+                <li><a href="https://www.infoq.com/jp/javascript/?itm_source=infoq&amp;itm_medium=header_graybar&amp;itm_campaign=topic_clk" title="JavaScript">JavaScript</a></li>
+                <li><a href="https://www.infoq.com/jp/cloud-computing/?itm_source=infoq&amp;itm_medium=header_graybar&amp;itm_campaign=topic_clk" title="&#x30AF;&#x30E9;&#x30A6;&#x30C9;&#x30B3;&#x30F3;&#x30D4;&#x30E5;&#x30FC;&#x30C6;&#x30A3;&#x30F3;&#x30B0;">&#x30AF;&#x30E9;&#x30A6;&#x30C9;&#x30B3;&#x30F3;&#x30D4;&#x30E5;&#x30FC;&#x30C6;&#x30A3;&#x30F3;&#x30B0;</a></li>
+                
+            </ul>
+        </nav>
+    </div>
+    <div class="actions__right"></div>
+
+            </div>
+        </div>
+    </div>
+</header>
+
+
+            
+            <main>
+                
+	<article data-type="news" class="article">
+		<section class="section container white">
+			<div class="container__inner">
+				
+
+
+
+
+
+
+
+
+<p class="crumbs">
+	<span><a href="https://www.infoq.com/jp?itm_source=infoq&amp;itm_medium=breadcrumbs_feature&amp;itm_campaign=breadcrumbs" title="InfoQ &#x30DB;&#x30FC;&#x30E0;&#x30DA;&#x30FC;&#x30B8;">InfoQ &#x30DB;&#x30FC;&#x30E0;&#x30DA;&#x30FC;&#x30B8;</a></span>
+	
+		
+			
+			
+                <span><a href="https://www.infoq.com/jp/news?itm_source=infoq&amp;itm_medium=breadcrumbs_feature&amp;itm_campaign=breadcrumbs" title="&#x30CB;&#x30E5;&#x30FC;&#x30B9;">&#x30CB;&#x30E5;&#x30FC;&#x30B9;</a></span>
+            
+		
+		<span class="active">Google Chrome&#x306E;Never-Slow Mode</span>
+	
+	
+    
+        
+    
+</p>
+
+				<div class="actions">
+					<div class="actions__left">
+						
+
+
+
+
+
+
+
+    <div class="article__category html-5">
+        <a href="https://www.infoq.com/html-5" class="article__tag" title="HTML5">
+
+            HTML5
+        </a>
+
+    </div>
+
+					</div>
+					<div class="actions__right">
+						
+					</div>
+				</div>
+				<div class="actions heading__container article__heading">
+					<div class="actions__left">
+						<h1 class="heading">
+							Google Chrome&#x306E;Never-Slow Mode
+						</h1>
+					</div>
+				</div>
+				
+				
+
+
+
+
+
+
+
+
+
+		
+		
+			
+				<p id="translated_br" class="article__translated">
+					Leia em
+					<a href="https://www.infoq.com/br/news/2019/03/chrome-never-slow-mode?itm_source=infoq_en&amp;itm_medium=link_on_en_item&amp;itm_campaign=item_in_other_langs">
+
+						portugu&#xEA;s
+					</a>
+
+					<span class="icon flag br"></span>
+				</p>
+			
+		
+
+
+				<div class="article__actions actions">
+					<div class="actions__left">
+						<button id="toggleLikeContent" class="icon button button__icon like button__gray icon__like" aria-label="&#x3044;&#x3044;&#x306D;">&#x3044;&#x3044;&#x306D;</button>
+						<a href="https://www.infoq.com/jp/news/2019/02/chrome-never-slow-mode#theCommentsSection" class="button button__gray button__icon icon icon__discuss" id="noOfComments"></a>
+						<button class="icon button button__icon icon--only button__gray icon__print" aria-label="Print">Print</button>
+						
+
+
+
+
+
+
+        <a href="https://www.infoq.com/jp/showbookmarks.action" class="button button__gray button__icon icon icon__bookmark">&#x30D6;&#x30C3;&#x30AF;&#x30DE;&#x30FC;&#x30AF;</a>
+        
+        
+                <button id="bookmarkBtn" class="icon button button__icon icon--only button__gray icon__bookmark" aria-label="&#x5F8C;&#x3067;&#x8AAD;&#x3080;" onclick="Bookmarks.bookmarkContent(&apos;news&apos;, &apos;2019/02/chrome-never-slow-mode&apos;);"></button>
+        
+
+					</div>
+					<div class="actions__right">
+						
+
+
+
+
+
+
+
+
+    
+    <div class="addthis_inline_share_toolbox"></div>
+    
+
+
+
+
+
+
+
+
+
+					</div>
+				</div>
+				<div class="columns article__explore">
+					<div class="column article__main" data-col="4/6">
+						<div class="column article__metadata metadata">
+							<p class="article__readTime date">2019&#x5E74;2&#x6708;27&#x65E5;<span class="dot"></span>
+								
+								
+								
+									&#x8AAD;&#x4E86;&#x6642;&#x9593;
+									3
+									&#x5206;
+								
+							</p>
+
+							<div class="widget article__authors">
+								<div>
+									<p class="meta">&#x4F5C;&#x8005;&#xFF1A;</p>
+									
+
+
+
+
+
+
+
+
+
+
+
+
+
+<ul class="no-style authors">
+    
+        
+            
+        
+        <li data-id="author-Diogo-Carleto">
+            <p class="meta author__bio">
+                <span class="author__name">
+                    <a href="https://www.infoq.com/jp/profile/Diogo-Carleto" class="author__link">Diogo Carleto</a>
+                </span>
+            </p>
+        </li>
+    
+</ul>
+								</div>
+								
+									<div>
+										<p class="meta">&#x7FFB;&#x8A33;&#x8005;</p>
+										
+
+
+
+
+
+
+
+
+
+
+
+
+
+<ul class="no-style authors">
+    
+        
+            
+        
+        <li data-id="author-&#x4E2D;&#x6751;-&#x771F;&#x5B50;">
+            <p class="meta author__bio">
+                <span class="author__name">
+                    <a href="https://www.infoq.com/jp/profile/%E4%B8%AD%E6%9D%91-%E7%9C%9F%E5%AD%90" class="author__link">&#x4E2D;&#x6751; &#x771F;&#x5B50;</a>
+                </span>
+            </p>
+        </li>
+    
+</ul>
+									</div>
+								
+							</div>
+							<div class="widgets"></div>
+						</div>
+						<div class="article__content">
+							
+							
+
+
+
+							
+
+							<div class="article__data">
+								<p><a href="https://www.infoq.com/news/2019/02/chrome-never-slow-mode" target="_blank"><em>&#x539F;&#x6587;(&#x6295;&#x7A3F;&#x65E5;&#xFF1A;2019/02/16)&#x3078;&#x306E;&#x30EA;&#x30F3;&#x30AF;</em></a></p>
+
+<p>Google&#x306F;Never-Slow Mode&#x3068;&#x547C;&#x3070;&#x308C;&#x308B;&#x30D7;&#x30ED;&#x30C8;&#x30BF;&#x30A4;&#x30D7;&#x6A5F;&#x80FD;&#x306B;&#x53D6;&#x308A;&#x7D44;&#x3093;&#x3067;&#x3044;&#x308B;&#x3002;&#x3053;&#x306E;&#x30D7;&#x30ED;&#x30C8;&#x30BF;&#x30A4;&#x30D7;&#x6A5F;&#x80FD;&#x306F;<a href="https://www.chromium.org/Home">Chromium &#x30D7;&#x30ED;&#x30B8;&#x30A7;&#x30AF;&#x30C8;</a>&#x3067;<a href="https://chromium-review.googlesource.com/c/chromium/src/+/1265506">&#x30B3;&#x30DF;&#x30C3;&#x30C8;</a>&#x4F5C;&#x696D;&#x9032;&#x884C;&#x4E2D;&#x3067;&#x3042;&#x308A;&#x3001;&#x30E6;&#x30FC;&#x30B6;&#x30FC;&#x30A8;&#x30AF;&#x30B9;&#x30DA;&#x30EA;&#x30A8;&#x30F3;&#x30B9;&#x306E;&#x5411;&#x4E0A;&#x3001;&#x4E00;&#x8CAB;&#x6027;&#x306E;&#x3042;&#x308B;&#x8FC5;&#x901F;&#x306A;&#x30D6;&#x30E9;&#x30A6;&#x30B8;&#x30F3;&#x30B0;&#x306E;&#x63D0;&#x4F9B;&#x3092;&#x76EE;&#x7684;&#x3068;&#x3057;&#x3066;&#x3044;&#x308B;&#x3002;</p>
+
+<p><a href="https://www.w3schools.com/browsers/">w3schools</a>&#x306B;&#x3088;&#x308B;&#x3068;&#x3001;Google Chrome&#x306F;70&#xFF05;&#x4EE5;&#x4E0A;&#x306E;&#x30DE;&#x30FC;&#x30B1;&#x30C3;&#x30C8;&#x30B7;&#x30A7;&#x30A2;&#x3092;&#x6301;&#x3061;&#x3001;&#x6B21;&#x3044;&#x3067;Firefox&#x304C;10&#xFF05;&#x3001;Internet Explorer / Edge&#x304C;4&#xFF05;&#x3067;&#x3042;&#x308B;&#x3002;Google&#x30B5;&#x30FC;&#x30D3;&#x30B9;&#x3068;&#x306E;&#x540C;&#x671F;&#x3084;&#x6570;&#x5343;&#x3082;&#x306E;&#x62E1;&#x5F35;&#x6A5F;&#x80FD;&#x306A;&#x3069;&#x3001;&#x4E00;&#x9023;&#x306E;&#x6A5F;&#x80FD;&#x306B;&#x3088;&#x3063;&#x3066;Google Chrome&#x304C;&#x6700;&#x4E0A;&#x4F4D;&#x306B;&#x541B;&#x81E8;&#x3057;&#x3066;&#x3044;&#x308B;&#x3002;&#x3055;&#x3089;&#x306B;Google&#x306F;&#x30D6;&#x30E9;&#x30A6;&#x30B6;&#x4E0A;&#x3067;&#x52D5;&#x4F5C;&#x3059;&#x308B;&#x30A2;&#x30D7;&#x30EA;&#x3092;&#x591A;&#x6570;&#x63D0;&#x4F9B;&#x3057;&#x3066;&#x304A;&#x308A;&#x3001;&#x7D76;&#x3048;&#x305A;Web&#x30B5;&#x30A4;&#x30C8;&#x306E;&#x30D1;&#x30D5;&#x30A9;&#x30FC;&#x30DE;&#x30F3;&#x30B9;&#x3092;&#x5411;&#x4E0A;&#x3055;&#x305B;&#x308B;&#x305F;&#x3081;&#x306E;&#x53D6;&#x308A;&#x7D44;&#x3092;&#x5B9F;&#x65BD;&#x3057;&#x3001;Web&#x30DA;&#x30FC;&#x30B8;&#x8AAD;&#x307F;&#x8FBC;&#x307F;&#x9045;&#x5EF6;&#x306E;&#x77ED;&#x7E2E;&#x3068;Web&#x30BB;&#x30AD;&#x30E5;&#x30EA;&#x30C6;&#x30A3;&#x306E;&#x6539;&#x5584;&#x306B;&#x91CD;&#x70B9;&#x3092;&#x7F6E;&#x3044;&#x305F;HTTP&#x30C8;&#x30E9;&#x30D5;&#x30A3;&#x30C3;&#x30AF;&#x3092;&#x64CD;&#x4F5C;&#x3059;&#x308B;<a href="https://en.wikipedia.org/wiki/SPDY">SPDY</a>&#x30D7;&#x30ED;&#x30C8;&#x30B3;&#x30EB;&#x306A;&#x3069;&#x306E;&#x65B0;&#x3057;&#x3044;&#x30B9;&#x30DA;&#x30C3;&#x30AF;&#x3084;&#x30C4;&#x30FC;&#x30EB;&#x306B;&#x8CA2;&#x732E;&#x3057;&#x3066;&#x3044;&#x308B;&#x3002;</p>
+
+<p>Google&#x306E;Never-Slow Mode&#x306F;&#x4E00;&#x822C;&#x7684;&#x306A;&#x65B9;&#x6CD5;&#x3067;&#x3001;CSS&#x3001;&#x753B;&#x50CF;&#x3001;&#x5927;&#x898F;&#x6A21;&#x306A;&#x30B9;&#x30AF;&#x30EA;&#x30D7;&#x30C8;&#x306A;&#x3069;&#x306E;&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x3092;&#x5236;&#x9650;&#x3059;&#x308B;&#x30D0;&#x30B8;&#x30A7;&#x30C3;&#x30C8;&#x3092;&#x5C0E;&#x5165;&#x3057;&#x3066;&#x3044;&#x308B;&#x3002;<a href="https://chromium-review.googlesource.com/c/chromium/src/+/1265506">Alex Russell</a>&#x6C0F;&#x306B;&#x3088;&#x308B;&#x3068;&#x3001;&#x3053;&#x308C;&#x3089;&#x306E;&#x30D0;&#x30B8;&#x30A7;&#x30C3;&#x30C8;&#x306F;&#x30E1;&#x30A4;&#x30F3;&#x30B9;&#x30EC;&#x30C3;&#x30C9;&#x3092;&#x304D;&#x308C;&#x3044;&#x306B;&#x7DAD;&#x6301;&#x3059;&#x308B;&#x305F;&#x3081;&#x306B;&#x8A2D;&#x8A08;&#x3055;&#x308C;&#x3066;&#x3044;&#x308B;&#x3002;</p>
+
+<blockquote>
+<p>&#x73FE;&#x5728;&#x306E;&#x3068;&#x3053;&#x308D;Never-Slow Mode&#x306F;&#x3001;&#x5927;&#x304D;&#x306A;&#x30B9;&#x30AF;&#x30EA;&#x30D7;&#x30C8;&#x3092;&#x30D6;&#x30ED;&#x30C3;&#x30AF;&#x3057;&#x3001;&#x7279;&#x5B9A;&#x306E;&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x30BF;&#x30A4;&#x30D7;&#xFF08;&#x30B9;&#x30AF;&#x30EA;&#x30D7;&#x30C8;&#x3001;&#x30D5;&#x30A9;&#x30F3;&#x30C8;&#x3001;CSS&#x3001;&#x753B;&#x50CF;&#xFF09;&#x3078;&#x306E;&#x30D0;&#x30B8;&#x30A7;&#x30C3;&#x30C8;&#x8A2D;&#x5B9A;&#x3001;document.write()&#x306E;&#x7121;&#x52B9;&#x5316;&#x3001;&#x540C;&#x671F;XHR&#x306E;&#x4E0A;&#x66F8;&#x304D;&#x3001;&#x30AF;&#x30E9;&#x30A4;&#x30A2;&#x30F3;&#x30C8;&#x30D2;&#x30F3;&#x30C8;&#x306E;&#x5168;&#x9762;&#x7684;&#x306A;&#x6709;&#x52B9;&#x5316;&#x3001; `Content-Length`&#x304C;&#x8A2D;&#x5B9A;&#x3055;&#x308C;&#x3066;&#x3044;&#x306A;&#x3044;&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x306E;&#x30D0;&#x30C3;&#x30D5;&#x30A1;&#x3092;&#x5B9F;&#x65BD;&#x3057;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;&#x30D0;&#x30C3;&#x30D5;&#x30A1;&#x306F;&#x30A4;&#x30F3;&#x30BF;&#x30E9;&#x30AF;&#x30B7;&#x30E7;&#x30F3;&#xFF08;&#x30AF;&#x30EA;&#x30C3;&#x30AF;/&#x30BF;&#x30C3;&#x30D7;/&#x30B9;&#x30AF;&#x30ED;&#x30FC;&#x30EB;&#xFF09;&#x3067;&#x518D;&#x8A2D;&#x5B9A;&#x3055;&#x308C;&#x307E;&#x3059;&#x3002;&#x9577;&#x3044;&#x30B9;&#x30AF;&#x30EA;&#x30D7;&#x30C8;&#x30BF;&#x30B9;&#x30AF;&#xFF08;200&#x30DF;&#x30EA;&#x79D2;&#x4EE5;&#x4E0A;&#xFF09;&#x306F;&#x3001;&#x6B21;&#x306E;&#x30A4;&#x30F3;&#x30BF;&#x30E9;&#x30AF;&#x30B7;&#x30E7;&#x30F3;&#x307E;&#x3067;&#x3059;&#x3079;&#x3066;&#x306E;&#x30DA;&#x30FC;&#x30B8;&#x306E;&#x5B9F;&#x884C;&#x3092;&#x4E00;&#x6642;&#x505C;&#x6B62;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+</blockquote>
+
+<p>&#x3053;&#x308C;&#x3089;&#x306E;&#x4E0A;&#x9650;&#x306F;worker&#x306B;&#x306F;&#x9069;&#x7528;&#x3055;&#x308C;&#x305A;&#x3001;&#x30B5;&#x30A4;&#x30BA;&#x4E0A;&#x9650;&#x306F;Service Worker Cache Storage&#x304B;&#x3089;&#x30ED;&#x30FC;&#x30C9;&#x3055;&#x308C;&#x305F;&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x306B;&#x5BFE;&#x3057;&#x3066;&#x306F;&#x5F15;&#x304D;&#x4E0A;&#x3052;&#x3089;&#x308C;&#x308B;&#x3002;&#x73FE;&#x5728;&#x306E;&#x4E0A;&#x9650;&#x306F;&#x6B21;&#x306E;&#x901A;&#x308A;&#x3002;</p>
+
+<pre>
+
+    Per-image max size:        1MiB
+    Total image budget:        2MiB
+    Per-stylesheet max size: 100KiB
+    Total stylesheet budget: 200KiB
+    Per-script max size:      50KiB
+    Total script budget:     500KiB
+    Per-font max size:       100KiB
+    Total font budget:       100KiB
+    Total connection limit:   10
+    Long-task limit:         200ms
+</pre>
+
+<p>&#x30D0;&#x30B8;&#x30A7;&#x30C3;&#x30C8;&#x3092;&#x8D85;&#x3048;&#x3066;&#x30D6;&#x30E9;&#x30A6;&#x30B6;&#x306B;&#x3088;&#x3063;&#x3066;&#x30D6;&#x30ED;&#x30C3;&#x30AF;&#x3055;&#x308C;&#x305F;&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x3092;&#x77E5;&#x3089;&#x305B;&#x308B;&#x30D7;&#x30ED;&#x30C8;&#x30BF;&#x30A4;&#x30D7;&#x6A5F;&#x80FD;&#x306E;Never-Slow Mode&#x306E;&#x8AAC;&#x660E;&#x3092;<a href="https://www.chromestory.com/2019/02/google-is-testing-a-never-slow-mode-for-chrome/">Dinsan Francis&#x6C0F;&#x306F;&#x898B;&#x3064;&#x3051;&#x305F;</a> &#x3002;</p>
+
+<blockquote>
+<p>&#x3053;&#x308C;&#x306B;&#x3088;&#x308A;&#x3001;&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x306E;&#x30ED;&#x30FC;&#x30C7;&#x30A3;&#x30F3;&#x30B0;&#x3068;&#x30E9;&#x30F3;&#x30BF;&#x30A4;&#x30E0;&#x51E6;&#x7406;&#x3092;&#x5236;&#x9650;&#x3059;&#x308B;&#x5B9F;&#x9A13;&#x7684;&#x306A;&#x30D6;&#x30E9;&#x30A6;&#x30B8;&#x30F3;&#x30B0;&#x30E2;&#x30FC;&#x30C9;&#x304C;&#x53EF;&#x80FD;&#x306B;&#x306A;&#x308A;&#x3001;&#x4E00;&#x8CAB;&#x3057;&#x3066;&#x9AD8;&#x901F;&#x306A;&#x30A8;&#x30AF;&#x30B9;&#x30DA;&#x30EA;&#x30A8;&#x30F3;&#x30B9;&#x306E;&#x63D0;&#x4F9B;&#x304C;&#x5B9F;&#x73FE;&#x3067;&#x304D;&#x307E;&#x3059;&#x3002;&#x8B66;&#x544A;&#xFF1A;&#x9ED9;&#x3063;&#x3066;&#x30B3;&#x30F3;&#x30C6;&#x30F3;&#x30C4;&#x3092;&#x58CA;&#x3059;&#x53EF;&#x80FD;&#x6027;&#x304C;&#x3042;&#x308A;&#x307E;&#x3059;&#xFF01;</p>
+</blockquote>
+
+<p>&#x30A4;&#x30F3;&#x30BF;&#x30FC;&#x30CD;&#x30C3;&#x30C8;&#x306E;&#x901F;&#x5EA6;&#x306F;&#x305D;&#x308C;&#x307B;&#x3069;&#x901F;&#x304F;&#x306A;&#x3063;&#x3066;&#x3044;&#x306A;&#x3044;&#x306E;&#x306B;&#x5BFE;&#x3057;&#x3001;Web&#x30B5;&#x30A4;&#x30C8;&#x306E;&#x30B5;&#x30A4;&#x30BA;&#x306F;&#x3053;&#x3053;&#x6570;&#x5E74;&#x3067;&#x5927;&#x5E45;&#x306B;&#x62E1;&#x5927;&#x3057;&#x3066;&#x3044;&#x308B;&#x3002;<a href="https://www.keycdn.com/support/the-growth-of-web-page-size">KeyCDN</a>&#x306E;&#x5206;&#x6790;&#x3067;&#x306F;&#x3001;&#x5E73;&#x5747;&#x7684;&#x306A;Web&#x30DA;&#x30FC;&#x30B8;&#x30B5;&#x30A4;&#x30BA;&#x304C;2010&#x5E74;&#x306E;&#x7D04;700&#x30AD;&#x30ED;&#x30D0;&#x30A4;&#x30C8;&#x304B;&#x3089;2016&#x5E74;&#x306B;&#x306F;2300&#x30AD;&#x30ED;&#x30D0;&#x30A4;&#x30C8;&#x307E;&#x3067;&#x5897;&#x52A0;&#x3057;&#x305F;&#x3068;&#x3044;&#x3046;</p>
+
+<p><img _href="img://image1-1550321623431.png" alt data-src="news/2019/02/chrome-never-slow-mode/ja/resources/image1-1550321623431.png" rel share"" share src="https://res.infoq.com/news/2019/02/chrome-never-slow-mode/ja/resources/image1-1550321623431.png">(image taken from <a href="https://www.keycdn.com/support/the-growth-of-web-page-size">https://www.keycdn.com</a>)</p>
+
+<p>Never-Slow Mode&#x306E;&#x30EA;&#x30EA;&#x30FC;&#x30B9;&#x4E88;&#x5B9A;&#x65E5;&#x306B;&#x95A2;&#x3059;&#x308B;&#x60C5;&#x5831;&#x3084;&#x3001;Never-Slow Mode&#x304C;Chrome&#x306E;&#x6B21;&#x306E;&#x30E1;&#x30B8;&#x30E3;&#x30FC;&#x30D0;&#x30FC;&#x30B8;&#x30E7;&#x30F3;&#x306B;&#x542B;&#x307E;&#x308C;&#x308B;&#x304B;&#x3069;&#x3046;&#x304B;&#x306B;&#x3064;&#x3044;&#x3066;&#x3001;&#x73FE;&#x6642;&#x70B9;&#x3067;&#x306F;&#x767A;&#x8868;&#x3055;&#x308C;&#x3066;&#x3044;&#x306A;&#x3044;&#x3002;</p>
+
+							</div>
+
+							
+
+
+
+
+
+
+
+
+
+<input type="hidden" name value="&#x9001;&#x4FE1;&#x3055;&#x308C;&#x307E;&#x3057;&#x305F;" id="cr_messages_submitSuccess">
+
+<input type="hidden" name value="&#x661F;&#x3092;&#x3064;&#x3051;&#x3066;&#x304F;&#x3060;&#x3055;&#x3044;&#x3002;" id="cr_messages_ratingRequired">
+
+<input type="hidden" name value="Google Chrome&#x306E;Never-Slow Mode" id="cr_item_title">
+
+<input type="hidden" name value="Diogo Carleto" id="cr_item_author">
+
+<input type="hidden" name value="http://www.infoq.com/jp/news/2019/02/chrome-never-slow-mode" id="cr_item_url">
+
+<input type="hidden" name value="news" id="cr_item_ctype">
+
+<input type="hidden" name value="ja" id="cr_item_lang">
+
+<input type="hidden" name value="1551257160000" id="cr_item_published_time">
+
+<input type="hidden" name value="1480" id="cr_item_primary_topic">
+
+
+
+
+<div class="reviews tabs contentRatingWidget">
+    <div id="editorReview" class="tab" data-title="&#x30A8;&#x30C7;&#x30A3;&#x30BF;&#x30FC;&#x30BF;&#x30D6;">
+        
+    </div>
+
+    <div id="chiefEditorReview" class="tab" data-title="&#x30C1;&#x30FC;&#x30D5;&#x30A8;&#x30C7;&#x30A3;&#x30BF;&#x30FC;&#x30BF;&#x30D6;">
+        
+    </div>
+</div>
+
+
+
+							
+							
+
+
+
+
+
+
+<div class="widget article__fromTopic topics">
+    
+        <div class="widget__head related__for-topic" data-id="7693" data-trk-ref="content_primary_topic">
+            <h4 class="heading related__heading">
+                
+                    
+                &#x3053;&#x306E;&#x30B3;&#x30F3;&#x30C6;&#x30F3;&#x30C4;&#x306E;&#x30C8;&#x30D4;&#x30C3;&#x30AF;&#x306F; <a href="https://www.infoq.com/html-5">HTML5</a> &#x3067;&#x3059;&#x3002;
+            </h4>
+        </div>
+    
+    <h5 class="heading related__inline">&#x95A2;&#x9023;&#x8A18;&#x4E8B;:</h5>
+    <ul class="no-style topics related__topics topics__small" data-trk-ref="content_related_topic">
+         
+            
+                
+                    
+                
+                
+                <li data-id="6830">
+                    <a href="https://www.infoq.com/jp/development" class="button related__topic button__small button__black">&#x30C7;&#x30D9;&#x30ED;&#x30C3;&#x30D7;&#x30E1;&#x30F3;&#x30C8;</a>
+                </li>
+            
+        
+        
+            
+                
+                    
+                
+                
+                <li data-id="2881">
+                    <a href="https://www.infoq.com/jp/javascript" class="button related__topic button__small button__black">JavaScript</a>
+                </li>
+            
+                
+                    
+                
+                
+                <li data-id="3941">
+                    <a href="https://www.infoq.com/jp/OS" class="button related__topic button__small button__black">OS</a>
+                </li>
+            
+                
+                    
+                
+                
+                <li data-id="3410">
+                    <a href="https://www.infoq.com/jp/MarkupLanguages" class="button related__topic button__small button__black">Markup Languages</a>
+                </li>
+            
+                
+                    
+                
+                
+                <li data-id="2653">
+                    <a href="https://www.infoq.com/jp/ria" class="button related__topic button__small button__black">RIA</a>
+                </li>
+            
+                
+                    
+                
+                
+                <li data-id="16402">
+                    <a href="https://www.infoq.com/jp/web-browser" class="button related__topic button__small button__black">Web Browser</a>
+                </li>
+            
+                
+                    
+                
+                
+                <li data-id="16401">
+                    <a href="https://www.infoq.com/jp/Chrome" class="button related__topic button__small button__black">Chrome</a>
+                </li>
+            
+                
+                    
+                
+                
+                <li data-id="2841">
+                    <a href="https://www.infoq.com/jp/dynamic_languages" class="button related__topic button__small button__black">&#x52D5;&#x7684;&#x8A00;&#x8A9E;</a>
+                </li>
+            
+                
+                    
+                
+                
+                <li data-id="7693">
+                    <a href="https://www.infoq.com/jp/html-5" class="button related__topic button__small button__black">HTML5</a>
+                </li>
+            
+        
+    </ul>
+</div>
+
+						</div>
+						
+						
+						
+						
+
+
+
+
+
+
+
+
+<input type="hidden" name value="1480" id="cont_item_primary_topic">
+
+
+
+
+
+
+<ul class="no-style related__group nocontent cards">
+    <li>
+        <div class="related__editorial">
+            <h4 class="heading">&#x95A2;&#x9023;&#x8A18;&#x4E8B;</h4>
+            <ul></ul>
+        </div>
+    </li>
+    <li>
+        <ul class="no-style rvc__list f_rvcbox" data-place="BOTTOM" style="display: none">
+            <h4 class="heading">&#x95A2;&#x9023;&#x30B9;&#x30DD;&#x30F3;&#x30B5;&#x30FC;&#x30B3;&#x30F3;&#x30C6;&#x30F3;&#x30C4;</h4>
+            
+            <div class="f_rvcList"></div>
+            
+                
+            
+        </ul>
+    </li>
+    
+</ul>
+
+					</div>
+					<div class="column article__more f_article_rightbar" data-col="2/6">
+						
+							
+
+
+
+
+
+
+						
+						
+						
+
+
+
+
+
+
+<div class="newsletter widget" data-bg="infoq">
+	<h3 class="heading"><strong>InfoQ</strong> &#x30CB;&#x30E5;&#x30FC;&#x30B9;&#x30EC;&#x30BF;&#x30FC;</h3>
+	<p class="intro">
+        &#x6BCE;&#x9031;&#x706B;&#x66DC;&#x65E5;&#x306B;&#x524D;&#x9031;&#x306E;&#x307E;&#x3068;&#x3081;&#x30B3;&#x30F3;&#x30C6;&#x30F3;&#x30C4;&#x304C;&#x304A;&#x9001;&#x308A;&#x3044;&#x305F;&#x3057;&#x307E;&#x3059;&#x3002;25&#x4E07;&#x4EBA;&#x3082;&#x306E;&#x30B7;&#x30CB;&#x30A2;&#x30C7;&#x30D9;&#x30ED;&#x30C3;&#x30D1;&#x30FC;&#x306E;&#x30B3;&#x30DF;&#x30E5;&#x30CB;&#x30C6;&#x30A3;&#x30FC;&#x306B;&#x305C;&#x3072;&#x3054;&#x53C2;&#x52A0;&#x304F;&#x3060;&#x3055;&#x3044;&#x3002;
+        
+        
+			<a target="_blank" href="https://assets.infoq.com/newsletter/regular/jp/newsletter_sample/newsletter_sample.html">&#x30B5;&#x30F3;&#x30D7;&#x30EB;&#x3092;&#x898B;&#x308B;</a>
+        
+    </p>
+	<div class="newsletter__subscribe">
+		
+		<p class="meta">
+			<a href="https://www.infoq.com/jp/privacypolicy" target="_blank">We protect your privacy.</a>
+		</p>
+		
+		<span class="success" style="display:none;" id="floatingNewsletterEmailMessage"></span>
+	</div>
+</div>
+
+
+					</div>
+				</div>
+			</div>
+		</section>
+		
+			
+		
+
+
+
+
+
+
+
+
+
+
+
+    <section class="container section" id="theCommentsSection">
+        <div class="container__inner">
+            <div class="comments section__center">
+                
+                <div class="actions heading__container comment__heading">
+                    <div class="actions__left">
+                        <h2 class="heading">&#x30B3;&#x30DF;&#x30E5;&#x30CB;&#x30C6;&#x30A3;&#x30B3;&#x30E1;&#x30F3;&#x30C8;</h2>
+                    </div>
+                    <div class="actions__right">
+                        
+                            <button id="watch" class="icon button button__icon button__unstyled button__small icon__add" aria-label="Watch thread">Watch thread</button>
+                        
+                    </div>
+                </div>
+                
+                
+                <ul class="no-style comments__boxes">
+                    
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    
+    <div id="replyPopup" class="box box__border reply__box">
+        <button class="icon button button__icon icon--only button__unstyled icon__close close_popup" aria-label="&#x9589;&#x3058;&#x308B;">&#x9589;&#x3058;&#x308B;</button>
+        
+    </div>
+
+    
+    <div id="editCommentPopup" class="box box__border reply__box">
+        <button class="icon button button__icon icon--only button__unstyled icon__close close_popup" aria-label="&#x9589;&#x3058;&#x308B;">&#x9589;&#x3058;&#x308B;</button>
+        
+    </div>
+
+    
+    <div id="messagePopup" class="box box__border reply__box">
+        <button class="icon button button__icon icon--only button__unstyled icon__close close_popup" aria-label="&#x9589;&#x3058;&#x308B;">&#x9589;&#x3058;&#x308B;</button>
+        <div class="messageBox">
+            <p class="allowed"></p>
+            <div class="buttonWrapper">
+                <button id="reset-reply" class="close_popup button" aria-label="OK">
+                   OK
+                </button>
+            </div>
+        </div>
+    </div>
+
+    
+    
+    
+        <div id="commentLinkText" style="display: none;">&#x30C7;&#x30A3;&#x30B9;&#x30AB;&#x30C3;&#x30B7;&#x30E7;&#x30F3; </div>
+    
+
+
+
+	</article>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+	
+
+            </main>
+
+            
+
+
+
+
+
+
+
+<footer class="footer ">
+	
+	<section class="section container">
+		<div class="container__inner">
+			
+				
+				
+				
+				
+                
+				
+			
+
+
+<ul data-cols="5" class="no-style columns boxes topic__boxes">
+    
+        <li class="development">
+            <div class="box__header">
+                <a href="https://www.infoq.com/jp/development">&#x30C7;&#x30D9;&#x30ED;&#x30C3;&#x30D7;&#x30E1;&#x30F3;&#x30C8; </a>
+            </div>
+            <div class="box__content">
+                <ul class="no-style box__list small">
+                    
+                        <li>
+                            <h5><a href="https://www.infoq.com/jp/news/2019/03/github-dependabot-security" title="GitHub&amp;#12398;PR&amp;#12434;&amp;#33258;&amp;#21205;&amp;#29983;&amp;#25104;&amp;#12375;&amp;#12390;&amp;#33030;&amp;#24369;&amp;#24615;&amp;#12434;&amp;#20462;&amp;#27491;&amp;#12377;&amp;#12427;Dependabot">GitHub&#x306E;PR&#x3092;&#x81EA;&#x52D5;&#x751F;&#x6210;&#x3057;&#x3066;&#x8106;&#x5F31;&#x6027;&#x3092;&#x4FEE;&#x6B63;&#x3059;&#x308B;Dependabot</a></h5>
+                        </li>
+                    
+                        <li>
+                            <h5><a href="https://www.infoq.com/jp/articles/api-gateway-clojure-golang" title="API Gateway&amp;#12469;&amp;#12540;&amp;#12499;&amp;#12473;&amp;#12434;Clojure&amp;#12363;&amp;#12425;Go&amp;#35328;&amp;#35486;&amp;#12395;&amp;#26360;&amp;#12365;&amp;#30452;&amp;#12377; - AppsFlyer&amp;#12395;&amp;#12424;&amp;#12427;&amp;#23455;&amp;#20363;&amp;#22577;&amp;#21578;">API Gateway&#x30B5;&#x30FC;&#x30D3;&#x30B9;&#x3092;Clojure&#x304B;&#x3089;Go&#x8A00;&#x8A9E;&#x306B;&#x66F8;&#x304D;&#x76F4;&#x3059; - AppsFlyer&#x306B;&#x3088;&#x308B;&#x5B9F;&#x4F8B;&#x5831;&#x544A;</a></h5>
+                        </li>
+                    
+                        <li>
+                            <h5><a href="https://www.infoq.com/jp/news/2019/03/rust-1.32-released" title="&amp;#12488;&amp;#12524;&amp;#12540;&amp;#12473;&amp;#65292;&amp;#12514;&amp;#12472;&amp;#12517;&amp;#12540;&amp;#12523;&amp;#65292;&amp;#12510;&amp;#12463;&amp;#12525;&amp;#12394;&amp;#12393;&amp;#12364;&amp;#25913;&amp;#33391;&amp;#12373;&amp;#12428;&amp;#12383;Rust 1.32">&#x30C8;&#x30EC;&#x30FC;&#x30B9;&#xFF0C;&#x30E2;&#x30B8;&#x30E5;&#x30FC;&#x30EB;&#xFF0C;&#x30DE;&#x30AF;&#x30ED;&#x306A;&#x3069;&#x304C;&#x6539;&#x826F;&#x3055;&#x308C;&#x305F;Rust 1.32</a></h5>
+                        </li>
+                    
+                </ul>
+            </div>
+        </li>
+    
+        <li class="architecture-design">
+            <div class="box__header">
+                <a href="https://www.infoq.com/jp/architecture-design">&#x8A2D;&#x8A08;/&#x30A2;&#x30FC;&#x30AD;&#x30C6;&#x30AF;&#x30C1;&#x30E3; </a>
+            </div>
+            <div class="box__content">
+                <ul class="no-style box__list small">
+                    
+                        <li>
+                            <h5><a href="https://www.infoq.com/jp/news/2019/04/migrate-microservices-workflows" title="&amp;#12510;&amp;#12452;&amp;#12463;&amp;#12525;&amp;#12469;&amp;#12540;&amp;#12499;&amp;#12473;&amp;#12363;&amp;#12425;&amp;#12527;&amp;#12540;&amp;#12463;&amp;#12501;&amp;#12525;&amp;#12540;&amp;#12408;&amp;#12398;&amp;#31227;&amp;#34892;">&#x30DE;&#x30A4;&#x30AF;&#x30ED;&#x30B5;&#x30FC;&#x30D3;&#x30B9;&#x304B;&#x3089;&#x30EF;&#x30FC;&#x30AF;&#x30D5;&#x30ED;&#x30FC;&#x3078;&#x306E;&#x79FB;&#x884C;</a></h5>
+                        </li>
+                    
+                        <li>
+                            <h5><a href="https://www.infoq.com/jp/news/2019/03/netflix-evolution-architecture" title="Netflix Play API: &amp;#36914;&amp;#21270;&amp;#30340;&amp;#12450;&amp;#12540;&amp;#12461;&amp;#12486;&amp;#12463;&amp;#12481;&amp;#12515;&amp;#12398;&amp;#27083;&amp;#31689;">Netflix Play API: &#x9032;&#x5316;&#x7684;&#x30A2;&#x30FC;&#x30AD;&#x30C6;&#x30AF;&#x30C1;&#x30E3;&#x306E;&#x69CB;&#x7BC9;</a></h5>
+                        </li>
+                    
+                        <li>
+                            <h5><a href="https://www.infoq.com/jp/articles/overcoming-restlessness" title="RESTlessness&amp;#12395;&amp;#25171;&amp;#12385;&amp;#21213;&amp;#12388;">RESTlessness&#x306B;&#x6253;&#x3061;&#x52DD;&#x3064;</a></h5>
+                        </li>
+                    
+                </ul>
+            </div>
+        </li>
+    
+        <li class="culture-methods">
+            <div class="box__header">
+                <a href="https://www.infoq.com/jp/culture-methods">&#x30AB;&#x30EB;&#x30C1;&#x30E3;&#x30FC;&#xFF06;&#x624B;&#x6CD5; </a>
+            </div>
+            <div class="box__content">
+                <ul class="no-style box__list small">
+                    
+                        <li>
+                            <h5><a href="https://www.infoq.com/jp/news/2019/04/effective-mob-programming" title="&amp;#21177;&amp;#26524;&amp;#30340;&amp;#12394;&amp;#12514;&amp;#12502;&amp;#12503;&amp;#12525;&amp;#12464;&amp;#12521;&amp;#12511;&amp;#12531;&amp;#12464;&amp;#12497;&amp;#12479;&amp;#12540;&amp;#12531;">&#x52B9;&#x679C;&#x7684;&#x306A;&#x30E2;&#x30D6;&#x30D7;&#x30ED;&#x30B0;&#x30E9;&#x30DF;&#x30F3;&#x30B0;&#x30D1;&#x30BF;&#x30FC;&#x30F3;</a></h5>
+                        </li>
+                    
+                        <li>
+                            <h5><a href="https://www.infoq.com/jp/news/2019/04/testing-distributed-systems" title="&amp;#35079;&amp;#38609;&amp;#12394;&amp;#20998;&amp;#25955;&amp;#12471;&amp;#12473;&amp;#12486;&amp;#12512;&amp;#12434;&amp;#12486;&amp;#12473;&amp;#12488;&amp;#12377;&amp;#12427;">&#x8907;&#x96D1;&#x306A;&#x5206;&#x6563;&#x30B7;&#x30B9;&#x30C6;&#x30E0;&#x3092;&#x30C6;&#x30B9;&#x30C8;&#x3059;&#x308B;</a></h5>
+                        </li>
+                    
+                        <li>
+                            <h5><a href="https://www.infoq.com/jp/news/2019/04/NoRetrospective" title="Ocado Technology&amp;#12395;&amp;#12362;&amp;#12369;&amp;#12427;&amp;#12524;&amp;#12488;&amp;#12525;&amp;#12473;&amp;#12506;&amp;#12463;&amp;#12486;&amp;#12451;&amp;#12502;3.0">Ocado Technology&#x306B;&#x304A;&#x3051;&#x308B;&#x30EC;&#x30C8;&#x30ED;&#x30B9;&#x30DA;&#x30AF;&#x30C6;&#x30A3;&#x30D6;3.0</a></h5>
+                        </li>
+                    
+                </ul>
+            </div>
+        </li>
+    
+        <li class="ai-ml-data-eng">
+            <div class="box__header">
+                <a href="https://www.infoq.com/jp/ai-ml-data-eng">AI&#x3068;&#x6A5F;&#x68B0;&#x5B66;&#x7FD2;&#x3001;&#x30C7;&#x30FC;&#x30BF;&#x30A8;&#x30F3;&#x30B8;&#x30CB;&#x30A2;&#x30EA;&#x30F3;&#x30B0; </a>
+            </div>
+            <div class="box__content">
+                <ul class="no-style box__list small">
+                    
+                        <li>
+                            <h5><a href="https://www.infoq.com/jp/news/2019/03/foundationdb-record-layer" title="FoundationDB&amp;#12398;Record Layer&amp;#12399;&amp;#12522;&amp;#12524;&amp;#12540;&amp;#12471;&amp;#12519;&amp;#12490;&amp;#12523;&amp;#12487;&amp;#12540;&amp;#12479;&amp;#12505;&amp;#12540;&amp;#12473;&amp;#12398;&amp;#12475;&amp;#12510;&amp;#12531;&amp;#12486;&amp;#12451;&amp;#12463;&amp;#12473;&amp;#65292;&amp;#12473;&amp;#12461;&amp;#12540;&amp;#12510;&amp;#31649;&amp;#29702;&amp;#65292;&amp;#12452;&amp;#12531;&amp;#12487;&amp;#12483;&amp;#12463;&amp;#12473;&amp;#12434;&amp;#12469;&amp;#12509;&amp;#12540;&amp;#12488;">FoundationDB&#x306E;Record Layer&#x306F;&#x30EA;&#x30EC;&#x30FC;&#x30B7;&#x30E7;&#x30CA;&#x30EB;&#x30C7;&#x30FC;&#x30BF;&#x30D9;&#x30FC;&#x30B9;&#x306E;&#x30BB;&#x30DE;&#x30F3;&#x30C6;&#x30A3;&#x30AF;&#x30B9;&#xFF0C;&#x30B9;&#x30AD;&#x30FC;&#x30DE;&#x7BA1;&#x7406;&#xFF0C;&#x30A4;&#x30F3;&#x30C7;&#x30C3;&#x30AF;&#x30B9;&#x3092;&#x30B5;&#x30DD;&#x30FC;&#x30C8;</a></h5>
+                        </li>
+                    
+                        <li>
+                            <h5><a href="https://www.infoq.com/jp/news/2019/03/Grady-Booch-Future-AI" title="Grady Booch&amp;#12289;AI&amp;#12398;&amp;#26410;&amp;#26469;&amp;#12434;&amp;#35486;&amp;#12427;">Grady Booch&#x3001;AI&#x306E;&#x672A;&#x6765;&#x3092;&#x8A9E;&#x308B;</a></h5>
+                        </li>
+                    
+                        <li>
+                            <h5><a href="https://www.infoq.com/jp/news/2019/02/scylladb-releases-version-3.0" title="ScyllaDB&amp;#12364;NoSQL&amp;#12487;&amp;#12540;&amp;#12479;&amp;#12505;&amp;#12540;&amp;#12473;&amp;#12398;&amp;#12513;&amp;#12472;&amp;#12515;&amp;#12540;&amp;#12522;&amp;#12522;&amp;#12540;&amp;#12473;&amp;#12434;&amp;#30330;&amp;#34920;&amp;#65292;&amp;#12467;&amp;#12531;&amp;#12459;&amp;#12524;&amp;#12531;&amp;#12488;OLTP&amp;#12392;OLAP&amp;#12434;&amp;#12469;&amp;#12509;&amp;#12540;&amp;#12488;">ScyllaDB&#x304C;NoSQL&#x30C7;&#x30FC;&#x30BF;&#x30D9;&#x30FC;&#x30B9;&#x306E;&#x30E1;&#x30B8;&#x30E3;&#x30FC;&#x30EA;&#x30EA;&#x30FC;&#x30B9;&#x3092;&#x767A;&#x8868;&#xFF0C;&#x30B3;&#x30F3;&#x30AB;&#x30EC;&#x30F3;&#x30C8;OLTP&#x3068;OLAP&#x3092;&#x30B5;&#x30DD;&#x30FC;&#x30C8;</a></h5>
+                        </li>
+                    
+                </ul>
+            </div>
+        </li>
+    
+        <li class="devops">
+            <div class="box__header">
+                <a href="https://www.infoq.com/jp/devops">DevOps </a>
+            </div>
+            <div class="box__content">
+                <ul class="no-style box__list small">
+                    
+                        <li>
+                            <h5><a href="https://www.infoq.com/jp/news/2019/03/mysql-clustering-wepay" title="Orchestrator&amp;#12289;Consul&amp;#12289;HAProxy&amp;#12434;&amp;#20351;&amp;#29992;&amp;#12375;&amp;#12383;WePay&amp;#12398;&amp;#39640;&amp;#21487;&amp;#29992;&amp;#24615;MySQL&amp;#12463;&amp;#12521;&amp;#12473;&amp;#12479;&amp;#12522;&amp;#12531;&amp;#12464;">Orchestrator&#x3001;Consul&#x3001;HAProxy&#x3092;&#x4F7F;&#x7528;&#x3057;&#x305F;WePay&#x306E;&#x9AD8;&#x53EF;&#x7528;&#x6027;MySQL&#x30AF;&#x30E9;&#x30B9;&#x30BF;&#x30EA;&#x30F3;&#x30B0;</a></h5>
+                        </li>
+                    
+                        <li>
+                            <h5><a href="https://www.infoq.com/jp/news/2019/03/opsramp-service-centricity-aiops" title="OpsRamp&amp;#12364;&amp;#12469;&amp;#12540;&amp;#12499;&amp;#12473;&amp;#20013;&amp;#24515;&amp;#24615;&amp;#12398;&amp;#21521;&amp;#19978;&amp;#65292;AIOps&amp;#65292;&amp;#12463;&amp;#12521;&amp;#12454;&amp;#12489;&amp;#30435;&amp;#35222;&amp;#12434;&amp;#30330;&amp;#34920;">OpsRamp&#x304C;&#x30B5;&#x30FC;&#x30D3;&#x30B9;&#x4E2D;&#x5FC3;&#x6027;&#x306E;&#x5411;&#x4E0A;&#xFF0C;AIOps&#xFF0C;&#x30AF;&#x30E9;&#x30A6;&#x30C9;&#x76E3;&#x8996;&#x3092;&#x767A;&#x8868;</a></h5>
+                        </li>
+                    
+                        <li>
+                            <h5><a href="https://www.infoq.com/jp/news/2019/03/metrics-logging-coinbase" title="Coinbase&amp;#12395;&amp;#12362;&amp;#12369;&amp;#12427;&amp;#12513;&amp;#12488;&amp;#12522;&amp;#12463;&amp;#12473;&amp;#12467;&amp;#12524;&amp;#12463;&amp;#12471;&amp;#12519;&amp;#12531;&amp;#12392;&amp;#12525;&amp;#12464;&amp;#12450;&amp;#12464;&amp;#12522;&amp;#12466;&amp;#12540;&amp;#12471;&amp;#12519;&amp;#12531;&amp;#12398;&amp;#36914;&amp;#21270;">Coinbase&#x306B;&#x304A;&#x3051;&#x308B;&#x30E1;&#x30C8;&#x30EA;&#x30AF;&#x30B9;&#x30B3;&#x30EC;&#x30AF;&#x30B7;&#x30E7;&#x30F3;&#x3068;&#x30ED;&#x30B0;&#x30A2;&#x30B0;&#x30EA;&#x30B2;&#x30FC;&#x30B7;&#x30E7;&#x30F3;&#x306E;&#x9032;&#x5316;</a></h5>
+                        </li>
+                    
+                </ul>
+            </div>
+        </li>
+    
+    
+</ul>
+
+
+
+		</div>
+	</section>
+	<section class="container section section__newsletter">
+		<div class="columns container__inner">
+			 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="newsletter" data-col="1/2">
+	<h2 class="heading">
+		<strong>InfoQ</strong> &#x30CB;&#x30E5;&#x30FC;&#x30B9;&#x30EC;&#x30BF;&#x30FC;
+	</h2>
+	<p class="intro">&#x6BCE;&#x9031;&#x706B;&#x66DC;&#x65E5;&#x306B;&#x524D;&#x9031;&#x306E;&#x307E;&#x3068;&#x3081;&#x30B3;&#x30F3;&#x30C6;&#x30F3;&#x30C4;&#x304C;&#x304A;&#x9001;&#x308A;&#x3044;&#x305F;&#x3057;&#x307E;&#x3059;&#x3002;25&#x4E07;&#x4EBA;&#x3082;&#x306E;&#x30B7;&#x30CB;&#x30A2;&#x30C7;&#x30D9;&#x30ED;&#x30C3;&#x30D1;&#x30FC;&#x306E;&#x30B3;&#x30DF;&#x30E5;&#x30CB;&#x30C6;&#x30A3;&#x30FC;&#x306B;&#x305C;&#x3072;&#x3054;&#x53C2;&#x52A0;&#x304F;&#x3060;&#x3055;&#x3044;&#x3002;
+		
+		
+			<a target="_blank" href="https://assets.infoq.com/newsletter/regular/jp/newsletter_sample/newsletter_sample.html">&#x30B5;&#x30F3;&#x30D7;&#x30EB;&#x3092;&#x898B;&#x308B;</a>
+		
+	</p>
+	<ul class="newsletter__features">
+		<li>&#x69D8;&#x3005;&#x306A;&#x30A4;&#x30CE;&#x30D9;&#x30FC;&#x30BF;&#x30FC;&#x3068;&#x30A2;&#x30FC;&#x30EA;&#x30FC;&#x30A2;&#x30C0;&#x30D7;&#x30BF;&#x30FC;&#x304C;&#x304A;&#x9001;&#x308A;&#x3059;&#x308B;&#x30C6;&#x30AF;&#x30CE;&#x30ED;&#x30B8;&#x30FC;&#x306E;&#x6982;&#x8981;&#x3092;&#x898B;&#x308B;&#x3002;</li>
+		<li>&#x81EA;&#x5206;&#x304C;&#x307E;&#x3060;&#x77E5;&#x3089;&#x306A;&#x3044;&#x3053;&#x3068;&#x306B;&#x6C17;&#x3065;&#x3044;&#x3066;&#x3044;&#x306A;&#x3044;&#x3068;&#x77E5;&#x308B;</li>
+		<li>&#x3042;&#x306A;&#x305F;&#x304C;&#x8208;&#x5473;&#x306E;&#x3042;&#x308B;&#x30C8;&#x30D4;&#x30C3;&#x30AF;&#x30B9;&#x3092;&#x3044;&#x3064;&#x3067;&#x3082;&#x6700;&#x65B0;&#x306A;&#x60C5;&#x5831;&#x306B;&#x3002;</li>
+	</ul>
+	<div class="newsletter__subscribe">
+		
+		<p class="meta">
+			<a href="https://www.infoq.com/jp/privacypolicy" target="_blank">We protect your privacy.</a>
+		</p>
+		
+		<span class="success" style="display:none;" id="footerNewsletterMessage"></span>
+	</div>
+	
+</div>
+
+
+
+
+
+
+
+
+
+
+<div data-col="1/2" data-bg="ny" class="event__container">
+    <h2 class="event__description heading">QCons Worldwide</h2>
+    <div class="event__next">
+        <p class="event__tag">Next Event</p>
+        <a href="https://qconnewyork.com/?utm_source=infoq&amp;utm_medium=listing&amp;utm_campaign=footertop" target="_blank" title="New York, Jun 24 - 28, 2019" class="event__title">New York</a>
+        <p class="event__desc">Software Development Conference</p>
+        <p class="event__date">Jun 24 - 26, 2019</p>
+    </div>
+    <h4 class="event__subheading heading">Upcoming QCons</h4>
+    <div class="event__list">
+        <a data-col="1/2" href="https://qcon.ai/?utm_source=infoq&amp;utm_medium=listing&amp;utm_campaign=footertop" target="_blank" title="QCon.ai, SF, Apr 15-17, 2019">AI &amp; ML QCon, SF <span>/</span> Apr 15 - 17, 2019</a>
+        <a data-col="1/2" href="http://www.qconsp.com/?utm_source=infoq&amp;utm_medium=listing&amp;utm_campaign=footertop" target="_blank" title="S&#xE3;o Paulo, May 6 - 8, 2019">S&#xE3;o Paulo <span>/</span> May 6 - 8, 2019</a>
+        
+        <a data-col="1/2" href="http://2019.qconbeijing.com/?utm_source=infoq&amp;utm_medium=listing&amp;utm_campaign=footertop" target="_blank" title="Beijing Apr 23 - 27, 2019">Beijing <span>/</span> Apr 23 - 27, 2019</a>
+        <a data-col="1/2" href="http://qconshanghai.com/?utm_source=infoq&amp;utm_medium=listing&amp;utm_campaign=footertop" target="_blank" title="Shanghai Oct 17 - 19, 2019">Shanghai <span>/</span> Oct 17 - 19, 2019</a>
+        <a data-col="1/2" href="https://qconsf.com/?utm_source=infoq&amp;utm_medium=listing&amp;utm_campaign=footertop" target="_blank" title="San Francisco, Nov 11-15, 2019">San Francisco<span>/</span> Nov 11 - 15, 2019</a>
+        <a data-col="1/2" href="https://qconlondon.com/?utm_source=infoq&amp;utm_medium=listing&amp;utm_campaign=footertop" target="_blank" title="London, Mar 2&#x2013;6, 2020">London<span>/</span> Mar 2 - 6, 2020</a>
+        <a data-col="1/2" href="https://2019.qconguangzhou.com/?utm_source=infoq&amp;utm_medium=listing&amp;utm_campaign=footertop" target="_blank" title="Guangzhou, May 25&#x2013;28, 2019">Guangzhou<span>/</span> May 25 - 28, 2019</a>
+    </div>
+</div>
+
+
+		</div>
+	</section>
+	<section class="section container footer__subfooter align__left">
+		<div class="container__inner columns">
+			 <div data-col="1/3" class="columns">
+				  <div class="footer__links">
+						
+
+
+
+
+
+
+
+
+<a href="https://www.infoq.com/jp/" class="nuxt-link-exact-active active" title="&#x30DB;&#x30FC;&#x30E0;">&#x30DB;&#x30FC;&#x30E0;</a>
+
+
+    <a href="https://www.infoq.com/jp/reginit.action" class="emphasis" title="&#x30A2;&#x30AB;&#x30A6;&#x30F3;&#x30C8;&#x3092;&#x4F5C;&#x308B;">&#x30A2;&#x30AB;&#x30A6;&#x30F3;&#x30C8;&#x3092;&#x4F5C;&#x308B;</a>
+    <button aria-label="&#x30ED;&#x30B0;&#x30A4;&#x30F3;" class="login" data-ref="mainLogin">&#x30ED;&#x30B0;&#x30A4;&#x30F3;</button>
+
+
+<a href="http://qconferences.com/" target="_blank" title="QCon Conferences">QCon Conferences</a>
+
+    <a href="https://www.infoq.com/jp/contribute" title="&#x5BC4;&#x7A3F;">&#x5BC4;&#x7A3F;</a>
+    <a href="https://www.infoq.com/jp/infoq-writers" title="InfoQ&#x306E;&#x30E9;&#x30A4;&#x30BF;&#x30FC;">InfoQ&#x306E;&#x30E9;&#x30A4;&#x30BF;&#x30FC;</a>
+    <a href="https://www.infoq.com/jp/about-infoq" title="InfoQ&#x306B;&#x3064;&#x3044;&#x3066;">InfoQ&#x306B;&#x3064;&#x3044;&#x3066;</a>
+    <a href="https://www.infoq.com/jp/about-c4media" title="C4Media&#x306B;&#x3064;&#x3044;&#x3066;">C4Media&#x306B;&#x3064;&#x3044;&#x3066;</a>
+    
+
+
+				  </div>
+				 
+					 
+				 
+
+
+
+
+
+
+
+    <div data-col="1/2" class="qcons__worldwide">
+        <h4 class="heading footer__heading">QCons Worldwide</h4>
+        <ul class="qcons__list no-style">
+            
+                <li>
+                    <span class="icon flag us"></span>
+                    <div class="qcon__detail">
+                        <h5 class="heading">
+                            <a href="https://qcon.ai/?utm_source=infoq&amp;utm_medium=listing&amp;utm_campaign=footer" target="_blank" title="QCon.ai San Francisco, Apr 15-17, 2019">QCon.ai San Francisco</a>
+                        </h5>
+                        <span class="meta date">Apr 15-17, 2019</span>
+                    </div>
+                </li>
+            
+                <li>
+                    <span class="icon flag cn"></span>
+                    <div class="qcon__detail">
+                        <h5 class="heading">
+                            <a href="https://qconbeijing.com/?utm_source=infoq&amp;utm_medium=listing&amp;utm_campaign=footer" target="_blank" title="Beijing, May 4 - 8, 2019">Beijing</a>
+                        </h5>
+                        <span class="meta date">May 4 - 8, 2019</span>
+                    </div>
+                </li>
+            
+                <li>
+                    <span class="icon flag cn"></span>
+                    <div class="qcon__detail">
+                        <h5 class="heading">
+                            <a href="https://qconguangzhou.geekbang.org/?utm_source=infoq&amp;utm_medium=listing&amp;utm_campaign=footer" target="_blank" title="QCon Guangzhou, May 25 - 28, 2019">QCon Guangzhou</a>
+                        </h5>
+                        <span class="meta date">May 25 - 28, 2019</span>
+                    </div>
+                </li>
+            
+                <li>
+                    <span class="icon flag br"></span>
+                    <div class="qcon__detail">
+                        <h5 class="heading">
+                            <a href="https://qconsp.com/?utm_source=infoq&amp;utm_medium=listing&amp;utm_campaign=footer" target="_blank" title="Sao Paulo, May 6&#x2013;8, 2019">Sao Paulo</a>
+                        </h5>
+                        <span class="meta date">May 6&#x2013;8, 2019</span>
+                    </div>
+                </li>
+            
+                <li>
+                    <span class="icon flag us"></span>
+                    <div class="qcon__detail">
+                        <h5 class="heading">
+                            <a href="https://qconnewyork.com/?utm_source=infoq&amp;utm_medium=listing&amp;utm_campaign=footer" target="_blank" title="New York, Jun 24-28, 2019">New York</a>
+                        </h5>
+                        <span class="meta date">Jun 24-28, 2019</span>
+                    </div>
+                </li>
+            
+                <li>
+                    <span class="icon flag cn"></span>
+                    <div class="qcon__detail">
+                        <h5 class="heading">
+                            <a href="http://qconshanghai.com/?utm_source=infoq&amp;utm_medium=listing&amp;utm_campaign=footer" target="_blank" title="Shanghai, Oct 17-21, 2019">Shanghai</a>
+                        </h5>
+                        <span class="meta date">Oct 17-21, 2019</span>
+                    </div>
+                </li>
+            
+                <li>
+                    <span class="icon flag us"></span>
+                    <div class="qcon__detail">
+                        <h5 class="heading">
+                            <a href="https://qconsf.com/?utm_source=infoq&amp;utm_medium=listing&amp;utm_campaign=footer" target="_blank" title="San Francisco, Nov 11-15, 2019">San Francisco</a>
+                        </h5>
+                        <span class="meta date">Nov 11-15, 2019</span>
+                    </div>
+                </li>
+            
+        </ul>
+    </div>
+
+
+
+			</div>
+			<div data-col="1/3" class="footer__sm">
+				<h4 class="footer__heading heading">Follow us on </h4>
+				<div class="social__links columns">
+					
+						
+						
+						
+						
+						
+							<a href="https://www.infoq.com/jp/news/2019/02/chrome-never-slow-mode#" id="footerNewsletterRssLink"><span class="icon icon__large icon__social icon__rss"></span></a>
+							<a href="http://twitter.com/InfoQJapan" target="_blank"><span class="icon icon__large icon__social icon__twitter"></span></a>
+							<a href="https://www.facebook.com/InfoqJapan" target="_blank"><span class="icon icon__large icon__social icon__fb"></span></a>
+						
+				</div>
+			</div>
+			
+			
+				<div data-col="1/3" class="oneP">
+					<div class="oneP__bg"></div>
+					<div class="oneP__container">
+						<div>
+							<p class="heading">
+								<span class="oneP__percent">1<em>%</em></span> &#x3088;&#x308A;&#x3088;&#x3044;&#x4E16;&#x754C;&#x3078;
+							</p>
+						</div>
+						<div>
+							<p>&#x79C1;&#x305F;&#x3061;&#x304C;&#x66AE;&#x3089;&#x3059;&#x4E16;&#x754C;&#x3092;&#x5927;&#x5207;&#x306B;&#x601D;&#x3044;&#x3001;&#x3088;&#x308A;&#x3088;&#x3044;&#x3082;&#x306E;&#x306B;&#x3057;&#x305F;&#x3044;&#x3068;&#x8003;&#x3048;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;</p>
+							<p><strong>&#x4EBA;&#x306E;&#x305F;&#x3081;&#x306E;&#x30BD;&#x30D5;&#x30C8;&#x30A6;&#x30A7;&#x30A2;&#x958B;&#x767A;&#x3092;&#x52A0;&#x901F;&#x3057;&#x79C1;&#x305F;&#x3061;&#x306E;&#x30DF;&#x30C3;&#x30B7;&#x30E7;&#x30F3;&#x3092;&#x5B9F;&#x73FE;&#x3059;&#x308B;&#x3053;&#x3068;&#x3067;&#x3001;</strong>&#x3053;&#x306E;&#x601D;&#x3044;&#x3092;&#x6210;&#x3057;&#x9042;&#x3052;&#x3088;&#x3046;&#x3068;&#x3057;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;</p>
+							<p>&#x307E;&#x305F;&#x3001;&#x79C1;&#x305F;&#x3061;&#x306F;<strong>&#x5229;&#x76CA;&#x306E;1%&#x3092;&#x3055;&#x307E;&#x3056;&#x307E;&#x306A;&#x6148;&#x5584;&#x56E3;&#x4F53;&#x306B;&#x5BC4;&#x4ED8;</strong>&#x3057;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;&#x4F1A;&#x793E;&#x3068;&#x3057;&#x3066;&#x3001;&#x307E;&#x305F;&#x5F93;&#x696D;&#x54E1;&#x3068;&#x3057;&#x3066;&#x3001;&#x305D;&#x3046;&#x3057;&#x305F;&#x3053;&#x3068;&#x306E;&#x4FA1;&#x5024;&#x3092;&#x5F37;&#x304F;&#x4FE1;&#x3058;&#x3066;&#x3044;&#x308B;&#x304B;&#x3089;&#x3067;&#x3059;&#x3002;</p>
+						</div>
+					</div>
+				</div>
+			
+		</div>
+	</section>
+	<section class="container footer__bottom section white align__left">
+		<div class="container__inner columns">
+			<div data-col="2/3" class="column">
+				<div class="footer__contact contact columns">
+					<span data-col="1/6">
+						&#x30B5;&#x30A4;&#x30C8;&#x5168;&#x822C;&#x306B;&#x3064;&#x3044;&#x3066;
+						<a href="mailto:feedback@infoq.com">feedback@infoq.com</a>
+					</span>
+					<span data-col="1/6">
+						&#x5E83;&#x544A;
+						<a href="mailto:infoqsec@peak-1.co.jp">infoqsec@peak-1.co.jp</a>
+					</span>
+					<span data-col="1/6">
+						&#x8A18;&#x4E8B;
+						<a href="mailto:infoqsec@peak-1.co.jp">infoqsec@peak-1.co.jp</a>
+					</span>
+					<span data-col="1/6">
+						Marketing
+						<a href="mailto:marketing@infoq.com">marketing@infoq.com</a>
+					</span>
+				</div>
+			</div>
+			<div class="column" data-col="1/3">
+				<p class="footer__more">InfoQ.com and all content copyright &#xA9; 2006-2019 C4Media Inc. InfoQ.com and &#x682A;&#x5F0F;&#x4F1A;&#x793E;&#x8C46;&#x8535; InfoQ Japan hosted at <a href="http://www.contegix.com/">Contegix</a>, the best ISP we&apos;ve ever worked with.<br>
+					
+					
+					
+						<a href="https://www.infoq.com/jp/privacy-notice" target="_blank">&#x30D7;&#x30E9;&#x30A4;&#x30D0;&#x30B7;&#x30FC;</a>
+					
+				</p>
+			</div>
+		</div>
+	</section>
+</footer>
+            
+        </div>
+
+
+        
+            <div class="intbt">
+                <a href="https://www.infoq.com/int/bt" title="bt">BT</a>
+            </div>
+        
+
+        
+
+
+
+
+
+
+
+<div id="id_geo_banner" style="display:none;position:fixed;bottom:0;left:0;width:100%;z-index:100000;">
+	<div id="id_geo_banner_ad" style="display:none;" class="f_dfp_ad" data-place="TOP">
+		
+	</div>
+</div>
+
+        
+        
+        
+        
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+	
+	
+
+
+
+
+        
+        
+        
+        
+
+
+
+
+
+
+
+<div id="forceProfileUpdateArea" class="popups">
+    
+    <div id="forceUpdate_inline" class="forceUpdatePopup forceUpdate">
+
+		
+		<div id="validateMessage">&#x65B0;&#x3057;&#x3044;&#x30E1;&#x30FC;&#x30EB;&#x30A2;&#x30C9;&#x30EC;&#x30B9;&#x306B;&#x78BA;&#x8A8D;&#x7528;&#x306E;&#x30E1;&#x30FC;&#x30EB;&#x3092;&#x9001;&#x4FE1;&#x3057;&#x307E;&#x3059;&#x3002;&#x3053;&#x306E;&#x30DD;&#x30C3;&#x30D7;&#x30A2;&#x30C3;&#x30D7;&#x753B;&#x9762;&#x306F;&#x81EA;&#x52D5;&#x7684;&#x306B;&#x9589;&#x3058;&#x3089;&#x308C;&#x307E;&#x3059;&#x3002;</div>
+	</div>
+</div>
+
+
+        
+
+
+
+
+
+
+
+        
+
+        
+
+        
+
+        
+    </body>
+</html>
+<!-- s2 -->
