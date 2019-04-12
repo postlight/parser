@@ -108,3 +108,4 @@ export * from './www.jnsa.org';
 export * from './phpspot.org';
 export * from './www.infoq.com';
 export * from './www.moongift.jp';
+export * from './www.itmedia.co.jp';
