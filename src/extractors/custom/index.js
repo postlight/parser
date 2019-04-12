@@ -105,4 +105,8 @@ export * from './scan.netsecurity.ne.jp';
 export * from './jvndb.jvn.jp';
 export * from './genius.com';
 export * from './www.jnsa.org';
+export * from './phpspot.org';
+export * from './www.infoq.com';
+export * from './www.moongift.jp';
+export * from './www.itmedia.co.jp';
 export * from './www.publickey1.jp';
