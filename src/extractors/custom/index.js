@@ -114,3 +114,4 @@ export * from './takagi-hiromitsu.jp';
 export * from './bookwalker.jp';
 export * from './www.yomiuri.co.jp';
 export * from './japan.cnet.com';
+export * from './deadline.com';
