@@ -17,6 +17,7 @@ export const DeadlineComExtractor = {
 
   lead_image_url: {
     selectors: [['meta[name="og:image"]', 'value']],
+    timezone: 'America/Los_Angeles',
   },
 
   content: {
