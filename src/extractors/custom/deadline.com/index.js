@@ -10,14 +10,13 @@ export const DeadlineComExtractor = {
   },
 
   date_published: {
-    selectors: ['time'],
+    selectors: [['meta[name="article:published_time"]', 'value']],
   },
 
   dek: null,
 
   lead_image_url: {
     selectors: [['meta[name="og:image"]', 'value']],
-    timezone: 'America/Los_Angeles',
   },
 
   content: {
