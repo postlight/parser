@@ -7,7 +7,11 @@ export const WwwElecomCoJpExtractor = {
 
   author: null,
 
-  date_published: null,
+  date_published: {
+    selectors: ['p.section-last'],
+    format: 'YYYY.MM.DD',
+    timezone: 'Asia/Tokyo',
+  },
 
   dek: null,
 
