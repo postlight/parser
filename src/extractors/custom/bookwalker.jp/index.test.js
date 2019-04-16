@@ -8,16 +8,19 @@ import { excerptContent } from 'utils/text';
 
 const fs = require('fs');
 
-describe('JvndbJvnJpExtractor', () => {
+describe('BookwalkerJpExtractor', () => {
   describe('initial test case', () => {
     let result;
     let url;
     beforeAll(() => {
-      url = 'https://jvndb.jvn.jp/ja/contents/2018/JVNDB-2018-013542.html';
+      url = 'https://bookwalker.jp/de2b8f78c6-f6bb-4da9-8d15-202e8c6c185b/';
       const html = fs.readFileSync(
-        './fixtures/jvndb.jvn.jp/1550906544985.html'
+        './fixtures/bookwalker.jp/1554821842273.html'
       );
-      result = Mercury.parse(url, { html, fallback: false });
+      result = Mercury.parse(url, {
+        html,
+        fallback: false,
+      });
     });
 
     it('is selected properly', () => {
@@ -30,40 +33,37 @@ describe('JvndbJvnJpExtractor', () => {
 
     it('returns the title', async () => {
       // To pass this test, fill out the title selector
-      // in ./src/extractors/custom/jvndb.jvn.jp/index.js.
+      // in ./src/extractors/custom/bookwalker.jp/index.js.
       const { title } = await result;
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(
-        title,
-        `JVNDB-2018-013542 - JVN iPedia - 脆弱性対策情報データベース`
-      );
+      assert.equal(title, `異世界おもいで食堂 ～偉人と和食のあったかゴハン～`);
     });
 
     it('returns the author', async () => {
       // To pass this test, fill out the author selector
-      // in ./src/extractors/custom/jvndb.jvn.jp/index.js.
+      // in ./src/extractors/custom/bookwalker.jp/index.js.
       const { author } = await result;
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(author, null);
+      assert.equal(author, '著者 お米ゴハン イラスト 汐街コナ');
     });
 
     it('returns the date_published', async () => {
       // To pass this test, fill out the date_published selector
-      // in ./src/extractors/custom/jvndb.jvn.jp/index.js.
+      // in ./src/extractors/custom/bookwalker.jp/index.js.
       const { date_published } = await result;
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(date_published, '2019-02-21T15:00:00.000Z');
+      assert.equal(date_published, '2019-03-04T15:00:00.000Z');
     });
 
     it('returns the dek', async () => {
       // To pass this test, fill out the dek selector
-      // in ./src/extractors/custom/jvndb.jvn.jp/index.js.
+      // in ./src/extractors/custom/bookwalker.jp/index.js.
       const { dek } = await result;
 
       // Update these values with the expected values from
@@ -73,17 +73,20 @@ describe('JvndbJvnJpExtractor', () => {
 
     it('returns the lead_image_url', async () => {
       // To pass this test, fill out the lead_image_url selector
-      // in ./src/extractors/custom/jvndb.jvn.jp/index.js.
+      // in ./src/extractors/custom/bookwalker.jp/index.js.
       const { lead_image_url } = await result;
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(lead_image_url, null);
+      assert.equal(
+        lead_image_url,
+        `https://c.bookwalker.jp/7775823/t_700x780.jpg`
+      );
     });
 
     it('returns the content', async () => {
       // To pass this test, fill out the content selector
-      // in ./src/extractors/custom/jvndb.jvn.jp/index.js.
+      // in ./src/extractors/custom/bookwalker.jp/index.js.
       // You may also want to make use of the clean and transform
       // options.
       const { content } = await result;
@@ -94,14 +97,14 @@ describe('JvndbJvnJpExtractor', () => {
         $('*')
           .first()
           .text(),
-        13
+        9
       );
 
       // Update these values with the expected values from
       // the article.
       assert.equal(
         first13,
-        '概要 NETWAVE MNG6200 デバイスには、証明書・パスワードの管理に関する脆弱性が存在します。 CVSS による深刻度 (CVSS とは?) CVSS v3 による深刻度基本値: 9.8 (緊急)'
+        '電子書籍（ラノベ） 著者 お米ゴハン イラスト 汐街コナ 税込価格 1,296円 1,296 円'
       );
     });
   });

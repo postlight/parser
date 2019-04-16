@@ -7,7 +7,11 @@ export const JvndbJvnJpExtractor = {
 
   author: null,
 
-  date_published: null,
+  date_published: {
+    selectors: ['div.modifytxt:nth-child(2)'],
+    format: 'YYYY/MM/DD',
+    timezone: 'Asia/Tokyo',
+  },
 
   dek: null,
 
