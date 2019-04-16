@@ -7,7 +7,11 @@ export const WwwSanwaCoJpExtractor = {
 
   author: null,
 
-  date_published: null,
+  date_published: {
+    selectors: ['p.date'],
+    format: 'YYYY.MM.DD',
+    timezone: 'Asia/Tokyo',
+  },
 
   dek: {
     selectors: [['meta[name="og:description"]', 'value']],
