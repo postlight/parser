@@ -2,11 +2,11 @@ export const DeadlineComExtractor = {
   domain: 'deadline.com',
 
   title: {
-    selectors: ['title'],
+    selectors: ['h1'],
   },
 
   author: {
-    selectors: ['div.author__byline p a span:first-of-type'],
+    selectors: ['section.author h3'],
   },
 
   date_published: {

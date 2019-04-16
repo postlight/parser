@@ -40,8 +40,8 @@ describe('DeadlineComExtractor', () => {
       // Update these values with the expected values from
       // the article.
       assert.equal(
-        title,
-        `Donald Trump Advises Boeing, Tweeting “But What The Hell Do I Know?”; Twitter Answers – Deadline`
+        title.split('Twitter')[0],
+        `Donald Trump Advises Boeing To Rebrand Max 737, Tweeting “But What The Hell Do I Know?”; `
       );
     });
 
