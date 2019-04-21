@@ -22,13 +22,13 @@ export const DeadlineComExtractor = {
   content: {
     selectors: ['div.a-article-grid__main.pmc-a-grid div.pmc-a-grid-item'],
 
-    defaultCleaner: false,
+    transforms: {
+      '.embed-twitter': $node => {
+        const innerHtml = $node.html();
+        $node.replaceWith(innerHtml);
+      },
+    },
 
-    transforms: {},
-
-    clean: [
-      'button.o-icon-button.c-button--block.pmc-u-background-brand-red',
-      '#comments-loading',
-    ],
+    clean: [],
   },
 };
