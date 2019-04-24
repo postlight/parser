@@ -16,7 +16,7 @@ describe('DeadlineComExtractor', () => {
       url =
         'https://deadline.com/2019/04/donald-trump-boeing-max-737-rebrand-advice-twitter-1202595880/';
       const html = fs.readFileSync(
-        './fixtures/deadline.com/1555363730240.html'
+        './fixtures/deadline.com/1556104756617.html'
       );
       result = Mercury.parse(url, {
         html,

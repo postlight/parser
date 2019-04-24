@@ -20,7 +20,7 @@ export const DeadlineComExtractor = {
   },
 
   content: {
-    selectors: ['div.a-article-grid__main.pmc-a-grid div.pmc-a-grid-item'],
+    selectors: ['div.a-article-grid__main.pmc-a-grid article.pmc-a-grid-item'],
 
     transforms: {
       '.embed-twitter': $node => {
