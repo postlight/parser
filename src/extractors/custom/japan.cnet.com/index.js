@@ -24,11 +24,7 @@ export const JapanCnetComExtractor = {
   content: {
     selectors: ['div.article_body'],
 
-    transforms: {
-      '.img-xxxl img': $node => {
-        $node.attr('width', '100%');
-      },
-    },
+    transforms: {},
 
     clean: [],
   },
