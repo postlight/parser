@@ -108,6 +108,33 @@ describe('makeLinksAbsolute($)', () => {
       );
     });
 
+    it('does nothing when the srcset is empty or just whitespace', () => {
+      const html = `<div>
+        <picture>
+          <source srcset="" media="(max-width: 450px)">
+          <source srcset=" ">
+          <img src="http://example.com/assets/images/rhythm/076.jpg" alt="Vertical and horizontal rhythm">
+        </picture>
+      </div>`;
+      const $ = cheerio.load(html);
+      const $content = $('*').first();
+
+      const result = $.html(
+        makeLinksAbsolute($content, $, 'http://example.com')
+      );
+
+      assert.equal(
+        result,
+        `<div>
+        <picture>
+          <source srcset="" media="(max-width: 450px)">
+          <source srcset=" ">
+          <img src="http://example.com/assets/images/rhythm/076.jpg" alt="Vertical and horizontal rhythm">
+        </picture>
+      </div>`
+      );
+    });
+
     it('handles comma separated (with whitespace) srcset files with device-pixel-ratio descriptors', () => {
       const html = `<div>
         <picture>
