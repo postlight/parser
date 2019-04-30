@@ -100,14 +100,14 @@ describe('WwwRbbtodayComExtractor', () => {
         $('*')
           .first()
           .text(),
-        1
+        5
       );
 
       // Update these values with the expected values from
       // the article.
       assert.equal(
         first13,
-        'もっぱら映画は映画館で見る派の筆者だが、最近、HuluやNetflixなどの映像配信サービスで魅力的なドラマや映画、それもオリジナル作品が増えてきているように思う。'
+        'プロジェクター 【デジージョ レビュー】新機能「ジェスチャー」で便利になった「Xperia Touch」を堪能中 【イマドキ家電】第3回'
       );
     });
   });
