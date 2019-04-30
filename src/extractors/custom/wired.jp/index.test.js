@@ -51,7 +51,7 @@ describe('WiredJpExtractor', () => {
       // the article.
       assert.equal(
         author,
-        'TEXT BY ARIELLE PARDES TRANSLATION BY CHIHIRO OKA WIRED(US)'
+        'TEXT BY ARIELLE PARDES\nTRANSLATION BY CHIHIRO OKA WIRED(US)'
       );
     });
 
