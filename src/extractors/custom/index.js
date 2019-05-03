@@ -118,3 +118,4 @@ export * from './deadline.com';
 export * from './www.gizmodo.jp';
 export * from './getnews.jp';
 export * from './www.lifehacker.jp';
+export * from './sect.iij.ad.jp';
