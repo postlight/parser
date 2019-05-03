@@ -116,3 +116,4 @@ export * from './www.yomiuri.co.jp';
 export * from './japan.cnet.com';
 export * from './deadline.com';
 export * from './www.gizmodo.jp';
+export * from './getnews.jp';
