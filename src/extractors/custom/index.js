@@ -117,3 +117,4 @@ export * from './japan.cnet.com';
 export * from './deadline.com';
 export * from './www.gizmodo.jp';
 export * from './getnews.jp';
+export * from './www.lifehacker.jp';
