@@ -25,7 +25,9 @@ export const NewYorkerExtractor = {
   },
 
   date_published: {
-    selectors: ['p[class^="ArticleTimestamp__timestamp"]'],
+    selectors: [['meta[name="pubdate"]', 'value']],
+    format: 'YYYYMMDD',
+    timezone: 'America/New_York',
   },
 
   lead_image_url: {

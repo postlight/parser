@@ -1,7 +1,6 @@
 import assert from 'assert';
 import URL from 'url';
 import cheerio from 'cheerio';
-import moment from 'moment';
 
 import Mercury from 'mercury';
 import getExtractor from 'extractors/get-extractor';
@@ -59,11 +58,10 @@ describe('NewYorkerExtractor', () => {
       // To pass this test, fill out the date_published selector
       // in ./src/extractors/custom/www.newyorker.com/index.js.
       const { date_published } = await result;
-      const newDatePublished = moment(date_published).format();
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(newDatePublished.split('T')[0], '2016-09-26');
+      assert.equal(date_published.split('T')[0], '2016-09-26');
     });
 
     it('returns the lead_image_url', async () => {
@@ -127,9 +125,8 @@ describe('NewYorkerExtractor', () => {
 
     it('returns the date for magazine content', async () => {
       const { date_published } = await result;
-      const newDatePublished = moment(date_published).format();
 
-      assert.equal(newDatePublished.split('T')[0], '2016-11-27');
+      assert.equal(date_published.split('T')[0], '2016-11-28');
     });
   });
 });
