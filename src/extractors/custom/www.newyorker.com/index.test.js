@@ -1,6 +1,7 @@
 import assert from 'assert';
 import URL from 'url';
 import cheerio from 'cheerio';
+import moment from 'moment';
 
 import Mercury from 'mercury';
 import getExtractor from 'extractors/get-extractor';
@@ -16,7 +17,7 @@ describe('NewYorkerExtractor', () => {
       url =
         'http://www.newyorker.com/tech/elements/hacking-cryptography-and-the-countdown-to-quantum-computing';
       const html = fs.readFileSync(
-        './fixtures/www.newyorker.com/1475248565793.html'
+        './fixtures/www.newyorker.com/1557138180688.html'
       );
       result = Mercury.parse(url, { html, fallback: false });
     });
@@ -58,10 +59,11 @@ describe('NewYorkerExtractor', () => {
       // To pass this test, fill out the date_published selector
       // in ./src/extractors/custom/www.newyorker.com/index.js.
       const { date_published } = await result;
+      const newDatePublished = moment(date_published).format();
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(date_published, '2016-09-26T18:04:22.000Z');
+      assert.equal(newDatePublished.split('T')[0], '2016-09-26');
     });
 
     it('returns the lead_image_url', async () => {
@@ -73,7 +75,7 @@ describe('NewYorkerExtractor', () => {
       // the article.
       assert.equal(
         lead_image_url,
-        'http://www.newyorker.com/wp-content/uploads/2016/09/Hutchinson-Quantum-Computing-1200x630-1474903563.jpg'
+        'https://media.newyorker.com/photos/59097a5e8b51cf59fc4239f5/16:9/w_1200,h_630,c_limit/Hutchinson-Quantum-Computing.jpg'
       );
     });
 
@@ -109,7 +111,7 @@ describe('NewYorkerExtractor', () => {
       url =
         'http://www.newyorker.com/magazine/2016/12/05/lessons-from-my-mother';
       const html = fs.readFileSync(
-        './fixtures/www.newyorker.com/1480713300334.html'
+        './fixtures/www.newyorker.com/1557145645680.html'
       );
       result = Mercury.parse(url, { html, fallback: false });
     });
@@ -125,8 +127,9 @@ describe('NewYorkerExtractor', () => {
 
     it('returns the date for magazine content', async () => {
       const { date_published } = await result;
+      const newDatePublished = moment(date_published).format();
 
-      assert.equal(date_published, '2016-11-28T05:00:00.000Z');
+      assert.equal(newDatePublished.split('T')[0], '2016-11-27');
     });
   });
 });

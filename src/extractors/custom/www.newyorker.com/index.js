@@ -4,15 +4,15 @@
 export const NewYorkerExtractor = {
   domain: 'www.newyorker.com',
   title: {
-    selectors: ['h1.title'],
+    selectors: ['h1[class^="ArticleHeader__hed"]'],
   },
 
   author: {
-    selectors: ['.contributors'],
+    selectors: ['div[class^="ArticleContributors"] a[rel="author"]'],
   },
 
   content: {
-    selectors: ['div#articleBody', 'div.articleBody'],
+    selectors: ['main[class^="Layout__content"]'],
 
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images
@@ -25,12 +25,7 @@ export const NewYorkerExtractor = {
   },
 
   date_published: {
-    selectors: [
-      ['meta[name="article:published_time"]', 'value'],
-      ['time[itemProp="datePublished"]', 'content'],
-    ],
-
-    timezone: 'America/New_York',
+    selectors: ['p[class^="ArticleTimestamp__timestamp"]'],
   },
 
   lead_image_url: {
@@ -38,7 +33,7 @@ export const NewYorkerExtractor = {
   },
 
   dek: {
-    selectors: ['.dek', 'h2.dek'],
+    selectors: ['h2[class^="ArticleHeader__dek"]'],
   },
 
   next_page_url: null,
