@@ -35,12 +35,6 @@ export const WiredJpExtractor = {
       },
     },
 
-    clean: [
-      '.post-category',
-      'time',
-      'h1.post-title',
-      '.post-intro',
-      '.social-area-syncer',
-    ],
+    clean: ['.post-category', 'time', 'h1.post-title', '.social-area-syncer'],
   },
 };
