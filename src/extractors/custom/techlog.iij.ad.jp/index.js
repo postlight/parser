@@ -10,7 +10,7 @@ export const TechlogIijAdJpExtractor = {
   },
 
   date_published: {
-    selectors: [['time', 'datetime']],
+    selectors: [['time.entry-date', 'datetime']],
   },
 
   dek: null,
@@ -20,7 +20,7 @@ export const TechlogIijAdJpExtractor = {
   },
 
   content: {
-    selectors: ['div.entry-content.clearfix'],
+    selectors: ['div.entry-content'],
 
     defaultCleaner: false,
 
