@@ -72,7 +72,10 @@ describe('WiredJpExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(dek, null);
+      assert.equal(
+        dek,
+        '世界で最も多く使われているであろうフォントのひとつ「Helvetica」が、このほどリニューアルを遂げた。まるで水のように生活に浸透しているフォントのデザインは、いかに伝統を守りながら、デジタル時代に合わせて最適化されたのか。'
+      );
     });
 
     it('returns the lead_image_url', async () => {
@@ -101,14 +104,14 @@ describe('WiredJpExtractor', () => {
         $('*')
           .first()
           .text(),
-        1
+        12
       );
 
       // Update these values with the expected values from
       // the article.
       assert.equal(
         first13,
-        '世界で最も多く使われているであろうフォントのひとつ「Helvetica」が、このほどリニューアルを遂げた。まるで水のように生活に浸透しているフォントのデザインは、いかに伝統を守りながら、デジタル時代に合わせて最適化されたのか。'
+        'TEXT BY ARIELLE PARDES TRANSLATION BY CHIHIRO OKA WIRED(US) PHOTOGRAPH COURTESY OF'
       );
     });
   });

@@ -15,7 +15,9 @@ export const WiredJpExtractor = {
     selectors: [['time', 'datetime']],
   },
 
-  dek: null,
+  dek: {
+    selectors: ['.post-intro'],
+  },
 
   lead_image_url: {
     selectors: [['meta[name="og:image"]', 'value']],
@@ -28,12 +30,17 @@ export const WiredJpExtractor = {
       'img[data-original]': $node => {
         const dataOriginal = $node.attr('data-original');
         const src = $node.attr('src');
-        const url = URL.parse(src);
-        const origin = `${url.protocol}//${url.hostname}`;
-        $node.attr('src', origin + dataOriginal);
+        const url = URL.resolve(src, dataOriginal);
+        $node.attr('src', url);
       },
     },
 
-    clean: ['.post-category', 'time', 'h1.post-title', '.social-area-syncer'],
+    clean: [
+      '.post-category',
+      'time',
+      'h1.post-title',
+      '.post-intro',
+      '.social-area-syncer',
+    ],
   },
 };
