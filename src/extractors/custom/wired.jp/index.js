@@ -12,9 +12,7 @@ export const WiredJpExtractor = {
   },
 
   date_published: {
-    selectors: ['time'],
-    format: 'YYYY.MM.DD dddd HH:mm',
-    timezone: 'Asia/Tokyo',
+    selectors: [['time', 'datetime']],
   },
 
   dek: null,
