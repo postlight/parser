@@ -6,13 +6,11 @@ export const JapanZdnetComExtractor = {
   },
 
   author: {
-    selectors: ['.author'],
+    selectors: [['meta[name="cXenseParse:author"]', 'value']],
   },
 
   date_published: {
-    selectors: ['.author'],
-    format: 'YYYY年MM月DD日 HH時mm分',
-    timezone: 'Asia/Tokyo',
+    selectors: [['meta[name="article:published_time"]', 'value']],
   },
 
   dek: null,

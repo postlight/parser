@@ -48,7 +48,7 @@ describe('JapanZdnetComExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(author, `ZDNet Japan Staff 2019年04月28日 08時00分`);
+      assert.equal(author, `ZDNet Japan Staff`);
     });
 
     it('returns the date_published', async () => {
