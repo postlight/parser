@@ -2,7 +2,7 @@ export const WeeklyAsciiJpExtractor = {
   domain: 'weekly.ascii.jp',
 
   title: {
-    selectors: ['h1[itemprop]'],
+    selectors: ['h1[itemprop="headline"]'],
   },
 
   author: {
@@ -10,9 +10,7 @@ export const WeeklyAsciiJpExtractor = {
   },
 
   date_published: {
-    selectors: ['p.data'],
-    format: 'YYYY年MM月DD日HH時mm分',
-    timezone: 'Asia/Tokyo',
+    selectors: [['meta[name="odate"]', 'value']],
   },
 
   dek: null,
