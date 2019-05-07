@@ -71,7 +71,10 @@ describe('WwwRbbtodayComExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(dek, null);
+      assert.equal(
+        dek,
+        'もっぱら映画は映画館で見る派の筆者だが、最近、HuluやNetflixなどの映像配信サービスで魅力的なドラマや映画、それもオリジナル作品が増えてきているように思う。'
+      );
     });
 
     it('returns the lead_image_url', async () => {
@@ -100,14 +103,14 @@ describe('WwwRbbtodayComExtractor', () => {
         $('*')
           .first()
           .text(),
-        5
+        1
       );
 
       // Update these values with the expected values from
       // the article.
       assert.equal(
         first13,
-        'プロジェクター 【デジージョ レビュー】新機能「ジェスチャー」で便利になった「Xperia Touch」を堪能中 【イマドキ家電】第3回'
+        'もっぱら映画は映画館で見る派の筆者だが、最近、HuluやNetflixなどの映像配信サービスで魅力的なドラマや映画、それもオリジナル作品が増えてきているように思う。'
       );
     });
   });

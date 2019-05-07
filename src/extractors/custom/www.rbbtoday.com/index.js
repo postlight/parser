@@ -13,7 +13,9 @@ export const WwwRbbtodayComExtractor = {
     selectors: [['header time', 'datetime']],
   },
 
-  dek: null,
+  dek: {
+    selectors: ['.arti-summary'],
+  },
 
   lead_image_url: {
     selectors: [['meta[name="og:image"]', 'value']],
@@ -22,13 +24,8 @@ export const WwwRbbtodayComExtractor = {
   content: {
     selectors: ['.arti-content'],
 
-    transforms: {
-      '.giga-list': $node => {
-        const innerHtml = $node.html();
-        $node.replaceWith(innerHtml);
-      },
-    },
+    transforms: {},
 
-    clean: [],
+    clean: ['.arti-giga'],
   },
 };
