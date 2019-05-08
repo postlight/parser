@@ -122,3 +122,4 @@ export * from './sect.iij.ad.jp';
 export * from './www.oreilly.co.jp';
 export * from './www.ipa.go.jp';
 export * from './weekly.ascii.jp';
+export * from './techlog.iij.ad.jp';
