@@ -4,7 +4,7 @@ import TurndownService from 'turndown';
 
 import Resource from 'resource';
 import { validateUrl } from 'utils';
-import getExtractor from 'extractors/get-extractor';
+import getExtractor, { addExtractor } from 'extractors/get-extractor';
 import RootExtractor, { selectExtendedTypes } from 'extractors/root-extractor';
 import collectAllPages from 'extractors/collect-all-pages';
 
@@ -104,7 +104,7 @@ const Mercury = {
 
     return { ...result, ...extendedTypes };
   },
-
+  addExtractor,
   browser: !!cheerio.browser,
 
   // A convenience method for getting a resource
