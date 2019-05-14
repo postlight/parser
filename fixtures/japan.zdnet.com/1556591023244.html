@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
+  <meta http-equiv="Content-Type" value="text/html; charset=UTF-8">
+<title>Raspberry Pi&#x7AF6;&#x5408;--Ubuntu&#x304C;&#x52D5;&#x304F;&#x300C;UP Core&#x300D;&#x3092;&#x898B;&#x308B; - ZDNet Japan</title>
+
+<meta name="description" value="&#x300C;UP Core&#x300D;&#x306F;&#x3001;&#x300C;ubilinux&#xFF08;Debian&#xFF09;&#x300D;&#x3084;&#x300C;Ubuntu&#x300D;&#x300C;Yocto&#x300D;&#x306A;&#x3069;&#x3001;&#x3055;&#x307E;&#x3056;&#x307E;&#x306A;OS&#x304C;&#x52D5;&#x4F5C;&#x3059;&#x308B;&#x30B7;&#x30F3;&#x30B0;&#x30EB;&#x30DC;&#x30FC;&#x30C9;&#x30B3;&#x30F3;&#x30D4;&#x30E5;&#x30FC;&#x30BF;&#x3060;&#x3002;&#x305D;&#x3057;&#x3066;&#x3001;&#x305D;&#x306E;&#x6027;&#x80FD;&#x306F;&#x300C;Raspberry Pi 3 Model B&#x300D;&#x3092;&#x4E0A;&#x56DE;&#x308B;&#x3088;&#x3046;&#x3060;&#x3002;">
+<meta name="title" value="Raspberry Pi&#x7AF6;&#x5408;--Ubuntu&#x304C;&#x52D5;&#x304F;&#x300C;UP Core&#x300D;&#x3092;&#x898B;&#x308B; - ZDNet Japan">
+    <meta name="viewport" value="width=device-width, initial-scale=1.0,minimum-scale=1.0, user-scalable=yes">
+<meta http-equiv="Content-Script-Type" value="text/javascript">
+<meta http-equiv="Content-Style-Type" value="text/css">
+    <meta name="DC.date.issued" value="2019-04-28T08:00:00+09:00">
+
+<meta name="twitter:card" value="summary">
+<meta name="twitter:site" value="@zdnet_japan">
+<meta value="1445243325512954" name="fb:app_id">
+<meta value="Raspberry Pi&#x7AF6;&#x5408;--Ubuntu&#x304C;&#x52D5;&#x304F;&#x300C;UP Core&#x300D;&#x3092;&#x898B;&#x308B;" name="og:title">
+<meta value="article" name="og:type">
+<meta value="&#x300C;UP Core&#x300D;&#x306F;&#x3001;&#x300C;ubilinux&#xFF08;Debian&#xFF09;&#x300D;&#x3084;&#x300C;Ubuntu&#x300D;&#x300C;Yocto&#x300D;&#x306A;&#x3069;&#x3001;&#x3055;&#x307E;&#x3056;&#x307E;&#x306A;OS&#x304C;&#x52D5;&#x4F5C;&#x3059;&#x308B;&#x30B7;&#x30F3;&#x30B0;&#x30EB;&#x30DC;&#x30FC;&#x30C9;&#x30B3;&#x30F3;&#x30D4;&#x30E5;&#x30FC;&#x30BF;&#x3060;&#x3002;&#x305D;&#x3057;&#x3066;&#x3001;&#x305D;&#x306E;&#x6027;&#x80FD;&#x306F;&#x300C;Raspberry Pi 3 Model B&#x300D;&#x3092;&#x4E0A;&#x56DE;&#x308B;&#x3088;&#x3046;&#x3060;&#x3002;" name="og:description">
+<meta value="https://japan.zdnet.com/article/35136396/" name="og:url">
+<meta name="cXenseParse:url" value="https://japan.zdnet.com/article/35136396/">
+<meta value="https://japan.zdnet.com/storage/2019/04/26/97670c9f883bf3f9e11a492df245717c/190426_original_1280x960.jpg" name="og:image">
+<meta value="ZDNet Japan" name="og:site_name">
+<meta value="2019-04-28T08:00:00+09:00" name="article:published_time">
+<meta name="cXenseParse:recs:publishtime" value="2019-04-28T08:00:00+09:00">
+<meta value="2019-04-28T08:00:00+09:00" name="article:modified_time">
+<meta name="cXenseParse:ahi-pubyear" value="2019">
+<meta name="cXenseParse:ahi-pubmonth" value="201904">
+<meta name="cXenseParse:ahi-pubday" value="20190428">
+<meta name="cXenseParse:pageclass" value="article">
+<meta name="cXenseParse:author" value="ZDNet Japan Staff">
+<meta name="cXenseParse:ahi-articleid" value="35136396">
+<meta name="cXenseParse:recs:articleid" value="35136396">
+<meta name="cXenseParse:recs:image" value="https://japan.zdnet.com/storage/2019/04/26/97670c9f883bf3f9e11a492df245717c/190426_original_1280x960.jpg">
+<meta name="cXenseParse:ahi-channel" value="mobile">
+<meta name="cXenseParse:ahi-news-source" value="TechRepublic Japan">
+<meta name="cXenseParse:ahi-story-type" value="113">
+
+    <meta value="https://www.facebook.com/ZDNetJapan" name="article:publisher">
+<meta name="google-site-verification" value="YxPL_KwBxc7OzzVtjhPNuoDjkcAVuaphOGQvHf1KLec">
+    <link rel="amphtml" href="https://japan.zdnet.com/amp/article/35136396/">
+  
+  <link rel="shortcut icon" href="https://japan.zdnet.com/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://japan.zdnet.com/static/img/favicon-16x16.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://japan.zdnet.com/static/img/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="https://japan.zdnet.com/static/img/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="160x160" href="https://japan.zdnet.com/static/img/favicon-160x160.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="https://japan.zdnet.com/static/img/favicon-192x192.png">
+  <link rel="apple-touch-icon" sizes="57x57" href="https://japan.zdnet.com/static/img/apple-touch-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="https://japan.zdnet.com/static/img/apple-touch-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="https://japan.zdnet.com/static/img/apple-touch-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://japan.zdnet.com/static/img/apple-touch-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="https://japan.zdnet.com/static/img/apple-touch-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="https://japan.zdnet.com/static/img/apple-touch-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="https://japan.zdnet.com/static/img/apple-touch-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="https://japan.zdnet.com/static/img/apple-touch-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://japan.zdnet.com/static/img/apple-touch-icon-180x180.png">
+  <meta name="msapplication-TileImage" value="/static/img/apple-touch-icon-144x144.png">
+  <meta name="msapplication-TileColor" value="#FFFFFF">
+
+  <link rel="stylesheet" type="text/css" href="https://japan.zdnet.com/static/css/common2014.css?1551937309">
+  <link rel="stylesheet" type="text/css" href="https://japan.zdnet.com/static/css/iziModal.min.css?1536722965">
+    <link rel="stylesheet" type="text/css" href="https://japan.zdnet.com/style/leaf.css">
+    <link rel="stylesheet" type="text/css" href="https://japan.zdnet.com/static/css/responsive.css?1541572482">
+      
+   
+   
+  <link rel="alternate" type="application/rss+xml" title="ZDNet Japan RSS" href="http://feed.japan.zdnet.com/rss/index.rdf">
+  <link rel="canonical" href="https://japan.zdnet.com/article/35136396/">
+  
+  
+  
+
+
+
+    </head>
+<body onload="window.IPSX.onloadDisplayAds();">
+  
+  
+
+<noscript>
+	<iframe src="https://imp.aiasahi.jp/hserver/SITE=ZDNET.ETC/AREA=ELU_YOSHI/AAMSZ=1X1/KEYWORD=mobile%20zone_mobile%2035136396/OENCJP=UTF8/" noresize scrolling="no" hspace="0" vspace="0" frameborder="0" marginheight="0" marginwidth="0" width="1" height="1" allowtransparency="true">
+	</iframe>
+</noscript>
+<noscript>
+	<iframe src="https://imp.aiasahi.jp/hserver/SITE=ZDNET.ETC/AREA=ELU/AAMSZ=1X1/KEYWORD=mobile%20zone_mobile%2035136396/OENCJP=UTF8/" noresize scrolling="no" hspace="0" vspace="0" frameborder="0" marginheight="0" marginwidth="0" width="1" height="1" allowtransparency="true">
+	</iframe>
+</noscript>
+
+  
+
+<div id="ad_all_bundle">
+</div>
+
+
+      
+
+<div id="AAMB13" class="ad_container" style="  margin-left:auto;margin-right:auto"></div><noscript>
+	<iframe src="https://imp.aiasahi.jp/hserver/SITE=ZDNET.ETC/AREA=WALLPAPER/AAMSZ=1640X1200/KEYWORD=mobile%20zone_mobile%2035136396/OENCJP=UTF8/" noresize scrolling="no" hspace="0" vspace="0" frameborder="0" marginheight="0" marginwidth="0" width="1640" height="1200" allowtransparency="true">
+	</iframe>
+</noscript>  
+  <div id="block_elu">
+    
+    
+<header>
+  <div id="header">
+          <ul class="nav-resp">
+        <li class="menu">menu</li>
+        <li class="search">search</li>
+        <li class="login">login</li>
+        <li class="category">category</li>
+      </ul>
+        <div id="primary-nav">
+      <ul>
+        <li><a href="https://japan.zdnet.com/">Japan Edition <img src="https://japan.zdnet.com/media/2014/zdnet/menu_downarrow.png" width="15" height="15" alt></a>
+          <ul>
+            <li>ZDNet is available in the following editions:</li>
+            <li><a href="http://www.zdnet.com/" target="_blank">Austrailia</a></li>
+            <li><a href="http://www.zdnet.com/" target="_blank">Asia</a></li>
+            <li><a href="http://www.zdnet.com.cn/" target="_blank">China</a></li>
+            <li><a href="http://www.zdnet.fr/" target="_blank">France</a></li>
+            <li><a href="http://www.zdnet.de/" target="_blank">Germany</a></li>
+            <li><a href="http://www.zdnet.com/" target="_blank">United Kingdom</a></li>
+            <li><a href="http://www.zdnet.com/" target="_blank">USA</a></li>
+          </ul>
+        </li>
+
+        <li class="short"><a href="https://japan.zdnet.com/blog/">Blog</a></li>
+        <li><a href="https://japan.zdnet.com/paper/">&#x30DB;&#x30EF;&#x30A4;&#x30C8;&#x30DA;&#x30FC;&#x30D1;&#x30FC;</a></li>
+        <li><a href="https://japan.zdnet.com/company/">&#x4F01;&#x696D;&#x60C5;&#x5831;&#x30BB;&#x30F3;&#x30BF;&#x30FC; <img src="https://japan.zdnet.com/media/2014/zdnet/menu_downarrow.png" width="15" height="15" alt></a>
+          <ul>
+            <li style="padding: 0; font-size: 100%;"><a href="https://japan.zdnet.com/release/">&#x30D7;&#x30EC;&#x30B9;&#x30EA;&#x30EA;&#x30FC;&#x30B9;</a></li>
+            <li><a href="https://japan.zdnet.com/event_info/">&#x30A4;&#x30D9;&#x30F3;&#x30C8;&#x60C5;&#x5831;</a></li>
+            <li><a href="https://japan.zdnet.com/hikaku/">IT&#x88FD;&#x54C1;&#x6BD4;&#x8F03;</a></li>
+          </ul>
+        </li>
+
+        <li><a href="https://japan.zdnet.com/archives/foreign/">&#x30A2;&#x30E1;&#x30EA;&#x30AB;&#x767A;</a></li>
+        <li class="builder"><a href="https://builder.japan.zdnet.com/" target="_blank">builder by ZDNet Japan</a></li>
+        <li class="cnet"><a href="https://japan.cnet.com/" target="_blank">CNET Japan</a></li>
+        <li class="techrepublic"><a href="https://japan.techrepublic.com/" target="_blank" title="&#x30C6;&#x30C3;&#x30AF;&#x30EA;&#x30D1;&#x30D6;&#x30EA;&#x30C3;&#x30AF;&#xFF08;&#x30C6;&#x30AF;&#x30EA;&#x30D1;&#xFF09;">TechRepublic Japan</a></li>
+      </ul>
+    </div>
+
+
+
+    <div id="header-inner">
+      <a href="https://japan.zdnet.com/"><div id="logo-zd">
+                  </div></a>
+
+      <div id="info-edit">
+        
+<dl>
+  <dt>&#x7DE8;&#x96C6;&#x90E8;&#x304B;&#x3089;&#x306E;&#x304A;&#x77E5;&#x3089;&#x305B;</dt>
+    <dd><a href="https://japan.zdnet.com/article/35136402/">&#x4E3B;&#x8981;&#x30AF;&#x30E9;&#x30A6;&#x30C9;&#x306E;&#x4ECA;&#x3092;&#x8AAD;&#x307F;&#x89E3;&#x304F;</a></dd>
+    <dd><a href="https://japan.zdnet.com/article/35135933/">&#x30AD;&#x30E3;&#x30C3;&#x30C1;&#x30A2;&#x30C3;&#x30D7;&#xFF1A;&#x4E2D;&#x56FD;IT&#x30D3;&#x30B8;&#x30CD;&#x30B9;&#x306E;&#x6700;&#x524D;&#x7DDA;</a></dd>
+</dl>
+      </div>
+
+
+
+      <div id="header-right">
+        <div id="search-area-google">
+                    
+        </div>
+
+        <div id="login-area">
+          <ul>
+            <li id="top-regist-btn"><a href="https://japan.zdnet.com/article/35136396/#" onclick="dialogopen(&apos;https://s.japan.zdnet.com/membership/new_register/?next=68747470733a2f2f6a6170616e2e7a646e65742e636f6d2f61727469636c652f33353133363339362f236865616465725f6c696e6b&apos;, 670); return false;" data-ga_category="cnet_id_register" data-ga_label="header_register_link">&#x30E1;&#x30FC;&#x30EB;&#x30DE;&#x30AC;&#x30B8;&#x30F3;(&#x7121;&#x6599;&#x767B;&#x9332;)</a></li>
+            <li id="top-login-btn"><a href="https://japan.zdnet.com/article/35136396/#" onclick="processAction(&apos;https://s.japan.zdnet.com/membership/?layout=dialog&apos;); return false;">&#x30ED;&#x30B0;&#x30A4;&#x30F3;</a></li>
+            <li id="top-mypage-btn" style="display:none;"><a href="https://s.japan.zdnet.com/membership/">My &#x30DA;&#x30FC;&#x30B8;</a></li>
+            <li id="top-logout-btn" style="display:none;"><a href="https://s.japan.zdnet.com/membership/logout/" onclick="javascript:ga(&apos;send&apos;, &apos;pageview&apos;, &apos;/membership/logout/&apos;); ">&#x30ED;&#x30B0;&#x30A2;&#x30A6;&#x30C8;</a></li>
+          </ul>
+
+          <div id="sns-btn">
+            <a href="https://www.facebook.com/ZDNetJapan" title="Facebook&#x30D5;&#x30A1;&#x30F3;&#x30DA;&#x30FC;&#x30B8;&#x306B;&#x884C;&#x304F;" target="_blank"><img src="https://japan.zdnet.com/media/2012/cnet/icon/f_logo.png" alt="Facebook"></a>
+            <a href="https://twitter.com/zdnet_japan" title="Twitter&#x3067;cnet_japan&#x3092;&#x30D5;&#x30A9;&#x30ED;&#x30FC;&#x3059;&#x308B;" target="_blank"><img src="https://japan.zdnet.com/media/2012/cnet/icon/t_logo.png" alt="Twitter"></a>
+            <a href="https://japan.zdnet.com/info/feed/" title="ZDNet Japan&#x306E;RSS&#x7D39;&#x4ECB;&#x30DA;&#x30FC;&#x30B8;&#x3078;&#x884C;&#x304F;"><img src="https://japan.zdnet.com/media/2012/cnet/icon/t_rss.png" alt="RSS"></a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    
+    
+<div id="ad_large" class="clearfix">
+<div id="AAMB1" class="ad_container" style="  margin-left:auto;margin-right:auto"></div><noscript>
+	<iframe src="https://imp.aiasahi.jp/hserver/SITE=ZDNET.ETC/AREA=LARGE/AAMSZ=728X180/KEYWORD=mobile%20zone_mobile%2035136396/OENCJP=UTF8/" noresize scrolling="no" hspace="0" vspace="0" frameborder="0" marginheight="0" marginwidth="0" width="728" height="180" allowtransparency="true">
+	</iframe>
+</noscript></div>
+    
+    <div id="category">
+  <div class="btn-category" style="display:none">+&#x30AB;&#x30C6;&#x30B4;&#x30EA;&#x9078;&#x629E;</div>
+  <ul>
+    <li><a href="https://japan.zdnet.com/cio/">CIO</a></li>
+    <li><a href="https://japan.zdnet.com/cloud/">&#x30AF;&#x30E9;&#x30A6;&#x30C9;</a></li>
+    <li><a href="https://japan.zdnet.com/mobile/">&#x30E2;&#x30D0;&#x30A4;&#x30EB;PC</a></li>
+    <li><a href="https://japan.zdnet.com/security/">&#x30BB;&#x30AD;&#x30E5;&#x30EA;&#x30C6;&#x30A3;</a></li>
+    <li><a href="https://japan.zdnet.com/software/">&#x30BD;&#x30D5;&#x30C8;&#x30A6;&#x30A7;&#x30A2;</a></li>
+    <li><a href="https://japan.zdnet.com/server/">&#x30B5;&#x30FC;&#x30D0;</a></li>
+    <li><a href="https://japan.zdnet.com/storages/">&#x30B9;&#x30C8;&#x30EC;&#x30FC;&#x30B8;</a></li>
+    <li><a href="https://japan.zdnet.com/network/">&#x30CD;&#x30C3;&#x30C8;&#x30EF;&#x30FC;&#x30AF;</a></li>
+    <li><a href="https://japan.zdnet.com/middleware/">&#x30DF;&#x30C9;&#x30EB;&#x30A6;&#x30A7;&#x30A2;</a></li>
+    <li><a href="https://japan.zdnet.com/it-management/">&#x904B;&#x7528;</a></li>
+    <li class="usnews"><a href="https://japan.zdnet.com/archives/foreign/">&#x30A2;&#x30E1;&#x30EA;&#x30AB;&#x767A;</a></li>
+    <li><a href="https://japan.zdnet.com/marketing/">&#x30DE;&#x30FC;&#x30B1;&#x30C6;&#x30A3;&#x30F3;&#x30B0;</a></li>
+    <li><a href="https://japan.zdnet.com/bigdata/">&#x30D3;&#x30C3;&#x30B0;&#x30C7;&#x30FC;&#x30BF;</a></li>
+    <li><a href="https://japan.zdnet.com/off-topic/">&#x30AA;&#x30D5;&#x30C8;&#x30D4;&#x30C3;&#x30AF;</a></li>
+    <li><a href="https://japan.zdnet.com/case-study/">&#x4E8B;&#x4F8B;</a></li>
+    <li><a href="https://japan.zdnet.com/survey/">&#x8ABF;&#x67FB;</a></li>
+    <li><a href="https://japan.zdnet.com/sp/">&#x7279;&#x96C6;</a></li>
+    <li><a href="https://japan.zdnet.com/extra/hybridit_201903/">&#x30CF;&#x30A4;&#x30D6;&#x30EA;&#x30C3;&#x30C9;IT</a></li>
+    <li><a href="https://japan.zdnet.com/extra/datadriven_201903/">&#x30C7;&#x30FC;&#x30BF;&#x30C9;&#x30EA;&#x30D6;&#x30F3;</a></li>
+    <li><a href="https://japan.zdnet.com/extra/azure_2018/">Azure Info Cafe</a></li>
+  </ul>
+</div>
+  </div>
+</header>        
+    <div id="rbWrap">
+    <div id="wrapper"> 
+    
+    <div id="contents">
+
+      
+<div id="contents-left">
+  
+<div class="breadcrumbs">
+  <ul class="clearfix">
+    <li class="home" itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a href="https://japan.zdnet.com/" itemprop="url">ZDNet Japan</a></li>
+        <li itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a href="https://japan.zdnet.com/mobile/" itemprop="url">&#x30E2;&#x30D0;&#x30A4;&#x30EB;PC</a></li>
+      </ul>
+</div>
+
+<h1 class="leaftitle">
+<img src="https://japan.zdnet.com/storage/2019/04/26/97670c9f883bf3f9e11a492df245717c/t/120/90/d/190426_original_1280x960.jpg">
+Raspberry Pi&#x7AF6;&#x5408;--Ubuntu&#x304C;&#x52D5;&#x304F;&#x300C;UP Core&#x300D;&#x3092;&#x898B;&#x308B;</h1>
+
+<p class="author">
+ZDNet Japan Staff 2019&#x5E74;04&#x6708;28&#x65E5; 08&#x6642;00&#x5206;</p>
+
+<ul id="social_bkm_wrap_top" class="clearfix">
+    <li class="leaf_sbm_button_space_facebook">
+
+<div class="fb-root"></div>
+
+
+
+<span class="social_bkm social_bkm_fb fb-like" layout="button_count" data-href="https://japan.zdnet.com/article/35136396/" action="like">
+</span>
+</li>
+    <li class="leaf_sbm_button_space_twitter"><span class="social_bkm social_bkm_twitter">
+  <a href="https://twitter.com/share" class="twitter-share-button" data-url="https://japan.zdnet.com/article/35136396/" data-text="Raspberry Pi&#x7AF6;&#x5408;--Ubuntu&#x304C;&#x52D5;&#x304F;&#x300C;UP Core&#x300D;&#x3092;&#x898B;&#x308B;" data-count="horizontal" data-via="zdnet_japan" data-related="cnet_japan" data-lang="ja">Tweet</a>
+  
+</span></li>
+    <li class="leaf_sbm_button_space_hatena"><span class="sbm_button">
+<a href="http://b.hatena.ne.jp/entry/https://japan.zdnet.com/article/35136396/" class="hatena-bookmark-button" data-hatena-bookmark-layout="simple-balloon" title="&#x3053;&#x306E;&#x30A8;&#x30F3;&#x30C8;&#x30EA;&#x30FC;&#x3092;&#x306F;&#x3066;&#x306A;&#x30D6;&#x30C3;&#x30AF;&#x30DE;&#x30FC;&#x30AF;&#x306B;&#x8FFD;&#x52A0;"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="&#x3053;&#x306E;&#x30A8;&#x30F3;&#x30C8;&#x30EA;&#x30FC;&#x3092;&#x306F;&#x3066;&#x306A;&#x30D6;&#x30C3;&#x30AF;&#x30DE;&#x30FC;&#x30AF;&#x306B;&#x8FFD;&#x52A0;" width="20" height="20" style="border: none;"></a></span>
+</li>
+    <li class="leaf_sbm_button_space_pocket"><a data-save-url="https://japan.zdnet.com/article/35136396/" data-pocket-label="pocket" data-pocket-count="horizontal" class="pocket-btn" data-lang="en"></a>
+
+</li>
+</ul>
+<ul id="social_bkm_wrap_bottom" class="clearfix">
+<span id="atode">
+        <li id="atode_print"><span class="link" data-link="/direct/atodeyomu/print/35136396/" name="print">&#x5370;&#x5237;</span></li>
+  
+    <li id="atode_pulldown" class="expandable clearfix">
+    <div class="desc">&#x30E1;&#x30FC;&#x30EB;</div>
+    <div class="btn"><img src="https://japan.zdnet.com/media/c/2012/images/atode/ato_droparrow.gif" width="18"></div>
+    <div class="menuWrapper">
+      <dl id="atode_pulldown_actions" class="menu">
+                    <dd class="atode_ml_text"><span class="link list" data-link="/direct/atodeyomu/mail/35136396/" name="mail">&#x30C6;&#x30AD;&#x30B9;&#x30C8;</span></dd>
+                            <dd class="atode_ml_html"><span class="link list" data-link="/direct/atodeyomu/htmlmail/35136396/" name="mail">HTML</span></dd>
+                            <dd class="atode_ml_epub"><span class="link list" data-link="/direct/atodeyomu/epubmail/35136396/" name="mail">&#x96FB;&#x5B50;&#x66F8;&#x7C4D;</span></dd>
+                            <dd class="atode_ml_pdf"><span class="link list" data-link="/direct/atodeyomu/pdfmail/35136396/" name="mail">PDF</span></dd>
+              </dl>
+    </div>
+  </li>
+  <li id="atode_pulldown_dl" class="expandable clearfix">
+    <div class="desc">&#x30C0;&#x30A6;&#x30F3;&#x30ED;&#x30FC;&#x30C9;</div>
+    <div class="btn"><img src="https://japan.zdnet.com/media/c/2012/images/atode/ato_droparrow.gif" width="18"></div>
+    <div class="menuWrapper">
+      <dl id="atode_pulldown_actions_dl" class="menu">
+                    <dd class="atode_dl_text"><span class="link list" data-link="/direct/atodeyomu/text/35136396/" name="dl">&#x30C6;&#x30AD;&#x30B9;&#x30C8;</span></dd>
+                            <dd class="atode_dl_epub"><span class="link list" data-link="/direct/atodeyomu/epub/35136396/" name="dl">&#x96FB;&#x5B50;&#x66F8;&#x7C4D;</span></dd>
+                            <dd class="atode_dl_pdf"><span class="link list" data-link="/direct/atodeyomu/pdf/35136396/" name="dl">PDF</span></dd>
+              </dl>
+    </div>
+  </li>
+
+        <li id="atode_action" class="atode_clip expandable">
+    <span><span class="link" data-link="/direct/atodeyomu/clip/35136396/" name="clip">&#x30AF;&#x30EA;&#x30C3;&#x30D7;</span>
+    <div class="menuWrapper">
+      <div id="atode_pulldown_actions_clip" class="menu">&#x30AF;&#x30EA;&#x30C3;&#x30D7;&#x3057;&#x305F;&#x8A18;&#x4E8B;&#x3092;My&#x30DA;&#x30FC;&#x30B8;&#x304B;&#x3089;&#x8AAD;&#x3080;&#x3053;&#x3068;&#x304C;&#x3067;&#x304D;&#x307E;&#x3059;</div>
+    </div>
+  </span></li>
+  
+    
+  <li class="ctooltip" style="display:none">
+    <p>Here&apos;s my content</p>
+  </li>
+    
+</span>
+</ul>
+
+
+<ul class="ad-text">
+  <div id="AAMB6" class style="  margin-left:auto;margin-right:auto"></div><div id="AAMB7" class style="  margin-left:auto;margin-right:auto"></div><div id="AAMB8" class style="  margin-left:auto;margin-right:auto"></div><div id="AAMB14" class style="  margin-left:auto;margin-right:auto"></div><noscript>
+	<iframe src="https://imp.aiasahi.jp/hserver/SITE=ZDNET.ETC/AREA=TOPTEXT4/AAMSZ=520X70/KEYWORD=mobile%20zone_mobile%2035136396/OENCJP=UTF8/" noresize scrolling="no" hspace="0" vspace="0" frameborder="0" marginheight="0" marginwidth="0" width="520" height="70" allowtransparency="true">
+	</iframe>
+</noscript></ul>
+<div class="leaf_content clearfix">
+<div class="article_body">
+
+  <p>
+&#x3000;2017&#x5E74;&#x306B;&#x30EA;&#x30EA;&#x30FC;&#x30B9;&#x4E88;&#x5B9A;&#x306E;&#x4F4E;&#x4FA1;&#x683C;&#x30DD;&#x30B1;&#x30C3;&#x30C8;&#x30B5;&#x30A4;&#x30BA;&#x30B3;&#x30F3;&#x30D4;&#x30E5;&#x30FC;&#x30BF;&#x306F;&#x3001;&#x300C;Android Marshmallow&#x300D;&#x3068;&#x300C;Windows 10&#x300D;&#x306E;&#x30D5;&#x30EB;&#x30D0;&#x30FC;&#x30B8;&#x30E7;&#x30F3;&#x304C;&#x52D5;&#x4F5C;&#x3059;&#x308B;&#x3002;
+</p><p>
+&#x3000;&#x300C;UP Core&#x300D;&#x306F;&#x3001;&#x300C;ubilinux&#xFF08;Debian&#xFF09;&#x300D;&#x3084;&#x300C;Ubuntu&#x300D;&#x300C;Yocto&#x300D;&#x306A;&#x3069;&#x3001;&#x3055;&#x307E;&#x3056;&#x307E;&#x306A;OS&#x304C;&#x52D5;&#x4F5C;&#x3059;&#x308B;&#x30B7;&#x30F3;&#x30B0;&#x30EB;&#x30DC;&#x30FC;&#x30C9;&#x30B3;&#x30F3;&#x30D4;&#x30E5;&#x30FC;&#x30BF;&#x3060;&#x3002;&#x305D;&#x3057;&#x3066;&#x3001;&#x305D;&#x306E;&#x6027;&#x80FD;&#x306F;&#x300C;Raspberry Pi 3 Model B&#x300D;&#x3092;&#x4E0A;&#x56DE;&#x308B;&#x3088;&#x3046;&#x3060;&#x3002;
+</p>
+
+<p>
+&#xFF08;&#x672C;&#x8A18;&#x4E8B;&#x306F;&#x3001;<a href="https://japan.techrepublic.com/article/35102407.htm" target="_blank">TechRepublic Japan&#x3067;2017&#x5E74;6&#x6708;8&#x65E5;&#x306B;&#x63B2;&#x8F09;&#x3057;&#x305F;&#x8A18;&#x4E8B;</a>&#x304B;&#x3089;&#x306E;&#x8EE2;&#x8F09;&#x3067;&#x3059;&#x3002;&#x7D9A;&#x304D;&#x306F;TechRepublic Japan&#x3067;&#x304A;&#x8AAD;&#x307F;&#x3044;&#x305F;&#x3060;&#x3051;&#x307E;&#x3059;&#xFF09;
+</p>
+
+
+</div>
+</div>
+
+
+<div id="article_under_nllink" class="section" style="margin: 15px 0; padding: 20px 30px; background-color: #f0f0f0; text-align: center;">
+  <p>ZDNet Japan &#x8A18;&#x4E8B;&#x3092;&#x6BCE;&#x671D;&#x30E1;&#x30FC;&#x30EB;&#x3067;&#x307E;&#x3068;&#x3081;&#x8AAD;&#x307F;(&#x767B;&#x9332;&#x7121;&#x6599;)</p>
+  <div><a href="https://japan.zdnet.com/newsletter/" data-ga_category="zd_article_under_nllink" style="display: inline-block; color: #fff; background-color: #B00B00; margin-top: 20px; padding: 10px 20px;" onclick="dialogopen(&apos;https://s.japan.zdnet.com/membership/new_register/?next=68747470733a2f2f6a6170616e2e7a646e65742e636f6d2f61727469636c652f33353133363339362f&apos;); return false;">&#x30E1;&#x30FC;&#x30EB;&#x30DE;&#x30AC;&#x30B8;&#x30F3;&#x8CFC;&#x8AAD;&#x306E;&#x304A;&#x7533;&#x3057;&#x8FBC;&#x307F;</a></div>
+</div>
+
+
+<div class="to_zdtop_btn">
+<a href="https://japan.zdnet.com/" data-ga_category="zd_article_under_toplink">ZDNet Japan &#x30C8;&#x30C3;&#x30D7;&#x3078;</a>
+</div>
+
+
+<div class="clearfix">
+<ul id="social_bkm_wrap_under_leaf" class="clearfix" style="float: right; height: auto !important;">
+<li class="leaf_sbm_button_space_facebook"><div class="fb-root"></div>
+<span class="social_bkm social_bkm_fb fb-like" layout="button" data-href="https://japan.zdnet.com/article/35136396/" action="like">
+</span></li>
+<li class="leaf_sbm_button_space_twitter"><span class="social_bkm social_bkm_twitter">
+  <a href="https://twitter.com/share" class="twitter-share-button" data-url="https://japan.zdnet.com/article/35136396/" data-text="Raspberry Pi&#x7AF6;&#x5408;--Ubuntu&#x304C;&#x52D5;&#x304F;&#x300C;UP Core&#x300D;&#x3092;&#x898B;&#x308B;" data-count="none" data-via="zdnet_japan" data-related="zdnet_japan" data-lang="ja">Tweet</a>
+ 
+</span></li>
+<li class="leaf_sbm_button_space_hatena"><span class="sbm_button">
+<a href="http://b.hatena.ne.jp/entry/https://japan.zdnet.com/article/35136396/" class="hatena-bookmark-button" data-hatena-bookmark-layout="standard-noballoon" data-hatena-bookmark-lang="ja" title="&#x3053;&#x306E;&#x30A8;&#x30F3;&#x30C8;&#x30EA;&#x30FC;&#x3092;&#x306F;&#x3066;&#x306A;&#x30D6;&#x30C3;&#x30AF;&#x30DE;&#x30FC;&#x30AF;&#x306B;&#x8FFD;&#x52A0;"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="&#x3053;&#x306E;&#x30A8;&#x30F3;&#x30C8;&#x30EA;&#x30FC;&#x3092;&#x306F;&#x3066;&#x306A;&#x30D6;&#x30C3;&#x30AF;&#x30DE;&#x30FC;&#x30AF;&#x306B;&#x8FFD;&#x52A0;" width="20" height="20" style="border: none;"></a>
+</span></li>
+<li class="leaf_sbm_button_space_pocket"><span class="social_bkm_pocket">
+<a data-save-url="https://japan.zdnet.com/article/35136396/" data-pocket-label="pocket" data-pocket-count="none" class="pocket-btn" data-lang="en"></a>
+
+</span></li>
+</ul>
+</div>
+
+<div id="ad_mlarge" class="clearfix">
+<div id="AAMB16" class="ad_container" style="  margin-left:auto;margin-right:auto"></div><noscript>
+	<iframe src="https://imp.aiasahi.jp/hserver/SITE=ZDNET.ETC/AREA=MLARGE/AAMSZ=600X180/KEYWORD=mobile%20zone_mobile%2035136396/OENCJP=UTF8/" noresize scrolling="no" hspace="0" vspace="0" frameborder="0" marginheight="0" marginwidth="0" width="600" height="180" allowtransparency="true">
+	</iframe>
+</noscript></div>
+<ul class="ad-text">
+  <div id="AAMB9" class style="  margin-left:auto;margin-right:auto"></div><div id="AAMB10" class style="  margin-left:auto;margin-right:auto"></div><div id="AAMB11" class style="  margin-left:auto;margin-right:auto"></div><div id="AAMB15" class style="  margin-left:auto;margin-right:auto"></div><noscript>
+	<iframe src="https://imp.aiasahi.jp/hserver/SITE=ZDNET.ETC/AREA=UNDERTEXT4/AAMSZ=520X70/KEYWORD=mobile%20zone_mobile%2035136396/OENCJP=UTF8/" noresize scrolling="no" hspace="0" vspace="0" frameborder="0" marginheight="0" marginwidth="0" width="520" height="70" allowtransparency="true">
+	</iframe>
+</noscript></ul>
+<div class="box_white">
+    
+<h2 class="t_relation_leaf">&#x95A2;&#x9023;&#x8A18;&#x4E8B;</h2>
+
+<ul class="thumb_list_relation">
+      <li>
+      <a href="https://japan.zdnet.com/article/35132810/" data-ga_category="zd_article_popular_article">
+        <img src="https://japan.zdnet.com/storage/2019/02/15/7d8162e1d6a24b2db68dcb60253bbba6/t/184/138/d/thumb_container_1280.jpg">
+        <span>&#x30AF;&#x30E9;&#x30A6;&#x30C9;&#x79FB;&#x884C;&#x3067;&#x77E5;&#x308B;&#x3079;&#x304D;&#x30B3;&#x30F3;&#x30C6;&#x30CA;&#x306E;&#x57FA;&#x672C;</span>
+      </a>
+    </li>
+      <li>
+      <a href="https://japan.zdnet.com/article/35133179/" data-ga_category="zd_article_popular_article">
+        <img src="https://japan.zdnet.com/storage/2019/02/24/89d4359607eed17879b52809d27a41be/t/184/138/d/thumb_multicloud_1280.jpg">
+        <span>&#x201C;&#x73FE;&#x5B9F;&#x89E3;&#x201D;&#x3068;&#x3057;&#x3066;&#x306E;&#x30DE;&#x30EB;&#x30C1;&#x30AF;&#x30E9;&#x30A6;&#x30C9;</span>
+      </a>
+    </li>
+      <li>
+      <a href="https://japan.zdnet.com/article/35132545/" data-ga_category="zd_article_popular_article">
+        <img src="https://japan.zdnet.com/storage/2019/02/11/a7b32444f93e6ac99f5ee95eb095f108/t/184/138/d/thumb_cdo_1280.jpg">
+        <span>&#x3053;&#x308C;&#x304B;&#x3089;&#x306E;&#x6700;&#x9AD8;&#x30C7;&#x30B8;&#x30BF;&#x30EB;&#x8CAC;&#x4EFB;&#x8005;&#x306B;&#x6C42;&#x3081;&#x3089;&#x308C;&#x308B;&#x5F79;&#x5272;</span>
+      </a>
+    </li>
+  </ul>
+
+<ul class="arrow_list1 list_relation">
+      <li>
+      <h3><a href="https://japan.techrepublic.com/article/35136135.htm" data-tag="mcol;relArticles" data-ga_category="zd_article_related_article">&#x5358;&#x7D14;&#x306A;&#x6A5F;&#x80FD;&#x3092;&#x90E8;&#x54C1;&#x3068;&#x3057;&#x3066;&#x518D;&#x5229;&#x7528;&#x3001;&#x30ED;&#x30DC;&#x30C3;&#x30C8;&#x306B;&#x4EFB;&#x305B;&#x3059;&#x304E;&#x306A;&#x3044;--&#x53CC;&#x65E5;&#x6D41;RPA&#x6D3B;&#x7528;&#x8853;</a></h3>
+    </li>
+      <li>
+      <h3><a href="https://japan.techrepublic.com/article/35135777.htm" data-tag="mcol;relArticles" data-ga_category="zd_article_related_article">&#x30E9;&#x30BA;&#x30D1;&#x30A4;&#x7AF6;&#x5408;&#x88FD;&#x54C1;&#x307E;&#x3068;&#x3081;&#xFF08;9&#xFF09;--Orange Pi 3&#x3001;Pine H64 Model B&#x3001;Nitrogen8M_Mini</a></h3>
+    </li>
+      <li>
+      <h3><a href="https://japan.techrepublic.com/article/35134000.htm" data-tag="mcol;relArticles" data-ga_category="zd_article_related_article">&#x300C;Raspberry Pi&#x300D;&#x306E;&#x6B69;&#x307F;&#x3092;&#x305F;&#x3069;&#x308B;--&#x751F;&#x307F;&#x306E;&#x89AA;E&#x30FB;&#x30A2;&#x30D7;&#x30C8;&#x30F3;&#x6C0F;&#x306B;&#x805E;&#x304F;</a></h3>
+    </li>
+      <li>
+      <h3><a href="https://japan.techrepublic.com/article/35133771.htm" data-tag="mcol;relArticles" data-ga_category="zd_article_related_article">&#x300C;Orange Pi 3&#x300D;&#x30EC;&#x30D3;&#x30E5;&#x30FC;--&#x6B8B;&#x5FF5;&#x306A;&#x4F7F;&#x7528;&#x7D50;&#x679C;&#x3068;&#x306A;&#x3063;&#x305F;&#x30E9;&#x30BA;&#x30D1;&#x30A4;&#x7AF6;&#x5408;&#x30DC;&#x30FC;&#x30C9;</a></h3>
+    </li>
+      <li>
+      <h3><a href="https://japan.techrepublic.com/article/35133013.htm" data-tag="mcol;relArticles" data-ga_category="zd_article_related_article">&#x300C;ROCK Pi 4&#x300D;&#x30EC;&#x30D3;&#x30E5;&#x30FC;--&#x300C;Raspberry Pi&#x300D;&#x5BFE;&#x6297;&#x99AC;&#x306E;&#x5B9F;&#x529B;&#x3092;&#x6E2C;&#x308B;</a></h3>
+    </li>
+  </ul>
+    </div>
+<div id="logly-lift-1374341"></div><div class="section clearfix">
+<span class="line"></span>
+<h2>&#x9023;&#x8F09;</h2>
+<dl class="list-sp list-2col">
+
+      
+
+    <dt class="cio"><a href="https://japan.zdnet.com/cio/">CIO</a></dt>
+    <dd>
+    <a href="https://japan.zdnet.com/cio/sp_19_win10migration/">&#x6708;&#x520A; Windows 10&#x79FB;&#x884C;&#x306E;&#x5FC3;&#x30FB;&#x6280;&#x30FB;&#x4F53;</a>
+  </dd>
+    <dd>
+    <a href="https://japan.zdnet.com/cio/sp_18it-analyst/">IT&#x30A2;&#x30CA;&#x30EA;&#x30B9;&#x30C8;&#x304C;&#x77E5;&#x308B;&#x65E5;&#x672C;&#x4F01;&#x696D;&#x306E;&#x300C;IT&#x306E;&#x76F2;&#x70B9;&#x300D;</a>
+  </dd>
+    <dd>
+    <a href="https://japan.zdnet.com/cio/sp_18share/">&#x30B7;&#x30A7;&#x30A2;&#x30EA;&#x30F3;&#x30B0;&#x30A8;&#x30B3;&#x30CE;&#x30DF;&#x30FC;&#x306E;&#x885D;&#x6483;</a>
+  </dd>
+    <dd>
+    <a href="https://japan.zdnet.com/cio/sp_18failure-studies/">&#x30C7;&#x30B8;&#x30BF;&#x30EB;&#x201C;&#x5931;&#x6557;&#x5B66;&#x201D;</a>
+  </dd>
+    <dd>
+    <a href="https://japan.zdnet.com/cio/sp_17consul/">&#x30B3;&#x30F3;&#x30B5;&#x30EB;&#x30C6;&#x30A3;&#x30F3;&#x30B0;&#x73FE;&#x5834;&#x306E;&#x30AB;&#x30E9;&#x30AF;&#x30EA;</a>
+  </dd>
+    <dd>
+    <a href="https://japan.zdnet.com/cio/sp_16rethink_internet/">Rethink Internet&#xFF1A;&#x30A4;&#x30F3;&#x30BF;&#x30FC;&#x30CD;&#x30C3;&#x30C8;&#x518D;&#x8003;</a>
+  </dd>
+    <dd>
+    <a href="https://japan.zdnet.com/cio/sp_17humanerror/">&#x30A4;&#x30F3;&#x30B7;&#x30C7;&#x30F3;&#x30C8;&#x3092;&#x3082;&#x305F;&#x3089;&#x3059;&#x30D2;&#x30E5;&#x30FC;&#x30DE;&#x30F3;&#x30A8;&#x30E9;&#x30FC;</a>
+  </dd>
+    <dd>
+    <a href="https://japan.zdnet.com/cio/sp_17transactions/">&#x30C8;&#x30E9;&#x30F3;&#x30B6;&#x30AF;&#x30B7;&#x30E7;&#x30F3;&#x306E;&#x4ECA;&#x6614;&#x7269;&#x8A9E;</a>
+  </dd>
+    <dd>
+    <a href="https://japan.zdnet.com/cio/sp_17eric/">&#x30A8;&#x30EA;&#x30C3;&#x30AF;&#x677E;&#x6C38;&#x306E;&#x30C7;&#x30B8;&#x30BF;&#x30EB;IQ&#x9053;&#x5834;</a>
+  </dd>
+    <dd>
+    <a href="https://japan.zdnet.com/cio/sp_16airesearch/">&#x7814;&#x7A76;&#x73FE;&#x5834;&#x304B;&#x3089;&#x898B;&#x305F;AI</a>
+  </dd>
+    <dd>
+    <a href="https://japan.zdnet.com/cio/sp16_fintech/">Fintech&#x306E;&#x6B63;&#x4F53;</a>
+  </dd>
+    <dd>
+    <a href="https://japan.zdnet.com/cio/sp15_us_editorinchief/">&#x7C73;ZDNet&#x7DE8;&#x96C6;&#x9577;Larry&#x306E;&#x72EC;&#x308A;&#x8A00;</a>
+  </dd>
+    <dd>
+    <a href="https://japan.zdnet.com/cio/sp_15oki/">&#x5927;&#x6728;&#x8C4A;&#x6210;&#x300C;&#x4ED5;&#x4E8B;&#x3067;&#x4F7F;&#x3046;&#x30A2;&#x30C3;&#x30D7;&#x30EB;&#x306E;&#x30C8;&#x30EA;&#x30BB;&#x30C4;&#x300D;</a>
+  </dd>
+    <dd>
+    <a href="https://japan.zdnet.com/cio/sp_17hardwaretrends/">&#x5C71;&#x672C;&#x96C5;&#x53F2;&#x300C;&#x30CF;&#x30FC;&#x30C9;&#x304B;&#x3089;&#x8AAD;&#x307F;&#x89E3;&#x304F;IT&#x30C8;&#x30EC;&#x30F3;&#x30C9;&#x653E;&#x8AC7;&#x300D;</a>
+  </dd>
+    <dd>
+    <a href="https://japan.zdnet.com/cio/sp_14tenbou2020/">&#x7530;&#x4E2D;&#x514B;&#x5DF1;&#x300C;&#x5C55;&#x671B;2020&#x5E74;&#x306E;IT&#x4F01;&#x696D;&#x300D;</a>
+  </dd>
+    <dd>
+    <a href="https://japan.zdnet.com/cio/sp_13matsuokaopinion/">&#x677E;&#x5CA1;&#x529F;&#x300C;&#x4E00;&#x8A00;&#x3082;&#x306E;&#x7533;&#x3059;&#x300D;</a>
+  </dd>
+    <dd>
+    <a href="https://japan.zdnet.com/cio/sp_12matsuoka/">&#x677E;&#x5CA1;&#x529F;&#x300C;&#x4ECA;&#x9031;&#x306E;&#x660E;&#x8A00;&#x300D;</a>
+  </dd>
+    <dd>
+    <a href="https://japan.zdnet.com/cio/sp_15uchiyama/">&#x5185;&#x5C71;&#x609F;&#x5FD7;&#x300C;IT&#x90E8;&#x9580;&#x306F;&#x3069;&#x3053;&#x306B;&#x5411;&#x304B;&#x3046;&#x306E;&#x304B;&#x300D;</a>
+  </dd>
+    <dd>
+    <a href="https://japan.zdnet.com/cio/sp16_future/">&#x6797; &#x96C5;&#x4E4B;&#x300C;&#x30C7;&#x30B8;&#x30BF;&#x30EB;&#x672A;&#x6765;&#x304B;&#x3089;&#x306E;&#x624B;&#x7D19;&#x300D;</a>
+  </dd>
+    <dd>
+    <a href="https://japan.zdnet.com/cio/sp_15tanikawa/">&#x8C37;&#x5DDD;&#x8015;&#x4E00;&#x300C;&#x30A8;&#x30F3;&#x30D7;&#x30E9;IT&#x306A;&#x3089;&#x3053;&#x308C;&#x306F;&#x77E5;&#x3063;&#x3068;&#x3051;&#x300D;</a>
+  </dd>
+    <dd>
+    <a href="https://japan.zdnet.com/cio/sp_09ohkawara/">&#x5927;&#x6CB3;&#x539F;&#x514B;&#x884C;&#x300C;&#x30A8;&#x30F3;&#x30D7;&#x30E9;&#x5F92;&#x7136;&#x300D;</a>
+  </dd>
+    <dd>
+    <a href="https://japan.zdnet.com/cio/sp_16inside/">&#x5185;&#x88FD;&#x5316;&#x3068;&#x30E6;&#x30FC;&#x30B6;&#x30FC;&#x4F53;&#x9A13;&#x306E;&#x95A2;&#x4FC2;</a>
+  </dd>
+    <dd>
+    <a href="https://japan.zdnet.com/cio/sp16_pm/">&#x300C;&#x30D7;&#x30ED;&#x30B8;&#x30A7;&#x30AF;&#x30C8;&#x30DE;&#x30CD;&#x30B8;&#x30E1;&#x30F3;&#x30C8;&#x300D;&#x306E;&#x89E3;&#x304D;&#x65B9;</a>
+  </dd>
+    <dd>
+    <a href="https://japan.zdnet.com/cio/sp_16himitsu/">IT&#x306F;&#x300C;&#x3072;&#x307F;&#x3064;&#x9053;&#x5177;&#x300D;&#x306E;&#x5922;&#x3092;&#x898B;&#x308B;</a>
+  </dd>
+          
+
+        
+
+        
+
+    <dt class="security"><a href="https://japan.zdnet.com/security/">&#x30BB;&#x30AD;&#x30E5;&#x30EA;&#x30C6;&#x30A3;</a></dt>
+    <dd>
+    <a href="https://japan.zdnet.com/security/sp_19incidentresponse/">&#x30BB;&#x30AD;&#x30E5;&#x30EA;&#x30C6;&#x30A3;&#x30A4;&#x30F3;&#x30B7;&#x30C7;&#x30F3;&#x30C8;&#x5BFE;&#x5FDC;&#x306E;&#x73FE;&#x5834;</a>
+  </dd>
+    <dd>
+    <a href="https://japan.zdnet.com/security/sp_18endpoint/">&#x30A8;&#x30F3;&#x30C9;&#x30DD;&#x30A4;&#x30F3;&#x30C8;&#x30BB;&#x30AD;&#x30E5;&#x30EA;&#x30C6;&#x30A3;&#x306E;4&#x3064;&#x306E;&#x300C;&#x57FA;&#x790E;&#x300D;</a>
+  </dd>
+    <dd>
+    <a href="https://japan.zdnet.com/security/sp_17securityarukikata/">&#x4F01;&#x696D;&#x30BB;&#x30AD;&#x30E5;&#x30EA;&#x30C6;&#x30A3;&#x306E;&#x6B69;&#x304D;&#x65B9;</a>
+  </dd>
+    <dd>
+    <a href="https://japan.zdnet.com/security/sp_17futurecybersecurity/">&#x30B5;&#x30A4;&#x30D0;&#x30FC;&#x30BB;&#x30AD;&#x30E5;&#x30EA;&#x30C6;&#x30A3;&#x672A;&#x6765;&#x8003;</a>
+  </dd>
+    <dd>
+    <a href="https://japan.zdnet.com/security/sp_networksec/">&#x30CD;&#x30C3;&#x30C8;&#x30EF;&#x30FC;&#x30AF;&#x30BB;&#x30AD;&#x30E5;&#x30EA;&#x30C6;&#x30A3;&#x306E;&#x8981;&#x8AE6;</a>
+  </dd>
+    <dd>
+    <a href="https://japan.zdnet.com/security/sp_13securityissues/">&#x30BB;&#x30AD;&#x30E5;&#x30EA;&#x30C6;&#x30A3;&#x306E;&#x8AD6;&#x70B9;</a>
+  </dd>
+          
+
+        
+
+        
+
+    <dt class="sp"><a href="https://japan.zdnet.com/sp/">&#x30B9;&#x30DA;&#x30B7;&#x30E3;&#x30EB;</a></dt>
+    <dd>
+    <a href="https://japan.zdnet.com/software/sp_18enterpriseai/">&#x30A8;&#x30F3;&#x30BF;&#x30FC;&#x30D7;&#x30E9;&#x30A4;&#x30BA;AI&#x306E;&#x9686;&#x76DB;</a>
+  </dd>
+    <dd>
+    <a href="https://japan.zdnet.com/software/sp_18insuretech/">&#x30A4;&#x30F3;&#x30B7;&#x30E5;&#x30A2;&#x30C6;&#x30C3;&#x30AF;&#x3067;&#x5909;&#x308F;&#x308B;&#x4FDD;&#x967A;&#x696D;&#x754C;</a>
+  </dd>
+    <dd>
+    <a href="https://japan.zdnet.com/marketing/sp_18ma/">&#x9867;&#x5BA2;&#x306F;&#x52DD;&#x624B;&#x306B;&#x80B2;&#x305F;&#x306A;&#x3044;--MA&#x30C4;&#x30FC;&#x30EB;&#x5C0E;&#x5165;&#x306E;&#x5FC3;&#x5F97;</a>
+  </dd>
+    <dd>
+    <a href="https://japan.zdnet.com/it-management/sp_18hitori/">&#x300C;&#x3072;&#x3068;&#x308A;&#x60C5;&#x30B7;&#x30B9;&#x300D;&#x306E;&#x672C;&#x5F53;&#x306E;&#x3068;&#x3053;&#x308D;</a>
+  </dd>
+    <dd>
+    <a href="https://japan.zdnet.com/marketing/sp_18sns_consulting/">&#x3056;&#x3063;&#x304F;&#x308A;&#x89E3;&#x6C7A;&#xFF01;SNS&#x62C5;&#x5F53;&#x8005;&#x304A;&#x60A9;&#x307F;&#x76F8;&#x8AC7;&#x5BA4;</a>
+  </dd>
+    <dd>
+    <a href="https://japan.zdnet.com/software/sp_18biz_tool/">&#x751F;&#x7523;&#x6027;&#x5411;&#x4E0A;&#x306B;&#x52B9;&#x304F;&#x30D3;&#x30B8;&#x30CD;&#x30B9;IT&#x30C4;&#x30FC;&#x30EB;&#x6700;&#x524D;&#x7DDA;</a>
+  </dd>
+    <dd>
+    <a href="https://japan.zdnet.com/marketing/sp_17sns_marketing/">&#x3056;&#x3063;&#x304F;&#x308A;&#x308F;&#x304B;&#x308B;SNS&#x30DE;&#x30FC;&#x30B1;&#x30C6;&#x30A3;&#x30F3;&#x30B0;&#x5165;&#x9580;</a>
+  </dd>
+    <dd>
+    <a href="https://japan.zdnet.com/software/sp17_uiux/">&#x8AB2;&#x984C;&#x89E3;&#x6C7A;&#x306E;&#x305F;&#x3081;&#x306E;UI/UX</a>
+  </dd>
+    <dd>
+    <a href="https://japan.zdnet.com/cloud/sp_16isa/">&#x8AB0;&#x3082;&#x304C;&#x958B;&#x767A;&#x8005;&#x306B;&#x306A;&#x308B;&#x6642;&#x4EE3; &#xFF5E;&#x696D;&#x52D9;&#x30B7;&#x30B9;&#x30C6;&#x30E0;&#x958B;&#x767A;&#x306E;&#x73FE;&#x5834;&#x3092;&#x884C;&#x304F;&#xFF5E;</a>
+  </dd>
+    <dd>
+    <a href="https://japan.zdnet.com/software/sp_15windows10/">&#x300C;Windows 10&#x300D;&#x6CD5;&#x4EBA;&#x5C0E;&#x5165;&#x306E;&#x624B;&#x5F15;&#x304D;</a>
+  </dd>
+    <dd>
+    <a href="https://japan.zdnet.com/software/sp_17kaihatu/">&#x30BD;&#x30D5;&#x30C8;&#x30A6;&#x30A7;&#x30A2;&#x958B;&#x767A;&#x30D1;&#x30E9;&#x30C0;&#x30A4;&#x30E0;&#x306E;&#x9032;&#x5316;</a>
+  </dd>
+    <dd>
+    <a href="https://japan.zdnet.com/sp/enterprise-trend/">&#x30A8;&#x30F3;&#x30BF;&#x30FC;&#x30D7;&#x30E9;&#x30A4;&#x30BA;&#x30C8;&#x30EC;&#x30F3;&#x30C9;</a>
+  </dd>
+    <dd>
+    <a href="https://japan.zdnet.com/tag/10%E3%81%AE%E4%BA%8B%E6%83%85/">10&#x306E;&#x4E8B;&#x60C5;</a>
+  </dd>
+    <dd>
+    <a href="https://japan.zdnet.com/keyword/%E5%BA%A7%E8%AB%87%E4%BC%9A%EF%BC%A0ZDNet/">&#x5EA7;&#x8AC7;&#x4F1A;&#xFF20;ZDNet</a>
+  </dd>
+    <dd>
+    <a href="https://japan.zdnet.com/cloud/sp_16cloudtopgun/">Dr.&#x6D25;&#x7530;&#x306E;&#x30AF;&#x30E9;&#x30A6;&#x30C9;&#x30C8;&#x30C3;&#x30D7;&#x30AC;&#x30F3;&#x5BFE;&#x8AC7;</a>
+  </dd>
+    <dd>
+    <a href="https://japan.zdnet.com/keyword/Gartner%20Symposium/">Gartner Symposium</a>
+  </dd>
+    <dd>
+    <a href="https://japan.zdnet.com/keyword/IBM%20World%20of%20Watson/">IBM World of Watson</a>
+  </dd>
+    <dd>
+    <a href="https://japan.zdnet.com/keyword/de%3Acode/">de:code</a>
+  </dd>
+    <dd>
+    <a href="https://japan.zdnet.com/keyword/Sapphire%20Now/">Sapphire Now</a>
+  </dd>
+    <dd>
+    <a href="https://japan.zdnet.com/keyword/VMWorld/">VMworld</a>
+  </dd>
+    <dd>
+    <a href="https://japan.zdnet.com/keyword/Microsoft%20WPC/">Microsoft WPC</a>
+  </dd>
+    <dd>
+    <a href="https://japan.zdnet.com/keyword/Microsoft%20Connect%28%29%3B/">Microsoft Connect()</a>
+  </dd>
+    <dd>
+    <a href="https://japan.zdnet.com/keyword/HPE%20Discover/">HPE Discover</a>
+  </dd>
+    <dd>
+    <a href="https://japan.zdnet.com/keyword/Oracle%20OpenWorld/">Oracle OpenWorld</a>
+  </dd>
+    <dd>
+    <a href="https://japan.zdnet.com/keyword/Dell+EMC+World/">Dell Technologies World</a>
+  </dd>
+    <dd>
+    <a href="https://japan.zdnet.com/keyword/AWS%20re:Invent/">AWS re:Invent</a>
+  </dd>
+    <dd>
+    <a href="https://japan.zdnet.com/keyword/AWS%20Summit/">AWS Summit</a>
+  </dd>
+    <dd>
+    <a href="https://japan.zdnet.com/keyword/PTC%20LiveWorx/">PTC LiveWorx</a>
+  </dd>
+    <dd>
+    <a href="https://japan.zdnet.com/software/sp_15yoshida/">&#x5409;&#x7530;&#x884C;&#x7537;&#x300C;&#x3088;&#x308A;&#x8CE2;&#x304F;&#x6D3B;&#x7528;&#x3059;&#x308B;&#x305F;&#x3081;&#x306E;OSS&#x6700;&#x65B0;&#x52D5;&#x5411;&#x300D;</a>
+  </dd>
+    <dd>
+    <a href="https://japan.zdnet.com/cloud/sp_16koga/">&#x53E4;&#x8CC0;&#x653F;&#x7D14;&#x300C;Docker&#x304C;&#x3082;&#x305F;&#x3089;&#x3059;&#x30D3;&#x30B8;&#x30CD;&#x30B9;&#x5909;&#x9769;&#x300D;</a>
+  </dd>
+    <dd>
+    <a href="https://japan.zdnet.com/development/sp_14china/">&#x4E2D;&#x56FD;&#x30D3;&#x30B8;&#x30CD;&#x30B9;&#x56DB;&#x65B9;&#x5C71;&#x8A71;</a>
+  </dd>
+    <dd>
+    <a href="https://japan.zdnet.com/development/sp_13vietnam/">&#x30D9;&#x30C8;&#x30CA;&#x30E0;&#x3067;&#x30D3;&#x30B8;&#x30CD;&#x30B9;</a>
+  </dd>
+    <dd>
+    <a href="https://japan.zdnet.com/tag/%E6%97%A5%E6%9C%AC%E6%A0%AA%E5%B1%95%E6%9C%9B/">&#x65E5;&#x672C;&#x682A;&#x5C55;&#x671B;</a>
+  </dd>
+    <dd>
+    <a href="https://japan.zdnet.com/keyword/%E4%BC%81%E6%A5%AD%E6%B1%BA%E7%AE%97/">&#x4F01;&#x696D;&#x6C7A;&#x7B97;</a>
+  </dd>
+      
+
+</dl>
+</div>
+<div class="section"><span class="line"></span>
+<h2><a href="https://japan.cnet.com/" target="_blank">CNET Japan&#x30C8;&#x30C3;&#x30D7;&#x30B9;&#x30C8;&#x30FC;&#x30EA;&#x30FC;</a></h2>
+
+<ul class="list-disc ggt">
+<li><a href="https://japan.cnet.com/article/35135306/" data-tag="zd">&#x30A2;&#x30C3;&#x30D7;&#x30EB;15&#x306E;&#x5927;&#x5931;&#x614B;&#x3092;&#x632F;&#x308A;&#x8FD4;&#x308B;--&#x300C;AirPower&#x300D;&#x3001;&#x6298;&#x308C;&#x66F2;&#x304C;&#x308A;&#x7591;&#x60D1;&#x304B;&#x3089;&#x300C;Newton&#x300D;&#x307E;&#x3067;</a></li>
+<li><a href="https://japan.cnet.com/article/35136455/" data-tag="zd">&#x30C9;&#x30B3;&#x30E2;&#x3001;2019&#x5E74;&#x5EA6;&#x306F;&#x65B0;&#x6599;&#x91D1;&#x30D7;&#x30E9;&#x30F3;&#x3067;&#x5927;&#x5E45;&#x306A;&#x6E1B;&#x53CE;&#x6E1B;&#x76CA;&#x306B;&#x2212;&#x2212;&#x300C;Magic Leap&#x300D;&#x3078;&#x306E;&#x51FA;&#x8CC7;&#x3082;</a></li>
+<li><a href="https://japan.cnet.com/article/35136443/" data-tag="zd">&#x30CB;&#x30B3;&#x30CB;&#x30B3;&#x8D85;&#x4F1A;&#x8B70;2019&#x3001;&#x4F1A;&#x5834;&#x6765;&#x5834;&#x8005;&#x306F;&#x4ECA;&#x56DE;&#x3082;16&#x4E07;&#x4EBA;&#x8D85;&#x3048;--&#x30CD;&#x30C3;&#x30C8;&#x6765;&#x5834;&#x8005;&#x3082;&#x5897;&#x52A0;</a></li>
+<li><a href="https://japan.cnet.com/article/35136409/" data-tag="zd">&#x5C0F;&#x5150;&#x773C;&#x79D1;&#x533B;&#x306B;&#x805E;&#x304F;&#x3001;&#x5B50;&#x3069;&#x3082;&#x304C;&#x300C;VR&#x300D;&#x3092;&#x4F7F;&#x3063;&#x3066;&#x3082;&#x3044;&#x3044;&#x5E74;&#x9F62;--Oculus&#x793E;&#x306E;&#x898B;&#x89E3;&#x3082;</a></li>
+<li><a href="https://japan.cnet.com/article/35135431/" data-tag="zd">&#x30BB;&#x30EB;&#x30D5;&#x30A3;&#x30FC;&#x3084;&#x7D75;&#x8449;&#x66F8;&#x304C;&#x30A2;&#x30FC;&#x30C8;&#x306B;--&#x5199;&#x771F;&#x5171;&#x6709;&#x306E;&#x6B74;&#x53F2;&#x3092;&#x305F;&#x3069;&#x308B;&#x5C55;&#x793A;&#x4F1A;&#x300C;snap+share&#x300D;</a></li>
+</ul>
+</div>
+<iframe id="tr_recent_articles_ifr" class="parts_frame_ads_iframe" src="https://japan.zdnet.com/parts/frame/tr_recent_articles.htm" style="border: none !important;" width="100%" height="250" scrolling="no"></iframe><div class="OUTBRAIN" data-src="https://japan.zdnet.com/article/35136396/" data-widget-id="AR_1"></div>
+
+
+</div>
+
+
+
+<div id="contents-right" class="nocontent">
+  
+<div class="ad_bnr">
+  <div id="AAMB3" class="ad_container" style="min-width:300px;  min-height:250px;  margin-left:auto;margin-right:auto"></div><noscript>
+	<iframe src="https://imp.aiasahi.jp/hserver/SITE=ZDNET.ETC/AREA=RECT/AAMSZ=300X500/KEYWORD=mobile%20zone_mobile%2035136396/OENCJP=UTF8/" noresize scrolling="no" hspace="0" vspace="0" frameborder="0" marginheight="0" marginwidth="0" width="300" height="500" allowtransparency="true">
+	</iframe>
+</noscript></div>
+<iframe id="ad_tieup_control_sp_ifr" class="parts_frame_ads_iframe" src="https://japan.zdnet.com/parts/frame/ad_tieup_control_sp.htm" frameborder="0" scrolling="no" width="100%" height="110"></iframe>
+<div class="section">
+<h2>&#x30DB;&#x30EF;&#x30A4;&#x30C8;&#x30DA;&#x30FC;&#x30D1;&#x30FC;&#x30E9;&#x30F3;&#x30AD;&#x30F3;&#x30B0;</h2>
+<ol class="wp-ranking ggt">
+    <li><span class="top3">1</span><a href="https://japan.zdnet.com/paper/30001043/30002967/" data-tag="wp_rank">&#x591A;&#x6A5F;&#x80FD;&#x3001;&#x30B7;&#x30F3;&#x30D7;&#x30EB;&#x7BA1;&#x7406;&#x3001;&#x30B5;&#x30DD;&#x30FC;&#x30C8;&#x9762;--&#x7BA1;&#x7406;&#x8005;&#x306E;&#x300C;&#x6B32;&#x3057;&#x3044;&#x300D;&#x3092;&#x5168;&#x90E8;&#x5165;&#x308A;&#x306B;&#x3057;&#x305F;&#x30B9;&#x30C8;&#x30EC;&#x30FC;&#x30B8;&#x3068;&#x306F;</a></li>
+    <li><span class="top3">2</span><a href="https://japan.zdnet.com/paper/20013940/30003019/" data-tag="wp_rank">&#x3010;&#x6D88;&#x8CBB;&#x7A0E;&#x6539;&#x6B63;&#x5B9F;&#x614B;&#x8ABF;&#x67FB;&#x3011;&#x5168;&#x696D;&#x7A2E;&#x306B;&#x5F71;&#x97FF;&#x3059;&#x308B;&#x4F01;&#x696D;&#x306E;&#x6D88;&#x8CBB;&#x7A0E;&#x6539;&#x6B63;&#x5BFE;&#x5FDC;&#x304C;&#x3001;&#x308F;&#x305A;&#x304B;&#xFF12;&#x5272;&#x3057;&#x304B;&#x5BFE;&#x5FDC;&#x304C;&#x9032;&#x3093;&#x3067;&#x3044;&#x306A;&#x3044;&#x73FE;&#x72B6;</a></li>
+    <li><span class="top3">3</span><a href="https://japan.zdnet.com/paper/30001124/30003030/" data-tag="wp_rank">&#x6B62;&#x3081;&#x3089;&#x308C;&#x306A;&#x3044;&#x30B7;&#x30B9;&#x30C6;&#x30E0;&#x306E;&#x57FA;&#x672C;&#x7684;&#x306A;DB&#x9AD8;&#x53EF;&#x7528;&#x5316;&#x65B9;&#x5F0F;&#x306E;&#x8AB2;&#x984C;&#x3092;&#x89E3;&#x6C7A;&#xFF1F;&#xFF01;&#x30AB;&#x30AE;&#x306F;&#x5B89;&#x5FC3;&#x306E;&#x65E5;&#x672C;&#x8A9E;&#x6280;&#x8853;&#x76F8;&#x8AC7;&#x306B;</a></li>
+    <li><span class>4</span><a href="https://japan.zdnet.com/paper/30001112/30002979/" data-tag="wp_rank">&#x30AF;&#x30E9;&#x30A6;&#x30C9;&#x30B5;&#x30FC;&#x30D3;&#x30B9;&#x306E;&#x6C3E;&#x6FEB;&#x306B;&#x5099;&#x3048;&#x3088;! &#x30B7;&#x30E3;&#x30C9;&#x30FC;IT&#x3092;&#x53EF;&#x8996;&#x5316;&#x3057;&#x30EA;&#x30A2;&#x30EB;&#x30BF;&#x30A4;&#x30E0;&#x5236;&#x5FA1;&#x3067;&#x304D;&#x308B;&#x6B21;&#x4E16;&#x4EE3;CASB&#x304C;&#x4E0A;&#x9678;</a></li>
+    <li><span class>5</span><a href="https://japan.zdnet.com/paper/30000702/30003026/" data-tag="wp_rank">&#x3010;&#x6F2B;&#x753B;&#x3067;&#x89E3;&#x8AAC;&#x3011;&#x201C;HCI&#x306B;&#x30D0;&#x30C3;&#x30AF;&#x30A2;&#x30C3;&#x30D7;&#x306F;&#x4E0D;&#x8981;&#x201D;&#x306F;&#x5927;&#x9593;&#x9055;&#x3044;&#xFF01;&#x30B3;&#x30B9;&#x30C8;&#x3082;&#x624B;&#x9593;&#x3082;&#x304B;&#x3051;&#x305A;&#x89E3;&#x6C7A;&#x3092;</a></li>
+    <li><span class>6</span><a href="https://japan.zdnet.com/paper/30001080/30002951/" data-tag="wp_rank">&#x65E2;&#x5B58;&#x306E;&#x30BB;&#x30AD;&#x30E5;&#x30EA;&#x30C6;&#x30A3;&#x5BFE;&#x7B56;&#x306F;&#x201C;&#x7A74;&#x3060;&#x3089;&#x3051;&#x201D;&#x2500;&#x4F01;&#x696D;&#x306E;&#x547D;&#x904B;&#x306F;&#x6B21;&#x4E16;&#x4EE3;&#x578B;&#x306E;&#x9632;&#x5FA1;&#x30A2;&#x30D7;&#x30ED;&#x30FC;&#x30C1;&#x306B;&#x304B;&#x304B;&#x3063;&#x3066;&#x3044;&#x308B;</a></li>
+    <li><span class>7</span><a href="https://japan.zdnet.com/paper/30001107/30002927/" data-tag="wp_rank">&#x30B9;&#x30C8;&#x30EC;&#x30FC;&#x30B8;&#x306E;&#x904B;&#x7528;&#x4FDD;&#x5B88;&#x306E;&#x7169;&#x308F;&#x3057;&#x3055;&#x306B;&#x60A9;&#x3080;&#x7BA1;&#x7406;&#x8005;&#x304C;&#x7D9A;&#x51FA;&#xFF01;&#x89E3;&#x6C7A;&#x7B56;&#x3092;&#x6F2B;&#x753B;&#x30FB;&#x30A4;&#x30E9;&#x30B9;&#x30C8;&#x3092;&#x4F7F;&#x3063;&#x3066;&#x6559;&#x3048;&#x307E;&#x3059;</a></li>
+    <li><span class>8</span><a href="https://japan.zdnet.com/paper/30001017/30002953/" data-tag="wp_rank">&#x30BB;&#x30AD;&#x30E5;&#x30A2;&#x306A;web&#x30A2;&#x30AF;&#x30BB;&#x30B9;&#x306E;&#x5B9F;&#x73FE;&#x306B;&#x5411;&#x3051;&#x305F;&#x3001;&#x6700;&#x9069;&#x306A;&#x300C;&#x30A4;&#x30F3;&#x30BF;&#x30FC;&#x30CD;&#x30C3;&#x30C8;&#x5206;&#x96E2;&#x300D;&#x74B0;&#x5883;&#x306E;&#x691C;&#x8A0E;&#x65B9;&#x6CD5;</a></li>
+    <li><span class>9</span><a href="https://japan.zdnet.com/paper/30001114/30002976/" data-tag="wp_rank">Pure Storage&#x3060;&#x304B;&#x3089;&#x5B9F;&#x73FE;&#x3059;&#x308B;&#x6A5F;&#x80FD;&#xFF01;&#x9AD8;&#x6027;&#x80FD;&#x3068;&#x624B;&#x8EFD;&#x3055;&#x3092;&#x4E21;&#x7ACB;&#x3055;&#x305B;&#x308B;&#x201C;&#x79D8;&#x8A23;&#x201D;&#x6559;&#x3048;&#x307E;&#x3059;</a></li>
+    <li><span class>10</span><a href="https://japan.zdnet.com/paper/30000702/30003027/" data-tag="wp_rank">&#x3010;&#x4E8B;&#x4F8B;&#x3011;&#x30D0;&#x30C3;&#x30AF;&#x30A2;&#x30C3;&#x30D7;&#x306B;&#x3088;&#x308B;&#x30B7;&#x30B9;&#x30C6;&#x30E0;&#x505C;&#x6B62;&#x3092;&#x3069;&#x3046;&#x907F;&#x3051;&#x308B;&#x304B;&#x2500;&#x4EEE;&#x60F3;&#x74B0;&#x5883;&#xFF0B;HCI&#x74B0;&#x5883;&#x3067;&#x306E;&#x89E3;&#x6C7A;&#x7B56;&#x3092;&#x77E5;&#x308B;</a></li>
+  </ol>
+<p class="more ggt"><a href="https://japan.zdnet.com/paper/" target="_top">&#x30DB;&#x30EF;&#x30A4;&#x30C8;&#x30DA;&#x30FC;&#x30D1;&#x30FC;&#x30E9;&#x30A4;&#x30D6;&#x30E9;&#x30EA;&#x30FC;</a></p>
+</div>
+
+<iframe id="ad_sp_list_a_n_ifr" class="parts_frame_ads_iframe" src="https://japan.zdnet.com/parts/frame/ad_sp_list_a_n.htm" frameborder="0" scrolling="no" width="100%" height="2063"></iframe>
+<div class="ad_bnr">
+  <div id="AAMB4" class="ad_container" style="  margin-left:auto;margin-right:auto"></div><noscript>
+	<iframe src="https://imp.aiasahi.jp/hserver/SITE=ZDNET.ETC/AREA=MRECT/AAMSZ=300X250/KEYWORD=mobile%20zone_mobile%2035136396/OENCJP=UTF8/" noresize scrolling="no" hspace="0" vspace="0" frameborder="0" marginheight="0" marginwidth="0" width="300" height="250" allowtransparency="true">
+	</iframe>
+</noscript></div>
+
+<div class="section">
+<h2>&#x30AB;&#x30C6;&#x30B4;&#x30EA;&#x30FC;&#x30E9;&#x30F3;&#x30AD;&#x30F3;&#x30B0;</h2>
+  <ol class="wp-ranking">
+    <li>
+      <span class="top3">1</span>
+      <a href="https://japan.zdnet.com/article/35136396/" data-ga_category="zd_category_ranking">Raspberry Pi&#x7AF6;&#x5408;--Ubuntu&#x304C;&#x52D5;&#x304F;&#x300C;UP Core&#x300D;&#x3092;&#x898B;&#x308B;</a>
+    </li>
+    <li>
+      <span class="top3">2</span>
+      <a href="https://japan.zdnet.com/article/35133858/" data-ga_category="zd_category_ranking">&#x30B0;&#x30FC;&#x30B0;&#x30EB;&#x304C;&#x30A8;&#x30C3;&#x30B8;&#x3067;AI&#x3092;&#x5229;&#x7528;&#x3059;&#x308B;&#x305F;&#x3081;&#x306E;&#x30EF;&#x30F3;&#x30DC;&#x30FC;&#x30C9;&#x30B3;&#x30F3;&#x30D4;&#x30E5;&#x30FC;&#x30BF;&#x3092;&#x767A;&#x8868;</a>
+    </li>
+    <li>
+      <span class="top3">3</span>
+      <a href="https://japan.zdnet.com/article/35136053/" data-ga_category="zd_category_ranking">Raspberry Pi&#x7AF6;&#x5408;--ASUS&#x306E;1.8GHz&#x30AF;&#x30A2;&#x30C3;&#x30C9;&#x30B3;&#x30A2;&#x642D;&#x8F09;&#x300C;Tinker Board&#x300D;&#x3092;&#x898B;&#x308B;</a>
+    </li>
+    <li>
+      <span class>4</span>
+      <a href="https://japan.zdnet.com/article/35135702/" data-ga_category="zd_category_ranking">&#x300C;Raspberry Pi 3&#x300D;&#x7AF6;&#x5408;&#x306E;&#x300C;Orange Pi PC 2&#x300D;&#x306F;&#x4FA1;&#x683C;20&#x30C9;&#x30EB;</a>
+    </li>
+    <li>
+      <span class>5</span>
+      <a href="https://japan.zdnet.com/article/35136029/" data-ga_category="zd_category_ranking">&#x591A;&#x304F;&#x306E;&#x4EBA;&#x306F;1&#x65E5;5&#x3064;&#x3057;&#x304B;&#x30A2;&#x30D7;&#x30EA;&#x3092;&#x4F7F;&#x308F;&#x306A;&#x3044;--&#x30B9;&#x30DE;&#x30DB;&#x30E6;&#x30FC;&#x30B6;&#x30FC;&#x306E;&#x30A2;&#x30D7;&#x30EA;&#x5229;&#x7528;&#x50BE;&#x5411;&#x8ABF;&#x67FB;</a>
+    </li>
+  </ol>
+</div>
+
+<iframe id="recent_comp_info_top_ifr" class="parts_frame_ads_iframe" src="https://japan.zdnet.com/parts/frame/recent_comp_info_top.htm" frameborder="0" scrolling="no" width="100%" height="362"></iframe>
+<div class="ad_bnr">
+  <div id="AAMB5" class="ad_container" style="  margin-left:auto;margin-right:auto"></div><noscript>
+	<iframe src="https://imp.aiasahi.jp/hserver/SITE=ZDNET.ETC/AREA=VRECT/AAMSZ=300X500/KEYWORD=mobile%20zone_mobile%2035136396/OENCJP=UTF8/" noresize scrolling="no" hspace="0" vspace="0" frameborder="0" marginheight="0" marginwidth="0" width="300" height="500" allowtransparency="true">
+	</iframe>
+</noscript></div>
+
+<div class="site_info">
+  <p>ZDNet Japan&#x306F;&#x3001;CIO&#x3068;IT&#x30DE;&#x30CD;&#x30FC;&#x30B8;&#x30E3;&#x30FC;&#x3092;&#x5BFE;&#x8C61;&#x306B;&#x3001;&#x30D3;&#x30B8;&#x30CD;&#x30B9;&#x8AB2;&#x984C;&#x306E;&#x89E3;&#x6C7A;&#x3068;IT&#x3092;&#x6D3B;&#x7528;&#x3057;&#x305F;&#x65B0;&#x305F;&#x306A;&#x4FA1;&#x5024;&#x5275;&#x9020;&#x3092;&#x652F;&#x63F4;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+  <p>IT&#x30D3;&#x30B8;&#x30CD;&#x30B9;&#x5168;&#x822C;&#x306B;&#x3064;&#x3044;&#x3066;&#x306F;&#x3001;<strong><a href="https://japan.cnet.com/" target="_blank">CNET Japan</a></strong>&#x3092;&#x3054;&#x89A7;&#x304F;&#x3060;&#x3055;&#x3044;&#x3002;</p>
+</div>
+
+
+<div class="section newsletter">
+<h2>ZDNet Japan Headline</h2>
+<p>&#x30A8;&#x30F3;&#x30BF;&#x30FC;&#x30D7;&#x30E9;&#x30A4;&#x30BA;&#x30FB;&#x30B3;&#x30F3;&#x30D4;&#x30E5;&#x30FC;&#x30C6;&#x30A3;&#x30F3;&#x30B0;&#x306E;&#x6700;&#x524D;&#x7DDA;&#x3092;&#x914D;&#x4FE1;</p>
+<input name="email" type="text" id="right_newsletter_field_email" placeholder="&#x30E1;&#x30FC;&#x30EB;&#x30A2;&#x30C9;&#x30EC;&#x30B9;&#x3092;&#x5165;&#x529B;&#x3057;&#x3066;&#x304F;&#x3060;&#x3055;&#x3044;">
+<div class="btn">
+  <a href="https://japan.zdnet.com/article/35136396/#" onclick="cnet_id_signup(&apos;https://s.japan.zdnet.com/membership/new_register/?next=68747470733a2f2f6a6170616e2e7a646e65742e636f6d2f6e6577736c65747465722f&apos;, &apos;right_newsletter_field_email&apos;);return false" data-ga_category="cnet_id_register" data-ga_label="right_col_newsletter">&#x30E1;&#x30EB;&#x30DE;&#x30AC;&#x914D;&#x4FE1;&#x767B;&#x9332;</a></div>
+</div>
+
+
+
+</div>
+    </div>
+    
+    </div>
+    
+    </div>
+    
+        
+<div id="ad_footerlarge" class="clearfix">
+<div id="AAMB2" class="ad_container" style="  margin-left:auto;margin-right:auto"></div><noscript>
+	<iframe src="https://imp.aiasahi.jp/hserver/SITE=ZDNET.ETC/AREA=FLARGE/AAMSZ=728X90/KEYWORD=mobile%20zone_mobile%2035136396/OENCJP=UTF8/" noresize scrolling="no" hspace="0" vspace="0" frameborder="0" marginheight="0" marginwidth="0" width="728" height="90" allowtransparency="true">
+	</iframe>
+</noscript></div>
+
+<footer>
+<div id="footer">
+
+<div id="zd-menu">
+<dl>
+<dt><a href="https://japan.zdnet.com/analysis/">&#x88FD;&#x54C1;&#x89E3;&#x8AAC;</a></dt>
+<dt><a href="https://japan.zdnet.com/sp/">&#x7279;&#x96C6;</a></dt>
+<dt><a href="https://japan.zdnet.com/case-study/">&#x4E8B;&#x4F8B;</a></dt>
+<dt><a href="https://japan.zdnet.com/blog/">&#x30D6;&#x30ED;&#x30B0;</a></dt>
+<dt><a href="https://japan.zdnet.com/cio/sp_12executive/">&#x30C8;&#x30C3;&#x30D7;&#x30A4;&#x30F3;&#x30BF;&#x30D3;&#x30E5;&#x30FC;</a></dt>
+<dt><a href="https://japan.zdnet.com/paper/">&#x30DB;&#x30EF;&#x30A4;&#x30C8;&#x30DA;&#x30FC;&#x30D1;&#x30FC;</a></dt>
+<dt><a href="https://japan.zdnet.com/company/">&#x4F01;&#x696D;&#x60C5;&#x5831;&#x30BB;&#x30F3;&#x30BF;&#x30FC;</a></dt>
+<dd><a href="https://japan.zdnet.com/release/">&#x30D7;&#x30EC;&#x30B9;&#x30EA;&#x30EA;&#x30FC;&#x30B9;</a></dd>
+<dd><a href="https://japan.zdnet.com/event_info/">&#x30A4;&#x30D9;&#x30F3;&#x30C8;&#x60C5;&#x5831;</a></dd>
+<dd><a href="https://japan.zdnet.com/hikaku/">IT&#x88FD;&#x54C1;&#x6BD4;&#x8F03;</a></dd>
+<dt>&#x305D;&#x306E;&#x4ED6;</dt>
+<dd><a href="https://japan.zdnet.com/keyword/">&#x30AD;&#x30FC;&#x30EF;&#x30FC;&#x30C9;&#x89E3;&#x8AAC;</a></dd>
+</dl>
+
+
+<dl>
+<dt>&#x30AB;&#x30C6;&#x30B4;&#x30EA;&#x30FC;</dt>
+<dd><a href="https://japan.zdnet.com/cio/">CIO</a></dd>
+<dd><a href="https://japan.zdnet.com/cloud/">&#x30AF;&#x30E9;&#x30A6;&#x30C9;</a></dd>
+<dd><a href="https://japan.zdnet.com/mobile/">&#x30E2;&#x30D0;&#x30A4;&#x30EB;PC</a></dd>
+<dd><a href="https://japan.zdnet.com/security/">&#x30BB;&#x30AD;&#x30E5;&#x30EA;&#x30C6;&#x30A3;</a></dd>
+<dd><a href="https://japan.zdnet.com/software/">&#x30BD;&#x30D5;&#x30C8;&#x30A6;&#x30A7;&#x30A2;</a></dd>
+<dd><a href="https://japan.zdnet.com/server/">&#x30B5;&#x30FC;&#x30D0;</a></dd>
+<dd><a href="https://japan.zdnet.com/storages/">&#x30B9;&#x30C8;&#x30EC;&#x30FC;&#x30B8;</a></dd>
+<dd><a href="https://japan.zdnet.com/network/">&#x30CD;&#x30C3;&#x30C8;&#x30EF;&#x30FC;&#x30AF;</a></dd>
+<dd><a href="https://japan.zdnet.com/middleware/">&#x30DF;&#x30C9;&#x30EB;&#x30A6;&#x30A7;&#x30A2;</a></dd>
+<dd><a href="https://japan.zdnet.com/it-management/">&#x904B;&#x7528;</a></dd>
+<dd><a href="https://japan.zdnet.com/marketing/">&#x30DE;&#x30FC;&#x30B1;&#x30C6;&#x30A3;&#x30F3;&#x30B0;</a></dd>
+<dd><a href="https://japan.zdnet.com/bigdata/">&#x30D3;&#x30C3;&#x30B0;&#x30C7;&#x30FC;&#x30BF;</a></dd>
+<dd><a href="https://japan.zdnet.com/career/">&#x30AD;&#x30E3;&#x30EA;&#x30A2;</a></dd>
+<dd><a href="https://japan.zdnet.com/off-topic/">&#x30AA;&#x30D5;&#x30C8;&#x30D4;&#x30C3;&#x30AF;</a></dd>
+<dd><a href="https://japan.zdnet.com/case-study/">&#x4E8B;&#x4F8B;</a></dd>
+<dd><a href="https://japan.zdnet.com/survey/">&#x8ABF;&#x67FB;</a></dd>
+<dd><a href="https://japan.zdnet.com/windows-server/">Windows Server</a></dd>
+</dl>
+
+
+
+
+<dl>
+<dt><a href="https://aiasahi.jp/" target="_blank">ASAHI INTERACTIVE</a></dt>
+<dd><a href="https://japan.cnet.com/" target="_blank">CNET Japan</a></dd>
+<dd><a href="https://japan.zdnet.com/" target="_blank">ZDNet Japan</a></dd>
+<dd><a href="https://builder.japan.zdnet.com/" target="_blank">builder by ZDNet Japan</a></dd>
+<dd><a href="https://japan.techrepublic.com/" target="_blank">TechRepublic Japan</a></dd>
+<dd><a href="https://www.tetsudo.com/" target="_blank">Tetsudo.com</a></dd>
+</dl>
+
+
+
+
+<dl>
+<dt>USA Business Sites</dt>
+<dd><a href="http://bnet.com/" target="_blank">BNET.com</a></dd>
+<dd><a href="http://www.cnet.com/" target="_blank">CNET.com</a></dd>
+<dd><a href="http://www.cnetchannel.com/" target="_blank">CNET Channel</a></dd>
+<dd><a href="http://www.download.com/" target="_blank">Download.com</a></dd>
+<dd><a href="http://news.com/" target="_blank">News.com</a></dd>
+<dd><a href="http://techrepublic.com/" target="_blank">TechRepublic</a></dd>
+<dd><a href="http://www.zdnet.com/" target="_blank">ZDNet.com</a></dd>
+
+<dt>International Business Sites</dt>
+<dd><a href="http://www.zdnet.com/" target="_blank">Australia</a></dd>
+<dd><a href="http://www.zdnetasia.com/" target="_blank">Asia</a></dd>
+<dd><a href="http://www.zdnet.fr/" target="_blank">France</a></dd>
+<dd><a href="http://www.zdnet.de/" target="_blank">Germany</a></dd>
+<dd><a href="http://www.zdnet.co.uk/" target="_blank">UK</a></dd>
+<dd><a href="http://www.zdnet.com/" target="_blank">US</a></dd>
+
+</dl>
+
+</div>
+
+
+<div id="terms">
+<p>The Japanese edition of &apos;ZDNet&apos; is published under license from CBS Interactive, Inc., San Francisco, CA, USA. Editorial items appearing in &apos;ZDNet Japan&apos; that were originally published in the US Edition of &apos;ZDNet&apos;, &apos;TechRepublic&apos;, &apos;CNET&apos;, and &apos;CNET News.com&apos; are the copyright properties of CBS Interactive, Inc. or its suppliers. Copyright (c) CBS Interactive, Inc. All Rights Reserved. &apos;ZDNet&apos;, &apos;CNET&apos; and &apos;CNET News.com&apos; are trademarks of CBS Interactive, Inc.</p>
+<a href="https://aiasahi.jp/privacy/" target="_blank">&#x500B;&#x4EBA;&#x60C5;&#x5831;&#x4FDD;&#x8B77;&#x65B9;&#x91DD;</a>
+<a href="https://aiasahi.jp/term/" target="_blank">&#x5229;&#x7528;&#x898F;&#x7D04;</a>
+<a href="https://aiasahi.jp/advertisement/" target="_blank">&#x5E83;&#x544A;&#x306B;&#x3064;&#x3044;&#x3066;</a>
+<a href="https://aiasahi.jp/" target="_blank">&#x904B;&#x55B6;&#x4F1A;&#x793E;</a>
+<a href="https://japan.zdnet.com/info/sitemap/">&#x30B5;&#x30A4;&#x30C8;&#x30DE;&#x30C3;&#x30D7;</a>
+</div>
+
+<div id="copyright">
+&#x5F53;&#x30B5;&#x30A4;&#x30C8;&#x306F;&#x6700;&#x65B0;&#x30D6;&#x30E9;&#x30A6;&#x30B6;&#x3067;&#x306E;&#x95B2;&#x89A7;&#x3092;&#x63A8;&#x5968;&#x3057;&#x307E;&#x3059;&#x3002;<br>
+Copyright (c) 2019 ASAHI INTERACTIVE, Inc. All rights reserved. No reproduction or republication without written permission.
+</div>
+</div>
+</footer>  </div>
+  
+
+<div id="gdpr_area">
+  <div class="gdpr_area_inner">
+    <span class="break">&#x3053;&#x306E;&#x30B5;&#x30A4;&#x30C8;&#x3067;&#x306F;&#x3001;&#x5229;&#x7528;&#x72B6;&#x6CC1;&#x306E;&#x628A;&#x63E1;&#x3084;&#x5E83;&#x544A;&#x914D;&#x4FE1;&#x306A;&#x3069;&#x306E;&#x305F;&#x3081;&#x306B;&#x3001;Cookie&#x306A;&#x3069;&#x3092;&#x4F7F;&#x7528;&#x3057;&#x3066;&#x30A2;&#x30AF;&#x30BB;&#x30B9;&#x30C7;&#x30FC;&#x30BF;&#x3092;&#x53D6;&#x5F97;&#x30FB;&#x5229;&#x7528;&#x3057;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;</span>
+    &#x3053;&#x308C;&#x4EE5;&#x964D;&#x30DA;&#x30FC;&#x30B8;&#x3092;&#x9077;&#x79FB;&#x3057;&#x305F;&#x5834;&#x5408;&#x3001;Cookie&#x306A;&#x3069;&#x306E;&#x8A2D;&#x5B9A;&#x3084;&#x4F7F;&#x7528;&#x306B;&#x540C;&#x610F;&#x3057;&#x305F;&#x3053;&#x3068;&#x306B;&#x306A;&#x308A;&#x307E;&#x3059;&#x3002;<br>
+    Cookie&#x306A;&#x3069;&#x306E;&#x8A2D;&#x5B9A;&#x3084;&#x4F7F;&#x7528;&#x306E;&#x8A73;&#x7D30;&#x3001;&#x30AA;&#x30D7;&#x30C8;&#x30A2;&#x30A6;&#x30C8;&#x306B;&#x3064;&#x3044;&#x3066;&#x306F;<a href="https://aiasahi.jp/cookie/">&#x8A73;&#x7D30;</a>&#x3092;&#x3054;&#x89A7;&#x304F;&#x3060;&#x3055;&#x3044;&#x3002;<br>
+    <span class="gdpr_btn_agree">[ &#x9589;&#x3058;&#x308B; ]</span>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<noscript><iframe src="https://nspt.unitag.jp/bb5e8db7c2720d69_3807.php" width="0" height="0" frameborder="0"></iframe></noscript>
+
+
+<div id="modal_dialog" style="display: none;"></div>
+
+
+
+
+<div class="ad" id="ad-inread_rich">
+  <div id="AAMB21" class="ad_container" style="  margin-left:auto;margin-right:auto"></div><noscript>
+	<iframe src="https://imp.aiasahi.jp/hserver/SITE=ZDNET.ETC/AREA=INREAD.RICH/AAMSZ=1X1/KEYWORD=mobile%20zone_mobile%2035136396/OENCJP=UTF8/" noresize scrolling="no" hspace="0" vspace="0" frameborder="0" marginheight="0" marginwidth="0" width="1" height="1" allowtransparency="true">
+	</iframe>
+</noscript></div>
+
+
+</body>
+</html>
