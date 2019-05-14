@@ -129,4 +129,26 @@ describe('NewYorkerExtractor', () => {
       assert.equal(date_published.split('T')[0], '2016-11-28');
     });
   });
+
+  describe('article with multiple authors', () => {
+    let result;
+    let url;
+    beforeAll(() => {
+      url =
+        'https://www.newyorker.com/humor/daily-shouts/teas-you-should-probably-get-rid-of-already';
+      const html = fs.readFileSync(
+        './fixtures/www.newyorker.com/1557834611707.html'
+      );
+      result = Mercury.parse(url, { html, fallback: false });
+    });
+
+    it('returns multiple authors', async () => {
+      const { author } = await result;
+
+      assert.equal(
+        author,
+        'Ysabel YatesIllustration by Claire LordonMay 10, 2019'
+      );
+    });
+  });
 });

@@ -11,7 +11,10 @@ export const NewYorkerExtractor = {
   },
 
   author: {
-    selectors: ['div[class^="ArticleContributors"] a[rel="author"]'],
+    selectors: [
+      'div[class^="ArticleContributors"] a[rel="author"]',
+      'article header div[class*="Byline__multipleContributors"]',
+    ],
   },
 
   content: {
