@@ -126,3 +126,4 @@ export * from './techlog.iij.ad.jp';
 export * from './wired.jp';
 export * from './japan.zdnet.com';
 export * from './www.rbbtoday.com';
+export * from './www.lemonde.fr';
