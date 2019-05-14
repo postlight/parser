@@ -4,7 +4,10 @@
 export const NewYorkerExtractor = {
   domain: 'www.newyorker.com',
   title: {
-    selectors: ['h1[class^="ArticleHeader__hed"]'],
+    selectors: [
+      'h1[class^="ArticleHeader__hed"]',
+      ['meta[name="og:title"]', 'value'],
+    ],
   },
 
   author: {
