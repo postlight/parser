@@ -101,7 +101,7 @@
     "requirejs": "^2.3.6",
     "rollup": "^1.1.0",
     "rollup-plugin-babel": "^4.0.1",
-    "rollup-plugin-commonjs": "^9.2.0",
+    "rollup-plugin-commonjs": "^10.0.0",
     "rollup-plugin-node-globals": "^1.4.0",
     "rollup-plugin-node-resolve": "^2.0.0",
     "rollup-plugin-uglify": "^6.0.1",
