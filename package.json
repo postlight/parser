@@ -115,7 +115,7 @@
     "difflib": "github:postlight/difflib.js",
     "ellipsize": "0.1.0",
     "iconv-lite": "0.4.24",
-    "jquery": "^3.3.1",
+    "jquery": "^3.4.1",
     "moment": "^2.23.0",
     "moment-parseformat": "3.0.0",
     "moment-timezone": "0.5.23",
