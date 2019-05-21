@@ -11,3 +11,4 @@ dist/mercury_test.js.map
 dist/mercury_test.web.js
 tmp/artifacts
 test-output.json
+.idea

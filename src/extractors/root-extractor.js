@@ -47,20 +47,21 @@ function findMatchingSelector($, selectors, extractHtml, allowMultiple) {
       }
 
       const [s, attr] = selector;
-      return (
-        (allowMultiple || (!allowMultiple && $(s).length === 1)) &&
-        $(s).attr(attr) &&
-        $(s)
-          .attr(attr)
-          .trim() !== ''
-      );
+      if (attr)
+        return (
+          (allowMultiple || (!allowMultiple && $(s).length === 1)) &&
+          $(s).attr(attr) &&
+          $(s)
+            .attr(attr)
+            .trim() !== ''
+        );
+      selector = s;
     }
 
+    const $selector = $(selector);
     return (
-      (allowMultiple || (!allowMultiple && $(selector).length === 1)) &&
-      $(selector)
-        .text()
-        .trim() !== ''
+      (allowMultiple || (!allowMultiple && $selector.length === 1)) &&
+      $selector.text().trim() !== ''
     );
   });
 }
@@ -137,16 +138,22 @@ export function select(opts) {
 
   let $match;
   let result;
-  // if selector is an array (e.g., ['img', 'src']),
-  // extract the attr
+  // if selector is an array (e.g., ['img', 'src', ($match)=>{} ]),
+  // extract the attr or text (if !attr) and pass to an optional function for
+  // modifications.
+
   if (Array.isArray(matchingSelector)) {
     const [selector, attr, transform] = matchingSelector;
     $match = $(selector);
     $match = transformAndClean($match);
     result = $match.map((_, el) => {
-      const item = $(el)
-        .attr(attr)
-        .trim();
+      const item = attr
+        ? $(el)
+            .attr(attr)
+            .trim()
+        : $(el)
+            .text()
+            .trim();
       return transform ? transform(item) : item;
     });
   } else {

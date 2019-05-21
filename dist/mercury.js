@@ -7095,14 +7095,17 @@ function findMatchingSelector($, selectors, extractHtml, allowMultiple) {
         }, true);
       }
 
-      var _selector = _slicedToArray(selector, 2),
-          s = _selector[0],
-          attr = _selector[1];
+      var _selector = selector,
+          _selector2 = _slicedToArray(_selector, 2),
+          s = _selector2[0],
+          attr = _selector2[1];
 
-      return (allowMultiple || !allowMultiple && $(s).length === 1) && $(s).attr(attr) && $(s).attr(attr).trim() !== '';
+      if (attr) return (allowMultiple || !allowMultiple && $(s).length === 1) && $(s).attr(attr) && $(s).attr(attr).trim() !== '';
+      selector = s;
     }
 
-    return (allowMultiple || !allowMultiple && $(selector).length === 1) && $(selector).text().trim() !== '';
+    var $selector = $(selector);
+    return (allowMultiple || !allowMultiple && $selector.length === 1) && $selector.text().trim() !== '';
   });
 }
 
@@ -7175,8 +7178,9 @@ function select(opts) {
   }
 
   var $match;
-  var result; // if selector is an array (e.g., ['img', 'src']),
-  // extract the attr
+  var result; // if selector is an array (e.g., ['img', 'src', ($match)=>{} ]),
+  // extract the attr or text (if !attr) and pass to an optional function for
+  // modifications.
 
   if (_Array$isArray(matchingSelector)) {
     var _matchingSelector = _slicedToArray(matchingSelector, 3),
@@ -7187,7 +7191,7 @@ function select(opts) {
     $match = $(selector);
     $match = transformAndClean($match);
     result = $match.map(function (_, el) {
-      var item = $(el).attr(attr).trim();
+      var item = attr ? $(el).attr(attr).trim() : $(el).text().trim();
       return transform ? transform(item) : item;
     });
   } else {
