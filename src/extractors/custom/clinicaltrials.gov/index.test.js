@@ -13,9 +13,10 @@ describe('ClinicaltrialsGovExtractor', () => {
   describe('initial test case', () => {
     let result;
     let url;
+
     beforeAll(() => {
       url =
-        'https://clinicaltrials.gov/ct2/show/NCT03746262?amp%3Bsfpd_d=100&term=Guardant+Health';
+        'https://clinicaltrials.gov/ct2/show/NCT03746262?term=Guardant+Health';
       const html = fs.readFileSync(
         './fixtures/clinicaltrials.gov/1551708504719.html'
       );
