@@ -1,5 +1,5 @@
 import Cleaners from 'cleaners';
-import { convertNodeTo } from 'utils/dom';
+import { convertNodeTo, makeLinksAbsolute } from 'utils/dom';
 import GenericExtractor from './generic';
 
 // Remove elements by an array of selectors
@@ -39,7 +39,7 @@ export function transformElements($content, $, { transforms }) {
   return $content;
 }
 
-function findMatchingSelector($, selectors, extractHtml) {
+function findMatchingSelector($, selectors, extractHtml, allowMultiple) {
   return selectors.find(selector => {
     if (Array.isArray(selector)) {
       if (extractHtml) {
@@ -48,7 +48,7 @@ function findMatchingSelector($, selectors, extractHtml) {
 
       const [s, attr] = selector;
       return (
-        $(s).length === 1 &&
+        (allowMultiple || (!allowMultiple && $(s).length === 1)) &&
         $(s).attr(attr) &&
         $(s)
           .attr(attr)
@@ -57,7 +57,7 @@ function findMatchingSelector($, selectors, extractHtml) {
     }
 
     return (
-      $(selector).length === 1 &&
+      (allowMultiple || (!allowMultiple && $(selector).length === 1)) &&
       $(selector)
         .text()
         .trim() !== ''
@@ -74,20 +74,29 @@ export function select(opts) {
   // contributors), return the string
   if (typeof extractionOpts === 'string') return extractionOpts;
 
-  const { selectors, defaultCleaner = true } = extractionOpts;
+  const { selectors, defaultCleaner = true, allowMultiple } = extractionOpts;
 
-  const matchingSelector = findMatchingSelector($, selectors, extractHtml);
+  const matchingSelector = findMatchingSelector(
+    $,
+    selectors,
+    extractHtml,
+    allowMultiple
+  );
 
   if (!matchingSelector) return null;
 
-  // Declaring result; will contain either
-  // text or html, which will be cleaned
-  // by the appropriate cleaner type
+  function transformAndClean($node) {
+    makeLinksAbsolute($node, $, opts.url || '');
+    cleanBySelectors($node, $, extractionOpts);
+    transformElements($node, $, extractionOpts);
+    return $node;
+  }
 
-  // If the selector type requests html as its return type
-  // transform and clean the element with provided selectors
-  let $content;
-  if (extractHtml) {
+  function selectHtml() {
+    // If the selector type requests html as its return type
+    // transform and clean the element with provided selectors
+    let $content;
+
     // If matching selector is an array, we're considering this a
     // multi-match selection, which allows the parser to choose several
     // selectors to include in the result. Note that all selectors in the
@@ -95,7 +104,7 @@ export function select(opts) {
     if (Array.isArray(matchingSelector)) {
       $content = $(matchingSelector.join(','));
       const $wrapper = $('<div></div>');
-      $content.each((index, element) => {
+      $content.each((_, element) => {
         $wrapper.append(element);
       });
 
@@ -107,40 +116,70 @@ export function select(opts) {
     // Wrap in div so transformation can take place on root element
     $content.wrap($('<div></div>'));
     $content = $content.parent();
+    $content = transformAndClean($content);
+    if (Cleaners[type]) {
+      Cleaners[type]($content, { ...opts, defaultCleaner });
+    }
 
-    $content = transformElements($content, $, extractionOpts);
-    $content = cleanBySelectors($content, $, extractionOpts);
-
-    $content = Cleaners[type]($content, { ...opts, defaultCleaner });
+    if (allowMultiple) {
+      return $content
+        .children()
+        .toArray()
+        .map(el => $.html($(el)));
+    }
 
     return $.html($content);
   }
 
-  let result;
+  if (extractHtml) {
+    return selectHtml(matchingSelector);
+  }
 
+  let $match;
+  let result;
   // if selector is an array (e.g., ['img', 'src']),
   // extract the attr
   if (Array.isArray(matchingSelector)) {
-    const [selector, attr] = matchingSelector;
-    result = $(selector)
-      .attr(attr)
-      .trim();
+    const [selector, attr, transform] = matchingSelector;
+    $match = $(selector);
+    $match = transformAndClean($match);
+    result = $match.map((_, el) => {
+      const item = $(el)
+        .attr(attr)
+        .trim();
+      return transform ? transform(item) : item;
+    });
   } else {
-    let $node = $(matchingSelector);
-
-    $node = cleanBySelectors($node, $, extractionOpts);
-    $node = transformElements($node, $, extractionOpts);
-
-    result = $node.text().trim();
+    $match = $(matchingSelector);
+    $match = transformAndClean($match);
+    result = $match.map((_, el) =>
+      $(el)
+        .text()
+        .trim()
+    );
   }
 
+  result =
+    Array.isArray(result.toArray()) && allowMultiple
+      ? result.toArray()
+      : result[0];
   // Allow custom extractor to skip default cleaner
   // for this type; defaults to true
-  if (defaultCleaner) {
+  if (defaultCleaner && Cleaners[type]) {
     return Cleaners[type](result, { ...opts, ...extractionOpts });
   }
 
   return result;
+}
+
+export function selectExtendedTypes(extend, opts) {
+  const results = {};
+  Reflect.ownKeys(extend).forEach(t => {
+    if (!results[t]) {
+      results[t] = select({ ...opts, type: t, extractionOpts: extend[t] });
+    }
+  });
+  return results;
 }
 
 function extractResult(opts) {
@@ -206,6 +245,11 @@ const RootExtractor = {
       type: 'url_and_domain',
     }) || { url: null, domain: null };
 
+    let extendedResults = {};
+    if (extractor.extend) {
+      extendedResults = selectExtendedTypes(extractor.extend, opts);
+    }
+
     return {
       title,
       content,
@@ -219,6 +263,7 @@ const RootExtractor = {
       excerpt,
       word_count,
       direction,
+      ...extendedResults,
     };
   },
 };

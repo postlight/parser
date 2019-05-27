@@ -2,12 +2,13 @@ import URL from 'url';
 
 import { getAttrs, setAttr } from 'utils/dom';
 
-function absolutize($, rootUrl, attr, $content) {
+function absolutize($, rootUrl, attr) {
   const baseUrl = $('base').attr('href');
 
-  $(`[${attr}]`, $content).each((_, node) => {
+  $(`[${attr}]`).each((_, node) => {
     const attrs = getAttrs(node);
     const url = attrs[attr];
+    if (!url) return;
     const absoluteUrl = URL.resolve(baseUrl || rootUrl, url);
 
     setAttr(node, attr, absoluteUrl);
@@ -26,6 +27,7 @@ function absolutizeSet($, rootUrl, $content) {
       const candidates = urlSet.match(
         /(?:\s*)(\S+(?:\s*[\d.]+[wx])?)(?:\s*,\s*)?/g
       );
+      if (!candidates) return;
       const absoluteCandidates = candidates.map(candidate => {
         // a candidate URL cannot start or end with a comma
         // descriptors are separated from the URLs by unescaped whitespace
@@ -43,7 +45,7 @@ function absolutizeSet($, rootUrl, $content) {
 }
 
 export default function makeLinksAbsolute($content, $, url) {
-  ['href', 'src'].forEach(attr => absolutize($, url, attr, $content));
+  ['href', 'src'].forEach(attr => absolutize($, url, attr));
   absolutizeSet($, url, $content);
 
   return $content;

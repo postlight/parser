@@ -13,7 +13,7 @@ var iconv = _interopDefault(require('iconv-lite'));
 var _parseInt = _interopDefault(require('@babel/runtime-corejs2/core-js/parse-int'));
 var _slicedToArray = _interopDefault(require('@babel/runtime-corejs2/helpers/slicedToArray'));
 var _Promise = _interopDefault(require('@babel/runtime-corejs2/core-js/promise'));
-var request = _interopDefault(require('request'));
+var request = _interopDefault(require('postman-request'));
 var _Reflect$ownKeys = _interopDefault(require('@babel/runtime-corejs2/core-js/reflect/own-keys'));
 var _toConsumableArray = _interopDefault(require('@babel/runtime-corejs2/helpers/toConsumableArray'));
 var _defineProperty = _interopDefault(require('@babel/runtime-corejs2/helpers/defineProperty'));
@@ -32,7 +32,7 @@ var _Array$from = _interopDefault(require('@babel/runtime-corejs2/core-js/array/
 var ellipsize = _interopDefault(require('ellipsize'));
 var _Array$isArray = _interopDefault(require('@babel/runtime-corejs2/core-js/array/is-array'));
 
-var NORMALIZE_RE = /\s{2,}/g;
+var NORMALIZE_RE = /\s{2,}(?![^<>]*<\/(pre|code|textarea)>)/g;
 function normalizeSpaces(text) {
   return text.replace(NORMALIZE_RE, ' ').trim();
 }
@@ -194,56 +194,6 @@ function getEncoding(str) {
   return encoding;
 }
 
-var _marked =
-/*#__PURE__*/
-_regeneratorRuntime.mark(range);
-
-function range() {
-  var start,
-      end,
-      _args = arguments;
-  return _regeneratorRuntime.wrap(function range$(_context) {
-    while (1) {
-      switch (_context.prev = _context.next) {
-        case 0:
-          start = _args.length > 0 && _args[0] !== undefined ? _args[0] : 1;
-          end = _args.length > 1 && _args[1] !== undefined ? _args[1] : 1;
-
-        case 2:
-          if (!(start <= end)) {
-            _context.next = 7;
-            break;
-          }
-
-          _context.next = 5;
-          return start += 1;
-
-        case 5:
-          _context.next = 2;
-          break;
-
-        case 7:
-        case "end":
-          return _context.stop();
-      }
-    }
-  }, _marked, this);
-}
-
-// extremely simple url validation as a first step
-function validateUrl(_ref) {
-  var hostname = _ref.hostname;
-  // If this isn't a valid url, return an error message
-  return !!hostname;
-}
-
-var Errors = {
-  badUrl: {
-    error: true,
-    messages: 'The url parameter passed does not look like a valid URL. Please check your data and try again.'
-  }
-};
-
 var REQUEST_HEADERS = cheerio.browser ? {} : {
   'User-Agent': 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36'
 }; // The number of milliseconds to attempt to fetch a resource before timing out.
@@ -270,13 +220,13 @@ function get(options) {
     });
   });
 } // Evaluate a response to ensure it's something we should be keeping.
-// This does not validate in the sense of a response being 200 level or
-// not. Validation here means that we haven't found reason to bail from
+// This does not validate in the sense of a response being 200 or not.
+// Validation here means that we haven't found reason to bail from
 // further processing of this url.
 
 
 function validateResponse(response) {
-  var parseNon2xx = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+  var parseNon200 = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
 
   // Check if we got a valid status code
   // This isn't great, but I'm requiring a statusMessage to be set
@@ -287,8 +237,8 @@ function validateResponse(response) {
   if (response.statusMessage && response.statusMessage !== 'OK' || response.statusCode !== 200) {
     if (!response.statusCode) {
       throw new Error("Unable to fetch content. Original exception was ".concat(response.error));
-    } else if (!parseNon2xx) {
-      throw new Error("Resource returned a response status code of ".concat(response.statusCode, " and resource was instructed to reject non-2xx level status codes."));
+    } else if (!parseNon200) {
+      throw new Error("Resource returned a response status code of ".concat(response.statusCode, " and resource was instructed to reject non-200 status codes."));
     }
   }
 
@@ -320,16 +270,22 @@ function _fetchResource() {
   _fetchResource = _asyncToGenerator(
   /*#__PURE__*/
   _regeneratorRuntime.mark(function _callee(url, parsedUrl) {
-    var options, _ref2, response, body;
+    var headers,
+        options,
+        _ref2,
+        response,
+        body,
+        _args = arguments;
 
     return _regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
+            headers = _args.length > 2 && _args[2] !== undefined ? _args[2] : {};
             parsedUrl = parsedUrl || URL.parse(encodeURI(url));
             options = _objectSpread({
               url: parsedUrl.href,
-              headers: _objectSpread({}, REQUEST_HEADERS),
+              headers: _objectSpread({}, REQUEST_HEADERS, headers),
               timeout: FETCH_TIMEOUT,
               // Accept cookies
               jar: true,
@@ -344,31 +300,34 @@ function _fetchResource() {
               // Follow GET redirects; this option is for Node only
               followRedirect: true
             });
-            _context.next = 4;
+            _context.next = 5;
             return get(options);
 
-          case 4:
+          case 5:
             _ref2 = _context.sent;
             response = _ref2.response;
             body = _ref2.body;
-            _context.prev = 7;
+            _context.prev = 8;
             validateResponse(response);
             return _context.abrupt("return", {
               body: body,
               response: response
             });
 
-          case 12:
-            _context.prev = 12;
-            _context.t0 = _context["catch"](7);
-            return _context.abrupt("return", Errors.badUrl);
+          case 13:
+            _context.prev = 13;
+            _context.t0 = _context["catch"](8);
+            return _context.abrupt("return", {
+              error: true,
+              message: _context.t0.message
+            });
 
-          case 15:
+          case 16:
           case "end":
             return _context.stop();
         }
       }
-    }, _callee, this, [[7, 12]]);
+    }, _callee, this, [[8, 13]]);
   }));
   return _fetchResource.apply(this, arguments);
 }
@@ -400,10 +359,10 @@ var SPACER_RE = new RegExp('transparent|spacer|blank', 'i'); // The class we wil
 // but would normally remove
 
 var KEEP_CLASS = 'mercury-parser-keep';
-var KEEP_SELECTORS = ['iframe[src^="https://www.youtube.com"]', 'iframe[src^="https://www.youtube-nocookie.com"]', 'iframe[src^="http://www.youtube.com"]', 'iframe[src^="https://player.vimeo"]', 'iframe[src^="http://player.vimeo"]']; // A list of tags to strip from the output if we encounter them.
+var KEEP_SELECTORS = ['iframe[src^="https://www.youtube.com"]', 'iframe[src^="https://www.youtube-nocookie.com"]', 'iframe[src^="http://www.youtube.com"]', 'iframe[src^="https://player.vimeo"]', 'iframe[src^="http://player.vimeo"]', 'iframe[src^="https://www.redditmedia.com"]']; // A list of tags to strip from the output if we encounter them.
 
 var STRIP_OUTPUT_TAGS = ['title', 'script', 'noscript', 'link', 'style', 'hr', 'embed', 'iframe', 'object']; // cleanAttributes
-var WHITELIST_ATTRS = ['src', 'srcset', 'href', 'class', 'id', 'alt', 'xlink:href', 'width', 'height'];
+var WHITELIST_ATTRS = ['src', 'srcset', 'sizes', 'type', 'href', 'class', 'id', 'alt', 'xlink:href', 'width', 'height'];
 var WHITELIST_ATTRS_RE = new RegExp("^(".concat(WHITELIST_ATTRS.join('|'), ")$"), 'i'); // removeEmpty
 
 var CLEAN_CONDITIONALLY_TAGS = ['ul', 'ol', 'table', 'div', 'button', 'form'].join(','); // cleanHeaders
@@ -1284,11 +1243,12 @@ function rewriteTopLevel$$1(article, $) {
   return $;
 }
 
-function absolutize($, rootUrl, attr, $content) {
+function absolutize($, rootUrl, attr) {
   var baseUrl = $('base').attr('href');
-  $("[".concat(attr, "]"), $content).each(function (_, node) {
+  $("[".concat(attr, "]")).each(function (_, node) {
     var attrs = getAttrs(node);
     var url = attrs[attr];
+    if (!url) return;
     var absoluteUrl = URL.resolve(baseUrl || rootUrl, url);
     setAttr(node, attr, absoluteUrl);
   });
@@ -1304,6 +1264,7 @@ function absolutizeSet($, rootUrl, $content) {
       // descriptors can only contain positive numbers followed immediately by either 'w' or 'x'
       // space characters inside the URL should be encoded (%20 or +)
       var candidates = urlSet.match(/(?:\s*)(\S+(?:\s*[\d.]+[wx])?)(?:\s*,\s*)?/g);
+      if (!candidates) return;
       var absoluteCandidates = candidates.map(function (candidate) {
         // a candidate URL cannot start or end with a comma
         // descriptors are separated from the URLs by unescaped whitespace
@@ -1321,7 +1282,7 @@ function absolutizeSet($, rootUrl, $content) {
 
 function makeLinksAbsolute$$1($content, $, url) {
   ['href', 'src'].forEach(function (attr) {
-    return absolutize($, url, attr, $content);
+    return absolutize($, url, attr);
   });
   absolutizeSet($, url, $content);
   return $content;
@@ -1567,7 +1528,9 @@ function setAttrs(node, attrs) {
 // DOM manipulation
 
 var IS_LINK = new RegExp('https?://', 'i');
-var IS_IMAGE = new RegExp('.(png|gif|jpe?g)', 'i');
+var IMAGE_RE = '.(png|gif|jpe?g)';
+var IS_IMAGE = new RegExp("".concat(IMAGE_RE), 'i');
+var IS_SRCSET = new RegExp("".concat(IMAGE_RE, "(\\s*[\\d.]+[wx])"), 'i');
 var TAGS_TO_REMOVE = ['script', 'style', 'form'].join(',');
 
 // lazy loaded images into normal images.
@@ -1582,7 +1545,9 @@ function convertLazyLoadedImages($) {
     _Reflect$ownKeys(attrs).forEach(function (attr) {
       var value = attrs[attr];
 
-      if (attr !== 'src' && IS_LINK.test(value) && IS_IMAGE.test(value)) {
+      if (attr !== 'srcset' && IS_LINK.test(value) && IS_SRCSET.test(value)) {
+        $(img).attr('srcset', value);
+      } else if (attr !== 'src' && attr !== 'srcset' && IS_LINK.test(value) && IS_IMAGE.test(value)) {
         $(img).attr('src', value);
       }
     });
@@ -1612,17 +1577,23 @@ var Resource = {
   // :param response: If set, use as the response rather than
   //                  attempting to fetch it ourselves. Expects a
   //                  string.
+  // :param headers: Custom headers to be included in the request
   create: function () {
     var _create = _asyncToGenerator(
     /*#__PURE__*/
     _regeneratorRuntime.mark(function _callee(url, preparedResponse, parsedUrl) {
-      var result, validResponse;
+      var headers,
+          result,
+          validResponse,
+          _args = arguments;
       return _regeneratorRuntime.wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
+              headers = _args.length > 3 && _args[3] !== undefined ? _args[3] : {};
+
               if (!preparedResponse) {
-                _context.next = 5;
+                _context.next = 6;
                 break;
               }
 
@@ -1638,29 +1609,29 @@ var Resource = {
                 body: preparedResponse,
                 response: validResponse
               };
-              _context.next = 8;
+              _context.next = 9;
               break;
 
-            case 5:
-              _context.next = 7;
-              return fetchResource(url, parsedUrl);
-
-            case 7:
-              result = _context.sent;
+            case 6:
+              _context.next = 8;
+              return fetchResource(url, parsedUrl, headers);
 
             case 8:
+              result = _context.sent;
+
+            case 9:
               if (!result.error) {
-                _context.next = 11;
+                _context.next = 12;
                 break;
               }
 
               result.failed = true;
               return _context.abrupt("return", result);
 
-            case 11:
+            case 12:
               return _context.abrupt("return", this.generateDoc(result));
 
-            case 12:
+            case 13:
             case "end":
               return _context.stop();
           }
@@ -1677,7 +1648,8 @@ var Resource = {
   generateDoc: function generateDoc(_ref) {
     var content = _ref.body,
         response = _ref.response;
-    var contentType = response.headers['content-type']; // TODO: Implement is_text function from
+    var _response$headers$con = response.headers['content-type'],
+        contentType = _response$headers$con === void 0 ? '' : _response$headers$con; // TODO: Implement is_text function from
     // https://github.com/ReadabilityHoldings/readability/blob/8dc89613241d04741ebd42fa9fa7df1b1d746303/readability/utils/text.py#L57
 
     if (!contentType.includes('html') && !contentType.includes('text')) {
@@ -1717,6 +1689,49 @@ var Resource = {
     return $;
   }
 };
+
+var _marked =
+/*#__PURE__*/
+_regeneratorRuntime.mark(range);
+
+function range() {
+  var start,
+      end,
+      _args = arguments;
+  return _regeneratorRuntime.wrap(function range$(_context) {
+    while (1) {
+      switch (_context.prev = _context.next) {
+        case 0:
+          start = _args.length > 0 && _args[0] !== undefined ? _args[0] : 1;
+          end = _args.length > 1 && _args[1] !== undefined ? _args[1] : 1;
+
+        case 2:
+          if (!(start <= end)) {
+            _context.next = 7;
+            break;
+          }
+
+          _context.next = 5;
+          return start += 1;
+
+        case 5:
+          _context.next = 2;
+          break;
+
+        case 7:
+        case "end":
+          return _context.stop();
+      }
+    }
+  }, _marked, this);
+}
+
+// extremely simple url validation as a first step
+function validateUrl(_ref) {
+  var hostname = _ref.hostname;
+  // If this isn't a valid url, return an error message
+  return !!hostname;
+}
 
 var merge = function merge(extractor, domains) {
   return domains.reduce(function (acc, domain) {
@@ -1920,30 +1935,31 @@ var TheAtlanticExtractor = {
 var NewYorkerExtractor = {
   domain: 'www.newyorker.com',
   title: {
-    selectors: ['h1.title']
+    selectors: ['h1[class^="ArticleHeader__hed"]', ['meta[name="og:title"]', 'value']]
   },
   author: {
-    selectors: ['.contributors']
+    selectors: ['div[class^="ArticleContributors"] a[rel="author"]', 'article header div[class*="Byline__multipleContributors"]']
   },
   content: {
-    selectors: ['div#articleBody', 'div.articleBody'],
+    selectors: ['main[class^="Layout__content"]'],
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images
     transforms: [],
     // Is there anything that is in the result that shouldn't be?
     // The clean selectors will remove anything that matches from
     // the result
-    clean: []
+    clean: ['footer[class^="ArticleFooter__footer"]']
   },
   date_published: {
-    selectors: [['meta[name="article:published_time"]', 'value'], ['time[itemProp="datePublished"]', 'content']],
+    selectors: [['meta[name="pubdate"]', 'value']],
+    format: 'YYYYMMDD',
     timezone: 'America/New_York'
   },
   lead_image_url: {
     selectors: [['meta[name="og:image"]', 'value']]
   },
   dek: {
-    selectors: ['.dek', 'h2.dek']
+    selectors: ['h2[class^="ArticleHeader__dek"]']
   },
   next_page_url: null,
   excerpt: null
@@ -2200,7 +2216,7 @@ var PoliticoExtractor = {
 
 var DeadspinExtractor = {
   domain: 'deadspin.com',
-  supportedDomains: ['jezebel.com', 'lifehacker.com', 'kotaku.com', 'gizmodo.com', 'jalopnik.com', 'kinja.com'],
+  supportedDomains: ['jezebel.com', 'lifehacker.com', 'kotaku.com', 'gizmodo.com', 'jalopnik.com', 'kinja.com', 'avclub.com', 'clickhole.com', 'splinternews.com', 'theonion.com', 'theroot.com', 'thetakeout.com', 'theinventory.com'],
   title: {
     selectors: ['h1.headline']
   },
@@ -3428,7 +3444,7 @@ var WwwNydailynewsComExtractor = {
 var WwwCnbcComExtractor = {
   domain: 'www.cnbc.com',
   title: {
-    selectors: ['h1.title']
+    selectors: ['h1.title', 'h1.ArticleHeader-headline']
   },
   author: {
     selectors: [['meta[name="author"]', 'value']]
@@ -3440,7 +3456,7 @@ var WwwCnbcComExtractor = {
     selectors: [['meta[name="og:image"]', 'value']]
   },
   content: {
-    selectors: ['div#article_body.content', 'div.story'],
+    selectors: ['div#article_body.content', 'div.story', 'div.ArticleBody-articleBody'],
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images
     transforms: {},
@@ -4770,6 +4786,855 @@ var ClinicaltrialsGovExtractor = {
   }
 };
 
+var GithubComExtractor = {
+  domain: 'github.com',
+  title: {
+    selectors: [['meta[name="og:title"]', 'value']]
+  },
+  author: {
+    selectors: [// enter author selectors
+    ]
+  },
+  date_published: {
+    selectors: [['span[itemprop="dateModified"] relative-time', 'datetime']]
+  },
+  dek: {
+    selectors: ['span[itemprop="about"]']
+  },
+  lead_image_url: {
+    selectors: [['meta[name="og:image"]', 'value']]
+  },
+  content: {
+    selectors: [['#readme article']],
+    // Is there anything in the content you selected that needs transformed
+    // before it's consumable content? E.g., unusual lazy loaded images
+    transforms: {},
+    // Is there anything that is in the result that shouldn't be?
+    // The clean selectors will remove anything that matches from
+    // the result
+    clean: []
+  }
+};
+
+var WwwRedditComExtractor = {
+  domain: 'www.reddit.com',
+  title: {
+    selectors: ['div[data-test-id="post-content"] h2']
+  },
+  author: {
+    selectors: ['div[data-test-id="post-content"] a[href*="user/"]']
+  },
+  date_published: {
+    selectors: ['div[data-test-id="post-content"] a[data-click-id="timestamp"]']
+  },
+  lead_image_url: {
+    selectors: [['meta[name="og:image"]', 'value']]
+  },
+  content: {
+    selectors: [['div[data-test-id="post-content"] p'], // text post
+    ['div[data-test-id="post-content"] a[target="_blank"]:not([data-click-id="timestamp"])', // external link
+    'div[data-test-id="post-content"] div[data-click-id="media"]'], // external link with media preview (YouTube, imgur album, etc...)
+    ['div[data-test-id="post-content"] div[data-click-id="media"]'], // Embedded media (Reddit video)
+    ['div[data-test-id="post-content"] a[target="_blank"]:not([data-click-id="timestamp"])'], // external link
+    'div[data-test-id="post-content"]'],
+    // Is there anything in the content you selected that needs transformed
+    // before it's consumable content? E.g., unusual lazy loaded images
+    transforms: {
+      'div[role="img"]': function divRoleImg($node) {
+        // External link image preview
+        var $img = $node.find('img');
+        var bgImg = $node.css('background-image');
+
+        if ($img.length === 1 && bgImg) {
+          $img.attr('src', bgImg.match(/\((.*?)\)/)[1].replace(/('|")/g, ''));
+          return $img;
+        }
+
+        return $node;
+      }
+    },
+    // Is there anything that is in the result that shouldn't be?
+    // The clean selectors will remove anything that matches from
+    // the result
+    clean: ['.icon']
+  }
+};
+
+var OtrsComExtractor = {
+  domain: 'otrs.com',
+  title: {
+    selectors: ['#main article h1']
+  },
+  author: {
+    selectors: ['div.dateplusauthor a']
+  },
+  date_published: {
+    selectors: [['meta[name="article:published_time"]', 'value']]
+  },
+  dek: {
+    selectors: [['meta[name="og:description"]', 'value']]
+  },
+  lead_image_url: {
+    selectors: [['meta[name="og:image"]', 'value']]
+  },
+  content: {
+    selectors: ['#main article'],
+    defaultCleaner: false,
+    transforms: {},
+    clean: ['div.dateplusauthor', 'div.gr-12.push-6.footershare', '#atftbx', 'div.category-modul']
+  }
+};
+
+var WwwOssnewsJpExtractor = {
+  domain: 'www.ossnews.jp',
+  title: {
+    selectors: ['#alpha-block h1.hxnewstitle']
+  },
+  author: null,
+  date_published: {
+    selectors: ['p.fs12'],
+    format: 'YYYY年MM月DD日 HH:mm',
+    timezone: 'Asia/Tokyo'
+  },
+  dek: null,
+  lead_image_url: {
+    selectors: [['meta[name="og:image"]', 'value']]
+  },
+  content: {
+    selectors: ['#alpha-block .section:has(h1.hxnewstitle)'],
+    defaultCleaner: false,
+    transforms: {},
+    clean: []
+  }
+};
+
+var BuzzapJpExtractor = {
+  domain: 'buzzap.jp',
+  title: {
+    selectors: ['h1.entry-title']
+  },
+  author: null,
+  date_published: {
+    selectors: [['time.entry-date', 'datetime']]
+  },
+  dek: null,
+  lead_image_url: {
+    selectors: [['meta[name="og:image"]', 'value']]
+  },
+  content: {
+    selectors: ['div.ctiframe'],
+    defaultCleaner: false,
+    transforms: {},
+    clean: []
+  }
+};
+
+var WwwAsahiComExtractor = {
+  domain: 'www.asahi.com',
+  title: {
+    selectors: ['.ArticleTitle h1']
+  },
+  author: {
+    selectors: [['meta[name="article:author"]', 'value']]
+  },
+  date_published: {
+    selectors: [['meta[name="pubdate"]', 'value']]
+  },
+  dek: null,
+  excerpt: {
+    selectors: [['meta[name="og:description"]', 'value']]
+  },
+  lead_image_url: {
+    selectors: [['meta[name="og:image"]', 'value']]
+  },
+  content: {
+    selectors: ['#MainInner div.ArticleBody'],
+    defaultCleaner: false,
+    transforms: {},
+    clean: ['div.AdMod', 'div.LoginSelectArea']
+  }
+};
+
+var WwwSanwaCoJpExtractor = {
+  domain: 'www.sanwa.co.jp',
+  title: {
+    selectors: ['#newsContent h1']
+  },
+  author: null,
+  date_published: {
+    selectors: ['p.date'],
+    format: 'YYYY.MM.DD',
+    timezone: 'Asia/Tokyo'
+  },
+  dek: {
+    selectors: [['meta[name="og:description"]', 'value']]
+  },
+  lead_image_url: {
+    selectors: [['meta[name="og:image"]', 'value']]
+  },
+  content: {
+    selectors: ['#newsContent'],
+    defaultCleaner: false,
+    transforms: {},
+    clean: ['#smartphone', 'div.sns_box', 'div.contentFoot']
+  }
+};
+
+var WwwElecomCoJpExtractor = {
+  domain: 'www.elecom.co.jp',
+  title: {
+    selectors: ['title']
+  },
+  author: null,
+  date_published: {
+    selectors: ['p.section-last'],
+    format: 'YYYY.MM.DD',
+    timezone: 'Asia/Tokyo'
+  },
+  dek: null,
+  lead_image_url: null,
+  content: {
+    selectors: ['td.TableMain2'],
+    defaultCleaner: false,
+    transforms: {
+      table: function table($node) {
+        $node.attr('width', 'auto');
+      }
+    },
+    clean: []
+  }
+};
+
+var ScanNetsecurityNeJpExtractor = {
+  domain: 'scan.netsecurity.ne.jp',
+  title: {
+    selectors: ['header.arti-header h1.head']
+  },
+  author: null,
+  date_published: {
+    selectors: [['meta[name="article:modified_time"]', 'value']]
+  },
+  dek: {
+    selectors: ['header.arti-header p.arti-summary']
+  },
+  lead_image_url: {
+    selectors: [['meta[name="og:image"]', 'value']]
+  },
+  content: {
+    selectors: ['div.arti-content.arti-content--thumbnail'],
+    defaultCleaner: false,
+    transforms: {},
+    clean: ['aside.arti-giga']
+  }
+};
+
+var JvndbJvnJpExtractor = {
+  domain: 'jvndb.jvn.jp',
+  title: {
+    selectors: ['title']
+  },
+  author: null,
+  date_published: {
+    selectors: ['div.modifytxt:nth-child(2)'],
+    format: 'YYYY/MM/DD',
+    timezone: 'Asia/Tokyo'
+  },
+  dek: null,
+  lead_image_url: null,
+  content: {
+    selectors: ['#news-list'],
+    defaultCleaner: false,
+    transforms: {},
+    clean: []
+  }
+};
+
+var GeniusComExtractor = {
+  domain: 'genius.com',
+  title: {
+    selectors: ['h1']
+  },
+  author: {
+    selectors: ['h2 a']
+  },
+  date_published: {
+    selectors: [['meta[itemprop=page_data]', 'value', function (res) {
+      var json = JSON.parse(res);
+      return json.song.release_date;
+    }]]
+  },
+  dek: {
+    selectors: [// enter selectors
+    ]
+  },
+  lead_image_url: {
+    selectors: [['meta[itemprop=page_data]', 'value', function (res) {
+      var json = JSON.parse(res);
+      return json.song.album.cover_art_url;
+    }]]
+  },
+  content: {
+    selectors: ['.lyrics'],
+    // Is there anything in the content you selected that needs transformed
+    // before it's consumable content? E.g., unusual lazy loaded images
+    transforms: {},
+    // Is there anything that is in the result that shouldn't be?
+    // The clean selectors will remove anything that matches from
+    // the result
+    clean: []
+  }
+};
+
+var WwwJnsaOrgExtractor = {
+  domain: 'www.jnsa.org',
+  title: {
+    selectors: ['#wgtitle h2']
+  },
+  author: null,
+  date_published: null,
+  dek: null,
+  excerpt: {
+    selectors: [['meta[name="og:description"]', 'value']]
+  },
+  lead_image_url: {
+    selectors: [['meta[name="og:image"]', 'value']]
+  },
+  content: {
+    selectors: ['#main_area'],
+    transforms: {},
+    clean: ['#pankuzu', '#side']
+  }
+};
+
+var PhpspotOrgExtractor = {
+  domain: 'phpspot.org',
+  title: {
+    selectors: ['h3.hl']
+  },
+  author: null,
+  date_published: {
+    selectors: ['h4.hl'],
+    format: 'YYYY年MM月DD日',
+    timezone: 'Asia/Tokyo'
+  },
+  dek: null,
+  lead_image_url: null,
+  content: {
+    selectors: ['div.entrybody'],
+    defaultCleaner: false,
+    transforms: {},
+    clean: []
+  }
+};
+
+var WwwInfoqComExtractor = {
+  domain: 'www.infoq.com',
+  title: {
+    selectors: ['h1.heading']
+  },
+  author: {
+    selectors: ['div.widget.article__authors']
+  },
+  date_published: {
+    selectors: ['.article__readTime.date'],
+    format: 'YYYY年MM月DD日',
+    timezone: 'Asia/Tokyo'
+  },
+  dek: {
+    selectors: [['meta[name="og:description"]', 'value']]
+  },
+  lead_image_url: {
+    selectors: [['meta[name="og:image"]', 'value']]
+  },
+  content: {
+    selectors: ['div.article__data'],
+    defaultCleaner: false,
+    transforms: {},
+    clean: []
+  }
+};
+
+var WwwMoongiftJpExtractor = {
+  domain: 'www.moongift.jp',
+  title: {
+    selectors: ['h1.title a']
+  },
+  author: null,
+  date_published: {
+    selectors: ['ul.meta li:not(.social):first-of-type'],
+    timezone: 'Asia/Tokyo'
+  },
+  dek: {
+    selectors: [['meta[name="og:description"]', 'value']]
+  },
+  lead_image_url: {
+    selectors: [['meta[name="og:image"]', 'value']]
+  },
+  content: {
+    selectors: ['#main'],
+    transforms: {},
+    clean: ['ul.mg_service.cf']
+  }
+};
+
+var WwwItmediaCoJpExtractor = {
+  domain: 'www.itmedia.co.jp',
+  supportedDomains: ['www.atmarkit.co.jp', 'techtarget.itmedia.co.jp', 'nlab.itmedia.co.jp'],
+  title: {
+    selectors: ['#cmsTitle h1']
+  },
+  author: {
+    selectors: ['#byline']
+  },
+  date_published: {
+    selectors: [['meta[name="article:modified_time"]', 'value']]
+  },
+  dek: {
+    selectors: ['#cmsAbstract h2']
+  },
+  lead_image_url: {
+    selectors: [['meta[name="og:image"]', 'value']]
+  },
+  content: {
+    selectors: ['#cmsBody'],
+    defaultCleaner: false,
+    transforms: {},
+    clean: ['#snsSharebox']
+  }
+};
+
+var WwwPublickey1JpExtractor = {
+  domain: 'www.publickey1.jp',
+  title: {
+    selectors: ['h1']
+  },
+  author: {
+    selectors: ['#subcol p:has(img)']
+  },
+  date_published: {
+    selectors: ['div.pubdate'],
+    format: 'YYYY年MM月DD日',
+    timezone: 'Asia/Tokyo'
+  },
+  dek: null,
+  lead_image_url: {
+    selectors: [['meta[name="og:image"]', 'value']]
+  },
+  content: {
+    selectors: ['#maincol'],
+    defaultCleaner: false,
+    transforms: {},
+    clean: ['#breadcrumbs', 'div.sbm', 'div.ad_footer']
+  }
+};
+
+var TakagihiromitsuJpExtractor = {
+  domain: 'takagi-hiromitsu.jp',
+  title: {
+    selectors: ['h3']
+  },
+  author: {
+    selectors: [['meta[name="author"]', 'value']]
+  },
+  date_published: {
+    selectors: [['meta[http-equiv="Last-Modified"]', 'value']]
+  },
+  dek: null,
+  lead_image_url: null,
+  content: {
+    selectors: ['div.body'],
+    defaultCleaner: false,
+    transforms: {},
+    clean: []
+  }
+};
+
+var BookwalkerJpExtractor = {
+  domain: 'bookwalker.jp',
+  title: {
+    selectors: ['h1.main-heading']
+  },
+  author: {
+    selectors: ['div.authors']
+  },
+  date_published: {
+    selectors: ['.work-info .work-detail:first-of-type .work-detail-contents:last-of-type'],
+    timezone: 'Asia/Tokyo'
+  },
+  dek: null,
+  lead_image_url: {
+    selectors: [['meta[name="og:image"]', 'value']]
+  },
+  content: {
+    selectors: [['div.main-info', 'div.main-cover-inner']],
+    defaultCleaner: false,
+    transforms: {},
+    clean: ['span.label.label--trial', 'dt.info-head.info-head--coin', 'dd.info-contents.info-contents--coin', 'div.info-notice.fn-toggleClass']
+  }
+};
+
+var WwwYomiuriCoJpExtractor = {
+  domain: 'www.yomiuri.co.jp',
+  title: {
+    selectors: ['h1.title-article.c-article-title']
+  },
+  author: null,
+  date_published: {
+    selectors: [['meta[name="article:published_time"]', 'value']]
+  },
+  dek: null,
+  lead_image_url: {
+    selectors: [['meta[name="og:image"]', 'value']]
+  },
+  content: {
+    selectors: ['div.p-main-contents'],
+    transforms: {},
+    clean: []
+  }
+};
+
+var JapanCnetComExtractor = {
+  domain: 'japan.cnet.com',
+  title: {
+    selectors: ['.leaf-headline-ttl']
+  },
+  author: {
+    selectors: ['.writer']
+  },
+  date_published: {
+    selectors: ['.date'],
+    format: 'YYYY年MM月DD日 HH時mm分',
+    timezone: 'Asia/Tokyo'
+  },
+  dek: null,
+  lead_image_url: {
+    selectors: [['meta[name="og:image"]', 'value']]
+  },
+  content: {
+    selectors: ['div.article_body'],
+    transforms: {},
+    clean: []
+  }
+};
+
+var DeadlineComExtractor = {
+  domain: 'deadline.com',
+  title: {
+    selectors: ['h1']
+  },
+  author: {
+    selectors: ['section.author h3']
+  },
+  date_published: {
+    selectors: [['meta[name="article:published_time"]', 'value']]
+  },
+  dek: null,
+  lead_image_url: {
+    selectors: [['meta[name="og:image"]', 'value']]
+  },
+  content: {
+    selectors: ['div.a-article-grid__main.pmc-a-grid article.pmc-a-grid-item'],
+    transforms: {
+      '.embed-twitter': function embedTwitter($node) {
+        var innerHtml = $node.html();
+        $node.replaceWith(innerHtml);
+      }
+    },
+    clean: []
+  }
+};
+
+var WwwGizmodoJpExtractor = {
+  domain: 'www.gizmodo.jp',
+  title: {
+    selectors: ['h1.p-post-title']
+  },
+  author: {
+    selectors: ['li.p-post-AssistAuthor']
+  },
+  date_published: {
+    selectors: [['li.p-post-AssistTime time', 'datetime']]
+  },
+  dek: null,
+  lead_image_url: {
+    selectors: [['meta[name="og:image"]', 'value']]
+  },
+  content: {
+    selectors: ['article.p-post'],
+    transforms: {
+      'img.p-post-thumbnailImage': function imgPPostThumbnailImage($node) {
+        var src = $node.attr('src');
+        $node.attr('src', src.replace(/^.*=%27/, '').replace(/%27;$/, ''));
+      }
+    },
+    clean: ['h1.p-post-title', 'ul.p-post-Assist']
+  }
+};
+
+var GetnewsJpExtractor = {
+  domain: 'getnews.jp',
+  title: {
+    selectors: ['article h1']
+  },
+  author: {
+    selectors: ['span.prof']
+  },
+  date_published: {
+    selectors: [['ul.cattag-top time', 'datetime']]
+  },
+  dek: null,
+  lead_image_url: {
+    selectors: [['meta[name="og:image"]', 'value']]
+  },
+  content: {
+    selectors: ['div.post-bodycopy'],
+    transforms: {},
+    clean: []
+  }
+};
+
+var WwwLifehackerJpExtractor = {
+  domain: 'www.lifehacker.jp',
+  title: {
+    selectors: ['h1.lh-summary-title']
+  },
+  author: {
+    selectors: ['p.lh-entryDetailInner--credit']
+  },
+  date_published: {
+    selectors: [['div.lh-entryDetail-header time', 'datetime']]
+  },
+  dek: null,
+  lead_image_url: {
+    selectors: [['meta[name="og:image"]', 'value']]
+  },
+  content: {
+    selectors: ['div.lh-entryDetail-body'],
+    transforms: {
+      'img.lazyload': function imgLazyload($node) {
+        var src = $node.attr('src');
+        $node.attr('src', src.replace(/^.*=%27/, '').replace(/%27;$/, ''));
+      }
+    },
+    clean: ['p.lh-entryDetailInner--credit']
+  }
+};
+
+var SectIijAdJpExtractor = {
+  domain: 'sect.iij.ad.jp',
+  title: {
+    selectors: ['h3']
+  },
+  author: {
+    selectors: ['dl.entrydate dd']
+  },
+  date_published: {
+    selectors: ['dl.entrydate dd'],
+    format: 'YYYY年MM月DD日',
+    timezone: 'Asia/Tokyo'
+  },
+  dek: null,
+  lead_image_url: {
+    selectors: [['meta[name="og:image"]', 'value']]
+  },
+  content: {
+    selectors: ['#article'],
+    transforms: {},
+    clean: ['dl.entrydate']
+  }
+};
+
+var WwwOreillyCoJpExtractor = {
+  domain: 'www.oreilly.co.jp',
+  title: {
+    selectors: ['h3']
+  },
+  author: {
+    selectors: ['li[itemprop="author"]']
+  },
+  date_published: {
+    selectors: [['meta[itemprop="datePublished"]', 'value']],
+    timezone: 'Asia/Tokyo'
+  },
+  dek: null,
+  lead_image_url: {
+    selectors: [['meta[name="og:image"]', 'value']]
+  },
+  content: {
+    selectors: ['#content'],
+    defaultCleaner: false,
+    transforms: {},
+    clean: ['.social-tools']
+  }
+};
+
+var WwwIpaGoJpExtractor = {
+  domain: 'www.ipa.go.jp',
+  title: {
+    selectors: ['h1']
+  },
+  author: null,
+  date_published: {
+    selectors: ['p.ipar_text_right'],
+    format: 'YYYY年M月D日',
+    timezone: 'Asia/Tokyo'
+  },
+  dek: null,
+  lead_image_url: null,
+  content: {
+    selectors: ['#ipar_main'],
+    defaultCleaner: false,
+    transforms: {},
+    clean: ['p.ipar_text_right']
+  }
+};
+
+var WeeklyAsciiJpExtractor = {
+  domain: 'weekly.ascii.jp',
+  title: {
+    selectors: ['h1[itemprop="headline"]']
+  },
+  author: {
+    selectors: ['p.author']
+  },
+  date_published: {
+    selectors: [['meta[name="odate"]', 'value']]
+  },
+  dek: null,
+  lead_image_url: {
+    selectors: [['meta[name="og:image"]', 'value']]
+  },
+  content: {
+    selectors: ['div.article'],
+    transforms: {},
+    clean: []
+  }
+};
+
+var TechlogIijAdJpExtractor = {
+  domain: 'techlog.iij.ad.jp',
+  title: {
+    selectors: ['h1.entry-title']
+  },
+  author: {
+    selectors: ['a[rel="author"]']
+  },
+  date_published: {
+    selectors: [['time.entry-date', 'datetime']]
+  },
+  dek: null,
+  lead_image_url: {
+    selectors: [['meta[name="og:image"]', 'value']]
+  },
+  content: {
+    selectors: ['div.entry-content'],
+    defaultCleaner: false,
+    transforms: {},
+    clean: []
+  }
+};
+
+var WiredJpExtractor = {
+  domain: 'wired.jp',
+  title: {
+    selectors: ['h1.post-title']
+  },
+  author: {
+    selectors: ['p[itemprop="author"]']
+  },
+  date_published: {
+    selectors: [['time', 'datetime']]
+  },
+  dek: {
+    selectors: ['.post-intro']
+  },
+  lead_image_url: {
+    selectors: [['meta[name="og:image"]', 'value']]
+  },
+  content: {
+    selectors: ['article.article-detail'],
+    transforms: {
+      'img[data-original]': function imgDataOriginal($node) {
+        var dataOriginal = $node.attr('data-original');
+        var src = $node.attr('src');
+        var url = URL.resolve(src, dataOriginal);
+        $node.attr('src', url);
+      }
+    },
+    clean: ['.post-category', 'time', 'h1.post-title', '.social-area-syncer']
+  }
+};
+
+var JapanZdnetComExtractor = {
+  domain: 'japan.zdnet.com',
+  title: {
+    selectors: ['h1']
+  },
+  author: {
+    selectors: [['meta[name="cXenseParse:author"]', 'value']]
+  },
+  date_published: {
+    selectors: [['meta[name="article:published_time"]', 'value']]
+  },
+  dek: null,
+  lead_image_url: {
+    selectors: [['meta[name="og:image"]', 'value']]
+  },
+  content: {
+    selectors: ['div.article_body'],
+    transforms: {},
+    clean: []
+  }
+};
+
+var WwwRbbtodayComExtractor = {
+  domain: 'www.rbbtoday.com',
+  title: {
+    selectors: ['h1']
+  },
+  author: {
+    selectors: ['.writer.writer-name']
+  },
+  date_published: {
+    selectors: [['header time', 'datetime']]
+  },
+  dek: {
+    selectors: ['.arti-summary']
+  },
+  lead_image_url: {
+    selectors: [['meta[name="og:image"]', 'value']]
+  },
+  content: {
+    selectors: ['.arti-content'],
+    transforms: {},
+    clean: ['.arti-giga']
+  }
+};
+
+var WwwLemondeFrExtractor = {
+  domain: 'www.lemonde.fr',
+  title: {
+    selectors: ['h1.article__title']
+  },
+  author: {
+    selectors: ['.author__name']
+  },
+  date_published: {
+    selectors: [['meta[name="og:article:published_time"]', 'value']]
+  },
+  dek: {
+    selectors: ['.article__desc']
+  },
+  lead_image_url: {
+    selectors: [['meta[name="og:image"]', 'value']]
+  },
+  content: {
+    selectors: ['.article__content'],
+    transforms: {},
+    clean: []
+  }
+};
+
 
 
 var CustomExtractors = /*#__PURE__*/Object.freeze({
@@ -4868,7 +5733,41 @@ var CustomExtractors = /*#__PURE__*/Object.freeze({
   WwwFastcompanyComExtractor: WwwFastcompanyComExtractor,
   BlisterreviewComExtractor: BlisterreviewComExtractor,
   NewsMynaviJpExtractor: NewsMynaviJpExtractor,
-  ClinicaltrialsGovExtractor: ClinicaltrialsGovExtractor
+  ClinicaltrialsGovExtractor: ClinicaltrialsGovExtractor,
+  GithubComExtractor: GithubComExtractor,
+  WwwRedditComExtractor: WwwRedditComExtractor,
+  OtrsComExtractor: OtrsComExtractor,
+  WwwOssnewsJpExtractor: WwwOssnewsJpExtractor,
+  BuzzapJpExtractor: BuzzapJpExtractor,
+  WwwAsahiComExtractor: WwwAsahiComExtractor,
+  WwwSanwaCoJpExtractor: WwwSanwaCoJpExtractor,
+  WwwElecomCoJpExtractor: WwwElecomCoJpExtractor,
+  ScanNetsecurityNeJpExtractor: ScanNetsecurityNeJpExtractor,
+  JvndbJvnJpExtractor: JvndbJvnJpExtractor,
+  GeniusComExtractor: GeniusComExtractor,
+  WwwJnsaOrgExtractor: WwwJnsaOrgExtractor,
+  PhpspotOrgExtractor: PhpspotOrgExtractor,
+  WwwInfoqComExtractor: WwwInfoqComExtractor,
+  WwwMoongiftJpExtractor: WwwMoongiftJpExtractor,
+  WwwItmediaCoJpExtractor: WwwItmediaCoJpExtractor,
+  WwwPublickey1JpExtractor: WwwPublickey1JpExtractor,
+  TakagihiromitsuJpExtractor: TakagihiromitsuJpExtractor,
+  BookwalkerJpExtractor: BookwalkerJpExtractor,
+  WwwYomiuriCoJpExtractor: WwwYomiuriCoJpExtractor,
+  JapanCnetComExtractor: JapanCnetComExtractor,
+  DeadlineComExtractor: DeadlineComExtractor,
+  WwwGizmodoJpExtractor: WwwGizmodoJpExtractor,
+  GetnewsJpExtractor: GetnewsJpExtractor,
+  WwwLifehackerJpExtractor: WwwLifehackerJpExtractor,
+  SectIijAdJpExtractor: SectIijAdJpExtractor,
+  WwwOreillyCoJpExtractor: WwwOreillyCoJpExtractor,
+  WwwIpaGoJpExtractor: WwwIpaGoJpExtractor,
+  WeeklyAsciiJpExtractor: WeeklyAsciiJpExtractor,
+  TechlogIijAdJpExtractor: TechlogIijAdJpExtractor,
+  WiredJpExtractor: WiredJpExtractor,
+  JapanZdnetComExtractor: JapanZdnetComExtractor,
+  WwwRbbtodayComExtractor: WwwRbbtodayComExtractor,
+  WwwLemondeFrExtractor: WwwLemondeFrExtractor
 });
 
 var Extractors = _Object$keys(CustomExtractors).reduce(function (acc, key) {
@@ -4886,6 +5785,10 @@ var SEC_DATE_STRING = /^\d{10}$/i;
 var CLEAN_DATE_STRING_RE = /^\s*published\s*:?\s*(.*)/i;
 var TIME_MERIDIAN_SPACE_RE = /(.*\d)(am|pm)(.*)/i;
 var TIME_MERIDIAN_DOTS_RE = /\.m\./i;
+var TIME_NOW_STRING = /^\s*(just|right)?\s*now\s*/i;
+var timeUnits = ['seconds?', 'minutes?', 'hours?', 'days?', 'weeks?', 'months?', 'years?'];
+var allTimeUnits = timeUnits.join('|');
+var TIME_AGO_STRING = new RegExp("(\\d+)\\s+(".concat(allTimeUnits, ")\\s+ago"), 'i');
 var months = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
 var allMonths = months.join('|');
 var timestamp1 = '[0-9]{1,2}:[0-9]{2,2}( ?[ap].?m.?)?';
@@ -4939,6 +5842,15 @@ function cleanDateString(dateString) {
 function createDate(dateString, timezone, format) {
   if (TIME_WITH_OFFSET_RE.test(dateString)) {
     return moment(new Date(dateString));
+  }
+
+  if (TIME_AGO_STRING.test(dateString)) {
+    var fragments = TIME_AGO_STRING.exec(dateString);
+    return moment().subtract(fragments[1], fragments[2]);
+  }
+
+  if (TIME_NOW_STRING.test(dateString)) {
+    return moment();
   }
 
   return timezone ? moment.tz(dateString, format || parseFormat(dateString), timezone) : moment(dateString, format || parseFormat(dateString));
@@ -6220,7 +7132,7 @@ function transformElements($content, $, _ref2) {
   return $content;
 }
 
-function findMatchingSelector($, selectors, extractHtml) {
+function findMatchingSelector($, selectors, extractHtml, allowMultiple) {
   return selectors.find(function (selector) {
     if (_Array$isArray(selector)) {
       if (extractHtml) {
@@ -6233,10 +7145,10 @@ function findMatchingSelector($, selectors, extractHtml) {
           s = _selector[0],
           attr = _selector[1];
 
-      return $(s).length === 1 && $(s).attr(attr) && $(s).attr(attr).trim() !== '';
+      return (allowMultiple || !allowMultiple && $(s).length === 1) && $(s).attr(attr) && $(s).attr(attr).trim() !== '';
     }
 
-    return $(selector).length === 1 && $(selector).text().trim() !== '';
+    return (allowMultiple || !allowMultiple && $(selector).length === 1) && $(selector).text().trim() !== '';
   });
 }
 
@@ -6253,25 +7165,30 @@ function select(opts) {
   if (typeof extractionOpts === 'string') return extractionOpts;
   var selectors = extractionOpts.selectors,
       _extractionOpts$defau = extractionOpts.defaultCleaner,
-      defaultCleaner = _extractionOpts$defau === void 0 ? true : _extractionOpts$defau;
-  var matchingSelector = findMatchingSelector($, selectors, extractHtml);
-  if (!matchingSelector) return null; // Declaring result; will contain either
-  // text or html, which will be cleaned
-  // by the appropriate cleaner type
-  // If the selector type requests html as its return type
-  // transform and clean the element with provided selectors
+      defaultCleaner = _extractionOpts$defau === void 0 ? true : _extractionOpts$defau,
+      allowMultiple = extractionOpts.allowMultiple;
+  var matchingSelector = findMatchingSelector($, selectors, extractHtml, allowMultiple);
+  if (!matchingSelector) return null;
 
-  var $content;
+  function transformAndClean($node) {
+    makeLinksAbsolute$$1($node, $, opts.url || '');
+    cleanBySelectors($node, $, extractionOpts);
+    transformElements($node, $, extractionOpts);
+    return $node;
+  }
 
-  if (extractHtml) {
-    // If matching selector is an array, we're considering this a
+  function selectHtml() {
+    // If the selector type requests html as its return type
+    // transform and clean the element with provided selectors
+    var $content; // If matching selector is an array, we're considering this a
     // multi-match selection, which allows the parser to choose several
     // selectors to include in the result. Note that all selectors in the
     // array must match in order for this selector to trigger
+
     if (_Array$isArray(matchingSelector)) {
       $content = $(matchingSelector.join(','));
       var $wrapper = $('<div></div>');
-      $content.each(function (index, element) {
+      $content.each(function (_, element) {
         $wrapper.append(element);
       });
       $content = $wrapper;
@@ -6282,37 +7199,73 @@ function select(opts) {
 
     $content.wrap($('<div></div>'));
     $content = $content.parent();
-    $content = transformElements($content, $, extractionOpts);
-    $content = cleanBySelectors($content, $, extractionOpts);
-    $content = Cleaners[type]($content, _objectSpread({}, opts, {
-      defaultCleaner: defaultCleaner
-    }));
+    $content = transformAndClean($content);
+
+    if (Cleaners[type]) {
+      Cleaners[type]($content, _objectSpread({}, opts, {
+        defaultCleaner: defaultCleaner
+      }));
+    }
+
+    if (allowMultiple) {
+      return $content.children().toArray().map(function (el) {
+        return $.html($(el));
+      });
+    }
+
     return $.html($content);
   }
 
+  if (extractHtml) {
+    return selectHtml(matchingSelector);
+  }
+
+  var $match;
   var result; // if selector is an array (e.g., ['img', 'src']),
   // extract the attr
 
   if (_Array$isArray(matchingSelector)) {
-    var _matchingSelector = _slicedToArray(matchingSelector, 2),
+    var _matchingSelector = _slicedToArray(matchingSelector, 3),
         selector = _matchingSelector[0],
-        attr = _matchingSelector[1];
+        attr = _matchingSelector[1],
+        transform = _matchingSelector[2];
 
-    result = $(selector).attr(attr).trim();
+    $match = $(selector);
+    $match = transformAndClean($match);
+    result = $match.map(function (_, el) {
+      var item = $(el).attr(attr).trim();
+      return transform ? transform(item) : item;
+    });
   } else {
-    var $node = $(matchingSelector);
-    $node = cleanBySelectors($node, $, extractionOpts);
-    $node = transformElements($node, $, extractionOpts);
-    result = $node.text().trim();
-  } // Allow custom extractor to skip default cleaner
+    $match = $(matchingSelector);
+    $match = transformAndClean($match);
+    result = $match.map(function (_, el) {
+      return $(el).text().trim();
+    });
+  }
+
+  result = _Array$isArray(result.toArray()) && allowMultiple ? result.toArray() : result[0]; // Allow custom extractor to skip default cleaner
   // for this type; defaults to true
 
-
-  if (defaultCleaner) {
+  if (defaultCleaner && Cleaners[type]) {
     return Cleaners[type](result, _objectSpread({}, opts, extractionOpts));
   }
 
   return result;
+}
+function selectExtendedTypes(extend, opts) {
+  var results = {};
+
+  _Reflect$ownKeys(extend).forEach(function (t) {
+    if (!results[t]) {
+      results[t] = select(_objectSpread({}, opts, {
+        type: t,
+        extractionOpts: extend[t]
+      }));
+    }
+  });
+
+  return results;
 }
 
 function extractResult(opts) {
@@ -6407,7 +7360,13 @@ var RootExtractor = {
         url = _ref3.url,
         domain = _ref3.domain;
 
-    return {
+    var extendedResults = {};
+
+    if (extractor.extend) {
+      extendedResults = selectExtendedTypes(extractor.extend, opts);
+    }
+
+    return _objectSpread({
       title: title,
       content: content,
       author: author,
@@ -6420,7 +7379,7 @@ var RootExtractor = {
       excerpt: excerpt,
       word_count: word_count,
       direction: direction
-    };
+    }, extendedResults);
   }
 };
 
@@ -6510,10 +7469,14 @@ var Mercury = {
           fallback,
           _opts$contentType,
           contentType,
+          _opts$headers,
+          headers,
+          extend,
           parsedUrl,
           $,
           Extractor,
           metaCache,
+          extendedTypes,
           result,
           _result,
           title,
@@ -6526,7 +7489,7 @@ var Mercury = {
           switch (_context.prev = _context.next) {
             case 0:
               _ref = _args.length > 1 && _args[1] !== undefined ? _args[1] : {}, html = _ref.html, opts = _objectWithoutProperties(_ref, ["html"]);
-              _opts$fetchAllPages = opts.fetchAllPages, fetchAllPages = _opts$fetchAllPages === void 0 ? true : _opts$fetchAllPages, _opts$fallback = opts.fallback, fallback = _opts$fallback === void 0 ? true : _opts$fallback, _opts$contentType = opts.contentType, contentType = _opts$contentType === void 0 ? 'html' : _opts$contentType; // if no url was passed and this is the browser version,
+              _opts$fetchAllPages = opts.fetchAllPages, fetchAllPages = _opts$fetchAllPages === void 0 ? true : _opts$fetchAllPages, _opts$fallback = opts.fallback, fallback = _opts$fallback === void 0 ? true : _opts$fallback, _opts$contentType = opts.contentType, contentType = _opts$contentType === void 0 ? 'html' : _opts$contentType, _opts$headers = opts.headers, headers = _opts$headers === void 0 ? {} : _opts$headers, extend = opts.extend; // if no url was passed and this is the browser version,
               // set url to window.location.href and load the html
               // from the current page
 
@@ -6543,11 +7506,14 @@ var Mercury = {
                 break;
               }
 
-              return _context.abrupt("return", Errors.badUrl);
+              return _context.abrupt("return", {
+                error: true,
+                message: 'The url parameter passed does not look like a valid URL. Please check your URL and try again.'
+              });
 
             case 6:
               _context.next = 8;
-              return Resource.create(url, html, parsedUrl);
+              return Resource.create(url, html, parsedUrl, headers);
 
             case 8:
               $ = _context.sent;
@@ -6573,6 +7539,16 @@ var Mercury = {
               metaCache = $('meta').map(function (_, node) {
                 return $(node).attr('name');
               }).toArray();
+              extendedTypes = {};
+
+              if (extend) {
+                extendedTypes = selectExtendedTypes(extend, {
+                  $: $,
+                  url: url,
+                  html: html
+                });
+              }
+
               result = RootExtractor.extract(Extractor, {
                 url: url,
                 html: html,
@@ -6585,11 +7561,11 @@ var Mercury = {
               _result = result, title = _result.title, next_page_url = _result.next_page_url; // Fetch more pages if next_page_url found
 
               if (!(fetchAllPages && next_page_url)) {
-                _context.next = 22;
+                _context.next = 24;
                 break;
               }
 
-              _context.next = 19;
+              _context.next = 21;
               return collectAllPages({
                 Extractor: Extractor,
                 next_page_url: next_page_url,
@@ -6601,18 +7577,18 @@ var Mercury = {
                 url: url
               });
 
-            case 19:
+            case 21:
               result = _context.sent;
-              _context.next = 23;
+              _context.next = 25;
               break;
 
-            case 22:
+            case 24:
               result = _objectSpread({}, result, {
                 total_pages: 1,
                 rendered_pages: 1
               });
 
-            case 23:
+            case 25:
               if (contentType === 'markdown') {
                 turndownService = new TurndownService();
                 result.content = turndownService.turndown(result.content);
@@ -6620,9 +7596,9 @@ var Mercury = {
                 result.content = $.text($(result.content));
               }
 
-              return _context.abrupt("return", result);
+              return _context.abrupt("return", _objectSpread({}, result, extendedTypes));
 
-            case 25:
+            case 27:
             case "end":
               return _context.stop();
           }
