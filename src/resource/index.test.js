@@ -109,10 +109,9 @@ describe('Resource', () => {
         () => {
           Resource.generateDoc({ body, response });
         },
-        err => (
-          (err instanceof Error) &&
+        err =>
+          err instanceof Error &&
           /content does not appear to be text/i.test(err)
-        )
       );
     });
 
