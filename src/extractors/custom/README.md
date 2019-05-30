@@ -2,6 +2,22 @@
 
 Mercury can extract meaningful content from almost any web site, but custom parsers/extractors allow the Mercury Parser to find the content more quickly and more accurately than it might otherwise do. Our goal is to include custom parsers as many sites as we can, and we'd love your help!
 
+## Runtime extractors
+
+Mercury can obtain extractor with API in runtime.
+
+```javascript
+import Mercury from '@postlight/mercury-parser';
+//...
+import ExampleComExtractor from './ExampleComExtractor';
+
+Mercury.add(ExampleComExtractor);
+
+//...
+
+Mercury.parse('www.example.com').then(result => console.log(result));
+```
+
 ## The basics of parsing a site with a custom parser
 
 Custom parsers allow you to write CSS selectors that will find the content you're looking for on the page you're testing against. If you've written any CSS or jQuery, CSS selectors should be very familiar to you.
