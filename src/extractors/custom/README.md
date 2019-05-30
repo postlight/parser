@@ -71,6 +71,34 @@ export const ExampleExtractor = {
     ...
 ```
 
+If the array includes a callback function as 3rd element, all the results pass through that transformer. Returned values are the result of selector.
+For example:
+
+```javascript
+date_published: {
+    selectors: [[
+        'meta[name="article:published_time"]',
+         'value',
+          (item) => moment.from(convertNumbersToEnglish(item), 'fa',
+            'YYYY/MM/DD - HH:mm').toISOString();
+    ]]
+}
+```
+
+```javascript
+
+
+extend: {
+  tags: {
+    selectors: [[
+        'meta[name=\'article:tag\']', 'value', (item) => {
+        return item.split(/\s*,\s*/);
+      }]],
+    allowMultiple: true
+  }
+}
+```
+
 This is all you'll need to know to handle most of the fields Mercury parses (titles, authors, date published, etc.). Article content is the exception.
 
 #### Content selectors
