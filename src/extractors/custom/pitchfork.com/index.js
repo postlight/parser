@@ -22,7 +22,7 @@ export const PitchforkComExtractor = {
   },
 
   content: {
-    selectors: ['.review-detail__text'],
+    selectors: [['.score', '.review-detail__text']],
 
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images
