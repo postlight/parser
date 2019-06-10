@@ -6,33 +6,23 @@ export const PitchforkComExtractor = {
   },
 
   author: {
-    selectors: [
-      // enter author selectors
-    ],
+    selectors: ['.authors-detail__display-name'],
   },
 
   date_published: {
-    selectors: [
-      // enter selectors
-    ],
+    selectors: ['.pub-date'],
   },
 
   dek: {
-    selectors: [
-      // enter selectors
-    ],
+    selectors: ['.review-detail__abstract'],
   },
 
   lead_image_url: {
-    selectors: [
-      // enter selectors
-    ],
+    selectors: [['.single-album-tombstone__art img', 'src']],
   },
 
   content: {
-    selectors: [
-      // enter content selectors
-    ],
+    selectors: ['.review-detail__text'],
 
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images
