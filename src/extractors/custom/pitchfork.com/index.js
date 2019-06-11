@@ -10,7 +10,7 @@ export const PitchforkComExtractor = {
   },
 
   date_published: {
-    selectors: ['.pub-date'],
+    selectors: [['.pub-date', 'datetime']],
   },
 
   dek: {

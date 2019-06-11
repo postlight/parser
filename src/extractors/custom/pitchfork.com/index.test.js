@@ -43,7 +43,7 @@ describe('PitchforkComExtractor', () => {
     it('returns the date_published', async () => {
       const { date_published } = await result;
 
-      assert.equal(date_published, '2019-06-07T04:00:00.000Z');
+      assert.equal(date_published, '2019-06-07T09:00:00.000Z');
     });
 
     it('returns the dek', async () => {
