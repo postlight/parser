@@ -78,8 +78,14 @@ describe('PitchforkComExtractor', () => {
 
       assert.equal(
         first13,
-        'Score: 6.2. Coldwave never cared about you. The minimalistic, machine-driven sound that bubbled'
+        'Coldwave never cared about you. The minimalistic, machine-driven sound that bubbled up twice'
       );
+    });
+
+    it('returns the score', async () => {
+      const { score } = await result;
+
+      assert.equal(score, '6.2');
     });
   });
 });
