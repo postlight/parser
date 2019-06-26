@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" value="width=device-width,initial-scale=1">
+  <meta name="og:title" value="IIJ Security Diary: Masscan &#x3068; ZMap &#x306B;&#x3088;&#x308B;&#x30B9;&#x30AD;&#x30E3;&#x30F3;&#x306E;&#x9055;&#x3044;">
+  <meta name="og:image" value="https://sect.iij.ad.jp/images/logo_iij_sect.gif">
+  <meta name="og:type" value="website">
+  <meta name="og:site_name" value="IIJ-SECT">
+  <link rel="apple-touch-icon" href="https://sect.iij.ad.jp/apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="https://sect.iij.ad.jp/apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="https://sect.iij.ad.jp/apple-touch-icon.png">
+  <link rel="shortcut icon" href="https://sect.iij.ad.jp/favicon.ico" type="image/vnd.microsoft.icon">
+  <link rel="icon" href="https://sect.iij.ad.jp/favicon.ico" type="image/vnd.microsoft.icon">
+  <link rel="stylesheet" href="https://sect.iij.ad.jp/css/reset.css?1550041357">
+  <link rel="stylesheet" href="https://sect.iij.ad.jp/css/template.css?1550041357">
+  <link rel="stylesheet" href="https://sect.iij.ad.jp/css/module.css?1550041357">
+  <link rel="stylesheet" href="https://sect.iij.ad.jp/css/print.css?1550041357" media="print">
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="https://sect.iij.ad.jp/index.xml">
+  <title>IIJ Security Diary: Masscan &#x3068; ZMap &#x306B;&#x3088;&#x308B;&#x30B9;&#x30AD;&#x30E3;&#x30F3;&#x306E;&#x9055;&#x3044;</title>
+
+  
+  
+  
+  
+</head>
+<body>
+<div id="fb-root"></div>
+
+
+<div id="page">
+
+  
+<header>
+  <h1 id="logo"><a href="https://sect.iij.ad.jp/">
+      <img src="https://sect.iij.ad.jp/images/logo_iij_sect.gif" width="210" height="102" alt="IIJ-SECT"></a></h1>
+  <p id="company">
+    <a href="http://www.iij.ad.jp/" target="_blank">
+      <img src="https://sect.iij.ad.jp/images/logo_iij.gif" width="90" height="52" alt="IIJ">
+  </a></p>
+  <p id="language">&#xA0;</p>
+</header>
+
+
+<div id="wrapper">
+
+
+<div id="globalnav">
+  <nav>
+    <ul class="mainmenu">
+      <li><a href="https://sect.iij.ad.jp/index.html">
+	  HOME
+      </a></li>
+      <li><a href="https://sect.iij.ad.jp/about.html">
+	  IIJ-SECT&#x306B;&#x3064;&#x3044;&#x3066;
+      </a></li>
+      <li><a href="https://sect.iij.ad.jp/office.html">
+	  IIJ&#x30BB;&#x30AD;&#x30E5;&#x30EA;&#x30C6;&#x30A3;&#x60C5;&#x5831;&#x7D71;&#x62EC;&#x5BA4;&#x306B;&#x3064;&#x3044;&#x3066;
+      </a></li>
+      <li><a href="https://sect.iij.ad.jp/mitf.html">
+	  MITF&#x306B;&#x3064;&#x3044;&#x3066;
+      </a></li>
+      <li><a href="https://sect.iij.ad.jp/d/" class="here">
+	  Security Diary
+      </a></li>
+    </ul>
+    <ul class="linkmenu">
+      <li><span class="linktitle">&#x30EA;&#x30F3;&#x30AF;</span>
+      <ul>
+	<li><a href="http://www.iij.ad.jp/" target="_blank" class="ext"><span>IIJ</span></a></li>
+	<li><a href="http://www.iij.ad.jp/company/development/report/iir/index.html" target="_blank" class="ext"><span>Internet Infrastructure Review<br>(&#x5B9A;&#x671F;&#x767A;&#x884C;&#x6280;&#x8853;&#x30EC;&#x30DD;&#x30FC;&#x30C8;)</span></a></li>
+      </ul>
+      </li>
+    </ul>
+    <ul class="submenu">
+      <li><a href="https://sect.iij.ad.jp/contact.html"><span>&#xFF0B;&#xA0;&#x304A;&#x554F;&#x3044;&#x5408;&#x308F;&#x305B;</span></a></li>
+      <li><a href="http://www.iij.ad.jp/privacy/index.html" target="_blank" class="ext"><span>&#xFF0B;&#xA0;&#x500B;&#x4EBA;&#x60C5;&#x5831;&#x4FDD;&#x8B77;&#x30DD;&#x30EA;&#x30B7;&#x30FC;</span></a></li>
+      <li><a href="https://twitter.com/IIJSECT" target="_blank" class="ext"><span>&#xFF0B;&#xA0;Twitter @IIJSECT</span></a></li>
+      <li><a href="https://sect.iij.ad.jp/index.xml"><span>&#xFF0B;&#xA0;RSS</span></a></li>
+    </ul>
+  </nav>
+
+</div>
+
+
+
+<div id="localnav">
+
+
+  <div id="category">
+    <div class="title" id="t_cat">
+      &#x30AB;&#x30C6;&#x30B4;&#x30EA;&#x30FC;
+    </div>
+    <ul>
+      <li><a href="https://sect.iij.ad.jp/d/cat/vuln.html">
+	  &#x8106;&#x5F31;&#x6027;</a> (15)</li>
+      <li><a href="https://sect.iij.ad.jp/d/cat/incident.html">
+	  &#x30BB;&#x30AD;&#x30E5;&#x30EA;&#x30C6;&#x30A3;&#x4E8B;&#x4EF6;</a> (32)</li>
+      <li><a href="https://sect.iij.ad.jp/d/cat/tech.html">
+	  &#x6280;&#x8853;&#x89E3;&#x8AAC;</a> (8)</li>
+      <li><a href="https://sect.iij.ad.jp/d/cat/info.html">
+	  &#x304A;&#x77E5;&#x3089;&#x305B;</a> (6)</li>
+      <li><a href="https://sect.iij.ad.jp/d/cat/other.html">
+	  &#x305D;&#x306E;&#x4ED6;</a> (4)</li>
+    </ul>
+  </div>
+
+  <div id="tags">
+    <div class="title" id="t_tag">
+      &#x30BF;&#x30B0;
+    </div>
+    <ul>
+      <li><a href="https://sect.iij.ad.jp/d/tag/Anonymous.html">
+	  Anonymous</a></li>
+      <li><a href="https://sect.iij.ad.jp/d/tag/Apache.html">
+	  Apache</a></li>
+      <li><a href="https://sect.iij.ad.jp/d/tag/Arbitrary_code_execution.html">
+	  Arbitrary code execution</a></li>
+      <li><a href="https://sect.iij.ad.jp/d/tag/BIND.html">
+	  BIND</a></li>
+      <li><a href="https://sect.iij.ad.jp/d/tag/BSOD.html">
+	  BSOD</a></li>
+      <li><a href="https://sect.iij.ad.jp/d/tag/Cryptography.html">
+	  Cryptography</a></li>
+      <li><a href="https://sect.iij.ad.jp/d/tag/DDoS.html">
+	  DDoS</a></li>
+      <li><a href="https://sect.iij.ad.jp/d/tag/DHS.html">
+	  DHS</a></li>
+      <li><a href="https://sect.iij.ad.jp/d/tag/diary.html">
+	  diary</a></li>
+      <li><a href="https://sect.iij.ad.jp/d/tag/DNS.html">
+	  DNS</a></li>
+      <li><a href="https://sect.iij.ad.jp/d/tag/DoS.html">
+	  DoS</a></li>
+      <li><a href="https://sect.iij.ad.jp/d/tag/Exploit_kit.html">
+	  Exploit kit</a></li>
+      <li><a href="https://sect.iij.ad.jp/d/tag/Forensics.html">
+	  Forensics</a></li>
+      <li><a href="https://sect.iij.ad.jp/d/tag/IIR.html">
+	  IIR</a></li>
+      <li><a href="https://sect.iij.ad.jp/d/tag/IoT.html">
+	  IoT</a></li>
+      <li><a href="https://sect.iij.ad.jp/d/tag/IPA.html">
+	  IPA</a></li>
+      <li><a href="https://sect.iij.ad.jp/d/tag/Linux.html">
+	  Linux</a></li>
+      <li><a href="https://sect.iij.ad.jp/d/tag/Malvertising.html">
+	  Malvertising</a></li>
+      <li><a href="https://sect.iij.ad.jp/d/tag/Malware.html">
+	  Malware</a></li>
+      <li><a href="https://sect.iij.ad.jp/d/tag/Microsoft.html">
+	  Microsoft</a></li>
+      <li><a href="https://sect.iij.ad.jp/d/tag/MySQL.html">
+	  MySQL</a></li>
+      <li><a href="https://sect.iij.ad.jp/d/tag/PHP.html">
+	  PHP</a></li>
+      <li><a href="https://sect.iij.ad.jp/d/tag/RAT.html">
+	  RAT</a></li>
+      <li><a href="https://sect.iij.ad.jp/d/tag/SCADA.html">
+	  SCADA</a></li>
+      <li><a href="https://sect.iij.ad.jp/d/tag/Scam.html">
+	  Scam</a></li>
+      <li><a href="https://sect.iij.ad.jp/d/tag/SSL.html">
+	  SSL</a></li>
+      <li><a href="https://sect.iij.ad.jp/d/tag/Targeted_Attack.html">
+	  Targeted Attack</a></li>
+      <li><a href="https://sect.iij.ad.jp/d/tag/TCP_IP.html">
+	  TCP/IP</a></li>
+      <li><a href="https://sect.iij.ad.jp/d/tag/TLS.html">
+	  TLS</a></li>
+      <li><a href="https://sect.iij.ad.jp/d/tag/UDP.html">
+	  UDP</a></li>
+      <li><a href="https://sect.iij.ad.jp/d/tag/Vulnerability.html">
+	  Vulnerability</a></li>
+      <li><a href="https://sect.iij.ad.jp/d/tag/Web_Browser.html">
+	  Web Browser</a></li>
+      <li><a href="https://sect.iij.ad.jp/d/tag/Windows.html">
+	  Windows</a></li>
+    </ul>
+  </div>
+
+  <div id="archives">
+    <div class="title" id="t_mon">
+      &#x6708;&#x5225;&#x30A2;&#x30FC;&#x30AB;&#x30A4;&#x30D6;
+    </div>
+    <ul>
+      <li><div class="year" id="y_2019">2019&#x5E74; (3)</div>
+	<ul>
+	  <li><a href="https://sect.iij.ad.jp/d/2019/02/index.html">
+	      02&#x6708;</a> (2)</li>
+	  <li><a href="https://sect.iij.ad.jp/d/2019/01/index.html">
+	      01&#x6708;</a> (1)</li>
+	</ul>
+      </li>
+      <li><div class="year" id="y_2018">2018&#x5E74; (5)</div>
+	<ul>
+	  <li><a href="https://sect.iij.ad.jp/d/2018/05/index.html">
+	      05&#x6708;</a> (1)</li>
+	  <li><a href="https://sect.iij.ad.jp/d/2018/04/index.html">
+	      04&#x6708;</a> (1)</li>
+	  <li><a href="https://sect.iij.ad.jp/d/2018/03/index.html">
+	      03&#x6708;</a> (1)</li>
+	  <li><a href="https://sect.iij.ad.jp/d/2018/02/index.html">
+	      02&#x6708;</a> (1)</li>
+	  <li><a href="https://sect.iij.ad.jp/d/2018/01/index.html">
+	      01&#x6708;</a> (1)</li>
+	</ul>
+      </li>
+      <li><div class="year" id="y_2017">2017&#x5E74; (7)</div>
+	<ul>
+	  <li><a href="https://sect.iij.ad.jp/d/2017/12/index.html">
+	      12&#x6708;</a> (1)</li>
+	  <li><a href="https://sect.iij.ad.jp/d/2017/09/index.html">
+	      09&#x6708;</a> (4)</li>
+	  <li><a href="https://sect.iij.ad.jp/d/2017/04/index.html">
+	      04&#x6708;</a> (1)</li>
+	  <li><a href="https://sect.iij.ad.jp/d/2017/02/index.html">
+	      02&#x6708;</a> (1)</li>
+	</ul>
+      </li>
+      <li><div class="year" id="y_2016">2016&#x5E74; (3)</div>
+	<ul>
+	  <li><a href="https://sect.iij.ad.jp/d/2016/10/index.html">
+	      10&#x6708;</a> (1)</li>
+	  <li><a href="https://sect.iij.ad.jp/d/2016/02/index.html">
+	      02&#x6708;</a> (2)</li>
+	</ul>
+      </li>
+      <li><div class="year" id="y_2015">2015&#x5E74; (2)</div>
+	<ul>
+	  <li><a href="https://sect.iij.ad.jp/d/2015/12/index.html">
+	      12&#x6708;</a> (1)</li>
+	  <li><a href="https://sect.iij.ad.jp/d/2015/05/index.html">
+	      05&#x6708;</a> (1)</li>
+	</ul>
+      </li>
+      <li><div class="year" id="y_2014">2014&#x5E74; (3)</div>
+	<ul>
+	  <li><a href="https://sect.iij.ad.jp/d/2014/06/index.html">
+	      06&#x6708;</a> (1)</li>
+	  <li><a href="https://sect.iij.ad.jp/d/2014/04/index.html">
+	      04&#x6708;</a> (2)</li>
+	</ul>
+      </li>
+      <li><div class="year" id="y_2013">2013&#x5E74; (5)</div>
+	<ul>
+	  <li><a href="https://sect.iij.ad.jp/d/2013/12/index.html">
+	      12&#x6708;</a> (1)</li>
+	  <li><a href="https://sect.iij.ad.jp/d/2013/11/index.html">
+	      11&#x6708;</a> (1)</li>
+	  <li><a href="https://sect.iij.ad.jp/d/2013/07/index.html">
+	      07&#x6708;</a> (1)</li>
+	  <li><a href="https://sect.iij.ad.jp/d/2013/03/index.html">
+	      03&#x6708;</a> (2)</li>
+	</ul>
+      </li>
+      <li><div class="year" id="y_2012">2012&#x5E74; (14)</div>
+	<ul>
+	  <li><a href="https://sect.iij.ad.jp/d/2012/10/index.html">
+	      10&#x6708;</a> (1)</li>
+	  <li><a href="https://sect.iij.ad.jp/d/2012/09/index.html">
+	      09&#x6708;</a> (1)</li>
+	  <li><a href="https://sect.iij.ad.jp/d/2012/08/index.html">
+	      08&#x6708;</a> (1)</li>
+	  <li><a href="https://sect.iij.ad.jp/d/2012/07/index.html">
+	      07&#x6708;</a> (1)</li>
+	  <li><a href="https://sect.iij.ad.jp/d/2012/06/index.html">
+	      06&#x6708;</a> (2)</li>
+	  <li><a href="https://sect.iij.ad.jp/d/2012/05/index.html">
+	      05&#x6708;</a> (2)</li>
+	  <li><a href="https://sect.iij.ad.jp/d/2012/03/index.html">
+	      03&#x6708;</a> (3)</li>
+	  <li><a href="https://sect.iij.ad.jp/d/2012/02/index.html">
+	      02&#x6708;</a> (2)</li>
+	  <li><a href="https://sect.iij.ad.jp/d/2012/01/index.html">
+	      01&#x6708;</a> (1)</li>
+	</ul>
+      </li>
+      <li><div class="year" id="y_2011">2011&#x5E74; (18)</div>
+	<ul>
+	  <li><a href="https://sect.iij.ad.jp/d/2011/12/index.html">
+	      12&#x6708;</a> (8)</li>
+	  <li><a href="https://sect.iij.ad.jp/d/2011/11/index.html">
+	      11&#x6708;</a> (8)</li>
+	  <li><a href="https://sect.iij.ad.jp/d/2011/10/index.html">
+	      10&#x6708;</a> (2)</li>
+	</ul>
+      </li>
+    </ul>
+  </div>
+
+</div>
+
+
+
+<div id="contents">
+
+  <section id="diary">
+    <h2>Security Diary</h2>
+    <div id="topicpath"><a href="https://sect.iij.ad.jp/index.html">HOME</a>&#xA0;&gt;&#xA0;<a href="https://sect.iij.ad.jp/d/index.html">Security&#xA0;Diary</a>&#xA0;&gt;&#xA0;Masscan &#x3068; ZMap &#x306B;&#x3088;&#x308B;&#x30B9;&#x30AD;&#x30E3;&#x30F3;&#x306E;&#x9055;&#x3044;</div>
+
+    <article id="article">
+      <dl class="entrydate">
+	<dt><span class="info">Diary</span></dt>
+	<dd>
+	  &#x2502;2019&#x5E74;02&#x6708;13&#x65E5; Masafumi Negishi&#x2502;
+	</dd>
+      </dl>
+
+<h3 id="masscanzmap">Masscan &#x3068; ZMap &#x306B;&#x3088;&#x308B;&#x30B9;&#x30AD;&#x30E3;&#x30F3;&#x306E;&#x9055;&#x3044;</h3>
+
+<p>&#x30A4;&#x30F3;&#x30BF;&#x30FC;&#x30CD;&#x30C3;&#x30C8;&#x4E0A;&#x306E;&#x5168;&#x30A2;&#x30C9;&#x30EC;&#x30B9;&#x7A7A;&#x9593;&#x3092;&#x9AD8;&#x901F;&#x306B;&#x30B9;&#x30AD;&#x30E3;&#x30F3;&#x3059;&#x308B;&#x30C4;&#x30FC;&#x30EB;&#x3068;&#x3057;&#x3066;&#x3001;Masscan &#x3068; ZMap &#x306E; 2&#x3064;&#x304C;&#x6709;&#x540D;&#x3067;&#x3059;&#x3002;&#x3053;&#x308C;&#x3089;&#x306F;&#x7814;&#x7A76;&#x8005;&#x306B;&#x3082;&#x653B;&#x6483;&#x8005;&#x306B;&#x3082;&#x5E45;&#x5E83;&#x304F;&#x5229;&#x7528;&#x3055;&#x308C;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;&#x3067;&#x3059;&#x304C;&#x3001;IIJ &#x306E;&#x30DE;&#x30EB;&#x30A6;&#x30A7;&#x30A2;&#x6D3B;&#x52D5;&#x89B3;&#x6E2C;&#x30D7;&#x30ED;&#x30B8;&#x30A7;&#x30AF;&#x30C8; MITF &#x306E;&#x30CF;&#x30CB;&#x30FC;&#x30DD;&#x30C3;&#x30C8;&#x306B;&#x3088;&#x308B;&#x89B3;&#x6E2C;&#x306B;&#x304A;&#x3044;&#x3066;&#x3001;&#x4E21;&#x8005;&#x306E;&#x4F7F;&#x308F;&#x308C;&#x65B9;&#x306B;&#x306F;&#x304B;&#x306A;&#x308A;&#x9055;&#x3044;&#x304C;&#x3042;&#x308B;&#x3053;&#x3068;&#x304C;&#x308F;&#x304B;&#x308A;&#x307E;&#x3057;&#x305F;&#x3002;&#x672C;&#x8A18;&#x4E8B;&#x3067;&#x305D;&#x306E;&#x5185;&#x5BB9;&#x306B;&#x3064;&#x3044;&#x3066;&#x7D39;&#x4ECB;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+
+<h4>&#x8ABF;&#x67FB;&#x76EE;&#x7684;&#x3068;&#x898B;&#x3089;&#x308C;&#x308B;&#x30B9;&#x30AD;&#x30E3;&#x30F3;&#x306E;&#x5897;&#x52A0;</h4>
+
+<p>NICT &#x30B5;&#x30A4;&#x30D0;&#x30FC;&#x30BB;&#x30AD;&#x30E5;&#x30EA;&#x30C6;&#x30A3;&#x7814;&#x7A76;&#x6240;&#x304C; 2019&#x5E74;2&#x6708;6&#x65E5;&#x306B;&#x516C;&#x958B;&#x3057;&#x305F;&#x300C;<a href="http://www.nict.go.jp/cyber/report/NICTER_report_2018.pdf" target="_blank" class="ext">NICTER&#x89B3;&#x6E2C;&#x30EC;&#x30DD;&#x30FC;&#x30C8;2018</a>&#x300D;&#x3067;&#x306F;&#x3001;2017&#x5E74;&#x3068;&#x6BD4;&#x8F03;&#x3057;&#x3066;&#x6D77;&#x5916;&#x7D44;&#x7E54;&#x304B;&#x3089;&#x306E;&#x8ABF;&#x67FB;&#x76EE;&#x7684;&#x3068;&#x898B;&#x3089;&#x308C;&#x308B;&#x30B9;&#x30AD;&#x30E3;&#x30F3;&#x304C;&#x5927;&#x5E45;&#x306B;&#x5897;&#x52A0;&#x3057;&#x305F;&#x3053;&#x3068;&#x304C;&#x5831;&#x544A;&#x3055;&#x308C;&#x307E;&#x3057;&#x305F;&#x3002;&#x3053;&#x306E;&#x30EC;&#x30DD;&#x30FC;&#x30C8;&#x3067;&#x306F;&#x3001;1&#x65E5;&#x306B; 30&#x4EE5;&#x4E0A;&#x306E;&#x5B9B;&#x5148;&#x30DD;&#x30FC;&#x30C8;&#x306B;&#x5BFE;&#x3057;&#x3066; 30&#x4E07;&#x30D1;&#x30B1;&#x30C3;&#x30C8;&#x4EE5;&#x4E0A;&#x306E;&#x30B9;&#x30AD;&#x30E3;&#x30F3;&#x30D1;&#x30B1;&#x30C3;&#x30C8; (TCP SYN &#x3068; UDP &#x306E;&#x307F;) &#x3092;&#x9001;&#x4FE1;&#x3059;&#x308B;&#x30A2;&#x30C9;&#x30EC;&#x30B9;&#x3092;&#x8ABF;&#x67FB;&#x76EE;&#x7684;&#x306E;&#x30B9;&#x30AD;&#x30E3;&#x30F3;&#x3068;&#x5224;&#x5225;&#x3057;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;&#x305D;&#x3057;&#x3066; 2018&#x5E74;&#x306E;&#x7DCF;&#x30D1;&#x30B1;&#x30C3;&#x30C8;&#x6570;&#x306E;&#x7D04; 35% &#x304C;&#x8ABF;&#x67FB;&#x76EE;&#x7684;&#x306E;&#x30B9;&#x30AD;&#x30E3;&#x30F3;&#x3060;&#x3063;&#x305F;&#x3068;&#x3044;&#x3046;&#x3053;&#x3068;&#x3067;&#x3059;&#x3002;&#x3053;&#x306E;&#x5831;&#x544A;&#x3092;&#x898B;&#x3066;&#x3001;IIJ &#x306E;&#x30CF;&#x30CB;&#x30FC;&#x30DD;&#x30C3;&#x30C8;&#x306B;&#x304A;&#x3051;&#x308B;&#x89B3;&#x6E2C;&#x3067;&#x3082;&#x540C;&#x69D8;&#x306E;&#x50BE;&#x5411;&#x304C;&#x898B;&#x3089;&#x308C;&#x308B;&#x304B;&#x691C;&#x8A3C;&#x3057;&#x305F;&#x3044;&#x3068;&#x8003;&#x3048;&#x307E;&#x3057;&#x305F;&#x3002;&#x3057;&#x304B;&#x3057; NICTER &#x306E;&#x30C0;&#x30FC;&#x30AF;&#x30CD;&#x30C3;&#x30C8;&#x89B3;&#x6E2C;&#x3068;&#x6BD4;&#x3079;&#x308B;&#x3068;&#x3001;IP &#x30A2;&#x30C9;&#x30EC;&#x30B9;&#x306E;&#x6570;&#x304C;&#x9055;&#x3044;&#x3059;&#x304E;&#x308B;&#x305F;&#x3081;&#x3001;&#x540C;&#x3058;&#x5224;&#x5B9A;&#x6761;&#x4EF6;&#x3092;&#x305D;&#x306E;&#x307E;&#x307E;&#x9069;&#x7528;&#x3059;&#x308B;&#x3053;&#x3068;&#x306F;&#x3067;&#x304D;&#x307E;&#x305B;&#x3093;&#x3002;&#x305D;&#x3053;&#x3067;&#x3001;&#x30D1;&#x30B1;&#x30C3;&#x30C8;&#x6570;&#x3067;&#x306F;&#x306A;&#x304F;&#x30B9;&#x30AD;&#x30E3;&#x30F3;&#x306B;&#x5229;&#x7528;&#x3055;&#x308C;&#x3066;&#x3044;&#x308B;&#x30C4;&#x30FC;&#x30EB;&#x306B;&#x7740;&#x76EE;&#x3057;&#x3001;&#x5225;&#x306E;&#x8996;&#x70B9;&#x304B;&#x3089;&#x8ABF;&#x67FB;&#x3092;&#x884C;&#x3046;&#x3053;&#x3068;&#x306B;&#x3057;&#x307E;&#x3057;&#x305F;&#x3002;</p>
+
+<h4 id="masscanzmap">Masscan &#x3068; ZMap</h4>
+
+<p><a href="https://github.com/robertdavidgraham/masscan" target="_blank" class="ext">Masscan</a> &#x3068; <a href="https://github.com/zmap/zmap" target="_blank" class="ext">ZMap</a> &#x306F;&#x3001;IPv4 &#x306E;&#x5168;&#x30A2;&#x30C9;&#x30EC;&#x30B9;&#x7A7A;&#x9593;&#x3092;&#x9AD8;&#x901F;&#x306B;&#x30B9;&#x30AD;&#x30E3;&#x30F3;&#x3059;&#x308B;&#x3068;&#x3044;&#x3046;&#x76EE;&#x7684;&#x306B;&#x7279;&#x5316;&#x3057;&#x305F;&#x30CD;&#x30C3;&#x30C8;&#x30EF;&#x30FC;&#x30AF;&#x30B9;&#x30AD;&#x30E3;&#x30CA;&#x30FC;&#x3067;&#x3059;&#x3002;&#x3069;&#x3061;&#x3089;&#x3082;&#x30BD;&#x30FC;&#x30B9;&#x30B3;&#x30FC;&#x30C9;&#x304C;&#x516C;&#x958B;&#x3055;&#x308C;&#x3066;&#x304A;&#x308A;&#x3001;&#x8AB0;&#x3067;&#x3082;&#x3055;&#x307E;&#x3056;&#x307E;&#x306A;&#x30D7;&#x30E9;&#x30C3;&#x30C8;&#x30D5;&#x30A9;&#x30FC;&#x30E0;&#x3067;&#x5229;&#x7528;&#x3059;&#x308B;&#x3053;&#x3068;&#x304C;&#x3067;&#x304D;&#x307E;&#x3059;<small><sup><a href="https://sect.iij.ad.jp/d/2019/02/134052.html#fn:footnote1" id="fnref:footnote1" class="footnote">[1]</a></sup></small>&#x3002;&#x305D;&#x306E;&#x305F;&#x3081;&#x7814;&#x7A76;&#x8005;&#x3060;&#x3051;&#x3067;&#x306A;&#x304F;&#x3001;&#x653B;&#x6483;&#x8005;&#x306B;&#x3068;&#x3063;&#x3066;&#x3082;&#x6709;&#x7528;&#x306A;&#x30C4;&#x30FC;&#x30EB;&#x3068;&#x3057;&#x3066;&#x5229;&#x7528;&#x3055;&#x308C;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;&#x4EE5;&#x524D;&#x304B;&#x3089;&#x3053;&#x306E; 2&#x3064;&#x306E;&#x30C4;&#x30FC;&#x30EB;&#x304C;&#x5E45;&#x5E83;&#x304F;&#x5229;&#x7528;&#x3055;&#x308C;&#x3066;&#x3044;&#x308B;&#x3053;&#x3068;&#x306F;&#x89B3;&#x6E2C;&#x30C7;&#x30FC;&#x30BF;&#x304B;&#x3089;&#x308F;&#x304B;&#x3063;&#x3066;&#x3044;&#x307E;&#x3057;&#x305F;&#x304C;&#x3001;&#x4ECA;&#x56DE;&#x305D;&#x306E;&#x5185;&#x8A33;&#x306B;&#x3064;&#x3044;&#x3066;&#x3082;&#x8A73;&#x3057;&#x304F;&#x8ABF;&#x3079;&#x307E;&#x3057;&#x305F;&#x3002;&#x8ABF;&#x67FB;&#x5BFE;&#x8C61;&#x3068;&#x3057;&#x305F;&#x306E;&#x306F; 2019&#x5E74;1&#x6708;&#x306E; 1&#x30F6;&#x6708;&#x9593;&#x306B; IIJ &#x306E;&#x30CF;&#x30CB;&#x30FC;&#x30DD;&#x30C3;&#x30C8;&#x3067;&#x89B3;&#x6E2C;&#x3057;&#x305F;&#x30C7;&#x30FC;&#x30BF;&#x3067;&#x3059;&#x3002;</p>
+
+<p>&#x5148;&#x306B;&#x89B3;&#x6E2C;&#x7D50;&#x679C;&#x306E;&#x30B5;&#x30DE;&#x30EA;&#x3092;&#x793A;&#x3057;&#x3066;&#x304A;&#x304D;&#x307E;&#x3059;&#x3002;</p>
+
+<ul>
+<li>Masscan &#x306B;&#x3088;&#x308B;&#x30B9;&#x30AD;&#x30E3;&#x30F3;&#x306F; ZMap &#x306B;&#x3088;&#x308B;&#x30B9;&#x30AD;&#x30E3;&#x30F3;&#x3068;&#x6BD4;&#x8F03;&#x3057;&#x3001;&#x9001;&#x4FE1;&#x5143;&#x30A2;&#x30C9;&#x30EC;&#x30B9;&#x6570;&#x3067;&#x306F; 2&#x500D;&#x3001;SYN &#x30D1;&#x30B1;&#x30C3;&#x30C8;&#x6570;&#x3067;&#x306F; 6&#x500D;</li>
+<li>&#x5B9B;&#x5148;&#x30DD;&#x30FC;&#x30C8;&#x5225;&#x306B;&#x898B;&#x308B;&#x3068;&#x3001;Masscan &#x306B;&#x3088;&#x308B;&#x30B9;&#x30AD;&#x30E3;&#x30F3;&#x306F;&#x591A;&#x6570;&#x306E;&#x30DD;&#x30FC;&#x30C8;&#x306B;&#x5206;&#x6563;&#x3057;&#x3066;&#x3044;&#x308B;&#x306E;&#x306B;&#x5BFE;&#x3057;&#x3066;&#x3001;ZMap &#x306B;&#x3088;&#x308B;&#x30B9;&#x30AD;&#x30E3;&#x30F3;&#x306F;&#x7279;&#x5B9A;&#x306E;&#x30DD;&#x30FC;&#x30C8;&#x306B;&#x5927;&#x304D;&#x304F;&#x504F;&#x3063;&#x3066;&#x3044;&#x308B;</li>
+<li>ZMap &#x306B;&#x3088;&#x308B;&#x30B9;&#x30AD;&#x30E3;&#x30F3;&#x306E;&#x5B9B;&#x5148;&#x30DD;&#x30FC;&#x30C8;&#x306F;&#x3001;52869/tcp &#x306A;&#x3069; IoT &#x6A5F;&#x5668;&#x306E;&#x8106;&#x5F31;&#x6027;&#x3092;&#x63A2;&#x7D22;&#x3059;&#x308B;&#x76EE;&#x7684;&#x3068;&#x8003;&#x3048;&#x3089;&#x308C;&#x308B;&#x30DD;&#x30FC;&#x30C8;&#x304C;&#x591A;&#x6570;&#x3092;&#x5360;&#x3081;&#x308B;</li>
+</ul>
+
+<p><br></p>
+
+<p><a href="https://sect.iij.ad.jp/d/2019/02/134052/20190213_fig1.png"><img src="https://sect.iij.ad.jp/d/2019/02/134052/20190213_fig1_thumb.png" alt="fig1" id="fig1"></a></p>
+
+<p>&#x4E0A;&#x306E;&#x30B0;&#x30E9;&#x30D5;&#x306F;&#x30CF;&#x30CB;&#x30FC;&#x30DD;&#x30C3;&#x30C8;&#x306B;&#x5230;&#x9054;&#x3059;&#x308B; SYN &#x30D1;&#x30B1;&#x30C3;&#x30C8;&#x306E;&#x3046;&#x3061;&#x3001;Masscan &#x3068; ZMap &#x306B;&#x3088;&#x308B;&#x30B9;&#x30AD;&#x30E3;&#x30F3;&#x304C;&#x5360;&#x3081;&#x308B;&#x5272;&#x5408;&#x3092;&#x793A;&#x3057;&#x305F;&#x3082;&#x306E;&#x3067;&#x3059;&#x3002;&#x65E5;&#x306B;&#x3088;&#x3063;&#x3066;&#x591A;&#x5C11;&#x306E;&#x5909;&#x52D5;&#x306F;&#x3042;&#x308A;&#x307E;&#x3059;&#x304C;&#x3001;&#x5E73;&#x5747;&#x3059;&#x308B;&#x3068; Masscan &#x306F; 16%&#x3001;ZMap &#x306F; 3%&#x7A0B;&#x5EA6;&#x3067;&#x3042;&#x308A;&#x3001;&#x4E21;&#x8005;&#x3092;&#x3042;&#x308F;&#x305B;&#x308B;&#x3068;&#x5168;&#x4F53;&#x306E;&#x7D04; 2&#x5272;&#x3092;&#x5360;&#x3081;&#x3066;&#x3044;&#x307E;&#x3059;<small><sup><a href="https://sect.iij.ad.jp/d/2019/02/134052.html#fn:footnote2" id="fnref:footnote2" class="footnote">[2]</a></sup></small>&#x3002;&#x30E6;&#x30CB;&#x30FC;&#x30AF;&#x306A;&#x9001;&#x4FE1;&#x5143;&#x30A2;&#x30C9;&#x30EC;&#x30B9;&#x6570;&#x3067;&#x306F;&#x3001;Masscan &#x304C; ZMap &#x306E;&#x7D04; 2&#x500D;&#x3068;&#x306A;&#x3063;&#x3066;&#x304A;&#x308A;&#x3001;&#x76F8;&#x5BFE;&#x7684;&#x306B; Masscan &#x306B;&#x3088;&#x308B;&#x30B9;&#x30AD;&#x30E3;&#x30F3;&#x306E;&#x65B9;&#x304C;&#x9001;&#x51FA;&#x3059;&#x308B;&#x30D1;&#x30B1;&#x30C3;&#x30C8;&#x6570;&#x304C;&#x591A;&#x3044;&#x3068;&#x3044;&#x3046;&#x7D50;&#x679C;&#x306B;&#x306A;&#x3063;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;&#x306A;&#x304A;&#x30CF;&#x30CB;&#x30FC;&#x30DD;&#x30C3;&#x30C8;&#x306B;&#x5230;&#x9054;&#x3059;&#x308B; SYN &#x30D1;&#x30B1;&#x30C3;&#x30C8;&#x306B;&#x306F;&#x9001;&#x4FE1;&#x5143;&#x30A2;&#x30C9;&#x30EC;&#x30B9;&#x3092;&#x507D;&#x88C5;&#x3057;&#x305F; SYN/ACK &#x30EA;&#x30D5;&#x30EC;&#x30AF;&#x30B7;&#x30E7;&#x30F3;&#x653B;&#x6483;&#x306E;&#x30D1;&#x30B1;&#x30C3;&#x30C8;&#x3082;&#x304B;&#x306A;&#x308A;&#x542B;&#x307E;&#x308C;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;&#x305D;&#x306E;&#x305F;&#x3081;&#x3001;&#x53EF;&#x80FD;&#x306A;&#x9650;&#x308A;&#x3053;&#x306E;&#x3088;&#x3046;&#x306A; DoS &#x653B;&#x6483;&#x306E;&#x30D1;&#x30B1;&#x30C3;&#x30C8;&#x3092;&#x96C6;&#x8A08;&#x30C7;&#x30FC;&#x30BF;&#x304B;&#x3089;&#x9664;&#x5916;&#x3057;&#x307E;&#x3057;&#x305F;<small><sup><a href="https://sect.iij.ad.jp/d/2019/02/134052.html#fn:footnote3" id="fnref:footnote3" class="footnote">[3]</a></sup></small>&#x3002;&#x307E;&#x305F;&#x53C2;&#x8003;&#x307E;&#x3067;&#x306B;&#x3001;IoT &#x30DC;&#x30C3;&#x30C8;&#x306E; Mirai &#x304A;&#x3088;&#x3073;&#x305D;&#x306E;&#x4E9C;&#x7A2E;&#x306B;&#x3088;&#x308B; SYN &#x30B9;&#x30AD;&#x30E3;&#x30F3;&#x306E;&#x30D1;&#x30B1;&#x30C3;&#x30C8;&#x306F; 3%&#x7A0B;&#x5EA6;&#x3067;&#x3001;ZMap &#x306B;&#x3088;&#x308B;&#x30B9;&#x30AD;&#x30E3;&#x30F3;&#x3068;&#x307B;&#x307C;&#x540C;&#x6570;&#x3067;&#x3059;&#x3002;</p>
+
+<p><a href="https://sect.iij.ad.jp/d/2019/02/134052/20190213_fig2.png"><img src="https://sect.iij.ad.jp/d/2019/02/134052/20190213_fig2_thumb.png" alt="fig2" id="fig2"></a></p>
+
+<p><a href="https://sect.iij.ad.jp/d/2019/02/134052/20190213_fig3.png"><img src="https://sect.iij.ad.jp/d/2019/02/134052/20190213_fig3_thumb.png" alt="fig3" id="fig3"></a></p>
+
+<p>&#x4E0A;&#x306E;&#x7A4D;&#x307F;&#x4E0A;&#x3052;&#x30B0;&#x30E9;&#x30D5;&#x306F; Masscan &#x3068; ZMap &#x305D;&#x308C;&#x305E;&#x308C;&#x306E; SYN &#x30D1;&#x30B1;&#x30C3;&#x30C8;&#x306B;&#x3064;&#x3044;&#x3066;&#x3001;&#x5B9B;&#x5148;&#x30DD;&#x30FC;&#x30C8;&#x5225;&#x306E;&#x63A8;&#x79FB;&#x3092;&#x793A;&#x3057;&#x305F;&#x3082;&#x306E;&#x3067;&#x3059;&#x3002;&#x30D1;&#x30B1;&#x30C3;&#x30C8;&#x6570;&#x306E;&#x591A;&#x3044;&#x4E0A;&#x4F4D; 10&#x30DD;&#x30FC;&#x30C8;&#x306E;&#x307F;&#x5185;&#x8A33;&#x3092;&#x793A;&#x3057;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;&#x30C0;&#x30FC;&#x30AF;&#x30CD;&#x30C3;&#x30C8;&#x306B;&#x304A;&#x3051;&#x308B;&#x89B3;&#x6E2C;&#x3068;&#x306F;&#x7570;&#x306A;&#x308A;&#x3001;&#x30CF;&#x30CB;&#x30FC;&#x30DD;&#x30C3;&#x30C8;&#x306F;&#x8907;&#x6570;&#x306E;&#x30DD;&#x30FC;&#x30C8;&#x306B;&#x304A;&#x3044;&#x3066; SYN &#x30D1;&#x30B1;&#x30C3;&#x30C8;&#x306B;&#x5FDC;&#x7B54;&#x3092;&#x8FD4;&#x3057;&#x307E;&#x3059;&#x3002;&#x305D;&#x306E;&#x305F;&#x3081;&#x30AA;&#x30FC;&#x30D7;&#x30F3;&#x3057;&#x3066;&#x3044;&#x308B;&#x3068;&#x5224;&#x65AD;&#x3055;&#x308C;&#x305F;&#x30DD;&#x30FC;&#x30C8;&#x306B;&#x5BFE;&#x3057;&#x3066;&#x306F;&#x7E70;&#x308A;&#x8FD4;&#x3057;&#x30B9;&#x30AD;&#x30E3;&#x30F3;&#x3055;&#x308C;&#x308B;&#x50BE;&#x5411;&#x304C;&#x3042;&#x308B;&#x70B9;&#x306B;&#x6CE8;&#x610F;&#x3057;&#x3066;&#x304F;&#x3060;&#x3055;&#x3044;&#x3002;</p>
+
+<p>&#x30B0;&#x30E9;&#x30D5;&#x304B;&#x3089;&#x306F;&#x4E21;&#x8005;&#x306B;&#x306F;&#x3063;&#x304D;&#x308A;&#x3068;&#x3057;&#x305F;&#x9055;&#x3044;&#x304C;&#x898B;&#x3066;&#x3068;&#x308C;&#x307E;&#x3059;&#x3002;&#x307E;&#x305A; Masscan &#x3067;&#x3059;&#x304C;&#x3001;SQL Server &#x306B;&#x5229;&#x7528;&#x3055;&#x308C;&#x308B; 1433/tcp&#x3001;SMB &#x30D7;&#x30ED;&#x30C8;&#x30B3;&#x30EB;&#x306B;&#x5229;&#x7528;&#x3055;&#x308C;&#x308B; 445/tcp &#x304C;&#x3084;&#x3084;&#x591A;&#x3044;&#x3082;&#x306E;&#x306E;&#x3001;&#x5E45;&#x5E83;&#x304F;&#x591A;&#x6570;&#x306E;&#x30DD;&#x30FC;&#x30C8;&#x306B;&#x5206;&#x6563;&#x3057;&#x3066;&#x3044;&#x308B;&#x305F;&#x3081;&#x3001;&#x4E0A;&#x4F4D; 10&#x30DD;&#x30FC;&#x30C8;&#x306E;&#x5272;&#x5408;&#x304C;&#x5C0F;&#x3055;&#x304F;&#x306A;&#x3063;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;&#x307E;&#x305F;&#x9001;&#x4FE1;&#x5143;&#x30A2;&#x30C9;&#x30EC;&#x30B9;&#x5225;&#x306B;&#x30C7;&#x30FC;&#x30BF;&#x3092;&#x8ABF;&#x3079;&#x308B;&#x3068;&#x3001;65535 &#x3059;&#x3079;&#x3066;&#x306E;&#x30DD;&#x30FC;&#x30C8;&#x3092;&#x30D5;&#x30EB;&#x30B9;&#x30AD;&#x30E3;&#x30F3;&#x3057;&#x3066;&#x3044;&#x308B;&#x30A2;&#x30C9;&#x30EC;&#x30B9;&#x304C;&#x3042;&#x308B;&#x307B;&#x304B;&#x3001;1000 &#x30DD;&#x30FC;&#x30C8;&#x4EE5;&#x4E0A;&#x30B9;&#x30AD;&#x30E3;&#x30F3;&#x3057;&#x3066;&#x3044;&#x308B;&#x30A2;&#x30C9;&#x30EC;&#x30B9;&#x3082;&#x591A;&#x6570;&#x5B58;&#x5728;&#x3057;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;&#x30B9;&#x30AD;&#x30E3;&#x30F3;&#x30D1;&#x30B1;&#x30C3;&#x30C8;&#x6570;&#x306E;&#x4E0A;&#x4F4D; 10&#x30A2;&#x30C9;&#x30EC;&#x30B9;&#x306B;&#x3064;&#x3044;&#x3066;&#x306F;&#x3001;&#x304A;&#x305D;&#x3089;&#x304F;&#x3069;&#x308C;&#x3082;&#x8ABF;&#x67FB;&#x76EE;&#x7684;&#x306E;&#x30B9;&#x30AD;&#x30E3;&#x30F3;&#x3067;&#x306F;&#x306A;&#x3044;&#x304B;&#x3068;&#x63A8;&#x6E2C;&#x3057;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;&#x4EE5;&#x4E0B;&#x306E; 2&#x3064;&#x306E;&#x56FD;&#x5185;&#x30D7;&#x30ED;&#x30B8;&#x30A7;&#x30AF;&#x30C8;&#x306F; IoT &#x6A5F;&#x5668;&#x306E;&#x8ABF;&#x67FB;&#x3092;&#x76EE;&#x7684;&#x3068;&#x3057;&#x305F;&#x30B9;&#x30AD;&#x30E3;&#x30F3;&#x3092;&#x5B9F;&#x65BD;&#x3057;&#x3066;&#x3044;&#x307E;&#x3059;&#x304C;&#x3001;&#x3069;&#x3061;&#x3089;&#x3082; Masscan &#x3092;&#x5229;&#x7528;&#x3057;&#x3066;&#x3044;&#x308B;&#x3088;&#x3046;&#x3067;&#x3059;&#x3002;</p>
+
+<ul>
+<li>2018&#x5E74;11&#x6708;08&#x65E5;&#x3000;&#x5E83;&#x57DF;&#x30CD;&#x30C3;&#x30C8;&#x30EF;&#x30FC;&#x30AF;&#x30B9;&#x30AD;&#x30E3;&#x30F3;&#x306B;&#x3088;&#x308B;&#x8ABF;&#x67FB;&#x306B;&#x3064;&#x3044;&#x3066; | NTT-AT <a href="https://www.ntt-at.co.jp/news/2018/detail/info181107.html" target="_blank" class="ext">https://www.ntt-at.co.jp/news/2018/detail/info181107.html</a></li>
+<li>&#x65E5;&#x672C;&#x56FD;&#x5185;&#x3067;&#x30A4;&#x30F3;&#x30BF;&#x30FC;&#x30CD;&#x30C3;&#x30C8;&#x306B;&#x63A5;&#x7D9A;&#x3055;&#x308C;&#x305F;IoT&#x6A5F;&#x5668;&#x7B49;&#x306B;&#x95A2;&#x3059;&#x308B;&#x4E8B;&#x524D;&#x8ABF;&#x67FB;&#x306E;&#x5B9F;&#x65BD;&#x306B;&#x3064;&#x3044;&#x3066;&#xFF08;12&#x6708;10&#x65E5;&#x66F4;&#x65B0;&#xFF09; | NICT-&#x60C5;&#x5831;&#x901A;&#x4FE1;&#x7814;&#x7A76;&#x6A5F;&#x69CB; <a href="https://www.nict.go.jp/info/topics/2018/11/07-2.html" target="_blank" class="ext">https://www.nict.go.jp/info/topics/2018/11/07-2.html</a></li>
+</ul>
+
+<p><br></p>
+
+<p>&#x4E00;&#x65B9; ZMap &#x306E;&#x307B;&#x3046;&#x306F;&#x3001;&#x5B9B;&#x5148;&#x30DD;&#x30FC;&#x30C8;&#x304C; 52869/tcp &#x306B;&#x5927;&#x304D;&#x304F;&#x504F;&#x3063;&#x3066;&#x3044;&#x308B;&#x307B;&#x304B;&#x3001;&#x30D1;&#x30B1;&#x30C3;&#x30C8;&#x6570;&#x4E0A;&#x4F4D; 10&#x30DD;&#x30FC;&#x30C8;&#x306B;&#x306F; IoT &#x6A5F;&#x5668;&#x3067;&#x3088;&#x304F;&#x5229;&#x7528;&#x3055;&#x308C;&#x308B;&#x30DD;&#x30FC;&#x30C8;&#x304C;&#x4E26;&#x3093;&#x3067;&#x3044;&#x307E;&#x3059;&#x3002;&#x3053;&#x306E;&#x3053;&#x3068;&#x304B;&#x3089;&#x3001;ZMap &#x306B;&#x3088;&#x308B;&#x3053;&#x308C;&#x3089;&#x306E;&#x30B9;&#x30AD;&#x30E3;&#x30F3;&#x306F;&#x8106;&#x5F31;&#x306A; IoT &#x6A5F;&#x5668;&#x3092;&#x63A2;&#x7D22;&#x3059;&#x308B;&#x76EE;&#x7684;&#x3067;&#x306F;&#x306A;&#x3044;&#x304B;&#x3068;&#x8003;&#x3048;&#x3089;&#x308C;&#x307E;&#x3059;&#x304C;&#x3001;&#x3053;&#x308C;&#x3060;&#x3051;&#x3067;&#x306F;&#x8ABF;&#x67FB;&#x7814;&#x7A76;&#x306B;&#x3088;&#x308B;&#x3082;&#x306E;&#x304B;&#x653B;&#x6483;&#x8005;&#x306B;&#x3088;&#x308B;&#x3082;&#x306E;&#x304B;&#x306F;&#x5224;&#x5225;&#x3067;&#x304D;&#x307E;&#x305B;&#x3093;&#x3002;&#x305D;&#x3053;&#x3067;&#x9001;&#x4FE1;&#x5143;&#x30A2;&#x30C9;&#x30EC;&#x30B9;&#x5225;&#x306B;&#x305D;&#x306E;&#x5185;&#x8A33;&#x3092;&#x898B;&#x3066;&#x307F;&#x308B;&#x3068;&#x3001;&#x30B9;&#x30AD;&#x30E3;&#x30F3;&#x30D1;&#x30B1;&#x30C3;&#x30C8;&#x6570;&#x306E;&#x4E0A;&#x4F4D; 5&#x30A2;&#x30C9;&#x30EC;&#x30B9;&#x306B;&#x3064;&#x3044;&#x3066;&#x306F;&#x3001;ZMap &#x306B;&#x3088;&#x308B;&#x30B9;&#x30AD;&#x30E3;&#x30F3;&#x5F8C;&#x306B; Mirai &#x3084; qBot &#x306A;&#x3069;&#x306E;&#x611F;&#x67D3;&#x3092;&#x8A66;&#x307F;&#x308B;&#x653B;&#x6483;&#x3092;&#x884C;&#x3063;&#x3066;&#x3044;&#x307E;&#x3057;&#x305F;&#x3002;&#x3053;&#x306E; 5&#x30A2;&#x30C9;&#x30EC;&#x30B9;&#x3067; ZMap &#x306B;&#x3088;&#x308B;&#x30B9;&#x30AD;&#x30E3;&#x30F3;&#x5168;&#x4F53;&#x306E;&#x7D04; 2&#x5272;&#x3092;&#x5360;&#x3081;&#x3066;&#x304A;&#x308A;&#x3001;&#x5C11;&#x6570;&#x306E;&#x653B;&#x6483;&#x8005;&#x306B;&#x3088;&#x308B;&#x30B9;&#x30AD;&#x30E3;&#x30F3;&#x306E;&#x5F71;&#x97FF;&#x304C;&#x5927;&#x304D;&#x3044;&#x3053;&#x3068;&#x304C;&#x308F;&#x304B;&#x308A;&#x307E;&#x3057;&#x305F;<small><sup><a href="https://sect.iij.ad.jp/d/2019/02/134052.html#fn:footnote4" id="fnref:footnote4" class="footnote">[4]</a></sup></small>&#x3002;&#x307E;&#x305F; Masscan &#x3068;&#x306F;&#x9055;&#x3063;&#x3066;&#x3001;1000&#x30DD;&#x30FC;&#x30C8;&#x4EE5;&#x4E0A;&#x30B9;&#x30AD;&#x30E3;&#x30F3;&#x3057;&#x3066;&#x3044;&#x308B;&#x30A2;&#x30C9;&#x30EC;&#x30B9;&#x306F; ZMap &#x3067;&#x306F; 1&#x3064;&#x3082;&#x3042;&#x308A;&#x307E;&#x305B;&#x3093;&#x3067;&#x3057;&#x305F;&#x3002;</p>
+
+<p>&#x4E0B;&#x306E;&#x30B0;&#x30E9;&#x30D5;&#x306F; ZMap &#x3067;&#x30D1;&#x30B1;&#x30C3;&#x30C8;&#x6570;&#x4E0A;&#x4F4D;&#x306E; 5&#x30DD;&#x30FC;&#x30C8;&#x306B;&#x3064;&#x3044;&#x3066;&#x3001;2019&#x5E74;1&#x6708;&#x306E; ZMap &#x3068; Masscan &#x306E; SYN &#x30D1;&#x30B1;&#x30C3;&#x30C8;&#x7DCF;&#x6570;&#x3092;&#x6BD4;&#x8F03;&#x3057;&#x305F;&#x3082;&#x306E;&#x3067;&#x3059;&#x3002;80/tcp &#x306F;&#x307B;&#x307C;&#x540C;&#x6570;&#x3067;&#x3059;&#x304C;&#x3001;&#x305D;&#x308C;&#x4EE5;&#x5916;&#x306F;&#x4E0A;&#x4F4D;&#x306E;&#x30DD;&#x30FC;&#x30C8;&#x307B;&#x3069; Masscan &#x3088;&#x308A;&#x3082; ZMap &#x3092;&#x5229;&#x7528;&#x3057;&#x305F;&#x30B9;&#x30AD;&#x30E3;&#x30F3;&#x306B;&#x5927;&#x304D;&#x304F;&#x504F;&#x3063;&#x3066;&#x3044;&#x308B;&#x3053;&#x3068;&#x304C;&#x308F;&#x304B;&#x308A;&#x307E;&#x3059;&#x3002;</p>
+
+<p><a href="https://sect.iij.ad.jp/d/2019/02/134052/20190213_fig4.png"><img src="https://sect.iij.ad.jp/d/2019/02/134052/20190213_fig4_thumb.png" alt="fig4" id="fig4"></a></p>
+
+<h4>&#x8003;&#x5BDF;</h4>
+
+<p>Masscan &#x3068; ZMap &#x306B;&#x3088;&#x308B;&#x30B9;&#x30AD;&#x30E3;&#x30F3;&#x306B;&#x306F;&#x5927;&#x304D;&#x306A;&#x9055;&#x3044;&#x304C;&#x3042;&#x308B;&#x3053;&#x3068;&#x304C;&#x30CF;&#x30CB;&#x30FC;&#x30DD;&#x30C3;&#x30C8;&#x306E;&#x89B3;&#x6E2C;&#x304B;&#x3089;&#x308F;&#x304B;&#x308A;&#x307E;&#x3057;&#x305F;&#x304C;&#x3001;&#x306A;&#x305C;&#x305D;&#x306E;&#x3088;&#x3046;&#x306A;&#x9055;&#x3044;&#x304C;&#x751F;&#x307E;&#x308C;&#x308B;&#x306E;&#x304B;&#x3001;&#x5B9F;&#x306F;&#x3088;&#x304F;&#x308F;&#x304B;&#x308A;&#x307E;&#x305B;&#x3093;&#x3002;&#x305F;&#x3068;&#x3048;&#x3070; IoT &#x30DC;&#x30C3;&#x30C8;&#x306E;&#x611F;&#x67D3;&#x3092;&#x8A66;&#x884C;&#x3059;&#x308B;&#x653B;&#x6483;&#x8005;&#x304C;&#x306A;&#x305C; Masscan &#x3088;&#x308A; ZMap &#x3092;&#x597D;&#x3093;&#x3067;&#x4F7F;&#x3046;&#x306E;&#x304B;&#x3001;&#x7406;&#x7531;&#x306F;&#x306F;&#x3063;&#x304D;&#x308A;&#x3057;&#x307E;&#x305B;&#x3093;&#x3002;&#x305F;&#x3060;&#x3053;&#x308C;&#x307E;&#x3067;&#x306B;&#x516C;&#x958B;&#x3055;&#x308C;&#x3066;&#x3044;&#x308B; IoT &#x6A5F;&#x5668;&#x306E;&#x653B;&#x6483;&#x7528;&#x30B9;&#x30AF;&#x30EA;&#x30D7;&#x30C8;&#x3084;&#x30C1;&#x30E5;&#x30FC;&#x30C8;&#x30EA;&#x30A2;&#x30EB;&#x3092;&#x8ABF;&#x3079;&#x308B;&#x3068;&#x3001;ZMap &#x3092;&#x5229;&#x7528;&#x3057;&#x3066;&#x30B9;&#x30AD;&#x30E3;&#x30F3;&#x3092;&#x884C;&#x3044;&#x3001;&#x305D;&#x306E;&#x5F8C;&#x306B;&#x30A8;&#x30AF;&#x30B9;&#x30D7;&#x30ED;&#x30A4;&#x30C8;&#x3092;&#x5B9F;&#x884C;&#x3059;&#x308B;&#x3082;&#x306E;&#x304C;&#x591A;&#x6570;&#x5B58;&#x5728;&#x3057;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;&#x4E00;&#x65B9; Masscan &#x306B;&#x3064;&#x3044;&#x3066;&#x306F;&#x3053;&#x3046;&#x3044;&#x3063;&#x305F;&#x3082;&#x306E;&#x306F;&#x3042;&#x307E;&#x308A;&#x898B;&#x5F53;&#x305F;&#x308A;&#x307E;&#x305B;&#x3093;&#x3002;</p>
+
+<p>52869/tcp &#x30DD;&#x30FC;&#x30C8;&#x306B;&#x5BFE;&#x3057;&#x3066; ZMap &#x306B;&#x3088;&#x308B;&#x5927;&#x91CF;&#x306E;&#x30B9;&#x30AD;&#x30E3;&#x30F3;&#x3092;&#x89B3;&#x6E2C;&#x3057;&#x3066;&#x3044;&#x308B;&#x7406;&#x7531;&#x306E;&#x4E00;&#x3064;&#x306F;&#x3001;&#x3053;&#x3046;&#x3057;&#x305F;&#x653B;&#x6483;&#x30C4;&#x30FC;&#x30EB;&#x306E;&#x5B58;&#x5728;&#x306B;&#x3042;&#x308B;&#x3068;&#x8003;&#x3048;&#x307E;&#x3059;&#x3002;&#x65E5;&#x672C;&#x56FD;&#x5185;&#x306B;&#x306F; Realtek &#x306E;&#x8106;&#x5F31;&#x6027; (CVE-2014-8361) &#x3092;&#x6301;&#x3064;&#x6A5F;&#x5668;&#x304C;&#x591A;&#x6570;&#x5B58;&#x5728;&#x3057;&#x3066;&#x3044;&#x308B;&#x3053;&#x3068;&#x306F;&#x3059;&#x3067;&#x306B;&#x5E83;&#x304F;&#x77E5;&#x3089;&#x308C;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;&#x305D;&#x306E;&#x305F;&#x3081; Realtek &#x306E;&#x8106;&#x5F31;&#x6027;&#x3092;&#x653B;&#x6483;&#x3059;&#x308B;&#x30C4;&#x30FC;&#x30EB;&#x306E;&#x30D1;&#x30C3;&#x30B1;&#x30FC;&#x30B8;&#x306B;&#x306F;&#x65E5;&#x672C;&#x306E; IP &#x30A2;&#x30C9;&#x30EC;&#x30B9;&#x30EA;&#x30B9;&#x30C8;<small><sup><a href="https://sect.iij.ad.jp/d/2019/02/134052.html#fn:footnote5" id="fnref:footnote5" class="footnote">[5]</a></sup></small>&#x304C;&#x542B;&#x307E;&#x308C;&#x3066;&#x304A;&#x308A;&#x3001;ZMap &#x3092;&#x5229;&#x7528;&#x3057;&#x3066;&#x3053;&#x306E;&#x30EA;&#x30B9;&#x30C8;&#x306B;&#x5BFE;&#x3057;&#x3066; 52869/tcp &#x30DD;&#x30FC;&#x30C8;&#x3092;&#x30B9;&#x30AD;&#x30E3;&#x30F3;&#x3059;&#x308B;&#x3088;&#x3046;&#x306B;&#x8A2D;&#x5B9A;&#x3055;&#x308C;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;&#x653B;&#x6483;&#x8005;&#x306E;&#x591A;&#x304F;&#x304C;&#x3053;&#x3046;&#x3057;&#x305F;&#x30C4;&#x30FC;&#x30EB;&#x3092;&#x5229;&#x7528;&#x3057;&#x3066;&#x3044;&#x308B;&#x304B;&#x3001;&#x53C2;&#x8003;&#x306B;&#x3057;&#x3066;&#x3044;&#x308B;&#x306E;&#x3067;&#x306F;&#x306A;&#x3044;&#x304B;&#x3068;&#x63A8;&#x6E2C;&#x3057;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;&#x4EE5;&#x4E0B;&#x306F;&#x653B;&#x6483;&#x30C4;&#x30FC;&#x30EB;&#x306B;&#x542B;&#x307E;&#x308C;&#x3066;&#x3044;&#x308B;&#x30B7;&#x30A7;&#x30EB;&#x30B9;&#x30AF;&#x30EA;&#x30D7;&#x30C8;&#x306E;&#x4F8B;&#x3067;&#x3059;&#x3002;</p>
+
+<pre><code>zmap -p52869 -wjp.lst -o jp; python realtek.py jp; killall python -9;
+</code></pre>
+
+<p>&#x3053;&#x3046;&#x3057;&#x305F;&#x30C4;&#x30FC;&#x30EB;&#x3092;&#x6539;&#x5909;&#x3057;&#x3066;&#x5229;&#x7528;&#x3059;&#x308B;&#x3053;&#x3068;&#x306F;&#x6BD4;&#x8F03;&#x7684;&#x5BB9;&#x6613;&#x3067;&#x3042;&#x308A;&#x3001;&#x65B0;&#x305F;&#x306A;&#x653B;&#x6483;&#x8005;&#x304C;&#x53C2;&#x5165;&#x3057;&#x3084;&#x3059;&#x3044;&#x8981;&#x56E0;&#x306E;&#x4E00;&#x3064;&#x306B;&#x306A;&#x3063;&#x3066;&#x3044;&#x308B;&#x306E;&#x3067;&#x306F;&#x306A;&#x3044;&#x304B;&#x3068;&#x8003;&#x3048;&#x307E;&#x3059;&#x3002;&#x307E;&#x305F;&#x3053;&#x306E;&#x3088;&#x3046;&#x306A;&#x653B;&#x6483;&#x30C4;&#x30FC;&#x30EB;&#x306E;&#x5229;&#x7528;&#x304C;&#x591A;&#x3044;&#x306E;&#x3060;&#x3068;&#x3059;&#x308B;&#x3068;&#x3001;&#x89B3;&#x6E2C;&#x5834;&#x6240; (IP &#x30A2;&#x30C9;&#x30EC;&#x30B9;) &#x306B;&#x3088;&#x3063;&#x3066;&#x89B3;&#x6E2C;&#x7D50;&#x679C;&#x304C;&#x304B;&#x306A;&#x308A;&#x5909;&#x308F;&#x308B;&#x3053;&#x3068;&#x304C;&#x4E88;&#x60F3;&#x3055;&#x308C;&#x307E;&#x3059;&#x3002;IIJ &#x306E;&#x30CF;&#x30CB;&#x30FC;&#x30DD;&#x30C3;&#x30C8;&#x306F;&#x56FD;&#x5185;&#x306B;&#x8A2D;&#x7F6E;&#x3055;&#x308C;&#x3066;&#x3044;&#x308B;&#x305F;&#x3081;&#x3001;52869/tcp &#x3078;&#x306E;&#x30B9;&#x30AD;&#x30E3;&#x30F3;&#x304C;&#x591A;&#x304F;&#x89B3;&#x6E2C;&#x3055;&#x308C;&#x3066;&#x3044;&#x307E;&#x3059;&#x304C;&#x3001;&#x56FD;&#x5916;&#x306E;&#x89B3;&#x6E2C;&#x5730;&#x70B9;&#x3067;&#x306F;&#x304A;&#x305D;&#x3089;&#x304F;&#x9055;&#x3046;&#x3067;&#x3057;&#x3087;&#x3046;&#x3002;&#x653B;&#x6483;&#x8005;&#x306B;&#x3088;&#x308B;&#x6D3B;&#x52D5;&#x72B6;&#x6CC1;&#x306A;&#x3069;&#x4ECA;&#x5F8C;&#x3082;&#x7D99;&#x7D9A;&#x3057;&#x3066;&#x8ABF;&#x67FB;&#x3001;&#x5206;&#x6790;&#x3092;&#x3057;&#x3066;&#x3044;&#x304D;&#x307E;&#x3059;&#x3002;</p>
+
+<div class="footnotes">
+<hr>
+<ol>
+
+<li id="fn:footnote1"><p>Masscan &#x306F; GNU General Public License Version 3&#x3001;ZMap &#x306F; Apache License Version 2.0 &#x306E;&#x30E9;&#x30A4;&#x30BB;&#x30F3;&#x30B9;&#x3067;&#x305D;&#x308C;&#x305E;&#x308C;&#x516C;&#x958B;&#x3055;&#x308C;&#x3066;&#x3044;&#x308B;&#x3002;<a href="https://sect.iij.ad.jp/d/2019/02/134052.html#fnref:footnote1" class="reversefootnote">&#xA0;&#x21A9;</a></p></li>
+
+<li id="fn:footnote2"><p>1/29&#x304B;&#x3089; 1/31&#x306B;&#x304B;&#x3051;&#x3066;&#x3001;&#x5358;&#x4E00;&#x306E; IP &#x30A2;&#x30C9;&#x30EC;&#x30B9;&#x304B;&#x3089;&#x901A;&#x5E38;&#x306E;&#x30B9;&#x30AD;&#x30E3;&#x30F3;&#x30C8;&#x30E9;&#x30D5;&#x30A3;&#x30C3;&#x30AF;&#x306E;&#x6570;&#x500D;&#x306B;&#x3042;&#x305F;&#x308B;&#x5927;&#x91CF;&#x306E;&#x30B9;&#x30AD;&#x30E3;&#x30F3;&#x3092;&#x89B3;&#x6E2C;&#x3057;&#x305F;&#x305F;&#x3081;&#x3001;&#x3053;&#x306E;&#x30C7;&#x30FC;&#x30BF;&#x306F;&#x7570;&#x5E38;&#x5024;&#x3068;&#x3057;&#x3066;&#x96C6;&#x8A08;&#x30C7;&#x30FC;&#x30BF;&#x304B;&#x3089;&#x306F;&#x9664;&#x5916;&#x3057;&#x3066;&#x3044;&#x308B;&#x3002;&#x306A;&#x304A;&#x3053;&#x306E;&#x30B9;&#x30AD;&#x30E3;&#x30F3;&#x306F; Masscan &#x3092;&#x5229;&#x7528;&#x3057;&#x305F;&#x30D5;&#x30EB;&#x30DD;&#x30FC;&#x30C8;&#x306E;&#x30B9;&#x30AD;&#x30E3;&#x30F3;&#x3060;&#x3063;&#x305F;&#x3002;<a href="https://sect.iij.ad.jp/d/2019/02/134052.html#fnref:footnote2" class="reversefootnote">&#xA0;&#x21A9;</a></p></li>
+
+<li id="fn:footnote3"><p>TCP &#x306E; SYN/ACK &#x30EA;&#x30D5;&#x30EC;&#x30AF;&#x30B7;&#x30E7;&#x30F3;&#x653B;&#x6483;&#x306B;&#x3064;&#x3044;&#x3066;&#x306F;&#x3001;&#x6B21;&#x306E;&#x8A18;&#x4E8B;&#x3092;&#x53C2;&#x7167;&#x306E;&#x3053;&#x3068;&#x3002;IIJ &#x3067;&#x306F; 2019&#x5E74;1&#x6708;&#x5F8C;&#x534A;&#x304B;&#x3089; 23/tcp &#x3084; 2323/tcp &#x306A;&#x3069;&#x3092;&#x5B9B;&#x5148;&#x30DD;&#x30FC;&#x30C8;&#x3068;&#x3057;&#x305F; SYN/ACK &#x30EA;&#x30D5;&#x30EC;&#x30AF;&#x30B7;&#x30E7;&#x30F3;&#x653B;&#x6483;&#x3092;&#x89B3;&#x6E2C;&#x3057;&#x3066;&#x3044;&#x308B;&#x3002;
+&#x300C;IIJ Security Diary: IoT &#x6A5F;&#x5668;&#x3092;&#x8E0F;&#x307F;&#x53F0;&#x3068;&#x3057;&#x3066;&#x5229;&#x7528;&#x3059;&#x308B; SYN/ACK &#x30EA;&#x30D5;&#x30EC;&#x30AF;&#x30B7;&#x30E7;&#x30F3;&#x653B;&#x6483;&#x300D; <a href="https://sect.iij.ad.jp/d/2019/02/128021.html">https://sect.iij.ad.jp/d/2019/02/128021.html</a><a href="https://sect.iij.ad.jp/d/2019/02/134052.html#fnref:footnote3" class="reversefootnote">&#xA0;&#x21A9;</a></p></li>
+
+<li id="fn:footnote4"><p>&#x305F;&#x3060;&#x3057;&#x4E0A;&#x4F4D; 10&#x30A2;&#x30C9;&#x30EC;&#x30B9;&#x4E2D;&#x306E; 4&#x30A2;&#x30C9;&#x30EC;&#x30B9;&#x306B;&#x3064;&#x3044;&#x3066;&#x306F;&#x3001;&#x304A;&#x305D;&#x3089;&#x304F;&#x8ABF;&#x67FB;&#x76EE;&#x7684;&#x306E;&#x30B9;&#x30AD;&#x30E3;&#x30F3;&#x3068;&#x8003;&#x3048;&#x3089;&#x308C;&#x308B;&#x3002;<a href="https://sect.iij.ad.jp/d/2019/02/134052.html#fnref:footnote4" class="reversefootnote">&#xA0;&#x21A9;</a></p></li>
+
+<li id="fn:footnote5"><p>&#x3053;&#x306E;&#x30EA;&#x30B9;&#x30C8;&#x306B;&#x306F;&#x65E5;&#x672C;&#x306B;&#x5272;&#x308A;&#x5F53;&#x3066;&#x3089;&#x308C;&#x3066;&#x3044;&#x308B; 4,000&#x4EE5;&#x4E0A;&#x306E; IPv4 &#x30A2;&#x30C9;&#x30EC;&#x30B9;&#x30EC;&#x30F3;&#x30B8;&#x304C;&#x542B;&#x307E;&#x308C;&#x3066;&#x3044;&#x308B;&#x3002;<a href="https://sect.iij.ad.jp/d/2019/02/134052.html#fnref:footnote5" class="reversefootnote">&#xA0;&#x21A9;</a></p></li>
+
+</ol>
+</div>
+
+
+      <dl class="entryfoot">
+	<dt>-<dt><dd>&#xA0;</dd>
+	<dt>&#x30AB;&#x30C6;&#x30B4;&#x30EA;&#x30FC; : </dt>
+	<dd>
+	  <a href="https://sect.iij.ad.jp/d/cat/incident.html">&#x30BB;&#x30AD;&#x30E5;&#x30EA;&#x30C6;&#x30A3;&#x4E8B;&#x4EF6;</a>&#xA0;&#xA0;
+	</dd>
+	<dt>&#x30BF;&#x30B0; : </dt>
+	<dd>
+	  <a href="https://sect.iij.ad.jp/d/tag/IoT.html">IoT</a>&#xA0;&#xA0;
+	</dd>
+	<dt>&#x3053;&#x306E;&#x8A18;&#x4E8B;&#x306E;URL : </dt>
+	<dd><a href="https://sect.iij.ad.jp/d/2019/02/134052.html">https://sect.iij.ad.jp/d/2019/02/134052.html</a></dd>
+      </dt></dt></dl>
+    </article>
+
+    <div class="sns">
+      <ul>
+	<li><div class="fb-like" data-href="https://sect.iij.ad.jp/d/2019/02/134052.html" data-layout="button_count" data-action="recommend" data-size="small" data-show-faces="false" data-share="true"></div></li>
+	<li><a href="https://twitter.com/share" class="twitter-share-button" data-count="none" data-via="IIJSECT" data-lang="ja">Tweet</a>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</li>
+	<li><g:plusone size="medium" annotation="none"></g:plusone></li>
+      </ul>
+    </div>
+
+  </section>
+</div>
+
+
+</div>
+
+
+
+<footer>
+&#xA9; 2011-2017 Internet Initiative Japan Inc.
+</footer>
+
+
+</div>
+</body>
+</html>
