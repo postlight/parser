@@ -11,7 +11,7 @@ jobs:
     steps:
       - checkout
       # For some reason phantomjs-prebuild is failing w/yarn, but npm installing works
-      - run: 'npm install phantomjs-prebuilt'
+      - run: 'npm install --no-save phantomjs-prebuilt'
       - run: 'yarn install'
       - run: 'yarn lint:ci'
       - run: 'yarn build:ci'
