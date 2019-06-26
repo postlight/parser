@@ -28,6 +28,19 @@ describe('convertLazyLoadedImages($)', () => {
     );
   });
 
+  it('moves image source candidates containing query strings to srcset if placed in another attribute', () => {
+    const html =
+      '<img data-srcset="http://example.com/foo.jpg?w=400 2x, http://example.com/foo.jpg?w=600 3x">';
+    const $ = cheerio.load(html);
+
+    const result = convertLazyLoadedImages($).html();
+
+    assert.equal(
+      result,
+      '<img data-srcset="http://example.com/foo.jpg?w=400 2x, http://example.com/foo.jpg?w=600 3x" srcset="http://example.com/foo.jpg?w=400 2x, http://example.com/foo.jpg?w=600 3x">'
+    );
+  });
+
   it('properly handles src and srcset attributes', () => {
     const html =
       '<img data-src="http://example.com/foo.jpg" data-srcset="http://example.com/foo.jpg 2x">';
