@@ -17,12 +17,6 @@ describe('Mercury', () => {
       assert(/does not look like a valid URL/i.test(error.message));
     });
 
-    it('returns an error if a bad url is passed', async () => {
-      const error = await Mercury.parse('foo.com');
-
-      assert(/does not look like a valid URL/i.test(error.message));
-    });
-
     it('does the whole thing', async () => {
       const result = await Mercury.parse(
         'http://deadspin.com/remember-when-donald-trump-got-booed-for-butchering-ta-1788216229'
