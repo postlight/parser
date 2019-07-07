@@ -11,7 +11,7 @@ import Mercury from '@postlight/mercury-parser';
 //...
 import ExampleComExtractor from './ExampleComExtractor';
 
-Mercury.add(ExampleComExtractor);
+Mercury.addExtractor(ExampleComExtractor);
 
 //...
 
