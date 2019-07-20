@@ -125,7 +125,7 @@
     "turndown": "^5.0.3",
     "url": "^0.11.0",
     "valid-url": "^1.0.9",
-    "wuzzy": "^0.1.3",
+    "wuzzy": "^0.1.4",
     "yargs-parser": "^13.0.0"
   },
   "bundleDependencies": [
