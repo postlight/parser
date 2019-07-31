@@ -9,15 +9,18 @@ import RootExtractor, { selectExtendedTypes } from 'extractors/root-extractor';
 import collectAllPages from 'extractors/collect-all-pages';
 
 const Mercury = {
-  async parse(url, { html, ...opts } = {}) {
-    const {
+  async parse(
+    url,
+    {
+      html,
       fetchAllPages = true,
       fallback = true,
       contentType = 'html',
       headers = {},
       extend,
-    } = opts;
-
+      fetchOptions = {},
+    } = {}
+  ) {
     // if no url was passed and this is the browser version,
     // set url to window.location.href and load the html
     // from the current page
@@ -36,7 +39,13 @@ const Mercury = {
       };
     }
 
-    const $ = await Resource.create(url, html, parsedUrl, headers);
+    const $ = await Resource.create(
+      url,
+      html,
+      parsedUrl,
+      headers,
+      fetchOptions
+    );
 
     // If we found an error creating the resource, return that error
     if ($.failed) {

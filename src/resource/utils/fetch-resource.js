@@ -86,7 +86,12 @@ export function baseDomain({ host }) {
 // TODO: Ensure we are not fetching something enormous. Always return
 //       unicode content for HTML, with charset conversion.
 
-export default async function fetchResource(url, parsedUrl, headers = {}) {
+export default async function fetchResource(
+  url,
+  parsedUrl,
+  headers = {},
+  fetchOptions = {}
+) {
   parsedUrl = parsedUrl || URL.parse(encodeURI(url));
   const options = {
     url: parsedUrl.href,
@@ -107,6 +112,7 @@ export default async function fetchResource(url, parsedUrl, headers = {}) {
           // Follow GET redirects; this option is for Node only
           followRedirect: true,
         }),
+    ...fetchOptions,
   };
 
   const { response, body } = await get(options);
