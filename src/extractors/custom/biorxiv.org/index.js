@@ -12,7 +12,7 @@ export const BiorxivOrgExtractor = {
   },
 
   content: {
-    selectors: ['div#abstract-1 > h2 + p'],
+    selectors: ['div#abstract-1'],
 
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images
