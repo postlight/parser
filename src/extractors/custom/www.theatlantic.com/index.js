@@ -11,7 +11,7 @@ export const TheAtlanticExtractor = {
   },
 
   content: {
-    selectors: [['section[itemprop="articleBody"]', 'p']],
+    selectors: ['article', '.article-body'],
 
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images
@@ -25,10 +25,10 @@ export const TheAtlanticExtractor = {
       '.callout',
       '.c-article-writer__image',
       '.c-article-writer__content',
-      '.s-cms-content',
       '.c-letters-cta__text',
       '.c-footer__logo',
       '.c-recirculation-link',
+      '.twitter-tweet',
     ],
   },
 
