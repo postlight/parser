@@ -1,10 +1,8 @@
 export const MediumExtractor = {
   domain: 'medium.com',
 
-  supportedDomains: ['trackchanges.postlight.com'],
-
   title: {
-    selectors: ['h1'],
+    selectors: [['meta[name="og:title"]', 'value'], 'h1'],
   },
 
   author: {
@@ -12,11 +10,7 @@ export const MediumExtractor = {
   },
 
   content: {
-    selectors: [
-      ['.section-content'],
-      '.section-content',
-      'article > div > section',
-    ],
+    selectors: ['article'],
 
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images
@@ -49,11 +43,11 @@ export const MediumExtractor = {
     // Is there anything that is in the result that shouldn't be?
     // The clean selectors will remove anything that matches from
     // the result
-    clean: [],
+    clean: ['div > a > img', 'svg + img'],
   },
 
   date_published: {
-    selectors: [['time[datetime]', 'datetime']],
+    selectors: [['meta[name="article:published_time"]', 'value']],
   },
 
   lead_image_url: {
@@ -61,9 +55,7 @@ export const MediumExtractor = {
   },
 
   dek: {
-    selectors: [
-      // enter selectors
-    ],
+    selectors: ['h2'],
   },
 
   next_page_url: {
