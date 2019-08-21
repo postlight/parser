@@ -29,8 +29,8 @@ export const MediumExtractor = {
           return;
         }
 
-        // If we can't draw the YouTube preview, hide the figure.
-        $parent.empty();
+        // If we can't draw the YouTube preview, remove the figure.
+        $parent.remove();
       },
 
       // rewrite figures to pull out image and caption, remove rest
