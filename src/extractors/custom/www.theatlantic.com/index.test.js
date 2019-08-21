@@ -35,7 +35,8 @@ describe('AtlanticExtractor', () => {
       // selectors in ./src/extractors/custom/www.theatlantic.com/index.js. This test is just
       // a stub; you can add more fields to test as much of
       // your parser as possible.
-      const { content, title, author } = await result;
+      const { content, title, author, dek, lead_image_url } = await result;
+
       const $ = cheerio.load(content);
       const text = $('*')
         .first()
@@ -48,7 +49,15 @@ describe('AtlanticExtractor', () => {
         'Why New Yorkers Received a Push Alert About a Manhunt'
       );
       assert.equal(author, 'Kaveh Waddell');
-      assert.equal(text, 'New York police offi');
+      assert.equal(text, 'The city has never b');
+      assert.equal(
+        dek,
+        'The city has never before used the emergency system the way it did Monday morning.'
+      );
+      assert.equal(
+        lead_image_url,
+        'https://cdn.theatlantic.com/assets/media/img/mt/2016/09/RTSO9RP/lead_720_405.jpg?mod=1533691849'
+      );
     });
   });
 });
