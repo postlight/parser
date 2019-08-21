@@ -187,7 +187,7 @@ export const ExampleExtractor = {
   },
 ```
 
-For much more complex tranforms, you can perform dom manipulation within the tranform function, but this is discouraged unless absolutely necessary. See, for example, the lazy-loaded image transform in [the NYTimesExtractor](www.nytimes.com/index.js#L25), which transforms the `src` attribute on the lazy-loaded image.
+For much more complex tranforms, you can perform dom manipulation within the tranform function, but this is discouraged unless absolutely necessary. See, for example, the lazy-loaded image transform in [the NYTimesExtractor](www.nytimes.com/index.js#L15), which transforms the `src` attribute on the lazy-loaded image.
 
 ## How to generate a custom parser
 
@@ -334,7 +334,7 @@ You can refer to the [NewYorkerExtractor](www.newyorker.com/index.js) to see mor
 
 ### Step 4: Content extraction
 
-I've left content extraction for last, since it's often the trickiest, sometimes requiring special passes to [clean](#cleaning-content) and [transform](#using-tranforms) the content. For the New Yorker, the first part is easy: The selector for this page is clearly `div#articleBody`. But that's just our first step, because unlike the other tests, where we want to make sure we're matching a simple string, we need to sanity check that the page looks good when it's rendered, and that there aren't any elements returned by our selector that we don't want.
+I've left content extraction for last, since it's often the trickiest, sometimes requiring special passes to [clean](#cleaning-content-from-an-article) and [transform](#using-transforms) the content. For the New Yorker, the first part is easy: The selector for this page is clearly `div#articleBody`. But that's just our first step, because unlike the other tests, where we want to make sure we're matching a simple string, we need to sanity check that the page looks good when it's rendered, and that there aren't any elements returned by our selector that we don't want.
 
 To aid you in previewing the results, you can run the `./preview` script to see what the title and content output look like. So, after you've chosen your selector, run the preview script on the URL you're testing:
 
@@ -342,7 +342,7 @@ To aid you in previewing the results, you can run the `./preview` script to see 
 ./preview http://www.newyorker.com/tech/elements/hacking-cryptography-and-the-countdown-to-quantum-computing
 ```
 
-This script will open both an `html` and `json` file allowing you to preview your results. Luckily for us, the New Yorker content is simple, and doesn't require any unusual cleaning or transformations — at least not in this example. Remember that if you do see content that needs cleaned or transformed in the selected content, you can follow the instructions in the [clean](#cleaning-content) and [transform](#using-tranforms) sections above.
+This script will open both an `html` and `json` file allowing you to preview your results. Luckily for us, the New Yorker content is simple, and doesn't require any unusual cleaning or transformations — at least not in this example. Remember that if you do see content that needs cleaned or transformed in the selected content, you can follow the instructions in the [clean](#cleaning-content-from-an-article) and [transform](#using-transforms) sections above.
 
 ## Submitting a custom extractor
 
