@@ -187,7 +187,7 @@ export const ExampleExtractor = {
   },
 ```
 
-For much more complex tranforms, you can perform dom manipulation within the tranform function, but this is discouraged unless absolutely necessary. See, for example, the lazy-loaded image transform in [the NYTimesExtractor](www.nytimes.com/index.js#L25), which transforms the `src` attribute on the lazy-loaded image.
+For much more complex tranforms, you can perform dom manipulation within the tranform function, but this is discouraged unless absolutely necessary. See, for example, the lazy-loaded image transform in [the NYTimesExtractor](www.nytimes.com/index.js#L15), which transforms the `src` attribute on the lazy-loaded image.
 
 ## How to generate a custom parser
 
