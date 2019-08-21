@@ -2,7 +2,7 @@ export const MediumExtractor = {
   domain: 'medium.com',
 
   title: {
-    selectors: [['meta[name="og:title"]', 'value'], 'h1'],
+    selectors: ['h1', ['meta[name="og:title"]', 'value']],
   },
 
   author: {
@@ -19,14 +19,18 @@ export const MediumExtractor = {
       iframe: $node => {
         const ytRe = /https:\/\/i.embed.ly\/.+url=https:\/\/i\.ytimg\.com\/vi\/(\w+)\//;
         const thumb = decodeURIComponent($node.attr('data-thumbnail'));
+        const $parent = $node.parents('figure');
 
         if (ytRe.test(thumb)) {
           const [_, youtubeId] = thumb.match(ytRe); // eslint-disable-line
           $node.attr('src', `https://www.youtube.com/embed/${youtubeId}`);
-          const $parent = $node.parents('figure');
           const $caption = $parent.find('figcaption');
           $parent.empty().append([$node, $caption]);
+          return;
         }
+
+        // If we can't draw the YouTube preview, hide the figure.
+        $parent.empty();
       },
 
       // rewrite figures to pull out image and caption, remove rest
@@ -36,14 +40,22 @@ export const MediumExtractor = {
 
         const $img = $node.find('img').slice(-1)[0];
         const $caption = $node.find('figcaption');
+
         $node.empty().append([$img, $caption]);
+      },
+
+      // Remove any smaller images that did not get caught by the generic image
+      // cleaner (author photo 48px, leading sentence images 79px, etc.).
+      img: $node => {
+        const width = parseInt($node.attr('width'), 10);
+        if (width < 100) $node.remove();
       },
     },
 
     // Is there anything that is in the result that shouldn't be?
     // The clean selectors will remove anything that matches from
     // the result
-    clean: ['div > a > img', 'svg + img'],
+    clean: ['span', 'svg'],
   },
 
   date_published: {
@@ -55,7 +67,7 @@ export const MediumExtractor = {
   },
 
   dek: {
-    selectors: ['h2'],
+    selectors: [['meta[name="og:description"]', 'value']],
   },
 
   next_page_url: {

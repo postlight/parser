@@ -50,7 +50,7 @@ describe('MediumExtractor', () => {
     it('returns the dek', async () => {
       const { dek } = await result;
 
-      assert.equal(dek, null);
+      assert.equal(dek, 'My talk at the White House Frontiers Conference');
     });
 
     it('returns the lead_image_url', async () => {
@@ -80,7 +80,7 @@ describe('MediumExtractor', () => {
 
       assert.equal(
         first13,
-        'Video of WTF? My talk at the White House Frontiers ConferenceOct 19, 2016'
+        'Last Thursday, I had the honor to be one of the warmup acts'
       );
     });
   });
