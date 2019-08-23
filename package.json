@@ -79,7 +79,7 @@
     "eslint-plugin-react": "^7.12.3",
     "express": "^4.16.4",
     "husky": "^3.0.0",
-    "inquirer": "^6.2.1",
+    "inquirer": "^7.0.0",
     "jasmine-core": "^2.5.2",
     "jest": "^23.6.0",
     "jest-cli": "^23.6.0",
