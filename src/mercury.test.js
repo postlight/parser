@@ -209,7 +209,6 @@ describe('Mercury', () => {
     const result = await Mercury.parse(url, { html });
     assert.equal(typeof result, 'object');
     assert.equal(result.domain, 'www.theonion.com');
-    assert.equal(result.date_published, '2019-08-27T19:56:00.000Z');
     assert.equal(result.total_pages, 1);
     assert.equal(
       result.title,
