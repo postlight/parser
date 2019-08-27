@@ -66,9 +66,7 @@ export const MediumExtractor = {
     selectors: [['meta[name="og:image"]', 'value']],
   },
 
-  dek: {
-    selectors: [['meta[name="og:description"]', 'value']],
-  },
+  dek: null,
 
   next_page_url: {
     selectors: [

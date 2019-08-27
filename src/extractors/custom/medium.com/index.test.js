@@ -50,7 +50,7 @@ describe('MediumExtractor', () => {
     it('returns the dek', async () => {
       const { dek } = await result;
 
-      assert.equal(dek, 'My talk at the White House Frontiers Conference');
+      assert.equal(dek, null);
     });
 
     it('returns the lead_image_url', async () => {
