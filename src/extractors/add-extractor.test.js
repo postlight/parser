@@ -12,13 +12,13 @@ describe('addExtractor({ hostName, baseDomain, extractor })', () => {
   });
 
   it('can add custom extractor using hostName as key', () => {
-    const hostName = 'www.example.com';
+    const hostName = 'www.somewebsite.com';
     const result = addExtractor({ hostName, extractor: {} });
     assert.equal(typeof result[hostName], 'object');
   });
 
   it('can add custom extractor using baseDomain as key', () => {
-    const baseDomain = 'example.com';
+    const baseDomain = 'somewebsite.com';
     const result = addExtractor({ baseDomain, extractor: {} });
     assert.equal(typeof result[baseDomain], 'object');
   });
