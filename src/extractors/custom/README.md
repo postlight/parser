@@ -373,6 +373,8 @@ const customExtractor = {
 
 ### Step 2: Add your custom extractor.
 
+Use either a `hostName` or `baseDomain` (or both) and include your custom extractor.
+
 ```javascript
 Mercury.addCustomExtractor({
   baseDomain: 'theonion.com',
