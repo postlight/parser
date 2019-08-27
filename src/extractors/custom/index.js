@@ -131,3 +131,4 @@ export * from './www.lemonde.fr';
 export * from './www.phoronix.com';
 export * from './pitchfork.com';
 export * from './biorxiv.org';
+export * from './epaper.zeit.de';
