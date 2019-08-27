@@ -4,6 +4,7 @@ import TurndownService from 'turndown';
 
 import Resource from 'resource';
 import { validateUrl } from 'utils';
+import addExtractor from 'extractors/add-extractor';
 import getExtractor from 'extractors/get-extractor';
 import RootExtractor, { selectExtendedTypes } from 'extractors/root-extractor';
 import collectAllPages from 'extractors/collect-all-pages';
@@ -111,6 +112,10 @@ const Mercury = {
   // to work with, e.g., for custom extractor generator
   fetchResource(url) {
     return Resource.create(url);
+  },
+
+  addCustomExtractor({ hostName, baseDomain, extractor }) {
+    return addExtractor({ hostName, baseDomain, extractor });
   },
 };
 

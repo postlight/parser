@@ -182,4 +182,38 @@ describe('Mercury', () => {
     assert.equal(sites.length, 8);
     assert.equal(sites[1], 'http://nymag.com/daily/intelligencer/');
   });
+
+  it('is able to use custom extractors added via api', async () => {
+    const url =
+      'https://www.theonion.com/bird-owner-assures-guests-he-sometimes-lets-parakeet-ou-1837586071';
+    const html = fs.readFileSync(
+      './fixtures/www.theonion.com/test.html',
+      'utf8'
+    );
+
+    const customExtractor = {
+      domain: 'theonion.com',
+      title: {
+        selectors: ['h1'],
+      },
+      date_published: {
+        selectors: ['.js_publish_time'],
+      },
+    };
+
+    Mercury.addCustomExtractor({
+      baseDomain: 'theonion.com',
+      extractor: customExtractor,
+    });
+
+    const result = await Mercury.parse(url, { html });
+    assert.equal(typeof result, 'object');
+    assert.equal(result.domain, 'www.theonion.com');
+    assert.equal(result.date_published, '2019-08-27T19:56:00.000Z');
+    assert.equal(result.total_pages, 1);
+    assert.equal(
+      result.title,
+      'Bird Owner Assures Guests He Sometimes Lets Parakeet Out Of Cage To Fly Around House In Frantic Search For Freedom'
+    );
+  });
 });

@@ -349,3 +349,33 @@ This script will open both an `html` and `json` file allowing you to preview you
 If you've written a custom extractor, please send us a pull request! Passing tests that demonstrate your parser in action will help us evaluate the parser.
 
 Sometimes you may find that the site you're parsing doesn't provide certain information. For example, some sites don't have deks, and in those instances, you don't need to write a selector for that field. If there's a test for a selector you don't need, you can just remove that test and make note of it in your pull request.
+
+---
+
+## Adding Custom Parser via API
+
+As of **version 2.1.1**, you can additionally add custom private extractors via API.
+
+### Step 1: Start by creating your parser per instructions above:
+
+```javascript
+const customExtractor = {
+  domain: 'theonion.com',
+  title: {
+    selectors: ['h1'],
+  },
+  date_published: {
+    selectors: ['.js_publish_time'],
+  },
+  // additional configuration ...
+};
+```
+
+### Step 2: Add your custom extractor.
+
+```javascript
+Mercury.addCustomExtractor({
+  baseDomain: 'theonion.com',
+  extractor: customExtractor,
+});
+```
