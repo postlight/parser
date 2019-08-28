@@ -2,7 +2,7 @@ import assert from 'assert';
 
 import addExtractor from './add-extractor';
 
-describe('addExtractor({ hostName, baseDomain, extractor })', () => {
+describe('addExtractor(extractor)', () => {
   it('can add multiple custom extractors', () => {
     addExtractor({ domain: 'www.site1.com' });
     addExtractor({ domain: 'www.site2.com' });
