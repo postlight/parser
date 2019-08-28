@@ -201,8 +201,6 @@ describe('Mercury', () => {
       },
       content: {
         selectors: ['article'],
-        transforms: {},
-        clean: [],
       },
       extend: {
         testContent: {

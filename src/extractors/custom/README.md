@@ -352,32 +352,23 @@ Sometimes you may find that the site you're parsing doesn't provide certain info
 
 ---
 
-## Adding Custom Parser via API
+## Adding Custom Extractor via API
 
-As of **version 2.1.1**, you can additionally add custom private extractors via API.
-
-### Step 1: Start by creating your parser per instructions above:
+As of **version 2.1.1**, you can additionally add custom private extractors via API. Make sure that your custom extractor includes a domain name. Note that extractors added via API will take precedence over the packaged custom extractors.
 
 ```javascript
 const customExtractor = {
-  domain: 'theonion.com',
+  domain: 'www.sandiegouniontribune.com',
   title: {
-    selectors: ['h1'],
+    selectors: ['h1', '.ArticlePage-headline'],
   },
-  date_published: {
-    selectors: ['.js_publish_time'],
+  author: {
+    selectors: ['.ArticlePage-authorInfo-bio-name'],
   },
-  // additional configuration ...
+  content: {
+    selectors: ['article'],
+  },
 };
-```
 
-### Step 2: Add your custom extractor.
-
-Use either a `hostName` or `baseDomain` (or both) and include your custom extractor.
-
-```javascript
-Mercury.addCustomExtractor({
-  baseDomain: 'theonion.com',
-  extractor: customExtractor,
-});
+Mercury.addExtractor(customExtractor);
 ```
