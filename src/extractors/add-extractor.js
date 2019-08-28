@@ -1,20 +1,16 @@
-export const CustomExtractors = [];
+import mergeSupportedDomains from '../utils/merge-supported-domains';
 
-export default function addExtractor({ hostName, baseDomain, extractor }) {
-  if ((!hostName && !baseDomain) || !extractor) {
+export const apiExtractors = {};
+
+export default function addExtractor(extractor) {
+  if (!extractor || !extractor.domain) {
     return {
       error: true,
       message: 'Unable to add custom extractor. Invalid parameters.',
     };
   }
 
-  if (hostName) {
-    CustomExtractors[hostName] = extractor;
-  }
+  Object.assign(apiExtractors, mergeSupportedDomains(extractor));
 
-  if (baseDomain) {
-    CustomExtractors[baseDomain] = extractor;
-  }
-
-  return CustomExtractors;
+  return apiExtractors;
 }

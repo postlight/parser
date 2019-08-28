@@ -211,10 +211,7 @@ describe('Mercury', () => {
       },
     };
 
-    Mercury.addCustomExtractor({
-      hostName: 'www.sandiegouniontribune.com',
-      extractor: customExtractor,
-    });
+    Mercury.addExtractor(customExtractor);
 
     const result = await Mercury.parse(url, { html });
     assert.equal(typeof result, 'object');
