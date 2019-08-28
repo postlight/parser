@@ -183,36 +183,44 @@ describe('Mercury', () => {
     assert.equal(sites[1], 'http://nymag.com/daily/intelligencer/');
   });
 
-  it('is able to use custom extractors added via api', async () => {
+  it('is able to use custom extractors (with extension) added via api', async () => {
     const url =
-      'https://www.theonion.com/bird-owner-assures-guests-he-sometimes-lets-parakeet-ou-1837586071';
+      'https://www.sandiegouniontribune.com/business/growth-development/story/2019-08-27/sdsu-mission-valley-stadium-management-firm';
     const html = fs.readFileSync(
-      './fixtures/www.theonion.com/test.html',
+      './fixtures/sandiegouniontribune.com/test.html',
       'utf8'
     );
 
     const customExtractor = {
-      domain: 'theonion.com',
+      domain: 'www.sandiegouniontribune.com',
       title: {
-        selectors: ['h1'],
+        selectors: ['h1', '.ArticlePage-headline'],
       },
-      date_published: {
-        selectors: ['.js_publish_time'],
+      author: {
+        selectors: ['.ArticlePage-authorInfo-bio-name'],
+      },
+      content: {
+        selectors: ['article'],
+        transforms: {},
+        clean: [],
+      },
+      extend: {
+        testContent: {
+          selectors: ['.ArticlePage-breadcrumbs a'],
+        },
       },
     };
 
     Mercury.addCustomExtractor({
-      baseDomain: 'theonion.com',
+      hostName: 'www.sandiegouniontribune.com',
       extractor: customExtractor,
     });
 
     const result = await Mercury.parse(url, { html });
     assert.equal(typeof result, 'object');
-    assert.equal(result.domain, 'www.theonion.com');
+    assert.equal(result.author, 'Jennifer Van Grove');
+    assert.equal(result.domain, 'www.sandiegouniontribune.com');
     assert.equal(result.total_pages, 1);
-    assert.equal(
-      result.title,
-      'Bird Owner Assures Guests He Sometimes Lets Parakeet Out Of Cage To Fly Around House In Frantic Search For Freedom'
-    );
+    assert.equal(result.testContent, 'Growth & Development');
   });
 });
