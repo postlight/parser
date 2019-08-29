@@ -17,6 +17,7 @@ const Mercury = {
       contentType = 'html',
       headers = {},
       extend,
+      customExtractor,
     } = opts;
 
     // if no url was passed and this is the browser version,
@@ -42,6 +43,11 @@ const Mercury = {
     // If we found an error creating the resource, return that error
     if ($.failed) {
       return $;
+    }
+
+    // Add custom extractor via cli.
+    if (customExtractor) {
+      addCustomExtractor(customExtractor);
     }
 
     const Extractor = getExtractor(url, parsedUrl, $);

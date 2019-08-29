@@ -372,3 +372,39 @@ const customExtractor = {
 
 Mercury.addExtractor(customExtractor);
 ```
+
+---
+
+## Passing custom extractor to addExtractor via CLI
+
+It's also possible to add a custom parser at runtime via the CLI.
+
+### 1. Create your custom extractor in a standalone file.
+
+```javascript
+var customExtractor = {
+  domain: 'postlight.com',
+  title: {
+    selectors: ['h1'],
+  },
+  author: {
+    selectors: ['.byline-name'],
+  },
+  content: {
+    selectors: ['article'],
+  },
+  extend: {
+    uniqueKeyFromFixture: {
+      selectors: ['.single__hero-category'],
+    },
+  },
+};
+
+module.exports = customExtractor;
+```
+
+### 2. From the CLI, add the `--add-extractor` param:
+
+```bash
+mercury-parser https://postlight.com/trackchanges/mercury-goes-open-source --add-extractor ./src/extractors/fixtures/postlight.com/index.js
+```
