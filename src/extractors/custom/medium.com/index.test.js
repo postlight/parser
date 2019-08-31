@@ -44,7 +44,7 @@ describe('MediumExtractor', () => {
     it('returns the date_published', async () => {
       const { date_published } = await result;
 
-      assert.equal(date_published, '2016-10-19T14:24:20.323Z');
+      assert.equal(date_published, '2016-10-19T14:30:56.529Z');
     });
 
     it('returns the dek', async () => {
@@ -62,7 +62,7 @@ describe('MediumExtractor', () => {
       // the article.
       assert.equal(
         lead_image_url,
-        'https://cdn-images-1.medium.com/max/1200/1*3Gzaug9mRc8vvx1cuQWkog.png'
+        'https://miro.medium.com/max/540/1*3Gzaug9mRc8vvx1cuQWkog.png'
       );
     });
 
@@ -78,12 +78,9 @@ describe('MediumExtractor', () => {
         13
       );
 
-      // testing that youtube video transform is working
-      assert.equal(/IAoy3ia2ivI/.test(content), true);
-
       assert.equal(
         first13,
-        'Video of WTF? My talk at the White House Frontiers ConferenceLast Thursday, I'
+        'Last Thursday, I had the honor to be one of the warmup acts'
       );
     });
   });
