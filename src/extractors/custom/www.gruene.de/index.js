@@ -12,7 +12,7 @@ export const WwwGrueneDeExtractor = {
   dek: null,
 
   lead_image_url: {
-    selectors: [['header img', 'src']],
+    selectors: [['meta[property="og:image"]', 'content']],
   },
 
   content: {
