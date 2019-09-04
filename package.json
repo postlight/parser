@@ -92,7 +92,7 @@
     "karma-requirejs": "^1.1.0",
     "lint-staged": "^8.1.0",
     "mocha": "^6.0.0",
-    "nock": "^10.0.6",
+    "nock": "^11.1.0",
     "ora": "^3.0.0",
     "prettier": "^1.15.3",
     "remark-cli": "^7.0.0",
