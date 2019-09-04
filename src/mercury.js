@@ -4,6 +4,7 @@ import TurndownService from 'turndown';
 
 import Resource from 'resource';
 import { validateUrl } from 'utils';
+import addCustomExtractor from 'extractors/add-extractor';
 import getExtractor from 'extractors/get-extractor';
 import RootExtractor, { selectExtendedTypes } from 'extractors/root-extractor';
 import collectAllPages from 'extractors/collect-all-pages';
@@ -16,6 +17,7 @@ const Mercury = {
       contentType = 'html',
       headers = {},
       extend,
+      customExtractor,
     } = opts;
 
     // if no url was passed and this is the browser version,
@@ -41,6 +43,11 @@ const Mercury = {
     // If we found an error creating the resource, return that error
     if ($.failed) {
       return $;
+    }
+
+    // Add custom extractor via cli.
+    if (customExtractor) {
+      addCustomExtractor(customExtractor);
     }
 
     const Extractor = getExtractor(url, parsedUrl, $);
@@ -111,6 +118,10 @@ const Mercury = {
   // to work with, e.g., for custom extractor generator
   fetchResource(url) {
     return Resource.create(url);
+  },
+
+  addExtractor(extractor) {
+    return addCustomExtractor(extractor);
   },
 };
 

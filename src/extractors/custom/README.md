@@ -349,3 +349,62 @@ This script will open both an `html` and `json` file allowing you to preview you
 If you've written a custom extractor, please send us a pull request! Passing tests that demonstrate your parser in action will help us evaluate the parser.
 
 Sometimes you may find that the site you're parsing doesn't provide certain information. For example, some sites don't have deks, and in those instances, you don't need to write a selector for that field. If there's a test for a selector you don't need, you can just remove that test and make note of it in your pull request.
+
+---
+
+## Adding Custom Extractor via API
+
+As of **version 2.1.1**, you can additionally add custom private extractors via API. Make sure that your custom extractor includes a domain name. Note that extractors added via API will take precedence over the packaged custom extractors.
+
+```javascript
+const customExtractor = {
+  domain: 'www.sandiegouniontribune.com',
+  title: {
+    selectors: ['h1', '.ArticlePage-headline'],
+  },
+  author: {
+    selectors: ['.ArticlePage-authorInfo-bio-name'],
+  },
+  content: {
+    selectors: ['article'],
+  },
+};
+
+Mercury.addExtractor(customExtractor);
+```
+
+---
+
+## Passing custom extractor to addExtractor via CLI
+
+It's also possible to add a custom parser at runtime via the CLI.
+
+### 1. Create your custom extractor in a standalone file.
+
+```javascript
+var customExtractor = {
+  domain: 'postlight.com',
+  title: {
+    selectors: ['h1'],
+  },
+  author: {
+    selectors: ['.byline-name'],
+  },
+  content: {
+    selectors: ['article'],
+  },
+  extend: {
+    uniqueKeyFromFixture: {
+      selectors: ['.single__hero-category'],
+    },
+  },
+};
+
+module.exports = customExtractor;
+```
+
+### 2. From the CLI, add the `--add-extractor` param:
+
+```bash
+mercury-parser https://postlight.com/trackchanges/mercury-goes-open-source --add-extractor ./src/extractors/fixtures/postlight.com/index.js
+```
