@@ -1,0 +1,23 @@
+name: Node CI
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        os: ubuntu-latest
+        node-version: [8.x]
+      runs-on: ${{matrix.os}}
+    steps:
+      - uses: actions/checkout@v1
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: test-node
+        run: |
+          yarn install
+          yarn test:node --maxWorkers=4
+        env:
+          CI: true
