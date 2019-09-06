@@ -6,8 +6,10 @@ jobs:
   build:
     strategy:
       matrix:
-        os: ubuntu-latest
-        node-version: [8.x]
+        os:
+          - macOS-latest
+        node-version:
+          - 8.10
       runs-on: ${{matrix.os}}
     steps:
       - uses: actions/checkout@v1
