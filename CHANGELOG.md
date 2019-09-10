@@ -1,6 +1,6 @@
 # Mercury Parser Changelog
 
-### 2.1.1 (Jun 26, 2019)
+### 2.2.0 (Sept 10, 2019)
 
 ##### Commits
 
@@ -25,6 +25,11 @@
 - [[`853e041d84`](https://github.com/postlight/mercury-parser/commit/853e041d84)] - **deps**: update husky to the latest version 🚀 (#450) (greenkeeper[bot])
 - [[`f42f81218b`](https://github.com/postlight/mercury-parser/commit/f42f81218b)] - **deps**: update iconv-lite to the latest version 🚀 (#447) (greenkeeper[bot])
 - [[`592f175270`](https://github.com/postlight/mercury-parser/commit/592f175270)] - **tests**: remove a duplicate test (#448) (Kirill Danshin)
+
+### 2.1.1 (Jun 26, 2019)
+
+##### Commits
+
 - [[`713de25751`](https://github.com/postlight/mercury-parser/commit/713de25751)] - **release**: 2.1.1 (#446) (Adam Pash)
 - [[`c11b85f405`](https://github.com/postlight/mercury-parser/commit/c11b85f405)] - **deps**: update eslint-config-prettier to version 5.0.0 (#441) (greenkeeper[bot])
 - [[`3b0d5fed69`](https://github.com/postlight/mercury-parser/commit/3b0d5fed69)] - **chore**: prevent adding phantomjs-prebuilt as a dependency in CI. (#412) (Jaen)
