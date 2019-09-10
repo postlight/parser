@@ -21,6 +21,7 @@ var _parseFloat = _interopDefault(require('@babel/runtime-corejs2/core-js/parse-
 var _Set = _interopDefault(require('@babel/runtime-corejs2/core-js/set'));
 var _typeof = _interopDefault(require('@babel/runtime-corejs2/helpers/typeof'));
 var _getIterator = _interopDefault(require('@babel/runtime-corejs2/core-js/get-iterator'));
+var _Object$assign = _interopDefault(require('@babel/runtime-corejs2/core-js/object/assign'));
 var _Object$keys = _interopDefault(require('@babel/runtime-corejs2/core-js/object/keys'));
 var stringDirection = _interopDefault(require('string-direction'));
 var validUrl = _interopDefault(require('valid-url'));
@@ -1744,6 +1745,20 @@ function mergeSupportedDomains(extractor) {
   return extractor.supportedDomains ? merge(extractor, [extractor.domain].concat(_toConsumableArray(extractor.supportedDomains))) : merge(extractor, [extractor.domain]);
 }
 
+var apiExtractors = {};
+function addExtractor(extractor) {
+  if (!extractor || !extractor.domain) {
+    return {
+      error: true,
+      message: 'Unable to add custom extractor. Invalid parameters.'
+    };
+  }
+
+  _Object$assign(apiExtractors, mergeSupportedDomains(extractor));
+
+  return apiExtractors;
+}
+
 var BloggerExtractor = {
   domain: 'blogspot.com',
   content: {
@@ -1906,25 +1921,30 @@ var NYTimesExtractor = {
 var TheAtlanticExtractor = {
   domain: 'www.theatlantic.com',
   title: {
-    selectors: ['h1.hed']
+    selectors: ['h1', '.c-article-header__hed']
   },
   author: {
-    selectors: ['article#article .article-cover-extra .metadata .byline a']
+    selectors: [['meta[name="author"]', 'value'], '.c-byline__author']
   },
   content: {
-    selectors: [['.article-cover figure.lead-img', '.article-body'], '.article-body'],
+    selectors: ['article', '.article-body'],
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images
     transforms: [],
     // Is there anything that is in the result that shouldn't be?
     // The clean selectors will remove anything that matches from
     // the result
-    clean: ['.partner-box', '.callout']
+    clean: ['.partner-box', '.callout', '.c-article-writer__image', '.c-article-writer__content', '.c-letters-cta__text', '.c-footer__logo', '.c-recirculation-link', '.twitter-tweet']
+  },
+  dek: {
+    selectors: [['meta[name="description"]', 'value']]
   },
   date_published: {
-    selectors: [['time[itemProp="datePublished"]', 'datetime']]
+    selectors: [['time[itemprop="datePublished"]', 'datetime']]
   },
-  lead_image_url: null,
+  lead_image_url: {
+    selectors: [['img[itemprop="url"]', 'src']]
+  },
   next_page_url: null,
   excerpt: null
 };
@@ -2347,15 +2367,14 @@ var ApartmentTherapyExtractor = {
 
 var MediumExtractor = {
   domain: 'medium.com',
-  supportedDomains: ['trackchanges.postlight.com'],
   title: {
-    selectors: ['h1']
+    selectors: ['h1', ['meta[name="og:title"]', 'value']]
   },
   author: {
     selectors: [['meta[name="author"]', 'value']]
   },
   content: {
-    selectors: [['.section-content'], '.section-content', 'article > div > section'],
+    selectors: ['article'],
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images
     transforms: {
@@ -2363,6 +2382,7 @@ var MediumExtractor = {
       iframe: function iframe($node) {
         var ytRe = /https:\/\/i.embed.ly\/.+url=https:\/\/i\.ytimg\.com\/vi\/(\w+)\//;
         var thumb = decodeURIComponent($node.attr('data-thumbnail'));
+        var $parent = $node.parents('figure');
 
         if (ytRe.test(thumb)) {
           var _thumb$match = thumb.match(ytRe),
@@ -2372,10 +2392,13 @@ var MediumExtractor = {
 
 
           $node.attr('src', "https://www.youtube.com/embed/".concat(youtubeId));
-          var $parent = $node.parents('figure');
           var $caption = $parent.find('figcaption');
           $parent.empty().append([$node, $caption]);
-        }
+          return;
+        } // If we can't draw the YouTube preview, remove the figure.
+
+
+        $parent.remove();
       },
       // rewrite figures to pull out image and caption, remove rest
       figure: function figure($node) {
@@ -2384,23 +2407,27 @@ var MediumExtractor = {
         var $img = $node.find('img').slice(-1)[0];
         var $caption = $node.find('figcaption');
         $node.empty().append([$img, $caption]);
+      },
+      // Remove any smaller images that did not get caught by the generic image
+      // cleaner (author photo 48px, leading sentence images 79px, etc.).
+      img: function img($node) {
+        var width = _parseInt($node.attr('width'), 10);
+
+        if (width < 100) $node.remove();
       }
     },
     // Is there anything that is in the result that shouldn't be?
     // The clean selectors will remove anything that matches from
     // the result
-    clean: []
+    clean: ['span', 'svg']
   },
   date_published: {
-    selectors: [['time[datetime]', 'datetime']]
+    selectors: [['meta[name="article:published_time"]', 'value']]
   },
   lead_image_url: {
     selectors: [['meta[name="og:image"]', 'value']]
   },
-  dek: {
-    selectors: [// enter selectors
-    ]
-  },
+  dek: null,
   next_page_url: {
     selectors: [// enter selectors
     ]
@@ -5690,6 +5717,56 @@ var PitchforkComExtractor = {
   }
 };
 
+var BiorxivOrgExtractor = {
+  domain: 'biorxiv.org',
+  title: {
+    selectors: ['h1#page-title']
+  },
+  author: {
+    selectors: ['div.highwire-citation-biorxiv-article-top > div.highwire-cite-authors']
+  },
+  content: {
+    selectors: ['div#abstract-1'],
+    // Is there anything in the content you selected that needs transformed
+    // before it's consumable content? E.g., unusual lazy loaded images
+    transforms: {},
+    // Is there anything that is in the result that shouldn't be?
+    // The clean selectors will remove anything that matches from
+    // the result
+    clean: []
+  }
+};
+
+var EpaperZeitDeExtractor = {
+  domain: 'epaper.zeit.de',
+  title: {
+    selectors: ['p.title']
+  },
+  author: {
+    selectors: ['.article__author']
+  },
+  date_published: null,
+  excerpt: {
+    selectors: ['subtitle']
+  },
+  lead_image_url: null,
+  content: {
+    selectors: ['.article'],
+    // Is there anything in the content you selected that needs transformed
+    // before it's consumable content? E.g., unusual lazy loaded images
+    transforms: {
+      'p.title': 'h1',
+      '.article__author': 'p',
+      byline: 'p',
+      linkbox: 'p'
+    },
+    // Is there anything that is in the result that shouldn't be?
+    // The clean selectors will remove anything that matches from
+    // the result
+    clean: ['image-credits', 'box[type=citation]']
+  }
+};
+
 
 
 var CustomExtractors = /*#__PURE__*/Object.freeze({
@@ -5824,7 +5901,9 @@ var CustomExtractors = /*#__PURE__*/Object.freeze({
   WwwRbbtodayComExtractor: WwwRbbtodayComExtractor,
   WwwLemondeFrExtractor: WwwLemondeFrExtractor,
   WwwPhoronixComExtractor: WwwPhoronixComExtractor,
-  PitchforkComExtractor: PitchforkComExtractor
+  PitchforkComExtractor: PitchforkComExtractor,
+  BiorxivOrgExtractor: BiorxivOrgExtractor,
+  EpaperZeitDeExtractor: EpaperZeitDeExtractor
 });
 
 var Extractors = _Object$keys(CustomExtractors).reduce(function (acc, key) {
@@ -7152,7 +7231,7 @@ function getExtractor(url, parsedUrl, $) {
   var _parsedUrl = parsedUrl,
       hostname = _parsedUrl.hostname;
   var baseDomain = hostname.split('.').slice(-2).join('.');
-  return Extractors[hostname] || Extractors[baseDomain] || detectByHtml($) || GenericExtractor;
+  return apiExtractors[hostname] || apiExtractors[baseDomain] || Extractors[hostname] || Extractors[baseDomain] || detectByHtml($) || GenericExtractor;
 }
 
 function cleanBySelectors($content, $, _ref) {
@@ -7529,6 +7608,7 @@ var Mercury = {
           _opts$headers,
           headers,
           extend,
+          customExtractor,
           parsedUrl,
           $,
           Extractor,
@@ -7546,7 +7626,7 @@ var Mercury = {
           switch (_context.prev = _context.next) {
             case 0:
               _ref = _args.length > 1 && _args[1] !== undefined ? _args[1] : {}, html = _ref.html, opts = _objectWithoutProperties(_ref, ["html"]);
-              _opts$fetchAllPages = opts.fetchAllPages, fetchAllPages = _opts$fetchAllPages === void 0 ? true : _opts$fetchAllPages, _opts$fallback = opts.fallback, fallback = _opts$fallback === void 0 ? true : _opts$fallback, _opts$contentType = opts.contentType, contentType = _opts$contentType === void 0 ? 'html' : _opts$contentType, _opts$headers = opts.headers, headers = _opts$headers === void 0 ? {} : _opts$headers, extend = opts.extend; // if no url was passed and this is the browser version,
+              _opts$fetchAllPages = opts.fetchAllPages, fetchAllPages = _opts$fetchAllPages === void 0 ? true : _opts$fetchAllPages, _opts$fallback = opts.fallback, fallback = _opts$fallback === void 0 ? true : _opts$fallback, _opts$contentType = opts.contentType, contentType = _opts$contentType === void 0 ? 'html' : _opts$contentType, _opts$headers = opts.headers, headers = _opts$headers === void 0 ? {} : _opts$headers, extend = opts.extend, customExtractor = opts.customExtractor; // if no url was passed and this is the browser version,
               // set url to window.location.href and load the html
               // from the current page
 
@@ -7583,6 +7663,11 @@ var Mercury = {
               return _context.abrupt("return", $);
 
             case 11:
+              // Add custom extractor via cli.
+              if (customExtractor) {
+                addExtractor(customExtractor);
+              }
+
               Extractor = getExtractor(url, parsedUrl, $); // console.log(`Using extractor for ${Extractor.domain}`);
               // if html still has not been set (i.e., url passed to Mercury.parse),
               // set html from the response of Resource.create
@@ -7618,11 +7703,11 @@ var Mercury = {
               _result = result, title = _result.title, next_page_url = _result.next_page_url; // Fetch more pages if next_page_url found
 
               if (!(fetchAllPages && next_page_url)) {
-                _context.next = 24;
+                _context.next = 25;
                 break;
               }
 
-              _context.next = 21;
+              _context.next = 22;
               return collectAllPages({
                 Extractor: Extractor,
                 next_page_url: next_page_url,
@@ -7634,18 +7719,18 @@ var Mercury = {
                 url: url
               });
 
-            case 21:
+            case 22:
               result = _context.sent;
-              _context.next = 25;
+              _context.next = 26;
               break;
 
-            case 24:
+            case 25:
               result = _objectSpread({}, result, {
                 total_pages: 1,
                 rendered_pages: 1
               });
 
-            case 25:
+            case 26:
               if (contentType === 'markdown') {
                 turndownService = new TurndownService();
                 result.content = turndownService.turndown(result.content);
@@ -7655,7 +7740,7 @@ var Mercury = {
 
               return _context.abrupt("return", _objectSpread({}, result, extendedTypes));
 
-            case 27:
+            case 28:
             case "end":
               return _context.stop();
           }
@@ -7674,6 +7759,9 @@ var Mercury = {
   // to work with, e.g., for custom extractor generator
   fetchResource: function fetchResource(url) {
     return Resource.create(url);
+  },
+  addExtractor: function addExtractor$$1(extractor) {
+    return addExtractor(extractor);
   }
 };
 
