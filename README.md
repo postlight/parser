@@ -137,6 +137,9 @@ mercury-parser https://postlight.com/trackchanges/mercury-goes-open-source --ext
 
 # Get the value of attributes by adding a pipe to --extend or --extend-list
 mercury-parser https://postlight.com/trackchanges/mercury-goes-open-source --extend-list links=".body a|href"
+
+# Pass optional --add-extractor argument to add a custom extractor at runtime.
+mercury-parser https://postlight.com/trackchanges/mercury-goes-open-source --add-extractor ./src/extractors/fixtures/postlight.com/index.js
 ```
 
 ## License
