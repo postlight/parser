@@ -26,7 +26,11 @@ const Resource = {
         },
       };
 
-      result = { body: preparedResponse, response: validResponse };
+      result = {
+        body: preparedResponse,
+        response: validResponse,
+        alreadyDecoded: true,
+      };
     } else {
       result = await fetchResource(url, parsedUrl, headers);
     }
@@ -39,7 +43,7 @@ const Resource = {
     return this.generateDoc(result);
   },
 
-  generateDoc({ body: content, response }) {
+  generateDoc({ body: content, response, alreadyDecoded = false }) {
     const { 'content-type': contentType = '' } = response.headers;
 
     // TODO: Implement is_text function from
@@ -48,7 +52,7 @@ const Resource = {
       throw new Error('Content does not appear to be text.');
     }
 
-    let $ = this.encodeDoc({ content, contentType });
+    let $ = this.encodeDoc({ content, contentType, alreadyDecoded });
 
     if ($.root().children().length === 0) {
       throw new Error('No children, likely a bad parse.');
@@ -61,11 +65,14 @@ const Resource = {
     return $;
   },
 
-  encodeDoc({ content, contentType }) {
+  encodeDoc({ content, contentType, alreadyDecoded = false }) {
+    if (alreadyDecoded) {
+      return cheerio.load(content);
+    }
+
     const encoding = getEncoding(contentType);
     let decodedContent = iconv.decode(content, encoding);
     let $ = cheerio.load(decodedContent);
-
     // after first cheerio.load, check to see if encoding matches
     const contentTypeSelector = cheerio.browser
       ? 'meta[http-equiv=content-type]'
