@@ -93,7 +93,7 @@
     "lint-staged": "^8.1.0",
     "mocha": "^6.0.0",
     "nock": "^10.0.6",
-    "ora": "^3.0.0",
+    "ora": "^4.0.0",
     "prettier": "^1.15.3",
     "remark-cli": "^7.0.0",
     "remark-lint": "^6.0.4",
