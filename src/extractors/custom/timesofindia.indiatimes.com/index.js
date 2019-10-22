@@ -26,23 +26,6 @@ export const TimesofindiaIndiatimesComExtractor = {
     selectors: ['div.contentwrapper:has(section)'],
     defaultCleaner: false,
 
-    transforms: {
-      section: function remove_section($node) {
-        $node.empty();
-        return $node;
-      },
-      h1: function remove_header1($node) {
-        $node.empty();
-        return $node;
-      },
-      '.byline': function remove_byline($node) {
-        $node.empty();
-        return $node;
-      },
-      '.img_cptn': function remove_img_cptn($node) {
-        $node.empty();
-        return $node;
-      },
-    },
+    clean: ['section', 'h1', '.byline', '.img_cptn'],
   },
 };
