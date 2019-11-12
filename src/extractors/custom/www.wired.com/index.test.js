@@ -14,10 +14,15 @@ describe('WiredExtractor', () => {
     let result;
     let url;
     beforeAll(() => {
+      // url =
+      //   'https://www.wired.com/2016/09/ode-rosetta-spacecraft-going-die-comet/';
+      // const html = fs.readFileSync(
+      //   './fixtures/www.wired.com/1475256747028.html'
+      // );
       url =
-        'https://www.wired.com/2016/09/ode-rosetta-spacecraft-going-die-comet/';
+        'https://www.wired.com/story/chris-evans-rian-johnson-knives-out-wired25/';
       const html = fs.readFileSync(
-        './fixtures/www.wired.com/1475256747028.html'
+        './fixtures/www.wired.com/1573490667708.html'
       );
       result = Mercury.parse(url, { html, fallback: false });
     });
@@ -41,7 +46,7 @@ describe('WiredExtractor', () => {
       // the article.
       assert.equal(
         title,
-        'An Ode to the Rosetta Spacecraft as It Flings Itself Into a Comet'
+        "Rian Johnson to Star Wars Diversity Haters: 'Fuck 'Em'"
       );
     });
 
@@ -52,7 +57,7 @@ describe('WiredExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(author, 'Emma Grey Ellis');
+      assert.equal(author, 'Angela Watercutter');
     });
 
     it('returns the date_published', async () => {
@@ -62,7 +67,7 @@ describe('WiredExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(date_published, '2016-09-30T07:00:12.000Z');
+      assert.equal(date_published, '2019-11-11T09:41:00.000Z');
     });
 
     it('returns the lead_image_url', async () => {
@@ -74,7 +79,7 @@ describe('WiredExtractor', () => {
       // the article.
       assert.equal(
         lead_image_url,
-        'https://www.wired.com/wp-content/uploads/2016/09/Rosetta_impact-1-1200x630.jpg'
+        'https://media.wired.com/photos/5dc846b008f8500008719370/191:100/w_1280,c_limit/W25-KnivesOut-DinaLitovsky-3209.jpg'
       );
     });
 
@@ -98,7 +103,7 @@ describe('WiredExtractor', () => {
       // the article.
       assert.equal(
         first13,
-        'Today, the European Space Agency’s Rosetta spacecraft will engage its thrusters for one'
+        'In a scant six weeks, there will be a new Star Wars film,'
       );
     });
   });
