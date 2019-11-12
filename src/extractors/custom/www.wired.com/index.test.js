@@ -67,7 +67,7 @@ describe('WiredExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(date_published, '2019-11-11T09:41:00.000Z');
+      assert.equal(date_published, '2019-11-11T10:41:00.000Z');
     });
 
     it('returns the lead_image_url', async () => {
