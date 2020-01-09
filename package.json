@@ -78,7 +78,7 @@
     "eslint-plugin-jsx-a11y": "^6.1.2",
     "eslint-plugin-react": "^7.12.3",
     "express": "^4.16.4",
-    "husky": "^3.0.0",
+    "husky": "^4.0.2",
     "inquirer": "^7.0.0",
     "jasmine-core": "^2.5.2",
     "jest": "^23.6.0",
