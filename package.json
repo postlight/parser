@@ -57,7 +57,7 @@
     "@babel/preset-env": "^7.0.0",
     "@babel/runtime": "^7.0.0",
     "@jesses/circle-github-bot": "^2.1.0",
-    "@octokit/rest": "^16.9.0",
+    "@octokit/rest": "^17.0.0",
     "babel-core": "^7.0.0-bridge.0",
     "babel-eslint": "^10.0.1",
     "babel-jest": "^23.4.2",
