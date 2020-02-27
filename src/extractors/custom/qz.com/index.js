@@ -2,7 +2,7 @@ export const QzComExtractor = {
   domain: 'qz.com',
 
   title: {
-    selectors: ['header.item-header.content-width-responsive'],
+    selectors: ['article header h1'],
   },
 
   author: {
@@ -10,15 +10,19 @@ export const QzComExtractor = {
   },
 
   date_published: {
-    selectors: ['.timestamp'],
+    selectors: [['time[datetime]', 'datetime']],
   },
 
   lead_image_url: {
-    selectors: [['meta[name="og:image"]', 'value']],
+    selectors: [
+      ['meta[name="og:image"]', 'value'],
+      ['meta[property="og:image"]', 'content'],
+      ['meta[name="twitter:image"]', 'content'],
+    ],
   },
 
   content: {
-    selectors: [['figure.featured-image', '.item-body'], '.item-body'],
+    selectors: ['#article-content'],
 
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images
@@ -27,6 +31,6 @@ export const QzComExtractor = {
     // Is there anything that is in the result that shouldn't be?
     // The clean selectors will remove anything that matches from
     // the result
-    clean: ['.article-aside', '.progressive-image-thumbnail'],
+    clean: [],
   },
 };
