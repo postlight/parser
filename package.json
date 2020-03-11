@@ -122,7 +122,7 @@
     "postman-request": "^2.88.1-postman.7.1",
     "request-promise": "^4.2.2",
     "string-direction": "^0.1.2",
-    "turndown": "^5.0.3",
+    "turndown": "^6.0.0",
     "url": "^0.11.0",
     "valid-url": "^1.0.9",
     "wuzzy": "^0.1.4",
