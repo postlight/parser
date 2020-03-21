@@ -94,7 +94,7 @@
     "mocha": "^6.0.0",
     "nock": "^10.0.6",
     "ora": "^4.0.0",
-    "prettier": "^1.15.3",
+    "prettier": "^2.0.0",
     "remark-cli": "^7.0.0",
     "remark-lint": "^6.0.4",
     "remark-preset-lint-recommended": "^3.0.2",
