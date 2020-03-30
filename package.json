@@ -96,7 +96,7 @@
     "ora": "^4.0.0",
     "prettier": "^1.15.3",
     "remark-cli": "^7.0.0",
-    "remark-lint": "^6.0.4",
+    "remark-lint": "^7.0.0",
     "remark-preset-lint-recommended": "^3.0.2",
     "requirejs": "^2.3.6",
     "rollup": "^1.1.0",
