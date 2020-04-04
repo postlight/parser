@@ -1,9 +1,9 @@
-import { scoreParagraph } from './index';
 import {
-  PARAGRAPH_SCORE_TAGS,
-  CHILD_CONTENT_TAGS,
   BAD_TAGS,
+  CHILD_CONTENT_TAGS,
+  PARAGRAPH_SCORE_TAGS,
 } from './constants';
+import scoreParagraph from './score-paragraph';
 
 // Score an individual node. Has some smarts for paragraphs, otherwise
 // just scores based on tag.

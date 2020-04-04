@@ -2,7 +2,7 @@ import assert from 'assert';
 import cheerio from 'cheerio';
 
 import HTML from './fixtures/html';
-import { cleanTitle } from './index';
+import cleanTitle from './title';
 
 describe('cleanTitle(title, { url, $ })', () => {
   it('only uses h1 if there is only one on the page', () => {

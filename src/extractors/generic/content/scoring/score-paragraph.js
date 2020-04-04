@@ -1,4 +1,5 @@
-import { scoreCommas, scoreLength } from './index';
+import scoreCommas from './score-commas';
+import scoreLength from './score-length';
 
 // Score a paragraph using various methods. Things like number of
 // commas, etc. Higher is better.

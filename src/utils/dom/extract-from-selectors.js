@@ -1,4 +1,4 @@
-import { withinComment } from 'utils/dom';
+import withinComment from './within-comment';
 
 function isGoodNode($node, maxChildren) {
   // If it has a number of children, it's more likely a container

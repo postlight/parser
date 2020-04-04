@@ -1,6 +1,6 @@
-import { brsToPs, convertNodeTo } from 'utils/dom';
-
 import { DIV_TO_P_BLOCK_TAGS } from './constants';
+import brsToPs from './brs-to-ps';
+import convertNodeTo from './convert-node-to';
 
 function convertDivs($) {
   $('div').each((index, div) => {

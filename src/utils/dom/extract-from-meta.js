@@ -1,4 +1,4 @@
-import { stripTags } from 'utils/dom';
+import stripTags from './strip-tags';
 
 // Given a node type to search for, and a list of meta tag names to
 // search for, find a meta tag associated.

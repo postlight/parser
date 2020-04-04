@@ -2,7 +2,7 @@ import { stripTags } from 'utils/dom';
 import { normalizeSpaces } from 'utils/text';
 
 import { TITLE_SPLITTERS_RE } from './constants';
-import { resolveSplitTitle } from './index';
+import resolveSplitTitle from './resolve-split-title';
 
 export default function cleanTitle(title, { url, $ }) {
   // If title has |, :, or - in it, see if

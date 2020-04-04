@@ -462,30 +462,6 @@ function stripUnlikelyCandidates($) {
   return $;
 }
 
-// Another good candidate for refactoring/optimizing.
-// Very imperative code, I don't love it. - AP
-//  Given cheerio object, convert consecutive <br /> tags into
-//  <p /> tags instead.
-//
-//  :param $: A cheerio object
-
-function brsToPs$$1($) {
-  var collapsing = false;
-  $('br').each(function (index, element) {
-    var $element = $(element);
-    var nextElement = $element.next().get(0);
-
-    if (nextElement && nextElement.tagName.toLowerCase() === 'br') {
-      collapsing = true;
-      $element.remove();
-    } else if (collapsing) {
-      collapsing = false;
-      paragraphize(element, $, true);
-    }
-  });
-  return $;
-}
-
 // make sure it conforms to the constraints of a P tag (I.E. does
 // not contain any other block tags.)
 //
@@ -520,49 +496,49 @@ function paragraphize(node, $) {
   return $;
 }
 
-function convertDivs($) {
-  $('div').each(function (index, div) {
-    var $div = $(div);
-    var convertable = $div.children(DIV_TO_P_BLOCK_TAGS).length === 0;
+// Another good candidate for refactoring/optimizing.
+// Very imperative code, I don't love it. - AP
+//  Given cheerio object, convert consecutive <br /> tags into
+//  <p /> tags instead.
+//
+//  :param $: A cheerio object
 
-    if (convertable) {
-      convertNodeTo$$1($div, $, 'p');
+function brsToPs($) {
+  var collapsing = false;
+  $('br').each(function (index, element) {
+    var $element = $(element);
+    var nextElement = $element.next().get(0);
+
+    if (nextElement && nextElement.tagName.toLowerCase() === 'br') {
+      collapsing = true;
+      $element.remove();
+    } else if (collapsing) {
+      collapsing = false;
+      paragraphize(element, $, true);
     }
   });
   return $;
 }
 
-function convertSpans($) {
-  $('span').each(function (index, span) {
-    var $span = $(span);
-    var convertable = $span.parents('p, div').length === 0;
+function getAttrs(node) {
+  var attribs = node.attribs,
+      attributes = node.attributes;
 
-    if (convertable) {
-      convertNodeTo$$1($span, $, 'p');
-    }
-  });
-  return $;
-} // Loop through the provided doc, and convert any p-like elements to
-// actual paragraph tags.
-//
-//   Things fitting this criteria:
-//   * Multiple consecutive <br /> tags.
-//   * <div /> tags without block level elements inside of them
-//   * <span /> tags who are not children of <p /> or <div /> tags.
-//
-//   :param $: A cheerio object to search
-//   :return cheerio object with new p elements
-//   (By-reference mutation, though. Returned just for convenience.)
+  if (!attribs && attributes) {
+    var attrs = _Reflect$ownKeys(attributes).reduce(function (acc, index) {
+      var attr = attributes[index];
+      if (!attr.name || !attr.value) return acc;
+      acc[attr.name] = attr.value;
+      return acc;
+    }, {});
 
+    return attrs;
+  }
 
-function convertToParagraphs$$1($) {
-  $ = brsToPs$$1($);
-  $ = convertDivs($);
-  $ = convertSpans($);
-  return $;
+  return attribs;
 }
 
-function convertNodeTo$$1($node, $) {
+function convertNodeTo($node, $) {
   var tag = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'p';
   var node = $node.get(0);
 
@@ -588,6 +564,48 @@ function convertNodeTo$$1($node, $) {
   }
 
   $node.replaceWith("<".concat(tag, " ").concat(attribString, ">").concat(html, "</").concat(tag, ">"));
+  return $;
+}
+
+function convertDivs($) {
+  $('div').each(function (index, div) {
+    var $div = $(div);
+    var convertable = $div.children(DIV_TO_P_BLOCK_TAGS).length === 0;
+
+    if (convertable) {
+      convertNodeTo($div, $, 'p');
+    }
+  });
+  return $;
+}
+
+function convertSpans($) {
+  $('span').each(function (index, span) {
+    var $span = $(span);
+    var convertable = $span.parents('p, div').length === 0;
+
+    if (convertable) {
+      convertNodeTo($span, $, 'p');
+    }
+  });
+  return $;
+} // Loop through the provided doc, and convert any p-like elements to
+// actual paragraph tags.
+//
+//   Things fitting this criteria:
+//   * Multiple consecutive <br /> tags.
+//   * <div /> tags without block level elements inside of them
+//   * <span /> tags who are not children of <p /> or <div /> tags.
+//
+//   :param $: A cheerio object to search
+//   :return cheerio object with new p elements
+//   (By-reference mutation, though. Returned just for convenience.)
+
+
+function convertToParagraphs($) {
+  $ = brsToPs($);
+  $ = convertDivs($);
+  $ = convertSpans($);
   return $;
 }
 
@@ -664,7 +682,7 @@ function stripJunkTags(article, $) {
 // by the title extractor instead. If there's less than 3 of them (<3),
 // strip them. Otherwise, turn 'em into H2s.
 
-function cleanHOnes$$1(article, $) {
+function cleanHOnes(article, $) {
   var $hOnes = $('h1', article);
 
   if ($hOnes.length < 3) {
@@ -673,11 +691,27 @@ function cleanHOnes$$1(article, $) {
     });
   } else {
     $hOnes.each(function (index, node) {
-      convertNodeTo$$1($(node), $, 'h2');
+      convertNodeTo($(node), $, 'h2');
     });
   }
 
   return $;
+}
+
+function setAttrs(node, attrs) {
+  if (node.attribs) {
+    node.attribs = attrs;
+  } else if (node.attributes) {
+    while (node.attributes.length > 0) {
+      node.removeAttribute(node.attributes[0].name);
+    }
+
+    _Reflect$ownKeys(attrs).forEach(function (key) {
+      node.setAttribute(key, attrs[key]);
+    });
+  }
+
+  return node;
 }
 
 function removeAllButWhitelist($article, $) {
@@ -697,7 +731,7 @@ function removeAllButWhitelist($article, $) {
 } // Remove attributes like style or align
 
 
-function cleanAttributes$$1($article, $) {
+function cleanAttributes($article, $) {
   // Grabbing the parent because at this point
   // $article will be wrapped in a div which will
   // have a score set on it.
@@ -835,7 +869,7 @@ function scoreLength(textLength) {
 
 // commas, etc. Higher is better.
 
-function scoreParagraph$$1(node) {
+function scoreParagraph(node) {
   var score = 1;
   var text = node.text().trim();
   var textLength = text.length; // If this paragraph is less than 25 characters, don't count it.
@@ -865,50 +899,9 @@ function setScore($node, $, score) {
   return $node;
 }
 
-function addScore$$1($node, $, amount) {
-  try {
-    var score = getOrInitScore$$1($node, $) + amount;
-    setScore($node, $, score);
-  } catch (e) {// Ignoring; error occurs in scoreNode
-  }
-
-  return $node;
-}
-
-function addToParent$$1(node, $, score) {
-  var parent = node.parent();
-
-  if (parent) {
-    addScore$$1(parent, $, score * 0.25);
-  }
-
-  return node;
-}
-
-// if not, initializes a score based on
-// the node's tag type
-
-function getOrInitScore$$1($node, $) {
-  var weightNodes = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
-  var score = getScore($node);
-
-  if (score) {
-    return score;
-  }
-
-  score = scoreNode$$1($node);
-
-  if (weightNodes) {
-    score += getWeight($node);
-  }
-
-  addToParent$$1($node, $, score);
-  return score;
-}
-
 // just scores based on tag.
 
-function scoreNode$$1($node) {
+function scoreNode($node) {
   var _$node$get = $node.get(0),
       tagName = _$node$get.tagName; // TODO: Consider ordering by most likely.
   // E.g., if divs are a more common tag on a page,
@@ -916,7 +909,7 @@ function scoreNode$$1($node) {
 
 
   if (PARAGRAPH_SCORE_TAGS$1.test(tagName)) {
-    return scoreParagraph$$1($node);
+    return scoreParagraph($node);
   }
 
   if (tagName.toLowerCase() === 'div') {
@@ -938,6 +931,47 @@ function scoreNode$$1($node) {
   return 0;
 }
 
+function addToParent(node, $, score) {
+  var parent = node.parent();
+
+  if (parent) {
+    addScore(parent, $, score * 0.25);
+  }
+
+  return node;
+}
+
+// if not, initializes a score based on
+// the node's tag type
+
+function getOrInitScore($node, $) {
+  var weightNodes = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
+  var score = getScore($node);
+
+  if (score) {
+    return score;
+  }
+
+  score = scoreNode($node);
+
+  if (weightNodes) {
+    score += getWeight($node);
+  }
+
+  addToParent($node, $, score);
+  return score;
+}
+
+function addScore($node, $, amount) {
+  try {
+    var score = getOrInitScore($node, $) + amount;
+    setScore($node, $, score);
+  } catch (e) {// Ignoring; error occurs in scoreNode
+  }
+
+  return $node;
+}
+
 function convertSpans$1($node, $) {
   if ($node.get(0)) {
     var _$node$get = $node.get(0),
@@ -945,7 +979,7 @@ function convertSpans$1($node, $) {
 
     if (tagName === 'span') {
       // convert spans to divs
-      convertNodeTo$$1($node, $, 'div');
+      convertNodeTo($node, $, 'div');
     }
   }
 }
@@ -953,7 +987,7 @@ function convertSpans$1($node, $) {
 function addScoreTo($node, $, score) {
   if ($node) {
     convertSpans$1($node, $);
-    addScore$$1($node, $, score);
+    addScore($node, $, score);
   }
 }
 
@@ -962,9 +996,9 @@ function scorePs($, weightNodes) {
     // The raw score for this paragraph, before we add any parent/child
     // scores.
     var $node = $(node);
-    $node = setScore($node, $, getOrInitScore$$1($node, $, weightNodes));
+    $node = setScore($node, $, getOrInitScore($node, $, weightNodes));
     var $parent = $node.parent();
-    var rawScore = scoreNode$$1($node);
+    var rawScore = scoreNode($node);
     addScoreTo($parent, $, rawScore, weightNodes);
 
     if ($parent) {
@@ -978,7 +1012,7 @@ function scorePs($, weightNodes) {
 // content score, grandparents half
 
 
-function scoreContent$$1($) {
+function scoreContent($) {
   var weightNodes = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
   // First, look for special hNews based selectors and give them a big
   // boost, if they exist
@@ -988,7 +1022,7 @@ function scoreContent$$1($) {
         childSelector = _ref2[1];
 
     $("".concat(parentSelector, " ").concat(childSelector)).each(function (index, node) {
-      addScore$$1($(node).parent(parentSelector), $, 80);
+      addScore($(node).parent(parentSelector), $, 80);
     });
   }); // Doubling this again
   // Previous solution caused a bug
@@ -999,6 +1033,28 @@ function scoreContent$$1($) {
   scorePs($, weightNodes);
   scorePs($, weightNodes);
   return $;
+}
+
+function textLength(text) {
+  return text.trim().replace(/\s+/g, ' ').length;
+} // Determines what percentage of the text
+// in a node is link text
+// Takes a node, returns a float
+
+function linkDensity($node) {
+  var totalTextLength = textLength($node.text());
+  var linkText = $node.find('a').text();
+  var linkLength = textLength(linkText);
+
+  if (totalTextLength > 0) {
+    return linkLength / totalTextLength;
+  }
+
+  if (totalTextLength === 0 && linkLength > 0) {
+    return 1;
+  }
+
+  return 0;
 }
 
 // it to see if any of them are decently scored. If they are, they
@@ -1079,7 +1135,7 @@ function mergeSiblings($candidate, topScore, $) {
 
 // candidate nodes we found and find the one with the highest score.
 
-function findTopCandidate$$1($) {
+function findTopCandidate($) {
   var $candidate;
   var topScore = 0;
   $('[score]').each(function (index, node) {
@@ -1182,7 +1238,7 @@ function removeUnlessContent($node, $, weight) {
 // Return this same doc.
 
 
-function cleanTags$$1($article, $) {
+function cleanTags($article, $) {
   $(CLEAN_CONDITIONALLY_TAGS, $article).each(function (index, node) {
     var $node = $(node); // If marked to keep, skip it
 
@@ -1190,7 +1246,7 @@ function cleanTags$$1($article, $) {
     var weight = getScore($node);
 
     if (!weight) {
-      weight = getOrInitScore$$1($node, $);
+      weight = getOrInitScore($node, $);
       setScore($node, $, weight);
     } // drop node if its weight is < 0
 
@@ -1235,13 +1291,23 @@ function cleanHeaders($article, $) {
 
 // html to avoid later complications with multiple body tags.
 
-function rewriteTopLevel$$1(article, $) {
+function rewriteTopLevel(article, $) {
   // I'm not using context here because
   // it's problematic when converting the
   // top-level/root node - AP
-  $ = convertNodeTo$$1($('html'), $, 'div');
-  $ = convertNodeTo$$1($('body'), $, 'div');
+  $ = convertNodeTo($('html'), $, 'div');
+  $ = convertNodeTo($('body'), $, 'div');
   return $;
+}
+
+function setAttr(node, attr, val) {
+  if (node.attribs) {
+    node.attribs[attr] = val;
+  } else if (node.attributes) {
+    node.setAttribute(attr, val);
+  }
+
+  return node;
 }
 
 function absolutize($, rootUrl, attr) {
@@ -1281,7 +1347,7 @@ function absolutizeSet($, rootUrl, $content) {
   });
 }
 
-function makeLinksAbsolute$$1($content, $, url) {
+function makeLinksAbsolute($content, $, url) {
   ['href', 'src'].forEach(function (attr) {
     return absolutize($, url, attr);
   });
@@ -1289,31 +1355,17 @@ function makeLinksAbsolute$$1($content, $, url) {
   return $content;
 }
 
-function textLength(text) {
-  return text.trim().replace(/\s+/g, ' ').length;
-} // Determines what percentage of the text
-// in a node is link text
-// Takes a node, returns a float
-
-function linkDensity($node) {
-  var totalTextLength = textLength($node.text());
-  var linkText = $node.find('a').text();
-  var linkLength = textLength(linkText);
-
-  if (totalTextLength > 0) {
-    return linkLength / totalTextLength;
-  }
-
-  if (totalTextLength === 0 && linkLength > 0) {
-    return 1;
-  }
-
-  return 0;
+// strips all tags from a string of text
+function stripTags(text, $) {
+  // Wrapping text in html element prevents errors when text
+  // has no html
+  var cleanText = $("<span>".concat(text, "</span>")).text();
+  return cleanText === '' ? text : cleanText;
 }
 
 // search for, find a meta tag associated.
 
-function extractFromMeta$$1($, metaNames, cachedNames) {
+function extractFromMeta($, metaNames, cachedNames) {
   var cleanTags = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
   var foundNames = metaNames.filter(function (name) {
     return cachedNames.indexOf(name) !== -1;
@@ -1383,6 +1435,18 @@ function extractFromMeta$$1($, metaNames, cachedNames) {
   return null;
 }
 
+function withinComment($node) {
+  var parents = $node.parents().toArray();
+  var commentParent = parents.find(function (parent) {
+    var attrs = getAttrs(parent);
+    var nodeClass = attrs.class,
+        id = attrs.id;
+    var classAndId = "".concat(nodeClass, " ").concat(id);
+    return classAndId.includes('comment');
+  });
+  return commentParent !== undefined;
+}
+
 function isGoodNode($node, maxChildren) {
   // If it has a number of children, it's more likely a container
   // element. Skip it.
@@ -1391,7 +1455,7 @@ function isGoodNode($node, maxChildren) {
   } // If it looks to be within a comment, skip it.
 
 
-  if (withinComment$$1($node)) {
+  if (withinComment($node)) {
     return false;
   }
 
@@ -1401,7 +1465,7 @@ function isGoodNode($node, maxChildren) {
 // meta-information, like author, title, date published, etc.
 
 
-function extractFromSelectors$$1($, selectors) {
+function extractFromSelectors($, selectors) {
   var maxChildren = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 1;
   var textOnly = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
   // eslint-disable-next-line no-restricted-syntax
@@ -1451,26 +1515,6 @@ function extractFromSelectors$$1($, selectors) {
   return null;
 }
 
-// strips all tags from a string of text
-function stripTags(text, $) {
-  // Wrapping text in html element prevents errors when text
-  // has no html
-  var cleanText = $("<span>".concat(text, "</span>")).text();
-  return cleanText === '' ? text : cleanText;
-}
-
-function withinComment$$1($node) {
-  var parents = $node.parents().toArray();
-  var commentParent = parents.find(function (parent) {
-    var attrs = getAttrs(parent);
-    var nodeClass = attrs.class,
-        id = attrs.id;
-    var classAndId = "".concat(nodeClass, " ").concat(id);
-    return classAndId.includes('comment');
-  });
-  return commentParent !== undefined;
-}
-
 // Given a node, determine if it's article-like enough to return
 // param: node (a cheerio node)
 // return: boolean
@@ -1480,50 +1524,6 @@ function nodeIsSufficient($node) {
 
 function isWordpress($) {
   return $(IS_WP_SELECTOR).length > 0;
-}
-
-function getAttrs(node) {
-  var attribs = node.attribs,
-      attributes = node.attributes;
-
-  if (!attribs && attributes) {
-    var attrs = _Reflect$ownKeys(attributes).reduce(function (acc, index) {
-      var attr = attributes[index];
-      if (!attr.name || !attr.value) return acc;
-      acc[attr.name] = attr.value;
-      return acc;
-    }, {});
-
-    return attrs;
-  }
-
-  return attribs;
-}
-
-function setAttr(node, attr, val) {
-  if (node.attribs) {
-    node.attribs[attr] = val;
-  } else if (node.attributes) {
-    node.setAttribute(attr, val);
-  }
-
-  return node;
-}
-
-function setAttrs(node, attrs) {
-  if (node.attribs) {
-    node.attribs = attrs;
-  } else if (node.attributes) {
-    while (node.attributes.length > 0) {
-      node.removeAttribute(node.attributes[0].name);
-    }
-
-    _Reflect$ownKeys(attrs).forEach(function (key) {
-      node.setAttribute(key, attrs[key]);
-    });
-  }
-
-  return node;
 }
 
 // DOM manipulation
@@ -1888,13 +1888,13 @@ var TwitterExtractor = {
 var NYTimesExtractor = {
   domain: 'www.nytimes.com',
   title: {
-    selectors: ['h1.g-headline', 'h1[itemprop="headline"]', 'h1.headline']
+    selectors: ['h1.g-headline', 'h1[itemprop="headline"]', 'h1.headline', 'h1 .balancedHeadline']
   },
   author: {
-    selectors: [['meta[name="author"]', 'value'], '.g-byline', '.byline']
+    selectors: [['meta[name="author"]', 'value'], '.g-byline', '.byline', ['meta[name="byl"]', 'value']]
   },
   content: {
-    selectors: ['div.g-blocks', 'article#story'],
+    selectors: ['div.g-blocks', 'section[name="articleBody"]', 'article#story'],
     transforms: {
       'img.g-lazy': function imgGLazy($node) {
         var src = $node.attr('src');
@@ -6025,13 +6025,13 @@ function extractCleanNode(article, _ref) {
       defaultCleaner = _ref$defaultCleaner === void 0 ? true : _ref$defaultCleaner;
   // Rewrite the tag name to div if it's a top level node like body or
   // html to avoid later complications with multiple body tags.
-  rewriteTopLevel$$1(article, $); // Drop small images and spacer images
+  rewriteTopLevel(article, $); // Drop small images and spacer images
   // Only do this is defaultCleaner is set to true;
   // this can sometimes be too aggressive.
 
   if (defaultCleaner) cleanImages(article, $); // Make links absolute
 
-  makeLinksAbsolute$$1(article, $, url); // Mark elements to keep that would normally be removed.
+  makeLinksAbsolute(article, $, url); // Mark elements to keep that would normally be removed.
   // E.g., stripJunkTags will remove iframes, so we're going to mark
   // YouTube/Vimeo videos as elements we want to keep.
 
@@ -6042,44 +6042,19 @@ function extractCleanNode(article, _ref) {
   // by the title extractor instead. If there's less than 3 of them (<3),
   // strip them. Otherwise, turn 'em into H2s.
 
-  cleanHOnes$$1(article, $); // Clean headers
+  cleanHOnes(article, $); // Clean headers
 
   cleanHeaders(article, $, title); // We used to clean UL's and OL's here, but it was leading to
   // too many in-article lists being removed. Consider a better
   // way to detect menus particularly and remove them.
   // Also optionally running, since it can be overly aggressive.
 
-  if (defaultCleaner) cleanTags$$1(article, $, cleanConditionally); // Remove empty paragraph nodes
+  if (defaultCleaner) cleanTags(article, $, cleanConditionally); // Remove empty paragraph nodes
 
   removeEmpty(article, $); // Remove unnecessary attributes
 
-  cleanAttributes$$1(article, $);
+  cleanAttributes(article, $);
   return article;
-}
-
-function cleanTitle$$1(title, _ref) {
-  var url = _ref.url,
-      $ = _ref.$;
-
-  // If title has |, :, or - in it, see if
-  // we can clean it up.
-  if (TITLE_SPLITTERS_RE.test(title)) {
-    title = resolveSplitTitle(title, url);
-  } // Final sanity check that we didn't get a crazy title.
-  // if (title.length > 150 || title.length < 15) {
-
-
-  if (title.length > 150) {
-    // If we did, return h1 from the document if it exists
-    var h1 = $('h1');
-
-    if (h1.length === 1) {
-      title = h1.text();
-    }
-  } // strip any html tags in the title text
-
-
-  return normalizeSpaces(stripTags(title, $).trim());
 }
 
 function extractBreadcrumbTitle(splitTitle, text) {
@@ -6178,13 +6153,38 @@ function resolveSplitTitle(title) {
   return title;
 }
 
+function cleanTitle(title, _ref) {
+  var url = _ref.url,
+      $ = _ref.$;
+
+  // If title has |, :, or - in it, see if
+  // we can clean it up.
+  if (TITLE_SPLITTERS_RE.test(title)) {
+    title = resolveSplitTitle(title, url);
+  } // Final sanity check that we didn't get a crazy title.
+  // if (title.length > 150 || title.length < 15) {
+
+
+  if (title.length > 150) {
+    // If we did, return h1 from the document if it exists
+    var h1 = $('h1');
+
+    if (h1.length === 1) {
+      title = h1.text();
+    }
+  } // strip any html tags in the title text
+
+
+  return normalizeSpaces(stripTags(title, $).trim());
+}
+
 var Cleaners = {
   author: cleanAuthor,
   lead_image_url: clean$1,
   dek: cleanDek,
   date_published: cleanDatePublished,
   content: extractCleanNode,
-  title: cleanTitle$$1
+  title: cleanTitle
 };
 
 // likely to be article text.
@@ -6203,9 +6203,9 @@ function extractBestNode($, opts) {
     $ = stripUnlikelyCandidates($);
   }
 
-  $ = convertToParagraphs$$1($);
-  $ = scoreContent$$1($, opts.weightNodes);
-  var $topCandidate = findTopCandidate$$1($);
+  $ = convertToParagraphs($);
+  $ = scoreContent($, opts.weightNodes);
+  var $topCandidate = findTopCandidate($);
   return $topCandidate;
 }
 
@@ -6335,27 +6335,27 @@ var GenericTitleExtractor = {
     // First, check to see if we have a matching meta tag that we can make
     // use of that is strongly associated with the headline.
     var title;
-    title = extractFromMeta$$1($, STRONG_TITLE_META_TAGS, metaCache);
-    if (title) return cleanTitle$$1(title, {
+    title = extractFromMeta($, STRONG_TITLE_META_TAGS, metaCache);
+    if (title) return cleanTitle(title, {
       url: url,
       $: $
     }); // Second, look through our content selectors for the most likely
     // article title that is strongly associated with the headline.
 
-    title = extractFromSelectors$$1($, STRONG_TITLE_SELECTORS);
-    if (title) return cleanTitle$$1(title, {
+    title = extractFromSelectors($, STRONG_TITLE_SELECTORS);
+    if (title) return cleanTitle(title, {
       url: url,
       $: $
     }); // Third, check for weaker meta tags that may match.
 
-    title = extractFromMeta$$1($, WEAK_TITLE_META_TAGS, metaCache);
-    if (title) return cleanTitle$$1(title, {
+    title = extractFromMeta($, WEAK_TITLE_META_TAGS, metaCache);
+    if (title) return cleanTitle(title, {
       url: url,
       $: $
     }); // Last, look for weaker selector tags that may match.
 
-    title = extractFromSelectors$$1($, WEAK_TITLE_SELECTORS);
-    if (title) return cleanTitle$$1(title, {
+    title = extractFromSelectors($, WEAK_TITLE_SELECTORS);
+    if (title) return cleanTitle(title, {
       url: url,
       $: $
     }); // If no matches, return an empty string
@@ -6392,14 +6392,14 @@ var GenericAuthorExtractor = {
     var author; // First, check to see if we have a matching
     // meta tag that we can make use of.
 
-    author = extractFromMeta$$1($, AUTHOR_META_TAGS, metaCache);
+    author = extractFromMeta($, AUTHOR_META_TAGS, metaCache);
 
     if (author && author.length < AUTHOR_MAX_LENGTH) {
       return cleanAuthor(author);
     } // Second, look through our selectors looking for potential authors.
 
 
-    author = extractFromSelectors$$1($, AUTHOR_SELECTORS, 2);
+    author = extractFromSelectors($, AUTHOR_SELECTORS, 2);
 
     if (author && author.length < AUTHOR_MAX_LENGTH) {
       return cleanAuthor(author);
@@ -6471,11 +6471,11 @@ var GenericDatePublishedExtractor = {
     // that we can make use of.
     // Don't try cleaning tags from this string
 
-    datePublished = extractFromMeta$$1($, DATE_PUBLISHED_META_TAGS, metaCache, false);
+    datePublished = extractFromMeta($, DATE_PUBLISHED_META_TAGS, metaCache, false);
     if (datePublished) return cleanDatePublished(datePublished); // Second, look through our selectors looking for potential
     // date_published's.
 
-    datePublished = extractFromSelectors$$1($, DATE_PUBLISHED_SELECTORS);
+    datePublished = extractFromSelectors($, DATE_PUBLISHED_SELECTORS);
     if (datePublished) return cleanDatePublished(datePublished); // Lastly, look to see if a dately string exists in the URL
 
     datePublished = extractFromUrl(url, DATE_PUBLISHED_URL_RES);
@@ -6644,7 +6644,7 @@ var GenericLeadImageUrlExtractor = {
     // images usually have for things like Open Graph.
 
 
-    var imageUrl = extractFromMeta$$1($, LEAD_IMAGE_URL_META_TAGS, metaCache, false);
+    var imageUrl = extractFromMeta($, LEAD_IMAGE_URL_META_TAGS, metaCache, false);
 
     if (imageUrl) {
       cleanUrl = clean$1(imageUrl);
@@ -7097,7 +7097,7 @@ var GenericUrlExtractor = {
       }
     }
 
-    var metaUrl = extractFromMeta$$1($, CANONICAL_META_SELECTORS, metaCache);
+    var metaUrl = extractFromMeta($, CANONICAL_META_SELECTORS, metaCache);
 
     if (metaUrl) {
       return result(metaUrl);
@@ -7121,7 +7121,7 @@ var GenericExcerptExtractor = {
     var $ = _ref.$,
         content = _ref.content,
         metaCache = _ref.metaCache;
-    var excerpt = extractFromMeta$$1($, EXCERPT_META_SELECTORS, metaCache);
+    var excerpt = extractFromMeta($, EXCERPT_META_SELECTORS, metaCache);
 
     if (excerpt) {
       return clean$2(stripTags(excerpt, $));
@@ -7251,7 +7251,7 @@ function transformElements($content, $, _ref2) {
 
     if (typeof value === 'string') {
       $matches.each(function (index, node) {
-        convertNodeTo$$1($(node), $, transforms[key]);
+        convertNodeTo($(node), $, transforms[key]);
       });
     } else if (typeof value === 'function') {
       // If value is function, apply function to node
@@ -7259,7 +7259,7 @@ function transformElements($content, $, _ref2) {
         var result = value($(node), $); // If function returns a string, convert node to that value
 
         if (typeof result === 'string') {
-          convertNodeTo$$1($(node), $, result);
+          convertNodeTo($(node), $, result);
         }
       });
     }
@@ -7307,7 +7307,7 @@ function select(opts) {
   if (!matchingSelector) return null;
 
   function transformAndClean($node) {
-    makeLinksAbsolute$$1($node, $, opts.url || '');
+    makeLinksAbsolute($node, $, opts.url || '');
     cleanBySelectors($node, $, extractionOpts);
     transformElements($node, $, extractionOpts);
     return $node;

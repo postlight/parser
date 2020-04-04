@@ -1,4 +1,4 @@
-import { getAttrs } from 'utils/dom';
+import getAttrs from './get-attrs';
 
 export default function convertNodeTo($node, $, tag = 'p') {
   const node = $node.get(0);

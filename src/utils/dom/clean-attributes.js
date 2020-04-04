@@ -1,6 +1,6 @@
-import { getAttrs, setAttrs } from 'utils/dom';
-
 import { WHITELIST_ATTRS_RE, KEEP_CLASS } from './constants';
+import getAttrs from './get-attrs';
+import setAttrs from './set-attrs';
 
 function removeAllButWhitelist($article, $) {
   $article.find('*').each((index, node) => {

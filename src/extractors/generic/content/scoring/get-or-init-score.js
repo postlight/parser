@@ -1,4 +1,7 @@
-import { getScore, scoreNode, getWeight, addToParent } from './index';
+import getScore from './get-score';
+import scoreNode from './score-node';
+import getWeight from './get-weight';
+import addToParent from './add-to-parent';
 
 // gets and returns the score if it exists
 // if not, initializes a score based on

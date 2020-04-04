@@ -1,6 +1,6 @@
 import { NON_TOP_CANDIDATE_TAGS_RE } from './constants';
-import { getScore } from './index';
 import mergeSiblings from './merge-siblings';
+import getScore from './get-score';
 
 // After we've calculated scores, loop through all of the possible
 // candidate nodes we found and find the one with the highest score.

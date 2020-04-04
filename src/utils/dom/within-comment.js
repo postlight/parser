@@ -1,4 +1,4 @@
-import { getAttrs } from 'utils/dom';
+import getAttrs from './get-attrs';
 
 export default function withinComment($node) {
   const parents = $node.parents().toArray();

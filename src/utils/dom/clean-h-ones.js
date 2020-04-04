@@ -1,4 +1,4 @@
-import { convertNodeTo } from 'utils/dom';
+import convertNodeTo from './convert-node-to';
 
 // H1 tags are typically the article title, which should be extracted
 // by the title extractor instead. If there's less than 3 of them (<3),

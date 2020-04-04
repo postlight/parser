@@ -1,4 +1,4 @@
-import { addScore } from './index';
+import addScore from './add-score';
 
 // Adds 1/4 of a child's score to its parent
 export default function addToParent(node, $, score) {

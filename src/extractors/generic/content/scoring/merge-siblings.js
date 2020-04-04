@@ -1,8 +1,8 @@
-import { textLength, linkDensity } from 'utils/dom';
 import { hasSentenceEnd } from 'utils/text';
+import { linkDensity, textLength } from '../../../../utils/dom/link-density';
 
 import { NON_TOP_CANDIDATE_TAGS_RE } from './constants';
-import { getScore } from './index';
+import getScore from './get-score';
 
 // Now that we have a top_candidate, look through the siblings of
 // it to see if any of them are decently scored. If they are, they
