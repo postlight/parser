@@ -39,7 +39,7 @@ describe('Mercury', () => {
         'https://upload.wikimedia.org/wikipedia/commons/5/52/Spacer.gif'
       );
 
-      assert(/content-type for this resource/i.test(error.message));
+      assert(/Content does not appear to be text/i.test(error.message));
     });
 
     it('does wikipedia', async () => {

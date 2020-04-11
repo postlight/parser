@@ -197,26 +197,16 @@ var REQUEST_HEADERS = cheerio.browser ? {} : {
   'User-Agent': 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36'
 }; // The number of milliseconds to attempt to fetch a resource before timing out.
 
-var FETCH_TIMEOUT = 10000; // Content types that we do not extract content from
-
-var BAD_CONTENT_TYPES = ['audio/mpeg', 'image/gif', 'image/jpeg', 'image/jpg'];
-var BAD_CONTENT_TYPES_RE = new RegExp("^(".concat(BAD_CONTENT_TYPES.join('|'), ")$"), 'i'); // Use this setting as the maximum size an article can be
+var FETCH_TIMEOUT = 10000; // Use this setting as the maximum size an article can be
 // for us to attempt parsing. Defaults to 5 MB.
 
 var MAX_CONTENT_LENGTH = 5242880; // Turn the global proxy on or off
 
-if (!globalThis.fetch) {
-  var _fetch = require('node-fetch');
+var fetch = undefined && undefined.fetch ? undefined.fetch : require('node-fetch');
 
-  var Headers = require('node-fetch').Headers;
-
-  globalThis.fetch = _fetch;
-  globalThis.Headers = Headers;
-} // Evaluate a response to ensure it's something we should be keeping.
 // This does not validate in the sense of a response being 200 or not.
 // Validation here means that we haven't found reason to bail from
 // further processing of this url.
-
 
 function validateResponse(response) {
   var parseNon200 = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
@@ -236,16 +226,18 @@ function validateResponse(response) {
   }
 
   var _response$headers = response.headers,
-      contentType = _response$headers['content-type'],
-      contentLength = _response$headers['content-length']; // Check that the content is not in BAD_CONTENT_TYPES
-
-  if (BAD_CONTENT_TYPES_RE.test(contentType)) {
-    throw new Error("Content-type for this resource was ".concat(contentType, " and is not allowed."));
-  } // Check that the content length is below maximum
-
+      _response$headers$con = _response$headers['content-type'],
+      contentType = _response$headers$con === void 0 ? '' : _response$headers$con,
+      contentLength = _response$headers['content-length']; // Check that the content length is below maximum
 
   if (contentLength > MAX_CONTENT_LENGTH) {
     throw new Error("Content for this resource was too large. Maximum content length is ".concat(MAX_CONTENT_LENGTH, "."));
+  } // TODO: Implement is_text function from
+  // https://github.com/ReadabilityHoldings/readability/blob/8dc89613241d04741ebd42fa9fa7df1b1d746303/readability/utils/text.py#L57
+
+
+  if (!contentType || !contentType.includes('html') && !contentType.includes('text')) {
+    throw new Error('Content does not appear to be text.');
   }
 
   return true;
@@ -284,7 +276,7 @@ function _getBody() {
 
           case 3:
             _context.t1 = _context.sent;
-            return _context.abrupt("return", new _context.t0(_context.t1));
+            return _context.abrupt("return", _context.t0.from.call(_context.t0, _context.t1));
 
           case 5:
           case "end":
@@ -1698,13 +1690,6 @@ var Resource = {
     var content = _ref.content,
         _ref$contentType = _ref.contentType,
         contentType = _ref$contentType === void 0 ? '' : _ref$contentType;
-
-    // TODO: Implement is_text function from
-    // https://github.com/ReadabilityHoldings/readability/blob/8dc89613241d04741ebd42fa9fa7df1b1d746303/readability/utils/text.py#L57
-    if (!contentType.includes('html') && !contentType.includes('text')) {
-      throw new Error('Content does not appear to be text.');
-    }
-
     var $ = this.encodeDoc({
       content: content,
       contentType: contentType

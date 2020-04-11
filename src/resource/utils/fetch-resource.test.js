@@ -1,6 +1,6 @@
 import assert from 'assert';
 import URL from 'url';
-import { Headers } from 'node-fetch';
+import nock from 'nock';
 
 import { record } from 'test-helpers';
 import fetchResource, { baseDomain, validateResponse } from './fetch-resource';
@@ -19,19 +19,24 @@ describe('fetchResource(url)', () => {
   });
 
   it('passes custom headers in requests', async () => {
-    // A GET request to this endpoint returns the list of all request headers as part of the response JSON
-    const url = 'https://postman-echo.com/headers';
+    const url = 'https://example.com';
     const parsedUrl = URL.parse(url);
     const headers = {
       'my-custom-header': 'Lorem ipsum dolor sit amet',
     };
-    const result = await fetchResource(url, parsedUrl, headers);
-    const body = JSON.parse(result.content.toString());
+    nock(url)
+      .get('/')
+      .reply(function() {
+        return [
+          200,
+          this.req.headers['my-custom-header'][0], // request headers in body
+          { 'Content-Type': 'text/html' },
+        ];
+      });
 
-    assert.equal(
-      body.headers['my-custom-header'],
-      'Lorem ipsum dolor sit amet'
-    );
+    const result = await fetchResource(url, parsedUrl, headers);
+
+    assert.equal(result.content.toString(), 'Lorem ipsum dolor sit amet');
   });
 
   it('returns a buffer as its content', async () => {
@@ -65,10 +70,10 @@ describe('validateResponse(response)', () => {
     const validResponse = {
       statusMessage: 'OK',
       status: 200,
-      headers: new Headers({
+      headers: {
         'content-type': 'text/html',
         'content-length': 500,
-      }),
+      },
     };
 
     assert.equal(validateResponse(validResponse), true);
@@ -92,6 +97,24 @@ describe('validateResponse(response)', () => {
     }, /instructed to reject non-200/i);
   });
 
+  it('throws an error if the response has no content-type header', () => {
+    const invalidResponse = {
+      statusText: 'OK',
+      status: 200,
+      headers: {
+        'content-length': 500,
+      },
+    };
+
+    assert.throws(
+      () => {
+        validateResponse(invalidResponse);
+      },
+      err =>
+        err instanceof Error && /content does not appear to be text/i.test(err)
+    );
+  });
+
   it('throws an error if response has bad content-type', () => {
     const invalidResponse = {
       statusText: 'OK',
@@ -104,7 +127,7 @@ describe('validateResponse(response)', () => {
 
     assert.throws(() => {
       validateResponse(invalidResponse);
-    }, /content-type for this resource/i);
+    }, /Content does not appear to be text./i);
   });
 
   it('throws an error if response length is > max', () => {

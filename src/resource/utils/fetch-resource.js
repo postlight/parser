@@ -1,6 +1,5 @@
 import URL from 'url';
 import {
-  BAD_CONTENT_TYPES_RE,
   FETCH_TIMEOUT,
   MAX_CONTENT_LENGTH,
   REQUEST_HEADERS,
@@ -38,22 +37,24 @@ export function validateResponse(response, parseNon200 = false) {
   }
 
   const {
-    'content-type': contentType,
+    'content-type': contentType = '',
     'content-length': contentLength,
   } = response.headers;
-
-  // Check that the content is not in BAD_CONTENT_TYPES
-  if (BAD_CONTENT_TYPES_RE.test(contentType)) {
-    throw new Error(
-      `Content-type for this resource was ${contentType} and is not allowed.`
-    );
-  }
 
   // Check that the content length is below maximum
   if (contentLength > MAX_CONTENT_LENGTH) {
     throw new Error(
       `Content for this resource was too large. Maximum content length is ${MAX_CONTENT_LENGTH}.`
     );
+  }
+
+  // TODO: Implement is_text function from
+  // https://github.com/ReadabilityHoldings/readability/blob/8dc89613241d04741ebd42fa9fa7df1b1d746303/readability/utils/text.py#L57
+  if (
+    !contentType ||
+    (!contentType.includes('html') && !contentType.includes('text'))
+  ) {
+    throw new Error('Content does not appear to be text.');
   }
 
   return true;

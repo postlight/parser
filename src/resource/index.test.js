@@ -84,25 +84,6 @@ describe('Resource', () => {
     // Ideally the body would be a buffer, because of potential issues with
     // string re-encoding, since these strings are blank, it should be fine
     // but this is why iconv is throwing warnings.
-    it('throws an error if the content is not text', () => {
-      assert.throws(() => {
-        Resource.generateDoc({ content: '', contentType: 'foo' });
-      }, /content does not appear to be text/i);
-    });
-
-    it('throws an error if the response has no Content-Type header', () => {
-      // This assertion is more elaborate than the others to be sure that we're
-      // throwing an `Error` and not raising a runtime exception.
-      assert.throws(
-        () => {
-          Resource.generateDoc({ content: '' });
-        },
-        err =>
-          err instanceof Error &&
-          /content does not appear to be text/i.test(err)
-      );
-    });
-
     it('throws an error if the content has no children', () => {
       // jquery's parser won't work this way, and this is
       // an outside case
