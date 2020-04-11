@@ -3,7 +3,7 @@ import iconv from 'iconv-lite';
 
 import { getEncoding } from 'utils/text';
 import { fetchResource } from './utils';
-import { normalizeMetaTags, convertLazyLoadedImages, clean } from './utils/dom';
+import { clean, convertLazyLoadedImages, normalizeMetaTags } from './utils/dom';
 
 const Resource = {
   // Create a Resource.
@@ -17,16 +17,7 @@ const Resource = {
     let result;
 
     if (preparedResponse) {
-      const validResponse = {
-        statusMessage: 'OK',
-        statusCode: 200,
-        headers: {
-          'content-type': 'text/html',
-          'content-length': 500,
-        },
-      };
-
-      result = { body: preparedResponse, response: validResponse };
+      result = { content: preparedResponse, contentType: 'text/html' };
     } else {
       result = await fetchResource(url, parsedUrl, headers);
     }
@@ -39,9 +30,7 @@ const Resource = {
     return this.generateDoc(result);
   },
 
-  generateDoc({ body: content, response }) {
-    const { 'content-type': contentType = '' } = response.headers;
-
+  generateDoc({ content, contentType = '' }) {
     // TODO: Implement is_text function from
     // https://github.com/ReadabilityHoldings/readability/blob/8dc89613241d04741ebd42fa9fa7df1b1d746303/readability/utils/text.py#L57
     if (!contentType.includes('html') && !contentType.includes('text')) {

@@ -1,5 +1,6 @@
 import assert from 'assert';
 import URL from 'url';
+import { Headers } from 'node-fetch';
 
 import { record } from 'test-helpers';
 import fetchResource, { baseDomain, validateResponse } from './fetch-resource';
@@ -25,7 +26,7 @@ describe('fetchResource(url)', () => {
       'my-custom-header': 'Lorem ipsum dolor sit amet',
     };
     const result = await fetchResource(url, parsedUrl, headers);
-    const body = JSON.parse(result.body.toString());
+    const body = JSON.parse(result.content.toString());
 
     assert.equal(
       body.headers['my-custom-header'],
@@ -33,43 +34,29 @@ describe('fetchResource(url)', () => {
     );
   });
 
-  it('returns a buffer as its body', async () => {
+  it('returns a buffer as its content', async () => {
     const url =
       'http://www.nytimes.com/2016/08/16/upshot/the-state-of-the-clinton-trump-race-is-it-over.html?_r=0';
     const result = await fetchResource(url);
 
-    assert.equal(typeof result.body, 'object');
+    assert.equal(typeof result.content, 'object');
   });
 
   it('fetches nyt', async () => {
     const url =
       'http://www.nytimes.com/2016/08/16/upshot/the-state-of-the-clinton-trump-race-is-it-over.html?_r=0';
-    const { response } = await fetchResource(url);
+    const { content, contentType } = await fetchResource(url);
 
-    assert.equal(response.statusCode, 200);
-  });
-
-  it('fetches domains', async () => {
-    const url = 'http://theconcourse.deadspin.com/1786177057';
-    const { response } = await fetchResource(url);
-
-    assert.equal(response.statusCode, 200);
-  });
-
-  it('fetches nyt', async () => {
-    const url =
-      'http://www.nytimes.com/2016/08/16/upshot/the-state-of-the-clinton-trump-race-is-it-over.html?_r=0';
-    const { response } = await fetchResource(url);
-
-    assert.equal(response.statusCode, 200);
+    assert.notEqual(content.toString(), undefined);
+    assert.equal(contentType, 'text/html; charset=utf-8');
   });
 
   it('handles this gzip error', async () => {
     const url =
       'http://www.redcross.ca/blog/2016/11/photo-of-the-day--one-year-anniversary-of-the-end-of-ebola-in-sierra-leone';
-    const { response } = await fetchResource(url);
+    const { content } = await fetchResource(url);
 
-    assert.equal(response.statusCode, 200);
+    assert.notEqual(content.toString(), undefined);
   });
 });
 
@@ -77,11 +64,11 @@ describe('validateResponse(response)', () => {
   it('validates a response object', () => {
     const validResponse = {
       statusMessage: 'OK',
-      statusCode: 200,
-      headers: {
+      status: 200,
+      headers: new Headers({
         'content-type': 'text/html',
         'content-length': 500,
-      },
+      }),
     };
 
     assert.equal(validateResponse(validResponse), true);
@@ -97,7 +84,7 @@ describe('validateResponse(response)', () => {
 
   it('throws an error if response code is not 200', () => {
     const invalidResponse = {
-      statusCode: 500,
+      status: 500,
     };
 
     assert.throws(() => {
@@ -107,8 +94,8 @@ describe('validateResponse(response)', () => {
 
   it('throws an error if response has bad content-type', () => {
     const invalidResponse = {
-      statusMessage: 'OK',
-      statusCode: 200,
+      statusText: 'OK',
+      status: 200,
       headers: {
         'content-type': 'image/gif',
         'content-length': 500,
@@ -122,8 +109,8 @@ describe('validateResponse(response)', () => {
 
   it('throws an error if response length is > max', () => {
     const invalidResponse = {
-      statusMessage: 'OK',
-      statusCode: 200,
+      statusText: 'OK',
+      status: 200,
       headers: {
         'content-type': 'text/html',
         'content-length': MAX_CONTENT_LENGTH + 1,

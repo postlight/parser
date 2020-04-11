@@ -12,8 +12,7 @@ var TurndownService = _interopDefault(require('turndown'));
 var iconv = _interopDefault(require('iconv-lite'));
 var _parseInt = _interopDefault(require('@babel/runtime-corejs2/core-js/parse-int'));
 var _slicedToArray = _interopDefault(require('@babel/runtime-corejs2/helpers/slicedToArray'));
-var _Promise = _interopDefault(require('@babel/runtime-corejs2/core-js/promise'));
-var request = _interopDefault(require('postman-request'));
+var _Array$from = _interopDefault(require('@babel/runtime-corejs2/core-js/array/from'));
 var _Reflect$ownKeys = _interopDefault(require('@babel/runtime-corejs2/core-js/reflect/own-keys'));
 var _toConsumableArray = _interopDefault(require('@babel/runtime-corejs2/helpers/toConsumableArray'));
 var _defineProperty = _interopDefault(require('@babel/runtime-corejs2/helpers/defineProperty'));
@@ -29,7 +28,6 @@ var moment = _interopDefault(require('moment-timezone'));
 var parseFormat = _interopDefault(require('moment-parseformat'));
 var wuzzy = _interopDefault(require('wuzzy'));
 var difflib = _interopDefault(require('difflib'));
-var _Array$from = _interopDefault(require('@babel/runtime-corejs2/core-js/array/from'));
 var ellipsize = _interopDefault(require('ellipsize'));
 var _Array$isArray = _interopDefault(require('@babel/runtime-corejs2/core-js/array/is-array'));
 
@@ -207,19 +205,13 @@ var BAD_CONTENT_TYPES_RE = new RegExp("^(".concat(BAD_CONTENT_TYPES.join('|'), "
 
 var MAX_CONTENT_LENGTH = 5242880; // Turn the global proxy on or off
 
-function get(options) {
-  return new _Promise(function (resolve, reject) {
-    request(options, function (err, response, body) {
-      if (err) {
-        reject(err);
-      } else {
-        resolve({
-          body: body,
-          response: response
-        });
-      }
-    });
-  });
+if (!globalThis.fetch) {
+  var _fetch = require('node-fetch');
+
+  var Headers = require('node-fetch').Headers;
+
+  globalThis.fetch = _fetch;
+  globalThis.Headers = Headers;
 } // Evaluate a response to ensure it's something we should be keeping.
 // This does not validate in the sense of a response being 200 or not.
 // Validation here means that we haven't found reason to bail from
@@ -235,11 +227,11 @@ function validateResponse(response) {
   // statusMessage only not set in nock response, in which case
   // I check statusCode, which is currently only 200 for OK responses
   // in tests
-  if (response.statusMessage && response.statusMessage !== 'OK' || response.statusCode !== 200) {
-    if (!response.statusCode) {
+  if (response.statusText && response.statusText !== 'OK' || response.status !== 200) {
+    if (!response.status) {
       throw new Error("Unable to fetch content. Original exception was ".concat(response.error));
     } else if (!parseNon200) {
-      throw new Error("Resource returned a response status code of ".concat(response.statusCode, " and resource was instructed to reject non-200 status codes."));
+      throw new Error("Resource returned a response status code of ".concat(response.status, " and resource was instructed to reject non-200 status codes."));
     }
   }
 
@@ -263,72 +255,137 @@ function validateResponse(response) {
 // TODO: Ensure we are not fetching something enormous. Always return
 //       unicode content for HTML, with charset conversion.
 
-function fetchResource(_x, _x2) {
+function getHeaders(response) {
+  return _Array$from(response.headers.entries()).reduce(function (acc, _ref2) {
+    var _ref3 = _slicedToArray(_ref2, 2),
+        k = _ref3[0],
+        v = _ref3[1];
+
+    acc[k] = v;
+    return acc;
+  }, {});
+}
+
+function getBody(_x) {
+  return _getBody.apply(this, arguments);
+}
+
+function _getBody() {
+  _getBody = _asyncToGenerator(
+  /*#__PURE__*/
+  _regeneratorRuntime.mark(function _callee(response) {
+    return _regeneratorRuntime.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            _context.t0 = Buffer;
+            _context.next = 3;
+            return response.arrayBuffer();
+
+          case 3:
+            _context.t1 = _context.sent;
+            return _context.abrupt("return", new _context.t0(_context.t1));
+
+          case 5:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee, this);
+  }));
+  return _getBody.apply(this, arguments);
+}
+
+function request(_x2, _x3) {
+  return _request.apply(this, arguments);
+}
+
+function _request() {
+  _request = _asyncToGenerator(
+  /*#__PURE__*/
+  _regeneratorRuntime.mark(function _callee2(headers, parsedUrl) {
+    var options, rawResponse;
+    return _regeneratorRuntime.wrap(function _callee2$(_context2) {
+      while (1) {
+        switch (_context2.prev = _context2.next) {
+          case 0:
+            options = {
+              headers: _objectSpread({}, REQUEST_HEADERS, headers),
+              timeout: FETCH_TIMEOUT
+            };
+            _context2.next = 3;
+            return fetch(parsedUrl.href, options);
+
+          case 3:
+            rawResponse = _context2.sent;
+            _context2.t0 = rawResponse.statusText;
+            _context2.t1 = rawResponse.status;
+            _context2.next = 8;
+            return getBody(rawResponse);
+
+          case 8:
+            _context2.t2 = _context2.sent;
+            _context2.t3 = getHeaders(rawResponse);
+            return _context2.abrupt("return", {
+              statusText: _context2.t0,
+              status: _context2.t1,
+              body: _context2.t2,
+              headers: _context2.t3
+            });
+
+          case 11:
+          case "end":
+            return _context2.stop();
+        }
+      }
+    }, _callee2, this);
+  }));
+  return _request.apply(this, arguments);
+}
+
+function fetchResource(_x4, _x5) {
   return _fetchResource.apply(this, arguments);
 }
 
 function _fetchResource() {
   _fetchResource = _asyncToGenerator(
   /*#__PURE__*/
-  _regeneratorRuntime.mark(function _callee(url, parsedUrl) {
+  _regeneratorRuntime.mark(function _callee3(url, parsedUrl) {
     var headers,
-        options,
-        _ref2,
         response,
-        body,
-        _args = arguments;
-
-    return _regeneratorRuntime.wrap(function _callee$(_context) {
+        _args3 = arguments;
+    return _regeneratorRuntime.wrap(function _callee3$(_context3) {
       while (1) {
-        switch (_context.prev = _context.next) {
+        switch (_context3.prev = _context3.next) {
           case 0:
-            headers = _args.length > 2 && _args[2] !== undefined ? _args[2] : {};
+            headers = _args3.length > 2 && _args3[2] !== undefined ? _args3[2] : {};
             parsedUrl = parsedUrl || URL.parse(encodeURI(url));
-            options = _objectSpread({
-              url: parsedUrl.href,
-              headers: _objectSpread({}, REQUEST_HEADERS, headers),
-              timeout: FETCH_TIMEOUT,
-              // Accept cookies
-              jar: true,
-              // Set to null so the response returns as binary and body as buffer
-              // https://github.com/request/request#requestoptions-callback
-              encoding: null,
-              // Accept and decode gzip
-              gzip: true,
-              // Follow any non-GET redirects
-              followAllRedirects: true
-            }, typeof window !== 'undefined' ? {} : {
-              // Follow GET redirects; this option is for Node only
-              followRedirect: true
-            });
-            _context.next = 5;
-            return get(options);
+            _context3.next = 4;
+            return request(headers, parsedUrl);
 
-          case 5:
-            _ref2 = _context.sent;
-            response = _ref2.response;
-            body = _ref2.body;
-            _context.prev = 8;
+          case 4:
+            response = _context3.sent;
+            _context3.prev = 5;
             validateResponse(response);
-            return _context.abrupt("return", {
-              body: body,
-              response: response
+            return _context3.abrupt("return", {
+              content: response.body,
+              contentType: response.headers['content-type']
+            });
+
+          case 10:
+            _context3.prev = 10;
+            _context3.t0 = _context3["catch"](5);
+            return _context3.abrupt("return", {
+              error: true,
+              message: _context3.t0.message
             });
 
           case 13:
-            _context.prev = 13;
-            _context.t0 = _context["catch"](8);
-            return _context.abrupt("return", {
-              error: true,
-              message: _context.t0.message
-            });
-
-          case 16:
           case "end":
-            return _context.stop();
+            return _context3.stop();
         }
       }
-    }, _callee, this, [[8, 13]]);
+    }, _callee3, this, [[5, 10]]);
   }));
   return _fetchResource.apply(this, arguments);
 }
@@ -1585,7 +1642,6 @@ var Resource = {
     _regeneratorRuntime.mark(function _callee(url, preparedResponse, parsedUrl) {
       var headers,
           result,
-          validResponse,
           _args = arguments;
       return _regeneratorRuntime.wrap(function _callee$(_context) {
         while (1) {
@@ -1594,45 +1650,37 @@ var Resource = {
               headers = _args.length > 3 && _args[3] !== undefined ? _args[3] : {};
 
               if (!preparedResponse) {
-                _context.next = 6;
+                _context.next = 5;
                 break;
               }
 
-              validResponse = {
-                statusMessage: 'OK',
-                statusCode: 200,
-                headers: {
-                  'content-type': 'text/html',
-                  'content-length': 500
-                }
-              };
               result = {
-                body: preparedResponse,
-                response: validResponse
+                content: preparedResponse,
+                contentType: 'text/html'
               };
-              _context.next = 9;
+              _context.next = 8;
               break;
 
-            case 6:
-              _context.next = 8;
+            case 5:
+              _context.next = 7;
               return fetchResource(url, parsedUrl, headers);
 
-            case 8:
+            case 7:
               result = _context.sent;
 
-            case 9:
+            case 8:
               if (!result.error) {
-                _context.next = 12;
+                _context.next = 11;
                 break;
               }
 
               result.failed = true;
               return _context.abrupt("return", result);
 
-            case 12:
+            case 11:
               return _context.abrupt("return", this.generateDoc(result));
 
-            case 13:
+            case 12:
             case "end":
               return _context.stop();
           }
@@ -1647,12 +1695,12 @@ var Resource = {
     return create;
   }(),
   generateDoc: function generateDoc(_ref) {
-    var content = _ref.body,
-        response = _ref.response;
-    var _response$headers$con = response.headers['content-type'],
-        contentType = _response$headers$con === void 0 ? '' : _response$headers$con; // TODO: Implement is_text function from
-    // https://github.com/ReadabilityHoldings/readability/blob/8dc89613241d04741ebd42fa9fa7df1b1d746303/readability/utils/text.py#L57
+    var content = _ref.content,
+        _ref$contentType = _ref.contentType,
+        contentType = _ref$contentType === void 0 ? '' : _ref$contentType;
 
+    // TODO: Implement is_text function from
+    // https://github.com/ReadabilityHoldings/readability/blob/8dc89613241d04741ebd42fa9fa7df1b1d746303/readability/utils/text.py#L57
     if (!contentType.includes('html') && !contentType.includes('text')) {
       throw new Error('Content does not appear to be text.');
     }

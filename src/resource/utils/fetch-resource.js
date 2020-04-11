@@ -1,24 +1,12 @@
 import URL from 'url';
-import request from 'postman-request';
-
 import {
-  REQUEST_HEADERS,
-  FETCH_TIMEOUT,
   BAD_CONTENT_TYPES_RE,
+  FETCH_TIMEOUT,
   MAX_CONTENT_LENGTH,
+  REQUEST_HEADERS,
 } from './constants';
 
-function get(options) {
-  return new Promise((resolve, reject) => {
-    request(options, (err, response, body) => {
-      if (err) {
-        reject(err);
-      } else {
-        resolve({ body, response });
-      }
-    });
-  });
-}
+import { fetch } from './fetch';
 
 // Evaluate a response to ensure it's something we should be keeping.
 // This does not validate in the sense of a response being 200 or not.
@@ -33,17 +21,17 @@ export function validateResponse(response, parseNon200 = false) {
   // I check statusCode, which is currently only 200 for OK responses
   // in tests
   if (
-    (response.statusMessage && response.statusMessage !== 'OK') ||
-    response.statusCode !== 200
+    (response.statusText && response.statusText !== 'OK') ||
+    response.status !== 200
   ) {
-    if (!response.statusCode) {
+    if (!response.status) {
       throw new Error(
         `Unable to fetch content. Original exception was ${response.error}`
       );
     } else if (!parseNon200) {
       throw new Error(
         `Resource returned a response status code of ${
-          response.statusCode
+          response.status
         } and resource was instructed to reject non-200 status codes.`
       );
     }
@@ -86,36 +74,41 @@ export function baseDomain({ host }) {
 // TODO: Ensure we are not fetching something enormous. Always return
 //       unicode content for HTML, with charset conversion.
 
-export default async function fetchResource(url, parsedUrl, headers = {}) {
-  parsedUrl = parsedUrl || URL.parse(encodeURI(url));
+function getHeaders(response) {
+  return Array.from(response.headers.entries()).reduce((acc, [k, v]) => {
+    acc[k] = v;
+    return acc;
+  }, {});
+}
+
+async function getBody(response) {
+  return Buffer.from(await response.arrayBuffer());
+}
+
+async function request(headers, parsedUrl) {
   const options = {
-    url: parsedUrl.href,
     headers: { ...REQUEST_HEADERS, ...headers },
     timeout: FETCH_TIMEOUT,
-    // Accept cookies
-    jar: true,
-    // Set to null so the response returns as binary and body as buffer
-    // https://github.com/request/request#requestoptions-callback
-    encoding: null,
-    // Accept and decode gzip
-    gzip: true,
-    // Follow any non-GET redirects
-    followAllRedirects: true,
-    ...(typeof window !== 'undefined'
-      ? {}
-      : {
-          // Follow GET redirects; this option is for Node only
-          followRedirect: true,
-        }),
   };
 
-  const { response, body } = await get(options);
+  const rawResponse = await fetch(parsedUrl.href, options);
+  return {
+    statusText: rawResponse.statusText,
+    status: rawResponse.status,
+    body: await getBody(rawResponse),
+    headers: getHeaders(rawResponse),
+  };
+}
+
+export default async function fetchResource(url, parsedUrl, headers = {}) {
+  parsedUrl = parsedUrl || URL.parse(encodeURI(url));
+  const response = await request(headers, parsedUrl);
 
   try {
     validateResponse(response);
     return {
-      body,
-      response,
+      content: response.body,
+      contentType: response.headers['content-type'],
     };
   } catch (e) {
     return {

@@ -110,6 +110,7 @@
   "dependencies": {
     "@babel/runtime-corejs2": "^7.2.0",
     "@postlight/ci-failed-test-reporter": "^1.0",
+    "@ungap/global-this": "^0.3.1",
     "browser-request": "github:postlight/browser-request#feat-add-headers-to-response",
     "cheerio": "^0.22.0",
     "difflib": "github:postlight/difflib.js",
@@ -119,6 +120,7 @@
     "moment": "^2.23.0",
     "moment-parseformat": "3.0.0",
     "moment-timezone": "0.5.26",
+    "node-fetch": "^2.6.0",
     "postman-request": "^2.88.1-postman.7.1",
     "request-promise": "^4.2.2",
     "string-direction": "^0.1.2",
