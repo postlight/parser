@@ -116,8 +116,6 @@ describe('MaTtiasBeExtractor', () => {
         13
       );
 
-      // Update these values with the expected values from
-      // the article.
       assert.equal(
         first13,
         'Hi everyone! 👋 Welcome to cron.weekly issue #130. There’s quite a bit of'
