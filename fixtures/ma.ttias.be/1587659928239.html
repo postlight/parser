@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" value="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" value="ie=edge">
+    <title>cron.weekly issue #130: Github, keycloak, proc, redis6, cron &amp; more</title>
+
+    
+    
+    <meta name="robots" value="index, follow">
+    
+    <link rel="canonical" href="https://ma.ttias.be/cronweekly/issue-130/">
+
+    
+    <meta name="author" value="Mattias Geniar">
+    <meta name="description" value="Hi everyone! &#x1F44B;
+Welcome to cron.weekly issue #130.
+There&#x2019;s quite a bit of news from Github this week, together with Windows 10 (I know, on a Linux-focussed newsletter no less!">
+
+    
+    <meta prefix="og: http://ogp.me/ns#" value="cron.weekly issue #130: Github, keycloak, proc, redis6, cron &amp; more" name="og:title">
+    <meta prefix="og: http://ogp.me/ns#" value="Hi everyone! &#x1F44B;
+Welcome to cron.weekly issue #130.
+There&#x2019;s quite a bit of news from Github this week, together with Windows 10 (I know, on a Linux-focussed newsletter no less!" name="og:description">
+    <meta prefix="og: http://ogp.me/ns#" value="article" name="og:type">
+    <meta prefix="og: http://ogp.me/ns#" value="https://ma.ttias.be/cronweekly/issue-130/" name="og:url">
+    <meta prefix="og: http://ogp.me/ns#" value="https://ma.ttias.be//cronweekly/cronweekly_social_media_image.png" name="og:image">
+
+    <meta value="2020-04-19T06:50:00+01:00" name="article:published_time">
+    <meta value="2020-04-19T06:50:00+01:00" name="article:modified_time">
+    <meta value="https://www.facebook.com/www.ma.ttias.be/" name="article:author">
+    <meta value="https://www.facebook.com/www.ma.ttias.be/" name="article:publisher">
+    <meta value="cronweekly" name="article:section">
+    
+    <meta name="twitter:card" value="summary_large_image">
+    <meta name="twitter:site" value="@mattiasgeniar">
+    <meta name="twitter:title" value="cron.weekly issue #130: Github, keycloak, proc, redis6, cron &amp; more">
+    <meta name="twitter:description" value="Hi everyone! &#x1F44B;
+Welcome to cron.weekly issue #130.
+There&#x2019;s quite a bit of news from Github this week, together with Windows 10 (I know, on a Linux-focussed newsletter no less!">
+    <meta name="twitter:image" value="https://ma.ttias.be//cronweekly/cronweekly_social_media_image.png">
+
+    
+    <link rel="stylesheet" href="https://ma.ttias.be/css/styles.min.4f69788acc04a694fc7d7d35d61b5c6ad24a139127f8b175ec3bb441e737392c.css" integrity="sha256-T2l4iswEppT8fX011htcatJKE5En+LF17Du0Qec3OSw=">
+
+    
+<meta name="generator" value="Hugo 0.59.1">
+</head><body class="bg-white font-sans leading-normal tracking-normal text-lg"><nav id="header" class="fixed w-full z-10 top-0 border-b-4  border-blue-300 bg-white">
+    
+    <div class="w-full md:max-w-4xl mx-auto flex flex-wrap items-center justify-between mt-0 py-3">
+        <div class="pl-4">
+            <a class="text-gray-900 text-base no-underline hover:no-underline font-extrabold text-xl" href="https://ma.ttias.be/">
+                Mattias Geniar
+            </a>
+        </div>
+
+        <div class="block lg:hidden pr-4">
+            <button id="nav-toggle" class="flex items-center px-3 py-2 border rounded text-gray-500 border-gray-600 hover:text-gray-900 hover:border-teal-500 appearance-none focus:outline-none">
+                <svg class="fill-current h-3 w-3" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                    <title>Menu</title>
+                    <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/>
+                </svg>
+            </button>
+        </div>
+
+        <div class="w-full flex-grow lg:flex lg:items-center lg:w-auto hidden lg:block mt-2 lg:mt-0 bg-gray-100 md:bg-transparent z-20" id="nav-content">
+            <ul class="list-reset lg:flex justify-end flex-1 items-center">
+                
+                
+                    
+                    
+                    
+                    
+                    
+                    
+                    <li class="mr-2">
+                        <a href="https://ma.ttias.be/blog/" class="inline-block text-gray-600 no-underline hover:text-gray-900 hover:text-underline py-2 px-4 ">
+                            <span>Blog</span>
+                        </a>
+                    </li>
+                
+                    
+                    
+                    
+                    
+                    
+                    
+                    <li class="mr-2">
+                        <a href="https://ma.ttias.be/cronweekly/" class="inline-block text-gray-600 no-underline hover:text-gray-900 hover:text-underline py-2 px-4 active">
+                            <span>Newsletter</span>
+                        </a>
+                    </li>
+                
+                    
+                    
+                    
+                    
+                    
+                    
+                    <li class="mr-2">
+                        <a href="https://ma.ttias.be/syscast/" class="inline-block text-gray-600 no-underline hover:text-gray-900 hover:text-underline py-2 px-4 ">
+                            <span>Podcast</span>
+                        </a>
+                    </li>
+                
+                    
+                    
+                    
+                    
+                    
+                    
+                    <li class="mr-2">
+                        <a href="https://ma.ttias.be/projects/" class="inline-block text-gray-600 no-underline hover:text-gray-900 hover:text-underline py-2 px-4 ">
+                            <span>Projects</span>
+                        </a>
+                    </li>
+                
+                    
+                    
+                    
+                    
+                    
+                    
+                    <li class="mr-2">
+                        <a href="https://ma.ttias.be/talks/" class="inline-block text-gray-600 no-underline hover:text-gray-900 hover:text-underline py-2 px-4 ">
+                            <span>Talks</span>
+                        </a>
+                    </li>
+                
+                    
+                    
+                    
+                    
+                    
+                    
+                    <li class="mr-2">
+                        <a href="https://ma.ttias.be/contact/" class="inline-block text-gray-600 no-underline hover:text-gray-900 hover:text-underline py-2 px-4 ">
+                            <span>Contact</span>
+                        </a>
+                    </li>
+                
+
+                <li>
+                    <a href="https://ma.ttias.be/search/" class="inline-block text-gray-600 no-underline hover:text-gray-900 hover:text-underline py-2 px-4 mt-2">
+                        <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="search" class="fill-current w-5" role="img" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 512 512">
+                            <path d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"/>
+                        </svg>
+                    </a>
+                </li>
+            </ul>
+
+        </div>
+    </div>
+</nav><div id="content">
+
+<div class="w-screen max-w-full pt-20 header-curved bg-blue-300 border-blue-200">
+    <div class="container w-full md:max-w-4xl px-4 md:px-6 text-xl text-gray-800 leading-normal mx-auto">
+        
+        <div class="pb-8">
+            <h1 class="font-thin break-normal leading-tight text-gray-900 pt-6 pb-4 text-4xl md:text-5xl">
+                cron.weekly issue #130: Github, keycloak, proc, redis6, cron &amp; more
+            </h1>
+
+            <hr class="mt-2">
+
+            <div class="font-thin italic break-normal text-gray-700 text-xl homepage-intro leading-relaxed pb-8 mt-2">
+                <p class="py-2">
+                    cron.weekly is a newsletter about Linux, open source &amp; webdevelopment. Want to get it in your inbox every Sunday? Subscribe below!
+                </p>
+
+                <div>
+                    
+
+                    <div class="max-w-full mx-auto pt-1">
+                        <span class="text-gray-700 text-sm italic leading-none">
+                            I <a href="https://ma.ttias.be/cronweekly/about/">respect your privacy</a> and you won&apos;t get spam. Ever. Just a weekly-ish newsletter about Linux and open source.
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container w-full md:max-w-4xl mx-auto mt-12">
+    <div class="w-full px-4 md:px-6 text-xl text-gray-800 leading-normal">
+        <div class="flex w-full items-center mb-8">
+            <img class="w-12 h-12 rounded-full mr-4" src="https://ma.ttias.be/img/mattias-400x400.jpg" alt="Image of Mattias Geniar">
+            <div class="flex-1 px-2">
+                <p class="text-base font-bold text-base md:text-xl leading-none">
+                    Mattias Geniar, April 19, 2020
+                </p>
+                <p class="font-thin text-base mt-2">
+                    Follow me on Twitter as <a href="https://twitter.com/mattiasgeniar" class="underline hover:no-underline">@mattiasgeniar</a>
+                </p>
+            </div>
+        </div>
+
+        
+
+            
+            <main class="cronweekly ">
+                <div class="content blog-content cronweekly-content">
+                    
+
+<p>Hi everyone! &#x1F44B;</p>
+
+<p>Welcome to cron.weekly issue #130.</p>
+
+<p>There&#x2019;s quite a bit of news from Github this week, together with Windows 10 (I know, on a Linux-focussed newsletter no less!) and ARM servers. I should have some content for everyone to enjoy.</p>
+
+<p>Stay strong, stay home, <a href="https://www.youtube.com/watch?v=YxvBPH4sArQ">stay alive</a>.</p>
+
+<p>Oh, and &#x2615;&#xFE0F;, of course.</p>
+
+<h1 id="news-general">News &amp; general &#x1F5DE;</h1>
+
+<h2 id="is-bgp-safe-yet-no-https-isbgpsafeyet-com"><a href="https://isbgpsafeyet.com/">Is BGP safe yet? No.</a></h2>
+
+<p>Did you know the internet is held together with duct tape? BGP is one of those pieces of tape. Resource Public Key Infrastructure (RPKI) can help authenticate routes, but is only seeing slow adoption.</p>
+
+<h2 id="github-is-now-free-for-teams-https-github-blog-2020-04-14-github-is-now-free-for-teams"><a href="https://github.blog/2020-04-14-github-is-now-free-for-teams/">GitHub is now free for teams</a></h2>
+
+<p>This is a pretty big move on their part: you can now create teams and host unlimited private git repositories at Github for free!</p>
+
+<blockquote>
+<p>We&#x2019;ve wanted to make this change for the last 18 months, but needed our Enterprise business to be big enough to enable the free use of GitHub by the rest of the world. - <a href="https://news.ycombinator.com/item?id=22867627">Nat Friedman</a></p>
+</blockquote>
+
+<p>Big players pay for the little ones, I appreciate that.</p>
+
+<h2 id="academics-steal-data-from-air-gapped-systems-using-pc-fan-vibrations-https-www-zdnet-com-article-academics-steal-data-from-air-gapped-systems-using-pc-fan-vibrations"><a href="https://www.zdnet.com/article/academics-steal-data-from-air-gapped-systems-using-pc-fan-vibrations/">Academics steal data from air-gapped systems using PC fan vibrations</a></h2>
+
+<p>Even your computer fan can leak your personal data. tl;dr: don&#x2019;t use computers. Ever.</p>
+
+<h2 id="icann-delays-org-sell-off-https-www-theregister-co-uk-2020-04-17-icann-california-org-sale-delay"><a href="https://www.theregister.co.uk/2020/04/17/icann_california_org_sale_delay/">ICANN delays .org sell off</a></h2>
+
+<p>Good news, for now - as the .org sale announced late last year is put on hold. Question is, for how long?</p>
+
+<h2 id="npm-has-joined-github-https-github-blog-2020-04-15-npm-has-joined-github"><a href="https://github.blog/2020-04-15-npm-has-joined-github/">npm has joined GitHub</a></h2>
+
+<p>GitHub has completed its acquisition of npm. Which is a bit of a weird announcement from Github, as <a href="https://github.blog/2020-03-16-npm-is-joining-github/">npm already announced it last month?</a> Oh well, corporate stuff. &#x1F604;</p>
+
+<h2 id="scaleway-arm64-instances-reach-end-of-life-https-www-scaleway-com-en-docs-migrate-c2-arm64-to-virtual-instance-using-rsync"><a href="https://www.scaleway.com/en/docs/migrate-c2-arm64-to-virtual-instance-using-rsync/">Scaleway ARM64 instances reach end-of-life</a></h2>
+
+<p>Scaleway is sunsetting its ARM64 instances at the end of this year. This is a bit of a surprise move, as they reached their fame (I believe?) mostly <em>because</em> they did ARM server hosting at scale.</p>
+
+<p>In an age where Apple is supposed to release ARM laptops <em>within the year</em>, I&#x2019;d be very curious to learn why Scaleway is terminating their ARM support.</p>
+
+<h2 id="windows-wsl2-explorer-integration-for-linux">Windows WSL2 &amp; Explorer integration for Linux</h2>
+
+<p>Two interesting stories that caught my attention last week from the Windows front:</p>
+
+<ul>
+<li><a href="https://www.infoq.com/news/2020/04/wsl-2-general-availability/">Windows Subsystem for Linux 2 Moving into General Availability</a></li>
+<li><a href="https://www.theverge.com/2020/4/8/21213783/microsoft-windows-10-linux-file-explorer-integration-features">Windows 10 getting Linux files integration in Explorer</a></li>
+</ul>
+
+<p>The new Windows Subsystem for Linux 2 (WSL2) will run as a lightweight VM running a full Linux kernel, which means it&#x2019;ll support things like Docker and FUSE.</p>
+
+<p>The new Explorer integration means you&#x2019;ll be able to access the files on that tiny Linux VM much easier.</p>
+
+<h1 id="tools-projects">Tools &amp; Projects &#x1F6E0;</h1>
+
+<h2 id="learning-to-see-in-the-dark-https-github-com-cchen156-learning-to-see-in-the-dark"><a href="https://github.com/cchen156/Learning-to-See-in-the-Dark">Learning-to-See-in-the-Dark</a></h2>
+
+<p>This is crazy: a machine learning dataset that can turn just about any (really) dark image into a bright-as-day version. The video blew my mind.</p>
+
+<h2 id="protonmail-bridge-https-protonmail-com-blog-bridge-open-source"><a href="https://protonmail.com/blog/bridge-open-source/">ProtonMail Bridge</a></h2>
+
+<p>The ProtonMail Bridge is an application that runs on your computer in the background and seamlessly encrypts and decrypts your mail as it enters and leaves your computer.</p>
+
+<h2 id="simplify-complexity-in-containerized-environments-https-www-datadoghq-com-dg-monitor-containers-utm-source-advertisement-utm-medium-advertisement-utm-campaign-cronweeklynewsletter07-utm-content-containers"><a href="https://www.datadoghq.com/dg/monitor/containers/?utm_source=Advertisement&amp;utm_medium=Advertisement&amp;utm_campaign=CronWeeklyNewsletter07&amp;utm_content=Containers">Simplify Complexity in Containerized Environments</a></h2>
+
+<p>Enhance visibility into containers and container orchestration with Datadog. Automatically track containerized services with Autodiscovery and receive smarter alerts that won&#x2019;t panic as customers scale down. Easily monitor the health of all your containers with granular, real-time metrics and visualize performance from a bird&#x2019;s eye view with Datadog&#x2019;s live container map. Start your free Datadog trial today! <span class="pill-sponsored">Sponsored</span></p>
+
+<h2 id="phoenix-livedashboard-https-github-com-phoenixframework-phoenix-live-dashboard"><a href="https://github.com/phoenixframework/phoenix_live_dashboard">Phoenix LiveDashboard</a></h2>
+
+<p>LiveDashboard provides real-time performance monitoring and debugging tools for Phoenix developers.</p>
+
+<h2 id="prestissimo-https-github-com-hirak-prestissimo"><a href="https://github.com/hirak/prestissimo">prestissimo</a></h2>
+
+<p>This is a composer plugin (PHP&#x2019;s package manager) that downloads packages in parallel to speed up the installation process.</p>
+
+<h2 id="kanboard-https-kanboard-org"><a href="https://kanboard.org/">Kanboard</a></h2>
+
+<p>Kanboard is a free and open-source Kanban project management software.</p>
+
+<h2 id="hund-versatile-service-monitoring-https-hund-io-utm-source-cronweekly-utm-medium-email-utm-campaign-sp-apr20"><a href="https://hund.io/?utm_source=cronweekly&amp;utm_medium=email&amp;utm_campaign=sp_apr20">Hund: versatile service monitoring</a></h2>
+
+<p>Monitor your services every 30 seconds, get notified the way you want! Slack, Email, Webhooks, &#x2026; your pick. See rich metrics and use our customizable status pages to keep all your customers informed. Try us for free for 30 days! <span class="pill-sponsored">Sponsored</span></p>
+
+<h2 id="regex2fat-https-github-com-8051enthusiast-regex2fat"><a href="https://github.com/8051Enthusiast/regex2fat">regex2fat</a></h2>
+
+<p><em>&#x201C;Did you ever want to match a regex, but all you had was a fat32 driver? Ever wanted to serialize your regex DFAs into one of the most widely supported formats used by over 3 billion devices?&#x201D;</em></p>
+
+<p>I have no idea how any of this works, but it got shared far &amp; wide on the internet, so I figure I&#x2019;ll do the same here. But really &#x2026; even the tagline confuses me. &#x1F648;</p>
+
+<h2 id="falcon-https-github-com-plotly-falcon"><a href="https://github.com/plotly/falcon">falcon</a></h2>
+
+<p>Falcon is a free, open-source SQL editor with inline data visualization. It currently supports connecting to RedShift, MySQL, PostgreSQL, IBM DB2, Impala, MS SQL, Oracle, SQLite.</p>
+
+<h2 id="keycloak-https-github-com-keycloak-keycloak"><a href="https://github.com/keycloak/keycloak">keycloak</a></h2>
+
+<p>Keycloak is an Open Source Identity and Access Management solution for modern Applications and Services. It allows you to add authentication to applications and secure services with minimum fuss. No need to deal with storing users or authenticating users. It&#x2019;s all available out of the box. You&#x2019;ll even get advanced features such as User Federation, Identity Brokering and Social Login.</p>
+
+<h2 id="mdbook-https-github-com-rust-lang-mdbook"><a href="https://github.com/rust-lang/mdBook">mdBook</a></h2>
+
+<p>Ever wanted to write a book <em>(You&#x2019;re crazy)</em>? Ever wanted to do it in Markdown (<em>OK, maybe you&#x2019;re not crazy)</em>? You can use mdBook to take Markdown files, parse them &amp; create online books.</p>
+
+<h2 id="3mux-https-github-com-aaronjanse-3mux"><a href="https://github.com/aaronjanse/3mux">3mux</a></h2>
+
+<p>3mux is a terminal multiplexer with out-of-the-box support for search, mouse-controlled scrollback, and i3-like keybindings. Imagine tmux with a smaller learning curve and more sane defaults.</p>
+
+<h1 id="guides-tutorials">Guides &amp; Tutorials &#x1F393;</h1>
+
+<h2 id="now-i-understand-why-almost-no-one-uses-encrypted-email-https-cheapskatesguide-org-articles-encrypted-email-html"><a href="https://cheapskatesguide.org/articles/encrypted-email.html/">Now I Understand why Almost No One uses Encrypted Email</a></h2>
+
+<p>It&#x2019;s true, using PGP with email isn&#x2019;t very user friendly, to this day. This post contains the commands used to send encrypted e-mails, and it&#x2019;s enough to put you off - honestly.</p>
+
+<h2 id="troubleshoot-using-the-proc-filesystem-on-linux-https-opensource-com-article-20-4-proc-filesystem"><a href="https://opensource.com/article/20/4/proc-filesystem">Troubleshoot using the proc filesystem on Linux</a></h2>
+
+<p>A good overview of the basics when looking at the <code>/proc</code> filesystem. I use this all the time when debugging, it&#x2019;s a good place to start a lot of debug-quests.</p>
+
+<h2 id="comparing-the-new-redis6-multithreaded-i-o-to-elasticache-keydb-https-docs-keydb-dev-blog-2020-04-15-blog-post"><a href="https://docs.keydb.dev/blog/2020/04/15/blog-post">Comparing the new Redis6 multithreaded I/O to Elasticache &amp; KeyDB</a></h2>
+
+<p>The team at KeyDB compares its key/value daemon (<em>originally a fork of Redis</em>) with the latest Redis 6. Surprise surprise, KeyDB wins. &#x1F605; But the metrics &amp; numbers are interesting enough to share the post regardless.</p>
+
+<h2 id="why-does-cron-only-offer-minute-granularity-https-superuser-com-questions-620807-why-does-cron-only-offer-minute-granularity"><a href="https://superuser.com/questions/620807/why-does-cron-only-offer-minute-granularity">Why does cron only offer minute granularity?</a></h2>
+
+<p>In short, compatibility. The format that crontab uses is described in minute detail as part of the POSIX Specification.</p>
+
+<h2 id="how-to-boost-udp-transaction-performance-https-www-slideshare-net-lfevents-boost-udp-transaction-performance"><a href="https://www.slideshare.net/lfevents/boost-udp-transaction-performance">How to Boost UDP Transaction Performance</a></h2>
+
+<p>A nice in-depth set of slides to optimize UDP traffic on a Linux server. This might come in handy <em>when</em> HTTP/3 takes off and you want to optimise your throughput.</p>
+
+<h2 id="rename-files-in-linux-without-typing-the-full-name-twice-https-gist-github-com-premek-6e70446cfc913d3c929d7cdbfe896fef"><a href="https://gist.github.com/premek/6e70446cfc913d3c929d7cdbfe896fef">Rename files in linux without typing the full name twice</a></h2>
+
+<p>This is clever use of a Bash alias and the <code>read</code> method in Bash to prompt for input.</p>
+
+<h2 id="technical-reasons-to-choose-freebsd-over-gnu-linux-https-unixsheikh-com-articles-technical-reasons-to-choose-freebsd-over-linux-html"><a href="https://unixsheikh.com/articles/technical-reasons-to-choose-freebsd-over-linux.html">Technical reasons to choose FreeBSD over GNU/Linux</a></h2>
+
+<p>This post covers some of the technical reasons to choose FreeBSD over GNU/Linux.</p>
+
+<h2 id="wireguard-vpn-typical-setup-https-www-ckn-io-blog-2017-11-14-wireguard-vpn-typical-setup"><a href="https://www.ckn.io/blog/2017/11/14/wireguard-vpn-typical-setup">Wireguard VPN: Typical Setup</a></h2>
+
+<p>This guide helps you set up Wireguard VPN on your Linux box with step-by-step instructions.</p>
+
+                </div>
+
+                <aside class="hidden lg:block tableOfContentContainer  border-blue-300" id="tableOfContentContainer">
+
+                    <h3>Table of contents</h3>
+                    <nav id="TableOfContents">
+<ul>
+<li><a href="https://ma.ttias.be/cronweekly/issue-130/#news-general">News &amp; general &#x1F5DE;</a>
+<ul>
+<li><a href="https://ma.ttias.be/cronweekly/issue-130/#is-bgp-safe-yet-no-https-isbgpsafeyet-com"><a href="https://isbgpsafeyet.com/">Is BGP safe yet? No.</a></a></li>
+<li><a href="https://ma.ttias.be/cronweekly/issue-130/#github-is-now-free-for-teams-https-github-blog-2020-04-14-github-is-now-free-for-teams"><a href="https://github.blog/2020-04-14-github-is-now-free-for-teams/">GitHub is now free for teams</a></a></li>
+<li><a href="https://ma.ttias.be/cronweekly/issue-130/#academics-steal-data-from-air-gapped-systems-using-pc-fan-vibrations-https-www-zdnet-com-article-academics-steal-data-from-air-gapped-systems-using-pc-fan-vibrations"><a href="https://www.zdnet.com/article/academics-steal-data-from-air-gapped-systems-using-pc-fan-vibrations/">Academics steal data from air-gapped systems using PC fan vibrations</a></a></li>
+<li><a href="https://ma.ttias.be/cronweekly/issue-130/#icann-delays-org-sell-off-https-www-theregister-co-uk-2020-04-17-icann-california-org-sale-delay"><a href="https://www.theregister.co.uk/2020/04/17/icann_california_org_sale_delay/">ICANN delays .org sell off</a></a></li>
+<li><a href="https://ma.ttias.be/cronweekly/issue-130/#npm-has-joined-github-https-github-blog-2020-04-15-npm-has-joined-github"><a href="https://github.blog/2020-04-15-npm-has-joined-github/">npm has joined GitHub</a></a></li>
+<li><a href="https://ma.ttias.be/cronweekly/issue-130/#scaleway-arm64-instances-reach-end-of-life-https-www-scaleway-com-en-docs-migrate-c2-arm64-to-virtual-instance-using-rsync"><a href="https://www.scaleway.com/en/docs/migrate-c2-arm64-to-virtual-instance-using-rsync/">Scaleway ARM64 instances reach end-of-life</a></a></li>
+<li><a href="https://ma.ttias.be/cronweekly/issue-130/#windows-wsl2-explorer-integration-for-linux">Windows WSL2 &amp; Explorer integration for Linux</a></li>
+</ul></li>
+<li><a href="https://ma.ttias.be/cronweekly/issue-130/#tools-projects">Tools &amp; Projects &#x1F6E0;</a>
+<ul>
+<li><a href="https://ma.ttias.be/cronweekly/issue-130/#learning-to-see-in-the-dark-https-github-com-cchen156-learning-to-see-in-the-dark"><a href="https://github.com/cchen156/Learning-to-See-in-the-Dark">Learning-to-See-in-the-Dark</a></a></li>
+<li><a href="https://ma.ttias.be/cronweekly/issue-130/#protonmail-bridge-https-protonmail-com-blog-bridge-open-source"><a href="https://protonmail.com/blog/bridge-open-source/">ProtonMail Bridge</a></a></li>
+<li><a href="https://ma.ttias.be/cronweekly/issue-130/#simplify-complexity-in-containerized-environments-https-www-datadoghq-com-dg-monitor-containers-utm-source-advertisement-utm-medium-advertisement-utm-campaign-cronweeklynewsletter07-utm-content-containers"><a href="https://www.datadoghq.com/dg/monitor/containers/?utm_source=Advertisement&amp;utm_medium=Advertisement&amp;utm_campaign=CronWeeklyNewsletter07&amp;utm_content=Containers">Simplify Complexity in Containerized Environments</a></a></li>
+<li><a href="https://ma.ttias.be/cronweekly/issue-130/#phoenix-livedashboard-https-github-com-phoenixframework-phoenix-live-dashboard"><a href="https://github.com/phoenixframework/phoenix_live_dashboard">Phoenix LiveDashboard</a></a></li>
+<li><a href="https://ma.ttias.be/cronweekly/issue-130/#prestissimo-https-github-com-hirak-prestissimo"><a href="https://github.com/hirak/prestissimo">prestissimo</a></a></li>
+<li><a href="https://ma.ttias.be/cronweekly/issue-130/#kanboard-https-kanboard-org"><a href="https://kanboard.org/">Kanboard</a></a></li>
+<li><a href="https://ma.ttias.be/cronweekly/issue-130/#hund-versatile-service-monitoring-https-hund-io-utm-source-cronweekly-utm-medium-email-utm-campaign-sp-apr20"><a href="https://hund.io/?utm_source=cronweekly&amp;utm_medium=email&amp;utm_campaign=sp_apr20">Hund: versatile service monitoring</a></a></li>
+<li><a href="https://ma.ttias.be/cronweekly/issue-130/#regex2fat-https-github-com-8051enthusiast-regex2fat"><a href="https://github.com/8051Enthusiast/regex2fat">regex2fat</a></a></li>
+<li><a href="https://ma.ttias.be/cronweekly/issue-130/#falcon-https-github-com-plotly-falcon"><a href="https://github.com/plotly/falcon">falcon</a></a></li>
+<li><a href="https://ma.ttias.be/cronweekly/issue-130/#keycloak-https-github-com-keycloak-keycloak"><a href="https://github.com/keycloak/keycloak">keycloak</a></a></li>
+<li><a href="https://ma.ttias.be/cronweekly/issue-130/#mdbook-https-github-com-rust-lang-mdbook"><a href="https://github.com/rust-lang/mdBook">mdBook</a></a></li>
+<li><a href="https://ma.ttias.be/cronweekly/issue-130/#3mux-https-github-com-aaronjanse-3mux"><a href="https://github.com/aaronjanse/3mux">3mux</a></a></li>
+</ul></li>
+<li><a href="https://ma.ttias.be/cronweekly/issue-130/#guides-tutorials">Guides &amp; Tutorials &#x1F393;</a>
+<ul>
+<li><a href="https://ma.ttias.be/cronweekly/issue-130/#now-i-understand-why-almost-no-one-uses-encrypted-email-https-cheapskatesguide-org-articles-encrypted-email-html"><a href="https://cheapskatesguide.org/articles/encrypted-email.html/">Now I Understand why Almost No One uses Encrypted Email</a></a></li>
+<li><a href="https://ma.ttias.be/cronweekly/issue-130/#troubleshoot-using-the-proc-filesystem-on-linux-https-opensource-com-article-20-4-proc-filesystem"><a href="https://opensource.com/article/20/4/proc-filesystem">Troubleshoot using the proc filesystem on Linux</a></a></li>
+<li><a href="https://ma.ttias.be/cronweekly/issue-130/#comparing-the-new-redis6-multithreaded-i-o-to-elasticache-keydb-https-docs-keydb-dev-blog-2020-04-15-blog-post"><a href="https://docs.keydb.dev/blog/2020/04/15/blog-post">Comparing the new Redis6 multithreaded I/O to Elasticache &amp; KeyDB</a></a></li>
+<li><a href="https://ma.ttias.be/cronweekly/issue-130/#why-does-cron-only-offer-minute-granularity-https-superuser-com-questions-620807-why-does-cron-only-offer-minute-granularity"><a href="https://superuser.com/questions/620807/why-does-cron-only-offer-minute-granularity">Why does cron only offer minute granularity?</a></a></li>
+<li><a href="https://ma.ttias.be/cronweekly/issue-130/#how-to-boost-udp-transaction-performance-https-www-slideshare-net-lfevents-boost-udp-transaction-performance"><a href="https://www.slideshare.net/lfevents/boost-udp-transaction-performance">How to Boost UDP Transaction Performance</a></a></li>
+<li><a href="https://ma.ttias.be/cronweekly/issue-130/#rename-files-in-linux-without-typing-the-full-name-twice-https-gist-github-com-premek-6e70446cfc913d3c929d7cdbfe896fef"><a href="https://gist.github.com/premek/6e70446cfc913d3c929d7cdbfe896fef">Rename files in linux without typing the full name twice</a></a></li>
+<li><a href="https://ma.ttias.be/cronweekly/issue-130/#technical-reasons-to-choose-freebsd-over-gnu-linux-https-unixsheikh-com-articles-technical-reasons-to-choose-freebsd-over-linux-html"><a href="https://unixsheikh.com/articles/technical-reasons-to-choose-freebsd-over-linux.html">Technical reasons to choose FreeBSD over GNU/Linux</a></a></li>
+<li><a href="https://ma.ttias.be/cronweekly/issue-130/#wireguard-vpn-typical-setup-https-www-ckn-io-blog-2017-11-14-wireguard-vpn-typical-setup"><a href="https://www.ckn.io/blog/2017/11/14/wireguard-vpn-typical-setup">Wireguard VPN: Typical Setup</a></a></li>
+</ul></li>
+</ul>
+</nav>
+
+                </aside>
+            </main>
+
+            
+
+        
+
+        
+<hr class="border border-2 border-gray-100 mt-8">
+
+<div class="content comments mt-8 overflow-hidden">
+    <div class="w-full text-center pl-4">
+        <ul class="list-reset flex flex-wrap justify-between share-links">
+            <li class="mb-4 md:mb-0">
+                <a href="https://twitter.com/intent/tweet?text=cron.weekly%20issue%20%23130%3a%20Github%2c%20keycloak%2c%20proc%2c%20redis6%2c%20cron%20%26%20more&amp;via=mattiasgeniar&amp;url=https%3a%2f%2fma.ttias.be%2fcronweekly%2fissue-130%2f" class="share" target="_blank">
+                    <svg aria-hidden="true" focusable="false" data-prefix="fab" data-icon="twitter" class="text-blue-900" role="img" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 512 512">
+                        <path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"/>
+                    </svg>
+                </a>
+            </li>
+
+            <li class="mb-4 md:mb-0">
+                <a href="https://www.facebook.com/dialog/share?app_id=561520434630185&amp;display=popup&amp;href=https%3a%2f%2fma.ttias.be%2fcronweekly%2fissue-130%2f&amp;redirect_uri=https%3a%2f%2fma.ttias.be%2fcronweekly%2fissue-130%2f" target="_blank">
+                    <svg aria-hidden="true" focusable="false" data-prefix="fab" data-icon="facebook-f" class="text-blue-900" role="img" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 320 512">
+                        <path d="M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z"/>
+                    </svg>
+                </a>
+            </li>
+
+            <li class="mb-4 md:mb-0">
+                <a href="https://www.reddit.com/submit?url=https%3a%2f%2fma.ttias.be%2fcronweekly%2fissue-130%2f" target="_blank">
+                    <svg aria-hidden="true" focusable="false" data-prefix="fab" data-icon="reddit" class="text-blue-900" role="img" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 512 512">
+                        <path d="M201.5 305.5c-13.8 0-24.9-11.1-24.9-24.6 0-13.8 11.1-24.9 24.9-24.9 13.6 0 24.6 11.1 24.6 24.9 0 13.6-11.1 24.6-24.6 24.6zM504 256c0 137-111 248-248 248S8 393 8 256 119 8 256 8s248 111 248 248zm-132.3-41.2c-9.4 0-17.7 3.9-23.8 10-22.4-15.5-52.6-25.5-86.1-26.6l17.4-78.3 55.4 12.5c0 13.6 11.1 24.6 24.6 24.6 13.8 0 24.9-11.3 24.9-24.9s-11.1-24.9-24.9-24.9c-9.7 0-18 5.8-22.1 13.8l-61.2-13.6c-3-.8-6.1 1.4-6.9 4.4l-19.1 86.4c-33.2 1.4-63.1 11.3-85.5 26.8-6.1-6.4-14.7-10.2-24.1-10.2-34.9 0-46.3 46.9-14.4 62.8-1.1 5-1.7 10.2-1.7 15.5 0 52.6 59.2 95.2 132 95.2 73.1 0 132.3-42.6 132.3-95.2 0-5.3-.6-10.8-1.9-15.8 31.3-16 19.8-62.5-14.9-62.5zM302.8 331c-18.2 18.2-76.1 17.9-93.6 0-2.2-2.2-6.1-2.2-8.3 0-2.5 2.5-2.5 6.4 0 8.6 22.8 22.8 87.3 22.8 110.2 0 2.5-2.2 2.5-6.1 0-8.6-2.2-2.2-6.1-2.2-8.3 0zm7.7-75c-13.6 0-24.6 11.1-24.6 24.9 0 13.6 11.1 24.6 24.6 24.6 13.8 0 24.9-11.1 24.9-24.6 0-13.8-11-24.9-24.9-24.9z"/>
+                    </svg>
+                </a>
+            </li>
+
+            <li class="mb-4 md:mb-0">
+                <a href="https://news.ycombinator.com/submitlink?u=https%3a%2f%2fma.ttias.be%2fcronweekly%2fissue-130%2f&amp;t=cron.weekly%20issue%20%23130%3a%20Github%2c%20keycloak%2c%20proc%2c%20redis6%2c%20cron%20%26%20more" target="_blank">
+                    <svg aria-hidden="true" focusable="false" data-prefix="fab" data-icon="hacker-news" class="text-blue-900" role="img" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 448 512">
+                        <path fill="currentColor" d="M0 32v448h448V32H0zm21.2 197.2H21c.1-.1.2-.3.3-.4 0 .1 0 .3-.1.4zm218 53.9V384h-31.4V281.3L128 128h37.3c52.5 98.3 49.2 101.2 59.3 125.6 12.3-27 5.8-24.4 60.6-125.6H320l-80.8 155.1z"/>
+                    </svg>
+                </a>
+            </li>
+
+            <li class="mb-4 md:mb-0">
+                <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3a%2f%2fma.ttias.be%2fcronweekly%2fissue-130%2f" target="_blank">
+                    <svg aria-hidden="true" focusable="false" data-prefix="fab" data-icon="linkedin" class="text-blue-900" role="img" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 448 512">
+                        <path fill="currentColor" d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/>
+                    </svg>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<hr class="border border-2 border-gray-100 mt-8">
+
+<div class="content comments border rounded-lg mt-12 overflow-hidden">
+    <div class="w-full pr-4 bg-blue-300 p-4 px-8">
+        <h3 class="text-5xl">Want to subscribe to the cron.weekly newsletter?</h3>
+
+        <p>
+            I write a weekly-ish newsletter on Linux, open source &amp; webdevelopment called <a href="https://ma.ttias.be/cronweekly">cron.weekly</a>.
+        </p>
+
+        <p>
+            It features the latest news, guides &amp; tutorials and new open source projects. You can sign up via email below.
+        </p>
+
+        <div class="w-full pr-4">
+            
+        </div>
+
+        <p class="text-sm text-center">
+            No spam. Just some good, practical Linux &amp; open source content.
+        </p>
+    </div>
+</div>
+    </div>
+</div>
+
+
+        </div><footer class="footer-curved mt-24  bg-blue-200  border-blue-300">
+    <div class="container max-w-4xl mx-auto flex py-8">
+
+        <div class="w-full mx-auto flex flex-wrap">
+            <div class="flex w-full md:w-1/2 ">
+                <div class="px-8">
+                    <h3 class="font-bold text-gray-900 text-2xl text-center lg:text-left">Who dis? &#x1F914;</h3>
+                    <p class="py-4 text-gray-900 text-xl leading-loose">
+                        Hi! I&apos;m Mattias Geniar, an independent developer, Linux sysadmin &amp; general problem solver. Looking for help? I&apos;m available for hire as a <a href="https://ma.ttias.be/consultancy" class="link-dark">consultant</a>. Want to get in touch? Have a look at <a href="https://ma.ttias.be/contact" class="link-dark">my contact page</a>.
+                    </p>
+                </div>
+            </div>
+
+            <div class="flex w-full md:w-1/2">
+                <div class="px-8">
+                <h3 class="font-bold text-gray-900 text-2xl">Follow me on social media &#x1F607;</h3>
+                    <ul class="list-reset items-center text-xl pt-3">
+                      <li>
+                        <a class="inline-block text-indigo-900 py-1 px-2 font" href="https://twitter.com/mattiasgeniar" target="_blank">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" class="w-6 h-6 inline-block text-gray-900 fill-current mr-1">
+                                <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/>
+                            </svg>
+
+                            Twitter
+                        </a>
+                      </li>
+                      <li>
+                        <a class="inline-block text-gray-900 py-1 px-2" href="https://www.linkedin.com/in/mattiasgeniar/" target="_blank">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" class="w-6 h-6 inline-block text-gray-900 fill-current mr-1">
+                                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                            </svg>
+
+                            LinkedIn
+                        </a>
+                      </li>
+                      <li>
+                        <a class="inline-block text-gray-900 py-1 px-2" href="https://github.com/mattiasgeniar" target="_blank">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" class="w-6 h-6 inline-block text-gray-900 fill-current mr-1">
+                                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                            </svg>
+
+                            GitHub
+                        </a>
+                      </li>
+                      <li>
+                        <a class="inline-block text-gray-900 py-1 px-2" href="https://www.facebook.com/www.ma.ttias.be/" target="_blank">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" class="w-6 h-6 inline-block text-gray-900 fill-current mr-1">
+                                <path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm3 8h-1.35c-.538 0-.65.221-.65.778v1.222h2l-.209 2h-1.791v7h-3v-7h-2v-2h2v-2.308c0-1.769.931-2.692 3.029-2.692h1.971v3z"/>
+                            </svg>
+
+                            Facebook
+                        </a>
+                       </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>
