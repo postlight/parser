@@ -132,5 +132,6 @@ export * from './www.phoronix.com';
 export * from './pitchfork.com';
 export * from './biorxiv.org';
 export * from './epaper.zeit.de';
+export * from './arstechnica.com';
 export * from './www.engadget.com';
 export * from './ma.ttias.be';

@@ -30,7 +30,6 @@ export default async function collectAllPages({
       html,
       $,
       metaCache,
-      contentOnly: true,
       extractedTitle: title,
       previousUrls,
     };
