@@ -14,7 +14,8 @@ export const WwwPilzforumAtExtractor = {
   },
 
   content: {
-    selectors: ['.post_content'],
+    // :first-of-type, because I want just the first post, not the replies.
+    selectors: [['.post:first-of-type .post_content']],
 
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images
