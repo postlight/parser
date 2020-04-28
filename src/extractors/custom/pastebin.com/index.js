@@ -25,7 +25,7 @@ export const PastebinComExtractor = {
     // before it's consumable content? E.g., unusual lazy loaded images
     transforms: {
       ol: 'div',
-      li: 'div',
+      li: 'p',
     },
 
     // Is there anything that is in the result that shouldn't be?
