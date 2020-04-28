@@ -1,16 +1,16 @@
 {
-  "name": "@postlight/mercury-parser",
+  "name": "@jbrayton/mercury-parser",
   "version": "2.2.0",
   "description": "Mercury transforms web pages into clean text. Publishers and programmers use it to make the web make sense, and readers use it to read any web article comfortably.",
-  "author": "Postlight <mercury@postlight.com>",
+  "author": "John Brayton <jbrayton@goldenhillsoftware.com>",
   "homepage": "https://mercury.postlight.com",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/postlight/mercury-parser.git"
+    "url": "git+https://github.com/jbrayton/mercury-parser.git"
   },
   "bugs": {
-    "url": "https://github.com/postlight/mercury-parser/issues"
+    "url": "https://github.com/jbrayton/mercury-parser/issues"
   },
   "keywords": [
     "mercury",
