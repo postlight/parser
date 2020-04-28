@@ -1,0 +1,866 @@
+<!DOCTYPE html><!-- start: showthread -->
+<html xml:lang="de" lang="de" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Pilz im Mai</title>
+<!-- start: headerinclude -->
+<link rel="alternate" type="application/rss+xml" title="Letzte Themen (RSS 2.0)" href="https://www.pilzforum.at/syndication.php" />
+<link rel="alternate" type="application/atom+xml" title="Letzte Themen (Atom 1.0)" href="https://www.pilzforum.at/syndication.php?type=atom1.0" />
+<link rel="shortcut icon" href="/favicon.ico" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<script type="text/javascript" src="https://www.pilzforum.at/jscripts/jquery.js?ver=1820"></script>
+<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://www.pilzforum.at/jscripts/jquery.plugins.min.js?ver=1820"></script>
+<script type="text/javascript" src="https://www.pilzforum.at/jscripts/general.js?ver=1820"></script>
+<script type="text/javascript" src="https://www.pilzforum.at/images/bootbb/js/tooltip.js"></script>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+<link href='https://fonts.googleapis.com/css?family=Droid+Sans' rel='stylesheet' type='text/css' />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+
+<script language="javascript" type="text/javascript" src="https://www.pilzforum.at/jscripts/myadvertisements.js"></script>
+<link type="text/css" rel="stylesheet" href="https://www.pilzforum.at/cache/themes/theme7/global.css" />
+<link type="text/css" rel="stylesheet" href="https://www.pilzforum.at/cache/themes/theme7/css3.css" />
+<link type="text/css" rel="stylesheet" href="https://www.pilzforum.at/cache/themes/theme7/responsive.css" />
+<link type="text/css" rel="stylesheet" href="https://www.pilzforum.at/cache/themes/theme7/star_ratings.css" />
+<link type="text/css" rel="stylesheet" href="https://www.pilzforum.at/cache/themes/theme7/showthread.css" />
+<link type="text/css" rel="stylesheet" href="https://www.pilzforum.at/cache/themes/theme7/yellow.css" />
+
+
+
+
+<script type="text/javascript">
+jQuery(document).on('click', '.panel-heading span.clickable', function(e){
+    var jQuerythis = jQuery(this);
+	if(!jQuerythis.hasClass('panel-collapsed')) {
+		jQuerythis.parents('.panel').find('.panel-body').slideUp();
+		jQuerythis.addClass('panel-collapsed');
+		jQuerythis.find('i').removeClass('glyphicon-chevron-up').addClass('glyphicon-chevron-down');
+	} else {
+		jQuerythis.parents('.panel').find('.panel-body').slideDown();
+		jQuerythis.removeClass('panel-collapsed');
+		jQuerythis.find('i').removeClass('glyphicon-chevron-down').addClass('glyphicon-chevron-up');
+	}
+})
+</script>
+
+
+
+
+<script type="text/javascript">
+	lang.unknown_error = "Ein unbekannter Fehler ist aufgetreten.";
+
+	lang.select2_match = "Ein Ergebnis wurde gefunden, drücke die Eingabetaste um es auszuwählen.";
+	lang.select2_matches = "{1} Ergebnisse wurden gefunden, benutze die Pfeiltasten zum Navigieren.";
+	lang.select2_nomatches = "Keine Ergebnisse gefunden";
+	lang.select2_inputtooshort_single = "Bitte gib ein oder mehrere Zeichen ein";
+	lang.select2_inputtooshort_plural = "Bitte gib {1} oder mehr Zeichen ein";
+	lang.select2_inputtoolong_single = "Bitte lösche ein Zeichen";
+	lang.select2_inputtoolong_plural = "Bitte lösche {1} Zeichen";
+	lang.select2_selectiontoobig_single = "Du kannst nur einen Eintrag auswählen";
+	lang.select2_selectiontoobig_plural = "Du kannst nur {1} Einträge auswählen";
+	lang.select2_loadmore = "Lade weitere Ergebnisse...";
+	lang.select2_searching = "Suche...";
+	
+	var templates = {
+		modal: '',
+		modal_button: ''
+	};
+	
+	var cookieSecureFlag = "0";
+	var cookieDomain = ".pilzforum.at";
+	var cookiePath = "/";
+	var cookiePrefix = "";
+	var deleteevent_confirm = "Möchtest Du dieses Ereignis wirklich löschen?";
+	var removeattach_confirm = "Möchtest du die ausgewählten Anhänge wirklich löschen?";
+	var loading_text = 'Lade.<br />Bitte warten...';
+	var saving_changes = 'Änderungen werden gespeichert ...';
+	var use_xmlhttprequest = "1";
+	var my_post_key = "3512e371893d6e6d29de5d0dcb1c0138";
+	var rootpath = "https://www.pilzforum.at";
+	var imagepath = "https://www.pilzforum.at/images/bootbb";
+  	var yes_confirm = "Ja";
+	var no_confirm = "Nein";
+	var MyBBEditor = null;
+	var spinner_image = "https://www.pilzforum.at/images/bootbb/spinner.gif";
+	var spinner = "<img src='" + spinner_image +"' alt='' />";
+	var modal_zindex = 9999;
+</script>
+<!-- end: headerinclude -->
+<script>
+<!--
+	var quickdelete_confirm = "Möchtest du diesen Beitrag wirklich löschen?";
+	var quickrestore_confirm = "Möchtest du diesen Beitrag wirklich wiederherstellen?";
+	var allowEditReason = "1";
+	lang.save_changes = "Änderungen speichern";
+	lang.cancel_edit = "Bearbeitung abbrechen";
+	lang.quick_edit_update_error = "Beim Bearbeiten des Beitrags ist es zu einem Fehler gekommen:";
+	lang.quick_reply_post_error = "Beim Absenden des Beitrags ist es zu einem Fehler gekommen:";
+	lang.quick_delete_error = "Beim Löschen des Beitrags ist es zu einem Fehler gekommen:";
+	lang.quick_delete_success = "Der Beitrag wurde erfolgreich gelöscht.";
+	lang.quick_delete_thread_success = "Das Thema wurde erfolgreich gelöscht.";
+	lang.quick_restore_error = "Beim Wiederherstellen des Beitrags ist es zu einem Fehler gekommen:";
+	lang.quick_restore_success = "Der Beitrag wurde erfolgreich wiederhergestellt.";
+	lang.editreason = "Bearbeitungsgrund";
+// -->
+</script>
+<!-- jeditable (jquery) -->
+<script src="https://www.pilzforum.at/jscripts/report.js?ver=1820"></script>
+<script src="https://www.pilzforum.at/jscripts/jeditable/jeditable.min.js"></script>
+<script src="https://www.pilzforum.at/jscripts/thread.js?ver=1820"></script>
+<script type="text/javascript" src="https://www.pilzforum.at/jscripts/thankyoulike.min.js"></script>
+<script type="text/javascript">
+<!--
+	var tylEnabled = "";
+	var tylDisplayGrowl = "";
+	var tylCollapsible = "";
+	var tylUser = "0";
+	var tylSend = "";
+	var tylRemove = "";
+// -->
+</script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-145410037-1', 'auto');
+  ga('send', 'pageview');
+
+</script><script type="text/javascript" src="https://www.pilzforum.at/jscripts/fancyzoom/FancyZoom.js"></script>
+<script type="text/javascript" src="https://www.pilzforum.at/jscripts/fancyzoom/FancyZoomHTML.js"></script>
+</head>
+<body onload="setupZoom()">
+	<!-- start: header -->
+<header>
+<div class="navbar navbar-default">
+     <div class="container">
+          <div class="navbar-header">
+               <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse" aria-label="Toggle navigation">
+               <span class="icon-bar"></span>
+               <span class="icon-bar"></span>
+               <span class="icon-bar"></span> 
+               </button>
+			  
+			  <div class="navbar-header" id="large_logo1">
+				  <!--<a class="navbar-brand" href="https://www.pilzforum.at">BootBB</a>-->
+				  
+				  <!--<a class="" href="https://www.pilzforum.at/"><img src="https://www.pilzforum.at/images/logo1b.jpg" /></a>-->
+			  <script>
+	var min = 1,
+      max = 2;
+
+ function rand (min, max) {
+	return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+	
+	var elem = rand(min, max);
+	/*document.write(elem);*/
+	
+	if (elem == 1){
+			var nr1 = "<a class=\"\" href=\"https://www.pilzforum.at/\"><img src=\"https://www.pilzforum.at/images/logo1b.jpg\" /></a>";
+			document.write(nr1);
+		}
+		else{
+			var nr2 = "<a class=\"\" href=\"https://www.pilzforum.at/\"><img src=\"https://www.pilzforum.at/images/logo2.jpg\" /></a>";
+			document.write(nr2);
+		}
+
+</script>
+			  </div>
+			  
+			  
+			  <div class="navbar-header" id="small_logo1">
+				  <!--<a class="navbar-brand" href="https://www.pilzforum.at">BootBB</a>-->
+				  
+				  <!--<a class="" href="https://www.pilzforum.at/"><img src="https://www.pilzforum.at/images/logo1b.jpg" /></a>-->
+			  <script>
+	var min = 1,
+      max = 2;
+
+ function rand (min, max) {
+	return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+	
+	var elem = rand(min, max);
+	/*document.write(elem);*/
+	
+	if (elem == 1){
+			var nr1 = "<a class=\"\" href=\"https://www.pilzforum.at/\"><img src=\"https://www.pilzforum.at/images/logo1bsmall.jpg\" /></a>";
+			document.write(nr1);
+		}
+		else{
+			var nr2 = "<a class=\"\" href=\"https://www.pilzforum.at/\"><img src=\"https://www.pilzforum.at/images/logo2small.jpg\" /></a>";
+			document.write(nr2);
+		}
+
+</script>
+			  </div>
+			  
+          </div>
+          <div class="collapse navbar-collapse navbar-ex1-collapse">
+			  <ul class="nav navbar-nav navbar-right">
+				  <li id="nav-portal"><a href="https://www.pilzforum.at/portal.php"><i class="fa fa-bell"></i> Portal</a></li>
+               <li id="nav-forums"><a href="https://www.pilzforum.at/index.php"><i class="fa fa-group"></i> Forum</a></li>
+				<li><a href="https://www.pilzforum.at/search.php?action=getnew"><i class="fa fa-comment"></i> Neue Beiträge</a></li>
+            	<li><a href="https://www.pilzforum.at/search.php?action=getdaily"><i class="fa fa-comments"></i> Heutige Posts</a></li>
+               <li id="nav-search"><a href="https://www.pilzforum.at/search.php"><i class="fa fa-search"></i> Suche</a></li>
+               <li id="nav-member"><a href="https://www.pilzforum.at/memberlist.php"><i class="fa fa-users"></i> Mitglieder</a></li>
+				  
+<li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-cubes"></i> Misc <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+			  <li id="nav-help"><a href="https://www.pilzforum.at/misc.php?action=help"><i class="fa fa-life-bouy"></i> Hilfe</a></li>
+			  <li class="divider"></li>
+			  <li id="nav-calendar"><a href="https://www.pilzforum.at/calendar.php"><i class="fa fa-calendar"></i> Kalender</a></li>
+          </ul>
+</li> 
+</ul>
+  
+          </div>
+     </div>
+</div>
+</header>
+
+
+<div id="container">
+	<a name="top" id="top"></a>
+		<div id="header">
+			<div id="panel">
+				<div class="upper">
+					<div class="container">
+
+						<!-- start: header_welcomeblock_guest -->
+<span><a href="https://www.pilzforum.at/member.php?action=login" onclick="$('#quick_login').modal({ fadeDuration: 250, keepelement: true }); return false;" class="login btn btn-danger" style="color: #fff;"><i class="fa fa-sign-in"></i> Anmelden</a> <a href="https://www.pilzforum.at/member.php?action=register" class="register btn btn-success" style="color: #fff;"><i class="fa fa-user-plus"></i> Registrieren</a></span>
+
+<span class="float_right hidden-xs">Hallo, Gast!</span>
+
+<br class="clearfix" />
+	
+
+				<div class="modal" id="quick_login" style="display: none;">
+					<form method="post" action="https://www.pilzforum.at/member.php">
+						<input name="my_post_key" type="hidden" value="3512e371893d6e6d29de5d0dcb1c0138" />
+						<input name="action" type="hidden" value="do_login" />
+						<input name="url" type="hidden" value="" />
+						<input name="quick_login" type="hidden" value="1" />
+						<table width="100%" cellspacing="0" cellpadding="1" border="0" class="tborder">
+							<tr>
+								<td class="thead" colspan="2"><strong>Login</strong></td>
+							</tr>
+							<tr>
+								<td class="trow1" width="25%"><strong>Benutzername/E-Mail:</strong></td>
+								<td class="trow1"><input name="quick_username" id="quick_login_username" type="text" value="" class="textbox initial_focus" /></td>
+							</tr>
+							<tr>
+								<td class="trow2"><strong>Passwort:</strong></td>
+								<td class="trow2">
+									<input name="quick_password" id="quick_login_password" type="password" value="" class="textbox" /> <a href="https://www.pilzforum.at/member.php?action=lostpw" class="lost_password">Passwort vergessen?</a>
+								</td>
+							</tr>
+							<tr>
+								<td class="trow1">&nbsp;</td>
+								<td class="trow1 remember_me">
+									<input name="quick_remember" id="quick_login_remember" type="checkbox" value="yes" class="checkbox" checked="checked" />
+									<label for="quick_login_remember">Merken</label>
+								</td>
+							</tr>
+							<tr>
+								<td class="trow2" colspan="2">
+									<div align="center"><input name="submit" type="submit" class="button" value="Login" /></div>
+								</td>
+							</tr>
+						</table>
+					</form>
+				</div>
+				<script type="text/javascript">
+					$("#quick_login input[name='url']").val($(location).attr('href'));
+				</script>
+<!-- end: header_welcomeblock_guest -->
+					
+					</div>
+			</div>
+			</div>
+	</div>
+			</div>
+               
+				   
+                <main class="container">
+				<br />
+                 <!-- start: nav -->
+<ol class="breadcrumb container"><!-- start: nav_bit -->
+<li><a href="https://www.pilzforum.at/index.php">Österreichisches Pilzforum - Pilzforum.at</a></li>
+<!-- end: nav_bit --><!-- start: nav_bit -->
+<li><a href="forumdisplay.php?fid=1">Pilze, Schwammerln und deren Bestimmung</a></li>
+<!-- end: nav_bit --><!-- start: nav_bit -->
+<li><a href="forumdisplay.php?fid=2">Pilzbestimmung und Bestimmungshilfe</a></li>
+<!-- end: nav_bit --><!-- start: nav_sep_active -->
+
+<!-- end: nav_sep_active --></ol>
+<!-- end: nav -->
+				
+				
+				
+				
+				
+				<div onclick="MyAdvertisements.do_click(2);"><!--<center><a href="http://www.pilzforum.at/schwammdrueber"><img src="http://www.pilzforum.at/schwammdrueber/images/schwammdrueberwerbung.jpg" alt="Das beste Pilzerezeptbuch, entstanden durch Pilzforum.at" title="Das beste Pilzerezeptbuch, entstanden durch Pilzforum.at"></a></center>-->
+<center><script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-6540433346169917"
+     data-ad-slot="4306158640"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script><br>
+<a href="http://www.pilzforum.at/schwammdrueber" target="_blank"><img src="werbung_schwammdrueber.jpg" alt="Das beste Pilzerezeptbuch, entstanden durch Pilzforum.at" title="Das beste Pilzerezeptbuch, entstanden durch Pilzforum.at"></a><br><span class="font-size:1px;">&nbsp;</span></center><!--<center><a rel="nofollow" target="_blank" href="http://www.amazon.de/gp/product/B001VFR95W/ref=as_li_tl?ie=UTF8&camp=1638&creative=19454&creativeASIN=B001VFR95W&linkCode=as2&tag=headsupatpoke-21"><b>Unsere Empfehlung: Herbertz Pilzmesser, rostfrei, Holz-Griff, inkl. Bürste und Karabiner</b></a><br><span class="font-size:1px;">&nbsp; </span></center>--></div>
+<!-- end: header -->
+	
+	
+	<div class="float_left">
+		
+	</div>
+	<div class="float_right">
+		
+	</div>
+	<!-- start: showthread_ratethread -->
+<div style="margin-top: 6px; padding-right: 10px;" class="float_right">
+		<script type="text/javascript">
+		<!--
+			lang.ratings_update_error = "";
+		// -->
+		</script>
+		<script type="text/javascript" src="https://www.pilzforum.at/jscripts/rating.js?ver=1808"></script>
+		<div class="inline_rating">
+			<strong class="float_left" style="padding-right: 10px;">Themabewertung:</strong>
+			<ul class="star_rating star_rating_notrated" id="rating_thread_5837">
+				<li style="width: 0%" class="current_rating" id="current_rating_5837">0 Bewertung(en) - 0 im Durchschnitt</li>
+				<li><a class="one_star" title="1 Stern von 5" href="./ratethread.php?tid=5837&amp;rating=1&amp;my_post_key=3512e371893d6e6d29de5d0dcb1c0138">1</a></li>
+				<li><a class="two_stars" title="2 Sterne von 5" href="./ratethread.php?tid=5837&amp;rating=2&amp;my_post_key=3512e371893d6e6d29de5d0dcb1c0138">2</a></li>
+				<li><a class="three_stars" title="3 Sterne von 5" href="./ratethread.php?tid=5837&amp;rating=3&amp;my_post_key=3512e371893d6e6d29de5d0dcb1c0138">3</a></li>
+				<li><a class="four_stars" title="4 Sterne von 5" href="./ratethread.php?tid=5837&amp;rating=4&amp;my_post_key=3512e371893d6e6d29de5d0dcb1c0138">4</a></li>
+				<li><a class="five_stars" title="5 Sterne von 5" href="./ratethread.php?tid=5837&amp;rating=5&amp;my_post_key=3512e371893d6e6d29de5d0dcb1c0138">5</a></li>
+			</ul>
+		</div>
+</div>
+<!-- end: showthread_ratethread --><br class="clear" />
+	<div class="tborder tfixed clear">
+		<div class="thead">
+				<div class="float_right">
+					<span class="smalltext"><a href="javascript:void(0)" id="thread_modes">Ansichts-Optionen</a></span>
+				</div>
+				
+					Pilz im Mai
+			</div>
+	</div>
+<div id="posts_container">
+	<div id="posts">
+		<!-- start: postbit -->
+
+<a id="pid37039"></a>
+<div class="post " style="" id="post_37039">
+<div class="post_author">
+	<!-- start: postbit_avatar -->
+<div class="postbit_avatar author_avatar"><a href="member.php?action=profile&amp;uid=1092"><img src="https://www.pilzforum.at/uploads/avatars/avatar_1092.jpg?dateline=1570127014" alt="" width="53" height="70" /></a></div>
+<!-- end: postbit_avatar -->
+	<div class="author_information">
+			<strong><span class="largetext"><a href="https://www.pilzforum.at/member.php?action=profile&amp;uid=1092">mykologisch</a></span></strong> <!-- start: postbit_offline -->
+<span class="online_status status_offline" title="Offline"></span>
+<!-- end: postbit_offline --><br />
+			<span class="smalltext">
+				Senior Member<br />
+				<span class="postbit_userstars"><img src="images/star.png" alt="*" /><img src="images/star.png" alt="*" /><img src="images/star.png" alt="*" /><img src="images/star.png" alt="*" /><br /></span>
+				
+			</span>
+	</div>
+	<div class="author_statistics">
+		<!-- start: postbit_author_user -->
+	Beiträge: 294<br />
+	Themen: 67<br />
+	Registriert seit: Oct 2018
+	<!-- start: postbit_reputation -->
+<br />Bewertung: <!-- start: postbit_reputation_formatted_link -->
+<a href="reputation.php?uid=1092"><strong class="reputation_neutral">0</strong></a>
+<!-- end: postbit_reputation_formatted_link -->
+<!-- end: postbit_reputation --><br />
+<!-- end: postbit_author_user --><!-- start: thanks_postbit_count -->
+<div><span class="smalltext">Danken: 85<br />
+	4 Danke erhalten in 4 Post(s)<br /></span></div>
+<!-- end: thanks_postbit_count -->
+		<span class="smalltext"></span>
+	</div>
+</div>
+<div class="post_content">
+	<div class="post_head">
+		<!-- start: postbit_posturl -->
+<div class="float_right" style="vertical-align: top">
+<strong><a href="showthread.php?tid=5837&amp;pid=37039#pid37039" title="Pilz im Mai">#1</a></strong>
+
+</div>
+<!-- end: postbit_posturl -->
+		
+		<h1 aria-label="Beitrag 1 von mykologisch" style="display:inline;font-size:9px;"><!-- helps navigation for screen readers --></h1>
+		<span class="post_date">26.04.2020, 17:35 </span>
+		
+	</div>
+	<div class="post_body scaleimages" id="pid_37039">
+		Liebe Pilzfreude,<br />
+ein Freund hat mir grade ein paar Fotos geschickt, die er bei einem Waldspaziergang gemacht hat.<br />
+Da ich den Pilz nicht kenne (bisher war ich nur im Spätsommer - Winter unterwegs), würde ich mich über Tipps freuen.<br />
+Informationen über Geruch, Schnittbild, Sporenfarbe und etwaigen Verfärbungen habe ich leider keine vorliegen.<br />
+<br />
+Hier die Infos, die ich den Bildern entnommen habe:<br />
+Hut: hellbraun, Buckel in der Mitte<br />
+Lamellen: dicht, mit Zwischenlamellen; augebuchtet/Burggraben<br />
+Stiel: fasrig, weiß/hellbraun<br />
+Die Zapfen (Fichte?) und Blätter weisen auf einen Mischwald hin.<br />
+<br />
+Könnte es ein Maipilz oder eine Rötlingart sein?<br />
+<br />
+Danke euch!<br />
+Christoph
+
+	</div>
+	<!-- start: postbit_attachments -->
+<br />
+<br />
+<fieldset>
+<legend>Angehängte Dateien</legend>
+
+<!-- start: postbit_attachments_images -->
+<span class="smalltext">Bild(er)</span><br />
+<!-- start: postbit_attachments_images_image -->
+<img src="attachment.php?aid=45381" class="attachment" alt="" title="26.04.2020, 17:34" />&nbsp;&nbsp;&nbsp;
+<!-- end: postbit_attachments_images_image --><!-- start: postbit_attachments_images_image -->
+<img src="attachment.php?aid=45383" class="attachment" alt="" title="26.04.2020, 17:34" />&nbsp;&nbsp;&nbsp;
+<!-- end: postbit_attachments_images_image --><!-- start: postbit_attachments_images_image -->
+<img src="attachment.php?aid=45385" class="attachment" alt="" title="26.04.2020, 17:34" />&nbsp;&nbsp;&nbsp;
+<!-- end: postbit_attachments_images_image -->
+<br />
+<!-- end: postbit_attachments_images -->
+
+</fieldset>
+<!-- end: postbit_attachments -->
+	
+	<div class="post_meta" id="post_meta_37039">
+		
+		<div class="post_edit align_right smalltext float_right" id="edited_by_37039"></div>
+	</div>
+	
+	
+</div>
+<div class="post_controls">
+	<div class="postbit_buttons author_buttons float_left">
+		<!-- start: postbit_find -->
+<a href="search.php?action=finduser&amp;uid=1092" title="Alle Beiträge dieses Benutzers finden" class="postbit_find"><span>Suchen</span></a>
+<!-- end: postbit_find -->
+	</div>
+	<div class="postbit_buttons post_management_buttons float_right">
+		<!-- start: postbit_quote -->
+<a href="newreply.php?tid=5837&amp;replyto=37039" title="Diese Nachricht in einer Antwort zitieren" class="postbit_quote postbit_mirage"><span>Zitieren</span></a>
+<!-- end: postbit_quote -->
+	</div>
+</div>
+</div><div onclick="MyAdvertisements.do_click(6);"><script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Pilzforum.at Responsive Content-Anzeigenblöcke -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-6540433346169917"
+     data-ad-slot="1842628248"
+     data-ad-format="autorelaxed"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script></div>
+<!-- end: postbit --><!-- start: postbit -->
+
+<a id="pid37041"></a>
+<div class="post " style="" id="post_37041">
+<div class="post_author">
+	<!-- start: postbit_avatar -->
+<div class="postbit_avatar author_avatar"><a href="member.php?action=profile&amp;uid=1131"><img src="https://www.pilzforum.at/images/default_avatar.png" alt="" width="70" height="70" /></a></div>
+<!-- end: postbit_avatar -->
+	<div class="author_information">
+			<strong><span class="largetext"><a href="https://www.pilzforum.at/member.php?action=profile&amp;uid=1131">Werner Edelmann</a></span></strong> <!-- start: postbit_offline -->
+<span class="online_status status_offline" title="Offline"></span>
+<!-- end: postbit_offline --><br />
+			<span class="smalltext">
+				Member<br />
+				<span class="postbit_userstars"><img src="images/star.png" alt="*" /><img src="images/star.png" alt="*" /><img src="images/star.png" alt="*" /><br /></span>
+				
+			</span>
+	</div>
+	<div class="author_statistics">
+		<!-- start: postbit_author_user -->
+	Beiträge: 96<br />
+	Themen: 0<br />
+	Registriert seit: Mar 2019
+	<!-- start: postbit_reputation -->
+<br />Bewertung: <!-- start: postbit_reputation_formatted_link -->
+<a href="reputation.php?uid=1131"><strong class="reputation_neutral">0</strong></a>
+<!-- end: postbit_reputation_formatted_link -->
+<!-- end: postbit_reputation --><br />
+<!-- end: postbit_author_user --><!-- start: thanks_postbit_count -->
+<div><span class="smalltext">Danken: 6<br />
+	18 Danke erhalten in 17 Post(s)<br /></span></div>
+<!-- end: thanks_postbit_count -->
+		<span class="smalltext"></span>
+	</div>
+</div>
+<div class="post_content">
+	<div class="post_head">
+		<!-- start: postbit_posturl -->
+<div class="float_right" style="vertical-align: top">
+<strong><a href="showthread.php?tid=5837&amp;pid=37041#pid37041" title="RE: Pilz im Mai">#2</a></strong>
+
+</div>
+<!-- end: postbit_posturl -->
+		
+		<h1 aria-label="Beitrag 2 von Werner Edelmann" style="display:inline;font-size:9px;"><!-- helps navigation for screen readers --></h1>
+		<span class="post_date">26.04.2020, 19:13 </span>
+		
+	</div>
+	<div class="post_body scaleimages" id="pid_37041">
+		GriasDi Christoph,<br />
+das schaut sehr nach einem jungen Frühlingsweichritterling, Melanoleuca cognata, aus.<br />
+Würd auch von der Erscheinungszeit gut passen.<br />
+An liabn Gruaß, <br />
+Werner
+
+	</div>
+	
+	
+	<div class="post_meta" id="post_meta_37041">
+		
+		<div class="post_edit align_right smalltext float_right" id="edited_by_37041"></div>
+	</div>
+	
+	
+</div>
+<div class="post_controls">
+	<div class="postbit_buttons author_buttons float_left">
+		<!-- start: postbit_find -->
+<a href="search.php?action=finduser&amp;uid=1131" title="Alle Beiträge dieses Benutzers finden" class="postbit_find"><span>Suchen</span></a>
+<!-- end: postbit_find -->
+	</div>
+	<div class="postbit_buttons post_management_buttons float_right">
+		<!-- start: postbit_quote -->
+<a href="newreply.php?tid=5837&amp;replyto=37041" title="Diese Nachricht in einer Antwort zitieren" class="postbit_quote postbit_mirage"><span>Zitieren</span></a>
+<!-- end: postbit_quote -->
+	</div>
+</div>
+</div>
+<!-- end: postbit --><!-- start: postbit -->
+
+<a id="pid37051"></a>
+<div class="post " style="" id="post_37051">
+<div class="post_author">
+	<!-- start: postbit_avatar -->
+<div class="postbit_avatar author_avatar"><a href="member.php?action=profile&amp;uid=191"><img src="https://www.pilzforum.at/images/default_avatar.png" alt="" width="70" height="70" /></a></div>
+<!-- end: postbit_avatar -->
+	<div class="author_information">
+			<strong><span class="largetext"><a href="https://www.pilzforum.at/member.php?action=profile&amp;uid=191">Sepp</a></span></strong> <!-- start: postbit_offline -->
+<span class="online_status status_offline" title="Offline"></span>
+<!-- end: postbit_offline --><br />
+			<span class="smalltext">
+				Posting Freak<br />
+				<span class="postbit_userstars"><img src="images/star.png" alt="*" /><img src="images/star.png" alt="*" /><img src="images/star.png" alt="*" /><img src="images/star.png" alt="*" /><img src="images/star.png" alt="*" /><br /></span>
+				
+			</span>
+	</div>
+	<div class="author_statistics">
+		<!-- start: postbit_author_user -->
+	Beiträge: 885<br />
+	Themen: 63<br />
+	Registriert seit: Jul 2013
+	<!-- start: postbit_reputation -->
+<br />Bewertung: <!-- start: postbit_reputation_formatted_link -->
+<a href="reputation.php?uid=191"><strong class="reputation_positive">6</strong></a>
+<!-- end: postbit_reputation_formatted_link -->
+<!-- end: postbit_reputation --><br />
+<!-- end: postbit_author_user --><!-- start: thanks_postbit_count -->
+<div><span class="smalltext">Danken: 2<br />
+	99 Danke erhalten in 94 Post(s)<br /></span></div>
+<!-- end: thanks_postbit_count -->
+		<span class="smalltext"></span>
+	</div>
+</div>
+<div class="post_content">
+	<div class="post_head">
+		<!-- start: postbit_posturl -->
+<div class="float_right" style="vertical-align: top">
+<strong><a href="showthread.php?tid=5837&amp;pid=37051#pid37051" title="RE: Pilz im Mai">#3</a></strong>
+
+</div>
+<!-- end: postbit_posturl -->
+		
+		<h1 aria-label="Beitrag 3 von Sepp" style="display:inline;font-size:9px;"><!-- helps navigation for screen readers --></h1>
+		<span class="post_date"><span title="27.04.2020">Gestern</span>, 06:58 </span>
+		
+	</div>
+	<div class="post_body scaleimages" id="pid_37051">
+		Servus Christoph,<br />
+<br />
+ich sehe Deine Fundanfrage erst jetzt und kann mich Werner nur noch anschließen.<br />
+<br />
+Gruß<br />
+Sepp
+
+	</div>
+	
+	<!-- start: postbit_signature -->
+<div class="postbit_signature signature scaleimages">
+<hr />Eine Verzehrsfreigabe gibt es nur beim Pilzsachverständigen vor Ort.
+</div>
+<!-- end: postbit_signature -->
+	<div class="post_meta" id="post_meta_37051">
+		
+		<div class="post_edit align_right smalltext float_right" id="edited_by_37051"></div>
+	</div>
+	
+	
+</div>
+<div class="post_controls">
+	<div class="postbit_buttons author_buttons float_left">
+		<!-- start: postbit_find -->
+<a href="search.php?action=finduser&amp;uid=191" title="Alle Beiträge dieses Benutzers finden" class="postbit_find"><span>Suchen</span></a>
+<!-- end: postbit_find -->
+	</div>
+	<div class="postbit_buttons post_management_buttons float_right">
+		<!-- start: postbit_quote -->
+<a href="newreply.php?tid=5837&amp;replyto=37051" title="Diese Nachricht in einer Antwort zitieren" class="postbit_quote postbit_mirage"><span>Zitieren</span></a>
+<!-- end: postbit_quote -->
+	</div>
+</div>
+</div>
+<!-- end: postbit -->
+	</div>
+</div>
+	
+			<div class="tfoot row">
+				<div class="col-sm-6">
+					<strong>&laquo; <a href="showthread.php?tid=5837&amp;action=nextoldest">Ein Thema zurück</a> | <a href="showthread.php?tid=5837&amp;action=nextnewest">Ein Thema vor</a> &raquo;</strong>
+				</div>
+				<div class="col-sm-6"><!-- start: showthread_search -->
+	<div class="float_right">
+		<form action="search.php" method="post">
+			<input type="hidden" name="action" value="thread" />
+			<input type="hidden" name="tid" value="5837" />
+			<input type="text" name="keywords" value="Suchbegriff(e)" onfocus="if(this.value == 'Suchbegriff(e)') { this.value = ''; }" onblur="if(this.value=='') { this.value='Suchbegriff(e)'; }" class="textbox" size="25" />
+			<input type="submit" class="button" value="Durchsuche Thema" />
+		</form>
+	</div>
+<!-- end: showthread_search --></div>
+			</div>
+	<div class="float_left">
+		
+	</div>
+	<div class="float_right">
+		
+	</div>
+	<br class="clear" />
+	
+	
+	
+	<br />
+	<div class="float_left">
+		<ul class="thread_tools">
+			<!-- start: showthread_printthread -->
+<li class="printable"><a href="printthread.php?tid=5837">Druckversion anzeigen</a></li>
+<!-- end: showthread_printthread -->
+			
+			
+			
+		</ul>
+	</div>
+
+	<div class="float_right" style="text-align: right;">
+		
+		<!-- start: forumjump_advanced -->
+<form action="forumdisplay.php" method="get">
+<span class="smalltext">Gehe zu:</span>
+<select name="fid" class="forumjump">
+<option value="-4">Private Nachrichten</option>
+<option value="-3">Benutzer Control-Panel</option>
+<option value="-5">Wer ist online?</option>
+<option value="-2">Suche</option>
+<option value="-1">Forenstartseite</option>
+<!-- start: forumjump_bit -->
+<option value="1" > Pilze, Schwammerln und deren Bestimmung</option>
+<!-- end: forumjump_bit --><!-- start: forumjump_bit -->
+<option value="2" selected="selected">-- Pilzbestimmung und Bestimmungshilfe</option>
+<!-- end: forumjump_bit --><!-- start: forumjump_bit -->
+<option value="3" >-- Speisepilze, giftige und ungenießbare Pilze, Bilder, Funde und Berichte</option>
+<!-- end: forumjump_bit --><!-- start: forumjump_bit -->
+<option value="28" >-- Pilze- und Schwammerlgeplauder</option>
+<!-- end: forumjump_bit --><!-- start: forumjump_bit -->
+<option value="22" >-- Wissenschaftliches</option>
+<!-- end: forumjump_bit --><!-- start: forumjump_bit -->
+<option value="23" >-- Pilzliteratur</option>
+<!-- end: forumjump_bit --><!-- start: forumjump_bit -->
+<option value="24" >-- Pilzzucht</option>
+<!-- end: forumjump_bit --><!-- start: forumjump_bit -->
+<option value="27" >-- Pilzrezepte und Pilzverarbeitung</option>
+<!-- end: forumjump_bit --><!-- start: forumjump_bit -->
+<option value="29" >-- Pilzveranstaltungen und Termine</option>
+<!-- end: forumjump_bit --><!-- start: forumjump_bit -->
+<option value="25" >-- Offtopic und Small Talk</option>
+<!-- end: forumjump_bit --><!-- start: forumjump_bit -->
+<option value="33" >---- Tiere</option>
+<!-- end: forumjump_bit --><!-- start: forumjump_bit -->
+<option value="35" >---- Pflanzen</option>
+<!-- end: forumjump_bit --><!-- start: forumjump_bit -->
+<option value="26" >-- Neuvorstellungen, dieses Forum, Kritik</option>
+<!-- end: forumjump_bit -->
+</select>
+<!-- start: gobutton -->
+<input type="submit" class="button" value="Los" />
+<!-- end: gobutton -->
+</form>
+<script type="text/javascript">
+$(".forumjump").change(function() {
+	var option = $(this).val();
+
+	if(option < 0)
+	{
+		window.location = 'forumdisplay.php?fid='+option;
+	}
+	else
+	{
+		window.location = 'forumdisplay.php?fid='+option;
+	}
+});
+</script>
+<!-- end: forumjump_advanced -->
+	</div>
+	<br class="clear" />
+	<!-- start: showthread_usersbrowsing -->
+<br />
+<span class="smalltext">Benutzer, die gerade dieses Thema anschauen: 1 Gast/Gäste</span>
+<br />
+<!-- end: showthread_usersbrowsing -->
+	<!-- start: footer -->
+<div onclick="MyAdvertisements.do_click(4);"><center><SCRIPT charset="utf-8" type="text/javascript" src="//ws-eu.amazon-adsystem.com/widgets/q?rt=tf_ssw&ServiceVersion=20070822&MarketPlace=DE&ID=V20070822%2FDE%2Fheadsupatpoke-21%2F8003%2F90550c17-b9bd-4373-ba2f-8eb21a72d4bc&Operation=GetScriptTemplate"> </SCRIPT> <NOSCRIPT><A rel="nofollow" HREF="//ws-eu.amazon-adsystem.com/widgets/q?rt=tf_ssw&ServiceVersion=20070822&MarketPlace=DE&ID=V20070822%2FDE%2Fheadsupatpoke-21%2F8003%2F90550c17-b9bd-4373-ba2f-8eb21a72d4bc&Operation=NoScript">Amazon.de Widgets</A></NOSCRIPT></center></div>
+<script>
+	var mybbuid = 0;
+	var meinewerbung = "";
+if(mybbuid){
+    //document.write('Redaktionelle Hinweis: Eingeloggte Besucher sehen keine Werbung :-) !!!');
+}
+else{
+	document.write('Redaktioneller Hinweis: Eingeloggte Besucher sehen keine Werbung!!!&nbsp;&nbsp;&nbsp;<a href="https://www.pilzforum.at/member.php?action=register">>>> Registrieren kostet nix :-) <<<</a>');
+}
+</script>
+
+<div style="clear:both"><div style="padding-top: 10px"><!-- start: nav -->
+<ol class="breadcrumb container"><!-- start: nav_bit -->
+<li><a href="https://www.pilzforum.at/index.php">Österreichisches Pilzforum - Pilzforum.at</a></li>
+<!-- end: nav_bit --><!-- start: nav_bit -->
+<li><a href="forumdisplay.php?fid=1">Pilze, Schwammerln und deren Bestimmung</a></li>
+<!-- end: nav_bit --><!-- start: nav_bit -->
+<li><a href="forumdisplay.php?fid=2">Pilzbestimmung und Bestimmungshilfe</a></li>
+<!-- end: nav_bit --><!-- start: nav_sep_active -->
+
+<!-- end: nav_sep_active --></ol>
+<!-- end: nav --></div></div>
+</main>
+
+<div class="blankspace"></div>
+
+<footer id="footer">
+	<div class="container">
+    <div class="row">
+		
+        <div class="col-sm-4 foot">
+			<h3>Über unser Forum</h3>
+			<p>Österreichisches Pilzforum - Speisepilze, giftige und ungenießbare Pilze, Bilder, Funde und Berichte. Österreichisches Pilzforum - Pilzforum.at</p>
+			
+		</div>		
+		
+
+		<div class="col-sm-4 foot">
+			<h3>Links</h3>
+			<p>
+
+ 				<a href="/" class="btn btn-success" style="color: #fff;" data-toggle="tooltip" data-placement="bottom" data-original-title="Forenstartseite"><i class="fa fa-home"></i></a>
+				
+				<a href="https://www.pilzforum.at/archive/index.php?thread-5837.html" class="btn btn-danger" style="color: #fff;" data-toggle="tooltip" data-placement="bottom" data-original-title="Archiv-Modus"><i class="fa fa-archive"></i></a>
+				
+				
+				
+				<!--<a href="#" target="_blank"  rel="noopener" class="btn btn-primary" style="color: #fff;" data-toggle="tooltip" data-placement="bottom" data-original-title="Werde Fan"><i class="fa fa-facebook-square"></i></a>
+				
+				<a href="#" target="_blank"  rel="noopener" class="btn btn-info" style="color: #fff;" data-toggle="tooltip" data-placement="bottom" data-original-title="Follow Us"><i class="fa fa-twitter"></i></a>
+				-->
+				<a href="https://www.pilzforum.at/misc.php?action=syndication" class="btn btn-warning" style="color: #fff;" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="RSS-Synchronisation"><i class="fa fa-rss"></i></a>
+				
+				<a href="https://www.pilzforum.at/misc.php?page=impressum" class="btn btn-success" style="color: #fff;" data-toggle="tooltip" data-placement="bottom" data-original-title="Impressum"><i class="fa fa-info"></i></a>
+				<a href="https://www.fundlisten.at" target="_blank" class="btn btn-danger" style="color: #fff;" data-toggle="tooltip" data-placement="bottom" data-original-title="Fundlisten erstellen"><i class="fa fa-indent"></i></a>
+				<a href="https://www.pilzforum.at/schwammdrueber" target="_blank" class="btn btn-warning" style="color: #000;" data-toggle="tooltip" data-placement="bottom" data-original-title="Pilzrezeptebuch 'Schwamm drüber'">"Schwamm drüber"</a>
+				<br/>
+				<a href="misc.php?action=markread&amp;my_post_key=3512e371893d6e6d29de5d0dcb1c0138" class="btn btn-warning" style="color: #fff; margin-top:10px" data-toggle="tooltip" data-placement="bottom" data-original-title="Alle Foren als gelesen markieren"><i class="fa fa-book"></i> Alle Foren als gelesen markieren</a><br /><br />
+				
+				
+				</p>
+
+		</div>
+		
+		<div class="col-sm-4 foot">
+			
+			 <h3>Kontakt</h3>
+			 
+<p><a href="contact.php" class="btn btn-primary" style="color: #fff;" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Kontakt"><i class="fa fa-envelope"></i> Kontakt</a>&nbsp;
+			
+			<a href="showteam.php" class="btn btn-danger" style="color: #fff;" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Unser Team"><i class="fa fa-users"></i> </a>&nbsp;<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=Y9ZBDYZTMSD9Y&source=url" target="_blank" class="btn btn-success" style="color: #fff;" data-toggle="tooltip" data-placement="bottom" data-original-title="Spenden"><i class="fa fa-euro"></i></a></p>
+		</div>
+		
+		
+		
+		<!-- The following piece of code allows MyBB to run scheduled tasks. DO NOT REMOVE --><!-- start: task_image -->
+<img src="https://www.pilzforum.at/task.php" height="1" alt="" />
+<!-- end: task_image --><!-- End task image code -->
+		</div>
+	
+	</div>
+
+	
+<div id="copyright">
+	<div class="container">
+			<div class="pull-right"></div>
+			<div class="pull-left">
+				<!-- MyBB is free software developed and maintained by a volunteer community.
+					It would be much appreciated by the MyBB Group if you left the full copyright and "powered by" notice intact,
+					to show your support for MyBB.  If you choose to remove or modify the copyright below,
+					you may be refused support on the MyBB Community Forums.
+
+					This is free software, support us and we'll support you. -->
+				Deutsche Übersetzung: <a href="https://www.mybb.de/" target="_blank">MyBB.de</a>, Powered by <a href="http://www.mybb.com" target="_blank"  rel="noopener" style="color: #fff;" >MyBB</a>.<!-- End powered by -->
+				
+			</div>
+	</div>
+
+</div>
+
+</footer>
+<!-- end: footer -->
+	<div id="thread_modes_popup" class="popup_menu" style="display: none;"><div class="popup_item_container"><a href="showthread.php?mode=linear&amp;tid=5837&amp;pid=37039#pid37039" class="popup_item">Linearer Modus</a></div><div class="popup_item_container"><a href="showthread.php?mode=threaded&amp;tid=5837&amp;pid=37039#pid37039" class="popup_item">Baumstrukturmodus</a></div></div>
+	<script type="text/javascript">
+	// <!--
+		if(use_xmlhttprequest == "1")
+		{
+			$("#thread_modes").popupMenu();
+		}
+	// -->
+	</script>
+	<script type="text/javascript">
+		var thread_deleted = "";
+		if(thread_deleted == "1")
+		{
+			$("#quick_reply_form, .new_reply_button, .thread_tools, .inline_rating").hide();
+			$("#moderator_options_selector option.option_mirage").attr("disabled","disabled");
+		}
+	</script>
+</body>
+</html>
+<!-- end: showthread -->
