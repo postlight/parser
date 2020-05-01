@@ -74,7 +74,15 @@ export function select(opts) {
   // contributors), return the string
   if (typeof extractionOpts === 'string') return extractionOpts;
 
-  const { selectors, defaultCleaner = true, allowMultiple } = extractionOpts;
+  const {
+    selectors,
+    locator,
+    defaultCleaner = true,
+    allowMultiple,
+  } = extractionOpts;
+  if (locator) {
+    return locator($, opts.url);
+  }
 
   const matchingSelector = findMatchingSelector(
     $,
@@ -191,11 +199,12 @@ function extractResult(opts) {
   if (result) {
     return result;
   }
-
   // If nothing matches the selector, and fallback is enabled,
   // run the Generic extraction
-  if (fallback) return GenericExtractor[type](opts);
-
+  if (fallback) {
+    const fallbackResult = GenericExtractor[type](opts);
+    return fallbackResult;
+  }
   return null;
 }
 
