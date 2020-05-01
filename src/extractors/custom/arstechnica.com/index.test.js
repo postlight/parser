@@ -13,12 +13,15 @@ describe('ArstechnicaComExtractor', () => {
     let result;
     let url;
     beforeAll(() => {
-      url =
-        'https://arstechnica.com/gadgets/2016/08/the-connected-renter-how-to-make-your-apartment-smarter/';
+      url = 'https://arstechnica.com/?p=1665636';
       const html = fs.readFileSync(
         './fixtures/arstechnica.com/1587927767738.html'
       );
-      result = Mercury.parse(url, { html, fallback: false });
+      result = Mercury.parse(url, {
+        html,
+        fallback: false,
+        fetchAllPages: false,
+      });
     });
 
     it('is selected properly', () => {
@@ -88,15 +91,18 @@ describe('ArstechnicaComExtractor', () => {
       );
     });
 
-    // it('returns the pages_rendered', async () => {
-    //     // To pass this test, fill out the pages_rendered selector
-    //     // in ./src/extractors/custom/arstechnica.com/index.js.
-    //     const { pages_rendered } = await result
-    //
-    //     // Update these values with the expected values from
-    //     // the article.
-    //     assert.equal(pages_rendered, `3`)
-    //   });
+    it('returns the next_page_url', async () => {
+      // To pass this test, fill out the lead_image_url selector
+      // in ./src/extractors/custom/arstechnica.com/index.js.
+      const { next_page_url } = await result;
+
+      // Update these values with the expected values from
+      // the article.
+      assert.equal(
+        next_page_url,
+        `https://arstechnica.com/gadgets/2016/08/the-connected-renter-how-to-make-your-apartment-smarter/2`
+      );
+    });
 
     it('returns the content', async () => {
       // To pass this test, fill out the content selector
@@ -132,7 +138,11 @@ describe('ArstechnicaComExtractor', () => {
       const html = fs.readFileSync(
         './fixtures/arstechnica.com/1587927767738.html'
       );
-      result = Mercury.parse(url, { html, fallback: false });
+      result = Mercury.parse(url, {
+        html,
+        fallback: false,
+        fetchAllPages: false,
+      });
     });
 
     it('is selected properly', () => {
