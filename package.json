@@ -119,7 +119,7 @@
     "moment": "^2.23.0",
     "moment-parseformat": "3.0.0",
     "moment-timezone": "0.5.26",
-    "postman-request": "^2.88.1-postman.7.1",
+    "postman-request": "github:jbrayton/postman-request#disableSockets",
     "request-promise": "^4.2.5",
     "string-direction": "^0.1.2",
     "turndown": "^6.0.0",

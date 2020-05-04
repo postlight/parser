@@ -101,6 +101,8 @@ export default async function fetchResource(url, parsedUrl, headers = {}) {
     gzip: true,
     // Follow any non-GET redirects
     followAllRedirects: true,
+    disableSockets: true,
+    strictSSL: true,
     ...(typeof window !== 'undefined'
       ? {}
       : {

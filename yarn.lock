@@ -779,6 +779,22 @@
     dotenv "^6.2.0"
     node-fetch "^2.3.0"
 
+"@postman/form-data@~3.1.0":
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/@postman/form-data/-/form-data-3.1.0.tgz#27ab8cd8a1f8737b45a5429a133bb83ecb3d2780"
+  integrity sha512-6x1UHKQ45Sv5yLFjqhhtyk3YGOF9677RVRQjfr32Bkt45pH8yIlqcpPxiIR4/ZEs3GFk5vl5j9ymmdLTt0HR6Q==
+  dependencies:
+    asynckit "^0.4.0"
+    combined-stream "^1.0.8"
+    mime-types "^2.1.12"
+
+"@postman/tunnel-agent@^0.6.3":
+  version "0.6.3"
+  resolved "https://registry.yarnpkg.com/@postman/tunnel-agent/-/tunnel-agent-0.6.3.tgz#23048d8d8618d453c571f03189e944afdc2292b7"
+  integrity sha512-k57fzmAZ2PJGxfOA4SGR05ejorHbVAa/84Hxh/2nAztjNXc4ZjOm9NUIk6/Z6LCrBvJZqjRZbN8e/nROVUPVdg==
+  dependencies:
+    safe-buffer "^5.0.1"
+
 "@samverschueren/stream-to-observable@^0.3.0":
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/@samverschueren/stream-to-observable/-/stream-to-observable-0.3.0.tgz#ecdf48d532c58ea477acfcab80348424f8d0662f"
@@ -1482,6 +1498,11 @@ base64-js@^1.0.2:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/base64-js/-/base64-js-1.2.0.tgz#a39992d723584811982be5e290bb6a53d86700f1"
 
+base64-js@^1.1.2:
+  version "1.3.1"
+  resolved "https://registry.yarnpkg.com/base64-js/-/base64-js-1.3.1.tgz#58ece8cb75dd07e71ed08c736abc5fac4dbf8df1"
+  integrity sha512-mLQ4i2QO1ytvGWFWmcngKO//JXAQueZvwEKtjgQFM4jIK0kU+ytMfplL8j+n5mspOfjHwoAg+9yhb7BwAHm36g==
+
 base64id@1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/base64id/-/base64id-1.0.0.tgz#47688cb99bb6804f0e06d3e763b1c32e57d8e6b6"
@@ -1652,6 +1673,13 @@ brfs@^2.0.1:
 brorand@^1.0.1:
   version "1.0.6"
   resolved "https://registry.yarnpkg.com/brorand/-/brorand-1.0.6.tgz#4028706b915f91f7b349a2e0bf3c376039d216e5"
+
+brotli@~1.3.2:
+  version "1.3.2"
+  resolved "https://registry.yarnpkg.com/brotli/-/brotli-1.3.2.tgz#525a9cad4fcba96475d7d388f6aecb13eed52f46"
+  integrity sha1-UlqcrU/LqWR119OI9q7LE+7VL0Y=
+  dependencies:
+    base64-js "^1.1.2"
 
 browser-pack@^6.0.1:
   version "6.0.1"
@@ -2230,6 +2258,13 @@ combine-source-map@~0.7.1:
 combined-stream@^1.0.6, combined-stream@~1.0.6:
   version "1.0.7"
   resolved "https://registry.yarnpkg.com/combined-stream/-/combined-stream-1.0.7.tgz#2d1d24317afb8abe95d6d2c0b07b57813539d828"
+  dependencies:
+    delayed-stream "~1.0.0"
+
+combined-stream@^1.0.8:
+  version "1.0.8"
+  resolved "https://registry.yarnpkg.com/combined-stream/-/combined-stream-1.0.8.tgz#c3d45a8b34fd730631a110a8a2520682b31d5a7f"
+  integrity sha512-FQN4MRfuJeHf7cBbBMJFXhKSDq+2kAArBlmRBvcvFE5BB1HZKXtSFASDhdlz9zOYwxh8lDdnvmMOe/+5cdoEdg==
   dependencies:
     delayed-stream "~1.0.0"
 
@@ -4178,6 +4213,15 @@ http-signature@~1.2.0:
     assert-plus "^1.0.0"
     jsprim "^1.2.2"
     sshpk "^1.7.0"
+
+http-signature@~1.3.1:
+  version "1.3.4"
+  resolved "https://registry.yarnpkg.com/http-signature/-/http-signature-1.3.4.tgz#a65b41193110b222364e776fd1ac848655a0e2f0"
+  integrity sha512-CbG3io8gUSIxNNSgq+XMjgpTMzAeVRipxVXjuGrDhH5M1a2kZ03w20s8FCLR1NjnnJj10KbvabvckmtQcYNb9g==
+  dependencies:
+    assert-plus "^1.0.0"
+    jsprim "^1.2.2"
+    sshpk "^1.14.1"
 
 https-browserify@^1.0.0:
   version "1.0.0"
@@ -6820,36 +6864,32 @@ posix-character-classes@^0.1.0:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/posix-character-classes/-/posix-character-classes-0.1.1.tgz#01eac0fe3b5af71a2a6c02feabb8c1fef7e00eab"
 
-postman-request@^2.88.1-postman.7.1:
-  version "2.88.1-postman.7.1"
-  resolved "https://registry.yarnpkg.com/postman-request/-/postman-request-2.88.1-postman.7.1.tgz#1a4eda71abce10e4b0735f78ce605633e9bc00c8"
+"postman-request@github:jbrayton/postman-request#disableSockets":
+  version "2.88.1-postman.22"
+  resolved "https://codeload.github.com/jbrayton/postman-request/tar.gz/1c1a851a826556a5274986924c6ca7e046b6001e"
   dependencies:
+    "@postman/form-data" "~3.1.0"
+    "@postman/tunnel-agent" "^0.6.3"
     aws-sign2 "~0.7.0"
     aws4 "^1.8.0"
+    brotli "~1.3.2"
     caseless "~0.12.0"
     combined-stream "~1.0.6"
     extend "~3.0.2"
     forever-agent "~0.6.1"
-    form-data "~2.3.2"
     har-validator "~5.1.3"
-    http-signature "~1.2.0"
+    http-signature "~1.3.1"
     is-typedarray "~1.0.0"
     isstream "~0.1.2"
     json-stringify-safe "~5.0.1"
     mime-types "~2.1.19"
     oauth-sign "~0.9.0"
     performance-now "^2.1.0"
-    postman-url-encoder "1.0.1"
     qs "~6.5.2"
     safe-buffer "^5.1.2"
     stream-length "^1.0.2"
     tough-cookie "~2.5.0"
-    tunnel-agent "^0.6.0"
     uuid "^3.3.2"
-
-postman-url-encoder@1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/postman-url-encoder/-/postman-url-encoder-1.0.1.tgz#a094a42e9415ff0bbfdce0eaa8e6011d449ee83c"
 
 prelude-ls@~1.1.2:
   version "1.1.2"
@@ -8133,9 +8173,10 @@ sprintf-js@~1.0.2:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/sprintf-js/-/sprintf-js-1.0.3.tgz#04e6926f662895354f3dd015203633b857297e2c"
 
-sshpk@^1.7.0:
+sshpk@^1.14.1, sshpk@^1.7.0:
   version "1.16.1"
   resolved "https://registry.yarnpkg.com/sshpk/-/sshpk-1.16.1.tgz#fb661c0bef29b39db40769ee39fa70093d6f6877"
+  integrity sha512-HXXqVUq7+pcKeLqqZj6mHFUMvXtOJt1uoUx09pFW6011inTMxqI8BA8PM95myrIyyKwdnzjdFjLiE6KBPVtJIg==
   dependencies:
     asn1 "~0.2.3"
     assert-plus "^1.0.0"
