@@ -23,6 +23,7 @@ var _typeof = _interopDefault(require('@babel/runtime-corejs2/helpers/typeof'));
 var _getIterator = _interopDefault(require('@babel/runtime-corejs2/core-js/get-iterator'));
 var _Object$assign = _interopDefault(require('@babel/runtime-corejs2/core-js/object/assign'));
 var _Object$keys = _interopDefault(require('@babel/runtime-corejs2/core-js/object/keys'));
+var _Number$isNaN = _interopDefault(require('@babel/runtime-corejs2/core-js/number/is-nan'));
 var stringDirection = _interopDefault(require('string-direction'));
 var validUrl = _interopDefault(require('valid-url'));
 var moment = _interopDefault(require('moment-timezone'));
@@ -296,7 +297,9 @@ function _fetchResource() {
               // Accept and decode gzip
               gzip: true,
               // Follow any non-GET redirects
-              followAllRedirects: true
+              followAllRedirects: true,
+              disableSockets: true,
+              strictSSL: true
             }, typeof window !== 'undefined' ? {} : {
               // Follow GET redirects; this option is for Node only
               followRedirect: true
@@ -1888,13 +1891,13 @@ var TwitterExtractor = {
 var NYTimesExtractor = {
   domain: 'www.nytimes.com',
   title: {
-    selectors: ['h1.g-headline', 'h1[itemprop="headline"]', 'h1.headline']
+    selectors: ['h1.g-headline', 'h1[itemprop="headline"]', 'h1.headline', 'h1 .balancedHeadline']
   },
   author: {
-    selectors: [['meta[name="author"]', 'value'], '.g-byline', '.byline']
+    selectors: [['meta[name="author"]', 'value'], '.g-byline', '.byline', ['meta[name="byl"]', 'value']]
   },
   content: {
-    selectors: ['div.g-blocks', 'article#story'],
+    selectors: ['div.g-blocks', 'section[name="articleBody"]', 'article#story'],
     transforms: {
       'img.g-lazy': function imgGLazy($node) {
         var src = $node.attr('src');
@@ -5767,6 +5770,239 @@ var EpaperZeitDeExtractor = {
   }
 };
 
+var WwwNdtvComExtractor = {
+  domain: 'www.ndtv.com',
+  title: {
+    selectors: [['meta[name="og:title"]', 'value'], 'h1.entry-title']
+  },
+  author: {
+    selectors: ['span[itemprop="author"] span[itemprop="name"]']
+  },
+  date_published: {
+    selectors: [['span[itemprop="dateModified"]', 'content']]
+  },
+  dek: {
+    selectors: ['h2']
+  },
+  lead_image_url: {
+    selectors: [['meta[name="og:image"]', 'value']]
+  },
+  content: {
+    selectors: ['div[itemprop="articleBody"]'],
+    // Is there anything in the content you selected that needs transformed
+    // before it's consumable content? E.g., unusual lazy loaded images
+    transforms: {
+      // This site puts a dateline in a 'b' above the first paragraph, and then somehow
+      // blends it into the first paragraph with CSS. This transform moves the dateline
+      // to the first paragraph.
+      '.place_cont': function place_cont($node) {
+        if (!$node.parents('p').length) {
+          var nextSibling = $node.next('p');
+
+          if (nextSibling) {
+            $node.remove();
+            nextSibling.prepend($node);
+          }
+        }
+      }
+    },
+    // Is there anything that is in the result that shouldn't be?
+    // The clean selectors will remove anything that matches from
+    // the result
+    clean: ['.highlghts_Wdgt', '.ins_instory_dv_caption', 'input', '._world-wrapper .mt20']
+  }
+};
+
+var ArstechnicaComExtractor = {
+  domain: 'arstechnica.com',
+  title: {
+    selectors: ['title']
+  },
+  author: {
+    selectors: ['*[rel="author"] *[itemprop="name"]']
+  },
+  date_published: {
+    selectors: [['.byline time', 'datetime']]
+  },
+  dek: {
+    selectors: ['h2[itemprop="description"]']
+  },
+  lead_image_url: {
+    selectors: [['meta[name="og:image"]', 'value']]
+  },
+  // Articles from this site are often paginated, but I was unable to write a CSS
+  // selector to find the next page. On the last page, there will be a link with a CSS
+  // selector indicating that the previous page is next. So I implemented the ability to
+  // specify the next_page_url (and other attributes) with locator function.
+  next_page_url: {
+    locator: function locator($, url) {
+      function pageNumberFromUrl(pageUrl) {
+        var components = pageUrl.split('/');
+
+        if (components.length < 1) {
+          return 1;
+        }
+
+        var lastComponent = components[components.length - 1];
+
+        var pageNumber = _parseInt(lastComponent, 10);
+
+        if (_Number$isNaN(pageNumber)) {
+          return 1;
+        }
+
+        return pageNumber;
+      }
+
+      var nextPageUrl = $('nav.page-numbers span.numbers a:has(span.next)').attr('href');
+
+      if (nextPageUrl) {
+        // Removing the slash here avoids us fetching pages 2 through _n_ a second time
+        // because the generic parser finds a different link to ".../2/", etc.
+        if (nextPageUrl.endsWith('/')) {
+          nextPageUrl = nextPageUrl.substring(0, nextPageUrl.length - 1);
+        } // On the next page, the nextPageUrl selector above will find a "next" link to
+        // a prior page. So here we parse the page numbers out of the URL to ensure that
+        // the next page number is what we expect.
+
+
+        var currentPageNumber = pageNumberFromUrl(url);
+        var nextPageNumber = pageNumberFromUrl(nextPageUrl);
+
+        if (nextPageNumber === currentPageNumber + 1) {
+          return nextPageUrl;
+        }
+      }
+
+      return null;
+    }
+  },
+  content: {
+    selectors: ['div[itemprop="articleBody"]'],
+    // Is there anything in the content you selected that needs transformed
+    // before it's consumable content? E.g., unusual lazy loaded images
+    transforms: {
+      h2: function h2($node) {
+        // Some pages have an element h2 that is significant, and that the parser will
+        // remove if not following a paragraph. Adding this empty paragraph fixes it, and
+        // the empty paragraph will be removed anyway.
+        $node.before('<p></p>');
+      }
+    },
+    // Is there anything that is in the result that shouldn't be?
+    // The clean selectors will remove anything that matches from
+    // the result.
+    clean: [// Remove enlarge links and separators inside image captions.
+    'figcaption .enlarge-link', 'figcaption .sep', // I could not transform the video into usable elements, so I
+    // removed them.
+    'figure.video', // Image galleries that do not work.
+    '.gallery', 'aside', '.sidebar']
+  }
+};
+
+var WwwEngadgetComExtractor = {
+  domain: 'www.engadget.com',
+  title: {
+    selectors: [['meta[name="og:title"]', 'value']]
+  },
+  author: {
+    selectors: ['a.th-meta[data-ylk*="subsec:author"]']
+  },
+  // Engadget stories have publish dates, but the only representation of them on the page
+  // is in a format like "2h ago". There are also these tags with blank values:
+  // <meta class="swiftype" name="published_at" data-type="date" value="">
+  date_published: {
+    selectors: [// enter selectors
+    ]
+  },
+  dek: {
+    selectors: ['div[class*="o-title_mark"] div']
+  },
+  // Engadget stories do have lead images specified by an og:image meta tag, but selecting
+  // the value attribute of that tag fails. I believe the "&#x2111;" sequence of characters
+  // is triggering this inability to select the attribute value.
+  lead_image_url: {
+    selectors: [// enter selectors
+    ]
+  },
+  content: {
+    selectors: [[// Some figures will be inside div.article-text, but some header figures/images
+    // will not.
+    '#page_body figure:not(div.article-text figure)', 'div.article-text']],
+    // Is there anything in the content you selected that needs transformed
+    // before it's consumable content? E.g., unusual lazy loaded images
+    transforms: {},
+    // Is there anything that is in the result that shouldn't be?
+    // The clean selectors will remove anything that matches from
+    // the result
+    clean: []
+  }
+};
+
+var MaTtiasBeExtractor = {
+  domain: 'ma.ttias.be',
+  title: {
+    selectors: [['meta[name="twitter:title"]', 'value']]
+  },
+  author: {
+    selectors: [['meta[name="author"]', 'value']]
+  },
+  date_published: {
+    selectors: [['meta[name="article:published_time"]', 'value']]
+  },
+  content: {
+    selectors: [['.content']],
+    // Is there anything in the content you selected that needs transformed
+    // before it's consumable content? E.g., unusual lazy loaded images
+    transforms: {
+      h2: function h2($node) {
+        // The "id" attribute values would result in low scores and the element being
+        // removed.
+        $node.attr('id', null); // h1 elements will be demoted to h2, so demote h2 elements to h3.
+
+        return 'h3';
+      },
+      h1: function h1($node) {
+        // The "id" attribute values would result in low scores and the element being
+        // removed.
+        $node.attr('id', null); // A subsequent h2 will be removed if there is not a paragraph before it, so
+        // add a paragraph here. It will be removed anyway because it is empty.
+
+        $node.after('<p></p>');
+      },
+      ul: function ul($node) {
+        // Articles contain lists of links which look like, but are not, navigation
+        // elements. Adding this class attribute avoids them being incorrectly removed.
+        $node.attr('class', 'entry-content-asset');
+      }
+    }
+  }
+};
+
+var WwwPilzforumAtExtractor = {
+  domain: 'www.pilzforum.at',
+  title: {
+    selectors: ['title']
+  },
+  author: {
+    selectors: ['div.author_information strong span']
+  },
+  date_published: {
+    selectors: [['.post_date span', 'title']]
+  },
+  content: {
+    // :first-of-type, because I want just the first post, not the replies.
+    selectors: [['.post:first-of-type .post_content']],
+    // Is there anything in the content you selected that needs transformed
+    // before it's consumable content? E.g., unusual lazy loaded images
+    transforms: {},
+    // Is there anything that is in the result that shouldn't be?
+    // The clean selectors will remove anything that matches from
+    // the result
+    clean: ['.post_head']
+  }
+};
+
 
 
 var CustomExtractors = /*#__PURE__*/Object.freeze({
@@ -5903,7 +6139,12 @@ var CustomExtractors = /*#__PURE__*/Object.freeze({
   WwwPhoronixComExtractor: WwwPhoronixComExtractor,
   PitchforkComExtractor: PitchforkComExtractor,
   BiorxivOrgExtractor: BiorxivOrgExtractor,
-  EpaperZeitDeExtractor: EpaperZeitDeExtractor
+  EpaperZeitDeExtractor: EpaperZeitDeExtractor,
+  WwwNdtvComExtractor: WwwNdtvComExtractor,
+  ArstechnicaComExtractor: ArstechnicaComExtractor,
+  WwwEngadgetComExtractor: WwwEngadgetComExtractor,
+  MaTtiasBeExtractor: MaTtiasBeExtractor,
+  WwwPilzforumAtExtractor: WwwPilzforumAtExtractor
 });
 
 var Extractors = _Object$keys(CustomExtractors).reduce(function (acc, key) {
@@ -7300,9 +7541,15 @@ function select(opts) {
 
   if (typeof extractionOpts === 'string') return extractionOpts;
   var selectors = extractionOpts.selectors,
+      locator = extractionOpts.locator,
       _extractionOpts$defau = extractionOpts.defaultCleaner,
       defaultCleaner = _extractionOpts$defau === void 0 ? true : _extractionOpts$defau,
       allowMultiple = extractionOpts.allowMultiple;
+
+  if (locator) {
+    return locator($, opts.url);
+  }
+
   var matchingSelector = findMatchingSelector($, selectors, extractHtml, allowMultiple);
   if (!matchingSelector) return null;
 
@@ -7419,7 +7666,11 @@ function extractResult(opts) {
   // run the Generic extraction
 
 
-  if (fallback) return GenericExtractor[type](opts);
+  if (fallback) {
+    var fallbackResult = GenericExtractor[type](opts);
+    return fallbackResult;
+  }
+
   return null;
 }
 
@@ -7557,7 +7808,6 @@ function _collectAllPages() {
               html: html,
               $: $,
               metaCache: metaCache,
-              contentOnly: true,
               extractedTitle: title,
               previousUrls: previousUrls
             };
