@@ -18,7 +18,7 @@ export const DeadspinExtractor = {
   ],
 
   title: {
-    selectors: ['h1.headline'],
+    selectors: ['title'],
   },
 
   author: {
@@ -26,7 +26,7 @@ export const DeadspinExtractor = {
   },
 
   content: {
-    selectors: ['.post-content', '.entry-content'],
+    selectors: [['.js_post-content'], ['.post-content'], ['.entry-content']],
 
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images
@@ -34,6 +34,14 @@ export const DeadspinExtractor = {
       'iframe.lazyload[data-recommend-id^="youtube://"]': $node => {
         const youtubeId = $node.attr('id').split('youtube-')[1];
         $node.attr('src', `https://www.youtube.com/embed/${youtubeId}`);
+      },
+
+      // Prevent h4 elements from being deleted by preceding them with
+      // empty pargraphs.
+      h4: $node => {
+        // The "id" attribute values would result in low scores and the element being
+        // removed.
+        $node.before('<p></p>');
       },
     },
 
@@ -44,7 +52,10 @@ export const DeadspinExtractor = {
   },
 
   date_published: {
-    selectors: [['time.updated[datetime]', 'datetime']],
+    selectors: [
+      ['time.updated[datetime]', 'datetime'],
+      ['time[datetime]', 'datetime'],
+    ],
   },
 
   lead_image_url: {
