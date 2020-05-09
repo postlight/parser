@@ -137,3 +137,4 @@ export * from './arstechnica.com';
 export * from './www.engadget.com';
 export * from './ma.ttias.be';
 export * from './www.pilzforum.at';
+export * from './sicnoticias.pt';
