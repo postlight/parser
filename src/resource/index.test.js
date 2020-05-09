@@ -97,22 +97,12 @@ describe('Resource', () => {
       }, /content does not appear to be text/i);
     });
 
-    it('throws an error if the response has no Content-Type header', () => {
+    it('does not throw an error if the response has no Content-Type header', () => {
       const response = {
         headers: {},
       };
-      const body = '';
-
-      // This assertion is more elaborate than the others to be sure that we're
-      // throwing an `Error` and not raising a runtime exception.
-      assert.throws(
-        () => {
-          Resource.generateDoc({ body, response });
-        },
-        err =>
-          err instanceof Error &&
-          /content does not appear to be text/i.test(err)
-      );
+      const body = '<p>hello</p>';
+      Resource.generateDoc({ body, response });
     });
 
     it('throws an error if the content has no children', () => {
