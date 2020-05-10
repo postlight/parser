@@ -140,3 +140,4 @@ export * from './www.pilzforum.at';
 export * from './sicnoticias.pt';
 export * from './inagblog.com';
 export * from './marblegate.webcomic.ws';
+export * from './simpledesktops.com';
