@@ -1,0 +1,97 @@
+export const WwwBbcComExtractor = {
+  domain: 'www.bbc.com',
+
+  title: {
+    selectors: [['meta[name="og:title"]', 'value']],
+  },
+
+  lead_image_url: {
+    selectors: [['meta[name="og:image"]', 'value']],
+  },
+
+  author: {
+    selectors: [['meta[name="author"]', 'value']],
+  },
+
+  dek: {
+    selectors: [['meta[name="og:description"]', 'value']],
+  },
+  content: {
+    defaultCleaner: false,
+    selectors: [
+      ['.vxp-media__summary'],
+      ['*[property="articleBody"]'],
+      ['.article__body'],
+      ['#lx-stream'],
+    ],
+
+    clean: [
+      '.article__author-unit',
+      '.article__intro',
+      '.drop-capped',
+      '.lx-media-asset__copyright',
+      '.qa-visually-hidden-meta',
+      '.qa-post-auto-meta',
+      'footer',
+      'button',
+      '.lx-stream-post__contributor',
+      'svg',
+      '.lx-pagination',
+    ],
+
+    transforms: {
+      '.vxp-media__summary': ($node, $) => {
+        const [selector, attr] = WwwBbcComExtractor.lead_image_url.selectors[0];
+        const src = $(selector).attr(attr);
+        if (src) {
+          $node.prepend(`<img src="${src}" />`);
+        }
+      },
+
+      // Lazy-loaded images.
+      '.js-delayed-image-load': $node => {
+        const alt = $node.attr('data-alt');
+        const src = $node.attr('data-src').replace('%7Bwidth%7D', '1024');
+        const width = $node.attr('data-width');
+        const height = $node.attr('data-height');
+        if (alt && src && width && height) {
+          $node.attr('alt', alt);
+          $node.attr('src', src);
+          $node.attr('width', width);
+          $node.attr('height', height);
+          return 'img';
+        }
+        return null;
+      },
+      img: $node => {
+        let src = $node.attr('src');
+        if (src) {
+          src = src.replace('%7Bwidth%7D', '1024');
+          $node.attr('src', src);
+        }
+        return 'img';
+      },
+
+      // Convert figures.
+      '.article-body__image-text': () => {
+        return 'figure';
+      },
+      '.article-body__image-text .inline-image__description': () => {
+        return 'figcaption';
+      },
+
+      // Convert lists and list items to divs in order to avoid stray bullets and numbers.
+      '#lx-stream ol': () => {
+        return 'div';
+      },
+      '#lx-stream li': () => {
+        return 'div';
+      },
+
+      // Make sure h3 is not removed just because it does not have a preceding paragraph.
+      h3: $node => {
+        $node.before('<p></p>');
+      },
+    },
+  },
+};
