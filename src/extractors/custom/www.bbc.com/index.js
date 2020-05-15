@@ -23,6 +23,7 @@ export const WwwBbcComExtractor = {
       ['*[property="articleBody"]'],
       ['.article__body'],
       ['#lx-stream'],
+      ['.story-body'],
     ],
 
     clean: [
@@ -37,6 +38,11 @@ export const WwwBbcComExtractor = {
       '.lx-stream-post__contributor',
       'svg',
       '.lx-pagination',
+      '.sp-story-body__introduction',
+      '.player-with-placeholder__caption',
+      '.off-screen',
+      '.story-body__unordered-list', // Seem to be mostly "related articles" lists
+      '.story-image-copyright',
     ],
 
     transforms: {
@@ -69,6 +75,15 @@ export const WwwBbcComExtractor = {
           src = src.replace('%7Bwidth%7D', '1024');
           $node.attr('src', src);
         }
+        const srcset = $node.attr('srcset');
+        if (srcset) {
+          const elements = srcset.split(/,\s*/);
+          const lastElement = elements[elements.length - 1];
+          const lastElementComponents = lastElement.split(/\s+/);
+          $node.attr('src', lastElementComponents[0]);
+          $node.removeAttr('srcset');
+          $node.removeAttr('sizes');
+        }
         return 'img';
       },
 
@@ -78,6 +93,14 @@ export const WwwBbcComExtractor = {
       },
       '.article-body__image-text .inline-image__description': () => {
         return 'figcaption';
+      },
+      figure: $node => {
+        if (
+          $node.find('img').length === 0 ||
+          $node.find('img[alt~="Banner"]').length !== 0
+        ) {
+          $node.remove();
+        }
       },
 
       // Convert lists and list items to divs in order to avoid stray bullets and numbers.
