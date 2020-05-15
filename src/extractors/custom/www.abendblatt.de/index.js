@@ -30,6 +30,7 @@ export const WwwAbendblattDeExtractor = {
     // before it's consumable content? E.g., unusual lazy loaded images
     transforms: {
       p: $node => {
+        if (!$node.hasClass('obfuscated')) return null;
         let o = '';
         let n = 0;
         for (let i = $node.text(); n < i.length; n += 1) {
@@ -50,6 +51,34 @@ export const WwwAbendblattDeExtractor = {
         }
 
         $node.html(o);
+        $node.removeClass('obfuscated');
+        $node.addClass('deobfuscated');
+        return null;
+      },
+      div: $node => {
+        if (!$node.hasClass('obfuscated')) return null;
+        let o = '';
+        let n = 0;
+        for (let i = $node.text(); n < i.length; n += 1) {
+          const r = i.charCodeAt(n);
+          r === 177
+            ? (o += '%')
+            : r === 178
+            ? (o += '!')
+            : r === 180
+            ? (o += ';')
+            : r === 181
+            ? (o += '=')
+            : r === 32
+            ? (o += ' ')
+            : r === 10
+            ? (o += '\n')
+            : r > 33 && (o += String.fromCharCode(r - 1));
+        }
+
+        $node.html(o);
+        $node.removeClass('obfuscated');
+        $node.addClass('deobfuscated');
         return null;
       },
     },
