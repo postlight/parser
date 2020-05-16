@@ -1,5 +1,6 @@
 export const WwwBbcComExtractor = {
   domain: 'www.bbc.com',
+  supportedDomains: ['www.bbc.co.uk'],
 
   title: {
     selectors: [['meta[name="og:title"]', 'value']],
@@ -54,9 +55,9 @@ export const WwwBbcComExtractor = {
       '.sp-story-body__introduction',
       '.player-with-placeholder__caption',
       '.off-screen',
-      '.story-body__unordered-list', // Seem to be mostly "related articles" lists
       '.story-image-copyright',
       '.social-embed',
+      'img[alt~="banner"]',
     ],
 
     transforms: {
@@ -113,7 +114,7 @@ export const WwwBbcComExtractor = {
           $node.find('img').length === 0 ||
           $node.find('img[alt~="Banner"]').length !== 0 ||
           $node.find('img[alt="Newsbeat"]').length !== 0 ||
-          $node.find('img[height="2"]').length !== 0
+          $node.find('img[alt="Reality"]').length !== 0
         ) {
           $node.remove();
         }
