@@ -21,7 +21,15 @@ export const WwwBbcComExtractor = {
     defaultCleaner: false,
 
     locator: ($, url) => {
-      if (url.includes('/reel/')) {
+      if (
+        url.includes('/reel/') ||
+        url.includes('/iplayer/') ||
+        url.includes('/sounds/') ||
+        url.includes('/food/') ||
+        url.includes('/programmes/') ||
+        url.includes('/quiz/') ||
+        url.includes('/newsround/')
+      ) {
         const image_url = $('meta[name="og:image"]').attr('value');
         const image_width = $('meta[name="og:image:width"]').attr('value');
         const image_height = $('meta[name="og:image:height"]').attr('value');
@@ -38,6 +46,7 @@ export const WwwBbcComExtractor = {
       ['#lx-stream'],
       ['.story-body'],
       ['.body-content'],
+      ['.blocks-article'],
     ],
 
     clean: [
