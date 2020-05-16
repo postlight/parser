@@ -36,6 +36,7 @@ export const WwwBbcComExtractor = {
       ['.article__body'],
       ['#lx-stream'],
       ['.story-body'],
+      ['.body-content'],
     ],
 
     clean: [
@@ -126,6 +127,11 @@ export const WwwBbcComExtractor = {
       // Make sure h3 is not removed just because it does not have a preceding paragraph.
       h3: $node => {
         $node.before('<p></p>');
+      },
+
+      'div[data-video-player-image-url]': $node => {
+        $node.attr('src', $node.attr('data-video-player-image-url'));
+        return 'img';
       },
     },
   },

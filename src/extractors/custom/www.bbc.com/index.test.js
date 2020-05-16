@@ -632,4 +632,106 @@ describe('WwwBbcComExtractor', () => {
       assert.equal(img.length, 1);
     });
   });
+
+  describe('travel', () => {
+    let result;
+    let url;
+    beforeAll(() => {
+      url =
+        'https://www.bbc.com/travel/story/20200514-welcome-to-svalbard-a-place-anyone-can-call-home';
+      const html = fs.readFileSync('./fixtures/www.bbc.com/1589289678592.html');
+      result = Mercury.parse(url, { html, fallback: false });
+    });
+
+    it('is selected properly', () => {
+      // This test should be passing by default.
+      // It sanity checks that the correct parser
+      // is being selected for URLs from this domain
+      const extractor = getExtractor(url);
+      assert.equal(extractor.domain, URL.parse(url).hostname);
+    });
+
+    it('returns the title', async () => {
+      // To pass this test, fill out the title selector
+      // in ./src/extractors/custom/www.bbc.com/index.js.
+      const { title } = await result;
+
+      // Update these values with the expected values from
+      // the article.
+      assert.equal(title, `Welcome to Svalbard: a place anyone can call home`);
+    });
+
+    it('returns the author', async () => {
+      // To pass this test, fill out the author selector
+      // in ./src/extractors/custom/www.bbc.com/index.js.
+      const { author } = await result;
+
+      // Update these values with the expected values from
+      // the article.
+      assert.equal(author, 'Will Francome');
+    });
+
+    it('returns the date_published', async () => {
+      // To pass this test, fill out the date_published selector
+      // in ./src/extractors/custom/www.bbc.com/index.js.
+      const { date_published } = await result;
+
+      // Update these values with the expected values from
+      // the article.
+      assert.equal(date_published, null);
+    });
+
+    it('returns the dek', async () => {
+      // To pass this test, fill out the dek selector
+      // in ./src/extractors/custom/www.bbc.com/index.js.
+      const { dek } = await result;
+
+      // Update these values with the expected values from
+      // the article.
+      assert.equal(
+        dek,
+        'This visa-free archipelago in Norway is the northernmost year-round settlement in the world, and its capital, Longyearbyen, is home to people from more than 50 countries.'
+      );
+    });
+
+    it('returns the lead_image_url', async () => {
+      // To pass this test, fill out the lead_image_url selector
+      // in ./src/extractors/custom/www.bbc.com/index.js.
+      const { lead_image_url } = await result;
+
+      // Update these values with the expected values from
+      // the article.
+      assert.equal(
+        lead_image_url,
+        `https://ichef.bbci.co.uk/wwfeatures/live/624_351/images/live/p0/86/78/p08678x1.jpg`
+      );
+    });
+
+    it('returns the content', async () => {
+      // To pass this test, fill out the content selector
+      // in ./src/extractors/custom/www.bbc.com/index.js.
+      // You may also want to make use of the clean and transform
+      // options.
+      const { content } = await result;
+
+      const $ = cheerio.load(content || '');
+
+      const first13 = excerptContent(
+        $('*')
+          .first()
+          .text(),
+        13
+      );
+
+      // Update these values with the expected values from
+      // the article.
+      assert.equal(
+        first13,
+        'Snow-capped mountaintops are the first thing visitors may spot from the airplane windows'
+      );
+
+      const img = $('img');
+      assert.equal(img.length, 1);
+    });
+  });
 });
