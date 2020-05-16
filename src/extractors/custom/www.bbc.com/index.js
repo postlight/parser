@@ -56,6 +56,7 @@ export const WwwBbcComExtractor = {
       '.off-screen',
       '.story-body__unordered-list', // Seem to be mostly "related articles" lists
       '.story-image-copyright',
+      '.social-embed',
     ],
 
     transforms: {
@@ -110,7 +111,9 @@ export const WwwBbcComExtractor = {
       figure: $node => {
         if (
           $node.find('img').length === 0 ||
-          $node.find('img[alt~="Banner"]').length !== 0
+          $node.find('img[alt~="Banner"]').length !== 0 ||
+          $node.find('img[alt="Newsbeat"]').length !== 0 ||
+          $node.find('img[height="2"]').length !== 0
         ) {
           $node.remove();
         }
