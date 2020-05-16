@@ -80,9 +80,12 @@ export function select(opts) {
     defaultCleaner = true,
     allowMultiple,
   } = extractionOpts;
+
   if (locator) {
     const locatorResult = locator($, opts.url);
-    if (locatorResult) {
+    // If locator returns null and we're extracting HTML, keep going.
+    // But if we have a null result and we're extracting a simple value, stop here.
+    if (locatorResult || !extractHtml) {
       return locatorResult;
     }
   }
