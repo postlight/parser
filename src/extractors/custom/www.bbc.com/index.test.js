@@ -313,7 +313,7 @@ describe('WwwBbcComExtractor', () => {
       );
 
       const img = $('img');
-      assert.equal(img.length, 4);
+      assert.equal(img.length, 5);
 
       const figuresWithImages = $('figure img');
       assert.equal(figuresWithImages.length, 4);

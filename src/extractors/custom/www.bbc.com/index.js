@@ -33,7 +33,7 @@ export const WwwBbcComExtractor = {
     selectors: [
       ['.vxp-media__summary'],
       ['*[property="articleBody"]'],
-      ['.article__body'],
+      ['.hero-image, .article__body'],
       ['#lx-stream'],
       ['.story-body'],
       ['.body-content'],
