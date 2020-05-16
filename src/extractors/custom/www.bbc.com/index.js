@@ -18,6 +18,18 @@ export const WwwBbcComExtractor = {
   },
   content: {
     defaultCleaner: false,
+
+    locator: ($, url) => {
+      if (url.includes('/reel/')) {
+        const image_url = $('meta[name="og:image"]').attr('value');
+        const image_width = $('meta[name="og:image:width"]').attr('value');
+        const image_height = $('meta[name="og:image:height"]').attr('value');
+        const description = $('meta[name="description"]').attr('value');
+        return `<div><img src="${image_url}" width="${image_width}" height="${image_height}"><p>${description}</p></div>`;
+      }
+      return null;
+    },
+
     selectors: [
       ['.vxp-media__summary'],
       ['*[property="articleBody"]'],

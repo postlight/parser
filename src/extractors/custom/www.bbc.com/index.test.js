@@ -530,4 +530,106 @@ describe('WwwBbcComExtractor', () => {
       assert.equal(figure.length, 1);
     });
   });
+
+  describe('reel', () => {
+    let result;
+    let url;
+    beforeAll(() => {
+      url =
+        'https://www.bbc.com/reel/video/p081rqqq/surprising-images-from-inside-north-korea';
+      const html = fs.readFileSync('./fixtures/www.bbc.com/1589289678591.html');
+      result = Mercury.parse(url, { html, fallback: false });
+    });
+
+    it('is selected properly', () => {
+      // This test should be passing by default.
+      // It sanity checks that the correct parser
+      // is being selected for URLs from this domain
+      const extractor = getExtractor(url);
+      assert.equal(extractor.domain, URL.parse(url).hostname);
+    });
+
+    it('returns the title', async () => {
+      // To pass this test, fill out the title selector
+      // in ./src/extractors/custom/www.bbc.com/index.js.
+      const { title } = await result;
+
+      // Update these values with the expected values from
+      // the article.
+      assert.equal(
+        title,
+        `Surprising images from inside North Korea - BBC Reel`
+      );
+    });
+
+    it('returns the author', async () => {
+      // To pass this test, fill out the author selector
+      // in ./src/extractors/custom/www.bbc.com/index.js.
+      const { author } = await result;
+
+      // Update these values with the expected values from
+      // the article.
+      assert.equal(author, null);
+    });
+
+    it('returns the date_published', async () => {
+      // To pass this test, fill out the date_published selector
+      // in ./src/extractors/custom/www.bbc.com/index.js.
+      const { date_published } = await result;
+
+      // Update these values with the expected values from
+      // the article.
+      assert.equal(date_published, null);
+    });
+
+    it('returns the dek', async () => {
+      // To pass this test, fill out the dek selector
+      // in ./src/extractors/custom/www.bbc.com/index.js.
+      const { dek } = await result;
+
+      // Update these values with the expected values from
+      // the article.
+      assert.equal(dek, null);
+    });
+
+    it('returns the lead_image_url', async () => {
+      // To pass this test, fill out the lead_image_url selector
+      // in ./src/extractors/custom/www.bbc.com/index.js.
+      const { lead_image_url } = await result;
+
+      // Update these values with the expected values from
+      // the article.
+      assert.equal(
+        lead_image_url,
+        `https://ychef.files.bbci.co.uk/1376x774/p081tks6.jpg`
+      );
+    });
+
+    it('returns the content', async () => {
+      // To pass this test, fill out the content selector
+      // in ./src/extractors/custom/www.bbc.com/index.js.
+      // You may also want to make use of the clean and transform
+      // options.
+      const { content } = await result;
+
+      const $ = cheerio.load(content || '');
+
+      const first13 = excerptContent(
+        $('*')
+          .first()
+          .text(),
+        13
+      );
+
+      // Update these values with the expected values from
+      // the article.
+      assert.equal(
+        first13,
+        'Magnum photographer Carl De Keyzer is one of very few to have been'
+      );
+
+      const img = $('img');
+      assert.equal(img.length, 1);
+    });
+  });
 });

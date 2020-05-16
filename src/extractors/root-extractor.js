@@ -81,7 +81,10 @@ export function select(opts) {
     allowMultiple,
   } = extractionOpts;
   if (locator) {
-    return locator($, opts.url);
+    const locatorResult = locator($, opts.url);
+    if (locatorResult) {
+      return locatorResult;
+    }
   }
 
   const matchingSelector = findMatchingSelector(
