@@ -68,11 +68,13 @@ export const WwwBbcComExtractor = {
           $node.prepend(`<img src="${src}" />`);
         }
       },
-
       // Lazy-loaded images.
       '.js-delayed-image-load': $node => {
         const alt = $node.attr('data-alt');
-        const src = $node.attr('data-src').replace('%7Bwidth%7D', '1024');
+        const src = $node
+          .attr('data-src')
+          .replace('%7Bwidth%7D%7Bhidpi%7D', '624')
+          .replace('%7Bwidth%7D', '1024');
         const width = $node.attr('data-width');
         const height = $node.attr('data-height');
         if (alt && src && width && height) {
@@ -87,7 +89,9 @@ export const WwwBbcComExtractor = {
       img: $node => {
         let src = $node.attr('src');
         if (src) {
-          src = src.replace('%7Bwidth%7D', '1024');
+          src = src
+            .replace('%7Bwidth%7D%7Bhidpi%7D', '624')
+            .replace('%7Bwidth%7D', '1024');
           $node.attr('src', src);
         }
         const srcset = $node.attr('srcset');
