@@ -141,5 +141,6 @@ export * from './sicnoticias.pt';
 export * from './inagblog.com';
 export * from './marblegate.webcomic.ws';
 export * from './simpledesktops.com';
+export * from './www.bbc.com';
 export * from './www.thesalinepost.com';
 export * from './widerimage.reuters.com';

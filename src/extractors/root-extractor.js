@@ -80,8 +80,14 @@ export function select(opts) {
     defaultCleaner = true,
     allowMultiple,
   } = extractionOpts;
+
   if (locator) {
-    return locator($, opts.url);
+    const locatorResult = locator($, opts.url);
+    // If locator returns null and we're extracting HTML, keep going.
+    // But if we have a null result and we're extracting a simple value, stop here.
+    if (locatorResult || !extractHtml) {
+      return locatorResult;
+    }
   }
 
   const matchingSelector = findMatchingSelector(
