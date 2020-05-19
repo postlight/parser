@@ -8,14 +8,14 @@ import { excerptContent } from 'utils/text';
 
 const fs = require('fs');
 
-describe('WwwThreepanelsoulComExtractor', () => {
+describe('KillsixbilliondemonsComExtractor', () => {
   describe('initial test case', () => {
     let result;
     let url;
     beforeAll(() => {
-      url = 'http://www.threepanelsoul.com/comic/oh-please';
+      url = 'https://killsixbilliondemons.com/comic/king-of-swords-10-141/';
       const html = fs.readFileSync(
-        './fixtures/www.threepanelsoul.com/1589907024808.html'
+        './fixtures/killsixbilliondemons.com/1589914561721.html'
       );
       result = Mercury.parse(url, { html, fallback: false });
     });
@@ -30,27 +30,27 @@ describe('WwwThreepanelsoulComExtractor', () => {
 
     it('returns the title', async () => {
       // To pass this test, fill out the title selector
-      // in ./src/extractors/custom/www.threepanelsoul.com/index.js.
+      // in ./src/extractors/custom/killsixbilliondemons.com/index.js.
       const { title } = await result;
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(title, `Oh Please`);
+      assert.equal(title, `Kill Six Billion Demons`);
     });
 
     it('returns the author', async () => {
       // To pass this test, fill out the author selector
-      // in ./src/extractors/custom/www.threepanelsoul.com/index.js.
+      // in ./src/extractors/custom/killsixbilliondemons.com/index.js.
       const { author } = await result;
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(author, null);
+      assert.equal(author, 'Abbadon');
     });
 
     it('returns the date_published', async () => {
       // To pass this test, fill out the date_published selector
-      // in ./src/extractors/custom/www.threepanelsoul.com/index.js.
+      // in ./src/extractors/custom/killsixbilliondemons.com/index.js.
       const { date_published } = await result;
 
       // Update these values with the expected values from
@@ -60,7 +60,7 @@ describe('WwwThreepanelsoulComExtractor', () => {
 
     it('returns the dek', async () => {
       // To pass this test, fill out the dek selector
-      // in ./src/extractors/custom/www.threepanelsoul.com/index.js.
+      // in ./src/extractors/custom/killsixbilliondemons.com/index.js.
       const { dek } = await result;
 
       // Update these values with the expected values from
@@ -70,17 +70,20 @@ describe('WwwThreepanelsoulComExtractor', () => {
 
     it('returns the lead_image_url', async () => {
       // To pass this test, fill out the lead_image_url selector
-      // in ./src/extractors/custom/www.threepanelsoul.com/index.js.
+      // in ./src/extractors/custom/killsixbilliondemons.com/index.js.
       const { lead_image_url } = await result;
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(lead_image_url, null);
+      assert.equal(
+        lead_image_url,
+        `https://killsixbilliondemons.com/wp-content/uploads/2020/05/KOS141.jpg`
+      );
     });
 
     it('returns the content', async () => {
       // To pass this test, fill out the content selector
-      // in ./src/extractors/custom/www.threepanelsoul.com/index.js.
+      // in ./src/extractors/custom/killsixbilliondemons.com/index.js.
       // You may also want to make use of the clean and transform
       // options.
       const { content } = await result;
@@ -99,8 +102,9 @@ describe('WwwThreepanelsoulComExtractor', () => {
       assert.equal(first13, '');
       assert.equal($('img').length, 1);
       assert.equal(
-        $('img[src="http://www.threepanelsoul.com/comics/1588973000-714.png"]')
-          .length,
+        $(
+          'img[src="https://killsixbilliondemons.com/wp-content/uploads/2020/05/KOS141.jpg"]'
+        ).length,
         1
       );
     });

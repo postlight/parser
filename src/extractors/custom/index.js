@@ -151,3 +151,4 @@ export * from './www.portaltotheuniverse.org';
 export * from './www.threepanelsoul.com';
 export * from './www.toothpastefordinner.com';
 export * from './www.toxel.com';
+export * from './killsixbilliondemons.com';
