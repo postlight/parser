@@ -149,3 +149,4 @@ export * from './www.lamebook.com';
 export * from './www.gunnerkrigg.com';
 export * from './www.portaltotheuniverse.org';
 export * from './www.threepanelsoul.com';
+export * from './www.toothpastefordinner.com';
