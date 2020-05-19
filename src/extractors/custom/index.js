@@ -145,3 +145,4 @@ export * from './www.bbc.com';
 export * from './www.thesalinepost.com';
 export * from './widerimage.reuters.com';
 export * from './www.gocomics.com';
+export * from './www.gunnerkrigg.com';
