@@ -147,3 +147,4 @@ export * from './widerimage.reuters.com';
 export * from './www.gocomics.com';
 export * from './www.lamebook.com';
 export * from './www.gunnerkrigg.com';
+export * from './www.portaltotheuniverse.org';
