@@ -155,3 +155,4 @@ export * from './killsixbilliondemons.com';
 export * from './nitter.snopyta.org';
 export * from './thenib.tumblr.com';
 export * from './www.bluesnews.com';
+export * from './www.dieselsweeties.com';
