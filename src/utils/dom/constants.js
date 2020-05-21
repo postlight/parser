@@ -46,6 +46,7 @@ export const WHITELIST_ATTRS = [
   'width',
   'height',
   'controls',
+  'poster',
 ];
 
 export const WHITELIST_ATTRS_RE = new RegExp(
