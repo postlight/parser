@@ -99,4 +99,44 @@ describe('WwwZdfDeExtractor', () => {
     assert.equal($('img').length, 2);
     assert.equal($('img[src*="assets"]').length, 2);
   });
+
+  it('https://www.zdf.de/comedy/die-anstalt/die-anstalt-vom-10-dezember-2019-100.html', async () => {
+    const html = fs.readFileSync('./fixtures/www.zdf.de/1590166652115.html');
+    const uri =
+      'https://www.zdf.de/comedy/die-anstalt/die-anstalt-vom-10-dezember-2019-100.html';
+
+    const extractor = getExtractor(uri);
+    assert.equal(extractor.domain, URL.parse(uri).hostname);
+
+    const {
+      title,
+      author,
+      date_published,
+      dek,
+      lead_image_url,
+      content,
+    } = await Mercury.parse(uri, { html, fallback: false });
+
+    assert.equal(title, 'Die Anstalt vom 10. Dezember 2019');
+    assert.equal(author, null);
+    assert.equal(date_published, '2020-01-23T09:28:19.824Z');
+    assert.equal(dek, null);
+    assert.equal(
+      lead_image_url,
+      'https://www.zdf.de/assets/191210-teaserbild-100~768x432?cb=1575991596551'
+    );
+
+    const $ = cheerio.load(content || '');
+    const first13 = excerptContent(
+      $('*')
+        .first()
+        .text(),
+      13
+    );
+    assert.equal(
+      first13,
+      'Wortgewandt, unkonventionell und mit viel satirischer Schärfe: Max Uthoff und Claus von Wagner'
+    );
+    assert.equal($('img').length, 1);
+  });
 });

@@ -37,10 +37,17 @@ export const WwwZdfDeExtractor = {
         const attribute = teaserElement.attr('data-zdfplayer-teaser-image');
         if (attribute) {
           const imageJson = JSON.parse(attribute);
-          const imageUrl = imageJson['1920x1080'];
+          let imageUrl = imageJson['1920x1080'];
           if (imageUrl) {
             teaserElement.replaceWith(
               `<img src="${imageUrl}" width="960" height="540">`
+            );
+            return;
+          }
+          imageUrl = imageJson['768x432'];
+          if (imageUrl) {
+            teaserElement.replaceWith(
+              `<img src="${imageUrl}" width="384" height="216">`
             );
           }
         }
