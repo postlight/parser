@@ -86,6 +86,7 @@ export const WwwZdfDeExtractor = {
       '.teaser-foot',
       'button',
       '.artdirect',
+      '.teaser-label',
     ],
   },
 };
