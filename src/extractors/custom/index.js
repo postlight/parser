@@ -158,3 +158,4 @@ export * from './www.bluesnews.com';
 export * from './www.dieselsweeties.com';
 export * from './www.giantbomb.com';
 export * from './www.tested.com';
+export * from './www.zdf.de';
