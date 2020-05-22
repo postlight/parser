@@ -139,4 +139,45 @@ describe('WwwZdfDeExtractor', () => {
     );
     assert.equal($('img').length, 1);
   });
+
+  it('https://www.zdf.de/comedy/die-anstalt/die-gaeste-am-2-juni-2020-100.html', async () => {
+    const html = fs.readFileSync('./fixtures/www.zdf.de/1590167629561.html');
+    const uri =
+      'https://www.zdf.de/comedy/die-anstalt/die-gaeste-am-2-juni-2020-100.html';
+
+    const extractor = getExtractor(uri);
+    assert.equal(extractor.domain, URL.parse(uri).hostname);
+
+    const {
+      title,
+      author,
+      date_published,
+      dek,
+      lead_image_url,
+      content,
+    } = await Mercury.parse(uri, { html, fallback: false });
+
+    assert.equal(title, 'Die Gäste am 2. Juni 2020');
+    assert.equal(author, null);
+    assert.equal(date_published, '2020-05-05T15:08:35.657Z');
+    assert.equal(dek, null);
+    assert.equal(
+      lead_image_url,
+      'https://www.zdf.de/assets/max-von-wagner-und-max-uthoff-100~1280x720?cb=1563284652517'
+    );
+
+    const $ = cheerio.load(content || '');
+    const first13 = excerptContent(
+      $('*')
+        .first()
+        .text(),
+      13
+    );
+    assert.equal(
+      first13,
+      'Comedy | Die Anstalt - Die Gäste am 2. Juni 2020 (1/4) Wortgewandt,'
+    );
+    assert.equal($('img').length, 4);
+    assert.equal($('hr').length, 3);
+  });
 });

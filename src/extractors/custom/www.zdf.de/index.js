@@ -27,11 +27,23 @@ export const WwwZdfDeExtractor = {
 
   content: {
     defaultCleaner: false,
-    selectors: ['.content-item', '.b-post-content', '.teaser-foot'],
+
+    // If there is only one .content-item, we want it. If there are multiple and that is
+    // all we find, then we want that -- but treat .b-post-content and .teaser-foot as
+    // being better matches.
+    selectors: [
+      '.content-item',
+      '.b-post-content',
+      '.teaser-foot',
+      ['.content-item'],
+    ],
 
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images
     transforms: {
+      '.content-item:not(:first-child)': $node => {
+        $node.before('<hr class="mercury-parser-keep">');
+      },
       '[data-zdfplayer-teaser-image]': $node => {
         const teaserElement = $node;
         const attribute = teaserElement.attr('data-zdfplayer-teaser-image');
@@ -72,6 +84,7 @@ export const WwwZdfDeExtractor = {
       '.other-infos',
       '.b-content-module',
       '.teaser-foot',
+      'button',
     ],
   },
 };
