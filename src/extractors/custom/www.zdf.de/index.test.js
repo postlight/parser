@@ -223,4 +223,46 @@ describe('WwwZdfDeExtractor', () => {
     );
     assert.equal($('img').length, 5);
   });
+
+  it('https://www.zdf.de/dokumentation/37-grad/37-bauernhof-statt-altersheim-100.html', async () => {
+    const html = fs.readFileSync('./fixtures/www.zdf.de/1590171317943.html');
+    const uri =
+      'https://www.zdf.de/dokumentation/37-grad/37-bauernhof-statt-altersheim-100.html';
+
+    const extractor = getExtractor(uri);
+    assert.equal(extractor.domain, URL.parse(uri).hostname);
+
+    const {
+      title,
+      author,
+      date_published,
+      dek,
+      lead_image_url,
+      content,
+    } = await Mercury.parse(uri, { html, fallback: false });
+
+    assert.equal(title, 'Bauernhof statt Altersheim');
+    assert.equal(author, null);
+    assert.equal(date_published, '2020-05-05T12:23:19.621Z');
+    assert.equal(dek, null);
+    assert.equal(
+      lead_image_url,
+      'https://epg-image.zdf.de/fotobase-webdelivery/images/0008e618-3276-4865-b375-07c1955e5b5d?layout=1280x720'
+    );
+
+    const $ = cheerio.load(content || '');
+
+    const first13 = excerptContent(
+      $('*')
+        .first()
+        .text(),
+      13
+    );
+    assert.equal(
+      first13,
+      '"Green Care" ist ein Trend in vielen Ländern. Senioren leben auf dem Bauernhof'
+    );
+    assert.equal($('img').length, 1);
+    assert.equal($('p').length, 9);
+  });
 });
