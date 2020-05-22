@@ -85,6 +85,7 @@ export const WwwZdfDeExtractor = {
       '.b-content-module',
       '.teaser-foot',
       'button',
+      '.artdirect',
     ],
   },
 };

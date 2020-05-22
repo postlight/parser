@@ -180,4 +180,47 @@ describe('WwwZdfDeExtractor', () => {
     assert.equal($('img').length, 4);
     assert.equal($('hr').length, 3);
   });
+
+  it('https://www.zdf.de/nachrichten/briefing/coronavirus-homeoffice-ueberwachung-zdfheute-update-100.html', async () => {
+    const html = fs.readFileSync('./fixtures/www.zdf.de/1590170681758.html');
+    const uri =
+      'https://www.zdf.de/nachrichten/briefing/coronavirus-homeoffice-ueberwachung-zdfheute-update-100.html';
+
+    const extractor = getExtractor(uri);
+    assert.equal(extractor.domain, URL.parse(uri).hostname);
+
+    const {
+      title,
+      author,
+      date_published,
+      dek,
+      lead_image_url,
+      content,
+    } = await Mercury.parse(uri, { html, fallback: false });
+
+    assert.equal(
+      title,
+      'Update am Abend: Wenn der Chef im Homeoffice zuschaut'
+    );
+    assert.equal(author, 'Katja Belousova');
+    assert.equal(date_published, '2020-05-22T15:12:20.390Z');
+    assert.equal(dek, null);
+    assert.equal(
+      lead_image_url,
+      'https://www.zdf.de/assets/update-typical-100~1280x720?cb=1589468949457'
+    );
+
+    const $ = cheerio.load(content || '');
+    const first13 = excerptContent(
+      $('*')
+        .first()
+        .text(),
+      13
+    );
+    assert.equal(
+      first13,
+      'Guten Abend, wieder eine Arbeitswoche rum. Für viele fand diese noch immer in'
+    );
+    assert.equal($('img').length, 5);
+  });
 });
