@@ -157,17 +157,5 @@
       "prettier --write",
       "git add"
     ]
-  },
-  "greenkeeper": {
-    "ignore": [
-      "jasmine-core",
-      "karma-jasmine",
-      "rollup-plugin-node-resolve",
-      "eslint-import-resolver-babel-module",
-      "jest",
-      "jest-cli",
-      "babel-jest",
-      "karma"
-    ]
   }
 }
