@@ -3,7 +3,7 @@ version: 2
 defaults: &defaults
   working_directory: ~/project
   docker:
-    - image: circleci/node:8.10-browsers
+    - image: circleci/node:12.8.1-browsers
 
 jobs:
   test-node:
@@ -52,7 +52,7 @@ jobs:
 
   update-fixtures:
     docker:
-      - image: circleci/node:8.10
+      - image: circleci/node:12.8.1
     steps:
       - checkout
       - run: 'yarn install'
@@ -63,13 +63,13 @@ workflows:
   build_and_test:
     jobs:
       - test-node:
-          filters:  # required since `deploy` has tag filters AND requires `test-node`
+          filters: # required since `deploy` has tag filters AND requires `test-node`
             branches:
               only: /.*/
             tags:
               only: /.*/
       - test-web:
-          filters:  # required since `deploy` has tag filters AND requires `test-web`
+          filters: # required since `deploy` has tag filters AND requires `test-web`
             branches:
               only: /.*/
             tags:

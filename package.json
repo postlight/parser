@@ -48,7 +48,7 @@
     "generate-parser": "node ./dist/generate-custom-parser.js"
   },
   "engines": {
-    "node": ">=8.10"
+    "node": ">=10"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0",
