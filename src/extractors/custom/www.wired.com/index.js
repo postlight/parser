@@ -5,6 +5,7 @@ export const WiredExtractor = {
   domain: 'www.wired.com',
   title: {
     selectors: [
+      'h1.content-header__hed',
       'h1.post-title',
       // enter title selectors
     ],
@@ -12,6 +13,7 @@ export const WiredExtractor = {
 
   author: {
     selectors: [
+      ['meta[name="author"]', 'value'],
       'a[rel="author"]',
       // enter author selectors
     ],
@@ -19,6 +21,7 @@ export const WiredExtractor = {
 
   content: {
     selectors: [
+      'article.article.main-content',
       'article.content',
       // enter content selectors
     ],
@@ -34,7 +37,10 @@ export const WiredExtractor = {
   },
 
   date_published: {
-    selectors: [['meta[itemprop="datePublished"]', 'value']],
+    selectors: [
+      'time.content-header__publish-date',
+      ['meta[itemprop="datePublished"]', 'value'],
+    ],
   },
 
   lead_image_url: {
