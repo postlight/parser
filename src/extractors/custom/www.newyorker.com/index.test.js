@@ -16,7 +16,7 @@ describe('NewYorkerExtractor', () => {
       url =
         'http://www.newyorker.com/tech/elements/hacking-cryptography-and-the-countdown-to-quantum-computing';
       const html = fs.readFileSync(
-        './fixtures/www.newyorker.com/1557138180688.html'
+        './fixtures/www.newyorker.com/1611473608343.html'
       );
       result = Mercury.parse(url, { html, fallback: false });
     });
@@ -73,7 +73,7 @@ describe('NewYorkerExtractor', () => {
       // the article.
       assert.equal(
         lead_image_url,
-        'https://media.newyorker.com/photos/59097a5e8b51cf59fc4239f5/16:9/w_1200,h_630,c_limit/Hutchinson-Quantum-Computing.jpg'
+        'https://media.newyorker.com/photos/59097a5e8b51cf59fc4239f5/16:9/w_1280,c_limit/Hutchinson-Quantum-Computing.jpg'
       );
     });
 
@@ -97,7 +97,7 @@ describe('NewYorkerExtractor', () => {
       // the article.
       assert.equal(
         first13,
-        'In a laboratory in Shanghai, researchers work on developing a quantum computer—a new'
+        'Given the recent ubiquity of cyber-scandals—Colin Powell’s stolen e-mails, Simone Biles’s leaked medical'
       );
     });
   });
@@ -109,7 +109,7 @@ describe('NewYorkerExtractor', () => {
       url =
         'http://www.newyorker.com/magazine/2016/12/05/lessons-from-my-mother';
       const html = fs.readFileSync(
-        './fixtures/www.newyorker.com/1557145645680.html'
+        './fixtures/www.newyorker.com/1611475571383.html'
       );
       result = Mercury.parse(url, { html, fallback: false });
     });
