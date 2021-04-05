@@ -16,6 +16,7 @@ const {
   h,
   addExtractor,
   x,
+  version,
 } = argv;
 (async (
   urlToParse,
@@ -23,8 +24,14 @@ const {
   extendedTypes,
   extendedListTypes,
   headers,
-  addExtractor
+  addExtractor,
+  version,
 ) => {
+  if (version) {
+    console.log(require('./package.json').version)
+    process.exit(0)
+  }
+
   if (!urlToParse) {
     console.log(
       '\n\
