@@ -7,19 +7,20 @@ export const TwitterExtractor = {
       // Twitter doesn't have nice selectors, so our initial
       // selector grabs the whole page, then we're re-writing
       // it to fit our needs before we clean it up.
-      '.permalink[role=main]': ($node, $) => {
-        const tweets = $node.find('.tweet');
-        const $tweetContainer = $('<div id="TWEETS_GO_HERE"></div>');
-        $tweetContainer.append(tweets);
+      'main[role=main]': ($node, $) => {
+        const text = $node.text();
+        // const tweets = $node.find('article');
+        const $tweetContainer = $(`<div id="TWEETS_GO_HERE">${text}</div>`);
+        // $tweetContainer.append(tweets);
         $node.replaceWith($tweetContainer);
       },
 
-      // Twitter wraps @ with s, which
-      // renders as a strikethrough
-      s: 'span',
+      // // Twitter wraps @ with s, which
+      // // renders as a strikethrough
+      // s: 'span',
     },
 
-    selectors: ['.permalink[role=main]'],
+    selectors: ['main[role=main]'],
 
     defaultCleaner: false,
 
