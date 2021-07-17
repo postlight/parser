@@ -59,7 +59,7 @@ describe('WwwLadbibleComExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(date_published, '2021-07-12T05:00:00.000Z');
+      assert.equal(date_published, '2021-07-11T21:00:00.000Z');
     });
 
     it('returns the lead_image_url', async () => {

@@ -11,6 +11,7 @@ export const WwwLadbibleComExtractor = {
 
   date_published: {
     selectors: ['time'],
+    timezone: 'Europe/London',
   },
 
   lead_image_url: {
