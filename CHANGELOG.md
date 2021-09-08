@@ -1,5 +1,20 @@
 # Mercury Parser Changelog
 
+### 2.2.1 (Sept 08, 2020)
+
+##### Commits
+
+- [[`8c9982247b`](https://github.com/postlight/mercury-parser/commit/8c9982247b)] - **feat**: Ladbible.com extractor (#624) (Nitin Khanna)
+- [[`30d6f472ee`](https://github.com/postlight/mercury-parser/commit/30d6f472ee)] - **feat**: Times of India extractor (#503) (Nitin Khanna)
+- [[`c15f4f5c3e`](https://github.com/postlight/mercury-parser/commit/c15f4f5c3e)] - chore(deps): bump lodash from 4.17.2 to 4.17.21 (#612) (dependabot[bot])
+- [[`b8b90afa95`](https://github.com/postlight/mercury-parser/commit/b8b90afa95)] - chore(deps): bump handlebars from 4.1.2 to 4.7.6 (#583) (dependabot[bot])
+- [[`38fb3204f5`](https://github.com/postlight/mercury-parser/commit/38fb3204f5)] - **chore**: remove greenkeeper configs (#580) (Jad Termsani)
+- [[`a5a066c69d`](https://github.com/postlight/mercury-parser/commit/a5a066c69d)] - **chore**: update node version (#579) (Jad Termsani)
+- [[`b0e708aac6`](https://github.com/postlight/mercury-parser/commit/b0e708aac6)] - **feat**: update nytimes extractor (#506) (Wajeeh Zantout)
+- [[`3fb8526c4a`](https://github.com/postlight/mercury-parser/commit/3fb8526c4a)] - chore(package): update ora to version 4.0.0 (#500) (greenkeeper[bot])
+- [[`3009ecf137`](https://github.com/postlight/mercury-parser/commit/3009ecf137)] - fix(package): update yargs-parser to version 14.0.0 (#495) (greenkeeper[bot])
+- [[`c5c000586d`](https://github.com/postlight/mercury-parser/commit/c5c000586d)] - **release**: 2.2.0 (#496) (Michael Ashley)
+
 ### 2.2.0 (Sept 10, 2019)
 
 ##### Commits

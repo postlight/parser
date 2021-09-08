@@ -1888,13 +1888,13 @@ var TwitterExtractor = {
 var NYTimesExtractor = {
   domain: 'www.nytimes.com',
   title: {
-    selectors: ['h1.g-headline', 'h1[itemprop="headline"]', 'h1.headline']
+    selectors: ['h1.g-headline', 'h1[itemprop="headline"]', 'h1.headline', 'h1 .balancedHeadline']
   },
   author: {
-    selectors: [['meta[name="author"]', 'value'], '.g-byline', '.byline']
+    selectors: [['meta[name="author"]', 'value'], '.g-byline', '.byline', ['meta[name="byl"]', 'value']]
   },
   content: {
-    selectors: ['div.g-blocks', 'article#story'],
+    selectors: ['div.g-blocks', 'section[name="articleBody"]', 'article#story'],
     transforms: {
       'img.g-lazy': function imgGLazy($node) {
         var src = $node.attr('src');
@@ -5767,6 +5767,53 @@ var EpaperZeitDeExtractor = {
   }
 };
 
+var WwwLadbibleComExtractor = {
+  domain: 'www.ladbible.com',
+  title: {
+    selectors: ['h1']
+  },
+  author: {
+    selectors: ['[class*=Byline]']
+  },
+  date_published: {
+    selectors: ['time'],
+    timezone: 'Europe/London'
+  },
+  lead_image_url: {
+    selectors: [['meta[name="og:image"]', 'value']]
+  },
+  content: {
+    selectors: ['[class*=ArticleContainer]'],
+    clean: ['time', 'source', 'a[href^="https://www.ladbible.com/"]', 'picture', '[class*=StyledCardBlock]']
+  }
+};
+
+var TimesofindiaIndiatimesComExtractor = {
+  domain: 'timesofindia.indiatimes.com',
+  title: {
+    selectors: ['h1']
+  },
+  extend: {
+    reporter: {
+      selectors: ['div.byline'],
+      transforms: {}
+    }
+  },
+  date_published: {
+    selectors: ['.byline'],
+    format: 'MMM D, YYYY, HH:mm z',
+    timezone: 'Asia/Kolkata'
+  },
+  lead_image_url: {
+    selectors: [['meta[name="og:image"]', 'value']]
+  },
+  content: {
+    selectors: ['div.contentwrapper:has(section)'],
+    defaultCleaner: false,
+    clean: ['section', 'h1', '.byline', '.img_cptn']
+  }
+};
+
 
 
 var CustomExtractors = /*#__PURE__*/Object.freeze({
@@ -5903,7 +5950,9 @@ var CustomExtractors = /*#__PURE__*/Object.freeze({
   WwwPhoronixComExtractor: WwwPhoronixComExtractor,
   PitchforkComExtractor: PitchforkComExtractor,
   BiorxivOrgExtractor: BiorxivOrgExtractor,
-  EpaperZeitDeExtractor: EpaperZeitDeExtractor
+  EpaperZeitDeExtractor: EpaperZeitDeExtractor,
+  WwwLadbibleComExtractor: WwwLadbibleComExtractor,
+  TimesofindiaIndiatimesComExtractor: TimesofindiaIndiatimesComExtractor
 });
 
 var Extractors = _Object$keys(CustomExtractors).reduce(function (acc, key) {
