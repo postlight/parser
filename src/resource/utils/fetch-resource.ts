@@ -1,4 +1,3 @@
-import { parse, URL, UrlWithStringQuery } from 'url';
 import request, {
   CoreOptions,
   RequiredUriUrl,
@@ -49,17 +48,13 @@ export function validateResponse(response: Response, parseNon200 = false) {
       );
     } else if (!parseNon200) {
       throw new Error(
-        `Resource returned a response status code of ${
-          response.statusCode
-        } and resource was instructed to reject non-200 status codes.`
+        `Resource returned a response status code of ${response.statusCode} and resource was instructed to reject non-200 status codes.`
       );
     }
   }
 
-  const {
-    'content-type': contentType,
-    'content-length': contentLength,
-  } = response.headers;
+  const { 'content-type': contentType, 'content-length': contentLength } =
+    response.headers;
 
   // Check that the content is not in BAD_CONTENT_TYPES
   if (contentType && BAD_CONTENT_TYPES_RE.test(contentType)) {
@@ -83,10 +78,7 @@ export function validateResponse(response: Response, parseNon200 = false) {
 // Grabs the last two pieces of the URL and joins them back together
 // This is to get the 'livejournal.com' from 'erotictrains.livejournal.com'
 export function baseDomain({ host }: { host: string }) {
-  return host
-    .split('.')
-    .slice(-2)
-    .join('.');
+  return host.split('.').slice(-2).join('.');
 }
 
 // Set our response attribute to the result of fetching our URL.
@@ -97,10 +89,10 @@ export function baseDomain({ host }: { host: string }) {
 
 export default async function fetchResource(
   url: string,
-  parsedUrl?: UrlWithStringQuery,
+  parsedUrl?: URL,
   headers: Record<string, string> = {}
 ) {
-  const finalParsedUrl = parsedUrl || parse(encodeURI(url));
+  const finalParsedUrl = parsedUrl || new URL(encodeURI(url));
   const options = {
     url: finalParsedUrl.href ?? '',
     headers: { ...REQUEST_HEADERS, ...headers },

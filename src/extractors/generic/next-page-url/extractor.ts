@@ -1,5 +1,3 @@
-import URL, { UrlWithStringQuery } from 'url';
-
 import { articleBaseUrl, removeAnchor } from '../../../utils/text';
 import scoreLinks from './scoring/score-links';
 
@@ -14,10 +12,10 @@ export const GenericNextPageUrlExtractor = {
   }: {
     $: cheerio.Root;
     url: string;
-    parsedUrl?: UrlWithStringQuery;
+    parsedUrl?: URL;
     previousUrls?: string[];
   }) {
-    parsedUrl = parsedUrl || URL.parse(url);
+    parsedUrl = parsedUrl || new URL(url);
 
     const articleUrl = removeAnchor(url);
     const baseUrl = articleBaseUrl(url, parsedUrl);

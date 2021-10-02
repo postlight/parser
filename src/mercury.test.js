@@ -1,11 +1,12 @@
 import assert from 'assert';
 
 import { record } from 'test-helpers';
-import Mercury from './mercury';
+import * as Mercury from './mercury';
 
 const fs = require('fs');
 
 describe('Mercury', () => {
+  console.log(Mercury);
   const recorder = record('mercury-test');
   beforeAll(recorder.before);
   afterAll(recorder.after);

@@ -11,7 +11,6 @@ import { GenericNextPageUrlExtractor } from './next-page-url/extractor';
 import { GenericUrlExtractor } from './url/extractor';
 import { GenericExcerptExtractor } from './excerpt/extractor';
 import { GenericWordCountExtractor } from './word-count/extractor';
-import { UrlWithStringQuery } from 'url';
 import { ExtractorResult } from '../types';
 
 export const GenericExtractor = {
@@ -34,7 +33,7 @@ export const GenericExtractor = {
     $: cheerio.Root;
     html: string;
     url: string;
-    parsedUrl?: UrlWithStringQuery;
+    parsedUrl?: URL;
     previousUrls?: string[];
     metaCache: string[];
   }): ExtractorResult {

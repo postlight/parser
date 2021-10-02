@@ -1,7 +1,6 @@
 import cheerio from 'cheerio';
 import iconv from 'iconv-lite';
 import { Response } from 'postman-request';
-import { URL, UrlWithStringQuery } from 'url';
 
 import { getEncoding } from '../utils/text';
 import { fetchResource } from './utils';
@@ -10,16 +9,14 @@ import { normalizeMetaTags, convertLazyLoadedImages, clean } from './utils/dom';
 type SuccessResult = {
   body: Buffer | string;
   response: Response;
-}
+};
 
 type ErrorResult = {
   error: boolean;
   failed: true;
 };
 
-type Result =
-  | SuccessResult
-  | ErrorResult;
+type Result = SuccessResult | ErrorResult;
 
 const isError = (result: Result): result is ErrorResult => 'error' in result;
 
@@ -34,7 +31,7 @@ const Resource = {
   async create(
     url: string,
     preparedResponse?: Buffer | string,
-    parsedUrl?: UrlWithStringQuery,
+    parsedUrl?: URL,
     headers: Record<string, string> = {}
   ) {
     let result: Result;
@@ -61,10 +58,7 @@ const Resource = {
     return this.generateDoc(result);
   },
 
-  generateDoc({
-    body: content,
-    response,
-  }: SuccessResult) {
+  generateDoc({ body: content, response }: SuccessResult) {
     const { 'content-type': contentType = '' } = response.headers;
 
     // TODO: Implement is_text function from

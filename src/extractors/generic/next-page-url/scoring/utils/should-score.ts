@@ -1,12 +1,10 @@
-import URL, { UrlWithStringQuery } from 'url';
-
 import { DIGIT_RE, EXTRANEOUS_LINK_HINTS_RE } from '../constants';
 
 export function shouldScore(
   href: string,
   articleUrl: string,
   baseUrl: string,
-  parsedUrl: UrlWithStringQuery,
+  parsedUrl: URL,
   linkText: string,
   previousUrls: string[]
 ) {
@@ -22,7 +20,7 @@ export function shouldScore(
   }
 
   const { hostname } = parsedUrl;
-  const { hostname: linkHost } = URL.parse(href);
+  const { hostname: linkHost } = new URL(href);
 
   // Domain mismatch.
   if (linkHost !== hostname) {

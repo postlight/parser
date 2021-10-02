@@ -1,10 +1,14 @@
 {
   "compilerOptions": {
+    "target": "ES6",
     "lib": ["ESNext", "DOM"],
+    "module": "CommonJS",
+    "moduleResolution": "node",
     "strict": true,
     "sourceMap": true,
     "esModuleInterop": true,
     "downlevelIteration": true,
+    "allowSyntheticDefaultImports": true,
     "typeRoots": ["types", "node_modules/@types"]
   },
   "include": ["src", "fixtures"],

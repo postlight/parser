@@ -1,4 +1,3 @@
-import { parse } from 'url';
 import cheerio from 'cheerio';
 import TurndownService from 'turndown';
 
@@ -11,132 +10,131 @@ import {
   selectExtendedTypes,
 } from './extractors/root-extractor';
 import { collectAllPages } from './extractors/collect-all-pages';
-import { CustomExtractor } from './extractors/types';
 import { Options, Result } from './types';
 
-const Mercury = {
-  async parse(
-    url: string,
-    { html, extend, customExtractor, ...opts }: Options | undefined = {}
+export const parse = async (
+  url: string,
+  { html, extend, customExtractor, ...opts }: Options | undefined = {}
+) => {
+  const {
+    fetchAllPages = true,
+    fallback = true,
+    contentType = 'html',
+    headers,
+  } = opts;
+
+  // if no url was passed and this is the browser version,
+  // set url to window.location.href and load the html
+  // from the current page
+  if (!url && (cheerio as any).browser) {
+    url = window.location.href; // eslint-disable-line no-undef
+    html = html || cheerio.html();
+  }
+
+  const parsedUrl = new URL(url);
+
+  if (!validateUrl(parsedUrl)) {
+    return {
+      error: true,
+      message:
+        'The url parameter passed does not look like a valid URL. Please check your URL and try again.',
+    };
+  }
+
+  const resource = await Resource.create(url, html, parsedUrl, headers);
+
+  // If we found an error creating the resource, return that error
+  if ('error' in resource) {
+    return resource;
+  }
+
+  const $ = resource;
+
+  // Add custom extractor via cli.
+  if (customExtractor) {
+    addExtractor(customExtractor);
+  }
+
+  const extractor = getExtractor(url, parsedUrl, $);
+  // console.log(`Using extractor for ${Extractor.domain}`);
+
+  // if html still has not been set (i.e., url passed to Mercury.parse),
+  // set html from the response of Resource.create
+  if (!html) {
+    html = $.html();
+  }
+
+  // Cached value of every meta name in our document.
+  // Used when extracting title/author/date_published/dek
+  const metaCache = $('meta')
+    .map((_, node) => $(node).attr('name'))
+    .toArray() as unknown as string[];
+
+  let extendedTypes = {};
+  if (extend) {
+    extendedTypes = selectExtendedTypes(extend, { $, url, html });
+  }
+
+  const extractionResult = RootExtractor.extract(extractor, {
+    url,
+    html,
+    $: $ as cheerio.Root,
+    metaCache,
+    parsedUrl,
+    fallback,
+    contentType,
+  });
+
+  let result: Result;
+
+  // Fetch more pages if next_page_url found
+  if (
+    extractionResult.type === 'full' &&
+    fetchAllPages &&
+    extractionResult.next_page_url
   ) {
-    const {
-      fetchAllPages = true,
-      fallback = true,
-      contentType = 'html',
-      headers,
-    } = opts;
-
-    // if no url was passed and this is the browser version,
-    // set url to window.location.href and load the html
-    // from the current page
-    if (!url && (cheerio as any).browser) {
-      url = window.location.href; // eslint-disable-line no-undef
-      html = html || cheerio.html();
-    }
-
-    const parsedUrl = parse(url);
-
-    if (!validateUrl(parsedUrl)) {
-      return {
-        error: true,
-        message:
-          'The url parameter passed does not look like a valid URL. Please check your URL and try again.',
-      };
-    }
-
-    const resource = await Resource.create(url, html, parsedUrl, headers);
-
-    // If we found an error creating the resource, return that error
-    if ('error' in resource) {
-      return resource;
-    }
-
-    const $ = resource;
-
-    // Add custom extractor via cli.
-    if (customExtractor) {
-      addExtractor(customExtractor);
-    }
-
-    const extractor = getExtractor(url, parsedUrl, $);
-    // console.log(`Using extractor for ${Extractor.domain}`);
-
-    // if html still has not been set (i.e., url passed to Mercury.parse),
-    // set html from the response of Resource.create
-    if (!html) {
-      html = $.html();
-    }
-
-    // Cached value of every meta name in our document.
-    // Used when extracting title/author/date_published/dek
-    const metaCache = ($('meta')
-      .map((_, node) => $(node).attr('name'))
-      .toArray() as unknown) as string[];
-
-    let extendedTypes = {};
-    if (extend) {
-      extendedTypes = selectExtendedTypes(extend, { $, url, html });
-    }
-
-    const extractionResult = RootExtractor.extract(extractor, {
-      url,
+    const pageResult = await collectAllPages({
+      extractor,
+      next_page_url: extractionResult.next_page_url,
       html,
-      $: $ as cheerio.Root,
+      $,
       metaCache,
-      parsedUrl,
-      fallback,
-      contentType,
+      result: extractionResult,
+      title: extractionResult.title,
+      url,
     });
 
-    let result: Result;
-    
-    // Fetch more pages if next_page_url found
-    if (extractionResult.type === 'full' && fetchAllPages && extractionResult.next_page_url) {
-      const pageResult = await collectAllPages({
-        extractor,
-        next_page_url: extractionResult.next_page_url,
-        html,
-        $,
-        metaCache,
-        result: extractionResult,
-        title: extractionResult.title,
-        url,
-      });
+    result = {
+      ...pageResult,
+      type: 'full',
+    };
+  } else {
+    result = {
+      ...extractionResult,
+      total_pages: 1,
+      pages_rendered: 1,
+    };
+  }
 
-      result = {
-        ...pageResult,
-        type: 'full',
-      };
-    } else {
-      result = {
-        ...extractionResult,
-        total_pages: 1,
-        pages_rendered: 1,
-      };
-    }
+  if (contentType === 'markdown') {
+    const turndownService = new TurndownService();
+    extractionResult.content = turndownService.turndown(
+      extractionResult.content ?? ''
+    );
+  } else if (contentType === 'text') {
+    // TODO: Fix cheerio .text types
+    extractionResult.content = ($ as any).text($(extractionResult.content));
+  }
 
-    if (contentType === 'markdown') {
-      const turndownService = new TurndownService();
-      extractionResult.content = turndownService.turndown(extractionResult.content ?? '');
-    } else if (contentType === 'text') {
-      // TODO: Fix cheerio .text types
-      extractionResult.content = ($ as any).text($(extractionResult.content));
-    }
-
-    return { ...extractionResult, ...extendedTypes };
-  },
-
-  browser: !!(cheerio as any).browser,
-
-  // A convenience method for getting a resource
-  // to work with, e.g., for custom extractor generator
-  fetchResource(url: string) {
-    return Resource.create(url);
-  },
-
-  addExtractor(extractor: CustomExtractor) {
-    return addExtractor(extractor);
-  },
+  return { ...extractionResult, ...extendedTypes };
 };
 
-export default Mercury;
+export const browser = !!(cheerio as any).browser;
+
+/**
+ * A convenience method for getting a resource
+ * to work with, e.g., for custom extractor generator
+ */
+export const fetchResource = (url: string) => Resource.create(url);
+
+export { CustomExtractor } from './extractors/types';

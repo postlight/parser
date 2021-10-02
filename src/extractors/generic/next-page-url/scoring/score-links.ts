@@ -1,5 +1,3 @@
-import URL, { UrlWithStringQuery } from 'url';
-
 import { getAttrs, isWordpress } from '../../../../utils/dom';
 import { removeAnchor, pageNumFromUrl } from '../../../../utils/text';
 
@@ -21,9 +19,9 @@ export function makeBaseRegex(baseUrl: string) {
 }
 
 function makeSig($link: cheerio.Cheerio, linkText: string) {
-  return `${linkText || $link.text()} ${$link.attr('class') || ''} ${$link.attr(
-    'id'
-  ) || ''}`;
+  return `${linkText || $link.text()} ${$link.attr('class') || ''} ${
+    $link.attr('id') || ''
+  }`;
 }
 
 export default function scoreLinks({
@@ -37,11 +35,11 @@ export default function scoreLinks({
   links: cheerio.Element[];
   articleUrl: string;
   baseUrl: string;
-  parsedUrl: UrlWithStringQuery;
+  parsedUrl: URL;
   $: cheerio.Root;
   previousUrls: string[];
 }) {
-  parsedUrl = parsedUrl || URL.parse(articleUrl);
+  parsedUrl = parsedUrl || new URL(articleUrl);
   const baseRegex = makeBaseRegex(baseUrl);
   const isWp = isWordpress($);
 
@@ -52,66 +50,56 @@ export default function scoreLinks({
   // After we do that, assign each page a score, and pick the one that
   // looks most like the next page link, as long as its score is strong
   // enough to have decent confidence.
-  const scoredPages = links.reduce(
-    (possiblePages, link) => {
-      // Remove any anchor data since we don't do a good job
-      // standardizing URLs (it's hard), we're going to do
-      // some checking with and without a trailing slash
-      const attrs = getAttrs(link);
+  const scoredPages = links.reduce((possiblePages, link) => {
+    // Remove any anchor data since we don't do a good job
+    // standardizing URLs (it's hard), we're going to do
+    // some checking with and without a trailing slash
+    const attrs = getAttrs(link);
 
-      // if href is undefined, return
-      if (!attrs.href) return possiblePages;
+    // if href is undefined, return
+    if (!attrs.href) return possiblePages;
 
-      const href = removeAnchor(attrs.href);
-      const $link = $(link);
-      const linkText = $link.text();
+    const href = removeAnchor(attrs.href);
+    const $link = $(link);
+    const linkText = $link.text();
 
-      if (
-        !shouldScore(
-          href,
-          articleUrl,
-          baseUrl,
-          parsedUrl,
-          linkText,
-          previousUrls
-        )
-      ) {
-        return possiblePages;
-      }
-
-      // ## PASSED THE FIRST-PASS TESTS. Start scoring. ##
-      if (!possiblePages[href]) {
-        possiblePages[href] = {
-          score: 0,
-          linkText,
-          href,
-        };
-      } else {
-        possiblePages[href].linkText = `${
-          possiblePages[href].linkText
-        }|${linkText}`;
-      }
-
-      const possiblePage = possiblePages[href];
-      const linkData = makeSig($link, linkText);
-      const pageNum = pageNumFromUrl(href);
-
-      let score = scoreBaseUrl(href, baseRegex);
-      score += scoreNextLinkText(linkData);
-      score += scoreCapLinks(linkData);
-      score += scorePrevLink(linkData);
-      score += scoreByParents($link);
-      score += scoreExtraneousLinks(href);
-      score += scorePageInLink(pageNum, isWp);
-      score += scoreLinkText(linkText, pageNum);
-      score += scoreSimilarity(score, articleUrl, href);
-
-      possiblePage.score = score;
-
+    if (
+      !shouldScore(href, articleUrl, baseUrl, parsedUrl, linkText, previousUrls)
+    ) {
       return possiblePages;
-    },
-    {} as Record<string, { score: number; linkText: string; href: string }>
-  );
+    }
+
+    // ## PASSED THE FIRST-PASS TESTS. Start scoring. ##
+    if (!possiblePages[href]) {
+      possiblePages[href] = {
+        score: 0,
+        linkText,
+        href,
+      };
+    } else {
+      possiblePages[
+        href
+      ].linkText = `${possiblePages[href].linkText}|${linkText}`;
+    }
+
+    const possiblePage = possiblePages[href];
+    const linkData = makeSig($link, linkText);
+    const pageNum = pageNumFromUrl(href);
+
+    let score = scoreBaseUrl(href, baseRegex);
+    score += scoreNextLinkText(linkData);
+    score += scoreCapLinks(linkData);
+    score += scorePrevLink(linkData);
+    score += scoreByParents($link);
+    score += scoreExtraneousLinks(href);
+    score += scorePageInLink(pageNum, isWp);
+    score += scoreLinkText(linkText, pageNum);
+    score += scoreSimilarity(score, articleUrl, href);
+
+    possiblePage.score = score;
+
+    return possiblePages;
+  }, {} as Record<string, { score: number; linkText: string; href: string }>);
 
   return Reflect.ownKeys(scoredPages).length === 0 ? null : scoredPages;
 }

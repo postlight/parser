@@ -1,7 +1,3 @@
-import { extend } from 'jquery';
-import { UrlWithParsedQuery, UrlWithStringQuery } from 'url';
-import { GenericExtractor } from './generic';
-
 export interface Extractor {
   domain: string;
   supportedDomains: string;
@@ -33,7 +29,7 @@ export type DefaultContentType =
   | 'url_and_domain';
 
 export type CustomExtractor = {
-  [Key in DefaultContentType]: InnerExtractorOptions
+  [Key in DefaultContentType]: InnerExtractorOptions;
 } & {
   domain: string;
   supportedDomains?: string[];
@@ -51,7 +47,7 @@ export interface ExtractorOptions {
   extractedTitle?: string;
   defaultCleaner?: boolean;
 
-  parsedUrl?: UrlWithStringQuery;
+  parsedUrl?: URL;
   contentType?: string;
   previousUrls?: string[];
   metaCache: string[];
