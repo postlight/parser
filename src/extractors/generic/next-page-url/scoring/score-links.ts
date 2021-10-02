@@ -24,7 +24,7 @@ function makeSig($link: cheerio.Cheerio, linkText: string) {
   }`;
 }
 
-export default function scoreLinks({
+export function scoreLinks({
   links,
   articleUrl,
   baseUrl,

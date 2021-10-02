@@ -1,7 +1,7 @@
 import cheerio from 'cheerio';
 import assert from 'assert';
 
-import withinComment from './within-comment';
+import { withinComment } from './within-comment';
 
 describe('withinComment(node)', () => {
   it('returns false if its parent is not a comment', () => {

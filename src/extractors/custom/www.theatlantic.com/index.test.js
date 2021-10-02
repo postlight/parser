@@ -2,8 +2,8 @@ import assert from 'assert';
 import URL from 'url';
 import cheerio from 'cheerio';
 
-import Mercury from 'mercury';
-import getExtractor from 'extractors/get-extractor';
+import { parse } from 'mercury';
+import { getExtractor } from 'extractors/get-extractor';
 
 const fs = require('fs');
 
@@ -18,7 +18,7 @@ describe('AtlanticExtractor', () => {
       const html = fs.readFileSync(
         './fixtures/www.theatlantic.com/1474321707642.html'
       );
-      result = Mercury.parse(url, { html, fallback: false });
+      result = parse(url, { html, fallback: false });
     });
 
     it('is selected properly', async () => {
@@ -38,11 +38,7 @@ describe('AtlanticExtractor', () => {
       const { content, title, author, dek, lead_image_url } = await result;
 
       const $ = cheerio.load(content);
-      const text = $('*')
-        .first()
-        .text()
-        .trim()
-        .slice(0, 20);
+      const text = $('*').first().text().trim().slice(0, 20);
 
       assert.equal(
         title,

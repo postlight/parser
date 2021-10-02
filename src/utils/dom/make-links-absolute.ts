@@ -36,15 +36,16 @@ function absolutizeSet(
       const absoluteCandidates = candidates.map(candidate => {
         // a candidate URL cannot start or end with a comma
         // descriptors are separated from the URLs by unescaped whitespace
-        const parts = candidate
-          .trim()
-          .replace(/,$/, '')
-          .split(/\s+/);
+        const parts = candidate.trim().replace(/,$/, '').split(/\s+/);
         parts[0] = URL.resolve(rootUrl, parts[0]);
         return parts.join(' ');
       });
       const absoluteUrlSet = [...new Set(absoluteCandidates)].join(', ');
-      setAttr(node, 'srcset', absoluteUrlSet);
+      setAttr(
+        node,
+        'srcset',
+        absoluteUrlSet.length > 0 ? absoluteUrlSet : undefined
+      );
     }
   });
 }

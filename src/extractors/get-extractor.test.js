@@ -1,7 +1,7 @@
 import assert from 'assert';
 import cheerio from 'cheerio';
 
-import getExtractor from './get-extractor';
+import { getExtractor } from './get-extractor';
 
 describe('getExtractor(url)', () => {
   it('returns GenericExtractor if no custom extractor is found', () => {

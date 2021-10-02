@@ -1,6 +1,6 @@
 import assert from 'assert';
 
-import scoreSimilarity from './score-similarity';
+import { scoreSimilarity } from './score-similarity';
 
 describe('scoreSimilarity(score, articleUrl, href)', () => {
   it('returns a similarity bonus based on current score', () => {

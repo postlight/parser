@@ -10,7 +10,7 @@ function cleanComments($: cheerio.Root) {
   return $;
 }
 
-export default function clean($: cheerio.Root) {
+export function clean($: cheerio.Root) {
   $(TAGS_TO_REMOVE).remove();
 
   $ = cleanComments($);

@@ -1,7 +1,7 @@
 import assert from 'assert';
 import cheerio from 'cheerio';
 
-import GenericDekExtractor from './extractor';
+import { GenericDekExtractor } from './extractor';
 
 describe('GenericDekExtractor', () => {
   describe('extract({ $, metaCache })', () => {

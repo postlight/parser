@@ -1,7 +1,7 @@
 import assert from 'assert';
 import cheerio from 'cheerio';
 
-import GenericUrlExtractor from './extractor';
+import { GenericUrlExtractor } from './extractor';
 
 describe('GenericUrlExtractor', () => {
   describe('extract({ $, url })', () => {

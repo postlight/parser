@@ -1,7 +1,7 @@
 import assert from 'assert';
 import cheerio from 'cheerio';
 
-import scoreByParents from './score-by-parents';
+import { scoreByParents } from './score-by-parents';
 
 describe('scoreByParents($link)', () => {
   it('returns 25 if parent sig looks like a page', () => {

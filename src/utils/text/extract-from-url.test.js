@@ -1,6 +1,6 @@
 import assert from 'assert';
 
-import extractFromUrl from './extract-from-url';
+import { extractFromUrl } from './extract-from-url';
 
 describe('extractFromUrl(url)', () => {
   it('extracts datePublished from url', () => {

@@ -2,8 +2,8 @@ import assert from 'assert';
 import URL from 'url';
 import cheerio from 'cheerio';
 
-import Mercury from 'mercury';
-import getExtractor from 'extractors/get-extractor';
+import { parse } from 'mercury';
+import { getExtractor } from 'extractors/get-extractor';
 import { excerptContent } from 'utils/text';
 
 const fs = require('fs');
@@ -17,7 +17,7 @@ describe('ScanNetsecurityNeJpExtractor', () => {
       const html = fs.readFileSync(
         './fixtures/scan.netsecurity.ne.jp/1551788723281.html'
       );
-      result = Mercury.parse(url, {
+      result = parse(url, {
         html,
         fallback: false,
       });
@@ -99,12 +99,7 @@ describe('ScanNetsecurityNeJpExtractor', () => {
 
       const $ = cheerio.load(content || '');
 
-      const first13 = excerptContent(
-        $('*')
-          .first()
-          .text(),
-        2
-      );
+      const first13 = excerptContent($('*').first().text(), 2);
 
       // Update these values with the expected values from
       // the article.

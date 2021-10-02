@@ -2,8 +2,8 @@ import assert from 'assert';
 import URL from 'url';
 import cheerio from 'cheerio';
 
-import Mercury from 'mercury';
-import getExtractor from 'extractors/get-extractor';
+import { parse } from 'mercury';
+import { getExtractor } from 'extractors/get-extractor';
 import { excerptContent } from 'utils/text';
 
 const fs = require('fs');
@@ -18,7 +18,7 @@ describe('DeadspinExtractor', () => {
       const html = fs.readFileSync(
         './fixtures/deadspin.com/1476389931786.html'
       );
-      result = Mercury.parse(url, { html, fallback: false });
+      result = parse(url, { html, fallback: false });
     });
 
     it('is selected properly', async () => {
@@ -80,12 +80,7 @@ describe('DeadspinExtractor', () => {
 
       const $ = cheerio.load(content || '');
 
-      const first13 = excerptContent(
-        $('*')
-          .first()
-          .text(),
-        13
-      );
+      const first13 = excerptContent($('*').first().text(), 13);
 
       // Update these values with the expected values from
       // the article.
@@ -105,7 +100,7 @@ describe('DeadspinExtractor', () => {
     const url =
       'http://deadspin.com/remember-when-donald-trump-got-booed-for-butchering-ta-1788216229';
 
-    const { content } = await Mercury.parse(url, { html, fallback: false });
+    const { content } = await parse(url, { html, fallback: false });
 
     const $ = cheerio.load(content || '');
 

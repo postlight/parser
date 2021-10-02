@@ -3,7 +3,7 @@ import cheerio from 'cheerio';
 import moment from 'moment-timezone';
 
 import HTML from './fixtures/html';
-import GenericDatePublishedExtractor from './extractor';
+import { GenericDatePublishedExtractor } from './extractor';
 
 describe('GenericDatePublishedExtractor', () => {
   describe('extract($, metaCache)', () => {

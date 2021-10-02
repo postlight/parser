@@ -2,8 +2,8 @@ import assert from 'assert';
 import URL from 'url';
 import cheerio from 'cheerio';
 
-import Mercury from 'mercury';
-import getExtractor from 'extractors/get-extractor';
+import { parse } from 'mercury';
+import { getExtractor } from 'extractors/get-extractor';
 import { excerptContent } from 'utils/text';
 
 const fs = require('fs');
@@ -15,7 +15,7 @@ describe('WiredJpExtractor', () => {
     beforeAll(() => {
       url = 'https://wired.jp/2019/04/25/helvetica-now/';
       const html = fs.readFileSync('./fixtures/wired.jp/1556585529692.html');
-      result = Mercury.parse(url, {
+      result = parse(url, {
         html,
         fallback: false,
       });
@@ -100,12 +100,7 @@ describe('WiredJpExtractor', () => {
 
       const $ = cheerio.load(content || '');
 
-      const first13 = excerptContent(
-        $('*')
-          .first()
-          .text(),
-        1
-      );
+      const first13 = excerptContent($('*').first().text(), 1);
 
       // Update these values with the expected values from
       // the article.

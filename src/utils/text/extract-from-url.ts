@@ -9,5 +9,5 @@ export function extractFromUrl(url: string, regexList: RegExp[]) {
     return matchRe.exec(url)?.[1];
   }
 
-  return null;
+  return undefined;
 }

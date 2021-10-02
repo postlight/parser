@@ -1,7 +1,7 @@
 import assert from 'assert';
 import cheerio from 'cheerio';
 
-import makeLinksAbsolute from './make-links-absolute';
+import { makeLinksAbsolute } from './make-links-absolute';
 
 describe('makeLinksAbsolute($)', () => {
   it('makes relative #hrefs absolute', () => {
@@ -111,7 +111,7 @@ describe('makeLinksAbsolute($)', () => {
     it('does nothing when the srcset is empty or just whitespace', () => {
       const html = `<div>
         <picture>
-          <source srcset="" media="(max-width: 450px)">
+          <source media="(max-width: 450px)">
           <source srcset=" ">
           <img src="http://example.com/assets/images/rhythm/076.jpg" alt="Vertical and horizontal rhythm">
         </picture>
@@ -127,7 +127,7 @@ describe('makeLinksAbsolute($)', () => {
         result,
         `<div>
         <picture>
-          <source srcset="" media="(max-width: 450px)">
+          <source media="(max-width: 450px)">
           <source srcset=" ">
           <img src="http://example.com/assets/images/rhythm/076.jpg" alt="Vertical and horizontal rhythm">
         </picture>

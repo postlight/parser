@@ -2,8 +2,8 @@ import assert from 'assert';
 import URL from 'url';
 import cheerio from 'cheerio';
 
-import Mercury from 'mercury';
-import getExtractor from 'extractors/get-extractor';
+import { parse } from 'mercury';
+import { getExtractor } from 'extractors/get-extractor';
 import { excerptContent } from 'utils/text';
 
 const fs = require('fs');
@@ -28,7 +28,7 @@ describe('WwwUsmagazineComExtractor', () => {
     const articleUrl =
       'http://www.usmagazine.com/celebrity-news/news/lady-gaga-shares-pic-of-ex-taylor-kinney-with-her-mom-w454419';
 
-    const { title } = await Mercury.parse(articleUrl, {
+    const { title } = await parse(articleUrl, {
       html,
       fallback: false,
     });
@@ -50,7 +50,7 @@ describe('WwwUsmagazineComExtractor', () => {
     const articleUrl =
       'http://www.usmagazine.com/celebrity-news/news/lady-gaga-shares-pic-of-ex-taylor-kinney-with-her-mom-w454419';
 
-    const { author } = await Mercury.parse(articleUrl, {
+    const { author } = await parse(articleUrl, {
       html,
       fallback: false,
     });
@@ -69,7 +69,7 @@ describe('WwwUsmagazineComExtractor', () => {
     const articleUrl =
       'http://www.usmagazine.com/celebrity-news/news/lady-gaga-shares-pic-of-ex-taylor-kinney-with-her-mom-w454419';
 
-    const { date_published } = await Mercury.parse(articleUrl, {
+    const { date_published } = await parse(articleUrl, {
       html,
       fallback: false,
     });
@@ -88,7 +88,7 @@ describe('WwwUsmagazineComExtractor', () => {
     const articleUrl =
       'http://www.usmagazine.com/celebrity-news/news/lady-gaga-shares-pic-of-ex-taylor-kinney-with-her-mom-w454419';
 
-    const { lead_image_url } = await Mercury.parse(articleUrl, {
+    const { lead_image_url } = await parse(articleUrl, {
       html,
       fallback: false,
     });
@@ -112,16 +112,11 @@ describe('WwwUsmagazineComExtractor', () => {
     const url =
       'http://www.usmagazine.com/celebrity-news/news/lady-gaga-shares-pic-of-ex-taylor-kinney-with-her-mom-w454419';
 
-    const { content } = await Mercury.parse(url, { html, fallback: false });
+    const { content } = await parse(url, { html, fallback: false });
 
     const $ = cheerio.load(content || '');
 
-    const first13 = excerptContent(
-      $('*')
-        .first()
-        .text(),
-      13
-    );
+    const first13 = excerptContent($('*').first().text(), 13);
 
     // Update these values with the expected values from
     // the article.

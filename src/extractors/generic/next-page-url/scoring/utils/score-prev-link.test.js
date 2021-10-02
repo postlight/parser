@@ -1,6 +1,6 @@
 import assert from 'assert';
 
-import scorePrevLink from './score-prev-link';
+import { scorePrevLink } from './score-prev-link';
 
 describe('scorePrevLink(linkData)', () => {
   it('returns -200 if link matches previous text', () => {

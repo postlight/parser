@@ -40,7 +40,7 @@ execFile('find', ['fixtures', '-type', 'f'], (err, stdout) => {
   Promise.all(
     fixturesToUpdate.map((fixture, i) => {
       const html = fs.readFileSync(fixture);
-      return Mercury.parse(`http://${baseDomains[i]}`, { html });
+      return parse(`http://${baseDomains[i]}`, { html });
     })
   ).then(parsedFixture => {
     const fixturesAndUrls = fixturesToUpdate.reduce(
@@ -76,7 +76,7 @@ const changeBase = [];
 const otherMess = [];
 const updateFixture = ({ fixture, url, baseDomain }) => {
   return new Promise(res => {
-    Mercury.parse(url)
+    parse(url)
       .then(({ url: updatedUrl }) => {
         if (!updatedUrl) {
           otherMess.push({ updatedUrl, url, fixture, baseDomain });
@@ -162,9 +162,7 @@ const createAndPushBranch = ({ branchName, commitMessage }) => {
   execFileSync('git', [
     'push',
     '-q',
-    `https://${
-      process.env.GH_AUTH_TOKEN
-    }@github.com/postlight/mercury-parser.git`,
+    `https://${process.env.GH_AUTH_TOKEN}@github.com/postlight/mercury-parser.git`,
   ]);
 };
 

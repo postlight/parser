@@ -1,6 +1,6 @@
 import assert from 'assert';
 
-import scoreLinkText from './score-link-text';
+import { scoreLinkText } from './score-link-text';
 
 describe('scoreLinkText(linkText)', () => {
   it('returns 8 if link contains the num 2', () => {

@@ -2,8 +2,8 @@ import assert from 'assert';
 import URL from 'url';
 import cheerio from 'cheerio';
 
-import Mercury from 'mercury';
-import getExtractor from 'extractors/get-extractor';
+import { parse } from 'mercury';
+import { getExtractor } from 'extractors/get-extractor';
 import { excerptContent } from 'utils/text';
 
 const fs = require('fs');
@@ -18,7 +18,7 @@ describe('ObamawhitehouseArchivesGovExtractor', () => {
       const html = fs.readFileSync(
         './fixtures/obamawhitehouse.archives.gov/1485905445365.html'
       );
-      result = Mercury.parse(url, { html, fallback: false });
+      result = parse(url, { html, fallback: false });
     });
 
     it('is selected properly', () => {
@@ -70,10 +70,7 @@ describe('ObamawhitehouseArchivesGovExtractor', () => {
       // Update these values with the expected values from
       // the article.
       assert.equal(
-        dek
-          .split(/\s/)
-          .slice(0, 4)
-          .join(' '),
+        dek.split(/\s/).slice(0, 4).join(' '),
         "Summary: Here's the latest"
       );
     });
@@ -100,12 +97,7 @@ describe('ObamawhitehouseArchivesGovExtractor', () => {
 
       const $ = cheerio.load(content || '');
 
-      const first13 = excerptContent(
-        $('*')
-          .first()
-          .text(),
-        13
-      );
+      const first13 = excerptContent($('*').first().text(), 13);
 
       // Update these values with the expected values from
       // the article.
@@ -125,7 +117,7 @@ describe('ObamawhitehouseArchivesGovExtractor', () => {
       const html = fs.readFileSync(
         './fixtures/obamawhitehouse.archives.gov/1490209983872.html'
       );
-      result = Mercury.parse(url, { html, fallback: false });
+      result = parse(url, { html, fallback: false });
     });
 
     it('includes this youtube video', async () => {
@@ -146,7 +138,7 @@ describe('ObamawhitehouseArchivesGovExtractor', () => {
       const html = fs.readFileSync(
         './fixtures/obamawhitehouse.archives.gov/1490227791307.html'
       );
-      result = Mercury.parse(url, { html, fallback: false });
+      result = parse(url, { html, fallback: false });
     });
 
     it('gets the words and video', async () => {
@@ -154,12 +146,7 @@ describe('ObamawhitehouseArchivesGovExtractor', () => {
 
       const $ = cheerio.load(content || '');
 
-      const first13 = excerptContent(
-        $('*')
-          .first()
-          .text(),
-        13
-      );
+      const first13 = excerptContent($('*').first().text(), 13);
 
       // Update these values with the expected values from
       // the article.
@@ -180,7 +167,7 @@ describe('ObamawhitehouseArchivesGovExtractor', () => {
       const html = fs.readFileSync(
         './fixtures/obamawhitehouse.archives.gov/1490375478954.html'
       );
-      result = Mercury.parse(url, { html, fallback: false });
+      result = parse(url, { html, fallback: false });
     });
 
     it('gets the content', async () => {
@@ -188,12 +175,7 @@ describe('ObamawhitehouseArchivesGovExtractor', () => {
 
       const $ = cheerio.load(content || '');
 
-      const first13 = excerptContent(
-        $('*')
-          .first()
-          .text(),
-        13
-      );
+      const first13 = excerptContent($('*').first().text(), 13);
 
       assert.equal(
         first13,

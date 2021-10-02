@@ -3,8 +3,8 @@ import URL from 'url';
 import cheerio from 'cheerio';
 import moment from 'moment';
 
-import Mercury from 'mercury';
-import getExtractor from 'extractors/get-extractor';
+import { parse } from 'mercury';
+import { getExtractor } from 'extractors/get-extractor';
 import { excerptContent } from 'utils/text';
 
 const fs = require('fs');
@@ -18,7 +18,7 @@ describe('MSNExtractor', () => {
       url =
         'http://www.msn.com/en-us/health/wellness/this-is-your-brain-on-sad-movies-plus-5-films-to-cry-to/ar-BBwsPWG?li=BBnb2gg';
       const html = fs.readFileSync('./fixtures/www.msn.com/1475506925474.html');
-      result = Mercury.parse(url, { html, fallback: false });
+      result = parse(url, { html, fallback: false });
     });
 
     it('is selected properly', async () => {
@@ -84,12 +84,7 @@ describe('MSNExtractor', () => {
 
       const $ = cheerio.load(content || '');
 
-      const first13 = excerptContent(
-        $('*')
-          .first()
-          .text(),
-        13
-      );
+      const first13 = excerptContent($('*').first().text(), 13);
 
       // Update these values with the expected values from
       // the article.

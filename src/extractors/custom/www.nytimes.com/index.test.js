@@ -2,9 +2,9 @@ import assert from 'assert';
 import cheerio from 'cheerio';
 import URL from 'url';
 
-import getExtractor from 'extractors/get-extractor';
+import { getExtractor } from 'extractors/get-extractor';
 import { excerptContent } from 'utils/text';
-import Mercury from 'mercury';
+import { parse } from 'mercury';
 
 const fs = require('fs');
 
@@ -18,7 +18,7 @@ describe('NYTimesExtractor', () => {
       const html = fs.readFileSync(
         './fixtures/www.nytimes.com/1571224616991.html'
       );
-      result = Mercury.parse(url, { html, fallback: false });
+      result = parse(url, { html, fallback: false });
     });
 
     it('is selected properly', async () => {
@@ -89,12 +89,7 @@ describe('NYTimesExtractor', () => {
 
       const $ = cheerio.load(content || '');
 
-      const first13 = excerptContent(
-        $('*')
-          .first()
-          .text(),
-        13
-      );
+      const first13 = excerptContent($('*').first().text(), 13);
 
       // Update these values with the expected values from
       // the article.
@@ -112,14 +107,9 @@ describe('NYTimesExtractor', () => {
     const uri =
       'http://www.nytimes.com/interactive/2016/09/15/arts/design/national-museum-of-african-american-history-and-culture.html';
 
-    const { content, title, author } = await Mercury.parse(uri, { html });
+    const { content, title, author } = await parse(uri, { html });
     const $ = cheerio.load(content);
-    const text = excerptContent(
-      $('*')
-        .first()
-        .text(),
-      13
-    );
+    const text = excerptContent($('*').first().text(), 13);
 
     assert.equal(title, 'I, Too, Sing America');
     assert.equal(author, 'The New York Times');
@@ -136,7 +126,7 @@ describe('NYTimesExtractor', () => {
     const uri =
       'https://www.nytimes.com/2018/10/09/us/politics/nikki-haley-united-nations.html';
 
-    const { title } = await Mercury.parse(uri, { html });
+    const { title } = await parse(uri, { html });
 
     assert.equal(
       title,

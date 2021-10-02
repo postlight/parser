@@ -70,7 +70,7 @@ Usage:\n\
       customExtractor = require(addExtractor);
     }
 
-    const result = await Mercury.parse(urlToParse, {
+    const result = await parse(urlToParse, {
       contentType: contentTypeMap[contentType],
       extend: extensions,
       headers,

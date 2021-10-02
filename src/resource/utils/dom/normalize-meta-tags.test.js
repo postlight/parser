@@ -1,7 +1,7 @@
 import assert from 'assert';
 import cheerio from 'cheerio';
 
-import normalizeMetaTags from './normalize-meta-tags';
+import { normalizeMetaTags } from './normalize-meta-tags';
 
 describe('normalizeMetaTags($)', () => {
   it('replaces "content" attributes with "value"', () => {

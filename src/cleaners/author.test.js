@@ -1,6 +1,6 @@
 import assert from 'assert';
 
-import cleanAuthor from './author';
+import { cleanAuthor } from './author';
 
 describe('cleanAuthor(author)', () => {
   it('removes the By from an author string', () => {

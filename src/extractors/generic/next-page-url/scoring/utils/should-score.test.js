@@ -1,7 +1,7 @@
 import assert from 'assert';
 import URL from 'url';
 
-import shouldScore from './should-score';
+import { shouldScore } from './should-score';
 
 describe('shouldScore(href, articleUrl, baseUrl, parsedUrl, linkText, previousUrls)', () => {
   it('returns false if href has already been fetched', () => {

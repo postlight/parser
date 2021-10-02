@@ -3,7 +3,7 @@ import cheerio from 'cheerio';
 
 import { assertClean } from 'test-helpers';
 import HTML from './fixtures/html';
-import stripUnlikelyCandidates from './strip-unlikely-candidates';
+import { stripUnlikelyCandidates } from './strip-unlikely-candidates';
 
 function assertBeforeAndAfter(key, fn) {
   const $ = cheerio.load(HTML[key].before);

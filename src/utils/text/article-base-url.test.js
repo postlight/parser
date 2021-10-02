@@ -1,6 +1,6 @@
 import assert from 'assert';
 
-import articleBaseUrl from './article-base-url';
+import { articleBaseUrl } from './article-base-url';
 
 describe('articleBaseUrl(url, parsedUrl)', () => {
   it('returns the base url of a paginated url', () => {

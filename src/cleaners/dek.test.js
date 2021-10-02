@@ -1,7 +1,7 @@
 import assert from 'assert';
 import cheerio from 'cheerio';
 
-import cleanDek from './dek';
+import { cleanDek } from './dek';
 
 describe('cleanDek(dekString, { $ })', () => {
   it('returns null if the dek is < 5 chars', () => {

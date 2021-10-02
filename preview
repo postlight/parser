@@ -1,39 +1,42 @@
 #!/usr/bin/env node
-var fs = require('fs')
-var execSync = require('child_process').execSync
+var fs = require('fs');
+var execSync = require('child_process').execSync;
 
-var optRe = /^--/
-var args = process.argv.slice(2).reduce((acc, arg) => {
-  if (optRe.test(arg)) {
-    acc.opts.push(arg)
-  } else {
-    acc.urls.push(arg)
-  }
+var optRe = /^--/;
+var args = process.argv.slice(2).reduce(
+  (acc, arg) => {
+    if (optRe.test(arg)) {
+      acc.opts.push(arg);
+    } else {
+      acc.urls.push(arg);
+    }
 
-  return acc
-}, { opts: [], urls: [] })
+    return acc;
+  },
+  { opts: [], urls: [] }
+);
 
-var urls = args.urls
+var urls = args.urls;
 
 if (!args.opts.find(arg => arg === '--no-rebuild')) {
-  console.log('Rebuilding Mercury')
-  execSync('MERCURY_TEST_BUILD=true npm run build')
+  console.log('Rebuilding Mercury');
+  execSync('MERCURY_TEST_BUILD=true npm run build');
 }
 
-var Mercury = require('./dist/mercury_test')
+var Mercury = require('./dist/mercury_test');
 
-console.log(`Fetching link(s)`)
+console.log(`Fetching link(s)`);
 
 urls.map(url => {
-  Mercury.parse(url, { fallback: false }).then(function(result) {
-    var htmlFile = './preview.html'
-    var jsonFile = './preview.json'
+  parse(url, { fallback: false }).then(function (result) {
+    var htmlFile = './preview.html';
+    var jsonFile = './preview.json';
 
-    var html = `<h1>${result.title}</h1>${result.content}`
+    var html = `<h1>${result.title}</h1>${result.content}`;
 
-    fs.writeFileSync(htmlFile, html)
-    fs.writeFileSync(jsonFile, JSON.stringify(result))
-    execSync(`open ${jsonFile}`)
-    execSync(`open ${htmlFile}`)
-  })
-})
+    fs.writeFileSync(htmlFile, html);
+    fs.writeFileSync(jsonFile, JSON.stringify(result));
+    execSync(`open ${jsonFile}`);
+    execSync(`open ${htmlFile}`);
+  });
+});

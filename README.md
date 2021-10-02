@@ -31,12 +31,12 @@ npm install @postlight/mercury-parser
 ### Usage
 
 ```javascript
-import Mercury from '@postlight/mercury-parser';
+import { parse } from '@postlight/mercury-parser';
 
-Mercury.parse(url).then(result => console.log(result));
+parse(url).then(result => console.log(result));
 
 // NOTE: When used in the browser, you can omit the URL argument
-// and simply run `Mercury.parse()` to parse the current page.
+// and simply run `parse()` to parse the current page.
 ```
 
 The result looks like this:
@@ -56,7 +56,7 @@ The result looks like this:
   "word_count": 4677,
   "direction": "ltr",
   "total_pages": 1,
-  "rendered_pages": 1
+  "pages_rendered": 1
 }
 ```
 
@@ -69,9 +69,7 @@ If Mercury is unable to find a field, that field will return `null`.
 By default, Mercury Parser returns the `content` field as HTML. However, you can override this behavior by passing in options to the `parse` function, specifying whether or not to scrape all pages of an article, and what type of output to return (valid values are `'html'`, `'markdown'`, and `'text'`). For example:
 
 ```javascript
-Mercury.parse(url, { contentType: 'markdown' }).then(result =>
-  console.log(result)
-);
+parse(url, { contentType: 'markdown' }).then(result => console.log(result));
 ```
 
 This returns the the page's `content` as GitHub-flavored Markdown:
@@ -85,7 +83,7 @@ This returns the the page's `content` as GitHub-flavored Markdown:
 You can include custom headers in requests by passing name-value pairs to the `parse` function as follows:
 
 ```javascript
-Mercury.parse(url, {
+parse(url, {
   headers: {
     Cookie: 'name=value; name2=value2; name3=value3',
     'User-Agent':
@@ -99,9 +97,8 @@ Mercury.parse(url, {
 You can use Mercury Parser to parse custom or pre-fetched HTML by passing an HTML string to the `parse` function as follows:
 
 ```javascript
-Mercury.parse(url, {
-  html:
-    '<html><body><article><h1>Thunder (mascot)</h1><p>Thunder is the stage name for the horse who is the official live animal mascot for the Denver Broncos</p></article></body></html>',
+parse(url, {
+  html: '<html><body><article><h1>Thunder (mascot)</h1><p>Thunder is the stage name for the horse who is the official live animal mascot for the Denver Broncos</p></article></body></html>',
 }).then(result => console.log(result));
 ```
 

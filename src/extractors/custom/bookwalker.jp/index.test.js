@@ -2,8 +2,8 @@ import assert from 'assert';
 import URL from 'url';
 import cheerio from 'cheerio';
 
-import Mercury from 'mercury';
-import getExtractor from 'extractors/get-extractor';
+import { parse } from 'mercury';
+import { getExtractor } from 'extractors/get-extractor';
 import { excerptContent } from 'utils/text';
 
 const fs = require('fs');
@@ -17,7 +17,7 @@ describe('BookwalkerJpExtractor', () => {
       const html = fs.readFileSync(
         './fixtures/bookwalker.jp/1554821842273.html'
       );
-      result = Mercury.parse(url, {
+      result = parse(url, {
         html,
         fallback: false,
       });
@@ -93,12 +93,7 @@ describe('BookwalkerJpExtractor', () => {
 
       const $ = cheerio.load(content || '');
 
-      const first13 = excerptContent(
-        $('*')
-          .first()
-          .text(),
-        9
-      );
+      const first13 = excerptContent($('*').first().text(), 9);
 
       // Update these values with the expected values from
       // the article.

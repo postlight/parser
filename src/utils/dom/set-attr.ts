@@ -1,8 +1,16 @@
 import { isTagElement } from '../types';
 
-export function setAttr(node: cheerio.Element, attr: string, val: string) {
+export function setAttr(
+  node: cheerio.Element,
+  attr: string,
+  val: string | undefined
+) {
   if (isTagElement(node)) {
-    node.attribs[attr] = val;
+    if (val === undefined) {
+      delete node.attribs[attr];
+    } else {
+      node.attribs[attr] = val;
+    }
   }
   // else if (node.attributes) {
   //   node.setAttribute(attr, val);

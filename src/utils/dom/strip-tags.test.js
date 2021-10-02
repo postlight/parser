@@ -1,7 +1,7 @@
 import assert from 'assert';
 import cheerio from 'cheerio';
 
-import stripTags from './strip-tags';
+import { stripTags } from './strip-tags';
 
 describe('stripTags(title, $)', () => {
   it('strips tags from a string of text', () => {

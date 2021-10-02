@@ -2,8 +2,8 @@ import assert from 'assert';
 import URL from 'url';
 import cheerio from 'cheerio';
 
-import Mercury from 'mercury';
-import getExtractor from 'extractors/get-extractor';
+import { parse } from 'mercury';
+import { getExtractor } from 'extractors/get-extractor';
 import { excerptContent } from 'utils/text';
 
 const fs = require('fs');
@@ -19,7 +19,7 @@ describe('BuzzfeedExtractor', () => {
       const html = fs.readFileSync(
         './fixtures/www.buzzfeed.com/1475531975121.html'
       );
-      result = Mercury.parse(url, { html, fallback: false });
+      result = parse(url, { html, fallback: false });
     });
 
     it('is selected properly', async () => {
@@ -77,12 +77,7 @@ describe('BuzzfeedExtractor', () => {
 
       const $ = cheerio.load(content || '');
 
-      const first13 = excerptContent(
-        $('*')
-          .first()
-          .text(),
-        13
-      );
+      const first13 = excerptContent($('*').first().text(), 13);
 
       // Update these values with the expected values from
       // the article.
@@ -102,7 +97,7 @@ describe('BuzzfeedExtractor', () => {
       const html = fs.readFileSync(
         './fixtures/www.buzzfeed.com/1480717502688.html'
       );
-      result = Mercury.parse(url, { html, fallback: false });
+      result = parse(url, { html, fallback: false });
     });
 
     it('returns big header images in the content', async () => {
@@ -110,9 +105,7 @@ describe('BuzzfeedExtractor', () => {
 
       const $ = cheerio.load(content || '');
 
-      const imgSrc = $('img')
-        .first()
-        .attr('src');
+      const imgSrc = $('img').first().attr('src');
 
       assert.equal(
         imgSrc,
@@ -125,12 +118,8 @@ describe('BuzzfeedExtractor', () => {
 
       const $ = cheerio.load(content || '');
 
-      const imgSrc = $('figure img')
-        .first()
-        .attr('src');
-      const figcaption = $('figure figcaption')
-        .first()
-        .text();
+      const imgSrc = $('figure img').first().attr('src');
+      const figcaption = $('figure figcaption').first().text();
 
       // Update these values with the expected values from
       // the article.

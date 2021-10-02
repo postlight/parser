@@ -1,7 +1,19 @@
-import {Cleaners} from '../cleaners';
+import { Cleaners } from '../cleaners';
 import { convertNodeTo, makeLinksAbsolute } from '../utils/dom';
 import { GenericExtractor } from './generic';
-import { CustomExtractor, DefaultContentType, Extend, ExtractorOptions, ExtractorResult, InnerExtractorOptions, ExtractResultOptions, Selector, SelectedExtractOptions, FullExtractorResult, ContentExtractorResult } from './types';
+import {
+  CustomExtractor,
+  DefaultContentType,
+  Extend,
+  ExtractorOptions,
+  ExtractorResult,
+  InnerExtractorOptions,
+  ExtractResultOptions,
+  Selector,
+  SelectedExtractOptions,
+  FullExtractorResult,
+  ContentExtractorResult,
+} from './types';
 
 // Remove elements by an array of selectors
 export function cleanBySelectors(
@@ -69,8 +81,8 @@ function findMatchingSelector(
   return selectors.find(selector => {
     if (Array.isArray(selector)) {
       if (extractHtml) {
-        // Ignore third element, if it exists
-        return selector.slice(0, 2).reduce(
+        // Ignore function selectors, if they're present
+        return (selector.filter(s => typeof s === 'string') as string[]).reduce(
           (acc, s) => acc && $(s).length > 0,
           true as boolean
         );
@@ -80,17 +92,13 @@ function findMatchingSelector(
       return (
         (allowMultiple || (!allowMultiple && $(s).length === 1)) &&
         $(s).attr(attr) &&
-        $(s)
-          .attr(attr)
-          ?.trim() !== ''
+        $(s).attr(attr)?.trim() !== ''
       );
     }
 
     return (
       (allowMultiple || (!allowMultiple && $(selector).length === 1)) &&
-      $(selector)
-        .text()
-        .trim() !== ''
+      $(selector).text().trim() !== ''
     );
   });
 }
@@ -155,7 +163,10 @@ export function select(opts: SelectedExtractOptions) {
     $content = $content.parent();
     $content = transformAndClean($content);
     if (type in Cleaners) {
-      Cleaners[type as keyof typeof Cleaners]($content, { ...opts, defaultCleaner });
+      Cleaners[type as keyof typeof Cleaners]($content, {
+        ...opts,
+        defaultCleaner,
+      });
     }
 
     if (allowMultiple) {
@@ -181,44 +192,48 @@ export function select(opts: SelectedExtractOptions) {
     $match = $(selector);
     $match = transformAndClean($match);
     result = $match.map((_, el) => {
-      const item = $(el)
-        .attr(attr)
-        ?.trim() ?? '';
+      const item = $(el).attr(attr)?.trim() ?? '';
       return transform ? transform(item) : item;
     });
   } else {
     $match = $(matchingSelector);
     $match = transformAndClean($match);
-    result = $match.map((_, el) =>
-      $(el)
-        .text()
-        .trim()
-    );
+    result = $match.map((_, el) => $(el).text().trim());
   }
 
   const finalResult =
     Array.isArray(result.toArray()) && allowMultiple
-      ? result.toArray() as unknown as string[]
-      : result[0] as unknown as string;
+      ? (result.toArray() as unknown as string[])
+      : (result[0] as unknown as string);
   // Allow custom extractor to skip default cleaner
   // for this type; defaults to true
   if (defaultCleaner && type in Cleaners) {
-    return Cleaners[type as keyof typeof Cleaners](finalResult as any, { ...opts, ...extractionOpts });
+    return Cleaners[type as keyof typeof Cleaners](finalResult as any, {
+      ...opts,
+      ...extractionOpts,
+    });
   }
 
   return finalResult;
 }
 
-export function selectExtendedTypes(extend: Extend, opts: Omit<SelectedExtractOptions, 'type'>) {
+export function selectExtendedTypes(
+  extend: Extend,
+  opts: Omit<SelectedExtractOptions, 'type'>
+) {
   const results: Record<string, string | string[]> = {};
   Reflect.ownKeys(extend).forEach(t => {
-    const type = String(t)
+    const type = String(t);
 
     if (!results[type]) {
       // TODO: This cast isn't safe. Maybe add a generic for addition extended types
-      const selectedData = select({ ...opts, type: type as DefaultContentType, extractionOpts: extend[type] });
+      const selectedData = select({
+        ...opts,
+        type: type as DefaultContentType,
+        extractionOpts: extend[type],
+      });
       if (selectedData) {
-        results[type] = selectedData
+        results[type] = selectedData;
       }
     }
   });
@@ -226,8 +241,10 @@ export function selectExtendedTypes(extend: Extend, opts: Omit<SelectedExtractOp
   return results;
 }
 
-function extractResult<T extends DefaultContentType>(opts: ExtractResultOptions & { content?: string }): ReturnType<typeof GenericExtractor[T]> {
-  type Result = ReturnType<typeof GenericExtractor[T]>
+function extractResult<T extends DefaultContentType>(
+  opts: ExtractResultOptions & { content?: string }
+): ReturnType<typeof GenericExtractor[T]> {
+  type Result = ReturnType<typeof GenericExtractor[T]>;
   const { type, extractor, fallback = true } = opts;
 
   const result = select({ ...opts, extractionOpts: extractor[type] });
@@ -247,14 +264,17 @@ function extractResult<T extends DefaultContentType>(opts: ExtractResultOptions 
 }
 
 export const RootExtractor = {
-  extract(extractor: CustomExtractor | undefined, opts: ExtractorOptions): FullExtractorResult | ContentExtractorResult {
+  extract(
+    extractor: CustomExtractor | undefined,
+    opts: ExtractorOptions
+  ): FullExtractorResult | ContentExtractorResult {
     const { contentOnly, extractedTitle } = opts;
     // This is the generic extractor. Run its extract method
-    if (!extractor) { 
+    if (!extractor) {
       return {
         type: 'full',
-        ...GenericExtractor.extract(opts)
-      }
+        ...GenericExtractor.extract(opts),
+      };
     }
 
     const selectionOptions: Omit<ExtractResultOptions, 'type'> = {
@@ -269,15 +289,33 @@ export const RootExtractor = {
         extractHtml: true,
         title: extractedTitle,
       });
+      const next_page_url = extractResult<'next_page_url'>({
+        ...selectionOptions,
+        type: 'next_page_url',
+      });
+
       return {
         type: 'contentOnly',
         content,
+        next_page_url,
       };
     }
-    const title = extractResult<'title'>({ ...selectionOptions, type: 'title' });
-    const date_published = extractResult<'date_published'>({ ...selectionOptions, type: 'date_published' });
-    const author = extractResult<'author'>({ ...selectionOptions, type: 'author' });
-    const next_page_url = extractResult<'next_page_url'>({ ...selectionOptions, type: 'next_page_url' });
+    const title = extractResult<'title'>({
+      ...selectionOptions,
+      type: 'title',
+    });
+    const date_published = extractResult<'date_published'>({
+      ...selectionOptions,
+      type: 'date_published',
+    });
+    const author = extractResult<'author'>({
+      ...selectionOptions,
+      type: 'author',
+    });
+    const next_page_url = extractResult<'next_page_url'>({
+      ...selectionOptions,
+      type: 'next_page_url',
+    });
     const content = extractResult<'content'>({
       ...selectionOptions,
       type: 'content',
@@ -289,10 +327,27 @@ export const RootExtractor = {
       type: 'lead_image_url',
       content,
     });
-    const excerpt = extractResult<'excerpt'>({ ...selectionOptions, type: 'excerpt', content });
-    const dek = extractResult<'dek'>({ ...selectionOptions, type: 'dek', content, excerpt });
-    const word_count = extractResult<'word_count'>({ ...selectionOptions, type: 'word_count', content });
-    const direction = extractResult<'direction'>({ ...selectionOptions, type: 'direction', title });
+    const excerpt = extractResult<'excerpt'>({
+      ...selectionOptions,
+      type: 'excerpt',
+      content,
+    });
+    const dek = extractResult<'dek'>({
+      ...selectionOptions,
+      type: 'dek',
+      content,
+      excerpt,
+    });
+    const word_count = extractResult<'word_count'>({
+      ...selectionOptions,
+      type: 'word_count',
+      content,
+    });
+    const direction = extractResult<'direction'>({
+      ...selectionOptions,
+      type: 'direction',
+      title,
+    });
     const { url, domain } = extractResult<'url_and_domain'>({
       ...selectionOptions,
       type: 'url_and_domain',

@@ -1,6 +1,6 @@
 import assert from 'assert';
 import cheerio from 'cheerio';
-import extractBestNode from './extract-best-node';
+import { extractBestNode } from './extract-best-node';
 
 const fs = require('fs');
 

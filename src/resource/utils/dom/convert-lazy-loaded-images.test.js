@@ -1,7 +1,7 @@
 import assert from 'assert';
 import cheerio from 'cheerio';
 
-import convertLazyLoadedImages from './convert-lazy-loaded-images';
+import { convertLazyLoadedImages } from './convert-lazy-loaded-images';
 
 describe('convertLazyLoadedImages($)', () => {
   it('moves image links to src if placed in another attribute', () => {

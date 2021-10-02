@@ -1,6 +1,6 @@
 import assert from 'assert';
 
-import GenericWordCountExtractor from './extractor';
+import { GenericWordCountExtractor } from './extractor';
 
 describe('GenericWordCountExtractor', () => {
   describe('extact({ content })', () => {

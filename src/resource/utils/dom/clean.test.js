@@ -1,7 +1,7 @@
 import assert from 'assert';
 import cheerio from 'cheerio';
 
-import clean from './clean';
+import { clean } from './clean';
 
 describe('clean($)', () => {
   it('removes script elements', () => {

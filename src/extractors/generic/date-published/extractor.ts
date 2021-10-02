@@ -18,7 +18,7 @@ export const GenericDatePublishedExtractor = {
     url: string;
     metaCache: string[];
   }) {
-    let datePublished;
+    let datePublished: string | undefined;
     // First, check to see if we have a matching meta tag
     // that we can make use of.
     // Don't try cleaning tags from this string

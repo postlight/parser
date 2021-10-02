@@ -2,7 +2,7 @@ import assert from 'assert';
 import cheerio from 'cheerio';
 
 import HTML from './fixtures/html';
-import GenericAuthorExtractor from './extractor';
+import { GenericAuthorExtractor } from './extractor';
 
 describe('GenericAuthorExtractor', () => {
   describe('extract($, cachedMeta)', () => {

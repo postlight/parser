@@ -13,10 +13,10 @@ const run = () => {
   const html = fs.readFileSync(`${fixture}`);
 
   // first parse is just to get the url
-  Mercury.parse('http://example.com', { html, fallback: false }).then(
+  parse('http://example.com', { html, fallback: false }).then(
     ({ url, domain, excerpt, word_count, direction }) => {
       // with the url, second pass will test the correct parser
-      Mercury.parse(url, { html, fallback: false }).then(json => {
+      parse(url, { html, fallback: false }).then(json => {
         // removing excerpt b/c this comes from content, not necessary
         delete json.excerpt;
 
@@ -24,9 +24,7 @@ const run = () => {
         Object.assign(json, { url, domain, word_count, direction });
 
         // a quick preview of the parsed content in an html file
-        const previewHtml = `<h1>${json.title}</h1><img src=${
-          json.lead_image_url
-        } /><p>${json.author}</p>${json.content}`;
+        const previewHtml = `<h1>${json.title}</h1><img src=${json.lead_image_url} /><p>${json.author}</p>${json.content}`;
 
         const jsonPath = `${screenshotPath}-parsed.json`;
         const fixtureArtifactPath = `tmp/artifacts/${fixture}`;
@@ -64,9 +62,11 @@ ${JSON.stringify(json, null, 2)}
 
 **\`null\` fields**
 
-${Object.keys(json)
-          .map(key => (json[key] !== null ? '' : `  * \`${key}\n\``))
-          .join('\n\n') || 'None'}
+${
+  Object.keys(json)
+    .map(key => (json[key] !== null ? '' : `  * \`${key}\n\``))
+    .join('\n\n') || 'None'
+}
 
 
 ${testReport}

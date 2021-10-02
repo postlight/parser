@@ -1,7 +1,7 @@
 import assert from 'assert';
 import cheerio from 'cheerio';
 
-import scoreLinks from './score-links';
+import { scoreLinks } from './score-links';
 
 const fs = require('fs');
 

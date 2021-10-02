@@ -1,8 +1,8 @@
 import assert from 'assert';
 import cheerio from 'cheerio';
 
-import extractBestNode from 'extractors/generic/content/extract-best-node';
-import extractCleanNode from './content';
+import { extractBestNode } from '../extractors/generic/content/extract-best-node';
+import { cleanContent } from './content';
 
 const fs = require('fs');
 
@@ -19,7 +19,7 @@ describe('extractCleanNode(article, { $, cleanConditionally, title } })', () => 
 
     const bestNode = extractBestNode($, opts);
 
-    const cleanNode = extractCleanNode(bestNode, { $, opts });
+    const cleanNode = cleanContent(bestNode, { $, opts });
 
     const text = $(cleanNode)
       .text()

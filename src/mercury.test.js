@@ -1,25 +1,25 @@
 import assert from 'assert';
 
 import { record } from 'test-helpers';
-import * as Mercury from './mercury';
+import { JsxEmit } from 'typescript';
+import { parse, addExtractor } from './mercury';
 
 const fs = require('fs');
 
 describe('Mercury', () => {
-  console.log(Mercury);
   const recorder = record('mercury-test');
   beforeAll(recorder.before);
   afterAll(recorder.after);
 
   describe('parse(url)', () => {
     it('returns an error if a malformed url is passed', async () => {
-      const error = await Mercury.parse('foo.com');
+      const error = await parse('foo.com');
 
       assert(/does not look like a valid URL/i.test(error.message));
     });
 
     it('does the whole thing', async () => {
-      const result = await Mercury.parse(
+      const result = await parse(
         'http://deadspin.com/remember-when-donald-trump-got-booed-for-butchering-ta-1788216229'
       );
 
@@ -28,7 +28,7 @@ describe('Mercury', () => {
     });
 
     it('returns an error on non-200 responses', async () => {
-      const error = await Mercury.parse(
+      const error = await parse(
         'https://www.thekitchn.com/instant-pot-chicken-pesto-pasta-eating-instantly-267141'
       );
 
@@ -36,7 +36,7 @@ describe('Mercury', () => {
     });
 
     it('returns an error on invalid content types', async () => {
-      const error = await Mercury.parse(
+      const error = await parse(
         'https://upload.wikimedia.org/wikipedia/commons/5/52/Spacer.gif'
       );
 
@@ -44,7 +44,7 @@ describe('Mercury', () => {
     });
 
     it('does wikipedia', async () => {
-      const result = await Mercury.parse(
+      const result = await parse(
         'https://en.wikipedia.org/wiki/Brihadeeswarar_Temple_fire'
       );
 
@@ -52,8 +52,7 @@ describe('Mercury', () => {
     });
 
     it('does washingtonpost', async () => {
-      jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000;
-      const result = await Mercury.parse(
+      const result = await parse(
         'https://www.washingtonpost.com/news/opinions/wp/2018/10/29/enough-platitudes-lets-name-names/'
       );
 
@@ -63,10 +62,10 @@ describe('Mercury', () => {
         result.url,
         'https://www.washingtonpost.com/news/opinions/wp/2018/10/29/enough-platitudes-lets-name-names/'
       );
-    });
+    }, 10000);
 
     it('does the nyt', async () => {
-      const result = await Mercury.parse(
+      const result = await parse(
         'http://www.nytimes.com/2016/08/16/upshot/the-state-of-the-clinton-trump-race-is-it-over.html?_r=0'
       );
 
@@ -75,10 +74,9 @@ describe('Mercury', () => {
     });
 
     it('does ars pagination', async () => {
-      jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000;
       const url =
         'https://arstechnica.com/gadgets/2016/08/the-connected-renter-how-to-make-your-apartment-smarter/';
-      const result = await Mercury.parse(url, { fetchAllPages: true });
+      const result = await parse(url, { fetchAllPages: true });
 
       const { total_pages, pages_rendered } = result;
 
@@ -86,7 +84,7 @@ describe('Mercury', () => {
       assert.equal(pages_rendered, 3);
 
       assert.equal(result.next_page_url, `${url}2`);
-    });
+    }, 10000);
   });
 
   it('returns text content if text is passed as contentType', async () => {
@@ -96,7 +94,7 @@ describe('Mercury', () => {
       './src/extractors/custom/nymag.com/fixtures/test.html',
       'utf8'
     );
-    const { content } = await Mercury.parse(url, { html, contentType: 'text' });
+    const { content } = await parse(url, { html, contentType: 'text' });
 
     const htmlRe = /<[a-z][\s\S]*>/g;
 
@@ -110,7 +108,7 @@ describe('Mercury', () => {
       './src/extractors/custom/nymag.com/fixtures/test.html',
       'utf8'
     );
-    const { content } = await Mercury.parse(url, {
+    const { content } = await parse(url, {
       html,
       contentType: 'markdown',
     });
@@ -129,7 +127,7 @@ describe('Mercury', () => {
       './src/extractors/custom/nymag.com/fixtures/test.html',
       'utf8'
     );
-    const { sites } = await Mercury.parse(url, {
+    const { sites } = await parse(url, {
       html,
       extend: {
         sites: {
@@ -150,7 +148,7 @@ describe('Mercury', () => {
       './src/extractors/custom/nymag.com/fixtures/test.html',
       'utf8'
     );
-    const { sites } = await Mercury.parse(url, {
+    const { sites } = await parse(url, {
       html,
       extend: {
         sites: {
@@ -170,7 +168,7 @@ describe('Mercury', () => {
       './src/extractors/custom/nymag.com/fixtures/test.html',
       'utf8'
     );
-    const { sites } = await Mercury.parse(url, {
+    const { sites } = await parse(url, {
       html,
       extend: {
         sites: {
@@ -210,9 +208,9 @@ describe('Mercury', () => {
       },
     };
 
-    Mercury.addExtractor(customExtractor);
+    addExtractor(customExtractor);
 
-    const result = await Mercury.parse(url, { html });
+    const result = await parse(url, { html });
     assert.equal(typeof result, 'object');
     assert.equal(result.author, 'Jennifer Van Grove');
     assert.equal(result.domain, 'www.sandiegouniontribune.com');

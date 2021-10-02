@@ -2,7 +2,7 @@ import assert from 'assert';
 import cheerio from 'cheerio';
 
 import HTML from './fixtures/extract-from-selectors';
-import extractFromSelectors from './extract-from-selectors';
+import { extractFromSelectors } from './extract-from-selectors';
 
 describe('extractFromSelectors($, selectors, maxChildren, textOnly)', () => {
   it('extracts an arbitrary node by selector', () => {

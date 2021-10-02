@@ -20,7 +20,12 @@ export function shouldScore(
   }
 
   const { hostname } = parsedUrl;
-  const { hostname: linkHost } = new URL(href);
+  let linkHost: string;
+  try {
+    linkHost = new URL(href).hostname;
+  } catch {
+    return false;
+  }
 
   // Domain mismatch.
   if (linkHost !== hostname) {

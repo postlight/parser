@@ -1,6 +1,6 @@
 import assert from 'assert';
 
-import mergeSupportedDomains from './merge-supported-domains';
+import { mergeSupportedDomains } from './merge-supported-domains';
 
 describe('mergeSupportedDomains(extractor, domains)', () => {
   it('returns an object w/domains as keys and extractor as value', () => {

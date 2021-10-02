@@ -54,14 +54,11 @@ export async function collectAllPages({
     previousUrls.push(next_page_url);
     result = {
       ...result,
-      content: `${result.content}<hr><h4>Page ${pages}</h4>${
-        nextPageResult.content
-      }`,
+      content: `${result.content}<hr><h4>Page ${pages}</h4>${nextPageResult.content}`,
     };
 
     // eslint-disable-next-line prefer-destructuring
-    next_page_url =
-      nextPageResult.type === 'full' ? nextPageResult.next_page_url : undefined;
+    next_page_url = nextPageResult.next_page_url;
   }
 
   const word_count = GenericExtractor.word_count({

@@ -2,8 +2,8 @@ import assert from 'assert';
 import URL from 'url';
 import cheerio from 'cheerio';
 
-import Mercury from 'mercury';
-import getExtractor from 'extractors/get-extractor';
+import { parse } from 'mercury';
+import { getExtractor } from 'extractors/get-extractor';
 import { excerptContent } from 'utils/text';
 
 const fs = require('fs');
@@ -15,7 +15,7 @@ describe('GetnewsJpExtractor', () => {
     beforeAll(() => {
       url = 'https://getnews.jp/archives/2146078';
       const html = fs.readFileSync('./fixtures/getnews.jp/1555846693544.html');
-      result = Mercury.parse(url, {
+      result = parse(url, {
         html,
         fallback: false,
       });
@@ -91,12 +91,7 @@ describe('GetnewsJpExtractor', () => {
 
       const $ = cheerio.load(content || '');
 
-      const first13 = excerptContent(
-        $('*')
-          .first()
-          .text(),
-        1
-      );
+      const first13 = excerptContent($('*').first().text(), 1);
 
       // Update these values with the expected values from
       // the article.

@@ -3,7 +3,7 @@ import cheerio from 'cheerio';
 
 import HTML from './fixtures/html';
 
-import GenericLeadImageUrlExtractor from './extractor';
+import { GenericLeadImageUrlExtractor } from './extractor';
 
 describe('GenericLeadImageUrlExtractor', () => {
   describe('extract({ $, content, metaCache })', () => {

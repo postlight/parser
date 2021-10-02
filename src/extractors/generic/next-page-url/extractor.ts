@@ -1,5 +1,5 @@
 import { articleBaseUrl, removeAnchor } from '../../../utils/text';
-import scoreLinks from './scoring/score-links';
+import { scoreLinks } from './scoring/score-links';
 
 // Looks for and returns next page url
 // for multi-page articles

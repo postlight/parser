@@ -107,4 +107,6 @@ export interface FullExtractorResult extends ExtractorResult {
 export interface ContentExtractorResult {
   type: 'contentOnly';
   content?: string;
+
+  next_page_url?: string;
 }

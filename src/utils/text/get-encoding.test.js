@@ -1,7 +1,7 @@
 import assert from 'assert';
 import cheerio from 'cheerio';
 
-import getEncoding from './get-encoding';
+import { getEncoding } from './get-encoding';
 
 // Tests are bypassed in the browser because it has an encoding
 // A shim is used /src/shims/iconv-lite.js to decrease load size

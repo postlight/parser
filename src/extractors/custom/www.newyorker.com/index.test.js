@@ -2,8 +2,8 @@ import assert from 'assert';
 import URL from 'url';
 import cheerio from 'cheerio';
 
-import Mercury from 'mercury';
-import getExtractor from 'extractors/get-extractor';
+import { parse } from 'mercury';
+import { getExtractor } from 'extractors/get-extractor';
 import { excerptContent } from 'utils/text';
 
 const fs = require('fs');
@@ -18,7 +18,7 @@ describe('NewYorkerExtractor', () => {
       const html = fs.readFileSync(
         './fixtures/www.newyorker.com/1557138180688.html'
       );
-      result = Mercury.parse(url, { html, fallback: false });
+      result = parse(url, { html, fallback: false });
     });
 
     it('is selected properly', async () => {
@@ -86,12 +86,7 @@ describe('NewYorkerExtractor', () => {
 
       const $ = cheerio.load(content || '');
 
-      const first13 = excerptContent(
-        $('*')
-          .first()
-          .text(),
-        13
-      );
+      const first13 = excerptContent($('*').first().text(), 13);
 
       // Update these values with the expected values from
       // the article.
@@ -111,7 +106,7 @@ describe('NewYorkerExtractor', () => {
       const html = fs.readFileSync(
         './fixtures/www.newyorker.com/1557145645680.html'
       );
-      result = Mercury.parse(url, { html, fallback: false });
+      result = parse(url, { html, fallback: false });
     });
 
     it('returns the dek when present', async () => {
@@ -139,7 +134,7 @@ describe('NewYorkerExtractor', () => {
       const html = fs.readFileSync(
         './fixtures/www.newyorker.com/1557834611707.html'
       );
-      result = Mercury.parse(url, { html, fallback: false });
+      result = parse(url, { html, fallback: false });
     });
 
     it('returns multiple authors', async () => {

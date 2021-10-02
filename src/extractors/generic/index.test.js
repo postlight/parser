@@ -1,7 +1,7 @@
 import assert from 'assert';
 import moment from 'moment';
 
-import GenericExtractor from './index';
+import { GenericExtractor } from './index';
 
 const fs = require('fs');
 

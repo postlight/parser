@@ -9,7 +9,7 @@ const IGNORE = [
   'excerpt',
   'direction',
   'total_pages',
-  'rendered_pages',
+  'pages_rendered',
 ];
 
 function testFor(key, value, dir) {
@@ -28,14 +28,14 @@ function testFor(key, value, dir) {
     `;
 }
 
-export default function(file, url, dir, result, name) {
+export default function (file, url, dir, result, name) {
   return template`
     import assert from 'assert';
     import URL from 'url';
     import cheerio from 'cheerio';
 
-    import Mercury from 'mercury';
-    import getExtractor from 'extractors/get-extractor';
+    import { parse } from 'mercury';
+    import { getExtractor } from 'extractors/get-extractor';
     import { excerptContent } from 'utils/text';
 
     const fs = require('fs');
@@ -50,7 +50,7 @@ export default function(file, url, dir, result, name) {
           const html =
             fs.readFileSync('${file}');
           result =
-            Mercury.parse(url, { html, fallback: false });
+            parse(url, { html, fallback: false });
         });
 
         it('is selected properly', () => {

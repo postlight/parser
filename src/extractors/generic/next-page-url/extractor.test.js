@@ -1,7 +1,7 @@
 import assert from 'assert';
 import cheerio from 'cheerio';
 
-import GenericNextPageUrlExtractor from './extractor';
+import { GenericNextPageUrlExtractor } from './extractor';
 
 const fs = require('fs');
 

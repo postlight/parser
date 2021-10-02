@@ -1,6 +1,6 @@
 import assert from 'assert';
 
-import addExtractor from './add-extractor';
+import { addExtractor } from './add-extractor';
 
 describe('addExtractor(extractor)', () => {
   it('can add multiple custom extractors', () => {

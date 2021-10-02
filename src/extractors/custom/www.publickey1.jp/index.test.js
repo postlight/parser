@@ -2,8 +2,8 @@ import assert from 'assert';
 import URL from 'url';
 import cheerio from 'cheerio';
 
-import Mercury from 'mercury';
-import getExtractor from 'extractors/get-extractor';
+import { parse } from 'mercury';
+import { getExtractor } from 'extractors/get-extractor';
 import { excerptContent } from 'utils/text';
 
 const fs = require('fs');
@@ -18,7 +18,7 @@ describe('WwwPublickey1JpExtractor', () => {
       const html = fs.readFileSync(
         './fixtures/www.publickey1.jp/1554481347071.html'
       );
-      result = Mercury.parse(url, {
+      result = parse(url, {
         html,
         fallback: false,
       });
@@ -100,12 +100,7 @@ describe('WwwPublickey1JpExtractor', () => {
 
       const $ = cheerio.load(content || '');
 
-      const first13 = excerptContent(
-        $('*')
-          .first()
-          .text(),
-        5
-      );
+      const first13 = excerptContent($('*').first().text(), 5);
 
       // Update these values with the expected values from
       // the article.

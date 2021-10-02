@@ -3,7 +3,7 @@ import cheerio from 'cheerio';
 
 import { assertClean } from 'test-helpers';
 import HTML from './fixtures/html';
-import brsToPs from './brs-to-ps';
+import { brsToPs } from './brs-to-ps';
 
 function assertBeforeAndAfter(key, fn) {
   const $ = cheerio.load(HTML[key].before);

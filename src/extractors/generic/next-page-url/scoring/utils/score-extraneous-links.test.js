@@ -1,6 +1,6 @@
 import assert from 'assert';
 
-import scoreExtraneousLinks from './score-extraneous-links';
+import { scoreExtraneousLinks } from './score-extraneous-links';
 
 describe('scoreExtraneousLinks(href)', () => {
   it('returns -25 if link matches extraneous text', () => {

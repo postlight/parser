@@ -1,7 +1,7 @@
 import assert from 'assert';
 import cheerio from 'cheerio';
 
-import detectByHtml from './detect-by-html';
+import { detectByHtml } from './detect-by-html';
 
 describe('detectByHtml', () => {
   it('detects a medium post from the html', () => {

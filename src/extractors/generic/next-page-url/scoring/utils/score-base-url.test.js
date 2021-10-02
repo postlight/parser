@@ -1,6 +1,6 @@
 import assert from 'assert';
 
-import scoreBaseUrl from './score-base-url';
+import { scoreBaseUrl } from './score-base-url';
 import { makeBaseRegex } from '../score-links';
 
 describe('scoreBaseUrl(href, baseRegex)', () => {

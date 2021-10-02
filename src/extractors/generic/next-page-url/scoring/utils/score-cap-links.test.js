@@ -1,6 +1,6 @@
 import assert from 'assert';
 
-import scoreCapLinks from './score-cap-links';
+import { scoreCapLinks } from './score-cap-links';
 
 describe('scoreCapLinks(linkData)', () => {
   it('returns -65 if cap link with next link text', () => {

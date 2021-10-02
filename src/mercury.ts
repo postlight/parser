@@ -2,7 +2,6 @@ import cheerio from 'cheerio';
 import TurndownService from 'turndown';
 
 import Resource from './resource';
-import { validateUrl } from './utils';
 import { addExtractor } from './extractors/add-extractor';
 import { getExtractor } from './extractors/get-extractor';
 import {
@@ -31,9 +30,10 @@ export const parse = async (
     html = html || cheerio.html();
   }
 
-  const parsedUrl = new URL(url);
-
-  if (!validateUrl(parsedUrl)) {
+  let parsedUrl: URL;
+  try {
+    parsedUrl = new URL(url);
+  } catch {
     return {
       error: true,
       message:
@@ -58,7 +58,7 @@ export const parse = async (
   const extractor = getExtractor(url, parsedUrl, $);
   // console.log(`Using extractor for ${Extractor.domain}`);
 
-  // if html still has not been set (i.e., url passed to Mercury.parse),
+  // if html still has not been set (i.e., url passed to parse),
   // set html from the response of Resource.create
   if (!html) {
     html = $.html();
@@ -118,15 +118,13 @@ export const parse = async (
 
   if (contentType === 'markdown') {
     const turndownService = new TurndownService();
-    extractionResult.content = turndownService.turndown(
-      extractionResult.content ?? ''
-    );
+    result.content = turndownService.turndown(result.content ?? '');
   } else if (contentType === 'text') {
     // TODO: Fix cheerio .text types
-    extractionResult.content = ($ as any).text($(extractionResult.content));
+    result.content = ($ as any).text($(result.content));
   }
 
-  return { ...extractionResult, ...extendedTypes };
+  return { ...result, ...extendedTypes };
 };
 
 export const browser = !!(cheerio as any).browser;
@@ -137,4 +135,4 @@ export const browser = !!(cheerio as any).browser;
  */
 export const fetchResource = (url: string) => Resource.create(url);
 
-export { CustomExtractor } from './extractors/types';
+export { addExtractor } from './extractors/add-extractor';

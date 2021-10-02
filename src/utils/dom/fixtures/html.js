@@ -236,7 +236,7 @@ const HTML = {
     <html><body><div><p><a href="">Wow how about that</a></p></div></body></html>
     `,
     after: `
-    <div><div><div><p><a href="">Wow how about that</a></p></div></div></div>
+    <div><div><div><p><a href>Wow how about that</a></p></div></div></div>
     `,
   },
 

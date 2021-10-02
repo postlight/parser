@@ -2,8 +2,8 @@ import assert from 'assert';
 import URL from 'url';
 import cheerio from 'cheerio';
 
-import Mercury from 'mercury';
-import getExtractor from 'extractors/get-extractor';
+import { parse } from 'mercury';
+import { getExtractor } from 'extractors/get-extractor';
 import { excerptContent } from 'utils/text';
 
 const fs = require('fs');
@@ -16,7 +16,7 @@ describe('WwwNjComExtractor', () => {
       url =
         'http://www.nj.com/essex/index.ssf/2016/12/man_sentenced_for_stealing_millions_from_nj_atms_i.html#incart_river_home';
       const html = fs.readFileSync('./fixtures/www.nj.com/1481666201503.html');
-      result = Mercury.parse(url, { html, fallback: false });
+      result = parse(url, { html, fallback: false });
     });
 
     it('is selected properly', () => {
@@ -82,12 +82,7 @@ describe('WwwNjComExtractor', () => {
 
       const $ = cheerio.load(content || '');
 
-      const first13 = excerptContent(
-        $('*')
-          .first()
-          .text(),
-        13
-      );
+      const first13 = excerptContent($('*').first().text(), 13);
 
       // Update these values with the expected values from
       // the article.

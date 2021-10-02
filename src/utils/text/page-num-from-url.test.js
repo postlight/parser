@@ -1,6 +1,6 @@
 import assert from 'assert';
 
-import pageNumFromUrl from './page-num-from-url';
+import { pageNumFromUrl } from './page-num-from-url';
 
 describe('pageNumFromUrl(url)', () => {
   it('returns null if there is no page num in the url', () => {

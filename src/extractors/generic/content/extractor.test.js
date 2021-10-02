@@ -2,7 +2,7 @@ import assert from 'assert';
 
 import { clean } from 'test-helpers';
 
-import GenericContentExtractor from './extractor';
+import { GenericContentExtractor } from './extractor';
 
 const fs = require('fs');
 
@@ -14,8 +14,7 @@ describe('GenericContentExtractor', () => {
         GenericContentExtractor.extract({
           $: null,
           html,
-          url:
-            'http://www.vulture.com/2016/08/dc-comics-greg-berlanti-c-v-r.html',
+          url: 'http://www.vulture.com/2016/08/dc-comics-greg-berlanti-c-v-r.html',
         })
       );
 
