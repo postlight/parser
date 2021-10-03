@@ -1,0 +1,15 @@
+export declare const CLEAN_AUTHOR_RE: RegExp;
+export declare const TEXT_LINK_RE: RegExp;
+export declare const DEK_META_TAGS: never[];
+export declare const DEK_SELECTORS: string[];
+export declare const MS_DATE_STRING: RegExp;
+export declare const SEC_DATE_STRING: RegExp;
+export declare const CLEAN_DATE_STRING_RE: RegExp;
+export declare const TIME_MERIDIAN_SPACE_RE: RegExp;
+export declare const TIME_MERIDIAN_DOTS_RE: RegExp;
+export declare const TIME_NOW_STRING: RegExp;
+export declare const TIME_AGO_STRING: RegExp;
+export declare const SPLIT_DATE_STRING: RegExp;
+export declare const TIME_WITH_OFFSET_RE: RegExp;
+export declare const TITLE_SPLITTERS_RE: RegExp;
+export declare const DOMAIN_ENDINGS_RE: RegExp;

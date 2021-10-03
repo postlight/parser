@@ -9,12 +9,12 @@ import {
   selectExtendedTypes,
 } from './extractors/root-extractor';
 import { collectAllPages } from './extractors/collect-all-pages';
-import { Options, Result } from './types';
+import { ErrorResult, Options, Result } from './types';
 
 export const parse = async (
   url: string,
   { html, extend, customExtractor, ...opts }: Options | undefined = {}
-) => {
+): Promise<Result | ErrorResult> => {
   const {
     fetchAllPages = true,
     fallback = true,
@@ -35,7 +35,7 @@ export const parse = async (
     parsedUrl = new URL(url);
   } catch {
     return {
-      error: true,
+      type: 'error',
       message:
         'The url parameter passed does not look like a valid URL. Please check your URL and try again.',
     };
@@ -44,7 +44,7 @@ export const parse = async (
   const resource = await Resource.create(url, html, parsedUrl, headers);
 
   // If we found an error creating the resource, return that error
-  if ('error' in resource) {
+  if ('type' in resource) {
     return resource;
   }
 

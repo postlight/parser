@@ -2,7 +2,7 @@
   "compilerOptions": {
     "target": "ES6",
     "lib": ["ESNext", "DOM"],
-    "module": "CommonJS",
+    "module": "ESNext",
     "moduleResolution": "node",
     "strict": true,
     "sourceMap": true,
@@ -13,7 +13,9 @@
     "baseUrl": "./",
     "paths": {
       "*": ["types/*", "*"]
-    }
+    },
+    "declaration": true,
+    "declarationDir": "types"
   },
   "include": ["src", "fixtures", "scripts", "cli.js"],
   "exclude": ["node_modules", "dist"]

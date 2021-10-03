@@ -5,20 +5,10 @@ import { Response } from 'postman-request';
 import { getEncoding } from '../utils/text';
 import { fetchResource } from './utils';
 import { normalizeMetaTags, convertLazyLoadedImages, clean } from './utils/dom';
+import { ErrorResult, Result, SuccessResult } from './utils/fetch-resource';
 
-type SuccessResult = {
-  body: Buffer | string;
-  response: Response;
-};
-
-type ErrorResult = {
-  error: boolean;
-  failed: true;
-};
-
-type Result = SuccessResult | ErrorResult;
-
-const isError = (result: Result): result is ErrorResult => 'error' in result;
+const isError = (result: Result): result is ErrorResult =>
+  result.type === 'error';
 
 const Resource = {
   // Create a Resource.
@@ -46,7 +36,11 @@ const Resource = {
         },
       } as Response;
 
-      result = { body: preparedResponse, response: validResponse };
+      result = {
+        type: 'success',
+        body: preparedResponse,
+        response: validResponse,
+      };
     } else {
       result = (await fetchResource(url, parsedUrl, headers)) as typeof result;
     }

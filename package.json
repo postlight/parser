@@ -1,6 +1,6 @@
 {
   "name": "@postlight/mercury-parser",
-  "version": "2.2.1",
+  "version": "2.3.0",
   "description": "Mercury transforms web pages into clean text. Publishers and programmers use it to make the web make sense, and readers use it to read any web article comfortably.",
   "author": "Postlight <mercury@postlight.com>",
   "homepage": "https://mercury.postlight.com",
@@ -25,6 +25,7 @@
     "src/shims/"
   ],
   "main": "./dist/mercury.js",
+  "typings": "./dist/types/mercury.d.ts",
   "bin": {
     "mercury-parser": "./cli.js"
   },
@@ -37,7 +38,6 @@
     "build:ci": "rollup -c && yarn test:build",
     "build:web": "yarn lint && rollup -c rollup.config.web.js && yarn test:build:web",
     "build:web:ci": "rollup -c rollup.config.web.js && yarn test:build:web",
-    "build:only": "rollup -c",
     "release": "yarn build && yarn build:web",
     "build:generator": "rollup -c scripts/rollup.config.js",
     "test_build": "rollup -c",
@@ -114,6 +114,7 @@
     "remark-preset-lint-recommended": "^3.0.2",
     "requirejs": "^2.3.6",
     "rollup": "^2.58.0",
+    "rollup-plugin-delete": "^2.0.0",
     "rollup-plugin-node-globals": "^1.4.0",
     "rollup-plugin-uglify": "^6.0.4",
     "tslib": "^2.3.1",

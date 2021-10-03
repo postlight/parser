@@ -81,17 +81,30 @@ export function baseDomain({ host }: { host: string }) {
   return host.split('.').slice(-2).join('.');
 }
 
+export type SuccessResult = {
+  type: 'success';
+  body: Buffer | string;
+  response: Response;
+};
+
+export type ErrorResult = {
+  type: 'error';
+  message: string;
+};
+
+export type Result = SuccessResult | ErrorResult;
+
 // Set our response attribute to the result of fetching our URL.
 // TODO: This should gracefully handle timeouts and raise the
 //       proper exceptions on the many failure cases of HTTP.
 // TODO: Ensure we are not fetching something enormous. Always return
 //       unicode content for HTML, with charset conversion.
 
-export default async function fetchResource(
+export async function fetchResource(
   url: string,
   parsedUrl?: URL,
   headers: Record<string, string> = {}
-) {
+): Promise<Result> {
   const finalParsedUrl = parsedUrl || new URL(encodeURI(url));
   const options = {
     url: finalParsedUrl.href ?? '',
@@ -119,12 +132,13 @@ export default async function fetchResource(
   try {
     validateResponse(response);
     return {
+      type: 'success',
       body,
       response,
     };
   } catch (e) {
     return {
-      error: true,
+      type: 'error',
       message: (e as Error).message,
     };
   }

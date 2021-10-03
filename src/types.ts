@@ -19,3 +19,8 @@ export type Result = (FullExtractorResult | ContentExtractorResult) & {
   total_pages: number;
   pages_rendered: number;
 };
+
+export interface ErrorResult {
+  type: 'error';
+  message: string;
+}
