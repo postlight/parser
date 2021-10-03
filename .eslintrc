@@ -1,7 +1,9 @@
 {
-  "parser": "babel-eslint",
-  "extends": ["airbnb", "prettier"],
-  "plugins": ["babel"],
+  "parser": "@typescript-eslint/parser",
+  "extends": ["airbnb-base", "airbnb-typescript/base", "prettier"],
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  },
   "globals": {
     "describe": true,
     "it": true,
@@ -24,7 +26,8 @@
       "error",
       { "max": 1, "maxEOF": 0, "maxBOF": 0 }
     ],
-    "import/no-unresolved": false
+    "import/no-unresolved": false,
+    "@typescript-eslint/naming-convention": 0
   },
   "settings": {
     "import/resolver": {

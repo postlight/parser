@@ -111,4 +111,3 @@ const Resource = {
 };
 
 export default Resource;
-export type Resource = typeof Resource;

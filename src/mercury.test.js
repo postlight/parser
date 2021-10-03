@@ -1,7 +1,6 @@
 import assert from 'assert';
 
 import { record } from 'test-helpers';
-import { JsxEmit } from 'typescript';
 import { parse, addExtractor } from './mercury';
 
 const fs = require('fs');

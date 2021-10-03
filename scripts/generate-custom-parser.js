@@ -1,5 +1,6 @@
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable no-use-before-define */
+/* eslint-disable @typescript-eslint/no-use-before-define */
 /* eslint-disable no-console */
 import fs from 'fs';
 import URL from 'url';
@@ -8,7 +9,7 @@ import ora from 'ora';
 import { exec } from 'child_process';
 
 import { stripJunkTags, makeLinksAbsolute } from 'utils/dom';
-import Mercury from '../dist/mercury';
+import { parse, fetchResource } from '../dist/mercury';
 import extractorTemplate from './templates/custom-extractor';
 import extractorTestTemplate from './templates/custom-extractor-test';
 
@@ -64,7 +65,7 @@ function scaffoldCustomParser(url) {
     confirmCreateDir(`./fixtures/${hostname}`, 'Creating fixtures directory');
   }
 
-  confirm(Mercury.fetchResource, [url], 'Fetching fixture', newParser);
+  confirm(fetchResource, [url], 'Fetching fixture', newParser);
 }
 
 // if has arg, just assume that arg is a url and skip prmopt

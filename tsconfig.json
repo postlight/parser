@@ -15,6 +15,6 @@
       "*": ["types/*", "*"]
     }
   },
-  "include": ["src", "fixtures"],
-  "exclude": ["node_modules", "dist", "scripts"]
+  "include": ["src", "fixtures", "scripts", "cli.js"],
+  "exclude": ["node_modules", "dist"]
 }

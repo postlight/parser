@@ -2,3 +2,6 @@
 dist/*
 coverage/*
 karma.conf.js
+babel.config.js
+rollup.config.js
+rollup.config.web.js

@@ -37,10 +37,7 @@ const removeUnusedTags = $node => {
 $.cloneHtml = () => {
   const html = removeUnusedTags($('html', null, null, false).clone());
 
-  return html
-    .children()
-    .wrap('<div />')
-    .wrap('<div />');
+  return html.children().wrap('<div />').wrap('<div />');
 };
 
 $.root = () => $('*').first();
@@ -63,9 +60,7 @@ $.html = $node => {
       return $node.children('container').html() || $node.html();
     }
 
-    return $('<div>')
-      .append($node.eq(0).clone())
-      .html();
+    return $('<div>').append($node.eq(0).clone()).html();
   }
 
   const $body = removeUnusedTags($('body', null, null, false).clone());
@@ -85,7 +80,7 @@ $.html = $node => {
   return html;
 };
 
-// eslint-disable-next-line no-unused-vars
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 $.load = (html, opts = {}, returnHtml = false) => {
   if (!html) {
     html = $.cloneHtml();
@@ -103,7 +98,7 @@ $.load = (html, opts = {}, returnHtml = false) => {
   html
     .find('*')
     .contents()
-    .each(function() {
+    .each(function () {
       // eslint-disable-next-line no-undef
       if (this.nodeType === Node.COMMENT_NODE) {
         $(this).remove();

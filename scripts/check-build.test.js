@@ -8,8 +8,7 @@ let urls = [
     title: 'Iraqi troops storm town south of Mosul',
   },
   {
-    url:
-      'https://www.cnn.com/2019/01/30/politics/trump-intel-chiefs-foreign-policy-iran-isis-north-korea/index.html',
+    url: 'https://www.cnn.com/2019/01/30/politics/trump-intel-chiefs-foreign-policy-iran-isis-north-korea/index.html',
     title:
       'Trump chastises intel chiefs after they contradict him on Iran and claims of foreign policy success',
   },
@@ -23,8 +22,9 @@ if (
   if (cheerio.browser) {
     require('../dist/mercury.web');
   }
-  // eslint-disable-next-line no-unused-expressions
-  typeof Mercury === 'undefined' && require('../dist/mercury');
+  if (typeof Mercury === 'undefined') {
+    require('../dist/mercury');
+  }
   describe('Tests', () => {
     it('do not run because this is CI and we do not want network requests', () => {
       assert.equal(true, true);

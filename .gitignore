@@ -13,4 +13,3 @@ tmp/artifacts
 test-output.json
 .DS_Store
 yarn-error.log
-dist/
