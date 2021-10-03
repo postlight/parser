@@ -10,7 +10,10 @@
     "downlevelIteration": true,
     "allowSyntheticDefaultImports": true,
     "noImplicitAny": true,
-    "typeRoots": ["types", "node_modules/@types"]
+    "baseUrl": "./",
+    "paths": {
+      "*": ["types/*", "*"]
+    }
   },
   "include": ["src", "fixtures"],
   "exclude": ["node_modules", "dist", "scripts"]

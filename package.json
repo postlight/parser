@@ -129,7 +129,7 @@
     "ellipsize": "0.1.0",
     "iconv-lite": "0.5.0",
     "jquery": "^3.4.1",
-    "moment": "^2.23.0",
+    "moment": "2.23.0",
     "moment-parseformat": "3.0.0",
     "moment-timezone": "0.5.26",
     "postman-request": "^2.88.1-postman.7.1",

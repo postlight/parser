@@ -1,8 +1,8 @@
 import assert from 'assert';
 import cheerio from 'cheerio';
+import { record } from 'test-helpers';
 import { getEncoding } from '../utils/text';
 
-import { record } from 'test-helpers';
 import Resource from './index';
 
 describe('Resource', () => {
