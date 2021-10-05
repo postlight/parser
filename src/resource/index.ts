@@ -1,5 +1,5 @@
 import cheerio from 'cheerio';
-import iconv from 'iconv-lite';
+import * as iconv from 'iconv-lite';
 import { Response } from 'postman-request';
 
 import { getEncoding } from '../utils/text';

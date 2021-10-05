@@ -1,4 +1,4 @@
-import iconv from 'iconv-lite';
+import * as iconv from 'iconv-lite';
 import { DEFAULT_ENCODING, ENCODING_RE } from './constants';
 
 // check a string for encoding; this is

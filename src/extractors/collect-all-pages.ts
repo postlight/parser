@@ -31,7 +31,7 @@ export async function collectAllPages({
     // eslint-disable-next-line no-await-in-loop
     const root = await Resource.create(next_page_url);
 
-    if ('error' in root) {
+    if ('type' in root) {
       break;
     }
 
