@@ -1,7 +1,9 @@
-import { convertNodeTo } from '../../../../utils/dom';
+import { convertNodeTo } from '../../../../utils/dom/convert-node-to';
+import { addScore, getOrInitScore } from './add-score';
 
 import { HNEWS_CONTENT_SELECTORS } from './constants';
-import { scoreNode, setScore, getOrInitScore, addScore } from './index';
+import { scoreNode } from './score-node';
+import { setScore } from './set-score';
 
 function convertSpans($node: cheerio.Cheerio, $: cheerio.Root) {
   if ($node.get(0)) {

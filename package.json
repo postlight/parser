@@ -84,6 +84,7 @@
     "brfs-babel": "^2.0.0",
     "browserify": "^17.0.0",
     "changelog-maker": "^2.3.0",
+    "cross-fetch": "^3.1.4",
     "eslint": "^5.12.0",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-config-airbnb-typescript": "^14.0.0",
@@ -124,7 +125,6 @@
   },
   "dependencies": {
     "@postlight/ci-failed-test-reporter": "^1.0",
-    "browser-request": "github:postlight/browser-request#feat-add-headers-to-response",
     "cheerio": "^0.22.0",
     "difflib": "github:postlight/difflib.js",
     "ellipsize": "0.1.0",
@@ -133,8 +133,6 @@
     "moment": "2.23.0",
     "moment-parseformat": "3.0.0",
     "moment-timezone": "0.5.26",
-    "postman-request": "^2.88.1-postman.7.1",
-    "request-promise": "^4.2.2",
     "string-direction": "^0.1.2",
     "turndown": "^5.0.3",
     "valid-url": "^1.0.9",
@@ -146,11 +144,15 @@
     "moment-timezone",
     "browser-request"
   ],
+  "resolutions": {
+    "htmlparser2": "^4.0.0"
+  },
   "jest": {
     "moduleNameMapper": {
       "mercury": "<rootDir>/src/mercury",
       "^extractors/(.*)$": "<rootDir>/src/extractors/$1",
-      "^utils/(.*)$": "<rootDir>/src/utils/$1"
+      "^utils/(.*)$": "<rootDir>/src/utils/$1",
+      "^src/(.*)$": "<rootDir>/src/$1"
     }
   },
   "browser": {

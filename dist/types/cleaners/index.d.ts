@@ -20,11 +20,10 @@ declare const InternalCleaners: {
         $: cheerio.Root;
     }) => string;
 };
-declare type InternalCleaners = typeof InternalCleaners;
-declare type Cleaners = {
-    [Key in keyof InternalCleaners]: (input: cheerio.Cheerio, opts: CleanerOptions) => string | undefined;
+declare type CleanersMap = {
+    [Key in keyof typeof InternalCleaners]: (input: cheerio.Cheerio, opts: CleanerOptions) => string | undefined;
 };
-export declare const Cleaners: Cleaners;
+export declare const Cleaners: CleanersMap;
 export { cleanAuthor };
 export { cleanImage };
 export { cleanDek };

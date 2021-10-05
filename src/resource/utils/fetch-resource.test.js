@@ -1,5 +1,6 @@
 import assert from 'assert';
 import URL from 'url';
+import { Response } from 'cross-fetch';
 
 import { record } from 'test-helpers';
 import { fetchResource, baseDomain, validateResponse } from './fetch-resource';
@@ -44,61 +45,53 @@ describe('fetchResource(url)', () => {
   it('fetches nyt', async () => {
     const url =
       'http://www.nytimes.com/2016/08/16/upshot/the-state-of-the-clinton-trump-race-is-it-over.html?_r=0';
-    const { response } = await fetchResource(url);
+    const { type } = await fetchResource(url);
 
-    assert.equal(response.statusCode, 200);
+    assert.equal(type, 'success');
   });
 
   it('fetches domains', async () => {
     const url = 'http://theconcourse.deadspin.com/1786177057';
-    const { response } = await fetchResource(url);
+    const { type } = await fetchResource(url);
 
-    assert.equal(response.statusCode, 200);
+    assert.equal(type, 'success');
   });
 
   it('fetches nyt', async () => {
     const url =
       'http://www.nytimes.com/2016/08/16/upshot/the-state-of-the-clinton-trump-race-is-it-over.html?_r=0';
-    const { response } = await fetchResource(url);
+    const { type } = await fetchResource(url);
 
-    assert.equal(response.statusCode, 200);
+    assert.equal(type, 'success');
   });
 
   it('handles this gzip error', async () => {
     const url =
       'http://www.redcross.ca/blog/2016/11/photo-of-the-day--one-year-anniversary-of-the-end-of-ebola-in-sierra-leone';
-    const { response } = await fetchResource(url);
+    const { type } = await fetchResource(url);
 
-    assert.equal(response.statusCode, 200);
+    assert.equal(type, 'success');
   });
 });
 
 describe('validateResponse(response)', () => {
   it('validates a response object', () => {
-    const validResponse = {
-      statusMessage: 'OK',
-      statusCode: 200,
+    const validResponse = new Response(null, {
+      statusText: 'OK',
+      status: 200,
       headers: {
         'content-type': 'text/html',
         'content-length': 500,
       },
-    };
+    });
 
     assert.equal(validateResponse(validResponse), true);
   });
 
-  it('throws an error if there is no status code', () => {
-    const invalidResponse = {};
-
-    assert.throws(() => {
-      validateResponse(invalidResponse);
-    }, /unable to fetch content/i);
-  });
-
   it('throws an error if response code is not 200', () => {
-    const invalidResponse = {
-      statusCode: 500,
-    };
+    const invalidResponse = new Response(null, {
+      status: 500,
+    });
 
     assert.throws(() => {
       validateResponse(invalidResponse);
@@ -106,14 +99,14 @@ describe('validateResponse(response)', () => {
   });
 
   it('throws an error if response has bad content-type', () => {
-    const invalidResponse = {
-      statusMessage: 'OK',
-      statusCode: 200,
+    const invalidResponse = new Response(null, {
+      statusText: 'OK',
+      status: 200,
       headers: {
         'content-type': 'image/gif',
         'content-length': 500,
       },
-    };
+    });
 
     assert.throws(() => {
       validateResponse(invalidResponse);
@@ -121,14 +114,14 @@ describe('validateResponse(response)', () => {
   });
 
   it('throws an error if response length is > max', () => {
-    const invalidResponse = {
-      statusMessage: 'OK',
-      statusCode: 200,
+    const invalidResponse = new Response(null, {
+      statusText: 'OK',
+      status: 200,
       headers: {
         'content-type': 'text/html',
         'content-length': MAX_CONTENT_LENGTH + 1,
       },
-    };
+    });
 
     assert.throws(() => {
       validateResponse(invalidResponse);

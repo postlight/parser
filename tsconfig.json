@@ -9,11 +9,13 @@
     "esModuleInterop": true,
     "downlevelIteration": true,
     "allowSyntheticDefaultImports": true,
+    "allowJs": true,
     "noImplicitAny": true,
     "baseUrl": "./",
     "paths": {
       "*": ["types/*", "*"]
     },
+    "outDir": "dist",
     "declaration": true,
     "declarationDir": "types"
   },

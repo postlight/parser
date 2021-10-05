@@ -1,6 +1,6 @@
 import cheerio from 'cheerio';
 import * as iconv from 'iconv-lite';
-import { Response } from 'postman-request';
+import { Headers } from 'cross-fetch';
 
 import { getEncoding } from '../utils/text';
 import { fetchResource } from './utils';
@@ -27,19 +27,13 @@ const Resource = {
     let result: Result;
 
     if (preparedResponse) {
-      const validResponse = {
-        statusMessage: 'OK',
-        statusCode: 200,
-        headers: {
-          'content-type': 'text/html',
-          'content-length': '500',
-        },
-      } as Response;
-
       result = {
         type: 'success',
         body: preparedResponse,
-        response: validResponse,
+        headers: new Headers({
+          'content-type': 'text/html',
+          'content-length': '500',
+        }),
       };
     } else {
       result = (await fetchResource(url, parsedUrl, headers)) as typeof result;
@@ -52,16 +46,19 @@ const Resource = {
     return this.generateDoc(result);
   },
 
-  generateDoc({ body: content, response }: SuccessResult) {
-    const { 'content-type': contentType = '' } = response.headers;
+  generateDoc({ body, headers }: SuccessResult) {
+    const contentType = headers.get('content-type');
 
     // TODO: Implement is_text function from
     // https://github.com/ReadabilityHoldings/readability/blob/8dc89613241d04741ebd42fa9fa7df1b1d746303/readability/utils/text.py#L57
-    if (!contentType.includes('html') && !contentType.includes('text')) {
+    if (
+      !contentType ||
+      (!contentType.includes('html') && !contentType.includes('text'))
+    ) {
       throw new Error('Content does not appear to be text.');
     }
 
-    let $ = this.encodeDoc({ content, contentType });
+    let $ = this.encodeDoc({ content: body, contentType });
 
     if ($.root().children().length === 0) {
       throw new Error('No children, likely a bad parse.');

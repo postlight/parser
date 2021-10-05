@@ -1,8 +1,4 @@
-import request, {
-  CoreOptions,
-  RequiredUriUrl,
-  Response,
-} from 'postman-request';
+import fetch from 'cross-fetch';
 
 import {
   REQUEST_HEADERS,
@@ -10,21 +6,6 @@ import {
   BAD_CONTENT_TYPES_RE,
   MAX_CONTENT_LENGTH,
 } from './constants';
-
-function get(options: CoreOptions & RequiredUriUrl) {
-  return new Promise<{
-    body: any;
-    response: Response;
-  }>((resolve, reject) => {
-    request(options, (err: any, response: Response, body: any) => {
-      if (err) {
-        reject(err);
-      } else {
-        resolve({ body, response });
-      }
-    });
-  });
-}
 
 // Evaluate a response to ensure it's something we should be keeping.
 // This does not validate in the sense of a response being 200 or not.
@@ -39,22 +20,22 @@ export function validateResponse(response: Response, parseNon200 = false) {
   // I check statusCode, which is currently only 200 for OK responses
   // in tests
   if (
-    (response.statusMessage && response.statusMessage !== 'OK') ||
-    response.statusCode !== 200
+    (response.statusText && response.statusText !== 'OK') ||
+    response.status !== 200
   ) {
-    if (!response.statusCode) {
+    if (!response.status) {
       throw new Error(
         `Unable to fetch content. Original exception was ${response}`
       );
     } else if (!parseNon200) {
       throw new Error(
-        `Resource returned a response status code of ${response.statusCode} and resource was instructed to reject non-200 status codes.`
+        `Resource returned a response status code of ${response.status} and resource was instructed to reject non-200 status codes.`
       );
     }
   }
 
-  const { 'content-type': contentType, 'content-length': contentLength } =
-    response.headers;
+  const contentType = response.headers.get('content-type');
+  const contentLength = response.headers.get('content-length');
 
   // Check that the content is not in BAD_CONTENT_TYPES
   if (contentType && BAD_CONTENT_TYPES_RE.test(contentType)) {
@@ -84,7 +65,7 @@ export function baseDomain({ host }: { host: string }) {
 export type SuccessResult = {
   type: 'success';
   body: Buffer | string;
-  response: Response;
+  headers: Headers;
 };
 
 export type ErrorResult = {
@@ -106,35 +87,31 @@ export async function fetchResource(
   headers: Record<string, string> = {}
 ): Promise<Result> {
   const finalParsedUrl = parsedUrl || new URL(encodeURI(url));
-  const options = {
-    url: finalParsedUrl.href ?? '',
-    headers: { ...REQUEST_HEADERS, ...headers },
-    timeout: FETCH_TIMEOUT,
-    // Accept cookies
-    jar: true,
-    // Set to null so the response returns as binary and body as buffer
-    // https://github.com/request/request#requestoptions-callback
-    encoding: null,
-    // Accept and decode gzip
-    gzip: true,
-    // Follow any non-GET redirects
-    followAllRedirects: true,
-    ...(typeof window !== 'undefined'
-      ? {}
-      : {
-          // Follow GET redirects; this option is for Node only
-          followRedirect: true,
-        }),
-  };
 
-  const { response, body } = await get(options);
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), FETCH_TIMEOUT);
+
+  const options = {
+    method: 'GET',
+    headers: {
+      ...REQUEST_HEADERS,
+      ...headers,
+    },
+    signal: controller.signal,
+    // Follow redirects
+    redirect: 'follow',
+  } as Request;
+
+  const response = await fetch(finalParsedUrl.href, options);
+
+  clearTimeout(timeoutId);
 
   try {
     validateResponse(response);
     return {
       type: 'success',
-      body,
-      response,
+      body: Buffer.from(await response.arrayBuffer()),
+      headers: response.headers,
     };
   } catch (e) {
     return {

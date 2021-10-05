@@ -4,12 +4,14 @@ import { cleanDek } from './dek';
 import { cleanDatePublished } from './date-published';
 import { cleanContent } from './content';
 import { cleanTitle } from './title';
-import { CleanerOptions, ExtractorOptions } from '../extractors/types';
+import { CleanerOptions } from '../extractors/types';
 
-const wrapStringMethodFromCheerio = <TReturn, TRest extends any[]>(
-  func: (input: string, ...rest: TRest) => TReturn
-) => (input: cheerio.Cheerio, ...rest: TRest) =>
-  func(input.toString(), ...rest);
+const wrapStringMethodFromCheerio =
+  <TReturn, TRest extends any[]>(
+    func: (input: string, ...rest: TRest) => TReturn
+  ) =>
+  (input: cheerio.Cheerio, ...rest: TRest) =>
+    func(input.toString(), ...rest);
 
 const InternalCleaners = {
   author: wrapStringMethodFromCheerio(cleanAuthor),
@@ -21,16 +23,14 @@ const InternalCleaners = {
   title: wrapStringMethodFromCheerio(cleanTitle),
 };
 
-type InternalCleaners = typeof InternalCleaners;
-
-type Cleaners = {
-  [Key in keyof InternalCleaners]: (
+type CleanersMap = {
+  [Key in keyof typeof InternalCleaners]: (
     input: cheerio.Cheerio,
     opts: CleanerOptions
-  ) => string | undefined
+  ) => string | undefined;
 };
 
-export const Cleaners = InternalCleaners as Cleaners;
+export const Cleaners = InternalCleaners as CleanersMap;
 
 export { cleanAuthor };
 export { cleanImage };

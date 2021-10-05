@@ -1,4 +1,4 @@
-const { MediumExtractor, BloggerExtractor } = require('./custom');
+import { MediumExtractor, BloggerExtractor } from './custom';
 
 const Detectors = {
   'meta[name="al:ios:app_name"][value="Medium"]': MediumExtractor,

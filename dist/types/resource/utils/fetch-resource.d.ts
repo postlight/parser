@@ -1,5 +1,4 @@
 /// <reference types="node" />
-import { Response } from 'postman-request';
 export declare function validateResponse(response: Response, parseNon200?: boolean): boolean;
 export declare function baseDomain({ host }: {
     host: string;
@@ -7,7 +6,7 @@ export declare function baseDomain({ host }: {
 export declare type SuccessResult = {
     type: 'success';
     body: Buffer | string;
-    response: Response;
+    headers: Headers;
 };
 export declare type ErrorResult = {
     type: 'error';
