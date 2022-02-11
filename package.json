@@ -83,7 +83,7 @@
     "jasmine-core": "^2.5.2",
     "jest": "^23.6.0",
     "jest-cli": "^23.6.0",
-    "karma": "^3.1.4",
+    "karma": "^6.3.14",
     "karma-browserify": "^6.0.0",
     "karma-chrome-launcher": "^3.0.0",
     "karma-cli": "^2.0.0",
