@@ -16,6 +16,7 @@ export const WwwDmagazineComExtractor = {
     ],
 
     timezone: 'America/Chicago',
+    format: 'MMMM D, YYYY h:mm a',
   },
 
   dek: {
