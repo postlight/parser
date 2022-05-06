@@ -126,7 +126,7 @@
     "url": "^0.11.0",
     "valid-url": "^1.0.9",
     "wuzzy": "^0.1.4",
-    "yargs-parser": "^14.0.0"
+    "yargs-parser": "^15.0.1"
   },
   "bundleDependencies": [
     "jquery",
