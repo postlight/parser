@@ -1,6 +1,6 @@
 {
   "name": "@postlight/mercury-parser",
-  "version": "2.2.0",
+  "version": "2.2.1",
   "description": "Mercury transforms web pages into clean text. Publishers and programmers use it to make the web make sense, and readers use it to read any web article comfortably.",
   "author": "Postlight <mercury@postlight.com>",
   "homepage": "https://mercury.postlight.com",
@@ -83,8 +83,8 @@
     "jasmine-core": "^2.5.2",
     "jest": "^23.6.0",
     "jest-cli": "^23.6.0",
-    "karma": "^3.1.4",
-    "karma-browserify": "^6.0.0",
+    "karma": "^6.3.16",
+    "karma-browserify": "8.1.0",
     "karma-chrome-launcher": "^3.0.0",
     "karma-cli": "^2.0.0",
     "karma-jasmine": "^1.0.2",
@@ -126,7 +126,7 @@
     "url": "^0.11.0",
     "valid-url": "^1.0.9",
     "wuzzy": "^0.1.4",
-    "yargs-parser": "^14.0.0"
+    "yargs-parser": "^15.0.1"
   },
   "bundleDependencies": [
     "jquery",
