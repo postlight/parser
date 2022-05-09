@@ -8,15 +8,17 @@ import { excerptContent } from 'utils/text';
 
 const fs = require('fs');
 
-describe('QzComExtractor', () => {
+describe('TimesofindiaIndiatimesComExtractor', () => {
   describe('initial test case', () => {
     let result;
     let url;
     beforeAll(() => {
       url =
-        'https://qz.com/africa/1807355/nigerias-economy-has-best-quarterly-growth-since-recession/';
-      const html = fs.readFileSync('./fixtures/qz.com/1582826662145.html');
-      result = Mercury.parse(url, { html, fallback: false });
+        'https://timesofindia.indiatimes.com/india/china-snubs-imran-says-resolve-jk-bilaterally/articleshow/71496416.cms';
+      const html = fs.readFileSync(
+        './fixtures/timesofindia.indiatimes.com/1570663350014.html'
+      );
+      result = Mercury.parse(url, { html, fallback: true });
     });
 
     it('is selected properly', () => {
@@ -29,55 +31,53 @@ describe('QzComExtractor', () => {
 
     it('returns the title', async () => {
       // To pass this test, fill out the title selector
-      // in ./src/extractors/custom/qz.com/index.js.
+      // in ./src/extractors/custom/timesofindia.indiatimes.com/index.js.
       const { title } = await result;
 
       // Update these values with the expected values from
       // the article.
       assert.equal(
         title,
-        'Nigeria’s economy is making a comeback—but it’s still not happening fast enough'
+        `China snubs Imran Khan, says resolve J&K bilaterally`
       );
     });
 
     it('returns the author', async () => {
       // To pass this test, fill out the author selector
-      // in ./src/extractors/custom/qz.com/index.js.
+      // in ./src/extractors/custom/timesofindia.indiatimes.com/index.js.
       const { author } = await result;
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(author, 'Yomi Kazeem');
+      assert.equal(author, `Saibal Dasgupta`);
     });
 
-    // qz doesn't appear to pass the date from the server,
-    // so the date is unfortunately null
     it('returns the date_published', async () => {
       // To pass this test, fill out the date_published selector
-      // in ./src/extractors/custom/qz.com/index.js.
+      // in ./src/extractors/custom/timesofindia.indiatimes.com/index.js.
       const { date_published } = await result;
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(date_published, '2020-02-24T16:26:29.000Z');
+      assert.equal(date_published, '2019-10-09T05:35:00.000Z');
     });
 
     it('returns the lead_image_url', async () => {
       // To pass this test, fill out the lead_image_url selector
-      // in ./src/extractors/custom/qz.com/index.js.
+      // in ./src/extractors/custom/timesofindia.indiatimes.com/index.js.
       const { lead_image_url } = await result;
 
       // Update these values with the expected values from
       // the article.
       assert.equal(
         lead_image_url,
-        'https://cms.qz.com/wp-content/uploads/2017/04/nigerians-at-a-lagos-island-market.jpg?quality=75&strip=all&w=1400'
+        `https://static.toiimg.com/thumb/msid-71496420,width-1070,height-580,imgsize-83878,resizemode-6,overlay-toi_sw,pt-32,y_pad-40/photo.jpg`
       );
     });
 
     it('returns the content', async () => {
       // To pass this test, fill out the content selector
-      // in ./src/extractors/custom/qz.com/index.js.
+      // in ./src/extractors/custom/timesofindia.indiatimes.com/index.js.
       // You may also want to make use of the clean and transform
       // options.
       const { content } = await result;
@@ -95,7 +95,7 @@ describe('QzComExtractor', () => {
       // the article.
       assert.equal(
         first13,
-        'Since suffering a recession and full year of negative growth in 2016, Nigeria,'
+        'BEIJING: In what is being seen as a snub to the visiting Pakistan'
       );
     });
   });
