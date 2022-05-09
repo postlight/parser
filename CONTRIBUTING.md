@@ -143,7 +143,7 @@ preset. This helps keep our Markdown tidy and consistent.
 
 ### Node.js Version Requirements
 
-Mercury is built against Node `>= v8.10`. Since this is the
+Mercury is built against Node `>= v12.8.1`. Since this is the
 version we run in our CI environments, we recommend you use it when working on
 the Mercury codebase.
 
