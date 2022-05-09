@@ -35,6 +35,8 @@
     "build": "yarn lint && rollup -c && yarn test:build",
     "build:ci": "rollup -c && yarn test:build",
     "build:web": "yarn lint && rollup -c rollup.config.web.js && yarn test:build:web",
+    "build:esm": "yarn lint && rollup -c rollup.config.esm.js && yarn test:build:esm",
+    "build:esm:ci": "rollup -c rollup.config.esm.js && yarn test:build:esm",
     "build:web:ci": "rollup -c rollup.config.web.js && yarn test:build:web",
     "release": "yarn build && yarn build:web",
     "build:generator": "rollup -c scripts/rollup.config.js",
@@ -44,6 +46,7 @@
     "test:web": "node ./node_modules/karma/bin/karma start karma.conf.js --auto-watch",
     "test:build": "cd ./scripts && jest check-build.test.js",
     "test:build:web": "node ./scripts/proxy-browser-test.js",
+    "test:build:esm": "node ./scripts/proxy-browser-test.js",
     "watch:test": "jest --watch",
     "generate-parser": "node ./dist/generate-custom-parser.js"
   },
@@ -104,6 +107,7 @@
     "rollup-plugin-commonjs": "^9.2.0",
     "rollup-plugin-node-globals": "^1.4.0",
     "rollup-plugin-node-resolve": "^2.0.0",
+    "rollup-plugin-terser": "^6.1.0",
     "rollup-plugin-uglify": "^6.0.1",
     "watchify": "^3.11.1"
   },
