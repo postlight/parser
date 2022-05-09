@@ -10,6 +10,8 @@ jobs:
     <<: *defaults
     steps:
       - checkout
+      # For some reason phantomjs-prebuild is failing w/yarn, but npm installing works
+      - run: 'npm install --no-save phantomjs-prebuilt'
       - run: 'yarn install'
       - run: 'yarn lint:ci'
       - run: 'yarn build:ci'
@@ -32,6 +34,7 @@ jobs:
           at: ~/project
       - checkout
       - run: 'yarn install'
+      - run: 'yarn add karma-cli --dev'
       - run: 'yarn test:web --maxWorkers=4'
       - run: 'yarn build:web:ci --maxWorkers=4'
 
