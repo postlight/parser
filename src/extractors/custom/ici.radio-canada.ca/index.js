@@ -11,7 +11,7 @@ export const IciRadioCanadaCaExtractor = {
 
   date_published: {
     selectors: [['meta[name="dc.date.created"]', 'value']],
-
+    format: 'YYYY-MM-DD|HH[h]mm',
     timezone: 'America/New_York',
   },
 
