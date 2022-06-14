@@ -2,19 +2,6 @@
 import assert from 'assert';
 import cheerio from 'cheerio';
 
-let urls = [
-  {
-    url: 'http://www.cnn.com/2016/11/05/middleeast/iraq-mosul-isis-offensive/',
-    title: 'Iraqi troops storm town south of Mosul',
-  },
-  {
-    url:
-      'https://www.cnn.com/2019/01/30/politics/trump-intel-chiefs-foreign-policy-iran-isis-north-korea/index.html',
-    title:
-      'Trump chastises intel chiefs after they contradict him on Iran and claims of foreign policy success',
-  },
-];
-
 // don't run this on CI b/c we want to avoid network requests
 if (
   process.env.CI ||
@@ -38,6 +25,22 @@ if (
     typeof Mercury === 'undefined' ? require('../dist/mercury') : Mercury;
 
   describe('Is Mercury build working', () => {
+    let urls = [
+      {
+        url:
+          'http://www.cnn.com/2016/11/05/middleeast/iraq-mosul-isis-offensive/',
+        title: `Iraqi troops storm town south of Mosul${
+          Merc.browser ? ' | CNN' : ''
+        }`,
+      },
+      {
+        url:
+          'https://www.cnn.com/2019/01/30/politics/trump-intel-chiefs-foreign-policy-iran-isis-north-korea/index.html',
+        title: `Trump chastises intel chiefs after they contradict him on Iran and claims of foreign policy success${
+          Merc.browser ? ' | CNN Politics' : ''
+        }`,
+      },
+    ];
     if (Merc.browser) {
       const proxyUrl = 'http://localhost:3000/';
       urls = urls.map(article => ({
