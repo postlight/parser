@@ -8,14 +8,13 @@ import { excerptContent } from 'utils/text';
 
 const fs = require('fs');
 
-describe('QzComExtractor', () => {
+describe('MaTtiasBeExtractor', () => {
   describe('initial test case', () => {
     let result;
     let url;
     beforeAll(() => {
-      url =
-        'https://qz.com/africa/1807355/nigerias-economy-has-best-quarterly-growth-since-recession/';
-      const html = fs.readFileSync('./fixtures/qz.com/1582826662145.html');
+      url = 'https://ma.ttias.be/cronweekly/issue-130/';
+      const html = fs.readFileSync('./fixtures/ma.ttias.be/1587659928239.html');
       result = Mercury.parse(url, { html, fallback: false });
     });
 
@@ -29,60 +28,86 @@ describe('QzComExtractor', () => {
 
     it('returns the title', async () => {
       // To pass this test, fill out the title selector
-      // in ./src/extractors/custom/qz.com/index.js.
+      // in ./src/extractors/custom/ma.ttias.be/index.js.
       const { title } = await result;
 
       // Update these values with the expected values from
       // the article.
       assert.equal(
         title,
-        'Nigeria’s economy is making a comeback—but it’s still not happening fast enough'
+        `cron.weekly issue #130: Github, keycloak, proc, redis6, cron & more`
       );
     });
 
     it('returns the author', async () => {
       // To pass this test, fill out the author selector
-      // in ./src/extractors/custom/qz.com/index.js.
+      // in ./src/extractors/custom/ma.ttias.be/index.js.
       const { author } = await result;
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(author, 'Yomi Kazeem');
+      assert.equal(author, 'Mattias Geniar');
     });
 
-    // qz doesn't appear to pass the date from the server,
-    // so the date is unfortunately null
     it('returns the date_published', async () => {
       // To pass this test, fill out the date_published selector
-      // in ./src/extractors/custom/qz.com/index.js.
+      // in ./src/extractors/custom/ma.ttias.be/index.js.
       const { date_published } = await result;
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(date_published, '2020-02-24T16:26:29.000Z');
+      assert.equal(date_published, `2020-04-19T05:50:00.000Z`);
+    });
+
+    it('returns the dek', async () => {
+      // To pass this test, fill out the dek selector
+      // in ./src/extractors/custom/ma.ttias.be/index.js.
+      const { dek } = await result;
+
+      // Update these values with the expected values from
+      // the article.
+      assert.equal(dek, null);
     });
 
     it('returns the lead_image_url', async () => {
       // To pass this test, fill out the lead_image_url selector
-      // in ./src/extractors/custom/qz.com/index.js.
+      // in ./src/extractors/custom/ma.ttias.be/index.js.
       const { lead_image_url } = await result;
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(
-        lead_image_url,
-        'https://cms.qz.com/wp-content/uploads/2017/04/nigerians-at-a-lagos-island-market.jpg?quality=75&strip=all&w=1400'
-      );
+      assert.equal(lead_image_url, null);
     });
 
     it('returns the content', async () => {
-      // To pass this test, fill out the content selector
-      // in ./src/extractors/custom/qz.com/index.js.
-      // You may also want to make use of the clean and transform
-      // options.
-      const { content } = await result;
+      const html = fs.readFileSync('./fixtures/ma.ttias.be/1587659928239.html');
+      const uri = 'https://ma.ttias.be/cronweekly/issue-130/';
+
+      const { content } = await Mercury.parse(uri, { html });
 
       const $ = cheerio.load(content || '');
+
+      // Ensure that there are 3 h2 elements.
+      const h2 = $('h2');
+
+      assert.equal(h2.length, 3);
+
+      // Ensure that there are h2 h2 elements.
+      const h3 = $('h3');
+
+      assert.equal(h3.length, 27);
+
+      // Ensure that there is 1 ul element.
+      const ul = $('ul');
+
+      assert.equal(ul.length, 1);
+
+      // Ensure that there are no nav elements.
+      const nav = $('nav');
+
+      assert.equal(nav.length, 0);
+
+      // Check the first 13 words.
 
       const first13 = excerptContent(
         $('*')
@@ -91,11 +116,9 @@ describe('QzComExtractor', () => {
         13
       );
 
-      // Update these values with the expected values from
-      // the article.
       assert.equal(
         first13,
-        'Since suffering a recession and full year of negative growth in 2016, Nigeria,'
+        'Hi everyone! 👋 Welcome to cron.weekly issue #130. There’s quite a bit of'
       );
     });
   });

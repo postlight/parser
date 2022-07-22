@@ -1,6 +1,6 @@
 # Mercury Parser Changelog
 
-### 2.2.1 (Sept 08, 2020)
+### 2.2.1 (Sept 08, 2021)
 
 ##### Commits
 

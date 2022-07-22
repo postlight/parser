@@ -134,3 +134,6 @@ export * from './biorxiv.org';
 export * from './epaper.zeit.de';
 export * from './www.ladbible.com';
 export * from './timesofindia.indiatimes.com';
+export * from './ma.ttias.be';
+export * from './pastebin.com';
+export * from './www.abendblatt.de';
