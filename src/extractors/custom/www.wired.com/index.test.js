@@ -17,7 +17,7 @@ describe('WiredExtractor', () => {
       url =
         'https://www.wired.com/2016/09/ode-rosetta-spacecraft-going-die-comet/';
       const html = fs.readFileSync(
-        './fixtures/www.wired.com/1475256747028.html'
+        './fixtures/www.wired.com/1611475755063.html'
       );
       result = Mercury.parse(url, { html, fallback: false });
     });
@@ -62,7 +62,7 @@ describe('WiredExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(date_published, '2016-09-30T07:00:12.000Z');
+      assert.equal(date_published.split('T')[0], '2016-09-30');
     });
 
     it('returns the lead_image_url', async () => {
@@ -74,7 +74,7 @@ describe('WiredExtractor', () => {
       // the article.
       assert.equal(
         lead_image_url,
-        'https://www.wired.com/wp-content/uploads/2016/09/Rosetta_impact-1-1200x630.jpg'
+        'https://media.wired.com/photos/5926b676af95806129f50602/191:100/w_1280,c_limit/Rosetta_impact-1.jpg'
       );
     });
 
@@ -98,7 +98,7 @@ describe('WiredExtractor', () => {
       // the article.
       assert.equal(
         first13,
-        'Today, the European Space Agency’s Rosetta spacecraft will engage its thrusters for one'
+        "Today, the European Space Agency's Rosetta spacecraft will engage its thrusters for one"
       );
     });
   });

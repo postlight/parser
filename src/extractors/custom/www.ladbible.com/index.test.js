@@ -8,14 +8,16 @@ import { excerptContent } from 'utils/text';
 
 const fs = require('fs');
 
-describe('QzComExtractor', () => {
+describe('WwwLadbibleComExtractor', () => {
   describe('initial test case', () => {
     let result;
     let url;
     beforeAll(() => {
       url =
-        'https://qz.com/africa/1807355/nigerias-economy-has-best-quarterly-growth-since-recession/';
-      const html = fs.readFileSync('./fixtures/qz.com/1582826662145.html');
+        'https://www.ladbible.com/news/latest-aussie-government-sparks-fury-over-graphic-and-confronting-covid-19-ad-20210711';
+      const html = fs.readFileSync(
+        './fixtures/www.ladbible.com/1626477326151.html'
+      );
       result = Mercury.parse(url, { html, fallback: false });
     });
 
@@ -29,55 +31,53 @@ describe('QzComExtractor', () => {
 
     it('returns the title', async () => {
       // To pass this test, fill out the title selector
-      // in ./src/extractors/custom/qz.com/index.js.
+      // in ./src/extractors/custom/www.ladbible.com/index.js.
       const { title } = await result;
 
       // Update these values with the expected values from
       // the article.
       assert.equal(
         title,
-        'Nigeria’s economy is making a comeback—but it’s still not happening fast enough'
+        `Aussie Government Sparks Fury Over 'Graphic' And Confronting Covid-19 Ad`
       );
     });
 
     it('returns the author', async () => {
       // To pass this test, fill out the author selector
-      // in ./src/extractors/custom/qz.com/index.js.
+      // in ./src/extractors/custom/www.ladbible.com/index.js.
       const { author } = await result;
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(author, 'Yomi Kazeem');
+      assert.equal(author, 'Stewart Perrie');
     });
 
-    // qz doesn't appear to pass the date from the server,
-    // so the date is unfortunately null
     it('returns the date_published', async () => {
       // To pass this test, fill out the date_published selector
-      // in ./src/extractors/custom/qz.com/index.js.
+      // in ./src/extractors/custom/www.ladbible.com/index.js.
       const { date_published } = await result;
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(date_published, '2020-02-24T16:26:29.000Z');
+      assert.equal(date_published, '2021-07-11T21:00:00.000Z');
     });
 
     it('returns the lead_image_url', async () => {
       // To pass this test, fill out the lead_image_url selector
-      // in ./src/extractors/custom/qz.com/index.js.
+      // in ./src/extractors/custom/www.ladbible.com/index.js.
       const { lead_image_url } = await result;
 
       // Update these values with the expected values from
       // the article.
       assert.equal(
         lead_image_url,
-        'https://cms.qz.com/wp-content/uploads/2017/04/nigerians-at-a-lagos-island-market.jpg?quality=75&strip=all&w=1400'
+        `https://www.ladbible.com/cdn-cgi/image/width=1200,quality=70,format=jpeg,fit=cover,dpr=1/https%3A%2F%2Fs3-images.ladbible.com%2Fs3%2Fcontent%2F788d729460eb11aa5ceadb28b93c0f8a.png`
       );
     });
 
     it('returns the content', async () => {
       // To pass this test, fill out the content selector
-      // in ./src/extractors/custom/qz.com/index.js.
+      // in ./src/extractors/custom/www.ladbible.com/index.js.
       // You may also want to make use of the clean and transform
       // options.
       const { content } = await result;
@@ -95,7 +95,7 @@ describe('QzComExtractor', () => {
       // the article.
       assert.equal(
         first13,
-        'Since suffering a recession and full year of negative growth in 2016, Nigeria,'
+        'The Australian government has copped backlash for publishing a confronting and graphic advertisement'
       );
     });
   });

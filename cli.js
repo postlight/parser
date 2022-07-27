@@ -2,6 +2,7 @@
 /* eslint-disable */
 
 const Mercury = require('./dist/mercury');
+const package_info = require('./package.json');
 const argv = require('yargs-parser')(process.argv.slice(2));
 
 const {
@@ -16,6 +17,7 @@ const {
   h,
   addExtractor,
   x,
+  version,
 } = argv;
 (async (
   urlToParse,
@@ -23,8 +25,14 @@ const {
   extendedTypes,
   extendedListTypes,
   headers,
-  addExtractor
+  addExtractor,
+  version,
 ) => {
+  if (version) {
+    console.log(package_info.version);
+    process.exit(0);
+  }
+
   if (!urlToParse) {
     console.log(
       '\n\
