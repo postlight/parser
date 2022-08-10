@@ -15,9 +15,7 @@ describe('WwwHowtogeekComExtractor', () => {
     beforeAll(() => {
       url =
         'http://www.howtogeek.com/282568/amazon-echo-vs.-google-home-which-one-should-you-buy/';
-      const html = fs.readFileSync(
-        './fixtures/www.howtogeek.com/1482438125052.html'
-      );
+      const html = fs.readFileSync('./fixtures/www.howtogeek.com.html');
       result = Mercury.parse(url, { html, fallback: false });
     });
 

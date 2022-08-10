@@ -15,9 +15,7 @@ describe('LittleThingsExtractor', () => {
     let url;
     beforeAll(() => {
       url = 'http://www.littlethings.com/diy-pineapple-lamp/';
-      const html = fs.readFileSync(
-        './fixtures/www.littlethings.com/1475605036506.html'
-      );
+      const html = fs.readFileSync('./fixtures/www.littlethings.com.html');
       result = Mercury.parse(url, { html, fallback: false });
     });
 

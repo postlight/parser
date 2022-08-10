@@ -16,9 +16,7 @@ describe('BuzzfeedExtractor', () => {
     beforeAll(() => {
       url =
         'https://www.buzzfeed.com/ikrd/people-are-calling-out-this-edited-picture-of-demi-lovato-fo';
-      const html = fs.readFileSync(
-        './fixtures/www.buzzfeed.com/1475531975121.html'
-      );
+      const html = fs.readFileSync('./fixtures/www.buzzfeed.com.html');
       result = Mercury.parse(url, { html, fallback: false });
     });
 
@@ -99,9 +97,7 @@ describe('BuzzfeedExtractor', () => {
     beforeAll(() => {
       url =
         'https://www.buzzfeed.com/katiejmbaker/college-trump-supporters-the-new-counterculture?utm_term=.ckb72b58Y#.oxY8ZOWY3';
-      const html = fs.readFileSync(
-        './fixtures/www.buzzfeed.com/1480717502688.html'
-      );
+      const html = fs.readFileSync('./fixtures/www.buzzfeed.com--splash.html');
       result = Mercury.parse(url, { html, fallback: false });
     });
 

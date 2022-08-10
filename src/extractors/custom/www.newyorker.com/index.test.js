@@ -15,9 +15,7 @@ describe('NewYorkerExtractor', () => {
     beforeAll(() => {
       url =
         'http://www.newyorker.com/tech/elements/hacking-cryptography-and-the-countdown-to-quantum-computing';
-      const html = fs.readFileSync(
-        './fixtures/www.newyorker.com/1611473608343.html'
-      );
+      const html = fs.readFileSync('./fixtures/www.newyorker.com.html');
       result = Mercury.parse(url, { html, fallback: false });
     });
 
@@ -109,7 +107,7 @@ describe('NewYorkerExtractor', () => {
       url =
         'http://www.newyorker.com/magazine/2016/12/05/lessons-from-my-mother';
       const html = fs.readFileSync(
-        './fixtures/www.newyorker.com/1611475571383.html'
+        './fixtures/www.newyorker.com--magazine.html'
       );
       result = Mercury.parse(url, { html, fallback: false });
     });
@@ -137,7 +135,7 @@ describe('NewYorkerExtractor', () => {
       url =
         'https://www.newyorker.com/humor/daily-shouts/teas-you-should-probably-get-rid-of-already';
       const html = fs.readFileSync(
-        './fixtures/www.newyorker.com/1557834611707.html'
+        './fixtures/www.newyorker.com--multiple-authors.html'
       );
       result = Mercury.parse(url, { html, fallback: false });
     });

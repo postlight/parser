@@ -15,9 +15,7 @@ describe('WwwCnetComExtractor', () => {
     beforeAll(() => {
       url =
         'https://www.cnet.com/news/seven-mobile-trends-to-look-for-in-2017/';
-      const html = fs.readFileSync(
-        './fixtures/www.cnet.com/1482428196806.html'
-      );
+      const html = fs.readFileSync('./fixtures/www.cnet.com.html');
       result = Mercury.parse(url, { html, fallback: false });
     });
 

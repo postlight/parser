@@ -15,9 +15,7 @@ describe('twofortysevensportsComExtractor', () => {
     beforeAll(() => {
       url =
         'http://247sports.com/Bolt/Breaking-Houston-hires-Major-Applewhite-as-head-coach-49676932';
-      const html = fs.readFileSync(
-        './fixtures/247sports.com/1481309665090.html'
-      );
+      const html = fs.readFileSync('./fixtures/247sports.com.html');
       result = Mercury.parse(url, { html, fallback: false });
     });
 

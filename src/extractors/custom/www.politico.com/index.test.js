@@ -16,9 +16,7 @@ describe('PoliticoExtractor', () => {
     beforeAll(() => {
       url =
         'http://www.politico.com/story/2016/10/who-will-win-the-vp-debate-229079?lo=ut_a1';
-      const html = fs.readFileSync(
-        './fixtures/www.politico.com/1475617690069.html'
-      );
+      const html = fs.readFileSync('./fixtures/www.politico.com.html');
       result = Mercury.parse(url, { html, fallback: false });
     });
 

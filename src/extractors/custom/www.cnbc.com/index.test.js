@@ -15,9 +15,7 @@ describe('WwwCnbcComExtractor', () => {
     beforeAll(() => {
       url =
         'http://www.cnbc.com/2016/12/20/coals-us-stronghold-is-losing-steam-even-as-trump-aims-for-a-revival.html';
-      const html = fs.readFileSync(
-        './fixtures/www.cnbc.com/1482251664848.html'
-      );
+      const html = fs.readFileSync('./fixtures/www.cnbc.com.html');
       result = Mercury.parse(url, { html, fallback: false });
     });
 
@@ -106,9 +104,7 @@ describe('WwwCnbcComExtractor', () => {
     beforeAll(() => {
       url =
         'https://www.cnbc.com/2019/03/18/heres-how-cybersecurity-vendors-drive-the-hacking-news-cycle.html';
-      const html = fs.readFileSync(
-        './fixtures/www.cnbc.com/1553160766510.html'
-      );
+      const html = fs.readFileSync('./fixtures/www.cnbc.com--redesign.html');
       result = Mercury.parse(url, { html, fallback: false });
     });
 

@@ -15,9 +15,7 @@ describe('WwwLinkedinComExtractor', () => {
     beforeAll(() => {
       url =
         'https://www.linkedin.com/pulse/what-set-your-soul-fire-2017-ellyn-shook';
-      const html = fs.readFileSync(
-        './fixtures/www.linkedin.com/1485452542218.html'
-      );
+      const html = fs.readFileSync('./fixtures/www.linkedin.com.html');
       result = Mercury.parse(url, { html, fallback: false });
     });
 

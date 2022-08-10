@@ -6,7 +6,7 @@ import Resource from 'resource';
 export default async function collectAllPages({
   next_page_url,
   html,
-  $,
+  // $,
   metaCache,
   result,
   Extractor,
@@ -22,13 +22,16 @@ export default async function collectAllPages({
   while (next_page_url && pages < 26) {
     pages += 1;
     // eslint-disable-next-line no-await-in-loop
-    $ = await Resource.create(next_page_url);
-    html = $.html();
+    const newDoc = await Resource.create(next_page_url);
+    if (newDoc.error) {
+      break;
+    }
+    html = newDoc.html();
 
     const extractorOpts = {
       url: next_page_url,
       html,
-      $,
+      $: newDoc,
       metaCache,
       extractedTitle: title,
       previousUrls,

@@ -14,9 +14,7 @@ describe('GothamistComExtractor', () => {
     let url;
     beforeAll(() => {
       url = 'http://gothamist.com/2017/03/09/fallout_shelters_nyc.php';
-      const html = fs.readFileSync(
-        './fixtures/gothamist.com/1489073770258.html'
-      );
+      const html = fs.readFileSync('./fixtures/gothamist.com.html');
       result = Mercury.parse(url, { html, fallback: false });
     });
 

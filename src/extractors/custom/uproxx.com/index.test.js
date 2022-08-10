@@ -14,7 +14,7 @@ describe('UproxxComExtractor', () => {
     let url;
     beforeAll(() => {
       url = 'http://uproxx.com/news/rudy-giuliani-not-secretary-of-state/';
-      const html = fs.readFileSync('./fixtures/uproxx.com/1481324633976.html');
+      const html = fs.readFileSync('./fixtures/uproxx.com.html');
       result = Mercury.parse(url, { html, fallback: false });
     });
 

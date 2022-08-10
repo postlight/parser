@@ -15,9 +15,7 @@ describe('WwwPopsugarComExtractor', () => {
     beforeAll(() => {
       url =
         'http://www.popsugar.com/home/Millennial-Decorating-Mistakes-42696116#photo-42696116';
-      const html = fs.readFileSync(
-        './fixtures/www.popsugar.com/1482182390796.html'
-      );
+      const html = fs.readFileSync('./fixtures/www.popsugar.com.html');
       result = Mercury.parse(url, { html, fallback: false });
     });
 

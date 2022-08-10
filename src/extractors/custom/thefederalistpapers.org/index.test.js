@@ -15,9 +15,7 @@ describe('ThefederalistpapersOrgExtractor', () => {
     beforeAll(() => {
       url =
         'http://thefederalistpapers.org/education-2/the-failure-of-public-schooling-in-one-chart';
-      const html = fs.readFileSync(
-        './fixtures/thefederalistpapers.org/1482344359572.html'
-      );
+      const html = fs.readFileSync('./fixtures/thefederalistpapers.org.html');
       result = Mercury.parse(url, { html, fallback: false });
     });
 

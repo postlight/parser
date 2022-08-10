@@ -33,7 +33,10 @@ describe('scoreContent($, weightNodes)', () => {
   });
 
   it('scores this Wired article the same', () => {
-    const html = fs.readFileSync('./fixtures/wired.html', 'utf-8');
+    const html = fs.readFileSync(
+      './fixtures/www.wired.com--other.html',
+      'utf-8'
+    );
     const $ = cheerio.load(html);
     scoreContent($);
 
@@ -41,8 +44,9 @@ describe('scoreContent($, weightNodes)', () => {
   });
 
   it('scores this Vulture article', () => {
-    const html = fs.readFileSync('./fixtures/vulture.html', 'utf-8');
-    const $ = scoreContent(cheerio.load(html));
+    const html = fs.readFileSync('./fixtures/www.vulture.com.html', 'utf-8');
+    let $ = cheerio.load(html);
+    $ = scoreContent($);
 
     assert.equal($('p[score]').length, 62);
     const itemprop = $('[itemprop=articleBody]').first();

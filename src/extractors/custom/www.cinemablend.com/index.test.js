@@ -15,9 +15,7 @@ describe('WwwCinemablendComExtractor', () => {
     beforeAll(() => {
       url =
         'http://www.cinemablend.com/news/1602870/to-3d-or-not-to-3d-buy-the-right-passengers-ticket';
-      const html = fs.readFileSync(
-        './fixtures/www.cinemablend.com/1482432215722.html'
-      );
+      const html = fs.readFileSync('./fixtures/www.cinemablend.com.html');
       result = Mercury.parse(url, { html, fallback: false });
     });
 

@@ -15,9 +15,7 @@ describe('WwwLemondeFrExtractor', () => {
     beforeAll(() => {
       url =
         'https://www.lemonde.fr/economie/article/2019/05/07/dans-ses-previsions-economiques-bruxelles-confirme-la-montee-des-perils_5459325_3234.html';
-      const html = fs.readFileSync(
-        './fixtures/www.lemonde.fr/1557235525251.html'
-      );
+      const html = fs.readFileSync('./fixtures/www.lemonde.fr.html');
       result = Mercury.parse(url, { html, fallback: false });
     });
 

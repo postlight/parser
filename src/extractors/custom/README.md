@@ -249,9 +249,7 @@ By default, the first test, which ensures your custom extractor is being selecte
 it('returns the title', async () => {
   // To pass this test, fill out the title selector
   // in ./src/extractors/custom/www.newyorker.com/index.js.
-  const html = fs.readFileSync(
-    './fixtures/www.newyorker.com/1475245895852.html'
-  );
+  const html = fs.readFileSync('./fixtures/www.newyorker.com.html');
   const articleUrl =
     'http://www.newyorker.com/tech/elements/hacking-cryptography-and-the-countdown-to-quantum-computing';
 
@@ -263,7 +261,7 @@ it('returns the title', async () => {
 });
 ```
 
-As you can see, to pass this test, we need to fill out our title selector. In order to do this, you need to know what your selector is. To do this, open the html fixture the generator downloaded for you in the [`fixtures`](/fixtures) directory. In our example, that file is `fixtures/www.newyorker.com/1475248565793.html`. Now open that file in your web browser.
+As you can see, to pass this test, we need to fill out our title selector. In order to do this, you need to know what your selector is. To do this, open the html fixture the generator downloaded for you in the [`fixtures`](/fixtures) directory. In our example, that file is `fixtures/www.newyorker.com.html`. Now open that file in your web browser.
 
 The page should look more or less exactly like the site you pointed it to, but this version is downloaded locally for test purposes. (You should always look for selectors using this local fixture rather than the actual web site; some sites re-write elements after the page loads, and we want to make sure we're looking at the page the same way Postlight Parser will be.)
 

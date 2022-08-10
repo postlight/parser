@@ -14,9 +14,7 @@ describe('WwwThepennyhoarderComExtractor', () => {
     let url;
     beforeAll(() => {
       url = 'http://www.thepennyhoarder.com/find-hidden-cash/';
-      const html = fs.readFileSync(
-        './fixtures/www.thepennyhoarder.com/1482509014877.html'
-      );
+      const html = fs.readFileSync('./fixtures/www.thepennyhoarder.com.html');
       result = Mercury.parse(url, { html, fallback: false });
     });
 

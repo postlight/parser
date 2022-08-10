@@ -15,9 +15,7 @@ describe('WwwThevergeComExtractor', () => {
     beforeAll(() => {
       url =
         'http://www.theverge.com/2016/11/29/13774648/fcc-att-zero-rating-directv-net-neutrality-vs-tmobile';
-      const html = fs.readFileSync(
-        './fixtures/www.theverge.com/1480520999617.html'
-      );
+      const html = fs.readFileSync('./fixtures/www.theverge.com.html');
       result = Mercury.parse(url, { html, fallback: false });
     });
 
@@ -115,9 +113,7 @@ describe('WwwThevergeComExtractor', () => {
     // in ./src/extractors/custom/www.theverge.com/index.js.
     // You may also want to make use of the clean and transform
     // options.
-    const html = fs.readFileSync(
-      './fixtures/www.theverge.com/1480526003318.html'
-    );
+    const html = fs.readFileSync('./fixtures/www.theverge.com--feature.html');
     const url =
       'http://www.theverge.com/2016/10/31/13478080/microsoft-surface-studio-design-engineering-interview';
 

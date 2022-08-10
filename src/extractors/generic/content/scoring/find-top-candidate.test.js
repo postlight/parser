@@ -66,7 +66,10 @@ describe('findTopCandidate($)', () => {
   });
 
   it('appends a sibling with a good enough score', () => {
-    const html = fs.readFileSync('./fixtures/latimes.html', 'utf-8');
+    const html = fs.readFileSync(
+      './fixtures/www.latimes.com--old.html',
+      'utf-8'
+    );
 
     let $ = cheerio.load(html);
     $ = scoreContent($);

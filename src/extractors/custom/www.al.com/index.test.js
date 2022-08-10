@@ -15,7 +15,7 @@ describe('WwwAlComExtractor', () => {
     beforeAll(() => {
       url =
         'http://www.al.com/news/birmingham/index.ssf/2016/12/two_arrested_in_multi-state_de.html#incart_river_home';
-      const html = fs.readFileSync('./fixtures/www.al.com/1482445422101.html');
+      const html = fs.readFileSync('./fixtures/www.al.com.html');
       result = Mercury.parse(url, { html, fallback: false });
     });
 

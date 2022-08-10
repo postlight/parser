@@ -15,7 +15,7 @@ describe('QzComExtractor', () => {
     beforeAll(() => {
       url =
         'https://qz.com/africa/1807355/nigerias-economy-has-best-quarterly-growth-since-recession/';
-      const html = fs.readFileSync('./fixtures/qz.com/1582826662145.html');
+      const html = fs.readFileSync('./fixtures/qz.com.html');
       result = Mercury.parse(url, { html, fallback: false });
     });
 

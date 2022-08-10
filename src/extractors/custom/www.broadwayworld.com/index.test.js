@@ -16,9 +16,7 @@ describe('CustomExtractor', () => {
     beforeAll(() => {
       url =
         'http://www.broadwayworld.com/article/American-Theatre-Wing-Launches-Andrew-Lloyd-Webber-Training-Scholarships-20161013';
-      const html = fs.readFileSync(
-        './fixtures/www.broadwayworld.com/1476392567143.html'
-      );
+      const html = fs.readFileSync('./fixtures/www.broadwayworld.com.html');
       result = Mercury.parse(url, { html, fallback: false });
     });
     it('is selected properly', async () => {

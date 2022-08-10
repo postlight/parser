@@ -22,9 +22,7 @@ describe('WwwUsmagazineComExtractor', () => {
   it('returns the title', async () => {
     // To pass this test, fill out the title selector
     // in ./src/extractors/custom/www.usmagazine.com/index.js.
-    const html = fs.readFileSync(
-      './fixtures/www.usmagazine.com/1481147005164.html'
-    );
+    const html = fs.readFileSync('./fixtures/www.usmagazine.com.html');
     const articleUrl =
       'http://www.usmagazine.com/celebrity-news/news/lady-gaga-shares-pic-of-ex-taylor-kinney-with-her-mom-w454419';
 
@@ -44,9 +42,7 @@ describe('WwwUsmagazineComExtractor', () => {
   it('returns the author', async () => {
     // To pass this test, fill out the author selector
     // in ./src/extractors/custom/www.usmagazine.com/index.js.
-    const html = fs.readFileSync(
-      './fixtures/www.usmagazine.com/1481147005164.html'
-    );
+    const html = fs.readFileSync('./fixtures/www.usmagazine.com.html');
     const articleUrl =
       'http://www.usmagazine.com/celebrity-news/news/lady-gaga-shares-pic-of-ex-taylor-kinney-with-her-mom-w454419';
 
@@ -63,9 +59,7 @@ describe('WwwUsmagazineComExtractor', () => {
   it('returns the date_published', async () => {
     // To pass this test, fill out the date_published selector
     // in ./src/extractors/custom/www.usmagazine.com/index.js.
-    const html = fs.readFileSync(
-      './fixtures/www.usmagazine.com/1481147005164.html'
-    );
+    const html = fs.readFileSync('./fixtures/www.usmagazine.com.html');
     const articleUrl =
       'http://www.usmagazine.com/celebrity-news/news/lady-gaga-shares-pic-of-ex-taylor-kinney-with-her-mom-w454419';
 
@@ -82,9 +76,7 @@ describe('WwwUsmagazineComExtractor', () => {
   it('returns the lead_image_url', async () => {
     // To pass this test, fill out the lead_image_url selector
     // in ./src/extractors/custom/www.usmagazine.com/index.js.
-    const html = fs.readFileSync(
-      './fixtures/www.usmagazine.com/1481147005164.html'
-    );
+    const html = fs.readFileSync('./fixtures/www.usmagazine.com.html');
     const articleUrl =
       'http://www.usmagazine.com/celebrity-news/news/lady-gaga-shares-pic-of-ex-taylor-kinney-with-her-mom-w454419';
 
@@ -106,9 +98,7 @@ describe('WwwUsmagazineComExtractor', () => {
     // in ./src/extractors/custom/www.usmagazine.com/index.js.
     // You may also want to make use of the clean and transform
     // options.
-    const html = fs.readFileSync(
-      './fixtures/www.usmagazine.com/1481147005164.html'
-    );
+    const html = fs.readFileSync('./fixtures/www.usmagazine.com.html');
     const url =
       'http://www.usmagazine.com/celebrity-news/news/lady-gaga-shares-pic-of-ex-taylor-kinney-with-her-mom-w454419';
 

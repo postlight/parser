@@ -16,7 +16,7 @@ describe('WwwProspectmagazineCoUkExtractor', () => {
       url =
         'http://www.prospectmagazine.co.uk/magazine/anglosphere-old-dream-brexit-role-in-the-world';
       const html = fs.readFileSync(
-        './fixtures/www.prospectmagazine.co.uk/1488476298434.html'
+        './fixtures/www.prospectmagazine.co.uk.html'
       );
       result = Mercury.parse(url, { html, fallback: false });
     });

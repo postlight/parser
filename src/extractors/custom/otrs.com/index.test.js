@@ -14,7 +14,7 @@ describe('OtrsComExtractor', () => {
     let url;
     beforeAll(() => {
       url = 'https://otrs.com/otrsmag/silver-society-the-young-old-people/';
-      const html = fs.readFileSync('./fixtures/otrs.com/1553117632270.html');
+      const html = fs.readFileSync('./fixtures/otrs.com.html');
       result = Mercury.parse(url, {
         html,
         fallback: false,

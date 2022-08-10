@@ -15,9 +15,7 @@ describe('WwwRollingstoneComExtractor', () => {
     beforeAll(() => {
       url =
         'http://www.rollingstone.com/movies/features/how-la-la-land-resurrected-the-hollywood-musical-w454198';
-      const html = fs.readFileSync(
-        './fixtures/www.rollingstone.com/1482380017694.html'
-      );
+      const html = fs.readFileSync('./fixtures/www.rollingstone.com.html');
       result = Mercury.parse(url, { html, fallback: false });
     });
 

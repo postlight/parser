@@ -15,9 +15,7 @@ describe('WwwTheguardianComExtractor', () => {
     beforeAll(() => {
       url =
         'https://www.theguardian.com/us-news/2016/nov/29/standing-rock-protest-north-dakota-shutdown-evacuation';
-      const html = fs.readFileSync(
-        './fixtures/www.theguardian.com/1480457558008.html'
-      );
+      const html = fs.readFileSync('./fixtures/www.theguardian.com.html');
       result = Mercury.parse(url, { html, fallback: false });
     });
 

@@ -15,7 +15,7 @@ describe('WwwVoxComExtractor', () => {
     beforeAll(() => {
       url =
         'http://www.vox.com/culture/2016/12/10/13898352/trump-twitter-harassment-policy-bannable';
-      const html = fs.readFileSync('./fixtures/www.vox.com/1481563623532.html');
+      const html = fs.readFileSync('./fixtures/www.vox.com.html');
       result = Mercury.parse(url, { html, fallback: false });
     });
 

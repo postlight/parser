@@ -14,9 +14,7 @@ describe('BookwalkerJpExtractor', () => {
     let url;
     beforeAll(() => {
       url = 'https://bookwalker.jp/de2b8f78c6-f6bb-4da9-8d15-202e8c6c185b/';
-      const html = fs.readFileSync(
-        './fixtures/bookwalker.jp/1554821842273.html'
-      );
+      const html = fs.readFileSync('./fixtures/bookwalker.jp.html');
       result = Mercury.parse(url, {
         html,
         fallback: false,

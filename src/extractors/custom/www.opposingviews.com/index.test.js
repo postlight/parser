@@ -15,9 +15,7 @@ describe('WwwOpposingviewsComExtractor', () => {
     beforeAll(() => {
       url =
         'http://www.opposingviews.com/i/politics/trump-picks-investing-mogul-icahn-advise-him-finance-regulation';
-      const html = fs.readFileSync(
-        './fixtures/www.opposingviews.com/1482427531189.html'
-      );
+      const html = fs.readFileSync('./fixtures/www.opposingviews.com.html');
       result = Mercury.parse(url, { html, fallback: false });
     });
 

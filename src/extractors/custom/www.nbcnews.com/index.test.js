@@ -14,9 +14,7 @@ describe('WwwNbcnewsComExtractor', () => {
     let url;
     beforeAll(() => {
       url = 'http://www.nbcnews.com/tech/tech-news/what-s-hold-spacex-n695001';
-      const html = fs.readFileSync(
-        './fixtures/www.nbcnews.com/1481667763790.html'
-      );
+      const html = fs.readFileSync('./fixtures/www.nbcnews.com.html');
       result = Mercury.parse(url, { html, fallback: false });
     });
 

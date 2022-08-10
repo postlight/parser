@@ -15,9 +15,7 @@ describe('WwwNydailynewsComExtractor', () => {
     beforeAll(() => {
       url =
         'http://www.nydailynews.com/news/politics/michelle-obama-feeling-not-hope-feels-article-1.2913255';
-      const html = fs.readFileSync(
-        './fixtures/www.nydailynews.com/1481917212613.html'
-      );
+      const html = fs.readFileSync('./fixtures/www.nydailynews.com.html');
       result = Mercury.parse(url, { html, fallback: false });
     });
 

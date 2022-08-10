@@ -15,9 +15,7 @@ describe('ObserverComExtractor', () => {
     beforeAll(() => {
       url =
         'http://observer.com/2016/12/archaeologists-just-discovered-a-2500-year-old-lost-city-atop-a-greek-mountain-peak/';
-      const html = fs.readFileSync(
-        './fixtures/observer.com/1481925269939.html'
-      );
+      const html = fs.readFileSync('./fixtures/observer.com.html');
       result = Mercury.parse(url, { html, fallback: false });
     });
 

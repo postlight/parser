@@ -15,9 +15,7 @@ describe('WwwRawstoryComExtractor', () => {
     beforeAll(() => {
       url =
         'http://www.rawstory.com/2016/12/these-6-celebrities-are-refusing-to-play-trumps-inauguration-as-team-scrambles-to-secure-talent/';
-      const html = fs.readFileSync(
-        './fixtures/www.rawstory.com/1482439337481.html'
-      );
+      const html = fs.readFileSync('./fixtures/www.rawstory.com.html');
       result = Mercury.parse(url, { html, fallback: false });
     });
 

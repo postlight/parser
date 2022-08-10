@@ -15,9 +15,7 @@ describe('AtlanticExtractor', () => {
     beforeAll(() => {
       url =
         'http://www.theatlantic.com/technology/archive/2016/09/why-new-yorkers-got-a-push-alert-about-a-manhunt/500591/';
-      const html = fs.readFileSync(
-        './fixtures/www.theatlantic.com/1474321707642.html'
-      );
+      const html = fs.readFileSync('./fixtures/www.theatlantic.com.html');
       result = Mercury.parse(url, { html, fallback: false });
     });
 

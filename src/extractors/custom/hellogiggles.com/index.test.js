@@ -14,9 +14,7 @@ describe('HellogigglesComExtractor', () => {
     let url;
     beforeAll(() => {
       url = 'http://hellogiggles.com/comfy-chic-holiday-outfit-illustrated/';
-      const html = fs.readFileSync(
-        './fixtures/hellogiggles.com/1482437663500.html'
-      );
+      const html = fs.readFileSync('./fixtures/hellogiggles.com.html');
       result = Mercury.parse(url, { html, fallback: false });
     });
 

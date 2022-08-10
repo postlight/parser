@@ -14,7 +14,7 @@ describe('GetnewsJpExtractor', () => {
     let url;
     beforeAll(() => {
       url = 'https://getnews.jp/archives/2146078';
-      const html = fs.readFileSync('./fixtures/getnews.jp/1555846693544.html');
+      const html = fs.readFileSync('./fixtures/getnews.jp.html');
       result = Mercury.parse(url, {
         html,
         fallback: false,

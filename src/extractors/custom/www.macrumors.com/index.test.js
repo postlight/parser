@@ -14,9 +14,7 @@ describe('WwwMacrumorsComExtractor', () => {
     let url;
     beforeAll(() => {
       url = 'http://www.macrumors.com/2017/01/18/apple-pencil-2-march-2017/';
-      const html = fs.readFileSync(
-        './fixtures/www.macrumors.com/1484778558090.html'
-      );
+      const html = fs.readFileSync('./fixtures/www.macrumors.com.html');
       result = Mercury.parse(url, { html, fallback: false });
     });
 

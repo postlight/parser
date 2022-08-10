@@ -14,9 +14,7 @@ describe('TechlogIijAdJpExtractor', () => {
     let url;
     beforeAll(() => {
       url = 'http://techlog.iij.ad.jp/archives/2562';
-      const html = fs.readFileSync(
-        './fixtures/techlog.iij.ad.jp/1556573200354.html'
-      );
+      const html = fs.readFileSync('./fixtures/techlog.iij.ad.jp.html');
       result = Mercury.parse(url, { html, fallback: false });
     });
 

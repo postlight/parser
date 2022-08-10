@@ -15,9 +15,7 @@ describe('MashableComExtractor', () => {
     beforeAll(() => {
       url =
         'http://mashable.com/2016/12/13/mysterious-plane-flying-over-new-york/?utm_cid=hp-n-1#sxBI1HiPKsqG';
-      const html = fs.readFileSync(
-        './fixtures/mashable.com/1481670648585.html'
-      );
+      const html = fs.readFileSync('./fixtures/mashable.com.html');
       result = Mercury.parse(url, { html, fallback: false });
     });
 

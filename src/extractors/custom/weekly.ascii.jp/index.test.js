@@ -14,9 +14,7 @@ describe('WeeklyAsciiJpExtractor', () => {
     let url;
     beforeAll(() => {
       url = 'https://weekly.ascii.jp/elem/000/000/428/428292/';
-      const html = fs.readFileSync(
-        './fixtures/weekly.ascii.jp/1555849300154.html'
-      );
+      const html = fs.readFileSync('./fixtures/weekly.ascii.jp.html');
       result = Mercury.parse(url, {
         html,
         fallback: false,

@@ -14,9 +14,7 @@ describe('WwwOreillyCoJpExtractor', () => {
     let url;
     beforeAll(() => {
       url = 'https://www.oreilly.co.jp/books/9784873118741/';
-      const html = fs.readFileSync(
-        './fixtures/www.oreilly.co.jp/1556577184695.html'
-      );
+      const html = fs.readFileSync('./fixtures/www.oreilly.co.jp.html');
       result = Mercury.parse(url, {
         html,
         fallback: false,

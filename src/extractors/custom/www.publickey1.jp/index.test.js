@@ -15,9 +15,7 @@ describe('WwwPublickey1JpExtractor', () => {
     beforeAll(() => {
       url =
         'https://www.publickey1.jp/blog/19/1ssdintel_ssd_d5-p4326qlc14643d_nandssd.html';
-      const html = fs.readFileSync(
-        './fixtures/www.publickey1.jp/1554481347071.html'
-      );
+      const html = fs.readFileSync('./fixtures/www.publickey1.jp.html');
       result = Mercury.parse(url, {
         html,
         fallback: false,

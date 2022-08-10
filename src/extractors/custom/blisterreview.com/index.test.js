@@ -14,9 +14,7 @@ describe('BlisterreviewComExtractor', () => {
     let url;
     beforeAll(() => {
       url = 'https://blisterreview.com/gear-reviews/2019-2020-line-outline';
-      const html = fs.readFileSync(
-        './fixtures/blisterreview.com/1551128228532.html'
-      );
+      const html = fs.readFileSync('./fixtures/blisterreview.com.html');
       result = Mercury.parse(url, { html, fallback: false });
     });
 

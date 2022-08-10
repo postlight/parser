@@ -15,9 +15,7 @@ describe('MoneyCnnComExtractor', () => {
     beforeAll(() => {
       url =
         'http://money.cnn.com/2016/11/29/news/ohare-workers-strike/index.html';
-      const html = fs.readFileSync(
-        './fixtures/money.cnn.com/1480437611330.html'
-      );
+      const html = fs.readFileSync('./fixtures/money.cnn.com.html');
       result = Mercury.parse(url, { html, fallback: false });
     });
     it('is selected properly', async () => {
