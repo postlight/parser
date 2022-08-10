@@ -5,9 +5,9 @@ import { DIV_TO_P_BLOCK_TAGS } from './constants';
 function convertDivs($) {
   $('div').each((index, div) => {
     const $div = $(div);
-    const convertable = $div.children(DIV_TO_P_BLOCK_TAGS).length === 0;
+    const convertible = $div.children(DIV_TO_P_BLOCK_TAGS).length === 0;
 
-    if (convertable) {
+    if (convertible) {
       convertNodeTo($div, $, 'p');
     }
   });
@@ -18,8 +18,8 @@ function convertDivs($) {
 function convertSpans($) {
   $('span').each((index, span) => {
     const $span = $(span);
-    const convertable = $span.parents('p, div, li').length === 0;
-    if (convertable) {
+    const convertible = $span.parents('p, div, li, figcaption').length === 0;
+    if (convertible) {
       convertNodeTo($span, $, 'p');
     }
   });
