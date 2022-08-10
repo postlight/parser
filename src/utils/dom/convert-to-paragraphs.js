@@ -18,7 +18,7 @@ function convertDivs($) {
 function convertSpans($) {
   $('span').each((index, span) => {
     const $span = $(span);
-    const convertable = $span.parents('p, div').length === 0;
+    const convertable = $span.parents('p, div, li').length === 0;
     if (convertable) {
       convertNodeTo($span, $, 'p');
     }
