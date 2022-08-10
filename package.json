@@ -111,7 +111,7 @@
     "@babel/runtime-corejs3": "^7.11.2",
     "@postlight/ci-failed-test-reporter": "^1.0.26",
     "browser-request": "github:postlight/browser-request#feat-add-headers-to-response",
-    "cheerio": "^1.0.0-rc.3",
+    "cheerio": "^0.22.0",
     "core-js": "3.6.5",
     "difflib": "github:postlight/difflib.js",
     "ellipsize": "0.1.0",
