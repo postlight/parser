@@ -182,4 +182,40 @@ describe('Mercury', () => {
     assert.equal(sites.length, 8);
     assert.equal(sites[1], 'http://nymag.com/daily/intelligencer/');
   });
+
+  it('is able to use custom extractors (with extension) added via api', async () => {
+    const url =
+      'https://www.sandiegouniontribune.com/business/growth-development/story/2019-08-27/sdsu-mission-valley-stadium-management-firm';
+    const html = fs.readFileSync(
+      './fixtures/sandiegouniontribune.com/test.html',
+      'utf8'
+    );
+
+    const customExtractor = {
+      domain: 'www.sandiegouniontribune.com',
+      title: {
+        selectors: ['h1', '.ArticlePage-headline'],
+      },
+      author: {
+        selectors: ['.ArticlePage-authorInfo-bio-name'],
+      },
+      content: {
+        selectors: ['article'],
+      },
+      extend: {
+        testContent: {
+          selectors: ['.ArticlePage-breadcrumbs a'],
+        },
+      },
+    };
+
+    Mercury.addExtractor(customExtractor);
+
+    const result = await Mercury.parse(url, { html });
+    assert.equal(typeof result, 'object');
+    assert.equal(result.author, 'Jennifer Van Grove');
+    assert.equal(result.domain, 'www.sandiegouniontribune.com');
+    assert.equal(result.total_pages, 1);
+    assert.equal(result.testContent, 'Growth & Development');
+  });
 });

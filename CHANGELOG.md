@@ -1,9 +1,51 @@
 # Mercury Parser Changelog
 
+### 2.2.1 (Sept 08, 2021)
+
+##### Commits
+
+- [[`8c9982247b`](https://github.com/postlight/mercury-parser/commit/8c9982247b)] - **feat**: Ladbible.com extractor (#624) (Nitin Khanna)
+- [[`30d6f472ee`](https://github.com/postlight/mercury-parser/commit/30d6f472ee)] - **feat**: Times of India extractor (#503) (Nitin Khanna)
+- [[`c15f4f5c3e`](https://github.com/postlight/mercury-parser/commit/c15f4f5c3e)] - chore(deps): bump lodash from 4.17.2 to 4.17.21 (#612) (dependabot[bot])
+- [[`b8b90afa95`](https://github.com/postlight/mercury-parser/commit/b8b90afa95)] - chore(deps): bump handlebars from 4.1.2 to 4.7.6 (#583) (dependabot[bot])
+- [[`38fb3204f5`](https://github.com/postlight/mercury-parser/commit/38fb3204f5)] - **chore**: remove greenkeeper configs (#580) (Jad Termsani)
+- [[`a5a066c69d`](https://github.com/postlight/mercury-parser/commit/a5a066c69d)] - **chore**: update node version (#579) (Jad Termsani)
+- [[`b0e708aac6`](https://github.com/postlight/mercury-parser/commit/b0e708aac6)] - **feat**: update nytimes extractor (#506) (Wajeeh Zantout)
+- [[`3fb8526c4a`](https://github.com/postlight/mercury-parser/commit/3fb8526c4a)] - chore(package): update ora to version 4.0.0 (#500) (greenkeeper[bot])
+- [[`3009ecf137`](https://github.com/postlight/mercury-parser/commit/3009ecf137)] - fix(package): update yargs-parser to version 14.0.0 (#495) (greenkeeper[bot])
+- [[`c5c000586d`](https://github.com/postlight/mercury-parser/commit/c5c000586d)] - **release**: 2.2.0 (#496) (Michael Ashley)
+
+### 2.2.0 (Sept 10, 2019)
+
+##### Commits
+
+- [[`e12c916499`](https://github.com/postlight/mercury-parser/commit/e12c916499)] - **feat**: ability to add custom extractors via api (#484) (Michael Ashley)
+- [[`f95947fe88`](https://github.com/postlight/mercury-parser/commit/f95947fe88)] - Implemented custom extractor epaper.zeit.de (#488) (Sven Wiegand)
+- [[`2422e4717d`](https://github.com/postlight/mercury-parser/commit/2422e4717d)] - **fix**: incorrect parsing on medium.com (#477) (Michael Ashley)
+- [[`2bed238b68`](https://github.com/postlight/mercury-parser/commit/2bed238b68)] - chore(package): update inquirer to version 7.0.0 (#479) (greenkeeper[bot])
+- [[`869e44a69f`](https://github.com/postlight/mercury-parser/commit/869e44a69f)] - chore(package): update karma-chrome-launcher to version 3.0.0 (#458) (greenkeeper[bot])
+- [[`e4a7a288e5`](https://github.com/postlight/mercury-parser/commit/e4a7a288e5)] - chore(package): update eslint-config-prettier to version 6.1.0 (#476) (greenkeeper[bot])
+- [[`2173c4cf83`](https://github.com/postlight/mercury-parser/commit/2173c4cf83)] - **deps**: Update wuzzy to fix vulnerability (#462) (Malo Bourgon)
+- [[`a918a9d6fa`](https://github.com/postlight/mercury-parser/commit/a918a9d6fa)] - **doc**: correct link that points to wrong line (#469) (Jakob Fix)
+- [[`0686ee7956`](https://github.com/postlight/mercury-parser/commit/0686ee7956)] - **fix**: incorrect parsing on theatlantic.com (#475) (Michael Ashley)
+- [[`5e33263d25`](https://github.com/postlight/mercury-parser/commit/5e33263d25)] - **chore**: minifying biorxiv.com fixture (#478) (Michael Ashley)
+- [[`911b0f87c8`](https://github.com/postlight/mercury-parser/commit/911b0f87c8)] - Add custom extractor for biorxiv.org (#467) (david0leong)
+- [[`76d59f2d58`](https://github.com/postlight/mercury-parser/commit/76d59f2d58)] - **doc**: correct internal page links (#470) (Jakob Fix)
+- [[`398cba4d66`](https://github.com/postlight/mercury-parser/commit/398cba4d66)] - chore(deps): bump lodash.merge from 4.6.1 to 4.6.2 (#456) (dependabot[bot])
+- [[`90e208ea13`](https://github.com/postlight/mercury-parser/commit/90e208ea13)] - chore(deps): bump cached-path-relative from 1.0.0 to 1.0.2 (#472) (dependabot[bot])
+- [[`5bb7c58e95`](https://github.com/postlight/mercury-parser/commit/5bb7c58e95)] - chore(deps): bump merge from 1.2.0 to 1.2.1 (#473) (dependabot[bot])
+- [[`ce572f3a28`](https://github.com/postlight/mercury-parser/commit/ce572f3a28)] - chore(package): update brfs-babel to version 2.0.0 (#461) (greenkeeper[bot])
+- [[`6f65702a6c`](https://github.com/postlight/mercury-parser/commit/6f65702a6c)] - Update moment-timezone to the latest version 🚀 (#455) (greenkeeper[bot])
+- [[`c764cebc0c`](https://github.com/postlight/mercury-parser/commit/c764cebc0c)] - chore(package): update remark-cli to version 7.0.0 (#460) (greenkeeper[bot])
+- [[`853e041d84`](https://github.com/postlight/mercury-parser/commit/853e041d84)] - **deps**: update husky to the latest version 🚀 (#450) (greenkeeper[bot])
+- [[`f42f81218b`](https://github.com/postlight/mercury-parser/commit/f42f81218b)] - **deps**: update iconv-lite to the latest version 🚀 (#447) (greenkeeper[bot])
+- [[`592f175270`](https://github.com/postlight/mercury-parser/commit/592f175270)] - **tests**: remove a duplicate test (#448) (Kirill Danshin)
+
 ### 2.1.1 (Jun 26, 2019)
 
 ##### Commits
 
+- [[`713de25751`](https://github.com/postlight/mercury-parser/commit/713de25751)] - **release**: 2.1.1 (#446) (Adam Pash)
 - [[`c11b85f405`](https://github.com/postlight/mercury-parser/commit/c11b85f405)] - **deps**: update eslint-config-prettier to version 5.0.0 (#441) (greenkeeper[bot])
 - [[`3b0d5fed69`](https://github.com/postlight/mercury-parser/commit/3b0d5fed69)] - **chore**: prevent adding phantomjs-prebuilt as a dependency in CI. (#412) (Jaen)
 - [[`939d181951`](https://github.com/postlight/mercury-parser/commit/939d181951)] - **fix**: support query strings in lazy-loaded srcsets (#387) (Toufic Mouallem)
