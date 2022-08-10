@@ -26,7 +26,7 @@ const {
   extendedListTypes,
   headers,
   addExtractor,
-  version,
+  version
 ) => {
   if (version) {
     console.log(package_info.version);
