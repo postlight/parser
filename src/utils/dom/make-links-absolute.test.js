@@ -127,7 +127,7 @@ describe('makeLinksAbsolute($)', () => {
         result,
         `<div>
         <picture>
-          <source srcset="" media="(max-width: 450px)">
+          <source srcset media="(max-width: 450px)">
           <source srcset=" ">
           <img src="http://example.com/assets/images/rhythm/076.jpg" alt="Vertical and horizontal rhythm">
         </picture>

@@ -1,5 +1,13 @@
 {
-  "presets": ["@babel/preset-env"],
+  "presets": [
+    [
+      "@babel/preset-env",
+      {
+        "useBuiltIns": "usage", // or "entry"
+        "corejs": 3
+      }
+    ]
+  ],
   "plugins": [
     [
       "module-resolver",
@@ -22,8 +30,7 @@
         [
           "@babel/plugin-transform-runtime",
           {
-            "corejs": 2,
-            "regenerator": true
+            "corejs": 3
           }
         ]
       ]
