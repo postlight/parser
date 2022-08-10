@@ -8,14 +8,16 @@ import { excerptContent } from 'utils/text';
 
 const fs = require('fs');
 
-describe('QzComExtractor', () => {
+describe('WwwAbendblattDeExtractor', () => {
   describe('initial test case', () => {
     let result;
     let url;
     beforeAll(() => {
       url =
-        'https://qz.com/africa/1807355/nigerias-economy-has-best-quarterly-growth-since-recession/';
-      const html = fs.readFileSync('./fixtures/qz.com/1582826662145.html');
+        'https://www.abendblatt.de/wirtschaft/article229123092/Hamburg-Grossmarkt-Obst-Gemuese-Mangos-Papayas-Fruechte-Preise-Corona.html';
+      const html = fs.readFileSync(
+        './fixtures/www.abendblatt.de/1589525587379.html'
+      );
       result = Mercury.parse(url, { html, fallback: false });
     });
 
@@ -29,55 +31,63 @@ describe('QzComExtractor', () => {
 
     it('returns the title', async () => {
       // To pass this test, fill out the title selector
-      // in ./src/extractors/custom/qz.com/index.js.
+      // in ./src/extractors/custom/www.abendblatt.de/index.js.
       const { title } = await result;
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(
-        title,
-        'Nigeria’s economy is making a comeback—but it’s still not happening fast enough'
-      );
+      assert.equal(title, `Warum Mangos und Papayas jetzt teurer sind`);
     });
 
     it('returns the author', async () => {
       // To pass this test, fill out the author selector
-      // in ./src/extractors/custom/qz.com/index.js.
+      // in ./src/extractors/custom/www.abendblatt.de/index.js.
       const { author } = await result;
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(author, 'Yomi Kazeem');
+      assert.equal(author, 'Melanie Wassink');
     });
 
-    // qz doesn't appear to pass the date from the server,
-    // so the date is unfortunately null
     it('returns the date_published', async () => {
       // To pass this test, fill out the date_published selector
-      // in ./src/extractors/custom/qz.com/index.js.
+      // in ./src/extractors/custom/www.abendblatt.de/index.js.
       const { date_published } = await result;
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(date_published, '2020-02-24T16:26:29.000Z');
+      assert.equal(date_published, '2020-05-15T05:11:00.000Z');
+    });
+
+    it('returns the dek', async () => {
+      // To pass this test, fill out the dek selector
+      // in ./src/extractors/custom/www.abendblatt.de/index.js.
+      const { dek } = await result;
+
+      // Update these values with the expected values from
+      // the article.
+      assert.equal(
+        dek,
+        'Obst wird auch in Corona-Zeiten weltweit transportiert. Doch es gibt Probleme, wie ein Besuch auf dem Hamburger Großmarkt zeigt'
+      );
     });
 
     it('returns the lead_image_url', async () => {
       // To pass this test, fill out the lead_image_url selector
-      // in ./src/extractors/custom/qz.com/index.js.
+      // in ./src/extractors/custom/www.abendblatt.de/index.js.
       const { lead_image_url } = await result;
 
       // Update these values with the expected values from
       // the article.
       assert.equal(
         lead_image_url,
-        'https://cms.qz.com/wp-content/uploads/2017/04/nigerians-at-a-lagos-island-market.jpg?quality=75&strip=all&w=1400'
+        `https://img.abendblatt.de/img/wirtschaft/crop229123088/9271097785-w820-cv16_9-q85-fnov-fpi227770079-fpotr/Fruchtgrossmarkt.jpg`
       );
     });
 
     it('returns the content', async () => {
       // To pass this test, fill out the content selector
-      // in ./src/extractors/custom/qz.com/index.js.
+      // in ./src/extractors/custom/www.abendblatt.de/index.js.
       // You may also want to make use of the clean and transform
       // options.
       const { content } = await result;
@@ -95,7 +105,7 @@ describe('QzComExtractor', () => {
       // the article.
       assert.equal(
         first13,
-        'Since suffering a recession and full year of negative growth in 2016, Nigeria,'
+        'Hamburg. Gabi Eutemüller und Eliane Steinmeyer stehen in einer Halle auf dem Gelände'
       );
     });
   });
