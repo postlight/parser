@@ -44,7 +44,8 @@ describe('cleanBySelectors($content, $, { clean })', () => {
           <p>This is some good content</p>
           <div class="ad">Advertisement!</div>
         </div>
-    </div>`;
+      </div>
+    `;
     const $ = cheerio.load(html);
 
     let $content = $('.body');
@@ -58,13 +59,13 @@ describe('cleanBySelectors($content, $, { clean })', () => {
 describe('transformElements($content, $, { transforms })', () => {
   it('performs a simple transformation on matched elements', () => {
     const html = `
-    <div>
-      <div class="body">
-        <h1>WOW BIG TITLE</h1>
-        <p>Here are some words</p>
-        <h1>WOW BIG TITLE</h1>
+      <div>
+        <div class="body">
+          <h1>WOW BIG TITLE</h1>
+          <p>Here are some words</p>
+          <h1>WOW BIG TITLE</h1>
+        </div>
       </div>
-    </div>
     `;
     const opts = {
       transforms: { h1: 'h2' },
@@ -86,17 +87,17 @@ describe('transformElements($content, $, { transforms })', () => {
 
   it('performs a complex transformation on matched elements', () => {
     const html = `
-    <div>
-      <div class="body">
-        <noscript>
-          <img src="/img.jpg" />
-        </noscript>
-        <noscript>
-          Something else
-        </noscript>
-        <p>Here are some words</p>
+      <div>
+        <div class="body">
+          <noscript>
+            <img src="/img.jpg" />
+          </noscript>
+          <noscript>
+            Something else
+          </noscript>
+          <p>Here are some words</p>
+        </div>
       </div>
-    </div>
     `;
     const opts = {
       transforms: {

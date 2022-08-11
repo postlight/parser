@@ -1,5 +1,4 @@
 import assert from 'assert';
-
 import mergeSupportedDomains from './merge-supported-domains';
 
 describe('mergeSupportedDomains(extractor, domains)', () => {
@@ -8,6 +7,7 @@ describe('mergeSupportedDomains(extractor, domains)', () => {
       domain: 'foo.com',
       supportedDomains: ['example.com'],
     };
+
     const expected = {
       'foo.com': extractor,
       'example.com': extractor,
@@ -21,6 +21,7 @@ describe('mergeSupportedDomains(extractor, domains)', () => {
     const extractor = {
       domain: 'foo.com',
     };
+
     const expected = {
       'foo.com': extractor,
     };

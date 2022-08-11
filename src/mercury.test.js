@@ -1,5 +1,4 @@
 import assert from 'assert';
-
 import { record } from 'test-helpers';
 import Mercury from './mercury';
 

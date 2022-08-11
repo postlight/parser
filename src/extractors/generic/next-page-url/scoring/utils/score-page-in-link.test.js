@@ -1,5 +1,4 @@
 import assert from 'assert';
-
 import scorePageInLink from './score-page-in-link';
 
 describe('scorePageInLink(pageNum, isWp)', () => {
