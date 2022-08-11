@@ -523,9 +523,9 @@ function paragraphize(node, $) {
 function convertDivs($) {
   $('div').each(function (index, div) {
     var $div = $(div);
-    var convertable = $div.children(DIV_TO_P_BLOCK_TAGS).length === 0;
+    var convertible = $div.children(DIV_TO_P_BLOCK_TAGS).length === 0;
 
-    if (convertable) {
+    if (convertible) {
       convertNodeTo$$1($div, $, 'p');
     }
   });
@@ -535,9 +535,9 @@ function convertDivs($) {
 function convertSpans($) {
   $('span').each(function (index, span) {
     var $span = $(span);
-    var convertable = $span.parents('p, div').length === 0;
+    var convertible = $span.parents('p, div, li, figcaption').length === 0;
 
-    if (convertable) {
+    if (convertible) {
       convertNodeTo$$1($span, $, 'p');
     }
   });
@@ -1608,7 +1608,8 @@ var Resource = {
               };
               result = {
                 body: preparedResponse,
-                response: validResponse
+                response: validResponse,
+                alreadyDecoded: true
               };
               _context.next = 9;
               break;
@@ -1648,7 +1649,9 @@ var Resource = {
   }(),
   generateDoc: function generateDoc(_ref) {
     var content = _ref.body,
-        response = _ref.response;
+        response = _ref.response,
+        _ref$alreadyDecoded = _ref.alreadyDecoded,
+        alreadyDecoded = _ref$alreadyDecoded === void 0 ? false : _ref$alreadyDecoded;
     var _response$headers$con = response.headers['content-type'],
         contentType = _response$headers$con === void 0 ? '' : _response$headers$con; // TODO: Implement is_text function from
     // https://github.com/ReadabilityHoldings/readability/blob/8dc89613241d04741ebd42fa9fa7df1b1d746303/readability/utils/text.py#L57
@@ -1659,7 +1662,8 @@ var Resource = {
 
     var $ = this.encodeDoc({
       content: content,
-      contentType: contentType
+      contentType: contentType,
+      alreadyDecoded: alreadyDecoded
     });
 
     if ($.root().children().length === 0) {
@@ -1673,7 +1677,14 @@ var Resource = {
   },
   encodeDoc: function encodeDoc(_ref2) {
     var content = _ref2.content,
-        contentType = _ref2.contentType;
+        contentType = _ref2.contentType,
+        _ref2$alreadyDecoded = _ref2.alreadyDecoded,
+        alreadyDecoded = _ref2$alreadyDecoded === void 0 ? false : _ref2$alreadyDecoded;
+
+    if (alreadyDecoded) {
+      return cheerio.load(content);
+    }
+
     var encoding = getEncoding(contentType);
     var decodedContent = iconv.decode(content, encoding);
     var $ = cheerio.load(decodedContent); // after first cheerio.load, check to see if encoding matches
@@ -1955,13 +1966,13 @@ var TheAtlanticExtractor = {
 var NewYorkerExtractor = {
   domain: 'www.newyorker.com',
   title: {
-    selectors: ['h1[class^="ArticleHeader__hed"]', ['meta[name="og:title"]', 'value']]
+    selectors: ['h1[class^="content-header"]', 'h1[class^="ArticleHeader__hed"]', ['meta[name="og:title"]', 'value']]
   },
   author: {
-    selectors: ['div[class^="ArticleContributors"] a[rel="author"]', 'article header div[class*="Byline__multipleContributors"]']
+    selectors: [['meta[name="author"]', 'value'], 'div[class^="ArticleContributors"] a[rel="author"]', 'article header div[class*="Byline__multipleContributors"]']
   },
   content: {
-    selectors: ['main[class^="Layout__content"]'],
+    selectors: ['article.article.main-content', 'main[class^="Layout__content"]'],
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images
     transforms: [],
@@ -1971,15 +1982,14 @@ var NewYorkerExtractor = {
     clean: ['footer[class^="ArticleFooter__footer"]']
   },
   date_published: {
-    selectors: [['meta[name="pubdate"]', 'value']],
-    format: 'YYYYMMDD',
+    selectors: ['time.content-header__publish-date', ['meta[name="pubdate"]', 'value']],
     timezone: 'America/New_York'
   },
   lead_image_url: {
     selectors: [['meta[name="og:image"]', 'value']]
   },
   dek: {
-    selectors: ['h2[class^="ArticleHeader__dek"]']
+    selectors: ['div.content-header__dek', 'h2[class^="ArticleHeader__dek"]']
   },
   next_page_url: null,
   excerpt: null
@@ -1991,13 +2001,13 @@ var NewYorkerExtractor = {
 var WiredExtractor = {
   domain: 'www.wired.com',
   title: {
-    selectors: ['h1.post-title']
+    selectors: ['h1.content-header__hed', 'h1.post-title']
   },
   author: {
-    selectors: ['a[rel="author"]']
+    selectors: [['meta[name="author"]', 'value'], 'a[rel="author"]']
   },
   content: {
-    selectors: ['article.content'],
+    selectors: ['article.article.main-content', 'article.content'],
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images
     transforms: [],
@@ -2007,7 +2017,7 @@ var WiredExtractor = {
     clean: ['.visually-hidden', 'figcaption img.photo']
   },
   date_published: {
-    selectors: [['meta[itemprop="datePublished"]', 'value']]
+    selectors: ['time.content-header__publish-date', ['meta[itemprop="datePublished"]', 'value']]
   },
   lead_image_url: {
     selectors: [['meta[name="og:image"]', 'value']]
@@ -2936,26 +2946,26 @@ var WwwRecodeNetExtractor = {
 var QzComExtractor = {
   domain: 'qz.com',
   title: {
-    selectors: ['header.item-header.content-width-responsive']
+    selectors: ['article header h1']
   },
   author: {
     selectors: [['meta[name="author"]', 'value']]
   },
   date_published: {
-    selectors: ['.timestamp']
+    selectors: [['time[datetime]', 'datetime']]
   },
   lead_image_url: {
-    selectors: [['meta[name="og:image"]', 'value']]
+    selectors: [['meta[name="og:image"]', 'value'], ['meta[property="og:image"]', 'content'], ['meta[name="twitter:image"]', 'content']]
   },
   content: {
-    selectors: [['figure.featured-image', '.item-body'], '.item-body'],
+    selectors: ['#article-content'],
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images
     transforms: {},
     // Is there anything that is in the result that shouldn't be?
     // The clean selectors will remove anything that matches from
     // the result
-    clean: ['.article-aside', '.progressive-image-thumbnail']
+    clean: []
   }
 };
 
@@ -2970,7 +2980,8 @@ var WwwDmagazineComExtractor = {
   date_published: {
     selectors: [// enter selectors
     '.story__info'],
-    timezone: 'America/Chicago'
+    timezone: 'America/Chicago',
+    format: 'MMMM D, YYYY h:mm a'
   },
   dek: {
     selectors: ['.story__subhead']
@@ -4648,6 +4659,7 @@ var IciRadioCanadaCaExtractor = {
   },
   date_published: {
     selectors: [['meta[name="dc.date.created"]', 'value']],
+    format: 'YYYY-MM-DD|HH[h]mm',
     timezone: 'America/New_York'
   },
   dek: {
@@ -5814,6 +5826,319 @@ var TimesofindiaIndiatimesComExtractor = {
   }
 };
 
+var MaTtiasBeExtractor = {
+  domain: 'ma.ttias.be',
+  title: {
+    selectors: [['meta[name="twitter:title"]', 'value']]
+  },
+  author: {
+    selectors: [['meta[name="author"]', 'value']]
+  },
+  date_published: {
+    selectors: [['meta[name="article:published_time"]', 'value']]
+  },
+  content: {
+    selectors: [['.content']],
+    // Is there anything in the content you selected that needs transformed
+    // before it's consumable content? E.g., unusual lazy loaded images
+    transforms: {
+      h2: function h2($node) {
+        // The "id" attribute values would result in low scores and the element being
+        // removed.
+        $node.attr('id', null); // h1 elements will be demoted to h2, so demote h2 elements to h3.
+
+        return 'h3';
+      },
+      h1: function h1($node) {
+        // The "id" attribute values would result in low scores and the element being
+        // removed.
+        $node.attr('id', null); // A subsequent h2 will be removed if there is not a paragraph before it, so
+        // add a paragraph here. It will be removed anyway because it is empty.
+
+        $node.after('<p></p>');
+      },
+      ul: function ul($node) {
+        // Articles contain lists of links which look like, but are not, navigation
+        // elements. Adding this class attribute avoids them being incorrectly removed.
+        $node.attr('class', 'entry-content-asset');
+      }
+    }
+  }
+};
+
+var PastebinComExtractor = {
+  domain: 'pastebin.com',
+  title: {
+    selectors: ['h1']
+  },
+  author: {
+    selectors: ['.paste_box_line2 .t_us + a']
+  },
+  date_published: {
+    selectors: ['.paste_box_line2 .t_da + span'],
+    timezone: 'America/New_York'
+  },
+  lead_image_url: {
+    selectors: [['meta[name="og:image"]', 'value']]
+  },
+  content: {
+    selectors: ['#selectable .text'],
+    // Is there anything in the content you selected that needs transformed
+    // before it's consumable content? E.g., unusual lazy loaded images
+    transforms: {
+      ol: 'div',
+      li: 'p'
+    },
+    // Is there anything that is in the result that shouldn't be?
+    // The clean selectors will remove anything that matches from
+    // the result
+    clean: []
+  }
+};
+
+/* eslint-disable no-nested-ternary */
+
+/* eslint-disable no-unused-expressions */
+var WwwAbendblattDeExtractor = {
+  domain: 'www.abendblatt.de',
+  title: {
+    selectors: ['h2.article__header__headline']
+  },
+  author: {
+    selectors: ['span.author-info__name-text']
+  },
+  date_published: {
+    selectors: [['time.article__header__date', 'datetime']]
+  },
+  dek: {
+    selectors: ["span[itemprop='description']"]
+  },
+  lead_image_url: {
+    selectors: [["meta[name='og:image']", 'value']]
+  },
+  content: {
+    selectors: ['div.article__body'],
+    // Is there anything in the content you selected that needs transformed
+    // before it's consumable content? E.g., unusual lazy loaded images
+    transforms: {
+      p: function p($node) {
+        if (!$node.hasClass('obfuscated')) return null;
+        var o = '';
+        var n = 0;
+
+        for (var i = $node.text(); n < i.length; n += 1) {
+          var r = i.charCodeAt(n);
+          r === 177 ? o += '%' : r === 178 ? o += '!' : r === 180 ? o += ';' : r === 181 ? o += '=' : r === 32 ? o += ' ' : r === 10 ? o += '\n' : r > 33 && (o += String.fromCharCode(r - 1));
+        }
+
+        $node.html(o);
+        $node.removeClass('obfuscated');
+        $node.addClass('deobfuscated');
+        return null;
+      },
+      div: function div($node) {
+        if (!$node.hasClass('obfuscated')) return null;
+        var o = '';
+        var n = 0;
+
+        for (var i = $node.text(); n < i.length; n += 1) {
+          var r = i.charCodeAt(n);
+          r === 177 ? o += '%' : r === 178 ? o += '!' : r === 180 ? o += ';' : r === 181 ? o += '=' : r === 32 ? o += ' ' : r === 10 ? o += '\n' : r > 33 && (o += String.fromCharCode(r - 1));
+        }
+
+        $node.html(o);
+        $node.removeClass('obfuscated');
+        $node.addClass('deobfuscated');
+        return null;
+      }
+    },
+    // Is there anything that is in the result that shouldn't be?
+    // The clean selectors will remove anything that matches from
+    // the result
+    clean: []
+  }
+};
+
+var WwwGrueneDeExtractor = {
+  domain: 'www.gruene.de',
+  title: {
+    selectors: ['header h1']
+  },
+  author: null,
+  date_published: null,
+  dek: null,
+  lead_image_url: {
+    selectors: [['meta[property="og:image"]', 'content']]
+  },
+  content: {
+    // selectors: ['section'],
+    selectors: [['section header', 'section h2', 'section p', 'section ol']],
+    // Is there anything in the content you selected that needs transformed
+    // before it's consumable content? E.g., unusual lazy loaded images
+    transforms: {},
+    // Is there anything that is in the result that shouldn't be?
+    // The clean selectors will remove anything that matches from
+    // the result
+    clean: ['figcaption', 'p[class]']
+  }
+};
+
+var WwwEngadgetComExtractor = {
+  domain: 'www.engadget.com',
+  title: {
+    selectors: [['meta[name="og:title"]', 'value']]
+  },
+  author: {
+    selectors: ['a.th-meta[data-ylk*="subsec:author"]']
+  },
+  // Engadget stories have publish dates, but the only representation of them on the page
+  // is in a format like "2h ago". There are also these tags with blank values:
+  // <meta class="swiftype" name="published_at" data-type="date" value="">
+  date_published: {
+    selectors: [// enter selectors
+    ]
+  },
+  dek: {
+    selectors: ['div[class*="o-title_mark"] div']
+  },
+  // Engadget stories do have lead images specified by an og:image meta tag, but selecting
+  // the value attribute of that tag fails. I believe the "&#x2111;" sequence of characters
+  // is triggering this inability to select the attribute value.
+  lead_image_url: {
+    selectors: [// enter selectors
+    ]
+  },
+  content: {
+    selectors: [[// Some figures will be inside div.article-text, but some header figures/images
+    // will not.
+    '#page_body figure:not(div.article-text figure)', 'div.article-text']],
+    // Is there anything in the content you selected that needs transformed
+    // before it's consumable content? E.g., unusual lazy loaded images
+    transforms: {},
+    // Is there anything that is in the result that shouldn't be?
+    // The clean selectors will remove anything that matches from
+    // the result
+    clean: []
+  }
+};
+
+var ArstechnicaComExtractor = {
+  domain: 'arstechnica.com',
+  // Articles from this site are often paginated, but I was unable to write a CSS
+  // selector to find the next page. On the last page, there will be a link with a CSS
+  // selector indicating that the previous page is next. But the parser appears to find
+  // the next page without this extractor finding it, as long as the fallback option is
+  // left at its default value of true.
+  title: {
+    selectors: ['title']
+  },
+  author: {
+    selectors: ['*[rel="author"] *[itemprop="name"]']
+  },
+  date_published: {
+    selectors: [['.byline time', 'datetime']]
+  },
+  dek: {
+    selectors: ['h2[itemprop="description"]']
+  },
+  lead_image_url: {
+    selectors: [['meta[name="og:image"]', 'value']]
+  },
+  content: {
+    selectors: ['div[itemprop="articleBody"]'],
+    // Is there anything in the content you selected that needs transformed
+    // before it's consumable content? E.g., unusual lazy loaded images
+    transforms: {
+      h2: function h2($node) {
+        // Some pages have an element h2 that is significant, and that the parser will
+        // remove if not following a paragraph. Adding this empty paragraph fixes it, and
+        // the empty paragraph will be removed anyway.
+        $node.before('<p></p>');
+      }
+    },
+    // Is there anything that is in the result that shouldn't be?
+    // The clean selectors will remove anything that matches from
+    // the result.
+    clean: [// Remove enlarge links and separators inside image captions.
+    'figcaption .enlarge-link', 'figcaption .sep', // I could not transform the video into usable elements, so I
+    // removed them.
+    'figure.video', // Image galleries that do not work.
+    '.gallery', 'aside', '.sidebar']
+  }
+};
+
+var WwwNdtvComExtractor = {
+  domain: 'www.ndtv.com',
+  title: {
+    selectors: [['meta[name="og:title"]', 'value'], 'h1.entry-title']
+  },
+  author: {
+    selectors: ['span[itemprop="author"] span[itemprop="name"]']
+  },
+  date_published: {
+    selectors: [['span[itemprop="dateModified"]', 'content']]
+  },
+  dek: {
+    selectors: ['h2']
+  },
+  lead_image_url: {
+    selectors: [['meta[name="og:image"]', 'value']]
+  },
+  content: {
+    selectors: ['div[itemprop="articleBody"]'],
+    // Is there anything in the content you selected that needs transformed
+    // before it's consumable content? E.g., unusual lazy loaded images
+    transforms: {
+      // This site puts a dateline in a 'b' above the first paragraph, and then somehow
+      // blends it into the first paragraph with CSS. This transform moves the dateline
+      // to the first paragraph.
+      '.place_cont': function place_cont($node) {
+        if (!$node.parents('p').length) {
+          var nextSibling = $node.next('p');
+
+          if (nextSibling) {
+            $node.remove();
+            nextSibling.prepend($node);
+          }
+        }
+      }
+    },
+    // Is there anything that is in the result that shouldn't be?
+    // The clean selectors will remove anything that matches from
+    // the result
+    clean: ['.highlghts_Wdgt', '.ins_instory_dv_caption', 'input', '._world-wrapper .mt20']
+  }
+};
+
+var SpektrumExtractor = {
+  domain: 'www.spektrum.de',
+  title: {
+    selectors: ['.content__title']
+  },
+  author: {
+    selectors: ['.content__author__info__name']
+  },
+  date_published: {
+    selectors: ['.content__meta__date'],
+    timezone: 'Europe/Berlin'
+  },
+  dek: {
+    selectors: ['.content__intro']
+  },
+  lead_image_url: {
+    selectors: [// This is how the meta tag appears in the original source code.
+    ['meta[name="og:image"]', 'value'], // This is how the meta tag appears in the DOM in Chrome.
+    // The selector is included here to make the code work within the browser as well.
+    ['meta[property="og:image"]', 'content'], // This is the image that is shown on the page.
+    // It can be slightly cropped compared to the original in the meta tag.
+    '.image__article__top img']
+  },
+  content: {
+    selectors: ['article.content'],
+    clean: ['.breadcrumbs', '.hide-for-print', 'aside', 'header h2', '.image__article__top', '.content__author', '.copyright', '.callout-box']
+  }
+};
+
 
 
 var CustomExtractors = /*#__PURE__*/Object.freeze({
@@ -5952,7 +6277,15 @@ var CustomExtractors = /*#__PURE__*/Object.freeze({
   BiorxivOrgExtractor: BiorxivOrgExtractor,
   EpaperZeitDeExtractor: EpaperZeitDeExtractor,
   WwwLadbibleComExtractor: WwwLadbibleComExtractor,
-  TimesofindiaIndiatimesComExtractor: TimesofindiaIndiatimesComExtractor
+  TimesofindiaIndiatimesComExtractor: TimesofindiaIndiatimesComExtractor,
+  MaTtiasBeExtractor: MaTtiasBeExtractor,
+  PastebinComExtractor: PastebinComExtractor,
+  WwwAbendblattDeExtractor: WwwAbendblattDeExtractor,
+  WwwGrueneDeExtractor: WwwGrueneDeExtractor,
+  WwwEngadgetComExtractor: WwwEngadgetComExtractor,
+  ArstechnicaComExtractor: ArstechnicaComExtractor,
+  WwwNdtvComExtractor: WwwNdtvComExtractor,
+  SpektrumExtractor: SpektrumExtractor
 });
 
 var Extractors = _Object$keys(CustomExtractors).reduce(function (acc, key) {
@@ -7606,7 +7939,6 @@ function _collectAllPages() {
               html: html,
               $: $,
               metaCache: metaCache,
-              contentOnly: true,
               extractedTitle: title,
               previousUrls: previousUrls
             };
