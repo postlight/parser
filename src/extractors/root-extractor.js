@@ -47,13 +47,15 @@ function findMatchingSelector($, selectors, extractHtml, allowMultiple) {
       }
 
       const [s, attr] = selector;
-      return (
-        (allowMultiple || (!allowMultiple && $(s).length === 1)) &&
-        $(s).attr(attr) &&
-        $(s)
-          .attr(attr)
-          .trim() !== ''
-      );
+      if (attr)
+        return (
+          (allowMultiple || (!allowMultiple && $(s).length === 1)) &&
+          $(s).attr(attr) &&
+          $(s)
+            .attr(attr)
+            .trim() !== ''
+        );
+      selector = s;
     }
 
     return (
