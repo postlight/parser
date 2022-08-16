@@ -66,15 +66,15 @@ describe('scoreAttr($img)', () => {
 
 describe('scoreByParents($img)', () => {
   it('gets 25 points if it has a figure parent', () => {
-    const $ = cheerio.load(
-      `<div>
-          <figure>
-            <div>
-              <img alt="Wow" />
-            </div>
-          </figure>
-        </div>`
-    );
+    const $ = cheerio.load(`
+      <div>
+        <figure>
+          <div>
+            <img alt="Wow" />
+          </div>
+        </figure>
+      </div>
+    `);
     const $img = $('img').first();
 
     assert.equal(scoreByParents($img), 25);
@@ -88,15 +88,15 @@ describe('scoreByParents($img)', () => {
   });
 
   it('gets 15 points if parent or gparent has photo hints', () => {
-    const $ = cheerio.load(
-      `<div>
-          <div class="figure">
-            <div>
-              <img alt="Wow" />
-            </div>
+    const $ = cheerio.load(`
+      <div>
+        <div class="figure">
+          <div>
+            <img alt="Wow" />
           </div>
-        </div>`
-    );
+        </div>
+      </div>
+    `);
     const $img = $('img').first();
 
     assert.equal(scoreByParents($img), 15);
@@ -105,30 +105,28 @@ describe('scoreByParents($img)', () => {
 
 describe('scoreBySibling($img)', () => {
   it('gets 25 points if its sibling is figcaption', () => {
-    const $ = cheerio.load(
-      `
+    const $ = cheerio.load(`
       <div>
         <img />
         <figcaption>Wow</figcaption>
       </div>
-      `
-    );
+    `);
     const $img = $('img').first();
 
     assert.equal(scoreBySibling($img), 25);
   });
 
   it('gets 15 points if its sibling has photo hints', () => {
-    const $ = cheerio.load(
-      `<div>
-          <div>
-              <img alt="Wow" />
-              <div class="caption">
-                Wow
-              </div>
-          </div>
-        </div>`
-    );
+    const $ = cheerio.load(`
+      <div>
+        <div>
+            <img alt="Wow" />
+            <div class="caption">
+              Wow
+            </div>
+        </div>
+      </div>
+    `);
     const $img = $('img').first();
 
     assert.equal(scoreBySibling($img), 15);
@@ -137,65 +135,55 @@ describe('scoreBySibling($img)', () => {
 
 describe('scoreByDimensions($img)', () => {
   it('penalizes skinny images', () => {
-    const $ = cheerio.load(
-      `
+    const $ = cheerio.load(`
       <div>
         <img width="10" />
       </div>
-      `
-    );
+    `);
     const $img = $('img').first();
 
     assert.equal(scoreByDimensions($img), -50);
   });
 
   it('penalizes short images', () => {
-    const $ = cheerio.load(
-      `
+    const $ = cheerio.load(`
       <div>
         <img height="10" />
       </div>
-      `
-    );
+    `);
     const $img = $('img').first();
 
     assert.equal(scoreByDimensions($img), -50);
   });
 
   it('ignores sprites', () => {
-    const $ = cheerio.load(
-      `
+    const $ = cheerio.load(`
       <div>
         <img src="/sprite/etc/foo.png" width="1000" height="1000" />
       </div>
-      `
-    );
+    `);
     const $img = $('img').first();
 
     assert.equal(scoreByDimensions($img), 0);
   });
 
   it('penalizes images with small areas', () => {
-    const $ = cheerio.load(
-      `
+    const $ = cheerio.load(`
       <div>
         <img src="/etc/foo.png" width="60" height="60" />
       </div>
-      `
-    );
+    `);
     const $img = $('img').first();
 
     assert.equal(scoreByDimensions($img), -100);
   });
 
   it('prefers the largest images', () => {
-    const $ = cheerio.load(
-      `
+    const $ = cheerio.load(`
       <div>
         <img src="/etc/foo.png" width="1000" height="1000" />
       </div>
-      `
-    );
+    `);
     const $img = $('img').first();
 
     assert.equal(scoreByDimensions($img), 1000);
@@ -204,8 +192,7 @@ describe('scoreByDimensions($img)', () => {
 
 describe('scoreByPosition($imgs, index)', () => {
   it('gives higher scores to images that come first', () => {
-    const $ = cheerio.load(
-      `
+    const $ = cheerio.load(`
       <div>
         <img width="10" />
         <img width="10" />
@@ -214,8 +201,7 @@ describe('scoreByPosition($imgs, index)', () => {
         <img width="10" />
         <img width="10" />
       </div>
-      `
-    );
+    `);
     const $imgs = $('img');
 
     assert.equal(scoreByPosition($imgs, 0), 3);

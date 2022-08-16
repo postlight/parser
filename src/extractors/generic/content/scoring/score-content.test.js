@@ -1,8 +1,6 @@
 import assert from 'assert';
 import cheerio from 'cheerio';
 
-import HTML from './fixtures/html';
-
 import { scoreContent, getScore } from './index';
 
 const fs = require('fs');
@@ -12,15 +10,24 @@ const fs = require('fs');
 // probably missing something when calculating
 describe('scoreContent($, weightNodes)', () => {
   it('loves hNews content', () => {
-    const $ = cheerio.load(HTML.hNews.before);
+    const $ = cheerio.load(`
+      <div class="hentry">
+        <p class="entry-content">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu.</p>
+      </div>
+    `);
     scoreContent($);
 
     assert.equal(getScore($('div').first()), 140);
   });
 
   it('is so-so about non-hNews content', () => {
-    const $ = cheerio.load(HTML.nonHNews.before);
-    scoreContent($).html();
+    const $ = cheerio.load(`
+      <div class="">
+        <p class="entry-content">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu.</p>
+        <p class="entry-content">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu.</p>
+      </div>
+    `);
+    scoreContent($);
 
     assert.equal(getScore($('div').first()), 65);
   });
@@ -28,15 +35,14 @@ describe('scoreContent($, weightNodes)', () => {
   it('scores this Wired article the same', () => {
     const html = fs.readFileSync('./fixtures/wired.html', 'utf-8');
     const $ = cheerio.load(html);
-    scoreContent($).html();
+    scoreContent($);
 
     assert.equal(getScore($('article').first()), 65.5);
   });
 
   it('scores this Vulture article', () => {
     const html = fs.readFileSync('./fixtures/vulture.html', 'utf-8');
-    let $ = cheerio.load(html);
-    $ = scoreContent($);
+    const $ = scoreContent(cheerio.load(html));
 
     assert.equal($('p[score]').length, 62);
     const itemprop = $('[itemprop=articleBody]').first();
@@ -50,31 +56,32 @@ describe('scoreContent($, weightNodes)', () => {
     const html = `
       <div score="0">
         <div score="0">
-          <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
-            when an unknown printer took a galley of type and scrambled it to make a type 
+          <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+            when an unknown printer took a galley of type and scrambled it to make a type
             specimen book.
           </p>
-          <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
-            when an unknown printer took a galley of type and scrambled it to make a type 
+          <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+            when an unknown printer took a galley of type and scrambled it to make a type
             specimen book.
           </p>
-          <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
-            when an unknown printer took a galley of type and scrambled it to make a type 
+          <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+            when an unknown printer took a galley of type and scrambled it to make a type
             specimen book.
           </p>
-          <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
-            when an unknown printer took a galley of type and scrambled it to make a type 
+          <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+            when an unknown printer took a galley of type and scrambled it to make a type
             specimen book.
           </p>
         </div>
       </div>
     `;
-    let $ = cheerio.load(html);
-    $ = scoreContent($);
+
+    const $ = cheerio.load(html);
+    scoreContent($);
 
     assert.equal(
       $('p')

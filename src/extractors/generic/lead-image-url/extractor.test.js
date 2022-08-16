@@ -1,14 +1,18 @@
 import assert from 'assert';
 import cheerio from 'cheerio';
 
-import HTML from './fixtures/html';
-
 import GenericLeadImageUrlExtractor from './extractor';
 
 describe('GenericLeadImageUrlExtractor', () => {
   describe('extract({ $, content, metaCache })', () => {
     it('returns og:image first', () => {
-      const $ = cheerio.load(HTML.og.test);
+      const $ = cheerio.load(`
+      <html>
+        <head>
+          <meta name="og:image" value="http://example.com/lead.jpg">
+        </head>
+      </html>
+    `);
       const content = $('*').first();
       const metaCache = ['og:image'];
 
@@ -18,11 +22,17 @@ describe('GenericLeadImageUrlExtractor', () => {
         metaCache,
       });
 
-      assert.equal(result, HTML.og.result);
+      assert.equal(result, 'http://example.com/lead.jpg');
     });
 
     it('returns twitter:image', () => {
-      const $ = cheerio.load(HTML.twitter.test);
+      const $ = cheerio.load(`
+      <html>
+        <head>
+          <meta name="twitter:image" value="http://example.com/lead.jpg">
+        </head>
+      </html>
+    `);
       const content = $('*').first();
       const metaCache = ['twitter:image'];
 
@@ -32,11 +42,17 @@ describe('GenericLeadImageUrlExtractor', () => {
         metaCache,
       });
 
-      assert.equal(result, HTML.twitter.result);
+      assert.equal(result, 'http://example.com/lead.jpg');
     });
 
     it('finds images based on scoring', () => {
-      const $ = cheerio.load(HTML.scoring.test);
+      const $ = cheerio.load(`
+      <div>
+        <img src="http://example.com/sprite/abadpic.jpg" />
+        <img src="http://example.com/upload/goodpic.jpg" />
+        <img src="http://example.com/upload/whateverpic.png" />
+      </div>
+    `);
       const content = $('*').first();
       const metaCache = [];
 
@@ -46,11 +62,15 @@ describe('GenericLeadImageUrlExtractor', () => {
         metaCache,
       });
 
-      assert.equal(result, HTML.scoring.result);
+      assert.equal(result, 'http://example.com/upload/goodpic.jpg');
     });
 
     it('returns image based on selectors', () => {
-      const $ = cheerio.load(HTML.selectors.test);
+      const $ = cheerio.load(`
+      <div>
+        <link rel="image_src" href="http://example.com/upload/goodpic.jpg">
+      </div>
+    `);
       const content = $('*').first();
       const metaCache = [];
 
@@ -60,7 +80,7 @@ describe('GenericLeadImageUrlExtractor', () => {
         metaCache,
       });
 
-      assert.equal(result, HTML.selectors.result);
+      assert.equal(result, 'http://example.com/upload/goodpic.jpg');
     });
   });
 });

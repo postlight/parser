@@ -9,8 +9,7 @@ describe('clean(leadImageUrl)', () => {
   });
 
   it('returns null if the url is not valid', () => {
-    const url = 'this is not a valid url';
-    assert.equal(clean(url), null);
+    assert.equal(clean('this is not a valid url'), null);
   });
 
   it('trims whitespace', () => {

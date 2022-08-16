@@ -2,13 +2,18 @@ import assert from 'assert';
 import cheerio from 'cheerio';
 import moment from 'moment-timezone';
 
-import HTML from './fixtures/html';
 import GenericDatePublishedExtractor from './extractor';
 
 describe('GenericDatePublishedExtractor', () => {
   describe('extract($, metaCache)', () => {
     it('extracts datePublished from meta tags', () => {
-      const $ = cheerio.load(HTML.datePublishedMeta.test);
+      const $ = cheerio.load(`
+      <html>
+        <head>
+          <meta name="displaydate" value="1/1/2020 8:30 (EST)" />
+        </head>
+      </html>
+    `);
       const metaCache = ['displaydate', 'something-else'];
       const result = GenericDatePublishedExtractor.extract({
         $,
@@ -16,11 +21,19 @@ describe('GenericDatePublishedExtractor', () => {
         metaCache,
       });
 
-      assert.equal(result, HTML.datePublishedMeta.result.toISOString());
+      assert.equal(result, new Date('1/1/2020 8:30 (EST)').toISOString());
     });
 
     it('extracts datePublished from selectors', () => {
-      const $ = cheerio.load(HTML.datePublishedSelectors.test);
+      const $ = cheerio.load(`
+      <div>
+        <div class="hentry">
+          <div class="updated">
+            1/1/2020 <span class="time">8:30am</span>
+          </div>
+        </head>
+      </div>
+    `);
       const metaCache = [];
       const result = GenericDatePublishedExtractor.extract({
         $,
@@ -28,7 +41,7 @@ describe('GenericDatePublishedExtractor', () => {
         metaCache,
       });
 
-      assert.equal(result, HTML.datePublishedMeta.result.toISOString());
+      assert.equal(result, new Date('1/1/2020 8:30 (EST)').toISOString());
     });
 
     it('extracts from url formatted /2012/08/01/etc', () => {

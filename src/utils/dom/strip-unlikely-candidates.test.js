@@ -2,32 +2,71 @@ import assert from 'assert';
 import cheerio from 'cheerio';
 
 import { assertClean } from 'test-helpers';
-import HTML from './fixtures/html';
 import stripUnlikelyCandidates from './strip-unlikely-candidates';
-
-function assertBeforeAndAfter(key, fn) {
-  const $ = cheerio.load(HTML[key].before);
-  assertClean(fn($).html(), HTML[key].after);
-}
 
 describe('Generic Extractor Utils', () => {
   describe('stripUnlikelyCandidates(node)', () => {
     it('returns original doc if no matches found', () => {
-      const $ = cheerio.load(HTML.noMatches);
-      const stripped = stripUnlikelyCandidates($);
-      assert.equal(stripped.html(), HTML.noMatches);
+      const html = `
+        <div id="foo">
+          <p>Ooo good one</p>
+        </div>
+      `;
+
+      const stripped = stripUnlikelyCandidates(cheerio.load(html));
+      assert.equal(stripped.html(), html);
     });
 
     it('strips unlikely matches from the doc', () => {
-      assertBeforeAndAfter('whitelistMatch', stripUnlikelyCandidates);
+      const before = `
+        <div class="header">Stuff</div>
+        <div class="article">
+          <p>Ooo good one</p>
+        </div>
+      `;
+      const after = `
+        <div class="article">
+          <p>Ooo good one</p>
+        </div>
+      `;
+
+      assertClean(stripUnlikelyCandidates(cheerio.load(before)).html(), after);
     });
 
     it('keeps likely matches even when they also match the blacklist', () => {
-      assertBeforeAndAfter('whiteAndBlack', stripUnlikelyCandidates);
+      const before = `
+        <div class="article adbox">
+          <p>Ooo good one</p>
+        </div>
+      `;
+
+      const after = `
+        <div class="article adbox">
+          <p>Ooo good one</p>
+        </div>
+      `;
+      assertClean(stripUnlikelyCandidates(cheerio.load(before)).html(), after);
     });
 
     it('removed likely matches when inside blacklist node', () => {
-      assertBeforeAndAfter('whiteInsideBlack', stripUnlikelyCandidates);
+      const before = `
+        <div>
+          <div class="adbox">
+            <div class="article">
+              <p>Ooo good one</p>
+            </div>
+          </div>
+          <div>Something unrelated</div>
+        </div>
+      `;
+
+      const after = `
+        <div>
+          <div>Something unrelated</div>
+        </div>
+      `;
+
+      assertClean(stripUnlikelyCandidates(cheerio.load(before)).html(), after);
     });
   });
 });

@@ -2,28 +2,64 @@ import cheerio from 'cheerio';
 
 import { assertClean } from 'test-helpers';
 
-import HTML from './fixtures/html';
 import { cleanImages } from './index';
 
 describe('cleanImages($)', () => {
   it('removes images with small heights/widths', () => {
-    const $ = cheerio.load(HTML.cleanSmallImages.before);
+    const $ = cheerio.load(`
+      <div>
+        <img width="5" height="5" />
+        <img width="50" />
+      </div>
+    `);
 
     const result = cleanImages($('*').first(), $);
-    assertClean(result.html(), HTML.cleanSmallImages.after);
+    assertClean(
+      result.html(),
+      `
+      <div>
+        <img width="50">
+      </div>
+    `
+    );
   });
 
   it('removes height attribute from images that remain', () => {
-    const $ = cheerio.load(HTML.cleanHeight.before);
+    const $ = cheerio.load(`
+      <div>
+        <img width="50" height="50" />
+      </div>
+    `);
 
     const result = cleanImages($('*').first(), $);
-    assertClean(result.html(), HTML.cleanHeight.after);
+    assertClean(
+      result.html(),
+      `
+      <div>
+        <img width="50">
+      </div>
+    `
+    );
   });
 
   it('removes spacer/transparent images', () => {
-    const $ = cheerio.load(HTML.cleanSpacer.before);
+    const $ = cheerio.load(`
+      <div>
+        <img src="/foo/bar/baz/spacer.png" />
+        <img src="/foo/bar/baz/normal.png" />
+        <p>Some text</p>
+      </div>
+    `);
 
     const result = cleanImages($('*').first(), $);
-    assertClean(result.html(), HTML.cleanSpacer.after);
+    assertClean(
+      result.html(),
+      `
+      <div>
+        <img src="/foo/bar/baz/normal.png">
+        <p>Some text</p>
+      </div>
+    `
+    );
   });
 });
