@@ -1,9 +1,8 @@
-/* eslint-disable */
-const express = require('express'); // eslint-disable-line import/no-extraneous-dependencies
+const express = require('express');
 const request = require('request');
 
 const app = express();
-var server;
+let server;
 
 const start = () => {
   app.use('/:url', (req, res) => {
@@ -23,24 +22,28 @@ const start = () => {
     };
     req.pipe(request(options)).pipe(res);
   });
-
   server = app.listen(process.env.PORT || 3000);
 };
 
 const stop = () => {
-  server && server.close();
+  if (server) {
+    server.close();
+  }
 };
 
 start();
 require('child_process').exec(
-  'node ./node_modules/karma/bin/karma start ./scripts/karma.conf.js' +
-    (process.env.CI ? ' --CI' : ''),
+  `node ./node_modules/karma/bin/karma start ./scripts/karma.conf.js${
+    process.env.CI ? ' --CI' : ''
+  }`,
   { stdio: [0, 1, 2] },
   (err, stdout) => {
     if (err) {
+      // eslint-disable-next-line no-console
       console.log('stdout', stdout);
       process.exit(1);
     } else {
+      // eslint-disable-next-line no-console
       console.log('stdout', stdout);
     }
     stop();
