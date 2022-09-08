@@ -6,7 +6,7 @@ const path = require('path');
 const URL = require('url');
 const octokit = require('@octokit/rest')();
 
-const Mercury = require('../dist/mercury');
+const Parser = require('../dist/mercury');
 
 // get all fixtures
 execFile('find', ['fixtures', '-type', 'f'], (err, stdout) => {
@@ -40,7 +40,7 @@ execFile('find', ['fixtures', '-type', 'f'], (err, stdout) => {
   Promise.all(
     fixturesToUpdate.map((fixture, i) => {
       const html = fs.readFileSync(fixture);
-      return Mercury.parse(`http://${baseDomains[i]}`, { html });
+      return Parser.parse(`http://${baseDomains[i]}`, { html });
     })
   ).then(parsedFixture => {
     const fixturesAndUrls = fixturesToUpdate.reduce(
@@ -76,7 +76,7 @@ const changeBase = [];
 const otherMess = [];
 const updateFixture = ({ fixture, url, baseDomain }) => {
   return new Promise(res => {
-    Mercury.parse(url)
+    Parser.parse(url)
       .then(({ url: updatedUrl }) => {
         if (!updatedUrl) {
           otherMess.push({ updatedUrl, url, fixture, baseDomain });
@@ -162,9 +162,7 @@ const createAndPushBranch = ({ branchName, commitMessage }) => {
   execFileSync('git', [
     'push',
     '-q',
-    `https://${
-      process.env.GH_AUTH_TOKEN
-    }@github.com/postlight/mercury-parser.git`,
+    `https://${process.env.GH_AUTH_TOKEN}@github.com/postlight/parser.git`,
   ]);
 };
 
@@ -176,7 +174,7 @@ const createPR = ({ branchName, title, body = '' }) => {
 
   octokit.pulls.create({
     owner: 'postlight',
-    repo: 'mercury-parser',
+    repo: 'parser',
     title,
     head: branchName,
     base: 'master',

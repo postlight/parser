@@ -1,16 +1,16 @@
 {
-  "name": "@postlight/mercury-parser",
+  "name": "@postlight/parser",
   "version": "2.2.1",
-  "description": "Mercury transforms web pages into clean text. Publishers and programmers use it to make the web make sense, and readers use it to read any web article comfortably.",
+  "description": "Postlight Parser transforms web pages into clean text. Publishers and programmers use it to make the web make sense, and readers use it to read any web article comfortably.",
   "author": "Postlight <mercury@postlight.com>",
-  "homepage": "https://mercury.postlight.com",
+  "homepage": "https://reader.postlight.com",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/postlight/mercury-parser.git"
+    "url": "git+https://github.com/postlight/parser.git"
   },
   "bugs": {
-    "url": "https://github.com/postlight/mercury-parser/issues"
+    "url": "https://github.com/postlight/parser/issues"
   },
   "keywords": [
     "mercury",
@@ -26,7 +26,8 @@
   ],
   "main": "./dist/mercury.js",
   "bin": {
-    "mercury-parser": "./cli.js"
+    "mercury-parser": "./cli.js",
+    "postlight-parser": "./cli.js"
   },
   "scripts": {
     "lint": "eslint . --fix",

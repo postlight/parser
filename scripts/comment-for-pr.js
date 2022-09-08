@@ -1,6 +1,6 @@
 /* eslint-disable */
 const bot = require('@jesses/circle-github-bot').default.create();
-const Mercury = require('../dist/mercury.js');
+const Parser = require('../dist/mercury.js');
 const fs = require('fs');
 const execSync = require('child_process').execSync;
 const { getReport } = require('@postlight/ci-failed-test-reporter');
@@ -13,7 +13,7 @@ const run = () => {
   const html = fs.readFileSync(`${fixture}`);
 
   // first parse is just to get the url
-  Mercury.parse('http://example.com', { html, fallback: false }).then(
+  Parser.parse('http://example.com', { html, fallback: false }).then(
     ({ url, domain, excerpt, word_count, direction }) => {
       // with the url, second pass will test the correct parser
       Mercury.parse(url, { html, fallback: false }).then(json => {
