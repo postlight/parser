@@ -8,7 +8,7 @@ import ora from 'ora';
 import { exec } from 'child_process';
 
 import { stripJunkTags, makeLinksAbsolute } from 'utils/dom';
-import Mercury from '../dist/mercury';
+import Parser from '../dist/mercury';
 import extractorTemplate from './templates/custom-extractor';
 import extractorTestTemplate from './templates/custom-extractor-test';
 
@@ -64,7 +64,7 @@ function scaffoldCustomParser(url) {
     confirmCreateDir(`./fixtures/${hostname}`, 'Creating fixtures directory');
   }
 
-  confirm(Mercury.fetchResource, [url], 'Fetching fixture', newParser);
+  confirm(Parser.fetchResource, [url], 'Fetching fixture', newParser);
 }
 
 // if has arg, just assume that arg is a url and skip prmopt
@@ -114,7 +114,7 @@ function savePage($, [url], newParser) {
 
   fs.writeFileSync(file, html);
 
-  Mercury.parse(url, { html }).then(result => {
+  Parser.parse(url, { html }).then(result => {
     if (newParser) {
       confirm(
         generateScaffold,

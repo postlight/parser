@@ -1,8 +1,8 @@
-# The Mercury Code of Conduct
+# The Postlight Parser Code of Conduct
 
 ## Conduct
 
-**Contact Mercury moderators:** [mercury@postlight.com](mailto:mercury@postlight.com)
+**Contact Postlight Parser moderators:** [mercury@postlight.com](mailto:mercury@postlight.com)
 
 - We are committed to providing a friendly, safe and welcoming environment for
   all, regardless of level of experience, gender, gender identity and expression,
@@ -31,7 +31,7 @@
 
 - Private harassment is also unacceptable. No matter who you are, if you feel
   you have been or are being harassed or made uncomfortable by a community member,
-  please contact one of the channel ops or any of the [Mercury moderation team](mailto:mercury@postlight.com)
+  please contact one of the channel ops or any of the [Postlight Parser moderation team](mailto:mercury@postlight.com)
   immediately. Whether you're a regular contributor or a newcomer, we care about
   making this community a safe place for you and we've got your back.
 
@@ -41,9 +41,9 @@
 ## Moderation
 
 These are the policies for upholding our community's standards of conduct. If you
-feel that a thread needs moderation, please contact the [Mercury moderation team](mailto:mercury@postlight.com).
+feel that a thread needs moderation, please contact the [Postlight Parser moderation team](mailto:mercury@postlight.com).
 
-1.  Remarks that violate the Mercury standards of conduct, including hateful, hurtful,
+1.  Remarks that violate the Postlight Parser standards of conduct, including hateful, hurtful,
     oppressive, or exclusionary remarks, are not allowed. (Cursing is allowed, but
     never targeting another user, and never in a hateful manner.)
 
@@ -69,7 +69,7 @@ feel that a thread needs moderation, please contact the [Mercury moderation team
     moderator creates an inappropriate situation, they should expect less leeway than
     others.
 
-In the Mercury community we strive to go the extra step to look out for each other.
+In the Postlight Parser community we strive to go the extra step to look out for each other.
 Don't just aim to be technically unimpeachable, try to be your best self. In
 particular, avoid flirting with offensive or sensitive issues, particularly if
 they're off-topic; this all too often leads to unnecessary fights, hurt feelings,
@@ -84,9 +84,9 @@ are all here first and foremost because we want to talk about cool technology.
 You will find that people will be eager to assume good intent and forgive as long
 as you earn their trust.
 
-The enforcement policies listed above apply to all official Mercury venues; including GitHub
-repositories under postlight/mercury such as mercury-rs and other Postlight repositories
-with a \*-mercury or mercury-\* naming convention; For other projects adopting the Mercury
+The enforcement policies listed above apply to all official Postlight Parser venues; including GitHub
+repositories under postlight/parser such as mercury-rs and other Postlight repositories
+with a \*-parser or parser-\* naming convention; For other projects adopting the Postlight Parser
 Code of Conduct, please contact the maintainers of those projects for enforcement.
 If you wish to use this code of conduct for your own project, consider explicitly
 mentioning your moderation policy or making a copy with your own moderation policy

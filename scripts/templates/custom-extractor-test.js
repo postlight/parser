@@ -34,7 +34,7 @@ export default function(file, url, dir, result, name) {
     import URL from 'url';
     import cheerio from 'cheerio';
 
-    import Mercury from 'mercury';
+    import Parser from 'mercury';
     import getExtractor from 'extractors/get-extractor';
     import { excerptContent } from 'utils/text';
 
@@ -50,7 +50,7 @@ export default function(file, url, dir, result, name) {
           const html =
             fs.readFileSync('${file}');
           result =
-            Mercury.parse(url, { html, fallback: false });
+            Parser.parse(url, { html, fallback: false });
         });
 
         it('is selected properly', () => {

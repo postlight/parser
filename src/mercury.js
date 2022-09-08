@@ -9,7 +9,7 @@ import getExtractor from 'extractors/get-extractor';
 import RootExtractor, { selectExtendedTypes } from 'extractors/root-extractor';
 import collectAllPages from 'extractors/collect-all-pages';
 
-const Mercury = {
+const Parser = {
   async parse(url, { html, ...opts } = {}) {
     const {
       fetchAllPages = true,
@@ -53,7 +53,7 @@ const Mercury = {
     const Extractor = getExtractor(url, parsedUrl, $);
     // console.log(`Using extractor for ${Extractor.domain}`);
 
-    // if html still has not been set (i.e., url passed to Mercury.parse),
+    // if html still has not been set (i.e., url passed to Parser.parse),
     // set html from the response of Resource.create
     if (!html) {
       html = $.html();
@@ -125,4 +125,4 @@ const Mercury = {
   },
 };
 
-export default Mercury;
+export default Parser;

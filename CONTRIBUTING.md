@@ -1,12 +1,12 @@
-# Contributing to Mercury Parser
+# Contributing to Postlight Parser
 
-Thank you for your interest in contributing to Mercury Parser! It's people like you that make Mercury such a useful tool. The below guidelines will help answer any questions you may have about the contribution process. We look forward to receiving contributions from you — our community!
+Thank you for your interest in contributing to Postlight Parser! It's people like you that make this such a useful tool. The below guidelines will help answer any questions you may have about the contribution process. We look forward to receiving contributions from you — our community!
 
 _Please read our [Code of Conduct](./CODE_OF_CONDUCT.md) before participating._
 
 ## Contents
 
-- [Contributing to Mercury Parser](#contributing-to-mercury-parser)
+- [Contributing to Postlight Parser](#contributing-to-postlight-parser)
   - [Contents](#contents)
   - [Ways to Contribute](#ways-to-contribute)
   - [Reporting a Bug](#reporting-a-bug)
@@ -27,15 +27,15 @@ _Please read our [Code of Conduct](./CODE_OF_CONDUCT.md) before participating._
 
 ## Ways to Contribute
 
-There are many ways you can contribute to the Mercury community. We value each type
+There are many ways you can contribute to the Postlight Parser community. We value each type
 of contribution and appreciate your help.
 
 Here are a few examples of what we consider a contribution:
 
 - Updates to source code, including bug fixes, improvements, or [creating new custom site extractors](./src/extractors/custom/README.md)
 - Answering questions and chatting with the community in the [Gitter](https://gitter.im/postlight/mercury) room
-- Filing, organizing, and commenting on issues in the [issue tracker](https://github.com/postlight/mercury-parser/issues)
-- Teaching others how to use Mercury
+- Filing, organizing, and commenting on issues in the [issue tracker](https://github.com/postlight/parser/issues)
+- Teaching others how to use Postlight Parser
 - Community building and outreach
 
 ## Reporting a Bug
@@ -49,41 +49,41 @@ as it's possible that someone else has already reported the error. This doesn't
 always work, and sometimes it's hard to know what to search for, so consider
 this extra credit. We won't mind if you accidentally file a duplicate report.
 
-Opening an issue is as easy as following [this link](https://github.com/postlight/mercury-parser/issues/new)
+Opening an issue is as easy as following [this link](https://github.com/postlight/parser/issues/new)
 and filling out the template.
 
 ### Security
 
-If you find a security bug in Mercury, send an email with a descriptive subject line
+If you find a security bug in Postlight Parser, send an email with a descriptive subject line
 to [mercury+security@postlight.com](mailto:mercury+security@postlight.com). If you think
-you’ve found a serious vulnerability, please do not file a public issue or share in the Mercury Gitter room.
+you’ve found a serious vulnerability, please do not file a public issue or share in the Postlight Parser Gitter room.
 
-Your report will go to Mercury's core development team. You will receive
+Your report will go to Postlight Parser's core development team. You will receive
 acknowledgement of the report in 24-48 hours, and our next steps should be to
 release a fix. If you don’t get a report acknowledgement in 48 hours, send an email to
 [mercury@postlight.com](mailto:mercury@postlight.com).
 
 A working list of public, known security-related issues can be found in the
-[issue tracker](https://github.com/postlight/mercury-parser/issues?q=is%3Aopen+is%3Aissue+label%3Asecurity).
+[issue tracker](https://github.com/postlight/parser/issues?q=is%3Aopen+is%3Aissue+label%3Asecurity).
 
 ## Requesting a Feature
 
-To request a change to the way that Mercury works, please open an issue in this repository named, "Feature Request: [Your Feature Idea]," followed by your suggestion.
+To request a change to the way that Postlight Parser works, please open an issue in this repository named, "Feature Request: [Your Feature Idea]," followed by your suggestion.
 
 ## Development Workflow
 
-This section of the document outlines how to build, run, and test Mercury locally.
+This section of the document outlines how to build, run, and test Postlight Parser locally.
 
 ### Building
 
-To build the Mercury Parser locally, execute the following commands:
+To build the Postlight Parser locally, execute the following commands:
 
 ```bash
 # Clone this repository from GitHub.
-git clone https://github.com/postlight/mercury-parser.git
+git clone https://github.com/postlight/parser.git
 
 # Navigate into the root of this repository.
-cd mercury-parser
+cd parser
 
 # Install local dependencies.
 yarn install
@@ -97,7 +97,7 @@ yarn build:web
 
 ### Testing
 
-Mercury is a test-driven application; each component has its own test file. Tests are run for both node and web builds. Our testing frameworks are:
+Postlight Parser is a test-driven application; each component has its own test file. Tests are run for both node and web builds. Our testing frameworks are:
 
 - `Jest` for the node build
 - `Karma` for the web build
@@ -143,9 +143,9 @@ preset. This helps keep our Markdown tidy and consistent.
 
 ### Node.js Version Requirements
 
-Mercury is built against Node `>= v12.8.1`. Since this is the
+Postlight Parser is built against Node `>= v12.8.1`. Since this is the
 version we run in our CI environments, we recommend you use it when working on
-the Mercury codebase.
+the codebase.
 
 If you use [nvm](https://github.com/creationix/nvm) to manage Node.js versions
 and zsh (like [Oh-My-ZSH](https://github.com/robbyrussell/oh-my-zsh)), you can
@@ -176,12 +176,12 @@ load-nvmrc
 
 ## Writing Documentation
 
-Improvements to documentation are a great way to start contributing to Mercury. The
+Improvements to documentation are a great way to start contributing to Postlight Parser. The
 source for the official documentation are Markdown files that live in this repository.
 
 ## Submitting a Pull Request
 
-Want to make a change to Mercury? Submit a pull request! We use the "fork and pull"
+Want to make a change to Postlight Parser? Submit a pull request! We use the "fork and pull"
 model [described here](https://help.github.com/articles/creating-a-pull-request-from-a-fork).
 
 **Before submitting a pull request**, please make sure:
@@ -203,7 +203,7 @@ Commit messages should follow the format outlined below:
 |    chore | does not effect the production version of the app in any way.            |
 |     deps | add, update, or remove a dependency.                                     |
 |      doc | add, update, or remove documentation. no code changes.                   |
-|       dx | improve the development experience of mercury core.                      |
+|       dx | improve the development experience of parser core.                       |
 |     feat | a feature or enhancement. can be incredibly small.                       |
 |      fix | a bug fix for something that was broken.                                 |
 |     perf | add, update, or fix a test.                                              |
@@ -222,9 +222,9 @@ fall behind. Feel free to reach out to the core team if you have not received a 
 Some useful places to look for information are:
 
 - The main [README](./README.md) for this repository.
-- The Mercury Custom Parser [README](./src/extractors/custom/README.md).
+- The Postlight Custom Parser [README](./src/extractors/custom/README.md).
 - The postlight/mercury room on [Gitter](https://gitter.im/postlight/mercury)
-- The Mercury Parser API [repository](https://github.com/postlight/mercury-parser-api).
+- The Postlight Parser API [repository](https://github.com/postlight/parser-api).
 
 _Adapted from [Contributing to Node.js](https://github.com/nodejs/node/blob/master/CONTRIBUTING.md)
 and [ThinkUp Security and Data Privacy](http://thinkup.readthedocs.io/en/latest/install/security.html#thinkup-security-and-data-privacy)._
