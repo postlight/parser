@@ -24,7 +24,17 @@
       "error",
       { "max": 1, "maxEOF": 0, "maxBOF": 0 }
     ],
-    "import/no-unresolved": false
+    "import/no-unresolved": false,
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        "devDependencies": [
+          "**/*.test.js",
+          "scripts/proxy-browser-test.js",
+          "rollup.config*js"
+        ]
+      }
+    ]
   },
   "settings": {
     "import/resolver": {
