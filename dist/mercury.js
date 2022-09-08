@@ -7972,7 +7972,7 @@ function _collectAllPages() {
   return _collectAllPages.apply(this, arguments);
 }
 
-var Mercury = {
+var Parser = {
   parse: function () {
     var _parse = _asyncToGenerator(
     /*#__PURE__*/
@@ -8050,7 +8050,7 @@ var Mercury = {
               }
 
               Extractor = getExtractor(url, parsedUrl, $); // console.log(`Using extractor for ${Extractor.domain}`);
-              // if html still has not been set (i.e., url passed to Mercury.parse),
+              // if html still has not been set (i.e., url passed to Parser.parse),
               // set html from the response of Resource.create
 
               if (!html) {
@@ -8146,4 +8146,4 @@ var Mercury = {
   }
 };
 
-module.exports = Mercury;
+module.exports = Parser;
