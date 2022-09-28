@@ -69,7 +69,7 @@ describe('WwwChicagotribuneComExtractor', () => {
       // the article.
       assert.equal(
         lead_image_url,
-        'http://www.trbimg.com/img-58506bcc/turbine/ct-trump-energy-department-climate-change-request-20161213'
+        'https://www.chicagotribune.com/resizer/tP-TOTSSCwh-DB2Tl_zeREXAVqc=/1200x630/filters:format(jpg):quality(70)/arc-anglerfish-arc2-prod-tronc.s3.amazonaws.com/public/LNQKCWO2SFHNLEVJV7AIVSBPWA.jpg'
       );
     });
 
@@ -93,7 +93,7 @@ describe('WwwChicagotribuneComExtractor', () => {
       // the article.
       assert.equal(
         first13,
-        'Global warming - "it\'s a hoax."Donald Trump has said that more than once.'
+        'Global warming - "it\'s a hoax."Donald Trump has said that more than once.So'
       );
     });
   });

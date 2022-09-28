@@ -5,7 +5,7 @@ export const BuzzfeedExtractor = {
   domain: 'www.buzzfeed.com',
   title: {
     selectors: [
-      'h1[id="post-title"]',
+      'h1.embed-headline-title',
       // enter title selectors
     ],
   },
@@ -14,17 +14,17 @@ export const BuzzfeedExtractor = {
     selectors: [
       'a[data-action="user/username"]',
       'byline__author',
+      ['meta[name="author"]', 'value'],
       // enter author selectors
     ],
   },
 
   content: {
-    selectors: [
-      ['.longform_custom_header_media', '#buzz_sub_buzz'],
-      '#buzz_sub_buzz',
-    ],
+    selectors: ['.subbuzz'],
 
     defaultCleaner: false,
+
+    allowMultiple: true,
 
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images
@@ -55,7 +55,7 @@ export const BuzzfeedExtractor = {
   },
 
   date_published: {
-    selectors: ['.buzz-datetime'],
+    selectors: ['time[datetime]'],
   },
 
   lead_image_url: {

@@ -5,15 +5,14 @@ export const WiredExtractor = {
   domain: 'www.wired.com',
   title: {
     selectors: [
-      'h1.content-header__hed',
-      'h1.post-title',
+      'h1[data-testId="ContentHeaderHed"]',
       // enter title selectors
     ],
   },
 
   author: {
     selectors: [
-      ['meta[name="author"]', 'value'],
+      ['meta[name="article:author"]', 'value'],
       'a[rel="author"]',
       // enter author selectors
     ],
@@ -33,14 +32,11 @@ export const WiredExtractor = {
     // Is there anything that is in the result that shouldn't be?
     // The clean selectors will remove anything that matches from
     // the result
-    clean: ['.visually-hidden', 'figcaption img.photo'],
+    clean: ['.visually-hidden', 'figcaption img.photo', '.alert-message'],
   },
 
   date_published: {
-    selectors: [
-      'time.content-header__publish-date',
-      ['meta[itemprop="datePublished"]', 'value'],
-    ],
+    selectors: [['meta[name="article:published_time"]', 'value']],
   },
 
   lead_image_url: {

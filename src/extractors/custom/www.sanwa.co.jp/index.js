@@ -8,7 +8,7 @@ export const WwwSanwaCoJpExtractor = {
   author: null,
 
   date_published: {
-    selectors: ['p.date'],
+    selectors: ['dl.date'],
     format: 'YYYY.MM.DD',
     timezone: 'Asia/Tokyo',
   },

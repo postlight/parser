@@ -81,7 +81,7 @@ describe('WwwSanwaCoJpExtractor', () => {
       // the article.
       assert.equal(
         lead_image_url,
-        `https://www.sanwa.co.jp/product/syohin_img/M/MA-IRFP139BK_MDX.jpg`
+        'https://cdn.sanwa.co.jp/product/syohin_img/M/MA-IRFP139BK_MDX.jpg'
       );
     });
 

@@ -53,6 +53,16 @@ describe('BuzzfeedExtractor', () => {
       assert.equal(author, 'Ikran Dahir');
     });
 
+    it('returns the date_published', async () => {
+      // To pass this test, fill out the date_published selector
+      // in ./src/extractors/custom/www.buzzfeed.com/index.js.
+      const { date_published } = await result;
+
+      // Update these values with the expected values from
+      // the article.
+      assert.equal(date_published, '2016-10-03T05:00:00.000Z');
+    });
+
     it('returns the lead_image_url', async () => {
       // To pass this test, fill out the lead_image_url selector
       // in ./src/extractors/custom/www.buzzfeed.com/index.js.
@@ -62,7 +72,7 @@ describe('BuzzfeedExtractor', () => {
       // the article.
       assert.equal(
         lead_image_url,
-        'https://img.buzzfeed.com/buzzfeed-static/static/2016-10/3/12/social_promotion/buzzfeed-prod-fastlane01/facebook-social-promotion-17757-1475512210-1.jpg'
+        'https://img.buzzfeed.com/buzzfeed-static/static/2016-10/3/14/campaign_images/buzzfeed-prod-fastlane01/people-are-calling-out-this-edited-picture-of-dem-2-28558-1475518666-10_dblbig.jpg'
       );
     });
 
@@ -76,7 +86,7 @@ describe('BuzzfeedExtractor', () => {
       const $ = cheerio.load(content || '');
 
       const first13 = excerptContent(
-        $('*')
+        $('span')
           .first()
           .text(),
         13

@@ -79,7 +79,7 @@ describe('WwwThevergeComExtractor', () => {
       // the article.
       assert.equal(
         lead_image_url,
-        'https://cdn0.vox-cdn.com/thumbor/v7kU2cISjo-wm6XceGk_kBuMBlA=/0x16:1024x592/1600x900/cdn0.vox-cdn.com/uploads/chorus_image/image/52042639/vrg_tc_attarmy_1024.1480431618.jpeg'
+        'https://cdn.vox-cdn.com/thumbor/nWeNjfNXUtcNpGGe-QVzsw89S_8=/0x16:1024x592/1600x900/cdn.vox-cdn.com/uploads/chorus_image/image/52042639/vrg_tc_attarmy_1024.1480431618.jpeg'
       );
     });
 

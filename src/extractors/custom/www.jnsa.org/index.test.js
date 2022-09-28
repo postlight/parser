@@ -35,7 +35,7 @@ describe('WwwJnsaOrgExtractor', () => {
       // the article.
       assert.equal(
         title,
-        `NSF 2019 in Kansai 「早期発見、早期対処」のセキュリティ\n～守りのセキュリティから攻めのセキュリティへ～`
+        `NSF 2019 in Kansai 「早期発見、早期対処」のセキュリティ ～守りのセキュリティから攻めのセキュリティへ～`
       );
     });
 

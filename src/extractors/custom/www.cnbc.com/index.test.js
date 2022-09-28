@@ -69,7 +69,7 @@ describe('WwwCnbcComExtractor', () => {
       // the article.
       assert.equal(
         lead_image_url,
-        'http://fm.cnbc.com/applications/cnbc.com/resources/img/editorial/2016/12/19/104176162-GettyImages-161350847.1910x1000.jpg'
+        'https://image.cnbcfm.com/api/v1/image/104178390-RTR3H5O9.jpg?v=1529452197&w=1920&h=1080'
       );
     });
 
@@ -93,7 +93,7 @@ describe('WwwCnbcComExtractor', () => {
       // the article.
       assert.equal(
         first13,
-        'Brian Brainerd | The Denver Post | Getty Images The U.S. Mountain States'
+        'The U.S. Mountain States are moving away from coal, even as President-elect Donald'
       );
     });
   });

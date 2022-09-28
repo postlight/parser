@@ -33,7 +33,7 @@ describe('BlisterreviewComExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(title, `2019-2020 Line Outline`);
+      assert.equal(title, `2021-2022 Line Outline`);
     });
 
     it('returns the author', async () => {
@@ -43,7 +43,7 @@ describe('BlisterreviewComExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(author, `Sam Shaheen`);
+      assert.equal(author, `Luke Koppa`);
     });
 
     it('returns the date_published', async () => {
@@ -53,7 +53,7 @@ describe('BlisterreviewComExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(date_published, `2019-02-20T15:18:15.000Z`);
+      assert.equal(date_published, `2019-04-09T14:00:15.000Z`);
     });
 
     // it('returns the dek', async () => {
@@ -75,7 +75,7 @@ describe('BlisterreviewComExtractor', () => {
       // the article.
       assert.equal(
         lead_image_url,
-        `https://blisterreview.com/wp-content/uploads/2019/02/thumb-6.jpg`
+        `https://blisterreview.com/wp-content/uploads/2019/02/featured-1.jpg`
       );
     });
 
@@ -99,7 +99,7 @@ describe('BlisterreviewComExtractor', () => {
       // the article.
       assert.equal(
         first13,
-        'Ski: 2019-2020 Line Outline, 186 cmAvailable Lengths: 178, 186 cmBlister’s Measured Tip-to-Tail Length:'
+        'Ski: 2021-2022 Line Outline, 186 cmAvailable Lengths: 178, 186 cmBlister’s Measured Tip-to-Tail Length:'
       );
     });
   });

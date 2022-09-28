@@ -2001,23 +2001,25 @@ var NewYorkerExtractor = {
 var WiredExtractor = {
   domain: 'www.wired.com',
   title: {
-    selectors: ['h1.content-header__hed', 'h1.post-title']
+    selectors: ['h1[data-testId="ContentHeaderHed"]' // enter title selectors
+    ]
   },
   author: {
-    selectors: [['meta[name="author"]', 'value'], 'a[rel="author"]']
+    selectors: [['meta[name="article:author"]', 'value'], 'a[rel="author"]']
   },
   content: {
-    selectors: ['article.article.main-content', 'article.content'],
+    selectors: ['article.article.main-content', 'article.content' // enter content selectors
+    ],
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images
     transforms: [],
     // Is there anything that is in the result that shouldn't be?
     // The clean selectors will remove anything that matches from
     // the result
-    clean: ['.visually-hidden', 'figcaption img.photo']
+    clean: ['.visually-hidden', 'figcaption img.photo', '.alert-message']
   },
   date_published: {
-    selectors: ['time.content-header__publish-date', ['meta[itemprop="datePublished"]', 'value']]
+    selectors: [['meta[name="article:published_time"]', 'value']]
   },
   lead_image_url: {
     selectors: [['meta[name="og:image"]', 'value']]
@@ -2105,14 +2107,15 @@ var YahooExtractor = {
 var BuzzfeedExtractor = {
   domain: 'www.buzzfeed.com',
   title: {
-    selectors: ['h1[id="post-title"]']
+    selectors: ['h1.embed-headline-title']
   },
   author: {
-    selectors: ['a[data-action="user/username"]', 'byline__author']
+    selectors: ['a[data-action="user/username"]', 'byline__author', ['meta[name="author"]', 'value']]
   },
   content: {
-    selectors: [['.longform_custom_header_media', '#buzz_sub_buzz'], '#buzz_sub_buzz'],
+    selectors: ['.subbuzz'],
     defaultCleaner: false,
+    allowMultiple: true,
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images
     transforms: {
@@ -2132,7 +2135,7 @@ var BuzzfeedExtractor = {
     clean: ['.instapaper_ignore', '.suplist_list_hide .buzz_superlist_item .buzz_superlist_number_inline', '.share-box', '.print']
   },
   date_published: {
-    selectors: ['.buzz-datetime']
+    selectors: ['time[datetime]']
   },
   lead_image_url: {
     selectors: [['meta[name="og:image"]', 'value']]
@@ -2549,10 +2552,10 @@ var WwwHuffingtonpostComExtractor = {
 var NewrepublicComExtractor = {
   domain: 'newrepublic.com',
   title: {
-    selectors: ['h1.article-headline', '.minutes-primary h1.minute-title']
+    selectors: ['h1.article-headline']
   },
   author: {
-    selectors: ['div.author-list', '.minutes-primary h3.minute-byline']
+    selectors: ['span.AuthorList']
   },
   date_published: {
     selectors: [['meta[name="article:published_time"]', 'value']],
@@ -2565,7 +2568,7 @@ var NewrepublicComExtractor = {
     selectors: [['meta[name="og:image"]', 'value']]
   },
   content: {
-    selectors: [['.article-cover', 'div.content-body'], ['.minute-image', '.minutes-primary div.content-body']],
+    selectors: [['div.article-body']],
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images
     transforms: {},
@@ -2619,7 +2622,7 @@ var WwwThevergeComExtractor = {
     selectors: [['meta[name="article:published_time"]', 'value']]
   },
   dek: {
-    selectors: ['h2.p-dek']
+    selectors: ['.p-dek']
   },
   lead_image_url: {
     selectors: [['meta[name="og:image"]', 'value']]
@@ -3060,19 +3063,19 @@ var MashableComExtractor = {
 var WwwChicagotribuneComExtractor = {
   domain: 'www.chicagotribune.com',
   title: {
-    selectors: ['h1.trb_ar_hl_t']
+    selectors: [['meta[name="og:title"]', 'value']]
   },
   author: {
-    selectors: ['span.trb_ar_by_nm_au']
+    selectors: ['div.article_byline span:first-of-type']
   },
   date_published: {
-    selectors: [['meta[itemprop="datePublished"]', 'value']]
+    selectors: ['time']
   },
   lead_image_url: {
     selectors: [['meta[name="og:image"]', 'value']]
   },
   content: {
-    selectors: ['div.trb_ar_page'],
+    selectors: ['article'],
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images
     transforms: {},
@@ -4114,38 +4117,6 @@ var WwwWesternjournalismComExtractor = {
   }
 };
 
-var FusionNetExtractor = {
-  domain: 'fusion.net',
-  title: {
-    selectors: ['.post-title', '.single-title', '.headline']
-  },
-  author: {
-    selectors: ['.show-for-medium .byline']
-  },
-  date_published: {
-    selectors: [['time.local-time', 'datetime']]
-  },
-  dek: {
-    selectors: [// enter selectors
-    ]
-  },
-  lead_image_url: {
-    selectors: [['meta[name="og:image"]', 'value']]
-  },
-  content: {
-    selectors: [['.post-featured-media', '.article-content'], '.article-content'],
-    // Is there anything in the content you selected that needs transformed
-    // before it's consumable content? E.g., unusual lazy loaded images
-    transforms: {
-      '.fusion-youtube-oembed': 'figure'
-    },
-    // Is there anything that is in the result that shouldn't be?
-    // The clean selectors will remove anything that matches from
-    // the result
-    clean: []
-  }
-};
-
 var WwwAmericanowComExtractor = {
   domain: 'www.americanow.com',
   title: {
@@ -5001,7 +4972,7 @@ var WwwSanwaCoJpExtractor = {
   },
   author: null,
   date_published: {
-    selectors: ['p.date'],
+    selectors: ['dl.date'],
     format: 'YYYY.MM.DD',
     timezone: 'Asia/Tokyo'
   },
@@ -6139,6 +6110,8 @@ var SpektrumExtractor = {
   }
 };
 
+
+
 var CustomExtractors = /*#__PURE__*/Object.freeze({
   BloggerExtractor: BloggerExtractor,
   NYMagExtractor: NYMagExtractor,
@@ -6212,7 +6185,6 @@ var CustomExtractors = /*#__PURE__*/Object.freeze({
   WwwAlComExtractor: WwwAlComExtractor,
   WwwThepennyhoarderComExtractor: WwwThepennyhoarderComExtractor,
   WwwWesternjournalismComExtractor: WwwWesternjournalismComExtractor,
-  FusionNetExtractor: FusionNetExtractor,
   WwwAmericanowComExtractor: WwwAmericanowComExtractor,
   ScienceflyComExtractor: ScienceflyComExtractor,
   HellogigglesComExtractor: HellogigglesComExtractor,
