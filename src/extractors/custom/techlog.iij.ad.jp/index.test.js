@@ -84,14 +84,14 @@ describe('TechlogIijAdJpExtractor', () => {
       );
     });
 
-    it('returns the pages_rendered', async () => {
+    it('returns the rendered_pages', async () => {
       // To pass this test, fill out the pages_rendered selector
       // in ./src/extractors/custom/techlog.iij.ad.jp/index.js.
-      const { pages_rendered } = await result;
+      const { rendered_pages } = await result;
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(pages_rendered, null);
+      assert.equal(rendered_pages, 1);
     });
 
     it('returns the content', async () => {
