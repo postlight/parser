@@ -69,7 +69,7 @@ describe('PagesixComExtractor', () => {
       // the article.
       assert.equal(
         lead_image_url,
-        'https://nyppagesix.files.wordpress.com/2016/12/sofia-vergara4.jpg?quality=90&strip=all&w=1200'
+        'https://pagesix.com/wp-content/uploads/sites/3/2016/12/sofia-vergara4.jpg?quality=75&strip=all&w=1200'
       );
     });
 

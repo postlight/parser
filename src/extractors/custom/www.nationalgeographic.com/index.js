@@ -14,7 +14,7 @@ export const WwwNationalgeographicComExtractor = {
   },
 
   dek: {
-    selectors: ['.article__deck'],
+    selectors: ['.Article__Headline__Desc', '.article__deck'],
   },
 
   lead_image_url: {
@@ -22,7 +22,11 @@ export const WwwNationalgeographicComExtractor = {
   },
 
   content: {
-    selectors: [['.parsys.content', '.__image-lead__'], '.content'],
+    selectors: [
+      'section.Article__Content',
+      ['.parsys.content', '.__image-lead__'],
+      '.content',
+    ],
 
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images

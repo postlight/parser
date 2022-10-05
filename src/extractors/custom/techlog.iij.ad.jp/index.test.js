@@ -78,7 +78,7 @@ describe('TechlogIijAdJpExtractor', () => {
       // the article.
       assert.equal(
         lead_image_url,
-        `http://techlog.iij.ad.jp/images/og-icon.png`
+        `https://techlog.iij.ad.jp/images/og-icon.png`
       );
     });
 

@@ -38,7 +38,7 @@ describe('WwwItmediaCoJpExtractor', () => {
       // the article.
       assert.equal(
         title,
-        `さらば平成、さらば水冷、いくぜNUC：Intel NUCで最新SSDを比較してみた (1/2)`
+        `Intel NUCで最新SSDを比較してみた：さらば平成、さらば水冷、いくぜNUC（1/2 ページ）`
       );
     });
 

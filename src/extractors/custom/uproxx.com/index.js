@@ -2,11 +2,11 @@ export const UproxxComExtractor = {
   domain: 'uproxx.com',
 
   title: {
-    selectors: ['div.post-top h1'],
+    selectors: ['div.entry-header h1'],
   },
 
   author: {
-    selectors: ['.post-top .authorname'],
+    selectors: [['meta[name="qc:author"]', 'value']],
   },
 
   date_published: {
@@ -18,7 +18,7 @@ export const UproxxComExtractor = {
   },
 
   content: {
-    selectors: ['.post-body'],
+    selectors: ['.entry-content'],
 
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images

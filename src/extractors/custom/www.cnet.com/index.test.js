@@ -79,7 +79,7 @@ describe('WwwCnetComExtractor', () => {
       // the article.
       assert.equal(
         lead_image_url,
-        'https://cnet2.cbsistatic.com/img/eW0A_hGjyVcT0oRB_23SDCOdEGU=/670x503/2016/12/16/48966e5f-87df-4915-ad68-ed70cdd37fdd/gettyimages-537252007.jpg'
+        'https://www.cnet.com/a/img/resize/b60fa8aec85660055988dbc589a0e8a1d73fb963/2016/12/16/48966e5f-87df-4915-ad68-ed70cdd37fdd/gettyimages-537252007.jpg?auto=webp&fit=crop&height=630&width=1200'
       );
     });
 
@@ -103,7 +103,7 @@ describe('WwwCnetComExtractor', () => {
       // the article.
       assert.equal(
         first13,
-        'Faster networks, more "free data" and a dismantling of net neutrality rules could'
+        'Get ready for a wild 2017 when it comes to the world of'
       );
     });
   });

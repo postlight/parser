@@ -26,6 +26,13 @@ export const TimesofindiaIndiatimesComExtractor = {
     selectors: ['div.contentwrapper:has(section)'],
     defaultCleaner: false,
 
-    clean: ['section', 'h1', '.byline', '.img_cptn'],
+    clean: [
+      'section',
+      'h1',
+      '.byline',
+      '.img_cptn',
+      '.icon_share_wrap',
+      'ul[itemtype="https://schema.org/BreadcrumbList"]',
+    ],
   },
 };

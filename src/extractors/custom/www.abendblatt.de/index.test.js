@@ -79,7 +79,7 @@ describe('WwwAbendblattDeExtractor', () => {
       // the article.
       assert.equal(
         lead_image_url,
-        `https://img.abendblatt.de/img/wirtschaft/crop229123088/9271097785-w820-cv16_9-q85-fnov-fpi227770079-fpotr/Fruchtgrossmarkt.jpg`
+        `https://img.abendblatt.de/img/wirtschaft/crop229123088/4422608426-w820-cv16_9-q85/Fruchtgrossmarkt.jpg`
       );
     });
 

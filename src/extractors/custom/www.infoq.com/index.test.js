@@ -81,7 +81,7 @@ describe('WwwInfoqComExtractor', () => {
       // the article.
       assert.equal(
         lead_image_url,
-        `https://cdn.infoq.com/statics_s2_20190403-0313/styles/i/logo-big.jpg`
+        `https://cdn.infoq.com/statics_s1_20220809063436/styles/static/images/logo/logo-big.jpg`
       );
     });
 

@@ -36,7 +36,7 @@ describe('WwwNationalgeographicComExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(title, "How Today's Toys May Be Harming Your Daughter");
+      assert.equal(title, 'How Today’s Toys May Be Harming Your Daughter');
     });
 
     it('returns the date_published', async () => {
@@ -46,7 +46,7 @@ describe('WwwNationalgeographicComExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(date_published, '2016-12-15T16:39:00.000Z');
+      assert.equal(date_published, '2016-12-15T06:00:00.000Z');
     });
 
     it('returns the dek', async () => {
@@ -71,7 +71,7 @@ describe('WwwNationalgeographicComExtractor', () => {
       // the article.
       assert.equal(
         lead_image_url,
-        'http://www.nationalgeographic.com/content/dam/magazine/rights-exempt/2017/01/Departments/gendertoys/gendertoysOG.ngsversion.1481823676336.png'
+        'https://i.natgeofe.com/n/2d5941b3-34f7-4db7-a8d7-eca792637b79/gendertoysOG_16x9.jpg?w=1200'
       );
     });
 
@@ -95,7 +95,7 @@ describe('WwwNationalgeographicComExtractor', () => {
       // the article.
       assert.equal(
         first13,
-        'This story appears in the January 2017 issue of National Geographic magazine. Read'
+        'For adults, play is a break from life. For children, especially in the'
       );
     });
   });

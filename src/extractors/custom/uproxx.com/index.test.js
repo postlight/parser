@@ -68,7 +68,7 @@ describe('UproxxComExtractor', () => {
       // the article.
       assert.equal(
         lead_image_url,
-        'https://uproxx.files.wordpress.com/2016/12/rudy-giuliani-not-secretary-of-state.jpg?quality=90&w=650'
+        'https://uproxx.com/wp-content/uploads/2016/12/rudy-giuliani-not-secretary-of-state.jpg?w=650'
       );
     });
 

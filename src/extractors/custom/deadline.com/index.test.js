@@ -82,7 +82,7 @@ describe('DeadlineComExtractor', () => {
       // the article.
       assert.equal(
         lead_image_url,
-        `https://pmcdeadline2.files.wordpress.com/2019/01/donald-trump-2.jpg?w=1024`
+        `https://deadline.com/wp-content/uploads/2019/01/donald-trump-2-e1561600955862.jpg?w=1024`
       );
     });
 
@@ -106,7 +106,7 @@ describe('DeadlineComExtractor', () => {
       // the article.
       assert.equal(
         first13,
-        'Andrew Harnik/AP/Shutterstock Twitter erupted Monday morning when President Donald Trump shared his branding'
+        'Twitter erupted Monday morning when President Donald Trump shared his branding expertise with'
       );
     });
   });

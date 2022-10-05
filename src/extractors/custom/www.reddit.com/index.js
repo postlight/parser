@@ -2,7 +2,10 @@ export const WwwRedditComExtractor = {
   domain: 'www.reddit.com',
 
   title: {
-    selectors: ['div[data-test-id="post-content"] h2'],
+    selectors: [
+      'div[data-test-id="post-content"] h1',
+      'div[data-test-id="post-content"] h2',
+    ],
   },
 
   author: {

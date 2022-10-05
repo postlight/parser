@@ -79,7 +79,7 @@ describe('WwwAndroidcentralComExtractor', () => {
       // the article.
       assert.equal(
         lead_image_url,
-        'https://www.androidcentral.com/sites/androidcentral.com/files/styles/large/public/article_images/2017/01/moto-mwc-2017.jpg?itok=-Cv5scPP'
+        'https://cdn.mos.cms.futurecdn.net/Qd5tPg9Tg4goHQcBE7eZJ5-1200-80.jpg'
       );
     });
 
