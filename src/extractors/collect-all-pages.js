@@ -57,7 +57,7 @@ export default async function collectAllPages({
   return {
     ...result,
     total_pages: pages,
-    pages_rendered: pages,
+    rendered_pages: pages,
     word_count,
   };
 }

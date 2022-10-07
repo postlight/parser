@@ -141,3 +141,4 @@ export * from './www.engadget.com';
 export * from './arstechnica.com';
 export * from './www.ndtv.com';
 export * from './www.spektrum.de';
+export * from './postlight.com';

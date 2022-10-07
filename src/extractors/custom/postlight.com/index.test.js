@@ -8,13 +8,15 @@ import { excerptContent } from 'utils/text';
 
 const fs = require('fs');
 
-describe('TechlogIijAdJpExtractor', () => {
+describe('PostlightComExtractor', () => {
   describe('initial test case', () => {
     let result;
     let url;
     beforeAll(() => {
-      url = 'http://techlog.iij.ad.jp/archives/2562';
-      const html = fs.readFileSync('./fixtures/techlog.iij.ad.jp.html');
+      url = 'https://postlight.com/insights/three-ways-to-be-the-thermostat';
+      const html = fs.readFileSync(
+        './fixtures/postlight.com/1664999338243.html'
+      );
       result = Mercury.parse(url, { html, fallback: false });
     });
 
@@ -28,73 +30,63 @@ describe('TechlogIijAdJpExtractor', () => {
 
     it('returns the title', async () => {
       // To pass this test, fill out the title selector
-      // in ./src/extractors/custom/techlog.iij.ad.jp/index.js.
+      // in ./src/extractors/custom/postlight.com/index.js.
       const { title } = await result;
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(
-        title,
-        `2019年のスマホ・DNSフィルタリング・スマホ政策 (IIJmio meeting 23資料公開)`
-      );
+      assert.equal(title, `Three Ways to Be the Thermostat`);
     });
 
     it('returns the author', async () => {
       // To pass this test, fill out the author selector
-      // in ./src/extractors/custom/techlog.iij.ad.jp/index.js.
+      // in ./src/extractors/custom/postlight.com/index.js.
       const { author } = await result;
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(author, `doumae`);
+      assert.equal(author, 'Gina Trapani');
     });
 
     it('returns the date_published', async () => {
       // To pass this test, fill out the date_published selector
-      // in ./src/extractors/custom/techlog.iij.ad.jp/index.js.
+      // in ./src/extractors/custom/postlight.com/index.js.
       const { date_published } = await result;
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(date_published, `2019-04-13T07:08:44.000Z`);
+      assert.equal(date_published, `2022-10-05T16:00:00.000Z`);
     });
 
     it('returns the dek', async () => {
       // To pass this test, fill out the dek selector
-      // in ./src/extractors/custom/techlog.iij.ad.jp/index.js.
+      // in ./src/extractors/custom/postlight.com/index.js.
       const { dek } = await result;
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(dek, null);
+      assert.equal(
+        dek,
+        'Great leaders set the temperature, especially when stress is high.'
+      );
     });
 
     it('returns the lead_image_url', async () => {
       // To pass this test, fill out the lead_image_url selector
-      // in ./src/extractors/custom/techlog.iij.ad.jp/index.js.
+      // in ./src/extractors/custom/postlight.com/index.js.
       const { lead_image_url } = await result;
 
       // Update these values with the expected values from
       // the article.
       assert.equal(
         lead_image_url,
-        `https://techlog.iij.ad.jp/images/og-icon.png`
+        `https://postlight.com/wp-content/uploads/2022/09/Be-The-Thermostat-1200-1.png?fit=1200%2C675`
       );
-    });
-
-    it('returns the rendered_pages', async () => {
-      // To pass this test, fill out the pages_rendered selector
-      // in ./src/extractors/custom/techlog.iij.ad.jp/index.js.
-      const { rendered_pages } = await result;
-
-      // Update these values with the expected values from
-      // the article.
-      assert.equal(rendered_pages, 1);
     });
 
     it('returns the content', async () => {
       // To pass this test, fill out the content selector
-      // in ./src/extractors/custom/techlog.iij.ad.jp/index.js.
+      // in ./src/extractors/custom/postlight.com/index.js.
       // You may also want to make use of the clean and transform
       // options.
       const { content } = await result;
@@ -105,12 +97,15 @@ describe('TechlogIijAdJpExtractor', () => {
         $('*')
           .first()
           .text(),
-        2
+        13
       );
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(first13, 'IIJmio meetingの発表資料を公開します。');
+      assert.equal(
+        first13,
+        'One of the best pieces of advice I’ve ever received is: “Be the'
+      );
     });
   });
 });

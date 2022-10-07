@@ -76,11 +76,13 @@ export function select(opts) {
 
   const { selectors, defaultCleaner = true, allowMultiple } = extractionOpts;
 
+  const overrideAllowMultiple = type === 'lead_image_url' || allowMultiple;
+
   const matchingSelector = findMatchingSelector(
     $,
     selectors,
     extractHtml,
-    allowMultiple
+    overrideAllowMultiple
   );
 
   if (!matchingSelector) return null;
