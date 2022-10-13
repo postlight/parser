@@ -46,7 +46,7 @@ describe('WwwReutersComExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(author, 'Howard Schneider and Lindsay Dunsmuir');
+      assert.equal(author, 'Howard Schneider, Lindsay Dunsmuir');
     });
 
     it('returns the date_published', async () => {
@@ -56,7 +56,7 @@ describe('WwwReutersComExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(date_published, '2016-12-14T22:03:42.000Z');
+      assert.equal(date_published, '2016-12-14T06:02:15.000Z');
     });
 
     it('returns the lead_image_url', async () => {
@@ -68,7 +68,7 @@ describe('WwwReutersComExtractor', () => {
       // the article.
       assert.equal(
         lead_image_url,
-        'http://s2.reutersmedia.net/resources/r/?m=02&d=20161214&t=2&i=1165492293&w=&fh=545px&fw=&ll=&pl=&sq=&r=LYNXMPECBD1EH'
+        'https://static.reuters.com/resources/r/?m=02&d=20161215&t=2&i=1165535950&r=LYNXMPECBD1EH&w=800'
       );
     });
 
@@ -92,7 +92,7 @@ describe('WwwReutersComExtractor', () => {
       // the article.
       assert.equal(
         first13,
-        'WASHINGTON The U.S. Federal Reserve raised interest rates on Wednesday and signaled a'
+        'WASHINGTON (Reuters) - The U.S. Federal Reserve raised interest rates on Wednesday and'
       );
     });
   });

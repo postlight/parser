@@ -56,7 +56,7 @@ describe('WwwMacrumorsComExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(date_published, '2017-01-18T19:44:00.000Z');
+      assert.equal(date_published, '2017-01-18T19:44:11.000Z');
     });
 
     it('returns the dek', async () => {
@@ -81,7 +81,7 @@ describe('WwwMacrumorsComExtractor', () => {
       // the article.
       assert.equal(
         lead_image_url,
-        'http://cdn.macrumors.com/article-new/2015/11/ipad-pro-apple-pencil-screen-800x471.jpg?retina'
+        'https://images.macrumors.com/t/EN8cNLYLkjyiQXEOq65hBnAVS6k=/1600x/article-new/2014/11/applepencil2.jpg'
       );
     });
 

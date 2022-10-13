@@ -4,7 +4,7 @@
 export const BroadwayWorldExtractor = {
   domain: 'www.broadwayworld.com',
   title: {
-    selectors: ['h1.article-title'],
+    selectors: ['h1[itemprop=headline]', 'h1.article-title'],
   },
 
   author: {

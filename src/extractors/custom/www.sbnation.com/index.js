@@ -14,7 +14,7 @@ export const WwwSbnationComExtractor = {
   },
 
   dek: {
-    selectors: ['h2.c-entry-summary.p-dek'],
+    selectors: ['p.c-entry-summary.p-dek', 'h2.c-entry-summary.p-dek'],
   },
 
   lead_image_url: {

@@ -49,7 +49,7 @@ describe('WeeklyAsciiJpExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(author, `文●オカモト／ASCII編集部`);
+      assert.equal(author, `文● オカモト／ASCII編集部`);
     });
 
     it('returns the date_published', async () => {
@@ -81,7 +81,7 @@ describe('WeeklyAsciiJpExtractor', () => {
       // the article.
       assert.equal(
         lead_image_url,
-        `https://ascii.jp/elem/000/001/848/1848427/00-01_1024x1024.jpg`
+        `https://ascii.jp/img/2019/04/19/1643408/l/59bcecd731732273.jpg`
       );
     });
 

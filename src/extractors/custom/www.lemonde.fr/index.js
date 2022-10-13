@@ -26,6 +26,6 @@ export const WwwLemondeFrExtractor = {
 
     transforms: {},
 
-    clean: [],
+    clean: ['figcaption'],
   },
 };

@@ -69,7 +69,7 @@ describe('twofortysevensportsComExtractor', () => {
       // the article.
       assert.equal(
         lead_image_url,
-        'https://s3media.247sports.com/Uploads/Assets/149/971/26_4971149.jpg'
+        'https://s3media.247sports.com/Uploads/Assets/149/971/4971149.jpg?fit=bounds&crop=1200:630,offset-y0.50&width=1200&height=630'
       );
     });
 

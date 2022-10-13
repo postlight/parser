@@ -57,7 +57,7 @@ describe('WwwTodayComExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(date_published, '2016-12-22T15:36:00.000Z');
+      assert.equal(date_published, '2016-12-22T21:36:00.000Z');
     });
 
     it('returns the lead_image_url', async () => {
@@ -69,7 +69,7 @@ describe('WwwTodayComExtractor', () => {
       // the article.
       assert.equal(
         lead_image_url,
-        'http://media1.s-nbcnews.com/i/newscms/2016_51/1183946/zsa-zsa-pool-2-today-161222-tease_ef3cb1c171786baa69a3f5db09f3da06.jpg'
+        'https://media-cldnry.s-nbcnews.com/image/upload/t_social_share_1200x630_center,f_auto,q_auto:best/newscms/2016_51/1183946/zsa-zsa-pool-2-today-161222-tease.jpg'
       );
     });
 

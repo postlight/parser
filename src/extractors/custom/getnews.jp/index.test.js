@@ -46,7 +46,7 @@ describe('GetnewsJpExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(author, 'NeoL／ネオエル');
+      assert.equal(author, 'https://getnews.jp/author/neol');
     });
 
     it('returns the date_published', async () => {

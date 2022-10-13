@@ -81,7 +81,7 @@ describe('WwwSbnationComExtractor', () => {
       // the article.
       assert.equal(
         lead_image_url,
-        'https://cdn0.vox-cdn.com/thumbor/VfeYqqHzPEOqSIXXAF-yK-1e4LQ=/0x0:1710x962/1600x900/cdn0.vox-cdn.com/uploads/chorus_image/image/52164267/592603330.0.jpeg'
+        'https://cdn.vox-cdn.com/thumbor/EnCgXG3xHnUSyPoxG2k7uA0NJlo=/0x0:1710x962/1600x900/cdn.vox-cdn.com/uploads/chorus_image/image/52164267/592603330.0.jpeg'
       );
     });
 

@@ -14,7 +14,7 @@ export const WwwRbbtodayComExtractor = {
   },
 
   dek: {
-    selectors: ['.arti-summary'],
+    selectors: [['meta[name="description"]', 'value'], '.arti-summary'],
   },
 
   lead_image_url: {

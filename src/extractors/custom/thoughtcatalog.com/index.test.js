@@ -69,7 +69,7 @@ describe('ThoughtcatalogComExtractor', () => {
       // the article.
       assert.equal(
         lead_image_url,
-        'https://thoughtcatalog.files.wordpress.com/2016/12/31565018766_4494e5f335_o.jpg'
+        'https://thoughtcatalog.com/wp-content/uploads/2016/12/31565018766_4494e5f335_o.jpg?w=1536&h=768&crop=1'
       );
     });
 
@@ -93,7 +93,7 @@ describe('ThoughtcatalogComExtractor', () => {
       // the article.
       assert.equal(
         first13,
-        'herzblut One day you are going to meet someone in your life, that'
+        'One day you are going to meet someone in your life, that is'
       );
     });
   });

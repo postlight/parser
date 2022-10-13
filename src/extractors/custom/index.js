@@ -74,7 +74,6 @@ export * from './www.americanow.com';
 export * from './sciencefly.com';
 export * from './hellogiggles.com';
 export * from './thoughtcatalog.com';
-export * from './www.nj.com';
 export * from './www.inquisitr.com';
 export * from './www.nbcnews.com';
 export * from './fortune.com';

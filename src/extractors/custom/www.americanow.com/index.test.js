@@ -66,7 +66,7 @@ describe('WwwAmericanowComExtractor', () => {
       // the article.
       assert.equal(
         lead_image_url,
-        'http://images.americanow.com:8080/ovi/catalog/downloads/preview/rndr_670x377//2016/12/conway-1482422231.JPG/rndr_670x377.jpg'
+        'https://americanow.s3-us-west-1.amazonaws.com/an_prod/s3fs-public/admin/ANDefault.jpg'
       );
     });
 
