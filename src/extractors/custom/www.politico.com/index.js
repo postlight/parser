@@ -24,6 +24,7 @@ export const PoliticoExtractor = {
       ['.story-meta__details time[datetime]', 'datetime'],
       ['.story-main-content .timestamp time[datetime]', 'datetime'],
     ],
+    timezone: 'America/New_York',
   },
 
   lead_image_url: {
