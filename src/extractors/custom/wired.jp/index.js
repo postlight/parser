@@ -4,19 +4,25 @@ export const WiredJpExtractor = {
   domain: 'wired.jp',
 
   title: {
-    selectors: ['h1.post-title'],
+    selectors: ['h1[data-testid="ContentHeaderHed"]', 'h1.post-title'],
   },
 
   author: {
-    selectors: ['p[itemprop="author"]'],
+    selectors: [
+      ['meta[name="article:author"]', 'value'],
+      'p[itemprop="author"]',
+    ],
   },
 
   date_published: {
-    selectors: [['time', 'datetime']],
+    selectors: [
+      ['meta[name="article:published_time"]', 'value'],
+      ['time', 'datetime'],
+    ],
   },
 
   dek: {
-    selectors: ['.post-intro'],
+    selectors: ['div[class^="ContentHeaderDek"]', '.post-intro'],
   },
 
   lead_image_url: {
@@ -24,7 +30,10 @@ export const WiredJpExtractor = {
   },
 
   content: {
-    selectors: ['article.article-detail'],
+    selectors: [
+      'div[data-attribute-verso-pattern="article-body"]',
+      'article.article-detail',
+    ],
 
     transforms: {
       'img[data-original]': $node => {

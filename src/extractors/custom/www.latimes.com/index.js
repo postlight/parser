@@ -2,15 +2,21 @@ export const WwwLatimesComExtractor = {
   domain: 'www.latimes.com',
 
   title: {
-    selectors: ['.trb_ar_hl'],
+    selectors: ['h1.headline', '.trb_ar_hl'],
   },
 
   author: {
-    selectors: [['meta[name="author"]', 'value']],
+    selectors: [
+      'a[data-click="standardBylineAuthorName"]',
+      ['meta[name="author"]', 'value'],
+    ],
   },
 
   date_published: {
-    selectors: [['meta[itemprop="datePublished"]', 'value']],
+    selectors: [
+      ['meta[name="article:published_time"]', 'value'],
+      ['meta[itemprop="datePublished"]', 'value'],
+    ],
   },
 
   lead_image_url: {
@@ -18,7 +24,7 @@ export const WwwLatimesComExtractor = {
   },
 
   content: {
-    selectors: ['.trb_ar_main'],
+    selectors: ['.page-article-body', '.trb_ar_main'],
 
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images

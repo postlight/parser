@@ -1,323 +1,236 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-<head>
-    <meta http-equiv="Content-Type" value="text/html; charset=UTF-8">
-    <title>JVN iPedia</title>
-    
-    <meta name="Keywords" value="JVN iPedia">
-    <meta name="Description" value="JVN iPedia">
-    <meta http-equiv="X-UA-Compatible" value="IE=edge, requiresActiveX=true">
-    <meta http-equiv="Content-Script-Type" value="text/javascript">
-    <meta http-equiv="Content-Style-Type" value="text/css">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja" style="overflow-x:hidden" class=""><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+  <title>JVNDB-2018-013542 - JVN iPedia - 脆弱性対策情報データベース</title>
+  
+  <meta name="Keywords" content="脆弱性対策情報データベース">
+  <meta name="Description" content="脆弱性対策情報データベース">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge, requiresActiveX=true">
+  <meta http-equiv="Content-Script-Type" content="text/javascript">
+  <meta http-equiv="Content-Style-Type" content="text/css">
 
-    
-    <link href="/en/common/css/master_hnd.css" rel="stylesheet" type="text/css" media="screen,print">
+  <link href="/common/css/master.css" rel="stylesheet" type="text/css" media="screen,print">
+  <link media="all" href="/common/css/provide.css" type="text/css" rel="stylesheet">
+  <link href="/common/css/font.css" rel="stylesheet" type="text/css" media="screen,print">
+  <link href="/common/css/print.css" rel="stylesheet" type="text/css" media="print">
+  <link href="/common/css/rightmenu.css" rel="stylesheet" type="text/css" media="screen,print">
 
-    <link href="/en/common/css/font.css" rel="stylesheet" type="text/css" media="screen,print">
-    <link href="/en/common/css/print.css" rel="stylesheet" type="text/css" media="print">
-    <link rel="alternate" type="application/rss+xml" title="JVN iPedia New" href="https://jvndb.jvn.jp/en/rss/jvndb_new.rdf">
-    
-    
-    <link href="/en/common/css/rightmenu.css" rel="stylesheet" type="text/css" media="screen,print">
-    
-    
-    
-</head>
+<link type="text/css" rel="stylesheet" charset="UTF-8" href="https://translate.googleapis.com/translate_static/css/translateelement.css"></head>
 <body>
-
 <a name="top" id="top"></a>
+<!-- ↓ ヘッダ表示 ↓ -->
 <div id="wrapper">
-    
-    <div id="header">
-        <div class="logo"><img height="60" alt="JVN iPedia" src="/en/common/img/en_logo.gif" width="490" border="0"></div>
-        <div class="modifytxt">Last Updated:2022/08/09<br>Total Records:2463</div>
-    </div>
-    <div id="head-bar">
-            </div>
-    
 
-    
-    <div id="mainarea">
-        
-        <div id="leftarea">
-          <div id="myjvn" class="leftarea-wrapper">
-
-<p align="right"><a href="/index.html">JVN iPedia Japanese Version</a></p>
-
-<div class="eyecatch bg5">
-  <h1>JVN iPedia</h1>
-  <p>JVN iPedia is the database of vulnerability countermeasure information published on JVN and vulnerability countermeasure information published in Japan and abroad.</p>
-  <div class="eyecatch-inner border short">
-    <div class="database-search-block">
-      
-    </div>
+  <!-- header begin -->
+  <div id="header">
+      <div class="logo"><a href="/"><img height="60" alt="JVN iPedia - 脆弱性対策情報データベース" src="/common/img/logo.gif" width="490" border="0"></a></div>
+      <div class="modifytxt">最終更新日：2019/02/22</div>
+      <div class="modifytxt"></div>
   </div>
-</div>
-    <div class="node">
-      <h2 class="bg">Information</h2>
-      <div class="node-wrapper">
-        <ul><li></li></ul>
-      </div>
-    </div>
-    <div class="node">
-      <h2 class="bg">Most Popular Vulnerabilities on JVN iPedia</h2>
-      <div class="node-wrapper"><b>Date: 2022/07/24 - 2022/07/30</b><br>
-<ol>  
-  <li><a href="https://jvndb.jvn.jp/jvndb/JVNDB-2022-000059" target="_blank">JVNDB-2022-000059</a><br>
-  &quot;Hulu&quot; App for Android uses a hard-coded API key for an external service</li>
-  <li><a href="https://jvndb.jvn.jp/jvndb/JVNDB-2022-000057" target="_blank">JVNDB-2022-000057</a><br>
-  WordPress Plugin &quot;Newsletter&quot; vulnerable to cross-site scripting</li>
-  <li><a href="https://jvndb.jvn.jp/jvndb/JVNDB-2022-000061" target="_blank">JVNDB-2022-000061</a><br>
-  &quot;JustSystems JUST Online Update for J-License&quot; starts a program with an unquoted file path</li>
-</ol></div>
-    </div>
-    
-<div class="node">
-  <h2 class="bg">New<a href="/en/feed/index.html#jvndbrss" class="rss">RSS</a><a href="/en/feed/" class="data-feed">Data Feeds</a><a href="https://twitter.com/JVNiPedia" target="_blank" class="twitter">twitter</a></h2>
-  <div class="node-wrapper">
-    <ul class="news-list bg">
-      <li class="header"><div class="date"><span>Last Updated</span></div><div class="id"><span>ID</span></div><div class="summary"><span>Title</span></div><div class="severity"><span>CVSSv3</span></div></li>
-      <li><a href="/en/contents/2016/JVNDB-2016-000113.html">
-        <div class="date">2022/08/09&#xA0;<span class="update">Update</span></div>
-        <div class="id">JVNDB-2016-000113</div>
-        <div class="summary">Apache&#xA0;Struts&#xA0;vulnerable&#xA0;to&#xA0;input&#xA0;validation&#xA0;bypass</div>
-        <div class="severity">
-          <div class="newlist_cvss_3_class">5.6(Medium)</div>
-        </div>
-      </a></li>
-      <li><a href="/en/contents/2016/JVNDB-2016-000112.html">
-        <div class="date">2022/08/09&#xA0;<span class="update">Update</span></div>
-        <div class="id">JVNDB-2016-000112</div>
-        <div class="summary">Apache&#xA0;Struts&#xA0;vulnerable&#xA0;to&#xA0;validation&#xA0;bypass&#xA0;in&#xA0;Getter&#xA0;method</div>
-        <div class="severity">
-          <div class="newlist_cvss_3_class">5.6(Medium)</div>
-        </div>
-      </a></li>
-      <li><a href="/en/contents/2016/JVNDB-2016-000111.html">
-        <div class="date">2022/08/09&#xA0;<span class="update">Update</span></div>
-        <div class="id">JVNDB-2016-000111</div>
-        <div class="summary">Apache&#xA0;Struts&#xA0;vulnerable&#xA0;to&#xA0;cross-site&#xA0;request&#xA0;forgery</div>
-        <div class="severity">
-          <div class="newlist_cvss_2_class">3.1(Low)</div>
-        </div>
-      </a></li>
-      <li><a href="/en/contents/2020/JVNDB-2020-000055.html">
-        <div class="date">2022/08/09&#xA0;<span class="update">Update</span></div>
-        <div class="id">JVNDB-2020-000055</div>
-        <div class="summary">Apache&#xA0;Struts&#xA0;2&#xA0;vulnerable&#xA0;to&#xA0;denial-of-service&#xA0;(DoS)</div>
-        <div class="severity">
-          <div class="newlist_cvss_3_class">5.9(Medium)</div>
-        </div>
-      </a></li>
-      <li><a href="/en/contents/2020/JVNDB-2020-000084.html">
-        <div class="date">2022/08/09&#xA0;<span class="update">Update</span></div>
-        <div class="id">JVNDB-2020-000084</div>
-        <div class="summary">Apache&#xA0;Struts&#xA0;2&#xA0;vulnerable&#xA0;to&#xA0;remote&#xA0;code&#xA0;execution&#xA0;(S2-061)</div>
-        <div class="severity">
-          <div class="newlist_cvss_4_class">8.1(High)</div>
-        </div>
-      </a></li>
-      <li><a href="/en/contents/2022/JVNDB-2022-000062.html">
-        <div class="date">2022/08/04&#xA0;<span class="new">&#xA0;</span></div>
-        <div class="id">JVNDB-2022-000062</div>
-        <div class="summary">Kaitai&#xA0;Struct:&#xA0;compiler&#xA0;vulnerable&#xA0;to&#xA0;denial-of-service&#xA0;(DoS)</div>
-        <div class="severity">
-          <div class="newlist_cvss_3_class">5.5(Medium)</div>
-        </div>
-      </a></li>
-      <li><a href="/en/contents/2022/JVNDB-2022-002112.html">
-        <div class="date">2022/08/03&#xA0;<span class="new">&#xA0;</span></div>
-        <div class="id">JVNDB-2022-002112</div>
-        <div class="summary">CONTEC&#xA0;SolarView&#xA0;Compact&#xA0;vulnerable&#xA0;to&#xA0;insufficient&#xA0;verification&#xA0;in&#xA0;uploading&#xA0;files</div>
-        <div class="severity">
-          <div class="newlist_cvss_4_class">8.8(High)</div>
-        </div>
-      </a></li>
-      <li><a href="/en/contents/2022/JVNDB-2022-002143.html">
-        <div class="date">2022/08/01&#xA0;<span class="new">&#xA0;</span></div>
-        <div class="id">JVNDB-2022-002143</div>
-        <div class="summary">Information&#xA0;Disclosure&#xA0;Vulnerability&#xA0;in&#xA0;Hitachi&#xA0;Automation&#xA0;Director&#xA0;and&#xA0;Hitachi&#xA0;Ops&#xA0;Center&#xA0;Automator</div>
-        <div class="severity">
-          <div class="newlist_cvss_none_class">-</div>
-        </div>
-      </a></li>
-      <li><a href="/en/contents/2022/JVNDB-2022-000056.html">
-        <div class="date">2022/07/29&#xA0;<span class="new">&#xA0;</span></div>
-        <div class="id">JVNDB-2022-000056</div>
-        <div class="summary">Multiple&#xA0;vulnerabilities&#xA0;in&#xA0;Nintendo&#xA0;Wi-Fi&#xA0;Network&#xA0;Adaptor&#xA0;WAP-001</div>
-        <div class="severity">
-          <div class="newlist_cvss_3_class">6.8(Medium)</div>
-        </div>
-      </a></li>
-      <li><a href="/en/contents/2022/JVNDB-2022-000061.html">
-        <div class="date">2022/07/28&#xA0;<span class="new">&#xA0;</span></div>
-        <div class="id">JVNDB-2022-000061</div>
-        <div class="summary">&quot;JustSystems&#xA0;JUST&#xA0;Online&#xA0;Update&#xA0;for&#xA0;J-License&quot;&#xA0;starts&#xA0;a&#xA0;program&#xA0;with&#xA0;an&#xA0;unquoted&#xA0;file&#xA0;path</div>
-        <div class="severity">
-          <div class="newlist_cvss_4_class">8.8(High)</div>
-        </div>
-      </a></li>
-      <li><a href="/en/contents/2022/JVNDB-2022-000060.html">
-        <div class="date">2022/07/28&#xA0;<span class="new">&#xA0;</span></div>
-        <div class="id">JVNDB-2022-000060</div>
-        <div class="summary">&quot;Hulu&quot;&#xA0;App&#xA0;for&#xA0;iOS&#xA0;vulnerable&#xA0;to&#xA0;improper&#xA0;server&#xA0;certificate&#xA0;verification</div>
-        <div class="severity">
-          <div class="newlist_cvss_3_class">4.8(Medium)</div>
-        </div>
-      </a></li>
-      <li><a href="/en/contents/2022/JVNDB-2022-000059.html">
-        <div class="date">2022/07/28&#xA0;<span class="new">&#xA0;</span></div>
-        <div class="id">JVNDB-2022-000059</div>
-        <div class="summary">&quot;Hulu&quot;&#xA0;App&#xA0;for&#xA0;Android&#xA0;uses&#xA0;a&#xA0;hard-coded&#xA0;API&#xA0;key&#xA0;for&#xA0;an&#xA0;external&#xA0;service</div>
-        <div class="severity">
-          <div class="newlist_cvss_3_class">4.0(Medium)</div>
-        </div>
-      </a></li>
-      <li><a href="/en/contents/2021/JVNDB-2021-000007.html">
-        <div class="date">2022/07/26&#xA0;<span class="new">&#xA0;</span></div>
-        <div class="id">JVNDB-2021-000007</div>
-        <div class="summary">OS&#xA0;command&#xA0;injection&#xA0;vulnerability&#xA0;in&#xA0;multiple&#xA0;Infoscience&#xA0;Corporation&#xA0;log&#xA0;management&#xA0;tools</div>
-        <div class="severity">
-          <div class="newlist_cvss_4_class">7.5(High)</div>
-        </div>
-      </a></li>
-      <li><a href="/en/contents/2022/JVNDB-2022-002017.html">
-        <div class="date">2022/07/25&#xA0;<span class="new">&#xA0;</span></div>
-        <div class="id">JVNDB-2022-002017</div>
-        <div class="summary">U-Boot&#xA0;squashfs&#xA0;filesystem&#xA0;implementation&#xA0;vulnerable&#xA0;to&#xA0;heap-based&#xA0;buffer&#xA0;overflow</div>
-        <div class="severity">
-          <div class="newlist_cvss_3_class">6.6(Medium)</div>
-        </div>
-      </a></li>
-      <li><a href="/en/contents/2022/JVNDB-2022-000057.html">
-        <div class="date">2022/07/25&#xA0;<span class="new">&#xA0;</span></div>
-        <div class="id">JVNDB-2022-000057</div>
-        <div class="summary">WordPress&#xA0;Plugin&#xA0;&quot;Newsletter&quot;&#xA0;vulnerable&#xA0;to&#xA0;cross-site&#xA0;scripting</div>
-        <div class="severity">
-          <div class="newlist_cvss_3_class">6.1(Medium)</div>
-        </div>
-      </a></li>
-      <li><a href="/en/contents/2022/JVNDB-2022-000058.html">
-        <div class="date">2022/07/25&#xA0;<span class="new">&#xA0;</span></div>
-        <div class="id">JVNDB-2022-000058</div>
-        <div class="summary">Multiple&#xA0;vulnerabilities&#xA0;in&#xA0;untangle</div>
-        <div class="severity">
-          <div class="newlist_cvss_3_class">4.3(Medium)</div>
-        </div>
-      </a></li>
-      <li><a href="/en/contents/2022/JVNDB-2022-000055.html">
-        <div class="date">2022/07/22&#xA0;<span class="new">&#xA0;</span></div>
-        <div class="id">JVNDB-2022-000055</div>
-        <div class="summary">Booked&#xA0;vulnerable&#xA0;to&#xA0;open&#xA0;redirect</div>
-        <div class="severity">
-          <div class="newlist_cvss_3_class">4.7(Medium)</div>
-        </div>
-      </a></li>
-      <li><a href="/en/contents/2022/JVNDB-2022-000054.html">
-        <div class="date">2022/07/21&#xA0;<span class="new">&#xA0;</span></div>
-        <div class="id">JVNDB-2022-000054</div>
-        <div class="summary">Multiple&#xA0;vulnerabilities&#xA0;in&#xA0;Cybozu&#xA0;Office</div>
-        <div class="severity">
-          <div class="newlist_cvss_3_class">5.3(Medium)</div>
-        </div>
-      </a></li>
-      <li><a href="/en/contents/2022/JVNDB-2022-000053.html">
-        <div class="date">2022/07/12&#xA0;<span class="new">&#xA0;</span></div>
-        <div class="id">JVNDB-2022-000053</div>
-        <div class="summary">Django&#xA0;Extract&#xA0;and&#xA0;Trunc&#xA0;functions&#xA0;vulnerable&#xA0;to&#xA0;SQL&#xA0;injection</div>
-        <div class="severity">
-          <div class="newlist_cvss_4_class">7.3(High)</div>
-        </div>
-      </a></li>
-      <li><a href="/en/contents/2022/JVNDB-2022-000052.html">
-        <div class="date">2022/07/08&#xA0;<span class="new">&#xA0;</span></div>
-        <div class="id">JVNDB-2022-000052</div>
-        <div class="summary">Passage&#xA0;Drive&#xA0;vulnerable&#xA0;to&#xA0;insufficient&#xA0;data&#xA0;verification</div>
-        <div class="severity">
-          <div class="newlist_cvss_4_class">8.6(High)</div>
-        </div>
-      </a></li>
-      <li><a href="/en/contents/2022/JVNDB-2022-000051.html">
-        <div class="date">2022/07/06&#xA0;<span class="new">&#xA0;</span></div>
-        <div class="id">JVNDB-2022-000051</div>
-        <div class="summary">Multiple&#xA0;vulnerabilities&#xA0;in&#xA0;Cybozu&#xA0;Garoon</div>
-        <div class="severity">
-          <div class="newlist_cvss_3_class">5.4(Medium)</div>
-        </div>
-      </a></li>
-      <li><a href="/en/contents/2022/JVNDB-2022-000035.html">
-        <div class="date">2022/07/06&#xA0;<span class="new">&#xA0;</span></div>
-        <div class="id">JVNDB-2022-000035</div>
-        <div class="summary">Multiple&#xA0;vulnerabilities&#xA0;in&#xA0;Cybozu&#xA0;Garoon</div>
-        <div class="severity">
-          <div class="newlist_cvss_3_class">5.3(Medium)</div>
-        </div>
-      </a></li>
-      <li><a href="/en/contents/2022/JVNDB-2022-000050.html">
-        <div class="date">2022/07/04&#xA0;<span class="new">&#xA0;</span></div>
-        <div class="id">JVNDB-2022-000050</div>
-        <div class="summary">LiteCart&#xA0;vulnerable&#xA0;to&#xA0;cross-site&#xA0;scripting</div>
-        <div class="severity">
-          <div class="newlist_cvss_3_class">6.1(Medium)</div>
-        </div>
-      </a></li>
-      <li><a href="/en/contents/2022/JVNDB-2022-000049.html">
-        <div class="date">2022/06/29&#xA0;<span class="new">&#xA0;</span></div>
-        <div class="id">JVNDB-2022-000049</div>
-        <div class="summary">HOME&#xA0;SPOT&#xA0;CUBE2&#xA0;vulnerable&#xA0;to&#xA0;OS&#xA0;command&#xA0;injection</div>
-        <div class="severity">
-          <div class="newlist_cvss_4_class">8.8(High)</div>
-        </div>
-      </a></li>
-      <li><a href="/en/contents/2022/JVNDB-2022-000048.html">
-        <div class="date">2022/06/24&#xA0;<span class="new">&#xA0;</span></div>
-        <div class="id">JVNDB-2022-000048</div>
-        <div class="summary">L2Blocker&#xA0;Sensor&#xA0;setup&#xA0;screen&#xA0;vulnerable&#xA0;to&#xA0;authentication&#xA0;bypass</div>
-        <div class="severity">
-          <div class="newlist_cvss_3_class">5.4(Medium)</div>
-        </div>
-      </a></li>
-    </ul>
-    <p class="none" align="right"><a href="/search/index.php?mode=_vulnerability_search_IA_VulnSearch&amp;lang=en&amp;keyword=&amp;dateLastPublishedFromYear=2022&amp;dateLastPublishedFromMonth=07&amp;datePublicFromYear=2022&amp;datePublicFromMonth=07&amp;skey=d6">more... </a></p>
+  <div id="head-bar">
+      <a href="/nav/guide_sysadm.html">【活用ガイド】</a>
   </div>
+  <!-- header end -->
+  
+  <!-- mainarea begin -->
+  <div id="mainarea">
+      <!-- leftarea begin -->
+      <div id="leftarea">
+          <div class="contents">
+              <div id="news-list">
+<br>
+<table class="vuln_table_clase">
+
+<tbody><tr><td colspan="2">
+<h2><font face="arial, geneva, helvetica">JVNDB-2018-013542</font></h2>
+</td></tr>
+
+<tr><td colspan="2">
+<h2>NETWAVE&nbsp;MNG6200&nbsp;デバイスにおける証明書・パスワードの管理に関する脆弱性</h2>
+</td></tr>
+
+<tr><td class="vuln_table_clase_td_header" colspan="2">
+<a name="overview">概要</a>
+</td></tr>
+<tr><td colspan="2">
+<br>
+<blockquote>
+NETWAVE MNG6200 デバイスには、証明書・パスワードの管理に関する脆弱性が存在します。
+</blockquote>
+</td></tr>
+<tr><td class="vuln_table_clase_td_header" colspan="2">
+<a name="cvss">CVSS による深刻度</a> (<a href="/nav/jvndbhelp.html#jvndb3" target="_blank">CVSS とは?</a>)
+</td></tr>
+<tr><td colspan="2">
+<br>
+<div style="margin: 20px 40px;">
+<div class="clearfix">
+<div class="float_left">
+<b>CVSS v3 による深刻度<br>基本値: <a href="/cvss/ja/v3.html#CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H" target="_blank">9.8</a> (緊急) [NVD値]</b>
+<ul>
+  <li>攻撃元区分: ネットワーク</li>
+  <li>攻撃条件の複雑さ: 低</li>
+  <li>攻撃に必要な特権レベル: 不要</li>
+  <li>利用者の関与: 不要</li>
+  <li>影響の想定範囲: 変更なし</li>
+  <li>機密性への影響(C): 高</li>
+  <li>完全性への影響(I): 高</li>
+  <li>可用性への影響(A): 高</li>
+</ul>
 </div>
-          </div>
-        </div>
-        <div id="rightarea">
-            <div id="ajaxmenu">
-                <ul>
-                    <li class="jvnhead">JVN</li>
-                    <li class="link"><a href="https://jvn.jp/en/">HOME</a></li>
-                    <li><a href="https://jvn.jp/en/nav/jvn.html">What is JVN ?</a></li>
-                    <li><a href="https://jvn.jp/en/nav/jvnhelp.html">Instructions</a></li>
-                    <li><a href="https://jvn.jp/en/report/index.html">List of Vulnerability Report</a></li>
-                    <li class="draft"><a href="https://jvn.jp/en/jp/index.html">VN_JP</a></li>
-                    <li class="draft"><a href="https://jvn.jp/en/adj/index.html">VN_JP(Unreachable)</a></li>
-                    <li class="draft"><a href="https://jvn.jp/en/vu/index.html">VN_VU</a></li>
-                    <li class="draft"><a href="https://jvn.jp/en/ta/index.html">TA</a></li>
-                    <li><a href="https://jvn.jp/en/tr/index.html">TRnotes</a></li>
-                    <li><a href="/en/">JVN iPedia</a></li>
-                    <li class="draft"><a href="/search/index.php?mode=_vulnerability_search_IA_VulnSearch&amp;lang=en">Search</a></li>
-                    <li class="draft"><a href="/en/nav/jvndb.html">What is JVN iPedia?</a></li>
-                    <li class="draft"><a href="/en/nav/jvndbhelp.html">How to Use?</a></li>
-                    <li class="draft"><a href="/en/apis/myjvn/index.html">MyJVN</a></li>
-                    <li><a href="https://jvn.jp/en/rss/index.html">JVNJS/RSS</a></li>
-                    <li><a href="https://jvn.jp/en/nav/index.html">Vendor List</a></li>
-                    <li><a href="https://jvn.jp/en/reply/index.html">List of unreachable developers</a></li>
-                    <li><a href="https://jvn.jp/en/contact/index.html">Contact</a></li>
-                </ul>
-                <br>
-                <a href="https://cve.mitre.org/compatible/compatible.html#j" target="cvecompatible"><img src="/common/img/comp_compatible.gif" alt="CVE-Compatible" id="Image99" name="Image99" border="0" height="50" width="145"></a>
-            </div>
-
-
-
-        </div>
-    </div>
-    <div id="footer">
-        <div class="footertext"><img src="/common/img/copyright.png" alt="Copyright &#xA9; 2007- IPA. All rights reserved."></div>
-    </div>
+<div class="float_left">
+<b>CVSS v2 による深刻度<br>基本値: <a href="/cvss/ja/v2.html#AV:N/AC:L/Au:N/C:P/I:N/A:N" target="_blank">5.0</a> (警告) [NVD値]</b>
+<ul>
+  <li>攻撃元区分: ネットワーク</li>
+  <li>攻撃条件の複雑さ: 低</li>
+  <li>攻撃前の認証要否: 不要</li>
+  <li>機密性への影響(C): 部分的</li>
+  <li>完全性への影響(I): なし</li>
+  <li>可用性への影響(A): なし</li>
+</ul>
 </div>
+</div>
+<div style="margin-top:20px">
+
+</div>
+</div>
+</td></tr>
+
+<tr><td class="vuln_table_clase_td_header" colspan="2">
+<a name="affect">影響を受けるシステム</a>
+</td></tr>
+
+<tr><td colspan="2">
+<br>
+<blockquote>
+
+</blockquote>
+</td></tr>
+
+<tr><td colspan="2">
+<br>
+<blockquote>
+NETWAVE&nbsp;Networks,&nbsp;Inc.
+<ul>
+  <li>MNG6200&nbsp;ファームウェア C4835805jrc12FU121413.cpr</li>
+  </ul>
+</blockquote>
+</td></tr>
+
+<tr><td colspan="2">
+<br>
+<blockquote>
+
+</blockquote>
+</td></tr>
+
+<tr><td class="vuln_table_clase_td_header" colspan="2">
+<a name="impact">想定される影響</a>
+</td></tr>
+
+<tr><td colspan="2">
+<br>
+<blockquote>
+情報を取得される、情報を改ざんされる、およびサービス運用妨害 (DoS) 状態にされる可能性があります。
+</blockquote>
+</td></tr>
+
+<tr><td class="vuln_table_clase_td_header" colspan="2">
+<a name="solution">対策</a>
+</td></tr>
+
+<tr><td colspan="2">
+<br>
+<blockquote>
+参考情報を参照して適切な対策を実施してください。
+</blockquote>
+</td></tr>
+
+<tr><td class="vuln_table_clase_td_header" colspan="2">
+<a name="venderinf">ベンダ情報</a>
+</td></tr>
+
+<tr><td colspan="2">
+<br>
+<blockquote>
+</blockquote>
+</td></tr>
+
+
+<tr><td class="vuln_table_clase_td_header" colspan="2">
+<a name="cwe">CWEによる脆弱性タイプ一覧</a>&nbsp;&nbsp;<a href="http://www.ipa.go.jp/security/vuln/CWE.html" target="_blank">CWEとは?</a>
+</td></tr>
+
+
+<tr><td colspan="2">
+<br>
+<blockquote>
+<ol>
+<li><a href="https://jvndb.jvn.jp/ja/cwe/CWE-255.html" target="_blank">証明書・パスワードの管理(CWE-255)</a> [NVD評価]</li>
+</ol>
+</blockquote>
+</td></tr>
+
+
+<tr><td class="vuln_table_clase_td_header" colspan="2">
+<a name="cve">共通脆弱性識別子(CVE)</a>&nbsp;&nbsp;<a href="http://www.ipa.go.jp/security/vuln/CVE.html" target="_blank">CVEとは?</a>
+</td></tr>
+
+<tr><td colspan="2">
+<br>
+<blockquote>
+<ol>
+<li><a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-20395" target="_blank">CVE-2018-20395</a></li>
+</ol>
+</blockquote>
+</td></tr>
+
+
+<tr><td class="vuln_table_clase_td_header" colspan="2">
+<a name="reference">参考情報</a>
+</td></tr>
+
+<tr><td colspan="2">
+<br>
+<blockquote>
+<ol>
+<li>National&nbsp;Vulnerability&nbsp;Database&nbsp;(NVD) : <a href="https://nvd.nist.gov/vuln/detail/CVE-2018-20395" target="_blank">CVE-2018-20395</a> </li>
+<li>関連文書 : <a href="https://github.com/ezelf/sensitivesOids/blob/master/oidpassswordleaks.csv" target="_blank">sensitivesOids/oidpassswordleaks.csv</a> </li>
+</ol>
+</blockquote>
+</td></tr>
+
+<tr><td class="vuln_table_clase_td_header" colspan="2">
+<a name="history">更新履歴</a>
+</td></tr>
+<tr><td colspan="2">
+<br>
+<blockquote>
+<ul style="list-style-type: none">
+<li>[2019年02月22日]<br>
+&nbsp;&nbsp;掲載</li>
+</ul>
+</blockquote>
+<br>
+</td></tr>
+</tbody></table>
+<table class="vuln_table_clase_footer">
+<tbody><tr><td colspan="2"><hr></td></tr>
+<tr><td class="vuln_table_clase_date_header_td">公表日</td><td>2018/12/23</td></tr>
+<tr><td class="vuln_table_clase_date_header_td">登録日</td><td>2019/02/22</td></tr>
+<tr><td class="vuln_table_clase_date_header_td">最終更新日</td><td>2019/02/22</td></tr>
+<tr><td colspan="2"><hr></td></tr>
+</tbody></table>
+<!-- 
+</td></tr></table>
 </body>
 </html>
+-->                </div>
+          </div>
+      </div>
+  </div>
+  <div id="footer">
+      <div class="footertext"><img src="/common/img/copyright.png" alt="Copyright © 2007- IPA. All rights reserved."></div>
+  </div>
+</div><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="https://www.gstatic.com/images/branding/product/1x/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div>
+
+<div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div></body></html>

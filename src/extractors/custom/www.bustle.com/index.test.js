@@ -34,10 +34,7 @@ describe('WwwBustleComExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(
-        title,
-        '13 Ways To Compliment Women In The Most Empowering, Transformative Way Possible'
-      );
+      assert.equal(title, 'The Transformative Power Of Feminist Compliments');
     });
 
     it('returns the author', async () => {
@@ -57,7 +54,7 @@ describe('WwwBustleComExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(date_published, '2016-12-02T18:28:24.692Z');
+      assert.equal(date_published, '2016-12-02T18:28:24.000Z');
     });
 
     it('returns the lead_image_url', async () => {
@@ -69,7 +66,7 @@ describe('WwwBustleComExtractor', () => {
       // the article.
       assert.equal(
         lead_image_url,
-        'https://typeset-beta.imgix.net/rehost/2016/12/2/2fa248d4-0035-403f-a18d-3aeca6929b98.jpg?w=1200&h=630&fit=crop&crop=faces&auto=format&q=70'
+        'https://imgix.bustle.com/rehost/2016/12/12/e2e85084-7022-487b-87ea-8b4e826e1fb8.jpg?w=1200&h=630&fit=crop&crop=faces&fm=jpg'
       );
     });
 

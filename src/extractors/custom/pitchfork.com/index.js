@@ -2,32 +2,41 @@ export const PitchforkComExtractor = {
   domain: 'pitchfork.com',
 
   title: {
-    selectors: ['title'],
+    selectors: [['meta[name="og:title"]', 'value'], 'title'],
   },
 
   author: {
-    selectors: ['.authors-detail__display-name'],
+    selectors: [
+      ['meta[name="article:author"]', 'value'],
+      '.authors-detail__display-name',
+    ],
   },
 
   date_published: {
-    selectors: [['.pub-date', 'datetime']],
+    selectors: ['div[class^="InfoSliceWrapper-"]', ['.pub-date', 'datetime']],
   },
 
   dek: {
-    selectors: ['.review-detail__abstract'],
+    selectors: [
+      ['meta[name="og:description"]', 'value'],
+      '.review-detail__abstract',
+    ],
   },
 
   lead_image_url: {
-    selectors: [['.single-album-tombstone__art img', 'src']],
+    selectors: [
+      ['meta[name="og:image"]', 'value'],
+      ['.single-album-tombstone__art img', 'src'],
+    ],
   },
 
   content: {
-    selectors: ['.review-detail__text'],
+    selectors: ['div.body__inner-container', '.review-detail__text'],
   },
 
   extend: {
     score: {
-      selectors: ['.score'],
+      selectors: ['p[class*="Rating"]', '.score'],
     },
   },
 };

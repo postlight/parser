@@ -43,7 +43,7 @@ describe('SectIijAdJpExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(author, '│2019年02月13日 Masafumi Negishi│');
+      assert.equal(author, 'Masafumi Negishi');
     });
 
     it('returns the date_published', async () => {
@@ -75,7 +75,7 @@ describe('SectIijAdJpExtractor', () => {
       // the article.
       assert.equal(
         lead_image_url,
-        `https://sect.iij.ad.jp/images/logo_iij_sect.gif`
+        `https://sect.iij.ad.jp/wp-content/uploads/2021/03/20190213_fig1-500x250.png`
       );
     });
 

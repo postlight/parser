@@ -81,7 +81,7 @@ describe('MoneyCnnComExtractor', () => {
       // the article.
       assert.equal(
         lead_image_url,
-        'http://i2.cdn.turner.com/money/dam/assets/161118102423-ohare-airport-strike-780x439.jpg'
+        'https://i2.cdn.turner.com/money/dam/assets/161118102423-ohare-airport-strike-780x439.jpg'
       );
     });
 

@@ -2,11 +2,11 @@ export const WwwTheguardianComExtractor = {
   domain: 'www.theguardian.com',
 
   title: {
-    selectors: ['.content__headline'],
+    selectors: ['h1', '.content__headline'],
   },
 
   author: {
-    selectors: ['p.byline'],
+    selectors: ['address[data-link-name="byline"]', 'p.byline'],
   },
 
   date_published: {
@@ -14,7 +14,7 @@ export const WwwTheguardianComExtractor = {
   },
 
   dek: {
-    selectors: ['.content__standfirst'],
+    selectors: ['div[data-gu-name="standfirst"]', '.content__standfirst'],
   },
 
   lead_image_url: {
@@ -22,7 +22,7 @@ export const WwwTheguardianComExtractor = {
   },
 
   content: {
-    selectors: ['.content__article-body'],
+    selectors: ['#maincontent', '.content__article-body'],
 
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images

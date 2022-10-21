@@ -57,7 +57,7 @@ describe('WwwLatimesComExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(date_published, '2016-12-16T22:05:00.000Z');
+      assert.equal(date_published, '2016-12-17T04:05:00.000Z');
     });
 
     it('returns the lead_image_url', async () => {
@@ -69,7 +69,7 @@ describe('WwwLatimesComExtractor', () => {
       // the article.
       assert.equal(
         lead_image_url,
-        'http://www.trbimg.com/img-5854652f/turbine/la-me-edu-report-on-la-school-shutdown-20161216'
+        'https://ca-times.brightspotcdn.com/dims4/default/0c0a70c/2147483647/strip/true/crop/2048x1075+0+38/resize/1200x630!/quality/90/?url=https%3A%2F%2Fcalifornia-times-brightspot.s3.amazonaws.com%2Ff7%2F58%2Fa6329ffd4ef9fb4992750ddfbe32%2Fla-hblume-1481909376-snap-photo'
       );
     });
 
@@ -93,7 +93,7 @@ describe('WwwLatimesComExtractor', () => {
       // the article.
       assert.equal(
         first13,
-        "An internal report on last year's unprecedented one-day shutdown of Los Angeles schools"
+        'An internal report on last year’s unprecedented one-day shutdown of Los Angeles schools'
       );
     });
   });

@@ -8,7 +8,7 @@ export const WwwTmzComExtractor = {
   author: 'TMZ STAFF',
 
   date_published: {
-    selectors: ['.article-posted-date'],
+    selectors: ['.article__published-at', '.article-posted-date'],
 
     timezone: 'America/Los_Angeles',
   },
@@ -24,7 +24,7 @@ export const WwwTmzComExtractor = {
   },
 
   content: {
-    selectors: ['.article-content', '.all-post-body'],
+    selectors: ['.article__blocks', '.article-content', '.all-post-body'],
 
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images

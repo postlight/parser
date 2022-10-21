@@ -6,7 +6,7 @@ export const WwwPublickey1JpExtractor = {
   },
 
   author: {
-    selectors: ['#subcol p:has(img)'],
+    selectors: ['.bloggerinchief p:first-of-type', '#subcol p:has(img)'],
   },
 
   date_published: {

@@ -2269,13 +2269,13 @@ var DeadspinExtractor = {
   domain: 'deadspin.com',
   supportedDomains: ['jezebel.com', 'lifehacker.com', 'kotaku.com', 'gizmodo.com', 'jalopnik.com', 'kinja.com', 'avclub.com', 'clickhole.com', 'splinternews.com', 'theonion.com', 'theroot.com', 'thetakeout.com', 'theinventory.com'],
   title: {
-    selectors: ['h1.headline']
+    selectors: ['header h1', 'h1.headline']
   },
   author: {
-    selectors: ['.author']
+    selectors: ['a[data-ga*="Author"]', '.author']
   },
   content: {
-    selectors: ['.post-content', '.entry-content'],
+    selectors: ['.js_post-content', '.post-content', '.entry-content'],
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images
     transforms: {
@@ -2290,7 +2290,7 @@ var DeadspinExtractor = {
     clean: ['.magnifier', '.lightbox']
   },
   date_published: {
-    selectors: [['time.updated[datetime]', 'datetime']]
+    selectors: [['meta[name="article:published_time"]', 'value'], ['time.updated[datetime]', 'datetime']]
   },
   lead_image_url: {
     selectors: [['meta[name="og:image"]', 'value']]
@@ -2484,7 +2484,7 @@ var WwwTmzComExtractor = {
   },
   author: 'TMZ STAFF',
   date_published: {
-    selectors: ['.article-posted-date'],
+    selectors: ['.article__published-at', '.article-posted-date'],
     timezone: 'America/Los_Angeles'
   },
   dek: {
@@ -2495,7 +2495,7 @@ var WwwTmzComExtractor = {
     selectors: [['meta[name="og:image"]', 'value']]
   },
   content: {
-    selectors: ['.article-content', '.all-post-body'],
+    selectors: ['.article__blocks', '.article-content', '.all-post-body'],
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images
     transforms: {},
@@ -2611,7 +2611,7 @@ var MoneyCnnComExtractor = {
     selectors: ['.article-title']
   },
   author: {
-    selectors: ['.byline a']
+    selectors: [['meta[name="author"]', 'value'], '.byline a']
   },
   date_published: {
     selectors: [['meta[name="date"]', 'value']],
@@ -2760,10 +2760,10 @@ var WwwAolComExtractor = {
 var WwwYoutubeComExtractor = {
   domain: 'www.youtube.com',
   title: {
-    selectors: ['.watch-title', 'h1.watch-title-container']
+    selectors: [['meta[name="title"]', 'value'], '.watch-title', 'h1.watch-title-container']
   },
   author: {
-    selectors: ['.yt-user-info']
+    selectors: [['link[itemprop="name"]', 'content'], '.yt-user-info']
   },
   date_published: {
     selectors: [['meta[itemProp="datePublished"]', 'value']],
@@ -2778,7 +2778,7 @@ var WwwYoutubeComExtractor = {
   },
   content: {
     defaultCleaner: false,
-    selectors: [['#player-api', '#eow-description']],
+    selectors: [['#player-api', '#description']],
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images
     transforms: {
@@ -2797,25 +2797,27 @@ var WwwYoutubeComExtractor = {
 var WwwTheguardianComExtractor = {
   domain: 'www.theguardian.com',
   title: {
-    selectors: ['.content__headline']
+    selectors: ['h1', '.content__headline']
   },
   author: {
-    selectors: ['p.byline']
+    selectors: ['address[data-link-name="byline"]', 'p.byline']
   },
   date_published: {
     selectors: [['meta[name="article:published_time"]', 'value']]
   },
   dek: {
-    selectors: ['.content__standfirst']
+    selectors: ['div[data-gu-name="standfirst"]', '.content__standfirst']
   },
   lead_image_url: {
     selectors: [['meta[name="og:image"]', 'value']]
   },
   content: {
-    selectors: ['.content__article-body'],
+    selectors: ['#maincontent', '.content__article-body'],
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images
-    transforms: {},
+    transforms: {
+      'h2': 'h4'
+    },
     // Is there anything that is in the result that shouldn't be?
     // The clean selectors will remove anything that matches from
     // the result
@@ -2891,19 +2893,19 @@ var WwwBloombergComExtractor = {
 var WwwBustleComExtractor = {
   domain: 'www.bustle.com',
   title: {
-    selectors: ['h1.post-page__title']
+    selectors: ['h1', 'h1.post-page__title']
   },
   author: {
-    selectors: ['div.content-meta__author']
+    selectors: ['a[href*="profile"]', 'div.content-meta__author']
   },
   date_published: {
-    selectors: [['time.content-meta__published-date[datetime]', 'datetime']]
+    selectors: [['time', 'datetime']]
   },
   lead_image_url: {
     selectors: [['meta[name="og:image"]', 'value']]
   },
   content: {
-    selectors: ['.post-page__body'],
+    selectors: ['article', '.post-page__body'],
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images
     transforms: {},
@@ -2981,7 +2983,7 @@ var QzComExtractor = {
     selectors: [['meta[name="author"]', 'value']]
   },
   date_published: {
-    selectors: [['time[datetime]', 'datetime']]
+    selectors: [['meta[name="article:published_time"]', 'value'], ['time[datetime]', 'datetime']]
   },
   lead_image_url: {
     selectors: [['meta[name="og:image"]', 'value'], ['meta[property="og:image"]', 'content'], ['meta[name="twitter:image"]', 'content']]
@@ -3045,7 +3047,7 @@ var WwwReutersComExtractor = {
     selectors: [['meta[name="og:image"]', 'value']]
   },
   content: {
-    selectors: ['div.ArticleBodyWrapper'],
+    selectors: ['div.ArticleBodyWrapper', '#article-text'],
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images
     transforms: {
@@ -3061,19 +3063,19 @@ var WwwReutersComExtractor = {
 var MashableComExtractor = {
   domain: 'mashable.com',
   title: {
-    selectors: ['h1.title']
+    selectors: ['header h1', 'h1.title']
   },
   author: {
-    selectors: ['span.author_name a']
+    selectors: [['meta[name="article:author"]', 'value'], 'span.author_name a']
   },
   date_published: {
-    selectors: [['meta[name="og:article:published_time"]', 'value']]
+    selectors: [['meta[name="article:published_time"]', 'value']]
   },
   lead_image_url: {
     selectors: [['meta[name="og:image"]', 'value']]
   },
   content: {
-    selectors: ['section.article-content.blueprint'],
+    selectors: ['#article', 'section.article-content.blueprint'],
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images
     transforms: {
@@ -3238,19 +3240,19 @@ var WwwNationalgeographicComExtractor = {
 var WwwLatimesComExtractor = {
   domain: 'www.latimes.com',
   title: {
-    selectors: ['.trb_ar_hl']
+    selectors: ['h1.headline', '.trb_ar_hl']
   },
   author: {
-    selectors: [['meta[name="author"]', 'value']]
+    selectors: ['a[data-click="standardBylineAuthorName"]', ['meta[name="author"]', 'value']]
   },
   date_published: {
-    selectors: [['meta[itemprop="datePublished"]', 'value']]
+    selectors: [['meta[name="article:published_time"]', 'value'], ['meta[itemprop="datePublished"]', 'value']]
   },
   lead_image_url: {
     selectors: [['meta[name="og:image"]', 'value']]
   },
   content: {
-    selectors: ['.trb_ar_main'],
+    selectors: ['.page-article-body', '.trb_ar_main'],
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images
     transforms: {
@@ -3305,7 +3307,7 @@ var ThefederalistpapersOrgExtractor = {
     selectors: ['h1.entry-title']
   },
   author: {
-    selectors: ['main span.entry-author-name']
+    selectors: ['.author-meta-title', 'main span.entry-author-name']
   },
   date_published: {
     selectors: [['meta[name="article:published_time"]', 'value']]
@@ -3314,14 +3316,14 @@ var ThefederalistpapersOrgExtractor = {
     selectors: [['meta[name="og:image"]', 'value']]
   },
   content: {
-    selectors: ['.entry-content'],
+    selectors: ['.content'],
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images
     transforms: {},
     // Is there anything that is in the result that shouldn't be?
     // The clean selectors will remove anything that matches from
     // the result
-    clean: [['p[style]']]
+    clean: ['header', '.article-sharing', '.after-article', '.type-commenting', '.more-posts', ['p[style]']]
   }
 };
 
@@ -3361,10 +3363,10 @@ var WwwMsnbcComExtractor = {
     selectors: ['h1', 'h1.is-title-pane']
   },
   author: {
-    selectors: ['.author']
+    selectors: ['.byline-name', '.author']
   },
   date_published: {
-    selectors: [['meta[name="DC.date.issued"]', 'value']]
+    selectors: [['meta[itemprop="datePublished"]', 'value'], ['meta[name="DC.date.issued"]', 'value']]
   },
   dek: {
     selectors: [['meta[name="description"]', 'value']]
@@ -3373,7 +3375,7 @@ var WwwMsnbcComExtractor = {
     selectors: [['meta[name="og:image"]', 'value']]
   },
   content: {
-    selectors: ['.pane-node-body'],
+    selectors: ['.article-body__content', '.pane-node-body'],
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images
     transforms: {
@@ -3430,27 +3432,27 @@ var WwwThepoliticalinsiderComExtractor = {
 var WwwMentalflossComExtractor = {
   domain: 'www.mentalfloss.com',
   title: {
-    selectors: ['h1.title', '.title-group', '.inner']
+    selectors: [['meta[name="og:title"]', 'value'], 'h1.title', '.title-group', '.inner']
   },
   author: {
-    selectors: ['.field-name-field-enhanced-authors']
+    selectors: ['a[data-vars-label*="authors"]', '.field-name-field-enhanced-authors']
   },
   date_published: {
-    selectors: ['.date-display-single'],
+    selectors: [['meta[name="article:published_time"]', 'value'], '.date-display-single'],
     timezone: 'America/New_York'
   },
   lead_image_url: {
     selectors: [['meta[name="og:image"]', 'value']]
   },
   content: {
-    selectors: ['div.field.field-name-body'],
+    selectors: ['article main', 'div.field.field-name-body'],
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images
     transforms: {},
     // Is there anything that is in the result that shouldn't be?
     // The clean selectors will remove anything that matches from
     // the result
-    clean: []
+    clean: ['small']
   }
 };
 
@@ -3485,19 +3487,19 @@ var AbcnewsGoComExtractor = {
 var WwwNydailynewsComExtractor = {
   domain: 'www.nydailynews.com',
   title: {
-    selectors: ['h1#ra-headline']
+    selectors: ['h1.headline', 'h1#ra-headline']
   },
   author: {
-    selectors: [['meta[name="parsely-author"]', 'value']]
+    selectors: ['.article_byline span', ['meta[name="parsely-author"]', 'value']]
   },
   date_published: {
-    selectors: [['meta[name="sailthru.date"]', 'value']]
+    selectors: ['time', ['meta[name="sailthru.date"]', 'value']]
   },
   lead_image_url: {
     selectors: [['meta[name="og:image"]', 'value']]
   },
   content: {
-    selectors: ['article#ra-body'],
+    selectors: ['article', 'article#ra-body'],
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images
     transforms: {},
@@ -3592,19 +3594,22 @@ var ObserverComExtractor = {
 var PeopleComExtractor = {
   domain: 'people.com',
   title: {
-    selectors: [['meta[name="og:title"]', 'value']]
+    selectors: ['.article-header h1', ['meta[name="og:title"]', 'value']]
   },
   author: {
-    selectors: ['a.author.url.fn']
+    selectors: [['meta[name="sailthru.author"]', 'value'], 'a.author.url.fn']
   },
   date_published: {
-    selectors: [['meta[name="article:published_time"]', 'value']]
+    selectors: ['.mntl-attribution__item-date', ['meta[name="article:published_time"]', 'value']]
   },
   lead_image_url: {
     selectors: [['meta[name="og:image"]', 'value']]
   },
+  dek: {
+    selectors: ['.article-header h2']
+  },
   content: {
-    selectors: ['div.article-body__inner'],
+    selectors: ['div[class^="loc article-content"]', 'div.article-body__inner'],
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images
     transforms: {},
@@ -3645,30 +3650,30 @@ var WwwUsmagazineComExtractor = {
 var WwwRollingstoneComExtractor = {
   domain: 'www.rollingstone.com',
   title: {
-    selectors: ['h1.content-title']
+    selectors: ['h1.l-article-header__row--title', 'h1.content-title']
   },
   author: {
-    selectors: ['a.content-author.tracked-offpage']
+    selectors: ['a.c-byline__link', 'a.content-author.tracked-offpage']
   },
   date_published: {
-    selectors: ['time.content-published-date'],
+    selectors: [['meta[name="article:published_time"]', 'value'], 'time.content-published-date'],
     timezone: 'America/New_York'
   },
   dek: {
-    selectors: ['.content-description']
+    selectors: ['h2.l-article-header__row--lead', '.content-description']
   },
   lead_image_url: {
     selectors: [['meta[name="og:image"]', 'value']]
   },
   content: {
-    selectors: [['.lead-container', '.article-content'], '.article-content'],
+    selectors: ['.l-article-content', ['.lead-container', '.article-content'], '.article-content'],
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images
     transforms: {},
     // Is there anything that is in the result that shouldn't be?
     // The clean selectors will remove anything that matches from
     // the result
-    clean: ['.module-related']
+    clean: ['.c-related-links-wrapper', '.module-related']
   }
 };
 
@@ -3917,20 +3922,20 @@ var WwwSiComExtractor = {
 var WwwRawstoryComExtractor = {
   domain: 'www.rawstory.com',
   title: {
-    selectors: ['.blog-title']
+    selectors: [['meta[name="og:title"]', 'value'], '.blog-title']
   },
   author: {
-    selectors: ['.blog-author a:first-of-type']
+    selectors: ['div.main-post-head .social-author__name', '.blog-author a:first-of-type']
   },
   date_published: {
-    selectors: ['.blog-author a:last-of-type'],
+    selectors: [['meta[name="article:published_time"]', 'value'], '.blog-author a:last-of-type'],
     timezone: 'EST'
   },
   lead_image_url: {
     selectors: [['meta[name="og:image"]', 'value']]
   },
   content: {
-    selectors: ['.blog-content'],
+    selectors: ['.post-body', '.blog-content'],
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images
     transforms: {},
@@ -3979,33 +3984,6 @@ var WwwCnetComExtractor = {
   }
 };
 
-var WwwCinemablendComExtractor = {
-  domain: 'www.cinemablend.com',
-  title: {
-    selectors: ['.story_title']
-  },
-  author: {
-    selectors: ['.author']
-  },
-  date_published: {
-    selectors: [['meta[name="article:published_time"]', 'value']],
-    timezone: 'EST'
-  },
-  lead_image_url: {
-    selectors: [['meta[name="og:image"]', 'value']]
-  },
-  content: {
-    selectors: ['div#wrap_left_content'],
-    // Is there anything in the content you selected that needs transformed
-    // before it's consumable content? E.g., unusual lazy loaded images
-    transforms: {},
-    // Is there anything that is in the result that shouldn't be?
-    // The clean selectors will remove anything that matches from
-    // the result
-    clean: []
-  }
-};
-
 var WwwTodayComExtractor = {
   domain: 'www.today.com',
   title: {
@@ -4029,33 +4007,6 @@ var WwwTodayComExtractor = {
     // The clean selectors will remove anything that matches from
     // the result
     clean: ['.label-comment']
-  }
-};
-
-var WwwHowtogeekComExtractor = {
-  domain: 'www.howtogeek.com',
-  title: {
-    selectors: ['title']
-  },
-  author: {
-    selectors: ['#authorinfobox a']
-  },
-  date_published: {
-    selectors: ['#authorinfobox + div li'],
-    timezone: 'GMT'
-  },
-  lead_image_url: {
-    selectors: [['meta[name="og:image"]', 'value']]
-  },
-  content: {
-    selectors: ['.thecontent'],
-    // Is there anything in the content you selected that needs transformed
-    // before it's consumable content? E.g., unusual lazy loaded images
-    transforms: {},
-    // Is there anything that is in the result that shouldn't be?
-    // The clean selectors will remove anything that matches from
-    // the result
-    clean: []
   }
 };
 
@@ -4233,7 +4184,7 @@ var ThoughtcatalogComExtractor = {
     selectors: ['h1.title', ['meta[name="og:title"]', 'value']]
   },
   author: {
-    selectors: ['div.col-xs-12.article_header div.writer-container.writer-container-inline.writer-no-avatar h4.writer-name', 'h1.writer-name']
+    selectors: ['cite a', 'div.col-xs-12.article_header div.writer-container.writer-container-inline.writer-no-avatar h4.writer-name', 'h1.writer-name']
   },
   date_published: {
     selectors: [['meta[name="article:published_time"]', 'value']]
@@ -4249,7 +4200,7 @@ var ThoughtcatalogComExtractor = {
     // Is there anything that is in the result that shouldn't be?
     // The clean selectors will remove anything that matches from
     // the result
-    clean: ['.tc_mark']
+    clean: ['.tc_mark', 'figcaption']
   }
 };
 
@@ -4339,10 +4290,10 @@ var WwwLinkedinComExtractor = {
     selectors: ['.article-title', 'h1']
   },
   author: {
-    selectors: [['meta[name="article:author"]', 'value'], '.entity-name a[rel=author]']
+    selectors: ['.main-author-card h3', ['meta[name="article:author"]', 'value'], '.entity-name a[rel=author]']
   },
   date_published: {
-    selectors: [['time[itemprop="datePublished"]', 'datetime']],
+    selectors: ['.base-main-card__metadata', ['time[itemprop="datePublished"]', 'datetime']],
     timezone: 'America/Los_Angeles'
   },
   dek: {
@@ -4353,7 +4304,7 @@ var WwwLinkedinComExtractor = {
     selectors: [['meta[name="og:image"]', 'value']]
   },
   content: {
-    selectors: [['header figure', '.prose'], '.prose'],
+    selectors: ['.article-content__body', ['header figure', '.prose'], '.prose'],
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images
     transforms: {},
@@ -4428,23 +4379,23 @@ var WwwOpposingviewsComExtractor = {
 var WwwProspectmagazineCoUkExtractor = {
   domain: 'www.prospectmagazine.co.uk',
   title: {
-    selectors: ['.page-title']
+    selectors: ['.blog-header__title', '.page-title']
   },
   author: {
-    selectors: ['.aside_author .title']
+    selectors: ['.blog-header__author-link', '.aside_author .title']
   },
   date_published: {
-    selectors: ['.post-info'],
+    selectors: [['meta[name="article:published_time"]', 'value'], '.post-info'],
     timezone: 'Europe/London'
   },
   dek: {
-    selectors: ['.page-subtitle']
+    selectors: ['.blog-header__description', '.page-subtitle']
   },
   lead_image_url: {
     selectors: [['meta[name="og:image"]', 'value']]
   },
   content: {
-    selectors: ['article .post_content'],
+    selectors: ['.blog__container', 'article .post_content'],
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images
     transforms: {},
@@ -4461,10 +4412,10 @@ var ForwardComExtractor = {
     selectors: [['meta[name="og:title"]', 'value']]
   },
   author: {
-    selectors: ['.author-name', ['meta[name="sailthru.author"]', 'value']]
+    selectors: ['.post-author a', '.author-name', ['meta[name="sailthru.author"]', 'value']]
   },
   date_published: {
-    selectors: [['meta[name="date"]', 'value']]
+    selectors: [['meta[name="article:published_time"]', 'value'], ['meta[name="date"]', 'value']]
   },
   dek: {
     selectors: [// enter selectors
@@ -4474,14 +4425,14 @@ var ForwardComExtractor = {
     selectors: [['meta[name="og:image"]', 'value']]
   },
   content: {
-    selectors: [['.post-item-media-wrap', '.post-item p']],
+    selectors: ['.content-container article', ['.post-item-media-wrap', '.post-item p']],
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images
     transforms: {},
     // Is there anything that is in the result that shouldn't be?
     // The clean selectors will remove anything that matches from
     // the result
-    clean: ['.donate-box', '.message', '.subtitle']
+    clean: ['.post-author', '.donate-box', '.message', '.subtitle']
   }
 };
 
@@ -4558,19 +4509,19 @@ var WwwFoolComExtractor = {
     selectors: ['h1']
   },
   author: {
-    selectors: ['.author-inline .author-name']
+    selectors: [['meta[name="author"]', 'value'], '.author-inline .author-name']
   },
   date_published: {
     selectors: [['meta[name="date"]', 'value']]
   },
   dek: {
-    selectors: ['header h2']
+    selectors: [['meta[name="og:description"]', 'value'], 'header h2']
   },
   lead_image_url: {
     selectors: [['meta[name="og:image"]', 'value']]
   },
   content: {
-    selectors: ['.article-content'],
+    selectors: ['.tailwind-article-body', '.article-content'],
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images
     transforms: {
@@ -5216,7 +5167,7 @@ var WwwPublickey1JpExtractor = {
     selectors: ['h1']
   },
   author: {
-    selectors: ['#subcol p:has(img)']
+    selectors: ['.bloggerinchief p:first-of-type', '#subcol p:has(img)']
   },
   date_published: {
     selectors: ['div.pubdate'],
@@ -5259,13 +5210,13 @@ var TakagihiromitsuJpExtractor = {
 var BookwalkerJpExtractor = {
   domain: 'bookwalker.jp',
   title: {
-    selectors: ['h1.main-heading']
+    selectors: ['h1.p-main__title', 'h1.main-heading']
   },
   author: {
-    selectors: ['div.authors']
+    selectors: ['div.p-author__list', 'div.authors']
   },
   date_published: {
-    selectors: ['.work-info .work-detail:first-of-type .work-detail-contents:last-of-type'],
+    selectors: ['dl.p-information__data dd:nth-of-type(7)', '.work-info .work-detail:first-of-type .work-detail-contents:last-of-type'],
     timezone: 'Asia/Tokyo'
   },
   dek: null,
@@ -5273,7 +5224,7 @@ var BookwalkerJpExtractor = {
     selectors: [['meta[name="og:image"]', 'value']]
   },
   content: {
-    selectors: [['div.main-info', 'div.main-cover-inner']],
+    selectors: ['div.p-main__information', ['div.main-info', 'div.main-cover-inner']],
     defaultCleaner: false,
     transforms: {},
     clean: ['span.label.label--trial', 'dt.info-head.info-head--coin', 'dd.info-contents.info-contents--coin', 'div.info-notice.fn-toggleClass']
@@ -5403,20 +5354,20 @@ var GetnewsJpExtractor = {
 var WwwLifehackerJpExtractor = {
   domain: 'www.lifehacker.jp',
   title: {
-    selectors: ['h1.lh-summary-title']
+    selectors: ['h1[class^="article_pArticle_Title"]', 'h1.lh-summary-title']
   },
   author: {
-    selectors: ['p.lh-entryDetailInner--credit']
+    selectors: [['meta[name="author"]', 'value'], 'p.lh-entryDetailInner--credit']
   },
   date_published: {
-    selectors: [['div.lh-entryDetail-header time', 'datetime']]
+    selectors: [['meta[name="article:published_time"]', 'value'], ['div.lh-entryDetail-header time', 'datetime']]
   },
   dek: null,
   lead_image_url: {
     selectors: [['meta[name="og:image"]', 'value']]
   },
   content: {
-    selectors: ['div.lh-entryDetail-body'],
+    selectors: ['div[class^="article_pArticle_Body__"]', 'div.lh-entryDetail-body'],
     transforms: {
       'img.lazyload': function imgLazyload($node) {
         var src = $node.attr('src');
@@ -5430,13 +5381,13 @@ var WwwLifehackerJpExtractor = {
 var SectIijAdJpExtractor = {
   domain: 'sect.iij.ad.jp',
   title: {
-    selectors: ['h3']
+    selectors: ['div.title-box-inner h1', 'h3']
   },
   author: {
-    selectors: ['dl.entrydate dd']
+    selectors: ['p.post-author a', 'dl.entrydate dd']
   },
   date_published: {
-    selectors: ['dl.entrydate dd'],
+    selectors: ['time'],
     format: 'YYYY年MM月DD日',
     timezone: 'Asia/Tokyo'
   },
@@ -5445,7 +5396,7 @@ var SectIijAdJpExtractor = {
     selectors: [['meta[name="og:image"]', 'value']]
   },
   content: {
-    selectors: ['#article'],
+    selectors: ['.entry-inner', '#article'],
     transforms: {},
     clean: ['dl.entrydate']
   }
@@ -5454,21 +5405,21 @@ var SectIijAdJpExtractor = {
 var WwwOreillyCoJpExtractor = {
   domain: 'www.oreilly.co.jp',
   title: {
-    selectors: ['h3']
+    selectors: [['meta[name="og:title"]', 'value'], 'h3']
   },
   author: {
-    selectors: ['li[itemprop="author"]']
+    selectors: ['span[itemprop="author"]', 'li[itemprop="author"]']
   },
   date_published: {
-    selectors: [['meta[itemprop="datePublished"]', 'value']],
+    selectors: [['dd[itemprop="datePublished"]', 'content'], ['meta[itemprop="datePublished"]', 'value']],
     timezone: 'Asia/Tokyo'
   },
   dek: null,
   lead_image_url: {
-    selectors: [['meta[name="og:image"]', 'value']]
+    selectors: [['meta[name="og:image:secure_url"]', 'value'], ['meta[name="og:image"]', 'value']]
   },
   content: {
-    selectors: ['#content'],
+    selectors: ['section.detail', '#content'],
     defaultCleaner: false,
     transforms: {},
     clean: ['.social-tools']
@@ -5546,22 +5497,22 @@ var TechlogIijAdJpExtractor = {
 var WiredJpExtractor = {
   domain: 'wired.jp',
   title: {
-    selectors: ['h1.post-title']
+    selectors: ['h1[data-testid="ContentHeaderHed"]', 'h1.post-title']
   },
   author: {
-    selectors: ['p[itemprop="author"]']
+    selectors: [['meta[name="article:author"]', 'value'], 'p[itemprop="author"]']
   },
   date_published: {
-    selectors: [['time', 'datetime']]
+    selectors: [['meta[name="article:published_time"]', 'value'], ['time', 'datetime']]
   },
   dek: {
-    selectors: ['.post-intro']
+    selectors: ['div[class^="ContentHeaderDek"]', '.post-intro']
   },
   lead_image_url: {
     selectors: [['meta[name="og:image"]', 'value']]
   },
   content: {
-    selectors: ['article.article-detail'],
+    selectors: ['div[data-attribute-verso-pattern="article-body"]', 'article.article-detail'],
     transforms: {
       'img[data-original]': function imgDataOriginal($node) {
         var dataOriginal = $node.attr('data-original');
@@ -5647,7 +5598,7 @@ var WwwLemondeFrExtractor = {
 var WwwPhoronixComExtractor = {
   domain: 'www.phoronix.com',
   title: {
-    selectors: ['article header']
+    selectors: ['article h1', 'article header']
   },
   author: {
     selectors: ['.author a:first-child']
@@ -5675,26 +5626,26 @@ var WwwPhoronixComExtractor = {
 var PitchforkComExtractor = {
   domain: 'pitchfork.com',
   title: {
-    selectors: ['title']
+    selectors: [['meta[name="og:title"]', 'value'], 'title']
   },
   author: {
-    selectors: ['.authors-detail__display-name']
+    selectors: [['meta[name="article:author"]', 'value'], '.authors-detail__display-name']
   },
   date_published: {
-    selectors: [['.pub-date', 'datetime']]
+    selectors: ['div[class^="InfoSliceWrapper-"]', ['.pub-date', 'datetime']]
   },
   dek: {
-    selectors: ['.review-detail__abstract']
+    selectors: [['meta[name="og:description"]', 'value'], '.review-detail__abstract']
   },
   lead_image_url: {
-    selectors: [['.single-album-tombstone__art img', 'src']]
+    selectors: [['meta[name="og:image"]', 'value'], ['.single-album-tombstone__art img', 'src']]
   },
   content: {
-    selectors: ['.review-detail__text']
+    selectors: ['div.body__inner-container', '.review-detail__text']
   },
   extend: {
     score: {
-      selectors: ['.score']
+      selectors: ['p[class*="Rating"]', '.score']
     }
   }
 };
@@ -6208,9 +6159,7 @@ var CustomExtractors = /*#__PURE__*/Object.freeze({
   WwwSiComExtractor: WwwSiComExtractor,
   WwwRawstoryComExtractor: WwwRawstoryComExtractor,
   WwwCnetComExtractor: WwwCnetComExtractor,
-  WwwCinemablendComExtractor: WwwCinemablendComExtractor,
   WwwTodayComExtractor: WwwTodayComExtractor,
-  WwwHowtogeekComExtractor: WwwHowtogeekComExtractor,
   WwwAlComExtractor: WwwAlComExtractor,
   WwwThepennyhoarderComExtractor: WwwThepennyhoarderComExtractor,
   WwwWesternjournalismComExtractor: WwwWesternjournalismComExtractor,

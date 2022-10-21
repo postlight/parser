@@ -2,7 +2,7 @@ export const WwwPhoronixComExtractor = {
   domain: 'www.phoronix.com',
 
   title: {
-    selectors: ['article header'],
+    selectors: ['article h1', 'article header'],
   },
 
   author: {

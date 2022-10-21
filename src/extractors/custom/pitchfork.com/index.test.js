@@ -29,7 +29,7 @@ describe('PitchforkComExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(title, `Lust for Youth: Lust for Youth Album Review`);
+      assert.equal(title, `Lust for Youth: Lust for Youth`);
     });
 
     it('returns the author', async () => {
@@ -41,7 +41,7 @@ describe('PitchforkComExtractor', () => {
     it('returns the date_published', async () => {
       const { date_published } = await result;
 
-      assert.equal(date_published.split('T')[0], '2019-06-07');
+      assert.equal(date_published, '2019-06-07T05:00:00.000Z');
     });
 
     it('returns the dek', async () => {
@@ -58,7 +58,7 @@ describe('PitchforkComExtractor', () => {
 
       assert.equal(
         lead_image_url,
-        `https://media.pitchfork.com/photos/5cefef2693a53659ed1ee6b8/1:1/w_320/LustForYouth_LustForYouth.jpg`
+        `https://media.pitchfork.com/photos/5cefef2693a53659ed1ee6b8/16:9/w_1280,c_limit/LustForYouth_LustForYouth.jpg`
       );
     });
 

@@ -36,7 +36,7 @@ describe('WwwNydailynewsComExtractor', () => {
       // the article.
       assert.equal(
         title,
-        'Michelle Obama suggests America has lost hope since Donald Trump’s election: ‘We are feeling what not having hope feels like’'
+        'Michelle Obama suggests America has lost hope since Donald Trump’s election'
       );
     });
 
@@ -58,7 +58,7 @@ describe('WwwNydailynewsComExtractor', () => {
       // Update these values with the expected values from
       // the article.
 
-      assert.equal(date_published, '2016-12-16T18:38:14.000Z');
+      assert.equal(date_published, '2016-12-16T19:38:00.000Z');
     });
 
     it('returns the lead_image_url', async () => {
@@ -70,7 +70,7 @@ describe('WwwNydailynewsComExtractor', () => {
       // the article.
       assert.equal(
         lead_image_url,
-        'http://assets.nydailynews.com/polopoly_fs/1.2913253.1481912929!/img/httpImage/image.jpg_gen/derivatives/landscape_1200/usa-trump.jpg'
+        'https://www.nydailynews.com/resizer/Dtui1X7fI4gunqGF0rSp1_X-xwc=/1200x630/filters:format(jpg):quality(70)/arc-anglerfish-arc2-prod-tronc.s3.amazonaws.com/public/Q3KUQ3K4VGF6733PRNTY36GQP4.jpg'
       );
     });
 
@@ -94,7 +94,7 @@ describe('WwwNydailynewsComExtractor', () => {
       // the article.
       assert.equal(
         first13,
-        'Michelle Obama understands your despair, America. The first lady suggested that the election'
+        'Michelle Obama sees despair in America.The first lady suggested that the election of'
       );
     });
   });

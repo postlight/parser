@@ -36,7 +36,7 @@ describe('WwwRawstoryComExtractor', () => {
       // the article.
       assert.equal(
         title,
-        'These 6 celebrities are refusing to play Trump’s inauguration as team scrambles to secure talent'
+        `These 6 celebrities are refusing to play Trump's inauguration as team scrambles to secure talent`
       );
     });
 
@@ -57,7 +57,7 @@ describe('WwwRawstoryComExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(date_published, '2016-12-22T19:27:00.000Z');
+      assert.equal(date_published, '2016-12-22T19:27:41.000Z');
     });
 
     it('returns the lead_image_url', async () => {
@@ -69,7 +69,7 @@ describe('WwwRawstoryComExtractor', () => {
       // the article.
       assert.equal(
         lead_image_url,
-        'http://www.rawstory.com/wp-content/uploads/2016/12/Donald-Trump11-800x430.jpg'
+        'https://www.rawstory.com/media-library/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpbWFnZSI6Imh0dHBzOi8vYXNzZXRzLnJibC5tcy8yNDk4MDQwMC9vcmlnaW4uanBnIiwiZXhwaXJlc19hdCI6MTcwODk2ODc0NH0.CAuDKCrYnLogkIrRCoHwZj7vOQ_5oq7DyFBijbdG0dE/image.jpg?width=210'
       );
     });
 
@@ -93,7 +93,7 @@ describe('WwwRawstoryComExtractor', () => {
       // the article.
       assert.equal(
         first13,
-        'As Inauguration Day approaches, Donald Trump’s team is reportedly having such a hard'
+        `As Inauguration Day approaches, Donald Trump's team is reportedly having such a hard`
       );
     });
   });

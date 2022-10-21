@@ -2,11 +2,15 @@ export const WwwYoutubeComExtractor = {
   domain: 'www.youtube.com',
 
   title: {
-    selectors: ['.watch-title', 'h1.watch-title-container'],
+    selectors: [
+      ['meta[name="title"]', 'value'],
+      '.watch-title',
+      'h1.watch-title-container',
+    ],
   },
 
   author: {
-    selectors: ['.yt-user-info'],
+    selectors: [['link[itemprop="name"]', 'content'], '.yt-user-info'],
   },
 
   date_published: {
@@ -28,7 +32,7 @@ export const WwwYoutubeComExtractor = {
   content: {
     defaultCleaner: false,
 
-    selectors: [['#player-api', '#eow-description']],
+    selectors: [['#player-api', '#description']],
 
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images
