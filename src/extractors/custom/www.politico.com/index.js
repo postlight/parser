@@ -6,6 +6,7 @@ export const PoliticoExtractor = {
 
   author: {
     selectors: [
+      ['div[itemprop="author"] meta[itemprop="name"]', 'value'],
       '.story-meta__authors .vcard',
       '.story-main-content .byline .vcard',
     ],
@@ -21,6 +22,7 @@ export const PoliticoExtractor = {
 
   date_published: {
     selectors: [
+      ['time[itemprop="datePublished"]', 'datetime'],
       ['.story-meta__details time[datetime]', 'datetime'],
       ['.story-main-content .timestamp time[datetime]', 'datetime'],
     ],
@@ -34,8 +36,4 @@ export const PoliticoExtractor = {
   dek: {
     selectors: [['meta[name="og:description"]', 'value']],
   },
-
-  next_page_url: null,
-
-  excerpt: null,
 };
