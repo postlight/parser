@@ -95,6 +95,17 @@ yarn build
 yarn build:web
 ```
 
+### Developing locally for use in the Chrome Extension
+
+Postlight Parser powers a browser extension called [Postlight Reader](https://chrome.google.com/webstore/detail/postlight-reader/oknpjjbmpnndlpmnhmekjpocelpnlfdi). In some cases, you may want to work on the parser in this context: being called by the browser extension. To run both locally and ensure that your local version of the extension is referencing your local version of the parser, follow these instructions:
+
+1. `git clone` both repos: [parser](https://github.com/postlight/parser) (this one) & [reader](https://github.com/postlight/reader) (the Chrome extension)
+2. Follow the "Building" instructions above to get the web release of the `parser` running locally.
+3. In the `reader` project, run `yarn add link:../parser` (assuming these projects are next to each other in your file system, otherwise, adjust the path accordingly).
+4. Follow the "Development" instructions in the `reader` project's README.
+5. After each change made in the `parser` project, run `yarn build:web` again, update your dev extension in the `chrome://extensions/` tab, and changes will be ready to view.
+6. Do not commit the `package.json` in the `reader` project with the `link:../parser` line.
+
 ### Testing
 
 Postlight Parser is a test-driven application; each component has its own test file. Tests are run for both node and web builds. Our testing frameworks are:
