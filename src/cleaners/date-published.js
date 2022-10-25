@@ -51,8 +51,11 @@ export default function cleanDatePublished(
   { timezone, format } = {}
 ) {
   // If string is in milliseconds or seconds, convert to int and return
-  if (MS_DATE_STRING.test(dateString) || SEC_DATE_STRING.test(dateString)) {
+  if (MS_DATE_STRING.test(dateString)) {
     return new Date(parseInt(dateString, 10)).toISOString();
+  }
+  if (SEC_DATE_STRING.test(dateString)) {
+    return new Date(parseInt(dateString, 10) * 1000).toISOString();
   }
 
   let date = createDate(dateString, timezone, format);

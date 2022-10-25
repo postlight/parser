@@ -6329,8 +6329,12 @@ function cleanDatePublished(dateString) {
       format = _ref.format;
 
   // If string is in milliseconds or seconds, convert to int and return
-  if (MS_DATE_STRING.test(dateString) || SEC_DATE_STRING.test(dateString)) {
+  if (MS_DATE_STRING.test(dateString)) {
     return new Date(_parseInt(dateString, 10)).toISOString();
+  }
+
+  if (SEC_DATE_STRING.test(dateString)) {
+    return new Date(_parseInt(dateString, 10) * 1000).toISOString();
   }
 
   var date = createDate(dateString, timezone, format);
