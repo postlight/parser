@@ -11,12 +11,16 @@ export const PoliticoExtractor = {
   },
 
   author: {
-    selectors: ['.story-main-content .byline .vcard'],
+    selectors: [
+      '.story-meta__authors .vcard',
+      '.story-main-content .byline .vcard',
+    ],
   },
 
   content: {
     selectors: [
       // enter content selectors
+      ['p.story-text__paragraph   '],
       '.story-main-content',
       '.content-group',
       '.story-core',
@@ -34,7 +38,10 @@ export const PoliticoExtractor = {
   },
 
   date_published: {
-    selectors: [['.story-main-content .timestamp time[datetime]', 'datetime']],
+    selectors: [
+      '.story-meta__details time[datetime]',
+      ['.story-main-content .timestamp time[datetime]', 'datetime'],
+    ],
   },
 
   lead_image_url: {

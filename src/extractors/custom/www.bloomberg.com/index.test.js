@@ -69,7 +69,7 @@ describe('WwwBloombergComExtractor', () => {
       // the article.
       assert.equal(
         lead_image_url,
-        'https://assets.bwbx.io/images/users/iqjWHBFdfxIU/ioUAfA1V2nzk/v0/-1x-1.jpg'
+        'https://assets.bwbx.io/images/users/iqjWHBFdfxIU/ioUAfA1V2nzk/v0/1200x675.jpg'
       );
     });
 

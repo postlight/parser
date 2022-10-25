@@ -57,7 +57,7 @@ describe('PoliticoExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(date_published, '2016-10-04T09:07:00.000Z');
+      assert.equal(date_published, '2016-10-04T10:07:00.000Z');
     });
 
     it('returns the lead_image_url', async () => {
@@ -69,7 +69,7 @@ describe('PoliticoExtractor', () => {
       // the article.
       assert.equal(
         lead_image_url,
-        'http://static.politico.com/0f/e7/5ee9a89044d1a01f74140bcd5b9e/caucus-vp-preview.jpg'
+        'https://static.politico.com/0f/e7/5ee9a89044d1a01f74140bcd5b9e/caucus-vp-preview.jpg'
       );
     });
 

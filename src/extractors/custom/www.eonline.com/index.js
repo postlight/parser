@@ -2,15 +2,18 @@ export const WwwEonlineComExtractor = {
   domain: 'www.eonline.com',
 
   title: {
-    selectors: ['h1.article__title'],
+    selectors: ['h1.article-detail__title', 'h1.article__title'],
   },
 
   author: {
-    selectors: ['.entry-meta__author a'],
+    selectors: ['.article-detail__meta__author', '.entry-meta__author a'],
   },
 
   date_published: {
-    selectors: [['meta[itemprop="datePublished"]', 'value']],
+    selectors: [
+      ['meta[name="article:published_time"]', 'value'],
+      ['meta[itemprop="datePublished"]', 'value'],
+    ],
   },
 
   lead_image_url: {
@@ -19,6 +22,7 @@ export const WwwEonlineComExtractor = {
 
   content: {
     selectors: [
+      ['.article-detail__main-content section'],
       ['.post-content section, .post-content div.post-content__image'],
     ],
 

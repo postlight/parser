@@ -2205,14 +2205,14 @@ var WikiaExtractor = {
 var LittleThingsExtractor = {
   domain: 'www.littlethings.com',
   title: {
-    selectors: ['h1.post-title']
+    selectors: ['h1[class*="PostHeader"]', 'h1.post-title']
   },
   author: {
-    selectors: [['meta[name="author"]', 'value']]
+    selectors: ['div[class^="PostHeader__ScAuthorNameSection"]', ['meta[name="author"]', 'value']]
   },
   content: {
     selectors: [// enter content selectors
-    '.mainContentIntro', '.content-wrapper'],
+    'section[class*="PostMainArticle"]', '.mainContentIntro', '.content-wrapper'],
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images
     transforms: [],
@@ -2238,11 +2238,11 @@ var PoliticoExtractor = {
     ['meta[name="og:title"]', 'value']]
   },
   author: {
-    selectors: ['.story-main-content .byline .vcard']
+    selectors: ['.story-meta__authors .vcard', '.story-main-content .byline .vcard']
   },
   content: {
     selectors: [// enter content selectors
-    '.story-main-content', '.content-group', '.story-core', '.story-text'],
+    ['p.story-text__paragraph   '], '.story-main-content', '.content-group', '.story-core', '.story-text'],
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images
     transforms: [],
@@ -2252,7 +2252,7 @@ var PoliticoExtractor = {
     clean: ['figcaption']
   },
   date_published: {
-    selectors: [['.story-main-content .timestamp time[datetime]', 'datetime']]
+    selectors: ['.story-meta__details time[datetime]', ['.story-main-content .timestamp time[datetime]', 'datetime']]
   },
   lead_image_url: {
     selectors: [// enter lead_image_url selectors
@@ -2815,9 +2815,7 @@ var WwwTheguardianComExtractor = {
     selectors: ['#maincontent', '.content__article-body'],
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images
-    transforms: {
-      'h2': 'h4'
-    },
+    transforms: {},
     // Is there anything that is in the result that shouldn't be?
     // The clean selectors will remove anything that matches from
     // the result
@@ -2860,24 +2858,24 @@ var WwwBloombergComExtractor = {
     selectors: [// normal articles
     '.lede-headline', // /graphics/ template
     'h1.article-title', // /news/ template
-    'h1.lede-text-only__hed']
+    'h1[class^="headline"]', 'h1.lede-text-only__hed']
   },
   author: {
     selectors: [['meta[name="parsely-author"]', 'value'], '.byline-details__link', // /graphics/ template
     '.bydek', // /news/ template
-    '.author']
+    '.author', 'p[class*="author"]']
   },
   date_published: {
-    selectors: [['time.published-at', 'datetime'], ['time[datetime]', 'datetime'], ['meta[name="date"]', 'value'], ['meta[name="parsely-pub-date"]', 'value']]
+    selectors: [['time.published-at', 'datetime'], ['time[datetime]', 'datetime'], ['meta[name="date"]', 'value'], ['meta[name="parsely-pub-date"]', 'value'], ['meta[name="parsely-pub-date"]', 'content']]
   },
   dek: {
     selectors: []
   },
   lead_image_url: {
-    selectors: [['meta[name="og:image"]', 'value']]
+    selectors: [['meta[name="og:image"]', 'value'], ['meta[name="og:image"]', 'content']]
   },
   content: {
-    selectors: ['.article-body__content', // /graphics/ template
+    selectors: ['.article-body__content', '.body-content', // /graphics/ template
     ['section.copy-block'], // /news/ template
     '.body-copy'],
     // Is there anything in the content you selected that needs transformed
@@ -3459,21 +3457,22 @@ var WwwMentalflossComExtractor = {
 var AbcnewsGoComExtractor = {
   domain: 'abcnews.go.com',
   title: {
-    selectors: ['.article-header h1']
+    selectors: ['div[class*="Article_main__body"] h1', '.article-header h1']
   },
   author: {
-    selectors: ['.authors'],
+    selectors: ['.ShareByline span:nth-child(2)', '.authors'],
     clean: ['.author-overlay', '.by-text']
   },
   date_published: {
-    selectors: ['.timestamp'],
+    selectors: ['.ShareByline', '.timestamp'],
+    format: 'MMMM D, YYYY h:mm a',
     timezone: 'America/New_York'
   },
   lead_image_url: {
     selectors: [['meta[name="og:image"]', 'value']]
   },
   content: {
-    selectors: ['.article-copy'],
+    selectors: ['article', '.article-copy'],
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images
     transforms: {},
@@ -3735,19 +3734,19 @@ var UproxxComExtractor = {
 var WwwEonlineComExtractor = {
   domain: 'www.eonline.com',
   title: {
-    selectors: ['h1.article__title']
+    selectors: ['h1.article-detail__title', 'h1.article__title']
   },
   author: {
-    selectors: ['.entry-meta__author a']
+    selectors: ['.article-detail__meta__author', '.entry-meta__author a']
   },
   date_published: {
-    selectors: [['meta[itemprop="datePublished"]', 'value']]
+    selectors: [['meta[name="article:published_time"]', 'value'], ['meta[itemprop="datePublished"]', 'value']]
   },
   lead_image_url: {
     selectors: [['meta[name="og:image"]', 'value']]
   },
   content: {
-    selectors: [['.post-content section, .post-content div.post-content__image']],
+    selectors: [['.article-detail__main-content section'], ['.post-content section, .post-content div.post-content__image']],
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images
     transforms: {
@@ -4155,19 +4154,19 @@ var ScienceflyComExtractor = {
 var HellogigglesComExtractor = {
   domain: 'hellogiggles.com',
   title: {
-    selectors: ['.title']
+    selectors: [['meta[name="og:title"]', 'value'], '.title']
   },
   author: {
-    selectors: ['.author-link']
+    selectors: ['.byline-wrapper span.author_name', '.author-link']
   },
   date_published: {
-    selectors: [['meta[name="article:published_time"]', 'value']]
+    selectors: [['meta[property="article:published_time"]', 'content'], ['meta[name="article:published_time"]', 'value']]
   },
   lead_image_url: {
     selectors: [['meta[name="og:image"]', 'value']]
   },
   content: {
-    selectors: ['.entry-content'],
+    selectors: ['.main-content', '.entry-content'],
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images
     transforms: {},
@@ -4472,10 +4471,11 @@ var GothamistComExtractor = {
     selectors: ['h1', '.entry-header h1']
   },
   author: {
-    selectors: ['.author']
+    // There are multiple article-metadata and byline-author classes, but the main article's is the 3rd child of the l-container class
+    selectors: ['.article-metadata:nth-child(3) .byline-author', '.author']
   },
   date_published: {
-    selectors: ['abbr', 'abbr.published'],
+    selectors: [['meta[name="article:published_time"]', 'value'], 'abbr', 'abbr.published'],
     timezone: 'America/New_York'
   },
   dek: {
@@ -4485,7 +4485,7 @@ var GothamistComExtractor = {
     selectors: [['meta[name="og:image"]', 'value']]
   },
   content: {
-    selectors: ['.entry-body'],
+    selectors: ['.article-body', '.entry-body'],
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images
     transforms: {

@@ -44,9 +44,11 @@ describe('GothamistComExtractor', () => {
       // in ./src/extractors/custom/gothamist.com/index.js.
       const { author } = await result;
 
+      console.log(author.toString());
+
       // Update these values with the expected values from
       // the article.
-      assert.equal(author, 'Nathan Tempey');
+      assert.equal(author, 'Nathan\xa0Tempey');
     });
 
     it('returns the date_published', async () => {
@@ -78,7 +80,7 @@ describe('GothamistComExtractor', () => {
       // the article.
       assert.equal(
         lead_image_url,
-        'http://gothamist.com/assets_c/2017/03/030717FalloutShelter80NY-5-thumb-640xauto-989222.jpg'
+        'https://cms.prod.nypr.digital/images/42584/fill-1200x650/'
       );
     });
 
@@ -102,7 +104,7 @@ describe('GothamistComExtractor', () => {
       // the article.
       assert.equal(
         first13,
-        'The basement at 80 New York Avenue in Crown Heights is one of'
+        "You've seen the placards around town, beside the front door on apartment buildings,"
       );
     });
   });
