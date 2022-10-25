@@ -44,8 +44,6 @@ describe('GothamistComExtractor', () => {
       // in ./src/extractors/custom/gothamist.com/index.js.
       const { author } = await result;
 
-      console.log(author.toString());
-
       // Update these values with the expected values from
       // the article.
       assert.equal(author, 'Nathan\xa0Tempey');
