@@ -194,8 +194,6 @@ describe('WwwRedditComExtractor', () => {
 
       const { content } = await Mercury.parse(uri, { html });
 
-      console.log(content);
-
       const $ = cheerio.load(content || '');
 
       const link = $('a[href="http://i.imgur.com/Qcx1DSD.gifv"]');

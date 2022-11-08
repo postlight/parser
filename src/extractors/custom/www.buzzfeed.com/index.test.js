@@ -60,7 +60,7 @@ describe('BuzzfeedExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(date_published, '2016-10-03T05:00:00.000Z');
+      assert.equal(date_published, '2016-10-03T16:35:39.000Z');
     });
 
     it('returns the lead_image_url', async () => {

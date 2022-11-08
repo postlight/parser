@@ -61,7 +61,7 @@ export const BuzzfeedExtractor = {
   },
 
   date_published: {
-    selectors: ['time[datetime]'],
+    selectors: [['time[datetime]', 'datetime']],
   },
 
   lead_image_url: {

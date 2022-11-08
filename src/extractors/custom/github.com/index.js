@@ -13,7 +13,7 @@ export const GithubComExtractor = {
 
   date_published: {
     selectors: [
-      'relative-time[datetime]',
+      ['relative-time[datetime]', 'datetime'],
       ['span[itemprop="dateModified"] relative-time', 'datetime'],
     ],
   },
