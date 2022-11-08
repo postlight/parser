@@ -22,7 +22,7 @@ export const PostlightComExtractor = {
   },
 
   content: {
-    selectors: ['article.body'],
+    selectors: ['main.post'],
 
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images
@@ -31,6 +31,10 @@ export const PostlightComExtractor = {
     // Is there anything that is in the result that shouldn't be?
     // The clean selectors will remove anything that matches from
     // the result
-    clean: ['section.pl-post-link'],
+    clean: [
+      'section.pl-post-link',
+      'aside',
+      'section.insights_featured_case_studies',
+    ],
   },
 };
