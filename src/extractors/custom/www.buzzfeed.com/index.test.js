@@ -76,6 +76,16 @@ describe('BuzzfeedExtractor', () => {
       );
     });
 
+    it('returns the dek', async () => {
+      // To pass this test, fill out the dek selector
+      // in ./src/extractors/custom/www.cbssports.com/index.js.
+      const { dek } = await result;
+
+      // Update these values with the expected values from
+      // the article.
+      assert.equal(dek, 'Lovato said: "Is that how my boobs should look?"');
+    });
+
     it('returns the content', async () => {
       // To pass this test, fill out the content selector
       // in ./src/extractors/custom/www.buzzfeed.com/index.js.
@@ -122,7 +132,7 @@ describe('BuzzfeedExtractor', () => {
 
       assert.equal(
         imgSrc,
-        'https://img.buzzfeed.com/buzzfeed-static/static/2016-11/21/10/enhanced/buzzfeed-prod-fastlane03/longform-original-25748-1479741827-5.jpg'
+        'https://img.buzzfeed.com/buzzfeed-static/static/2016-11/21/10/enhanced/buzzfeed-prod-fastlane03/longform-original-25748-1479741827-5.jpg?output-format=jpg&output-quality=auto'
       );
     });
 
@@ -142,9 +152,12 @@ describe('BuzzfeedExtractor', () => {
       // the article.
       assert.equal(
         imgSrc,
-        'https://img.buzzfeed.com/buzzfeed-static/static/2016-11/21/10/enhanced/buzzfeed-prod-fastlane03/longform-original-25748-1479741827-5.jpg'
+        'https://img.buzzfeed.com/buzzfeed-static/static/2016-11/21/10/enhanced/buzzfeed-prod-fastlane03/longform-original-25748-1479741827-5.jpg?output-format=jpg&output-quality=auto'
       );
-      assert.equal(figcaption, 'Adam Maida for BuzzFeed News');
+      assert.equal(
+        figcaption,
+        '\n                Adam Maida for BuzzFeed News\n              '
+      );
     });
   });
 });

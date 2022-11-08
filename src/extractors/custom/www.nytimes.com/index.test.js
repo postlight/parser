@@ -74,7 +74,7 @@ describe('NYTimesExtractor', () => {
       // the article.
       assert.equal(
         lead_image_url,
-        'https://static01.nyt.com/images/2016/09/20/nyregion/Manhunt/Manhunt-facebookJumbo-v2.jpg'
+        'https://static01.nyt.com/images/2016/09/20/nyregion/Manhunt/Manhunt-facebookJumbo-v2.jpg?year=2016&h=549&w=1050&s=a40dd9bd69012d95e8a76943424679f17908af4c8f7ad3a6585e0d50632fff4b&k=ZQJBKqZ0VN'
       );
     });
 

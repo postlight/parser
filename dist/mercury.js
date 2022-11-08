@@ -1919,7 +1919,7 @@ var TwitterExtractor = {
 var NYTimesExtractor = {
   domain: 'www.nytimes.com',
   title: {
-    selectors: ['h1.g-headline', 'h1[itemprop="headline"]', 'h1.headline', 'h1 .balancedHeadline']
+    selectors: ['h1[data-testid="headline"]', 'h1.g-headline', 'h1[itemprop="headline"]', 'h1.headline', 'h1 .balancedHeadline']
   },
   author: {
     selectors: [['meta[name="author"]', 'value'], '.g-byline', '.byline', ['meta[name="byl"]', 'value']]
@@ -1937,7 +1937,7 @@ var NYTimesExtractor = {
     clean: ['.ad', 'header#story-header', '.story-body-1 .lede.video', '.visually-hidden', '#newsletter-promo', '.promo', '.comments-button', '.hidden', '.comments', '.supplemental', '.nocontent', '.story-footer-links']
   },
   date_published: {
-    selectors: [['meta[name="article:published"]', 'value']]
+    selectors: [['meta[name="article:published_time"]', 'value'], ['meta[name="article:published"]', 'value']]
   },
   lead_image_url: {
     selectors: [['meta[name="og:image"]', 'value']]
@@ -1974,7 +1974,7 @@ var TheAtlanticExtractor = {
     selectors: [['time[itemprop="datePublished"]', 'datetime']]
   },
   lead_image_url: {
-    selectors: [['img[itemprop="url"]', 'src']]
+    selectors: [['meta[name="og:image"]', 'value']]
   },
   next_page_url: null,
   excerpt: null
@@ -1986,30 +1986,33 @@ var TheAtlanticExtractor = {
 var NewYorkerExtractor = {
   domain: 'www.newyorker.com',
   title: {
-    selectors: ['h1[class^="content-header"]', 'h1[class^="ArticleHeader__hed"]', ['meta[name="og:title"]', 'value']]
+    selectors: ['h1[class^="content-header"]', 'h1[class^="ArticleHeader__hed"]', 'h1[class*="ContentHeaderHed"]', ['meta[name="og:title"]', 'value']]
   },
   author: {
-    selectors: [['meta[name="author"]', 'value'], 'div[class^="ArticleContributors"] a[rel="author"]', 'article header div[class*="Byline__multipleContributors"]']
+    selectors: ['article header div[class^="BylinesWrapper"]', ['meta[name="article:author"]', 'value'], 'div[class^="ArticleContributors"] a[rel="author"]', 'article header div[class*="Byline__multipleContributors"]']
   },
   content: {
-    selectors: ['article.article.main-content', 'main[class^="Layout__content"]'],
+    selectors: ['.article__body', 'article.article.main-content', 'main[class^="Layout__content"]'],
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images
-    transforms: [],
+    transforms: {
+      '.caption__text': 'figcaption',
+      '.caption__credit': 'figcaption'
+    },
     // Is there anything that is in the result that shouldn't be?
     // The clean selectors will remove anything that matches from
     // the result
-    clean: ['footer[class^="ArticleFooter__footer"]']
+    clean: ['footer[class^="ArticleFooter__footer"]', 'aside']
   },
   date_published: {
-    selectors: ['time.content-header__publish-date', ['meta[name="pubdate"]', 'value']],
+    selectors: [['meta[name="article:published_time"]', 'value'], 'time.content-header__publish-date', ['meta[name="pubdate"]', 'value']],
     timezone: 'America/New_York'
   },
   lead_image_url: {
     selectors: [['meta[name="og:image"]', 'value']]
   },
   dek: {
-    selectors: ['div.content-header__dek', 'h2[class^="ArticleHeader__dek"]']
+    selectors: ['div[class^="ContentHeaderDek"]', 'div.content-header__dek', 'h2[class^="ArticleHeader__dek"]']
   },
   next_page_url: null,
   excerpt: null
@@ -2124,6 +2127,7 @@ var YahooExtractor = {
 // (e.g., NYTimesExtractor)
 var BuzzfeedExtractor = {
   domain: 'www.buzzfeed.com',
+  supportedDomains: ['www.buzzfeednews.com'],
   title: {
     selectors: ['h1.embed-headline-title']
   },
@@ -2131,9 +2135,8 @@ var BuzzfeedExtractor = {
     selectors: ['a[data-action="user/username"]', 'byline__author', ['meta[name="author"]', 'value']]
   },
   content: {
-    selectors: ['.subbuzz'],
+    selectors: [['div[class^="featureimage_featureImageWrapper"]', '.js-subbuzz-wrapper'], ['.js-subbuzz-wrapper']],
     defaultCleaner: false,
-    allowMultiple: true,
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images
     transforms: {
@@ -2150,7 +2153,7 @@ var BuzzfeedExtractor = {
     // Is there anything that is in the result that shouldn't be?
     // The clean selectors will remove anything that matches from
     // the result
-    clean: ['.instapaper_ignore', '.suplist_list_hide .buzz_superlist_item .buzz_superlist_number_inline', '.share-box', '.print']
+    clean: ['.instapaper_ignore', '.suplist_list_hide .buzz_superlist_item .buzz_superlist_number_inline', '.share-box', '.print', '.js-inline-share-bar', '.js-ad-placement']
   },
   date_published: {
     selectors: ['time[datetime]']
@@ -2159,7 +2162,7 @@ var BuzzfeedExtractor = {
     selectors: [['meta[name="og:image"]', 'value']]
   },
   dek: {
-    selectors: []
+    selectors: ['.embed-headline-description']
   },
   next_page_url: null,
   excerpt: null
@@ -2778,13 +2781,18 @@ var WwwYoutubeComExtractor = {
   },
   content: {
     defaultCleaner: false,
-    selectors: [['#player-api', '#description']],
+    selectors: ['#player-container-outer', 'ytd-expandable-video-description-body-renderer #description', ['#player-api', '#description']],
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images
     transforms: {
       '#player-api': function playerApi($node, $) {
         var videoId = $('meta[itemProp="videoId"]').attr('value');
         $node.html("\n          <iframe src=\"https://www.youtube.com/embed/".concat(videoId, "\" frameborder=\"0\" allowfullscreen></iframe>"));
+      },
+      '#player-container-outer': function playerContainerOuter($node, $) {
+        var videoId = $('meta[itemProp="videoId"]').attr('value');
+        var description = $('meta[itemProp="description"]').attr('value');
+        $node.html("\n        <iframe src=\"https://www.youtube.com/embed/".concat(videoId, "\" frameborder=\"0\" allowfullscreen></iframe>\n        <div><span>").concat(description, "</span></div>"));
       }
     },
     // Is there anything that is in the result that shouldn't be?
@@ -4783,17 +4791,21 @@ var WwwRedditComExtractor = {
     selectors: ['div[data-test-id="post-content"] a[href*="user/"]']
   },
   date_published: {
-    selectors: ['div[data-test-id="post-content"] a[data-click-id="timestamp"]']
+    selectors: ['div[data-test-id="post-content"] span[data-click-id="timestamp"]', 'div[data-test-id="post-content"] a[data-click-id="timestamp"]']
   },
   lead_image_url: {
     selectors: [['meta[name="og:image"]', 'value']]
   },
   content: {
-    selectors: [['div[data-test-id="post-content"] p'], // text post
-    ['div[data-test-id="post-content"] a[target="_blank"]:not([data-click-id="timestamp"])', // external link
-    'div[data-test-id="post-content"] div[data-click-id="media"]'], // external link with media preview (YouTube, imgur album, etc...)
-    ['div[data-test-id="post-content"] div[data-click-id="media"]'], // Embedded media (Reddit video)
-    ['div[data-test-id="post-content"] a[target="_blank"]:not([data-click-id="timestamp"])'], // external link
+    selectors: [// ['div[data-test-id="post-content"] p'], // text post
+    // [
+    //   'div[data-test-id="post-content"] a[target="_blank"]:not([data-click-id="timestamp"])', // external link
+    //   'div[data-test-id="post-content"] div[data-click-id="media"]', // embedded media
+    // ], // external link with media preview (YouTube, imgur album, etc...)
+    // ['div[data-test-id="post-content"] div[data-click-id="media"]'], // Embedded media (Reddit video)
+    // [
+    //   'div[data-test-id="post-content"] a[target="_blank"]:not([data-click-id="timestamp"])',
+    // ], // external link
     'div[data-test-id="post-content"]'],
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images
@@ -4814,7 +4826,7 @@ var WwwRedditComExtractor = {
     // Is there anything that is in the result that shouldn't be?
     // The clean selectors will remove anything that matches from
     // the result
-    clean: ['.icon']
+    clean: ['.icon', 'span[id^="PostAwardBadges"]', 'div a[data-test-id="comments-page-link-num-comments"]']
   }
 };
 

@@ -59,7 +59,7 @@ describe('NewYorkerExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(date_published.split('T')[0], '2016-09-26');
+      assert.equal(date_published, '2016-09-26T14:04:22.000Z');
     });
 
     it('returns the lead_image_url', async () => {
@@ -95,7 +95,7 @@ describe('NewYorkerExtractor', () => {
       // the article.
       assert.equal(
         first13,
-        'Given the recent ubiquity of cyber-scandals—Colin Powell’s stolen e-mails, Simone Biles’s leaked medical'
+        'In a laboratory in Shanghai, researchers work on developing a quantum computer—a new'
       );
     });
   });
@@ -124,7 +124,7 @@ describe('NewYorkerExtractor', () => {
     it('returns the date for magazine content', async () => {
       const { date_published } = await result;
 
-      assert.equal(date_published.split('T')[0], '2016-11-28');
+      assert.equal(date_published, '2016-11-28T00:00:00.000Z');
     });
   });
 
@@ -143,10 +143,7 @@ describe('NewYorkerExtractor', () => {
     it('returns multiple authors', async () => {
       const { author } = await result;
 
-      assert.equal(
-        author,
-        'Ysabel YatesIllustration by Claire LordonMay 10, 2019'
-      );
+      assert.equal(author, 'Ysabel Yates Illustration by Claire Lordon');
     });
   });
 });

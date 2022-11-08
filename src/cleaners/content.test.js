@@ -9,7 +9,7 @@ const fs = require('fs');
 describe('extractCleanNode(article, { $, cleanConditionally, title } })', () => {
   it('cleans cruft out of a DOM node', () => {
     const html = fs.readFileSync(
-      './fixtures/www.wired.com--other.html',
+      './fixtures/www.wired.com--content-test.html',
       'utf-8'
     );
     const $ = cheerio.load(html);

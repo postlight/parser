@@ -3,6 +3,9 @@
 // (e.g., NYTimesExtractor)
 export const BuzzfeedExtractor = {
   domain: 'www.buzzfeed.com',
+
+  supportedDomains: ['www.buzzfeednews.com'],
+
   title: {
     selectors: [
       'h1.embed-headline-title',
@@ -20,11 +23,12 @@ export const BuzzfeedExtractor = {
   },
 
   content: {
-    selectors: ['.subbuzz'],
+    selectors: [
+      ['div[class^="featureimage_featureImageWrapper"]', '.js-subbuzz-wrapper'],
+      ['.js-subbuzz-wrapper'],
+    ],
 
     defaultCleaner: false,
-
-    allowMultiple: true,
 
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images
@@ -51,6 +55,8 @@ export const BuzzfeedExtractor = {
       '.suplist_list_hide .buzz_superlist_item .buzz_superlist_number_inline',
       '.share-box',
       '.print',
+      '.js-inline-share-bar',
+      '.js-ad-placement',
     ],
   },
 
@@ -63,7 +69,7 @@ export const BuzzfeedExtractor = {
   },
 
   dek: {
-    selectors: [],
+    selectors: ['.embed-headline-description'],
   },
 
   next_page_url: null,

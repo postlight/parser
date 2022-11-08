@@ -59,7 +59,7 @@ describe('WwwRedditComExtractor', () => {
         .format()
         .split('T')[0];
       const expectedDate = moment()
-        .subtract(18, 'hours')
+        .subtract(4, 'years')
         .format()
         .split('T')[0];
 
@@ -118,7 +118,16 @@ describe('WwwRedditComExtractor', () => {
 
       const { content } = await Mercury.parse(uri, { html });
 
-      assert.equal(content, '<div></div>');
+      const $ = cheerio.load(content || '');
+
+      const first13 = excerptContent(
+        $('*')
+          .first()
+          .text(),
+        13
+      );
+
+      assert.equal(first13, '');
     });
 
     it('handles image posts', async () => {
@@ -146,9 +155,7 @@ describe('WwwRedditComExtractor', () => {
 
       const $ = cheerio.load(content || '');
 
-      const video = $(
-        'video > source[src="https://v.redd.it/kwhzxoz5rok21/HLSPlaylist.m3u8"]'
-      );
+      const video = $('video');
 
       assert.equal(video.length, 1);
     });
@@ -157,6 +164,7 @@ describe('WwwRedditComExtractor', () => {
       const html = fs.readFileSync(
         './fixtures/www.reddit.com--external-link.html'
       );
+
       const uri =
         'https://www.reddit.com/r/todayilearned/comments/aycizd/til_that_when_jrr_tolkiens_son_michael_signed_up/';
 
@@ -169,7 +177,7 @@ describe('WwwRedditComExtractor', () => {
       );
 
       const image = $(
-        'img[src="https://b.thumbs.redditmedia.com/gWPmq95XmEzQns6B-H6_l4kBNFeuhScpVDYPjvPsdDs.jpg"]'
+        'img[src="https://b.thumbs.redditmedia.com/mZhJhz9fAxHzdGRcA-tbCa06IieIIuI0YWfdSYQa3Uk.jpg"]'
       );
 
       assert.equal(link.length, 2);
@@ -186,17 +194,17 @@ describe('WwwRedditComExtractor', () => {
 
       const { content } = await Mercury.parse(uri, { html });
 
+      console.log(content);
+
       const $ = cheerio.load(content || '');
 
       const link = $('a[href="http://i.imgur.com/Qcx1DSD.gifv"]');
 
-      const image = $(
-        'img[src="https://external-preview.redd.it/sKJFPLamiRPOW5u7NTch3ykbFYMwqI5Qr0zlCINMTfU.gif?format=png8&s=56ecd472f8b8b2ee741b3b1cb76cb3a5110a85f9"]'
-      );
+      const video = $('video');
 
       assert.equal(link.length, 1);
 
-      assert.equal(image.length, 1);
+      assert.equal(video.length, 1);
     });
 
     it('handles external link posts with embedded media', async () => {
@@ -211,7 +219,7 @@ describe('WwwRedditComExtractor', () => {
       const link = $('a[href="https://youtu.be/dQw4w9WgXcQ"]');
 
       const embed = $(
-        'iframe[src="https://www.redditmedia.com/mediaembed/5gafop?responsive=true"]'
+        'iframe[src^="https://www.redditmedia.com/mediaembed/5gafop"]'
       );
 
       assert.equal(link.length, 1);

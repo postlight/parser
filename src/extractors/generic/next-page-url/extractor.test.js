@@ -10,9 +10,9 @@ describe('GenericNextPageUrlExtractor', () => {
     const html = fs.readFileSync('./fixtures/arstechnica.com.html', 'utf8');
     const $ = cheerio.load(html);
     const url =
-      'http://arstechnica.com/gadgets/2016/08/the-connected-renter-how-to-make-your-apartment-smarter/';
+      'https://arstechnica.com/gadgets/2016/08/the-connected-renter-how-to-make-your-apartment-smarter/';
     const next =
-      'http://arstechnica.com/gadgets/2016/08/the-connected-renter-how-to-make-your-apartment-smarter/2';
+      'https://arstechnica.com/gadgets/2016/08/the-connected-renter-how-to-make-your-apartment-smarter/2';
 
     const nextPage = GenericNextPageUrlExtractor.extract({
       $,

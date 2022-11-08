@@ -54,7 +54,7 @@ describe('AtlanticExtractor', () => {
       );
       assert.equal(
         lead_image_url,
-        'https://cdn.theatlantic.com/assets/media/img/mt/2016/09/RTSO9RP/lead_720_405.jpg?mod=1533691849'
+        'https://cdn.theatlantic.com/thumbor/wSPiU9kRoAfi5S26nCy3rw5-P78=/0x102:4246x2313/1200x625/media/img/mt/2016/09/RTSO9RP/original.jpg'
       );
     });
   });
