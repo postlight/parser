@@ -104,7 +104,7 @@ describe('PostlightComExtractor', () => {
       // the article.
       assert.equal(
         first13,
-        'One of the best pieces of advice I’ve ever received is: “Be the'
+        'Image: Brian Weaver One of the best pieces of advice I’ve ever received'
       );
     });
   });
