@@ -1540,6 +1540,19 @@ var TAGS_TO_REMOVE = ['script', 'style', 'form'].join(',');
 // the src attribute so the images are no longer lazy loaded.
 
 function convertLazyLoadedImages($) {
+  var extractSrcFromJSON = function extractSrcFromJSON(str) {
+    try {
+      var _JSON$parse = JSON.parse(str),
+          src = _JSON$parse.src;
+
+      if (typeof src === 'string') return src;
+    } catch (e) {
+      return false;
+    }
+
+    return false;
+  };
+
   $('img').each(function (_, img) {
     var attrs = getAttrs(img);
 
@@ -1549,7 +1562,14 @@ function convertLazyLoadedImages($) {
       if (attr !== 'srcset' && IS_LINK.test(value) && IS_SRCSET.test(value)) {
         $(img).attr('srcset', value);
       } else if (attr !== 'src' && attr !== 'srcset' && IS_LINK.test(value) && IS_IMAGE.test(value)) {
-        $(img).attr('src', value);
+        // Is the value a JSON object? If so, we should attempt to extract the image src from the data.
+        var existingSrc = extractSrcFromJSON(value);
+
+        if (existingSrc) {
+          $(img).attr('src', existingSrc);
+        } else {
+          $(img).attr('src', value);
+        }
       }
     });
   });
@@ -2388,6 +2408,14 @@ var MediumExtractor = {
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images
     transforms: {
+      // Allow drop cap character.
+      'section span:first-of-type': function sectionSpanFirstOfType($node) {
+        var $text = $node.html();
+
+        if ($text.length === 1 && /^[a-zA-Z()]+$/.test($text)) {
+          $node.replaceWith($text);
+        }
+      },
       // Re-write lazy-loaded youtube videos
       iframe: function iframe($node) {
         var ytRe = /https:\/\/i.embed.ly\/.+url=https:\/\/i\.ytimg\.com\/vi\/(\w+)\//;
@@ -2429,7 +2457,7 @@ var MediumExtractor = {
     // Is there anything that is in the result that shouldn't be?
     // The clean selectors will remove anything that matches from
     // the result
-    clean: ['span', 'svg']
+    clean: ['span a', 'svg']
   },
   date_published: {
     selectors: [['meta[name="article:published_time"]', 'value']]
@@ -6411,8 +6439,12 @@ function cleanDatePublished(dateString) {
       format = _ref.format;
 
   // If string is in milliseconds or seconds, convert to int and return
-  if (MS_DATE_STRING.test(dateString) || SEC_DATE_STRING.test(dateString)) {
+  if (MS_DATE_STRING.test(dateString)) {
     return new Date(_parseInt(dateString, 10)).toISOString();
+  }
+
+  if (SEC_DATE_STRING.test(dateString)) {
+    return new Date(_parseInt(dateString, 10) * 1000).toISOString();
   }
 
   var date = createDate(dateString, timezone, format);
@@ -7546,13 +7578,26 @@ var GenericExcerptExtractor = {
   }
 };
 
+var getWordCount = function getWordCount(content) {
+  var $ = cheerio.load(content);
+  var $content = $('div').first();
+  var text = normalizeSpaces($content.text());
+  return text.split(/\s/).length;
+};
+
+var getWordCountAlt = function getWordCountAlt(content) {
+  content = content.replace(/<[^>]*>/g, ' ');
+  content = content.replace(/\s+/g, ' ');
+  content = content.trim();
+  return content.split(' ').length;
+};
+
 var GenericWordCountExtractor = {
   extract: function extract(_ref) {
     var content = _ref.content;
-    var $ = cheerio.load(content);
-    var $content = $('div').first();
-    var text = normalizeSpaces($content.text());
-    return text.split(/\s/).length;
+    var count = getWordCount(content);
+    if (count === 1) count = getWordCountAlt(content);
+    return count;
   }
 };
 
@@ -7715,7 +7760,8 @@ function select(opts) {
       _extractionOpts$defau = extractionOpts.defaultCleaner,
       defaultCleaner = _extractionOpts$defau === void 0 ? true : _extractionOpts$defau,
       allowMultiple = extractionOpts.allowMultiple;
-  var matchingSelector = findMatchingSelector($, selectors, extractHtml, allowMultiple);
+  var overrideAllowMultiple = type === 'lead_image_url' || allowMultiple;
+  var matchingSelector = findMatchingSelector($, selectors, extractHtml, overrideAllowMultiple);
   if (!matchingSelector) return null;
 
   function transformAndClean($node) {
@@ -7988,7 +8034,7 @@ function _collectAllPages() {
             });
             return _context.abrupt("return", _objectSpread({}, result, {
               total_pages: pages,
-              pages_rendered: pages,
+              rendered_pages: pages,
               word_count: word_count
             }));
 
