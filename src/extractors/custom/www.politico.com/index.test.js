@@ -109,7 +109,7 @@ describe('PoliticoExtractor', () => {
       url =
         'https://www.politico.com/news/2022/10/17/student-debt-relief-applications-00062145';
       const html = fs.readFileSync(
-        './fixtures/www.politico.com/1666117046017.html'
+        './fixtures/www.politico.com--test-case-2.html'
       );
       result = Mercury.parse(url, { html, fallback: false });
     });
@@ -215,7 +215,7 @@ describe('PoliticoExtractor', () => {
       url =
         'https://www.politico.com/newsletters/morning-money/2022/10/11/grim-global-outlook-for-imf-world-bank-meetings-00061134';
       const html = fs.readFileSync(
-        './fixtures/www.politico.com/1666711551296.html'
+        './fixtures/www.politico.com--test-case-3.html'
       );
       result = Mercury.parse(url, { html, fallback: false });
     });
