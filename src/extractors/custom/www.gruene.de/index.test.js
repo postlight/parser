@@ -14,9 +14,7 @@ describe('WwwGrueneDeExtractor', () => {
     let url;
     beforeAll(() => {
       url = 'https://www.gruene.de/themen/arbeit';
-      const html = fs.readFileSync(
-        './fixtures/www.gruene.de/1566929456502.html'
-      );
+      const html = fs.readFileSync('./fixtures/www.gruene.de.html');
       result = Mercury.parse(url, { html, fallback: false });
     });
 

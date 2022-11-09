@@ -15,9 +15,7 @@ describe('WwwEngadgetComExtractor', () => {
     beforeAll(() => {
       url =
         'https://www.engadget.com/lyft-extends-free-scooter-rides-for-critical-workers-184144961.html';
-      const html = fs.readFileSync(
-        './fixtures/www.engadget.com/1587759947079.html'
-      );
+      const html = fs.readFileSync('./fixtures/www.engadget.com.html');
       result = Mercury.parse(url, { html, fallback: false });
     });
 
