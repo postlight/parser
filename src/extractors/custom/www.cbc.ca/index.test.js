@@ -8,15 +8,13 @@ import { excerptContent } from 'utils/text';
 
 const fs = require('fs');
 
-describe('PostlightComExtractor', () => {
+describe('WwwCbcCaExtractor', () => {
   describe('initial test case', () => {
     let result;
     let url;
     beforeAll(() => {
-      url = 'https://postlight.com/insights/three-ways-to-be-the-thermostat';
-      const html = fs.readFileSync(
-        './fixtures/postlight.com/1664999338243.html'
-      );
+      url = 'https://www.cbc.ca/news/business/crea-september-numbers-1.6616369';
+      const html = fs.readFileSync('./fixtures/www.cbc.ca/1665765912229.html');
       result = Mercury.parse(url, { html, fallback: false });
     });
 
@@ -30,63 +28,66 @@ describe('PostlightComExtractor', () => {
 
     it('returns the title', async () => {
       // To pass this test, fill out the title selector
-      // in ./src/extractors/custom/postlight.com/index.js.
+      // in ./src/extractors/custom/www.cbc.ca/index.js.
       const { title } = await result;
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(title, `Three Ways to Be the Thermostat`);
+      assert.equal(
+        title,
+        `Housing market slowdown continues with sales and average prices well down from last year`
+      );
     });
 
     it('returns the author', async () => {
       // To pass this test, fill out the author selector
-      // in ./src/extractors/custom/postlight.com/index.js.
+      // in ./src/extractors/custom/www.cbc.ca/index.js.
       const { author } = await result;
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(author, 'Gina Trapani');
+      assert.equal(author, `Pete Evans`);
     });
 
     it('returns the date_published', async () => {
       // To pass this test, fill out the date_published selector
-      // in ./src/extractors/custom/postlight.com/index.js.
+      // in ./src/extractors/custom/www.cbc.ca/index.js.
       const { date_published } = await result;
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(date_published, `2022-10-05T16:00:00.000Z`);
+      assert.equal(date_published, '2022-10-14T16:20:52.800Z');
     });
 
     it('returns the dek', async () => {
       // To pass this test, fill out the dek selector
-      // in ./src/extractors/custom/postlight.com/index.js.
+      // in ./src/extractors/custom/www.cbc.ca/index.js.
       const { dek } = await result;
 
       // Update these values with the expected values from
       // the article.
       assert.equal(
         dek,
-        'Great leaders set the temperature, especially when stress is high.'
+        'Average price of a home that sold in September was $640,479'
       );
     });
 
     it('returns the lead_image_url', async () => {
       // To pass this test, fill out the lead_image_url selector
-      // in ./src/extractors/custom/postlight.com/index.js.
+      // in ./src/extractors/custom/www.cbc.ca/index.js.
       const { lead_image_url } = await result;
 
       // Update these values with the expected values from
       // the article.
       assert.equal(
         lead_image_url,
-        `https://postlight.com/wp-content/uploads/2022/09/Be-The-Thermostat-1200-1.png?fit=1200%2C675`
+        `https://i.cbc.ca/1.6616381.1665753066!/fileImage/httpImage/image.JPG_gen/derivatives/16x9_620/real-estate-sign.JPG`
       );
     });
 
     it('returns the content', async () => {
       // To pass this test, fill out the content selector
-      // in ./src/extractors/custom/postlight.com/index.js.
+      // in ./src/extractors/custom/www.cbc.ca/index.js.
       // You may also want to make use of the clean and transform
       // options.
       const { content } = await result;
@@ -104,7 +105,7 @@ describe('PostlightComExtractor', () => {
       // the article.
       assert.equal(
         first13,
-        'Image: Brian Weaver One of the best pieces of advice I’ve ever received'
+        'New numbers from the Canadian Real Estate Association confirm what buyers, sellers and'
       );
     });
   });
