@@ -1,81 +1,184 @@
 /* eslint-disable */
 
-const fsPromises = require('fs/promises');
+const { execFile, execFileSync } = require('child_process');
+const fs = require('fs');
 const path = require('path');
 const URL = require('url');
+const octokit = require('@octokit/rest')();
+
 const Parser = require('../dist/mercury');
 
-const FIXTURES_PATH = path.join(__dirname, '..', 'fixtures');
+// get all fixtures
+execFile('find', ['fixtures', '-type', 'f'], (err, stdout) => {
+  const fixtures = stdout.split('\n');
 
-const perform = async () => {
-  const fixtures = (await fsPromises.readdir(FIXTURES_PATH)).filter(f =>
-    f.match(/\.html$/)
-  );
-
+  const now = new Date();
   const twoWeeks = 2 * 7 * 24 * 60 * 60 * 1000;
-  const TWO_WEEKS_AGO = new Date(); // - twoWeeks;
 
-  console.log('Finding fixtures to update…');
-  const fixturesToUpdate = (await Promise.all(
-    fixtures.map(async filename => {
-      const stats = await fsPromises.stat(path.join(FIXTURES_PATH, filename));
-      return [filename, stats.mtime];
+  // iterate through fixtures for fixtures older than 2 weeks
+  console.log('Finding fixtures to update...');
+  const fixturesToUpdate = fixtures
+    .filter(fixture => {
+      const timestamp = path
+        .basename(fixture)
+        .split(/\.html$/)[0]
+        .trim();
+      try {
+        const date = new Date(parseInt(timestamp, 10));
+        return now - date > twoWeeks;
+      } catch (e) {
+        // if fixture isn't a timestamp, ignore it
+        return false;
+      }
     })
-  ))
-    .filter(([_filename, timestamp]) => timestamp <= TWO_WEEKS_AGO)
-    .map(([filename, _timestamp]) => filename);
+    .slice(0, 1);
   console.log(`${fixturesToUpdate.length} fixtures are out of date`);
 
-  const changeBase = [];
-  const otherMess = [];
+  // iterate through fixtures and extract their URLs.
+  console.log('Extracting urls...');
+  const baseDomains = fixturesToUpdate.map(fixture => fixture.split('/')[1]);
+  Promise.all(
+    fixturesToUpdate.map((fixture, i) => {
+      const html = fs.readFileSync(fixture);
+      return Parser.parse(`http://${baseDomains[i]}`, { html });
+    })
+  ).then(parsedFixture => {
+    const fixturesAndUrls = fixturesToUpdate.reduce(
+      (acc, fixture, i) =>
+        acc.concat({
+          fixture,
+          url: parsedFixture[i].url,
+          baseDomain: baseDomains[i],
+        }),
+      []
+    );
 
-  console.log('Updating all fixtures');
-  for (const filename of fixturesToUpdate) {
-    const fixturePath = path.join(FIXTURES_PATH, filename);
-    const baseDomain = filename.replace(/(?:--[a-z-]+)?\.html$/, '');
-    const oldHtml = await fsPromises.readFile(fixturePath);
-    const { url } = await Parser.parse(`http://${baseDomain}`, {
-      html: oldHtml,
-    });
-
-    console.log(`Updating fixture for ${baseDomain} (${url})`);
-    try {
-      const { url: updatedUrl } = await Parser.parse(url);
-
-      if (!updatedUrl) {
-        otherMess.push({ updatedUrl, url, filename, baseDomain });
-        continue;
-      }
-
-      const { hostname } = URL.parse(updatedUrl);
-
-      if (hostname !== baseDomain) {
-        console.log(
-          `Base URL has changed from ${baseDomain} to ${hostname}, passing`
-        );
-
-        changeBase.push({
-          filename,
-          url,
-          baseDomain,
-          newBaseDomain: hostname,
-          updatedUrl,
+    console.log('Updating all fixtures');
+    const fns = fixturesAndUrls
+      .map(fixtureAndUrl => {
+        return () => {
+          // console.log('Updating fixture for', fixtureAndUrl);
+          return updateFixture(fixtureAndUrl);
+        };
+      })
+      .concat(() => {
+        return new Promise(res => {
+          console.log('changed bases', changeBase);
+          console.log(`otherMess`, otherMess);
+          res();
         });
+      });
+    promiseSerial(fns);
+  });
+});
 
-        continue;
-      }
+const changeBase = [];
+const otherMess = [];
+const updateFixture = ({ fixture, url, baseDomain }) => {
+  return new Promise(res => {
+    Parser.parse(url)
+      .then(({ url: updatedUrl }) => {
+        if (!updatedUrl) {
+          otherMess.push({ updatedUrl, url, fixture, baseDomain });
+          return res();
+        }
+        console.log(`updatedUrl`, updatedUrl);
+        const { hostname } = URL.parse(updatedUrl);
+        if (hostname !== baseDomain) {
+          console.log('Base URL has changed!!! Do something different');
+          console.log(`url`, url);
+          console.log(`updatedUrl`, updatedUrl);
+          console.log(`hostname`, hostname);
+          changeBase.push({
+            fixture,
+            url,
+            baseDomain,
+            newBaseDomain: hostname,
+            updatedUrl,
+          });
+          return res();
+        }
+        execFile('yarn', ['generate-parser', url], (err, stdout) => {
+          // console.log(`stdout`, stdout);
+          const dirRe = new RegExp(`(${path.dirname(fixture)}\/\\d+\.html)`);
+          const newFixture = stdout.match(dirRe)[0];
 
-      const $ = await Parser.fetchResource(updatedUrl);
-      const newHtml = $.html();
+          console.log(`newFixture`, newFixture);
+          // replace old fixture with new fixture in tests
+          execFile(
+            './scripts/find-and-replace.sh',
+            [fixture, newFixture, 'src/extractors/custom/**/*.test.js'],
+            (err, stdout) => {
+              // remove old fixture
+              fs.unlinkSync(fixture);
+              const { branchName, commitMessage } = doTestsPass(baseDomain)
+                ? {
+                    branchName: `chore-update-${baseDomain}-fixture`,
+                    commitMessage: `chore: update ${baseDomain} fixture`,
+                  }
+                : {
+                    branchName: `fix-update-${baseDomain}-extractor`,
+                    commitMessage: `fix: update ${baseDomain} extractor`,
+                  };
 
-      await fsPromises.writeFile(fixturePath, newHtml);
-    } catch (e) {
-      console.log('Fixture update failed to parse', e);
-    }
-  }
-
-  console.log('changed bases', changeBase);
-  console.log('other mess', otherMess);
+              createAndPushBranch({ branchName, commitMessage });
+              createPR({ branchName, title: commitMessage });
+            }
+          );
+        });
+      })
+      .catch(e => {
+        otherMess.push({ fixture, url, baseDomain, e });
+      });
+  });
 };
 
-perform();
+const doTestsPass = site => {
+  try {
+    execFileSync('yarn', ['test:node', site]);
+    return true;
+  } catch (e) {
+    return false;
+  }
+};
+
+const promiseSerial = funcs =>
+  funcs.reduce(
+    (promise, func) =>
+      promise.then(result => func().then(Array.prototype.concat.bind(result))),
+    Promise.resolve([])
+  );
+
+const createAndPushBranch = ({ branchName, commitMessage }) => {
+  execFileSync('git', [
+    'config',
+    'user.email',
+    'adam.pash+postlight-bot@postlight.com',
+  ]);
+  execFileSync('git', ['config', 'user.name', 'Postlight Bot']);
+  execFileSync('git', ['checkout', '-b', branchName]);
+  execFileSync('git', ['add', '.']);
+  execFileSync('git', ['commit', '-m', commitMessage]);
+  execFileSync('git', [
+    'push',
+    '-q',
+    `https://${process.env.GH_AUTH_TOKEN}@github.com/postlight/parser.git`,
+  ]);
+};
+
+const createPR = ({ branchName, title, body = '' }) => {
+  octokit.authenticate({
+    type: 'token',
+    token: process.env.GH_AUTH_TOKEN,
+  });
+
+  octokit.pulls.create({
+    owner: 'postlight',
+    repo: 'parser',
+    title,
+    head: branchName,
+    base: 'master',
+    body,
+    maintainer_can_modify: true,
+  });
+};
