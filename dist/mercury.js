@@ -2227,41 +2227,29 @@ var LittleThingsExtractor = {
   excerpt: null
 };
 
-// Rename CustomExtractor
-// to fit your publication
-// (e.g., NYTimesExtractor)
 var PoliticoExtractor = {
   domain: 'www.politico.com',
   title: {
-    selectors: [// enter title selectors
-    ['meta[name="og:title"]', 'value']]
+    selectors: [['meta[name="og:title"]', 'value']]
   },
   author: {
-    selectors: ['.story-main-content .byline .vcard']
+    selectors: [['div[itemprop="author"] meta[itemprop="name"]', 'value'], '.story-meta__authors .vcard', '.story-main-content .byline .vcard']
   },
   content: {
-    selectors: [// enter content selectors
-    '.story-main-content', '.content-group', '.story-core', '.story-text'],
-    // Is there anything in the content you selected that needs transformed
-    // before it's consumable content? E.g., unusual lazy loaded images
+    selectors: [['.story-text'], '.story-main-content', '.story-core'],
     transforms: [],
-    // Is there anything that is in the result that shouldn't be?
-    // The clean selectors will remove anything that matches from
-    // the result
-    clean: ['figcaption']
+    clean: ['figcaption', '.story-meta', '.ad']
   },
   date_published: {
-    selectors: [['.story-main-content .timestamp time[datetime]', 'datetime']]
+    selectors: [['time[itemprop="datePublished"]', 'datetime'], ['.story-meta__details time[datetime]', 'datetime'], ['.story-main-content .timestamp time[datetime]', 'datetime']],
+    timezone: 'America/New_York'
   },
   lead_image_url: {
-    selectors: [// enter lead_image_url selectors
-    ['meta[name="og:image"]', 'value']]
+    selectors: [['meta[name="og:image"]', 'value']]
   },
   dek: {
-    selectors: []
-  },
-  next_page_url: null,
-  excerpt: null
+    selectors: [['meta[name="og:description"]', 'value']]
+  }
 };
 
 var DeadspinExtractor = {
@@ -3980,33 +3968,6 @@ var WwwCnetComExtractor = {
   }
 };
 
-var WwwCinemablendComExtractor = {
-  domain: 'www.cinemablend.com',
-  title: {
-    selectors: ['.story_title']
-  },
-  author: {
-    selectors: ['.author']
-  },
-  date_published: {
-    selectors: [['meta[name="article:published_time"]', 'value']],
-    timezone: 'EST'
-  },
-  lead_image_url: {
-    selectors: [['meta[name="og:image"]', 'value']]
-  },
-  content: {
-    selectors: ['div#wrap_left_content'],
-    // Is there anything in the content you selected that needs transformed
-    // before it's consumable content? E.g., unusual lazy loaded images
-    transforms: {},
-    // Is there anything that is in the result that shouldn't be?
-    // The clean selectors will remove anything that matches from
-    // the result
-    clean: []
-  }
-};
-
 var WwwTodayComExtractor = {
   domain: 'www.today.com',
   title: {
@@ -4030,33 +3991,6 @@ var WwwTodayComExtractor = {
     // The clean selectors will remove anything that matches from
     // the result
     clean: ['.label-comment']
-  }
-};
-
-var WwwHowtogeekComExtractor = {
-  domain: 'www.howtogeek.com',
-  title: {
-    selectors: ['title']
-  },
-  author: {
-    selectors: ['#authorinfobox a']
-  },
-  date_published: {
-    selectors: ['#authorinfobox + div li'],
-    timezone: 'GMT'
-  },
-  lead_image_url: {
-    selectors: [['meta[name="og:image"]', 'value']]
-  },
-  content: {
-    selectors: ['.thecontent'],
-    // Is there anything in the content you selected that needs transformed
-    // before it's consumable content? E.g., unusual lazy loaded images
-    transforms: {},
-    // Is there anything that is in the result that shouldn't be?
-    // The clean selectors will remove anything that matches from
-    // the result
-    clean: []
   }
 };
 
@@ -4283,33 +4217,6 @@ var ThoughtcatalogComExtractor = {
     // The clean selectors will remove anything that matches from
     // the result
     clean: ['.tc_mark']
-  }
-};
-
-var WwwNjComExtractor = {
-  domain: 'www.nj.com',
-  title: {
-    selectors: [['meta[name="title"]', 'value']]
-  },
-  author: {
-    selectors: [['meta[name="article_author"]', 'value']]
-  },
-  date_published: {
-    selectors: [['meta[name="article_date_original"]', 'value']],
-    timezone: 'America/New_York'
-  },
-  lead_image_url: {
-    selectors: [['meta[name="og:image"]', 'value']]
-  },
-  content: {
-    selectors: ['.entry-content'],
-    // Is there anything in the content you selected that needs transformed
-    // before it's consumable content? E.g., unusual lazy loaded images
-    transforms: {},
-    // Is there anything that is in the result that shouldn't be?
-    // The clean selectors will remove anything that matches from
-    // the result
-    clean: []
   }
 };
 
@@ -6185,14 +6092,66 @@ var PostlightComExtractor = {
     selectors: [['meta[name="og:image"]', 'value']]
   },
   content: {
-    selectors: ['article.body'],
+    selectors: ['main.post'],
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images
     transforms: {},
     // Is there anything that is in the result that shouldn't be?
     // The clean selectors will remove anything that matches from
     // the result
-    clean: ['section.pl-post-link']
+    clean: ['section.pl-post-link', 'aside', 'section.insights_featured_case_studies']
+  }
+};
+
+var WwwInvestmentexecutiveComExtractor = {
+  domain: 'www.investmentexecutive.com',
+  title: {
+    selectors: ['h1']
+  },
+  author: {
+    selectors: ['div[itemprop="author"]']
+  },
+  date_published: {
+    selectors: [['meta[itemprop="datePublished"]', 'value']]
+  },
+  dek: {
+    selectors: [['meta[name="og:description"]', 'value']]
+  },
+  lead_image_url: {
+    selectors: [['meta[name="og:image"]', 'value']]
+  },
+  content: {
+    selectors: ['section.article-body'],
+    clean: ['.hidden']
+  }
+};
+
+var WwwCbcCaExtractor = {
+  domain: 'www.cbc.ca',
+  title: {
+    selectors: ['h1']
+  },
+  author: {
+    selectors: ['.authorText', '.bylineDetails']
+  },
+  date_published: {
+    selectors: [['.timeStamp[datetime]', 'datetime']]
+  },
+  dek: {
+    selectors: ['.deck']
+  },
+  lead_image_url: {
+    selectors: [['meta[name="og:image"]', 'value']]
+  },
+  content: {
+    selectors: ['.story'],
+    // Is there anything in the content you selected that needs transformed
+    // before it's consumable content? E.g., unusual lazy loaded images
+    transforms: {},
+    // Is there anything that is in the result that shouldn't be?
+    // The clean selectors will remove anything that matches from
+    // the result
+    clean: []
   }
 };
 
@@ -6265,9 +6224,7 @@ var CustomExtractors = /*#__PURE__*/Object.freeze({
   WwwSiComExtractor: WwwSiComExtractor,
   WwwRawstoryComExtractor: WwwRawstoryComExtractor,
   WwwCnetComExtractor: WwwCnetComExtractor,
-  WwwCinemablendComExtractor: WwwCinemablendComExtractor,
   WwwTodayComExtractor: WwwTodayComExtractor,
-  WwwHowtogeekComExtractor: WwwHowtogeekComExtractor,
   WwwAlComExtractor: WwwAlComExtractor,
   WwwThepennyhoarderComExtractor: WwwThepennyhoarderComExtractor,
   WwwWesternjournalismComExtractor: WwwWesternjournalismComExtractor,
@@ -6276,7 +6233,6 @@ var CustomExtractors = /*#__PURE__*/Object.freeze({
   ScienceflyComExtractor: ScienceflyComExtractor,
   HellogigglesComExtractor: HellogigglesComExtractor,
   ThoughtcatalogComExtractor: ThoughtcatalogComExtractor,
-  WwwNjComExtractor: WwwNjComExtractor,
   WwwInquisitrComExtractor: WwwInquisitrComExtractor,
   WwwNbcnewsComExtractor: WwwNbcnewsComExtractor,
   FortuneComExtractor: FortuneComExtractor,
@@ -6343,7 +6299,9 @@ var CustomExtractors = /*#__PURE__*/Object.freeze({
   ArstechnicaComExtractor: ArstechnicaComExtractor,
   WwwNdtvComExtractor: WwwNdtvComExtractor,
   SpektrumExtractor: SpektrumExtractor,
-  PostlightComExtractor: PostlightComExtractor
+  PostlightComExtractor: PostlightComExtractor,
+  WwwInvestmentexecutiveComExtractor: WwwInvestmentexecutiveComExtractor,
+  WwwCbcCaExtractor: WwwCbcCaExtractor
 });
 
 var Extractors = _Object$keys(CustomExtractors).reduce(function (acc, key) {
