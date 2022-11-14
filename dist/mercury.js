@@ -7925,12 +7925,12 @@ function _collectAllPages() {
   _collectAllPages = _asyncToGenerator(
   /*#__PURE__*/
   _regeneratorRuntime.mark(function _callee(_ref) {
-    var next_page_url, html, metaCache, result, Extractor, title, url, pages, previousUrls, newDoc, extractorOpts, nextPageResult, word_count;
+    var next_page_url, html, $, metaCache, result, Extractor, title, url, pages, previousUrls, extractorOpts, nextPageResult, word_count;
     return _regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            next_page_url = _ref.next_page_url, html = _ref.html, metaCache = _ref.metaCache, result = _ref.result, Extractor = _ref.Extractor, title = _ref.title, url = _ref.url;
+            next_page_url = _ref.next_page_url, html = _ref.html, $ = _ref.$, metaCache = _ref.metaCache, result = _ref.result, Extractor = _ref.Extractor, title = _ref.title, url = _ref.url;
             // At this point, we've fetched just the first page
             pages = 1;
             previousUrls = [removeAnchor(url)]; // If we've gone over 26 pages, something has
@@ -7938,7 +7938,7 @@ function _collectAllPages() {
 
           case 3:
             if (!(next_page_url && pages < 26)) {
-              _context.next = 18;
+              _context.next = 16;
               break;
             }
 
@@ -7948,21 +7948,12 @@ function _collectAllPages() {
             return Resource.create(next_page_url);
 
           case 7:
-            newDoc = _context.sent;
-
-            if (!newDoc.error) {
-              _context.next = 10;
-              break;
-            }
-
-            return _context.abrupt("break", 18);
-
-          case 10:
-            html = newDoc.html();
+            $ = _context.sent;
+            html = $.html();
             extractorOpts = {
               url: next_page_url,
               html: html,
-              $: newDoc,
+              $: $,
               metaCache: metaCache,
               extractedTitle: title,
               previousUrls: previousUrls
@@ -7977,7 +7968,7 @@ function _collectAllPages() {
             _context.next = 3;
             break;
 
-          case 18:
+          case 16:
             word_count = GenericExtractor.word_count({
               content: "<div>".concat(result.content, "</div>")
             });
@@ -7987,7 +7978,7 @@ function _collectAllPages() {
               word_count: word_count
             }));
 
-          case 20:
+          case 18:
           case "end":
             return _context.stop();
         }
