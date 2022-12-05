@@ -13,4 +13,4 @@ tmp/artifacts
 test-output.json
 .tool-versions
 .yarnrc.yml
-*.DS_Store
+**/.DS_Store
