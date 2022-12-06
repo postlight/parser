@@ -12,7 +12,9 @@ describe('Generic Extractor Utils', () => {
           <p>Ooo good one</p>
         </div>
       `;
-      assert.equal(brsToPs(cheerio.load(html)).html(), html);
+      let $ = cheerio.load(html);
+      $ = brsToPs($);
+      assert.equal($.html(), html);
     });
 
     it('does nothing when a single BR is present', () => {
@@ -29,8 +31,9 @@ describe('Generic Extractor Utils', () => {
           <p>Ooo good one</p>
         </div>
       `;
-
-      assertClean(brsToPs(cheerio.load(before)).html(), after);
+      let $ = cheerio.load(before);
+      $ = brsToPs($);
+      assertClean($.html(), after);
     });
 
     it('converts double BR tags to an empty P tag', () => {
@@ -47,8 +50,9 @@ describe('Generic Extractor Utils', () => {
           <p> </p><p>Ooo good one</p>
         </div>
       `;
-
-      assertClean(brsToPs(cheerio.load(before)).html(), after);
+      let $ = cheerio.load(before);
+      $ = brsToPs($);
+      assertClean($.html(), after);
     });
 
     it('converts several BR tags to an empty P tag', () => {
@@ -68,8 +72,9 @@ describe('Generic Extractor Utils', () => {
           <p> </p><p>Ooo good one</p>
         </div>
       `;
-
-      assertClean(brsToPs(cheerio.load(before)).html(), after);
+      let $ = cheerio.load(before);
+      $ = brsToPs($);
+      assertClean($.html(), after);
     });
 
     it('converts BR tags in a P tag into a P containing inline children', () => {
@@ -89,8 +94,9 @@ describe('Generic Extractor Utils', () => {
           Here is more text
         </p></p>
       `;
-
-      assertClean(brsToPs(cheerio.load(before)).html(), after);
+      let $ = cheerio.load(before);
+      $ = brsToPs($);
+      assertClean($.html(), after);
     });
   });
 });

@@ -12,9 +12,9 @@ describe('Generic Extractor Utils', () => {
           <p>Ooo good one</p>
         </div>
       `;
-
-      const stripped = stripUnlikelyCandidates(cheerio.load(html));
-      assert.equal(stripped.html(), html);
+      let $ = cheerio.load(html);
+      $ = stripUnlikelyCandidates($);
+      assert.equal($.html(), html);
     });
 
     it('strips unlikely matches from the doc', () => {
@@ -29,8 +29,9 @@ describe('Generic Extractor Utils', () => {
           <p>Ooo good one</p>
         </div>
       `;
-
-      assertClean(stripUnlikelyCandidates(cheerio.load(before)).html(), after);
+      let $ = cheerio.load(before);
+      $ = stripUnlikelyCandidates($);
+      assertClean($.html(), after);
     });
 
     it('keeps likely matches even when they also match the blacklist', () => {
@@ -45,7 +46,9 @@ describe('Generic Extractor Utils', () => {
           <p>Ooo good one</p>
         </div>
       `;
-      assertClean(stripUnlikelyCandidates(cheerio.load(before)).html(), after);
+      let $ = cheerio.load(before);
+      $ = stripUnlikelyCandidates($);
+      assertClean($.html(), after);
     });
 
     it('removed likely matches when inside blacklist node', () => {
@@ -65,8 +68,9 @@ describe('Generic Extractor Utils', () => {
           <div>Something unrelated</div>
         </div>
       `;
-
-      assertClean(stripUnlikelyCandidates(cheerio.load(before)).html(), after);
+      let $ = cheerio.load(before);
+      $ = stripUnlikelyCandidates($);
+      assertClean($.html(), after);
     });
   });
 });

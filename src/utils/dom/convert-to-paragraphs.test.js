@@ -30,8 +30,9 @@ describe('convertToParagraphs($)', () => {
         </p><p>This should become a p</p>
         </p> <p>This should become a p</p>
       `;
-
-      assertClean(convertToParagraphs(cheerio.load(before)).html(), after);
+      let $ = cheerio.load(before);
+      $ = convertToParagraphs($);
+      assertClean($.html(), after);
     }
   });
 
@@ -45,7 +46,8 @@ describe('convertToParagraphs($)', () => {
         </div>
       </div>
     `;
-
-    assertClean(convertToParagraphs(cheerio.load(html)).html(), html);
+    let $ = cheerio.load(html);
+    $ = convertToParagraphs($);
+    assertClean($.html(), html);
   });
 });
