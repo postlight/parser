@@ -15,6 +15,6 @@ export default {
   output: {
     file: 'dist/generate-custom-parser.js',
     format: 'cjs',
-    sourceMap: true,
+    sourcemap: true,
   },
 };

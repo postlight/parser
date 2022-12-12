@@ -8418,3 +8418,4 @@ function extractorName(hostname) {
   }).join('');
   return "".concat(name, "Extractor");
 }
+//# sourceMappingURL=generate-custom-parser.js.map
