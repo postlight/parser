@@ -1717,7 +1717,7 @@ function convertLazyLoadedImages($) {
           src = _JSON$parse.src;
 
       if (typeof src === 'string') return src;
-    } catch (e) {
+    } catch (_) {
       return false;
     }
 
