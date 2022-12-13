@@ -5,6 +5,7 @@ export const LittleThingsExtractor = {
   domain: 'www.littlethings.com',
   title: {
     selectors: [
+      'h1[class*="PostHeader"]',
       'h1.post-title',
       // enter title selectors
     ],
@@ -12,6 +13,7 @@ export const LittleThingsExtractor = {
 
   author: {
     selectors: [
+      'div[class^="PostHeader__ScAuthorNameSection"]',
       ['meta[name="author"]', 'value'],
       // enter author selectors
     ],
@@ -20,6 +22,7 @@ export const LittleThingsExtractor = {
   content: {
     selectors: [
       // enter content selectors
+      'section[class*="PostMainArticle"]',
       '.mainContentIntro',
       '.content-wrapper',
     ],

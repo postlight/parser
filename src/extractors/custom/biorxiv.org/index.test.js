@@ -15,7 +15,7 @@ describe('BiorxivOrgExtractor', () => {
 
     beforeAll(() => {
       url = 'https://biorxiv.org/content/10.1101/696633v1';
-      const html = fs.readFileSync('./fixtures/biorxiv.org/1565356858754.html');
+      const html = fs.readFileSync('./fixtures/biorxiv.org.html');
       result = Mercury.parse(url, { html, fallback: false });
     });
 

@@ -14,9 +14,7 @@ describe('WwwThepennyhoarderComExtractor', () => {
     let url;
     beforeAll(() => {
       url = 'http://www.thepennyhoarder.com/find-hidden-cash/';
-      const html = fs.readFileSync(
-        './fixtures/www.thepennyhoarder.com/1482509014877.html'
-      );
+      const html = fs.readFileSync('./fixtures/www.thepennyhoarder.com.html');
       result = Mercury.parse(url, { html, fallback: false });
     });
 
@@ -58,7 +56,7 @@ describe('WwwThepennyhoarderComExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(date_published, '2016-12-22T13:10:00.000Z');
+      assert.equal(date_published, '2017-06-21T19:50:00.000Z');
     });
 
     it('returns the lead_image_url', async () => {
@@ -70,7 +68,7 @@ describe('WwwThepennyhoarderComExtractor', () => {
       // the article.
       assert.equal(
         lead_image_url,
-        'http://cdn.thepennyhoarder.com/wp-content/uploads/2014/07/02170000/Mike-Schmidt-under-Creative-Commons-1024x679.jpg'
+        'https://cdn.thepennyhoarder.com/wp-content/uploads/2016/12/22181000/treasurejpg.jpg'
       );
     });
 

@@ -2,15 +2,18 @@ export const WwwNydailynewsComExtractor = {
   domain: 'www.nydailynews.com',
 
   title: {
-    selectors: ['h1#ra-headline'],
+    selectors: ['h1.headline', 'h1#ra-headline'],
   },
 
   author: {
-    selectors: [['meta[name="parsely-author"]', 'value']],
+    selectors: [
+      '.article_byline span',
+      ['meta[name="parsely-author"]', 'value'],
+    ],
   },
 
   date_published: {
-    selectors: [['meta[name="sailthru.date"]', 'value']],
+    selectors: ['time', ['meta[name="sailthru.date"]', 'value']],
   },
 
   lead_image_url: {
@@ -18,7 +21,7 @@ export const WwwNydailynewsComExtractor = {
   },
 
   content: {
-    selectors: ['article#ra-body'],
+    selectors: ['article', 'article#ra-body'],
 
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images

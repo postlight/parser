@@ -1,6 +1,7 @@
 import assert from 'assert';
 import URL from 'url';
 import cheerio from 'cheerio';
+import moment from 'moment-timezone';
 
 import Mercury from 'mercury';
 import getExtractor from 'extractors/get-extractor';
@@ -15,9 +16,7 @@ describe('WwwTodayComExtractor', () => {
     beforeAll(() => {
       url =
         'http://www.today.com/home/zsa-zsa-gabor-s-palm-springs-home-sale-see-inside-t106323';
-      const html = fs.readFileSync(
-        './fixtures/www.today.com/1482432737905.html'
-      );
+      const html = fs.readFileSync('./fixtures/www.today.com.html');
       result = Mercury.parse(url, { html, fallback: false });
     });
 
@@ -56,10 +55,13 @@ describe('WwwTodayComExtractor', () => {
       // To pass this test, fill out the date_published selector
       // in ./src/extractors/custom/www.today.com/index.js.
       const { date_published } = await result;
+      const new_date_published = moment(date_published)
+        .format()
+        .split('T')[0];
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(date_published, '2016-12-22T15:36:00.000Z');
+      assert.equal(new_date_published, '2016-12-22');
     });
 
     it('returns the lead_image_url', async () => {
@@ -71,7 +73,7 @@ describe('WwwTodayComExtractor', () => {
       // the article.
       assert.equal(
         lead_image_url,
-        'http://media1.s-nbcnews.com/i/newscms/2016_51/1183946/zsa-zsa-pool-2-today-161222-tease_ef3cb1c171786baa69a3f5db09f3da06.jpg'
+        'https://media-cldnry.s-nbcnews.com/image/upload/t_social_share_1200x630_center,f_auto,q_auto:best/newscms/2016_51/1183946/zsa-zsa-pool-2-today-161222-tease.jpg'
       );
     });
 

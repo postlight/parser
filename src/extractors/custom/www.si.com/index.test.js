@@ -15,7 +15,7 @@ describe('WwwSiComExtractor', () => {
     beforeAll(() => {
       url =
         'http://www.si.com/nfl/2017/01/12/dallas-cowboys-stephen-jerry-jones';
-      const html = fs.readFileSync('./fixtures/www.si.com/1484253704408.html');
+      const html = fs.readFileSync('./fixtures/www.si.com.html');
       result = Mercury.parse(url, { html, fallback: false });
     });
 
@@ -57,7 +57,7 @@ describe('WwwSiComExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(date_published, '2017-01-12T05:00:00.000Z');
+      assert.equal(date_published, '2017-01-12T15:10:14.000Z');
     });
 
     it('returns the dek', async () => {
@@ -82,7 +82,7 @@ describe('WwwSiComExtractor', () => {
       // the article.
       assert.equal(
         lead_image_url,
-        'http://cdn-s3.si.com/styles/inline_gallery_desktop/s3/images/stephen-jerry-jones-dallas-cowboys.jpg?itok=tmQDYtjs'
+        'https://www.si.com/.image/t_share/MTY4MTA0MzMwMTAyMzg0MDAw/stephen-jerry-jones-dallas-cowboysjpg.jpg'
       );
     });
 

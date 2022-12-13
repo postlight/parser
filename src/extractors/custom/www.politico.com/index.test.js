@@ -1,6 +1,7 @@
 import assert from 'assert';
 import URL from 'url';
 import cheerio from 'cheerio';
+import moment from 'moment-timezone';
 
 import Mercury from 'mercury';
 import getExtractor from 'extractors/get-extractor';
@@ -16,9 +17,7 @@ describe('PoliticoExtractor', () => {
     beforeAll(() => {
       url =
         'http://www.politico.com/story/2016/10/who-will-win-the-vp-debate-229079?lo=ut_a1';
-      const html = fs.readFileSync(
-        './fixtures/www.politico.com/1475617690069.html'
-      );
+      const html = fs.readFileSync('./fixtures/www.politico.com.html');
       result = Mercury.parse(url, { html, fallback: false });
     });
 
@@ -56,10 +55,13 @@ describe('PoliticoExtractor', () => {
       // To pass this test, fill out the date_published selector
       // in ./src/extractors/custom/www.politico.com/index.js.
       const { date_published } = await result;
+      const new_date_published = moment(date_published)
+        .format()
+        .split('T')[0];
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(date_published, '2016-10-04T09:07:00.000Z');
+      assert.equal(new_date_published, '2016-10-04');
     });
 
     it('returns the lead_image_url', async () => {
@@ -71,7 +73,7 @@ describe('PoliticoExtractor', () => {
       // the article.
       assert.equal(
         lead_image_url,
-        'http://static.politico.com/0f/e7/5ee9a89044d1a01f74140bcd5b9e/caucus-vp-preview.jpg'
+        'https://static.politico.com/0f/e7/5ee9a89044d1a01f74140bcd5b9e/caucus-vp-preview.jpg'
       );
     });
 
@@ -107,7 +109,7 @@ describe('PoliticoExtractor', () => {
       url =
         'https://www.politico.com/news/2022/10/17/student-debt-relief-applications-00062145';
       const html = fs.readFileSync(
-        './fixtures/www.politico.com/1666117046017.html'
+        './fixtures/www.politico.com--test-case-2.html'
       );
       result = Mercury.parse(url, { html, fallback: false });
     });
@@ -213,7 +215,7 @@ describe('PoliticoExtractor', () => {
       url =
         'https://www.politico.com/newsletters/morning-money/2022/10/11/grim-global-outlook-for-imf-world-bank-meetings-00061134';
       const html = fs.readFileSync(
-        './fixtures/www.politico.com/1666711551296.html'
+        './fixtures/www.politico.com--test-case-3.html'
       );
       result = Mercury.parse(url, { html, fallback: false });
     });

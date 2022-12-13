@@ -15,9 +15,7 @@ describe('NYTimesExtractor', () => {
     beforeAll(() => {
       url =
         'https://www.nytimes.com/2016/09/20/nyregion/nyc-nj-explosions-ahmad-khan-rahami.html';
-      const html = fs.readFileSync(
-        './fixtures/www.nytimes.com/1571224616991.html'
-      );
+      const html = fs.readFileSync('./fixtures/www.nytimes.com.html');
       result = Mercury.parse(url, { html, fallback: false });
     });
 
@@ -76,7 +74,7 @@ describe('NYTimesExtractor', () => {
       // the article.
       assert.equal(
         lead_image_url,
-        'https://static01.nyt.com/images/2016/09/20/nyregion/Manhunt/Manhunt-facebookJumbo-v2.jpg'
+        'https://static01.nyt.com/images/2016/09/20/nyregion/Manhunt/Manhunt-facebookJumbo-v2.jpg?year=2016&h=549&w=1050&s=a40dd9bd69012d95e8a76943424679f17908af4c8f7ad3a6585e0d50632fff4b&k=ZQJBKqZ0VN'
       );
     });
 
@@ -106,9 +104,7 @@ describe('NYTimesExtractor', () => {
   });
 
   it('works with a feature story', async () => {
-    const html = fs.readFileSync(
-      './fixtures/www.nytimes.com/1571223287888.html'
-    );
+    const html = fs.readFileSync('./fixtures/www.nytimes.com--feature.html');
     const uri =
       'http://www.nytimes.com/interactive/2016/09/15/arts/design/national-museum-of-african-american-history-and-culture.html';
 
@@ -130,9 +126,7 @@ describe('NYTimesExtractor', () => {
   });
 
   it('returns the title on most recent articles', async () => {
-    const html = fs.readFileSync(
-      './fixtures/www.nytimes.com/1571223477873.html'
-    );
+    const html = fs.readFileSync('./fixtures/www.nytimes.com--recent.html');
     const uri =
       'https://www.nytimes.com/2018/10/09/us/politics/nikki-haley-united-nations.html';
 

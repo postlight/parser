@@ -68,7 +68,6 @@ export * from './www.today.com';
 export * from './www.al.com';
 export * from './www.thepennyhoarder.com';
 export * from './www.westernjournalism.com';
-export * from './fusion.net';
 export * from './www.americanow.com';
 export * from './sciencefly.com';
 export * from './hellogiggles.com';

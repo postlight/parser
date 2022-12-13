@@ -16,7 +16,7 @@ export const WwwThevergeComExtractor = {
   },
 
   dek: {
-    selectors: ['h2.p-dek'],
+    selectors: ['.p-dek'],
   },
 
   lead_image_url: {

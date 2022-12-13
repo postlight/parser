@@ -15,9 +15,7 @@ describe('WwwFoolComExtractor', () => {
     beforeAll(() => {
       url =
         'https://www.fool.com/investing/2017/01/09/why-amazon-microsoft-and-activision-blizzard-are-b.aspx';
-      const html = fs.readFileSync(
-        './fixtures/www.fool.com/1489175437362.html'
-      );
+      const html = fs.readFileSync('./fixtures/www.fool.com.html');
       result = Mercury.parse(url, { html, fallback: false });
     });
 
@@ -84,7 +82,7 @@ describe('WwwFoolComExtractor', () => {
       // the article.
       assert.equal(
         lead_image_url,
-        'https://g.foolcdn.com/image/?url=https%3A%2F%2Fg.foolcdn.com%2Feditorial%2Fimages%2F420446%2Fgettyimages-502549392-1.jpg&h=630&w=1200&op=resize'
+        'https://g.foolcdn.com/editorial/images/420446/gettyimages-502549392-1.jpg'
       );
     });
 

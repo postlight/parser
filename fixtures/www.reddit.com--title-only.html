@@ -1,0 +1,1821 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+
+
+  <meta charset="utf-8">
+  <meta name="viewport" value="width=device-width, initial-scale=1">
+  <meta name="referrer" value="origin-when-cross-origin">
+
+
+  <link as="script" href="https://www.redditstatic.com/desktop2x/runtime~Reddit.41c76a049e0185a8327f.js"
+    key="https://www.redditstatic.com/desktop2x/runtime~Reddit.41c76a049e0185a8327f.js" rel="preload">
+  <link as="script"
+    href="https://www.redditstatic.com/desktop2x/vendors~CommentsPage~ModerationPages~Reddit~reddit-components-ClassicPost~reddit-components-CompactP~d737df3e.506a3ece88e0a905b7a3.js"
+    key="https://www.redditstatic.com/desktop2x/vendors~CommentsPage~ModerationPages~Reddit~reddit-components-ClassicPost~reddit-components-CompactP~d737df3e.506a3ece88e0a905b7a3.js"
+    rel="preload">
+  <link as="script"
+    href="https://www.redditstatic.com/desktop2x/vendors~CommentsPage~Governance~ModListing~ModerationPages~Reddit~Subreddit.f468f4fbfe44aa5cfabf.js"
+    key="https://www.redditstatic.com/desktop2x/vendors~CommentsPage~Governance~ModListing~ModerationPages~Reddit~Subreddit.f468f4fbfe44aa5cfabf.js"
+    rel="preload">
+  <link as="script" href="https://www.redditstatic.com/desktop2x/vendors~Chat~Governance~Reddit.75ad7bc6f7be757ab8f1.js"
+    key="https://www.redditstatic.com/desktop2x/vendors~Chat~Governance~Reddit.75ad7bc6f7be757ab8f1.js" rel="preload">
+  <link as="script" href="https://www.redditstatic.com/desktop2x/vendors~Reddit.5de4c3506237a92f1953.js"
+    key="https://www.redditstatic.com/desktop2x/vendors~Reddit.5de4c3506237a92f1953.js" rel="preload">
+  <link as="script"
+    href="https://www.redditstatic.com/desktop2x/CommentsPage~Governance~Reddit~ReportFlow~Subreddit~reddit-components-BlankPost~reddit-components-Cl~5351df81.c08da516a4290f0725c2.js"
+    key="https://www.redditstatic.com/desktop2x/CommentsPage~Governance~Reddit~ReportFlow~Subreddit~reddit-components-BlankPost~reddit-components-Cl~5351df81.c08da516a4290f0725c2.js"
+    rel="preload">
+  <link as="script"
+    href="https://www.redditstatic.com/desktop2x/PostCreation~Reddit~StandalonePostPage~reddit-components-ClassicPost~reddit-components-CompactPost~r~4c415e24.648ef5771f204684c2af.js"
+    key="https://www.redditstatic.com/desktop2x/PostCreation~Reddit~StandalonePostPage~reddit-components-ClassicPost~reddit-components-CompactPost~r~4c415e24.648ef5771f204684c2af.js"
+    rel="preload">
+  <link as="script"
+    href="https://www.redditstatic.com/desktop2x/Governance~Reddit~Subreddit~reddit-components-BlankPost~reddit-components-ClassicPost~reddit-compone~3b56c92e.7f3d1ef1f2f22d5abc61.js"
+    key="https://www.redditstatic.com/desktop2x/Governance~Reddit~Subreddit~reddit-components-BlankPost~reddit-components-ClassicPost~reddit-compone~3b56c92e.7f3d1ef1f2f22d5abc61.js"
+    rel="preload">
+  <link as="script"
+    href="https://www.redditstatic.com/desktop2x/Governance~ModListing~Reddit~ReportFlow~Subreddit.c27cefdc8f78fab8838f.js"
+    key="https://www.redditstatic.com/desktop2x/Governance~ModListing~Reddit~ReportFlow~Subreddit.c27cefdc8f78fab8838f.js"
+    rel="preload">
+  <link as="script" href="https://www.redditstatic.com/desktop2x/Chat~Governance~Reddit.6e5f44f84ed932447fa2.js"
+    key="https://www.redditstatic.com/desktop2x/Chat~Governance~Reddit.6e5f44f84ed932447fa2.js" rel="preload">
+  <link as="script" href="https://www.redditstatic.com/desktop2x/Governance~Reddit~Subreddit.8940ee928611276849c9.js"
+    key="https://www.redditstatic.com/desktop2x/Governance~Reddit~Subreddit.8940ee928611276849c9.js" rel="preload">
+  <link as="script"
+    href="https://www.redditstatic.com/desktop2x/Governance~Reddit~SubredditForkingCTA.b8fa5cd4f9cccf40ed7c.js"
+    key="https://www.redditstatic.com/desktop2x/Governance~Reddit~SubredditForkingCTA.b8fa5cd4f9cccf40ed7c.js"
+    rel="preload">
+  <link as="script" href="https://www.redditstatic.com/desktop2x/Governance~Reddit.28a07bb00b841a7a6ba8.js"
+    key="https://www.redditstatic.com/desktop2x/Governance~Reddit.28a07bb00b841a7a6ba8.js" rel="preload">
+  <link as="script" href="https://www.redditstatic.com/desktop2x/Reddit~StandalonePostPage.4486b75dd1ed7d56a706.js"
+    key="https://www.redditstatic.com/desktop2x/Reddit~StandalonePostPage.4486b75dd1ed7d56a706.js" rel="preload">
+  <link as="script" href="https://www.redditstatic.com/desktop2x/AuthorHovercard~Reddit.9148d09c94814d65eb54.js"
+    key="https://www.redditstatic.com/desktop2x/AuthorHovercard~Reddit.9148d09c94814d65eb54.js" rel="preload">
+  <link as="script" href="https://www.redditstatic.com/desktop2x/Reddit.61f8728b1f8cb39c81d0.js"
+    key="https://www.redditstatic.com/desktop2x/Reddit.61f8728b1f8cb39c81d0.js" rel="preload">
+  <link rel="apple-touch-icon" sizes="57x57"
+    href="https://www.redditstatic.com/desktop2x/img/favicon/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60"
+    href="https://www.redditstatic.com/desktop2x/img/favicon/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72"
+    href="https://www.redditstatic.com/desktop2x/img/favicon/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76"
+    href="https://www.redditstatic.com/desktop2x/img/favicon/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114"
+    href="https://www.redditstatic.com/desktop2x/img/favicon/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120"
+    href="https://www.redditstatic.com/desktop2x/img/favicon/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144"
+    href="https://www.redditstatic.com/desktop2x/img/favicon/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152"
+    href="https://www.redditstatic.com/desktop2x/img/favicon/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180"
+    href="https://www.redditstatic.com/desktop2x/img/favicon/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"
+    href="https://www.redditstatic.com/desktop2x/img/favicon/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32"
+    href="https://www.redditstatic.com/desktop2x/img/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96"
+    href="https://www.redditstatic.com/desktop2x/img/favicon/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16"
+    href="https://www.redditstatic.com/desktop2x/img/favicon/favicon-16x16.png">
+  <link rel="manifest" href="https://www.redditstatic.com/desktop2x/img/favicon/manifest.json?v=2">
+  <meta name="msapplication-TileColor" value="#ffffff">
+  <meta name="msapplication-TileImage" value="https://www.redditstatic.com/desktop2x/img/favicon/ms-icon-144x144.png">
+  <meta name="theme-color" data-reactroot="" value="#FFFFFF">
+  <meta name="jsapi">
+
+  <title>What is the most &quot;worth it&quot; item you have ever purchased? : AskReddit</title>
+  <meta name="description"
+    value="52.1k votes, 25.4k comments. 36.8m members in the AskReddit community. r/AskReddit is the place to ask and answer thought-provoking questions.">
+  <link rel="canonical"
+    href="https://www.reddit.com/r/AskReddit/comments/axtih6/what_is_the_most_worth_it_item_you_have_ever/">
+  <meta value="600" name="og:ttl">
+  <meta value="reddit" name="og:site_name">
+  <meta value="@reddit" name="twitter:site">
+  <meta value="summary" name="twitter:card">
+  <meta value="r/AskReddit - What is the most &quot;worth it&quot; item you have ever purchased?" name="twitter:title">
+  <meta value="r/AskReddit - What is the most &quot;worth it&quot; item you have ever purchased?" name="og:title">
+  <meta value="website" name="og:type">
+  <meta value="https://www.reddit.com/r/AskReddit/comments/axtih6/what_is_the_most_worth_it_item_you_have_ever/"
+    name="og:url">
+  <meta value="52,114 votes and 25,436 comments so far on Reddit" name="og:description">
+
+</head>
+
+<body>
+
+  <div id="2x-container">
+    <div class="_1VP69d9lk-Wk9zokOaylL " style="--background:#FFFFFF;--canvas:#DAE0E6">
+      <div class="hciOr5UGrnYrZxB11tX9s" id="SHORTCUT_FOCUSABLE_DIV" tabindex="-1">
+        <div class="subredditvars-r-askreddit">
+          <div class="GfthJQJvWCHdUoMi6YjYa _3el1HrJryfAxBUzu4HsIhE _2s1xq3Ji1Oj7oZtdSqWznV"><span>Looks like
+              you&apos;re using new Reddit on an old browser. The site may not work properly if you don&apos;t <a
+                class="vOGtEDdh1mVbkqinhg3Ov" href="https://www.google.com/chrome/">update your browser</a>
+              !&#xA0;</span><span>If you do not update your browser, we suggest you visit <a
+                class="vOGtEDdh1mVbkqinhg3Ov" href="https://old.reddit.com">old reddit</a> .</span></div>
+          <header data-redditstyle="true"
+            class="_1tvdSTbdxaK-BnUbzUIqIY _2GyPfdsi-MbQFyHRECo9GO cx1ohrUAq6ARaXTX2u8YN _378Md-M6pOqwzEiV3lAwYk  ">
+            <div class="_2vkeRJojnV7cb9pMlPHy7d ">
+              <div class="_3dnbqz69WJTFCss8wl7Wlk"><span class="_1RIl585IYPW6cmNXwgRz0J">Press J to jump to the feed.
+                  Press question mark to learn the rest of the keyboard shortcuts</span><a aria-label="Home"
+                  class="_30BbATRhFv3V83DHNDjJAO" href="/"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 20 20"
+                    class="_1O4jTk-dZ-VIxsCuYB6OR8 ">
+                    <g>
+                      <circle fill="#FF4500" cx="10" cy="10" r="10" />
+                      <path fill="#FFF"
+                        d="M16.67,10A1.46,1.46,0,0,0,14.2,9a7.12,7.12,0,0,0-3.85-1.23L11,4.65,13.14,5.1a1,1,0,1,0,.13-0.61L10.82,4a0.31,0.31,0,0,0-.37.24L9.71,7.71a7.14,7.14,0,0,0-3.9,1.23A1.46,1.46,0,1,0,4.2,11.33a2.87,2.87,0,0,0,0,.44c0,2.24,2.61,4.06,5.83,4.06s5.83-1.82,5.83-4.06a2.87,2.87,0,0,0,0-.44A1.46,1.46,0,0,0,16.67,10Zm-10,1a1,1,0,1,1,1,1A1,1,0,0,1,6.67,11Zm5.81,2.75a3.84,3.84,0,0,1-2.47.77,3.84,3.84,0,0,1-2.47-.77,0.27,0.27,0,0,1,.38-0.38A3.27,3.27,0,0,0,10,14a3.28,3.28,0,0,0,2.09-.61A0.27,0.27,0,1,1,12.48,13.79Zm-0.18-1.71a1,1,0,1,1,1-1A1,1,0,0,1,12.29,12.08Z" />
+                    </g>
+                  </svg><svg class="_1bWuGs_1sq4Pqy099x_yy-" viewbox="0 0 57 18" xmlns="http://www.w3.org/2000/svg">
+                    <g fill="#1c1c1c">
+                      <path
+                        d="M54.63,16.52V7.68h1a1,1,0,0,0,1.09-1V6.65a1,1,0,0,0-.93-1.12H54.63V3.88a1.23,1.23,0,0,0-1.12-1.23,1.2,1.2,0,0,0-1.27,1.11V5.55h-1a1,1,0,0,0-1.09,1v.07a1,1,0,0,0,.93,1.12h1.13v8.81a1.19,1.19,0,0,0,1.19,1.19h0a1.19,1.19,0,0,0,1.25-1.12A.17.17,0,0,0,54.63,16.52Z" />
+                      <circle fill="#FF4500" cx="47.26" cy="3.44" r="2.12" />
+                      <path d="M48.44,7.81a1.19,1.19,0,1,0-2.38,0h0v8.71a1.19,1.19,0,0,0,2.38,0Z" />
+                      <path
+                        d="M30.84,1.19A1.19,1.19,0,0,0,29.65,0h0a1.19,1.19,0,0,0-1.19,1.19V6.51a4.11,4.11,0,0,0-3-1.21c-3.1,0-5.69,2.85-5.69,6.35S22.28,18,25.42,18a4.26,4.26,0,0,0,3.1-1.23,1.17,1.17,0,0,0,1.47.8,1.2,1.2,0,0,0,.85-1.05ZM25.41,15.64c-1.83,0-3.32-1.77-3.32-4s1.48-4,3.32-4,3.31,1.78,3.31,4-1.47,3.95-3.3,3.95Z" />
+                      <path
+                        d="M43.28,1.19A1.19,1.19,0,0,0,42.09,0h0a1.18,1.18,0,0,0-1.18,1.19h0V6.51a4.15,4.15,0,0,0-3-1.21c-3.1,0-5.69,2.85-5.69,6.35S34.72,18,37.86,18A4.26,4.26,0,0,0,41,16.77a1.17,1.17,0,0,0,1.47.8,1.19,1.19,0,0,0,.85-1.05ZM37.85,15.64c-1.83,0-3.31-1.77-3.31-4s1.47-4,3.31-4,3.31,1.78,3.31,4-1.47,3.95-3.3,3.95Z" />
+                      <path
+                        d="M17.27,12.44a1.49,1.49,0,0,0,1.59-1.38v-.15a4.81,4.81,0,0,0-.1-.85A5.83,5.83,0,0,0,13.25,5.3c-3.1,0-5.69,2.85-5.69,6.35S10.11,18,13.25,18a5.66,5.66,0,0,0,4.39-1.84,1.23,1.23,0,0,0-.08-1.74l-.11-.09a1.29,1.29,0,0,0-1.58.17,3.91,3.91,0,0,1-2.62,1.12A3.54,3.54,0,0,1,10,12.44h7.27Zm-4-4.76a3.41,3.41,0,0,1,3.09,2.64H10.14A3.41,3.41,0,0,1,13.24,7.68Z" />
+                      <path
+                        d="M7.68,6.53a1.19,1.19,0,0,0-1-1.18A4.56,4.56,0,0,0,2.39,6.91V6.75A1.2,1.2,0,0,0,0,6.75v9.77a1.23,1.23,0,0,0,1.12,1.24,1.19,1.19,0,0,0,1.26-1.1.66.66,0,0,0,0-.14v-5A3.62,3.62,0,0,1,5.81,7.7a4.87,4.87,0,0,1,.54,0h.24A1.18,1.18,0,0,0,7.68,6.53Z" />
+                    </g>
+                  </svg></a>
+                <div class="_1iqnOY2Y57wmetu8MAjiId">
+                  <div class="_1blFGqU8stoZgWSZ8MQNpf _3jiriKeNer8y0-1r6oWIFM _2dlTXDaX9JuL0bekTwhV18 "
+                    id="SearchDropdown"></div>
+                </div>
+              </div>
+              <div class="_2u8LqkbMtzd0lpblMFbJq5">
+                <div class="_19oWd7e3z7-ztUGzdIoCR7">
+                  <div class="_1JBkpB_FOZMZ7IPr3FyNfH"><a role="button" tabindex="0"
+                      href="https://www.reddit.com/login/?dest=https%3A%2F%2Fwww.reddit.com%2Fr%2FAskReddit%2Fcomments%2Faxtih6%2Fwhat_is_the_most_worth_it_item_you_have_ever%2F"
+                      class="_3Wg53T10KuuPmyWOMWsY2F _2iuoyPiKHN3kfOoeIQalDT _2tU8R9NTqhvBrhoNAXWWcP HNozj_dKjQZ59ZsfEegz8 _2nelDm85zKKmuD94NequP0">Log
+                      In</a><a role="button" tabindex="0"
+                      href="https://www.reddit.com/register/?dest=https%3A%2F%2Fwww.reddit.com%2Fr%2FAskReddit%2Fcomments%2Faxtih6%2Fwhat_is_the_most_worth_it_item_you_have_ever%2F"
+                      class="Z_HUY3BUsGOBOtdmH94ZS _3Wg53T10KuuPmyWOMWsY2F _2iuoyPiKHN3kfOoeIQalDT _10BQ7pjWbeYP63SAPNS8Ts HNozj_dKjQZ59ZsfEegz8 _2nelDm85zKKmuD94NequP0">Sign
+                      Up</a></div>
+                  <div id="email-verification-tooltip-id" class="XZK-LTFT5CgGo9MvPQQsy U3FRqDA_Qhr4icbaNXSuf">
+                    <div id="change-username-tooltip-id" class="XZK-LTFT5CgGo9MvPQQsy _20HfCAFz3ot1MW1o29ZoGZ"></div>
+                    <div class="header-user-dropdown"><button aria-expanded="false" aria-haspopup="true"
+                        id="USER_DROPDOWN_ID"
+                        class="_10K5i7NW6qcm-UoCtpB3aK _1pA8z73SZ1olP5KMKFN4_Z _18X7KoiaLuKbuLqg4zE8BH _22SL37yETIW414yUiZj27w"><span
+                          class="DFKWwVItcycZV1bKUOyay"><span class="_3KfbpxpA8Esu_3UHTmIvfw _22SL37yETIW414yUiZj27w"><i
+                              class="_3-lF5kPDkSGfnVUW_GtvUV icon icon-user"></i></span><i
+                            class="_3x3dhQasGAuYcXVQ02QUzy icon icon-caret_down"></i></span><span
+                          class="_1RIl585IYPW6cmNXwgRz0J">User account menu</span></button></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </header>
+          <div
+            class="_1C1Dn0NhEGQkEA9tDGKKSH _378Md-M6pOqwzEiV3lAwYk OEQgz7Lkj--3zFaLL7BUF _1HWVXJoazfrENIGlRprCVp _2elztvdigLcbcRyu_4wcFW">
+            <img class="_3BcAFuYpz37S0WFvgyWCUN"
+              src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAE9 0lEQVRoQ9WYW0hlZRTHf94TIXXAYRQzQwmFQQSVYSZ6UlESH+whRxMDX6IHJ1AQCXFQkSFUCIUeCkETUx/CF1FB8ClNpFFEX8T UKWkyxgFngjRvJ9Z278Pe57Yv51Kul33O3mut7/9fa32X9UVxwyXqhuMn0gR+BbJ0QfsU+CaYIEaSgEuAulzKQ3lGR0fLzzngA 6ckIkpAA68HGxWlQHCMw7Ghg4i5AhBIBE4d+HTO3OZgscB5bW0tk5OTbtPV1VXu3bv3v8/AZ8DXwAmQODw8TFNTE0dHR6SlpWl kHFeCY0MLGSgE1lW9D4Fp4AdAfmvyO5BpwZdflVATuF5ijJIAnAUDMpBtuAhIYa+GC7RhFQvxIFoGQh2YiJXQR8AU8C6wE+Lg+ HQXjkhFNAvhICCREhLh8m3IRLgGEQIXgGxgmqwA3wHfqt9CUmGhIvAe8KMDRPGyQzuwc5sES+AXIEe8tbS0MDAwYAnL2dkZt2/ f5tWrV5p+nNOsmBH4EmjzgeoKiE5ISOD01NEZzO3y6uqKmJgY7X8S8DdwB/hDffkx8L2/yPgj0AwMipGAfPjwIS9fvmRmZsbtx 9fJ0lL4/Sitra1RVFQUyMUn6hwyncTPgLcrKyuZm5Ne41ok3SkpKVRVVRmIBAPal63aH7gbH9GJj4/n/FyZKk+AL/R2nhmQqDf v7++TnZ3t1uvu7ubx48dsbGxQUFAQasxe/pKSkpQ5Ijg0SUxM1MrVgFn/R35fNTQ0MDY25jZ8/fo1ycnJHB8fK89Iya1bt9ja2 iIjI8M9pJYd/R6jJ2DoWTUrMRocHKS5WaZFZEWifnIibcS1TE1NKfPRLwH5ODEx4TY4PDwkKysLWfb+K6mpqWF6WlqJa/HsoQ0 ZCPXKEg7SISOQk5PD3t6eAePFxYV+TTfFr6tpRXd0dJTGxsaAdgEJLC0t8eDBA8WBbDDqvY2Xw9jYWC4vL5X3vb29jIyMsLNzf Xq2mkUNfGdnJ11dXVppBLRva2ujr6+vF+hwl5QOnUsAa8BkAF9gdnd3yc3N5e7du2xubhrIic3CwgJlZWWm0ZcgSMb0Ivb3799 neXnZy97XCmSYzerMvtJA+yPga6MxRWtDQUgJOU9Rx5U7mToDaQ9FWbPekPLRbRwGlbq6OsNKZQNbUKr+bvB8nYX+kd1bDlieK Q4KQZDGdggoc9HOhAyETXZTqWk5tebn51NeXu6Iil0CcpS9Y3VF0SNKTU1Vjh1WRGpdPaQFVC8uLubp06ey7HlNDn/HaeV2wS4 Bz3XdCgkrY6h+ZX3/yWtyBxjEVVJSglzAWpUwE/AZ7EAdme15sL29TV5enlW+dHR00NPTE1C/tLSUxcVF2fKV1tVOBt4B9trb2 3nyRPoIa2InCzbKx2+gzXpi21kQmlZIyF5jpqd+l/74T3/hMyPgaEl98eKF0lH5k/X1dQoL5fbdv1RXV0vr+jNQEkjPCgFHJMR IQEobqklmZiYHBwemtSh99+zsrJJMM2VTBZ0DpZwqKiqYn5838+v4e1xcnHYCsITNkpIOzbZ688zz589JT093DNTTcGVlRTmJq jd871t1bJeA5lfOwcptVH9/P62trVbH89IbHx9HLhJUsY3HtoEHgt+At7R39fX1CCAzGRoa4tGjR3q1N4G/zOx8fQ+WgN7n58B XNkAIgyEb+j5VQ0kgWCyO7G88gX8BA0iEQE02M2MAAAAASUVORK5CYII="><span
+              class="_2hQKVL2Pm4yfkiqifapnBp">Found the internet!</span><i
+              class="_1E59q-NCGBwN0Aq_bPsPKb icon icon-refresh_fill"></i></div>
+        </div>
+        <div class="subredditvars-r-askreddit">
+          <div class="_1nxEQl5D2Bx2jxDILRHemb  _378Md-M6pOqwzEiV3lAwYk " id="AppRouter-main-content"
+            aria-hidden="false">
+            <div>
+              <div class="qYj03fU5CXf5t2Fc5iSvg ListingLayout-outerContainer ">
+                <div class="_2wxsLGNmMLx6sEMLJyn2o9 ListingLayout-backgroundContainer"
+                  style="--pseudo-before-background:#eeeeee"></div>
+                <div class="_3ozFtOe6WpJEMUtxDOIvtU"><span style="background:#f0f7fd;filter:none;height:128px"
+                    class="_2L5G9B5yaoqW3IegiYN-FL"><a class="_36MHhLdcmnzdWt0OMdNlwd" href="/r/AskReddit/">
+                      <div style="max-width:1200px" class="_2RkQc9Gtsq3cPQNZLYv4zc">
+                        <div class="_2ejRlONMr5WoDRgyd4GRyM"><span style="padding-top:14px"
+                            class="_2wzi-W7JiZ7A6U6aFvfvSR"></span></div>
+                        <div style="left:50%;transform:translate(-50%, -50%);height:112px"
+                          class="_26j3FxU4jTfjqi8m96HMmI _26j3FxU4jTfjqi8m96HMmI _114maV-96nVPek5oReA0kO _2L0wcm3McgWbJBT9_UHWyU">
+                        </div>
+                      </div>
+                    </a></span>
+                  <div class="_1gVVmSnHZpkUgVShsn7-ua" style="position:static;background:#444e59">
+                    <div class="_1_TJAX-8zAT3vVN1Iz7cys" style="max-width:1200px">
+                      <div><a class="_1O30sSXmfkKMRZqSaESf0S _1YpJV_aDQqujwuofx9-eAX " href="/r/AskReddit/">Posts</a><a
+                          class="_1O30sSXmfkKMRZqSaESf0S  " href="/r/AskReddit/wiki/index">Wiki</a><a
+                          class="_1O30sSXmfkKMRZqSaESf0S  " href="https://www.reddit.com/r/AskRedditAwards"
+                          rel="noopener nofollow ugc" target="_blank">Best of AskReddit</a>
+                        <div class="hcJJEc0gVBKH5pWCFgdET">
+                          <div class="_2wtKbmW1aPrT3MyHoaupQh  "><span>Related Subreddits</span><svg
+                              class="XHbKeEqnW58ib9mTN6jnS u_kypUXmB-k1A5TcC8MI9 _3u_CcXw7slod9vNJKIlYvx"
+                              viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M14.17,9.35,10,13.53,5.83,9.35a.5.5,0,0,1,.35-.85h7.64a.5.5,0,0,1,.35.85" />
+                            </svg></div>
+                          <div class="_1T423RClx-mTPxfuiCw4UN " aria-hidden="true" role="list"><a
+                              class="_1p4TpHzWWRAkGYYw9_jU-B  "
+                              href="https://www.reddit.com/r/AskReddit/wiki/sidebarsubs#wiki_ask_others" role="listitem"
+                              target="_blank" rel="noopener nofollow ugc">Ask Others</a><a
+                              class="_1p4TpHzWWRAkGYYw9_jU-B  "
+                              href="https://www.reddit.com/r/AskReddit/wiki/sidebarsubs#wiki_askreddit_offshoots"
+                              role="listitem" target="_blank" rel="noopener nofollow ugc">AskReddit Offshoots</a><a
+                              class="_1p4TpHzWWRAkGYYw9_jU-B  "
+                              href="https://www.reddit.com/r/AskReddit/wiki/sidebarsubs#wiki_find_a_subreddit"
+                              role="listitem" target="_blank" rel="noopener nofollow ugc">Find a Subreddit</a><a
+                              class="_1p4TpHzWWRAkGYYw9_jU-B  "
+                              href="https://www.reddit.com/r/AskReddit/wiki/sidebarsubs#wiki_learn_something"
+                              role="listitem" target="_blank" rel="noopener nofollow ugc">Learn Something</a><a
+                              class="_1p4TpHzWWRAkGYYw9_jU-B  "
+                              href="https://www.reddit.com/r/AskReddit/wiki/sidebarsubs#wiki_meta" role="listitem"
+                              target="_blank" rel="noopener nofollow ugc">Meta</a><a class="_1p4TpHzWWRAkGYYw9_jU-B  "
+                              href="https://www.reddit.com/r/AskReddit/wiki/sidebarsubs#wiki_offers_.26amp.3B_assistance"
+                              role="listitem" target="_blank" rel="noopener nofollow ugc">Offers/Assistance</a><a
+                              class="_1p4TpHzWWRAkGYYw9_jU-B  "
+                              href="https://www.reddit.com/r/AskReddit/wiki/sidebarsubs#wiki_self_.26amp.3B_others"
+                              role="listitem" target="_blank" rel="noopener nofollow ugc">Self and Others</a><a
+                              class="_1p4TpHzWWRAkGYYw9_jU-B  "
+                              href="https://www.reddit.com/r/AskReddit/wiki/sidebarsubs#wiki_what_is_this______"
+                              role="listitem" target="_blank" rel="noopener nofollow ugc">What is this ______?</a></div>
+                        </div><a class="_1O30sSXmfkKMRZqSaESf0S  " href="https://www.reddit.com/r/AskReddit/gilded/"
+                          rel="noopener nofollow ugc" target="_blank">Gilded</a>
+                        <div class="hcJJEc0gVBKH5pWCFgdET">
+                          <div class="_2wtKbmW1aPrT3MyHoaupQh  "><span>Secret</span><svg
+                              class="XHbKeEqnW58ib9mTN6jnS u_kypUXmB-k1A5TcC8MI9 _3u_CcXw7slod9vNJKIlYvx"
+                              viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M14.17,9.35,10,13.53,5.83,9.35a.5.5,0,0,1,.35-.85h7.64a.5.5,0,0,1,.35.85" />
+                            </svg></div>
+                          <div class="_1T423RClx-mTPxfuiCw4UN " aria-hidden="true" role="list"><a
+                              class="_1p4TpHzWWRAkGYYw9_jU-B  " href="https://en.wikipedia.org/wiki/Killing_of_Harambe"
+                              role="listitem" target="_blank" rel="noopener nofollow ugc">AssCredit</a></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div style="max-width:1600px"></div>
+                  <div class="_31N0dvxfpsO6Ur5AKx4O5d" style="max-width:1600px">
+                    <div
+                      class="_1OVBBWLtHoSPfGCRaPzpTf _3nSp9cdBpqL13CqjdMr2L_ _2udhMC-jldHp_EpAuBeSR1 _2OVNlZuUd8L9v0yVECZ2iA">
+                      <div tabindex="0"></div>
+                      <div class="uI_hDmU5GSiudtABRz_37 ">
+                        <div class="_1oQyIsiPHYt6nx7VOmd1sz _2rszc84L136gWQrkwH6IaM  Post t3_axtih6 "
+                          data-testid="post-container" id="t3_axtih6" tabindex="-1" data-adclicklocation="background">
+                          <div data-test-id="post-content">
+                            <div class="_23h0-EcaBUorIHC-JZyh6J" style="width:40px;border-left:4px solid transparent">
+                              <div class="_1E9mcoVn4MYnuBQSVDt1gC" id="vote-arrows-t3_axtih6"><button
+                                  aria-label="upvote" aria-pressed="false" class="voteButton " data-click-id="upvote"
+                                  id="upvote-button-t3_axtih6"><span
+                                    class="_2q7IQ0BUOWeEZoeAxN555e _3SUsITjKNQ7Tp0Wi2jGxIM qW0l8Af61EP35WIG6vnGk _3edNsMs0PNfyQYofMNVhsG"><i
+                                      class="icon icon-upvote _2Jxk822qXs4DaXwsN7yyHA"></i></span></button>
+                                <div class="_1rZYMD_4xY3gRcSS3p8ODO _3a2ZHWaih05DgAOtvu6cIo " style="color:#1A1A1B">
+                                  52.1k</div><button aria-label="downvote" aria-pressed="false" class="voteButton"
+                                  data-click-id="downvote"><span
+                                    class="_1iKd82bq_nqObFvSH1iC_Q Q0BxYHtCOJ_rNSPJMU2Y7 _2fe-KdD2OM0ciaiux-G1EL _3yQIOwaIuF6gn8db96Gu7y"><i
+                                      class="icon icon-downvote ZyxIIl4FP5gHGrJDzNpUC"></i></span></button>
+                              </div>
+                            </div>
+                            <div class="_14-YvdFiW5iVvfe5wdgmET">
+                              <div class="cZPZhMe-UCZ8htPodMyJ5">
+                                <div class="_3AStxql1mQsrZuUIFP9xSg nU4Je7n-eSXStTBAPMYt8"
+                                  data-adclicklocation="top_bar"><span style="color:#787C7E"
+                                    class="_2fCzxBE1dlMh4OFc7B3Dun">Posted by</span><span
+                                    class="_2VF2J19pUIMSLJFky-7PEI" data-testid="post_timestamp"
+                                    data-click-id="timestamp" style="color:#787C7E">3 years ago</span></div>
+                                <div class="_2wFk1qX4e1cxk8Pkw1rAHk"><i
+                                    class="icon icon-archived_fill _3vju76MdF2FaGmELBeiJ_r _2WSiH2JwZq4bXuvrDn-cgU"
+                                    id="PostBadges--Archived--t3_axtih6"><span
+                                      class="_37iEJpUpWXN00_fpZKHglg">Archived</span></i></div>
+                                <div class="_3XoW0oYd5806XiOr24gGdb"><span class="_2OYwDdghtXEuTF67C95YLY" id=""><span
+                                      id="PostAwardBadges--t3_axtih6-gid_2"><img alt="Gold"
+                                        class="n08B7PrU01wzgZYIh-s7N " id="awardItem__t3_axtih6-gid_2"
+                                        src="https://www.redditstatic.com/gold/awards/icon/gold_32.png"></span><span></span></span><span
+                                    class="_2OYwDdghtXEuTF67C95YLY" id=""><span
+                                      id="PostAwardBadges--t3_axtih6-award_3dd248bc-3438-4c5b-98d4-24421fd6d670"><img
+                                        alt="Coin Gift" class="n08B7PrU01wzgZYIh-s7N "
+                                        id="awardItem__t3_axtih6-award_3dd248bc-3438-4c5b-98d4-24421fd6d670"
+                                        src="https://preview.redd.it/award_images/t5_22cerq/cr1mq4yysv541_CoinGift.png?width=32&amp;height=32&amp;auto=webp&amp;s=c5bcd1a05b74e7a6371c9a71399a28c492a293cb"></span><span></span></span><span
+                                    class="_2OYwDdghtXEuTF67C95YLY" id=""><span
+                                      id="PostAwardBadges--t3_axtih6-gid_1"><img alt="Silver"
+                                        class="n08B7PrU01wzgZYIh-s7N " id="awardItem__t3_axtih6-gid_1"
+                                        src="https://www.redditstatic.com/gold/awards/icon/silver_32.png"></span><span>3</span></span>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="_2FCtq-QzlfuN-SwVMUZMM3 _2v9pwVh0VUYrmhoMv1tHPm t3_axtih6"
+                              data-adclicklocation="title">
+                              <div class="y8HYJ-y_lTUHkQIc1mdCq _2INHSNB8V5eaWp4P0rY_mE">
+                                <div class="_2SdHzo12ISmrC8H86TgSCp _29WrubtjAcKqzJSPdQqQ4h "
+                                  style="--posttitletextcolor:#1A1A1B">
+                                  <h1 class="_eYtD2XCVieq6emjKBH3m">What is the most &quot;worth it&quot; item you have
+                                    ever purchased?</h1>
+                                </div>
+                              </div>
+                              <div class="_1hLrLjnE1G_RBCNcN9MVQf">
+                                <img alt="" src="https://www.redditstatic.com/desktop2x/img/renderTimingPixel.png"
+                                  style="width: 1px; height: 1px;" onload="(__markFirstPostVisible || function(){})();">
+                              </div>
+                            </div>
+                            <div class="_3xX726aBn29LDbsDtzr_6E _1Ap4F5maDtT1E1YuCiaO0r D3IL3FD0RFy_mkKLPwL4"
+                              style="max-width:800px" data-click-id="text">
+                              <div class="_292iotee39Lmt0MkQZ2hPV RichTextJSON-root"></div>
+                            </div>
+                            <div class="_1hwEKkB_38tIoal6fcdrt9">
+                              <div class="_3-miAEojrCvx_4FQ8x3P-s"><a rel="nofollow" data-click-id="comments"
+                                  data-test-id="comments-page-link-num-comments"
+                                  class="_1UoeAeSRhOKSNdY_h3iS1O _1Hw7tY9pMr-T1F4P1C-xNU _3U_7i38RDPV5eBv7m4M-9J _2qww3J5KKzsD7e5DO0BvvU"
+                                  href="/r/AskReddit/comments/axtih6/what_is_the_most_worth_it_item_you_have_ever/"><i
+                                    class="icon icon-comment _3DVrpDrMM9NLT6TlsTUMxC" role="presentation"></i><span
+                                    class="FHCV02u6Cp2zYL0fhQPsO">25.4k comments</span></a>
+                                <div
+                                  class="_JRBNstMcGxbZUxrrIKXe _3U_7i38RDPV5eBv7m4M-9J _3yh2bniLq7bYr4BaiXowdO _1pShbCnOaF7EGWTq6IvZux _3sUJGnemgtNczijwoT8PGg"
+                                  id="t3_axtih6-share-menu"><button data-click-id="share"
+                                    class="kU8ebCMnbXfjCWfqn0WPb"><i
+                                      class="icon icon-share _1GQDWqbF-wkYWbrpmOvjqJ"></i><span
+                                      class="_6_44iTtZoeY6_XChKt5b0">share</span></button></div>
+                                <div data-ignore-click="false" class="_3U_7i38RDPV5eBv7m4M-9J"><button
+                                    class="_10K5i7NW6qcm-UoCtpB3aK YszYBnnIoNY8pZ6UwCivd _3yh2bniLq7bYr4BaiXowdO _2sAFaB0tx4Hd5KxVkdUcAx _3sUJGnemgtNczijwoT8PGg"><span
+                                      class="pthKOcceozMuXLYrLlbL1"><i
+                                        class="_1Xe01txJfRB9udUU85DNeR icon icon-save"></i></span><span
+                                      class="_2-cXnP74241WI7fpcpfPmg _70940WUuFmpHbhKlj8EjZ">save</span></button></div>
+                                <div data-ignore-click="false" class="_3U_7i38RDPV5eBv7m4M-9J"><button
+                                    class="_10K5i7NW6qcm-UoCtpB3aK YszYBnnIoNY8pZ6UwCivd _3yh2bniLq7bYr4BaiXowdO _2sAFaB0tx4Hd5KxVkdUcAx _3sUJGnemgtNczijwoT8PGg"><span
+                                      class="pthKOcceozMuXLYrLlbL1"><i class="icon icon-hide"></i></span><span
+                                      class="_2-cXnP74241WI7fpcpfPmg _70940WUuFmpHbhKlj8EjZ">hide</span></button></div>
+                                <div data-ignore-click="false" class="_3U_7i38RDPV5eBv7m4M-9J"><button
+                                    class="_10K5i7NW6qcm-UoCtpB3aK YszYBnnIoNY8pZ6UwCivd _3yh2bniLq7bYr4BaiXowdO _2sAFaB0tx4Hd5KxVkdUcAx _3sUJGnemgtNczijwoT8PGg"><span
+                                      class="pthKOcceozMuXLYrLlbL1"><i class="icon icon-report"></i></span><span
+                                      class="_2-cXnP74241WI7fpcpfPmg _70940WUuFmpHbhKlj8EjZ">report</span></button>
+                                </div>
+                                <div class="OccjSdFd6HkHhShRg6DOl"></div>
+                                <div class="_3MmwvEEt6fv5kQPFCVJizH">
+                                  <div><button aria-expanded="false" aria-haspopup="true" aria-label="more options"
+                                      id="t3_axtih6-overflow-menu"
+                                      class="_2pFdCpgBihIaYh9DSMWBIu _1EbinKu2t3KjaT2gR156Qp _1k3nXWGGz2NdPr8dg49Tbs _2sAFaB0tx4Hd5KxVkdUcAx _3sUJGnemgtNczijwoT8PGg uMPgOFYlCc5uvpa2Lbteu"><i
+                                        class="_38GxRFSqSC-Z2VLi5Xzkjy icon icon-overflow_horizontal"></i></button>
+                                  </div>
+                                </div>
+                                <div class="_21pmAV9gWG6F_UKVe7YIE0"></div>
+                              </div>
+                              <div class="t4Hq30BDzTeJ85vREX7_M"><span>86% Upvoted</span></div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="_1EjIqPTCvhReSe3IjZptiB _1DUKbp8va6vxOv9zemBDBi" style="border-color:#FFD635">
+                          <div class="_3TLlMYjrPH9Kl9522LpSxb" style="background-color:#FFD635"></div>
+                          <div class="_2p07tPrx9WpxDTQJ5cmVNe"><i
+                              class="icon icon-archived _3Apkcb3itLCGec85v2ZzFz"><span
+                                class="_37iEJpUpWXN00_fpZKHglg"></span></i></div>
+                          <div class="_2jpm-rNr0Hniw6BX3NWMVe">
+                            <div class="Nt8TnDvJ2BsL8KWcFQKy5">This thread is archived</div>
+                            <div class="_2J85dtk0HKQBLk8HTSWduv">New comments cannot be posted and votes cannot be cast
+                            </div>
+                          </div>
+                        </div>
+                        <div class="_2ulKn_zs7Y3LWsOqoFLHPo ">
+                          <div class="_1avwNy0RnwlEwVEW-fwKCI">
+                            <div class="_3N0NZT0gc58Hq7p0XRUjsH"><button id="CommentSort--SortPicker"
+                                class="_10K5i7NW6qcm-UoCtpB3aK _3LwUIE7yX7CZQKmD2L87vf _1nMYOibX9neGRqvcaCrPDz zW82EsY6Pakxpq4WWvsUG "><span
+                                  class="_2-cXnP74241WI7fpcpfPmg _3LRBCA71BwLLXBNsSlY7HW">Sort by:
+                                  best</span></button><svg
+                                class="XHbKeEqnW58ib9mTN6jnS u_kypUXmB-k1A5TcC8MI9 _2MGxQvIhmM2I5CzPdSJTtM"
+                                viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M14.17,9.35,10,13.53,5.83,9.35a.5.5,0,0,1,.35-.85h7.64a.5.5,0,0,1,.35.85" />
+                              </svg></div>
+                          </div>
+                        </div>
+                        <div class="_1k2YW82YLtn1xvksm7RHIO"><a class="_1WUTKdOO96akYfbq4CK6z6 "
+                            href="/r/AskReddit/duplicates/axtih6/what_is_the_most_worth_it_item_you_have_ever/">View
+                            discussions in 2 other communities</a></div>
+                        <div class="_2M2wOqmeoPVvcSsJ6Po9-V ">
+                          <div>
+                            <div class="_1ump7uMrSA43cqok14tPrG"
+                              style="--commentswrapper-gradient-color:#FFFFFF;max-height:unset">
+                              <div class="_1YCqQVO-9r-Up6QPB9H6_4 _1YCqQVO-9r-Up6QPB9H6_4">
+                                <div>
+                                  <div>
+                                    <div>
+                                      <div id="t1_ehwfe48" style="padding-left:16px" tabindex="-1"
+                                        class="_3sf33-9rVAO_v4y0pIW_CH">
+                                        <div class="_1DooEIX-1Nj5rweIc5cw_E">
+                                          <div class="_3Wv3am0TXfTcugZJ6niui">
+                                            <div class="_36AIN2ppxy_z-XSDxTvYj5 t1_ehwfe48 undefined"><i
+                                                class="threadline"></i></div>
+                                          </div>
+                                        </div>
+                                        <div
+                                          class="Comment t1_ehwfe48 P8SGAKMtRxNwlmLz1zdJu HZ-cv9q391bm8s7qT54B3 _1z5rdmX8TDr6mqwNv7A70U">
+                                          <div class="_2CkgPEY8ljDZH3np9UY1ws">
+                                            <img alt=""
+                                              src="https://www.redditstatic.com/desktop2x/img/renderTimingPixel.png"
+                                              style="width: 1px; height: 1px;"
+                                              onload="(__markFirstCommentVisible || function(){})();">
+                                          </div><button
+                                            class="_1nGapmdexvR0BuOkfAi6wa t1_ehwfe48 _1zN1-lYh2LfbYOMAho_O8g _2Gzh48SaLz7dQBCULfOC6V"><i
+                                              class="icon icon-expand _1tnrhhM9S7dYjApTfvd14l"></i></button><a
+                                            class="_3GfQMgsm3HGd3838lwqCST" data-testid="comment_author_icon"
+                                            href="/user/TheEngLife/">
+                                            <div class="_13ScjOmi6dGdJw0JAonQEr"></div>
+                                          </a>
+                                          <div class="_3tw__eCCe7j-epNCKGXUKk"><span
+                                              class="_1RIl585IYPW6cmNXwgRz0J">level 1</span>
+                                            <div
+                                              class="-Xcv3XBXmgiY2X5RqaPbO _1S45SPAIb30fsXtEcKPSdt _3LqBzV8aCO9tge99jHiUGy "
+                                              data-testid="post-comment-header"><span class="_1a_HxF03jCyxnx706hQmJR">
+                                                <div class="_3QEK34iVL1BjyHAVleVVNQ"></div><span
+                                                  class="_2ETuFsVzMBxiHia6HfJCTQ _8b8fUdBRxCYj9MkNpFvvv"> &#xB7;
+                                                </span><a class="_3yx4Dn0W3Yunucf5sVJeFU"
+                                                  data-testid="comment_timestamp"
+                                                  href="https://www.reddit.com/r/AskReddit/comments/axtih6/comment/ehwfe48/?utm_source=reddit&amp;utm_medium=web2x&amp;context=3"
+                                                  id="CommentTopMeta--Created--t1_ehwfe48" target="_blank"
+                                                  rel="nofollow noopener noreferrer">3 yr. ago</a>
+                                                <div class="_3XoW0oYd5806XiOr24gGdb"></div>
+                                              </span></div>
+                                            <div data-testid="comment" class="_3cjCphgls6DH-irkVaA0GM ">
+                                              <div class="_292iotee39Lmt0MkQZ2hPV RichTextJSON-root">
+                                                <p class="_1qeIAgB0cPwnLhDF9XSiJM">A Miele canister vacuum. I had read
+                                                  the 4 AMAs from the vacuum repair tech and he recommended Miele over
+                                                  all the other ones. My girlfriend and I found the C3 Total Care on
+                                                  sale in Canada for $650 and I jumped on it. She was hesitant to spend
+                                                  that much on a vacuum but it outperforms the $200 uprights by leaps
+                                                  and bounds. So much quieter, can get into tight spaces, better
+                                                  suction, a power head for the carpets, and from what I have heard,
+                                                  will last upwards of thirty years if the proper upkeep is done.
+                                                  Spending a little more to get a premium product is sometimes worth it
+                                                  and this is definitely one of those cases.</p>
+                                              </div>
+                                            </div>
+                                            <div class="_3KgrO85L1p9wQbgwG27q4y">
+                                              <div
+                                                class="_1E9mcoVn4MYnuBQSVDt1gC _2oM1YqCxIwkvwyeZamWwhW _1ewTEGuogtFmDvDII2T2Yy"
+                                                id="vote-arrows-t1_ehwfe48"><button aria-label="upvote"
+                                                  aria-pressed="false" class="voteButton _2m5vzALl8kQdr9kwIFUo5t "
+                                                  data-click-id="upvote"><span
+                                                    class="_2q7IQ0BUOWeEZoeAxN555e _3SUsITjKNQ7Tp0Wi2jGxIM _22nWXKAY6OzAfK5GcUqWV2 qW0l8Af61EP35WIG6vnGk _3edNsMs0PNfyQYofMNVhsG"><i
+                                                      class="icon icon-upvote _2Jxk822qXs4DaXwsN7yyHA"></i></span></button>
+                                                <div
+                                                  class="_1rZYMD_4xY3gRcSS3p8ODO _25IkBM0rRUqWX5ZojEMAFQ _3ChHiOyYyUkpZ_Nm3ZyM2M"
+                                                  style="color:#1A1A1B">364</div><button aria-label="downvote"
+                                                  aria-pressed="false" class="voteButton _2m5vzALl8kQdr9kwIFUo5t"
+                                                  data-click-id="downvote"><span
+                                                    class="_1iKd82bq_nqObFvSH1iC_Q Q0BxYHtCOJ_rNSPJMU2Y7 _2fe-KdD2OM0ciaiux-G1EL _3yQIOwaIuF6gn8db96Gu7y"><i
+                                                      class="icon icon-downvote ZyxIIl4FP5gHGrJDzNpUC"></i></span></button>
+                                              </div>
+                                              <div
+                                                class="XZK-LTFT5CgGo9MvPQQsy _1LXnp2ufrzN6ioaTLTjGQ1 _2t8wLytikHzPCUnvXdS_wu  _2_lhaFUJdP8q0o2L9MN2TN">
+                                                <div id="t1_ehwfe48-comment-share-menu"><button
+                                                    class="_374Hkkigy4E4srsI2WktEd">Share</button></div><button
+                                                  class="_374Hkkigy4E4srsI2WktEd _2hr3tRWszeMRQ0u_Whs7t8 _14hLFU5cIJCyxH9DSgsCov">Report</button><button
+                                                  class="_374Hkkigy4E4srsI2WktEd _2hr3tRWszeMRQ0u_Whs7t8 _14hLFU5cIJCyxH9DSgsCov">Save</button>
+                                                <div
+                                                  class="hrV8gUgmt0V7wM2wgZ81l _1YnPvd-E5MbmcM3PvRRcX _14hLFU5cIJCyxH9DSgsCov">
+                                                  <button aria-expanded="false" aria-haspopup="true"
+                                                    aria-label="more options" id="t1_ehwfe48-overflow-menu"
+                                                    class="_2pFdCpgBihIaYh9DSMWBIu _1VR6DV38j4rMT5OMeU4gJZ uMPgOFYlCc5uvpa2Lbteu"><i
+                                                      class="_38GxRFSqSC-Z2VLi5Xzkjy icon icon-overflow_horizontal"></i></button>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div>
+                                  <div>
+                                    <div id="moreComments-t1_eih000z" style="padding-left:21px" tabindex="-1"
+                                      class="_3sf33-9rVAO_v4y0pIW_CH">
+                                      <div class="_1DooEIX-1Nj5rweIc5cw_E">
+                                        <div class="_36AIN2ppxy_z-XSDxTvYj5 t1_ehwfe48"><i class="threadline"></i></div>
+                                      </div>
+                                      <div class="_3_mqV5-KnILOxl1TvgYtCk">
+                                        <p class="_2HYsucNpMdUpYlGBMviq8M _23013peWUhznY89KuYPZKv">22 more replies</p>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div>
+                                  <div>
+                                    <div>
+                                      <div id="t1_ehwfku3" style="padding-left:16px" tabindex="-1"
+                                        class="_3sf33-9rVAO_v4y0pIW_CH">
+                                        <div class="_1DooEIX-1Nj5rweIc5cw_E">
+                                          <div class="_3Wv3am0TXfTcugZJ6niui">
+                                            <div class="_36AIN2ppxy_z-XSDxTvYj5 t1_ehwfku3 undefined"><i
+                                                class="threadline"></i></div>
+                                          </div>
+                                        </div>
+                                        <div
+                                          class="Comment t1_ehwfku3 P8SGAKMtRxNwlmLz1zdJu HZ-cv9q391bm8s7qT54B3 _1z5rdmX8TDr6mqwNv7A70U">
+                                          <button
+                                            class="_1nGapmdexvR0BuOkfAi6wa t1_ehwfku3 _1zN1-lYh2LfbYOMAho_O8g _2Gzh48SaLz7dQBCULfOC6V"><i
+                                              class="icon icon-expand _1tnrhhM9S7dYjApTfvd14l"></i></button><a
+                                            class="_3GfQMgsm3HGd3838lwqCST" data-testid="comment_author_icon"
+                                            href="/user/ToaMexx/">
+                                            <div class="_13ScjOmi6dGdJw0JAonQEr"></div>
+                                          </a>
+                                          <div class="_3tw__eCCe7j-epNCKGXUKk"><span
+                                              class="_1RIl585IYPW6cmNXwgRz0J">level 1</span>
+                                            <div
+                                              class="-Xcv3XBXmgiY2X5RqaPbO _1S45SPAIb30fsXtEcKPSdt _3LqBzV8aCO9tge99jHiUGy "
+                                              data-testid="post-comment-header"><span class="_1a_HxF03jCyxnx706hQmJR">
+                                                <div class="_3QEK34iVL1BjyHAVleVVNQ"></div><span
+                                                  class="_2ETuFsVzMBxiHia6HfJCTQ _8b8fUdBRxCYj9MkNpFvvv"> &#xB7;
+                                                </span><a class="_3yx4Dn0W3Yunucf5sVJeFU"
+                                                  data-testid="comment_timestamp"
+                                                  href="https://www.reddit.com/r/AskReddit/comments/axtih6/comment/ehwfku3/?utm_source=reddit&amp;utm_medium=web2x&amp;context=3"
+                                                  id="CommentTopMeta--Created--t1_ehwfku3" target="_blank"
+                                                  rel="nofollow noopener noreferrer">3 yr. ago</a>
+                                                <div class="_3XoW0oYd5806XiOr24gGdb"></div>
+                                              </span></div>
+                                            <div data-testid="comment" class="_3cjCphgls6DH-irkVaA0GM ">
+                                              <div class="_292iotee39Lmt0MkQZ2hPV RichTextJSON-root">
+                                                <p class="_1qeIAgB0cPwnLhDF9XSiJM">Years ago my dad bought a plastic
+                                                  severed hand as a Halloween prop. Every year we stick that hand in
+                                                  different places, hanging from the stove, the trunk of our car, under
+                                                  the front porch, basically anywhere we wanted. I even tossed it at him
+                                                  once or twice when he asked for a hand (just like Buzz did to Woody in
+                                                  Toy Story).</p>
+                                                <p class="_1qeIAgB0cPwnLhDF9XSiJM"><br></p>
+                                                <p class="_1qeIAgB0cPwnLhDF9XSiJM">Hands down, one of the best purchases
+                                                  he&apos;s ever made.</p>
+                                              </div>
+                                            </div>
+                                            <div class="_3KgrO85L1p9wQbgwG27q4y">
+                                              <div
+                                                class="_1E9mcoVn4MYnuBQSVDt1gC _2oM1YqCxIwkvwyeZamWwhW _1ewTEGuogtFmDvDII2T2Yy"
+                                                id="vote-arrows-t1_ehwfku3"><button aria-label="upvote"
+                                                  aria-pressed="false" class="voteButton _2m5vzALl8kQdr9kwIFUo5t "
+                                                  data-click-id="upvote"><span
+                                                    class="_2q7IQ0BUOWeEZoeAxN555e _3SUsITjKNQ7Tp0Wi2jGxIM _22nWXKAY6OzAfK5GcUqWV2 qW0l8Af61EP35WIG6vnGk _3edNsMs0PNfyQYofMNVhsG"><i
+                                                      class="icon icon-upvote _2Jxk822qXs4DaXwsN7yyHA"></i></span></button>
+                                                <div
+                                                  class="_1rZYMD_4xY3gRcSS3p8ODO _25IkBM0rRUqWX5ZojEMAFQ _3ChHiOyYyUkpZ_Nm3ZyM2M"
+                                                  style="color:#1A1A1B">289</div><button aria-label="downvote"
+                                                  aria-pressed="false" class="voteButton _2m5vzALl8kQdr9kwIFUo5t"
+                                                  data-click-id="downvote"><span
+                                                    class="_1iKd82bq_nqObFvSH1iC_Q Q0BxYHtCOJ_rNSPJMU2Y7 _2fe-KdD2OM0ciaiux-G1EL _3yQIOwaIuF6gn8db96Gu7y"><i
+                                                      class="icon icon-downvote ZyxIIl4FP5gHGrJDzNpUC"></i></span></button>
+                                              </div>
+                                              <div
+                                                class="XZK-LTFT5CgGo9MvPQQsy _1LXnp2ufrzN6ioaTLTjGQ1 _2t8wLytikHzPCUnvXdS_wu  _2_lhaFUJdP8q0o2L9MN2TN">
+                                                <div id="t1_ehwfku3-comment-share-menu"><button
+                                                    class="_374Hkkigy4E4srsI2WktEd">Share</button></div><button
+                                                  class="_374Hkkigy4E4srsI2WktEd _2hr3tRWszeMRQ0u_Whs7t8 _14hLFU5cIJCyxH9DSgsCov">Report</button><button
+                                                  class="_374Hkkigy4E4srsI2WktEd _2hr3tRWszeMRQ0u_Whs7t8 _14hLFU5cIJCyxH9DSgsCov">Save</button>
+                                                <div
+                                                  class="hrV8gUgmt0V7wM2wgZ81l _1YnPvd-E5MbmcM3PvRRcX _14hLFU5cIJCyxH9DSgsCov">
+                                                  <button aria-expanded="false" aria-haspopup="true"
+                                                    aria-label="more options" id="t1_ehwfku3-overflow-menu"
+                                                    class="_2pFdCpgBihIaYh9DSMWBIu _1VR6DV38j4rMT5OMeU4gJZ uMPgOFYlCc5uvpa2Lbteu"><i
+                                                      class="_38GxRFSqSC-Z2VLi5Xzkjy icon icon-overflow_horizontal"></i></button>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div>
+                                  <div>
+                                    <div id="moreComments-t1_ehx5zss" style="padding-left:21px" tabindex="-1"
+                                      class="_3sf33-9rVAO_v4y0pIW_CH">
+                                      <div class="_1DooEIX-1Nj5rweIc5cw_E">
+                                        <div class="_36AIN2ppxy_z-XSDxTvYj5 t1_ehwfku3"><i class="threadline"></i></div>
+                                      </div>
+                                      <div class="_3_mqV5-KnILOxl1TvgYtCk">
+                                        <p class="_2HYsucNpMdUpYlGBMviq8M _23013peWUhznY89KuYPZKv">1 more reply</p>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div>
+                                  <div>
+                                    <div>
+                                      <div id="t1_ehwamnx" style="padding-left:16px" tabindex="-1"
+                                        class="_3sf33-9rVAO_v4y0pIW_CH">
+                                        <div class="_1DooEIX-1Nj5rweIc5cw_E">
+                                          <div class="_3Wv3am0TXfTcugZJ6niui">
+                                            <div class="_36AIN2ppxy_z-XSDxTvYj5 t1_ehwamnx undefined"><i
+                                                class="threadline"></i></div>
+                                          </div>
+                                        </div>
+                                        <div
+                                          class="Comment t1_ehwamnx P8SGAKMtRxNwlmLz1zdJu HZ-cv9q391bm8s7qT54B3 _1z5rdmX8TDr6mqwNv7A70U">
+                                          <button
+                                            class="_1nGapmdexvR0BuOkfAi6wa t1_ehwamnx _1zN1-lYh2LfbYOMAho_O8g _2Gzh48SaLz7dQBCULfOC6V"><i
+                                              class="icon icon-expand _1tnrhhM9S7dYjApTfvd14l"></i></button><a
+                                            class="_3GfQMgsm3HGd3838lwqCST" data-testid="comment_author_icon"
+                                            href="/user/patches402/">
+                                            <div class="_13ScjOmi6dGdJw0JAonQEr"></div>
+                                          </a>
+                                          <div class="_3tw__eCCe7j-epNCKGXUKk"><span
+                                              class="_1RIl585IYPW6cmNXwgRz0J">level 1</span>
+                                            <div
+                                              class="-Xcv3XBXmgiY2X5RqaPbO _1S45SPAIb30fsXtEcKPSdt _3LqBzV8aCO9tge99jHiUGy "
+                                              data-testid="post-comment-header"><span class="_1a_HxF03jCyxnx706hQmJR">
+                                                <div class="_3QEK34iVL1BjyHAVleVVNQ"></div><span
+                                                  class="_2ETuFsVzMBxiHia6HfJCTQ _8b8fUdBRxCYj9MkNpFvvv"> &#xB7;
+                                                </span><a class="_3yx4Dn0W3Yunucf5sVJeFU"
+                                                  data-testid="comment_timestamp"
+                                                  href="https://www.reddit.com/r/AskReddit/comments/axtih6/comment/ehwamnx/?utm_source=reddit&amp;utm_medium=web2x&amp;context=3"
+                                                  id="CommentTopMeta--Created--t1_ehwamnx" target="_blank"
+                                                  rel="nofollow noopener noreferrer">3 yr. ago</a>
+                                                <div class="_3XoW0oYd5806XiOr24gGdb"></div>
+                                              </span></div>
+                                            <div data-testid="comment" class="_3cjCphgls6DH-irkVaA0GM ">
+                                              <div class="_292iotee39Lmt0MkQZ2hPV RichTextJSON-root">
+                                                <p class="_1qeIAgB0cPwnLhDF9XSiJM">I bought an eight outlet power strip
+                                                  with surge protectors and 4 usb charger plug ins built into the power
+                                                  strip. I have everything on my entertainment stand all plugged in and
+                                                  a phone charger that reaches from there all the way to the couch.</p>
+                                              </div>
+                                            </div>
+                                            <div class="_3KgrO85L1p9wQbgwG27q4y">
+                                              <div
+                                                class="_1E9mcoVn4MYnuBQSVDt1gC _2oM1YqCxIwkvwyeZamWwhW _1ewTEGuogtFmDvDII2T2Yy"
+                                                id="vote-arrows-t1_ehwamnx"><button aria-label="upvote"
+                                                  aria-pressed="false" class="voteButton _2m5vzALl8kQdr9kwIFUo5t "
+                                                  data-click-id="upvote"><span
+                                                    class="_2q7IQ0BUOWeEZoeAxN555e _3SUsITjKNQ7Tp0Wi2jGxIM _22nWXKAY6OzAfK5GcUqWV2 qW0l8Af61EP35WIG6vnGk _3edNsMs0PNfyQYofMNVhsG"><i
+                                                      class="icon icon-upvote _2Jxk822qXs4DaXwsN7yyHA"></i></span></button>
+                                                <div
+                                                  class="_1rZYMD_4xY3gRcSS3p8ODO _25IkBM0rRUqWX5ZojEMAFQ _3ChHiOyYyUkpZ_Nm3ZyM2M"
+                                                  style="color:#1A1A1B">2.9k</div><button aria-label="downvote"
+                                                  aria-pressed="false" class="voteButton _2m5vzALl8kQdr9kwIFUo5t"
+                                                  data-click-id="downvote"><span
+                                                    class="_1iKd82bq_nqObFvSH1iC_Q Q0BxYHtCOJ_rNSPJMU2Y7 _2fe-KdD2OM0ciaiux-G1EL _3yQIOwaIuF6gn8db96Gu7y"><i
+                                                      class="icon icon-downvote ZyxIIl4FP5gHGrJDzNpUC"></i></span></button>
+                                              </div>
+                                              <div
+                                                class="XZK-LTFT5CgGo9MvPQQsy _1LXnp2ufrzN6ioaTLTjGQ1 _2t8wLytikHzPCUnvXdS_wu  _2_lhaFUJdP8q0o2L9MN2TN">
+                                                <div id="t1_ehwamnx-comment-share-menu"><button
+                                                    class="_374Hkkigy4E4srsI2WktEd">Share</button></div><button
+                                                  class="_374Hkkigy4E4srsI2WktEd _2hr3tRWszeMRQ0u_Whs7t8 _14hLFU5cIJCyxH9DSgsCov">Report</button><button
+                                                  class="_374Hkkigy4E4srsI2WktEd _2hr3tRWszeMRQ0u_Whs7t8 _14hLFU5cIJCyxH9DSgsCov">Save</button>
+                                                <div
+                                                  class="hrV8gUgmt0V7wM2wgZ81l _1YnPvd-E5MbmcM3PvRRcX _14hLFU5cIJCyxH9DSgsCov">
+                                                  <button aria-expanded="false" aria-haspopup="true"
+                                                    aria-label="more options" id="t1_ehwamnx-overflow-menu"
+                                                    class="_2pFdCpgBihIaYh9DSMWBIu _1VR6DV38j4rMT5OMeU4gJZ uMPgOFYlCc5uvpa2Lbteu"><i
+                                                      class="_38GxRFSqSC-Z2VLi5Xzkjy icon icon-overflow_horizontal"></i></button>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div>
+                                  <div>
+                                    <div>
+                                      <div id="t1_ehwn1nt" style="padding-left:37px" tabindex="-1"
+                                        class="_3sf33-9rVAO_v4y0pIW_CH">
+                                        <div class="_1DooEIX-1Nj5rweIc5cw_E">
+                                          <div class="_36AIN2ppxy_z-XSDxTvYj5 t1_ehwamnx"><i class="threadline"></i>
+                                          </div>
+                                          <div class="_3Wv3am0TXfTcugZJ6niui">
+                                            <div class="_36AIN2ppxy_z-XSDxTvYj5 t1_ehwn1nt "><i class="threadline"></i>
+                                            </div>
+                                          </div>
+                                        </div>
+                                        <div class="Comment t1_ehwn1nt P8SGAKMtRxNwlmLz1zdJu HZ-cv9q391bm8s7qT54B3">
+                                          <button
+                                            class="_1nGapmdexvR0BuOkfAi6wa t1_ehwn1nt _1zN1-lYh2LfbYOMAho_O8g _2Gzh48SaLz7dQBCULfOC6V"><i
+                                              class="icon icon-expand _1tnrhhM9S7dYjApTfvd14l"></i></button><a
+                                            class="_3GfQMgsm3HGd3838lwqCST" data-testid="comment_author_icon"
+                                            href="/user/NC_Vixen/">
+                                            <div class="_13ScjOmi6dGdJw0JAonQEr"></div>
+                                          </a>
+                                          <div class="_3tw__eCCe7j-epNCKGXUKk"><span
+                                              class="_1RIl585IYPW6cmNXwgRz0J">level 2</span>
+                                            <div
+                                              class="-Xcv3XBXmgiY2X5RqaPbO _1S45SPAIb30fsXtEcKPSdt _3LqBzV8aCO9tge99jHiUGy "
+                                              data-testid="post-comment-header"><span class="_1a_HxF03jCyxnx706hQmJR">
+                                                <div class="_3QEK34iVL1BjyHAVleVVNQ"></div><span
+                                                  class="_2ETuFsVzMBxiHia6HfJCTQ _8b8fUdBRxCYj9MkNpFvvv"> &#xB7;
+                                                </span><a class="_3yx4Dn0W3Yunucf5sVJeFU"
+                                                  data-testid="comment_timestamp"
+                                                  href="https://www.reddit.com/r/AskReddit/comments/axtih6/comment/ehwn1nt/?utm_source=reddit&amp;utm_medium=web2x&amp;context=3"
+                                                  id="CommentTopMeta--Created--t1_ehwn1nt" target="_blank"
+                                                  rel="nofollow noopener noreferrer">3 yr. ago</a>
+                                                <div class="_3XoW0oYd5806XiOr24gGdb"></div>
+                                              </span></div>
+                                            <div data-testid="comment" class="_3cjCphgls6DH-irkVaA0GM ">
+                                              <div class="_292iotee39Lmt0MkQZ2hPV RichTextJSON-root">
+                                                <p class="_1qeIAgB0cPwnLhDF9XSiJM">My only problem with these, is that
+                                                  most have 0.5amp chargers, where as you can get some nice usb chargers
+                                                  which charge 4x faster.</p>
+                                                <p class="_1qeIAgB0cPwnLhDF9XSiJM">I bought a 6 port fast charging usb
+                                                  adapter with swappable plugs (so you dont need adapters when
+                                                  traveling) and a couple of 3m braided usb C cords.</p>
+                                              </div>
+                                            </div>
+                                            <div class="_3KgrO85L1p9wQbgwG27q4y">
+                                              <div
+                                                class="_1E9mcoVn4MYnuBQSVDt1gC _2oM1YqCxIwkvwyeZamWwhW _1ewTEGuogtFmDvDII2T2Yy"
+                                                id="vote-arrows-t1_ehwn1nt"><button aria-label="upvote"
+                                                  aria-pressed="false" class="voteButton _2m5vzALl8kQdr9kwIFUo5t "
+                                                  data-click-id="upvote"><span
+                                                    class="_2q7IQ0BUOWeEZoeAxN555e _3SUsITjKNQ7Tp0Wi2jGxIM _22nWXKAY6OzAfK5GcUqWV2 qW0l8Af61EP35WIG6vnGk _3edNsMs0PNfyQYofMNVhsG"><i
+                                                      class="icon icon-upvote _2Jxk822qXs4DaXwsN7yyHA"></i></span></button>
+                                                <div
+                                                  class="_1rZYMD_4xY3gRcSS3p8ODO _25IkBM0rRUqWX5ZojEMAFQ _3ChHiOyYyUkpZ_Nm3ZyM2M"
+                                                  style="color:#1A1A1B">158</div><button aria-label="downvote"
+                                                  aria-pressed="false" class="voteButton _2m5vzALl8kQdr9kwIFUo5t"
+                                                  data-click-id="downvote"><span
+                                                    class="_1iKd82bq_nqObFvSH1iC_Q Q0BxYHtCOJ_rNSPJMU2Y7 _2fe-KdD2OM0ciaiux-G1EL _3yQIOwaIuF6gn8db96Gu7y"><i
+                                                      class="icon icon-downvote ZyxIIl4FP5gHGrJDzNpUC"></i></span></button>
+                                              </div>
+                                              <div
+                                                class="XZK-LTFT5CgGo9MvPQQsy _1LXnp2ufrzN6ioaTLTjGQ1 _2Ik7QEXtA-lbZKj0ssL89G  _2_lhaFUJdP8q0o2L9MN2TN">
+                                                <div id="t1_ehwn1nt-comment-share-menu"><button
+                                                    class="_374Hkkigy4E4srsI2WktEd">Share</button></div><button
+                                                  class="_374Hkkigy4E4srsI2WktEd _2hr3tRWszeMRQ0u_Whs7t8 _14hLFU5cIJCyxH9DSgsCov">Report</button><button
+                                                  class="_374Hkkigy4E4srsI2WktEd _2hr3tRWszeMRQ0u_Whs7t8 _14hLFU5cIJCyxH9DSgsCov">Save</button>
+                                                <div
+                                                  class="hrV8gUgmt0V7wM2wgZ81l _1YnPvd-E5MbmcM3PvRRcX _14hLFU5cIJCyxH9DSgsCov">
+                                                  <button aria-expanded="false" aria-haspopup="true"
+                                                    aria-label="more options" id="t1_ehwn1nt-overflow-menu"
+                                                    class="_2pFdCpgBihIaYh9DSMWBIu _1VR6DV38j4rMT5OMeU4gJZ uMPgOFYlCc5uvpa2Lbteu"><i
+                                                      class="_38GxRFSqSC-Z2VLi5Xzkjy icon icon-overflow_horizontal"></i></button>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div>
+                                  <div>
+                                    <div id="continueThread-t1_ehwn1nt" style="padding-left:42px" tabindex="-1"
+                                      class="_3sf33-9rVAO_v4y0pIW_CH">
+                                      <div class="_1DooEIX-1Nj5rweIc5cw_E">
+                                        <div class="_36AIN2ppxy_z-XSDxTvYj5 t1_ehwamnx"><i class="threadline"></i></div>
+                                        <div class="_36AIN2ppxy_z-XSDxTvYj5 t1_ehwn1nt"><i class="threadline"></i></div>
+                                      </div>
+                                      <div class="_3ndawrYzcvjHPJFYUHijfP "><a class="b57A3J7QBa7TvY8XeupVn"
+                                          href="/r/AskReddit/comments/axtih6/comment/ehwn1nt/"><span
+                                            class="_2bsN7AuzEexqxXD-vhOkM7">Continue this thread</span>&#xA0;<svg
+                                            viewbox="0 0 11.4 11.4" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                                            class="egHA5MD_goQfvgLP3zgST">
+                                            <g>
+                                              <path fill="inherit"
+                                                d="m11.17929,5.99479c0.08081,-0.19519 0.08081,-0.41599 0,-0.61118c-0.0408,-0.0984 -0.0992,-0.1864 -0.17361,-0.2608l-4.79963,-4.79911c-0.31283,-0.3128 -0.81847,-0.3128 -1.1313,0c-0.31283,0.31279 -0.31283,0.81918 0,1.13118l3.43471,3.43433l-7.66949,0c-0.44244,0 -0.80007,0.3584 -0.80007,0.79999c0,0.44159 0.35763,0.79999 0.80007,0.79999l7.66949,0l-3.43471,3.43433c-0.31283,0.3128 -0.31283,0.81919 0,1.13118c0.15601,0.156 0.36083,0.2344 0.56565,0.2344c0.20482,0 0.40964,-0.0784 0.56565,-0.2344l4.79963,-4.79911c0.07441,-0.0744 0.13281,-0.1624 0.17361,-0.2608" />
+                                            </g>
+                                          </svg></a></div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div>
+                                  <div>
+                                    <div id="moreComments-t1_ehwn268" style="padding-left:21px" tabindex="-1"
+                                      class="_3sf33-9rVAO_v4y0pIW_CH">
+                                      <div class="_1DooEIX-1Nj5rweIc5cw_E">
+                                        <div class="_36AIN2ppxy_z-XSDxTvYj5 t1_ehwamnx"><i class="threadline"></i></div>
+                                      </div>
+                                      <div class="_3_mqV5-KnILOxl1TvgYtCk">
+                                        <p class="_2HYsucNpMdUpYlGBMviq8M _23013peWUhznY89KuYPZKv">31 more replies</p>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div>
+                                  <div>
+                                    <div>
+                                      <div id="t1_ehwha24" style="padding-left:16px" tabindex="-1"
+                                        class="_3sf33-9rVAO_v4y0pIW_CH">
+                                        <div class="_1DooEIX-1Nj5rweIc5cw_E">
+                                          <div class="_3Wv3am0TXfTcugZJ6niui">
+                                            <div class="_36AIN2ppxy_z-XSDxTvYj5 t1_ehwha24 undefined"><i
+                                                class="threadline"></i></div>
+                                          </div>
+                                        </div>
+                                        <div
+                                          class="Comment t1_ehwha24 P8SGAKMtRxNwlmLz1zdJu HZ-cv9q391bm8s7qT54B3 _1z5rdmX8TDr6mqwNv7A70U">
+                                          <button
+                                            class="_1nGapmdexvR0BuOkfAi6wa t1_ehwha24 _1zN1-lYh2LfbYOMAho_O8g _2Gzh48SaLz7dQBCULfOC6V"><i
+                                              class="icon icon-expand _1tnrhhM9S7dYjApTfvd14l"></i></button><a
+                                            class="_3GfQMgsm3HGd3838lwqCST" data-testid="comment_author_icon"
+                                            href="/user/molliewhopped/">
+                                            <div class="_13ScjOmi6dGdJw0JAonQEr"></div>
+                                          </a>
+                                          <div class="_3tw__eCCe7j-epNCKGXUKk"><span
+                                              class="_1RIl585IYPW6cmNXwgRz0J">level 1</span>
+                                            <div
+                                              class="-Xcv3XBXmgiY2X5RqaPbO _1S45SPAIb30fsXtEcKPSdt _3LqBzV8aCO9tge99jHiUGy "
+                                              data-testid="post-comment-header"><span class="_1a_HxF03jCyxnx706hQmJR">
+                                                <div class="_3QEK34iVL1BjyHAVleVVNQ"></div><span
+                                                  class="_2ETuFsVzMBxiHia6HfJCTQ _8b8fUdBRxCYj9MkNpFvvv"> &#xB7;
+                                                </span><a class="_3yx4Dn0W3Yunucf5sVJeFU"
+                                                  data-testid="comment_timestamp"
+                                                  href="https://www.reddit.com/r/AskReddit/comments/axtih6/comment/ehwha24/?utm_source=reddit&amp;utm_medium=web2x&amp;context=3"
+                                                  id="CommentTopMeta--Created--t1_ehwha24" target="_blank"
+                                                  rel="nofollow noopener noreferrer">3 yr. ago</a>
+                                                <div class="_3XoW0oYd5806XiOr24gGdb"></div>
+                                              </span></div>
+                                            <div data-testid="comment" class="_3cjCphgls6DH-irkVaA0GM ">
+                                              <div class="_292iotee39Lmt0MkQZ2hPV RichTextJSON-root">
+                                                <p class="_1qeIAgB0cPwnLhDF9XSiJM">10 ft charging cord for my phone.</p>
+                                              </div>
+                                            </div>
+                                            <div class="_3KgrO85L1p9wQbgwG27q4y">
+                                              <div
+                                                class="_1E9mcoVn4MYnuBQSVDt1gC _2oM1YqCxIwkvwyeZamWwhW _1ewTEGuogtFmDvDII2T2Yy"
+                                                id="vote-arrows-t1_ehwha24"><button aria-label="upvote"
+                                                  aria-pressed="false" class="voteButton _2m5vzALl8kQdr9kwIFUo5t "
+                                                  data-click-id="upvote"><span
+                                                    class="_2q7IQ0BUOWeEZoeAxN555e _3SUsITjKNQ7Tp0Wi2jGxIM _22nWXKAY6OzAfK5GcUqWV2 qW0l8Af61EP35WIG6vnGk _3edNsMs0PNfyQYofMNVhsG"><i
+                                                      class="icon icon-upvote _2Jxk822qXs4DaXwsN7yyHA"></i></span></button>
+                                                <div
+                                                  class="_1rZYMD_4xY3gRcSS3p8ODO _25IkBM0rRUqWX5ZojEMAFQ _3ChHiOyYyUkpZ_Nm3ZyM2M"
+                                                  style="color:#1A1A1B">6.7k</div><button aria-label="downvote"
+                                                  aria-pressed="false" class="voteButton _2m5vzALl8kQdr9kwIFUo5t"
+                                                  data-click-id="downvote"><span
+                                                    class="_1iKd82bq_nqObFvSH1iC_Q Q0BxYHtCOJ_rNSPJMU2Y7 _2fe-KdD2OM0ciaiux-G1EL _3yQIOwaIuF6gn8db96Gu7y"><i
+                                                      class="icon icon-downvote ZyxIIl4FP5gHGrJDzNpUC"></i></span></button>
+                                              </div>
+                                              <div
+                                                class="XZK-LTFT5CgGo9MvPQQsy _1LXnp2ufrzN6ioaTLTjGQ1 _2t8wLytikHzPCUnvXdS_wu  _2_lhaFUJdP8q0o2L9MN2TN">
+                                                <div id="t1_ehwha24-comment-share-menu"><button
+                                                    class="_374Hkkigy4E4srsI2WktEd">Share</button></div><button
+                                                  class="_374Hkkigy4E4srsI2WktEd _2hr3tRWszeMRQ0u_Whs7t8 _14hLFU5cIJCyxH9DSgsCov">Report</button><button
+                                                  class="_374Hkkigy4E4srsI2WktEd _2hr3tRWszeMRQ0u_Whs7t8 _14hLFU5cIJCyxH9DSgsCov">Save</button>
+                                                <div
+                                                  class="hrV8gUgmt0V7wM2wgZ81l _1YnPvd-E5MbmcM3PvRRcX _14hLFU5cIJCyxH9DSgsCov">
+                                                  <button aria-expanded="false" aria-haspopup="true"
+                                                    aria-label="more options" id="t1_ehwha24-overflow-menu"
+                                                    class="_2pFdCpgBihIaYh9DSMWBIu _1VR6DV38j4rMT5OMeU4gJZ uMPgOFYlCc5uvpa2Lbteu"><i
+                                                      class="_38GxRFSqSC-Z2VLi5Xzkjy icon icon-overflow_horizontal"></i></button>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div>
+                                  <div>
+                                    <div>
+                                      <div id="t1_ehx88ol" style="padding-left:37px" tabindex="-1"
+                                        class="_3sf33-9rVAO_v4y0pIW_CH">
+                                        <div class="_1DooEIX-1Nj5rweIc5cw_E">
+                                          <div class="_36AIN2ppxy_z-XSDxTvYj5 t1_ehwha24"><i class="threadline"></i>
+                                          </div>
+                                          <div class="_3Wv3am0TXfTcugZJ6niui">
+                                            <div class="_36AIN2ppxy_z-XSDxTvYj5 t1_ehx88ol "><i class="threadline"></i>
+                                            </div>
+                                          </div>
+                                        </div>
+                                        <div class="Comment t1_ehx88ol P8SGAKMtRxNwlmLz1zdJu HZ-cv9q391bm8s7qT54B3">
+                                          <button
+                                            class="_1nGapmdexvR0BuOkfAi6wa t1_ehx88ol _1zN1-lYh2LfbYOMAho_O8g _2Gzh48SaLz7dQBCULfOC6V"><i
+                                              class="icon icon-expand _1tnrhhM9S7dYjApTfvd14l"></i></button><a
+                                            class="_3GfQMgsm3HGd3838lwqCST" data-testid="comment_author_icon"
+                                            href="/user/Deepsman/">
+                                            <div class="_13ScjOmi6dGdJw0JAonQEr"></div>
+                                          </a>
+                                          <div class="_3tw__eCCe7j-epNCKGXUKk"><span
+                                              class="_1RIl585IYPW6cmNXwgRz0J">level 2</span>
+                                            <div
+                                              class="-Xcv3XBXmgiY2X5RqaPbO _1S45SPAIb30fsXtEcKPSdt _3LqBzV8aCO9tge99jHiUGy "
+                                              data-testid="post-comment-header"><span class="_1a_HxF03jCyxnx706hQmJR">
+                                                <div class="_3QEK34iVL1BjyHAVleVVNQ"></div><span
+                                                  class="_2ETuFsVzMBxiHia6HfJCTQ _8b8fUdBRxCYj9MkNpFvvv"> &#xB7;
+                                                </span><a class="_3yx4Dn0W3Yunucf5sVJeFU"
+                                                  data-testid="comment_timestamp"
+                                                  href="https://www.reddit.com/r/AskReddit/comments/axtih6/comment/ehx88ol/?utm_source=reddit&amp;utm_medium=web2x&amp;context=3"
+                                                  id="CommentTopMeta--Created--t1_ehx88ol" target="_blank"
+                                                  rel="nofollow noopener noreferrer">3 yr. ago</a>
+                                                <div class="_3XoW0oYd5806XiOr24gGdb"></div>
+                                              </span></div>
+                                            <div data-testid="comment" class="_3cjCphgls6DH-irkVaA0GM ">
+                                              <div class="_292iotee39Lmt0MkQZ2hPV RichTextJSON-root">
+                                                <p class="_1qeIAgB0cPwnLhDF9XSiJM">Same here, great for the bedroom and
+                                                  when traveling. It might charge a bit slower but that doesn&#x2019;t
+                                                  matter because the utility of having the longer cord and being able to
+                                                  use your phone is far better that it charging 20 minutes faster.</p>
+                                              </div>
+                                            </div>
+                                            <div class="_3KgrO85L1p9wQbgwG27q4y">
+                                              <div
+                                                class="_1E9mcoVn4MYnuBQSVDt1gC _2oM1YqCxIwkvwyeZamWwhW _1ewTEGuogtFmDvDII2T2Yy"
+                                                id="vote-arrows-t1_ehx88ol"><button aria-label="upvote"
+                                                  aria-pressed="false" class="voteButton _2m5vzALl8kQdr9kwIFUo5t "
+                                                  data-click-id="upvote"><span
+                                                    class="_2q7IQ0BUOWeEZoeAxN555e _3SUsITjKNQ7Tp0Wi2jGxIM _22nWXKAY6OzAfK5GcUqWV2 qW0l8Af61EP35WIG6vnGk _3edNsMs0PNfyQYofMNVhsG"><i
+                                                      class="icon icon-upvote _2Jxk822qXs4DaXwsN7yyHA"></i></span></button>
+                                                <div
+                                                  class="_1rZYMD_4xY3gRcSS3p8ODO _25IkBM0rRUqWX5ZojEMAFQ _3ChHiOyYyUkpZ_Nm3ZyM2M"
+                                                  style="color:#1A1A1B">156</div><button aria-label="downvote"
+                                                  aria-pressed="false" class="voteButton _2m5vzALl8kQdr9kwIFUo5t"
+                                                  data-click-id="downvote"><span
+                                                    class="_1iKd82bq_nqObFvSH1iC_Q Q0BxYHtCOJ_rNSPJMU2Y7 _2fe-KdD2OM0ciaiux-G1EL _3yQIOwaIuF6gn8db96Gu7y"><i
+                                                      class="icon icon-downvote ZyxIIl4FP5gHGrJDzNpUC"></i></span></button>
+                                              </div>
+                                              <div
+                                                class="XZK-LTFT5CgGo9MvPQQsy _1LXnp2ufrzN6ioaTLTjGQ1 _2Ik7QEXtA-lbZKj0ssL89G  _2_lhaFUJdP8q0o2L9MN2TN">
+                                                <div id="t1_ehx88ol-comment-share-menu"><button
+                                                    class="_374Hkkigy4E4srsI2WktEd">Share</button></div><button
+                                                  class="_374Hkkigy4E4srsI2WktEd _2hr3tRWszeMRQ0u_Whs7t8 _14hLFU5cIJCyxH9DSgsCov">Report</button><button
+                                                  class="_374Hkkigy4E4srsI2WktEd _2hr3tRWszeMRQ0u_Whs7t8 _14hLFU5cIJCyxH9DSgsCov">Save</button>
+                                                <div
+                                                  class="hrV8gUgmt0V7wM2wgZ81l _1YnPvd-E5MbmcM3PvRRcX _14hLFU5cIJCyxH9DSgsCov">
+                                                  <button aria-expanded="false" aria-haspopup="true"
+                                                    aria-label="more options" id="t1_ehx88ol-overflow-menu"
+                                                    class="_2pFdCpgBihIaYh9DSMWBIu _1VR6DV38j4rMT5OMeU4gJZ uMPgOFYlCc5uvpa2Lbteu"><i
+                                                      class="_38GxRFSqSC-Z2VLi5Xzkjy icon icon-overflow_horizontal"></i></button>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div>
+                                  <div>
+                                    <div id="continueThread-t1_ehx88ol" style="padding-left:42px" tabindex="-1"
+                                      class="_3sf33-9rVAO_v4y0pIW_CH">
+                                      <div class="_1DooEIX-1Nj5rweIc5cw_E">
+                                        <div class="_36AIN2ppxy_z-XSDxTvYj5 t1_ehwha24"><i class="threadline"></i></div>
+                                        <div class="_36AIN2ppxy_z-XSDxTvYj5 t1_ehx88ol"><i class="threadline"></i></div>
+                                      </div>
+                                      <div class="_3ndawrYzcvjHPJFYUHijfP "><a class="b57A3J7QBa7TvY8XeupVn"
+                                          href="/r/AskReddit/comments/axtih6/comment/ehx88ol/"><span
+                                            class="_2bsN7AuzEexqxXD-vhOkM7">Continue this thread</span>&#xA0;<svg
+                                            viewbox="0 0 11.4 11.4" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                                            class="egHA5MD_goQfvgLP3zgST">
+                                            <g>
+                                              <path fill="inherit"
+                                                d="m11.17929,5.99479c0.08081,-0.19519 0.08081,-0.41599 0,-0.61118c-0.0408,-0.0984 -0.0992,-0.1864 -0.17361,-0.2608l-4.79963,-4.79911c-0.31283,-0.3128 -0.81847,-0.3128 -1.1313,0c-0.31283,0.31279 -0.31283,0.81918 0,1.13118l3.43471,3.43433l-7.66949,0c-0.44244,0 -0.80007,0.3584 -0.80007,0.79999c0,0.44159 0.35763,0.79999 0.80007,0.79999l7.66949,0l-3.43471,3.43433c-0.31283,0.3128 -0.31283,0.81919 0,1.13118c0.15601,0.156 0.36083,0.2344 0.56565,0.2344c0.20482,0 0.40964,-0.0784 0.56565,-0.2344l4.79963,-4.79911c0.07441,-0.0744 0.13281,-0.1624 0.17361,-0.2608" />
+                                            </g>
+                                          </svg></a></div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div>
+                                  <div>
+                                    <div id="moreComments-t1_ehxthfa" style="padding-left:21px" tabindex="-1"
+                                      class="_3sf33-9rVAO_v4y0pIW_CH">
+                                      <div class="_1DooEIX-1Nj5rweIc5cw_E">
+                                        <div class="_36AIN2ppxy_z-XSDxTvYj5 t1_ehwha24"><i class="threadline"></i></div>
+                                      </div>
+                                      <div class="_3_mqV5-KnILOxl1TvgYtCk">
+                                        <p class="_2HYsucNpMdUpYlGBMviq8M _23013peWUhznY89KuYPZKv">102 more replies</p>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div>
+                                  <div>
+                                    <div>
+                                      <div id="t1_ehwdvkc" style="padding-left:16px" tabindex="-1"
+                                        class="_3sf33-9rVAO_v4y0pIW_CH">
+                                        <div class="_1DooEIX-1Nj5rweIc5cw_E">
+                                          <div class="_3Wv3am0TXfTcugZJ6niui">
+                                            <div class="_36AIN2ppxy_z-XSDxTvYj5 t1_ehwdvkc undefined"><i
+                                                class="threadline"></i></div>
+                                          </div>
+                                        </div>
+                                        <div
+                                          class="Comment t1_ehwdvkc P8SGAKMtRxNwlmLz1zdJu HZ-cv9q391bm8s7qT54B3 _1z5rdmX8TDr6mqwNv7A70U">
+                                          <button
+                                            class="_1nGapmdexvR0BuOkfAi6wa t1_ehwdvkc _1zN1-lYh2LfbYOMAho_O8g _2Gzh48SaLz7dQBCULfOC6V"><i
+                                              class="icon icon-expand _1tnrhhM9S7dYjApTfvd14l"></i></button><a
+                                            class="_3GfQMgsm3HGd3838lwqCST" data-testid="comment_author_icon"
+                                            href="/user/HolyOrdersOtaku/">
+                                            <div class="_13ScjOmi6dGdJw0JAonQEr"></div>
+                                          </a>
+                                          <div class="_3tw__eCCe7j-epNCKGXUKk"><span
+                                              class="_1RIl585IYPW6cmNXwgRz0J">level 1</span>
+                                            <div
+                                              class="-Xcv3XBXmgiY2X5RqaPbO _1S45SPAIb30fsXtEcKPSdt _3LqBzV8aCO9tge99jHiUGy "
+                                              data-testid="post-comment-header"><span class="_1a_HxF03jCyxnx706hQmJR">
+                                                <div class="_3QEK34iVL1BjyHAVleVVNQ"></div><span
+                                                  class="_2ETuFsVzMBxiHia6HfJCTQ _8b8fUdBRxCYj9MkNpFvvv"> &#xB7;
+                                                </span><a class="_3yx4Dn0W3Yunucf5sVJeFU"
+                                                  data-testid="comment_timestamp"
+                                                  href="https://www.reddit.com/r/AskReddit/comments/axtih6/comment/ehwdvkc/?utm_source=reddit&amp;utm_medium=web2x&amp;context=3"
+                                                  id="CommentTopMeta--Created--t1_ehwdvkc" target="_blank"
+                                                  rel="nofollow noopener noreferrer">3 yr. ago</a>
+                                                <div class="_3XoW0oYd5806XiOr24gGdb"></div>
+                                              </span></div>
+                                            <div data-testid="comment" class="_3cjCphgls6DH-irkVaA0GM ">
+                                              <div class="_292iotee39Lmt0MkQZ2hPV RichTextJSON-root">
+                                                <p class="_1qeIAgB0cPwnLhDF9XSiJM">Well after 61,000 miles I finally got
+                                                  rid of my tires (which have been trying to kill me for a couple of
+                                                  months now) and bought new tires this past Saturday. So, yeah. Keep
+                                                  good tires on your vehicles.</p>
+                                              </div>
+                                            </div>
+                                            <div class="_3KgrO85L1p9wQbgwG27q4y">
+                                              <div
+                                                class="_1E9mcoVn4MYnuBQSVDt1gC _2oM1YqCxIwkvwyeZamWwhW _1ewTEGuogtFmDvDII2T2Yy"
+                                                id="vote-arrows-t1_ehwdvkc"><button aria-label="upvote"
+                                                  aria-pressed="false" class="voteButton _2m5vzALl8kQdr9kwIFUo5t "
+                                                  data-click-id="upvote"><span
+                                                    class="_2q7IQ0BUOWeEZoeAxN555e _3SUsITjKNQ7Tp0Wi2jGxIM _22nWXKAY6OzAfK5GcUqWV2 qW0l8Af61EP35WIG6vnGk _3edNsMs0PNfyQYofMNVhsG"><i
+                                                      class="icon icon-upvote _2Jxk822qXs4DaXwsN7yyHA"></i></span></button>
+                                                <div
+                                                  class="_1rZYMD_4xY3gRcSS3p8ODO _25IkBM0rRUqWX5ZojEMAFQ _3ChHiOyYyUkpZ_Nm3ZyM2M"
+                                                  style="color:#1A1A1B">5.5k</div><button aria-label="downvote"
+                                                  aria-pressed="false" class="voteButton _2m5vzALl8kQdr9kwIFUo5t"
+                                                  data-click-id="downvote"><span
+                                                    class="_1iKd82bq_nqObFvSH1iC_Q Q0BxYHtCOJ_rNSPJMU2Y7 _2fe-KdD2OM0ciaiux-G1EL _3yQIOwaIuF6gn8db96Gu7y"><i
+                                                      class="icon icon-downvote ZyxIIl4FP5gHGrJDzNpUC"></i></span></button>
+                                              </div>
+                                              <div
+                                                class="XZK-LTFT5CgGo9MvPQQsy _1LXnp2ufrzN6ioaTLTjGQ1 _2t8wLytikHzPCUnvXdS_wu  _2_lhaFUJdP8q0o2L9MN2TN">
+                                                <div id="t1_ehwdvkc-comment-share-menu"><button
+                                                    class="_374Hkkigy4E4srsI2WktEd">Share</button></div><button
+                                                  class="_374Hkkigy4E4srsI2WktEd _2hr3tRWszeMRQ0u_Whs7t8 _14hLFU5cIJCyxH9DSgsCov">Report</button><button
+                                                  class="_374Hkkigy4E4srsI2WktEd _2hr3tRWszeMRQ0u_Whs7t8 _14hLFU5cIJCyxH9DSgsCov">Save</button>
+                                                <div
+                                                  class="hrV8gUgmt0V7wM2wgZ81l _1YnPvd-E5MbmcM3PvRRcX _14hLFU5cIJCyxH9DSgsCov">
+                                                  <button aria-expanded="false" aria-haspopup="true"
+                                                    aria-label="more options" id="t1_ehwdvkc-overflow-menu"
+                                                    class="_2pFdCpgBihIaYh9DSMWBIu _1VR6DV38j4rMT5OMeU4gJZ uMPgOFYlCc5uvpa2Lbteu"><i
+                                                      class="_38GxRFSqSC-Z2VLi5Xzkjy icon icon-overflow_horizontal"></i></button>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div>
+                                  <div>
+                                    <div>
+                                      <div id="t1_ehwubbo" style="padding-left:37px" tabindex="-1"
+                                        class="_3sf33-9rVAO_v4y0pIW_CH">
+                                        <div class="_1DooEIX-1Nj5rweIc5cw_E">
+                                          <div class="_36AIN2ppxy_z-XSDxTvYj5 t1_ehwdvkc"><i class="threadline"></i>
+                                          </div>
+                                          <div class="_3Wv3am0TXfTcugZJ6niui">
+                                            <div class="_36AIN2ppxy_z-XSDxTvYj5 t1_ehwubbo "><i class="threadline"></i>
+                                            </div>
+                                          </div>
+                                        </div>
+                                        <div class="Comment t1_ehwubbo P8SGAKMtRxNwlmLz1zdJu HZ-cv9q391bm8s7qT54B3">
+                                          <button
+                                            class="_1nGapmdexvR0BuOkfAi6wa t1_ehwubbo _1zN1-lYh2LfbYOMAho_O8g _2Gzh48SaLz7dQBCULfOC6V"><i
+                                              class="icon icon-expand _1tnrhhM9S7dYjApTfvd14l"></i></button><a
+                                            class="_3GfQMgsm3HGd3838lwqCST" data-testid="comment_author_icon"
+                                            href="/user/Daripuff/">
+                                            <div class="_13ScjOmi6dGdJw0JAonQEr"></div>
+                                          </a>
+                                          <div class="_3tw__eCCe7j-epNCKGXUKk"><span
+                                              class="_1RIl585IYPW6cmNXwgRz0J">level 2</span>
+                                            <div
+                                              class="-Xcv3XBXmgiY2X5RqaPbO _1S45SPAIb30fsXtEcKPSdt _3LqBzV8aCO9tge99jHiUGy "
+                                              data-testid="post-comment-header"><span class="_1a_HxF03jCyxnx706hQmJR">
+                                                <div class="_3QEK34iVL1BjyHAVleVVNQ"></div><span
+                                                  class="_2ETuFsVzMBxiHia6HfJCTQ _8b8fUdBRxCYj9MkNpFvvv"> &#xB7;
+                                                </span><a class="_3yx4Dn0W3Yunucf5sVJeFU"
+                                                  data-testid="comment_timestamp"
+                                                  href="https://www.reddit.com/r/AskReddit/comments/axtih6/comment/ehwubbo/?utm_source=reddit&amp;utm_medium=web2x&amp;context=3"
+                                                  id="CommentTopMeta--Created--t1_ehwubbo" target="_blank"
+                                                  rel="nofollow noopener noreferrer">3 yr. ago</a>
+                                                <div class="_3XoW0oYd5806XiOr24gGdb"><span
+                                                    class="_2OYwDdghtXEuTF67C95YLY" id=""><span
+                                                      id="CommentAwardBadges--t1_ehwubbo-gid_1"><img alt="Silver"
+                                                        class="n08B7PrU01wzgZYIh-s7N " id="awardItem__t1_ehwubbo-gid_1"
+                                                        src="https://www.redditstatic.com/gold/awards/icon/silver_32.png"></span><span></span></span>
+                                                </div>
+                                              </span></div>
+                                            <div data-testid="comment" class="_3cjCphgls6DH-irkVaA0GM ">
+                                              <div class="_292iotee39Lmt0MkQZ2hPV RichTextJSON-root">
+                                                <p class="_1qeIAgB0cPwnLhDF9XSiJM">I used to sell tires, and the line I
+                                                  always used was :</p>
+                                                <p class="_1qeIAgB0cPwnLhDF9XSiJM">&quot;I don&apos;t care how good your
+                                                  brakes are, your brakes can only stop your wheels, your tires stop you
+                                                  car. I don&apos;t care how strong your engine is, your engine can only
+                                                  spin your wheels, your tires move your car. I can make a minivan out
+                                                  handle a corvette by putting the right tires on the minivan, and the
+                                                  wrong tires on the corvette. Every move your car makes has to go
+                                                  through your tires before anything actually happens. &quot;</p>
+                                                <p class="_1qeIAgB0cPwnLhDF9XSiJM">Tires are critical, there is no
+                                                  excuse to go with cheap, crappy tires.</p>
+                                              </div>
+                                            </div>
+                                            <div class="_3KgrO85L1p9wQbgwG27q4y">
+                                              <div
+                                                class="_1E9mcoVn4MYnuBQSVDt1gC _2oM1YqCxIwkvwyeZamWwhW _1ewTEGuogtFmDvDII2T2Yy"
+                                                id="vote-arrows-t1_ehwubbo"><button aria-label="upvote"
+                                                  aria-pressed="false" class="voteButton _2m5vzALl8kQdr9kwIFUo5t "
+                                                  data-click-id="upvote"><span
+                                                    class="_2q7IQ0BUOWeEZoeAxN555e _3SUsITjKNQ7Tp0Wi2jGxIM _22nWXKAY6OzAfK5GcUqWV2 qW0l8Af61EP35WIG6vnGk _3edNsMs0PNfyQYofMNVhsG"><i
+                                                      class="icon icon-upvote _2Jxk822qXs4DaXwsN7yyHA"></i></span></button>
+                                                <div
+                                                  class="_1rZYMD_4xY3gRcSS3p8ODO _25IkBM0rRUqWX5ZojEMAFQ _3ChHiOyYyUkpZ_Nm3ZyM2M"
+                                                  style="color:#1A1A1B">3.5k</div><button aria-label="downvote"
+                                                  aria-pressed="false" class="voteButton _2m5vzALl8kQdr9kwIFUo5t"
+                                                  data-click-id="downvote"><span
+                                                    class="_1iKd82bq_nqObFvSH1iC_Q Q0BxYHtCOJ_rNSPJMU2Y7 _2fe-KdD2OM0ciaiux-G1EL _3yQIOwaIuF6gn8db96Gu7y"><i
+                                                      class="icon icon-downvote ZyxIIl4FP5gHGrJDzNpUC"></i></span></button>
+                                              </div>
+                                              <div
+                                                class="XZK-LTFT5CgGo9MvPQQsy _1LXnp2ufrzN6ioaTLTjGQ1 _2Ik7QEXtA-lbZKj0ssL89G  _2_lhaFUJdP8q0o2L9MN2TN">
+                                                <div id="t1_ehwubbo-comment-share-menu"><button
+                                                    class="_374Hkkigy4E4srsI2WktEd">Share</button></div><button
+                                                  class="_374Hkkigy4E4srsI2WktEd _2hr3tRWszeMRQ0u_Whs7t8 _14hLFU5cIJCyxH9DSgsCov">Report</button><button
+                                                  class="_374Hkkigy4E4srsI2WktEd _2hr3tRWszeMRQ0u_Whs7t8 _14hLFU5cIJCyxH9DSgsCov">Save</button>
+                                                <div
+                                                  class="hrV8gUgmt0V7wM2wgZ81l _1YnPvd-E5MbmcM3PvRRcX _14hLFU5cIJCyxH9DSgsCov">
+                                                  <button aria-expanded="false" aria-haspopup="true"
+                                                    aria-label="more options" id="t1_ehwubbo-overflow-menu"
+                                                    class="_2pFdCpgBihIaYh9DSMWBIu _1VR6DV38j4rMT5OMeU4gJZ uMPgOFYlCc5uvpa2Lbteu"><i
+                                                      class="_38GxRFSqSC-Z2VLi5Xzkjy icon icon-overflow_horizontal"></i></button>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div>
+                                  <div>
+                                    <div id="continueThread-t1_ehwubbo" style="padding-left:42px" tabindex="-1"
+                                      class="_3sf33-9rVAO_v4y0pIW_CH">
+                                      <div class="_1DooEIX-1Nj5rweIc5cw_E">
+                                        <div class="_36AIN2ppxy_z-XSDxTvYj5 t1_ehwdvkc"><i class="threadline"></i></div>
+                                        <div class="_36AIN2ppxy_z-XSDxTvYj5 t1_ehwubbo"><i class="threadline"></i></div>
+                                      </div>
+                                      <div class="_3ndawrYzcvjHPJFYUHijfP "><a class="b57A3J7QBa7TvY8XeupVn"
+                                          href="/r/AskReddit/comments/axtih6/comment/ehwubbo/"><span
+                                            class="_2bsN7AuzEexqxXD-vhOkM7">Continue this thread</span>&#xA0;<svg
+                                            viewbox="0 0 11.4 11.4" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                                            class="egHA5MD_goQfvgLP3zgST">
+                                            <g>
+                                              <path fill="inherit"
+                                                d="m11.17929,5.99479c0.08081,-0.19519 0.08081,-0.41599 0,-0.61118c-0.0408,-0.0984 -0.0992,-0.1864 -0.17361,-0.2608l-4.79963,-4.79911c-0.31283,-0.3128 -0.81847,-0.3128 -1.1313,0c-0.31283,0.31279 -0.31283,0.81918 0,1.13118l3.43471,3.43433l-7.66949,0c-0.44244,0 -0.80007,0.3584 -0.80007,0.79999c0,0.44159 0.35763,0.79999 0.80007,0.79999l7.66949,0l-3.43471,3.43433c-0.31283,0.3128 -0.31283,0.81919 0,1.13118c0.15601,0.156 0.36083,0.2344 0.56565,0.2344c0.20482,0 0.40964,-0.0784 0.56565,-0.2344l4.79963,-4.79911c0.07441,-0.0744 0.13281,-0.1624 0.17361,-0.2608" />
+                                            </g>
+                                          </svg></a></div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div>
+                                  <div>
+                                    <div id="moreComments-t1_ehx01a8" style="padding-left:21px" tabindex="-1"
+                                      class="_3sf33-9rVAO_v4y0pIW_CH">
+                                      <div class="_1DooEIX-1Nj5rweIc5cw_E">
+                                        <div class="_36AIN2ppxy_z-XSDxTvYj5 t1_ehwdvkc"><i class="threadline"></i></div>
+                                      </div>
+                                      <div class="_3_mqV5-KnILOxl1TvgYtCk">
+                                        <p class="_2HYsucNpMdUpYlGBMviq8M _23013peWUhznY89KuYPZKv">90 more replies</p>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div>
+                                  <div>
+                                    <div>
+                                      <div id="t1_ehw4j07" style="padding-left:16px" tabindex="-1"
+                                        class="_3sf33-9rVAO_v4y0pIW_CH">
+                                        <div class="_1DooEIX-1Nj5rweIc5cw_E"></div>
+                                        <div
+                                          class="Comment t1_ehw4j07 P8SGAKMtRxNwlmLz1zdJu undefined HZ-cv9q391bm8s7qT54B3 _1z5rdmX8TDr6mqwNv7A70U">
+                                          <button
+                                            class="_1nGapmdexvR0BuOkfAi6wa t1_ehw4j07 O_Ica0k2O4KFcZyNfsJDU _2Gzh48SaLz7dQBCULfOC6V"><i
+                                              class="icon icon-expand _1tnrhhM9S7dYjApTfvd14l"></i></button>
+                                          <div class="_3GfQMgsm3HGd3838lwqCST" to="/user/[deleted]/">
+                                            <div class="_13ScjOmi6dGdJw0JAonQEr"></div>
+                                          </div>
+                                          <div class="_3tw__eCCe7j-epNCKGXUKk undefined"><span
+                                              class="_1RIl585IYPW6cmNXwgRz0J">level 1</span>
+                                            <div
+                                              class="-Xcv3XBXmgiY2X5RqaPbO _1S45SPAIb30fsXtEcKPSdt _3c9Go6433BnvYx8_7MkPnt _3LqBzV8aCO9tge99jHiUGy _2k27lgIDltx9kOzVGXt48i"
+                                              data-testid="post-comment-header-deleted"><span
+                                                class="_1a_HxF03jCyxnx706hQmJR"><span
+                                                  class="_3yx4Dn0W3Yunucf5sVJeFU">Comment deleted by user</span><span
+                                                  class="_2ETuFsVzMBxiHia6HfJCTQ _8b8fUdBRxCYj9MkNpFvvv"> &#xB7;
+                                                </span><a class="_3yx4Dn0W3Yunucf5sVJeFU"
+                                                  data-testid="comment_timestamp"
+                                                  href="https://www.reddit.com/r/AskReddit/comments/axtih6/comment/ehw4j07/?utm_source=reddit&amp;utm_medium=web2x&amp;context=3"
+                                                  id="CommentTopMeta--Created--t1_ehw4j07" target="_blank"
+                                                  rel="nofollow noopener noreferrer">3 yr. ago</a></span></div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div>
+                                  <div>
+                                    <div>
+                                      <div id="t1_ehw7gpf" style="padding-left:37px" tabindex="-1"
+                                        class="_3sf33-9rVAO_v4y0pIW_CH _2csJ1c6CZ_3VQ75SVdUAwt">
+                                        <div class="_1DooEIX-1Nj5rweIc5cw_E">
+                                          <div class="_36AIN2ppxy_z-XSDxTvYj5 t1_ehw4j07"><i class="threadline"></i>
+                                          </div>
+                                          <div class="_3Wv3am0TXfTcugZJ6niui">
+                                            <div class="_36AIN2ppxy_z-XSDxTvYj5 t1_ehw7gpf "><i class="threadline"></i>
+                                            </div>
+                                          </div>
+                                        </div>
+                                        <div class="Comment t1_ehw7gpf P8SGAKMtRxNwlmLz1zdJu HZ-cv9q391bm8s7qT54B3">
+                                          <button
+                                            class="_1nGapmdexvR0BuOkfAi6wa t1_ehw7gpf _1zN1-lYh2LfbYOMAho_O8g _2Gzh48SaLz7dQBCULfOC6V"><i
+                                              class="icon icon-expand _1tnrhhM9S7dYjApTfvd14l"></i></button>
+                                          <div class="_3GfQMgsm3HGd3838lwqCST" to="/user/[deleted]/">
+                                            <div class="_13ScjOmi6dGdJw0JAonQEr"></div>
+                                          </div>
+                                          <div class="_3tw__eCCe7j-epNCKGXUKk"><span
+                                              class="_1RIl585IYPW6cmNXwgRz0J">level 2</span>
+                                            <div
+                                              class="-Xcv3XBXmgiY2X5RqaPbO _1S45SPAIb30fsXtEcKPSdt _3LqBzV8aCO9tge99jHiUGy "
+                                              data-testid="post-comment-header"><span class="_1a_HxF03jCyxnx706hQmJR">
+                                                <div class="_3QEK34iVL1BjyHAVleVVNQ"><span
+                                                    class="lizQBHVukyun2S2babj-l wM6scouPXXsFDSZmZPHRo DjcdNGtVXPcxG0yiFXIoZ">[deleted]</span>
+                                                </div><span class="_2ETuFsVzMBxiHia6HfJCTQ _8b8fUdBRxCYj9MkNpFvvv">
+                                                  &#xB7; </span><a class="_3yx4Dn0W3Yunucf5sVJeFU"
+                                                  data-testid="comment_timestamp"
+                                                  href="https://www.reddit.com/r/AskReddit/comments/axtih6/comment/ehw7gpf/?utm_source=reddit&amp;utm_medium=web2x&amp;context=3"
+                                                  id="CommentTopMeta--Created--t1_ehw7gpf" target="_blank"
+                                                  rel="nofollow noopener noreferrer">3 yr. ago</a>
+                                                <div class="_3XoW0oYd5806XiOr24gGdb"></div>
+                                              </span></div>
+                                            <div data-testid="comment" class="_3cjCphgls6DH-irkVaA0GM ">
+                                              <div class="_292iotee39Lmt0MkQZ2hPV RichTextJSON-root">
+                                                <p class="_1qeIAgB0cPwnLhDF9XSiJM">You fade it yourself? How did you
+                                                  learn to fade it, just practice and upon a fuck up going bald?</p>
+                                              </div>
+                                            </div>
+                                            <div class="_3KgrO85L1p9wQbgwG27q4y">
+                                              <div
+                                                class="_1E9mcoVn4MYnuBQSVDt1gC _2oM1YqCxIwkvwyeZamWwhW _1ewTEGuogtFmDvDII2T2Yy"
+                                                id="vote-arrows-t1_ehw7gpf"><button aria-label="upvote"
+                                                  aria-pressed="false" class="voteButton _2m5vzALl8kQdr9kwIFUo5t "
+                                                  data-click-id="upvote"><span
+                                                    class="_2q7IQ0BUOWeEZoeAxN555e _3SUsITjKNQ7Tp0Wi2jGxIM _22nWXKAY6OzAfK5GcUqWV2 qW0l8Af61EP35WIG6vnGk _3edNsMs0PNfyQYofMNVhsG"><i
+                                                      class="icon icon-upvote _2Jxk822qXs4DaXwsN7yyHA"></i></span></button>
+                                                <div
+                                                  class="_1rZYMD_4xY3gRcSS3p8ODO _25IkBM0rRUqWX5ZojEMAFQ _3ChHiOyYyUkpZ_Nm3ZyM2M"
+                                                  style="color:#1A1A1B">208</div><button aria-label="downvote"
+                                                  aria-pressed="false" class="voteButton _2m5vzALl8kQdr9kwIFUo5t"
+                                                  data-click-id="downvote"><span
+                                                    class="_1iKd82bq_nqObFvSH1iC_Q Q0BxYHtCOJ_rNSPJMU2Y7 _2fe-KdD2OM0ciaiux-G1EL _3yQIOwaIuF6gn8db96Gu7y"><i
+                                                      class="icon icon-downvote ZyxIIl4FP5gHGrJDzNpUC"></i></span></button>
+                                              </div>
+                                              <div
+                                                class="XZK-LTFT5CgGo9MvPQQsy _1LXnp2ufrzN6ioaTLTjGQ1 _2Ik7QEXtA-lbZKj0ssL89G  _2_lhaFUJdP8q0o2L9MN2TN">
+                                                <div id="t1_ehw7gpf-comment-share-menu"><button
+                                                    class="_374Hkkigy4E4srsI2WktEd">Share</button></div><button
+                                                  class="_374Hkkigy4E4srsI2WktEd _2hr3tRWszeMRQ0u_Whs7t8 _14hLFU5cIJCyxH9DSgsCov">Report</button><button
+                                                  class="_374Hkkigy4E4srsI2WktEd _2hr3tRWszeMRQ0u_Whs7t8 _14hLFU5cIJCyxH9DSgsCov">Save</button>
+                                                <div
+                                                  class="hrV8gUgmt0V7wM2wgZ81l _1YnPvd-E5MbmcM3PvRRcX _14hLFU5cIJCyxH9DSgsCov">
+                                                  <button aria-expanded="false" aria-haspopup="true"
+                                                    aria-label="more options" id="t1_ehw7gpf-overflow-menu"
+                                                    class="_2pFdCpgBihIaYh9DSMWBIu _1VR6DV38j4rMT5OMeU4gJZ uMPgOFYlCc5uvpa2Lbteu"><i
+                                                      class="_38GxRFSqSC-Z2VLi5Xzkjy icon icon-overflow_horizontal"></i></button>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div>
+                                  <div>
+                                    <div id="continueThread-t1_ehw7gpf" style="padding-left:42px" tabindex="-1"
+                                      class="_3sf33-9rVAO_v4y0pIW_CH _2csJ1c6CZ_3VQ75SVdUAwt">
+                                      <div class="_1DooEIX-1Nj5rweIc5cw_E">
+                                        <div class="_36AIN2ppxy_z-XSDxTvYj5 t1_ehw4j07"><i class="threadline"></i></div>
+                                        <div class="_36AIN2ppxy_z-XSDxTvYj5 t1_ehw7gpf"><i class="threadline"></i></div>
+                                      </div>
+                                      <div class="_3ndawrYzcvjHPJFYUHijfP "><a class="b57A3J7QBa7TvY8XeupVn"
+                                          href="/r/AskReddit/comments/axtih6/comment/ehw7gpf/"><span
+                                            class="_2bsN7AuzEexqxXD-vhOkM7">Continue this thread</span>&#xA0;<svg
+                                            viewbox="0 0 11.4 11.4" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                                            class="egHA5MD_goQfvgLP3zgST">
+                                            <g>
+                                              <path fill="inherit"
+                                                d="m11.17929,5.99479c0.08081,-0.19519 0.08081,-0.41599 0,-0.61118c-0.0408,-0.0984 -0.0992,-0.1864 -0.17361,-0.2608l-4.79963,-4.79911c-0.31283,-0.3128 -0.81847,-0.3128 -1.1313,0c-0.31283,0.31279 -0.31283,0.81918 0,1.13118l3.43471,3.43433l-7.66949,0c-0.44244,0 -0.80007,0.3584 -0.80007,0.79999c0,0.44159 0.35763,0.79999 0.80007,0.79999l7.66949,0l-3.43471,3.43433c-0.31283,0.3128 -0.31283,0.81919 0,1.13118c0.15601,0.156 0.36083,0.2344 0.56565,0.2344c0.20482,0 0.40964,-0.0784 0.56565,-0.2344l4.79963,-4.79911c0.07441,-0.0744 0.13281,-0.1624 0.17361,-0.2608" />
+                                            </g>
+                                          </svg></a></div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div>
+                                  <div>
+                                    <div id="moreComments-t1_ehwkjgg" style="padding-left:21px" tabindex="-1"
+                                      class="_3sf33-9rVAO_v4y0pIW_CH _2csJ1c6CZ_3VQ75SVdUAwt">
+                                      <div class="_1DooEIX-1Nj5rweIc5cw_E">
+                                        <div class="_36AIN2ppxy_z-XSDxTvYj5 t1_ehw4j07"><i class="threadline"></i></div>
+                                      </div>
+                                      <div class="_3_mqV5-KnILOxl1TvgYtCk">
+                                        <p class="_2HYsucNpMdUpYlGBMviq8M _23013peWUhznY89KuYPZKv">98 more replies</p>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div>
+                                  <div>
+                                    <div>
+                                      <div id="t1_ehwajv7" style="padding-left:16px" tabindex="-1"
+                                        class="_3sf33-9rVAO_v4y0pIW_CH">
+                                        <div class="_1DooEIX-1Nj5rweIc5cw_E">
+                                          <div class="_3Wv3am0TXfTcugZJ6niui">
+                                            <div class="_36AIN2ppxy_z-XSDxTvYj5 t1_ehwajv7 undefined"><i
+                                                class="threadline"></i></div>
+                                          </div>
+                                        </div>
+                                        <div
+                                          class="Comment t1_ehwajv7 P8SGAKMtRxNwlmLz1zdJu HZ-cv9q391bm8s7qT54B3 _1z5rdmX8TDr6mqwNv7A70U">
+                                          <button
+                                            class="_1nGapmdexvR0BuOkfAi6wa t1_ehwajv7 _1zN1-lYh2LfbYOMAho_O8g _2Gzh48SaLz7dQBCULfOC6V"><i
+                                              class="icon icon-expand _1tnrhhM9S7dYjApTfvd14l"></i></button>
+                                          <div class="_3GfQMgsm3HGd3838lwqCST" to="/user/[deleted]/">
+                                            <div class="_13ScjOmi6dGdJw0JAonQEr"></div>
+                                          </div>
+                                          <div class="_3tw__eCCe7j-epNCKGXUKk"><span
+                                              class="_1RIl585IYPW6cmNXwgRz0J">level 1</span>
+                                            <div
+                                              class="-Xcv3XBXmgiY2X5RqaPbO _1S45SPAIb30fsXtEcKPSdt _3LqBzV8aCO9tge99jHiUGy "
+                                              data-testid="post-comment-header"><span class="_1a_HxF03jCyxnx706hQmJR">
+                                                <div class="_3QEK34iVL1BjyHAVleVVNQ"><span
+                                                    class="lizQBHVukyun2S2babj-l wM6scouPXXsFDSZmZPHRo DjcdNGtVXPcxG0yiFXIoZ">[deleted]</span>
+                                                </div><span class="_2ETuFsVzMBxiHia6HfJCTQ _8b8fUdBRxCYj9MkNpFvvv">
+                                                  &#xB7; </span><a class="_3yx4Dn0W3Yunucf5sVJeFU"
+                                                  data-testid="comment_timestamp"
+                                                  href="https://www.reddit.com/r/AskReddit/comments/axtih6/comment/ehwajv7/?utm_source=reddit&amp;utm_medium=web2x&amp;context=3"
+                                                  id="CommentTopMeta--Created--t1_ehwajv7" target="_blank"
+                                                  rel="nofollow noopener noreferrer">3 yr. ago</a>
+                                                <div class="_3XoW0oYd5806XiOr24gGdb"></div>
+                                              </span></div>
+                                            <div data-testid="comment" class="_3cjCphgls6DH-irkVaA0GM ">
+                                              <div class="_292iotee39Lmt0MkQZ2hPV RichTextJSON-root">
+                                                <p class="_1qeIAgB0cPwnLhDF9XSiJM">Prescription sunglasses!</p>
+                                              </div>
+                                            </div>
+                                            <div class="_3KgrO85L1p9wQbgwG27q4y">
+                                              <div
+                                                class="_1E9mcoVn4MYnuBQSVDt1gC _2oM1YqCxIwkvwyeZamWwhW _1ewTEGuogtFmDvDII2T2Yy"
+                                                id="vote-arrows-t1_ehwajv7"><button aria-label="upvote"
+                                                  aria-pressed="false" class="voteButton _2m5vzALl8kQdr9kwIFUo5t "
+                                                  data-click-id="upvote"><span
+                                                    class="_2q7IQ0BUOWeEZoeAxN555e _3SUsITjKNQ7Tp0Wi2jGxIM _22nWXKAY6OzAfK5GcUqWV2 qW0l8Af61EP35WIG6vnGk _3edNsMs0PNfyQYofMNVhsG"><i
+                                                      class="icon icon-upvote _2Jxk822qXs4DaXwsN7yyHA"></i></span></button>
+                                                <div
+                                                  class="_1rZYMD_4xY3gRcSS3p8ODO _25IkBM0rRUqWX5ZojEMAFQ _3ChHiOyYyUkpZ_Nm3ZyM2M"
+                                                  style="color:#1A1A1B">10.2k</div><button aria-label="downvote"
+                                                  aria-pressed="false" class="voteButton _2m5vzALl8kQdr9kwIFUo5t"
+                                                  data-click-id="downvote"><span
+                                                    class="_1iKd82bq_nqObFvSH1iC_Q Q0BxYHtCOJ_rNSPJMU2Y7 _2fe-KdD2OM0ciaiux-G1EL _3yQIOwaIuF6gn8db96Gu7y"><i
+                                                      class="icon icon-downvote ZyxIIl4FP5gHGrJDzNpUC"></i></span></button>
+                                              </div>
+                                              <div
+                                                class="XZK-LTFT5CgGo9MvPQQsy _1LXnp2ufrzN6ioaTLTjGQ1 _2t8wLytikHzPCUnvXdS_wu  _2_lhaFUJdP8q0o2L9MN2TN">
+                                                <div id="t1_ehwajv7-comment-share-menu"><button
+                                                    class="_374Hkkigy4E4srsI2WktEd">Share</button></div><button
+                                                  class="_374Hkkigy4E4srsI2WktEd _2hr3tRWszeMRQ0u_Whs7t8 _14hLFU5cIJCyxH9DSgsCov">Report</button><button
+                                                  class="_374Hkkigy4E4srsI2WktEd _2hr3tRWszeMRQ0u_Whs7t8 _14hLFU5cIJCyxH9DSgsCov">Save</button>
+                                                <div
+                                                  class="hrV8gUgmt0V7wM2wgZ81l _1YnPvd-E5MbmcM3PvRRcX _14hLFU5cIJCyxH9DSgsCov">
+                                                  <button aria-expanded="false" aria-haspopup="true"
+                                                    aria-label="more options" id="t1_ehwajv7-overflow-menu"
+                                                    class="_2pFdCpgBihIaYh9DSMWBIu _1VR6DV38j4rMT5OMeU4gJZ uMPgOFYlCc5uvpa2Lbteu"><i
+                                                      class="_38GxRFSqSC-Z2VLi5Xzkjy icon icon-overflow_horizontal"></i></button>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div>
+                                  <div>
+                                    <div>
+                                      <div id="t1_ehwv24z" style="padding-left:37px" tabindex="-1"
+                                        class="_3sf33-9rVAO_v4y0pIW_CH">
+                                        <div class="_1DooEIX-1Nj5rweIc5cw_E">
+                                          <div class="_36AIN2ppxy_z-XSDxTvYj5 t1_ehwajv7"><i class="threadline"></i>
+                                          </div>
+                                        </div>
+                                        <div
+                                          class="Comment t1_ehwv24z P8SGAKMtRxNwlmLz1zdJu undefined HZ-cv9q391bm8s7qT54B3">
+                                          <button
+                                            class="_1nGapmdexvR0BuOkfAi6wa t1_ehwv24z O_Ica0k2O4KFcZyNfsJDU _2Gzh48SaLz7dQBCULfOC6V"><i
+                                              class="icon icon-expand _1tnrhhM9S7dYjApTfvd14l"></i></button>
+                                          <div class="_3GfQMgsm3HGd3838lwqCST" to="/user/[deleted]/">
+                                            <div class="_13ScjOmi6dGdJw0JAonQEr"></div>
+                                          </div>
+                                          <div class="_3tw__eCCe7j-epNCKGXUKk undefined"><span
+                                              class="_1RIl585IYPW6cmNXwgRz0J">level 2</span>
+                                            <div
+                                              class="-Xcv3XBXmgiY2X5RqaPbO _1S45SPAIb30fsXtEcKPSdt _3c9Go6433BnvYx8_7MkPnt _3LqBzV8aCO9tge99jHiUGy _2k27lgIDltx9kOzVGXt48i"
+                                              data-testid="post-comment-header-deleted"><span
+                                                class="_1a_HxF03jCyxnx706hQmJR"><span
+                                                  class="_3yx4Dn0W3Yunucf5sVJeFU">Comment deleted by user</span><span
+                                                  class="_2ETuFsVzMBxiHia6HfJCTQ _8b8fUdBRxCYj9MkNpFvvv"> &#xB7;
+                                                </span><a class="_3yx4Dn0W3Yunucf5sVJeFU"
+                                                  data-testid="comment_timestamp"
+                                                  href="https://www.reddit.com/r/AskReddit/comments/axtih6/comment/ehwv24z/?utm_source=reddit&amp;utm_medium=web2x&amp;context=3"
+                                                  id="CommentTopMeta--Created--t1_ehwv24z" target="_blank"
+                                                  rel="nofollow noopener noreferrer">3 yr. ago</a></span></div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div>
+                                  <div>
+                                    <div id="continueThread-t1_ehwv24z" style="padding-left:42px" tabindex="-1"
+                                      class="_3sf33-9rVAO_v4y0pIW_CH _2csJ1c6CZ_3VQ75SVdUAwt">
+                                      <div class="_1DooEIX-1Nj5rweIc5cw_E">
+                                        <div class="_36AIN2ppxy_z-XSDxTvYj5 t1_ehwajv7"><i class="threadline"></i></div>
+                                        <div class="_36AIN2ppxy_z-XSDxTvYj5 t1_ehwv24z"><i class="threadline"></i></div>
+                                      </div>
+                                      <div class="_3ndawrYzcvjHPJFYUHijfP "><a class="b57A3J7QBa7TvY8XeupVn"
+                                          href="/r/AskReddit/comments/axtih6/comment/ehwv24z/"><span
+                                            class="_2bsN7AuzEexqxXD-vhOkM7">Continue this thread</span>&#xA0;<svg
+                                            viewbox="0 0 11.4 11.4" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                                            class="egHA5MD_goQfvgLP3zgST">
+                                            <g>
+                                              <path fill="inherit"
+                                                d="m11.17929,5.99479c0.08081,-0.19519 0.08081,-0.41599 0,-0.61118c-0.0408,-0.0984 -0.0992,-0.1864 -0.17361,-0.2608l-4.79963,-4.79911c-0.31283,-0.3128 -0.81847,-0.3128 -1.1313,0c-0.31283,0.31279 -0.31283,0.81918 0,1.13118l3.43471,3.43433l-7.66949,0c-0.44244,0 -0.80007,0.3584 -0.80007,0.79999c0,0.44159 0.35763,0.79999 0.80007,0.79999l7.66949,0l-3.43471,3.43433c-0.31283,0.3128 -0.31283,0.81919 0,1.13118c0.15601,0.156 0.36083,0.2344 0.56565,0.2344c0.20482,0 0.40964,-0.0784 0.56565,-0.2344l4.79963,-4.79911c0.07441,-0.0744 0.13281,-0.1624 0.17361,-0.2608" />
+                                            </g>
+                                          </svg></a></div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div>
+                                  <div>
+                                    <div>
+                                      <div id="t1_ehwxv0j" style="padding-left:37px" tabindex="-1"
+                                        class="_3sf33-9rVAO_v4y0pIW_CH">
+                                        <div class="_1DooEIX-1Nj5rweIc5cw_E">
+                                          <div class="_36AIN2ppxy_z-XSDxTvYj5 t1_ehwajv7"><i class="threadline"></i>
+                                          </div>
+                                        </div>
+                                        <div
+                                          class="Comment t1_ehwxv0j P8SGAKMtRxNwlmLz1zdJu undefined HZ-cv9q391bm8s7qT54B3">
+                                          <button
+                                            class="_1nGapmdexvR0BuOkfAi6wa t1_ehwxv0j O_Ica0k2O4KFcZyNfsJDU _2Gzh48SaLz7dQBCULfOC6V"><i
+                                              class="icon icon-expand _1tnrhhM9S7dYjApTfvd14l"></i></button>
+                                          <div class="_3GfQMgsm3HGd3838lwqCST" to="/user/[deleted]/">
+                                            <div class="_13ScjOmi6dGdJw0JAonQEr"></div>
+                                          </div>
+                                          <div class="_3tw__eCCe7j-epNCKGXUKk undefined"><span
+                                              class="_1RIl585IYPW6cmNXwgRz0J">level 2</span>
+                                            <div
+                                              class="-Xcv3XBXmgiY2X5RqaPbO _1S45SPAIb30fsXtEcKPSdt _3c9Go6433BnvYx8_7MkPnt _3LqBzV8aCO9tge99jHiUGy _2k27lgIDltx9kOzVGXt48i"
+                                              data-testid="post-comment-header-deleted"><span
+                                                class="_1a_HxF03jCyxnx706hQmJR"><span
+                                                  class="_3yx4Dn0W3Yunucf5sVJeFU">Comment deleted by user</span><span
+                                                  class="_2ETuFsVzMBxiHia6HfJCTQ _8b8fUdBRxCYj9MkNpFvvv"> &#xB7;
+                                                </span><a class="_3yx4Dn0W3Yunucf5sVJeFU"
+                                                  data-testid="comment_timestamp"
+                                                  href="https://www.reddit.com/r/AskReddit/comments/axtih6/comment/ehwxv0j/?utm_source=reddit&amp;utm_medium=web2x&amp;context=3"
+                                                  id="CommentTopMeta--Created--t1_ehwxv0j" target="_blank"
+                                                  rel="nofollow noopener noreferrer">3 yr. ago</a></span></div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div>
+                                  <div>
+                                    <div id="continueThread-t1_ehwxv0j" style="padding-left:42px" tabindex="-1"
+                                      class="_3sf33-9rVAO_v4y0pIW_CH _2csJ1c6CZ_3VQ75SVdUAwt">
+                                      <div class="_1DooEIX-1Nj5rweIc5cw_E">
+                                        <div class="_36AIN2ppxy_z-XSDxTvYj5 t1_ehwajv7"><i class="threadline"></i></div>
+                                        <div class="_36AIN2ppxy_z-XSDxTvYj5 t1_ehwxv0j"><i class="threadline"></i></div>
+                                      </div>
+                                      <div class="_3ndawrYzcvjHPJFYUHijfP "><a class="b57A3J7QBa7TvY8XeupVn"
+                                          href="/r/AskReddit/comments/axtih6/comment/ehwxv0j/"><span
+                                            class="_2bsN7AuzEexqxXD-vhOkM7">Continue this thread</span>&#xA0;<svg
+                                            viewbox="0 0 11.4 11.4" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                                            class="egHA5MD_goQfvgLP3zgST">
+                                            <g>
+                                              <path fill="inherit"
+                                                d="m11.17929,5.99479c0.08081,-0.19519 0.08081,-0.41599 0,-0.61118c-0.0408,-0.0984 -0.0992,-0.1864 -0.17361,-0.2608l-4.79963,-4.79911c-0.31283,-0.3128 -0.81847,-0.3128 -1.1313,0c-0.31283,0.31279 -0.31283,0.81918 0,1.13118l3.43471,3.43433l-7.66949,0c-0.44244,0 -0.80007,0.3584 -0.80007,0.79999c0,0.44159 0.35763,0.79999 0.80007,0.79999l7.66949,0l-3.43471,3.43433c-0.31283,0.3128 -0.31283,0.81919 0,1.13118c0.15601,0.156 0.36083,0.2344 0.56565,0.2344c0.20482,0 0.40964,-0.0784 0.56565,-0.2344l4.79963,-4.79911c0.07441,-0.0744 0.13281,-0.1624 0.17361,-0.2608" />
+                                            </g>
+                                          </svg></a></div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div>
+                                  <div>
+                                    <div id="moreComments-t1_ehws075" style="padding-left:21px" tabindex="-1"
+                                      class="_3sf33-9rVAO_v4y0pIW_CH">
+                                      <div class="_1DooEIX-1Nj5rweIc5cw_E">
+                                        <div class="_36AIN2ppxy_z-XSDxTvYj5 t1_ehwajv7"><i class="threadline"></i></div>
+                                      </div>
+                                      <div class="_3_mqV5-KnILOxl1TvgYtCk">
+                                        <p class="_2HYsucNpMdUpYlGBMviq8M _23013peWUhznY89KuYPZKv">237 more replies</p>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div>
+                                  <div>
+                                    <div>
+                                      <div id="t1_ehwgryj" style="padding-left:16px" tabindex="-1"
+                                        class="_3sf33-9rVAO_v4y0pIW_CH">
+                                        <div class="_1DooEIX-1Nj5rweIc5cw_E">
+                                          <div class="_3Wv3am0TXfTcugZJ6niui">
+                                            <div class="_36AIN2ppxy_z-XSDxTvYj5 t1_ehwgryj undefined"><i
+                                                class="threadline"></i></div>
+                                          </div>
+                                        </div>
+                                        <div
+                                          class="Comment t1_ehwgryj P8SGAKMtRxNwlmLz1zdJu HZ-cv9q391bm8s7qT54B3 _1z5rdmX8TDr6mqwNv7A70U">
+                                          <button
+                                            class="_1nGapmdexvR0BuOkfAi6wa t1_ehwgryj _1zN1-lYh2LfbYOMAho_O8g _2Gzh48SaLz7dQBCULfOC6V"><i
+                                              class="icon icon-expand _1tnrhhM9S7dYjApTfvd14l"></i></button><a
+                                            class="_3GfQMgsm3HGd3838lwqCST" data-testid="comment_author_icon"
+                                            href="/user/bluefoodforpercy/">
+                                            <div class="_13ScjOmi6dGdJw0JAonQEr"></div>
+                                          </a>
+                                          <div class="_3tw__eCCe7j-epNCKGXUKk"><span
+                                              class="_1RIl585IYPW6cmNXwgRz0J">level 1</span>
+                                            <div
+                                              class="-Xcv3XBXmgiY2X5RqaPbO _1S45SPAIb30fsXtEcKPSdt _3LqBzV8aCO9tge99jHiUGy "
+                                              data-testid="post-comment-header"><span class="_1a_HxF03jCyxnx706hQmJR">
+                                                <div class="_3QEK34iVL1BjyHAVleVVNQ"></div><span
+                                                  class="_2ETuFsVzMBxiHia6HfJCTQ _8b8fUdBRxCYj9MkNpFvvv"> &#xB7;
+                                                </span><a class="_3yx4Dn0W3Yunucf5sVJeFU"
+                                                  data-testid="comment_timestamp"
+                                                  href="https://www.reddit.com/r/AskReddit/comments/axtih6/comment/ehwgryj/?utm_source=reddit&amp;utm_medium=web2x&amp;context=3"
+                                                  id="CommentTopMeta--Created--t1_ehwgryj" target="_blank"
+                                                  rel="nofollow noopener noreferrer">3 yr. ago</a>
+                                                <div class="_3XoW0oYd5806XiOr24gGdb"></div>
+                                              </span></div>
+                                            <div data-testid="comment" class="_3cjCphgls6DH-irkVaA0GM ">
+                                              <div class="_292iotee39Lmt0MkQZ2hPV RichTextJSON-root">
+                                                <p class="_1qeIAgB0cPwnLhDF9XSiJM">My KitchenAid stand mixer. I love to
+                                                  bake and it&#x2019;s definitely upped my game 100 times over!</p>
+                                              </div>
+                                            </div>
+                                            <div class="_3KgrO85L1p9wQbgwG27q4y">
+                                              <div
+                                                class="_1E9mcoVn4MYnuBQSVDt1gC _2oM1YqCxIwkvwyeZamWwhW _1ewTEGuogtFmDvDII2T2Yy"
+                                                id="vote-arrows-t1_ehwgryj"><button aria-label="upvote"
+                                                  aria-pressed="false" class="voteButton _2m5vzALl8kQdr9kwIFUo5t "
+                                                  data-click-id="upvote"><span
+                                                    class="_2q7IQ0BUOWeEZoeAxN555e _3SUsITjKNQ7Tp0Wi2jGxIM _22nWXKAY6OzAfK5GcUqWV2 qW0l8Af61EP35WIG6vnGk _3edNsMs0PNfyQYofMNVhsG"><i
+                                                      class="icon icon-upvote _2Jxk822qXs4DaXwsN7yyHA"></i></span></button>
+                                                <div
+                                                  class="_1rZYMD_4xY3gRcSS3p8ODO _25IkBM0rRUqWX5ZojEMAFQ _3ChHiOyYyUkpZ_Nm3ZyM2M"
+                                                  style="color:#1A1A1B">3.2k</div><button aria-label="downvote"
+                                                  aria-pressed="false" class="voteButton _2m5vzALl8kQdr9kwIFUo5t"
+                                                  data-click-id="downvote"><span
+                                                    class="_1iKd82bq_nqObFvSH1iC_Q Q0BxYHtCOJ_rNSPJMU2Y7 _2fe-KdD2OM0ciaiux-G1EL _3yQIOwaIuF6gn8db96Gu7y"><i
+                                                      class="icon icon-downvote ZyxIIl4FP5gHGrJDzNpUC"></i></span></button>
+                                              </div>
+                                              <div
+                                                class="XZK-LTFT5CgGo9MvPQQsy _1LXnp2ufrzN6ioaTLTjGQ1 _2t8wLytikHzPCUnvXdS_wu  _2_lhaFUJdP8q0o2L9MN2TN">
+                                                <div id="t1_ehwgryj-comment-share-menu"><button
+                                                    class="_374Hkkigy4E4srsI2WktEd">Share</button></div><button
+                                                  class="_374Hkkigy4E4srsI2WktEd _2hr3tRWszeMRQ0u_Whs7t8 _14hLFU5cIJCyxH9DSgsCov">Report</button><button
+                                                  class="_374Hkkigy4E4srsI2WktEd _2hr3tRWszeMRQ0u_Whs7t8 _14hLFU5cIJCyxH9DSgsCov">Save</button>
+                                                <div
+                                                  class="hrV8gUgmt0V7wM2wgZ81l _1YnPvd-E5MbmcM3PvRRcX _14hLFU5cIJCyxH9DSgsCov">
+                                                  <button aria-expanded="false" aria-haspopup="true"
+                                                    aria-label="more options" id="t1_ehwgryj-overflow-menu"
+                                                    class="_2pFdCpgBihIaYh9DSMWBIu _1VR6DV38j4rMT5OMeU4gJZ uMPgOFYlCc5uvpa2Lbteu"><i
+                                                      class="_38GxRFSqSC-Z2VLi5Xzkjy icon icon-overflow_horizontal"></i></button>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div>
+                                  <div>
+                                    <div>
+                                      <div id="t1_ehwt27q" style="padding-left:37px" tabindex="-1"
+                                        class="_3sf33-9rVAO_v4y0pIW_CH">
+                                        <div class="_1DooEIX-1Nj5rweIc5cw_E">
+                                          <div class="_36AIN2ppxy_z-XSDxTvYj5 t1_ehwgryj"><i class="threadline"></i>
+                                          </div>
+                                          <div class="_3Wv3am0TXfTcugZJ6niui">
+                                            <div class="_36AIN2ppxy_z-XSDxTvYj5 t1_ehwt27q "><i class="threadline"></i>
+                                            </div>
+                                          </div>
+                                        </div>
+                                        <div class="Comment t1_ehwt27q P8SGAKMtRxNwlmLz1zdJu HZ-cv9q391bm8s7qT54B3">
+                                          <button
+                                            class="_1nGapmdexvR0BuOkfAi6wa t1_ehwt27q _1zN1-lYh2LfbYOMAho_O8g _2Gzh48SaLz7dQBCULfOC6V"><i
+                                              class="icon icon-expand _1tnrhhM9S7dYjApTfvd14l"></i></button><a
+                                            class="_3GfQMgsm3HGd3838lwqCST" data-testid="comment_author_icon"
+                                            href="/user/WorshipNickOfferman/">
+                                            <div class="_13ScjOmi6dGdJw0JAonQEr"></div>
+                                          </a>
+                                          <div class="_3tw__eCCe7j-epNCKGXUKk"><span
+                                              class="_1RIl585IYPW6cmNXwgRz0J">level 2</span>
+                                            <div
+                                              class="-Xcv3XBXmgiY2X5RqaPbO _1S45SPAIb30fsXtEcKPSdt _3LqBzV8aCO9tge99jHiUGy "
+                                              data-testid="post-comment-header"><span class="_1a_HxF03jCyxnx706hQmJR">
+                                                <div class="_3QEK34iVL1BjyHAVleVVNQ"></div><span
+                                                  class="_2ETuFsVzMBxiHia6HfJCTQ _8b8fUdBRxCYj9MkNpFvvv"> &#xB7;
+                                                </span><a class="_3yx4Dn0W3Yunucf5sVJeFU"
+                                                  data-testid="comment_timestamp"
+                                                  href="https://www.reddit.com/r/AskReddit/comments/axtih6/comment/ehwt27q/?utm_source=reddit&amp;utm_medium=web2x&amp;context=3"
+                                                  id="CommentTopMeta--Created--t1_ehwt27q" target="_blank"
+                                                  rel="nofollow noopener noreferrer">3 yr. ago</a>
+                                                <div class="_3XoW0oYd5806XiOr24gGdb"></div>
+                                              </span></div>
+                                            <div data-testid="comment" class="_3cjCphgls6DH-irkVaA0GM ">
+                                              <div class="_292iotee39Lmt0MkQZ2hPV RichTextJSON-root">
+                                                <p class="_1qeIAgB0cPwnLhDF9XSiJM">My brother borrowed mine 5 years ago
+                                                  and i haven&#x2019;t seen it since. hes getting married Sunday and
+                                                  maybe I should get home one.</p>
+                                              </div>
+                                            </div>
+                                            <div class="_3KgrO85L1p9wQbgwG27q4y">
+                                              <div
+                                                class="_1E9mcoVn4MYnuBQSVDt1gC _2oM1YqCxIwkvwyeZamWwhW _1ewTEGuogtFmDvDII2T2Yy"
+                                                id="vote-arrows-t1_ehwt27q"><button aria-label="upvote"
+                                                  aria-pressed="false" class="voteButton _2m5vzALl8kQdr9kwIFUo5t "
+                                                  data-click-id="upvote"><span
+                                                    class="_2q7IQ0BUOWeEZoeAxN555e _3SUsITjKNQ7Tp0Wi2jGxIM _22nWXKAY6OzAfK5GcUqWV2 qW0l8Af61EP35WIG6vnGk _3edNsMs0PNfyQYofMNVhsG"><i
+                                                      class="icon icon-upvote _2Jxk822qXs4DaXwsN7yyHA"></i></span></button>
+                                                <div
+                                                  class="_1rZYMD_4xY3gRcSS3p8ODO _25IkBM0rRUqWX5ZojEMAFQ _3ChHiOyYyUkpZ_Nm3ZyM2M"
+                                                  style="color:#1A1A1B">329</div><button aria-label="downvote"
+                                                  aria-pressed="false" class="voteButton _2m5vzALl8kQdr9kwIFUo5t"
+                                                  data-click-id="downvote"><span
+                                                    class="_1iKd82bq_nqObFvSH1iC_Q Q0BxYHtCOJ_rNSPJMU2Y7 _2fe-KdD2OM0ciaiux-G1EL _3yQIOwaIuF6gn8db96Gu7y"><i
+                                                      class="icon icon-downvote ZyxIIl4FP5gHGrJDzNpUC"></i></span></button>
+                                              </div>
+                                              <div
+                                                class="XZK-LTFT5CgGo9MvPQQsy _1LXnp2ufrzN6ioaTLTjGQ1 _2Ik7QEXtA-lbZKj0ssL89G  _2_lhaFUJdP8q0o2L9MN2TN">
+                                                <div id="t1_ehwt27q-comment-share-menu"><button
+                                                    class="_374Hkkigy4E4srsI2WktEd">Share</button></div><button
+                                                  class="_374Hkkigy4E4srsI2WktEd _2hr3tRWszeMRQ0u_Whs7t8 _14hLFU5cIJCyxH9DSgsCov">Report</button><button
+                                                  class="_374Hkkigy4E4srsI2WktEd _2hr3tRWszeMRQ0u_Whs7t8 _14hLFU5cIJCyxH9DSgsCov">Save</button>
+                                                <div
+                                                  class="hrV8gUgmt0V7wM2wgZ81l _1YnPvd-E5MbmcM3PvRRcX _14hLFU5cIJCyxH9DSgsCov">
+                                                  <button aria-expanded="false" aria-haspopup="true"
+                                                    aria-label="more options" id="t1_ehwt27q-overflow-menu"
+                                                    class="_2pFdCpgBihIaYh9DSMWBIu _1VR6DV38j4rMT5OMeU4gJZ uMPgOFYlCc5uvpa2Lbteu"><i
+                                                      class="_38GxRFSqSC-Z2VLi5Xzkjy icon icon-overflow_horizontal"></i></button>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div>
+                                  <div>
+                                    <div id="continueThread-t1_ehwt27q" style="padding-left:42px" tabindex="-1"
+                                      class="_3sf33-9rVAO_v4y0pIW_CH">
+                                      <div class="_1DooEIX-1Nj5rweIc5cw_E">
+                                        <div class="_36AIN2ppxy_z-XSDxTvYj5 t1_ehwgryj"><i class="threadline"></i></div>
+                                        <div class="_36AIN2ppxy_z-XSDxTvYj5 t1_ehwt27q"><i class="threadline"></i></div>
+                                      </div>
+                                      <div class="_3ndawrYzcvjHPJFYUHijfP "><a class="b57A3J7QBa7TvY8XeupVn"
+                                          href="/r/AskReddit/comments/axtih6/comment/ehwt27q/"><span
+                                            class="_2bsN7AuzEexqxXD-vhOkM7">Continue this thread</span>&#xA0;<svg
+                                            viewbox="0 0 11.4 11.4" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                                            class="egHA5MD_goQfvgLP3zgST">
+                                            <g>
+                                              <path fill="inherit"
+                                                d="m11.17929,5.99479c0.08081,-0.19519 0.08081,-0.41599 0,-0.61118c-0.0408,-0.0984 -0.0992,-0.1864 -0.17361,-0.2608l-4.79963,-4.79911c-0.31283,-0.3128 -0.81847,-0.3128 -1.1313,0c-0.31283,0.31279 -0.31283,0.81918 0,1.13118l3.43471,3.43433l-7.66949,0c-0.44244,0 -0.80007,0.3584 -0.80007,0.79999c0,0.44159 0.35763,0.79999 0.80007,0.79999l7.66949,0l-3.43471,3.43433c-0.31283,0.3128 -0.31283,0.81919 0,1.13118c0.15601,0.156 0.36083,0.2344 0.56565,0.2344c0.20482,0 0.40964,-0.0784 0.56565,-0.2344l4.79963,-4.79911c0.07441,-0.0744 0.13281,-0.1624 0.17361,-0.2608" />
+                                            </g>
+                                          </svg></a></div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="_3Kd8DQpBIbsr5E1JcrMFTY _1tvThPWQpORoc2taKebHxs" style="margin-left:24px;margin-top:0">
+                      <div class="_31AVRNJbVMh2DUFRrpCQcD RffBqG1xCvuy1r49wYhLr">
+                        <div class="_1G4yU68P50vRZ4USXfaceV " data-redditstyle="false">
+                          <div class="_ZhON3a3vplThB8NFwuJn ">
+                            <div class="_2sggAEfRQLyoAl4J__5twU yobE-ux_T1smVDcFMMKFv">
+                              <h2 class="_eYtD2XCVieq6emjKBH3m">About Community</h2>
+                            </div>
+                            <div class="_3nzVPnRRnrls4DOXO_I0fn"></div>
+                          </div>
+                          <div class="TmgZY6tDcdErbE5d7E0HJ " style="max-height:none">
+                            <div class="_20Kb6TX_CdnePoT8iEsls6"><img style="background-color:#0079D3"
+                                alt="Subreddit Icon" role="presentation"
+                                src="https://styles.redditmedia.com/t5_2qh1i/styles/communityIcon_tijjpyw1qe201.png?width=256&amp;s=4e76eadc662b8155a93d4d7487a6d3acb35f4334"
+                                class="_34CfAAowTqdbNDYXz5tBTW _2Vkdik1Q8k0lBEhhA_lRKE ">
+                              <div class="_2Zdkj7cQEO3zSGHGK2XnZv"><a class="_2D7eYuDY6cYGtybECmsxvE"
+                                  href="/r/AskReddit/"><span class="_19bCWnxeTjqzBElWZfIlJb"
+                                    title="r/AskReddit">r/AskReddit</span></a></div>
+                            </div>
+                            <div data-redditstyle="true" data-testid="no-edit-description-block"
+                              class="_1EPynDYoibfs7nDggdH7Gq">
+                              <div class="_1zPvgKHteTOub9dKkvrOl4">r/AskReddit is the place to ask and answer
+                                thought-provoking questions.</div>
+                            </div>
+                            <div class="_1aTW4bdYQHgSZJe7BF2-XV">
+                              <div>
+                                <div class="_3b9utyKN3e_kzVZ5ngPqAu">36.8m</div>
+                                <p class="_22W-auD0n8kTKDVe0vWuyK" id="IdCard--Subscribers--undefined--t5_2qh1i">Members
+                                </p>
+                              </div>
+                              <div>
+                                <div class="_3b9utyKN3e_kzVZ5ngPqAu">77.8k</div>
+                                <p class="_22W-auD0n8kTKDVe0vWuyK" id="IdCard--CurrentlyViewing--undefined--t5_2qh1i">
+                                  Online</p>
+                              </div>
+                              <div></div>
+                            </div>
+                            <hr class="_38lwnrIpIyqxDfAF1iwhcV">
+                            <div class="">
+                              <div class="_1sDtEhccxFpHDn2RUhxmSq" id="IdCard--CakeDay--undefined--t5_2qh1i"><i
+                                  class="_3tMM22A0evCEmrIk-8z4zO icon icon-cake"></i><span class="">Created Jan 25,
+                                  2008</span></div>
+                            </div>
+                            <div class="_3Z6MIaeww5ZxzFqWHAEUxa"></div>
+                            <div class="_1qiHDKK74j6hUNxM0p9ZIp">
+                              <div><button role="button" tabindex="0" id="subscribe-button-t5_2qh1i"
+                                  class="_1eMniuqQCoYf3kOpyx83Jj _1LHxa-yaHJwrPK8kuyv_Y4 _2iuoyPiKHN3kfOoeIQalDT _10BQ7pjWbeYP63SAPNS8Ts HNozj_dKjQZ59ZsfEegz8 _34mIRHpFtnJ0Sk97S2Z3D9">Join</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="_2vEf-C2keJaBMY9qk_BxVn">
+                          <div class="_2YJDRz5rCYQfu8YdgB_neb _1G4yU68P50vRZ4USXfaceV " data-redditstyle="false">
+                            <div class="_3RPJ8hHnfFohktLZca18J6 " style="max-height:none"><a
+                                href="https://www.reddit.com/posts/2019/march-6-1/" target="_blank"
+                                rel="noopener noreferrer">
+                                <div class="_2ppRhKEnnVueVHY_G-Ursy"><img
+                                    src="https://www.redditstatic.com/desktop2x/img/widgets/rereddit-promo/left.png"><img
+                                    class="_2KLA5wMaJBHg0K2z1q0ci_"
+                                    src="https://www.redditstatic.com/desktop2x/img/widgets/rereddit-promo/center.png"><img
+                                    src="https://www.redditstatic.com/desktop2x/img/widgets/rereddit-promo/right.png"><img
+                                    class="_1zdLtEEpuWI_Pnujn1lMF2"
+                                    src="https://www.redditstatic.com/desktop2x/img/widgets/rereddit-promo/upvotes.png">
+                                </div>
+                                <div class="_3s18OZ_KPHs2Ei416c7Q1l"><img class="LJjFa8EhquYX8xsTnb9n-"
+                                    src="https://www.redditstatic.com/desktop2x/img/widgets/rereddit-promo/line.png">
+                                  <div class="_2Zjw1QfT_iMHH7rfaGsfBs">
+                                    <div class="_2gaJVJ6_j7vwKV945EABN9"></div>
+                                  </div>
+                                </div>
+                              </a>
+                              <div class="_37WD6iicVS6vGN0RomNTwh"><a role="button" tabindex="0"
+                                  href="https://www.reddit.com/posts/2019/march-6-1/" target="_blank"
+                                  class="_3gbb_EMFXxTYrxDZ2kusIp _2iuoyPiKHN3kfOoeIQalDT _10BQ7pjWbeYP63SAPNS8Ts HNozj_dKjQZ59ZsfEegz8 ">Top
+                                  posts march 6th 2019</a><a role="button" tabindex="0"
+                                  href="https://www.reddit.com/posts/2019/march/" target="_blank"
+                                  class="_3gbb_EMFXxTYrxDZ2kusIp _2iuoyPiKHN3kfOoeIQalDT _10BQ7pjWbeYP63SAPNS8Ts HNozj_dKjQZ59ZsfEegz8 ">Top
+                                  posts of march, 2019</a><a role="button" tabindex="0"
+                                  href="https://www.reddit.com/posts/2019/" target="_blank"
+                                  class="_3gbb_EMFXxTYrxDZ2kusIp _2iuoyPiKHN3kfOoeIQalDT _10BQ7pjWbeYP63SAPNS8Ts HNozj_dKjQZ59ZsfEegz8 ">Top
+                                  posts 2019</a></div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="_1oRQu-aolgpPPJDblUGTw5">
+                          <div class="_1vYrJH5uc57mZQJPN4l34E"></div>
+                          <div class="_3Tc8YYRhVDX9vlR0XePZfH _365FiUZ11efXHV7l7fNp6K" style="top:calc(100vh - 8px)">
+                            <button role="button" tabindex="0"
+                              class="_1m03hmspTHlre1O1CXbY9Y _2iuoyPiKHN3kfOoeIQalDT _10BQ7pjWbeYP63SAPNS8Ts HNozj_dKjQZ59ZsfEegz8 ">Back
+                              to Top</button></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="subredditvars-r-askreddit"></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="acceptabletest" class="promotedlink"
+    style="width: 1px; height: 1px; position: absolute; left: -1e+06px; top: 0px; display: block;">Advertisement</div>
+  <div id="adblocktest" class="ad adsense-ad googad gemini-ad openx ad-banner GoogleAd LeftAd ad-300-250 adbar ads-area"
+    style="width: 1px; height: 1px; position: absolute; left: -1000%;">
+
+  </div>
+</body>
+
+</html>

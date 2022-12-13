@@ -26,6 +26,6 @@ export const TechlogIijAdJpExtractor = {
 
     transforms: {},
 
-    clean: [],
+    clean: ['.wp_social_bookmarking_light'],
   },
 };

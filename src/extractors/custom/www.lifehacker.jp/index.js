@@ -2,15 +2,21 @@ export const WwwLifehackerJpExtractor = {
   domain: 'www.lifehacker.jp',
 
   title: {
-    selectors: ['h1.lh-summary-title'],
+    selectors: ['h1[class^="article_pArticle_Title"]', 'h1.lh-summary-title'],
   },
 
   author: {
-    selectors: ['p.lh-entryDetailInner--credit'],
+    selectors: [
+      ['meta[name="author"]', 'value'],
+      'p.lh-entryDetailInner--credit',
+    ],
   },
 
   date_published: {
-    selectors: [['div.lh-entryDetail-header time', 'datetime']],
+    selectors: [
+      ['meta[name="article:published_time"]', 'value'],
+      ['div.lh-entryDetail-header time', 'datetime'],
+    ],
   },
 
   dek: null,
@@ -20,7 +26,10 @@ export const WwwLifehackerJpExtractor = {
   },
 
   content: {
-    selectors: ['div.lh-entryDetail-body'],
+    selectors: [
+      'div[class^="article_pArticle_Body__"]',
+      'div.lh-entryDetail-body',
+    ],
 
     transforms: {
       'img.lazyload': $node => {

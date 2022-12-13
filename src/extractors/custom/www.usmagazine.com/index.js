@@ -6,13 +6,13 @@ export const WwwUsmagazineComExtractor = {
   },
 
   author: {
-    selectors: ['a.article-byline.tracked-offpage'],
+    selectors: ['a.author', 'a.article-byline.tracked-offpage'],
   },
 
   date_published: {
     timezone: 'America/New_York',
 
-    selectors: ['time.article-published-date'],
+    selectors: [['meta[name="article:published_time"]', 'value']],
   },
 
   lead_image_url: {
@@ -20,7 +20,7 @@ export const WwwUsmagazineComExtractor = {
   },
 
   content: {
-    selectors: ['div.article-body-inner'],
+    selectors: ['div.article-content'],
 
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images

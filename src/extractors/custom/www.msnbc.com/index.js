@@ -6,11 +6,14 @@ export const WwwMsnbcComExtractor = {
   },
 
   author: {
-    selectors: ['.author'],
+    selectors: ['.byline-name', '.author'],
   },
 
   date_published: {
-    selectors: [['meta[name="DC.date.issued"]', 'value']],
+    selectors: [
+      ['meta[itemprop="datePublished"]', 'value'],
+      ['meta[name="DC.date.issued"]', 'value'],
+    ],
   },
 
   dek: {
@@ -22,7 +25,7 @@ export const WwwMsnbcComExtractor = {
   },
 
   content: {
-    selectors: ['.pane-node-body'],
+    selectors: ['.article-body__content', '.pane-node-body'],
 
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images

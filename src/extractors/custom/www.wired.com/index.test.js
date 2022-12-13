@@ -16,9 +16,7 @@ describe('WiredExtractor', () => {
     beforeAll(() => {
       url =
         'https://www.wired.com/2016/09/ode-rosetta-spacecraft-going-die-comet/';
-      const html = fs.readFileSync(
-        './fixtures/www.wired.com/1611475755063.html'
-      );
+      const html = fs.readFileSync('./fixtures/www.wired.com.html');
       result = Mercury.parse(url, { html, fallback: false });
     });
 

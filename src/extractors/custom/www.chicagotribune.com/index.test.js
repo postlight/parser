@@ -1,6 +1,7 @@
 import assert from 'assert';
 import URL from 'url';
 import cheerio from 'cheerio';
+import moment from 'moment-timezone';
 
 import Mercury from 'mercury';
 import getExtractor from 'extractors/get-extractor';
@@ -15,9 +16,7 @@ describe('WwwChicagotribuneComExtractor', () => {
     beforeAll(() => {
       url =
         'http://www.chicagotribune.com/news/nationworld/politics/ct-trump-energy-department-climate-change-request-20161213-story.html';
-      const html = fs.readFileSync(
-        './fixtures/www.chicagotribune.com/1481669367099.html'
-      );
+      const html = fs.readFileSync('./fixtures/www.chicagotribune.com.html');
       result = Mercury.parse(url, { html, fallback: false });
     });
 
@@ -56,10 +55,13 @@ describe('WwwChicagotribuneComExtractor', () => {
       // To pass this test, fill out the date_published selector
       // in ./src/extractors/custom/www.chicagotribune.com/index.js.
       const { date_published } = await result;
+      const new_date_published = moment(date_published)
+        .format()
+        .split('T')[0];
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(date_published, '2016-12-13T21:45:00.000Z');
+      assert.equal(new_date_published, '2016-12-13');
     });
 
     it('returns the lead_image_url', async () => {
@@ -71,7 +73,7 @@ describe('WwwChicagotribuneComExtractor', () => {
       // the article.
       assert.equal(
         lead_image_url,
-        'http://www.trbimg.com/img-58506bcc/turbine/ct-trump-energy-department-climate-change-request-20161213'
+        'https://www.chicagotribune.com/resizer/tP-TOTSSCwh-DB2Tl_zeREXAVqc=/1200x630/filters:format(jpg):quality(70)/arc-anglerfish-arc2-prod-tronc.s3.amazonaws.com/public/LNQKCWO2SFHNLEVJV7AIVSBPWA.jpg'
       );
     });
 
@@ -95,7 +97,7 @@ describe('WwwChicagotribuneComExtractor', () => {
       // the article.
       assert.equal(
         first13,
-        'Global warming - "it\'s a hoax."Donald Trump has said that more than once.'
+        'Global warming - "it\'s a hoax."Donald Trump has said that more than once.So'
       );
     });
   });

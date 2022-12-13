@@ -14,11 +14,16 @@ export const GothamistComExtractor = {
   },
 
   author: {
-    selectors: ['.author'],
+    // There are multiple article-metadata and byline-author classes, but the main article's is the 3rd child of the l-container class
+    selectors: ['.article-metadata:nth-child(3) .byline-author', '.author'],
   },
 
   date_published: {
-    selectors: ['abbr', 'abbr.published'],
+    selectors: [
+      ['meta[name="article:published_time"]', 'value'],
+      'abbr',
+      'abbr.published',
+    ],
 
     timezone: 'America/New_York',
   },
@@ -32,7 +37,7 @@ export const GothamistComExtractor = {
   },
 
   content: {
-    selectors: ['.entry-body'],
+    selectors: ['.article-body', '.entry-body'],
 
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images

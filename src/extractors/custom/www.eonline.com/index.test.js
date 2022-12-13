@@ -15,9 +15,7 @@ describe('WwwEonlineComExtractor', () => {
     beforeAll(() => {
       url =
         'http://www.eonline.com/news/814222/ryan-gosling-s-feelings-about-fatherhood-will-make-your-heart-sing';
-      const html = fs.readFileSync(
-        './fixtures/www.eonline.com/1481567592820.html'
-      );
+      const html = fs.readFileSync('./fixtures/www.eonline.com.html');
       result = Mercury.parse(url, { html, fallback: false });
     });
 
@@ -59,7 +57,7 @@ describe('WwwEonlineComExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(date_published, '2016-12-12T06:00:00.000Z');
+      assert.equal(date_published, '2016-12-12T14:00:00.000Z');
     });
 
     it('returns the lead_image_url', async () => {
@@ -71,7 +69,7 @@ describe('WwwEonlineComExtractor', () => {
       // the article.
       assert.equal(
         lead_image_url,
-        'http://akns-images.eonline.com/eol_images/Entire_Site/2016117/rs_300x300-161207101544-600.ryan-gosling-gq.12716.jpg?downsize=600:*&crop=600:315;left,top'
+        'https://akns-images.eonline.com/eol_images/Entire_Site/2016117/rs_600x600-161207101544-600.ryan-gosling-gq.12716.jpg?fit=around%7C1080:1080&output-quality=90&crop=1080:1080;center,top'
       );
     });
 
@@ -95,7 +93,7 @@ describe('WwwEonlineComExtractor', () => {
       // the article.
       assert.equal(
         first13,
-        "Ryan Gosling's most cherished role won't win him any Hollywood awards.With his musical"
+        "Ryan Gosling's most cherished role won't win him any Hollywood awards. With his"
       );
     });
   });

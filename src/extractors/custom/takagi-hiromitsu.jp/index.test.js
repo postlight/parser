@@ -15,9 +15,7 @@ describe('TakagihiromitsuJpExtractor', () => {
     let url;
     beforeAll(() => {
       url = 'http://takagi-hiromitsu.jp/diary/20190211.html';
-      const html = fs.readFileSync(
-        './fixtures/takagi-hiromitsu.jp/1551506427717.html'
-      );
+      const html = fs.readFileSync('./fixtures/takagi-hiromitsu.jp.html');
       result = Mercury.parse(url, {
         html,
         fallback: false,

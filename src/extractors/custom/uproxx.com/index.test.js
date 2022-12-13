@@ -14,7 +14,7 @@ describe('UproxxComExtractor', () => {
     let url;
     beforeAll(() => {
       url = 'http://uproxx.com/news/rudy-giuliani-not-secretary-of-state/';
-      const html = fs.readFileSync('./fixtures/uproxx.com/1481324633976.html');
+      const html = fs.readFileSync('./fixtures/uproxx.com.html');
       result = Mercury.parse(url, { html, fallback: false });
     });
 
@@ -68,7 +68,7 @@ describe('UproxxComExtractor', () => {
       // the article.
       assert.equal(
         lead_image_url,
-        'https://uproxx.files.wordpress.com/2016/12/rudy-giuliani-not-secretary-of-state.jpg?quality=90&w=650'
+        'https://uproxx.com/wp-content/uploads/2016/12/rudy-giuliani-not-secretary-of-state.jpg?w=650'
       );
     });
 

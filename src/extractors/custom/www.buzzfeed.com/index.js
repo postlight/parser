@@ -3,9 +3,12 @@
 // (e.g., NYTimesExtractor)
 export const BuzzfeedExtractor = {
   domain: 'www.buzzfeed.com',
+
+  supportedDomains: ['www.buzzfeednews.com'],
+
   title: {
     selectors: [
-      'h1[id="post-title"]',
+      'h1.embed-headline-title',
       // enter title selectors
     ],
   },
@@ -14,14 +17,15 @@ export const BuzzfeedExtractor = {
     selectors: [
       'a[data-action="user/username"]',
       'byline__author',
+      ['meta[name="author"]', 'value'],
       // enter author selectors
     ],
   },
 
   content: {
     selectors: [
-      ['.longform_custom_header_media', '#buzz_sub_buzz'],
-      '#buzz_sub_buzz',
+      ['div[class^="featureimage_featureImageWrapper"]', '.js-subbuzz-wrapper'],
+      ['.js-subbuzz-wrapper'],
     ],
 
     defaultCleaner: false,
@@ -51,11 +55,13 @@ export const BuzzfeedExtractor = {
       '.suplist_list_hide .buzz_superlist_item .buzz_superlist_number_inline',
       '.share-box',
       '.print',
+      '.js-inline-share-bar',
+      '.js-ad-placement',
     ],
   },
 
   date_published: {
-    selectors: ['.buzz-datetime'],
+    selectors: [['time[datetime]', 'datetime']],
   },
 
   lead_image_url: {
@@ -63,7 +69,7 @@ export const BuzzfeedExtractor = {
   },
 
   dek: {
-    selectors: [],
+    selectors: ['.embed-headline-description'],
   },
 
   next_page_url: null,

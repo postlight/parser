@@ -15,9 +15,7 @@ describe('AbcnewsGoComExtractor', () => {
     beforeAll(() => {
       url =
         'http://abcnews.go.com/US/hillary-clinton-putins-alleged-involvement-democratic-hack-stems/story?id=44233864&cid=clicksource_4380645_2_three_posts_vert_hed';
-      const html = fs.readFileSync(
-        './fixtures/abcnews.go.com/1481922563840.html'
-      );
+      const html = fs.readFileSync('./fixtures/abcnews.go.com.html');
       result = Mercury.parse(url, { html, fallback: false });
     });
 
@@ -38,7 +36,7 @@ describe('AbcnewsGoComExtractor', () => {
       // the article.
       assert.equal(
         title,
-        "Hillary Clinton: Putin's Alleged Involvement in Democratic Hack Stems From Longtime Grudge"
+        "Hillary Clinton: Putin's Alleged Involvement in Democratic Hack Stems From 'Personal Beef'"
       );
     });
 
@@ -49,7 +47,7 @@ describe('AbcnewsGoComExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(author, 'Josh Haskell David Caplan PATRICK REEVELL');
+      assert.equal(author, 'JOSH HASKELL, DAVID CAPLAN and PATRICK REEVELL');
     });
 
     it('returns the date_published', async () => {
@@ -59,7 +57,7 @@ describe('AbcnewsGoComExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(date_published, '2016-12-16T17:37:00.000Z');
+      assert.equal(date_published, '2016-12-16T21:19:00.000Z');
     });
 
     it('returns the lead_image_url', async () => {
@@ -71,7 +69,7 @@ describe('AbcnewsGoComExtractor', () => {
       // the article.
       assert.equal(
         lead_image_url,
-        'http://a.abcnews.com/images/Politics/AP-hillary-clinton-01-as-161216_16x9_992.jpg'
+        'https://s.abcnews.com/images/Politics/AP-hillary-clinton-01-as-161216_16x9_992.jpg'
       );
     });
 
@@ -95,7 +93,7 @@ describe('AbcnewsGoComExtractor', () => {
       // the article.
       assert.equal(
         first13,
-        "Hillary Clinton has an explanation for Vladimir Putin's alleged involvement in the hacking"
+        "&#151; -- Hillary Clinton has an explanation for Vladimir Putin's alleged involvement in"
       );
     });
   });

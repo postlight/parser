@@ -2,11 +2,15 @@ export const WwwYoutubeComExtractor = {
   domain: 'www.youtube.com',
 
   title: {
-    selectors: ['.watch-title', 'h1.watch-title-container'],
+    selectors: [
+      ['meta[name="title"]', 'value'],
+      '.watch-title',
+      'h1.watch-title-container',
+    ],
   },
 
   author: {
-    selectors: ['.yt-user-info'],
+    selectors: [['link[itemprop="name"]', 'content'], '.yt-user-info'],
   },
 
   date_published: {
@@ -28,7 +32,11 @@ export const WwwYoutubeComExtractor = {
   content: {
     defaultCleaner: false,
 
-    selectors: [['#player-api', '#eow-description']],
+    selectors: [
+      '#player-container-outer',
+      'ytd-expandable-video-description-body-renderer #description',
+      ['#player-api', '#description'],
+    ],
 
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images
@@ -37,6 +45,13 @@ export const WwwYoutubeComExtractor = {
         const videoId = $('meta[itemProp="videoId"]').attr('value');
         $node.html(`
           <iframe src="https://www.youtube.com/embed/${videoId}" frameborder="0" allowfullscreen></iframe>`);
+      },
+      '#player-container-outer': ($node, $) => {
+        const videoId = $('meta[itemProp="videoId"]').attr('value');
+        const description = $('meta[itemProp="description"]').attr('value');
+        $node.html(`
+        <iframe src="https://www.youtube.com/embed/${videoId}" frameborder="0" allowfullscreen></iframe>
+        <div><span>${description}</span></div>`);
       },
     },
 

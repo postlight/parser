@@ -15,9 +15,7 @@ describe('NewYorkerExtractor', () => {
     beforeAll(() => {
       url =
         'http://www.newyorker.com/tech/elements/hacking-cryptography-and-the-countdown-to-quantum-computing';
-      const html = fs.readFileSync(
-        './fixtures/www.newyorker.com/1611473608343.html'
-      );
+      const html = fs.readFileSync('./fixtures/www.newyorker.com.html');
       result = Mercury.parse(url, { html, fallback: false });
     });
 
@@ -61,7 +59,7 @@ describe('NewYorkerExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(date_published.split('T')[0], '2016-09-26');
+      assert.equal(date_published, '2016-09-26T14:04:22.000Z');
     });
 
     it('returns the lead_image_url', async () => {
@@ -97,7 +95,7 @@ describe('NewYorkerExtractor', () => {
       // the article.
       assert.equal(
         first13,
-        'Given the recent ubiquity of cyber-scandals—Colin Powell’s stolen e-mails, Simone Biles’s leaked medical'
+        'In a laboratory in Shanghai, researchers work on developing a quantum computer—a new'
       );
     });
   });
@@ -109,7 +107,7 @@ describe('NewYorkerExtractor', () => {
       url =
         'http://www.newyorker.com/magazine/2016/12/05/lessons-from-my-mother';
       const html = fs.readFileSync(
-        './fixtures/www.newyorker.com/1611475571383.html'
+        './fixtures/www.newyorker.com--magazine.html'
       );
       result = Mercury.parse(url, { html, fallback: false });
     });
@@ -126,7 +124,7 @@ describe('NewYorkerExtractor', () => {
     it('returns the date for magazine content', async () => {
       const { date_published } = await result;
 
-      assert.equal(date_published.split('T')[0], '2016-11-28');
+      assert.equal(date_published, '2016-11-28T00:00:00.000Z');
     });
   });
 
@@ -137,7 +135,7 @@ describe('NewYorkerExtractor', () => {
       url =
         'https://www.newyorker.com/humor/daily-shouts/teas-you-should-probably-get-rid-of-already';
       const html = fs.readFileSync(
-        './fixtures/www.newyorker.com/1557834611707.html'
+        './fixtures/www.newyorker.com--multiple-authors.html'
       );
       result = Mercury.parse(url, { html, fallback: false });
     });
@@ -145,10 +143,7 @@ describe('NewYorkerExtractor', () => {
     it('returns multiple authors', async () => {
       const { author } = await result;
 
-      assert.equal(
-        author,
-        'Ysabel YatesIllustration by Claire LordonMay 10, 2019'
-      );
+      assert.equal(author, 'Ysabel Yates Illustration by Claire Lordon');
     });
   });
 });

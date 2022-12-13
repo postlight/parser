@@ -2,11 +2,11 @@ export const WwwReutersComExtractor = {
   domain: 'www.reuters.com',
 
   title: {
-    selectors: ['h1.article-headline'],
+    selectors: ['h1[class*="ArticleHeader-headline-"]', 'h1.article-headline'],
   },
 
   author: {
-    selectors: ['.author'],
+    selectors: [['meta[name="og:article:author"]', 'value'], '.author'],
   },
 
   date_published: {
@@ -18,7 +18,7 @@ export const WwwReutersComExtractor = {
   },
 
   content: {
-    selectors: ['#article-text'],
+    selectors: ['div.ArticleBodyWrapper', '#article-text'],
 
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images
@@ -29,6 +29,9 @@ export const WwwReutersComExtractor = {
     // Is there anything that is in the result that shouldn't be?
     // The clean selectors will remove anything that matches from
     // the result
-    clean: ['#article-byline .author'],
+    clean: [
+      'div[class^="ArticleBody-byline-container-"]',
+      '#article-byline .author',
+    ],
   },
 };

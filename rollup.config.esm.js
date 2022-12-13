@@ -27,6 +27,6 @@ export default {
       ? 'dist/mercury_test.esm.js'
       : 'dist/mercury.esm.js',
     format: 'es',
-    sourceMap: true,
+    sourcemap: true,
   },
 };

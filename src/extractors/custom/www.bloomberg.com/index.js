@@ -10,6 +10,7 @@ export const WwwBloombergComExtractor = {
       'h1.article-title',
 
       // /news/ template
+      'h1[class^="headline"]',
       'h1.lede-text-only__hed',
     ],
   },
@@ -24,6 +25,7 @@ export const WwwBloombergComExtractor = {
 
       // /news/ template
       '.author',
+      'p[class*="author"]',
     ],
   },
 
@@ -33,6 +35,7 @@ export const WwwBloombergComExtractor = {
       ['time[datetime]', 'datetime'],
       ['meta[name="date"]', 'value'],
       ['meta[name="parsely-pub-date"]', 'value'],
+      ['meta[name="parsely-pub-date"]', 'content'],
     ],
   },
 
@@ -41,12 +44,16 @@ export const WwwBloombergComExtractor = {
   },
 
   lead_image_url: {
-    selectors: [['meta[name="og:image"]', 'value']],
+    selectors: [
+      ['meta[name="og:image"]', 'value'],
+      ['meta[name="og:image"]', 'content'],
+    ],
   },
 
   content: {
     selectors: [
       '.article-body__content',
+      '.body-content',
 
       // /graphics/ template
       ['section.copy-block'],

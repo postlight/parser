@@ -15,9 +15,7 @@ describe('WwwAmericanowComExtractor', () => {
     beforeAll(() => {
       url =
         'http://www.americanow.com/story/politics/2016/12/22/trump-names-kellyanne-conway-counselor-president';
-      const html = fs.readFileSync(
-        './fixtures/www.americanow.com/1482528557836.html'
-      );
+      const html = fs.readFileSync('./fixtures/www.americanow.com.html');
       result = Mercury.parse(url, { html, fallback: false });
     });
 
@@ -68,7 +66,7 @@ describe('WwwAmericanowComExtractor', () => {
       // the article.
       assert.equal(
         lead_image_url,
-        'http://images.americanow.com:8080/ovi/catalog/downloads/preview/rndr_670x377//2016/12/conway-1482422231.JPG/rndr_670x377.jpg'
+        'https://americanow.s3-us-west-1.amazonaws.com/an_prod/s3fs-public/admin/ANDefault.jpg'
       );
     });
 

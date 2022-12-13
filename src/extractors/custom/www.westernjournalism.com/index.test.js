@@ -15,9 +15,7 @@ describe('WwwWesternjournalismComExtractor', () => {
     beforeAll(() => {
       url =
         'http://www.westernjournalism.com/berlin-terrorist-shot-dead-in-milan-by-rookie-police-officer/';
-      const html = fs.readFileSync(
-        './fixtures/www.westernjournalism.com/1482520953825.html'
-      );
+      const html = fs.readFileSync('./fixtures/www.westernjournalism.com.html');
       result = Mercury.parse(url, { html, fallback: false });
     });
 

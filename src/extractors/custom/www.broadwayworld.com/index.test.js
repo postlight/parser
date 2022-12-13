@@ -9,16 +9,14 @@ import { excerptContent } from 'utils/text';
 const fs = require('fs');
 
 // Rename CustomExtractor
-describe('CustomExtractor', () => {
+describe('WwwBroadwayWorldComExtractor', () => {
   describe('initial test case', () => {
     let result;
     let url;
     beforeAll(() => {
       url =
         'http://www.broadwayworld.com/article/American-Theatre-Wing-Launches-Andrew-Lloyd-Webber-Training-Scholarships-20161013';
-      const html = fs.readFileSync(
-        './fixtures/www.broadwayworld.com/1476392567143.html'
-      );
+      const html = fs.readFileSync('./fixtures/www.broadwayworld.com.html');
       result = Mercury.parse(url, { html, fallback: false });
     });
     it('is selected properly', async () => {
@@ -61,7 +59,7 @@ describe('CustomExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(date_published, '2016-10-13T19:35:00.000Z');
+      assert.equal(date_published, '2016-10-13T15:35:00.000Z');
     });
 
     it('returns the lead_image_url', async () => {
@@ -73,7 +71,7 @@ describe('CustomExtractor', () => {
       // the article.
       assert.equal(
         lead_image_url,
-        'https://images.bwwstatic.com/columnpic7/7B5FD766-A644-E386-19DE07017A3AD79C.jpg'
+        'https://cloudimages.broadwayworld.com/columnpic7/6807B5FD766-A644-E386-19DE07017A3AD79C.jpg'
       );
     });
 

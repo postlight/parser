@@ -14,7 +14,7 @@ describe('WwwTmzComExtractor', () => {
     let url;
     beforeAll(() => {
       url = 'http://www.tmz.com/2016/11/28/prince-wife-estate-will/';
-      const html = fs.readFileSync('./fixtures/www.tmz.com/1480368537455.html');
+      const html = fs.readFileSync('./fixtures/www.tmz.com.html');
       result = Mercury.parse(url, { html, fallback: false });
     });
 
@@ -59,7 +59,7 @@ describe('WwwTmzComExtractor', () => {
       // Note: This is actually wrong, but the error is from TMZ's very bad
       // markup. Currently the parser will get it close but not the correct
       // timezone. This could be fixed by better markup)
-      assert.equal(date_published, '2016-11-28T11:00:00.000Z');
+      assert.equal(date_published, '2016-11-28T19:00:00.000Z');
     });
 
     it('returns the lead_image_url', async () => {
@@ -71,7 +71,7 @@ describe('WwwTmzComExtractor', () => {
       // the article.
       assert.equal(
         lead_image_url,
-        'http://ll-media.tmz.com/2016/11/28/1128-prince-getty-03-1200x630.jpg'
+        'https://imagez.tmz.com/image/b5/16by9/2016/11/28/b5f68d4fb1dc57c89f1ab2113eab4832_xl.jpg'
       );
     });
 

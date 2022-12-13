@@ -4,7 +4,7 @@ export const PagesixComExtractor = {
   supportedDomains: ['nypost.com'],
 
   title: {
-    selectors: ['h1 a'],
+    selectors: [['meta[name="og:title"]', 'value']],
   },
 
   author: {

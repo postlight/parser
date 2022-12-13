@@ -2,15 +2,15 @@ export const WwwChicagotribuneComExtractor = {
   domain: 'www.chicagotribune.com',
 
   title: {
-    selectors: ['h1.trb_ar_hl_t'],
+    selectors: [['meta[name="og:title"]', 'value']],
   },
 
   author: {
-    selectors: ['span.trb_ar_by_nm_au'],
+    selectors: ['div.article_byline span:first-of-type'],
   },
 
   date_published: {
-    selectors: [['meta[itemprop="datePublished"]', 'value']],
+    selectors: ['time'],
   },
 
   lead_image_url: {
@@ -18,7 +18,7 @@ export const WwwChicagotribuneComExtractor = {
   },
 
   content: {
-    selectors: ['div.trb_ar_page'],
+    selectors: ['article'],
 
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images

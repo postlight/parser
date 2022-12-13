@@ -15,9 +15,7 @@ describe('WwwPublickey1JpExtractor', () => {
     beforeAll(() => {
       url =
         'https://www.publickey1.jp/blog/19/1ssdintel_ssd_d5-p4326qlc14643d_nandssd.html';
-      const html = fs.readFileSync(
-        './fixtures/www.publickey1.jp/1554481347071.html'
-      );
+      const html = fs.readFileSync('./fixtures/www.publickey1.jp.html');
       result = Mercury.parse(url, {
         html,
         fallback: false,
@@ -41,7 +39,7 @@ describe('WwwPublickey1JpExtractor', () => {
       // the article.
       assert.equal(
         title,
-        `インテル、容量1ペタバイトのSSD「Intel SSD D5-P4326」発売。QLC（1セルあたり4ビット）と64層の3D NAND技術を用いて大容量SSDを実現`
+        `インテル、1Uで容量1ペタバイトのSSD「Intel SSD D5-P4326」発売。QLC（1セルあたり4ビット）と64層の3D NAND技術を用いて大容量SSDを実現`
       );
     });
 
@@ -111,7 +109,7 @@ describe('WwwPublickey1JpExtractor', () => {
       // the article.
       assert.equal(
         first13,
-        '2019年4月4日 米インテルは4月2日、イベント「Data-Centric Innovation Day」を開催。データセンター向けに1ペタバイトの容量を持つSSD「Intel SSD'
+        '2019年4月4日 米インテルは4月2日、イベント「Data-Centric Innovation Day」を開催。データセンター向けに1Uラックあたり1ペタバイトの容量を持つSSD「Intel SSD'
       );
     });
   });

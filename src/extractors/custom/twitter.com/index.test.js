@@ -6,7 +6,7 @@ const fs = require('fs');
 
 describe('TwitterExtractor', () => {
   it('works with a feature story', async () => {
-    const html = fs.readFileSync('./fixtures/twitter.com/tweet.html');
+    const html = fs.readFileSync('./fixtures/twitter.com.html');
     const uri = 'https://twitter.com/KingBeyonceStan/status/745276948213968896';
 
     const { title, author, date_published } = await Mercury.parse(uri, {

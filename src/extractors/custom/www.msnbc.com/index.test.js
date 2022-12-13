@@ -15,9 +15,7 @@ describe('WwwMsnbcComExtractor', () => {
     beforeAll(() => {
       url =
         'http://www.msnbc.com/rachel-maddow-show/bizarre-election-ends-bizarre-electoral-college-tally';
-      const html = fs.readFileSync(
-        './fixtures/www.msnbc.com/1482261084088.html'
-      );
+      const html = fs.readFileSync('./fixtures/www.msnbc.com.html');
       result = Mercury.parse(url, { html, fallback: false });
     });
 
@@ -59,7 +57,7 @@ describe('WwwMsnbcComExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(date_published, '2016-12-20T13:00:06.000Z');
+      assert.equal(date_published, '2016-12-20T12:44:32.000Z');
     });
 
     it('returns the lead_image_url', async () => {
@@ -71,7 +69,7 @@ describe('WwwMsnbcComExtractor', () => {
       // the article.
       assert.equal(
         lead_image_url,
-        'http://www.msnbc.com/sites/msnbc/files/styles/ratio--1_91-1--1200x630/public/trump.jpeg-99fbe.jpg?itok=2azRDj-y'
+        'https://media-cldnry.s-nbcnews.com/image/upload/t_nbcnews-fp-1200-630,f_auto,q_auto:best/msnbc/2016_49/510386/trump.jpeg-99fbe.jpg'
       );
     });
 
@@ -95,7 +93,7 @@ describe('WwwMsnbcComExtractor', () => {
       // the article.
       assert.equal(
         first13,
-        'On Election Day, Donald Trump earned 306 electoral votes to Hillary Clinton’s 232,'
+        "On Election Day, Donald Trump earned 306 electoral votes to Hillary Clinton's 232,"
       );
     });
   });

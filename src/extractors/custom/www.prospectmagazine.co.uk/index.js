@@ -2,21 +2,21 @@ export const WwwProspectmagazineCoUkExtractor = {
   domain: 'www.prospectmagazine.co.uk',
 
   title: {
-    selectors: ['.page-title'],
+    selectors: ['.blog-header__title', '.page-title'],
   },
 
   author: {
-    selectors: ['.aside_author .title'],
+    selectors: ['.blog-header__author-link', '.aside_author .title'],
   },
 
   date_published: {
-    selectors: ['.post-info'],
+    selectors: [['meta[name="article:published_time"]', 'value'], '.post-info'],
 
     timezone: 'Europe/London',
   },
 
   dek: {
-    selectors: ['.page-subtitle'],
+    selectors: ['.blog-header__description', '.page-subtitle'],
   },
 
   lead_image_url: {
@@ -24,7 +24,7 @@ export const WwwProspectmagazineCoUkExtractor = {
   },
 
   content: {
-    selectors: ['article .post_content'],
+    selectors: ['.blog__container', 'article .post_content'],
 
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images

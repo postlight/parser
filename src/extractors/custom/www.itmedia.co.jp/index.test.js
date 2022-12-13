@@ -14,9 +14,7 @@ describe('WwwItmediaCoJpExtractor', () => {
     let url;
     beforeAll(() => {
       url = 'https://www.itmedia.co.jp/pcuser/articles/1902/22/news089.html';
-      const html = fs.readFileSync(
-        './fixtures/www.itmedia.co.jp/1550977733079.html'
-      );
+      const html = fs.readFileSync('./fixtures/www.itmedia.co.jp.html');
       result = Mercury.parse(url, {
         html,
         fallback: false,
@@ -40,7 +38,7 @@ describe('WwwItmediaCoJpExtractor', () => {
       // the article.
       assert.equal(
         title,
-        `さらば平成、さらば水冷、いくぜNUC：Intel NUCで最新SSDを比較してみた (1/2)`
+        `Intel NUCで最新SSDを比較してみた：さらば平成、さらば水冷、いくぜNUC（1/2 ページ）`
       );
     });
 

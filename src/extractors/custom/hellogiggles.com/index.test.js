@@ -14,9 +14,7 @@ describe('HellogigglesComExtractor', () => {
     let url;
     beforeAll(() => {
       url = 'http://hellogiggles.com/comfy-chic-holiday-outfit-illustrated/';
-      const html = fs.readFileSync(
-        './fixtures/hellogiggles.com/1482437663500.html'
-      );
+      const html = fs.readFileSync('./fixtures/hellogiggles.com.html');
       result = Mercury.parse(url, { html, fallback: false });
     });
 
@@ -45,7 +43,7 @@ describe('HellogigglesComExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(author, 'Cindy Mangomini');
+      assert.equal(author, 'Cindy mangomini');
     });
 
     it('returns the date_published', async () => {
@@ -55,7 +53,7 @@ describe('HellogigglesComExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(date_published, '2016-12-22T00:05:23.000Z');
+      assert.equal(date_published, '2016-12-21T21:05:23.000Z');
     });
 
     it('returns the lead_image_url', async () => {
@@ -67,7 +65,7 @@ describe('HellogigglesComExtractor', () => {
       // the article.
       assert.equal(
         lead_image_url,
-        'http://images.hellogiggles.com/uploads/2016/12/21073729/HG-Xmas-NY-Cindy-Mangomini1.jpg'
+        'https://static.onecms.io/wp-content/uploads/sites/13/2016/12/21/HG-Xmas-NY-Cindy-Mangomini1.jpg'
       );
     });
 

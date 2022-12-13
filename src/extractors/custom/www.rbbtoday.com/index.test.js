@@ -14,9 +14,7 @@ describe('WwwRbbtodayComExtractor', () => {
     let url;
     beforeAll(() => {
       url = 'https://www.rbbtoday.com/article/2019/04/19/169284.html';
-      const html = fs.readFileSync(
-        './fixtures/www.rbbtoday.com/1556596828041.html'
-      );
+      const html = fs.readFileSync('./fixtures/www.rbbtoday.com.html');
       result = Mercury.parse(url, {
         html,
         fallback: false,

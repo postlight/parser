@@ -12,11 +12,17 @@ export const GithubComExtractor = {
   },
 
   date_published: {
-    selectors: [['span[itemprop="dateModified"] relative-time', 'datetime']],
+    selectors: [
+      ['relative-time[datetime]', 'datetime'],
+      ['span[itemprop="dateModified"] relative-time', 'datetime'],
+    ],
   },
 
   dek: {
-    selectors: ['span[itemprop="about"]'],
+    selectors: [
+      ['meta[name="description"]', 'value'],
+      'span[itemprop="about"]',
+    ],
   },
 
   lead_image_url: {

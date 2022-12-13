@@ -41,7 +41,7 @@ export const TheAtlanticExtractor = {
   },
 
   lead_image_url: {
-    selectors: [['img[itemprop="url"]', 'src']],
+    selectors: [['meta[name="og:image"]', 'value']],
   },
 
   next_page_url: null,

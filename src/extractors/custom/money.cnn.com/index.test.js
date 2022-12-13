@@ -15,9 +15,7 @@ describe('MoneyCnnComExtractor', () => {
     beforeAll(() => {
       url =
         'http://money.cnn.com/2016/11/29/news/ohare-workers-strike/index.html';
-      const html = fs.readFileSync(
-        './fixtures/money.cnn.com/1480437611330.html'
-      );
+      const html = fs.readFileSync('./fixtures/money.cnn.com.html');
       result = Mercury.parse(url, { html, fallback: false });
     });
     it('is selected properly', async () => {
@@ -83,7 +81,7 @@ describe('MoneyCnnComExtractor', () => {
       // the article.
       assert.equal(
         lead_image_url,
-        'http://i2.cdn.turner.com/money/dam/assets/161118102423-ohare-airport-strike-780x439.jpg'
+        'https://i2.cdn.turner.com/money/dam/assets/161118102423-ohare-airport-strike-780x439.jpg'
       );
     });
 

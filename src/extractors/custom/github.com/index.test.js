@@ -14,7 +14,7 @@ describe('GithubComExtractor', () => {
     let url;
     beforeAll(() => {
       url = 'https://github.com/steventroughtonsmith/marzipanify';
-      const html = fs.readFileSync('./fixtures/github.com/1551742565097.html');
+      const html = fs.readFileSync('./fixtures/github.com.html');
       result = Mercury.parse(url, { html, fallback: false });
     });
 
@@ -33,7 +33,10 @@ describe('GithubComExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(title, `steventroughtonsmith/marzipanify`);
+      assert.equal(
+        title,
+        `steventroughtonsmith/marzipanify: Convert an iOS Simulator app bundle to an iOSMac (Marzipan) one (Unsupported & undocumented, WIP)`
+      );
     });
 
     it('returns the author', async () => {
@@ -53,7 +56,7 @@ describe('GithubComExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(date_published, '2019-03-04T12:37:07.000Z');
+      assert.equal(date_published, '2020-07-07T12:10:51.000Z');
     });
 
     it('returns the dek', async () => {
@@ -65,7 +68,7 @@ describe('GithubComExtractor', () => {
       // the article.
       assert.equal(
         dek,
-        'Convert an iOS Simulator app bundle to an iOSMac (Marzipan) one (Unsupported & undocumented, WIP)'
+        'Convert an iOS Simulator app bundle to an iOSMac (Marzipan) one (Unsupported & undocumented, WIP) - steventroughtonsmith/marzipanify: Convert an iOS Simulator app bundle to an iOSMac (Marzipan) one (Unsupported & undocumented, WIP)'
       );
     });
 
@@ -78,7 +81,7 @@ describe('GithubComExtractor', () => {
       // the article.
       assert.equal(
         lead_image_url,
-        `https://avatars0.githubusercontent.com/u/45212?s=400&v=4`
+        `https://opengraph.githubassets.com/269d23b56f85a1ea9bd3cf5b2f34ddbce8cfaff7a74c6561f59d84db67b8efc1/steventroughtonsmith/marzipanify`
       );
     });
 

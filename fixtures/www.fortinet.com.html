@@ -1,0 +1,912 @@
+
+    <!DOCTYPE HTML>
+    <html lang="en" data-template="post-page">
+    <head>
+        
+    <meta charset="UTF-8">
+    <title>How-to Guide: Defeating an Android Packer with FRIDA</title>
+    <meta name="keywords" value="Threat Research,android,android malware">
+    <meta name="description" value="FortiGuard Labs has encountered a lot of packed Android malware recently. One interesting aspect to this malware is that even though the packer being used is consistently the same, the malware that it drops changes quite frequently. In this blogpost we will demonstrate how to unpack the malware deployed by today&#x2019;s most common dropper using only open-source free tools.">
+    <meta name="template" value="post-page">
+    
+
+    <meta name="viewport" value="width=device-width, initial-scale=1">
+
+
+<meta name="google-site-verification" value="tiQ03tSujT2TSsWJ6tNHiiUn8cwYVmdMQrGUCNrPQmo">
+
+<meta value="Fortinet Blog" name="og:site_name">
+<meta value="How-to Guide: Defeating an Android Packer with FRIDA" name="og:title">
+<meta value="https://www.fortinet.com/blog/threat-research/defeating-an-android-packer-with-frida" name="og:url">
+<meta value="article" name="og:type">
+<meta value="FortiGuard Labs has encountered a lot of packed Android malware recently. One interesting aspect to this malware is that even though the packer being used is consistently the same, the malware that&#x2026;" name="og:description">
+<meta value="https://www.fortinet.com/content/dam/fortinet-blog/article-images/defeating_an_android_packer_with_frida/frida_02.png" name="og:image">
+
+<meta value="summary" name="twitter:card">
+<meta value="@Fortinet" name="twitter:site">
+
+<meta value="Dario Durando" name="article:author">
+
+    <meta value="Threat Research" name="article:section">
+
+
+    <meta value="2018-11-02T00:00:00.000-07:00" name="article:published_time">
+
+
+    <meta value="android" name="article:tag">
+
+    <meta value="android malware" name="article:tag">
+
+
+<link rel="shortcut icon" href="/etc/designs/fortinet-blog/favicon.ico">
+
+
+
+
+
+
+
+     <link rel="stylesheet" href="/etc.clientlibs/fortinet-blog/clientlibs/clientlib-base.min.css?ver=071522" type="text/css">
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+
+
+
+    
+    
+    
+
+    
+    
+
+    
+    
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+
+        
+            
+            
+                
+                
+                
+                
+            
+        
+
+    </head>
+    <body>
+    
+
+
+
+    
+<div class="root responsivegrid">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    <div class="b1-header aem-GridColumn aem-GridColumn--default--12">
+
+
+<header class="b1-header__container">
+    <div class="b1-header__logo">
+        <a href="https://www.fortinet.com">
+            
+            <img class="desktop-logo" src="/content/dam/fortinet-blog/fortinet-logo-white.svg" alt="How-to Guide: Defeating an Android Packer with FRIDA">
+            <img class="mobile-logo" src="/content/dam/fortinet-blog/fortinet-logo-white.svg" alt="How-to Guide: Defeating an Android Packer with FRIDA">
+        </a>
+    </div>
+
+    <div class="b1-header__cta-list">
+      <a class="b1-header__cta-list-item " href="https://www.fortinet.com/blog">
+          <span>Blog</span>
+      </a>
+    </div>
+
+    <div class="b1-header__nav"><div class="b2-navigation">
+
+
+
+
+    <ul class="b2-navigation__list">
+        
+            <li class="b2-navigation-categories"><div class="b2-navigation__list-item nav-dropdown-title">Categories</div>
+                <ul class="navdropdown">
+                    
+                        <li>
+                            <a class="b2-navigation__dropdown__list-item" href="/blog/business-and-technology">
+                                <span>Business &amp; Technology </span>
+                            </a>
+                        </li>
+                    
+                
+                    
+                        <li>
+                            <a class="b2-navigation__dropdown__list-item" href="/blog/threat-research">
+                                <span>Threat Research</span>
+                            </a>
+                        </li>
+                    
+                
+                    
+                        <li>
+                            <a class="b2-navigation__dropdown__list-item" href="/blog/industry-trends">
+                                <span>Industry Trends</span>
+                            </a>
+                        </li>
+                    
+                
+                    
+                        <li>
+                            <a class="b2-navigation__dropdown__list-item" href="/blog/partners">
+                                <span>Partners</span>
+                            </a>
+                        </li>
+                    
+                
+                    
+                        <li>
+                            <a class="b2-navigation__dropdown__list-item" href="/blog/customer-stories">
+                                <span>Customer Stories</span>
+                            </a>
+                        </li>
+                    
+                
+                    
+                        <li>
+                            <a class="b2-navigation__dropdown__list-item" href="/blog/psirt-blogs">
+                                <span>PSIRT Blogs</span>
+                            </a>
+                        </li>
+                    
+                </ul>
+            </li>
+
+        
+            <li class="m-nav-item">
+                <a class="b2-navigation__list-item false" href="/blog/business-and-technology">
+                    <span>Business &amp; Technology </span>
+                </a>
+            </li>
+        
+            <li class="m-nav-item">
+                <a class="b2-navigation__list-item false" href="/blog/threat-research">
+                    <span>Threat Research</span>
+                </a>
+            </li>
+        
+            <li class="m-nav-item">
+                <a class="b2-navigation__list-item false" href="/blog/industry-trends">
+                    <span>Industry Trends</span>
+                </a>
+            </li>
+        
+            <li class="m-nav-item">
+                <a class="b2-navigation__list-item false" href="/blog/partners">
+                    <span>Partners</span>
+                </a>
+            </li>
+        
+            <li class="m-nav-item">
+                <a class="b2-navigation__list-item false" href="/blog/customer-stories">
+                    <span>Customer Stories</span>
+                </a>
+            </li>
+        
+            <li class="m-nav-item">
+                <a class="b2-navigation__list-item false" href="/blog/psirt-blogs">
+                    <span>PSIRT Blogs</span>
+                </a>
+            </li>
+        
+        
+        
+            <li>
+                <a class="b2-navigation__list-item false" href="/blog/ciso-collective">
+                    <span>CISO Collective</span>
+                </a>
+            </li>
+        
+    </ul>
+
+
+    
+
+</div>
+</div>
+
+    <div class="b1-header__search"><div class="b3-searchbox">
+
+
+
+
+
+    
+
+</div>
+</div>
+
+    <div class="b1-header__search-toggle">
+        
+    <svg viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+        <path d="M15.688 14.18l-4.075-4.075C12.36 9.06 12.8 7.78 12.8 6.4 12.8 2.87 9.93 0 6.4 0 2.87 0 0 2.87 0 6.4c0 3.53 2.87 6.4 6.4 6.4 1.38 0 2.66-.44 3.705-1.187l4.075 4.075c.207.208.48.312.753.312.274 0 .547-.104.755-.312.416-.417.416-1.093 0-1.51zM2.133 6.4c0-2.357 1.91-4.267 4.267-4.267s4.267 1.91 4.267 4.267-1.91 4.267-4.267 4.267S2.133 8.757 2.133 6.4z"/>
+        
+    </svg>
+
+        <div class="b1-header__search-toggle-close">
+            <span class="b1-header__search-toggle-close-line"></span>
+            <span class="b1-header__search-toggle-close-line"></span>
+        </div>
+    </div>
+
+    <div class="b1-header__nav-toggle" aria-hidden="true">
+        <span class="b1-header__nav-toggle-line"></span>
+        <span class="b1-header__nav-toggle-line"></span>
+        <span class="b1-header__nav-toggle-line"></span>
+    </div>
+</header>
+
+    
+
+</div>
+<section class="b4-hero aem-GridColumn aem-GridColumn--default--12">
+
+
+
+<div class="b4-hero__container" style="background-image:url(/content/dam/fortinet-blog/article-images/defeating_an_android_packer_with_frida/frida_02.png);">
+    <img class="ratio" alt="How-to Guide: Defeating an Android Packer with FRIDA" aria-hidden="true" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAADCAQAAAAe/WZNAAAADklEQVR42mNkgAJGDAYAAFEABCaLYqoAAAAASUVORK5CYII=">
+    <div class="b4-hero__text text-container">
+        <p data-ly-test="" class="b4-hero__kicker">Threat Research</p>
+        
+        
+        <h1 class="b4-hero__headline">How-to Guide: Defeating an Android Packer with FRIDA</h1>
+        
+    </div>
+</div>
+</section>
+<section class="b15-blog-meta aem-GridColumn aem-GridColumn--default--12">
+
+<div class="b15-blog-meta__container text-container">
+    <span>By </span>
+
+    <span class="b15-blog-meta__author">
+
+        
+					
+
+                        
+
+                                  
+                                      
+                                            
+                                              <a href="/blog/search?author=Dario+Durando">Dario Durando</a>
+                                          
+                                          
+                                           
+                                      
+                                  
+                          
+                    
+        
+    </span>
+    <span class="b15-blog-meta__">
+        
+
+              </span>
+
+
+
+    <span class="b15-blog-meta__date"> | November 02, 2018</span>
+</div>
+</section>
+<div class="responsivegrid aem-GridColumn aem-GridColumn--default--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    <div class="cmp cmp-text aem-GridColumn aem-GridColumn--default--12">
+  <p><b><i>A FortiGuard Labs How-To Guide for Cybersecurity Threat Researchers</i></b></p>
+<p>&#xA0;</p>
+<p>Here at FortiGuard Labs we have encountered a lot of packed Android malware recently. One interesting aspect to this malware is that even though the packer being used is consistently the same, the malware that it drops changes quite frequently.</p>
+<p>Analysing packers can be very intimidating. It is generally very hard to understand the flow of the program, and the sheer amount of garbage displayed can easily scare analysts away.</p>
+<p>Because of that, we want show how we handle some of the problems that arise when analysing this kind of malware. In fact, in this blogpost we will demonstrate how to unpack the malware deployed by today&#x2019;s most common dropper using only open-source free tools.</p>
+<p>The reference sample is: <i>509aa4a846c6cb52e9756a282de67da3e8ec82769bceafa1265428b1289459b3</i></p>
+<p><b>Statis Analysis</b></p>
+<p><i>Sample Overview</i></p>
+<p>First things first: We began by taking a look at what kind of APK we are dealing with.</p>
+
+
+</div>
+<div class="cmp cmp-image aem-GridColumn--default--none aem-GridColumn aem-GridColumn--default--10 aem-GridColumn--offset--default--1">
+
+    
+        <noscript data-cmp-image="{&quot;smartImages&quot;:[],&quot;smartSizes&quot;:[],&quot;lazyEnabled&quot;:true}">
+            <img src="/blog/threat-research/defeating-an-android-packer-with-frida/_jcr_content/root/responsivegrid/image.img.png/1541035216980/frida-01.png" alt="Fortinet FortiGuard Labs Threat Research">
+        </noscript>
+    
+    <span class="cmp-image--title">Figure 1: files contained in the APK</span>
+
+
+    
+
+</div>
+<div class="cmp cmp-text aem-GridColumn aem-GridColumn--default--12">
+  <p>&#xA0;</p>
+<p>As can be seen, there is clearly something fishy in this sample. What is that <i>MawmjulbcbEndsqku^nd.cml </i>file?</p>
+<p>It does not hurt to start by asking the bash command <i>file</i><b><i> </i></b>what we are dealing with. Unfortunately, it did not detect any sort of file type. By looking at file with a hex editor (in this case, we actually used <a href="https://rada.re/r/">radare2</a>, a great open-source reverse engineering framework), we still could not really tell what kind of file this is.&#xA0;</p>
+
+
+</div>
+<div class="cmp cmp-image aem-GridColumn aem-GridColumn--default--12">
+
+    
+        <noscript data-cmp-image="{&quot;smartImages&quot;:[],&quot;smartSizes&quot;:[],&quot;lazyEnabled&quot;:true}">
+            <img src="/blog/threat-research/defeating-an-android-packer-with-frida/_jcr_content/root/responsivegrid/image_1091580682.img.png/1541035284099/frida-02.png" alt="Fortinet FortiGuard Labs Threat Research">
+        </noscript>
+    
+    <span class="cmp-image--title">Figure 2: Hex view of MawmjulbcbEndsqku^nd.cml</span>
+
+
+    
+
+</div>
+<div class="cmp cmp-text aem-GridColumn aem-GridColumn--default--12">
+  <p>&#xA0;</p>
+<p>These considerations, combined with the fact that the name looks like random characters, makes us consider that this may possibly be an encrypted file used by the main application.</p>
+<p>Maybe by taking a look at the Android Manifest we can gain a clearer idea of what is happening.</p>
+<p><b>Android Manifest</b></p>
+<p><i>AndroidManifest.xml</i> is an Android binary XML file that contains a lot of information about the application. It contains:</p>
+<p>-&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0; The package name of the application, under which it will be accessible on the device</p>
+<p>-&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0; The complete list of activities, services, and receivers used by the app (if they are not declared here, they will not be usable by the app later)</p>
+<p>-&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0; A full list of permissions</p>
+<p>-&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0; A full list of intent action filters used during execution</p>
+<p>-&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0; Other usually less important stuff, like icons used, etc.</p>
+<p>The first thing we noticed was the use of completely random strings as the names for all of the components of the app. This can be an indicator of malicious intent, but it is also used by legitimate application developers to make it harder for the competition to reverse engineer their product.</p>
+<p>One of the things that first caught my attention was: with the sole exception of the Application class <i>com.asgradc.troernrn.yeSACsSs</i>, no declared Android component (activity, receiver, and service classes) were present in the decompiled <i>classes.dex </i>file. That&#x2019;s odd: what&#x2019;s the use of declaring non-existent classes and skipping the existing ones?</p>
+<p>It is now clear that additional external code is loaded by this APK. In addition, given the amount and nature of permissions requested&#x2014;like asking to send SMS messages&#x2014;we can be pretty confident that this code is up to no good.</p>
+
+
+</div>
+<div class="cmp cmp-image aem-GridColumn aem-GridColumn--default--12">
+
+    
+        <noscript data-cmp-image="{&quot;smartImages&quot;:[],&quot;smartSizes&quot;:[],&quot;lazyEnabled&quot;:true}">
+            <img src="/blog/threat-research/defeating-an-android-packer-with-frida/_jcr_content/root/responsivegrid/image_2133032318.img.png/1541035328956/frida-03.png" alt="Fortinet FortiGuard Labs Threat Research">
+        </noscript>
+    
+    <span class="cmp-image--title">Figure 3: AndroidManifest SMS filter</span>
+
+
+    
+
+</div>
+<div class="cmp cmp-text aem-GridColumn aem-GridColumn--default--12">
+  <p>&#xA0;</p>
+<p><b>Reversing the Packer</b></p>
+<p>There are many free options available for decompiling APKs into readable code. These include:</p>
+<p>-&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0; Apktool : obtains the SMALI representation of the classes</p>
+<p>-&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0; dex2jar : converts the .dex file into a jar archive which can be analysed using jd-gui</p>
+<p>-&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0; jadx : decompiles in java all the code into a convenient GUI</p>
+<p>My personal favourite is jadx, but it is good to have options because in rare cases only some of them will be able to decompile the code.</p>
+<p>So we next started to analyse the APK on jadx. Unfortunately, things were not pretty...</p>
+
+
+</div>
+<div class="cmp cmp-image aem-GridColumn aem-GridColumn--default--12">
+
+    
+        <noscript data-cmp-image="{&quot;smartImages&quot;:[],&quot;smartSizes&quot;:[],&quot;lazyEnabled&quot;:true}">
+            <img src="/blog/threat-research/defeating-an-android-packer-with-frida/_jcr_content/root/responsivegrid/image_1883097380.img.png/1541035369166/frida-04.png" alt="Fortinet FortiGuard Labs Threat Research">
+        </noscript>
+    
+    <span class="cmp-image--title">Figure 4: Packer Application class</span>
+
+
+    
+
+</div>
+<div class="cmp cmp-text aem-GridColumn aem-GridColumn--default--12">
+  <p>&#xA0;</p>
+<p>In true packer fashion, we were welcomed by a lot of useless garbage: meaningless strings, meaningless computations, meaningless functions. We tried for a while to make sense out of the execution flow: if the encrypted file was to be decrypted, it would either need to call some crypto-library or have its own decrypting routine. Once the decrypting is done, it would then need to load the new file with a <a href="https://developer.android.com/reference/java/lang/ClassLoader"><i>ClassLoader</i></a> Object of some kind.</p>
+<p>Unfortunately, none of these libraries were included in the APK imports. What was included were the Reflection methods that allow the file to indirectly call any loaded library. Once again, however, these reflection methods arguments were also dynamically created using a myriad of unintelligible functions.</p>
+<p>It was becoming clear that static analysis was not going to cut it. To quote George Bernard Shaw:&#xA0;</p>
+
+
+</div>
+<div class="cmp cmp-text aem-GridColumn--default--none aem-GridColumn aem-GridColumn--default--8 aem-GridColumn--offset--default--2">
+  <p><b><i>I learned long ago, never to wrestle with a pig. You get dirty, and besides, the pig likes it.</i></b><br>
+</p>
+
+
+</div>
+<div class="cmp cmp-text aem-GridColumn aem-GridColumn--default--12">
+  <p>&#xA0;</p>
+<p>We were not going to wrestle with this pig any longer. There had to be a faster way.</p>
+<p><b>Dynamic Analysis</b></p>
+<p>Google provides the ability to download the SDKs used in all of its versions of Android to create emulators through Android Studio. It is perfect way to test malware like this without the risk of being infected.</p>
+<p>So we started by using the Marshmallow 6.0 emulator for this sample and installed the APK through <i>adb</i> (Android Debug Bridge). If the APK is to load a new executable file, the built-in logger of the device (or emulator in our case) should be able to pick it up.</p>
+<p>We ran the <i>adb</i> command that connects to the system logger and only selected those lines containing the package name of our dropper:</p>
+
+
+</div>
+<div class="cmp cmp-text aem-GridColumn aem-GridColumn--default--12">
+  <p>$ adb logcat | grep &quot;com.jgnxmcj.knreroaxvi&quot;&#xA0;</p>
+<p>Then we launched the application. Among a lot of uninteresting output, we finally found what we had been looking for:<br>
+</p>
+
+
+</div>
+<div class="cmp cmp-text aem-GridColumn--default--none aem-GridColumn aem-GridColumn--default--7 aem-GridColumn--offset--default--1">
+  <p>10-25 17:12:11.001 24358 24358 W dex2oat : /system/bin/dex2oat --runtime-arg -classpath --runtime-arg&#xA0; --instruction-set=x86 --instruction-set-features=smp,ssse3,-sse4.1,-sse4.2,-avx,-avx2 --runtime-arg -Xrelocate --boot-image=/system/framework/boot.art --runtime-arg -Xms64m --runtime-arg -Xmx512m --instruction-set-variant=x86 --instruction-set-features=default --dex-file=/data/user/0/com.jgnxmcj.knreroaxvi/app_files/rzwohkt.jar --oat-file=/data/user/0/com.jgnxmcj.knreroaxvi/app_files/rzwohkt.dex<br>
+</p>
+
+
+</div>
+<div class="cmp cmp-text aem-GridColumn aem-GridColumn--default--12">
+  <p>&#xA0;</p>
+<p>The APK is indeed creating a new <i>.dex</i> file. Nice. We only need to get this file and we will not need to reverse the dropper.</p>
+<p>Unfortunately, when we tried to grab that file we could not find it in <i>/data/user/0/com.jgnxmcj.knreroaxvi/app_files</i>. Apparently (and unusually, for many malware coders), these authors like to clean up after themselves by deleting the file after its use. So our next problem was, how do we stop the dropper from deleting the file?</p>
+<p>Let me introduce you to the tool of your dreams: <a href="https://frida.re">FRIDA</a></p>
+<p>FRIDA is a fantastic instrumentation kit that allows the hooking of Javascript code during the execution of the application. It is also able to modify functions, fields and much more.</p>
+<p>What we wanted to do in this case was to stop the application from deleting the <i>rzwohkt.jar </i>file so that we can pull it onto our machine for analysis.</p>
+<p>Traditionally with FRIDA, our MO would be to first find the class responsible for the deletion, then hook the method and skip it. However, we do not want to start the pig wresting match again, so we started by using dynamic analysis to exactly skip this part.</p>
+<p>We were only going to be able to bypass this if we could find out which system call is executed to finalize the deletion process. No matter where in the obfuscated code the call is made, if we hook the right native function in the system we should be able to retrieve our desired payload.</p>
+<p><b>Using Strace</b></p>
+<p>The big question next was, how could we possibly find the right function? Fortunately, there is one easy way to get a full list of all of the function calls happening during execution.</p>
+<p><a href="https://linux.die.net/man/1/strace">Strace</a> is a great Linux utility tool that allows a user to get a full report of all the interactions between the processes and the Linux kernel. Because <a href="https://source.android.com/devices/tech/debug/strace">Android supports it</a>, it provides us with the perfect tool for finding the function we need to hook.</p>
+
+
+</div>
+<div class="cmp cmp-image aem-GridColumn aem-GridColumn--default--12">
+
+    
+        <noscript data-cmp-image="{&quot;smartImages&quot;:[],&quot;smartSizes&quot;:[],&quot;lazyEnabled&quot;:true}">
+            <img src="/blog/threat-research/defeating-an-android-packer-with-frida/_jcr_content/root/responsivegrid/image_500264116.img.png/1541035496442/frida-05.png" alt="Fortinet FortiGuard Labs Threat Research">
+        </noscript>
+    
+    <span class="cmp-image--title">Figure 5: Strace output</span>
+
+
+    
+
+</div>
+<div class="cmp cmp-text aem-GridColumn aem-GridColumn--default--12">
+  <p>&#xA0;</p>
+<p>From the screenshot above, it is clear that the function we are looking for is unlink().</p>
+<p>What we needed to do next was to hook our alternative code to it in order to avoid the deletion of the file.</p>
+<p><b>FRIDA Code</b></p>
+<p>Finally, we had all of the information required. It was now time to create our FRIDA hook.</p>
+<p>First of all, we needed to run the correct <a href="https://github.com/frida/frida/releases"><i>frida-server</i></a> on our mobile emulator, according to the architecture used.</p>
+<p>Now that we had a way to hook our FRIDA code, we just needed to create the script.&#xA0;All that was left to do was to hook the <i>unlink()</i> function and skip it. To do so, we used the <a href="https://www.frida.re/docs/javascript-api/#interceptor" style="">Interceptor.replace(target, replacement)</a> method, which allows us to replace the function at <i>target</i> with the implementation at <i>replacement</i>. We used&#xA0;</p>
+<p><i>Module.findExportByName(module, exp)</i> to get the pointer to our function; <i>null</i> can be passed as the module in case the module name is unknown (but it will affect speed).&#xA0; &#xA0;&#xA0;<br>
+</p>
+
+
+</div>
+<div class="cmp cmp-text aem-GridColumn aem-GridColumn--default--12">
+  <p>console.log(&quot;[*] FRIDA started&quot;);</p>
+<p>console.log(&quot;[*] skip native unlink function&quot;);</p>
+<p>&#xA0;</p>
+<p>// create a pointer to the function in the module</p>
+<p>var unlinkPtr = Module.findExportByName(null, &apos;unlink&apos;);</p>
+<p>&#xA0;</p>
+<p>Interceptor.replace(unlinkPtr, new NativeCallback(function (){&#xA0;&#xA0;</p>
+<p>&#xA0;&#xA0;&#xA0; console.log(&quot;[*] unlink() encountered, skipping it.&quot;);</p>
+<p>}, &apos;int&apos;, []));&#xA0;</p>
+<p>&#xA0;</p>
+
+
+</div>
+<div class="cmp cmp-text aem-GridColumn aem-GridColumn--default--12">
+  <p>Now, whenever the <i>unlink()</i> function is called, FRIDA will intercept the call and run our code instead. In this case, it will simply output a logger string, notifying us that the call has been skipped.</p>
+<p>Finally, we only needed to attach the script to the app process. We ran <i>dropper_startup.py</i>, a quick python script that launches the application, and then attached the FRIDA script to the <i>frida-server</i>.</p>
+
+
+</div>
+<div class="cmp cmp-image aem-GridColumn aem-GridColumn--default--12">
+
+    
+        <noscript data-cmp-image="{&quot;smartImages&quot;:[],&quot;smartSizes&quot;:[],&quot;lazyEnabled&quot;:true}">
+            <img src="/blog/threat-research/defeating-an-android-packer-with-frida/_jcr_content/root/responsivegrid/image_673340006.img.png/1541035567409/frida-06.png" alt="Fortinet FortiGuard Labs Threat Research">
+        </noscript>
+    
+    <span class="cmp-image--title">Figure 6: FRIDA output</span>
+
+
+    
+
+</div>
+<div class="cmp cmp-text aem-GridColumn aem-GridColumn--default--12">
+  <p>The fact that we obtained multiple hits has to do with the facts that <i>unlink()</i> is used to also delete also files during execution. Finally, after the second unlink we were able to run:</p>
+<p>$ adb pull /data/user/0/com.jgnxmcj.knreroaxvi/app_files/rzwohkt.jar</p>
+<p>and successfully obtain our file, a jar archive containing the <i>classes.dex</i> payload&#xA0;</p>
+<p><b>Conclusion</b></p>
+<p>Android malware is becoming more and more sophisticated, and is evolving every day, much like the more mature Windows malware. Droppers are just one way to deploy payloads, but they are an effective one indeed. The random strings and pointless functions they use can easily trick AV engines. Fortinet clients, however, are protected from these samples using the following signatures:</p>
+<p>-&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0; Dropper: Android/Agent.CHG!tr</p>
+<p>-&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0; Payload: Android/Agent.ARL!tr</p>
+<p>FortiGuard Labs will continue to monitor these malware campaigns as they evolve.</p>
+<p>All the scripts used in this blog can be found on the <a href="https://github.com/fortiguard-lion/FRIDA-scripts">FortiGuard Lion github page</a>.</p>
+<p><b>IOC:</b></p>
+<p>Packer: 509aa4a846c6cb52e9756a282de67da3e8ec82769bceafa1265428b1289459b3</p>
+<p>Payload: 4fa71942784c9f1d0d285dc44371d00da1f70f4da910da0ab2c41862b9e03c89</p>
+<p>-= FortiGuard Lion Team =-</p>
+<p><a href="https://www.fortinet.com/fortiguard/threat-intelligence/threat-research.html?utm_source=nreleaseblog&amp;utm_campaign=2018-q2-fortiguardlabs-cta" style=""><i>Sign up</i></a><i style="">&#xA0;for our weekly FortiGuard Threat Brief.</i><br>
+</p>
+<p><i>Know your vulnerabilities &#x2013; get the facts about your network security.&#xA0;A&#xA0;<a href="https://www.fortinet.com/offers/cyber-threat-assessment.html?utm_source=blog&amp;utm_campaign=2018-q4-ctap-assessment">Fortinet Cyber Threat Assessment</a>&#xA0;can help you better understand:&#xA0;Security and Threat Prevention,&#xA0;User Productivity, and&#xA0;Network Utilization and Performance.</i></p>
+
+
+</div>
+<div class="raw-import aem-GridColumn aem-GridColumn--default--12">
+<div class="text-container"><div id="om-qxx1b0gslklfu2kjckea-holder"></div> </div>
+</div>
+
+    
+</div>
+</div>
+<div class="b16-blog-tags aem-GridColumn aem-GridColumn--default--12">
+
+
+
+  <div class="b16-blog-tags__container text-container" style="display:none">
+    <span class="b16-blog-tags__headline">Tags:</span>
+    <p class="b16-blog-tags__tag-links">
+      <a href="https://www.fortinet.com/blog/tags-search.html?tag=android">android</a>, 
+    
+      <a href="https://www.fortinet.com/blog/tags-search.html?tag=android-malware">android malware</a>
+    </p>
+  </div>
+
+</div>
+<section class="b12-related aem-GridColumn aem-GridColumn--default--12">
+
+
+
+
+<div class="b12-related__container text-container">
+    
+
+    
+    
+    <h3>Related Posts</h3>
+    <div class="b12-related__posts">
+        
+        <a href="/blog/threat-research/android-spyware-now-dropping-legit-apps-" class="b12-related__post b12-related__post-0">
+            <div class="b12-related__image" style="background-image:url(/content/dam/fortinet-blog/article-images/android_spyware_now_dropping_legit_apps/spyware_00.png.thumb.319.319.png);">
+                <img class="ratio" alt="Android Spyware Now Dropping Legit Apps?" aria-hidden="true" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAADCAQAAAAe/WZNAAAADklEQVR42mNkgAJGDAYAAFEABCaLYqoAAAAASUVORK5CYII=">
+            </div>
+
+            <div class="b12-related__text">
+                <p class="b12-related__category">
+                    Threat Research
+                </p>
+                <h5 class="b12-related__title">Android Spyware Now Dropping Legit Apps?</h5>
+            </div>
+        </a>
+    
+    
+        
+        <a href="/blog/threat-research/an-android-package-is-no-longer-a-zip" class="b12-related__post b12-related__post-1">
+            <div class="b12-related__image" style="background-image:url(/content/dam/fortinet-blog/article-images/an_android_package_is_no_longer_zip/an-android-is-no-longer-zip-thumb.jpg.thumb.319.319.png);">
+                <img class="ratio" alt="An Android Package is no Longer a ZIP" aria-hidden="true" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAADCAQAAAAe/WZNAAAADklEQVR42mNkgAJGDAYAAFEABCaLYqoAAAAASUVORK5CYII=">
+            </div>
+
+            <div class="b12-related__text">
+                <p class="b12-related__category">
+                    Threat Research
+                </p>
+                <h5 class="b12-related__title">An Android Package is no Longer a ZIP</h5>
+            </div>
+        </a>
+    
+    
+        
+        <a href="/blog/threat-research/analyzing-android-malware-using-a-fortisandbox" class="b12-related__post b12-related__post-2">
+            <div class="b12-related__image" style="background-image:url(/content/dam/fortinet-blog/article-images/individual-images/analyzing-android-malware-using-a-fortisandbox.jpg.thumb.319.319.png);">
+                <img class="ratio" alt="Analyzing Android malware using a FortiSandbox" aria-hidden="true" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAADCAQAAAAe/WZNAAAADklEQVR42mNkgAJGDAYAAFEABCaLYqoAAAAASUVORK5CYII=">
+            </div>
+
+            <div class="b12-related__text">
+                <p class="b12-related__category">
+                    Threat Research
+                </p>
+                <h5 class="b12-related__title">Analyzing Android malware using a FortiSandbox</h5>
+            </div>
+        </a>
+    
+    </div>
+</div>
+
+
+</section>
+<div class="b13-comment-section aem-GridColumn aem-GridColumn--default--12">
+
+
+<div class="b13-comment-section__container text-container">
+
+
+  
+  
+</div>
+</div>
+<div class="b6-footer aem-GridColumn aem-GridColumn--default--12">
+
+
+  
+
+  <div class="b6-footer__container text-container">
+    <div class="b6-footer__footer-info">
+      <div class="b6-footer__logo">
+        <a href="https://www.fortinet.com" target="_blank">
+          <img src="/content/dam/fortinet-blog/fortinet-logo-white.svg" alt="Fortinet">
+        </a>
+      </div>
+      <div class="b6-footer__social-footer">
+        <ul>
+          
+            <li class="social-icon facebook">
+              <a href="https://www.facebook.com/fortinet" target="_blank">
+                
+    <svg viewbox="0 0 9 18" xmlns="http://www.w3.org/2000/svg">
+        <path d="M8.934.758v3.385H7.24c-.583 0-.845.685-.845 1.27v2.114h2.54v3.385h-2.54v6.77H3.01v-6.77H.472V7.527H3.01V4.143c0-1.87 1.516-3.385 3.385-3.385h2.54z" fill-opacity=".8" fill="#fff" fill-rule="evenodd"/>
+    </svg>
+
+              </a>
+            </li>
+          
+            <li class="social-icon twitter">
+              <a href="https://www.twitter.com/fortinet" target="_blank">
+                
+    <svg viewbox="0 0 19 15" xmlns="http://www.w3.org/2000/svg">
+        <path d="M18.17 2.296c-.652.296-1.354.49-2.082.584.745-.448 1.32-1.16 1.59-2.014-.702.423-1.48.72-2.3.89-.67-.73-1.61-1.152-2.675-1.152-1.988 0-3.613 1.625-3.613 3.63 0 .288.034.567.093.83-3.012-.153-5.694-1.6-7.48-3.792-.313.534-.49 1.16-.49 1.82 0 1.26.634 2.377 1.616 3.012-.61 0-1.16-.17-1.65-.423v.03c0 1.76 1.25 3.237 2.91 3.567-.31.084-.63.127-.96.127-.23 0-.46-.026-.68-.07.455 1.43 1.784 2.497 3.383 2.52-1.235.984-2.8 1.56-4.51 1.56-.288 0-.575-.018-.863-.05 1.61 1.03 3.52 1.632 5.57 1.632 6.667 0 10.33-5.534 10.33-10.332 0-.16 0-.313-.007-.474.71-.508 1.32-1.15 1.81-1.888z" fill-opacity=".8" fill="#fff" fill-rule="evenodd"/>
+    </svg>
+
+              </a>
+            </li>
+          
+            <li class="social-icon youtube">
+              <a href="https://www.youtube.com/channel/UCJHo4AuVomwMRzgkA5DQEOA?sub_confirmation=1" target="_blank">
+                
+    <svg viewbox="0 0 18 14" xmlns="http://www.w3.org/2000/svg">
+        <path d="M7.472 11.027V3.412L12.55 7.22l-5.08 3.806zM15.934.787C15.426.62 12.294.45 9.164.45c-3.13 0-6.26.16-6.77.322-1.32.44-1.69 3.4-1.69 6.447 0 3.03.37 6 1.69 6.43.51.17 3.64.33 6.77.33 3.13 0 6.262-.16 6.77-.33 1.32-.43 1.692-3.4 1.692-6.44 0-3.047-.372-6-1.692-6.43z" fill-opacity=".8" fill="#fff" fill-rule="evenodd"/>
+    </svg>
+
+              </a>
+            </li>
+          
+            <li class="social-icon linkedin">
+              <a href="https://www.linkedin.com/company/fortinet" target="_blank">
+                
+    <svg viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+        <path d="M15.934 15.835H12.55v-5.712c0-.897-1.008-1.64-1.905-1.64s-1.48.743-1.48 1.64v5.712H5.78V5.68h3.385v1.693c.558-.905 1.996-1.49 2.96-1.49 2.116 0 3.81 1.727 3.81 3.817v6.135zm-11.846 0H.703V5.68h3.385v10.155zM2.395.605c.935 0 1.693.757 1.693 1.69 0 .936-.758 1.694-1.693 1.694S.703 3.23.703 2.29C.703 1.36 1.46.6 2.395.6z" fill-opacity=".8" fill="#fff" fill-rule="evenodd"/>
+    </svg>
+
+              </a>
+            </li>
+          
+            <li class="social-icon instagram">
+              <a href="https://www.instagram.com/behindthefirewall/" target="_blank">
+                
+    <svg viewbox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+        <path class="st0" d="M16,3.7c4,0,4.5,0,6.1,0.1c1.5,0.1,2.3,0.3,2.8,0.5c0.7,0.3,1.2,0.6,1.7,1.1c0.5,0.5,0.8,1,1.1,1.7
+          c0.2,0.5,0.4,1.3,0.5,2.8c0.1,1.6,0.1,2.1,0.1,6.1s0,4.5-0.1,6.1c-0.1,1.5-0.3,2.3-0.5,2.8c-0.3,0.7-0.6,1.2-1.1,1.7
+          c-0.5,0.5-1,0.8-1.7,1.1c-0.5,0.2-1.3,0.4-2.8,0.5c-1.6,0.1-2.1,0.1-6.1,0.1s-4.5,0-6.1-0.1c-1.5-0.1-2.3-0.3-2.8-0.5
+          c-0.7-0.3-1.2-0.6-1.7-1.1c-0.5-0.5-0.8-1-1.1-1.7c-0.2-0.5-0.4-1.3-0.5-2.8C3.7,20.5,3.7,20,3.7,16s0-4.5,0.1-6.1
+          c0.1-1.5,0.3-2.3,0.5-2.8C4.6,6.5,4.9,6,5.4,5.4c0.5-0.5,1-0.8,1.7-1.1c0.5-0.2,1.3-0.4,2.8-0.5C11.5,3.7,12,3.7,16,3.7 M16,1
+          c-4.1,0-4.6,0-6.2,0.1C8.2,1.2,7.1,1.4,6.2,1.8c-1,0.4-1.8,0.9-2.7,1.7C2.7,4.4,2.2,5.2,1.8,6.2c-0.4,1-0.6,2-0.7,3.6
+          C1,11.4,1,11.9,1,16c0,4.1,0,4.6,0.1,6.2c0.1,1.6,0.3,2.7,0.7,3.6c0.4,1,0.9,1.8,1.7,2.7c0.8,0.8,1.7,1.3,2.7,1.7
+          c1,0.4,2,0.6,3.6,0.7C11.4,31,11.9,31,16,31s4.6,0,6.2-0.1c1.6-0.1,2.7-0.3,3.6-0.7c1-0.4,1.8-0.9,2.7-1.7c0.8-0.8,1.3-1.7,1.7-2.7
+          c0.4-1,0.6-2,0.7-3.6C31,20.6,31,20.1,31,16s0-4.6-0.1-6.2c-0.1-1.6-0.3-2.7-0.7-3.6c-0.4-1-0.9-1.8-1.7-2.7
+          c-0.8-0.8-1.7-1.3-2.7-1.7c-1-0.4-2-0.6-3.6-0.7C20.6,1,20.1,1,16,1L16,1z" fill-opacity=".8" fill="#fff" fill-rule="evenodd"/>
+        <path class="st0" d="M16,8.3c-4.3,0-7.7,3.4-7.7,7.7s3.4,7.7,7.7,7.7s7.7-3.4,7.7-7.7S20.3,8.3,16,8.3z M16,21c-2.8,0-5-2.2-5-5
+          s2.2-5,5-5s5,2.2,5,5S18.8,21,16,21z" fill-opacity=".8" fill="#fff" fill-rule="evenodd"/>
+        <circle class="st0" cx="24" cy="8" r="1.8" fill-opacity=".8" fill="#fff" fill-rule="evenodd"/>
+    </svg>
+
+              </a>
+            </li>
+          
+            <li class="social-icon rss">
+              <a href="https://www.fortinet.com/rss-feeds.html" target="_blank">
+                
+    <svg viewbox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
+        <path d="M3.072 17.68c-1.27 0-2.37-1.1-2.37-2.368 0-1.27 1.1-2.37 2.37-2.37s2.37 1.1 2.37 2.37-1.016 2.37-2.37 2.37zM.702.76v2.538c7.955 0 14.386 6.43 14.386 14.385h2.538C17.626 8.336 10.05.76.703.76zm0 5.162V8.46c5.078 0 9.224 4.146 9.224 9.223h2.54c0-6.514-5.248-11.76-11.763-11.76z" fill-opacity=".8" fill="#fff" fill-rule="evenodd"/>
+    </svg>
+
+              </a>
+            </li>
+          
+        </ul>
+      </div>
+    </div>
+    <div class="b6-footer__footer-links">
+      
+        <div class="b6-footer__footer-links-column">
+          <h4 class="b6-footer__header">News &amp; Articles</h4>
+          <ul>
+            
+              <li>
+                <a href="https://www.fortinet.com/corporate/about-us/newsroom/press-releases.html" target="_self">News Releases</a>
+              </li>
+            
+              <li>
+                <a href="https://www.fortinet.com/corporate/about-us/newsroom/news.html" target="_blank">News Articles</a>
+              </li>
+            
+              <li>
+                <a href="https://www.fortinet.com/corporate/about-us/contact-us/fortinet-trademark-guidelines.html" target="_self">Trademarks</a>
+              </li>
+            
+          </ul>
+        </div>
+      
+        <div class="b6-footer__footer-links-column">
+          <h4 class="b6-footer__header">Security Research</h4>
+          <ul>
+            
+              <li>
+                <a href="https://www.fortinet.com/fortiguard/threat-intelligence/threat-research.html" target="_self">Threat Research</a>
+              </li>
+            
+              <li>
+                <a href="https://fortiguard.com/" target="_self">FortiGuard Labs</a>
+              </li>
+            
+              <li>
+                <a href="https://www.fortinet.com/fortiguard/threat-intelligence/threat-map.html" target="_self">Threat Map</a>
+              </li>
+            
+              <li>
+                <a href="https://secure.fortinet.com/fortiguard" target="_blank">Threat Briefs</a>
+              </li>
+            
+              <li>
+                <a href="https://www.fortinet.com/solutions/ransomware.html" target="_self">Ransomware</a>
+              </li>
+            
+          </ul>
+        </div>
+      
+        <div class="b6-footer__footer-links-column">
+          <h4 class="b6-footer__header">Connect With Us</h4>
+          <ul>
+            
+              <li>
+                <a href="/content/fortinet-blog/us/en" target="_self">Blog</a>
+              </li>
+            
+              <li>
+                <a href="https://fusecommunity.fortinet.com" target="_self">Fuse Community</a>
+              </li>
+            
+          </ul>
+        </div>
+      
+        <div class="b6-footer__footer-links-column">
+          <h4 class="b6-footer__header">Company</h4>
+          <ul>
+            
+              <li>
+                <a href="https://www.fortinet.com/corporate/about-us/about-us" target="_blank">About Us</a>
+              </li>
+            
+              <li>
+                <a href="https://www.fortinet.com/corporate/about-us/why-fortinet" target="_blank">Why Fortinet</a>
+              </li>
+            
+              <li>
+                <a href="https://www.fortinet.com/corporate/about-us/security-fabric" target="_self">Security Fabric</a>
+              </li>
+            
+              <li>
+                <a href="https://www.fortinet.com/corporate/about-us/executive-management" target="_self">Exec Mgmt</a>
+              </li>
+            
+              <li>
+                <a href="https://www.fortinet.com/corporate/careers" target="_self">Careers</a>
+              </li>
+            
+              <li>
+                <a href="https://www.fortinet.com/corporate/about-us/product-certifications" target="_self">Certifications</a>
+              </li>
+            
+              <li>
+                <a href="https://www.fortinet.com/corporate/about-us/events" target="_self">Events</a>
+              </li>
+            
+              <li>
+                <a href="https://www.fortinet.com/corporate/about-us/industry-awards" target="_self">Industry Awards</a>
+              </li>
+            
+              <li>
+                <a href="https://www.fortinet.com/sitemap" target="_self">Sitemap</a>
+              </li>
+            
+              <li>
+                <a href="https://www.fortinet.com/blog/blog-sitemap" target="_self">Blog Sitemap</a>
+              </li>
+            
+          </ul>
+        </div>
+      
+      <div class="b6-footer__contact-info">
+        <h4 class="b6-footer__header">Contact Us</h4>
+        <ul>
+          <li>(866) 868-3678</li>
+        </ul>
+      </div>
+    </div>
+    <div class="b6-footer__copyright">
+      <div class="b6-footer__copyright-info">
+        <p class="b6-footer__copyright-text">Copyright &#xA9; 2022 Fortinet, Inc. All Rights Reserved</p>
+        
+          <a class="b6-footer__copyright-link" href="https://www.fortinet.com/corporate/about-us/legal.html" target="_blank">Terms of Services</a>
+        
+          <a class="b6-footer__copyright-link" href="https://www.fortinet.com/corporate/about-us/privacy.html" target="_blank">Privacy Policy</a>
+        
+        <span class="ot-ftnt-cookie-settings"> | <a href="#" onclick="Optanon.ToggleInfoDisplay()">Cookie Settings</a></span>
+      </div>
+    </div>
+  </div>
+
+
+
+
+</div>
+
+    
+</div>
+</div>
+
+
+    
+    
+    
+
+    
+        
+
+
+    
+
+
+
+    
+        
+            
+            <div class="brightedge-wrapper">
+                <div class="wrap footerwrap">
+                    <div class="be-ix-link-block be-ix-link-block-blog">
+                        
+                        
+                    </div>
+                </div></div>
+         
+    
+    
+
+    </body>
+    </html>
