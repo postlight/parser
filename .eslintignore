@@ -2,3 +2,4 @@
 dist/*
 coverage/*
 karma.conf.js
+/**/*.d.ts
