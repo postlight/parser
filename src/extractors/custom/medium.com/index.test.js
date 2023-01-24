@@ -4,18 +4,18 @@ import cheerio from 'cheerio';
 
 import Mercury from 'mercury';
 import getExtractor from 'extractors/get-extractor';
-import { excerptContent } from 'utils/text';
+import { excerptContentRange } from 'utils/text';
 
 const fs = require('fs');
 
-describe('MediumExtractor', () => {
+describe('extract medium article - the wtf economy', () => {
   describe('initial test case', () => {
     let result;
     let url;
     beforeAll(() => {
       url =
         'https://medium.com/the-wtf-economy/wtf-whats-the-future-e52ab9515573#.ilwrgwsks';
-      const html = fs.readFileSync('./fixtures/medium.com.html');
+      const html = fs.readFileSync('./fixtures/medium.com--future.html');
       result = Mercury.parse(url, { html, fallback: false });
     });
 
@@ -70,28 +70,25 @@ describe('MediumExtractor', () => {
       const { content } = await result;
 
       const $ = cheerio.load(content || '');
+      const text = $.text();
 
-      const first13 = excerptContent(
-        $('*')
-          .first()
-          .text(),
-        13
-      );
-
+      const slice1 = excerptContentRange(text, 0, 13);
       assert.equal(
-        first13,
+        slice1,
         'Last Thursday, I had the honor to be one of the warmup acts'
       );
+
+      const slice2 = excerptContentRange(text, -37, -28);
+      assert.equal(slice2, 'Can we hand off a better world to our');
     });
   });
 
-  describe('works with another url', () => {
+  describe('extract medium article - the mtg color wheel', () => {
     let result;
     let url;
     beforeAll(() => {
-      url =
-        'https://medium.com/@JakobUlbrich/flag-attributes-in-android-how-to-use-them-ac4ec8aee7d1#.h949wjmyw';
-      const html = fs.readFileSync('./fixtures/medium.com--another.html');
+      url = 'https://humanparts.medium.com/the-mtg-color-wheel-c9700a7cf36d';
+      const html = fs.readFileSync('./fixtures/medium.com--mtg.html');
       result = Mercury.parse(url, { html, fallback: false });
     });
 
@@ -99,12 +96,18 @@ describe('MediumExtractor', () => {
       const { content } = await result;
 
       const $ = cheerio.load(content || '');
+      const text = $.text();
 
-      const first13 = excerptContent($.text(), 13);
-
+      const slice1 = excerptContentRange(text, 18, 18 + 12);
       assert.equal(
-        first13,
-        'I’m sure you have seen something like the following line very often while'
+        slice1,
+        'Magic: The Gathering is a fantasy card game by Richard Garfield, Ph.D.'
+      );
+
+      const slice2 = excerptContentRange(text, -16);
+      assert.equal(
+        slice2,
+        'What sorts of things will I say? What sorts of things are likely to land flat?'
       );
     });
   });

@@ -10,7 +10,7 @@ export const MediumExtractor = {
   },
 
   content: {
-    selectors: ['article'],
+    selectors: ['article', 'article>div[class=l]'],
 
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images
@@ -22,6 +22,7 @@ export const MediumExtractor = {
           $node.replaceWith($text);
         }
       },
+
       // Re-write lazy-loaded youtube videos
       iframe: $node => {
         const ytRe = /https:\/\/i.embed.ly\/.+url=https:\/\/i\.ytimg\.com\/vi\/(\w+)\//;
