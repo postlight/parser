@@ -33,7 +33,22 @@ urls.map(url => {
 
     fs.writeFileSync(htmlFile, html)
     fs.writeFileSync(jsonFile, JSON.stringify(result))
-    execSync(`open ${jsonFile}`)
-    execSync(`open ${htmlFile}`)
+
+    var openCommand = null
+    switch (process.platform) {
+      case 'darwin':
+        openCommand = 'open'
+        break
+      case 'linux':
+        openCommand = 'xdg-open'
+        break
+      default:
+        console.log(`Open ${jsonFile} and ${htmlFile} to check the generated files.`)
+    }
+
+    if (openCommand) {
+      execSync(`${openCommand} ${jsonFile}`)
+      execSync(`${openCommand} ${htmlFile}`)
+    }
   })
 })
