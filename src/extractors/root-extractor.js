@@ -223,6 +223,10 @@ const RootExtractor = {
         content,
       };
     }
+    let extendedResults = {};
+    if (extractor.extend) {
+      extendedResults = selectExtendedTypes(extractor.extend, opts);
+    }
     const title = extractResult({ ...opts, type: 'title' });
     const date_published = extractResult({ ...opts, type: 'date_published' });
     const author = extractResult({ ...opts, type: 'author' });
@@ -246,11 +250,6 @@ const RootExtractor = {
       ...opts,
       type: 'url_and_domain',
     }) || { url: null, domain: null };
-
-    let extendedResults = {};
-    if (extractor.extend) {
-      extendedResults = selectExtendedTypes(extractor.extend, opts);
-    }
 
     return {
       title,
