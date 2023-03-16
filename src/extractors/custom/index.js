@@ -141,3 +141,4 @@ export * from './www.spektrum.de';
 export * from './postlight.com';
 export * from './www.investmentexecutive.com';
 export * from './www.cbc.ca';
+export * from './m.blog.naver.com';
