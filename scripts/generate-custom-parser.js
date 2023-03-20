@@ -61,7 +61,6 @@ function scaffoldCustomParser(url) {
   if (!fs.existsSync(dir)) {
     newParser = true;
     confirmCreateDir(dir, `Creating ${hostname} directory`);
-    confirmCreateDir(`./fixtures/${hostname}`, 'Creating fixtures directory');
   }
 
   confirm(Parser.fetchResource, [url], 'Fetching fixture', newParser);
@@ -99,8 +98,7 @@ function savePage($, [url], newParser) {
 
   spinner.succeed();
 
-  const filename = new Date().getTime();
-  const file = `./fixtures/${hostname}/${filename}.html`;
+  const file = `./fixtures/${hostname}.html`;
   // fix http(s) relative links:
   makeLinksAbsolute($('*').first(), $, url);
   $('[src], [href]').each((index, node) => {

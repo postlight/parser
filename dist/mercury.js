@@ -7846,6 +7846,12 @@ var RootExtractor = {
       };
     }
 
+    var extendedResults = {};
+
+    if (extractor.extend) {
+      extendedResults = selectExtendedTypes(extractor.extend, opts);
+    }
+
     var title = extractResult(_objectSpread({}, opts, {
       type: 'title'
     }));
@@ -7893,12 +7899,6 @@ var RootExtractor = {
     },
         url = _ref3.url,
         domain = _ref3.domain;
-
-    var extendedResults = {};
-
-    if (extractor.extend) {
-      extendedResults = selectExtendedTypes(extractor.extend, opts);
-    }
 
     return _objectSpread({
       title: title,

@@ -8342,7 +8342,6 @@ function scaffoldCustomParser(url) {
   if (!fs.existsSync(dir)) {
     newParser = true;
     confirmCreateDir(dir, "Creating ".concat(hostname, " directory"));
-    confirmCreateDir("./fixtures/".concat(hostname), 'Creating fixtures directory');
   }
 
   confirm(mercury.fetchResource, [url], 'Fetching fixture', newParser);
@@ -8379,8 +8378,7 @@ function savePage($, _ref, newParser) {
       hostname = _URL$parse5.hostname;
 
   spinner.succeed();
-  var filename = new Date().getTime();
-  var file = "./fixtures/".concat(hostname, "/").concat(filename, ".html"); // fix http(s) relative links:
+  var file = "./fixtures/".concat(hostname, ".html"); // fix http(s) relative links:
 
   makeLinksAbsolute$$1($('*').first(), $, url);
   $('[src], [href]').each(function (index, node) {
