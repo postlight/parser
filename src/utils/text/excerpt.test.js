@@ -1,5 +1,5 @@
 import assert from 'assert';
-import excerptContent from './excerpt-content';
+import { excerptContent } from './excerpt-content';
 
 describe('excerptContent(content, words)', () => {
   it('extracts the requested number of words from content', () => {
