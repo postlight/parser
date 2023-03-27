@@ -11,6 +11,7 @@ export const SpektrumExtractor = {
 
   date_published: {
     selectors: ['.content__meta__date'],
+    format: 'DD[.]MM[.]YYYY',
     timezone: 'Europe/Berlin',
   },
 

@@ -1,6 +1,6 @@
 import assert from 'assert';
 import cheerio from 'cheerio';
-import moment from 'moment-timezone';
+import dayjs from 'dayjs';
 
 import GenericDatePublishedExtractor from './extractor';
 
@@ -67,7 +67,7 @@ describe('GenericDatePublishedExtractor', () => {
         metaCache,
       });
 
-      assert.equal(result, moment('2020-01-01', 'YYYY-MM-DD').toISOString());
+      assert.equal(result, dayjs('2020-01-01', 'YYYY-MM-DD').toISOString());
     });
 
     it('extracts from url formatted /2020/jan/01', () => {
@@ -83,7 +83,7 @@ describe('GenericDatePublishedExtractor', () => {
           metaCache,
         });
 
-        assert.equal(result, moment(new Date('2020 jan 01')).toISOString());
+        assert.equal(result, dayjs(new Date('2020 jan 01')).toISOString());
       }
     });
 

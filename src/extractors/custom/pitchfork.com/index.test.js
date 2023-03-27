@@ -1,7 +1,6 @@
 import assert from 'assert';
 import URL from 'url';
 import cheerio from 'cheerio';
-import moment from 'moment-timezone';
 
 import Mercury from 'mercury';
 import getExtractor from 'extractors/get-extractor';
@@ -41,11 +40,8 @@ describe('PitchforkComExtractor', () => {
 
     it('returns the date_published', async () => {
       const { date_published } = await result;
-      const new_date_published = moment(date_published)
-        .format()
-        .split('T')[0];
 
-      assert.equal(new_date_published, '2019-06-07');
+      assert.equal(date_published, '2019-06-07T04:00:00.000Z');
     });
 
     it('returns the dek', async () => {

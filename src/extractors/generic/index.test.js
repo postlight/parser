@@ -1,5 +1,5 @@
 import assert from 'assert';
-import moment from 'moment';
+import dayjs from 'dayjs';
 
 import GenericExtractor from './index';
 
@@ -18,7 +18,7 @@ describe('GenericExtractor', () => {
         html,
         metaCache: [],
       });
-      const newDatePublished = moment(date_published).format();
+      const newDatePublished = dayjs(date_published).format();
 
       assert.equal(author, null);
       assert.equal(

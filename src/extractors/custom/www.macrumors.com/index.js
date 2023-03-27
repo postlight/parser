@@ -11,8 +11,7 @@ export const WwwMacrumorsComExtractor = {
 
   date_published: {
     selectors: [['time', 'datetime']],
-
-    timezone: 'America/Los_Angeles',
+    // timezone: 'America/Los_Angeles',
   },
 
   dek: {

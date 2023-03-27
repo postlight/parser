@@ -45,11 +45,17 @@ export function createDate(dateString, timezone, format) {
   }
 
   if (timezone) {
-    return format
-      ? dayjs.tz(dateString, format, timezone)
-      : dayjs.tz(new Date(dateString), timezone);
+    try {
+      return format
+        ? dayjs.tz(dateString, format, timezone)
+        : dayjs.tz(dayjs(dateString).format('YYYY-MM-DD HH:mm:ss'), timezone);
+    } catch (error) {
+      // return an intentionally invalid dayjs object,
+      // in case the input needs to be cleaned first
+      return dayjs('');
+    }
   }
-  return format ? dayjs(dateString, format) : dayjs(new Date(dateString));
+  return format ? dayjs(dateString, format) : dayjs(dateString);
 }
 
 // Take a date published string, and hopefully return a date out of
@@ -70,7 +76,7 @@ export default function cleanDatePublished(
 
   if (!date.isValid()) {
     dateString = cleanDateString(dateString);
-    date = createDate(dateString, timezone, format);
+    date = createDate(dateString, timezone);
   }
 
   return date.isValid() ? date.toISOString() : null;

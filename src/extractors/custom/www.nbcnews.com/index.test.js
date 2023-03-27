@@ -53,7 +53,7 @@ describe('WwwNbcnewsComExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(date_published, '2016-12-13T23:06:00.000Z');
+      assert.equal(date_published, '2016-12-13T18:06:00.000Z');
     });
 
     it('returns the lead_image_url', async () => {

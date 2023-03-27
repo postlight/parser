@@ -19,7 +19,7 @@ export const WwwNbcnewsComExtractor = {
       '.flag_article-wrapper time',
     ],
 
-    timezone: 'America/New_York',
+    // timezone: 'America/New_York',
   },
 
   lead_image_url: {
