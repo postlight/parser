@@ -12,7 +12,7 @@ export const WwwSiComExtractor = {
   date_published: {
     selectors: [['meta[name="published"]', 'value']],
 
-    timezone: 'America/New_York',
+    // timezone: 'America/New_York',
   },
 
   dek: {

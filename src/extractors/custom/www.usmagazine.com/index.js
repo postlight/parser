@@ -10,7 +10,7 @@ export const WwwUsmagazineComExtractor = {
   },
 
   date_published: {
-    timezone: 'America/New_York',
+    // timezone: 'America/New_York',
 
     selectors: [['meta[name="article:published_time"]', 'value']],
   },
