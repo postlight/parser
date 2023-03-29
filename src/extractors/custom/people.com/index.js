@@ -14,6 +14,7 @@ export const PeopleComExtractor = {
       '.mntl-attribution__item-date',
       ['meta[name="article:published_time"]', 'value'],
     ],
+    timezone: 'UTC',
   },
 
   lead_image_url: {

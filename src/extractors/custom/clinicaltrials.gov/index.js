@@ -12,6 +12,7 @@ export const ClinicaltrialsGovExtractor = {
   date_published: {
     // selectors: ['span.term[data-term="Last Update Posted"]'],
     selectors: ['div:has(> span.term[data-term="Last Update Posted"])'],
+    timezone: 'UTC',
   },
 
   content: {

@@ -58,7 +58,7 @@ describe('ClinicaltrialsGovExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(date_published, '2018-11-21T05:00:00.000Z');
+      assert.equal(date_published, '2018-11-21T00:00:00.000Z');
     });
 
     it('returns the content', async () => {

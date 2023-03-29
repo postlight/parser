@@ -56,7 +56,7 @@ describe('PeopleComExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(date_published, '2016-12-12T14:22:00.000Z');
+      assert.equal(date_published, '2016-12-12T09:22:00.000Z');
     });
 
     it('returns the lead_image_url', async () => {

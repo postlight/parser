@@ -53,7 +53,7 @@ describe('GeniusComExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(date_published, '1984-06-25T04:00:00.000Z');
+      assert.equal(date_published, '1984-06-25T00:00:00.000Z');
     });
 
     it('returns the lead_image_url', async () => {
