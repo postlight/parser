@@ -11,7 +11,6 @@ export const NewsNationalgeographicComExtractor = {
 
   date_published: {
     selectors: [['meta[name="article:published_time"]', 'value']],
-    timezone: 'America/New_York',
   },
 
   dek: {

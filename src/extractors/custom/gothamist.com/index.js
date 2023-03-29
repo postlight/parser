@@ -24,8 +24,6 @@ export const GothamistComExtractor = {
       'abbr',
       'abbr.published',
     ],
-
-    timezone: 'America/New_York',
   },
 
   dek: {
