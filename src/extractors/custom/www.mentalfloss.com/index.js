@@ -22,7 +22,7 @@ export const WwwMentalflossComExtractor = {
       ['meta[name="article:published_time"]', 'value'],
       '.date-display-single',
     ],
-    timezone: 'America/New_York',
+    // timezone: 'America/New_York',
   },
 
   lead_image_url: {

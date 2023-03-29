@@ -118,13 +118,11 @@
     "@postlight/ci-failed-test-reporter": "^1.0",
     "browser-request": "github:postlight/browser-request#feat-add-headers-to-response",
     "cheerio": "^0.22.0",
+    "dayjs": "^1.11.7",
     "difflib": "github:postlight/difflib.js",
     "ellipsize": "0.1.0",
     "iconv-lite": "0.5.0",
     "jquery": "^3.5.0",
-    "moment": "^2.23.0",
-    "moment-parseformat": "3.0.0",
-    "moment-timezone": "0.5.37",
     "postman-request": "^2.88.1-postman.31",
     "string-direction": "^0.1.2",
     "turndown": "^7.1.1",
@@ -134,7 +132,6 @@
   },
   "bundleDependencies": [
     "jquery",
-    "moment-timezone",
     "browser-request"
   ],
   "browser": {
@@ -142,8 +139,7 @@
     "cheerio": "./src/shims/cheerio-query",
     "jquery": "./node_modules/jquery/dist/jquery.min.js",
     "postman-request": "browser-request",
-    "iconv-lite": "./src/shims/iconv-lite",
-    "moment-timezone": "./node_modules/moment-timezone/builds/moment-timezone-with-data-2012-2022.min.js"
+    "iconv-lite": "./src/shims/iconv-lite"
   },
   "husky": {
     "hooks": {

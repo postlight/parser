@@ -11,8 +11,6 @@ export const WwwProspectmagazineCoUkExtractor = {
 
   date_published: {
     selectors: [['meta[name="article:published_time"]', 'value'], '.post-info'],
-
-    timezone: 'Europe/London',
   },
 
   dek: {

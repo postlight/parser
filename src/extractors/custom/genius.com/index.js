@@ -20,6 +20,7 @@ export const GeniusComExtractor = {
         },
       ],
     ],
+    timezone: 'UTC',
   },
 
   dek: {

@@ -1,7 +1,6 @@
 import assert from 'assert';
 import URL from 'url';
 import cheerio from 'cheerio';
-import moment from 'moment-timezone';
 
 import Mercury from 'mercury';
 import getExtractor from 'extractors/get-extractor';
@@ -55,13 +54,10 @@ describe('PoliticoExtractor', () => {
       // To pass this test, fill out the date_published selector
       // in ./src/extractors/custom/www.politico.com/index.js.
       const { date_published } = await result;
-      const new_date_published = moment(date_published)
-        .format()
-        .split('T')[0];
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(new_date_published, '2016-10-04');
+      assert.equal(date_published.split('T')[0], '2016-10-04');
     });
 
     it('returns the lead_image_url', async () => {

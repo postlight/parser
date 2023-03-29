@@ -49,7 +49,7 @@ describe('NewsNationalgeographicComExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(date_published, '2015-08-03T17:45:00.000Z');
+      assert.equal(date_published, '2015-08-03T16:45:00.000Z');
     });
 
     it('returns the dek', async () => {

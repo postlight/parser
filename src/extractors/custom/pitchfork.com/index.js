@@ -14,6 +14,7 @@ export const PitchforkComExtractor = {
 
   date_published: {
     selectors: ['div[class^="InfoSliceWrapper-"]', ['.pub-date', 'datetime']],
+    timezone: 'UTC',
   },
 
   dek: {

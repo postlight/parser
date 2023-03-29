@@ -1,8 +1,8 @@
-import moment from 'moment-timezone';
-import parseFormat from 'moment-parseformat';
-// Is there a compelling reason to use moment here?
-// Mostly only being used for the isValid() method,
-// but could just check for 'Invalid Date' string.
+import dayjs from 'dayjs';
+import customParseFormat from 'dayjs/plugin/customParseFormat';
+import utc from 'dayjs/plugin/utc';
+import timezonePlugin from 'dayjs/plugin/timezone';
+import advancedFormat from 'dayjs/plugin/advancedFormat';
 
 import {
   MS_DATE_STRING,
@@ -16,6 +16,11 @@ import {
   TIME_WITH_OFFSET_RE,
 } from './constants';
 
+dayjs.extend(customParseFormat);
+dayjs.extend(utc);
+dayjs.extend(timezonePlugin);
+dayjs.extend(advancedFormat);
+
 export function cleanDateString(dateString) {
   return (dateString.match(SPLIT_DATE_STRING) || [])
     .join(' ')
@@ -27,21 +32,30 @@ export function cleanDateString(dateString) {
 
 export function createDate(dateString, timezone, format) {
   if (TIME_WITH_OFFSET_RE.test(dateString)) {
-    return moment(new Date(dateString));
+    return dayjs(new Date(dateString));
   }
 
   if (TIME_AGO_STRING.test(dateString)) {
     const fragments = TIME_AGO_STRING.exec(dateString);
-    return moment().subtract(fragments[1], fragments[2]);
+    return dayjs().subtract(fragments[1], fragments[2]);
   }
 
   if (TIME_NOW_STRING.test(dateString)) {
-    return moment();
+    return dayjs();
   }
 
-  return timezone
-    ? moment.tz(dateString, format || parseFormat(dateString), timezone)
-    : moment(dateString, format || parseFormat(dateString));
+  if (timezone) {
+    try {
+      return format
+        ? dayjs.tz(dateString, format, timezone)
+        : dayjs.tz(dayjs(dateString).format('YYYY-MM-DD HH:mm:ss'), timezone);
+    } catch (error) {
+      // return an intentionally invalid dayjs object,
+      // in case the input needs to be cleaned first
+      return dayjs('');
+    }
+  }
+  return format ? dayjs(dateString, format) : dayjs(dateString);
 }
 
 // Take a date published string, and hopefully return a date out of
@@ -62,7 +76,7 @@ export default function cleanDatePublished(
 
   if (!date.isValid()) {
     dateString = cleanDateString(dateString);
-    date = createDate(dateString, timezone, format);
+    date = createDate(dateString, timezone);
   }
 
   return date.isValid() ? date.toISOString() : null;

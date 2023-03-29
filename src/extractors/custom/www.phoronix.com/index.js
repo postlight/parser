@@ -12,7 +12,7 @@ export const WwwPhoronixComExtractor = {
   date_published: {
     selectors: ['.author'],
     // 1 June 2019 at 08:34 PM EDT
-    format: 'D MMMM YYYY at hh:mm',
+    format: 'D MMMM YYYY [at] hh:mm A',
     timezone: 'America/New_York',
   },
 

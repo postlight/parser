@@ -47,7 +47,7 @@ export const NewYorkerExtractor = {
       'time.content-header__publish-date',
       ['meta[name="pubdate"]', 'value'],
     ],
-    timezone: 'America/New_York',
+    // timezone: 'America/New_York',
   },
 
   lead_image_url: {
