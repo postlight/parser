@@ -15,9 +15,7 @@ describe('WwwSbnationComExtractor', () => {
     beforeAll(() => {
       url =
         'http://www.sbnation.com/mlb/2016/12/6/13857040/chris-sale-red-sox-trade-white-sox';
-      const html = fs.readFileSync(
-        './fixtures/www.sbnation.com/1481062909839.html'
-      );
+      const html = fs.readFileSync('./fixtures/www.sbnation.com.html');
       result = Mercury.parse(url, { html, fallback: false });
     });
     it('is selected properly', () => {
@@ -83,7 +81,7 @@ describe('WwwSbnationComExtractor', () => {
       // the article.
       assert.equal(
         lead_image_url,
-        'https://cdn0.vox-cdn.com/thumbor/VfeYqqHzPEOqSIXXAF-yK-1e4LQ=/0x0:1710x962/1600x900/cdn0.vox-cdn.com/uploads/chorus_image/image/52164267/592603330.0.jpeg'
+        'https://cdn.vox-cdn.com/thumbor/EnCgXG3xHnUSyPoxG2k7uA0NJlo=/0x0:1710x962/1600x900/cdn.vox-cdn.com/uploads/chorus_image/image/52164267/592603330.0.jpeg'
       );
     });
 

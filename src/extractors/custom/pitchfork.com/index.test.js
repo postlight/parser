@@ -1,6 +1,7 @@
 import assert from 'assert';
 import URL from 'url';
 import cheerio from 'cheerio';
+import moment from 'moment-timezone';
 
 import Mercury from 'mercury';
 import getExtractor from 'extractors/get-extractor';
@@ -15,9 +16,7 @@ describe('PitchforkComExtractor', () => {
     beforeAll(() => {
       url =
         'https://pitchfork.com/reviews/albums/lust-for-youth-lust-for-youth/';
-      const html = fs.readFileSync(
-        './fixtures/pitchfork.com/1560196240837.html'
-      );
+      const html = fs.readFileSync('./fixtures/pitchfork.com.html');
       result = Mercury.parse(url, { html, fallback: false });
     });
 
@@ -31,7 +30,7 @@ describe('PitchforkComExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(title, `Lust for Youth: Lust for Youth Album Review`);
+      assert.equal(title, `Lust for Youth: Lust for Youth`);
     });
 
     it('returns the author', async () => {
@@ -42,8 +41,11 @@ describe('PitchforkComExtractor', () => {
 
     it('returns the date_published', async () => {
       const { date_published } = await result;
+      const new_date_published = moment(date_published)
+        .format()
+        .split('T')[0];
 
-      assert.equal(date_published.split('T')[0], '2019-06-07');
+      assert.equal(new_date_published, '2019-06-07');
     });
 
     it('returns the dek', async () => {
@@ -60,7 +62,7 @@ describe('PitchforkComExtractor', () => {
 
       assert.equal(
         lead_image_url,
-        `https://media.pitchfork.com/photos/5cefef2693a53659ed1ee6b8/1:1/w_320/LustForYouth_LustForYouth.jpg`
+        `https://media.pitchfork.com/photos/5cefef2693a53659ed1ee6b8/16:9/w_1280,c_limit/LustForYouth_LustForYouth.jpg`
       );
     });
 

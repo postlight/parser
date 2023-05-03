@@ -14,10 +14,8 @@ describe('MashableComExtractor', () => {
     let url;
     beforeAll(() => {
       url =
-        'http://mashable.com/2016/12/13/mysterious-plane-flying-over-new-york/?utm_cid=hp-n-1#sxBI1HiPKsqG';
-      const html = fs.readFileSync(
-        './fixtures/mashable.com/1481670648585.html'
-      );
+        'https://mashable.com/article/mysterious-plane-flying-over-new-york';
+      const html = fs.readFileSync('./fixtures/mashable.com.html');
       result = Mercury.parse(url, { html, fallback: false });
     });
 
@@ -71,7 +69,7 @@ describe('MashableComExtractor', () => {
       // the article.
       assert.equal(
         lead_image_url,
-        'http://a.amz.mshcdn.com/media/ZgkyMDE2LzEyLzEzL2UxL2xpbGlzYW1zbWFzaGFibGU1XzcyMC4wMWZkOS5qcGcKcAl0aHVtYgkxMjAweDYzMAplCWpwZw/29e123a7/0e0/lili-sams-mashable-5_720.jpg'
+        'https://helios-i.mashable.com/imagery/articles/04JdhZmvOs7mcfVf0jqvVxe/hero-image.fill.size_1200x675.v1611614732.jpg'
       );
     });
 

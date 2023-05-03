@@ -22,9 +22,7 @@ describe('WwwUsmagazineComExtractor', () => {
   it('returns the title', async () => {
     // To pass this test, fill out the title selector
     // in ./src/extractors/custom/www.usmagazine.com/index.js.
-    const html = fs.readFileSync(
-      './fixtures/www.usmagazine.com/1481147005164.html'
-    );
+    const html = fs.readFileSync('./fixtures/www.usmagazine.com.html');
     const articleUrl =
       'http://www.usmagazine.com/celebrity-news/news/lady-gaga-shares-pic-of-ex-taylor-kinney-with-her-mom-w454419';
 
@@ -44,9 +42,7 @@ describe('WwwUsmagazineComExtractor', () => {
   it('returns the author', async () => {
     // To pass this test, fill out the author selector
     // in ./src/extractors/custom/www.usmagazine.com/index.js.
-    const html = fs.readFileSync(
-      './fixtures/www.usmagazine.com/1481147005164.html'
-    );
+    const html = fs.readFileSync('./fixtures/www.usmagazine.com.html');
     const articleUrl =
       'http://www.usmagazine.com/celebrity-news/news/lady-gaga-shares-pic-of-ex-taylor-kinney-with-her-mom-w454419';
 
@@ -63,9 +59,7 @@ describe('WwwUsmagazineComExtractor', () => {
   it('returns the date_published', async () => {
     // To pass this test, fill out the date_published selector
     // in ./src/extractors/custom/www.usmagazine.com/index.js.
-    const html = fs.readFileSync(
-      './fixtures/www.usmagazine.com/1481147005164.html'
-    );
+    const html = fs.readFileSync('./fixtures/www.usmagazine.com.html');
     const articleUrl =
       'http://www.usmagazine.com/celebrity-news/news/lady-gaga-shares-pic-of-ex-taylor-kinney-with-her-mom-w454419';
 
@@ -76,15 +70,13 @@ describe('WwwUsmagazineComExtractor', () => {
 
     // Update these values with the expected values from
     // the article.
-    assert.equal(date_published, '2016-12-07T20:53:00.000Z');
+    assert.equal(date_published, '2016-12-07T20:53:36.000Z');
   });
 
   it('returns the lead_image_url', async () => {
     // To pass this test, fill out the lead_image_url selector
     // in ./src/extractors/custom/www.usmagazine.com/index.js.
-    const html = fs.readFileSync(
-      './fixtures/www.usmagazine.com/1481147005164.html'
-    );
+    const html = fs.readFileSync('./fixtures/www.usmagazine.com.html');
     const articleUrl =
       'http://www.usmagazine.com/celebrity-news/news/lady-gaga-shares-pic-of-ex-taylor-kinney-with-her-mom-w454419';
 
@@ -97,7 +89,7 @@ describe('WwwUsmagazineComExtractor', () => {
     // the article.
     assert.equal(
       lead_image_url,
-      'http://img.wennermedia.com/social/lady-gaga-taylor-kinney-9662aa39-cb01-4b53-9aa0-7aa8c6e3e94f.jpg'
+      'https://i0.wp.com/www.usmagazine.com/wp-content/uploads/lady-gaga-taylor-kinney-9662aa39-cb01-4b53-9aa0-7aa8c6e3e94f.jpg?crop=0px%2C0px%2C1500px%2C788px&resize=1200%2C630&ssl=1&quality=82&strip=all'
     );
   });
 
@@ -106,9 +98,7 @@ describe('WwwUsmagazineComExtractor', () => {
     // in ./src/extractors/custom/www.usmagazine.com/index.js.
     // You may also want to make use of the clean and transform
     // options.
-    const html = fs.readFileSync(
-      './fixtures/www.usmagazine.com/1481147005164.html'
-    );
+    const html = fs.readFileSync('./fixtures/www.usmagazine.com.html');
     const url =
       'http://www.usmagazine.com/celebrity-news/news/lady-gaga-shares-pic-of-ex-taylor-kinney-with-her-mom-w454419';
 
@@ -127,7 +117,7 @@ describe('WwwUsmagazineComExtractor', () => {
     // the article.
     assert.equal(
       first13,
-      'Taylor Kinney and Lady Gaga arrive at the 37th Annual Kennedy Center Honors'
+      'The Little Monsters are praying for a reunion. Lady Gaga shared a photo'
     );
   });
 });

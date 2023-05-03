@@ -15,9 +15,7 @@ describe('ObserverComExtractor', () => {
     beforeAll(() => {
       url =
         'http://observer.com/2016/12/archaeologists-just-discovered-a-2500-year-old-lost-city-atop-a-greek-mountain-peak/';
-      const html = fs.readFileSync(
-        './fixtures/observer.com/1481925269939.html'
-      );
+      const html = fs.readFileSync('./fixtures/observer.com.html');
       result = Mercury.parse(url, { html, fallback: false });
     });
 
@@ -84,7 +82,7 @@ describe('ObserverComExtractor', () => {
       // the article.
       assert.equal(
         lead_image_url,
-        'http://i0.wp.com/nyoobserver.files.wordpress.com/2016/12/extra_large-1481648730-cover-image-2.jpg?quality=80&strip&ssl=1'
+        'https://observer.com/wp-content/uploads/sites/2/2016/12/extra_large-1481648730-cover-image-2.jpg?quality=80&strip'
       );
     });
 

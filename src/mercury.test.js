@@ -78,10 +78,10 @@ describe('Parser', () => {
         'https://arstechnica.com/gadgets/2016/08/the-connected-renter-how-to-make-your-apartment-smarter/';
       const result = await Parser.parse(url, { fetchAllPages: true });
 
-      const { total_pages, pages_rendered } = result;
+      const { total_pages, rendered_pages } = result;
 
       assert.equal(total_pages, 3);
-      assert.equal(pages_rendered, 3);
+      assert.equal(rendered_pages, 3);
 
       assert.equal(result.next_page_url, `${url}2`);
     });
@@ -186,7 +186,7 @@ describe('Parser', () => {
     const url =
       'https://www.sandiegouniontribune.com/business/growth-development/story/2019-08-27/sdsu-mission-valley-stadium-management-firm';
     const html = fs.readFileSync(
-      './fixtures/sandiegouniontribune.com/test.html',
+      './fixtures/sandiegouniontribune.com.html',
       'utf8'
     );
 

@@ -14,9 +14,7 @@ describe('WwwOreillyCoJpExtractor', () => {
     let url;
     beforeAll(() => {
       url = 'https://www.oreilly.co.jp/books/9784873118741/';
-      const html = fs.readFileSync(
-        './fixtures/www.oreilly.co.jp/1556577184695.html'
-      );
+      const html = fs.readFileSync('./fixtures/www.oreilly.co.jp.html');
       result = Mercury.parse(url, {
         html,
         fallback: false,
@@ -38,10 +36,7 @@ describe('WwwOreillyCoJpExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(
-        title,
-        `Head First はじめてのプログラミング――頭とからだで覚えるPythonプログラミング入門`
-      );
+      assert.equal(title, `Head First はじめてのプログラミング`);
     });
 
     it('returns the author', async () => {
@@ -107,7 +102,7 @@ describe('WwwOreillyCoJpExtractor', () => {
       // the article.
       assert.equal(
         first13,
-        'Eric Freeman 著、嶋田 健志 監訳、木下 哲也 訳 2019年04月'
+        'TOPICS Head First , Programming , Python 発行年月日'
       );
     });
   });

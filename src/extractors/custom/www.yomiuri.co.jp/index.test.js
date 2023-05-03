@@ -14,9 +14,7 @@ describe('WwwYomiuriCoJpExtractor', () => {
     let url;
     beforeAll(() => {
       url = 'https://www.yomiuri.co.jp/sports/soccer/20190411-OYT1T50287/';
-      const html = fs.readFileSync(
-        './fixtures/www.yomiuri.co.jp/1554993242061.html'
-      );
+      const html = fs.readFileSync('./fixtures/www.yomiuri.co.jp.html');
       result = Mercury.parse(url, {
         html,
         fallback: false,

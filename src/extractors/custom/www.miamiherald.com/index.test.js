@@ -15,9 +15,7 @@ describe('WwwMiamiheraldComExtractor', () => {
     beforeAll(() => {
       url =
         'http://www.miamiherald.com/news/business/biz-monday/article120329158.html';
-      const html = fs.readFileSync(
-        './fixtures/www.miamiherald.com/1481571585318.html'
-      );
+      const html = fs.readFileSync('./fixtures/www.miamiherald.com.html');
       result = Mercury.parse(url, { html, fallback: false });
     });
 

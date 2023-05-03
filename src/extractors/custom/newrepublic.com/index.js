@@ -2,11 +2,11 @@ export const NewrepublicComExtractor = {
   domain: 'newrepublic.com',
 
   title: {
-    selectors: ['h1.article-headline', '.minutes-primary h1.minute-title'],
+    selectors: ['h1.article-headline'],
   },
 
   author: {
-    selectors: ['div.author-list', '.minutes-primary h3.minute-byline'],
+    selectors: ['span.AuthorList'],
   },
 
   date_published: {
@@ -24,10 +24,7 @@ export const NewrepublicComExtractor = {
   },
 
   content: {
-    selectors: [
-      ['.article-cover', 'div.content-body'],
-      ['.minute-image', '.minutes-primary div.content-body'],
-    ],
+    selectors: [['div.article-body']],
 
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images

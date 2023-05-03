@@ -15,9 +15,7 @@ describe('WikiaExtractor', () => {
     let url;
     beforeAll(() => {
       url = 'http://fandom.wikia.com/articles/box-office-good-peculiar';
-      const html = fs.readFileSync(
-        './fixtures/fandom.wikia.com/1475595373938.html'
-      );
+      const html = fs.readFileSync('./fixtures/fandom.wikia.com.html');
       result = Mercury.parse(url, { html, fallback: false });
     });
 

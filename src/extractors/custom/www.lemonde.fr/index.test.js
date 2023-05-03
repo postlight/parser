@@ -15,9 +15,7 @@ describe('WwwLemondeFrExtractor', () => {
     beforeAll(() => {
       url =
         'https://www.lemonde.fr/economie/article/2019/05/07/dans-ses-previsions-economiques-bruxelles-confirme-la-montee-des-perils_5459325_3234.html';
-      const html = fs.readFileSync(
-        './fixtures/www.lemonde.fr/1557235525251.html'
-      );
+      const html = fs.readFileSync('./fixtures/www.lemonde.fr.html');
       result = Mercury.parse(url, { html, fallback: false });
     });
 
@@ -52,7 +50,7 @@ describe('WwwLemondeFrExtractor', () => {
 
       assert.equal(
         dek,
-        'Elle abaisse ses prévisions pour 2019, avec un PIB à 1,4 % pour l’ensemble de l’UE, et à 1,2 % pour la zone euro.'
+        'L’institution abaisse ses prévisions pour 2019, avec un PIB à 1,4 % pour l’ensemble de l’UE, et à 1,2 % pour la zone euro.'
       );
     });
 
@@ -61,7 +59,7 @@ describe('WwwLemondeFrExtractor', () => {
 
       assert.equal(
         lead_image_url,
-        `https://img.lemde.fr/2019/05/07/316/0/3824/1912/1440/720/60/0/d105b14_dfjDE1I-caggQrT4gvHf2nZP.jpg`
+        `https://img.lemde.fr/2019/05/07/354/570/3246/2164/1440/960/60/0/d105b14_dfjDE1I-caggQrT4gvHf2nZP.jpg`
       );
     });
 

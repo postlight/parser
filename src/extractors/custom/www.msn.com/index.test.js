@@ -17,7 +17,7 @@ describe('MSNExtractor', () => {
     beforeAll(() => {
       url =
         'http://www.msn.com/en-us/health/wellness/this-is-your-brain-on-sad-movies-plus-5-films-to-cry-to/ar-BBwsPWG?li=BBnb2gg';
-      const html = fs.readFileSync('./fixtures/www.msn.com/1475506925474.html');
+      const html = fs.readFileSync('./fixtures/www.msn.com.html');
       result = Mercury.parse(url, { html, fallback: false });
     });
 

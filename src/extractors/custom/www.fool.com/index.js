@@ -6,7 +6,10 @@ export const WwwFoolComExtractor = {
   },
 
   author: {
-    selectors: ['.author-inline .author-name'],
+    selectors: [
+      ['meta[name="author"]', 'value'],
+      '.author-inline .author-name',
+    ],
   },
 
   date_published: {
@@ -14,7 +17,7 @@ export const WwwFoolComExtractor = {
   },
 
   dek: {
-    selectors: ['header h2'],
+    selectors: [['meta[name="og:description"]', 'value'], 'header h2'],
   },
 
   lead_image_url: {
@@ -22,7 +25,7 @@ export const WwwFoolComExtractor = {
   },
 
   content: {
-    selectors: ['.article-content'],
+    selectors: ['.tailwind-article-body', '.article-content'],
 
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images

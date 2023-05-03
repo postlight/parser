@@ -2,16 +2,17 @@ export const AbcnewsGoComExtractor = {
   domain: 'abcnews.go.com',
 
   title: {
-    selectors: ['.article-header h1'],
+    selectors: ['div[class*="Article_main__body"] h1', '.article-header h1'],
   },
 
   author: {
-    selectors: ['.authors'],
+    selectors: ['.ShareByline span:nth-child(2)', '.authors'],
     clean: ['.author-overlay', '.by-text'],
   },
 
   date_published: {
-    selectors: ['.timestamp'],
+    selectors: ['.ShareByline', '.timestamp'],
+    format: 'MMMM D, YYYY h:mm a',
     timezone: 'America/New_York',
   },
 
@@ -20,7 +21,7 @@ export const AbcnewsGoComExtractor = {
   },
 
   content: {
-    selectors: ['.article-copy'],
+    selectors: ['article', '.article-copy'],
 
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images

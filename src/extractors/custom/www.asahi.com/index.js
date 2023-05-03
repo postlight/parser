@@ -2,7 +2,7 @@ export const WwwAsahiComExtractor = {
   domain: 'www.asahi.com',
 
   title: {
-    selectors: ['.ArticleTitle h1'],
+    selectors: ['main h1', '.ArticleTitle h1'],
   },
 
   author: {
@@ -24,12 +24,12 @@ export const WwwAsahiComExtractor = {
   },
 
   content: {
-    selectors: ['#MainInner div.ArticleBody'],
+    selectors: ['main'],
 
     defaultCleaner: false,
 
     transforms: {},
 
-    clean: ['div.AdMod', 'div.LoginSelectArea'],
+    clean: ['div.AdMod', 'div.LoginSelectArea', 'time', 'div.notPrint'],
   },
 };

@@ -15,9 +15,7 @@ describe('DeadspinExtractor', () => {
     beforeAll(() => {
       url =
         'http://deadspin.com/the-nationals-are-stuck-with-danny-espinosa-tonight-un-1787706769';
-      const html = fs.readFileSync(
-        './fixtures/deadspin.com/1476389931786.html'
-      );
+      const html = fs.readFileSync('./fixtures/deadspin.com.html');
       result = Mercury.parse(url, { html, fallback: false });
     });
 
@@ -55,7 +53,7 @@ describe('DeadspinExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(date_published, '2016-10-13T16:34:00.000Z');
+      assert.equal(date_published, '2016-10-13T16:34:00.918Z');
     });
 
     it('returns the lead_image_url', async () => {
@@ -67,7 +65,7 @@ describe('DeadspinExtractor', () => {
       // the article.
       assert.equal(
         lead_image_url,
-        'https://i.kinja-img.com/gawker-media/image/upload/s--SUEXWZgf--/c_fill,fl_progressive,g_center,h_450,q_80,w_800/vmeayd7lteyycwzcdlju.jpg'
+        'https://i.kinja-img.com/gawker-media/image/upload/c_fill,f_auto,fl_progressive,g_center,h_675,pg_1,q_80,w_1200/197xrjaz7466rpng.png'
       );
     });
 
@@ -91,7 +89,7 @@ describe('DeadspinExtractor', () => {
       // the article.
       assert.equal(
         first13,
-        'Photo credit: Rob Carr/Getty Washington’s Danny Espinosa problem is inextricably linked to its'
+        'Washington’s Danny Espinosa problem is inextricably linked to its long-running center-field problem. If'
       );
     });
   });
@@ -101,7 +99,7 @@ describe('DeadspinExtractor', () => {
     // in ./src/extractors/custom/deadspin.com/index.js.
     // You may also want to make use of the clean and transform
     // options.
-    const html = fs.readFileSync('./fixtures/deadspin.com/1477505848605.html');
+    const html = fs.readFileSync('./fixtures/deadspin.com--video.html');
     const url =
       'http://deadspin.com/remember-when-donald-trump-got-booed-for-butchering-ta-1788216229';
 

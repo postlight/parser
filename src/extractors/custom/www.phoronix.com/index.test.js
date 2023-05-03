@@ -15,9 +15,7 @@ describe('WwwPhoronixComExtractor', () => {
     beforeAll(() => {
       url =
         'https://www.phoronix.com/scan.php?page=news_item&px=Steam-May-2019-Numbers';
-      const html = fs.readFileSync(
-        './fixtures/www.phoronix.com/1559454992878.html'
-      );
+      const html = fs.readFileSync('./fixtures/www.phoronix.com.html');
       result = Mercury.parse(url, { html, fallback: false });
     });
 

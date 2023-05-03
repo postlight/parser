@@ -2,20 +2,20 @@ export const WwwCbssportsComExtractor = {
   domain: 'www.cbssports.com',
 
   title: {
-    selectors: ['.article-headline'],
+    selectors: ['.Article-headline', '.article-headline'],
   },
 
   author: {
-    selectors: ['.author-name'],
+    selectors: ['.ArticleAuthor-nameText', '.author-name'],
   },
 
   date_published: {
-    selectors: [['.date-original-reading-time time', 'datetime']],
+    selectors: [['meta[itemprop="datePublished"]', 'value']],
     timezone: 'UTC',
   },
 
   dek: {
-    selectors: ['.article-subline'],
+    selectors: ['.Article-subline', '.article-subline'],
   },
 
   lead_image_url: {

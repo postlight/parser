@@ -15,9 +15,7 @@ describe('SpektrumExtractor', () => {
     beforeAll(() => {
       url =
         'https://www.spektrum.de/news/genetik-das-geheimnis-der-parasitischen-rafflesien/2039026';
-      const html = fs.readFileSync(
-        './fixtures/www.spektrum.de/1658928034778.html'
-      );
+      const html = fs.readFileSync('./fixtures/www.spektrum.de.html');
       result = Mercury.parse(url, { html, fallback: false });
     });
 

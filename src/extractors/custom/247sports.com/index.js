@@ -6,7 +6,7 @@ export const twofortysevensportsComExtractor = {
   },
 
   author: {
-    selectors: ['.author'],
+    selectors: ['.article-cnt__author', '.author'],
   },
 
   date_published: {
@@ -18,7 +18,7 @@ export const twofortysevensportsComExtractor = {
   },
 
   content: {
-    selectors: ['section.body.article'],
+    selectors: ['.article-body', 'section.body.article'],
 
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images

@@ -15,9 +15,7 @@ describe('IciRadioCanadaCaExtractor', () => {
     beforeAll(() => {
       url =
         'http://ici.radio-canada.ca/nouvelle/1022038/kpmg-comptables-fiscalite-impots-paradis-fiscaux-juge-bocock-cocktail';
-      const html = fs.readFileSync(
-        './fixtures/ici.radio-canada.ca/1489433621634.html'
-      );
+      const html = fs.readFileSync('./fixtures/ici.radio-canada.ca.html');
       result = Mercury.parse(url, { html, fallback: false });
     });
 
@@ -36,7 +34,7 @@ describe('IciRadioCanadaCaExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(title, 'Affaire KPMG: un juge se récuse');
+      assert.equal(title, 'Affaire KPMG : un juge se récuse');
     });
 
     it('returns the author', async () => {
@@ -71,7 +69,7 @@ describe('IciRadioCanadaCaExtractor', () => {
       // the article.
       assert.equal(
         dek,
-        "Un juge de la cour de l'impôt se récuse d'un dossier mettant en cause un stratagème du cabinet comptable KPMG. Selon les émissions Enquête et the fifth estate, le juge Bocock avait participé à une soirée cocktail organisée par un cabinet d'avocats lié à l'affaire."
+        "Un juge de la Cour de l'impôt se récuse d'un dossier mettant en cause un stratagème du cabinet comptable KPMG. Selon les émissions Enquête et The Fifth Estate, le juge Bocock avait participé à une soirée cocktail organisée par un cabinet d'avocats lié à l'affaire."
       );
     });
 
@@ -84,7 +82,7 @@ describe('IciRadioCanadaCaExtractor', () => {
       // the article.
       assert.equal(
         lead_image_url,
-        'https://images.radio-canada.ca/w_635,h_357/v1/ici-info/16x9/randall-bocock-juge.jpg'
+        'https://images.radio-canada.ca/v1/ici-info/16x9/randall-bocock-juge.jpg?im=Resize=(1250);Composite=(type=URL,url=https://images.radio-canada.ca/v1/assets/elements/16x9/outdated-content-2017.png),gravity=SouthEast,placement=Over,location=(0,0),scale=1'
       );
     });
 
@@ -108,7 +106,7 @@ describe('IciRadioCanadaCaExtractor', () => {
       // the article.
       assert.equal(
         first13,
-        "Le juge Randall Bocock se retire d'une cause liée à KPMG Photo :"
+        "Un texte de Frédéric Zalac d'Enquête Jusqu’à la semaine dernière, le juge Randall"
       );
     });
   });

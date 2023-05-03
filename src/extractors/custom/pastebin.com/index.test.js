@@ -14,9 +14,7 @@ describe('PastebinComExtractor', () => {
     let url;
     beforeAll(() => {
       url = 'https://pastebin.com/Af0yDAW4';
-      const html = fs.readFileSync(
-        './fixtures/pastebin.com/1588021382616.html'
-      );
+      const html = fs.readFileSync('./fixtures/pastebin.com.html');
       result = Mercury.parse(url, { html, fallback: false });
     });
 

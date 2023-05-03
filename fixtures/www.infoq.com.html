@@ -1,0 +1,2269 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+<html lang="ja" xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        
+        
+        
+        
+
+        
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        <title>Google Chrome&#x306E;Never-Slow Mode</title>
+        <link rel="canonical" href="https://www.infoq.com/jp/news/2019/02/chrome-never-slow-mode/">
+        <link rel="alternate" href="https://www.infoq.com/jp/news/2019/02/chrome-never-slow-mode/" hreflang="ja">
+        
+
+
+
+
+
+
+
+    
+        
+            
+            <link rel="alternate" href="https://www.infoq.com/br/news/2019/03/chrome-never-slow-mode/" hreflang="pt">
+        
+            
+            <link rel="alternate" href="https://www.infoq.com/news/2019/02/chrome-never-slow-mode/" hreflang="en">
+        
+            
+            <link rel="alternate" href="https://www.infoq.com/fr/news/2019/02/chrome-never-slow-mode/" hreflang="fr">
+        
+        
+            
+            <link rel="alternate" href="https://www.infoq.com/news/2019/02/chrome-never-slow-mode/" hreflang="en">
+            
+            <link rel="alternate" href="https://www.infoq.com/news/2019/02/chrome-never-slow-mode/" hreflang="x-default">
+        
+        
+    
+    
+
+
+
+
+
+
+
+        
+        <meta http-equiv="pragma" value="no-cache">
+<meta http-equiv="cache-control" value="private,no-cache,no-store,must-revalidate">
+<meta http-equiv="expires" value="0">
+<meta http-equiv="content-type" value="text/html; charset=utf-8">
+<meta name="copyright" value="&#xA9; 2006 C4Media">
+
+<meta name="google-site-verification" value="0qInQx_1WYOeIIbxnh7DnXlw1XOxNgAYakO2k4GhNnY">
+<meta name="msapplication-TileColor" value="#ffffff">
+<meta name="msapplication-TileImage" value="/styles/static/images/logo/logo.jpg">
+<meta value="3eac1729a8bbe046" name="wb:webmaster">
+<meta name="viewport" value="width=device-width,initial-scale=1">
+<meta http-equiv="X-UA-Compatible" value="IE=10, IE=edge">
+
+        
+        <link rel="stylesheet" type="text/css" media="screen" href="https://cdn.infoq.com/statics_s1_20220809063436/styles/style.css">
+        <link rel="stylesheet" type="text/css" media="print" href="https://cdn.infoq.com/statics_s1_20220809063436/styles/print.css">
+        <link rel="preload" type="text/css" href="https://cdn.infoq.com/statics_s1_20220809063436/styles/style_ja.css" as="style" onload="this.onload=null;this.rel=&apos;stylesheet&apos;">
+        <link rel="preload" href="https://cdn.infoq.com/statics_s1_20220809063436/styles/icons.css" as="style" onload="this.onload=null;this.rel=&apos;stylesheet&apos;">
+        <link rel="preload" type="text/css" media="screen" href="https://cdn.infoq.com/statics_s1_20220809063436/styles/style_extra.css" as="style" onload="this.onload=null;this.rel=&apos;stylesheet&apos;">
+        <noscript>
+            <link rel="stylesheet" type="text/css" href="https://cdn.infoq.com/statics_s1_20220809063436/styles/style_ja.css">
+            <link rel="stylesheet" href="https://cdn.infoq.com/statics_s1_20220809063436/styles/icons.css">
+            <link rel="stylesheet" type="text/css" media="screen" href="https://cdn.infoq.com/statics_s1_20220809063436/styles/style_extra.css">
+        </noscript>
+
+        
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+        <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@500;700&amp;display=swap" rel="stylesheet">
+
+        <link rel="shortcut icon" href="https://cdn.infoq.com/statics_s1_20220809063436/favicon.ico" type="image/x-icon">
+        <link rel="apple-touch-icon" href="https://cdn.infoq.com/statics_s1_20220809063436/apple-touch-icon.png">
+
+        
+
+        
+        
+        
+
+        
+	
+
+
+
+
+
+
+    
+    
+    
+    
+    
+        
+    
+
+
+
+
+
+	<meta name="ifq:pageType" value="NEWS_PAGE">
+	
+	
+		
+		
+		<link rel="stylesheet" href="https://cdn.infoq.com/statics_s1_20220809063436/styles/prism.css">
+		<meta name="keywords" value="chrome never slow mode,&#x30C7;&#x30D9;&#x30ED;&#x30C3;&#x30D7;&#x30E1;&#x30F3;&#x30C8;,HTML5,RIA,JavaScript,Chrome,Web Browser,&#x52D5;&#x7684;&#x8A00;&#x8A9E;,Markup Languages,OS,">
+		<meta name="description" value="Google&#x306F;Never-Slow Mode&#x3068;&#x547C;&#x3070;&#x308C;&#x308B;&#x30D7;&#x30ED;&#x30C8;&#x30BF;&#x30A4;&#x30D7;&#x6A5F;&#x80FD;&#x306B;&#x53D6;&#x308A;&#x7D44;&#x3093;&#x3067;&#x3044;&#x308B;&#x3002;&#x3053;&#x306E;&#x30D7;&#x30ED;&#x30C8;&#x30BF;&#x30A4;&#x30D7;&#x6A5F;&#x80FD;&#x306F;Chromium &#x30D7;&#x30ED;&#x30B8;&#x30A7;&#x30AF;&#x30C8;&#x3067;&#x30B3;&#x30DF;&#x30C3;&#x30C8;&#x4F5C;&#x696D;&#x9032;&#x884C;&#x4E2D;&#x3067;&#x3042;&#x308A;&#x3001;&#x30E6;&#x30FC;&#x30B6;&#x30FC;&#x30A8;&#x30AF;&#x30B9;&#x30DA;&#x30EA;&#x30A8;&#x30F3;&#x30B9;&#x306E;&#x5411;&#x4E0A;&#x3001;&#x4E00;&#x8CAB;&#x6027;&#x306E;&#x3042;&#x308B;&#x8FC5;&#x901F;&#x306A;&#x30D6;&#x30E9;&#x30A6;&#x30B8;&#x30F3;&#x30B0;&#x306E;&#x63D0;&#x4F9B;&#x3092;&#x76EE;&#x7684;&#x3068;&#x3057;&#x3066;&#x3044;&#x308B;&#x3002;">
+		<meta name="tprox" value="1551235560000">
+		
+    	
+
+
+
+
+
+
+
+<meta value="website" name="og:type">
+
+
+    
+
+
+
+
+
+
+
+    
+    
+    
+    
+    
+    
+        <meta value="https://cdn.infoq.com/statics_s1_20220809063436/styles/static/images/logo/logo-big.jpg" name="og:image">
+    
+
+
+    
+    
+    
+    
+    
+    
+        <meta value="https://cdn.infoq.com/statics_s1_20220809063436/styles/static/images/logo/logo-big.jpg" name="twitter:image">
+    
+
+
+<meta value="Google Chrome&#x306E;Never-Slow Mode " name="og:title">
+<meta value="Google&#x306F;Never-Slow Mode&#x3068;&#x547C;&#x3070;&#x308C;&#x308B;&#x30D7;&#x30ED;&#x30C8;&#x30BF;&#x30A4;&#x30D7;&#x6A5F;&#x80FD;&#x306B;&#x53D6;&#x308A;&#x7D44;&#x3093;&#x3067;&#x3044;&#x308B;&#x3002;&#x3053;&#x306E;&#x30D7;&#x30ED;&#x30C8;&#x30BF;&#x30A4;&#x30D7;&#x6A5F;&#x80FD;&#x306F;Chromium &#x30D7;&#x30ED;&#x30B8;&#x30A7;&#x30AF;&#x30C8;&#x3067;&#x30B3;&#x30DF;&#x30C3;&#x30C8;&#x4F5C;&#x696D;&#x9032;&#x884C;&#x4E2D;&#x3067;&#x3042;&#x308A;&#x3001;&#x30E6;&#x30FC;&#x30B6;&#x30FC;&#x30A8;&#x30AF;&#x30B9;&#x30DA;&#x30EA;&#x30A8;&#x30F3;&#x30B9;&#x306E;&#x5411;&#x4E0A;&#x3001;&#x4E00;&#x8CAB;&#x6027;&#x306E;&#x3042;&#x308B;&#x8FC5;&#x901F;&#x306A;&#x30D6;&#x30E9;&#x30A6;&#x30B8;&#x30F3;&#x30B0;&#x306E;&#x63D0;&#x4F9B;&#x3092;&#x76EE;&#x7684;&#x3068;&#x3057;&#x3066;&#x3044;&#x308B;&#x3002;" name="og:description">
+<meta value="InfoQ" name="og:site_name">
+<meta value="https://www.infoq.com/jp/news/2019/02/chrome-never-slow-mode/" name="og:url">
+
+<meta name="twitter:card" value="summary_large_image">
+<meta name="twitter:title" value="Google Chrome&#x306E;Never-Slow Mode ">
+<meta name="twitter:description" value="Google&#x306F;Never-Slow Mode&#x3068;&#x547C;&#x3070;&#x308C;&#x308B;&#x30D7;&#x30ED;&#x30C8;&#x30BF;&#x30A4;&#x30D7;&#x6A5F;&#x80FD;&#x306B;&#x53D6;&#x308A;&#x7D44;&#x3093;&#x3067;&#x3044;&#x308B;&#x3002;&#x3053;&#x306E;&#x30D7;&#x30ED;&#x30C8;&#x30BF;&#x30A4;&#x30D7;&#x6A5F;&#x80FD;&#x306F;Chromium &#x30D7;&#x30ED;&#x30B8;&#x30A7;&#x30AF;&#x30C8;&#x3067;&#x30B3;&#x30DF;&#x30C3;&#x30C8;&#x4F5C;&#x696D;&#x9032;&#x884C;&#x4E2D;&#x3067;&#x3042;&#x308A;&#x3001;&#x30E6;&#x30FC;&#x30B6;&#x30FC;&#x30A8;&#x30AF;&#x30B9;&#x30DA;&#x30EA;&#x30A8;&#x30F3;&#x30B9;&#x306E;&#x5411;&#x4E0A;&#x3001;&#x4E00;&#x8CAB;&#x6027;&#x306E;&#x3042;&#x308B;&#x8FC5;&#x901F;&#x306A;&#x30D6;&#x30E9;&#x30A6;&#x30B8;&#x30F3;&#x30B0;&#x306E;&#x63D0;&#x4F9B;&#x3092;&#x76EE;&#x7684;&#x3068;&#x3057;&#x3066;&#x3044;&#x308B;&#x3002;">
+
+		
+		
+		
+	
+	
+	
+
+        
+        
+			<link rel="image_src" href="https://cdn.infoq.com/statics_s1_20220809063436/styles/static/images/logo/logo-big.jpg">		
+        
+        
+
+        
+
+    </head>
+
+    <body>
+        
+
+
+
+
+
+
+
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W9GJ5DL" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+        
+            <div class="intbt">
+                <a href="/int/bt/" title="bt">BT</a>
+            </div>
+        
+
+        
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+ 
+
+
+        
+        <div class="infoq" id="infoq">
+
+            
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+<header class="header">
+    <button aria-label="Toggle Navigation" tabindex="0" class="burger header__toggle button">Toggle Navigation <span></span><span></span><span></span></button>
+    <div class="header__container container">
+        <div class="container__inner">
+            <div class="actions header__top">
+                <div class="actions__left">
+                    <p class="header__desc my-0">
+                        &#x6700;&#x65B0;&#x6280;&#x8853;&#x3092;&#x8FFD;&#x3044;&#x6C42;&#x3081;&#x308B;&#x30C7;&#x30D9;&#x30ED;&#x30C3;&#x30D1;&#x306E;&#x305F;&#x3081;&#x306E;&#x60C5;&#x5831;&#x30B3;&#x30DF;&#x30E5;&#x30CB;&#x30C6;&#x30A3;
+                    </p>
+                    <div class="button__dropdown dropdown header__more my-0 dropdown__center">
+                        
+
+
+
+
+
+
+
+<button aria-label="English edition" class="button button__unstyled button__small">Japanese edition</button>
+<div class="dropdown__holder">
+	
+	<div class="dropdown__content">
+		<ul class="no-style dropdown__nav languagesEdition">
+			<li><a href="/">English edition</a></li>
+			<li><a href="https://www.infoq.cn">Chinese edition</a></li>
+			<li class="active"><a href="#" onclick="return false;">Japanese edition</a></li>
+			<li><a href="/fr/">French edition</a></li>
+		</ul>
+	</div>
+	
+</div>
+                    </div>
+                    <a class="my-0 contribute-link" role="button" href="/jp/contribute/" title="&#x5BC4;&#x7A3F;">
+                        &#x5BC4;&#x7A3F;
+                    </a>
+                </div>
+                <div class="actions__right">
+                    <div>
+                        
+                    </div>
+                    
+
+
+
+
+
+
+
+
+	<div class="button__dropdown dropdown user__login">
+		<button aria-label="&#x30B5;&#x30A4;&#x30F3;&#x30A2;&#x30C3;&#x30D7;/&#x30ED;&#x30B0;&#x30A4;&#x30F3;" class="button button__small button__green button__arrow arrow__true button__icon icon icon__user icon--only">&#x30B5;&#x30A4;&#x30F3;&#x30A2;&#x30C3;&#x30D7;/&#x30ED;&#x30B0;&#x30A4;&#x30F3;</button>
+		<div class="dropdown__holder">
+			<div class="dropdown__content">
+				<div class="login__dropdown">
+					<div class="login__module">
+						<div class="login__username">
+							
+							
+							
+						</div>
+						<div class="login__social">
+							<h4 class="heading">Login with:</h4>
+							<div class="social__connect form__row login__socials">
+								<a href="/jp/social/googleLogin.action?fl=login" onclick="return UserActions_Login.addLoginInfo(this);" class="button button__medium button__gray button__icon icon icon__google" title="Google&#x30A2;&#x30AB;&#x30A6;&#x30F3;&#x30C8;&#x3067;&#x30ED;&#x30B0;&#x30A4;&#x30F3;">Google</a>
+								<a href="/jp/social/liveLogin.action?fl=login" onclick="return UserActions_Login.addLoginInfo(this);" class="button button__medium button__icon icon icon__microsoft" title="Microsoft&#x30A2;&#x30AB;&#x30A6;&#x30F3;&#x30C8;&#x3067;&#x30ED;&#x30B0;&#x30A4;&#x30F3;">Microsoft</a>
+								<a href="/jp/social/twitterLogin.action?fl=login" onclick="return UserActions_Login.addLoginInfo(this);" class="button button__medium button__icon icon icon__twitter" title="Twitter&#x30A2;&#x30AB;&#x30A6;&#x30F3;&#x30C8;&#x3067;&#x30ED;&#x30B0;&#x30A4;&#x30F3;">Twitter</a>
+								<a href="/jp/social/facebookLogin.action?fl=login" onclick="return UserActions_Login.addLoginInfo(this);" class="button button__medium button__icon icon icon__fb" title="Facebook&#x30A2;&#x30AB;&#x30A6;&#x30F3;&#x30C8;&#x3067;&#x30ED;&#x30B0;&#x30A4;&#x30F3;">Facebook</a>
+							</div>
+						</div>
+						<div class="login__signup">
+							<h4 class="heading">&#x30A2;&#x30AB;&#x30A6;&#x30F3;&#x30C8;&#x3092;&#x304A;&#x6301;&#x3061;&#x3067;&#x306A;&#x3044;&#x65B9;</h4>
+							<a href="/jp/reginit.action?" onclick="return UserActions_Login.addLoginInfo(this);" class="button button__medium button__green">&#x30B5;&#x30A4;&#x30F3;&#x30A2;&#x30C3;&#x30D7;/&#x30ED;&#x30B0;&#x30A4;&#x30F3;</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+                    
+                </div>
+            </div>
+            <div class="header__middle">
+                <div class="logo header__logo">
+                    <a href="/jp/" class="logo__symbol active">
+                        Logo - Back to homepage
+                    </a>
+                    
+
+
+
+
+
+
+
+
+
+                </div>
+                
+                <div class="content-items">
+                    <a href="/jp/news/" class="icon icon__news">&#x30CB;&#x30E5;&#x30FC;&#x30B9;</a>
+                    <a href="/jp/articles/" class="icon icon__articles">&#x30A2;&#x30FC;&#x30C6;&#x30A3;&#x30AF;&#x30EB;</a>
+                    <a href="/jp/presentations/" class="icon icon__presentations">&#x30D7;&#x30EC;&#x30BC;&#x30F3;&#x30C6;&#x30FC;&#x30B7;&#x30E7;&#x30F3;</a>
+                    <a href="/jp/podcasts/" class="icon icon__podcasts">&#x30DD;&#x30C3;&#x30C9;&#x30AD;&#x30E3;&#x30B9;&#x30C8;</a>
+                    <a href="/jp/minibooks/" class="icon icon__guides">E&#x30D6;&#x30C3;&#x30AF;</a>
+                </div>
+                <div class="header__items columns">
+
+                    
+                        
+                        
+                        
+                        
+                        
+                        
+                    
+
+
+
+
+
+
+
+<div>
+    <h3 class="widget__heading">Topics</h3>
+    <nav class="nav header__nav topics" data-trk-ref="header_personas">
+        <div class="has--subnav li-nav">
+            <a href="/jp/development/" title="Development" class="nav__category">&#x30C7;&#x30D9;&#x30ED;&#x30C3;&#x30D7;&#x30E1;&#x30F3;&#x30C8;</a>
+            <div class="nav__subnav subnav">
+                <ul class="subnav__categories no-style">
+                    <li><a href="/jp/java/?itm_source=infoq&amp;itm_medium=header_graybar&amp;itm_campaign=topic_clk" title="Java">Java</a></li>
+                    <li><a href="/jp/clojure/?itm_source=infoq&amp;itm_medium=header_graybar&amp;itm_campaign=topic_clk" title="Clojure">Clojure</a></li>
+                    <li><a href="/jp/scala/?itm_source=infoq&amp;itm_medium=header_graybar&amp;itm_campaign=topic_clk" title="Scala">Scala</a></li>
+                    <li><a href="/jp/dotnet/?itm_source=infoq&amp;itm_medium=header_graybar&amp;itm_campaign=topic_clk" title=".Net">.Net</a></li>
+                    <li><a href="/jp/mobile/?itm_source=infoq&amp;itm_medium=header_graybar&amp;itm_campaign=topic_clk" title="&#x30E2;&#x30D0;&#x30A4;&#x30EB;">&#x30E2;&#x30D0;&#x30A4;&#x30EB;</a></li>
+                    <li><a href="/jp/android/?itm_source=infoq&amp;itm_medium=header_graybar&amp;itm_campaign=topic_clk" title="Android">Android</a></li>
+                    <li><a href="/jp/iot/?itm_source=infoq&amp;itm_medium=header_graybar&amp;itm_campaign=topic_clk" title="IoT">IoT</a></li>
+                    <li><a href="/jp/HTML5Topic/?itm_source=infoq&amp;itm_medium=header_graybar&amp;itm_campaign=topic_clk" title="HTML5">HTML5</a></li>
+                    <li><a href="/jp/javascript/?itm_source=infoq&amp;itm_medium=header_graybar&amp;itm_campaign=topic_clk" title="JavaScript">JavaScript</a></li>
+                    <li><a href="/jp/fp/?itm_source=infoq&amp;itm_medium=header_graybar&amp;itm_campaign=topic_clk" title="Functional Programming">Functional Programming</a></li>
+                </ul>
+                <div class="subnav__content" data-id="6830">
+                    
+
+
+
+
+
+
+
+
+
+<div class="heading__container actions">
+    <div class="actions__left">
+        <h3 class="heading section__heading">&#x6CE8;&#x76EE;&#x306E; &#x30C7;&#x30D9;&#x30ED;&#x30C3;&#x30D7;&#x30E1;&#x30F3;&#x30C8;</h3>
+    </div>
+</div>
+<ul data-size="large" data-horizontal="true" data-tax="" taxonomy="articles" class="cards no-style">
+    <li>
+        <div class="card__content">
+            <div class="card__data">
+                <h4 class="card__title">
+                    <a href="/jp/articles/ballerina-fullstack-rest-api">&#x30D5;&#x30EB;&#x30B9;&#x30BF;&#x30C3;&#x30AF;&#x958B;&#x767A;&#x8005;&#x306E;&#x305F;&#x3081;&#x306E;Ballerina: &#x30D0;&#x30C3;&#x30AF;&#x30A8;&#x30F3;&#x30C9;API&#x958B;&#x767A;&#x30AC;&#x30A4;&#x30C9;</a>
+                </h4>
+                <p class="card__excerpt">&#x3053;&#x306E;&#x8A18;&#x4E8B;&#x3067;&#x306F;&#x3001;REST API&#x958B;&#x767A;&#x306E;&#x305F;&#x3081;&#x306E;&#x30D7;&#x30ED;&#x30B0;&#x30E9;&#x30DF;&#x30F3;&#x30B0;&#x8A00;&#x8A9E;&quot;Ballerina&quot;&#x306E;&#x76F4;&#x611F;&#x7684;&#x306A;&#x69CB;&#x6587;&#x306B;&#x3064;&#x3044;&#x3066;&#x89E3;&#x8AAC;&#x3057;&#x307E;&#x3059;&#x3002;&#x3055;&#x3089;&#x306B;&#x3001;&#x8A8D;&#x8A3C;&#x3084;&#x627F;&#x8A8D;&#x3001;OpenAPI&#x30C4;&#x30FC;&#x30EB;&#x3001;&#x53EF;&#x89B3;&#x6E2C;&#x6027;&#x3001;SQL/NoSQL&#x30AF;&#x30E9;&#x30A4;&#x30A2;&#x30F3;&#x30C8;&#x30E9;&#x30A4;&#x30D6;&#x30E9;&#x30EA;&#x306A;&#x3069;&#x3001;&#x91CD;&#x8981;&#x306A;&#x8A00;&#x8A9E;&#x6A5F;&#x80FD;&#x306B;&#x3064;&#x3044;&#x3066;&#x3082;&#x8AD6;&#x3058;&#x307E;&#x3059;&#x3002;&#x8A18;&#x4E8B;&#x3092;&#x8AAD;&#x307F;&#x7D42;&#x3048;&#x308C;&#x3070;&#x3001;Ballerina&#x304C;&#x6B21;&#x306E;&#x30D0;&#x30C3;&#x30AF;&#x30A8;&#x30F3;&#x30C9;API&#x958B;&#x767A;&#x306E;&#x6709;&#x529B;&#x306A;&#x5019;&#x88DC;&#x3067;&#x3042;&#x308B;&#x7406;&#x7531;&#x304C;&#x3088;&#x304F;&#x7406;&#x89E3;&#x3067;&#x304D;&#x308B;&#x3067;&#x3057;&#x3087;&#x3046;&#x3002;</p>
+                <div class="card__footer"></div>
+            </div>
+            
+                <a href="/jp/articles/ballerina-fullstack-rest-api" class="card__header">
+                    <img loading="lazy" alt="&#x30D5;&#x30EB;&#x30B9;&#x30BF;&#x30C3;&#x30AF;&#x958B;&#x767A;&#x8005;&#x306E;&#x305F;&#x3081;&#x306E;Ballerina: &#x30D0;&#x30C3;&#x30AF;&#x30A8;&#x30F3;&#x30C9;API&#x958B;&#x767A;&#x30AC;&#x30A4;&#x30C9;" src="https://imgopt.infoq.com/fit-in/100x100/filters:quality(80)/articles/ballerina-fullstack-rest-api/ja/smallimage/logo-1646298444299.jpg" class="card__image">
+                </a>
+            
+        </div>
+    </li>
+</ul>
+
+
+    
+    
+
+<a href="/jp/development/" class="button__more button button__large button__arrow arrow__right">&#x306E;&#x3059;&#x3079;&#x3066;&#x3092;&#x898B;&#x308B; development</a>
+
+                </div>
+            </div>
+        </div>
+        <div class="has--subnav li-nav">
+            <a href="/jp/architecture-design/" title="&#x8A2D;&#x8A08;/&#x30A2;&#x30FC;&#x30AD;&#x30C6;&#x30AF;&#x30C1;&#x30E3;" class="nav__category">&#x8A2D;&#x8A08;/&#x30A2;&#x30FC;&#x30AD;&#x30C6;&#x30AF;&#x30C1;&#x30E3;</a>
+            <div class="nav__subnav subnav">
+                <ul class="subnav__categories no-style">
+                    <li><a href="/jp/architecture/?itm_source=infoq&amp;itm_medium=header_graybar&amp;itm_campaign=topic_clk" title="Architecture">Architecture</a></li>
+                    <li><a href="/jp/enterprise-architecture/?itm_source=infoq&amp;itm_medium=header_graybar&amp;itm_campaign=topic_clk" title="&#x30A8;&#x30F3;&#x30BF;&#x30FC;&#x30D7;&#x30E9;&#x30A4;&#x30BA;&#x30A2;&#x30FC;&#x30AD;&#x30C6;&#x30AF;&#x30C1;&#x30E3;">&#x30A8;&#x30F3;&#x30BF;&#x30FC;&#x30D7;&#x30E9;&#x30A4;&#x30BA;&#x30A2;&#x30FC;&#x30AD;&#x30C6;&#x30AF;&#x30C1;&#x30E3;</a></li>
+                    <li><a href="/jp/performance-scalability/?itm_source=infoq&amp;itm_medium=header_graybar&amp;itm_campaign=topic_clk" title="&#x30D1;&#x30D5;&#x30A9;&#x30FC;&#x30DE;&#x30F3;&#x30B9;&amp;&#x30B9;&#x30B1;&#x30FC;&#x30E9;&#x30D3;&#x30EA;&#x30C6;&#x30A3;">&#x30D1;&#x30D5;&#x30A9;&#x30FC;&#x30DE;&#x30F3;&#x30B9;&amp;&#x30B9;&#x30B1;&#x30FC;&#x30E9;&#x30D3;&#x30EA;&#x30C6;&#x30A3;</a></li>
+                    <li><a href="/jp/design/?itm_source=infoq&amp;itm_medium=header_graybar&amp;itm_campaign=topic_clk" title="Design">Design</a></li>
+                    <li><a href="/jp/DesignPattern/?itm_source=infoq&amp;itm_medium=header_graybar&amp;itm_campaign=topic_clk" title="&#x30C7;&#x30B6;&#x30A4;&#x30F3;&#x30D1;&#x30BF;&#x30FC;&#x30F3;">&#x30C7;&#x30B6;&#x30A4;&#x30F3;&#x30D1;&#x30BF;&#x30FC;&#x30F3;</a></li>
+                    <li><a href="/jp/Security/?itm_source=infoq&amp;itm_medium=header_graybar&amp;itm_campaign=topic_clk" title="&#x30BB;&#x30AD;&#x30E5;&#x30EA;&#x30C6;&#x30A3;">&#x30BB;&#x30AD;&#x30E5;&#x30EA;&#x30C6;&#x30A3;</a></li>
+                </ul>
+                <div class="subnav__content" data-id="6831">
+                    
+
+
+
+
+
+
+
+
+
+<div class="heading__container actions">
+    <div class="actions__left">
+        <h3 class="heading section__heading">&#x6CE8;&#x76EE;&#x306E; &#x8A2D;&#x8A08;/&#x30A2;&#x30FC;&#x30AD;&#x30C6;&#x30AF;&#x30C1;&#x30E3;</h3>
+    </div>
+</div>
+<ul data-size="large" data-horizontal="true" data-tax="" taxonomy="articles" class="cards no-style">
+    <li>
+        <div class="card__content">
+            <div class="card__data">
+                <h4 class="card__title">
+                    <a href="/jp/articles/architecture-trends-2022">&#x30BD;&#x30D5;&#x30C8;&#x30A6;&#x30A7;&#x30A2;&#x30A2;&#x30FC;&#x30AD;&#x30C6;&#x30AF;&#x30C1;&#x30E3;&#x30FB;&#x8A2D;&#x8A08;&#x306E;InfoQ&#x30C8;&#x30EC;&#x30F3;&#x30C9;&#x30EC;&#x30DD;&#x30FC;&#x30C8; &#x2014; 2022&#x5E74;4&#x6708;</a>
+                </h4>
+                <p class="card__excerpt">InfoQ&#x7DE8;&#x96C6;&#x30C1;&#x30FC;&#x30E0;&#x304C;2022&#x5E74;&#x306B;&#x9032;&#x5316;&#x3059;&#x308B;&#x30BD;&#x30D5;&#x30C8;&#x30A6;&#x30A7;&#x30A2;&#x30A2;&#x30FC;&#x30AD;&#x30C6;&#x30AF;&#x30C1;&#x30E3;&#x3068;&#x8A2D;&#x8A08;&#x306E;&#x30C8;&#x30D4;&#x30C3;&#x30AF;&#x3092;&#x3069;&#x306E;&#x3088;&#x3046;&#x306B;&#x898B;&#x3066;&#x3044;&#x308B;&#x304B;&#x306E;&#x6982;&#x8981;&#x3067;&#x3059;&#x3002;&#x30A2;&#x30FC;&#x30AD;&#x30C6;&#x30AF;&#x30C8;&#x304C;&#x4ECA;&#x3001;&#x4F55;&#x3092;&#x8A2D;&#x8A08;&#x3057;&#x3066;&#x3044;&#x308B;&#x304B;&#x306B;&#x7126;&#x70B9;&#x3092;&#x5F53;&#x3066;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;</p>
+                <div class="card__footer"></div>
+            </div>
+            
+                <a href="/jp/articles/architecture-trends-2022" class="card__header">
+                    <img loading="lazy" alt="&#x30BD;&#x30D5;&#x30C8;&#x30A6;&#x30A7;&#x30A2;&#x30A2;&#x30FC;&#x30AD;&#x30C6;&#x30AF;&#x30C1;&#x30E3;&#x30FB;&#x8A2D;&#x8A08;&#x306E;InfoQ&#x30C8;&#x30EC;&#x30F3;&#x30C9;&#x30EC;&#x30DD;&#x30FC;&#x30C8; &#x2014; 2022&#x5E74;4&#x6708;" src="https://imgopt.infoq.com/fit-in/100x100/filters:quality(80)/articles/architecture-trends-2022/ja/smallimage/InfoQ-Trend-Report-logo-small-1648721970880.jpeg" class="card__image">
+                </a>
+            
+        </div>
+    </li>
+</ul>
+
+
+    
+    
+
+<a href="/jp/architecture-design/" class="button__more button button__large button__arrow arrow__right">&#x306E;&#x3059;&#x3079;&#x3066;&#x3092;&#x898B;&#x308B; architecture-design</a>
+
+                </div>
+            </div>
+        </div>
+        <div class="has--subnav li-nav">
+            <a href="/jp/ai-ml-data-eng/" title="AI&#x3068;&#x6A5F;&#x68B0;&#x5B66;&#x7FD2;&#x3001;&#x30C7;&#x30FC;&#x30BF;&#x30A8;&#x30F3;&#x30B8;&#x30CB;&#x30A2;&#x30EA;&#x30F3;&#x30B0;" class="nav__category">AI&#x3068;&#x6A5F;&#x68B0;&#x5B66;&#x7FD2;&#x3001;&#x30C7;&#x30FC;&#x30BF;&#x30A8;&#x30F3;&#x30B8;&#x30CB;&#x30A2;&#x30EA;&#x30F3;&#x30B0;</a>
+            <div class="nav__subnav subnav">
+                <ul class="subnav__categories no-style">
+                    <li><a href="/jp/bigdata/?itm_source=infoq&amp;itm_medium=header_graybar&amp;itm_campaign=topic_clk" title="Big Data">Big Data</a></li>
+                    <li><a href="/jp/database/?itm_source=infoq&amp;itm_medium=header_graybar&amp;itm_campaign=topic_clk" title="&#x30C7;&#x30FC;&#x30BF;&#x30D9;&#x30FC;&#x30B9;">&#x30C7;&#x30FC;&#x30BF;&#x30D9;&#x30FC;&#x30B9;</a></li>
+                </ul>
+                <div class="subnav__content" data-id="16691">
+                    
+
+
+
+
+
+
+
+
+
+<div class="heading__container actions">
+    <div class="actions__left">
+        <h3 class="heading section__heading">&#x6CE8;&#x76EE;&#x306E; AI&#x3068;&#x6A5F;&#x68B0;&#x5B66;&#x7FD2;&#x3001;&#x30C7;&#x30FC;&#x30BF;&#x30A8;&#x30F3;&#x30B8;&#x30CB;&#x30A2;&#x30EA;&#x30F3;&#x30B0;</h3>
+    </div>
+</div>
+<ul data-size="large" data-horizontal="true" data-tax="" taxonomy="articles" class="cards no-style">
+    <li>
+        <div class="card__content">
+            <div class="card__data">
+                <h4 class="card__title">
+                    <a href="/jp/articles/next-evolution-of-database-sharding-architecture">&#x30C7;&#x30FC;&#x30BF;&#x30D9;&#x30FC;&#x30B9;&#x30B7;&#x30E3;&#x30FC;&#x30C7;&#x30A3;&#x30F3;&#x30B0;&#x30A2;&#x30FC;&#x30AD;&#x30C6;&#x30AF;&#x30C1;&#x30E3;&#x306E;&#x65B0;&#x305F;&#x306A;&#x9032;&#x5316;</a>
+                </h4>
+                <p class="card__excerpt">&#x4ECA;&#x56DE;&#x306E;&#x8A18;&#x4E8B;&#x3067;&#x306F;&#x3001;&#x7B46;&#x8005;&#x306E;Juan Pan&#x6C0F;&#x304C;&#x3001;&#x5206;&#x6563;&#x30C7;&#x30FC;&#x30BF;&#x30D9;&#x30FC;&#x30B9;&#x30B7;&#x30B9;&#x30C6;&#x30E0;&#x306B;&#x304A;&#x3051;&#x308B;&#x30B7;&#x30E3;&#x30FC;&#x30C7;&#x30A3;&#x30F3;&#x30B0;&#x30A2;&#x30FC;&#x30AD;&#x30C6;&#x30AF;&#x30C1;&#x30E3;&#x306E;&#x30D1;&#x30BF;&#x30FC;&#x30F3;&#x306B;&#x3064;&#x3044;&#x3066;&#x8AD6;&#x3058;&#x307E;&#x3059;&#x3002;&#x8A18;&#x4E8B;&#x306E;&#x4E2D;&#x3067;&#x6C0F;&#x306F;&#x3001;Apache ShardingSphere&#x30D7;&#x30ED;&#x30B8;&#x30A7;&#x30AF;&#x30C8;&#x304C;&#x30C7;&#x30FC;&#x30BF;&#x30B7;&#x30E3;&#x30FC;&#x30C7;&#x30A3;&#x30F3;&#x30B0;&#x306E;&#x8AB2;&#x984C;&#x306B;&#x3044;&#x304B;&#x306B;&#x5BFE;&#x51E6;&#x3057;&#x3066;&#x3044;&#x308B;&#x304B;&#x3092;&#x8AAC;&#x660E;&#x3057;&#x305F;&#x4E0A;&#x3067;&#x3001;DistSQL&#x3092;&#x4F7F;&#x3063;&#x3066;&#x5206;&#x6563;&#x30C7;&#x30FC;&#x30BF;&#x30D9;&#x30FC;&#x30B9;&#x3068;&#x6697;&#x53F7;&#x5316;&#x30C6;&#x30FC;&#x30D6;&#x30EB;&#x3092;&#x751F;&#x6210;&#x3059;&#x308B;&#x65B9;&#x6CD5;&#x306E;&#x5B9F;&#x4F8B;&#xFF12;&#x3064;&#x3092;&#x8AD6;&#x3058;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;</p>
+                <div class="card__footer"></div>
+            </div>
+            
+                <a href="/jp/articles/next-evolution-of-database-sharding-architecture" class="card__header">
+                    <img loading="lazy" alt="&#x30C7;&#x30FC;&#x30BF;&#x30D9;&#x30FC;&#x30B9;&#x30B7;&#x30E3;&#x30FC;&#x30C7;&#x30A3;&#x30F3;&#x30B0;&#x30A2;&#x30FC;&#x30AD;&#x30C6;&#x30AF;&#x30C1;&#x30E3;&#x306E;&#x65B0;&#x305F;&#x306A;&#x9032;&#x5316;" src="https://imgopt.infoq.com/fit-in/100x100/filters:quality(80)/articles/next-evolution-of-database-sharding-architecture/ja/smallimage/logo-1641827655282.jpg" class="card__image">
+                </a>
+            
+        </div>
+    </li>
+</ul>
+
+
+    
+    
+
+<a href="/jp/ai-ml-data-eng/" class="button__more button button__large button__arrow arrow__right">&#x306E;&#x3059;&#x3079;&#x3066;&#x3092;&#x898B;&#x308B; ai-ml-data-eng</a>
+
+                </div>
+            </div>
+        </div>
+        <div class="has--subnav li-nav">
+            <a href="/jp/culture-methods/" title="&#x30AB;&#x30EB;&#x30C1;&#x30E3;&#x30FC;&#xFF06;&#x624B;&#x6CD5;" class="nav__category">&#x30AB;&#x30EB;&#x30C1;&#x30E3;&#x30FC;&#xFF06;&#x624B;&#x6CD5;</a>
+            <div class="nav__subnav subnav">
+                <ul class="subnav__categories no-style">
+                    <li><a href="/jp/agile/?itm_source=infoq&amp;itm_medium=header_graybar&amp;itm_campaign=topic_clk" title="Agile">Agile</a></li>
+                    <li><a href="/jp/Leadership/?itm_source=infoq&amp;itm_medium=header_graybar&amp;itm_campaign=topic_clk" title="&#x30EA;&#x30FC;&#x30C0;&#x30FC;&#x30B7;&#x30C3;&#x30D7;">&#x30EA;&#x30FC;&#x30C0;&#x30FC;&#x30B7;&#x30C3;&#x30D7;</a></li>
+                    <li><a href="/jp/team-collaboration/?itm_source=infoq&amp;itm_medium=header_graybar&amp;itm_campaign=topic_clk" title="Team Collaboration">Team Collaboration</a></li>
+                    <li><a href="/jp/testing/?itm_source=infoq&amp;itm_medium=header_graybar&amp;itm_campaign=topic_clk" title="&#x30C6;&#x30B9;&#x30C8;">&#x30C6;&#x30B9;&#x30C8;</a></li>
+                    <li><a href="/jp/ux/?itm_source=infoq&amp;itm_medium=header_graybar&amp;itm_campaign=topic_clk" title="UX">UX</a></li>
+                    <li><a href="/jp/scrum/?itm_source=infoq&amp;itm_medium=header_graybar&amp;itm_campaign=topic_clk" title="Scrum">Scrum</a></li>
+                    <li><a href="/jp/lean/?itm_source=infoq&amp;itm_medium=header_graybar&amp;itm_campaign=topic_clk" title="Lean/Kanban">Lean/Kanban</a></li>
+                </ul>
+                <div class="subnav__content" data-id="6832">
+                    
+
+
+
+
+
+
+
+
+
+<div class="heading__container actions">
+    <div class="actions__left">
+        <h3 class="heading section__heading">&#x6CE8;&#x76EE;&#x306E; &#x30AB;&#x30EB;&#x30C1;&#x30E3;&#x30FC;&#xFF06;&#x624B;&#x6CD5;</h3>
+    </div>
+</div>
+<ul data-size="large" data-horizontal="true" data-tax="" taxonomy="articles" class="cards no-style">
+    <li>
+        <div class="card__content">
+            <div class="card__data">
+                <h4 class="card__title">
+                    <a href="/jp/articles/design-first-api-development">API&#x958B;&#x767A;&#x306B;&#x304A;&#x3051;&#x308B;&#x30C7;&#x30B6;&#x30A4;&#x30F3;&#x30D5;&#x30A1;&#x30FC;&#x30B9;&#x30C8;&#x30A2;&#x30D7;&#x30ED;&#x30FC;&#x30C1; - &#x5B9F;&#x65BD;&#x65B9;&#x6CD5;&#x3068;&#x305D;&#x306E;&#x52B9;&#x679C;</a>
+                </h4>
+                <p class="card__excerpt">API&#x7523;&#x696D;&#x306E;&#x6025;&#x901F;&#x306A;&#x767A;&#x5C55;&#x306E;&#x4E2D;&#x3067;&#x306F;&#x3001;&#x958B;&#x767A;&#x8005;&#x3082;&#x6280;&#x8853;&#x30EA;&#x30FC;&#x30C0;&#x3082;&#x7B49;&#x3057;&#x304F;&#x3001;&#x30D3;&#x30B8;&#x30CD;&#x30B9;&#x4FA1;&#x5024;&#x3092;&#x52A0;&#x901F;&#x3059;&#x308B;&#x3088;&#x3046;&#x306A;&#x3001;&#x62E1;&#x5F35;&#x6027;&#x306E;&#x3042;&#x308B;&#x512A;&#x308C;&#x305F;API&#x30D7;&#x30ED;&#x30B0;&#x30E9;&#x30E0;&#x306E;&#x958B;&#x767A;&#x65B9;&#x6CD5;&#x3092;&#x7406;&#x89E3;&#x3059;&#x308B;&#x5FC5;&#x8981;&#x304C;&#x3042;&#x308A;&#x307E;&#x3059;&#x3002;&#x3059;&#x3079;&#x3066;&#x306E;&#x30B9;&#x30C6;&#x30FC;&#x30AF;&#x30DB;&#x30EB;&#x30C0;&#x306B;&#x5BFE;&#x3057;&#x3066;&#x6709;&#x76CA;&#x306A;&#x30A8;&#x30AF;&#x30B9;&#x30DA;&#x30EA;&#x30A8;&#x30F3;&#x30B9;&#x3092;&#x63D0;&#x4F9B;&#x3059;&#x308B;API&#x3092;&#x69CB;&#x7BC9;&#x3059;&#x308B;&#x305F;&#x3081;&#x306B;&#x3001;&#x958B;&#x767A;&#x8005;&#x306F;&#x3001;&#x30C7;&#x30B6;&#x30A4;&#x30F3;&#x30D5;&#x30A1;&#x30FC;&#x30B9;&#x30C8;&#x30A2;&#x30D7;&#x30ED;&#x30FC;&#x30C1;&#x3092;&#x512A;&#x5148;&#x7684;&#x306B;&#x8003;&#x616E;&#x3059;&#x3079;&#x304D;&#x3067;&#x3059;&#x3002;</p>
+                <div class="card__footer"></div>
+            </div>
+            
+                <a href="/jp/articles/design-first-api-development" class="card__header">
+                    <img loading="lazy" alt="API&#x958B;&#x767A;&#x306B;&#x304A;&#x3051;&#x308B;&#x30C7;&#x30B6;&#x30A4;&#x30F3;&#x30D5;&#x30A1;&#x30FC;&#x30B9;&#x30C8;&#x30A2;&#x30D7;&#x30ED;&#x30FC;&#x30C1; - &#x5B9F;&#x65BD;&#x65B9;&#x6CD5;&#x3068;&#x305D;&#x306E;&#x52B9;&#x679C;" src="https://imgopt.infoq.com/fit-in/100x100/filters:quality(80)/articles/design-first-api-development/ja/smallimage/design-first-approach-API-development-small-image-1650616561277.jpg" class="card__image">
+                </a>
+            
+        </div>
+    </li>
+</ul>
+
+
+    
+    
+
+<a href="/jp/culture-methods/" class="button__more button button__large button__arrow arrow__right">&#x306E;&#x3059;&#x3079;&#x3066;&#x3092;&#x898B;&#x308B; culture-methods</a>
+
+                </div>
+            </div>
+        </div>
+        <div class="has--subnav li-nav">
+            <a href="/jp/devops/" title="&#x904B;&#x7528;/&#x30A4;&#x30F3;&#x30D5;&#x30E9;" class="nav__category">&#x904B;&#x7528;/&#x30A4;&#x30F3;&#x30D5;&#x30E9;</a>
+            <div class="nav__subnav subnav">
+                <ul class="subnav__categories no-style">
+                    <li><a href="/jp/automation/?itm_source=infoq&amp;itm_medium=header_graybar&amp;itm_campaign=topic_clk" title="Automation">Automation</a></li>
+                    <li><a href="/jp/containers/?itm_source=infoq&amp;itm_medium=header_graybar&amp;itm_campaign=topic_clk" title="Containers">Containers</a></li>
+                    <li><a href="/jp/cloud-computing/?itm_source=infoq&amp;itm_medium=header_graybar&amp;itm_campaign=topic_clk" title="&#x30AF;&#x30E9;&#x30A6;&#x30C9;&#x30B3;&#x30F3;&#x30D4;&#x30E5;&#x30FC;&#x30C6;&#x30A3;&#x30F3;&#x30B0;">&#x30AF;&#x30E9;&#x30A6;&#x30C9;&#x30B3;&#x30F3;&#x30D4;&#x30E5;&#x30FC;&#x30C6;&#x30A3;&#x30F3;&#x30B0;</a></li>
+                </ul>
+                <div class="subnav__content" data-id="16689">
+                    
+
+
+
+
+
+
+
+
+
+<div class="heading__container actions">
+    <div class="actions__left">
+        <h3 class="heading section__heading">&#x6CE8;&#x76EE;&#x306E; DevOps</h3>
+    </div>
+</div>
+<ul data-size="large" data-horizontal="true" data-tax="" taxonomy="articles" class="cards no-style">
+    <li>
+        <div class="card__content">
+            <div class="card__data">
+                <h4 class="card__title">
+                    <a href="/jp/articles/securing-docker">Docker&#x306E;&#x30BB;&#x30AD;&#x30E5;&#x30EA;&#x30C6;&#x30A3;&#x306F;&#x5341;&#x5206;&#x3067;&#x3059;&#x304B;&#xFF1F;&#x30BB;&#x30AD;&#x30E5;&#x30A2;&#x306A;&#x30B3;&#x30F3;&#x30C6;&#x30CA;&#x30A4;&#x30E1;&#x30FC;&#x30B8;&#x3068;&#x30E9;&#x30F3;&#x30BF;&#x30A4;&#x30E0;&#x3092;&#x69CB;&#x6210;&#x3059;&#x308B;&#x305F;&#x3081;&#x306E;&#x30A2;&#x30C9;&#x30D0;&#x30A4;&#x30B9;</a>
+                </h4>
+                <p class="card__excerpt">&#x81EA;&#x8EAB;&#x306E;&#x30E6;&#x30FC;&#x30B9;&#x30B1;&#x30FC;&#x30B9;&#x306B;&#x5408;&#x308F;&#x305B;&#x3066;&#x30BB;&#x30AD;&#x30E5;&#x30EA;&#x30C6;&#x30A3;&#x30A2;&#x30D7;&#x30ED;&#x30FC;&#x30C1;&#x3092;&#x8A73;&#x7D30;&#x306B;&#x8ABF;&#x6574;&#x3059;&#x308B;&#x3053;&#x3068;&#x3067;&#x3001;Docker&#x306E;&#x5341;&#x5206;&#x306A;&#x5B89;&#x5168;&#x6027;&#x3092;&#x78BA;&#x4FDD;&#x3059;&#x308B;&#x3053;&#x3068;&#x304C;&#x53EF;&#x80FD;&#x306B;&#x306A;&#x308A;&#x307E;&#x3059;&#x3002;Docker&#x30A4;&#x30E1;&#x30FC;&#x30B8;&#x3068;Docker&#x30E9;&#x30F3;&#x30BF;&#x30A4;&#x30E0;&#x306E;&#x9055;&#x3044;&#x306B;&#x52A0;&#x3048;&#x3066;&#x3001;&#x305D;&#x308C;&#x305E;&#x308C;&#x306E;&#x30BB;&#x30AD;&#x30E5;&#x30EA;&#x30C6;&#x30A3;&#x306E;&#x610F;&#x5473;&#x3084;&#x512A;&#x5148;&#x9806;&#x4F4D;&#x306B;&#x3064;&#x3044;&#x3066;&#x7406;&#x89E3;&#x3057;&#x3066;&#x304A;&#x304F;&#x3053;&#x3068;&#x304C;&#x91CD;&#x8981;&#x3067;&#x3059;&#x3002;&#x4ECA;&#x56DE;&#x306E;&#x8A18;&#x4E8B;&#x3067;&#x306F;&#x3001;Docker&#x3067;&#x9069;&#x5207;&#x306A;&#x30BB;&#x30AD;&#x30E5;&#x30EA;&#x30C6;&#x30A3;&#x3092;&#x5B9F;&#x73FE;&#x3059;&#x308B;&#x305F;&#x3081;&#x306E;&#x3055;&#x307E;&#x3056;&#x307E;&#x306A;&#x30C6;&#x30AF;&#x30CB;&#x30C3;&#x30AF;&#x3092;&#x7D39;&#x4ECB;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+                <div class="card__footer"></div>
+            </div>
+            
+                <a href="/jp/articles/securing-docker" class="card__header">
+                    <img loading="lazy" alt="Docker&#x306E;&#x30BB;&#x30AD;&#x30E5;&#x30EA;&#x30C6;&#x30A3;&#x306F;&#x5341;&#x5206;&#x3067;&#x3059;&#x304B;&#xFF1F;&#x30BB;&#x30AD;&#x30E5;&#x30A2;&#x306A;&#x30B3;&#x30F3;&#x30C6;&#x30CA;&#x30A4;&#x30E1;&#x30FC;&#x30B8;&#x3068;&#x30E9;&#x30F3;&#x30BF;&#x30A4;&#x30E0;&#x3092;&#x69CB;&#x6210;&#x3059;&#x308B;&#x305F;&#x3081;&#x306E;&#x30A2;&#x30C9;&#x30D0;&#x30A4;&#x30B9;" src="https://imgopt.infoq.com/fit-in/100x100/filters:quality(80)/articles/securing-docker/ja/smallimage/logo-1645479973420.jpg" class="card__image">
+                </a>
+            
+        </div>
+    </li>
+</ul>
+
+
+    
+    
+
+<a href="/jp/devops/" class="button__more button button__large button__arrow arrow__right">&#x306E;&#x3059;&#x3079;&#x3066;&#x3092;&#x898B;&#x308B; devops</a>
+
+                </div>
+            </div>
+        </div>
+    </nav>
+</div>
+
+<div>
+    <h3 class="widget__heading">&#x5F79;&#x306B;&#x7ACB;&#x3064;&#x30EA;&#x30F3;&#x30AF;&#x96C6;</h3>
+    <ul class="no-style header__nav">
+        <li>
+            <a href="/jp/about-infoq" title="InfoQ&#x306B;&#x3064;&#x3044;&#x3066;">
+                InfoQ&#x306B;&#x3064;&#x3044;&#x3066;
+            </a>
+        </li>
+        <li>
+            <a href="/jp/infoq-editors" title="InfoQ&#x306E;&#x30E9;&#x30A4;&#x30BF;&#x30FC;">
+                InfoQ&#x306E;&#x30E9;&#x30A4;&#x30BF;&#x30FC;
+            </a>
+        </li>
+        <li>
+            <a href="/jp/contribute" title="&#x5BC4;&#x7A3F;">
+                &#x5BC4;&#x7A3F;
+            </a>
+        </li>
+        <li>
+            <a href="/jp/about-c4media" title="C4Media&#x306B;&#x3064;&#x3044;&#x3066;">
+                C4Media&#x306B;&#x3064;&#x3044;&#x3066;
+            </a>
+        </li>
+        <li>
+            <a rel="noreferrer noopener" href="https://c4media.com/diversity" title="Diversity" target="_blank">Diversity</a>
+        </li>
+    </ul>
+</div>
+
+                    
+                    <div>
+                        <h3 class="widget__heading">&#x5730;&#x57DF;&#x3092;&#x9078;&#x3076;</h3>
+                        
+
+
+
+
+
+
+
+<ul class="language__switcher no-style">
+	<li><a href="/" title="InfoQ English">En</a></li>
+	<li><a href="https://www.infoq.cn">&#x4E2D;&#x6587;</a></li>
+	<li class="active"><a href="#" onclick="return false;">&#x65E5;&#x672C;</a></li>
+	<li><a href="/fr/">Fr</a></li>
+</ul>
+                    </div>
+                </div>
+                    
+            </div>
+            <div class="actions header__bottom header__bottom__events">
+                <div class="actions__left">
+                    <div class="header__events-all">
+
+                            
+
+                        
+                        
+                        
+                        
+                        <a href="https://live.infoq.com/conference/2022/august?utm_source=infoq&amp;utm_medium=listing&amp;utm_campaign=infoqhomepageheaderil0822" rel="nofollow" target="_blank" class="header__event-slot">
+                            <img loading="lazy" width="40px" height="40px" src="https://cdn.infoq.com/statics_s1_20220809063436/styles/static/images/ui/header/conferences/2022/live-aug.jpg" alt="InfoQ Live August">
+                            <div>
+                                <span>InfoQ Live August</span>
+                                <p>Learn how cloud architectures help organizations take care of application and cloud security, observability, availability and elasticity. Register Now.</p>
+                            </div>
+                        </a>
+                        <a href="https://qconsf.com/?utm_source=infoq&amp;utm_medium=listing&amp;utm_campaign=infoqhomepageheaderqsf1022" rel="nofollow" target="_blank" class="header__event-slot">
+                            <img loading="lazy" width="40px" height="40px" src="https://cdn.infoq.com/statics_s1_20220809063436/styles/static/images/ui/header/conferences/2022/sf-oct-top.jpg" alt="QCon San Francisco">
+                            <div>
+                                <span>QCon San Francisco</span>
+                                <p>Understand the emerging software trends you should pay attention to. Attend in-person on Oct 24-28, 2022.</p>
+                            </div>
+                        </a>
+                        <a href="https://plus.qconferences.com/?utm_source=infoq&amp;utm_medium=listing&amp;utm_campaign=infoqhomepageheaderqplus1122" rel="nofollow" target="_blank" class="header__event-slot">
+                            <img loading="lazy" width="40px" height="40px" src="https://cdn.infoq.com/statics_s1_20220809063436/styles/static/images/ui/header/conferences/2022/plus-top.jpg" alt="QCon Plus">
+                            <div>
+                                <span>QCon Plus</span>
+                                <p>Make the right decisions by uncovering how senior software developers at early adopter companies are adopting emerging trends. Register Now.</p>
+                            </div>
+                        </a>
+                        
+                        
+
+                        
+                            
+                            
+                                
+                                
+                            
+                        
+
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</header>
+
+
+            
+            <main>
+                
+	<article data-type="news" class="article">
+		<section class="section container white">
+			<div class="container__inner">
+				
+
+
+
+
+
+
+
+
+<p class="crumbs">
+	<span><a href="/jp?itm_source=infoq&amp;itm_medium=breadcrumbs_feature&amp;itm_campaign=breadcrumbs" title="InfoQ &#x30DB;&#x30FC;&#x30E0;&#x30DA;&#x30FC;&#x30B8;">InfoQ &#x30DB;&#x30FC;&#x30E0;&#x30DA;&#x30FC;&#x30B8;</a></span>
+	
+		
+			
+			
+                <span><a href="/jp/news?itm_source=infoq&amp;itm_medium=breadcrumbs_feature&amp;itm_campaign=breadcrumbs" title="&#x30CB;&#x30E5;&#x30FC;&#x30B9;">&#x30CB;&#x30E5;&#x30FC;&#x30B9;</a></span>
+            
+		
+		<span class="active">Google Chrome&#x306E;Never-Slow Mode</span>
+	
+	
+    
+        
+    
+</p>
+
+				<div class="actions">
+					<div class="actions__left">
+						
+
+
+
+
+
+
+
+    <div class="article__category html-5">
+        
+        <a href="/html-5/" class="article__tag box--info" title="HTML5">
+
+            HTML5
+        </a>
+
+    </div>
+
+					</div>
+					<div class="actions__right">
+						
+
+
+
+
+
+
+
+
+
+
+					</div>
+				</div>
+				<div class="actions heading__container article__heading">
+					<div class="actions__left">
+						<h1 class="heading">
+							Google Chrome&#x306E;Never-Slow Mode
+						</h1>
+					</div>
+				</div>
+				
+				
+
+
+
+
+
+
+
+
+
+		
+		
+			
+				<p id="translated_br" class="article__translated">
+					Leia em
+					<a href="/br/news/2019/03/chrome-never-slow-mode?itm_source=infoq_en&amp;itm_medium=link_on_en_item&amp;itm_campaign=item_in_other_langs">
+
+						Portugu&#xEA;s
+					</a>
+
+					<span class="icon flag br"></span>
+				</p>
+			
+		
+			
+		
+			
+				<p id="translated_fr" class="article__translated">
+					Lire ce contenu en
+					<a href="/fr/news/2019/02/chrome-never-slow-mode?itm_source=infoq_en&amp;itm_medium=link_on_en_item&amp;itm_campaign=item_in_other_langs">
+
+						fran&#xE7;ais
+					</a>
+
+					<span class="icon flag fr"></span>
+				</p>
+			
+		
+
+
+				<div class="article__actions actions">
+					<div class="actions__left">
+						<button id="toggleLikeContent" class="icon button button__icon like button__gray icon__like" aria-label="&#x3044;&#x3044;&#x306D;">&#x3044;&#x3044;&#x306D;</button>
+						<a href="#theCommentsSection" class="button button__gray button__icon icon icon__discuss" id="noOfComments"></a>
+						<button class="icon button button__icon icon--only button__gray icon__print" aria-label="Print">Print</button>
+						
+
+
+
+
+
+
+
+        <a id="showBookmarks" href="/jp/showbookmarks.action" class="button button__gray button__icon icon icon__bookmark">&#x30D6;&#x30C3;&#x30AF;&#x30DE;&#x30FC;&#x30AF;</a>
+
+        <button id="bookmarkBtn" data-ref="bookmarkPage" aria-label="&#x5F8C;&#x3067;&#x8AAD;&#x3080;" class="login button__gray button button__icon icon icon__bookmark icon--only">
+        </button>
+
+        <div id="toastContainer" class="toast-none toast-hide">
+                <div class="toast"><span></span></div>
+        </div>
+        
+
+					</div>
+				</div>
+				<div class="columns article__explore">
+					<div class="column article__main" data-col="4/6">
+						<div class="column article__metadata metadata">
+							<p class="article__readTime date">2019&#x5E74;2&#x6708;27&#x65E5;<span class="dot"></span>
+								
+								
+								
+									&#x8AAD;&#x4E86;&#x6642;&#x9593;
+									3
+									&#x5206;
+								
+							</p>
+
+							<div class="widget article__authors">
+								<div>
+									<p class="meta">&#x4F5C;&#x8005;&#xFF1A;</p>
+									
+
+
+
+
+
+
+
+
+
+
+
+
+
+<ul class="no-style authors">
+    
+        
+            
+        
+        <li data-id="author-Diogo-Carleto">
+            <p class="meta author__bio">
+                
+                <a href="/jp/profile/Diogo-Carleto/" class="avatar author__avatar"></a>
+                <span class="author__name">
+                    <a href="/jp/profile/Diogo-Carleto/" class="author__link">Diogo Carleto</a>
+                </span>
+            </p>
+            
+        </li>
+    
+</ul>
+								</div>
+								
+									<div>
+										<p class="meta">&#x7FFB;&#x8A33;&#x8005;</p>
+										
+
+
+
+
+
+
+
+
+
+
+
+
+
+<ul class="no-style authors">
+    
+        
+            
+        
+        <li data-id="author-&#x4E2D;&#x6751;-&#x771F;&#x5B50;">
+            <p class="meta author__bio">
+                
+                <a href="/jp/profile/%E4%B8%AD%E6%9D%91-%E7%9C%9F%E5%AD%90/" class="avatar author__avatar"></a>
+                <span class="author__name">
+                    <a href="/jp/profile/%E4%B8%AD%E6%9D%91-%E7%9C%9F%E5%AD%90/" class="author__link">&#x4E2D;&#x6751; &#x771F;&#x5B50;</a>
+                </span>
+            </p>
+            
+        </li>
+    
+</ul>
+									</div>
+								
+							</div>
+
+							
+
+							<div class="widgets"></div>
+						</div>
+						<div class="article__content">
+							
+							
+
+
+
+							
+
+							<div class="article__data">
+								<p><a href="https://www.infoq.com/news/2019/02/chrome-never-slow-mode" target="_blank"><em>&#x539F;&#x6587;(&#x6295;&#x7A3F;&#x65E5;&#xFF1A;2019/02/16)&#x3078;&#x306E;&#x30EA;&#x30F3;&#x30AF;</em></a></p>
+
+<p>Google&#x306F;Never-Slow Mode&#x3068;&#x547C;&#x3070;&#x308C;&#x308B;&#x30D7;&#x30ED;&#x30C8;&#x30BF;&#x30A4;&#x30D7;&#x6A5F;&#x80FD;&#x306B;&#x53D6;&#x308A;&#x7D44;&#x3093;&#x3067;&#x3044;&#x308B;&#x3002;&#x3053;&#x306E;&#x30D7;&#x30ED;&#x30C8;&#x30BF;&#x30A4;&#x30D7;&#x6A5F;&#x80FD;&#x306F;<a href="https://www.chromium.org/Home">Chromium &#x30D7;&#x30ED;&#x30B8;&#x30A7;&#x30AF;&#x30C8;</a>&#x3067;<a href="https://chromium-review.googlesource.com/c/chromium/src/+/1265506">&#x30B3;&#x30DF;&#x30C3;&#x30C8;</a>&#x4F5C;&#x696D;&#x9032;&#x884C;&#x4E2D;&#x3067;&#x3042;&#x308A;&#x3001;&#x30E6;&#x30FC;&#x30B6;&#x30FC;&#x30A8;&#x30AF;&#x30B9;&#x30DA;&#x30EA;&#x30A8;&#x30F3;&#x30B9;&#x306E;&#x5411;&#x4E0A;&#x3001;&#x4E00;&#x8CAB;&#x6027;&#x306E;&#x3042;&#x308B;&#x8FC5;&#x901F;&#x306A;&#x30D6;&#x30E9;&#x30A6;&#x30B8;&#x30F3;&#x30B0;&#x306E;&#x63D0;&#x4F9B;&#x3092;&#x76EE;&#x7684;&#x3068;&#x3057;&#x3066;&#x3044;&#x308B;&#x3002;</p>
+
+<p><a href="https://www.w3schools.com/browsers/">w3schools</a>&#x306B;&#x3088;&#x308B;&#x3068;&#x3001;Google Chrome&#x306F;70&#xFF05;&#x4EE5;&#x4E0A;&#x306E;&#x30DE;&#x30FC;&#x30B1;&#x30C3;&#x30C8;&#x30B7;&#x30A7;&#x30A2;&#x3092;&#x6301;&#x3061;&#x3001;&#x6B21;&#x3044;&#x3067;Firefox&#x304C;10&#xFF05;&#x3001;Internet Explorer / Edge&#x304C;4&#xFF05;&#x3067;&#x3042;&#x308B;&#x3002;Google&#x30B5;&#x30FC;&#x30D3;&#x30B9;&#x3068;&#x306E;&#x540C;&#x671F;&#x3084;&#x6570;&#x5343;&#x3082;&#x306E;&#x62E1;&#x5F35;&#x6A5F;&#x80FD;&#x306A;&#x3069;&#x3001;&#x4E00;&#x9023;&#x306E;&#x6A5F;&#x80FD;&#x306B;&#x3088;&#x3063;&#x3066;Google Chrome&#x304C;&#x6700;&#x4E0A;&#x4F4D;&#x306B;&#x541B;&#x81E8;&#x3057;&#x3066;&#x3044;&#x308B;&#x3002;&#x3055;&#x3089;&#x306B;Google&#x306F;&#x30D6;&#x30E9;&#x30A6;&#x30B6;&#x4E0A;&#x3067;&#x52D5;&#x4F5C;&#x3059;&#x308B;&#x30A2;&#x30D7;&#x30EA;&#x3092;&#x591A;&#x6570;&#x63D0;&#x4F9B;&#x3057;&#x3066;&#x304A;&#x308A;&#x3001;&#x7D76;&#x3048;&#x305A;Web&#x30B5;&#x30A4;&#x30C8;&#x306E;&#x30D1;&#x30D5;&#x30A9;&#x30FC;&#x30DE;&#x30F3;&#x30B9;&#x3092;&#x5411;&#x4E0A;&#x3055;&#x305B;&#x308B;&#x305F;&#x3081;&#x306E;&#x53D6;&#x308A;&#x7D44;&#x3092;&#x5B9F;&#x65BD;&#x3057;&#x3001;Web&#x30DA;&#x30FC;&#x30B8;&#x8AAD;&#x307F;&#x8FBC;&#x307F;&#x9045;&#x5EF6;&#x306E;&#x77ED;&#x7E2E;&#x3068;Web&#x30BB;&#x30AD;&#x30E5;&#x30EA;&#x30C6;&#x30A3;&#x306E;&#x6539;&#x5584;&#x306B;&#x91CD;&#x70B9;&#x3092;&#x7F6E;&#x3044;&#x305F;HTTP&#x30C8;&#x30E9;&#x30D5;&#x30A3;&#x30C3;&#x30AF;&#x3092;&#x64CD;&#x4F5C;&#x3059;&#x308B;<a href="https://en.wikipedia.org/wiki/SPDY">SPDY</a>&#x30D7;&#x30ED;&#x30C8;&#x30B3;&#x30EB;&#x306A;&#x3069;&#x306E;&#x65B0;&#x3057;&#x3044;&#x30B9;&#x30DA;&#x30C3;&#x30AF;&#x3084;&#x30C4;&#x30FC;&#x30EB;&#x306B;&#x8CA2;&#x732E;&#x3057;&#x3066;&#x3044;&#x308B;&#x3002;</p>
+
+<p>Google&#x306E;Never-Slow Mode&#x306F;&#x4E00;&#x822C;&#x7684;&#x306A;&#x65B9;&#x6CD5;&#x3067;&#x3001;CSS&#x3001;&#x753B;&#x50CF;&#x3001;&#x5927;&#x898F;&#x6A21;&#x306A;&#x30B9;&#x30AF;&#x30EA;&#x30D7;&#x30C8;&#x306A;&#x3069;&#x306E;&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x3092;&#x5236;&#x9650;&#x3059;&#x308B;&#x30D0;&#x30B8;&#x30A7;&#x30C3;&#x30C8;&#x3092;&#x5C0E;&#x5165;&#x3057;&#x3066;&#x3044;&#x308B;&#x3002;<a href="https://chromium-review.googlesource.com/c/chromium/src/+/1265506">Alex Russell</a>&#x6C0F;&#x306B;&#x3088;&#x308B;&#x3068;&#x3001;&#x3053;&#x308C;&#x3089;&#x306E;&#x30D0;&#x30B8;&#x30A7;&#x30C3;&#x30C8;&#x306F;&#x30E1;&#x30A4;&#x30F3;&#x30B9;&#x30EC;&#x30C3;&#x30C9;&#x3092;&#x304D;&#x308C;&#x3044;&#x306B;&#x7DAD;&#x6301;&#x3059;&#x308B;&#x305F;&#x3081;&#x306B;&#x8A2D;&#x8A08;&#x3055;&#x308C;&#x3066;&#x3044;&#x308B;&#x3002;</p>
+
+<blockquote>
+<p>&#x73FE;&#x5728;&#x306E;&#x3068;&#x3053;&#x308D;Never-Slow Mode&#x306F;&#x3001;&#x5927;&#x304D;&#x306A;&#x30B9;&#x30AF;&#x30EA;&#x30D7;&#x30C8;&#x3092;&#x30D6;&#x30ED;&#x30C3;&#x30AF;&#x3057;&#x3001;&#x7279;&#x5B9A;&#x306E;&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x30BF;&#x30A4;&#x30D7;&#xFF08;&#x30B9;&#x30AF;&#x30EA;&#x30D7;&#x30C8;&#x3001;&#x30D5;&#x30A9;&#x30F3;&#x30C8;&#x3001;CSS&#x3001;&#x753B;&#x50CF;&#xFF09;&#x3078;&#x306E;&#x30D0;&#x30B8;&#x30A7;&#x30C3;&#x30C8;&#x8A2D;&#x5B9A;&#x3001;document.write()&#x306E;&#x7121;&#x52B9;&#x5316;&#x3001;&#x540C;&#x671F;XHR&#x306E;&#x4E0A;&#x66F8;&#x304D;&#x3001;&#x30AF;&#x30E9;&#x30A4;&#x30A2;&#x30F3;&#x30C8;&#x30D2;&#x30F3;&#x30C8;&#x306E;&#x5168;&#x9762;&#x7684;&#x306A;&#x6709;&#x52B9;&#x5316;&#x3001; `Content-Length`&#x304C;&#x8A2D;&#x5B9A;&#x3055;&#x308C;&#x3066;&#x3044;&#x306A;&#x3044;&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x306E;&#x30D0;&#x30C3;&#x30D5;&#x30A1;&#x3092;&#x5B9F;&#x65BD;&#x3057;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;&#x30D0;&#x30C3;&#x30D5;&#x30A1;&#x306F;&#x30A4;&#x30F3;&#x30BF;&#x30E9;&#x30AF;&#x30B7;&#x30E7;&#x30F3;&#xFF08;&#x30AF;&#x30EA;&#x30C3;&#x30AF;/&#x30BF;&#x30C3;&#x30D7;/&#x30B9;&#x30AF;&#x30ED;&#x30FC;&#x30EB;&#xFF09;&#x3067;&#x518D;&#x8A2D;&#x5B9A;&#x3055;&#x308C;&#x307E;&#x3059;&#x3002;&#x9577;&#x3044;&#x30B9;&#x30AF;&#x30EA;&#x30D7;&#x30C8;&#x30BF;&#x30B9;&#x30AF;&#xFF08;200&#x30DF;&#x30EA;&#x79D2;&#x4EE5;&#x4E0A;&#xFF09;&#x306F;&#x3001;&#x6B21;&#x306E;&#x30A4;&#x30F3;&#x30BF;&#x30E9;&#x30AF;&#x30B7;&#x30E7;&#x30F3;&#x307E;&#x3067;&#x3059;&#x3079;&#x3066;&#x306E;&#x30DA;&#x30FC;&#x30B8;&#x306E;&#x5B9F;&#x884C;&#x3092;&#x4E00;&#x6642;&#x505C;&#x6B62;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+</blockquote>
+
+<p>&#x3053;&#x308C;&#x3089;&#x306E;&#x4E0A;&#x9650;&#x306F;worker&#x306B;&#x306F;&#x9069;&#x7528;&#x3055;&#x308C;&#x305A;&#x3001;&#x30B5;&#x30A4;&#x30BA;&#x4E0A;&#x9650;&#x306F;Service Worker Cache Storage&#x304B;&#x3089;&#x30ED;&#x30FC;&#x30C9;&#x3055;&#x308C;&#x305F;&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x306B;&#x5BFE;&#x3057;&#x3066;&#x306F;&#x5F15;&#x304D;&#x4E0A;&#x3052;&#x3089;&#x308C;&#x308B;&#x3002;&#x73FE;&#x5728;&#x306E;&#x4E0A;&#x9650;&#x306F;&#x6B21;&#x306E;&#x901A;&#x308A;&#x3002;</p>
+
+<pre>
+
+    Per-image max size:        1MiB
+    Total image budget:        2MiB
+    Per-stylesheet max size: 100KiB
+    Total stylesheet budget: 200KiB
+    Per-script max size:      50KiB
+    Total script budget:     500KiB
+    Per-font max size:       100KiB
+    Total font budget:       100KiB
+    Total connection limit:   10
+    Long-task limit:         200ms
+</pre>
+
+<p>&#x30D0;&#x30B8;&#x30A7;&#x30C3;&#x30C8;&#x3092;&#x8D85;&#x3048;&#x3066;&#x30D6;&#x30E9;&#x30A6;&#x30B6;&#x306B;&#x3088;&#x3063;&#x3066;&#x30D6;&#x30ED;&#x30C3;&#x30AF;&#x3055;&#x308C;&#x305F;&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x3092;&#x77E5;&#x3089;&#x305B;&#x308B;&#x30D7;&#x30ED;&#x30C8;&#x30BF;&#x30A4;&#x30D7;&#x6A5F;&#x80FD;&#x306E;Never-Slow Mode&#x306E;&#x8AAC;&#x660E;&#x3092;<a href="https://www.chromestory.com/2019/02/google-is-testing-a-never-slow-mode-for-chrome/">Dinsan Francis&#x6C0F;&#x306F;&#x898B;&#x3064;&#x3051;&#x305F;</a> &#x3002;</p>
+
+<blockquote>
+<p>&#x3053;&#x308C;&#x306B;&#x3088;&#x308A;&#x3001;&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x306E;&#x30ED;&#x30FC;&#x30C7;&#x30A3;&#x30F3;&#x30B0;&#x3068;&#x30E9;&#x30F3;&#x30BF;&#x30A4;&#x30E0;&#x51E6;&#x7406;&#x3092;&#x5236;&#x9650;&#x3059;&#x308B;&#x5B9F;&#x9A13;&#x7684;&#x306A;&#x30D6;&#x30E9;&#x30A6;&#x30B8;&#x30F3;&#x30B0;&#x30E2;&#x30FC;&#x30C9;&#x304C;&#x53EF;&#x80FD;&#x306B;&#x306A;&#x308A;&#x3001;&#x4E00;&#x8CAB;&#x3057;&#x3066;&#x9AD8;&#x901F;&#x306A;&#x30A8;&#x30AF;&#x30B9;&#x30DA;&#x30EA;&#x30A8;&#x30F3;&#x30B9;&#x306E;&#x63D0;&#x4F9B;&#x304C;&#x5B9F;&#x73FE;&#x3067;&#x304D;&#x307E;&#x3059;&#x3002;&#x8B66;&#x544A;&#xFF1A;&#x9ED9;&#x3063;&#x3066;&#x30B3;&#x30F3;&#x30C6;&#x30F3;&#x30C4;&#x3092;&#x58CA;&#x3059;&#x53EF;&#x80FD;&#x6027;&#x304C;&#x3042;&#x308A;&#x307E;&#x3059;&#xFF01;</p>
+</blockquote>
+
+<p>&#x30A4;&#x30F3;&#x30BF;&#x30FC;&#x30CD;&#x30C3;&#x30C8;&#x306E;&#x901F;&#x5EA6;&#x306F;&#x305D;&#x308C;&#x307B;&#x3069;&#x901F;&#x304F;&#x306A;&#x3063;&#x3066;&#x3044;&#x306A;&#x3044;&#x306E;&#x306B;&#x5BFE;&#x3057;&#x3001;Web&#x30B5;&#x30A4;&#x30C8;&#x306E;&#x30B5;&#x30A4;&#x30BA;&#x306F;&#x3053;&#x3053;&#x6570;&#x5E74;&#x3067;&#x5927;&#x5E45;&#x306B;&#x62E1;&#x5927;&#x3057;&#x3066;&#x3044;&#x308B;&#x3002;<a href="https://www.keycdn.com/support/the-growth-of-web-page-size">KeyCDN</a>&#x306E;&#x5206;&#x6790;&#x3067;&#x306F;&#x3001;&#x5E73;&#x5747;&#x7684;&#x306A;Web&#x30DA;&#x30FC;&#x30B8;&#x30B5;&#x30A4;&#x30BA;&#x304C;2010&#x5E74;&#x306E;&#x7D04;700&#x30AD;&#x30ED;&#x30D0;&#x30A4;&#x30C8;&#x304B;&#x3089;2016&#x5E74;&#x306B;&#x306F;2300&#x30AD;&#x30ED;&#x30D0;&#x30A4;&#x30C8;&#x307E;&#x3067;&#x5897;&#x52A0;&#x3057;&#x305F;&#x3068;&#x3044;&#x3046;</p>
+
+<p><img _href="img://image1-1550321623431.png" alt="" data-src="news/2019/02/chrome-never-slow-mode/ja/resources/image1-1550321623431.png" rel="" share""="" share="" src="https://imgopt.infoq.com/fit-in/1200x2400/filters:quality(80)/filters:no_upscale()/news/2019/02/chrome-never-slow-mode/ja/resources/image1-1550321623431.png">(image taken from <a href="https://www.keycdn.com/support/the-growth-of-web-page-size">https://www.keycdn.com</a>)</p>
+
+<p>Never-Slow Mode&#x306E;&#x30EA;&#x30EA;&#x30FC;&#x30B9;&#x4E88;&#x5B9A;&#x65E5;&#x306B;&#x95A2;&#x3059;&#x308B;&#x60C5;&#x5831;&#x3084;&#x3001;Never-Slow Mode&#x304C;Chrome&#x306E;&#x6B21;&#x306E;&#x30E1;&#x30B8;&#x30E3;&#x30FC;&#x30D0;&#x30FC;&#x30B8;&#x30E7;&#x30F3;&#x306B;&#x542B;&#x307E;&#x308C;&#x308B;&#x304B;&#x3069;&#x3046;&#x304B;&#x306B;&#x3064;&#x3044;&#x3066;&#x3001;&#x73FE;&#x6642;&#x70B9;&#x3067;&#x306F;&#x767A;&#x8868;&#x3055;&#x308C;&#x3066;&#x3044;&#x306A;&#x3044;&#x3002;</p>
+
+								
+
+
+
+
+
+
+
+
+
+
+							</div>
+
+							
+							
+								
+									
+									
+									
+									
+										
+										
+									
+									
+										
+									
+								
+							
+							
+
+							
+
+							
+
+
+
+
+
+
+
+
+
+<input type="hidden" name="" value="&#x9001;&#x4FE1;&#x3055;&#x308C;&#x307E;&#x3057;&#x305F;" id="cr_messages_submitSuccess">
+
+<input type="hidden" name="" value="&#x661F;&#x3092;&#x3064;&#x3051;&#x3066;&#x304F;&#x3060;&#x3055;&#x3044;&#x3002;" id="cr_messages_ratingRequired">
+
+<input type="hidden" name="" value="Google Chrome&#x306E;Never-Slow Mode" id="cr_item_title">
+
+<input type="hidden" name="" value="Diogo Carleto" id="cr_item_author">
+
+<input type="hidden" name="" value="http://www.infoq.com/jp/news/2019/02/chrome-never-slow-mode/" id="cr_item_url">
+
+<input type="hidden" name="" value="news" id="cr_item_ctype">
+
+<input type="hidden" name="" value="ja" id="cr_item_lang">
+
+<input type="hidden" name="" value="1551235560000" id="cr_item_published_time">
+
+<input type="hidden" name="" value="1480" id="cr_item_primary_topic">
+
+
+
+
+<div class="reviews tabs contentRatingWidget">
+    <div id="editorReview" class="tab" data-title="&#x30A8;&#x30C7;&#x30A3;&#x30BF;&#x30FC;&#x30BF;&#x30D6;">
+        
+    </div>
+
+    <div id="chiefEditorReview" class="tab" data-title="&#x30C1;&#x30FC;&#x30D5;&#x30A8;&#x30C7;&#x30A3;&#x30BF;&#x30FC;&#x30BF;&#x30D6;">
+        
+    </div>
+</div>
+
+
+
+							
+							
+
+
+
+
+
+
+<div class="widget article__fromTopic topics">
+    
+        <div class="widget__head related__for-topic" data-id="7693" data-trk-ref="content_primary_topic">
+            <h4 class="heading related__heading">
+                
+                
+                    
+                &#x3053;&#x306E;&#x30B3;&#x30F3;&#x30C6;&#x30F3;&#x30C4;&#x306E;&#x30C8;&#x30D4;&#x30C3;&#x30AF;&#x306F; <a href="/jp/html-5/">HTML5</a> &#x3067;&#x3059;&#x3002;
+            </h4>
+        </div>
+    
+    <h5 class="heading related__inline">&#x95A2;&#x9023;&#x8A18;&#x4E8B;:</h5>
+    <ul class="no-style topics related__topics topics__small" data-trk-ref="content_related_topic">
+         
+            
+                
+                    
+                
+                
+                <li data-id="6830">
+                    <a href="/jp/development/" class="button related__topic button__small button__black">&#x30C7;&#x30D9;&#x30ED;&#x30C3;&#x30D7;&#x30E1;&#x30F3;&#x30C8;</a>
+                </li>
+            
+        
+        
+            
+                
+                    
+                
+                
+                <li data-id="7693">
+                    <a href="/jp/html-5/" class="button related__topic button__small button__black">HTML5</a>
+                </li>
+            
+                
+                    
+                
+                
+                <li data-id="2653">
+                    <a href="/jp/ria/" class="button related__topic button__small button__black">RIA</a>
+                </li>
+            
+                
+                    
+                
+                
+                <li data-id="2881">
+                    <a href="/jp/javascript/" class="button related__topic button__small button__black">JavaScript</a>
+                </li>
+            
+                
+                    
+                
+                
+                <li data-id="16401">
+                    <a href="/jp/Chrome/" class="button related__topic button__small button__black">Chrome</a>
+                </li>
+            
+                
+                    
+                
+                
+                <li data-id="16402">
+                    <a href="/jp/web-browser/" class="button related__topic button__small button__black">Web Browser</a>
+                </li>
+            
+                
+                    
+                
+                
+                <li data-id="2841">
+                    <a href="/jp/dynamic_languages/" class="button related__topic button__small button__black">&#x52D5;&#x7684;&#x8A00;&#x8A9E;</a>
+                </li>
+            
+                
+                    
+                
+                
+                <li data-id="3410">
+                    <a href="/jp/MarkupLanguages/" class="button related__topic button__small button__black">Markup Languages</a>
+                </li>
+            
+                
+                    
+                
+                
+                <li data-id="3941">
+                    <a href="/jp/OS/" class="button related__topic button__small button__black">OS</a>
+                </li>
+            
+        
+    </ul>
+</div>
+
+						</div>
+						
+						
+						
+						
+
+
+
+
+
+
+
+
+<input type="hidden" name="" value="1480" id="cont_item_primary_topic">
+
+
+
+
+
+
+<ul class="no-style related__group nocontent cards">
+    <li>
+        <div class="related__editorial">
+            <h4 class="heading">&#x95A2;&#x9023;&#x8A18;&#x4E8B;</h4>
+            <ul></ul>
+        </div>
+    </li>
+    <li>
+        <ul class="no-style rvc__list f_rvcbox" data-place="BOTTOM" data-trk-view="true" data-trk-impr="true" style="display: none">
+            <h4 class="heading">&#x95A2;&#x9023;&#x30B9;&#x30DD;&#x30F3;&#x30B5;&#x30FC;&#x30B3;&#x30F3;&#x30C6;&#x30F3;&#x30C4;</h4>
+            
+            <div class="f_rvcList"></div>
+            
+                
+            
+        </ul>
+    </li>
+    
+    
+    
+        
+    
+</ul>
+
+					</div>
+					<div class="column article__more f_article_rightbar" data-col="2/6">
+						
+							
+
+
+
+
+
+
+<noscript>
+<div class="widget related__content article__widget">
+    <h3 class="widget__heading">&#x95A2;&#x9023;&#x3059;&#x308B;&#x30B3;&#x30F3;&#x30C6;&#x30F3;&#x30C4;</h3>
+    <ul class="no-style cards" data-horizontal="true" data-size="xs" data-tax="">
+        
+            <li class="news">
+                <div class="card__content">
+                    <div class="card__data">
+                        <h5 class="card__title">
+                            <a href="https://www.infoq.com/jp/news/2022/06/angular-14-typed-forms/">Angular 14 - Typed Forms&#x3068;Standalone Components</a>
+                        </h5>
+                    </div>
+                    
+                </div>
+            </li>
+        
+            <li class="news">
+                <div class="card__content">
+                    <div class="card__data">
+                        <h5 class="card__title">
+                            <a href="https://www.infoq.com/jp/news/2022/04/react-18-concurrent-renderer/">React 18&#x3067;&#x4E26;&#x5217;&#x30EC;&#x30F3;&#x30C0;&#x30E9;&#x30FC;&#x3092;&#x5C0E;&#x5165;</a>
+                        </h5>
+                    </div>
+                    
+                </div>
+            </li>
+        
+            <li class="news">
+                <div class="card__content">
+                    <div class="card__data">
+                        <h5 class="card__title">
+                            <a href="https://www.infoq.com/jp/news/2022/04/minze-web-components-library/">Minze&#xFF1A;Web&#x30B3;&#x30F3;&#x30DD;&#x30FC;&#x30CD;&#x30F3;&#x30C8;&#x3092;&#x4F5C;&#x6210;&#x3059;&#x308B;&#x305F;&#x3081;&#x306E;&#x30B3;&#x30F3;&#x30D1;&#x30AF;&#x30C8;&#x306A;JS&#x30E9;&#x30A4;&#x30D6;&#x30E9;&#x30EA;</a>
+                        </h5>
+                    </div>
+                    
+                </div>
+            </li>
+        
+            <li class="news">
+                <div class="card__content">
+                    <div class="card__data">
+                        <h5 class="card__title">
+                            <a href="https://www.infoq.com/jp/news/2022/03/shepherd-guided-user-journeys/">Shepherd&#xFF1A;&#x30A2;&#x30D7;&#x30EA;&#x30B1;&#x30FC;&#x30B7;&#x30E7;&#x30F3;&#x306E;&#x30AC;&#x30A4;&#x30C9;&#x4ED8;&#x304D;&#x30E6;&#x30FC;&#x30B6;&#x30C4;&#x30A2;&#x30FC;</a>
+                        </h5>
+                    </div>
+                    
+                </div>
+            </li>
+        
+            <li class="news">
+                <div class="card__content">
+                    <div class="card__data">
+                        <h5 class="card__title">
+                            <a href="https://www.infoq.com/jp/news/2022/03/GitHub-code-scanning-ml/">GitHub&#x304C;&#x6A5F;&#x68B0;&#x5B66;&#x7FD2;&#x3092;&#x4F7F;&#x3063;&#x3066;&#x8106;&#x5F31;&#x6027;&#x30B3;&#x30FC;&#x30C9;&#x30B9;&#x30AD;&#x30E3;&#x30F3;&#x3092;&#x62E1;&#x5F35;&#x3057;&#x305F;&#x65B9;&#x6CD5;</a>
+                        </h5>
+                    </div>
+                    
+                </div>
+            </li>
+        
+            <li class="news">
+                <div class="card__content">
+                    <div class="card__data">
+                        <h5 class="card__title">
+                            <a href="https://www.infoq.com/jp/news/2022/02/TypeScript-beta-release/">TypeScript 4.6&#x30D9;&#x30FC;&#x30BF;&#x7248;&#x3067;&#x578B;&#x63A8;&#x8AD6;&#x3068;&#x30A8;&#x30E9;&#x30FC;&#x30C1;&#x30A7;&#x30C3;&#x30AF;&#x304C;&#x6539;&#x5584;</a>
+                        </h5>
+                    </div>
+                    
+                </div>
+            </li>
+        
+            <li class="news">
+                <div class="card__content">
+                    <div class="card__data">
+                        <h5 class="card__title">
+                            <a href="https://www.infoq.com/jp/news/2022/02/etst-migration-from-react-preact/">Etsy&#x304C;React&#x304B;&#x3089;Preact&#x306B;&#x79FB;&#x884C;&#x3057;&#x3001;&#x79FB;&#x884C;&#x30EA;&#x30B9;&#x30AF;&#x3092;&#x4F4E;&#x6E1B;</a>
+                        </h5>
+                    </div>
+                    
+                </div>
+            </li>
+        
+            <li class="news">
+                <div class="card__content">
+                    <div class="card__data">
+                        <h5 class="card__title">
+                            <a href="https://www.infoq.com/jp/news/2022/04/code-verify-browser-extension/">Meta&#x304C;Web&#x30B3;&#x30FC;&#x30C9;&#x306E;&#x771F;&#x6B63;&#x6027;&#x3092;&#x7ACB;&#x8A3C;&#x3059;&#x308B;&#x305F;&#x3081;&#x306E;&#x30D6;&#x30E9;&#x30A6;&#x30B6;&#x62E1;&#x5F35;&#x3092;&#x30AA;&#x30FC;&#x30D7;&#x30F3;&#x30BD;&#x30FC;&#x30B9;&#x5316;</a>
+                        </h5>
+                    </div>
+                    
+                </div>
+            </li>
+        
+            <li class="news">
+                <div class="card__content">
+                    <div class="card__data">
+                        <h5 class="card__title">
+                            <a href="https://www.infoq.com/jp/news/2022/06/java-news-roundup-jun13-2022/">Java News &#x30E9;&#x30A6;&#x30F3;&#x30C9;&#x30A2;&#x30C3;&#x30D7;: NetBeans 14&#x3001;Spring Tools Suite 3&#x306E;&#x30B5;&#x30DD;&#x30FC;&#x30C8;&#x7D42;&#x4E86;&#x3001;Hibernate 6.1&#x3001;TornadoVM</a>
+                        </h5>
+                    </div>
+                    
+                </div>
+            </li>
+        
+            <li class="news">
+                <div class="card__content">
+                    <div class="card__data">
+                        <h5 class="card__title">
+                            <a href="https://www.infoq.com/jp/news/2022/06/office-design-hybrid/">&#x30CF;&#x30A4;&#x30D6;&#x30EA;&#x30C3;&#x30C9;&#x30EF;&#x30FC;&#x30AF;&#x30B9;&#x30DA;&#x30FC;&#x30B9;&#x306E;&#x305F;&#x3081;&#x306E;&#x30AA;&#x30D5;&#x30A3;&#x30B9;&#x30C7;&#x30B6;&#x30A4;&#x30F3;</a>
+                        </h5>
+                    </div>
+                    
+                </div>
+            </li>
+        
+            <li class="news">
+                <div class="card__content">
+                    <div class="card__data">
+                        <h5 class="card__title">
+                            <a href="https://www.infoq.com/jp/news/2022/06/PostgreSQL-14-Breaking-Change/">PostgreSQL 14&#x304C;PostgreSQL&#x5411;&#x3051;.NET&#x3068;Java&#x30C9;&#x30E9;&#x30A4;&#x30D0;&#x30FC;&#x3092;&#x7834;&#x58CA;</a>
+                        </h5>
+                    </div>
+                    
+                </div>
+            </li>
+        
+            <li class="news">
+                <div class="card__content">
+                    <div class="card__data">
+                        <h5 class="card__title">
+                            <a href="https://www.infoq.com/jp/news/2022/06/azure-storage-optimized-vms/">Microsoft&#x304C;&#x30B9;&#x30C8;&#x30EC;&#x30FC;&#x30B8;&#x306B;&#x6700;&#x9069;&#x5316;&#x3057;&#x305F;&#x65B0;&#x305F;&#x306A;VM&#x3068;&#x3057;&#x3066;Lasv3&#x3068;Lsv3&#x3092;&#x767A;&#x8868;</a>
+                        </h5>
+                    </div>
+                    
+                </div>
+            </li>
+        
+            <li class="news">
+                <div class="card__content">
+                    <div class="card__data">
+                        <h5 class="card__title">
+                            <a href="https://www.infoq.com/jp/news/2022/06/cockroach-report-amd-intel/">Cockroach Labs 2022&#x30AF;&#x30E9;&#x30A6;&#x30C9;&#x30EC;&#x30DD;&#x30FC;&#x30C8;&#xFF1A;AMD&#x304C;Intel&#x306E;&#x6027;&#x80FD;&#x3092;&#x4E0A;&#x56DE;&#x308B;</a>
+                        </h5>
+                    </div>
+                    
+                </div>
+            </li>
+        
+            <li class="news">
+                <div class="card__content">
+                    <div class="card__data">
+                        <h5 class="card__title">
+                            <a href="https://www.infoq.com/jp/news/2022/06/openssl-fuzz-introspector/">OpenSSF&#x304C;Fuzz Introspector&#x3092;&#x30EA;&#x30EA;&#x30FC;&#x30B9;&#x3057;&#x3066;&#x3001;C/C++&#x30D5;&#x30A1;&#x30BA;&#x30C6;&#x30B9;&#x30C8;&#x306E;&#x30AB;&#x30D0;&#x30EC;&#x30C3;&#x30B8;&#x3092;&#x6539;&#x5584;</a>
+                        </h5>
+                    </div>
+                    
+                </div>
+            </li>
+        
+            <li class="news">
+                <div class="card__content">
+                    <div class="card__data">
+                        <h5 class="card__title">
+                            <a href="https://www.infoq.com/jp/news/2022/06/mongodb-atlas-serverless/">MongoDB&#x304C;Atlas&#x30B5;&#x30FC;&#x30D0;&#x30FC;&#x30EC;&#x30B9;&#x30A4;&#x30F3;&#x30B9;&#x30BF;&#x30F3;&#x30B9;&#x3068;&#x30C7;&#x30FC;&#x30BF;API&#x3092;&#x4E00;&#x822C;&#x5411;&#x3051;&#x63D0;&#x4F9B;&#x3078;</a>
+                        </h5>
+                    </div>
+                    
+                </div>
+            </li>
+        
+            <li class="news">
+                <div class="card__content">
+                    <div class="card__data">
+                        <h5 class="card__title">
+                            <a href="https://www.infoq.com/jp/news/2022/06/Database-Command-Batching/">.NET 6&#x306E;&#x30C7;&#x30FC;&#x30BF;&#x30D9;&#x30FC;&#x30B9;&#x30B3;&#x30DE;&#x30F3;&#x30C9;&#x30D0;&#x30C3;&#x30C1;</a>
+                        </h5>
+                    </div>
+                    
+                </div>
+            </li>
+        
+            <li class="news">
+                <div class="card__content">
+                    <div class="card__data">
+                        <h5 class="card__title">
+                            <a href="https://www.infoq.com/jp/news/2022/06/jfrog-binary-packages-swift/">JFrog Artifactory&#x304C;Swift&#x5411;&#x3051;&#x306E;&#x30D0;&#x30A4;&#x30CA;&#x30EA;&#x4F9D;&#x5B58;&#x95A2;&#x4FC2;&#x3092;&#x30B5;&#x30DD;&#x30FC;&#x30C8;</a>
+                        </h5>
+                    </div>
+                    
+                </div>
+            </li>
+        
+            <li class="news">
+                <div class="card__content">
+                    <div class="card__data">
+                        <h5 class="card__title">
+                            <a href="https://www.infoq.com/jp/news/2022/06/become-staff-plus-engineer/">&#x30B9;&#x30BF;&#x30C3;&#x30D5;&#x30D7;&#x30E9;&#x30B9;&#x30A8;&#x30F3;&#x30B8;&#x30CB;&#x30A2;&#x306B;&#x306A;&#x308B;&#x306B;&#x306F;</a>
+                        </h5>
+                    </div>
+                    
+                </div>
+            </li>
+        
+            <li class="news">
+                <div class="card__content">
+                    <div class="card__data">
+                        <h5 class="card__title">
+                            <a href="https://www.infoq.com/jp/news/2022/06/CSharp-Warning-Wave/">C# Warning Waves&#x304C;&#x5C06;&#x6765;&#x306E;&#x65B0;&#x30AD;&#x30FC;&#x30EF;&#x30FC;&#x30C9;&#x306E;&#x624B;&#x639B;&#x304B;&#x308A;&#x306B;</a>
+                        </h5>
+                    </div>
+                    
+                </div>
+            </li>
+        
+            <li class="news">
+                <div class="card__content">
+                    <div class="card__data">
+                        <h5 class="card__title">
+                            <a href="https://www.infoq.com/jp/news/2022/06/google-brain-imagen/">Google&#x306E;&#x65B0;&#x305F;&#x306A;Imagen AI&#x304C;&#x3001;&#x30C6;&#x30AD;&#x30B9;&#x30C8;&#x304B;&#x3089;&#x753B;&#x50CF;&#x3092;&#x751F;&#x6210;&#x3059;&#x308B;&#x30D9;&#x30F3;&#x30C1;&#x30DE;&#x30FC;&#x30AF;&#x3067;DALL-E&#x306E;&#x6027;&#x80FD;&#x3092;&#x4E0A;&#x56DE;&#x308B;</a>
+                        </h5>
+                    </div>
+                    
+                </div>
+            </li>
+        
+            <li class="news">
+                <div class="card__content">
+                    <div class="card__data">
+                        <h5 class="card__title">
+                            <a href="https://www.infoq.com/jp/news/2022/06/dynatrace-for-azure-preview/">Microsoft&#x304C;&#x3001;&#x81EA;&#x793E;&#x306E;Marketplace&#x3067;SaaS&#x30BD;&#x30EA;&#x30E5;&#x30FC;&#x30B7;&#x30E7;&#x30F3;&#x3068;&#x3057;&#x3066;Dynatrace for Azure&#x306E;&#x30D1;&#x30D6;&#x30EA;&#x30C3;&#x30AF;&#x30D7;&#x30EC;&#x30D3;&#x30E5;&#x30FC;&#x7248;&#x3092;&#x958B;&#x59CB;</a>
+                        </h5>
+                    </div>
+                    
+                </div>
+            </li>
+        
+            <li class="news">
+                <div class="card__content">
+                    <div class="card__data">
+                        <h5 class="card__title">
+                            <a href="https://www.infoq.com/jp/news/2022/06/spring-boot-2-7/">Spring Boot 2.7.0&#x304C;GraphQL&#x3001;Podman&#x3001;Cache2k&#x306E;&#x30B5;&#x30DD;&#x30FC;&#x30C8;&#x3068;&#x5171;&#x306B;&#x30EA;&#x30EA;&#x30FC;&#x30B9;&#x3078;</a>
+                        </h5>
+                    </div>
+                    
+                </div>
+            </li>
+        
+            <li class="news">
+                <div class="card__content">
+                    <div class="card__data">
+                        <h5 class="card__title">
+                            <a href="https://www.infoq.com/jp/news/2022/06/java-news-roundup-jun06-2022/">Java News&#x30E9;&#x30A6;&#x30F3;&#x30C9;&#x30A2;&#x30C3;&#x30D7;: JDK 19&#x30E9;&#x30F3;&#x30D7;&#x30C0;&#x30A6;&#x30F3;&#x3001;JDK 20 &#x5C02;&#x9580;&#x5BB6;&#x30B0;&#x30EB;&#x30FC;&#x30D7;&#x3001;Eclipse Mojarra 4.0</a>
+                        </h5>
+                    </div>
+                    
+                </div>
+            </li>
+        
+            <li class="news">
+                <div class="card__content">
+                    <div class="card__data">
+                        <h5 class="card__title">
+                            <a href="https://www.infoq.com/jp/news/2022/06/FLUTE-federated-learning/">Microsoft&#x306E;&#x65B0;&#x3057;&#x3044;&#x30B7;&#x30DF;&#x30E5;&#x30EC;&#x30FC;&#x30B7;&#x30E7;&#x30F3;&#x30D5;&#x30EC;&#x30FC;&#x30E0;&#x30EF;&#x30FC;&#x30AF;FLUTE&#x304C;&#x9023;&#x5408;&#x5B66;&#x7FD2;&#x30A2;&#x30EB;&#x30B4;&#x30EA;&#x30BA;&#x30E0;&#x306E;&#x958B;&#x767A;&#x3092;&#x52A0;&#x901F;</a>
+                        </h5>
+                    </div>
+                    
+                </div>
+            </li>
+        
+            <li class="news">
+                <div class="card__content">
+                    <div class="card__data">
+                        <h5 class="card__title">
+                            <a href="https://www.infoq.com/jp/news/2022/06/azure-skills-navigator-guide/">Microsoft&#x304C;Azure Skills Navigator&#x3092;&#x4F7F;&#x3063;&#x305F;&#x65B0;&#x305F;&#x306A;&#x5B66;&#x7FD2;&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x3092;&#x767A;&#x8868;</a>
+                        </h5>
+                    </div>
+                    
+                </div>
+            </li>
+        
+            <li class="news">
+                <div class="card__content">
+                    <div class="card__data">
+                        <h5 class="card__title">
+                            <a href="https://www.infoq.com/jp/news/2022/06/github-extends-rust-supply-chain/">GitHub&#x304C;&#x305D;&#x306E;&#x30B5;&#x30D7;&#x30E9;&#x30A4;&#x30C1;&#x30A7;&#x30FC;&#x30F3;&#x30BB;&#x30AD;&#x30E5;&#x30EA;&#x30C6;&#x30A3;&#x3092;&#x62E1;&#x5F35;&#x3057;&#x3001;Rust&#x306B;&#x9069;&#x7528;</a>
+                        </h5>
+                    </div>
+                    
+                </div>
+            </li>
+        
+            <li class="news">
+                <div class="card__content">
+                    <div class="card__data">
+                        <h5 class="card__title">
+                            <a href="https://www.infoq.com/jp/news/2022/06/cncf-kubevirt-incubating-project/">CNCF&#x304C;KubeVirt&#x3092;&#x30A4;&#x30F3;&#x30AD;&#x30E5;&#x30D9;&#x30FC;&#x30B7;&#x30E7;&#x30F3;&#x30D7;&#x30ED;&#x30B8;&#x30A7;&#x30AF;&#x30C8;&#x3068;&#x3057;&#x3066;&#x8A31;&#x8AFE;</a>
+                        </h5>
+                    </div>
+                    
+                </div>
+            </li>
+        
+            <li class="news">
+                <div class="card__content">
+                    <div class="card__data">
+                        <h5 class="card__title">
+                            <a href="https://www.infoq.com/jp/news/2022/06/aws-route53-ip-routing/">AWS&#x304C;&#x30EB;&#x30FC;&#x30C8;53&#x306B;IP&#x30D9;&#x30FC;&#x30B9;&#x306E;&#x30EB;&#x30FC;&#x30C6;&#x30A3;&#x30F3;&#x30B0;&#x3092;&#x5C0E;&#x5165;</a>
+                        </h5>
+                    </div>
+                    
+                </div>
+            </li>
+        
+            <li class="news">
+                <div class="card__content">
+                    <div class="card__data">
+                        <h5 class="card__title">
+                            <a href="https://www.infoq.com/jp/news/2022/06/apple-virtualization-framework/">Apple&#x304C;macOS&#x306E;&#x4EEE;&#x60F3;&#x5316;&#x6A5F;&#x80FD;&#x3092;&#x62E1;&#x5F35;&#x3057;&#x3001;Linux&#x30D0;&#x30A4;&#x30CA;&#x30EA;&#x5411;&#x3051;&#x306E;Rosetta&#x3092;&#x5C0E;&#x5165;</a>
+                        </h5>
+                    </div>
+                    
+                </div>
+            </li>
+        
+            <li class="news">
+                <div class="card__content">
+                    <div class="card__data">
+                        <h5 class="card__title">
+                            <a href="https://www.infoq.com/jp/news/2022/06/testers-stop-training-wheel/">&#x30E2;&#x30C0;&#x30F3;&#x30C6;&#x30B9;&#x30C8;&#x3078;&#x306E;&#x79FB;&#x884C;&#xFF1A;&#x30C6;&#x30B9;&#x30BF;&#x30FC;&#x304C;&#x30C1;&#x30FC;&#x30E0;&#x306E;&#x88DC;&#x52A9;&#x8F2A;&#x306B;&#x306A;&#x308B;&#x3053;&#x3068;&#x3092;&#x3069;&#x306E;&#x3088;&#x3046;&#x306B;&#x6B62;&#x3081;&#x308B;&#x304B;</a>
+                        </h5>
+                    </div>
+                    
+                </div>
+            </li>
+        
+            <li class="news">
+                <div class="card__content">
+                    <div class="card__data">
+                        <h5 class="card__title">
+                            <a href="https://www.infoq.com/jp/news/2022/06/aws-step-functions-observability/">AWS Step Functions&#x5411;&#x3051;&#x306E;&#x53EF;&#x89B3;&#x6E2C;&#x6027;&#x3092;&#x63D0;&#x4F9B;&#x3059;&#x308B;&#x65B0;&#x6A5F;&#x80FD;</a>
+                        </h5>
+                    </div>
+                    
+                </div>
+            </li>
+        
+            <li class="news">
+                <div class="card__content">
+                    <div class="card__data">
+                        <h5 class="card__title">
+                            <a href="https://www.infoq.com/jp/news/2022/06/spring-graphql/">Spring for GraphQL&#x30D0;&#x30FC;&#x30B8;&#x30E7;&#x30F3;1.0&#x304C;&#x30EA;&#x30EA;&#x30FC;&#x30B9;&#x3078;</a>
+                        </h5>
+                    </div>
+                    
+                </div>
+            </li>
+        
+            <li class="news">
+                <div class="card__content">
+                    <div class="card__data">
+                        <h5 class="card__title">
+                            <a href="https://www.infoq.com/jp/news/2022/06/new-intelligent-data-platform/">Microsoft&#x304C;&#x4E2D;&#x6838;&#x3068;&#x306A;&#x308B;&#x65B0;&#x305F;&#x306A;&#x30D7;&#x30E9;&#x30C3;&#x30C8;&#x30D5;&#x30A9;&#x30FC;&#x30E0;&#x3092;&#x767A;&#x8868;&#xFF1A;Microsoft Intelligent Data Platform</a>
+                        </h5>
+                    </div>
+                    
+                </div>
+            </li>
+        
+            <li class="news">
+                <div class="card__content">
+                    <div class="card__data">
+                        <h5 class="card__title">
+                            <a href="https://www.infoq.com/jp/news/2022/06/heighliner-stack-as-code/">Heighliner: \&quot;&#x30B9;&#x30BF;&#x30C3;&#x30AF;&#x30FB;&#x30A2;&#x30BA;&#x30FB;&#x30B3;&#x30FC;&#x30C9;\&quot;&#x30A8;&#x30AF;&#x30B9;&#x30DA;&#x30EA;&#x30A8;&#x30F3;&#x30B9;&#x3092;&#x5B9F;&#x73FE;&#x3059;&#x308B;&#x30A2;&#x30D7;&#x30EA;&#x30B1;&#x30FC;&#x30B7;&#x30E7;&#x30F3;&#x958B;&#x767A;&#x30D7;&#x30E9;&#x30C3;&#x30C8;&#x30D5;&#x30A9;&#x30FC;&#x30E0;</a>
+                        </h5>
+                    </div>
+                    
+                </div>
+            </li>
+        
+            <li class="news">
+                <div class="card__content">
+                    <div class="card__data">
+                        <h5 class="card__title">
+                            <a href="https://www.infoq.com/jp/news/2022/06/swiftui-wwdc-2022/">SwiftUI&#x304C;&#x30C1;&#x30E3;&#x30FC;&#x30C8;&#x3001;&#x30C7;&#x30FC;&#x30BF;&#x99C6;&#x52D5;&#x578B;&#x30CA;&#x30D3;&#x30B2;&#x30FC;&#x30B7;&#x30E7;&#x30F3;&#x306A;&#x3069;&#x3092;&#x63D0;&#x4F9B;</a>
+                        </h5>
+                    </div>
+                    
+                </div>
+            </li>
+        
+            <li class="news">
+                <div class="card__content">
+                    <div class="card__data">
+                        <h5 class="card__title">
+                            <a href="https://www.infoq.com/jp/news/2022/06/meta-opt-175b/">Meta&#x304C;1750&#x5104;&#x30D1;&#x30E9;&#x30E1;&#x30FC;&#x30BF;AI&#x8A00;&#x8A9E;&#x30E2;&#x30C7;&#x30EB;&#x306E;OPT&#x3092;&#x30AA;&#x30FC;&#x30D7;&#x30F3;&#x30BD;&#x30FC;&#x30B9;&#x5316;</a>
+                        </h5>
+                    </div>
+                    
+                </div>
+            </li>
+        
+            <li class="news">
+                <div class="card__content">
+                    <div class="card__data">
+                        <h5 class="card__title">
+                            <a href="https://www.infoq.com/jp/news/2022/06/aws-adr-guide/">AWS&#x304C;&#x30A2;&#x30FC;&#x30AD;&#x30C6;&#x30AF;&#x30C1;&#x30E3;&#x6C7A;&#x5B9A;&#x30EC;&#x30B3;&#x30FC;&#x30C9;&#x306E;&#x30AC;&#x30A4;&#x30C9;&#x3092;&#x516C;&#x958B;</a>
+                        </h5>
+                    </div>
+                    
+                </div>
+            </li>
+        
+            <li class="news">
+                <div class="card__content">
+                    <div class="card__data">
+                        <h5 class="card__title">
+                            <a href="https://www.infoq.com/jp/news/2022/06/amazon-emr-serverless-ga/">Amazon Elastic MapReduce&#x304C;&#x30B5;&#x30FC;&#x30D0;&#x30FC;&#x30EC;&#x30B9;&#x88FD;&#x54C1;&#x3068;&#x3057;&#x3066;&#x4E00;&#x822C;&#x5411;&#x3051;&#x63D0;&#x4F9B;&#x3078;</a>
+                        </h5>
+                    </div>
+                    
+                </div>
+            </li>
+        
+            <li class="news">
+                <div class="card__content">
+                    <div class="card__data">
+                        <h5 class="card__title">
+                            <a href="https://www.infoq.com/jp/news/2022/06/google-confidential-computing-3/">Google&#x306F;&#x6700;&#x65B0;&#x306E;C2D&#x30DE;&#x30B7;&#x30F3;&#x30BF;&#x30A4;&#x30D7;&#x3068;N2D&#x30DE;&#x30B7;&#x30F3;&#x30BF;&#x30A4;&#x30D7;&#x3067;&#x30B3;&#x30F3;&#x30D5;&#x30A3;&#x30C7;&#x30F3;&#x30B7;&#x30E3;&#x30EB;&#x30B3;&#x30F3;&#x30D4;&#x30E5;&#x30FC;&#x30C6;&#x30A3;&#x30F3;&#x30B0;&#x3092;&#x63D0;&#x4F9B;</a>
+                        </h5>
+                    </div>
+                    
+                </div>
+            </li>
+        
+            <li class="news">
+                <div class="card__content">
+                    <div class="card__data">
+                        <h5 class="card__title">
+                            <a href="https://www.infoq.com/jp/news/2022/06/java-news-roundup-may30-2022/">Java News&#x30E9;&#x30A6;&#x30F3;&#x30C9;&#x30A2;&#x30C3;&#x30D7;: JEP 428&#x3001;MicroStream&#x304C;Micronaut Foundation&#x306B;&#x53C2;&#x52A0;&#x3001;Spring&#x3068;Apache Groovy&#x306E;&#x30A2;&#x30C3;&#x30D7;&#x30C7;&#x30FC;&#x30C8;</a>
+                        </h5>
+                    </div>
+                    
+                </div>
+            </li>
+        
+    </ul>
+</div>
+</noscript>
+						
+						
+						
+
+
+
+
+
+
+<div class="newsletter widget" data-bg="infoq">
+	<h3 class="heading"><strong>InfoQ</strong> &#x30CB;&#x30E5;&#x30FC;&#x30B9;&#x30EC;&#x30BF;&#x30FC;</h3>
+	<p class="intro">
+        &#x6BCE;&#x9031;&#x706B;&#x66DC;&#x65E5;&#x306B;&#x524D;&#x9031;&#x306E;&#x307E;&#x3068;&#x3081;&#x30B3;&#x30F3;&#x30C6;&#x30F3;&#x30C4;&#x304C;&#x304A;&#x9001;&#x308A;&#x3044;&#x305F;&#x3057;&#x307E;&#x3059;&#x3002;25&#x4E07;&#x4EBA;&#x3082;&#x306E;&#x30B7;&#x30CB;&#x30A2;&#x30C7;&#x30D9;&#x30ED;&#x30C3;&#x30D1;&#x30FC;&#x306E;&#x30B3;&#x30DF;&#x30E5;&#x30CB;&#x30C6;&#x30A3;&#x30FC;&#x306B;&#x305C;&#x3072;&#x3054;&#x53C2;&#x52A0;&#x304F;&#x3060;&#x3055;&#x3044;&#x3002;
+        
+        
+			<a target="_blank" href="https://assets.infoq.com/newsletter/regular/jp/newsletter_sample/newsletter_sample.html">&#x30B5;&#x30F3;&#x30D7;&#x30EB;&#x3092;&#x898B;&#x308B;</a>
+        
+    </p>
+	<div class="newsletter__subscribe">
+		
+		<p class="meta">
+			<a href="/jp/privacy-notice/" target="_blank">We protect your privacy.</a>
+		</p>
+		
+		<span class="success" style="display:none;" id="floatingNewsletterEmailMessage"></span>
+	</div>
+</div>
+
+
+					</div>
+				</div>
+			</div>
+		</section>
+		
+			
+		
+
+
+
+
+
+
+
+
+
+
+    <section class="container section" id="theCommentsSection">
+        <div class="container__inner">
+            <div class="comments section__center">
+                
+                <div class="actions heading__container comment__heading">
+                    <div class="actions__left">
+                        <h2 class="heading">&#x30B3;&#x30DF;&#x30E5;&#x30CB;&#x30C6;&#x30A3;&#x30B3;&#x30E1;&#x30F3;&#x30C8;</h2>
+                    </div>
+                    <div class="actions__right">
+                        
+                            <button id="watch" class="icon button button__icon button__unstyled button__small icon__add" aria-label="Watch thread">Watch thread</button>
+                        
+                    </div>
+                </div>
+                
+                
+                <ul class="no-style comments__boxes">
+                    
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    
+    <div id="replyPopup" class="box box__border reply__box">
+        <button class="icon button button__icon icon--only button__unstyled icon__close close_popup" aria-label="&#x9589;&#x3058;&#x308B;">&#x9589;&#x3058;&#x308B;</button>
+        
+    </div>
+
+    
+    <div id="editCommentPopup" class="box box__border reply__box">
+        <button class="icon button button__icon icon--only button__unstyled icon__close close_popup" aria-label="&#x9589;&#x3058;&#x308B;">&#x9589;&#x3058;&#x308B;</button>
+        
+    </div>
+
+    
+    <div id="messagePopup" class="box box__border reply__box">
+        <button class="icon button button__icon icon--only button__unstyled icon__close close_popup" aria-label="&#x9589;&#x3058;&#x308B;">&#x9589;&#x3058;&#x308B;</button>
+        <div class="messageBox">
+            <p class="allowed"></p>
+            <div class="buttonWrapper">
+                <button id="reset-reply" class="close_popup button" aria-label="OK">
+                   OK
+                </button>
+            </div>
+        </div>
+    </div>
+
+    
+    
+        <div id="commentLinkText" style="display: none;">&#x30C7;&#x30A3;&#x30B9;&#x30AB;&#x30C3;&#x30B7;&#x30E7;&#x30F3; </div>
+    
+
+
+
+	</article>
+
+
+
+
+
+            </main>
+
+            
+
+
+
+
+
+
+
+<footer class="footer ">
+	
+	<section class="section container">
+		<div class="container__inner">
+			
+				
+				
+				
+				
+                
+				
+			
+
+
+<ul data-cols="5" class="no-style columns boxes topic__boxes">
+    
+        <li class="development">
+            <div class="box__header">
+                
+                <a href="/jp/development/">&#x30C7;&#x30D9;&#x30ED;&#x30C3;&#x30D7;&#x30E1;&#x30F3;&#x30C8;</a>
+            </div>
+            <div class="box__content">
+                <ul class="no-style box__list small">
+                    
+                        <li>
+                            
+                            <h5><a href="/jp/news/2022/06/PostgreSQL-14-Breaking-Change/" title="PostgreSQL 14&amp;#12364;PostgreSQL&amp;#21521;&amp;#12369;.NET&amp;#12392;Java&amp;#12489;&amp;#12521;&amp;#12452;&amp;#12496;&amp;#12540;&amp;#12434;&amp;#30772;&amp;#22730;">PostgreSQL 14&#x304C;PostgreSQL&#x5411;&#x3051;.NET&#x3068;Java&#x30C9;&#x30E9;&#x30A4;&#x30D0;&#x30FC;&#x3092;&#x7834;&#x58CA;</a></h5>
+                        </li>
+                    
+                        <li>
+                            
+                            <h5><a href="/jp/news/2022/06/climate-commitments-pov/" title="&amp;#12464;&amp;#12522;&amp;#12540;&amp;#12531;&amp;#12477;&amp;#12501;&amp;#12488;&amp;#12454;&amp;#12455;&amp;#12450;&amp;#38283;&amp;#30330;: &amp;#29992;&amp;#35486;&amp;#12392;&amp;#27671;&amp;#20505;&amp;#22793;&amp;#21205;&amp;#12408;&amp;#12398;&amp;#21462;&amp;#12426;&amp;#32068;&amp;#12415;&amp;#12434;&amp;#29702;&amp;#35299;&amp;#12377;&amp;#12427;">&#x30B0;&#x30EA;&#x30FC;&#x30F3;&#x30BD;&#x30D5;&#x30C8;&#x30A6;&#x30A7;&#x30A2;&#x958B;&#x767A;: &#x7528;&#x8A9E;&#x3068;&#x6C17;&#x5019;&#x5909;&#x52D5;&#x3078;&#x306E;&#x53D6;&#x308A;&#x7D44;&#x307F;&#x3092;&#x7406;&#x89E3;&#x3059;&#x308B;</a></h5>
+                        </li>
+                    
+                        <li>
+                            
+                            <h5><a href="/jp/news/2022/06/efficient-disaster-recovery/" title="&amp;#12393;&amp;#12398;&amp;#12424;&amp;#12358;&amp;#12395;&amp;#20104;&amp;#26399;&amp;#12379;&amp;#12396;&amp;#20107;&amp;#24907;&amp;#12395;&amp;#20633;&amp;#12360;&amp;#12427;&amp;#12363;&amp;#65306; KubeConEU 22&amp;#12391;&amp;#35486;&amp;#12425;&amp;#12428;&amp;#12383;InfluxData&amp;#20572;&amp;#27490;&amp;#12398;&amp;#35441;">&#x3069;&#x306E;&#x3088;&#x3046;&#x306B;&#x4E88;&#x671F;&#x305B;&#x306C;&#x4E8B;&#x614B;&#x306B;&#x5099;&#x3048;&#x308B;&#x304B;&#xFF1A; KubeConEU 22&#x3067;&#x8A9E;&#x3089;&#x308C;&#x305F;InfluxData&#x505C;&#x6B62;&#x306E;&#x8A71;</a></h5>
+                        </li>
+                    
+                </ul>
+            </div>
+        </li>
+    
+        <li class="architecture-design">
+            <div class="box__header">
+                
+                <a href="/jp/architecture-design/">&#x8A2D;&#x8A08;/&#x30A2;&#x30FC;&#x30AD;&#x30C6;&#x30AF;&#x30C1;&#x30E3;</a>
+            </div>
+            <div class="box__content">
+                <ul class="no-style box__list small">
+                    
+                        <li>
+                            
+                            <h5><a href="/jp/news/2022/06/aws-adr-guide/" title="AWS&amp;#12364;&amp;#12450;&amp;#12540;&amp;#12461;&amp;#12486;&amp;#12463;&amp;#12481;&amp;#12515;&amp;#27770;&amp;#23450;&amp;#12524;&amp;#12467;&amp;#12540;&amp;#12489;&amp;#12398;&amp;#12460;&amp;#12452;&amp;#12489;&amp;#12434;&amp;#20844;&amp;#38283;">AWS&#x304C;&#x30A2;&#x30FC;&#x30AD;&#x30C6;&#x30AF;&#x30C1;&#x30E3;&#x6C7A;&#x5B9A;&#x30EC;&#x30B3;&#x30FC;&#x30C9;&#x306E;&#x30AC;&#x30A4;&#x30C9;&#x3092;&#x516C;&#x958B;</a></h5>
+                        </li>
+                    
+                        <li>
+                            
+                            <h5><a href="/jp/news/2022/06/lyft-improving-experiments/" title="Lyft&amp;#12399;A/B&amp;#12486;&amp;#12473;&amp;#12488;&amp;#12398;&amp;#22495;&amp;#12434;&amp;#36234;&amp;#12360;&amp;#12390;&amp;#23455;&amp;#39443;&amp;#12434;&amp;#12393;&amp;#12398;&amp;#12424;&amp;#12358;&amp;#12395;&amp;#25913;&amp;#21892;&amp;#12375;&amp;#12390;&amp;#12356;&amp;#12427;&amp;#12363;">Lyft&#x306F;A/B&#x30C6;&#x30B9;&#x30C8;&#x306E;&#x57DF;&#x3092;&#x8D8A;&#x3048;&#x3066;&#x5B9F;&#x9A13;&#x3092;&#x3069;&#x306E;&#x3088;&#x3046;&#x306B;&#x6539;&#x5584;&#x3057;&#x3066;&#x3044;&#x308B;&#x304B;</a></h5>
+                        </li>
+                    
+                        <li>
+                            
+                            <h5><a href="/jp/news/2022/06/kalix-serverless/" title="Kalix&amp;#65306;&amp;#12487;&amp;#12540;&amp;#12479;&amp;#12505;&amp;#12540;&amp;#12473;&amp;#12434;&amp;#20351;&amp;#12431;&amp;#12394;&amp;#12356;&amp;#12463;&amp;#12521;&amp;#12454;&amp;#12489;&amp;#12493;&amp;#12452;&amp;#12486;&amp;#12451;&amp;#12502;&amp;#12391;&amp;#12499;&amp;#12472;&amp;#12493;&amp;#12473;&amp;#12463;&amp;#12522;&amp;#12486;&amp;#12451;&amp;#12459;&amp;#12523;&amp;#12394;&amp;#12450;&amp;#12503;&amp;#12522;&amp;#12465;&amp;#12540;&amp;#12471;&amp;#12519;&amp;#12531;&amp;#27083;&amp;#31689;">Kalix&#xFF1A;&#x30C7;&#x30FC;&#x30BF;&#x30D9;&#x30FC;&#x30B9;&#x3092;&#x4F7F;&#x308F;&#x306A;&#x3044;&#x30AF;&#x30E9;&#x30A6;&#x30C9;&#x30CD;&#x30A4;&#x30C6;&#x30A3;&#x30D6;&#x3067;&#x30D3;&#x30B8;&#x30CD;&#x30B9;&#x30AF;&#x30EA;&#x30C6;&#x30A3;&#x30AB;&#x30EB;&#x306A;&#x30A2;&#x30D7;&#x30EA;&#x30B1;&#x30FC;&#x30B7;&#x30E7;&#x30F3;&#x69CB;&#x7BC9;</a></h5>
+                        </li>
+                    
+                </ul>
+            </div>
+        </li>
+    
+        <li class="culture-methods">
+            <div class="box__header">
+                
+                <a href="/jp/culture-methods/">&#x30AB;&#x30EB;&#x30C1;&#x30E3;&#x30FC;&#xFF06;&#x624B;&#x6CD5;</a>
+            </div>
+            <div class="box__content">
+                <ul class="no-style box__list small">
+                    
+                        <li>
+                            
+                            <h5><a href="/jp/news/2022/06/office-design-hybrid/" title="&amp;#12495;&amp;#12452;&amp;#12502;&amp;#12522;&amp;#12483;&amp;#12489;&amp;#12527;&amp;#12540;&amp;#12463;&amp;#12473;&amp;#12506;&amp;#12540;&amp;#12473;&amp;#12398;&amp;#12383;&amp;#12417;&amp;#12398;&amp;#12458;&amp;#12501;&amp;#12451;&amp;#12473;&amp;#12487;&amp;#12470;&amp;#12452;&amp;#12531;">&#x30CF;&#x30A4;&#x30D6;&#x30EA;&#x30C3;&#x30C9;&#x30EF;&#x30FC;&#x30AF;&#x30B9;&#x30DA;&#x30FC;&#x30B9;&#x306E;&#x305F;&#x3081;&#x306E;&#x30AA;&#x30D5;&#x30A3;&#x30B9;&#x30C7;&#x30B6;&#x30A4;&#x30F3;</a></h5>
+                        </li>
+                    
+                        <li>
+                            
+                            <h5><a href="/jp/news/2022/06/become-staff-plus-engineer/" title="&amp;#12473;&amp;#12479;&amp;#12483;&amp;#12501;&amp;#12503;&amp;#12521;&amp;#12473;&amp;#12456;&amp;#12531;&amp;#12472;&amp;#12491;&amp;#12450;&amp;#12395;&amp;#12394;&amp;#12427;&amp;#12395;&amp;#12399;">&#x30B9;&#x30BF;&#x30C3;&#x30D5;&#x30D7;&#x30E9;&#x30B9;&#x30A8;&#x30F3;&#x30B8;&#x30CB;&#x30A2;&#x306B;&#x306A;&#x308B;&#x306B;&#x306F;</a></h5>
+                        </li>
+                    
+                        <li>
+                            
+                            <h5><a href="/jp/news/2022/06/testers-stop-training-wheel/" title="&amp;#12514;&amp;#12480;&amp;#12531;&amp;#12486;&amp;#12473;&amp;#12488;&amp;#12408;&amp;#12398;&amp;#31227;&amp;#34892;&amp;#65306;&amp;#12486;&amp;#12473;&amp;#12479;&amp;#12540;&amp;#12364;&amp;#12481;&amp;#12540;&amp;#12512;&amp;#12398;&amp;#35036;&amp;#21161;&amp;#36650;&amp;#12395;&amp;#12394;&amp;#12427;&amp;#12371;&amp;#12392;&amp;#12434;&amp;#12393;&amp;#12398;&amp;#12424;&amp;#12358;&amp;#12395;&amp;#27490;&amp;#12417;&amp;#12427;&amp;#12363;">&#x30E2;&#x30C0;&#x30F3;&#x30C6;&#x30B9;&#x30C8;&#x3078;&#x306E;&#x79FB;&#x884C;&#xFF1A;&#x30C6;&#x30B9;&#x30BF;&#x30FC;&#x304C;&#x30C1;&#x30FC;&#x30E0;&#x306E;&#x88DC;&#x52A9;&#x8F2A;&#x306B;&#x306A;&#x308B;&#x3053;&#x3068;&#x3092;&#x3069;&#x306E;&#x3088;&#x3046;&#x306B;&#x6B62;&#x3081;&#x308B;&#x304B;</a></h5>
+                        </li>
+                    
+                </ul>
+            </div>
+        </li>
+    
+        <li class="ai-ml-data-eng">
+            <div class="box__header">
+                
+                <a href="/jp/ai-ml-data-eng/">AI&#x3068;&#x6A5F;&#x68B0;&#x5B66;&#x7FD2;&#x3001;&#x30C7;&#x30FC;&#x30BF;&#x30A8;&#x30F3;&#x30B8;&#x30CB;&#x30A2;&#x30EA;&#x30F3;&#x30B0;</a>
+            </div>
+            <div class="box__content">
+                <ul class="no-style box__list small">
+                    
+                        <li>
+                            
+                            <h5><a href="/jp/news/2022/06/google-brain-imagen/" title="Google&amp;#12398;&amp;#26032;&amp;#12383;&amp;#12394;Imagen AI&amp;#12364;&amp;#12289;&amp;#12486;&amp;#12461;&amp;#12473;&amp;#12488;&amp;#12363;&amp;#12425;&amp;#30011;&amp;#20687;&amp;#12434;&amp;#29983;&amp;#25104;&amp;#12377;&amp;#12427;&amp;#12505;&amp;#12531;&amp;#12481;&amp;#12510;&amp;#12540;&amp;#12463;&amp;#12391;DALL-E&amp;#12398;&amp;#24615;&amp;#33021;&amp;#12434;&amp;#19978;&amp;#22238;&amp;#12427;">Google&#x306E;&#x65B0;&#x305F;&#x306A;Imagen AI&#x304C;&#x3001;&#x30C6;&#x30AD;&#x30B9;&#x30C8;&#x304B;&#x3089;&#x753B;&#x50CF;&#x3092;&#x751F;&#x6210;&#x3059;&#x308B;&#x30D9;&#x30F3;&#x30C1;&#x30DE;&#x30FC;&#x30AF;&#x3067;DALL-E&#x306E;&#x6027;&#x80FD;&#x3092;&#x4E0A;&#x56DE;&#x308B;</a></h5>
+                        </li>
+                    
+                        <li>
+                            
+                            <h5><a href="/jp/news/2022/06/FLUTE-federated-learning/" title="Microsoft&amp;#12398;&amp;#26032;&amp;#12375;&amp;#12356;&amp;#12471;&amp;#12511;&amp;#12517;&amp;#12524;&amp;#12540;&amp;#12471;&amp;#12519;&amp;#12531;&amp;#12501;&amp;#12524;&amp;#12540;&amp;#12512;&amp;#12527;&amp;#12540;&amp;#12463;FLUTE&amp;#12364;&amp;#36899;&amp;#21512;&amp;#23398;&amp;#32722;&amp;#12450;&amp;#12523;&amp;#12468;&amp;#12522;&amp;#12474;&amp;#12512;&amp;#12398;&amp;#38283;&amp;#30330;&amp;#12434;&amp;#21152;&amp;#36895;">Microsoft&#x306E;&#x65B0;&#x3057;&#x3044;&#x30B7;&#x30DF;&#x30E5;&#x30EC;&#x30FC;&#x30B7;&#x30E7;&#x30F3;&#x30D5;&#x30EC;&#x30FC;&#x30E0;&#x30EF;&#x30FC;&#x30AF;FLUTE&#x304C;&#x9023;&#x5408;&#x5B66;&#x7FD2;&#x30A2;&#x30EB;&#x30B4;&#x30EA;&#x30BA;&#x30E0;&#x306E;&#x958B;&#x767A;&#x3092;&#x52A0;&#x901F;</a></h5>
+                        </li>
+                    
+                        <li>
+                            
+                            <h5><a href="/jp/news/2022/06/meta-opt-175b/" title="Meta&amp;#12364;1750&amp;#20740;&amp;#12497;&amp;#12521;&amp;#12513;&amp;#12540;&amp;#12479;AI&amp;#35328;&amp;#35486;&amp;#12514;&amp;#12487;&amp;#12523;&amp;#12398;OPT&amp;#12434;&amp;#12458;&amp;#12540;&amp;#12503;&amp;#12531;&amp;#12477;&amp;#12540;&amp;#12473;&amp;#21270;">Meta&#x304C;1750&#x5104;&#x30D1;&#x30E9;&#x30E1;&#x30FC;&#x30BF;AI&#x8A00;&#x8A9E;&#x30E2;&#x30C7;&#x30EB;&#x306E;OPT&#x3092;&#x30AA;&#x30FC;&#x30D7;&#x30F3;&#x30BD;&#x30FC;&#x30B9;&#x5316;</a></h5>
+                        </li>
+                    
+                </ul>
+            </div>
+        </li>
+    
+        <li class="devops">
+            <div class="box__header">
+                
+                <a href="/jp/devops/">DevOps</a>
+            </div>
+            <div class="box__content">
+                <ul class="no-style box__list small">
+                    
+                        <li>
+                            
+                            <h5><a href="/jp/news/2022/06/openssl-fuzz-introspector/" title="OpenSSF&amp;#12364;Fuzz Introspector&amp;#12434;&amp;#12522;&amp;#12522;&amp;#12540;&amp;#12473;&amp;#12375;&amp;#12390;&amp;#12289;C/C++&amp;#12501;&amp;#12449;&amp;#12474;&amp;#12486;&amp;#12473;&amp;#12488;&amp;#12398;&amp;#12459;&amp;#12496;&amp;#12524;&amp;#12483;&amp;#12472;&amp;#12434;&amp;#25913;&amp;#21892;">OpenSSF&#x304C;Fuzz Introspector&#x3092;&#x30EA;&#x30EA;&#x30FC;&#x30B9;&#x3057;&#x3066;&#x3001;C/C++&#x30D5;&#x30A1;&#x30BA;&#x30C6;&#x30B9;&#x30C8;&#x306E;&#x30AB;&#x30D0;&#x30EC;&#x30C3;&#x30B8;&#x3092;&#x6539;&#x5584;</a></h5>
+                        </li>
+                    
+                        <li>
+                            
+                            <h5><a href="/jp/news/2022/06/github-extends-rust-supply-chain/" title="GitHub&amp;#12364;&amp;#12381;&amp;#12398;&amp;#12469;&amp;#12503;&amp;#12521;&amp;#12452;&amp;#12481;&amp;#12455;&amp;#12540;&amp;#12531;&amp;#12475;&amp;#12461;&amp;#12517;&amp;#12522;&amp;#12486;&amp;#12451;&amp;#12434;&amp;#25313;&amp;#24373;&amp;#12375;&amp;#12289;Rust&amp;#12395;&amp;#36969;&amp;#29992;">GitHub&#x304C;&#x305D;&#x306E;&#x30B5;&#x30D7;&#x30E9;&#x30A4;&#x30C1;&#x30A7;&#x30FC;&#x30F3;&#x30BB;&#x30AD;&#x30E5;&#x30EA;&#x30C6;&#x30A3;&#x3092;&#x62E1;&#x5F35;&#x3057;&#x3001;Rust&#x306B;&#x9069;&#x7528;</a></h5>
+                        </li>
+                    
+                        <li>
+                            
+                            <h5><a href="/jp/news/2022/06/cncf-kubevirt-incubating-project/" title="CNCF&amp;#12364;KubeVirt&amp;#12434;&amp;#12452;&amp;#12531;&amp;#12461;&amp;#12517;&amp;#12505;&amp;#12540;&amp;#12471;&amp;#12519;&amp;#12531;&amp;#12503;&amp;#12525;&amp;#12472;&amp;#12455;&amp;#12463;&amp;#12488;&amp;#12392;&amp;#12375;&amp;#12390;&amp;#35377;&amp;#35582;">CNCF&#x304C;KubeVirt&#x3092;&#x30A4;&#x30F3;&#x30AD;&#x30E5;&#x30D9;&#x30FC;&#x30B7;&#x30E7;&#x30F3;&#x30D7;&#x30ED;&#x30B8;&#x30A7;&#x30AF;&#x30C8;&#x3068;&#x3057;&#x3066;&#x8A31;&#x8AFE;</a></h5>
+                        </li>
+                    
+                </ul>
+            </div>
+        </li>
+    
+    
+</ul>
+
+
+
+		</div>
+	</section>
+	<section class="container section section__newsletter">
+		<div class="columns container__inner">
+			 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="newsletter" data-col="1/2">
+	<h2 class="heading">
+		<strong>InfoQ</strong> &#x30CB;&#x30E5;&#x30FC;&#x30B9;&#x30EC;&#x30BF;&#x30FC;
+	</h2>
+	<p class="intro">&#x6BCE;&#x9031;&#x706B;&#x66DC;&#x65E5;&#x306B;&#x524D;&#x9031;&#x306E;&#x307E;&#x3068;&#x3081;&#x30B3;&#x30F3;&#x30C6;&#x30F3;&#x30C4;&#x304C;&#x304A;&#x9001;&#x308A;&#x3044;&#x305F;&#x3057;&#x307E;&#x3059;&#x3002;25&#x4E07;&#x4EBA;&#x3082;&#x306E;&#x30B7;&#x30CB;&#x30A2;&#x30C7;&#x30D9;&#x30ED;&#x30C3;&#x30D1;&#x30FC;&#x306E;&#x30B3;&#x30DF;&#x30E5;&#x30CB;&#x30C6;&#x30A3;&#x30FC;&#x306B;&#x305C;&#x3072;&#x3054;&#x53C2;&#x52A0;&#x304F;&#x3060;&#x3055;&#x3044;&#x3002;
+		
+		
+			<a target="_blank" href="https://assets.infoq.com/newsletter/regular/jp/newsletter_sample/newsletter_sample.html">&#x30B5;&#x30F3;&#x30D7;&#x30EB;&#x3092;&#x898B;&#x308B;</a>
+		
+	</p>
+	<ul class="newsletter__features">
+		<li>&#x69D8;&#x3005;&#x306A;&#x30A4;&#x30CE;&#x30D9;&#x30FC;&#x30BF;&#x30FC;&#x3068;&#x30A2;&#x30FC;&#x30EA;&#x30FC;&#x30A2;&#x30C0;&#x30D7;&#x30BF;&#x30FC;&#x304C;&#x304A;&#x9001;&#x308A;&#x3059;&#x308B;&#x30C6;&#x30AF;&#x30CE;&#x30ED;&#x30B8;&#x30FC;&#x306E;&#x6982;&#x8981;&#x3092;&#x898B;&#x308B;&#x3002;</li>
+		<li>&#x81EA;&#x5206;&#x304C;&#x307E;&#x3060;&#x77E5;&#x3089;&#x306A;&#x3044;&#x3053;&#x3068;&#x306B;&#x6C17;&#x3065;&#x3044;&#x3066;&#x3044;&#x306A;&#x3044;&#x3068;&#x77E5;&#x308B;</li>
+		<li>&#x3042;&#x306A;&#x305F;&#x304C;&#x8208;&#x5473;&#x306E;&#x3042;&#x308B;&#x30C8;&#x30D4;&#x30C3;&#x30AF;&#x30B9;&#x3092;&#x3044;&#x3064;&#x3067;&#x3082;&#x6700;&#x65B0;&#x306A;&#x60C5;&#x5831;&#x306B;&#x3002;</li>
+	</ul>
+	<div class="newsletter__subscribe">
+		
+		<p class="meta">
+			<a href="/jp/privacy-notice/" target="_blank">We protect your privacy.</a>
+		</p>
+		
+		<span class="success" style="display:none;" id="footerNewsletterMessage"></span>
+	</div>
+	
+</div>
+
+
+
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="event__container" data-col="1/2" data-bg="qconSF">
+        <a href="https://qconsf.com/?utm_source=infoq&amp;utm_medium=listing&amp;utm_campaign=oldqconsworlwidesectionqsf1022" target="_blank" class="qconplus__events-slider">
+            <div>
+                <h2 class="heading">QCon Software Development Conference </h2>
+                <div class="logo-sf"></div>
+                <br>
+            </div>
+            <p class="intro"><strong>Real-world technical talks. No product pitches.<br style="margin: 0px;">Practical ideas to inspire you and your team.<br>QCon San Francisco - Oct 24-28, In-person.<br style="margin: 0px;"><br></strong>QCon San Francisco brings together the world&apos;s most innovative senior software engineers across multiple domains to share their real-world implementation of emerging trends and practices.<br>Uncover emerging software trends and practices to solve your complex engineering challenges, without the product pitches.<strong class="button button__green cta__button">Save your spot now</strong></p>
+        </a>
+    </div>
+
+
+
+
+
+		</div>
+	</section>
+	<section class="section container footer__subfooter align__left">
+		<div class="container__inner columns">
+			 <div data-col="1/4" class="columns footer__links-wrap">
+				  <div class="footer__links">
+						
+
+
+
+
+
+
+
+
+<a href="/jp/" class="nuxt-link-exact-active active" title="&#x30DB;&#x30FC;&#x30E0;">&#x30DB;&#x30FC;&#x30E0;</a>
+
+
+    <a href="/jp/reginit.action" class="emphasis" title="&#x30A2;&#x30AB;&#x30A6;&#x30F3;&#x30C8;&#x3092;&#x4F5C;&#x308B;">&#x30A2;&#x30AB;&#x30A6;&#x30F3;&#x30C8;&#x3092;&#x4F5C;&#x308B;</a>
+    <button aria-label="&#x30ED;&#x30B0;&#x30A4;&#x30F3;" class="login" data-ref="mainLogin">&#x30ED;&#x30B0;&#x30A4;&#x30F3;</button>
+
+
+<a rel="noreferrer noopener" href="http://qconferences.com/" target="_blank" title="QCon Conferences">QCon Conferences</a>
+<a rel="noreferrer noopener" href="https://events.infoq.com/" class="new" target="_blank">Events</a>
+
+    <a href="/jp/contribute/" title="&#x5BC4;&#x7A3F;">&#x5BC4;&#x7A3F;</a>
+    <a href="/jp/infoq-editors/" title="InfoQ&#x306E;&#x30E9;&#x30A4;&#x30BF;&#x30FC;">InfoQ&#x306E;&#x30E9;&#x30A4;&#x30BF;&#x30FC;</a>
+    <a href="/jp/about-infoq/" title="InfoQ&#x306B;&#x3064;&#x3044;&#x3066;">InfoQ&#x306B;&#x3064;&#x3044;&#x3066;</a>
+    <a href="/jp/about-c4media/" title="C4Media&#x306B;&#x3064;&#x3044;&#x3066;">C4Media&#x306B;&#x3064;&#x3044;&#x3066;</a>
+    
+    <a rel="noreferrer noopener" href="https://c4media.com/diversity" title="Diversity" target="_blank">Diversity</a>
+
+				  </div>
+
+			</div>
+			<div data-col="1/4" class="events__list">
+				<h4 class="heading footer__heading">Events</h4>
+				<ul class="qcons__list no-style">
+					
+					
+
+					
+					
+					<li><span class="icon event__type live"></span>
+						<div class="qcon__detail">
+							<h5 class="heading">
+								<a rel="noreferrer noopener" href="https://live.infoq.com/conference/2022/august?utm_source=infoq&amp;utm_medium=listing&amp;utm_campaign=infoqhomepagefooteril0822" target="_blank">InfoQ Live</a>
+							</h5>
+							<span class="meta date">AUGUST 23, 2022</span>
+						</div>
+					</li>
+					<li><span class="icon event__type conference"></span>
+						<div class="qcon__detail">
+							<h5 class="heading">
+								<a rel="noreferrer noopener" href="https://qconsf.com/?utm_source=infoq&amp;utm_medium=listing&amp;utm_campaign=infoqhomepagefooterqsf1022" target="_blank">QCon San Francisco</a>
+							</h5>
+							<span class="meta date">OCTOBER 24-28, 2022</span>
+						</div>
+					</li>
+					<li><span class="icon event__type conference"></span>
+						<div class="qcon__detail">
+							<h5 class="heading">
+								<a rel="noreferrer noopener" href="https://plus.qconferences.com/?utm_source=infoq&amp;utm_medium=listing&amp;utm_campaign=infoqhomepagefooterqplus1122" target="_blank">QCon Plus</a>
+							</h5>
+							<span class="meta date">NOVEMBER 29 - DECEMBER 9, 2022</span>
+						</div>
+					</li>
+					<li><span class="icon event__type conference"></span>
+						<div class="qcon__detail">
+							<h5 class="heading">
+								<a rel="noreferrer noopener" href="https://qconlondon.com/?utm_source=infoq&amp;utm_medium=listing&amp;utm_campaign=infoqhomepagefooterqlondon0323" target="_blank">QCon London</a>
+							</h5>
+							<span class="meta date">MARCH 27-31, 2023</span>
+						</div>
+					</li>
+					<li><span class="icon event__type conference"></span>
+						<div class="qcon__detail">
+							<h5 class="heading">
+								QCon San Francisco
+							</h5>
+							<span class="meta date">OCTOBER 2-6, 2023</span>
+						</div>
+					</li>
+				</ul>
+			</div>
+			<div data-col="1/4" class="footer__social-wrap">
+				<h4 class="heading text-left footer__heading">Follow us on </h4>
+				<div class="social__links columns social__links__row">
+					
+						
+						
+						
+						
+							<a href="#" id="footerNewsletterRssLink"><span class="icon icon__large icon__social icon__rss"></span></a>
+							<a href="http://twitter.com/InfoQJapan" target="_blank"><span class="icon icon__large icon__social icon__twitter"></span></a>
+							<a href="https://www.facebook.com/InfoqJapan" target="_blank"><span class="icon icon__large icon__social icon__fb"></span></a>
+						
+				</div>
+			</div>
+            <div data-col="1/4" class="footer__stayin-wrap">
+                <h4 class="heading text-left footer__heading">Stay in the know</h4>
+                <div class="stayIn_panel_container">
+                    <a href="/podcasts/" class="stayIn_panel" target="_blank" rel="noreferrer noopener"><span>The InfoQ Podcast</span><img loading="lazy" width="65px" height="64px" src="https://cdn.infoq.com/statics_s1_20220809063436/styles/static/images/ui/footer/infoq-podcast-small.jpg" alt="The InfoQ Podcast"></a>
+                    <a href="/podcasts/#engineering_culture" class="stayIn_panel" target="_blank" rel="noreferrer noopener"><span>Engineering Culture Podcast</span><img loading="lazy" width="65px" height="64px" alt="Engineering Culture Podcast" src="https://cdn.infoq.com/statics_s1_20220809063436/styles/static/images/ui/footer/engineering-culture-podcast-small.jpg"></a>
+                    <a href="/software-architects-newsletter/" class="stayIn_panel" target="_blank" rel="noreferrer noopener"><span>The Software Architects&apos; Newsletter</span><img loading="lazy" width="65px" height="64px" alt="The Software Architects&apos; Newsletter" src="https://cdn.infoq.com/statics_s1_20220809063436/styles/static/images/ui/footer/architects-newsletter-small.jpg"></a>
+                </div>
+            </div>
+			
+		</div>
+	</section>
+	<section class="container footer__bottom section white align__left">
+		<div class="container__inner columns">
+			<div data-col="2/3" class="column">
+				<div class="footer__contact contact columns">
+					<span data-col="1/6">
+						&#x30B5;&#x30A4;&#x30C8;&#x5168;&#x822C;&#x306B;&#x3064;&#x3044;&#x3066;
+						<a href="mailto:feedback@infoq.com">feedback@infoq.com</a>
+					</span>
+					<span data-col="1/6">
+						&#x5E83;&#x544A;
+						<a href="mailto:infoqsec@peak-1.co.jp">infoqsec@peak-1.co.jp</a>
+					</span>
+					<span data-col="1/6">
+						&#x8A18;&#x4E8B;
+						<a href="mailto:infoqsec@peak-1.co.jp">infoqsec@peak-1.co.jp</a>
+					</span>
+					<span data-col="1/6">
+						Marketing
+						<a href="mailto:marketing@infoq.com">marketing@infoq.com</a>
+					</span>
+				</div>
+			</div>
+			<div class="column" data-col="1/3">
+				<p class="footer__more">InfoQ.com and all content copyright &#xA9; 2006-2022 C4Media Inc. InfoQ.com and &#x682A;&#x5F0F;&#x4F1A;&#x793E;&#x8C46;&#x8535; InfoQ Japan hosted at <a href="http://www.contegix.com/">Contegix</a>, the best ISP we&apos;ve ever worked with.<br>
+					
+					
+						<a href="/jp/privacy-notice/" target="_blank">&#x30D7;&#x30E9;&#x30A4;&#x30D0;&#x30B7;&#x30FC;</a>
+					
+				</p>
+			</div>
+		</div>
+	</section>
+</footer>
+            
+        </div>
+
+
+        
+            <div class="intbt">
+                <a href="/int/bt/" title="bt">BT</a>
+            </div>
+        
+
+        
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+
+        
+
+        
+
+            
+    </body>
+</html>
+<!-- s1 -->

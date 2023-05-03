@@ -14,9 +14,7 @@ describe('WwwNbcnewsComExtractor', () => {
     let url;
     beforeAll(() => {
       url = 'http://www.nbcnews.com/tech/tech-news/what-s-hold-spacex-n695001';
-      const html = fs.readFileSync(
-        './fixtures/www.nbcnews.com/1481667763790.html'
-      );
+      const html = fs.readFileSync('./fixtures/www.nbcnews.com.html');
       result = Mercury.parse(url, { html, fallback: false });
     });
 
@@ -55,7 +53,7 @@ describe('WwwNbcnewsComExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(date_published, '2016-12-13T18:06:00.000Z');
+      assert.equal(date_published, '2016-12-13T23:06:00.000Z');
     });
 
     it('returns the lead_image_url', async () => {
@@ -67,7 +65,7 @@ describe('WwwNbcnewsComExtractor', () => {
       // the article.
       assert.equal(
         lead_image_url,
-        'http://media1.s-nbcnews.com/j/newscms/2016_45/1792226/161110-nasa-spacex-mbe-430p_ea6b06bb8c83e70502b6de93ee91c78a.nbcnews-fp-1200-800.jpg'
+        'https://media3.s-nbcnews.com/j/newscms/2016_45/1792226/161110-nasa-spacex-mbe-430p_ea6b06bb8c83e70502b6de93ee91c78a.nbcnews-fp-1200-630.jpg'
       );
     });
 

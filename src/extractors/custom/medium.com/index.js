@@ -15,6 +15,13 @@ export const MediumExtractor = {
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images
     transforms: {
+      // Allow drop cap character.
+      'section span:first-of-type': $node => {
+        const $text = $node.html();
+        if ($text.length === 1 && /^[a-zA-Z()]+$/.test($text)) {
+          $node.replaceWith($text);
+        }
+      },
       // Re-write lazy-loaded youtube videos
       iframe: $node => {
         const ytRe = /https:\/\/i.embed.ly\/.+url=https:\/\/i\.ytimg\.com\/vi\/(\w+)\//;
@@ -55,7 +62,7 @@ export const MediumExtractor = {
     // Is there anything that is in the result that shouldn't be?
     // The clean selectors will remove anything that matches from
     // the result
-    clean: ['span', 'svg'],
+    clean: ['span a', 'svg'],
   },
 
   date_published: {

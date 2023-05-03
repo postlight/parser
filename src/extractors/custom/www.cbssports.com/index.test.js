@@ -15,9 +15,7 @@ describe('WwwCbssportsComExtractor', () => {
     beforeAll(() => {
       url =
         'http://www.cbssports.com/mlb/news/why-despite-the-complaints-of-many-mlb-players-are-actually-not-overpaid/';
-      const html = fs.readFileSync(
-        './fixtures/www.cbssports.com/1482254907948.html'
-      );
+      const html = fs.readFileSync('./fixtures/www.cbssports.com.html');
       result = Mercury.parse(url, { html, fallback: false });
     });
 
@@ -84,7 +82,7 @@ describe('WwwCbssportsComExtractor', () => {
       // the article.
       assert.equal(
         lead_image_url,
-        'http://sportshub.cbsistatic.com/i/r/2016/12/19/4afa0e8e-b3b8-4c44-aca2-688cd11e9b39/thumbnail/770x433/f8a6d661a00ba87cb98847bdef9dfbad/yoenis-cespedes-121916.jpg'
+        'https://sportshub.cbsistatic.com/i/r/2016/12/19/4afa0e8e-b3b8-4c44-aca2-688cd11e9b39/thumbnail/1200x675/eb0d69f0915472ba34ac3490d52d2233/yoenis-cespedes-121916.jpg'
       );
     });
 

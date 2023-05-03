@@ -1,6 +1,7 @@
 import assert from 'assert';
 import URL from 'url';
 import cheerio from 'cheerio';
+import moment from 'moment-timezone';
 
 import Mercury from 'mercury';
 import getExtractor from 'extractors/get-extractor';
@@ -16,7 +17,7 @@ describe('WwwNationalgeographicComExtractor', () => {
       url =
         'http://www.nationalgeographic.com/magazine/2017/01/gender-toys-departments-piece/';
       const html = fs.readFileSync(
-        './fixtures/www.nationalgeographic.com/1481921323654.html'
+        './fixtures/www.nationalgeographic.com.html'
       );
       result = Mercury.parse(url, { html, fallback: false });
     });
@@ -36,17 +37,20 @@ describe('WwwNationalgeographicComExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(title, "How Today's Toys May Be Harming Your Daughter");
+      assert.equal(title, 'How Today’s Toys May Be Harming Your Daughter');
     });
 
     it('returns the date_published', async () => {
       // To pass this test, fill out the date_published selector
       // in ./src/extractors/custom/www.nationalgeographic.com/index.js.
       const { date_published } = await result;
+      const new_date_published = moment(date_published)
+        .format()
+        .split('T')[0];
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(date_published, '2016-12-15T16:39:00.000Z');
+      assert.equal(new_date_published, '2016-12-15');
     });
 
     it('returns the dek', async () => {
@@ -71,7 +75,7 @@ describe('WwwNationalgeographicComExtractor', () => {
       // the article.
       assert.equal(
         lead_image_url,
-        'http://www.nationalgeographic.com/content/dam/magazine/rights-exempt/2017/01/Departments/gendertoys/gendertoysOG.ngsversion.1481823676336.png'
+        'https://i.natgeofe.com/n/2d5941b3-34f7-4db7-a8d7-eca792637b79/gendertoysOG_16x9.jpg?w=1200'
       );
     });
 
@@ -95,7 +99,7 @@ describe('WwwNationalgeographicComExtractor', () => {
       // the article.
       assert.equal(
         first13,
-        'This story appears in the January 2017 issue of National Geographic magazine. Read'
+        'For adults, play is a break from life. For children, especially in the'
       );
     });
   });

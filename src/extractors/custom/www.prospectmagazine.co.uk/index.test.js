@@ -16,7 +16,7 @@ describe('WwwProspectmagazineCoUkExtractor', () => {
       url =
         'http://www.prospectmagazine.co.uk/magazine/anglosphere-old-dream-brexit-role-in-the-world';
       const html = fs.readFileSync(
-        './fixtures/www.prospectmagazine.co.uk/1488476298434.html'
+        './fixtures/www.prospectmagazine.co.uk.html'
       );
       result = Mercury.parse(url, { html, fallback: false });
     });
@@ -56,7 +56,7 @@ describe('WwwProspectmagazineCoUkExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(date_published, '2017-01-19T17:00:00.000Z');
+      assert.equal(date_published, '2017-01-19T08:05:40.000Z');
     });
 
     it('returns the dek', async () => {
@@ -81,7 +81,7 @@ describe('WwwProspectmagazineCoUkExtractor', () => {
       // the article.
       assert.equal(
         lead_image_url,
-        'http://www.prospectmagazine.co.uk/wp-content/uploads/2017/01/64344_web.jpg'
+        'https://www.prospectmagazine.co.uk/content/uploads/2017/01/64344_web.jpg'
       );
     });
 
@@ -105,7 +105,7 @@ describe('WwwProspectmagazineCoUkExtractor', () => {
       // the article.
       assert.equal(
         first13,
-        'Leading Brexiteers proposed Britain should reinforce its relationship with “natural allies” Australia, Canada'
+        'Leading Brexiteers proposed Britain should reinforce its relationship with "natural allies" Australia, Canada'
       );
     });
   });

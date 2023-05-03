@@ -15,9 +15,7 @@ describe('WwwTheguardianComExtractor', () => {
     beforeAll(() => {
       url =
         'https://www.theguardian.com/us-news/2016/nov/29/standing-rock-protest-north-dakota-shutdown-evacuation';
-      const html = fs.readFileSync(
-        './fixtures/www.theguardian.com/1480457558008.html'
-      );
+      const html = fs.readFileSync('./fixtures/www.theguardian.com.html');
       result = Mercury.parse(url, { html, fallback: false });
     });
 
@@ -84,7 +82,7 @@ describe('WwwTheguardianComExtractor', () => {
       // the article.
       assert.equal(
         lead_image_url,
-        'https://i.guim.co.uk/img/media/fc64982c5ab7b3ea7d5d38f3f74483c84c60b372/0_225_3500_2100/master/3500.jpg?w=1200&h=630&q=55&auto=format&usm=12&fit=crop&bm=normal&ba=bottom%2Cleft&blend64=aHR0cHM6Ly91cGxvYWRzLmd1aW0uY28udWsvMjAxNi8wNS8yNS9vdmVybGF5LWxvZ28tMTIwMC05MF9vcHQucG5n&s=034d7b3573a47c5ba3501a9e9e253a8f'
+        'https://i.guim.co.uk/img/media/fc64982c5ab7b3ea7d5d38f3f74483c84c60b372/0_225_3500_2100/master/3500.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctYWdlLTIwMTYucG5n&enable=upscale&s=0ebf4da49d1d10404c4ac6b872b14a62'
       );
     });
 

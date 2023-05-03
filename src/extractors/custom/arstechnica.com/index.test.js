@@ -15,9 +15,7 @@ describe('ArstechnicaComExtractor', () => {
     beforeAll(() => {
       url =
         'https://arstechnica.com/gadgets/2016/08/the-connected-renter-how-to-make-your-apartment-smarter/';
-      const html = fs.readFileSync(
-        './fixtures/arstechnica.com/1587927767738.html'
-      );
+      const html = fs.readFileSync('./fixtures/arstechnica.com.html');
       result = Mercury.parse(url, { html, fallback: false });
     });
 
@@ -129,9 +127,7 @@ describe('ArstechnicaComExtractor', () => {
     beforeAll(() => {
       url =
         'https://arstechnica.com/science/2020/04/should-you-wear-a-face-mask-heres-all-the-data-we-have/2/';
-      const html = fs.readFileSync(
-        './fixtures/arstechnica.com/1587927767738.html'
-      );
+      const html = fs.readFileSync('./fixtures/arstechnica.com.html');
       result = Mercury.parse(url, { html, fallback: false });
     });
 

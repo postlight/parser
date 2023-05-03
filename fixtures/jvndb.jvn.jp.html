@@ -1,0 +1,236 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja" style="overflow-x:hidden" class=""><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+  <title>JVNDB-2018-013542 - JVN iPedia - 脆弱性対策情報データベース</title>
+  
+  <meta name="Keywords" content="脆弱性対策情報データベース">
+  <meta name="Description" content="脆弱性対策情報データベース">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge, requiresActiveX=true">
+  <meta http-equiv="Content-Script-Type" content="text/javascript">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+
+  <link href="/common/css/master.css" rel="stylesheet" type="text/css" media="screen,print">
+  <link media="all" href="/common/css/provide.css" type="text/css" rel="stylesheet">
+  <link href="/common/css/font.css" rel="stylesheet" type="text/css" media="screen,print">
+  <link href="/common/css/print.css" rel="stylesheet" type="text/css" media="print">
+  <link href="/common/css/rightmenu.css" rel="stylesheet" type="text/css" media="screen,print">
+
+<link type="text/css" rel="stylesheet" charset="UTF-8" href="https://translate.googleapis.com/translate_static/css/translateelement.css"></head>
+<body>
+<a name="top" id="top"></a>
+<!-- ↓ ヘッダ表示 ↓ -->
+<div id="wrapper">
+
+  <!-- header begin -->
+  <div id="header">
+      <div class="logo"><a href="/"><img height="60" alt="JVN iPedia - 脆弱性対策情報データベース" src="/common/img/logo.gif" width="490" border="0"></a></div>
+      <div class="modifytxt">最終更新日：2019/02/22</div>
+      <div class="modifytxt"></div>
+  </div>
+  <div id="head-bar">
+      <a href="/nav/guide_sysadm.html">【活用ガイド】</a>
+  </div>
+  <!-- header end -->
+  
+  <!-- mainarea begin -->
+  <div id="mainarea">
+      <!-- leftarea begin -->
+      <div id="leftarea">
+          <div class="contents">
+              <div id="news-list">
+<br>
+<table class="vuln_table_clase">
+
+<tbody><tr><td colspan="2">
+<h2><font face="arial, geneva, helvetica">JVNDB-2018-013542</font></h2>
+</td></tr>
+
+<tr><td colspan="2">
+<h2>NETWAVE&nbsp;MNG6200&nbsp;デバイスにおける証明書・パスワードの管理に関する脆弱性</h2>
+</td></tr>
+
+<tr><td class="vuln_table_clase_td_header" colspan="2">
+<a name="overview">概要</a>
+</td></tr>
+<tr><td colspan="2">
+<br>
+<blockquote>
+NETWAVE MNG6200 デバイスには、証明書・パスワードの管理に関する脆弱性が存在します。
+</blockquote>
+</td></tr>
+<tr><td class="vuln_table_clase_td_header" colspan="2">
+<a name="cvss">CVSS による深刻度</a> (<a href="/nav/jvndbhelp.html#jvndb3" target="_blank">CVSS とは?</a>)
+</td></tr>
+<tr><td colspan="2">
+<br>
+<div style="margin: 20px 40px;">
+<div class="clearfix">
+<div class="float_left">
+<b>CVSS v3 による深刻度<br>基本値: <a href="/cvss/ja/v3.html#CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H" target="_blank">9.8</a> (緊急) [NVD値]</b>
+<ul>
+  <li>攻撃元区分: ネットワーク</li>
+  <li>攻撃条件の複雑さ: 低</li>
+  <li>攻撃に必要な特権レベル: 不要</li>
+  <li>利用者の関与: 不要</li>
+  <li>影響の想定範囲: 変更なし</li>
+  <li>機密性への影響(C): 高</li>
+  <li>完全性への影響(I): 高</li>
+  <li>可用性への影響(A): 高</li>
+</ul>
+</div>
+<div class="float_left">
+<b>CVSS v2 による深刻度<br>基本値: <a href="/cvss/ja/v2.html#AV:N/AC:L/Au:N/C:P/I:N/A:N" target="_blank">5.0</a> (警告) [NVD値]</b>
+<ul>
+  <li>攻撃元区分: ネットワーク</li>
+  <li>攻撃条件の複雑さ: 低</li>
+  <li>攻撃前の認証要否: 不要</li>
+  <li>機密性への影響(C): 部分的</li>
+  <li>完全性への影響(I): なし</li>
+  <li>可用性への影響(A): なし</li>
+</ul>
+</div>
+</div>
+<div style="margin-top:20px">
+
+</div>
+</div>
+</td></tr>
+
+<tr><td class="vuln_table_clase_td_header" colspan="2">
+<a name="affect">影響を受けるシステム</a>
+</td></tr>
+
+<tr><td colspan="2">
+<br>
+<blockquote>
+
+</blockquote>
+</td></tr>
+
+<tr><td colspan="2">
+<br>
+<blockquote>
+NETWAVE&nbsp;Networks,&nbsp;Inc.
+<ul>
+  <li>MNG6200&nbsp;ファームウェア C4835805jrc12FU121413.cpr</li>
+  </ul>
+</blockquote>
+</td></tr>
+
+<tr><td colspan="2">
+<br>
+<blockquote>
+
+</blockquote>
+</td></tr>
+
+<tr><td class="vuln_table_clase_td_header" colspan="2">
+<a name="impact">想定される影響</a>
+</td></tr>
+
+<tr><td colspan="2">
+<br>
+<blockquote>
+情報を取得される、情報を改ざんされる、およびサービス運用妨害 (DoS) 状態にされる可能性があります。
+</blockquote>
+</td></tr>
+
+<tr><td class="vuln_table_clase_td_header" colspan="2">
+<a name="solution">対策</a>
+</td></tr>
+
+<tr><td colspan="2">
+<br>
+<blockquote>
+参考情報を参照して適切な対策を実施してください。
+</blockquote>
+</td></tr>
+
+<tr><td class="vuln_table_clase_td_header" colspan="2">
+<a name="venderinf">ベンダ情報</a>
+</td></tr>
+
+<tr><td colspan="2">
+<br>
+<blockquote>
+</blockquote>
+</td></tr>
+
+
+<tr><td class="vuln_table_clase_td_header" colspan="2">
+<a name="cwe">CWEによる脆弱性タイプ一覧</a>&nbsp;&nbsp;<a href="http://www.ipa.go.jp/security/vuln/CWE.html" target="_blank">CWEとは?</a>
+</td></tr>
+
+
+<tr><td colspan="2">
+<br>
+<blockquote>
+<ol>
+<li><a href="https://jvndb.jvn.jp/ja/cwe/CWE-255.html" target="_blank">証明書・パスワードの管理(CWE-255)</a> [NVD評価]</li>
+</ol>
+</blockquote>
+</td></tr>
+
+
+<tr><td class="vuln_table_clase_td_header" colspan="2">
+<a name="cve">共通脆弱性識別子(CVE)</a>&nbsp;&nbsp;<a href="http://www.ipa.go.jp/security/vuln/CVE.html" target="_blank">CVEとは?</a>
+</td></tr>
+
+<tr><td colspan="2">
+<br>
+<blockquote>
+<ol>
+<li><a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-20395" target="_blank">CVE-2018-20395</a></li>
+</ol>
+</blockquote>
+</td></tr>
+
+
+<tr><td class="vuln_table_clase_td_header" colspan="2">
+<a name="reference">参考情報</a>
+</td></tr>
+
+<tr><td colspan="2">
+<br>
+<blockquote>
+<ol>
+<li>National&nbsp;Vulnerability&nbsp;Database&nbsp;(NVD) : <a href="https://nvd.nist.gov/vuln/detail/CVE-2018-20395" target="_blank">CVE-2018-20395</a> </li>
+<li>関連文書 : <a href="https://github.com/ezelf/sensitivesOids/blob/master/oidpassswordleaks.csv" target="_blank">sensitivesOids/oidpassswordleaks.csv</a> </li>
+</ol>
+</blockquote>
+</td></tr>
+
+<tr><td class="vuln_table_clase_td_header" colspan="2">
+<a name="history">更新履歴</a>
+</td></tr>
+<tr><td colspan="2">
+<br>
+<blockquote>
+<ul style="list-style-type: none">
+<li>[2019年02月22日]<br>
+&nbsp;&nbsp;掲載</li>
+</ul>
+</blockquote>
+<br>
+</td></tr>
+</tbody></table>
+<table class="vuln_table_clase_footer">
+<tbody><tr><td colspan="2"><hr></td></tr>
+<tr><td class="vuln_table_clase_date_header_td">公表日</td><td>2018/12/23</td></tr>
+<tr><td class="vuln_table_clase_date_header_td">登録日</td><td>2019/02/22</td></tr>
+<tr><td class="vuln_table_clase_date_header_td">最終更新日</td><td>2019/02/22</td></tr>
+<tr><td colspan="2"><hr></td></tr>
+</tbody></table>
+<!-- 
+</td></tr></table>
+</body>
+</html>
+-->                </div>
+          </div>
+      </div>
+  </div>
+  <div id="footer">
+      <div class="footertext"><img src="/common/img/copyright.png" alt="Copyright © 2007- IPA. All rights reserved."></div>
+  </div>
+</div><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="https://www.gstatic.com/images/branding/product/1x/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div>
+
+<div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div></body></html>

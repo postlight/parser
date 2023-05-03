@@ -7,7 +7,7 @@ const fs = require('fs');
 
 describe('scoreLinks(links)', () => {
   it('returns an object of scored links', () => {
-    const html = fs.readFileSync('./fixtures/ars.html', 'utf8');
+    const html = fs.readFileSync('./fixtures/arstechnica.com.html', 'utf8');
     const $ = cheerio.load(html);
     const links = $('a[href]').toArray();
     const url =

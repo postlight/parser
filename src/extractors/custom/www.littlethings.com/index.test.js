@@ -14,10 +14,9 @@ describe('LittleThingsExtractor', () => {
     let result;
     let url;
     beforeAll(() => {
-      url = 'http://www.littlethings.com/diy-pineapple-lamp/';
-      const html = fs.readFileSync(
-        './fixtures/www.littlethings.com/1475605036506.html'
-      );
+      url =
+        'https://www.littlethings.com/lifestyle/amazon-has-a-private-food-brand-that-just-launched-100-new-products-for-fall/';
+      const html = fs.readFileSync('./fixtures/www.littlethings.com.html');
       result = Mercury.parse(url, { html, fallback: false });
     });
 
@@ -40,7 +39,7 @@ describe('LittleThingsExtractor', () => {
       // the article.
       assert.equal(
         title,
-        'Snip The Stems Off Plastic Spoons To Make A Quirky Pineapple Lamp'
+        'Amazon Has A Private Food Brand That Just Launched 100 New Products For Fall'
       );
     });
 
@@ -51,7 +50,7 @@ describe('LittleThingsExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(author, 'Laura Caseley');
+      assert.equal(author, 'Bethany Braun-Silva');
     });
 
     it('returns the lead_image_url', async () => {
@@ -63,7 +62,7 @@ describe('LittleThingsExtractor', () => {
       // the article.
       assert.equal(
         lead_image_url,
-        'http://cdn1.littlethings.com/app/uploads/2016/09/pineapple-b-thumb-1.jpg'
+        'https://images.ctfassets.net/f60q1anpxzid/6qQL1s7jrdjipeebu7wkNB/80ba587f55cc9f3673582f493dc611f1/04764069-41b3-48d3-be5a-4cde1c41.jpeg?w=1800&q=50&fm=jpg&fl=progressive'
       );
     });
 
@@ -87,7 +86,7 @@ describe('LittleThingsExtractor', () => {
       // the article.
       assert.equal(
         first13,
-        'Every room needs light, and so lamps are pretty much a necessity for'
+        "One of the best things about fall is all the food offerings. What's"
       );
     });
   });

@@ -14,9 +14,7 @@ describe('WwwQdailyComExtractor', () => {
     let url;
     beforeAll(() => {
       url = 'http://www.qdaily.com/articles/38282.html';
-      const html = fs.readFileSync(
-        './fixtures/www.qdaily.com/1488417691505.html'
-      );
+      const html = fs.readFileSync('./fixtures/www.qdaily.com.html');
       result = Mercury.parse(url, { html, fallback: false });
     });
 

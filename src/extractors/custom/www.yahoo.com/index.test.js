@@ -16,9 +16,7 @@ describe('YahooExtractor', () => {
     beforeAll(() => {
       url =
         'https://www.yahoo.com/news/m/1c621104-b0eb-3b4d-9b0a-7bb979f80d7d/ss_clinton-cancels-joint-events.html';
-      const html = fs.readFileSync(
-        './fixtures/www.yahoo.com/1475529982399.html'
-      );
+      const html = fs.readFileSync('./fixtures/www.yahoo.com.html');
       result = Mercury.parse(url, { html, fallback: false });
     });
 

@@ -18,7 +18,11 @@ export const WwwThepennyhoarderComExtractor = {
   },
 
   content: {
-    selectors: [['.post-img', '.post-text'], '.post-text'],
+    selectors: [
+      ['.post-img', '.post-text'],
+      '.post-text',
+      '.single-post-content-inner',
+    ],
 
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images

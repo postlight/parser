@@ -14,9 +14,7 @@ describe('WwwElecomCoJpExtractor', () => {
     let url;
     beforeAll(() => {
       url = 'http://www.elecom.co.jp/news/201903/keyboard/index.html';
-      const html = fs.readFileSync(
-        './fixtures/www.elecom.co.jp/1552190473460.html'
-      );
+      const html = fs.readFileSync('./fixtures/www.elecom.co.jp.html');
       result = Mercury.parse(url, {
         html,
         fallback: false,
@@ -40,7 +38,7 @@ describe('WwwElecomCoJpExtractor', () => {
       // the article.
       assert.equal(
         title,
-        `[News] サクサク軽い打ち心地を実現し、キー入力がはかどる！従来比約18%も軽量化した薄型キーボード、接続タイプ/サイズ/マウス付きなどで選べる6モデルを発売`
+        `[News] サクサク軽い打ち心地を実現し、キー入力がはかどる！キー荷重が従来比約18%も軽くなった薄型キーボード、接続タイプ/サイズ/マウス付きなどで選べる6モデルを発売`
       );
     });
 

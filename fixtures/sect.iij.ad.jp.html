@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="ja" prefix="og: http://ogp.me/ns#"><head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta content="#c60030" name="theme-color">
+	<link rel="profile" href="http://gmpg.org/xfn/11">
+	<title>Masscan と ZMap によるスキャンの違い – IIJ Security Diary</title>
+<meta name="robots" content="max-image-preview:large">
+<link rel="dns-prefetch" href="//s.w.org">
+<link rel="alternate" type="application/rss+xml" title="IIJ Security Diary » フィード" href="https://sect.iij.ad.jp/feed/">
+<link rel="alternate" type="application/rss+xml" title="IIJ Security Diary » コメントフィード" href="https://sect.iij.ad.jp/comments/feed/">
+<link rel="alternate" type="application/rss+xml" title="IIJ Security Diary » Masscan と ZMap によるスキャンの違い のコメントのフィード" href="https://sect.iij.ad.jp/blog/2019/02/masscan-zmap/feed/">
+	<link rel="stylesheet" id="mci-footnotes-jquery-tooltips-pagelayout-none-css" href="https://sect.iij.ad.jp/wp-content/plugins/footnotes/css/footnotes-jqttbrpl0.min.css?ver=2.7.3" type="text/css" media="all">
+<link rel="stylesheet" id="wp-block-library-css" href="https://sect.iij.ad.jp/wp-content/plugins/gutenberg/build/block-library/style.css?ver=14.2.0" type="text/css" media="all">
+<link rel="stylesheet" id="wp-pagenavi-css" href="https://sect.iij.ad.jp/wp-content/plugins/wp-pagenavi/pagenavi-css.css?ver=2.70" type="text/css" media="all">
+<link rel="stylesheet" id="cd-style-css" href="https://sect.iij.ad.jp/wp-content/themes/coldbox/assets/css/style.min.css?ver=1.9.4" type="text/css" media="all">
+<link rel="https://api.w.org/" href="https://sect.iij.ad.jp/wp-json/"><link rel="alternate" type="application/json" href="https://sect.iij.ad.jp/wp-json/wp/v2/posts/253"><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://sect.iij.ad.jp/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://sect.iij.ad.jp/wp-includes/wlwmanifest.xml"> 
+<meta name="generator" content="WordPress 6.0.2">
+<link rel="canonical" href="https://sect.iij.ad.jp/blog/2019/02/masscan-zmap/">
+<link rel="shortlink" href="https://sect.iij.ad.jp/?p=253">
+<link rel="alternate" type="application/json+oembed" href="https://sect.iij.ad.jp/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fsect.iij.ad.jp%2Fblog%2F2019%2F02%2Fmasscan-zmap%2F">
+<link rel="alternate" type="text/xml+oembed" href="https://sect.iij.ad.jp/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fsect.iij.ad.jp%2Fblog%2F2019%2F02%2Fmasscan-zmap%2F&amp;format=xml">
+<link rel="amphtml" href="https://sect.iij.ad.jp/blog/2019/02/masscan-zmap/?amp=1">
+<!-- Coldbox Addon Open Graph -->
+<meta name="description" content="インターネット上の全アドレス空間を高速にスキャンするツールとして、Masscan と ZMap の2つが有名です。これらは研究者にも攻撃者にも幅広く利用されています。ですが、IIJ のマルウ...">
+<meta property="og:title" content="Masscan と ZMap によるスキャンの違い – IIJ Security Diary">
+<meta property="og:description" content="インターネット上の全アドレス空間を高速にスキャンするツールとして、Masscan と ZMap の2つが有名です。これらは研究者にも攻撃者にも幅広く利用されています。ですが、IIJ のマルウ...">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://sect.iij.ad.jp/blog/2019/02/masscan-zmap">
+<meta property="og:site_name" content="IIJ Security Diary">
+<meta property="og:image" content="https://sect.iij.ad.jp/wp-content/uploads/2021/03/20190213_fig1-500x250.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:domain" content="https://sect.iij.ad.jp">
+<meta property="og:locale" content="ja">
+<meta name="twitter:site" content="@IIJSECT">
+<meta name="twitter:creator" content="IIJSECT">
+<meta property="article:published_time" content="2019-02-13T12:00:00+09:00">
+<meta property="article:modified_time" content="2021-03-02T18:00:21+09:00">
+<!-- /Coldbox Addon Open Graph -->
+<link rel="pingback" href="https://sect.iij.ad.jp/xmlrpc.php">
+<link rel="icon" href="https://sect.iij.ad.jp/wp-content/uploads/2021/02/cropped-IIJ-SECT-logo-square-192x192.png" sizes="192x192">
+<link rel="apple-touch-icon" href="https://sect.iij.ad.jp/wp-content/uploads/2021/02/cropped-IIJ-SECT-logo-square-180x180.png">
+<meta name="msapplication-TileImage" content="https://sect.iij.ad.jp/wp-content/uploads/2021/02/cropped-IIJ-SECT-logo-square-270x270.png">
+</head>
+
+<body class="post-template-default single single-post postid-253 single-format-standard wp-custom-logo header-menu-enabled footer-menu-enabled right-sidebar-s1 header-column">
+
+	<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;"><defs><filter id="wp-duotone-dark-grayscale"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 "></feColorMatrix><feComponentTransfer color-interpolation-filters="sRGB"><feFuncR type="table" tableValues="0 0.49803921568627"></feFuncR><feFuncG type="table" tableValues="0 0.49803921568627"></feFuncG><feFuncB type="table" tableValues="0 0.49803921568627"></feFuncB><feFuncA type="table" tableValues="1 1"></feFuncA></feComponentTransfer><feComposite in2="SourceGraphic" operator="in"></feComposite></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;"><defs><filter id="wp-duotone-grayscale"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 "></feColorMatrix><feComponentTransfer color-interpolation-filters="sRGB"><feFuncR type="table" tableValues="0 1"></feFuncR><feFuncG type="table" tableValues="0 1"></feFuncG><feFuncB type="table" tableValues="0 1"></feFuncB><feFuncA type="table" tableValues="1 1"></feFuncA></feComponentTransfer><feComposite in2="SourceGraphic" operator="in"></feComposite></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;"><defs><filter id="wp-duotone-purple-yellow"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 "></feColorMatrix><feComponentTransfer color-interpolation-filters="sRGB"><feFuncR type="table" tableValues="0.54901960784314 0.98823529411765"></feFuncR><feFuncG type="table" tableValues="0 1"></feFuncG><feFuncB type="table" tableValues="0.71764705882353 0.25490196078431"></feFuncB><feFuncA type="table" tableValues="1 1"></feFuncA></feComponentTransfer><feComposite in2="SourceGraphic" operator="in"></feComposite></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;"><defs><filter id="wp-duotone-blue-red"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 "></feColorMatrix><feComponentTransfer color-interpolation-filters="sRGB"><feFuncR type="table" tableValues="0 1"></feFuncR><feFuncG type="table" tableValues="0 0.27843137254902"></feFuncG><feFuncB type="table" tableValues="0.5921568627451 0.27843137254902"></feFuncB><feFuncA type="table" tableValues="1 1"></feFuncA></feComponentTransfer><feComposite in2="SourceGraphic" operator="in"></feComposite></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;"><defs><filter id="wp-duotone-midnight"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 "></feColorMatrix><feComponentTransfer color-interpolation-filters="sRGB"><feFuncR type="table" tableValues="0 0"></feFuncR><feFuncG type="table" tableValues="0 0.64705882352941"></feFuncG><feFuncB type="table" tableValues="0 1"></feFuncB><feFuncA type="table" tableValues="1 1"></feFuncA></feComponentTransfer><feComposite in2="SourceGraphic" operator="in"></feComposite></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;"><defs><filter id="wp-duotone-magenta-yellow"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 "></feColorMatrix><feComponentTransfer color-interpolation-filters="sRGB"><feFuncR type="table" tableValues="0.78039215686275 1"></feFuncR><feFuncG type="table" tableValues="0 0.94901960784314"></feFuncG><feFuncB type="table" tableValues="0.35294117647059 0.47058823529412"></feFuncB><feFuncA type="table" tableValues="1 1"></feFuncA></feComponentTransfer><feComposite in2="SourceGraphic" operator="in"></feComposite></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;"><defs><filter id="wp-duotone-purple-green"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 "></feColorMatrix><feComponentTransfer color-interpolation-filters="sRGB"><feFuncR type="table" tableValues="0.65098039215686 0.40392156862745"></feFuncR><feFuncG type="table" tableValues="0 1"></feFuncG><feFuncB type="table" tableValues="0.44705882352941 0.4"></feFuncB><feFuncA type="table" tableValues="1 1"></feFuncA></feComponentTransfer><feComposite in2="SourceGraphic" operator="in"></feComposite></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;"><defs><filter id="wp-duotone-blue-orange"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 "></feColorMatrix><feComponentTransfer color-interpolation-filters="sRGB"><feFuncR type="table" tableValues="0.098039215686275 1"></feFuncR><feFuncG type="table" tableValues="0 0.66274509803922"></feFuncG><feFuncB type="table" tableValues="0.84705882352941 0.41960784313725"></feFuncB><feFuncA type="table" tableValues="1 1"></feFuncA></feComponentTransfer><feComposite in2="SourceGraphic" operator="in"></feComposite></filter></defs></svg>
+<a class="skip-link screen-reader-text noscroll" href="#content">
+	コンテンツへスキップ</a>
+
+
+	<header id="header" class="header" role="banner">
+
+		<div class="header-inner container">
+
+			<div class="site-info">
+
+				<a href="https://sect.iij.ad.jp" title="IIJ Security Diary"><div class="site-logo"><img src="https://sect.iij.ad.jp/wp-content/uploads/2021/02/iij-sect-logo01.png" width="3000" height="800" alt="IIJ Security Diary"></div></a><a href="https://sect.iij.ad.jp" title="IIJ Security Diary"><h2 class="site-title">IIJ Security Diary</h2></a>
+							</div>
+
+			
+			
+				<nav id="header-menu" class="header-menu" role="navigation" aria-label="ヘッダーメニュー"><ul id="header-nav" class="menu-container" style="padding-top: 0px;"><li id="menu-item-48" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-48"><a href="/">ホーム</a></li>
+<li id="menu-item-49" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-49"><a href="https://sect.iij.ad.jp/about/">IIJ-SECT</a></li>
+<li id="menu-item-50" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-50"><a href="https://sect.iij.ad.jp/office/">セキュリティ情報統括室</a></li>
+<li id="menu-item-51" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-51"><a href="https://sect.iij.ad.jp/mitf/">MITF について</a></li>
+<li id="menu-item-52" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-52"><a href="https://sect.iij.ad.jp/contact/">お問い合わせ</a></li>
+<li id="menu-item-54" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-54"><a href="/en/">[ in English ]</a></li>
+<li class="menu-item"><button id="close-mobile-menu" class="screen-reader-text close-mobile-menu">メニューを閉じる</button></li></ul><!--/#header-nav--><div class="menu-overlay"></div></nav>
+				
+									<button id="header-nav-toggle" class="nav-toggle header-menu" on="tap:amp-sidebar.open" aria-hidden="true">
+					<span class="top" aria-hidden="true"></span>
+					<span class="middle" aria-hidden="true"></span>
+					<span class="bottom" aria-hidden="true"></span>
+					<span class="screen-reader-text">メニュー</span>
+				</button><button class="search-toggle">
+					<span class="icon search" aria-hidden="true"></span>
+					<span class="screen-reader-text">検索切り替え</span>
+				</button>				
+			
+
+		</div>
+
+</header>
+
+
+	<main id="main" class="main-single" role="main">
+
+		<article id="post-253" class="main-inner post-253 post type-post status-publish format-standard has-post-thumbnail hentry category-incident tag-iot">
+
+				<header class="title-box">
+		<div class="title-box-inner container">
+			<div class="breadcrumb"><a href="https://sect.iij.ad.jp">ホーム</a>&nbsp;&nbsp;&gt;&nbsp;&nbsp;<a href="https://sect.iij.ad.jp/blog/cat/incident/" rel="category tag">セキュリティ事件</a></div>
+			<h1 class="post-title">Masscan と ZMap によるスキャンの違い</h1>
+		</div>
+	</header>
+	
+			<div class="container-outer">
+
+				<div class="container">
+
+					<div id="content" class="content">
+
+						<div class="content-inner">
+
+							<div class="content-inside">
+
+								<footer class="post-meta content-box">
+
+									
+																		
+																					<p class="post-date-wrapper">
+												<span class="far fa-clock" aria-hidden="true"></span>
+												<span class="screen-reader-text">公開日</span>
+												<time class="post-date" datetime="2019-02-13T12:00:00+09:00">2019年2月13日</time>
+											</p>
+										
+																			
+									
+																			<p class="post-author">
+											<span class="fas fa-user" aria-hidden="true"></span>
+											<span class="screen-reader-text">投稿者</span>
+											<a href="https://sect.iij.ad.jp/blog/author/mnegishi/" title="Masafumi Negishi の投稿" rel="author">Masafumi Negishi</a>										</p>
+									
+																	</footer>
+
+																	<div class="entry-thumbnail-image content-box">
+										<img width="680" height="377" src="https://sect.iij.ad.jp/wp-content/uploads/2021/03/20190213_fig1-1024x568.png" class="attachment-large size-large wp-post-image" alt="図1 SYN パケットに占めるスキャナーの割合" srcset="https://sect.iij.ad.jp/wp-content/uploads/2021/03/20190213_fig1-1024x568.png 1024w, https://sect.iij.ad.jp/wp-content/uploads/2021/03/20190213_fig1-300x167.png 300w, https://sect.iij.ad.jp/wp-content/uploads/2021/03/20190213_fig1-768x426.png 768w, https://sect.iij.ad.jp/wp-content/uploads/2021/03/20190213_fig1-1536x853.png 1536w, https://sect.iij.ad.jp/wp-content/uploads/2021/03/20190213_fig1.png 1924w" sizes="(max-width: 680px) 100vw, 680px">									</div>
+								
+
+								<div class="entry content-box">
+									<div class="entry-inner">
+<p>インターネット上の全アドレス空間を高速にスキャンするツールとして、Masscan と ZMap の2つが有名です。これらは研究者にも攻撃者にも幅広く利用されています。ですが、IIJ のマルウェア活動観測プロジェクト MITF のハニーポットによる観測において、両者の使われ方にはかなり違いがあることがわかりました。本記事でその内容について紹介します。</p>
+
+
+
+<h2>調査目的と見られるスキャンの増加</h2>
+
+
+
+<p>NICT サイバーセキュリティ研究所が2019年2月6日に公開した「<a href="http://www.nict.go.jp/cyber/report/NICTER_report_2018.pdf">NICTER観測レポート2018</a>」では、2017年と比較して海外組織からの調査目的と見られるスキャンが大幅に増加したことが報告されました。このレポートでは、1日に30以上の宛先ポートに対して30万パケット以上のスキャンパケット (TCP SYN と UDP のみ) を送信するアドレスを調査目的のスキャンと判別しています。そして2018年の総パケット数の約35%が調査目的のスキャンだったということです。この報告を見て、IIJ のハニーポットにおける観測でも同様の傾向が見られるか検証したいと考えました。しかし NICTER のダークネット観測と比べると、IP アドレスの数が違いすぎるため、同じ判定条件をそのまま適用することはできません。そこで、パケット数ではなくスキャンに利用されているツールに着目し、別の視点から調査を行うことにしました。</p>
+
+
+
+<h2>Masscan と ZMap</h2>
+
+
+
+<p><a href="https://github.com/robertdavidgraham/masscan">Masscan</a> と <a href="https://github.com/zmap/zmap">ZMap</a> は、IPv4 の全アドレス空間を高速にスキャンするという目的に特化したネットワークスキャナーです。どちらもソースコードが公開されており、誰でもさまざまなプラットフォームで利用することができます<span class="footnote_referrer"><a role="button" tabindex="0" onclick="footnote_moveToReference_253_1('footnote_plugin_reference_253_1_1');" onkeypress="footnote_moveToReference_253_1('footnote_plugin_reference_253_1_1');" href="#f+253+1+1" class="footnote_hard_link"><sup id="footnote_plugin_tooltip_253_1_1" class="footnote_plugin_tooltip_text">[1]</sup></a><span class="footnote_referrer_base"><span id="r+253+1+1" class="footnote_referrer_anchor"></span></span><span id="footnote_plugin_tooltip_text_253_1_1" class="footnote_tooltip">Masscan は GNU General Public License Version 3、ZMap は Apache License Version 2.0 のライセンスでそれぞれ公開されている。</span></span>。そのため研究者だけでなく、攻撃者にとっても有用なツールとして利用されています。以前からこの2つのツールが幅広く利用されていることは観測データからわかっていましたが、今回その内訳についても詳しく調べました。調査対象としたのは2019年1月の1ヶ月間に IIJ のハニーポットで観測したデータです。</p>
+
+
+
+<p>先に観測結果のサマリを示しておきます。</p>
+
+
+
+<ul><li>Masscan によるスキャンは ZMap によるスキャンと比較し、送信元アドレス数では2倍、SYN パケット数では6倍</li><li>宛先ポート別に見ると、Masscan によるスキャンは多数のポートに分散しているのに対して、ZMap によるスキャンは特定のポートに大きく偏っている</li><li>ZMap によるスキャンの宛先ポートは、52869/tcp など IoT 機器の脆弱性を探索する目的と考えられるポートが多数を占める</li></ul>
+
+
+
+<figure class="wp-block-image size-large"><img loading="lazy" width="1024" height="568" src="https://sect.iij.ad.jp/wp-content/uploads/2021/03/20190213_fig1-1024x568.png" alt="図1 SYN パケットに占めるスキャナーの割合" class="wp-image-249" srcset="https://sect.iij.ad.jp/wp-content/uploads/2021/03/20190213_fig1-1024x568.png 1024w, https://sect.iij.ad.jp/wp-content/uploads/2021/03/20190213_fig1-300x167.png 300w, https://sect.iij.ad.jp/wp-content/uploads/2021/03/20190213_fig1-768x426.png 768w, https://sect.iij.ad.jp/wp-content/uploads/2021/03/20190213_fig1-1536x853.png 1536w, https://sect.iij.ad.jp/wp-content/uploads/2021/03/20190213_fig1.png 1924w" sizes="(max-width: 1024px) 100vw, 1024px"><figcaption>図1 SYN パケットに占めるスキャナーの割合</figcaption></figure>
+
+
+
+<p>上のグラフはハニーポットに到達する SYN パケットのうち、Masscan と ZMap によるスキャンが占める割合を示したものです。日によって多少の変動はありますが、平均すると Masscan は16%、ZMap は3%程度であり、両者をあわせると全体の約2割を占めています<span class="footnote_referrer"><a role="button" tabindex="0" onclick="footnote_moveToReference_253_1('footnote_plugin_reference_253_1_2');" onkeypress="footnote_moveToReference_253_1('footnote_plugin_reference_253_1_2');" href="#f+253+1+2" class="footnote_hard_link"><sup id="footnote_plugin_tooltip_253_1_2" class="footnote_plugin_tooltip_text">[2]</sup></a><span class="footnote_referrer_base"><span id="r+253+1+2" class="footnote_referrer_anchor"></span></span><span id="footnote_plugin_tooltip_text_253_1_2" class="footnote_tooltip">1/29から1/31にかけて、単一の IP&nbsp;… <a class="footnote_tooltip_continue" onclick="footnote_moveToReference_253_1('footnote_plugin_reference_253_1_2');" href="#f+253+1+2">Continue reading</a></span></span>。ユニークな送信元アドレス数では、Masscan が ZMap の約2倍となっており、相対的に Masscan によるスキャンの方が送出するパケット数が多いという結果になっています。なおハニーポットに到達する SYN パケットには送信元アドレスを偽装した SYN/ACK リフレクション攻撃のパケットもかなり含まれています。そのため、可能な限りこのような DoS 攻撃のパケットを集計データから除外しました<span class="footnote_referrer"><a role="button" tabindex="0" onclick="footnote_moveToReference_253_1('footnote_plugin_reference_253_1_3');" onkeypress="footnote_moveToReference_253_1('footnote_plugin_reference_253_1_3');" href="#f+253+1+3" class="footnote_hard_link"><sup id="footnote_plugin_tooltip_253_1_3" class="footnote_plugin_tooltip_text">[3]</sup></a><span class="footnote_referrer_base"><span id="r+253+1+3" class="footnote_referrer_anchor"></span></span><span id="footnote_plugin_tooltip_text_253_1_3" class="footnote_tooltip">TCP の SYN/ACK リフレクション攻撃については、次の記事を参照のこと。IIJ では 2019年1月後半から 23/tcp や 2323/tcp などを宛先ポートとした SYN/ACK&nbsp;… <a class="footnote_tooltip_continue" onclick="footnote_moveToReference_253_1('footnote_plugin_reference_253_1_3');" href="#f+253+1+3">Continue reading</a></span></span>。また参考までに、IoT ボットの Mirai およびその亜種による SYN スキャンのパケットは3%程度で、ZMap によるスキャンとほぼ同数です。</p>
+
+
+
+<figure class="wp-block-image size-large"><img loading="lazy" width="1024" height="554" src="https://sect.iij.ad.jp/wp-content/uploads/2021/03/20190213_fig2-1024x554.png" alt="図2 MASSCAN による SYN パケット数の宛先ポート別推移" class="wp-image-250" srcset="https://sect.iij.ad.jp/wp-content/uploads/2021/03/20190213_fig2-1024x554.png 1024w, https://sect.iij.ad.jp/wp-content/uploads/2021/03/20190213_fig2-300x162.png 300w, https://sect.iij.ad.jp/wp-content/uploads/2021/03/20190213_fig2-768x416.png 768w, https://sect.iij.ad.jp/wp-content/uploads/2021/03/20190213_fig2-1536x832.png 1536w, https://sect.iij.ad.jp/wp-content/uploads/2021/03/20190213_fig2.png 2039w" sizes="(max-width: 1024px) 100vw, 1024px"><figcaption>図2 MASSCAN による SYN パケット数の宛先ポート別推移</figcaption></figure>
+
+
+
+<figure class="wp-block-image size-large"><img loading="lazy" width="1024" height="554" src="https://sect.iij.ad.jp/wp-content/uploads/2021/03/20190213_fig3-1024x554.png" alt="図3 ZMap による SYN パケット数の宛先ポート別推移" class="wp-image-251" srcset="https://sect.iij.ad.jp/wp-content/uploads/2021/03/20190213_fig3-1024x554.png 1024w, https://sect.iij.ad.jp/wp-content/uploads/2021/03/20190213_fig3-300x162.png 300w, https://sect.iij.ad.jp/wp-content/uploads/2021/03/20190213_fig3-768x416.png 768w, https://sect.iij.ad.jp/wp-content/uploads/2021/03/20190213_fig3-1536x832.png 1536w, https://sect.iij.ad.jp/wp-content/uploads/2021/03/20190213_fig3.png 2039w" sizes="(max-width: 1024px) 100vw, 1024px"><figcaption>図3 ZMap による SYN パケット数の宛先ポート別推移</figcaption></figure>
+
+
+
+<p>上の積み上げグラフは Masscan と ZMap それぞれの SYN パケットについて、宛先ポート別の推移を示したものです。パケット数の多い上位10ポートのみ内訳を示しています。ダークネットにおける観測とは異なり、ハニーポットは複数のポートにおいて SYN パケットに応答を返します。そのためオープンしていると判断されたポートに対しては繰り返しスキャンされる傾向がある点に注意してください。</p>
+
+
+
+<p>グラフからは両者にはっきりとした違いが見てとれます。まず Masscan ですが、SQL Server に利用される 1433/tcp、SMB プロトコルに利用される 445/tcp がやや多いものの、幅広く多数のポートに分散しているため、上位10ポートの割合が小さくなっています。また送信元アドレス別にデータを調べると、65535すべてのポートをフルスキャンしているアドレスがあるほか、1000ポート以上スキャンしているアドレスも多数存在しています。スキャンパケット数の上位10アドレスについては、おそらくどれも調査目的のスキャンではないかと推測しています。以下の2つの国内プロジェクトは IoT 機器の調査を目的としたスキャンを実施していますが、どちらも Masscan を利用しているようです。</p>
+
+
+
+<ul><li>2018年11月08日　広域ネットワークスキャンによる調査について | NTT-AT <a href="https://www.ntt-at.co.jp/news/2018/detail/info181107.html">https://www.ntt-at.co.jp/news/2018/detail/info181107.html</a></li><li>日本国内でインターネットに接続されたIoT機器等に関する事前調査の実施について（12月10日更新） | NICT-情報通信研究機構 <a href="https://www.nict.go.jp/info/topics/2018/11/07-2.html">https://www.nict.go.jp/info/topics/2018/11/07-2.html</a></li></ul>
+
+
+
+<p>一方 ZMap のほうは、宛先ポートが 52869/tcp に大きく偏っているほか、パケット数上位10ポートには IoT 機器でよく利用されるポートが並んでいます。このことから、ZMap によるこれらのスキャンは脆弱な IoT 機器を探索する目的ではないかと考えられますが、これだけでは調査研究によるものか攻撃者によるものかは判別できません。そこで送信元アドレス別にその内訳を見てみると、スキャンパケット数の上位5アドレスについては、ZMap によるスキャン後に Mirai や qBot などの感染を試みる攻撃を行っていました。この5アドレスで ZMap によるスキャン全体の約2割を占めており、少数の攻撃者によるスキャンの影響が大きいことがわかりました<span class="footnote_referrer"><a role="button" tabindex="0" onclick="footnote_moveToReference_253_1('footnote_plugin_reference_253_1_4');" onkeypress="footnote_moveToReference_253_1('footnote_plugin_reference_253_1_4');" href="#f+253+1+4" class="footnote_hard_link"><sup id="footnote_plugin_tooltip_253_1_4" class="footnote_plugin_tooltip_text">[4]</sup></a><span class="footnote_referrer_base"><span id="r+253+1+4" class="footnote_referrer_anchor"></span></span><span id="footnote_plugin_tooltip_text_253_1_4" class="footnote_tooltip">ただし上位10アドレス中の4アドレスについては、おそらく調査目的のスキャンと考えられる。</span></span>。また Masscan とは違って、1000ポート以上スキャンしているアドレスは ZMap では1つもありませんでした。</p>
+
+
+
+<p>下のグラフは ZMap でパケット数上位の5ポートについて、2019年1月の ZMap と Masscan の SYN パケット総数を比較したものです。80/tcp はほぼ同数ですが、それ以外は上位のポートほど Masscan よりも ZMap を利用したスキャンに大きく偏っていることがわかります。</p>
+
+
+
+<figure class="wp-block-image size-large"><img loading="lazy" width="1024" height="610" src="https://sect.iij.ad.jp/wp-content/uploads/2021/03/20190213_fig4-1024x610.png" alt="図4 宛先ポート別の ZMap と Masscan の SYN パケット数比較" class="wp-image-252" srcset="https://sect.iij.ad.jp/wp-content/uploads/2021/03/20190213_fig4-1024x610.png 1024w, https://sect.iij.ad.jp/wp-content/uploads/2021/03/20190213_fig4-300x179.png 300w, https://sect.iij.ad.jp/wp-content/uploads/2021/03/20190213_fig4-768x458.png 768w, https://sect.iij.ad.jp/wp-content/uploads/2021/03/20190213_fig4-1536x916.png 1536w, https://sect.iij.ad.jp/wp-content/uploads/2021/03/20190213_fig4.png 1837w" sizes="(max-width: 1024px) 100vw, 1024px"><figcaption>図4 宛先ポート別の ZMap と Masscan の SYN パケット数比較</figcaption></figure>
+
+
+
+<h2>考察</h2>
+
+
+
+<p>Masscan と ZMap によるスキャンには大きな違いがあることがハニーポットの観測からわかりましたが、なぜそのような違いが生まれるのか、実はよくわかりません。たとえば IoT ボットの感染を試行する攻撃者がなぜ Masscan より ZMap を好んで使うのか、理由ははっきりしません。ただこれまでに公開されている IoT 機器の攻撃用スクリプトやチュートリアルを調べると、ZMap を利用してスキャンを行い、その後にエクスプロイトを実行するものが多数存在しています。一方 Masscan についてはこういったものはあまり見当たりません。</p>
+
+
+
+<p>52869/tcp ポートに対して ZMap による大量のスキャンを観測している理由の一つは、こうした攻撃ツールの存在にあると考えます。日本国内には Realtek の脆弱性 (CVE-2014-8361) を持つ機器が多数存在していることはすでに広く知られています。そのため Realtek の脆弱性を攻撃するツールのパッケージには日本の IP アドレスリスト<span class="footnote_referrer"><a role="button" tabindex="0" onclick="footnote_moveToReference_253_1('footnote_plugin_reference_253_1_5');" onkeypress="footnote_moveToReference_253_1('footnote_plugin_reference_253_1_5');" href="#f+253+1+5" class="footnote_hard_link"><sup id="footnote_plugin_tooltip_253_1_5" class="footnote_plugin_tooltip_text">[5]</sup></a><span class="footnote_referrer_base"><span id="r+253+1+5" class="footnote_referrer_anchor"></span></span><span id="footnote_plugin_tooltip_text_253_1_5" class="footnote_tooltip">このリストには日本に割り当てられている4,000以上の IPv4 アドレスレンジが含まれている。</span></span>が含まれており、ZMap を利用してこのリストに対して 52869/tcp ポートをスキャンするように設定されています。攻撃者の多くがこうしたツールを利用しているか、参考にしているのではないかと推測しています。以下は攻撃ツールに含まれているシェルスクリプトの例です。</p>
+
+<div><code class="hljs language-bash">zmap -p52869 -wjp.lst -o jp; python realtek.py jp; killall python -9;</code></div><small class="shcb-language" id="shcb-language-1"><span class="shcb-language__label">Code language:</span> <span class="shcb-language__name">Bash</span> <span class="shcb-language__paren">(</span><span class="shcb-language__slug">bash</span><span class="shcb-language__paren">)</span></small></pre>
+
+
+<p>こうしたツールを改変して利用することは比較的容易であり、新たな攻撃者が参入しやすい要因の一つになっているのではないかと考えます。またこのような攻撃ツールの利用が多いのだとすると、観測場所 (IP アドレス) によって観測結果がかなり変わることが予想されます。IIJ のハニーポットは国内に設置されているため、52869/tcp へのスキャンが多く観測されていますが、国外の観測地点ではおそらく違うでしょう。攻撃者による活動状況など今後も継続して調査、分析をしていきます。</p>
+<div class="speaker-mute footnotes_reference_container"> <div class="footnote_container_prepare"><p><span role="button" tabindex="0" class="footnote_reference_container_label pointer" onclick="footnote_expand_collapse_reference_container_253_1();">脚注</span><span role="button" tabindex="0" class="footnote_reference_container_collapse_button" style="display: none;" onclick="footnote_expand_collapse_reference_container_253_1();">[<a id="footnote_reference_container_collapse_button_253_1">+</a>]</span></p></div> <div id="footnote_references_container_253_1" style=""><table class="footnotes_table footnote-reference-container"><caption class="accessibility">脚注</caption> <tbody> 
+
+<tr class="footnotes_plugin_reference_row"> <th scope="row" class="footnote_plugin_index_combi pointer" onclick="footnote_moveToAnchor_253_1('footnote_plugin_tooltip_253_1_1');"><a id="footnote_plugin_reference_253_1_1" href="#r+253+1+1" title="Alt+ ←" class="footnote_backlink"><span class="footnote_item_base"><span id="f+253+1+1" class="footnote_item_anchor"></span></span><span class="footnote_index_arrow">↑</span>1</a></th> <td class="footnote_plugin_text">Masscan は GNU General Public License Version 3、ZMap は Apache License Version 2.0 のライセンスでそれぞれ公開されている。</td></tr>
+
+<tr class="footnotes_plugin_reference_row"> <th scope="row" class="footnote_plugin_index_combi pointer" onclick="footnote_moveToAnchor_253_1('footnote_plugin_tooltip_253_1_2');"><a id="footnote_plugin_reference_253_1_2" href="#r+253+1+2" title="Alt+ ←" class="footnote_backlink"><span class="footnote_item_base"><span id="f+253+1+2" class="footnote_item_anchor"></span></span><span class="footnote_index_arrow">↑</span>2</a></th> <td class="footnote_plugin_text">1/29から1/31にかけて、単一の IP アドレスから通常のスキャントラフィックの数倍にあたる大量のスキャンを観測したため、このデータは異常値として集計データからは除外している。なおこのスキャンは Masscan を利用したフルポートのスキャンだった。</td></tr>
+
+<tr class="footnotes_plugin_reference_row"> <th scope="row" class="footnote_plugin_index_combi pointer" onclick="footnote_moveToAnchor_253_1('footnote_plugin_tooltip_253_1_3');"><a id="footnote_plugin_reference_253_1_3" href="#r+253+1+3" title="Alt+ ←" class="footnote_backlink"><span class="footnote_item_base"><span id="f+253+1+3" class="footnote_item_anchor"></span></span><span class="footnote_index_arrow">↑</span>3</a></th> <td class="footnote_plugin_text">TCP の SYN/ACK リフレクション攻撃については、次の記事を参照のこと。IIJ では 2019年1月後半から 23/tcp や 2323/tcp などを宛先ポートとした SYN/ACK リフレクション攻撃を観測している。<br>「IIJ Security Diary: IoT 機器を踏み台として利用する SYN/ACK リフレクション攻撃」 <a href="https://sect.iij.ad.jp/d/2019/02/128021.html"><span class="footnote_url_wrap">https://sect.iij.ad.jp/d/2019/02/128021.html</span></a></td></tr>
+
+<tr class="footnotes_plugin_reference_row"> <th scope="row" class="footnote_plugin_index_combi pointer" onclick="footnote_moveToAnchor_253_1('footnote_plugin_tooltip_253_1_4');"><a id="footnote_plugin_reference_253_1_4" href="#r+253+1+4" title="Alt+ ←" class="footnote_backlink"><span class="footnote_item_base"><span id="f+253+1+4" class="footnote_item_anchor"></span></span><span class="footnote_index_arrow">↑</span>4</a></th> <td class="footnote_plugin_text">ただし上位10アドレス中の4アドレスについては、おそらく調査目的のスキャンと考えられる。</td></tr>
+
+<tr class="footnotes_plugin_reference_row"> <th scope="row" class="footnote_plugin_index_combi pointer" onclick="footnote_moveToAnchor_253_1('footnote_plugin_tooltip_253_1_5');"><a id="footnote_plugin_reference_253_1_5" href="#r+253+1+5" title="Alt+ ←" class="footnote_backlink"><span class="footnote_item_base"><span id="f+253+1+5" class="footnote_item_anchor"></span></span><span class="footnote_index_arrow">↑</span>5</a></th> <td class="footnote_plugin_text">このリストには日本に割り当てられている4,000以上の IPv4 アドレスレンジが含まれている。</td></tr>
+
+ </tbody> </table> </div></div></div>
+																		<div class="btm-post-meta">
+																					<p class="post-btm-cats"><span class="meta-label">カテゴリー:</span><a href="https://sect.iij.ad.jp/blog/cat/incident/" rel="category tag">セキュリティ事件</a> </p>
+																															<p class="post-btm-tags"> <span class="meta-label">タグ:</span><a href="https://sect.iij.ad.jp/blog/tag/iot/" rel="tag">IoT</a> </p>																			</div>
+																	</div>
+
+
+									<section id="sns-buttons" class="content-box sns-buttons single-bottom">
+		<h2 id="sns-btn-bottom-head" class="content-box-heading">シェアする</h2>
+		<ul class="share-list-container">
+
+							<li class="twitter balloon-btn">
+					<div class="share">
+						<a class="share-inner" href="http://twitter.com/intent/tweet?url=https%3A%2F%2Fsect.iij.ad.jp%2Fblog%2F2019%2F02%2Fmasscan-zmap%2F&amp;text=Masscan%20%E3%81%A8%20ZMap%20%E3%81%AB%E3%82%88%E3%82%8B%E3%82%B9%E3%82%AD%E3%83%A3%E3%83%B3%E3%81%AE%E9%81%95%E3%81%84%20%20%7C%20IIJ%20Security%20Diary&amp;tw_p=tweetbutton&amp;via=IIJSECT" target="_blank">
+							<span class="share-icon icon-twitter fab fa-twitter">
+								<span class="screen-reader-text">Twitter でシェア</span>
+							</span>
+						</a>
+					</div>
+									</li>
+			
+							<li class="hatena balloon-btn">
+					<div class="share">
+						<a class="share-inner" href="http://b.hatena.ne.jp/add?mode=confirm&amp;url=https%3A%2F%2Fsect.iij.ad.jp%2Fblog%2F2019%2F02%2Fmasscan-zmap%2F&amp;title=Masscan%20%E3%81%A8%20ZMap%20%E3%81%AB%E3%82%88%E3%82%8B%E3%82%B9%E3%82%AD%E3%83%A3%E3%83%B3%E3%81%AE%E9%81%95%E3%81%84%20%20%7C%20IIJ%20Security%20Diary" target="_blank">
+							<span class="share-icon si si-hatenabookmark">
+								<span class="screen-reader-text">はてなブックマークに保存</span>
+							</span>
+						</a>
+					</div>
+									</li>
+			
+							<li class="line balloon-btn">
+					<div class="share">
+						<a class="share-inner" href="https://social-plugins.line.me/lineit/share?url=https%3A%2F%2Fsect.iij.ad.jp%2Fblog%2F2019%2F02%2Fmasscan-zmap%2F&amp;title=Masscan%20%E3%81%A8%20ZMap%20%E3%81%AB%E3%82%88%E3%82%8B%E3%82%B9%E3%82%AD%E3%83%A3%E3%83%B3%E3%81%AE%E9%81%95%E3%81%84%20%20%7C%20IIJ%20Security%20Diary" target="_blank">
+							<span class="share-icon icon-line fab fa-line">
+								<span class="screen-reader-text">LINE でシェア</span>
+							</span>
+						</a>
+					</div>
+				</li>
+			
+							<li class="facebook balloon-btn">
+					<div class="share">
+						<a class="share-inner" href="http://www.facebook.com/sharer.php?src=bm&amp;u=https%3A%2F%2Fsect.iij.ad.jp%2Fblog%2F2019%2F02%2Fmasscan-zmap%2F&amp;t=Masscan%20%E3%81%A8%20ZMap%20%E3%81%AB%E3%82%88%E3%82%8B%E3%82%B9%E3%82%AD%E3%83%A3%E3%83%B3%E3%81%AE%E9%81%95%E3%81%84%20%20%7C%20IIJ%20Security%20Diary" target="_blank">
+							<span class="share-icon icon-facebook fab fa-facebook">
+								<span class="screen-reader-text">Facebook でシェア</span>
+							</span>
+						</a>
+					</div>
+									</li>
+			
+							<li class="pocket balloon-btn">
+					<div class="share">
+						<a class="share-inner" href="https://getpocket.com/edit?url=https%3A%2F%2Fsect.iij.ad.jp%2Fblog%2F2019%2F02%2Fmasscan-zmap%2F&amp;title=Masscan%20%E3%81%A8%20ZMap%20%E3%81%AB%E3%82%88%E3%82%8B%E3%82%B9%E3%82%AD%E3%83%A3%E3%83%B3%E3%81%AE%E9%81%95%E3%81%84%20%20%7C%20IIJ%20Security%20Diary" target="_blank">
+							<span class="share-icon icon-pocket fab fa-get-pocket">
+								<span class="screen-reader-text">Pocket に保存</span>
+							</span>
+						</a>
+					</div>
+									</li>
+			
+							<li class="feedly balloon-btn">
+					<div class="share">
+						<a class="share-inner" href="https://feedly.com/i/subscription/feed/https://sect.iij.ad.jp/feed/" target="_blank">
+							<span class="share-icon si si-feedly">
+								<span class="screen-reader-text">Feedly で購読</span>
+							</span>
+						</a>
+					</div>
+									</li>
+			
+		</ul>
+	</section>
+	
+
+
+	<section class="related-posts content-box">
+
+		<h2 class="related-head content-box-heading">関連投稿</h2>
+		<ul class="related-posts-list">
+
+
+			
+				<li class="related-article">
+					<article class="post-226 post type-post status-publish format-standard has-post-thumbnail hentry category-incident tag-malware tag-iot">
+
+						<figure class="post-thumbnail">
+							<a href="https://sect.iij.ad.jp/blog/2018/03/hajime-8291tcp/">
+								<img width="500" height="250" src="https://sect.iij.ad.jp/wp-content/uploads/2021/03/20180329_fig1-500x250.png" class="attachment-cd-medium size-cd-medium wp-post-image" alt="" loading="lazy">							</a>
+						</figure>
+
+						<div class="post-content">
+							<div class="post-category"><a href="https://sect.iij.ad.jp/blog/cat/incident/" rel="category tag">セキュリティ事件</a></div>
+							<h3 class="post-title"><a href="https://sect.iij.ad.jp/blog/2018/03/hajime-8291tcp/">Hajime ボットによる 8291/tcp へのスキャン活動</a></h3>
+						</div>
+
+					</article>
+				</li>
+
+			
+				<li class="related-article">
+					<article class="post-184 post type-post status-publish format-standard has-post-thumbnail hentry category-incident tag-malware tag-iot">
+
+						<figure class="post-thumbnail">
+							<a href="https://sect.iij.ad.jp/blog/2017/09/hajime-mirai/">
+								<img width="500" height="250" src="https://sect.iij.ad.jp/wp-content/uploads/2021/03/Hajime_1704-1708-500x250.png" class="attachment-cd-medium size-cd-medium wp-post-image" alt="" loading="lazy">							</a>
+						</figure>
+
+						<div class="post-content">
+							<div class="post-category"><a href="https://sect.iij.ad.jp/blog/cat/incident/" rel="category tag">セキュリティ事件</a></div>
+							<h3 class="post-title"><a href="https://sect.iij.ad.jp/blog/2017/09/hajime-mirai/">Hajime, Miraiによる通信の推移</a></h3>
+						</div>
+
+					</article>
+				</li>
+
+			
+				<li class="related-article">
+					<article class="post-247 post type-post status-publish format-standard has-post-thumbnail hentry category-incident tag-ddos tag-iot">
+
+						<figure class="post-thumbnail">
+							<a href="https://sect.iij.ad.jp/blog/2019/02/syn-ack-reflection/">
+								<img width="500" height="250" src="https://sect.iij.ad.jp/wp-content/uploads/2021/03/20190212_fig1-500x250.png" class="attachment-cd-medium size-cd-medium wp-post-image" alt="" loading="lazy" srcset="https://sect.iij.ad.jp/wp-content/uploads/2021/03/20190212_fig1-500x250.png 500w, https://sect.iij.ad.jp/wp-content/uploads/2021/03/20190212_fig1-300x151.png 300w, https://sect.iij.ad.jp/wp-content/uploads/2021/03/20190212_fig1-1024x514.png 1024w, https://sect.iij.ad.jp/wp-content/uploads/2021/03/20190212_fig1-768x386.png 768w, https://sect.iij.ad.jp/wp-content/uploads/2021/03/20190212_fig1-1536x771.png 1536w, https://sect.iij.ad.jp/wp-content/uploads/2021/03/20190212_fig1-2048x1028.png 2048w" sizes="(max-width: 500px) 100vw, 500px">							</a>
+						</figure>
+
+						<div class="post-content">
+							<div class="post-category"><a href="https://sect.iij.ad.jp/blog/cat/incident/" rel="category tag">セキュリティ事件</a></div>
+							<h3 class="post-title"><a href="https://sect.iij.ad.jp/blog/2019/02/syn-ack-reflection/">IoT 機器を踏み台として利用する SYN/ACK リフレクション攻撃</a></h3>
+						</div>
+
+					</article>
+				</li>
+
+			
+				<li class="related-article">
+					<article class="post-199 post type-post status-publish format-standard hentry category-incident tag-malware tag-iot">
+
+						<figure class="post-thumbnail">
+							<a href="https://sect.iij.ad.jp/blog/2017/09/hajime-bot/">
+								<img src="https://sect.iij.ad.jp/wp-content/themes/coldbox/assets/img/thumb-medium.png" alt="" height="250" width="500">							</a>
+						</figure>
+
+						<div class="post-content">
+							<div class="post-category"><a href="https://sect.iij.ad.jp/blog/cat/incident/" rel="category tag">セキュリティ事件</a></div>
+							<h3 class="post-title"><a href="https://sect.iij.ad.jp/blog/2017/09/hajime-bot/">Hajime ボットの観測状況</a></h3>
+						</div>
+
+					</article>
+				</li>
+
+			
+				<li class="related-article">
+					<article class="post-257 post type-post status-publish format-standard has-post-thumbnail hentry category-incident tag-ddos tag-iot">
+
+						<figure class="post-thumbnail">
+							<a href="https://sect.iij.ad.jp/blog/2019/09/wikipedia-twitch-blizzard-ddos/">
+								<img width="500" height="250" src="https://sect.iij.ad.jp/wp-content/uploads/2021/03/20190917_fig2-500x250.png" class="attachment-cd-medium size-cd-medium wp-post-image" alt="" loading="lazy">							</a>
+						</figure>
+
+						<div class="post-content">
+							<div class="post-category"><a href="https://sect.iij.ad.jp/blog/cat/incident/" rel="category tag">セキュリティ事件</a></div>
+							<h3 class="post-title"><a href="https://sect.iij.ad.jp/blog/2019/09/wikipedia-twitch-blizzard-ddos/">Wikipedia, Twitch, Blizzard への DDoS 攻撃</a></h3>
+						</div>
+
+					</article>
+				</li>
+
+			
+				<li class="related-article">
+					<article class="post-190 post type-post status-publish format-standard has-post-thumbnail hentry category-incident tag-malware tag-iot">
+
+						<figure class="post-thumbnail">
+							<a href="https://sect.iij.ad.jp/blog/2017/09/mirai-variants/">
+								<img width="500" height="250" src="https://sect.iij.ad.jp/wp-content/uploads/2021/03/20170914_fig2-500x250.png" class="attachment-cd-medium size-cd-medium wp-post-image" alt="" loading="lazy">							</a>
+						</figure>
+
+						<div class="post-content">
+							<div class="post-category"><a href="https://sect.iij.ad.jp/blog/cat/incident/" rel="category tag">セキュリティ事件</a></div>
+							<h3 class="post-title"><a href="https://sect.iij.ad.jp/blog/2017/09/mirai-variants/">Mirai 亜種の活動状況について</a></h3>
+						</div>
+
+					</article>
+				</li>
+
+			
+		</ul>
+
+		
+	</section>
+
+
+
+<nav class="post-nav">
+
+	<ul>
+
+		<li class="prev"><a href="https://sect.iij.ad.jp/blog/2019/02/syn-ack-reflection/" rel="prev"><div class="post-thumbnail"></div> <span class="chevron-left" aria-hidden="true"></span> <p class="nav-title">前の投稿</p> <p class="post-title">IoT 機器を踏み台として利用する SYN/ACK リフレクション攻撃</p></a></li><li class="next"><a href="https://sect.iij.ad.jp/blog/2019/09/wikipedia-twitch-blizzard-ddos/" rel="next"><div class="post-thumbnail"></div> <span class="chevron-right" aria-hidden="true"></span> <p class="nav-title">次の投稿</p> <p class="post-title">Wikipedia, Twitch, Blizzard への DDoS 攻撃</p></a></li>
+	</ul>
+
+</nav>
+
+
+							</div><!--/.content-inside-->
+
+						</div><!--/.content-inner-->
+
+					</div><!--/.content-->
+
+					
+
+	<aside id="sidebar-s1" class="sidebar-s1" role="complementary">
+
+		<div class="sidebar">
+
+			<div class="sidebar-inner">
+
+				
+		<section id="recent-posts-2" class="widget widget_recent_entries">
+		<h2 class="widget-title">最近の投稿</h2>
+		<ul>
+											<li>
+					<a href="https://sect.iij.ad.jp/blog/2022/07/34th-annual-first-conference/">34th Annual FIRST Conference 現地レポート</a>
+									</li>
+											<li>
+					<a href="https://sect.iij.ad.jp/blog/2021/06/ndss2021-3/">NDSS Symposium 2021 セッション紹介 (3)</a>
+									</li>
+											<li>
+					<a href="https://sect.iij.ad.jp/blog/2021/06/ndss2021-2/">NDSS Symposium 2021 セッション紹介(2)</a>
+									</li>
+											<li>
+					<a href="https://sect.iij.ad.jp/blog/2021/04/iiw-verifiable-credential/">IIW (Internet Identity Workshop) の Verifiable Credential チケット</a>
+									</li>
+											<li>
+					<a href="https://sect.iij.ad.jp/blog/2021/03/ndss2021-1/">サイトリニューアルのお知らせと NDSS Symposium 2021 セッション紹介 (1)</a>
+									</li>
+					</ul>
+
+		</section><section id="categories-2" class="widget widget_categories"><h2 class="widget-title">カテゴリー</h2>
+			<ul>
+					<li class="cat-item cat-item-17"><a href="https://sect.iij.ad.jp/blog/cat/info/">お知らせ</a>
+</li>
+	<li class="cat-item cat-item-18"><a href="https://sect.iij.ad.jp/blog/cat/other/">その他</a>
+</li>
+	<li class="cat-item cat-item-14"><a href="https://sect.iij.ad.jp/blog/cat/vuln/">脆弱性</a>
+</li>
+	<li class="cat-item cat-item-15"><a href="https://sect.iij.ad.jp/blog/cat/incident/">セキュリティ事件</a>
+</li>
+	<li class="cat-item cat-item-16"><a href="https://sect.iij.ad.jp/blog/cat/tech/">技術解説</a>
+</li>
+			</ul>
+
+			</section><section id="tag_cloud-3" class="widget widget_tag_cloud"><h2 class="widget-title">タグ</h2><div class="tagcloud"><a href="https://sect.iij.ad.jp/blog/tag/anonymous/" class="tag-cloud-link tag-link-41 tag-link-position-1" style="font-size: 11.620689655172pt;" aria-label="Anonymous (3個の項目)">Anonymous</a>
+<a href="https://sect.iij.ad.jp/blog/tag/apache/" class="tag-cloud-link tag-link-21 tag-link-position-2" style="font-size: 8pt;" aria-label="Apache (1個の項目)">Apache</a>
+<a href="https://sect.iij.ad.jp/blog/tag/arbitrary-code-execution/" class="tag-cloud-link tag-link-30 tag-link-position-3" style="font-size: 10.172413793103pt;" aria-label="Arbitrary code execution (2個の項目)">Arbitrary code execution</a>
+<a href="https://sect.iij.ad.jp/blog/tag/backscatter/" class="tag-cloud-link tag-link-38 tag-link-position-4" style="font-size: 8pt;" aria-label="Backscatter (1個の項目)">Backscatter</a>
+<a href="https://sect.iij.ad.jp/blog/tag/bind/" class="tag-cloud-link tag-link-22 tag-link-position-5" style="font-size: 10.172413793103pt;" aria-label="BIND (2個の項目)">BIND</a>
+<a href="https://sect.iij.ad.jp/blog/tag/bsod/" class="tag-cloud-link tag-link-53 tag-link-position-6" style="font-size: 8pt;" aria-label="BSOD (1個の項目)">BSOD</a>
+<a href="https://sect.iij.ad.jp/blog/tag/cloud/" class="tag-cloud-link tag-link-26 tag-link-position-7" style="font-size: 8pt;" aria-label="Cloud (1個の項目)">Cloud</a>
+<a href="https://sect.iij.ad.jp/blog/tag/cryptography/" class="tag-cloud-link tag-link-35 tag-link-position-8" style="font-size: 14.637931034483pt;" aria-label="Cryptography (6個の項目)">Cryptography</a>
+<a href="https://sect.iij.ad.jp/blog/tag/ddos/" class="tag-cloud-link tag-link-37 tag-link-position-9" style="font-size: 15.241379310345pt;" aria-label="DDoS (7個の項目)">DDoS</a>
+<a href="https://sect.iij.ad.jp/blog/tag/dhs/" class="tag-cloud-link tag-link-43 tag-link-position-10" style="font-size: 8pt;" aria-label="DHS (1個の項目)">DHS</a>
+<a href="https://sect.iij.ad.jp/blog/tag/digital-identity/" class="tag-cloud-link tag-link-58 tag-link-position-11" style="font-size: 8pt;" aria-label="Digital Identity (1個の項目)">Digital Identity</a>
+<a href="https://sect.iij.ad.jp/blog/tag/dns/" class="tag-cloud-link tag-link-19 tag-link-position-12" style="font-size: 13.793103448276pt;" aria-label="DNS (5個の項目)">DNS</a>
+<a href="https://sect.iij.ad.jp/blog/tag/dos/" class="tag-cloud-link tag-link-49 tag-link-position-13" style="font-size: 8pt;" aria-label="DoS (1個の項目)">DoS</a>
+<a href="https://sect.iij.ad.jp/blog/tag/exploit-kit/" class="tag-cloud-link tag-link-45 tag-link-position-14" style="font-size: 13.793103448276pt;" aria-label="Exploit kit (5個の項目)">Exploit kit</a>
+<a href="https://sect.iij.ad.jp/blog/tag/first/" class="tag-cloud-link tag-link-60 tag-link-position-15" style="font-size: 8pt;" aria-label="FIRST (1個の項目)">FIRST</a>
+<a href="https://sect.iij.ad.jp/blog/tag/forensics/" class="tag-cloud-link tag-link-31 tag-link-position-16" style="font-size: 10.172413793103pt;" aria-label="Forensics (2個の項目)">Forensics</a>
+<a href="https://sect.iij.ad.jp/blog/tag/iir/" class="tag-cloud-link tag-link-36 tag-link-position-17" style="font-size: 10.172413793103pt;" aria-label="IIR (2個の項目)">IIR</a>
+<a href="https://sect.iij.ad.jp/blog/tag/iot/" class="tag-cloud-link tag-link-44 tag-link-position-18" style="font-size: 18.258620689655pt;" aria-label="IoT (13個の項目)">IoT</a>
+<a href="https://sect.iij.ad.jp/blog/tag/ipa/" class="tag-cloud-link tag-link-39 tag-link-position-19" style="font-size: 10.172413793103pt;" aria-label="IPA (2個の項目)">IPA</a>
+<a href="https://sect.iij.ad.jp/blog/tag/linux/" class="tag-cloud-link tag-link-23 tag-link-position-20" style="font-size: 12.827586206897pt;" aria-label="Linux (4個の項目)">Linux</a>
+<a href="https://sect.iij.ad.jp/blog/tag/malvertising/" class="tag-cloud-link tag-link-52 tag-link-position-21" style="font-size: 8pt;" aria-label="Malvertising (1個の項目)">Malvertising</a>
+<a href="https://sect.iij.ad.jp/blog/tag/malware/" class="tag-cloud-link tag-link-28 tag-link-position-22" style="font-size: 22pt;" aria-label="Malware (28個の項目)">Malware</a>
+<a href="https://sect.iij.ad.jp/blog/tag/microsoft/" class="tag-cloud-link tag-link-46 tag-link-position-23" style="font-size: 10.172413793103pt;" aria-label="Microsoft (2個の項目)">Microsoft</a>
+<a href="https://sect.iij.ad.jp/blog/tag/mysql/" class="tag-cloud-link tag-link-25 tag-link-position-24" style="font-size: 8pt;" aria-label="MySQL (1個の項目)">MySQL</a>
+<a href="https://sect.iij.ad.jp/blog/tag/php/" class="tag-cloud-link tag-link-24 tag-link-position-25" style="font-size: 8pt;" aria-label="PHP (1個の項目)">PHP</a>
+<a href="https://sect.iij.ad.jp/blog/tag/rat/" class="tag-cloud-link tag-link-51 tag-link-position-26" style="font-size: 8pt;" aria-label="RAT (1個の項目)">RAT</a>
+<a href="https://sect.iij.ad.jp/blog/tag/scada/" class="tag-cloud-link tag-link-42 tag-link-position-27" style="font-size: 8pt;" aria-label="SCADA (1個の項目)">SCADA</a>
+<a href="https://sect.iij.ad.jp/blog/tag/scam/" class="tag-cloud-link tag-link-54 tag-link-position-28" style="font-size: 8pt;" aria-label="Scam (1個の項目)">Scam</a>
+<a href="https://sect.iij.ad.jp/blog/tag/ssl/" class="tag-cloud-link tag-link-33 tag-link-position-29" style="font-size: 13.793103448276pt;" aria-label="SSL (5個の項目)">SSL</a>
+<a href="https://sect.iij.ad.jp/blog/tag/targeted-attack/" class="tag-cloud-link tag-link-32 tag-link-position-30" style="font-size: 12.827586206897pt;" aria-label="Targeted Attack (4個の項目)">Targeted Attack</a>
+<a href="https://sect.iij.ad.jp/blog/tag/tcp-ip/" class="tag-cloud-link tag-link-47 tag-link-position-31" style="font-size: 8pt;" aria-label="TCP/IP (1個の項目)">TCP/IP</a>
+<a href="https://sect.iij.ad.jp/blog/tag/tls/" class="tag-cloud-link tag-link-34 tag-link-position-32" style="font-size: 13.793103448276pt;" aria-label="TLS (5個の項目)">TLS</a>
+<a href="https://sect.iij.ad.jp/blog/tag/udp/" class="tag-cloud-link tag-link-48 tag-link-position-33" style="font-size: 8pt;" aria-label="UDP (1個の項目)">UDP</a>
+<a href="https://sect.iij.ad.jp/blog/tag/verifiable-credentials/" class="tag-cloud-link tag-link-57 tag-link-position-34" style="font-size: 8pt;" aria-label="Verifiable Credentials (1個の項目)">Verifiable Credentials</a>
+<a href="https://sect.iij.ad.jp/blog/tag/vulnerability/" class="tag-cloud-link tag-link-20 tag-link-position-35" style="font-size: 19.224137931034pt;" aria-label="Vulnerability (16個の項目)">Vulnerability</a>
+<a href="https://sect.iij.ad.jp/blog/tag/web-browser/" class="tag-cloud-link tag-link-40 tag-link-position-36" style="font-size: 8pt;" aria-label="Web browser (1個の項目)">Web browser</a>
+<a href="https://sect.iij.ad.jp/blog/tag/windows/" class="tag-cloud-link tag-link-29 tag-link-position-37" style="font-size: 11.620689655172pt;" aria-label="Windows (3個の項目)">Windows</a></div>
+</section><section id="archives-2" class="widget widget_archive"><h2 class="widget-title">アーカイブ</h2>
+			<ul>
+					<li><a href="https://sect.iij.ad.jp/blog/2022/07/">2022年7月</a></li>
+	<li><a href="https://sect.iij.ad.jp/blog/2021/06/">2021年6月</a></li>
+	<li><a href="https://sect.iij.ad.jp/blog/2021/04/">2021年4月</a></li>
+	<li><a href="https://sect.iij.ad.jp/blog/2021/03/">2021年3月</a></li>
+	<li><a href="https://sect.iij.ad.jp/blog/2020/02/">2020年2月</a></li>
+	<li><a href="https://sect.iij.ad.jp/blog/2019/11/">2019年11月</a></li>
+	<li><a href="https://sect.iij.ad.jp/blog/2019/09/">2019年9月</a></li>
+	<li><a href="https://sect.iij.ad.jp/blog/2019/02/">2019年2月</a></li>
+	<li><a href="https://sect.iij.ad.jp/blog/2019/01/">2019年1月</a></li>
+	<li><a href="https://sect.iij.ad.jp/blog/2018/05/">2018年5月</a></li>
+	<li><a href="https://sect.iij.ad.jp/blog/2018/04/">2018年4月</a></li>
+	<li><a href="https://sect.iij.ad.jp/blog/2018/03/">2018年3月</a></li>
+	<li><a href="https://sect.iij.ad.jp/blog/2018/02/">2018年2月</a></li>
+	<li><a href="https://sect.iij.ad.jp/blog/2018/01/">2018年1月</a></li>
+	<li><a href="https://sect.iij.ad.jp/blog/2017/12/">2017年12月</a></li>
+	<li><a href="https://sect.iij.ad.jp/blog/2017/09/">2017年9月</a></li>
+	<li><a href="https://sect.iij.ad.jp/blog/2017/04/">2017年4月</a></li>
+	<li><a href="https://sect.iij.ad.jp/blog/2017/02/">2017年2月</a></li>
+	<li><a href="https://sect.iij.ad.jp/blog/2016/10/">2016年10月</a></li>
+	<li><a href="https://sect.iij.ad.jp/blog/2016/02/">2016年2月</a></li>
+	<li><a href="https://sect.iij.ad.jp/blog/2015/12/">2015年12月</a></li>
+	<li><a href="https://sect.iij.ad.jp/blog/2015/05/">2015年5月</a></li>
+	<li><a href="https://sect.iij.ad.jp/blog/2014/06/">2014年6月</a></li>
+	<li><a href="https://sect.iij.ad.jp/blog/2014/04/">2014年4月</a></li>
+	<li><a href="https://sect.iij.ad.jp/blog/2013/12/">2013年12月</a></li>
+	<li><a href="https://sect.iij.ad.jp/blog/2013/11/">2013年11月</a></li>
+	<li><a href="https://sect.iij.ad.jp/blog/2013/07/">2013年7月</a></li>
+	<li><a href="https://sect.iij.ad.jp/blog/2013/03/">2013年3月</a></li>
+	<li><a href="https://sect.iij.ad.jp/blog/2012/10/">2012年10月</a></li>
+	<li><a href="https://sect.iij.ad.jp/blog/2012/09/">2012年9月</a></li>
+	<li><a href="https://sect.iij.ad.jp/blog/2012/08/">2012年8月</a></li>
+	<li><a href="https://sect.iij.ad.jp/blog/2012/07/">2012年7月</a></li>
+	<li><a href="https://sect.iij.ad.jp/blog/2012/06/">2012年6月</a></li>
+	<li><a href="https://sect.iij.ad.jp/blog/2012/05/">2012年5月</a></li>
+	<li><a href="https://sect.iij.ad.jp/blog/2012/03/">2012年3月</a></li>
+	<li><a href="https://sect.iij.ad.jp/blog/2012/02/">2012年2月</a></li>
+	<li><a href="https://sect.iij.ad.jp/blog/2012/01/">2012年1月</a></li>
+	<li><a href="https://sect.iij.ad.jp/blog/2011/12/">2011年12月</a></li>
+	<li><a href="https://sect.iij.ad.jp/blog/2011/11/">2011年11月</a></li>
+	<li><a href="https://sect.iij.ad.jp/blog/2011/10/">2011年10月</a></li>
+			</ul>
+
+			</section>
+			</div>
+
+		</div>
+
+	</aside><!--/.sidebar-->
+
+
+				</div><!--/.container-->
+
+			</div><!--/.container-outer-->
+
+		</article>
+
+	</main>
+
+
+
+<footer id="footer" class="footer" role="contentinfo">
+
+	
+	<nav id="footer-menu" class="footer-menu" role="navigation" aria-label="フッターメニュー"><div class="container"><ul id="footer-nav" class="menu-container"><li id="menu-item-350" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-350"><a href="https://www.iij.ad.jp">IIJ</a></li>
+<li id="menu-item-351" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-351"><a href="https://www.iij.ad.jp/dev/report/iir/">Internet Infrastructure Review (IIR)</a></li>
+<li id="menu-item-352" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-352"><a href="https://www.iij.ad.jp/privacy/index.html">個人情報保護ポリシー</a></li>
+</ul><!--/#footer-nav--></div></nav>
+	<div class="footer-bottom">
+
+		<div class="container">
+
+			<div class="copyright">
+
+				<p>
+					
+					© Internet Initiative Japan Inc.
+					
+				</p>
+
+				
+			</div>
+
+			<ul class="social-links has-3  ">			<li class="twitter-container">
+				<a class="twitter" href="https://twitter.com/IIJSECT" title="Twitter" target="_blank">
+					<span class="fab fa-twitter" aria-hidden="true"></span>
+					<span class="screen-reader-text">Twitter</span>
+				</a>
+			</li>
+						<li class="rss-container">
+				<a class="rss" href="https://sect.iij.ad.jp/feed/" title="RSS フィード" target="_blank">
+					<span class="fas fa-rss" aria-hidden="true"></span>
+					<span class="screen-reader-text">RSS フィード</span>
+				</a>
+			</li>
+						<li class="envelope-container">
+				<a class="envelope" href="https://sect.iij.ad.jp/contact/" title="お問い合わせフォーム" target="_blank">
+					<span class="fas fa-envelope" aria-hidden="true"></span>
+					<span class="screen-reader-text">お問い合わせフォーム</span>
+				</a>
+			</li>
+			</ul>
+		</div>
+
+	</div><!--/.footer-bottom-->
+
+	<a id="back-to-top" class="noscroll back-to-top is-hidden" href="#" style="display: block;">
+		<span class="chevron-up" aria-hidden="true"></span>
+		<span class="screen-reader-text">トップへ戻る</span>
+	</a>
+
+</footer>
+
+<div class="modal-search-form" id="modal-search-form" role="dialog" aria-modal="true">
+	
+<form method="get" class="search-form" action="https://sect.iij.ad.jp/" role="search">
+	<label for="search-form2" class="screen-reader-text">検索</label>
+	<input type="search" class="search-inner" name="s" id="search-form2" placeholder="サイト内を検索" value="">
+	<button type="submit" class="search-submit">
+		<span class="icon search" aria-hidden="true"></span>
+		<span class="screen-reader-text">検索</span>
+	</button>
+</form>
+
+	<button class="close-toggle">
+		<span class="top" aria-hidden="true"></span>
+		<span class="bottom" aria-hidden="true"></span>
+		<span class="label">閉じる</span>
+	</button>
+</div>
+
+</body></html>
+

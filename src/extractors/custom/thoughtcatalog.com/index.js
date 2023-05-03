@@ -7,6 +7,7 @@ export const ThoughtcatalogComExtractor = {
 
   author: {
     selectors: [
+      'cite a',
       'div.col-xs-12.article_header div.writer-container.writer-container-inline.writer-no-avatar h4.writer-name',
       'h1.writer-name',
     ],
@@ -30,6 +31,6 @@ export const ThoughtcatalogComExtractor = {
     // Is there anything that is in the result that shouldn't be?
     // The clean selectors will remove anything that matches from
     // the result
-    clean: ['.tc_mark'],
+    clean: ['.tc_mark', 'figcaption'],
   },
 };

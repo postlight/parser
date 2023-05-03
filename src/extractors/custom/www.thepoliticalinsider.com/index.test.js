@@ -16,7 +16,7 @@ describe('WwwThepoliticalinsiderComExtractor', () => {
       url =
         'http://www.thepoliticalinsider.com/hillary-faithless-electors-more-than-trump/';
       const html = fs.readFileSync(
-        './fixtures/www.thepoliticalinsider.com/1482255981213.html'
+        './fixtures/www.thepoliticalinsider.com.html'
       );
       result = Mercury.parse(url, { html, fallback: false });
     });

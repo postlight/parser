@@ -2,15 +2,18 @@ export const HellogigglesComExtractor = {
   domain: 'hellogiggles.com',
 
   title: {
-    selectors: ['.title'],
+    selectors: [['meta[name="og:title"]', 'value'], '.title'],
   },
 
   author: {
-    selectors: ['.author-link'],
+    selectors: ['.byline-wrapper span.author_name', '.author-link'],
   },
 
   date_published: {
-    selectors: [['meta[name="article:published_time"]', 'value']],
+    selectors: [
+      ['meta[property="article:published_time"]', 'content'],
+      ['meta[name="article:published_time"]', 'value'],
+    ],
   },
 
   lead_image_url: {
@@ -18,7 +21,7 @@ export const HellogigglesComExtractor = {
   },
 
   content: {
-    selectors: ['.entry-content'],
+    selectors: ['.main-content', '.entry-content'],
 
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images

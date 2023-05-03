@@ -14,9 +14,7 @@ describe('JapanZdnetComExtractor', () => {
     let url;
     beforeAll(() => {
       url = 'https://japan.zdnet.com/article/35136396/';
-      const html = fs.readFileSync(
-        './fixtures/japan.zdnet.com/1556591023244.html'
-      );
+      const html = fs.readFileSync('./fixtures/japan.zdnet.com.html');
       result = Mercury.parse(url, {
         html,
         fallback: false,

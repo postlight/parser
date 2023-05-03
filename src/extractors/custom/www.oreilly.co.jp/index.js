@@ -2,26 +2,32 @@ export const WwwOreillyCoJpExtractor = {
   domain: 'www.oreilly.co.jp',
 
   title: {
-    selectors: ['h3'],
+    selectors: [['meta[name="og:title"]', 'value'], 'h3'],
   },
 
   author: {
-    selectors: ['li[itemprop="author"]'],
+    selectors: ['span[itemprop="author"]', 'li[itemprop="author"]'],
   },
 
   date_published: {
-    selectors: [['meta[itemprop="datePublished"]', 'value']],
+    selectors: [
+      ['dd[itemprop="datePublished"]', 'content'],
+      ['meta[itemprop="datePublished"]', 'value'],
+    ],
     timezone: 'Asia/Tokyo',
   },
 
   dek: null,
 
   lead_image_url: {
-    selectors: [['meta[name="og:image"]', 'value']],
+    selectors: [
+      ['meta[name="og:image:secure_url"]', 'value'],
+      ['meta[name="og:image"]', 'value'],
+    ],
   },
 
   content: {
-    selectors: ['#content'],
+    selectors: ['section.detail', '#content'],
 
     defaultCleaner: false,
 

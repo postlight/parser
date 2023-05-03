@@ -17,6 +17,6 @@ export default {
       ? 'dist/mercury_test.js'
       : 'dist/mercury.js',
     format: 'cjs',
-    sourceMap: true,
+    sourcemap: true,
   },
 };

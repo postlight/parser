@@ -1,5 +1,12 @@
 # Mercury Parser Changelog
 
+### 2.2.3 (Oct 24, 2022)
+
+- [[`635fcf6356`](https://github.com/postlight/parser/commit/635fcf6356)] - **fix**: handle sec & ms timestamps properly (#702) (Austin)
+- [[`ab401822aa`](https://github.com/postlight/parser/commit/ab401822aa)] - maintenance update - october 2022 (#696) (Michael Ashley)
+- [[`8ca8a5f7e5`](https://github.com/postlight/parser/commit/8ca8a5f7e5)] - **feat**: add postlight.com custom extractor (#695) (Sarah Doire)
+- [[`39b9ff55c4`](https://github.com/postlight/parser/commit/39b9ff55c4)] - **release**: 2.2.2 (#689) (John Holdun)
+
 ### 2.2.2 (Sept 08, 2022)
 
 ##### Commits

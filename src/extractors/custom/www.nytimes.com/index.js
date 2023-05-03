@@ -3,6 +3,7 @@ export const NYTimesExtractor = {
 
   title: {
     selectors: [
+      'h1[data-testid="headline"]',
       'h1.g-headline',
       'h1[itemprop="headline"]',
       'h1.headline',
@@ -49,7 +50,10 @@ export const NYTimesExtractor = {
   },
 
   date_published: {
-    selectors: [['meta[name="article:published"]', 'value']],
+    selectors: [
+      ['meta[name="article:published_time"]', 'value'],
+      ['meta[name="article:published"]', 'value'],
+    ],
   },
 
   lead_image_url: {

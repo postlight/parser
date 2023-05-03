@@ -14,9 +14,7 @@ describe('TechlogIijAdJpExtractor', () => {
     let url;
     beforeAll(() => {
       url = 'http://techlog.iij.ad.jp/archives/2562';
-      const html = fs.readFileSync(
-        './fixtures/techlog.iij.ad.jp/1556573200354.html'
-      );
+      const html = fs.readFileSync('./fixtures/techlog.iij.ad.jp.html');
       result = Mercury.parse(url, { html, fallback: false });
     });
 
@@ -80,18 +78,18 @@ describe('TechlogIijAdJpExtractor', () => {
       // the article.
       assert.equal(
         lead_image_url,
-        `http://techlog.iij.ad.jp/images/og-icon.png`
+        `https://techlog.iij.ad.jp/images/og-icon.png`
       );
     });
 
-    it('returns the pages_rendered', async () => {
+    it('returns the rendered_pages', async () => {
       // To pass this test, fill out the pages_rendered selector
       // in ./src/extractors/custom/techlog.iij.ad.jp/index.js.
-      const { pages_rendered } = await result;
+      const { rendered_pages } = await result;
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(pages_rendered, null);
+      assert.equal(rendered_pages, 1);
     });
 
     it('returns the content', async () => {

@@ -14,9 +14,7 @@ describe('JapanCnetComExtractor', () => {
     let url;
     beforeAll(() => {
       url = 'https://japan.cnet.com/article/35135610/';
-      const html = fs.readFileSync(
-        './fixtures/japan.cnet.com/1555118717655.html'
-      );
+      const html = fs.readFileSync('./fixtures/japan.cnet.com.html');
       result = Mercury.parse(url, {
         html,
         fallback: false,

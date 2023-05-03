@@ -15,9 +15,7 @@ describe('WwwMentalflossComExtractor', () => {
     beforeAll(() => {
       url =
         'http://www.mentalfloss.com/article/90140/its-not-too-late-holiday-shop-these-amazon-deals';
-      const html = fs.readFileSync(
-        './fixtures/www.mentalfloss.com/1482186439659.html'
-      );
+      const html = fs.readFileSync('./fixtures/www.mentalfloss.com.html');
       result = Mercury.parse(url, { html, fallback: false });
     });
 
@@ -59,7 +57,7 @@ describe('WwwMentalflossComExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(date_published, '2016-12-19T17:29:00.000Z');
+      assert.equal(date_published, '2016-12-19T12:29:00.000Z');
     });
 
     it('returns the lead_image_url', async () => {
@@ -71,7 +69,7 @@ describe('WwwMentalflossComExtractor', () => {
       // the article.
       assert.equal(
         lead_image_url,
-        'http://images.mentalfloss.com/sites/default/files/35hk53jh53.png'
+        'https://images2.minutemediacdn.com/image/upload/c_fill,w_1440,ar_16:9,f_auto,q_auto,g_auto/shape/cover/sport/35hk53jh53-4509b8146d8e06da952fe862fd3874ad.jpg'
       );
     });
 

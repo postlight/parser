@@ -15,9 +15,7 @@ describe('ThefederalistpapersOrgExtractor', () => {
     beforeAll(() => {
       url =
         'http://thefederalistpapers.org/education-2/the-failure-of-public-schooling-in-one-chart';
-      const html = fs.readFileSync(
-        './fixtures/thefederalistpapers.org/1482344359572.html'
-      );
+      const html = fs.readFileSync('./fixtures/thefederalistpapers.org.html');
       result = Mercury.parse(url, { html, fallback: false });
     });
 
@@ -46,7 +44,7 @@ describe('ThefederalistpapersOrgExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(author, 'Robert Gehl');
+      assert.equal(author, 'Bushrod Washington');
     });
 
     it('returns the date_published', async () => {
@@ -56,7 +54,7 @@ describe('ThefederalistpapersOrgExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(date_published, '2016-12-21T08:31:34.000Z');
+      assert.equal(date_published, '2016-12-21T16:31:34.000Z');
     });
 
     it('returns the lead_image_url', async () => {
@@ -68,7 +66,7 @@ describe('ThefederalistpapersOrgExtractor', () => {
       // the article.
       assert.equal(
         lead_image_url,
-        'http://thefederalistpapers.integratedmarket.netdna-cdn.com/wp-content/uploads/2016/12/trends-in-public-schooling-1.jpg'
+        'https://thefederalistpapers.org/wp-content/uploads/2016/12/trends-in-public-schooling-1.jpg'
       );
     });
 

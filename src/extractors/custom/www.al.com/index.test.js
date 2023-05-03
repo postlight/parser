@@ -15,7 +15,7 @@ describe('WwwAlComExtractor', () => {
     beforeAll(() => {
       url =
         'http://www.al.com/news/birmingham/index.ssf/2016/12/two_arrested_in_multi-state_de.html#incart_river_home';
-      const html = fs.readFileSync('./fixtures/www.al.com/1482445422101.html');
+      const html = fs.readFileSync('./fixtures/www.al.com.html');
       result = Mercury.parse(url, { html, fallback: false });
     });
 
@@ -57,7 +57,7 @@ describe('WwwAlComExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(date_published, '2016-12-22T19:47:00.000Z');
+      assert.equal(date_published, '2016-12-22T23:47:00.000Z');
     });
 
     it('returns the lead_image_url', async () => {
@@ -69,7 +69,7 @@ describe('WwwAlComExtractor', () => {
       // the article.
       assert.equal(
         lead_image_url,
-        'http://image.al.com/home/bama-media/width620/img/news_birmingham_impact/photo/21753198-standard.jpg'
+        'https://www.al.com/resizer/YO-Vb3V3oDljjYrYT6GRgALxIDE=/1280x0/smart/advancelocal-adapter-image-uploads.s3.amazonaws.com/image.al.com/home/bama-media/width2048/img/news_birmingham_impact/photo/skimming-scheme-seized-cash-and-cardsjpg-db415ce3fd130cd1.jpg'
       );
     });
 
@@ -93,7 +93,7 @@ describe('WwwAlComExtractor', () => {
       // the article.
       assert.equal(
         first13,
-        "Jake Frith, special agent with the Alabama Attorney General's office, talks about an"
+        'skimming scheme seized cash and cards.jpgCash and cards seized during the arrest of'
       );
     });
   });
