@@ -14,7 +14,7 @@ describe('FortuneComExtractor', () => {
     let url;
     beforeAll(() => {
       url = 'http://fortune.com/2016/12/15/amazon-alexa-gadgets/';
-      const html = fs.readFileSync('./fixtures/fortune.com/1485216994169.html');
+      const html = fs.readFileSync('./fixtures/fortune.com.html');
       result = Mercury.parse(url, { html, fallback: false });
     });
 

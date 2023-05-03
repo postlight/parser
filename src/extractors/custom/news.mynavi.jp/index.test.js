@@ -14,9 +14,7 @@ describe('NewsMynaviJpExtractor', () => {
     let url;
     beforeAll(() => {
       url = 'https://news.mynavi.jp/article/20190222-775563/';
-      const html = fs.readFileSync(
-        './fixtures/news.mynavi.jp/1550913587143.html'
-      );
+      const html = fs.readFileSync('./fixtures/news.mynavi.jp.html');
       result = Mercury.parse(url, { html, fallback: false });
     });
 
@@ -48,7 +46,7 @@ describe('NewsMynaviJpExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(author, '後藤大地');
+      assert.equal(author, '著者：後藤大地');
     });
 
     it('returns the date_published', async () => {
@@ -83,7 +81,7 @@ describe('NewsMynaviJpExtractor', () => {
       // the article.
       assert.equal(
         lead_image_url,
-        `https://news.mynavi.jp/article/20190222-775563/index_images/index.jpg`
+        `https://news.mynavi.jp/techplus/article/20190222-775563/index_images/index.jpg`
       );
     });
 

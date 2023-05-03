@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" value="ie=edge">
+  <meta name="viewport" value="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>O&apos;Reilly Japan - Head First &#x306F;&#x3058;&#x3081;&#x3066;&#x306E;&#x30D7;&#x30ED;&#x30B0;&#x30E9;&#x30DF;&#x30F3;&#x30B0;</title>
+  <link rel="stylesheet" type="text/css" href="/assets/css/font-face.css">
+  <link rel="stylesheet" type="text/css" href="/assets/css/layout.css">
+  <link rel="stylesheet" type="text/css" href="/assets/css/layout-books.css">
+  <link rel="icon" type="image/png" href="https://www.oreilly.com/favicon.ico">
+
+  <meta name="format-detection" value="telephone=no">
+  <meta value="Head First &#x306F;&#x3058;&#x3081;&#x3066;&#x306E;&#x30D7;&#x30ED;&#x30B0;&#x30E9;&#x30DF;&#x30F3;&#x30B0;" name="og:title">
+  <meta value="article" name="og:type">
+  <meta value="https://www.oreilly.co.jp/books/images/picture978-4-87311-874-1.gif" name="og:image">
+  <meta value="https://www.oreilly.co.jp/books/images/picture_large978-4-87311-874-1.jpeg" name="og:image:secure_url">
+  <meta value="https://www.oreilly.co.jp/books/9784873118741/" name="og:url">
+  <meta name="twitter:card" value="summary">
+  <meta name="twitter:site" value="O&apos;Reilly Japan">
+  <meta name="twitter:creator" value="oreilly_japan">
+  <link href="http://www.oreilly.co.jp/sales/atom.xml" type="application/atom+xml" rel="alternate" title="Sales Information">
+  <meta value="&#x8133;&#x306E;&#x50CD;&#x304D;&#x306B;&#x6CE8;&#x76EE;&#x3057;&#x3001;&#x8133;&#x3092;&#x6D3B;&#x6027;&#x5316;&#x3055;&#x305B;&#x308B;&#x5B66;&#x7FD2;&#x52B9;&#x679C;&#x306E;&#x9AD8;&#x3044;&#x72EC;&#x81EA;&#x306E;&#x30B9;&#x30BF;&#x30A4;&#x30EB;&#x3067;&#x4EBA;&#x6C17;&#x306E;&#x9AD8;&#x3044;Head First&#x30B7;&#x30EA;&#x30FC;&#x30BA;&#x306B;&#x30D7;&#x30ED;&#x30B0;&#x30E9;&#x30DF;&#x30F3;&#x30B0;&#x521D;&#x5FC3;&#x8005;&#x5411;&#x3051;&#x30D0;&#x30FC;&#x30B8;&#x30E7;&#x30F3;&#x304C;&#x767B;&#x5834;&#x3002;Python&#x3092;&#x4F7F;&#x3063;&#x305F;&#x30D7;&#x30ED;&#x30B0;&#x30E9;&#x30DF;&#x30F3;&#x30B0;&#x306E;&#x57FA;&#x672C;&#x306B;&#x3064;&#x3044;&#x3066;&#x3001;&#x30A4;&#x30E9;&#x30B9;&#x30C8;&#x3084;&#x5199;&#x771F;&#x3092;&#x591A;&#x7528;&#x3057;&#x3066;&#x76F4;&#x611F;&#x7684;&#x306A;&#x7406;&#x89E3;&#x3092;&#x4FC3;&#x3057;&#x307E;&#x3059;&#x3002;&#x3084;&#x3055;&#x3057;&#x3044;&#x5207;&#x308A;&#x53E3;&#x306A;&#x304C;&#x3089;&#x3082;&#x3001;&#x30C7;&#x30FC;&#x30BF;&#x578B;&#x3001;&#x30C7;&#x30FC;&#x30BF;&#x69CB;&#x9020;&#x3001;&#x62BD;&#x8C61;&#x5316;&#x3001;&#x518D;&#x5E30;&#x3001;&#x30E2;&#x30B8;&#x30E5;&#x30FC;&#x30EB;&#x306A;&#x3069;&#x3001;&#x30D7;&#x30ED;&#x30B0;&#x30E9;&#x30DF;&#x30F3;&#x30B0;&#x306E;&#x57FA;&#x672C;&#x3092;&#x6BB5;&#x968E;&#x7684;&#x306B;&#x5B66;&#x3073;&#x3001;&#x5F8C;&#x534A;&#x3067;&#x306F;&#x8907;&#x96D1;&#x3067;&#x5927;&#x898F;&#x6A21;&#x306A;&#x30A2;&#x30D7;&#x30EA;&#x30B1;&#x30FC;&#x30B7;&#x30E7;&#x30F3;&#x306E;&#x4F5C;&#x6210;&#x306B;&#x3082;&#x53D6;&#x308A;&#x7D44;&#x307F;&#x307E;&#x3059;&#x3002;&#x8A8D;&#x77E5;&#x79D1;&#x5B66;&#x3068;&#x6559;&#x80B2;&#x5FC3;&#x7406;&#x5B66;&#x306B;&#x57FA;&#x3065;&#x3044;&#x305F;&#x30A2;&#x30D7;&#x30ED;&#x30FC;&#x30C1;&#x3067;&#x3001;&#x30D7;&#x30ED;&#x30B0;&#x30E9;&#x30DF;&#x30F3;&#x30B0;&#x306E;&#x30C6;&#x30AF;&#x30CB;&#x30C3;&#x30AF;&#x3060;&#x3051;&#x3067;&#x306F;&#x306A;&#x304F;&#x3001;&#x8AD6;&#x7406;&#x7684;&#x601D;&#x8003;&#x3084;&#x30D7;&#x30ED;&#x30B0;&#x30E9;&#x30DF;&#x30F3;&#x30B0;&#x7684;&#x306A;&#x8003;&#x3048;&#x65B9;&#x3092;&#x3001;&#x697D;&#x3057;&#x307F;&#x306A;&#x304C;&#x3089;&#x8EAB;&#x306B;&#x4ED8;&#x3051;&#x3089;&#x308C;&#x308B;&#x3088;&#x3046;&#x306B;&#x5DE5;&#x592B;&#x3055;&#x308C;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;
+
+&#x7121;&#x6599; &#x304A;&#x8A66;&#x3057;&#x7248;" name="og:description">
+  <link rel="canonical" href="https://www.oreilly.co.jp//books/9784873118741/">
+  <link rel="amphtml" href="https://www.oreilly.co.jp//books/9784873118741/mobile.html">
+  
+  
+  
+  
+</head>
+
+<body>
+  <div id="skipToMain" class="nav__SkipToMain"><a href="#maincontent">Skip to main content</a></div>
+
+  <header role="banner" class="nav__GlboalHeader">
+    <div class="pageWidth">
+      <nav role="navigation" aria-label="site sections" class="nav__GlobalNav">
+        <a aria-current="page" title="Go to home page" class="nav__Logo" href="/"><img src="/assets/images/logo_oreilly_japan.svg" alt="O&apos;Reilly logo"></a>
+        <div class="nav__NavItems" id="nav__NavItems">
+          <div class="nav__NavGroup">
+            <a class="nav__Link" href="/blog/">Blog</a>
+            <a class="nav__Link active" href="/books/">Books</a>
+            <a class="nav__Link" href="/ebook/">Ebooks</a>
+            <a class="nav__Link" href="/online-learning/">Learning platform</a>
+            <a class="nav__Link" href="/order/">Order</a>
+            <a class="nav__Link" href="/company/">About</a>
+          </div>
+          <div class="nav__CTA">
+            <a href="/app/cart" class="nav__Cart">Cart</a>
+          </div>
+        </div>
+        <button id="nav__MobileBtn" aria-expanded="false" aria-controls="menuList" class="nav__MobileBtn"><span><span></span></span></button>
+      </nav>
+    </div>
+  </header>
+
+
+  <main id="maincontent">
+    <div class="pageWidth">
+      <h1 itemprop="name">Head First &#x306F;&#x3058;&#x3081;&#x3066;&#x306E;&#x30D7;&#x30ED;&#x30B0;&#x30E9;&#x30DF;&#x30F3;&#x30B0;</h1>
+      <span itemprop="publisher" content="&#x30AA;&#x30E9;&#x30A4;&#x30EA;&#x30FC;&#x30FB;&#x30B8;&#x30E3;&#x30D1;&#x30F3;"></span>
+      <div class="contributers">
+        <span itemprop="author">Eric Freeman&#x3000;&#x8457;&#x3001;&#x5D8B;&#x7530; &#x5065;&#x5FD7;&#x3000;&#x76E3;&#x8A33;&#x3001;&#x6728;&#x4E0B; &#x54F2;&#x4E5F;&#x3000;&#x8A33;</span>
+      </div>
+
+      <section class="detail" itemscope="" itemtype="http://schema.org/Book">
+        <div class="detail-cover">
+          <img src="https://www.oreilly.co.jp/books/images/picture_large978-4-87311-874-1.jpeg" class="cover-photo" alt="[cover photo]">
+        </div>
+
+        <dl class="item-props">
+          <dt>TOPICS</dt>
+          <dd>
+            
+            <a href="/books/hf/">Head First</a>
+            , 
+            <a href="/books/prog/">Programming</a>
+            , 
+            <a href="/books/python/">Python</a>
+            
+          </dd>
+
+          <dt>&#x767A;&#x884C;&#x5E74;&#x6708;&#x65E5;</dt>
+          
+          <dd itemprop="datePublished" content="2019-04-26">2019&#x5E74;04&#x6708;</dd>
+          
+
+          
+          <dt>PRINT LENGTH</dt>
+          <dd itemprop="numberOfPages">636</dd>
+          
+
+          <dt>ISBN</dt>
+          <dd itemprop="isbn">978-4-87311-874-1</dd>
+
+          
+          <dt>&#x539F;&#x66F8;</dt>
+          <dd><a href="http://shop.oreilly.com/product/0636920051114.do">Head First Learn to Code</a></dd>
+          
+
+          <dt>FORMAT</dt>
+          <dd>
+            Print PDF 
+
+            <div class="buying-options">
+              
+              <div class="option-item">
+                <div class="option-name">Ebook</div>
+                <div>
+                  2,640&#x5186;
+                </div>
+                <a href="/ebook/cart?id=978-4-87311-874-1&amp;mode=add" class="update-button secondary-button">
+                  Ebook&#x3092;&#x8CFC;&#x5165;&#x3059;&#x308B;
+                </a>
+              </div>
+              
+
+              
+              <div class="option-item">
+                <div class="option-name">Print</div>
+                <div>3,300&#x5186;</div>
+                
+              </div>
+              
+            </div>
+          </dd>
+        </dl>
+
+        <div id="detail" class="content">
+          <p itemprop="description">&#x8133;&#x306E;&#x50CD;&#x304D;&#x306B;&#x6CE8;&#x76EE;&#x3057;&#x3001;&#x8133;&#x3092;&#x6D3B;&#x6027;&#x5316;&#x3055;&#x305B;&#x308B;&#x5B66;&#x7FD2;&#x52B9;&#x679C;&#x306E;&#x9AD8;&#x3044;&#x72EC;&#x81EA;&#x306E;&#x30B9;&#x30BF;&#x30A4;&#x30EB;&#x3067;&#x4EBA;&#x6C17;&#x306E;&#x9AD8;&#x3044;Head First&#x30B7;&#x30EA;&#x30FC;&#x30BA;&#x306B;&#x30D7;&#x30ED;&#x30B0;&#x30E9;&#x30DF;&#x30F3;&#x30B0;&#x521D;&#x5FC3;&#x8005;&#x5411;&#x3051;&#x30D0;&#x30FC;&#x30B8;&#x30E7;&#x30F3;&#x304C;&#x767B;&#x5834;&#x3002;Python&#x3092;&#x4F7F;&#x3063;&#x305F;&#x30D7;&#x30ED;&#x30B0;&#x30E9;&#x30DF;&#x30F3;&#x30B0;&#x306E;&#x57FA;&#x672C;&#x306B;&#x3064;&#x3044;&#x3066;&#x3001;&#x30A4;&#x30E9;&#x30B9;&#x30C8;&#x3084;&#x5199;&#x771F;&#x3092;&#x591A;&#x7528;&#x3057;&#x3066;&#x76F4;&#x611F;&#x7684;&#x306A;&#x7406;&#x89E3;&#x3092;&#x4FC3;&#x3057;&#x307E;&#x3059;&#x3002;&#x3084;&#x3055;&#x3057;&#x3044;&#x5207;&#x308A;&#x53E3;&#x306A;&#x304C;&#x3089;&#x3082;&#x3001;&#x30C7;&#x30FC;&#x30BF;&#x578B;&#x3001;&#x30C7;&#x30FC;&#x30BF;&#x69CB;&#x9020;&#x3001;&#x62BD;&#x8C61;&#x5316;&#x3001;&#x518D;&#x5E30;&#x3001;&#x30E2;&#x30B8;&#x30E5;&#x30FC;&#x30EB;&#x306A;&#x3069;&#x3001;&#x30D7;&#x30ED;&#x30B0;&#x30E9;&#x30DF;&#x30F3;&#x30B0;&#x306E;&#x57FA;&#x672C;&#x3092;&#x6BB5;&#x968E;&#x7684;&#x306B;&#x5B66;&#x3073;&#x3001;&#x5F8C;&#x534A;&#x3067;&#x306F;&#x8907;&#x96D1;&#x3067;&#x5927;&#x898F;&#x6A21;&#x306A;&#x30A2;&#x30D7;&#x30EA;&#x30B1;&#x30FC;&#x30B7;&#x30E7;&#x30F3;&#x306E;&#x4F5C;&#x6210;&#x306B;&#x3082;&#x53D6;&#x308A;&#x7D44;&#x307F;&#x307E;&#x3059;&#x3002;&#x8A8D;&#x77E5;&#x79D1;&#x5B66;&#x3068;&#x6559;&#x80B2;&#x5FC3;&#x7406;&#x5B66;&#x306B;&#x57FA;&#x3065;&#x3044;&#x305F;&#x30A2;&#x30D7;&#x30ED;&#x30FC;&#x30C1;&#x3067;&#x3001;&#x30D7;&#x30ED;&#x30B0;&#x30E9;&#x30DF;&#x30F3;&#x30B0;&#x306E;&#x30C6;&#x30AF;&#x30CB;&#x30C3;&#x30AF;&#x3060;&#x3051;&#x3067;&#x306F;&#x306A;&#x304F;&#x3001;&#x8AD6;&#x7406;&#x7684;&#x601D;&#x8003;&#x3084;&#x30D7;&#x30ED;&#x30B0;&#x30E9;&#x30DF;&#x30F3;&#x30B0;&#x7684;&#x306A;&#x8003;&#x3048;&#x65B9;&#x3092;&#x3001;&#x697D;&#x3057;&#x307F;&#x306A;&#x304C;&#x3089;&#x8EAB;&#x306B;&#x4ED8;&#x3051;&#x3089;&#x308C;&#x308B;&#x3088;&#x3046;&#x306B;&#x5DE5;&#x592B;&#x3055;&#x308C;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;<br>
+<br>
+<a href="https://www.oreilly.co.jp/pub/9784873118741/1874_hf_learn_to_code_free.pdf">&#x7121;&#x6599; &#x304A;&#x8A66;&#x3057;&#x7248;</a><br></p>
+        </div>
+
+        
+        <h2 class="collapsible">&#x95A2;&#x9023;&#x30D5;&#x30A1;&#x30A4;&#x30EB;</h2>
+        <section>
+          <ul>
+            
+            <li><a href="https://www.oreilly.co.jp/pub/9784873118741/sample-code.zip">&#x30B5;&#x30F3;&#x30D7;&#x30EB;&#x30B3;&#x30FC;&#x30C9;</a></li>
+            
+          </ul>
+        </section>
+        
+
+        
+        <h2 class="collapsible">&#x6B63;&#x8AA4;&#x8868;</h2>
+        <section>
+          <p>&#x3053;&#x3053;&#x3067;&#x7D39;&#x4ECB;&#x3059;&#x308B;&#x6B63;&#x8AA4;&#x8868;&#x306B;&#x306F;&#x3001;&#x66F8;&#x7C4D;&#x767A;&#x884C;&#x5F8C;&#x306B;&#x6C17;&#x3065;&#x3044;&#x305F;&#x8AA4;&#x690D;&#x3084;&#x66F4;&#x65B0;&#x3055;&#x308C;&#x305F;&#x60C5;&#x5831;&#x3092;&#x63B2;&#x8F09;&#x3057;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;&#x4EE5;&#x4E0B;&#x306E;&#x30EA;&#x30B9;&#x30C8;&#x306B;&#x8A18;&#x8F09;&#x306E;&#x5E74;&#x6708;&#x306F;&#x3001;&#x6B63;&#x8AA4;&#x8868;&#x3092;&#x4F5C;&#x6210;&#x3057;&#x3001;&#x5897;&#x5237;&#x66F8;&#x7C4D;&#x3092;&#x5370;&#x5237;&#x3057;&#x305F;&#x6708;&#x3067;&#x3059;&#x3002;&#x304A;&#x624B;&#x6301;&#x3061;&#x306E;&#x66F8;&#x7C4D;&#x3067;&#x306F;&#x3001;&#x3059;&#x3067;&#x306B;&#x4FEE;&#x6B63;&#x304C;&#x65BD;&#x3055;&#x308C;&#x3066;&#x3044;&#x308B;&#x5834;&#x5408;&#x304C;&#x3042;&#x308A;&#x307E;&#x3059;&#x306E;&#x3067;&#x3001;&#x66F8;&#x7C4D;&#x6700;&#x7D42;&#x30DA;&#x30FC;&#x30B8;&#x306E;&#x5965;&#x4ED8;&#x3067;&#x304A;&#x624B;&#x6301;&#x3061;&#x306E;&#x66F8;&#x7C4D;&#x306E;&#x5237;&#x7248;&#x3001;&#x5237;&#x308A;&#x5E74;&#x6708;&#x65E5;&#x3092;&#x3054;&#x78BA;&#x8A8D;&#x306E;&#x4E0A;&#x3001;&#x3054;&#x5229;&#x7528;&#x304F;&#x3060;&#x3055;&#x3044;&#x3002;</p>
+          
+          <h3>&#x7B2C;1&#x5237;&#x6B63;&#x8AA4;&#x8868;</h3>
+          <div class="errata">
+            <h4><a id="h-0-0-1"></a>&#x7B2C;1&#x5237;&#x6B63;&#x8AA4;&#x8868;</h4>
+<p class="noindent">2019&#x5E74;12&#x6708;17&#x65E5;&#x66F4;&#x65B0;<br></p>
+
+<h4><a id="h-0-0-2"></a>p.7&#x3001;&#x4F55;&#x3066;&#x8A00;&#x3046;&#xFF1F;&#x306E;&#x53F3;&#x5074;3&#x9805;&#x76EE;&#x76EE;</h4>
+<p class="noindent">&#x3010;&#x8AA4;&#x3011;<br>&#x30D1;&#x30F3;&#x3001;&#x30DF;&#x30EB;&#x30AF;&#x3001;&#x5375;&#x3068;&#x3044;&#x3063;&#x305F;&#x98DF;&#x6599;&#x54C1;&#x306E;<font color="red">&#x89A7;</font>&#x3002;<br></p>
+<p class="noindent">&#x3010;&#x6B63;&#x3011;<br>&#x30D1;&#x30F3;&#x3001;&#x30DF;&#x30EB;&#x30AF;&#x3001;&#x5375;&#x3068;&#x3044;&#x3063;&#x305F;&#x98DF;&#x6599;&#x54C1;&#x306E;<font color="red">&#x4E00;&#x89A7;</font>&#x3002;</p>
+
+<h4><a id="h-0-0-2"></a>p.55&#x3001;&#x8133;&#x529B;&#x767A;&#x63EE;&#x306E;&#x7B54;&#x3048;</h4>
+<p class="noindent">&#x3010;&#x8AA4;&#x3011;<br>&#x7B54;&#x3048;&#xFF1A;C&#x3002;<font color="red">&#x69CB;&#x6587;</font>&#x30A8;&#x30E9;&#x30FC;&#x3084;&#x5B9F;&#x884C;&#x6642;&#x30A8;&#x30E9;&#x30FC;&#x306F;&#x8D77;&#x3053;&#x3063;&#x3066;&#x3044;&#x306A;&#x3044;&#x3002;<br></p>
+<p class="noindent">&#x3010;&#x6B63;&#x3011;<br>&#x7B54;&#x3048;&#xFF1A;C&#x3002;<font color="red">&#x30B7;&#x30F3;&#x30BF;&#x30C3;&#x30AF;&#x30B9;</font>&#x30A8;&#x30E9;&#x30FC;&#x3084;&#x5B9F;&#x884C;&#x6642;&#x30A8;&#x30E9;&#x30FC;&#x306F;&#x8D77;&#x3053;&#x3063;&#x3066;&#x3044;&#x306A;&#x3044;&#x3002;</p>
+
+<h4><a id="h-0-0-2"></a>p.58&#x3001;&#x4E0B;&#x306E;&#x6D6E;&#x52D5;&#x5C0F;&#x6570;&#x70B9;&#x306E;&#x4E2D;&#x306E;&#x67A0;&#x5185;&#x306E;&#x6570;&#x5B57;</h4>
+<p class="noindent">&#x3010;&#x8AA4;&#x3011;<br><code class="tt">10.3<font color="red">+e</font>4 &#xA0;&#xA0;&#xA0;      -4.<font color="red">e</font>10</code><br></p>
+<p class="noindent">&#x3010;&#x6B63;&#x3011;<br><code class="tt">10.3<font color="red">e+</font>4 &#xA0;&#xA0;&#xA0;      -4.<font color="red">e-</font>10</code></p>
+
+
+<h4><a id="h-0-0-1"></a>p69&#x3001;&#x30B3;&#x30FC;&#x30C9;&#x30D6;&#x30ED;&#x30C3;&#x30AF;&#x4E0B;&#x304B;&#x3089;3&#x884C;&#x76EE;&#x3068;2&#x884C;&#x76EE;</h4>
+<p class="noindent">&#x3010;&#x8AA4;&#x3011;</p>
+<div class="emlist-code">
+<pre class="emlist">passcode = passcode + &apos; &apos;        passcode&#x306F;&#x300C;The red <font color="red">fox&#x300D;</font>
+passcode = passcode + word6      <font color="red">password</font>&#x306F;&#x300C;The red fox trots&#x300D;
+print(passcode)
+</pre>
+</div>
+<p class="noindent">&#x3010;&#x6B63;&#x3011;</p>
+<div class="emlist-code">
+<pre class="emlist">passcode = passcode + &apos; &apos;        passcode&#x306F;&#x300C;The red <font color="red">fox &#x300D;</font>
+passcode = passcode + word6      <font color="red">passcode</font>&#x306F;&#x300C;The red fox trots&#x300D;
+print(passcode)
+</pre>
+</div>
+
+<h4><a id="h-0-0-2"></a>p.122&#x3001;&#x4E0A;&#x306E;&#x30A8;&#x30AF;&#x30B5;&#x30B5;&#x30A4;&#x30BA;&#x306E;&#x7B54;&#x3048;&#x306E;&#x30B3;&#x30FC;&#x30C9;&#x3001;4&#x884C;&#x76EE;</h4>
+<p class="noindent">&#x3010;&#x8AA4;&#x3011;<br><code class="tt">while guess<font color="red">!</font> color</code><br></p>
+<p class="noindent">&#x3010;&#x6B63;&#x3011;<br><code class="tt">while guess <font color="red">!=</font> color</code></p>
+
+<h4><a id="h-0-0-2"></a>p.142&#x3001;&#x4E00;&#x756A;&#x4E0B;&#x306E;&#x30B3;&#x30C3;&#x30D7;&#x306E;&#x6587;&#x5B57;</h4>
+<p class="noindent">&#x3010;&#x8AA4;&#x3011;<br>smoothie<br></p>
+<p class="noindent">&#x3010;&#x6B63;&#x3011;<br>smoothie<font color="red">s</font></p>
+
+<h4><a id="h-0-0-3"></a>p.213&#x3001;&#x30A8;&#x30AF;&#x30B5;&#x30B5;&#x30A4;&#x30BA;&#x306E;&#x30B3;&#x30FC;&#x30C9;&#x3001;7&#x884C;&#x76EE;</h4>
+<p class="noindent">&#x3010;&#x8AA4;&#x3011;<br><code class="tt">recipe = recipe + <font color="red">&apos;&apos;</font>a banana and &apos;</code><br></p>
+<p class="noindent">&#x3010;&#x6B63;&#x3011;<br><code class="tt">recipe = recipe + <font color="red">&apos;</font>a banana and &apos;</code></p>
+
+<h4><a id="h-0-0-4"></a>p.222&#x3001;&#x30A8;&#x30AF;&#x30B5;&#x30B5;&#x30A4;&#x30BA;&#x306E;&#x7B54;&#x3048;&#x306E;&#x30B3;&#x30FC;&#x30C9;&#x3001;7&#x884C;&#x76EE;</h4>
+<p class="noindent">&#x3010;&#x8AA4;&#x3011;<br><code class="tt">recipe = recipe + <font color="red">&apos;&apos;</font>a banana and &apos;</code><br></p>
+<p class="noindent">&#x3010;&#x6B63;&#x3011;<br><code class="tt">recipe = recipe + <font color="red">&apos;</font>a banana and &apos;</code></p>
+
+<h4><a id="h-0-0-5"></a>p.239</h4>
+<p class="noindent">&#x3010;&#x8AA4;&#x3011;<br>&#x3082;&#x3061;&#x308D;&#x3093;&#x3001;&#x307E;&#x3060;&#x7D42;&#x308F;&#x308A;&#x3067;&#x306F;&#x3042;&#x308A;&#x307E;&#x305B;&#x3093;&#x3002;<font color="red">&#x982D;&#x306E;&#x4F53;&#x64CD;&#x3001;&#x91CD;&#x8981;&#x30DD;&#x30A4;&#x30F3;&#x30C8;&#x3001;&#x30AF;&#x30ED;&#x30B9;&#x30EF;&#x30FC;&#x30C9;</font>&#x304C;&#x6B8B;&#x3063;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;</p>
+<p class="noindent">&#x3010;&#x6B63;&#x3011;<br>&#x3082;&#x3061;&#x308D;&#x3093;&#x3001;&#x307E;&#x3060;&#x7D42;&#x308F;&#x308A;&#x3067;&#x306F;&#x3042;&#x308A;&#x307E;&#x305B;&#x3093;&#x3002;<font color="red">&#x91CD;&#x8981;&#x30DD;&#x30A4;&#x30F3;&#x30C8;&#x3068;&#x7DF4;&#x7FD2;&#x554F;&#x984C;</font>&#x304C;&#x6B8B;&#x3063;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;</p>
+
+<h4><a id="h-0-0-6"></a>p.249&#x3001;&#x64EC;&#x4F3C;&#x30B3;&#x30FC;&#x30C9;&#x5F8C;&#x534A;</h4>
+<p class="noindent">&#x3010;&#x8AA4;&#x3011;<br></p>
+<div class="emlist-code">
+<pre class="emlist highlight">    IF score &gt;= 90.0:
+            PRINT &apos;Reading level of 5th Grade&apos;
+    ELIF <font color="red">scores</font> &gt;= 80.0:
+            PRINT &apos;Reading level of 6th Grade&apos;
+    ELIF <font color="red">scores</font> &gt;= 70.0:
+            PRINT &apos;Reading level of 7th Grade&apos;
+    ELIF <font color="red">scores</font> &gt;= 60.0:
+            PRINT &apos;Reading level of 8-9th Grade&apos;
+    ELIF <font color="red">scores</font> &gt;= 50.0:
+            PRINT &apos;Reading level of 10-12th Grade&apos;
+    ELIF <font color="red">scores</font> &gt;= 30.0:
+            PRINT &apos;Reading level of College Student&apos;
+    ELSE:
+            PRINT &apos;Reading level of College Graduate&apos;
+</pre>
+</div>
+<p class="noindent">&#x3010;&#x6B63;&#x3011;<br></p>
+<div class="emlist-code">
+<pre class="emlist highlight">    IF score &gt;= 90.0:
+            PRINT &apos;Reading level of 5th Grade&apos;
+    ELIF <font color="red">score</font> &gt;= 80.0:
+            PRINT &apos;Reading level of 6th Grade&apos;
+    ELIF <font color="red">score</font> &gt;= 70.0:
+            PRINT &apos;Reading level of 7th Grade&apos;
+    ELIF <font color="red">score</font> &gt;= 60.0:
+            PRINT &apos;Reading level of 8-9th Grade&apos;
+    ELIF <font color="red">score</font> &gt;= 50.0:
+            PRINT &apos;Reading level of 10-12th Grade&apos;
+    ELIF <font color="red">score</font> &gt;= 30.0:
+            PRINT &apos;Reading level of College Student&apos;
+    ELSE:
+            PRINT &apos;Reading level of College Graduate&apos;
+</pre>
+</div>
+
+
+<h4><a id="h-0-0-2"></a>p271&#x3001;&#x30B3;&#x30FC;&#x30C9;&#x30D6;&#x30ED;&#x30C3;&#x30AF;&#x7DB2;&#x639B;&#x3051;&#x90E8;&#x5206;</h4>
+<p class="noindent">&#x3010;&#x8AA4;&#x3011;</p>
+<div class="emlist-code">
+<pre class="emlist">if len(word) &lt;= 3:
+    return 1
+vowels = &quot;aeiouAEIOU&quot;
+prev_char_was_vowel = False
+    <font color="red">for char in word:</font>
+    if char in vowels:
+        if not prev_char_was_vowel:
+            count = count + 1
+        prev_char_was_vowel = True
+    else:
+        prev_char_was_vowel = False
+</pre>
+</div>
+<p class="noindent">&#x3010;&#x6B63;&#x3011;</p>
+<div class="emlist-code">
+<pre class="emlist">if len(word) &lt;= 3:
+    return 1
+vowels = &quot;aeiouAEIOU&quot;
+prev_char_was_vowel = False
+<font color="red">for char in word:</font>
+    if char in vowels:
+        if not prev_char_was_vowel:
+            count = count + 1
+        prev_char_was_vowel = True
+    else:
+        prev_char_was_vowel = False
+</pre>
+</div>
+
+
+<h4><a id="h-0-0-7"></a>p.279&#x3001;&#x64EC;&#x4F3C;&#x30B3;&#x30FC;&#x30C9;</h4>
+<p class="noindent">&#x3010;&#x8AA4;&#x3011;<br></p>
+<div class="emlist-code">
+<pre class="emlist highlight">    IF score &gt;= 90.0:
+            PRINT &apos;Reading level of 5th Grade&apos;
+    ELIF <font color="red">scores</font> &gt;= 80.0:
+            PRINT &apos;Reading level of 6th Grade&apos;
+    ELIF <font color="red">scores</font> &gt;= 70.0:
+            PRINT &apos;Reading level of 7th Grade&apos;
+    ELIF <font color="red">scores</font> &gt;= 60.0:
+            PRINT &apos;Reading level of 8-9th Grade&apos;
+    ELIF <font color="red">scores</font> &gt;= 50.0:
+            PRINT &apos;Reading level of 10-12th Grade&apos;
+    ELIF <font color="red">scores</font> &gt;= 30.0:
+            PRINT &apos;Reading level of College Student&apos;
+    ELSE:
+            PRINT &apos;Reading level of College Graduate&apos;
+</pre>
+</div>
+<p class="noindent">&#x3010;&#x6B63;&#x3011;<br></p>
+<div class="emlist-code">
+<pre class="emlist highlight">    IF score &gt;= 90.0:
+            PRINT &apos;Reading level of 5th Grade&apos;
+    ELIF <font color="red">score</font> &gt;= 80.0:
+            PRINT &apos;Reading level of 6th Grade&apos;
+    ELIF <font color="red">score</font> &gt;= 70.0:
+            PRINT &apos;Reading level of 7th Grade&apos;
+    ELIF <font color="red">score</font> &gt;= 60.0:
+            PRINT &apos;Reading level of 8-9th Grade&apos;
+    ELIF <font color="red">score</font> &gt;= 50.0:
+            PRINT &apos;Reading level of 10-12th Grade&apos;
+    ELIF <font color="red">score</font> &gt;= 30.0:
+            PRINT &apos;Reading level of College Student&apos;
+    ELSE:
+            PRINT &apos;Reading level of College Graduate&apos;
+</pre>
+</div>
+
+<h4><a id="h-0-0-3"></a>p320&#x3001;&#x4E00;&#x756A;&#x4E0A;&#x306E;Shell&#x30A6;&#x30A3;&#x30F3;&#x30C9;&#x30A6;</h4>
+<p class="noindent">&#x3010;&#x8AA4;&#x3011;</p>
+<div class="emlist-code">
+<pre class="emlist">[&apos;<font color="red">second</font>&apos;, &apos;<font color="red">first</font>&apos;]
+&gt;&gt;&gt;
+</pre>
+</div>
+<p class="noindent">&#x3010;&#x6B63;&#x3011;</p>
+<div class="emlist-code">
+<pre class="emlist">[&apos;<font color="red">2&#x756A;</font>&apos;, &apos;<font color="red">1&#x756A;</font>&apos;]
+&gt;&gt;&gt;
+</pre>
+</div>
+
+<h4><a id="h-0-0-8"></a>p.368&#x3001;&#x4E0B;&#x304B;&#x3089;2&#x756A;&#x76EE;&#x306E;&#x30B3;&#x30FC;&#x30C9;&#x7247;</h4>
+<p class="noindent">&#x3010;&#x8AA4;&#x3011;<br></p>
+<div class="emlist-code">
+<pre class="emlist highlight">users = {}
+users[&apos;Kim&apos;] = attribute
+</pre>
+</div>
+<p class="noindent">&#x3010;&#x6B63;&#x3011;<br></p>
+<div class="emlist-code">
+<pre class="emlist highlight">users = {}
+users[&apos;Kim&apos;] = attribute<font color="red">s</font>
+</pre>
+</div>
+
+<h4><a id="h-0-0-4"></a>p448&#x3001;&#x2777;&#x3001;3&#x884C;&#x76EE;</h4>
+<p class="noindent">&#x3010;&#x8AA4;&#x3011;<br>&#x30AA;&#x30D6;&#x30B8;&#x30A7;&#x30AF;&#x30C8;<font color="red">&#x306B;&#x3092;</font>&#x751F;&#x6210;&#x3057;&#x3066;&#x8FD4;&#x3057;&#x307E;&#x3059;&#x3002;<br>&#x3010;&#x6B63;&#x3011;<br>&#x30AA;&#x30D6;&#x30B8;&#x30A7;&#x30AF;&#x30C8;<font color="red">&#x3092;</font>&#x751F;&#x6210;&#x3057;&#x3066;&#x8FD4;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+
+
+<h4><a id="h-0-0-9"></a>p.450&#x3001;&#x4E0B;&#x90E8;&#x306E;&#x30B3;&#x30FC;&#x30C9;</h4>
+<p class="noindent">&#x3010;&#x8AA4;&#x3011;<br></p>
+<div class="emlist-code">
+<pre class="emlist highlight">import json
+
+json_string = &apos;{&quot;frst&quot;: &quot;Emmett&quot;, &quot;last&quot;: &quot;Brown&quot;, &quot;<font color="red">prefx</font>&quot;: &quot;Dr.&quot;}&apos;
+
+name = json.loads(json_string)
+
+print(name[&apos;<font color="red">prefx</font>&apos;], name[&apos;frst&apos;], name[&apos;last&apos;])
+</pre>
+</div>
+<p class="noindent">&#x3010;&#x6B63;&#x3011;<br></p>
+<div class="emlist-code">
+<pre class="emlist highlight">import json
+
+json_string = &apos;{&quot;frst&quot;: &quot;Emmett&quot;, &quot;last&quot;: &quot;Brown&quot;, &quot;<font color="red">prefix</font>&quot;: &quot;Dr.&quot;}&apos;
+
+name = json.loads(json_string)
+
+print(name[&apos;<font color="red">prefix</font>&apos;], name[&apos;frst&apos;], name[&apos;last&apos;])
+</pre>
+</div>
+
+
+<h4><a id="h-0-0-5"></a>p469&#x3001;&#x5DE6;&#x4E0B;&#x306E;&#x8AAC;&#x660E;&#xFF08;&#x96A3;&#x63A5;&#x3059;&#x308B;&#x30BB;&#x30EB;&#x306E;&#x6570;&#xFF1D;3&#x306E;&#x8AAC;&#x660E;&#xFF09;</h4>
+<p class="noindent">&#x3010;&#x8AA4;&#x3011;<br>&#x30EB;&#x30FC;&#x30EB;&#x306B;&#x5F93;&#x3044;&#x3001;&#x6B7B;&#x3093;&#x3060;&#x30BB;&#x30EB;&#x306B;&#x96A3;&#x63A5;&#x3059;&#x308B;<font color="red">&#x751F;&#x3066;</font>&#x3044;&#x308B;&#x30BB;&#x30EB;&#x306E;&#x6570;&#x304C;3&#x306A;&#x306E;&#x3067;&#x8A95;&#x751F;&#x3057;&#x307E;&#x3059;&#xFF01;<br>&#x3010;&#x6B63;&#x3011;<br>&#x30EB;&#x30FC;&#x30EB;&#x306B;&#x5F93;&#x3044;&#x3001;&#x6B7B;&#x3093;&#x3060;&#x30BB;&#x30EB;&#x306B;&#x96A3;&#x63A5;&#x3059;&#x308B;<font color="red">&#x751F;&#x304D;&#x3066;</font>&#x3044;&#x308B;&#x30BB;&#x30EB;&#x306E;&#x6570;&#x304C;3&#x306A;&#x306E;&#x3067;&#x8A95;&#x751F;&#x3057;&#x307E;&#x3059;&#xFF01;</p>
+
+<h4><a id="h-0-0-6"></a>p526&#x3001;&#x8133;&#x529B;&#x767A;&#x63EE;&#x3001;2&#x884C;&#x76EE;</h4>
+<p class="noindent">&#x3010;&#x8AA4;&#x3011;<br>&#x30AA;&#x30D6;&#x30B8;&#x30A7;&#x30AF;&#x30C8;<font color="red">&#x3057;&#x3066;</font>&#x4F55;&#x3092;&#x9078;&#x3073;&#x307E;&#x3059;&#x304B;&#xFF1F;<br>&#x3010;&#x6B63;&#x3011;<br>&#x30AA;&#x30D6;&#x30B8;&#x30A7;&#x30AF;&#x30C8;<font color="red">&#x3068;&#x3057;&#x3066;</font>&#x4F55;&#x3092;&#x9078;&#x3073;&#x307E;&#x3059;&#x304B;&#xFF1F;</p>
+
+
+<h4><a id="h-0-0-10"></a>p.573&#x4E2D;&#x592E;&#x3001;def walk()&#x306E;print&#x6587;</h4>
+<p class="noindent">&#x3010;&#x8AA4;&#x3011;<br><code class="tt">print(self.name, &apos;says, &quot;I can\&apos;t walk, I<font color="red">&apos;</font>m playing Frisbee!&quot;&apos;)</code><br></p>
+<p class="noindent">&#x3010;&#x6B63;&#x3011;<br><code class="tt">print(self.name, &apos;says, &quot;I can\&apos;t walk, I<font color="red">\&apos;</font>m playing Frisbee!&quot;&apos;)</code><br></p>
+
+          </div>
+          
+        </section>
+        
+
+        <h2 class="collapsible">&#x76EE;&#x6B21;</h2>
+        <section>
+          <div id="toc">
+            <pre>&#x306F;&#x3058;&#x3081;&#x306B;
+
+1&#x7AE0; &#x30B3;&#x30F3;&#x30D4;&#x30E5;&#x30FC;&#x30BF;&#x7684;&#x306B;&#x8003;&#x3048;&#x308B;&#xFF1A;&#x59CB;&#x3081;&#x3088;&#x3046;
+    &#x5206;&#x89E3;&#x3059;&#x308B;
+    &#x30B3;&#x30FC;&#x30C7;&#x30A3;&#x30F3;&#x30B0;&#x306E;&#x624B;&#x9806;
+    &#x540C;&#x3058;&#x8A00;&#x8A9E;&#x3067;&#x8A71;&#x3057;&#x3066;&#x3044;&#x308B;&#xFF1F;
+    &#x30D7;&#x30ED;&#x30B0;&#x30E9;&#x30DF;&#x30F3;&#x30B0;&#x8A00;&#x8A9E;&#x306E;&#x4E16;&#x754C;
+    Python&#x3092;&#x4F7F;&#x3063;&#x305F;&#x30B3;&#x30FC;&#x30C9;&#x306E;&#x8A18;&#x8FF0;&#x3068;&#x5B9F;&#x884C;
+    Python&#x306E;&#x3056;&#x3063;&#x304F;&#x308A;&#x3057;&#x305F;&#x6B74;&#x53F2;
+    Python&#x3092;&#x8A66;&#x3059;
+    &#x4F5C;&#x696D;&#x3092;&#x4FDD;&#x5B58;&#x3059;&#x308B;
+    &#x304A;&#x3081;&#x3067;&#x3068;&#x3046;&#xFF01; &#x6700;&#x521D;&#x306E;Python&#x30D7;&#x30ED;&#x30B0;&#x30E9;&#x30E0;&#x304C;&#x66F8;&#x3051;&#x307E;&#x3057;&#x305F;&#xFF01;
+    &#x30D5;&#x30EC;&#x30FC;&#x30BA;&#x30FB;&#x30AA;&#x30FB;&#x30DE;&#x30C1;&#x30C3;&#x30AF;
+    &#x30B3;&#x30F3;&#x30D4;&#x30E5;&#x30FC;&#x30BF;&#x306B;&#x30B3;&#x30FC;&#x30C9;&#x3092;&#x8AAD;&#x307E;&#x305B;&#x308B;
+
+2&#x7AE0; &#x5358;&#x7D14;&#x306A;&#x5024;&#x3001;&#x5909;&#x6570;&#x3001;&#x578B;&#xFF1A;&#x5024;&#x3092;&#x77E5;&#x308B;
+    &#x72AC;&#x5E74;&#x9F62;&#x8A08;&#x7B97;&#x6A5F;&#x306E;&#x30B3;&#x30FC;&#x30C7;&#x30A3;&#x30F3;&#x30B0;
+    &#x64EC;&#x4F3C;&#x30B3;&#x30FC;&#x30C9;&#x304B;&#x3089;Python&#x306E;&#x30B3;&#x30FC;&#x30C9;&#x306B;&#x5909;&#x63DB;&#x3059;&#x308B;
+    &#x624B;&#x9806;1&#xFF1A;&#x5165;&#x529B;&#x3057;&#x3066;&#x3082;&#x3089;&#x3046;
+    input &#x95A2;&#x6570;&#x306E;&#x52D5;&#x4F5C;
+    &#x30E6;&#x30FC;&#x30B6;&#x306E;&#x5165;&#x529B;&#x3092;&#x5909;&#x6570;&#x306B;&#x4EE3;&#x5165;&#x3059;&#x308B;
+    &#x624B;&#x9806;2&#xFF1A;&#x3055;&#x3089;&#x306B;&#x5165;&#x529B;&#x3057;&#x3066;&#x3082;&#x3089;&#x3046;
+    &#x305D;&#x308D;&#x305D;&#x308D;&#x30B3;&#x30FC;&#x30C9;&#x3092;&#x5B9F;&#x884C;&#x3057;&#x3066;&#x307F;&#x3088;&#x3046;
+    &#x30B3;&#x30FC;&#x30C9;&#x306E;&#x5165;&#x529B;
+    &#x5909;&#x6570;&#x3092;&#x3055;&#x3089;&#x306B;&#x8A73;&#x3057;&#x304F;&#x5B66;&#x3076;
+    &#x5F0F;&#x306E;&#x8FFD;&#x52A0;
+    &#x5909;&#x6570;&#x304C;&#x300C;&#x5909;&#x300D;&#x6570;&#x3068;&#x547C;&#x3070;&#x308C;&#x308B;&#x7406;&#x7531;
+    &#x6F14;&#x7B97;&#x5B50;&#x306E;&#x512A;&#x5148;&#x9806;&#x4F4D;&#x3092;&#x3088;&#x304F;&#x7406;&#x89E3;&#x3059;&#x308B;
+    &#x6F14;&#x7B97;&#x5B50;&#x306E;&#x512A;&#x5148;&#x9806;&#x4F4D;&#x3092;&#x4F7F;&#x3063;&#x305F;&#x8A08;&#x7B97;
+    &#x5BC4;&#x308A;&#x9053;&#x3092;&#x3059;&#x308B;&#xFF01;
+    &#x624B;&#x9806;3&#xFF1A;&#x72AC;&#x306E;&#x5E74;&#x9F62;&#x3092;&#x8A08;&#x7B97;&#x3059;&#x308B;
+    &#x30D2;&#x30E5;&#x30FC;&#x30B9;&#x30C8;&#x30F3;&#x3001;&#x554F;&#x984C;&#x304C;&#x767A;&#x751F;&#x3057;&#x305F;&#xFF01;
+    &#x8AA4;&#x308A;&#x306F;&#xFF08;&#x4EBA;&#xFF09;&#x30B3;&#x30FC;&#x30C9;&#x306E;&#x5E38;
+    &#x30C7;&#x30D0;&#x30C3;&#x30B0;&#x3092;&#x3082;&#x3046;&#x5C11;&#x3057;&#x3060;&#x3051;
+    Python&#x306E;&#x578B;&#x3068;&#x306F;&#xFF1F;
+    &#x30B3;&#x30FC;&#x30C9;&#x306E;&#x4FEE;&#x6B63;
+    &#x30D2;&#x30E5;&#x30FC;&#x30B9;&#x30C8;&#x30F3;&#x3001;&#x767A;&#x5C04;&#x3057;&#x305F;&#xFF01;
+    &#x624B;&#x9806;4&#xFF1A;&#x30E6;&#x30FC;&#x30B6;&#x30D5;&#x30EC;&#x30F3;&#x30C9;&#x30EA;&#x30FC;&#x306A;&#x51FA;&#x529B;
+
+3&#x7AE0; &#x30D6;&#x30FC;&#x30EB;&#x578B;&#x3001;&#x5224;&#x5B9A;&#x3001;&#x30EB;&#x30FC;&#x30D7;&#xFF1A;&#x5224;&#x5B9A;&#x30B3;&#x30FC;&#x30C9;
+    &#x30B2;&#x30FC;&#x30E0;&#x3092;&#x3057;&#x306A;&#x3044;&#xFF1F;
+    &#x307E;&#x305A;&#x306F;&#x9AA8;&#x7D44;&#x307F;&#x306E;&#x8A2D;&#x8A08;
+    &#x30B3;&#x30F3;&#x30D4;&#x30E5;&#x30FC;&#x30BF;&#x306E;&#x624B;
+    &#x4E71;&#x6570;&#x306E;&#x4F7F;&#x3044;&#x65B9;
+    &#x30D6;&#x30FC;&#x30EB;&#x578B;&#x3063;&#x3066;&#xFF1F;
+    &#x5224;&#x5B9A;&#x3059;&#x308B;
+    &#x5224;&#x5B9A;&#x3001;&#x305D;&#x3057;&#x3066;&#x307E;&#x305F;&#x5224;&#x5B9A;
+    &#x3058;&#x3083;&#x3093;&#x3051;&#x3093;&#x306B;&#x623B;&#x308B;
+    &#x30E6;&#x30FC;&#x30B6;&#x306E;&#x624B;&#x3092;&#x53D6;&#x5F97;&#x3059;&#x308B;
+    &#x30E6;&#x30FC;&#x30B6;&#x306E;&#x624B;&#x3092;&#x8ABF;&#x3079;&#x308B;
+    &#x3042;&#x3044;&#x3053;&#x3092;&#x5224;&#x5B9A;&#x3059;&#x308B;&#x30B3;&#x30FC;&#x30C9;&#x3092;&#x8FFD;&#x52A0;&#x3059;&#x308B;
+    &#x8AB0;&#x304C;&#x52DD;&#x3063;&#x305F;&#xFF1F;
+    &#x30B2;&#x30FC;&#x30E0;&#x30ED;&#x30B8;&#x30C3;&#x30AF;&#x306E;&#x5B9F;&#x88C5;
+    &#x30D6;&#x30FC;&#x30EB;&#x6F14;&#x7B97;&#x5B50;&#x306E;&#x8A73;&#x7D30;
+    &#x8AAC;&#x660E;&#x3092;&#x5165;&#x308C;&#x308B;
+    &#x30B3;&#x30FC;&#x30C9;&#x306B;&#x30B3;&#x30E1;&#x30F3;&#x30C8;&#x3092;&#x8FFD;&#x52A0;&#x3059;&#x308B;
+    &#x30B2;&#x30FC;&#x30E0;&#x3092;&#x5B8C;&#x6210;&#x3055;&#x305B;&#x308B;&#xFF01;
+    &#x30E6;&#x30FC;&#x30B6;&#x306E;&#x624B;&#x304C;&#x7121;&#x52B9;&#x304B;&#x3069;&#x3046;&#x304B;&#x3092;&#x3069;&#x306E;&#x3088;&#x3046;&#x306B;&#x5224;&#x65AD;&#x3059;&#x308B;&#xFF1F;
+    &#x30E6;&#x30FC;&#x30B6;&#x306B;&#x5C0B;&#x306D;&#x7D9A;&#x3051;&#x308B;&#x65B9;&#x6CD5;
+    &#x4F55;&#x5EA6;&#x3082;&#x884C;&#x3046;
+    while &#x30EB;&#x30FC;&#x30D7;&#x306E;&#x52D5;&#x4F5C;
+    while&#x3092;&#x4F7F;&#x3063;&#x3066;&#x6709;&#x52B9;&#x306A;&#x624B;&#x3092;&#x9078;&#x3076;&#x307E;&#x3067;&#x30E6;&#x30FC;&#x30B6;&#x306B;&#x5C0B;&#x306D;&#x308B;&#x65B9;&#x6CD5;
+    &#x521D;&#x3081;&#x3066;&#x306E;&#x30B2;&#x30FC;&#x30E0;&#x306E;&#x30B3;&#x30FC;&#x30C9;&#x304C;&#x66F8;&#x3051;&#x307E;&#x3057;&#x305F;&#x3002;&#x304A;&#x3081;&#x3067;&#x3068;&#x3046;&#xFF01;
+
+4&#x7AE0; &#x30EA;&#x30B9;&#x30C8;&#x3068;&#x53CD;&#x5FA9;&#xFF1A;&#x69CB;&#x9020;&#x3092;&#x7528;&#x610F;&#x3059;&#x308B;
+    &#x30D0;&#x30D6;&#x30EB;&#x30B6;&#x3089;&#x30B9;&#x793E;&#x3092;&#x52A9;&#x3051;&#x3089;&#x308C;&#x308B;&#xFF1F;
+    Python&#x3067;&#x8907;&#x6570;&#x306E;&#x5024;&#x3092;&#x8868;&#x73FE;&#x3059;&#x308B;&#x65B9;&#x6CD5;
+    &#x30EA;&#x30B9;&#x30C8;&#x306E;&#x52D5;&#x4F5C;
+    &#x3068;&#x3053;&#x308D;&#x3067;&#x3001;&#x305D;&#x306E;&#x30EA;&#x30B9;&#x30C8;&#x306E;&#x5927;&#x304D;&#x3055;&#x3063;&#x3066;&#xFF1F;
+    &#x30EA;&#x30B9;&#x30C8;&#x306E;&#x672B;&#x5C3E;&#x306E;&#x8981;&#x7D20;&#x306B;&#x30A2;&#x30AF;&#x30BB;&#x30B9;&#x3059;&#x308B;
+    Python&#x3067;&#x306F;&#x305A;&#x3063;&#x3068;&#x7C21;&#x5358;
+    &#x8CA0;&#x306E;&#x30A4;&#x30F3;&#x30C7;&#x30C3;&#x30AF;&#x30B9;&#x3092;&#x4F7F;&#x3046;
+    &#x4E00;&#x65B9;&#x3001;&#x30D0;&#x30D6;&#x30EB;&#x30B6;&#x3089;&#x30B9;&#x793E;&#x3067;&#x306F;
+    &#x30EA;&#x30B9;&#x30C8;&#x3092;&#x53CD;&#x5FA9;&#x51E6;&#x7406;&#x3059;&#x308B;
+    &#x51FA;&#x529B;&#x306E;&#x554F;&#x984C;&#x3092;&#x4FEE;&#x6B63;&#x3059;&#x308B;
+    &#x51FA;&#x529B;&#x306E;&#x554F;&#x984C;&#x3092;&#x5B9F;&#x969B;&#x306B;&#x4FEE;&#x6B63;&#x3059;&#x308B;
+    for &#x30EB;&#x30FC;&#x30D7;&#x3001;&#x305D;&#x308C;&#x306F;&#x30EA;&#x30B9;&#x30C8;&#x306E;&#x53CD;&#x5FA9;&#x51E6;&#x7406;&#x306B;&#x6700;&#x9069;&#x306A;&#x65B9;&#x6CD5;
+    &#x6570;&#x5024;&#x306E;&#x7BC4;&#x56F2;&#x306B;&#x5BFE;&#x3059;&#x308B;for&#x30EB;&#x30FC;&#x30D7;&#x306E;&#x52D5;&#x4F5C;
+    &#x7BC4;&#x56F2;&#x3092;&#x3082;&#x3063;&#x3068;&#x4F7F;&#x3046;
+    &#x3059;&#x3079;&#x3066;&#x3092;&#x307E;&#x3068;&#x3081;&#x308B;
+    &#x30BC;&#x30ED;&#x304B;&#x3089;&#x30EA;&#x30B9;&#x30C8;&#x3092;&#x4F5C;&#x6210;&#x3059;&#x308B;
+    &#x30EA;&#x30B9;&#x30C8;&#x3092;&#x3055;&#x3089;&#x306B;&#x4F7F;&#x3046;
+    &#x6700;&#x7D42;&#x30EC;&#x30DD;&#x30FC;&#x30C8;&#x306E;&#x8A66;&#x904B;&#x8EE2;
+    &#x6700;&#x9AD8;&#x30B9;&#x30B3;&#x30A2;&#x306E;&#x6EB6;&#x6DB2;&#x306F;&#xFF1F;
+    &#x6700;&#x3082;&#x8CBB;&#x7528;&#x5BFE;&#x52B9;&#x679C;&#x306E;&#x9AD8;&#x3044;&#x6EB6;&#x6DB2;&#x306F;&#x3069;&#x308C;&#xFF1F;
+
+5&#x7AE0; &#x95A2;&#x6570;&#x3068;&#x62BD;&#x8C61;&#x5316;&#xFF1A;&#x95A2;&#x6570;&#x306B;&#x3059;&#x308B;
+    &#x3053;&#x306E;&#x30B3;&#x30FC;&#x30C9;&#x306E;&#x3069;&#x3053;&#x304C;&#x3044;&#x3051;&#x306A;&#x3044;&#x306E;&#xFF1F;
+    &#x30B3;&#x30FC;&#x30C9;&#x30D6;&#x30ED;&#x30C3;&#x30AF;&#x3092;&#x95A2;&#x6570;&#x306B;&#x5909;&#x63DB;&#x3059;&#x308B;
+    &#x95A2;&#x6570;&#x304C;&#x4F5C;&#x6210;&#x3067;&#x304D;&#x307E;&#x3057;&#x305F;&#x3002;&#x3055;&#x3066;&#x3069;&#x3046;&#x4F7F;&#x3046;&#xFF1F;
+    &#x5B9F;&#x969B;&#x306B;&#x306F;&#x3069;&#x306E;&#x3088;&#x3046;&#x306B;&#x6A5F;&#x80FD;&#x3057;&#x3066;&#x3044;&#x308B;&#x306E;&#xFF1F;
+    &#x95A2;&#x6570;&#x306F;&#x7D50;&#x679C;&#x3092;&#x8FD4;&#x3059;&#x3053;&#x3068;&#x3082;&#x3067;&#x304D;&#x308B;
+    &#x623B;&#x308A;&#x5024;&#x306E;&#x3042;&#x308B;&#x95A2;&#x6570;&#x3092;&#x547C;&#x3073;&#x51FA;&#x3059;
+    &#x5C11;&#x3057;&#x3060;&#x3051;&#x30EA;&#x30D5;&#x30A1;&#x30AF;&#x30BF;&#x30EA;&#x30F3;&#x30B0;&#x3057;&#x3066;&#x307F;&#x308B;
+    &#x30B3;&#x30FC;&#x30C9;&#x306E;&#x5B9F;&#x884C;
+    &#x30A2;&#x30D0;&#x30BF;&#x30FC;&#x30B3;&#x30FC;&#x30C9;&#x306E;&#x62BD;&#x8C61;&#x5316;&#x65B9;&#x6CD5;
+    get_attribute &#x95A2;&#x6570;&#x306E;&#x672C;&#x4F53;&#x3092;&#x66F8;&#x304F;
+    get_attribute &#x3092;&#x547C;&#x3073;&#x51FA;&#x3059;
+    &#x5909;&#x6570;&#x306B;&#x3064;&#x3044;&#x3066;&#x3082;&#x3046;&#x5C11;&#x3057;&#x304A;&#x8A71;&#x3057;&#x3057;&#x307E;&#x3059;
+    &#x5909;&#x6570;&#x30B9;&#x30B3;&#x30FC;&#x30D7;&#x3092;&#x7406;&#x89E3;&#x3059;&#x308B;
+    &#x5909;&#x6570;&#x304C;&#x95A2;&#x6570;&#x306B;&#x6E21;&#x3055;&#x308C;&#x308B;&#x3068;&#x304D;
+    drink_me&#x95A2;&#x6570;&#x3092;&#x547C;&#x3073;&#x51FA;&#x3059;
+    &#x95A2;&#x6570;&#x3067;&#x30B0;&#x30ED;&#x30FC;&#x30D0;&#x30EB;&#x5909;&#x6570;&#x3092;&#x4F7F;&#x3046;&#x3068;&#x3044;&#x3046;&#x3053;&#x3068;
+    &#x30D1;&#x30E9;&#x30E1;&#x30FC;&#x30BF;&#x3092;&#x6DF1;&#x304F;&#x7406;&#x89E3;&#x3059;&#x308B;&#xFF1A;&#x30C7;&#x30D5;&#x30A9;&#x30EB;&#x30C8;&#x5024;&#x3068;&#x30AD;&#x30FC;&#x30EF;&#x30FC;&#x30C9;
+    &#x30C7;&#x30D5;&#x30A9;&#x30EB;&#x30C8;&#x30D1;&#x30E9;&#x30E1;&#x30FC;&#x30BF;&#x5024;&#x306E;&#x4F7F;&#x3044;&#x65B9;
+    &#x5FC5;&#x305A;&#x5FC5;&#x9808;&#x30D1;&#x30E9;&#x30E1;&#x30FC;&#x30BF;&#x3092;&#x6700;&#x521D;&#x306B;&#x6307;&#x5B9A;&#x3059;&#x308B;&#xFF01;
+    &#x30AD;&#x30FC;&#x30EF;&#x30FC;&#x30C9;&#x5F15;&#x6570;&#x3092;&#x4F7F;&#x3046;
+    &#x30AD;&#x30FC;&#x30EF;&#x30FC;&#x30C9;&#x5F15;&#x6570;&#x3068;&#x30C7;&#x30D5;&#x30A9;&#x30EB;&#x30C8;&#x5024;&#x306B;&#x3064;&#x3044;&#x3066;
+
+&#x304A;&#x307E;&#x3051;&#x306E;&#x7AE0; &#x30BD;&#x30FC;&#x30C8;&#x3068;&#x5165;&#x308C;&#x5B50;&#x306E;&#x53CD;&#x5FA9;&#xFF1A;&#x30C7;&#x30FC;&#x30BF;&#x3092;&#x6574;&#x7406;&#x3059;&#x308B;
+    &#x30D0;&#x30D6;&#x30EB;&#x30BD;&#x30FC;&#x30C8;&#x3092;&#x7406;&#x89E3;&#x3059;&#x308B;
+    &#x8D70;&#x67FB;1&#x304B;&#x3089;&#x59CB;&#x3081;&#x308B;
+    &#x30D0;&#x30D6;&#x30EB;&#x30BD;&#x30FC;&#x30C8;&#x306E;&#x64EC;&#x4F3C;&#x30B3;&#x30FC;&#x30C9;
+    Python&#x3067;&#x30D0;&#x30D6;&#x30EB;&#x30BD;&#x30FC;&#x30C8;&#x3092;&#x5B9F;&#x88C5;&#x3059;&#x308B;
+    &#x6EB6;&#x6DB2;&#x756A;&#x53F7;&#x3092;&#x5272;&#x308A;&#x51FA;&#x3059;
+
+6&#x7AE0; &#x30C6;&#x30AD;&#x30B9;&#x30C8;&#x3001;&#x6587;&#x5B57;&#x5217;&#x3001;&#x30D2;&#x30E5;&#x30FC;&#x30EA;&#x30B9;&#x30C6;&#x30A3;&#x30C3;&#x30AF;&#xFF1A;&#x3059;&#x3079;&#x3066;&#x3092;&#x7D44;&#x307F;&#x5408;&#x308F;&#x305B;&#x308B;
+    &#x30C7;&#x30FC;&#x30BF;&#x30B5;&#x30A4;&#x30A8;&#x30F3;&#x30B9;&#x306B;&#x3088;&#x3046;&#x3053;&#x305D;
+    &#x8AAD;&#x307F;&#x3084;&#x3059;&#x3055;&#x306F;&#x3069;&#x306E;&#x3088;&#x3046;&#x306B;&#x8A08;&#x7B97;&#x3059;&#x308B;&#xFF1F;
+    &#x5B9F;&#x884C;&#x8A08;&#x753B;
+    &#x64EC;&#x4F3C;&#x30B3;&#x30FC;&#x30C9;&#x3092;&#x66F8;&#x304F;
+    &#x5206;&#x6790;&#x3059;&#x308B;&#x30C6;&#x30AD;&#x30B9;&#x30C8;&#x304C;&#x5FC5;&#x8981;
+    &#x95A2;&#x6570;&#x3092;&#x7528;&#x610F;&#x3059;&#x308B;
+    &#x512A;&#x5148;&#x4E8B;&#x9805;&#xFF1A;&#x30C6;&#x30AD;&#x30B9;&#x30C8;&#x5185;&#x306E;&#x5358;&#x8A9E;&#x306E;&#x7DCF;&#x6570;&#x304C;&#x5FC5;&#x8981;
+    &#x6587;&#x306E;&#x7DCF;&#x6570;&#x3092;&#x6C42;&#x3081;&#x308B;
+    &#x95A2;&#x6570;count_sentences&#x3092;&#x66F8;&#x304F;
+    &#x97F3;&#x7BC0;&#x306E;&#x6570;&#x3092;&#x6C42;&#x3081;&#x308B;&#x3002;&#x3064;&#x307E;&#x308A;&#x3001;&#x30D2;&#x30E5;&#x30FC;&#x30EA;&#x30B9;&#x30C6;&#x30A3;&#x30C3;&#x30AF;&#x3092;&#x597D;&#x304D;&#x306B;&#x306A;&#x308B;
+    &#x30D2;&#x30E5;&#x30FC;&#x30EA;&#x30B9;&#x30C6;&#x30A3;&#x30C3;&#x30AF;&#x306E;&#x4F5C;&#x6210;
+    &#x30D2;&#x30E5;&#x30FC;&#x30EA;&#x30B9;&#x30C6;&#x30A3;&#x30C3;&#x30AF;&#x3092;&#x66F8;&#x304F;
+    &#x6BCD;&#x97F3;&#x3092;&#x30AB;&#x30A6;&#x30F3;&#x30C8;&#x3059;&#x308B;
+    &#x9023;&#x7D9A;&#x3059;&#x308B;&#x6BCD;&#x97F3;&#x3092;&#x7121;&#x8996;&#x3059;&#x308B;
+    &#x9023;&#x7D9A;&#x3059;&#x308B;&#x6BCD;&#x97F3;&#x3092;&#x7121;&#x8996;&#x3059;&#x308B;&#x30B3;&#x30FC;&#x30C9;&#x3092;&#x66F8;&#x304F;
+    &#x672B;&#x5C3E;&#x306E;e&#x3001;y&#x3001;&#x53E5;&#x8AAD;&#x8A18;&#x53F7;&#x3092;&#x53D6;&#x308A;&#x9664;&#x304F;
+    &#x30B9;&#x30E9;&#x30A4;&#x30B9;&#xFF08;&#x90E8;&#x5206;&#x6587;&#x5B57;&#x5217;&#xFF09;&#x3092;&#x5229;&#x7528;&#x3059;&#x308B;
+    &#x30D2;&#x30E5;&#x30FC;&#x30EA;&#x30B9;&#x30C6;&#x30A3;&#x30C3;&#x30AF;&#x30B3;&#x30FC;&#x30C9;&#x3092;&#x5B8C;&#x6210;&#x3055;&#x305B;&#x308B;
+    &#x8AAD;&#x307F;&#x3084;&#x3059;&#x3055;&#x516C;&#x5F0F;&#x306E;&#x5B9F;&#x88C5;
+    &#x3055;&#x3089;&#x306B;&#x9032;&#x3081;&#x308B;
+
+7&#x7AE0; &#x30E2;&#x30B8;&#x30E5;&#x30FC;&#x30EB;&#x3001;&#x30E1;&#x30BD;&#x30C3;&#x30C9;&#x3001;&#x30AF;&#x30E9;&#x30B9;&#x3001;&#x30AA;&#x30D6;&#x30B8;&#x30A7;&#x30AF;&#x30C8;&#xFF1A;&#x30E2;&#x30B8;&#x30E5;&#x30FC;&#x30EB;&#x5316;&#x3059;&#x308B;
+    &#x7C21;&#x5358;&#x306A;&#x30E2;&#x30B8;&#x30E5;&#x30FC;&#x30EB;&#x306E;&#x5FA9;&#x7FD2;
+    &#x30B0;&#x30ED;&#x30FC;&#x30D0;&#x30EB;&#x5909;&#x6570;__name__
+    &#x30AA;&#x30D5;&#x30A3;&#x30B9;&#x306B;&#x304A;&#x3051;&#x308B;&#x4F1A;&#x8A71;&#x306E;&#x7D9A;&#x304D;
+    analyze.py &#x3092;&#x30E2;&#x30B8;&#x30E5;&#x30FC;&#x30EB;&#x3068;&#x3057;&#x3066;&#x4F7F;&#x3046;
+    analyze.py &#x306B;docstring&#x3092;&#x8FFD;&#x52A0;&#x3059;&#x308B;
+    &#x4ED6;&#x306E;Python&#x30E2;&#x30B8;&#x30E5;&#x30FC;&#x30EB;&#x3092;&#x8ABF;&#x3079;&#x308B;
+    &#x5F85;&#x3063;&#x3066;&#x3001;&#x8AB0;&#x304B;&#x300C;&#x30BF;&#x30FC;&#x30C8;&#x30EB;&#x300D;&#x3063;&#x3066;&#x8A00;&#x3063;&#x305F;&#xFF1F;&#xFF01;
+    &#x81EA;&#x5206;&#x3060;&#x3051;&#x306E;&#x30BF;&#x30FC;&#x30C8;&#x30EB;&#x3092;&#x4F5C;&#x6210;&#x3059;&#x308B;
+    &#x30BF;&#x30FC;&#x30C8;&#x30EB;&#x7814;&#x7A76;&#x6240;
+    2&#x3064;&#x76EE;&#x306E;&#x30BF;&#x30FC;&#x30C8;&#x30EB;&#x3092;&#x8FFD;&#x52A0;&#x3059;&#x308B;
+    &#x3068;&#x3053;&#x308D;&#x3067;&#x3001;&#x30BF;&#x30FC;&#x30C8;&#x30EB;&#x3063;&#x3066;&#xFF1F;
+    &#x30AA;&#x30D6;&#x30B8;&#x30A7;&#x30AF;&#x30C8;&#x3063;&#x3066;&#x4F55;&#x8005;&#xFF1F;
+    &#x308F;&#x304B;&#x3063;&#x305F;&#x3002;&#x3058;&#x3083;&#x3042;&#x3001;&#x30AF;&#x30E9;&#x30B9;&#x3063;&#x3066;&#xFF1F;
+    &#x30AA;&#x30D6;&#x30B8;&#x30A7;&#x30AF;&#x30C8;&#x3068;&#x30AF;&#x30E9;&#x30B9;&#x306E;&#x4F7F;&#x3044;&#x65B9;
+    &#x30E1;&#x30BD;&#x30C3;&#x30C9;&#x3068;&#x5C5E;&#x6027;
+    &#x30AF;&#x30E9;&#x30B9;&#x3068;&#x30AA;&#x30D6;&#x30B8;&#x30A7;&#x30AF;&#x30C8;&#x306F;&#x3069;&#x3053;&#x306B;&#x3067;&#x3082;&#x3042;&#x308B;
+    &#x30BF;&#x30FC;&#x30C8;&#x30EB;&#x30EC;&#x30FC;&#x30B9;&#x306E;&#x6E96;&#x5099;&#x3092;&#x3059;&#x308B;
+    &#x30B2;&#x30FC;&#x30E0;&#x3092;&#x8A2D;&#x8A08;&#x3059;&#x308B;
+    &#x30B3;&#x30FC;&#x30C7;&#x30A3;&#x30F3;&#x30B0;&#x3092;&#x59CB;&#x3081;&#x3088;&#x3046;
+    &#x30B2;&#x30FC;&#x30E0;&#x306E;&#x6E96;&#x5099;&#x3092;&#x3059;&#x308B;
+    &#x30BB;&#x30C3;&#x30C8;&#x30A2;&#x30C3;&#x30D7;&#x30B3;&#x30FC;&#x30C9;&#x3092;&#x66F8;&#x304F;
+    &#x843D;&#x3061;&#x7740;&#x3044;&#x3066;&#xFF01;
+    &#x30EC;&#x30FC;&#x30B9;&#x3092;&#x958B;&#x59CB;&#x3059;&#x308B;
+
+8&#x7AE0; &#x518D;&#x5E30;&#x3068;&#x8F9E;&#x66F8;&#xFF1A;&#x53CD;&#x5FA9;&#x3068;&#x30A4;&#x30F3;&#x30C7;&#x30C3;&#x30AF;&#x30B9;&#x3092;&#x8D85;&#x3048;&#x3066;
+    &#x7570;&#x306A;&#x308B;&#x8A08;&#x7B97;&#x65B9;&#x6CD5;
+    &#x5225;&#x306E;&#x65B9;&#x6CD5;&#x3092;&#x8003;&#x3048;&#x308B;
+    2&#x3064;&#x306E;&#x5834;&#x5408;&#x306E;&#x30B3;&#x30FC;&#x30C9;&#x3092;&#x66F8;&#x304F;
+    &#x3055;&#x3089;&#x306B;&#x7DF4;&#x7FD2;&#x3057;&#x3088;&#x3046;
+    &#x518D;&#x5E30;&#x3092;&#x4F7F;&#x3063;&#x3066;&#x56DE;&#x6587;&#x3092;&#x63A2;&#x3057;&#x51FA;&#x3059;
+    &#x518D;&#x5E30;&#x56DE;&#x6587;&#x691C;&#x51FA;&#x5668;&#x3092;&#x66F8;&#x304F;
+    &#x30A2;&#x30F3;&#x30C1;&#x30BD;&#x30FC;&#x30B7;&#x30E3;&#x30EB;&#x30CD;&#x30C3;&#x30C8;&#x30EF;&#x30FC;&#x30AF;
+    &#x8F9E;&#x66F8;&#x3068;&#x306F;
+    &#x8F9E;&#x66F8;&#x3092;&#x4F5C;&#x6210;&#x3059;&#x308B;
+    &#x30AD;&#x30FC;&#x3068;&#x5024;&#x306F;&#x6587;&#x5B57;&#x5217;&#x3067;&#x306A;&#x304F;&#x3066;&#x3082;&#x5927;&#x4E08;&#x592B;
+    &#x3082;&#x3061;&#x308D;&#x3093;&#x3001;&#x30AD;&#x30FC;&#x306F;&#x524A;&#x9664;&#x3067;&#x304D;&#x308B;
+    &#x307E;&#x305A;&#x5B58;&#x5728;&#x3059;&#x308B;&#x304B;&#x3069;&#x3046;&#x304B;&#x3092;&#x8ABF;&#x3079;&#x308B;
+    &#x8F9E;&#x66F8;&#x306E;&#x53CD;&#x5FA9;&#x51E6;&#x7406;&#x306F;&#x3069;&#x3046;&#x306A;&#x308B;&#xFF1F;
+    &#x30A2;&#x30F3;&#x30C1;&#x30BD;&#x30FC;&#x30B7;&#x30E3;&#x30EB;&#x30CD;&#x30C3;&#x30C8;&#x30EF;&#x30FC;&#x30AF;&#x3067;&#x8F9E;&#x66F8;&#x3092;&#x6D3B;&#x7528;&#x3059;&#x308B;
+    &#x5C5E;&#x6027;&#x3092;&#x8FFD;&#x52A0;&#x3059;&#x308B;&#x306B;&#x306F;&#x3069;&#x3046;&#x3059;&#x308C;&#x3070;&#x3044;&#x3044;&#xFF1F;
+    &#x30A2;&#x30F3;&#x30C1;&#x30BD;&#x30FC;&#x30B7;&#x30E3;&#x30EB;&#x30CD;&#x30C3;&#x30C8;&#x30EF;&#x30FC;&#x30AF;&#x306E;&#x76EE;&#x7389;&#x6A5F;&#x80FD;
+    &#x6700;&#x3082;&#x975E;&#x793E;&#x4EA4;&#x7684;&#x306A;&#x30E6;&#x30FC;&#x30B6;&#x3092;&#x63A2;&#x3059;
+    &#x95A2;&#x6570;&#x547C;&#x3073;&#x51FA;&#x3057;&#x306E;&#x7D50;&#x679C;&#x3092;&#x8A18;&#x61B6;&#x3057;&#x3066;&#x304A;&#x3051;&#x308B;&#xFF1F;
+    &#x8F9E;&#x66F8;&#x3092;&#x4F7F;&#x3063;&#x3066;&#x30D5;&#x30A3;&#x30DC;&#x30CA;&#x30C3;&#x30C1;&#x7D50;&#x679C;&#x3092;&#x8A18;&#x61B6;&#x3059;&#x308B;
+    &#x300C;&#x30E1;&#x30E2;&#x5316;&#x300D;&#x3068;&#x547C;&#x3070;&#x308C;&#x307E;&#x3059;
+    koch&#x95A2;&#x6570;&#x3092;&#x8A73;&#x3057;&#x304F;&#x8ABF;&#x3079;&#x308B;
+    &#x30B3;&#x30C3;&#x30DB;&#x30D5;&#x30E9;&#x30AF;&#x30BF;&#x30EB;&#x3092;&#x672C;&#x683C;&#x7684;&#x306B;&#x8ABF;&#x3079;&#x308B;
+
+9&#x7AE0; &#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x306E;&#x4FDD;&#x5B58;&#x3068;&#x53D6;&#x5F97;&#xFF1A;&#x6C38;&#x7D9A;&#x6027;
+    &#x30AF;&#x30EC;&#x30A4;&#x30B8;&#x30FC;&#x30EA;&#x30D6;&#x3092;&#x59CB;&#x3081;&#x308B;&#x6E96;&#x5099;&#x306F;&#x3044;&#x3044;&#xFF1F;
+    &#x30AF;&#x30EC;&#x30A4;&#x30B8;&#x30FC;&#x30EA;&#x30D6;&#x306E;&#x52D5;&#x4F5C;
+    &#x624B;&#x9806;1&#xFF1A;&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x304B;&#x3089;&#x6587;&#x7AE0;&#x306E;&#x30C6;&#x30AD;&#x30B9;&#x30C8;&#x3092;&#x8AAD;&#x307F;&#x8FBC;&#x3080;
+    &#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x30D1;&#x30B9;&#x306E;&#x4F7F;&#x3044;&#x65B9;
+    &#x7D76;&#x5BFE;&#x30D1;&#x30B9;
+    &#x7D42;&#x308F;&#x3063;&#x305F;&#x3089;&#x5F8C;&#x7247;&#x4ED8;&#x3051;&#x3092;&#x5FD8;&#x308C;&#x305A;&#x306B;&#xFF01;
+    &#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x3092;&#x30B3;&#x30FC;&#x30C9;&#x306B;&#x8AAD;&#x307F;&#x8FBC;&#x3080;
+    &#x3082;&#x3046;&#x52D8;&#x5F01;&#x3057;&#x3066;
+    &#x30AF;&#x30EC;&#x30A4;&#x30B8;&#x30FC;&#x30EA;&#x30D6;&#x30B2;&#x30FC;&#x30E0;&#x3092;&#x5B8C;&#x6210;&#x3055;&#x305B;&#x308B;&#xFF01;
+    &#x6700;&#x7D42;&#x884C;&#x3092;&#x3069;&#x306E;&#x3088;&#x3046;&#x306B;&#x5224;&#x65AD;&#x3059;&#x308B;&#x306E;&#xFF1F;
+    &#x30AF;&#x30EC;&#x30A4;&#x30B8;&#x30FC;&#x30EA;&#x30D6;&#x306E;&#x30C6;&#x30F3;&#x30D7;&#x30EC;&#x30FC;&#x30C8;&#x3092;&#x8AAD;&#x307F;&#x8FBC;&#x3080;
+    &#x30C6;&#x30F3;&#x30D7;&#x30EC;&#x30FC;&#x30C8;&#x30C6;&#x30AD;&#x30B9;&#x30C8;&#x3092;&#x51E6;&#x7406;&#x3059;&#x308B;
+    &#x65B0;&#x305F;&#x306A;&#x6587;&#x5B57;&#x5217;&#x30E1;&#x30BD;&#x30C3;&#x30C9;&#x3092;&#x4F7F;&#x3063;&#x3066;&#x30D0;&#x30B0;&#x3092;&#x4FEE;&#x6B63;&#x3059;&#x308B;
+    &#x5B9F;&#x969B;&#x306B;&#x30D0;&#x30B0;&#x3092;&#x4FEE;&#x6B63;&#x3059;&#x308B;
+    &#x672C;&#x5F53;&#x306B;&#x554F;&#x984C;&#x304C;&#x3042;&#x308B;&#x30B3;&#x30FC;&#x30C9;&#x3082;&#x3042;&#x308B;
+    &#x4F8B;&#x5916;&#x51E6;&#x7406;
+    &#x660E;&#x793A;&#x7684;&#x306B;&#x4F8B;&#x5916;&#x3092;&#x51E6;&#x7406;&#x3059;&#x308B;
+    &#x4F8B;&#x5916;&#x3092;&#x51E6;&#x7406;&#x3059;&#x308B;&#x3088;&#x3046;&#x306B;&#x30AF;&#x30EC;&#x30A4;&#x30B8;&#x30FC;&#x30EA;&#x30D6;&#x3092;&#x66F4;&#x65B0;&#x3059;&#x308B;
+    &#x6700;&#x5F8C;&#x306E;&#x624B;&#x9806;&#xFF1A;&#x30AF;&#x30EC;&#x30A4;&#x30B8;&#x30FC;&#x30EA;&#x30D6;&#x3092;&#x4FDD;&#x5B58;&#x3059;&#x308B;
+    &#x6B8B;&#x308A;&#x306E;&#x30B3;&#x30FC;&#x30C9;&#x3092;&#x66F4;&#x65B0;&#x3059;&#x308B;
+
+10&#x7AE0; Web API &#x306E;&#x5229;&#x7528;&#xFF1A;&#x3082;&#x3063;&#x3068;&#x5916;&#x306B;&#x76EE;&#x3092;&#x5411;&#x3051;&#x308B;
+    Web API&#x3092;&#x4F7F;&#x3063;&#x3066;&#x7BC4;&#x56F2;&#x3092;&#x5E83;&#x3052;&#x308B;
+    Web API &#x306E;&#x4ED5;&#x7D44;&#x307F;
+    &#x3059;&#x3079;&#x3066;&#x306E;Web API&#x306B;&#x306F;Web&#x30A2;&#x30C9;&#x30EC;&#x30B9;&#x304C;&#x3042;&#x308B;
+    &#x7C21;&#x5358;&#x306A;&#x30A2;&#x30C3;&#x30D7;&#x30B0;&#x30EC;&#x30FC;&#x30C9;&#x3092;&#x3059;&#x308B;
+    &#x30A2;&#x30C3;&#x30D7;&#x30B0;&#x30EC;&#x30FC;&#x30C9;&#x3059;&#x308B;
+    &#x3042;&#x3068;&#x306F;&#x512A;&#x308C;&#x305F;Web API&#x304C;&#x5FC5;&#x8981;&#x306A;&#x3060;&#x3051;
+    API &#x3092;&#x8A73;&#x3057;&#x304F;&#x8ABF;&#x3079;&#x308B;
+    Web API &#x306F;JSON&#x3092;&#x4F7F;&#x3063;&#x3066;&#x30C7;&#x30FC;&#x30BF;&#x3092;&#x8FD4;&#x3059;
+    &#x30EA;&#x30AF;&#x30A8;&#x30B9;&#x30C8;&#x30E2;&#x30B8;&#x30E5;&#x30FC;&#x30EB;&#x3092;&#x3082;&#x3046;&#x4E00;&#x5EA6;&#x8A73;&#x3057;&#x304F;
+    &#x5168;&#x4F53;&#x3092;&#x307E;&#x3068;&#x3081;&#x308B;&#xFF1A;Open Notify&#x306B;&#x30EA;&#x30AF;&#x30A8;&#x30B9;&#x30C8;&#x3059;&#x308B;
+    JSON&#x306E;&#x4F7F;&#x3044;&#x65B9;
+    ISS&#x30C7;&#x30FC;&#x30BF;&#x306B;JSON&#x30E2;&#x30B8;&#x30E5;&#x30FC;&#x30EB;&#x3092;&#x4F7F;&#x3046;
+    &#x30B0;&#x30E9;&#x30D5;&#x30A3;&#x30C3;&#x30AF;&#x30B9;&#x3092;&#x52A0;&#x3048;&#x308B;
+    Screen&#x30AA;&#x30D6;&#x30B8;&#x30A7;&#x30AF;&#x30C8;&#x3092;&#x4F7F;&#x3046;
+    &#x30BF;&#x30FC;&#x30C8;&#x30EB;&#x3092;&#x8FFD;&#x52A0;&#x3057;&#x3066;ISS&#x3092;&#x63CF;&#x753B;
+    &#x30BF;&#x30FC;&#x30C8;&#x30EB;&#x306F;&#x5B87;&#x5B99;&#x30B9;&#x30C6;&#x30FC;&#x30B7;&#x30E7;&#x30F3;&#x306E;&#x3088;&#x3046;&#x306B;&#x3082;&#x898B;&#x3048;&#x308B;
+    ISS&#x3092;&#x5FD8;&#x308C;&#x308B;&#x2212;&#x3069;&#x3053;&#x306B;&#x3044;&#x308B;&#x306E;&#xFF1F;
+    ISS&#x306E;&#x30B3;&#x30FC;&#x30C9;&#x3092;&#x4ED5;&#x4E0A;&#x3052;&#x308B;
+
+11&#x7AE0; &#x30A6;&#x30A3;&#x30B8;&#x30A7;&#x30C3;&#x30C8;&#x3001;&#x30A4;&#x30D9;&#x30F3;&#x30C8;&#x3001;&#x5275;&#x767A;&#x7684;&#x306A;&#x632F;&#x308B;&#x821E;&#x3044;&#xFF1A;&#x30A4;&#x30F3;&#x30BF;&#x30E9;&#x30AF;&#x30C6;&#x30A3;&#x30D6;&#x306B;&#x3059;&#x308B;
+    &#x4EBA;&#x5DE5;&#x751F;&#x547D;&#x306E;&#x4E0D;&#x601D;&#x8B70;&#x306A;&#x4E16;&#x754C;&#x3078;&#x3088;&#x3046;&#x3053;&#x305D;
+    &#x30E9;&#x30A4;&#x30D5;&#x30B2;&#x30FC;&#x30E0;&#x3092;&#x8A73;&#x3057;&#x304F;&#x8ABF;&#x3079;&#x308B;
+    &#x4F5C;&#x6210;&#x3059;&#x308B;&#x3082;&#x306E;
+    &#x8A2D;&#x8A08;&#x306F;&#x9069;&#x5207;&#x3067;&#x3059;&#x304B;&#xFF1F;
+    &#x30C7;&#x30FC;&#x30BF;&#x30E2;&#x30C7;&#x30EB;&#x306E;&#x4F5C;&#x6210;
+    &#x30B0;&#x30EA;&#x30C3;&#x30C9;&#x3092;&#x8868;&#x3059;
+    &#x30E9;&#x30A4;&#x30D5;&#x30B2;&#x30FC;&#x30E0;&#x306E;&#x4E16;&#x4EE3;&#x3092;&#x8A08;&#x7B97;&#x3059;&#x308B;
+    &#x30BB;&#x30EB;&#x306E;&#x904B;&#x547D;&#x3092;&#x8A08;&#x7B97;&#x3059;&#x308B;
+    &#x30E2;&#x30C7;&#x30EB;&#x306E;&#x30B3;&#x30FC;&#x30C9;&#x3092;&#x5B8C;&#x6210;&#x3055;&#x305B;&#x308B;
+    &#x30D3;&#x30E5;&#x30FC;&#x306E;&#x4F5C;&#x6210;
+    &#x6700;&#x521D;&#x306E;&#x30A6;&#x30A3;&#x30B8;&#x30A7;&#x30C3;&#x30C8;&#x3092;&#x4F5C;&#x6210;&#x3059;&#x308B;
+    &#x6B8B;&#x308A;&#x306E;&#x30A6;&#x30A3;&#x30B8;&#x30A7;&#x30C3;&#x30C8;&#x3092;&#x8FFD;&#x52A0;&#x3059;&#x308B;
+    &#x30EC;&#x30A4;&#x30A2;&#x30A6;&#x30C8;&#x3092;&#x4FEE;&#x6B63;&#x3059;&#x308B;
+    &#x30B0;&#x30EA;&#x30C3;&#x30C9;&#x30EC;&#x30A4;&#x30A2;&#x30A6;&#x30C8;&#x306B;&#x30A6;&#x30A3;&#x30B8;&#x30A7;&#x30C3;&#x30C8;&#x3092;&#x914D;&#x7F6E;&#x3059;&#x308B;
+    &#x30B0;&#x30EA;&#x30C3;&#x30C9;&#x30EC;&#x30A4;&#x30A2;&#x30A6;&#x30C8;&#x3092;&#x30B3;&#x30FC;&#x30C9;&#x306B;&#x5909;&#x63DB;&#x3059;&#x308B;
+    &#x30B3;&#x30F3;&#x30C8;&#x30ED;&#x30FC;&#x30E9;&#x306E;&#x4F5C;&#x6210;
+    update &#x95A2;&#x6570;&#x306E;&#x8FFD;&#x52A0;
+    &#x65B0;&#x3057;&#x3044;&#x8A08;&#x7B97;&#x65B9;&#x5F0F;&#x306B;&#x53D6;&#x308A;&#x7D44;&#x3080;
+    &#x958B;&#x59CB;/ &#x4E00;&#x6642;&#x505C;&#x6B62;&#x30DC;&#x30BF;&#x30F3;&#x306E;&#x52D5;&#x4F5C;
+    &#x5225;&#x306E;&#x7A2E;&#x985E;&#x306E;&#x30A4;&#x30D9;&#x30F3;&#x30C8;
+    &#x4E00;&#x5B9A;&#x9593;&#x9694;&#x3067;&#x4F55;&#x5EA6;&#x3082;&#x547C;&#x3073;&#x51FA;&#x3059;&#x65B9;&#x6CD5;&#xFF1A;after&#x30E1;&#x30BD;&#x30C3;&#x30C9;
+    &#x30BB;&#x30EB;&#x3092;&#x76F4;&#x63A5;&#x5165;&#x529B;&#x3059;&#x308B;&#x3001;&#x305D;&#x3057;&#x3066;&#x7DE8;&#x96C6;&#x3059;&#x308B;
+    grid_view&#x306E;&#x30CF;&#x30F3;&#x30C9;&#x30E9;&#x3092;&#x66F8;&#x304F;
+    &#x30D1;&#x30BF;&#x30FC;&#x30F3;&#x3092;&#x8FFD;&#x52A0;&#x3059;&#x308B;
+    &#x30AA;&#x30D7;&#x30B7;&#x30E7;&#x30F3;&#x30E1;&#x30CB;&#x30E5;&#x30FC;&#x306E;&#x30CF;&#x30F3;&#x30C9;&#x30E9;&#x3092;&#x66F8;&#x304F;
+    &#x30D1;&#x30BF;&#x30FC;&#x30F3;&#x30ED;&#x30FC;&#x30C0;&#x3092;&#x66F8;&#x304F;
+    &#x30E9;&#x30A4;&#x30D5;&#x30B2;&#x30FC;&#x30E0;&#x30B7;&#x30DF;&#x30E5;&#x30EC;&#x30FC;&#x30BF;&#x3092;&#x3055;&#x3089;&#x306B;&#x9032;&#x5316;&#x3055;&#x305B;&#x308B;&#xFF01;
+
+12&#x7AE0; &#x30AA;&#x30D6;&#x30B8;&#x30A7;&#x30AF;&#x30C8;&#x6307;&#x5411;&#x30D7;&#x30ED;&#x30B0;&#x30E9;&#x30DF;&#x30F3;&#x30B0;&#xFF1A;&#x30AA;&#x30D6;&#x30B8;&#x30A7;&#x30AF;&#x30C8;&#x6751;&#x3078;&#x306E;&#x65C5;
+    &#x5225;&#x306E;&#x65B9;&#x6CD5;&#x3067;&#x5206;&#x5272;&#x3059;&#x308B;
+    &#x8981;&#x3059;&#x308B;&#x306B;&#x30AA;&#x30D6;&#x30B8;&#x30A7;&#x30AF;&#x30C8;&#x6307;&#x5411;&#x30D7;&#x30ED;&#x30B0;&#x30E9;&#x30DF;&#x30F3;&#x30B0;&#x3063;&#x3066;&#xFF1F;
+    &#x30AF;&#x30E9;&#x30B9;&#x3092;&#x8A2D;&#x8A08;&#x3059;&#x308B;
+    &#x6700;&#x521D;&#x306E;&#x30AF;&#x30E9;&#x30B9;&#x3092;&#x66F8;&#x304F;
+    &#x30B3;&#x30F3;&#x30B9;&#x30C8;&#x30E9;&#x30AF;&#x30BF;&#x306E;&#x52D5;&#x4F5C;
+    bark&#x30E1;&#x30BD;&#x30C3;&#x30C9;&#x3092;&#x66F8;&#x304F;
+    &#x30E1;&#x30BD;&#x30C3;&#x30C9;&#x306E;&#x52D5;&#x4F5C;
+    &#x7D99;&#x627F;&#x3059;&#x308B;
+    ServiceDog &#x30AF;&#x30E9;&#x30B9;&#x306E;&#x5B9F;&#x88C5;
+    &#x30B5;&#x30D6;&#x30AF;&#x30E9;&#x30B9;&#x3068;&#x306F;
+    ServiceDog &#x306F;Dog &#x3067;&#x3042;&#x308B;&#xFF08;IS-A&#xFF09;
+    IS-A&#x95A2;&#x4FC2;&#x3092;&#x8ABF;&#x3079;&#x308B;
+    &#x632F;&#x308B;&#x821E;&#x3044;&#x306E;&#x30AA;&#x30FC;&#x30D0;&#x30FC;&#x30E9;&#x30A4;&#x30C9;&#x3068;&#x62E1;&#x5F35;
+    &#x5C02;&#x9580;&#x7528;&#x8A9E;&#x306E;&#x8857;&#x3078;&#x3088;&#x3046;&#x3053;&#x305D;
+    &#x30AA;&#x30D6;&#x30B8;&#x30A7;&#x30AF;&#x30C8;&#x306F;&#x5225;&#x306E;&#x30AA;&#x30D6;&#x30B8;&#x30A7;&#x30AF;&#x30C8;&#x3092;&#x542B;&#x3080;&#xFF08;HAS-A&#xFF09;
+    &#x72AC;&#x7528;&#x30DB;&#x30C6;&#x30EB;&#x306E;&#x8A2D;&#x8A08;
+    &#x72AC;&#x7528;&#x30DB;&#x30C6;&#x30EB;&#x306E;&#x5B9F;&#x88C5;
+    &#x30DB;&#x30C6;&#x30EB;&#x3067;&#x306E;&#x30A2;&#x30AF;&#x30C6;&#x30A3;&#x30D3;&#x30C6;&#x30A3;&#x3092;&#x8FFD;&#x52A0;&#x3059;&#x308B;
+    &#x53EF;&#x80FD;&#x306A;&#x3053;&#x3068;&#x306F;&#x4F55;&#x3067;&#x3082;&#x3067;&#x304D;&#x308B;&#xFF08;&#x30DD;&#x30EA;&#x30E2;&#x30FC;&#x30D5;&#x30A3;&#x30BA;&#x30E0;&#xFF09;
+    &#x4ED6;&#x306E;&#x72AC;&#x306B;&#x6B69;&#x304D;&#x65B9;&#x3092;&#x6559;&#x3048;&#x308B;
+    &#x7D99;&#x627F;&#x306E;&#x5A01;&#x529B;&#xFF08;&#x3068;&#x5F79;&#x5272;&#xFF09;
+
+&#x4ED8;&#x9332; &#x672A;&#x53CE;&#x9332;&#x4E8B;&#x9805;&#xFF1A;&#xFF08;&#x53D6;&#x308A;&#x4E0A;&#x3052;&#x306A;&#x304B;&#x3063;&#x305F;&#xFF09;&#x4E0A;&#x4F4D;10 &#x500B;&#x306E;&#x30C8;&#x30D4;&#x30C3;&#x30AF;
+    1. &#x30EA;&#x30B9;&#x30C8;&#x5185;&#x5305;&#x8868;&#x8A18; 
+    2. &#x65E5;&#x4ED8;&#x3068;&#x6642;&#x523B;
+    3. &#x6B63;&#x898F;&#x8868;&#x73FE;
+    4. &#x305D;&#x306E;&#x4ED6;&#x306E;&#x30C7;&#x30FC;&#x30BF;&#x578B;&#xFF1A;&#x30BF;&#x30D7;&#x30EB;
+    5. &#x305D;&#x306E;&#x4ED6;&#x306E;&#x30C7;&#x30FC;&#x30BF;&#x578B;&#xFF1A;&#x96C6;&#x5408;
+    6. &#x30B5;&#x30FC;&#x30D0;&#x30B5;&#x30A4;&#x30C9;&#x30D7;&#x30ED;&#x30B0;&#x30E9;&#x30DF;&#x30F3;&#x30B0;
+    7. &#x9045;&#x5EF6;&#x8A55;&#x4FA1;
+    8. &#x30C7;&#x30B3;&#x30EC;&#x30FC;&#x30BF;
+    9. &#x9AD8;&#x968E;&#x95A2;&#x6570;&#x3068;&#x7B2C;&#x4E00;&#x7D1A;&#x95A2;&#x6570;
+    10. &#x591A;&#x6570;&#x306E;&#x30E9;&#x30A4;&#x30D6;&#x30E9;&#x30EA;
+
+&#x7D22;&#x5F15;</pre>
+          </div>
+        </section>
+      </section>
+
+
+      
+      <div class="related-items">
+        <div class="sectionRow__Heading">
+          <h3>&#x95A2;&#x9023;&#x66F8;&#x7C4D;</h3>
+        </div>
+        
+
+        <div class="sectionRow__Content">
+          <div class="sectionRow__BestLarge" id="bestEbooks">
+            
+            
+            <div class="sectionRow__Best" id="bestEbook1">
+              <a class="sectionRow__BestCover" href="/books/9784873118291/">
+                <img src="https://www.oreilly.co.jp/books/images/picture_large978-4-87311-829-1.jpeg" alt="Head First Python &#x7B2C;2&#x7248;">
+              </a>
+            </div>
+            
+            
+            <div class="sectionRow__Best hidden" id="bestEbook2">
+              <a class="sectionRow__BestCover" href="/books/9784873119762/">
+                <img src="https://www.oreilly.co.jp/books/images/picture_large978-4-87311-976-2.jpeg" alt="Head First&#x30C7;&#x30B6;&#x30A4;&#x30F3;&#x30D1;&#x30BF;&#x30FC;&#x30F3; &#x7B2C;2&#x7248;">
+              </a>
+            </div>
+            
+            
+          </div>
+
+          <div class="sectionRow__BestThumbnails" id="bestEbookThumbnails">
+            
+            
+            <button class="sectionRow__bestBookThumbnailsItem" data-for="bestEbook1" aria-selected="true" title="Head First Python &#x7B2C;2&#x7248;">
+              <img src="https://www.oreilly.co.jp/books/images/picture_large978-4-87311-829-1.jpeg" alt="94342520887984">
+            </button>
+            
+            
+            <button class="sectionRow__bestBookThumbnailsItem" data-for="bestEbook2" title="Head First&#x30C7;&#x30B6;&#x30A4;&#x30F3;&#x30D1;&#x30BF;&#x30FC;&#x30F3; &#x7B2C;2&#x7248;">
+              <img src="https://www.oreilly.co.jp/books/images/picture_large978-4-87311-976-2.jpeg" alt="94342521101488">
+            </button>
+            
+            
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer__FooterSection">
+    <div class="pageWidth">
+      <div class="footer__FooterTop">
+        <div class="footer__List">
+          <h3><a href="https://www.oreilly.co.jp/company/">About</a></h3>
+          <a href="https://www.oreilly.co.jp/company/">&#x4F1A;&#x793E;&#x6982;&#x8981;</a>
+          <a href="https://www.oreilly.co.jp/orj/privacypolicy.shtml">&#x500B;&#x4EBA;&#x60C5;&#x5831;&#x306B;&#x3064;&#x3044;&#x3066;</a>
+          <a href="http://www.oreilly.com/">O&#x2019;Reilly Media</a>
+          <a href="http://makezine.jp/">Make: Japan</a>
+          <a href="http://makezine.jp/events">Maker Faire Tokyo</a>
+        </div>
+
+        <div class="footer__List">
+          <h3><a href="https://www.oreilly.co.jp/company/">Support</a></h3>
+          <a href="https://www.oreilly.co.jp/feedback/">Contact us</a>
+          <a href="https://www.oreilly.co.jp/bookclub/">Bookclub</a>
+          <a href="https://www.oreilly.co.jp/order/">&#x66F8;&#x7C4D;&#x6CE8;&#x6587;</a>
+        </div>
+
+        <div class="footer__Apps">
+          <h3>Download the O&#x2019;Reilly app</h3>
+
+          <p>Take O&#x2019;Reilly with you and learn anywhere, anytime on your phone <span class="nowrap">and tablet.</span></p>
+
+          <div class="footer__DownloadLinks">
+            <a href="https://itunes.apple.com/us/app/safari-to-go/id881697395"><img src="https://cdn.oreillystatic.com/oreilly/images/app-store-logo.png" alt="Apple app store"></a>
+
+            <a href="https://play.google.com/store/apps/details?id=com.safariflow.queue"><img src="https://cdn.oreillystatic.com/oreilly/images/google-play-logo.png" alt="Google play store"></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer__FooterBase">
+        <a aria-current="page" class="footer__Logo" title="Go to home page" href="/"><img src="/assets/images/logo_oreilly_japan.svg" alt="O&apos;Reilly logo"></a>
+        <p>&#xA9; 2022, O&#x2019;Reilly Japan, Inc. oreilly.co.jp&#x306B;&#x63B2;&#x8F09;&#x3055;&#x308C;&#x3066;&#x3044;&#x308B;&#x3059;&#x3079;&#x3066;&#x306E;&#x30C8;&#x30EC;&#x30FC;&#x30C9;&#x30DE;&#x30FC;&#x30AF;&#x304A;&#x3088;&#x3073;&#x767B;&#x9332;&#x5546;&#x6A19;&#x306F;&#x3001;&#x305D;&#x308C;&#x305E;&#x308C;&#x306E;&#x6240;&#x6709;&#x8005;&#x306B;&#x5E30;&#x5C5E;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+      </div>
+    </div>
+  </footer>
+
+  
+  
+  
+
+  
+  
+  
+</body>
+</html>

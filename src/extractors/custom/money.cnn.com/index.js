@@ -6,7 +6,7 @@ export const MoneyCnnComExtractor = {
   },
 
   author: {
-    selectors: ['.byline a'],
+    selectors: [['meta[name="author"]', 'value'], '.byline a'],
   },
 
   date_published: {

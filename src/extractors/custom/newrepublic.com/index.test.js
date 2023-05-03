@@ -15,9 +15,7 @@ describe('NewrepublicComExtractor', () => {
     beforeAll(() => {
       url =
         'https://newrepublic.com/article/138859/fantastic-beasts-nice-place-visit';
-      const html = fs.readFileSync(
-        './fixtures/newrepublic.com/1480434805231.html'
-      );
+      const html = fs.readFileSync('./fixtures/newrepublic.com.html');
       result = Mercury.parse(url, { html, fallback: false });
     });
     it('is selected properly', async () => {
@@ -115,9 +113,7 @@ describe('NewrepublicComExtractor', () => {
     beforeAll(async () => {
       url =
         'https://newrepublic.com/minutes/139022/maybe-donald-trumps-twitter-account-just-smoke-screen';
-      const html = fs.readFileSync(
-        './fixtures/newrepublic.com/1480446502259.html'
-      );
+      const html = fs.readFileSync('./fixtures/newrepublic.com--minutes.html');
       result = await Mercury.parse(url, { html, fallback: false });
     });
 

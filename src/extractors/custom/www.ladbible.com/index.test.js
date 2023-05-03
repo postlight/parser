@@ -15,9 +15,7 @@ describe('WwwLadbibleComExtractor', () => {
     beforeAll(() => {
       url =
         'https://www.ladbible.com/news/latest-aussie-government-sparks-fury-over-graphic-and-confronting-covid-19-ad-20210711';
-      const html = fs.readFileSync(
-        './fixtures/www.ladbible.com/1626477326151.html'
-      );
+      const html = fs.readFileSync('./fixtures/www.ladbible.com.html');
       result = Mercury.parse(url, { html, fallback: false });
     });
 
@@ -71,7 +69,7 @@ describe('WwwLadbibleComExtractor', () => {
       // the article.
       assert.equal(
         lead_image_url,
-        `https://www.ladbible.com/cdn-cgi/image/width=1200,quality=70,format=jpeg,fit=cover,dpr=1/https%3A%2F%2Fs3-images.ladbible.com%2Fs3%2Fcontent%2F788d729460eb11aa5ceadb28b93c0f8a.png`
+        `https://www.ladbible.com/cdn-cgi/image/width=1200,quality=70,format=jpeg,fit=contain,dpr=1/https%3A%2F%2Fs3-images.ladbible.com%2Fs3%2Fcontent%2F788d729460eb11aa5ceadb28b93c0f8a.png`
       );
     });
 

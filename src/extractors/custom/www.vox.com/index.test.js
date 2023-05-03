@@ -15,7 +15,7 @@ describe('WwwVoxComExtractor', () => {
     beforeAll(() => {
       url =
         'http://www.vox.com/culture/2016/12/10/13898352/trump-twitter-harassment-policy-bannable';
-      const html = fs.readFileSync('./fixtures/www.vox.com/1481563623532.html');
+      const html = fs.readFileSync('./fixtures/www.vox.com.html');
       result = Mercury.parse(url, { html, fallback: false });
     });
 
@@ -82,7 +82,7 @@ describe('WwwVoxComExtractor', () => {
       // the article.
       assert.equal(
         lead_image_url,
-        'https://cdn0.vox-cdn.com/thumbor/RuJTDlBH9LAp_9uFqYfnPzWXhj0=/0x175:2500x1564/1080x600/cdn0.vox-cdn.com/uploads/chorus_image/image/52223131/628656068.0.jpeg'
+        'https://cdn.vox-cdn.com/thumbor/E4zA3smy2FKHl9BxfsfKjkNHfFc=/0x166:2500x1572/1600x900/cdn.vox-cdn.com/uploads/chorus_image/image/52223131/628656068.0.jpeg'
       );
     });
 

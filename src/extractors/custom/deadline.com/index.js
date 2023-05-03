@@ -6,7 +6,7 @@ export const DeadlineComExtractor = {
   },
 
   author: {
-    selectors: ['section.author h3'],
+    selectors: ['section.author h2'],
   },
 
   date_published: {
@@ -29,6 +29,6 @@ export const DeadlineComExtractor = {
       },
     },
 
-    clean: [],
+    clean: ['figcaption'],
   },
 };

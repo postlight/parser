@@ -6,7 +6,7 @@ export const WwwFastcompanyComExtractor = {
   },
 
   author: {
-    selectors: ['.post__by'],
+    selectors: [['meta[name="author"]', 'value']],
   },
 
   date_published: {

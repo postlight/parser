@@ -10,7 +10,10 @@ export const QzComExtractor = {
   },
 
   date_published: {
-    selectors: [['time[datetime]', 'datetime']],
+    selectors: [
+      ['meta[name="article:published_time"]', 'value'],
+      ['time[datetime]', 'datetime'],
+    ],
   },
 
   lead_image_url: {

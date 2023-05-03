@@ -1,0 +1,414 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja" xmlns:gr="http://gree.jp/ns" xmlns:fb="http://www.facebook.com/2008/fbml">
+<head>
+<meta http-equiv="content-Type" value="text/html; charset=utf-8">
+<meta http-equiv="content-Script-Type" value="text/javascript">
+<meta http-equiv="content-Style-Type" value="text/css">
+<meta http-equiv="X-UA-Compatible" value="IE=IE9">
+<meta name="viewport" value="width=device-width; initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=yes">
+<title>&#x3010;OSS&#x3011;2018&#x5E74;&#x306E;&#x30AA;&#x30FC;&#x30D7;&#x30F3;&#x30BD;&#x30FC;&#x30B9;&#x30D7;&#x30ED;&#x30B8;&#x30A7;&#x30AF;&#x30C8;10&#x9078;---&#x300C;Visual Studio Code&#x300D;&#x300C;Vault&#x300D;&#x300C;Angular CLI&#x300D;</title>
+<meta name="keywords" value="">
+<meta name="description" value="2018&#x5E74;&#x3092;&#x4EE3;&#x8868;&#x3059;&#x308B;10&#x306E;&#x30AA;&#x30FC;&#x30D7;&#x30F3;&#x30BD;&#x30FC;&#x30B9;&#x30D7;&#x30ED;&#x30B8;&#x30A7;&#x30AF;&#x30C8;&#x3092;&#x7D39;&#x4ECB;&#x3002;&#x2460;Visual Studio CodeVisual Studio Code&#x306F;&#x3001;Microsoft&#x304C;&#x958B;&#x767A;&#x3057;&#x305F;&#x30AA;&#x30FC;&#x30D7;&#x30F3;&#x30BD;&#x30FC;&#x30B9;&#x30B3;&#x30FC;&#x30C9;&#x30A8;&#x30C7;&#x30A3;&#x30BF;&#x3002;&#x300C;Stack Overflow2018&#x958B;&#x767A;&#x8005;&#x8ABF;&#x67FB;&#x300D;&#x3067;&#x6700;&#x3082;&#x4EBA;&#x6C17;&#x306E;&#x3042;&#x308B;&#x958B;&#x767A;&#x8005;&#x74B0;&#x5883;&#x306B;&#x30E9;&#x30F3;&#x30AF;&#x3055;&#x308C;&#x305F;&#x3002;https://code.visualstudio.com/&#x2461;TensorFlowTensorFlow&#x306F;&#x9AD8;&#x6027;&#x80FD;&#x6570;&#x5024;&#x8A08;&#x7B97;&#x7528;&#x6A5F;&#x68B0;&#x5B66;&#x7FD2;&#x30D5;&#x30EC;&#x30FC;&#x30E0;&#x30EF;&#x30FC;&#x30AF;&#x3002;https://www.tensorflow.org/&#x2462;AnsibleAnsible&#x306F;IT&#x81EA;&#x52D5;&#x5316;&#x30C4;&#x30FC;&#x30EB;&#x3067;&#x9AD8;&#x5EA6;&#x306A;IT&#x30BF;&#x30B9;&#x30AF;&#x3092;&#x63D0;&#x4F9B;&#x3059;&#x308B;&#x3002;https://www.ansible.com/&#x2463;Vue.jsVue.js&#x306F;&#x3001;&#x30E6;&#x30FC;&#x30B6;&#x30FC;&#x30A4;&#x30F3;&#x30BF;&#x30FC;&#x30D5;&#x30A7;&#x30FC;&#x30B9;&#x3092;&#x69CB;&#x7BC9;&#x3059;&#x308B;&#x305F;&#x3081;&#x306E;JavaScript&#x30D5;&#x30EC;&#x30FC;&#x30E0;&#x30EF;&#x30FC;&#x30AF;&#x3002;GitHub&#x30DA;&#x30FC;&#x30B8;&#x3067;&#x306F;12&#x4E07;&#x4EE5;&#x4E0A;&#x306E;&#x661F;&#x3092;&#x7372;&#x5F97;&#x3057;&#x3066;&#x3044;&#x308B;&#x3002;https://jp.vuejs.org/&#x2464;React NativeReact Native&#x306F;&#x3001;JavaScript&#x3068;React&#x3092;&#x4F7F;&#x7528;&#x3057;&#x3066;&#x30CD;&#x30A4;&#x30C6;&#x30A3;&#x30D6;&#x30E2;&#x30D0;&#x30A4;&#x30EB;&#x30A2;&#x30D7;&#x30EA;&#x30B1;&#x30FC;&#x30B7;&#x30E7;&#x30F3;&#x3092;&#x69CB;&#x7BC9;&#x3059;&#x308B;&#x305F;&#x3081;&#x306E;JavaScript&#x30D5;&#x30EC;&#x30FC;&#x30E0;&#x30EF;&#x30FC;&#x30AF;&#x3002;https://facebook.github.io/react-native/&#x2465;Angular CLIAngular CLI&#x306F;&#x3001;Angular&#x30A2;&#x30D7;&#x30EA;&#x30B1;&#x30FC;&#x30B7;&#x30E7;&#x30F3;&#x3092;&#x64CD;&#x4F5C;&#x3067;&#x304D;&#x308B;&#x30B3;&#x30DE;&#x30F3;&#x30C9;&#x30E9;&#x30A4;&#x30F3;&#x30A4;&#x30F3;&#x30BF;&#x30FC;&#x30D5;&#x30A7;&#x30FC;&#x30B9;&#x30C4;&#x30FC;&#x30EB;&#x3002;https://cli.angular.io/&#x2466;VaultVault&#x306F;&#x300C;&#x79D8;&#x5BC6;&#x7BA1;&#x7406;&#x300D;&#x300C;&#x30B5;&#x30FC;&#x30D3;&#x30B9;&#x3068;&#x3057;&#x3066;&#x306E;&#x6697;&#x53F7;&#x5316;&#x300D;&#x300C;&#x7279;&#x6A29;&#x30A2;&#x30AF;&#x30BB;&#x30B9;&#x7BA1;&#x7406;&#x300D;&#x306E;&#x305F;&#x3081;&#x306E;&#x6A5F;&#x80FD;&#x3092;&#x63D0;&#x4F9B;&#x3059;&#x308B;&#x30AA;&#x30FC;&#x30D7;&#x30F3;&#x30BD;&#x30FC;&#x30B9;&#x30C4;&#x30FC;&#x30EB;&#x3002;https://www.vaultproject.io/&#x2467;KerasKeras&#x306F;&#x300C;TensorFlow&#x300D;&#x300C;Microsoft Cognitive Toolkit&#x300D;&#x300C;Theano&#x300D;&#x306E;&#x4E0A;&#x3067;&#x5B9F;&#x884C;&#x53EF;&#x80FD;&#x306A;Python&#x5B9F;&#x88C5;&#x306E;&#x30CB;&#x30E5;&#x30FC;&#x30E9;&#x30EB;&#x30CD;&#x30C3;&#x30C8;&#x30EF;&#x30FC;&#x30AF;&#x30E9;&#x30A4;&#x30D6;&#x30E9;&#x30EA;&#x3002;https://keras.io/ja/&#x2468;KubernetesKubernetes&#x306F;&#x30B3;&#x30F3;&#x30C6;&#x30CA;&#x30AA;&#x30FC;&#x30B1;&#x30B9;&#x30C8;&#x30EC;&#x30FC;&#x30B7;&#x30E7;&#x30F3;&#x30B7;&#x30B9;&#x30C6;&#x30E0;&#x3067;&#x3001;GitHub&#x306E;&#x30C8;&#x30C3;&#x30D7;&#x30AA;&#x30FC;&#x30D7;&#x30F3;&#x30BD;&#x30FC;&#x30B9;&#x30D7;&#x30ED;&#x30B8;&#x30A7;&#x30AF;&#x30C8;&#x30EA;&#x30B9;&#x30C8;&#x3067;&#x7B2C;8&#x4F4D;&#x306B;&#x30E9;&#x30F3;&#x30AF;&#x3055;&#x308C;&#x3066;&#x3044;&#x308B;&#x3002;https://kubernetes.io/&#x2469;BitcoinBitcoin&#x306F;&#x3001;&#x6700;&#x3082;&#x4EBA;&#x6C17;&#x306E;&#x3042;&#x308B;&#x30AA;&#x30FC;&#x30D7;&#x30F3;&#x30BD;&#x30FC;&#x30B9;&#x306E;&#x30D6;&#x30ED;&#x30C3;&#x30AF;&#x30C1;&#x30A7;&#x30FC;&#x30F3;&#x30D7;&#x30ED;&#x30B8;&#x30A7;&#x30AF;&#x30C8;&#x3002;&#x5B9F;&#x9A13;&#x7684;&#x306A;&#x30C7;&#x30B8;&#x30BF;&#x30EB;&#x901A;&#x8CA8;&#x3067;&#x3042;&#x308A;&#x3001;&#x30D4;&#x30A2;&#x30C4;&#x30FC;&#x30D4;&#x30A2;&#x6280;&#x8853;&#x3092;&#x4F7F;&#x7528;&#x3057;&#x3066;&#x4E2D;&#x592E;&#x6A29;&#x9650;&#x306A;&#x3057;&#x3067;&#x6A5F;&#x80FD;&#x3059;&#x308B;&#x3002;https://bitcoincore.org/&#x4EE5;&#x4E0A;&#x3001;&#x4E0B;&#x8A18;URL&#x304B;&#x3089;&#x306E;&#x8981;&#x7D04;  https://opensourceforu.com/2019/03/ten-trending-open-source-projects-of-2018/&#x3053;&#x306E;&#x4F5C;&#x54C1;&#x306F; &#x30AF;&#x30EA;&#x30A8;&#x30A4;&#x30C6;&#x30A3;&#x30D6;&#x30FB;&#x30B3;&#x30E2;&#x30F3;&#x30BA; &#x8868;&#x793A; - &#x975E;&#x55B6;&#x5229; 4.0 &#x56FD;&#x969B; &#x30E9;&#x30A4;&#x30BB;&#x30F3;&#x30B9;&#x306E;&#x4E0B;&#x306B;&#x63D0;&#x4F9B;&#x3055;&#x308C;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;">
+<link rel="apple-touch-icon" href="https://www.ossnews.jp/apple-touch-icon.png">
+<meta name="distribution" value="global">
+
+<meta http-equiv="imagetoolbar" value="no">
+<meta name="copyright" value="Copyright &#xA9; 2013 &#x682A;&#x5F0F;&#x4F1A;&#x793E;&#x30AA;&#x30FC;&#x30D7;&#x30F3;&#x30BD;&#x30FC;&#x30B9;&#x6D3B;&#x7528;&#x7814;&#x7A76;&#x6240;. All rights reserved.">
+
+<meta value="https://www.ossnews.jp/upload/contents/d31621685b4315555b30c2b16a66fd3b.jpg" name="og:image">
+<meta value="1200" name="og:image:width">
+<meta value="801" name="og:image:height">
+<meta value="website" name="og:type">
+<meta value="OSS&#xD7;Cloud News - &#x30AA;&#x30FC;&#x30D7;&#x30F3;&#x30BD;&#x30FC;&#x30B9;&#xD7;&#x30AF;&#x30E9;&#x30A6;&#x30C9;&#x60C5;&#x5831;&#x30B5;&#x30A4;&#x30C8;" name="og:site_name">
+<meta value="&#x3010;OSS&#x3011;2018&#x5E74;&#x306E;&#x30AA;&#x30FC;&#x30D7;&#x30F3;&#x30BD;&#x30FC;&#x30B9;&#x30D7;&#x30ED;&#x30B8;&#x30A7;&#x30AF;&#x30C8;10&#x9078;---&#x300C;Visual Studio Code&#x300D;&#x300C;Vault&#x300D;&#x300C;Angular CLI&#x300D;" name="og:title">
+<meta value="2018&#x5E74;&#x3092;&#x4EE3;&#x8868;&#x3059;&#x308B;10&#x306E;&#x30AA;&#x30FC;&#x30D7;&#x30F3;&#x30BD;&#x30FC;&#x30B9;&#x30D7;&#x30ED;&#x30B8;&#x30A7;&#x30AF;&#x30C8;&#x3092;&#x7D39;&#x4ECB;&#x3002;&#x2460;Visual Studio CodeVisual Studio Code&#x306F;&#x3001;Microsoft&#x304C;&#x958B;&#x767A;&#x3057;&#x305F;&#x30AA;&#x30FC;&#x30D7;&#x30F3;&#x30BD;&#x30FC;&#x30B9;&#x30B3;&#x30FC;&#x30C9;&#x30A8;&#x30C7;&#x30A3;&#x30BF;&#x3002;&#x300C;Stack Overflow2018&#x958B;&#x767A;&#x8005;&#x8ABF;&#x67FB;&#x300D;&#x3067;&#x6700;&#x3082;&#x4EBA;&#x6C17;&#x306E;&#x3042;&#x308B;&#x958B;&#x767A;&#x8005;&#x74B0;&#x5883;&#x306B;&#x30E9;&#x30F3;&#x30AF;&#x3055;&#x308C;&#x305F;&#x3002;https://code.visualstudio.com/&#x2461;TensorFlowTensorFlow&#x306F;&#x9AD8;&#x6027;&#x80FD;&#x6570;&#x5024;&#x8A08;&#x7B97;&#x7528;&#x6A5F;&#x68B0;&#x5B66;&#x7FD2;&#x30D5;&#x30EC;&#x30FC;&#x30E0;&#x30EF;&#x30FC;&#x30AF;&#x3002;https://www.tensorflow.org/&#x2462;AnsibleAnsible&#x306F;IT&#x81EA;&#x52D5;&#x5316;&#x30C4;&#x30FC;&#x30EB;&#x3067;&#x9AD8;&#x5EA6;&#x306A;IT&#x30BF;&#x30B9;&#x30AF;&#x3092;&#x63D0;&#x4F9B;&#x3059;&#x308B;&#x3002;https://www.ansible.com/&#x2463;Vue.jsVue.js&#x306F;&#x3001;&#x30E6;&#x30FC;&#x30B6;&#x30FC;&#x30A4;&#x30F3;&#x30BF;&#x30FC;&#x30D5;&#x30A7;&#x30FC;&#x30B9;&#x3092;&#x69CB;&#x7BC9;&#x3059;&#x308B;&#x305F;&#x3081;&#x306E;JavaScript&#x30D5;&#x30EC;&#x30FC;&#x30E0;&#x30EF;&#x30FC;&#x30AF;&#x3002;GitHub&#x30DA;&#x30FC;&#x30B8;&#x3067;&#x306F;12&#x4E07;&#x4EE5;&#x4E0A;&#x306E;&#x661F;&#x3092;&#x7372;&#x5F97;&#x3057;&#x3066;&#x3044;&#x308B;&#x3002;https://jp.vuejs.org/&#x2464;React NativeReact Native&#x306F;&#x3001;JavaScript&#x3068;React&#x3092;&#x4F7F;&#x7528;&#x3057;&#x3066;&#x30CD;&#x30A4;&#x30C6;&#x30A3;&#x30D6;&#x30E2;&#x30D0;&#x30A4;&#x30EB;&#x30A2;&#x30D7;&#x30EA;&#x30B1;&#x30FC;&#x30B7;&#x30E7;&#x30F3;&#x3092;&#x69CB;&#x7BC9;&#x3059;&#x308B;&#x305F;&#x3081;&#x306E;JavaScript&#x30D5;&#x30EC;&#x30FC;&#x30E0;&#x30EF;&#x30FC;&#x30AF;&#x3002;https://facebook.github.io/react-native/&#x2465;Angular CLIAngular CLI&#x306F;&#x3001;Angular&#x30A2;&#x30D7;&#x30EA;&#x30B1;&#x30FC;&#x30B7;&#x30E7;&#x30F3;&#x3092;&#x64CD;&#x4F5C;&#x3067;&#x304D;&#x308B;&#x30B3;&#x30DE;&#x30F3;&#x30C9;&#x30E9;&#x30A4;&#x30F3;&#x30A4;&#x30F3;&#x30BF;&#x30FC;&#x30D5;&#x30A7;&#x30FC;&#x30B9;&#x30C4;&#x30FC;&#x30EB;&#x3002;https://cli.angular.io/&#x2466;VaultVault&#x306F;&#x300C;&#x79D8;&#x5BC6;&#x7BA1;&#x7406;&#x300D;&#x300C;&#x30B5;&#x30FC;&#x30D3;&#x30B9;&#x3068;&#x3057;&#x3066;&#x306E;&#x6697;&#x53F7;&#x5316;&#x300D;&#x300C;&#x7279;&#x6A29;&#x30A2;&#x30AF;&#x30BB;&#x30B9;&#x7BA1;&#x7406;&#x300D;&#x306E;&#x305F;&#x3081;&#x306E;&#x6A5F;&#x80FD;&#x3092;&#x63D0;&#x4F9B;&#x3059;&#x308B;&#x30AA;&#x30FC;&#x30D7;&#x30F3;&#x30BD;&#x30FC;&#x30B9;&#x30C4;&#x30FC;&#x30EB;&#x3002;https://www.vaultproject.io/&#x2467;KerasKeras&#x306F;&#x300C;TensorFlow&#x300D;&#x300C;Microsoft Cognitive Toolkit&#x300D;&#x300C;Theano&#x300D;&#x306E;&#x4E0A;&#x3067;&#x5B9F;&#x884C;&#x53EF;&#x80FD;&#x306A;Python&#x5B9F;&#x88C5;&#x306E;&#x30CB;&#x30E5;&#x30FC;&#x30E9;&#x30EB;&#x30CD;&#x30C3;&#x30C8;&#x30EF;&#x30FC;&#x30AF;&#x30E9;&#x30A4;&#x30D6;&#x30E9;&#x30EA;&#x3002;https://keras.io/ja/&#x2468;KubernetesKubernetes&#x306F;&#x30B3;&#x30F3;&#x30C6;&#x30CA;&#x30AA;&#x30FC;&#x30B1;&#x30B9;&#x30C8;&#x30EC;&#x30FC;&#x30B7;&#x30E7;&#x30F3;&#x30B7;&#x30B9;&#x30C6;&#x30E0;&#x3067;&#x3001;GitHub&#x306E;&#x30C8;&#x30C3;&#x30D7;&#x30AA;&#x30FC;&#x30D7;&#x30F3;&#x30BD;&#x30FC;&#x30B9;&#x30D7;&#x30ED;&#x30B8;&#x30A7;&#x30AF;&#x30C8;&#x30EA;&#x30B9;&#x30C8;&#x3067;&#x7B2C;8&#x4F4D;&#x306B;&#x30E9;&#x30F3;&#x30AF;&#x3055;&#x308C;&#x3066;&#x3044;&#x308B;&#x3002;https://kubernetes.io/&#x2469;BitcoinBitcoin&#x306F;&#x3001;&#x6700;&#x3082;&#x4EBA;&#x6C17;&#x306E;&#x3042;&#x308B;&#x30AA;&#x30FC;&#x30D7;&#x30F3;&#x30BD;&#x30FC;&#x30B9;&#x306E;&#x30D6;&#x30ED;&#x30C3;&#x30AF;&#x30C1;&#x30A7;&#x30FC;&#x30F3;&#x30D7;&#x30ED;&#x30B8;&#x30A7;&#x30AF;&#x30C8;&#x3002;&#x5B9F;&#x9A13;&#x7684;&#x306A;&#x30C7;&#x30B8;&#x30BF;&#x30EB;&#x901A;&#x8CA8;&#x3067;&#x3042;&#x308A;&#x3001;&#x30D4;&#x30A2;&#x30C4;&#x30FC;&#x30D4;&#x30A2;&#x6280;&#x8853;&#x3092;&#x4F7F;&#x7528;&#x3057;&#x3066;&#x4E2D;&#x592E;&#x6A29;&#x9650;&#x306A;&#x3057;&#x3067;&#x6A5F;&#x80FD;&#x3059;&#x308B;&#x3002;https://bitcoincore.org/&#x4EE5;&#x4E0A;&#x3001;&#x4E0B;&#x8A18;URL&#x304B;&#x3089;&#x306E;&#x8981;&#x7D04;  https://opensourceforu.com/2019/03/ten-trending-open-source-projects-of-2018/&#x3053;&#x306E;&#x4F5C;&#x54C1;&#x306F; &#x30AF;&#x30EA;&#x30A8;&#x30A4;&#x30C6;&#x30A3;&#x30D6;&#x30FB;&#x30B3;&#x30E2;&#x30F3;&#x30BA; &#x8868;&#x793A; - &#x975E;&#x55B6;&#x5229; 4.0 &#x56FD;&#x969B; &#x30E9;&#x30A4;&#x30BB;&#x30F3;&#x30B9;&#x306E;&#x4E0B;&#x306B;&#x63D0;&#x4F9B;&#x3055;&#x308C;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;" name="og:description">
+<meta value="https://www.ossnews.jp/oss_info/article.html?oid=8976" name="og:url">
+<meta value="654136554717807" name="fb:app_id">
+
+<meta name="twitter:card" value="summary">
+<meta name="twitter:site" value="@OSS_News">
+<meta name="twitter:title" value="&#x3010;OSS&#x3011;2018&#x5E74;&#x306E;&#x30AA;&#x30FC;&#x30D7;&#x30F3;&#x30BD;&#x30FC;&#x30B9;&#x30D7;&#x30ED;&#x30B8;&#x30A7;&#x30AF;&#x30C8;10&#x9078;---&#x300C;Visual Studio Code&#x300D;&#x300C;Vault&#x300D;&#x300C;Angular CLI&#x300D;">
+<meta name="twitter:description" value="2018&#x5E74;&#x3092;&#x4EE3;&#x8868;&#x3059;&#x308B;10&#x306E;&#x30AA;&#x30FC;&#x30D7;&#x30F3;&#x30BD;&#x30FC;&#x30B9;&#x30D7;&#x30ED;&#x30B8;&#x30A7;&#x30AF;&#x30C8;&#x3092;&#x7D39;&#x4ECB;&#x3002;&#x2460;Visual Studio CodeVisual Studio Code&#x306F;&#x3001;Microsoft&#x304C;&#x958B;&#x767A;&#x3057;&#x305F;&#x30AA;&#x30FC;&#x30D7;&#x30F3;&#x30BD;&#x30FC;&#x30B9;&#x30B3;&#x30FC;&#x30C9;&#x30A8;&#x30C7;&#x30A3;&#x30BF;&#x3002;&#x300C;Stack Overflow2018&#x958B;&#x767A;&#x8005;&#x8ABF;&#x67FB;&#x300D;&#x3067;&#x6700;&#x3082;&#x4EBA;&#x6C17;&#x306E;&#x3042;&#x308B;&#x958B;&#x767A;&#x8005;&#x74B0;&#x5883;&#x306B;&#x30E9;&#x30F3;&#x30AF;&#x3055;&#x308C;&#x305F;&#x3002;https://code.visualstudio.com/&#x2461;TensorFlowTensorFlow&#x306F;&#x9AD8;&#x6027;&#x80FD;&#x6570;&#x5024;&#x8A08;&#x7B97;&#x7528;&#x6A5F;&#x68B0;&#x5B66;&#x7FD2;&#x30D5;&#x30EC;&#x30FC;&#x30E0;&#x30EF;&#x30FC;&#x30AF;&#x3002;https://www.tensorflow.org/&#x2462;AnsibleAnsible&#x306F;IT&#x81EA;&#x52D5;&#x5316;&#x30C4;&#x30FC;&#x30EB;&#x3067;&#x9AD8;&#x5EA6;&#x306A;IT&#x30BF;&#x30B9;&#x30AF;&#x3092;&#x63D0;&#x4F9B;&#x3059;&#x308B;&#x3002;https://www.ansible.com/&#x2463;Vue.jsVue.js&#x306F;&#x3001;&#x30E6;&#x30FC;&#x30B6;&#x30FC;&#x30A4;&#x30F3;&#x30BF;&#x30FC;&#x30D5;&#x30A7;&#x30FC;&#x30B9;&#x3092;&#x69CB;&#x7BC9;&#x3059;&#x308B;&#x305F;&#x3081;&#x306E;JavaScript&#x30D5;&#x30EC;&#x30FC;&#x30E0;&#x30EF;&#x30FC;&#x30AF;&#x3002;GitHub&#x30DA;&#x30FC;&#x30B8;&#x3067;&#x306F;12&#x4E07;&#x4EE5;&#x4E0A;&#x306E;&#x661F;&#x3092;&#x7372;&#x5F97;&#x3057;&#x3066;&#x3044;&#x308B;&#x3002;https://jp.vuejs.org/&#x2464;React NativeReact Native&#x306F;&#x3001;JavaScript&#x3068;React&#x3092;&#x4F7F;&#x7528;&#x3057;&#x3066;&#x30CD;&#x30A4;&#x30C6;&#x30A3;&#x30D6;&#x30E2;&#x30D0;&#x30A4;&#x30EB;&#x30A2;&#x30D7;&#x30EA;&#x30B1;&#x30FC;&#x30B7;&#x30E7;&#x30F3;&#x3092;&#x69CB;&#x7BC9;&#x3059;&#x308B;&#x305F;&#x3081;&#x306E;JavaScript&#x30D5;&#x30EC;&#x30FC;&#x30E0;&#x30EF;&#x30FC;&#x30AF;&#x3002;https://facebook.github.io/react-native/&#x2465;Angular CLIAngular CLI&#x306F;&#x3001;Angular&#x30A2;&#x30D7;&#x30EA;&#x30B1;&#x30FC;&#x30B7;&#x30E7;&#x30F3;&#x3092;&#x64CD;&#x4F5C;&#x3067;&#x304D;&#x308B;&#x30B3;&#x30DE;&#x30F3;&#x30C9;&#x30E9;&#x30A4;&#x30F3;&#x30A4;&#x30F3;&#x30BF;&#x30FC;&#x30D5;&#x30A7;&#x30FC;&#x30B9;&#x30C4;&#x30FC;&#x30EB;&#x3002;https://cli.angular.io/&#x2466;VaultVault&#x306F;&#x300C;&#x79D8;&#x5BC6;&#x7BA1;&#x7406;&#x300D;&#x300C;&#x30B5;&#x30FC;&#x30D3;&#x30B9;&#x3068;&#x3057;&#x3066;&#x306E;&#x6697;&#x53F7;&#x5316;&#x300D;&#x300C;&#x7279;&#x6A29;&#x30A2;&#x30AF;&#x30BB;&#x30B9;&#x7BA1;&#x7406;&#x300D;&#x306E;&#x305F;&#x3081;&#x306E;&#x6A5F;&#x80FD;&#x3092;&#x63D0;&#x4F9B;&#x3059;&#x308B;&#x30AA;&#x30FC;&#x30D7;&#x30F3;&#x30BD;&#x30FC;&#x30B9;&#x30C4;&#x30FC;&#x30EB;&#x3002;https://www.vaultproject.io/&#x2467;KerasKeras&#x306F;&#x300C;TensorFlow&#x300D;&#x300C;Microsoft Cognitive Toolkit&#x300D;&#x300C;Theano&#x300D;&#x306E;&#x4E0A;&#x3067;&#x5B9F;&#x884C;&#x53EF;&#x80FD;&#x306A;Python&#x5B9F;&#x88C5;&#x306E;&#x30CB;&#x30E5;&#x30FC;&#x30E9;&#x30EB;&#x30CD;&#x30C3;&#x30C8;&#x30EF;&#x30FC;&#x30AF;&#x30E9;&#x30A4;&#x30D6;&#x30E9;&#x30EA;&#x3002;https://keras.io/ja/&#x2468;KubernetesKubernetes&#x306F;&#x30B3;&#x30F3;&#x30C6;&#x30CA;&#x30AA;&#x30FC;&#x30B1;&#x30B9;&#x30C8;&#x30EC;&#x30FC;&#x30B7;&#x30E7;&#x30F3;&#x30B7;&#x30B9;&#x30C6;&#x30E0;&#x3067;&#x3001;GitHub&#x306E;&#x30C8;&#x30C3;&#x30D7;&#x30AA;&#x30FC;&#x30D7;&#x30F3;&#x30BD;&#x30FC;&#x30B9;&#x30D7;&#x30ED;&#x30B8;&#x30A7;&#x30AF;&#x30C8;&#x30EA;&#x30B9;&#x30C8;&#x3067;&#x7B2C;8&#x4F4D;&#x306B;&#x30E9;&#x30F3;&#x30AF;&#x3055;&#x308C;&#x3066;&#x3044;&#x308B;&#x3002;https://kubernetes.io/&#x2469;BitcoinBitcoin&#x306F;&#x3001;&#x6700;&#x3082;&#x4EBA;&#x6C17;&#x306E;&#x3042;&#x308B;&#x30AA;&#x30FC;&#x30D7;&#x30F3;&#x30BD;&#x30FC;&#x30B9;&#x306E;&#x30D6;&#x30ED;&#x30C3;&#x30AF;&#x30C1;&#x30A7;&#x30FC;&#x30F3;&#x30D7;&#x30ED;&#x30B8;&#x30A7;&#x30AF;&#x30C8;&#x3002;&#x5B9F;&#x9A13;&#x7684;&#x306A;&#x30C7;&#x30B8;&#x30BF;&#x30EB;&#x901A;&#x8CA8;&#x3067;&#x3042;&#x308A;&#x3001;&#x30D4;&#x30A2;&#x30C4;&#x30FC;&#x30D4;&#x30A2;&#x6280;&#x8853;&#x3092;&#x4F7F;&#x7528;&#x3057;&#x3066;&#x4E2D;&#x592E;&#x6A29;&#x9650;&#x306A;&#x3057;&#x3067;&#x6A5F;&#x80FD;&#x3059;&#x308B;&#x3002;https://bitcoincore.org/&#x4EE5;&#x4E0A;&#x3001;&#x4E0B;&#x8A18;URL&#x304B;&#x3089;&#x306E;&#x8981;&#x7D04;  https://opensourceforu.com/2019/03/ten-trending-open-source-projects-of-2018/&#x3053;&#x306E;&#x4F5C;&#x54C1;&#x306F; &#x30AF;&#x30EA;&#x30A8;&#x30A4;&#x30C6;&#x30A3;&#x30D6;&#x30FB;&#x30B3;&#x30E2;&#x30F3;&#x30BA; &#x8868;&#x793A; - &#x975E;&#x55B6;&#x5229; 4.0 &#x56FD;&#x969B; &#x30E9;&#x30A4;&#x30BB;&#x30F3;&#x30B9;&#x306E;&#x4E0B;&#x306B;&#x63D0;&#x4F9B;&#x3055;&#x308C;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;">
+
+<meta name="twitter:image" value="https://www.ossnews.jp/upload/contents/d31621685b4315555b30c2b16a66fd3b.jpg">
+<link rel="start" href="/" title="home">
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+<link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+<link href="/share/css/import.css" rel="stylesheet" type="text/css" media="screen">
+<link href="/share/css/print.css" rel="stylesheet" type="text/css" media="print">
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+</head>
+
+<body id="contentsection">
+
+
+
+<div class="headliner" id="top">
+<div class="headlinerbox">
+<p class="flL">&#x3010;OSS&#x3011;2018&#x5E74;&#x306E;&#x30AA;&#x30FC;&#x30D7;&#x30F3;&#x30BD;&#x30FC;&#x30B9;&#x30D7;&#x30ED;&#x30B8;&#x30A7;&#x30AF;&#x30C8;10&#x9078;---&#x300C;Visual Studio Code&#x300D;&#x300C;Vault&#x300D;&#x300C;Angular CLI&#x300D;</p>
+<ul class="flR"><li><a href="https://www.facebook.com/OSSNews" target="_blank"><img src="/share/images/common/header_ico_fb.png" class="over" width="26" height="26" alt="facebook"></a></li><li><a href="https://twitter.com/OSS_News" target="_blank"><img src="/share/images/common/header_ico_tw.png" class="over" width="26" height="26" alt="twitter"></a></li></ul>
+
+</div>
+</div>
+
+
+<div id="container">
+
+<div id="header">
+    <p id="site-id"><a href="/"><img src="/share/images/common/header_logotyle.png" alt="&#x30AA;&#x30FC;&#x30D7;&#x30F3;&#x30BD;&#x30FC;&#x30B9;&#xD7;&#x30AF;&#x30E9;&#x30A6;&#x30C9;&#x60C5;&#x5831;&#x30B5;&#x30A4;&#x30C8;&#x300C;OSS&#xD7;Cloud News&#x300D;" width="200" height="66"></a>
+    <span>
+            
+    </span></p>
+
+<ul class="flR">
+<li><a rel="nofollow" onclick="ga(&apos;send&apos;, &apos;event&apos;, &apos;banner&apos;, &apos;click&apos;, &apos;&#x30D3;&#x30C3;&#x30B0;&#x30D0;&#x30CA;&#x30FC;&#x5E83;&#x544A; &#x30AA;&#x30FC;&#x30D7;&#x30F3;&#x30BD;&#x30FC;&#x30B9;&#x66F8;&#x7C4D;&#xFF08;&#x30D8;&#x30C3;&#x30C0;&#x30FC;&#xFF09;&apos;);" href="https://www.amazon.co.jp/dp/479804783X/" target="_blank"><img src="/upimg/banner/p1_160927124927.jpg" class="over" width="728" height="90" alt="&#x30AA;&#x30FC;&#x30D7;&#x30F3;&#x30BD;&#x30FC;&#x30B9;&#x66F8;&#x7C4D;&#xFF08;&#x30D8;&#x30C3;&#x30C0;&#x30FC;&#xFF09;"></a></li>
+</ul>
+
+
+</div>
+
+<div id="header_smartphone">
+
+<ul class="container">
+<li class="mb5"><a rel="nofollow" href="http://www.ossnews.jp/site/pr/"><img src="/upimg/banner/p1_131103184253.jpg" width="100%" height="50" alt="OSSNEWS&#x306B;&#x5E83;&#x544A;&#x3092;&#x63B2;&#x8F09;&#x3057;&#x307E;&#x305B;&#x3093;&#x304B;&#xFF1F;"></a></li></ul>
+
+</div>
+
+
+
+
+
+<div id="nav-block" class="mb10">
+
+
+
+
+<ul id="nav">
+    <li id="nav-1"><a href="/" class="">OSS&#xD7;Cloud News &#x30DB;&#x30FC;&#x30E0;</a></li>
+    <li id="nav-7"><a href="/oss_info/" class="current">OSS&#xD7;&#x30AF;&#x30E9;&#x30A6;&#x30C9;TOPICS</a></li>
+    <li id="nav-11"><a href="/oss_search/" class="">OSS&#xD7;&#x30AF;&#x30E9;&#x30A6;&#x30C9;&#x60C5;&#x5831;</a></li>
+    <li id="nav-25"><a href="/compare/" class="">OSS&#xD7;&#x30AF;&#x30E9;&#x30A6;&#x30C9;&#x6BD4;&#x8F03;</a></li>
+    <li id="nav-12"><a href="/closeup/" class="">CLOSE UP</a></li>
+    <li id="nav-24"><a href="/expert/" class="">EXPERT CONTENTS</a></li>
+</ul>
+<ul id="subnav">
+    <li id="nav-8"><a href="/oss_info/">&#x30C8;&#x30D4;&#x30C3;&#x30AF;&#x30B9;HOME</a></li>
+    <li id="nav-9"><a href="/oss_info/topic/">OSS&#xD7;&#x30AF;&#x30E9;&#x30A6;&#x30C9;&#x6700;&#x65B0;TOPICS</a></li>
+    <li id="nav-10"><a href="/oss_info/event/">OSS&#xD7;&#x30AF;&#x30E9;&#x30A6;&#x30C9;&#x30A4;&#x30D9;&#x30F3;&#x30C8;&#x60C5;&#x5831;</a></li>
+
+</ul>
+
+
+
+</div>
+
+
+
+<div id="contents">
+
+
+
+<ul itemscope="" itemtype="http://schema.org/BreadcrumbList" id="topic-path">
+
+<li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem" class="breadcrumbhome">
+  <a itemprop="item" href="/">
+    <span itemprop="name">OSS&#xD7;Cloud News &#x30DB;&#x30FC;&#x30E0;</span>
+  </a>
+  <meta itemprop="position" value="1">
+  </li>
+
+
+
+
+
+
+
+
+
+  <li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">&gt;&#xA0;
+    <a itemprop="item" href="/oss_info/article.html?oid=8976">
+      <strong itemprop="name" style="display:none;">&#x3010;OSS&#x3011;2018&#x5E74;&#x306E;&#x30AA;&#x30FC;&#x30D7;&#x30F3;&#x30BD;&#x30FC;&#x30B9;&#x30D7;&#x30ED;&#x30B8;&#x30A7;&#x30AF;&#x30C8;10&#x9078;---&#x300C;Visual Studio Code&#x300D;&#x300C;Vault&#x300D;&#x300C;Angular CLI&#x300D;</strong>
+      <strong>&#x3010;OSS&#x3011;2018&#x5E74;&#x306E;&#x30AA;&#x30FC;&#x30D7;&#x30F3;&#x30BD;&#x30FC;&#x30B9;&#x30D7;&#x30ED;&#x30B8;&#x30A7;&#x30AF;&#x30C8;10&#x9078;---&#x300C;V...</strong>
+      <meta itemprop="position" value="2">
+    </a> 
+  </li>
+</ul>
+
+
+<div id="alpha-block">
+
+
+
+
+<div class="section box news">
+
+
+
+
+
+
+
+<h1 style="font-weight: bold;line-height: 1.4;" class="hxnewstitle">&#x3010;OSS&#x3011;2018&#x5E74;&#x306E;&#x30AA;&#x30FC;&#x30D7;&#x30F3;&#x30BD;&#x30FC;&#x30B9;&#x30D7;&#x30ED;&#x30B8;&#x30A7;&#x30AF;&#x30C8;10&#x9078;---&#x300C;Visual Studio Code&#x300D;&#x300C;Vault&#x300D;&#x300C;Angular CLI&#x300D;</h1>
+
+<p class="fs12"><a href="./topic/">OSS&#xD7;&#x30AF;&#x30E9;&#x30A6;&#x30C9;&#x6700;&#x65B0;TOPICS</a>&#x3000;2019&#x5E74;3&#x6708;15&#x65E5; 09:43</p>
+
+<div style="font-size:120%;">
+<img src="/upload/contents/d31621685b4315555b30c2b16a66fd3b.jpg" width="255" alt="&#x3010;OSS&#x3011;2018&#x5E74;&#x306E;&#x30AA;&#x30FC;&#x30D7;&#x30F3;&#x30BD;&#x30FC;&#x30B9;&#x30D7;&#x30ED;&#x30B8;&#x30A7;&#x30AF;&#x30C8;10&#x9078;---&#x300C;Visual Studio Code&#x300D;&#x300C;Vault&#x300D;&#x300C;Angular CLI&#x300D;">
+<p>
+</p><p>2018&#x5E74;&#x3092;&#x4EE3;&#x8868;&#x3059;&#x308B;10&#x306E;&#x30AA;&#x30FC;&#x30D7;&#x30F3;&#x30BD;&#x30FC;&#x30B9;&#x30D7;&#x30ED;&#x30B8;&#x30A7;&#x30AF;&#x30C8;&#x3092;&#x7D39;&#x4ECB;&#x3002;</p>
+
+<h3 class="h2smalltitle">&#x2460;Visual Studio Code</h3>
+<p>Visual Studio Code&#x306F;&#x3001;Microsoft&#x304C;&#x958B;&#x767A;&#x3057;&#x305F;&#x30AA;&#x30FC;&#x30D7;&#x30F3;&#x30BD;&#x30FC;&#x30B9;&#x30B3;&#x30FC;&#x30C9;&#x30A8;&#x30C7;&#x30A3;&#x30BF;&#x3002;&#x300C;Stack Overflow2018&#x958B;&#x767A;&#x8005;&#x8ABF;&#x67FB;&#x300D;&#x3067;&#x6700;&#x3082;&#x4EBA;&#x6C17;&#x306E;&#x3042;&#x308B;&#x958B;&#x767A;&#x8005;&#x74B0;&#x5883;&#x306B;&#x30E9;&#x30F3;&#x30AF;&#x3055;&#x308C;&#x305F;&#x3002;</p>
+<p><a href="https://code.visualstudio.com/" target="jumpsite">https://code.visualstudio.com/</a></p>
+<h3 class="h2smalltitle">&#x2461;TensorFlow</h3>
+<p>TensorFlow&#x306F;&#x9AD8;&#x6027;&#x80FD;&#x6570;&#x5024;&#x8A08;&#x7B97;&#x7528;&#x6A5F;&#x68B0;&#x5B66;&#x7FD2;&#x30D5;&#x30EC;&#x30FC;&#x30E0;&#x30EF;&#x30FC;&#x30AF;&#x3002;</p>
+<p><a href="https://www.tensorflow.org/" target="jumpsite">https://www.tensorflow.org/</a></p>
+<h3 class="h2smalltitle">&#x2462;Ansible</h3>
+<p>Ansible&#x306F;IT&#x81EA;&#x52D5;&#x5316;&#x30C4;&#x30FC;&#x30EB;&#x3067;&#x9AD8;&#x5EA6;&#x306A;IT&#x30BF;&#x30B9;&#x30AF;&#x3092;&#x63D0;&#x4F9B;&#x3059;&#x308B;&#x3002;</p>
+<p><a href="https://www.ansible.com/" target="jumpsite">https://www.ansible.com/</a></p>
+<h3 class="h2smalltitle">&#x2463;Vue.js</h3>
+<p>Vue.js&#x306F;&#x3001;&#x30E6;&#x30FC;&#x30B6;&#x30FC;&#x30A4;&#x30F3;&#x30BF;&#x30FC;&#x30D5;&#x30A7;&#x30FC;&#x30B9;&#x3092;&#x69CB;&#x7BC9;&#x3059;&#x308B;&#x305F;&#x3081;&#x306E;JavaScript&#x30D5;&#x30EC;&#x30FC;&#x30E0;&#x30EF;&#x30FC;&#x30AF;&#x3002;GitHub&#x30DA;&#x30FC;&#x30B8;&#x3067;&#x306F;12&#x4E07;&#x4EE5;&#x4E0A;&#x306E;&#x661F;&#x3092;&#x7372;&#x5F97;&#x3057;&#x3066;&#x3044;&#x308B;&#x3002;</p>
+<p><a href="https://jp.vuejs.org/" target="jumpsite">https://jp.vuejs.org/</a></p>
+<h3 class="h2smalltitle">&#x2464;React Native</h3>
+<p>React Native&#x306F;&#x3001;JavaScript&#x3068;React&#x3092;&#x4F7F;&#x7528;&#x3057;&#x3066;&#x30CD;&#x30A4;&#x30C6;&#x30A3;&#x30D6;&#x30E2;&#x30D0;&#x30A4;&#x30EB;&#x30A2;&#x30D7;&#x30EA;&#x30B1;&#x30FC;&#x30B7;&#x30E7;&#x30F3;&#x3092;&#x69CB;&#x7BC9;&#x3059;&#x308B;&#x305F;&#x3081;&#x306E;JavaScript&#x30D5;&#x30EC;&#x30FC;&#x30E0;&#x30EF;&#x30FC;&#x30AF;&#x3002;</p>
+<p><a href="https://facebook.github.io/react-native/" target="jumpsite">https://facebook.github.io/react-native/</a></p>
+<h3 class="h2smalltitle">&#x2465;Angular CLI</h3>
+<p>Angular CLI&#x306F;&#x3001;Angular&#x30A2;&#x30D7;&#x30EA;&#x30B1;&#x30FC;&#x30B7;&#x30E7;&#x30F3;&#x3092;&#x64CD;&#x4F5C;&#x3067;&#x304D;&#x308B;&#x30B3;&#x30DE;&#x30F3;&#x30C9;&#x30E9;&#x30A4;&#x30F3;&#x30A4;&#x30F3;&#x30BF;&#x30FC;&#x30D5;&#x30A7;&#x30FC;&#x30B9;&#x30C4;&#x30FC;&#x30EB;&#x3002;</p>
+<p><a href="https://cli.angular.io/" target="jumpsite">https://cli.angular.io/</a></p>
+<h3 class="h2smalltitle">&#x2466;Vault</h3>
+<p>Vault&#x306F;&#x300C;&#x79D8;&#x5BC6;&#x7BA1;&#x7406;&#x300D;&#x300C;&#x30B5;&#x30FC;&#x30D3;&#x30B9;&#x3068;&#x3057;&#x3066;&#x306E;&#x6697;&#x53F7;&#x5316;&#x300D;&#x300C;&#x7279;&#x6A29;&#x30A2;&#x30AF;&#x30BB;&#x30B9;&#x7BA1;&#x7406;&#x300D;&#x306E;&#x305F;&#x3081;&#x306E;&#x6A5F;&#x80FD;&#x3092;&#x63D0;&#x4F9B;&#x3059;&#x308B;&#x30AA;&#x30FC;&#x30D7;&#x30F3;&#x30BD;&#x30FC;&#x30B9;&#x30C4;&#x30FC;&#x30EB;&#x3002;</p>
+<p><a href="https://www.vaultproject.io/" target="jumpsite">https://www.vaultproject.io/</a></p>
+<h3 class="h2smalltitle">&#x2467;Keras</h3>
+<p>Keras&#x306F;&#x300C;TensorFlow&#x300D;&#x300C;Microsoft Cognitive Toolkit&#x300D;&#x300C;Theano&#x300D;&#x306E;&#x4E0A;&#x3067;&#x5B9F;&#x884C;&#x53EF;&#x80FD;&#x306A;Python&#x5B9F;&#x88C5;&#x306E;&#x30CB;&#x30E5;&#x30FC;&#x30E9;&#x30EB;&#x30CD;&#x30C3;&#x30C8;&#x30EF;&#x30FC;&#x30AF;&#x30E9;&#x30A4;&#x30D6;&#x30E9;&#x30EA;&#x3002;</p>
+<p><a href="https://keras.io/ja/" target="jumpsite">https://keras.io/ja/</a></p>
+<h3 class="h2smalltitle">&#x2468;Kubernetes</h3>
+<p>Kubernetes&#x306F;&#x30B3;&#x30F3;&#x30C6;&#x30CA;&#x30AA;&#x30FC;&#x30B1;&#x30B9;&#x30C8;&#x30EC;&#x30FC;&#x30B7;&#x30E7;&#x30F3;&#x30B7;&#x30B9;&#x30C6;&#x30E0;&#x3067;&#x3001;GitHub&#x306E;&#x30C8;&#x30C3;&#x30D7;&#x30AA;&#x30FC;&#x30D7;&#x30F3;&#x30BD;&#x30FC;&#x30B9;&#x30D7;&#x30ED;&#x30B8;&#x30A7;&#x30AF;&#x30C8;&#x30EA;&#x30B9;&#x30C8;&#x3067;&#x7B2C;8&#x4F4D;&#x306B;&#x30E9;&#x30F3;&#x30AF;&#x3055;&#x308C;&#x3066;&#x3044;&#x308B;&#x3002;</p>
+<p><a href="https://kubernetes.io/" target="jumpsite">https://kubernetes.io/</a></p>
+<h3 class="h2smalltitle">&#x2469;Bitcoin</h3>
+<p>Bitcoin&#x306F;&#x3001;&#x6700;&#x3082;&#x4EBA;&#x6C17;&#x306E;&#x3042;&#x308B;&#x30AA;&#x30FC;&#x30D7;&#x30F3;&#x30BD;&#x30FC;&#x30B9;&#x306E;&#x30D6;&#x30ED;&#x30C3;&#x30AF;&#x30C1;&#x30A7;&#x30FC;&#x30F3;&#x30D7;&#x30ED;&#x30B8;&#x30A7;&#x30AF;&#x30C8;&#x3002;&#x5B9F;&#x9A13;&#x7684;&#x306A;&#x30C7;&#x30B8;&#x30BF;&#x30EB;&#x901A;&#x8CA8;&#x3067;&#x3042;&#x308A;&#x3001;&#x30D4;&#x30A2;&#x30C4;&#x30FC;&#x30D4;&#x30A2;&#x6280;&#x8853;&#x3092;&#x4F7F;&#x7528;&#x3057;&#x3066;&#x4E2D;&#x592E;&#x6A29;&#x9650;&#x306A;&#x3057;&#x3067;&#x6A5F;&#x80FD;&#x3059;&#x308B;&#x3002;</p>
+<p><a href="https://bitcoincore.org/" target="jumpsite">https://bitcoincore.org/</a></p>
+<p>&#x4EE5;&#x4E0A;&#x3001;&#x4E0B;&#x8A18;URL&#x304B;&#x3089;&#x306E;&#x8981;&#x7D04;<br>
+  <a href="https://opensourceforu.com/2019/03/ten-trending-open-source-projects-of-2018/" target="jumpsite">https://opensourceforu.com/2019/03/ten-trending-open-source-projects-of-2018/</a></p>
+<p><a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="jumpsite"><img alt="&#x30AF;&#x30EA;&#x30A8;&#x30A4;&#x30C6;&#x30A3;&#x30D6;&#x30FB;&#x30B3;&#x30E2;&#x30F3;&#x30BA;&#x30FB;&#x30E9;&#x30A4;&#x30BB;&#x30F3;&#x30B9;" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png"></a><br>&#x3053;&#x306E;&#x4F5C;&#x54C1;&#x306F; <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="jumpsite">&#x30AF;&#x30EA;&#x30A8;&#x30A4;&#x30C6;&#x30A3;&#x30D6;&#x30FB;&#x30B3;&#x30E2;&#x30F3;&#x30BA; &#x8868;&#x793A; - &#x975E;&#x55B6;&#x5229; 4.0 &#x56FD;&#x969B; &#x30E9;&#x30A4;&#x30BB;&#x30F3;&#x30B9;</a>&#x306E;&#x4E0B;&#x306B;&#x63D0;&#x4F9B;&#x3055;&#x308C;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;</p><p></p>
+</div>
+
+ 
+
+
+
+<ul class="lineS mb10">
+  <li class="taR"><a href="https://opensourceforu.com/2019/03/ten-trending-open-source-projects-of-2018/" target="_blank" rel="nofollow">&#x7D9A;&#x304D;&#x3092;&#x8AAD;&#x3080;&#xFF08;&#x60C5;&#x5831;&#x30BD;&#x30FC;&#x30B9;&#x306E;&#x30DA;&#x30FC;&#x30B8;&#x306B;&#x79FB;&#x52D5;&#x3059;&#x308B;&#xFF09;</a></li></ul>
+  <div class="socialbox mb10 lineS">
+<div id="facebook_share3"></div>
+
+
+<div class="fb-like" data-href="https://www.ossnews.jp/oss_info/article.html?oid=8976" data-layout="button" data-action="like" data-size="small" data-show-faces="false" data-share="true"></div>
+
+<a href="https://twitter.com/share" class="twitter-share-button" data-url="https://www.ossnews.jp/oss_info/article.html?oid=8976" data-via="OhShousuke">Tweet</a> 
+
+
+
+</div>
+
+
+</div>
+
+<div class="section10 taC"><a rel="nofollow" href="http://www.ossnews.jp/site/pr/" onclick="ga(&apos;send&apos;, &apos;event&apos;, &apos;banner&apos;, &apos;click&apos;, &apos;&#x30B3;&#x30F3;&#x30C6;&#x30F3;&#x30C4;&#x30D0;&#x30CA;&#x30FC;&#x5E83;&#x544A; OSSNEWS&#x306B;&#x5E83;&#x544A;&#x3092;&#x63B2;&#x8F09;&#x3057;&#x307E;&#x305B;&#x3093;&#x304B;&#xFF1F;&apos;);"><img src="/upimg/banner/p1_131103183527.jpg" width="468" alt="OSSNEWS&#x306B;&#x5E83;&#x544A;&#x3092;&#x63B2;&#x8F09;&#x3057;&#x307E;&#x305B;&#x3093;&#x304B;&#xFF1F;"></a></div>
+    
+
+
+
+
+<div class="section box news">
+<h2 class="hxtitle" style="font-size: 22px; margin-bottom: 20px; font-weight: normal; border-bottom-width: 3px; border-bottom-style: solid;border-bottom-color: #888888;">&#x6700;&#x65B0;TOPICS</h2>
+ <div class="mb10 clear">
+
+                            <div class="flL"><a href="https://opensourceforu.com/2019/09/microsofts-open-source-voting-software-is-now-available-on-github/">
+                     
+                        <img src="/upload/contents/OSSxCloudNews2019-09-27-A.jpg" width="128" alt="&#x3010;OSS&#x3011;Microsoft&#x3001;&#x30AA;&#x30FC;&#x30D7;&#x30F3;&#x30BD;&#x30FC;&#x30B9;&#x6295;&#x7968;&#x30BD;&#x30D5;&#x30C8;&#x30A6;&#x30A7;&#x30A2;&#x300C;ElectionGuard&#x300D;&#x30EA;&#x30EA;&#x30FC;&#x30B9;---&#x7B2C;&#x4E09;&#x8005;&#x7D44;&#x7E54;&#x306B;&#x3088;&#x308B;&#x6295;&#x7968;&#x691C;&#x8A3C;&#x3001;&#x4E3B;&#x8981;&#x6295;&#x7968;&#x30B7;&#x30B9;&#x30C6;&#x30E0;&#x30E1;&#x30FC;&#x30AB;&#x30FC;&#x306B;&#x7D44;&#x307F;&#x8FBC;&#x307F;&#x6E08;">
+                                        </a></div>
+                <div class="flR w460">
+                <h2 class="mb10"><a href="http://www.ossnews.jp/oss_info/article.html?oid=9137" class="fsXXL pr10">&#x3010;OSS&#x3011;Microsoft&#x3001;&#x30AA;&#x30FC;&#x30D7;&#x30F3;&#x30BD;&#x30FC;&#x30B9;&#x6295;&#x7968;&#x30BD;&#x30D5;&#x30C8;&#x30A6;&#x30A7;&#x30A2;&#x300C;ElectionGuard&#x300D;&#x30EA;&#x30EA;&#x30FC;&#x30B9;---&#x7B2C;&#x4E09;&#x8005;&#x7D44;&#x7E54;&#x306B;&#x3088;&#x308B;&#x6295;&#x7968;&#x691C;&#x8A3C;&#x3001;&#x4E3B;&#x8981;&#x6295;&#x7968;&#x30B7;&#x30B9;&#x30C6;&#x30E0;&#x30E1;&#x30FC;&#x30AB;&#x30FC;&#x306B;&#x7D44;&#x307F;&#x8FBC;&#x307F;&#x6E08;</a>&#xFF08;09&#x6708;27&#x65E5; 10:44&#xFF09;</h2>
+                <p class="mb0">&#x300C;ElectionGuard&#x300D;&#x3068;&#x306F;
+&#x300C;ElectionGuard&#x300D;&#x306F;&#x3001;&#x6295;&#x7968;&#x306E;&#x300C;&#x5B89;&#x5168;&#x6027;&#x300D;&#x300C;&#x900F;&#x660E;&#x6027;&#x300D;&#x300C;&#x30A2;&#x30AF;&#x30BB;&#x30B9;&#x6027;&#x300D;&#x3092;&#x5411;&#x4E0A;&#x3055;&#x305B;&#x308B;&#x30AA;&#x30FC;&#x30D7;&#x30F3;&#x30BD;&#x30FC;&#x30B9;&#x30BD;&#x30D5;&#x30C8;&#x30A6;&#x30A7;&#x30A2;&#x958B;&#x767A;&#x30AD;&#x30C3;&#x30C8;(SDK)&#x3002;
+GitHub&#x3067;&#x300C;MIT&#x30E9;&#x30A4;&#x30BB;&#x30F3;&#x30B9;&#x300D;&#x306B;&#x3088;&#x308A;&#x30EA;&#x30EA;&#x30FC;&#x30B9;&#x3055;&#x308C;&#x3066;&#x3044;&#x308B;&#x3002;
+</p>
+                </div>
+            </div>
+            <ul class="newslist">
+             
+                        <li><a href="http://www.ossnews.jp/oss_info/article.html?oid=9134">&#x3010;OSS&#x3011;Deloitte&#x3001;&#x30D1;&#x30D6;&#x30EA;&#x30C3;&#x30AF;&#x30C7;&#x30FC;&#x30BF;&#x8996;&#x899A;&#x5316;&#x30C4;&#x30FC;&#x30EB;&#x300C;Open Source Compass&#x300D;&#x3092;&#x767A;&#x8868;---&#x65B0;&#x8208;&#x30AA;&#x30FC;&#x30D7;&#x30F3;&#x30BD;&#x30FC;&#x30B9;&#x30C6;&#x30AF;&#x30CE;&#x30ED;&#x30B8;&#x30FC;&#x30C9;&#x30E1;&#x30A4;&#x30F3;&#x306E;&#x898F;&#x6A21;&#x3068;&#x7BC4;&#x56F2;&#x3092;&#x8996;&#x899A;&#x5316;</a><span>&#xFF08;09&#x6708;24&#x65E5; 09:38&#xFF09;</span></li>
+             
+                        <li><a href="http://www.ossnews.jp/oss_info/article.html?oid=9129">&#x3010;OSS&#x3011;ITP Renewables&#x3001;&#x30A8;&#x30CD;&#x30EB;&#x30AE;&#x30FC;&#x9077;&#x79FB;&#x30B7;&#x30CA;&#x30EA;&#x30AA;&#x30E2;&#x30C7;&#x30EA;&#x30F3;&#x30B0;&#x30D7;&#x30E9;&#x30C3;&#x30C8;&#x30D5;&#x30A9;&#x30FC;&#x30E0;&#x300C;open-CEM&#x300D;&#x3092;&#x30EA;&#x30EA;&#x30FC;&#x30B9;---&#x30AA;&#x30FC;&#x30B9;&#x30C8;&#x30E9;&#x30EA;&#x30A2;&#x306E;&#x96FB;&#x529B;&#x9700;&#x8981;&#x3092;&#x30B7;&#x30DF;&#x30E5;&#x30EC;&#x30FC;&#x30C8;</a><span>&#xFF08;09&#x6708;17&#x65E5; 15:46&#xFF09;</span></li>
+             
+                        <li><a href="http://www.ossnews.jp/oss_info/article.html?oid=9121">&#x3010;OSS&#x3011;Auterion&#x3001;&#x30C9;&#x30ED;&#x30FC;&#x30F3;&#x5236;&#x5FA1;SDK&#x300C;MAVSDK&#x300D;&#x30EA;&#x30EA;&#x30FC;&#x30B9;---&#x5B9F;&#x7A3C;&#x50CD;&#x74B0;&#x5883;&#x3067;&#x3059;&#x3067;&#x306B;&#x4F7F;&#x7528;&#x3001;&#x5805;&#x7262;&#x3067;&#x5341;&#x5206;&#x306B;&#x30C6;&#x30B9;&#x30C8;&#x3055;&#x308C;&#x305F;&#x30E9;&#x30A4;&#x30D6;&#x30E9;&#x30EA;</a><span>&#xFF08;09&#x6708;09&#x65E5; 10:14&#xFF09;</span></li>
+             
+                        <li><a href="http://www.ossnews.jp/oss_info/article.html?oid=9115">&#x3010;OSS&#x3011;&#x30AA;&#x30FC;&#x30D7;&#x30F3;&#x30BD;&#x30FC;&#x30B9;&#x306E;&#x30CD;&#x30C3;&#x30C8;&#x30EF;&#x30FC;&#x30AF;&#x76E3;&#x8996;&#x30C4;&#x30FC;&#x30EB;13&#x9078;</a><span>&#xFF08;08&#x6708;30&#x65E5; 08:53&#xFF09;</span></li>
+            </ul>
+            
+             </div>
+
+<div class="section box news">
+<h2 class="hxtitle" style="font-size: 22px; margin-bottom: 20px; font-weight: normal; border-bottom-width: 3px; border-bottom-style: solid;border-bottom-color: #888888;">&#x6700;&#x65B0;CLOSEUP&#x30B3;&#x30E9;&#x30E0;
+</h2>
+  <div class="mb10 clear"><div class="flL firstChild"><a href="/closeup/articles/?aid=202008-00001" class="externalLink firstChild lastChild"><img src="/upload/HAYATO.jpg" alt="PostgreSQL&#x306B;&#x5BFE;&#x5FDC;&#xFF01;&#x30C6;&#x30EC;&#x30EF;&#x30FC;&#x30AF;&#x306E;&#x60C5;&#x5831;&#x5171;&#x6709;&#x306B;&#x3082;&#x6700;&#x9069;&#x306A;&#x30AA;&#x30FC;&#x30D7;&#x30F3;&#x30BD;&#x30FC;&#x30B9;&#x306E;Web&#x30C7;&#x30FC;&#x30BF;&#x30D9;&#x30FC;&#x30B9;&#x300C;&#x30D7;&#x30EA;&#x30B6;&#x30F3;&#x30BF;&#x30FC;&#x300D;&#x304C;&#x30D0;&#x30FC;&#x30B8;&#x30E7;&#x30F3;&#x30A2;&#x30C3;&#x30D7;" width="128"></a></div><div class="flR w460 lastChild"><h2 class="mb10 firstChild"><a href="/closeup/articles/?aid=202008-00001" class="externalLink firstChild lastChild"><p class="mb0 lastChild">PostgreSQL&#x306B;&#x5BFE;&#x5FDC;&#xFF01;&#x30C6;&#x30EC;&#x30EF;&#x30FC;&#x30AF;&#x306E;&#x60C5;&#x5831;&#x5171;&#x6709;&#x306B;&#x3082;&#x6700;&#x9069;&#x306A;&#x30AA;&#x30FC;&#x30D7;&#x30F3;&#x30BD;&#x30FC;&#x30B9;&#x306E;Web&#x30C7;&#x30FC;&#x30BF;&#x30D9;&#x30FC;&#x30B9;&#x300C;&#x30D7;&#x30EA;&#x30B6;&#x30F3;&#x30BF;&#x30FC;&#x300D;&#x304C;&#x30D0;&#x30FC;&#x30B8;&#x30E7;&#x30F3;&#x30A2;&#x30C3;&#x30D7;(2020&#x5E74;08&#x6708;02&#x65E5; )</p></a><p></p></h2></div></div>
+<div class="mb10 clear"><div class="flL firstChild"><a href="/closeup/articles/?aid=202007-00001" class="externalLink firstChild lastChild"><img src="/upload/1_001.png" alt="&#x30A6;&#x30A3;&#x30BA;&#x30B3;&#x30ED;&#x30CA;&#x6642;&#x4EE3;&#x306B;&#x9867;&#x5BA2;&#x30A8;&#x30F3;&#x30B2;&#x30FC;&#x30B8;&#x30E1;&#x30F3;&#x30C8;&#x3092;&#x7BC9;&#x304F;&#x305F;&#x3081;&#x306E;5&#x3064;&#x306E;&#x65B9;&#x91DD;" width="128"></a></div><div class="flR w460 lastChild"><h2 class="mb10 firstChild"><a href="/closeup/articles/?aid=202007-00001" class="externalLink firstChild lastChild"><p class="mb0 lastChild">&#x30A6;&#x30A3;&#x30BA;&#x30B3;&#x30ED;&#x30CA;&#x6642;&#x4EE3;&#x306B;&#x9867;&#x5BA2;&#x30A8;&#x30F3;&#x30B2;&#x30FC;&#x30B8;&#x30E1;&#x30F3;&#x30C8;&#x3092;&#x7BC9;&#x304F;&#x305F;&#x3081;&#x306E;5&#x3064;&#x306E;&#x65B9;&#x91DD;(2020&#x5E74;07&#x6708;16&#x65E5; )</p></a><p></p></h2></div></div>
+<div class="mb10 clear"><div class="flL firstChild"><a href="/closeup/articles/?aid=202007-00002" class="externalLink firstChild lastChild"><img src="/upload/%E7%84%A1%E9%A1%8C.png" alt="Zoom&#x3078;&#x306E;&#x30CD;&#x30C3;&#x30C8;&#x30EF;&#x30FC;&#x30AF;&#x63A5;&#x7D9A;&#x3092;&#x6700;&#x9069;&#x5316;&#x3059;&#x308B;&#x65B9;&#x6CD5;" width="128"></a></div><div class="flR w460 lastChild"><h2 class="mb10 firstChild"><a href="/closeup/articles/?aid=202007-00002" class="externalLink firstChild lastChild"><p class="mb0 lastChild">Zoom&#x3078;&#x306E;&#x30CD;&#x30C3;&#x30C8;&#x30EF;&#x30FC;&#x30AF;&#x63A5;&#x7D9A;&#x3092;&#x6700;&#x9069;&#x5316;&#x3059;&#x308B;&#x65B9;&#x6CD5;(2020&#x5E74;07&#x6708;15&#x65E5; )</p></a><p></p></h2></div></div>
+<div class="mb10 clear"><div class="flL firstChild"><a href="/closeup/articles/?aid=202001-00001" class="externalLink firstChild lastChild"><img src="/upload/%E3%80%90CLOSEUP%E2%86%92%E3%82%BB%E3%83%9F%E3%83%8A%E3%83%BC%E3%82%B5%E3%83%9E%E3%83%AA%E3%80%91%E3%80%902020-01-01-01%E3%80%91Azure_DevOps.jpg" alt="&#x3010;&#x30BB;&#x30DF;&#x30CA;&#x30FC;&#x30B5;&#x30DE;&#x30EA;&#x3011;&#x300C;Azure DevOps&#x300D;&#x7D39;&#x4ECB;---Azure DevOps + Git &#x306B;&#x3088;&#x308B;&#x958B;&#x767A;&#x65B9;&#x6CD5;" width="128"></a></div><div class="flR w460 lastChild"><h2 class="mb10 firstChild"><a href="/closeup/articles/?aid=202001-00001" class="externalLink firstChild lastChild"><p class="mb0 lastChild">&#x3010;&#x30BB;&#x30DF;&#x30CA;&#x30FC;&#x30B5;&#x30DE;&#x30EA;&#x3011;&#x300C;Azure DevOps&#x300D;&#x7D39;&#x4ECB;---Azure DevOps + Git &#x306B;&#x3088;&#x308B;&#x958B;&#x767A;&#x65B9;&#x6CD5;(2020&#x5E74;01&#x6708;30&#x65E5; )</p></a><p></p></h2></div></div>
+<div class="mb10 clear"><div class="flL firstChild"><a href="/closeup/articles/?aid=201912-00002" class="externalLink firstChild lastChild"><img src="/upload/%E3%80%90CLOSEUP%E2%86%92%E8%A8%98%E4%BA%8B%E6%8E%B2%E8%BC%89%E3%80%91%E3%80%902019-12-02-01%E3%80%91Zabbix%E8%A8%98%E4%BA%8B.jpg" alt="Zabbix&#x306E;&#x30C0;&#x30C3;&#x30B7;&#x30E5;&#x30DC;&#x30FC;&#x30C9;&#x304B;&#x3089;&#x30CD;&#x30C3;&#x30C8;&#x30EF;&#x30FC;&#x30AF;&#x8F3B;&#x8F33;&#x306E;&#x8A73;&#x7D30;&#x306A;&#x539F;&#x56E0;&#x3092;&#x8ABF;&#x67FB;&#x3059;&#x308B;&#x65B9;&#x6CD5;&#xFF5E;Zabbix&#x306E;&#x30C0;&#x30C3;&#x30B7;&#x30E5;&#x30DC;&#x30FC;&#x30C9;&#x304B;&#x3089;NetFlow&#x306E;&#x30C7;&#x30FC;&#x30BF;&#x3092;&#x89E3;&#x6790;&#x3059;&#x308B;&#xFF5E;" width="128"></a></div><div class="flR w460 lastChild"><h2 class="mb10 firstChild"><a href="/closeup/articles/?aid=201912-00002" class="externalLink firstChild lastChild"><p class="mb0 lastChild">Zabbix&#x306E;&#x30C0;&#x30C3;&#x30B7;&#x30E5;&#x30DC;&#x30FC;&#x30C9;&#x304B;&#x3089;&#x30CD;&#x30C3;&#x30C8;&#x30EF;&#x30FC;&#x30AF;&#x8F3B;&#x8F33;&#x306E;&#x8A73;&#x7D30;&#x306A;&#x539F;&#x56E0;&#x3092;&#x8ABF;&#x67FB;&#x3059;&#x308B;&#x65B9;&#x6CD5;&#xFF5E;Zabbix&#x306E;&#x30C0;&#x30C3;&#x30B7;&#x30E5;&#x30DC;&#x30FC;&#x30C9;&#x304B;&#x3089;NetFlow&#x306E;&#x30C7;&#x30FC;&#x30BF;&#x3092;&#x89E3;&#x6790;&#x3059;&#x308B;&#xFF5E;(2019&#x5E74;12&#x6708;11&#x65E5; )</p></a><p></p></h2></div></div>
+</div>
+
+<h3><img src="../../share/images/closeup_img/hx_oss.jpg" width="650" alt="&#x95A2;&#x9023;&#x30AA;&#x30FC;&#x30D7;&#x30F3;&#x30BD;&#x30FC;&#x30B9;"></h3>
+
+<div class="tabbox">
+
+
+</div>
+
+  
+  <div class="block mb10">
+  <div class="flL w315">
+    <div id="majisemi_oapi"></div>
+  </div>
+  
+  <div id="seminar_area" class="flR w315">
+    <div id="majisemi_api"></div>
+  </div>
+</div>
+   
+  
+
+
+
+
+
+</div>
+
+
+
+<div id="beta-block">
+
+
+
+
+    <div id="majisemi_rapi"></div>
+  
+
+
+<p class="smt-on taC mb0"><a href="/site/pr/"><img src="/upload/ossnews_pr.jpg" width="100%" alt=""></a></p>
+
+<ul class="mb10"><li><a rel="nofollow" href="https://www.amazon.co.jp/dp/479804783X/"><img src="/upimg/banner/p1_160927125154.jpg" width="300" height="250" alt="&#x30AA;&#x30FC;&#x30D7;&#x30BD;&#x30FC;&#x30B9;&#x66F8;&#x7C4D;&#xFF08;&#x30B5;&#x30A4;&#x30C9;&#xFF09;"></a></li>
+</ul>
+
+
+
+<div class="rankingsection box">
+<p class="hxranking">OSS&#xD7;Cloud ACCESS RANKING</p>
+<ul class="rankinglist">
+<li><a href="http://www.ossnews.jp/oss_info/MyBatis" class="listno1">MyBatis</a></li>
+<li><a href="http://www.ossnews.jp/oss_info/GitLab" class="listno2">GitLab</a></li>
+<li><a href="http://www.ossnews.jp/oss_info/Elasticsearch" class="listno3">Elasticsearch</a></li>
+<li><a href="http://www.ossnews.jp/oss_info/Blender" class="listno4">Blender</a></li>
+<li><a href="http://www.ossnews.jp/oss_info/TensorFlow" class="listno5">TensorFlow</a></li>
+<li><a href="http://www.ossnews.jp/oss_info/Curl" class="listno6">Curl</a></li>
+<li><a href="http://www.ossnews.jp/oss_info/app_cloud" class="listno7">App Cloud</a></li>
+<li><a href="http://www.ossnews.jp/oss_info/Caffe" class="listno8">Caffe</a></li>
+<li><a href="http://www.ossnews.jp/oss_info/SonarQube" class="listno9">SonarQube</a></li>
+<li><a href="http://www.ossnews.jp/oss_info/SQLite" class="listno10">SQLite</a></li>
+
+
+</ul>
+</div>
+
+
+<ul class="mb20">
+<li class="mb5"><a rel="nofollow" href="http://www.ossnews.jp/site/pr/"><img src="/upimg/banner/p1_131103184253.jpg" width="300" height="50" alt="OSSNEWS&#x306B;&#x5E83;&#x544A;&#x3092;&#x63B2;&#x8F09;&#x3057;&#x307E;&#x305B;&#x3093;&#x304B;&#xFF1F;"></a></li></ul>
+
+
+<p class="hxfacebook png">facebook</p>
+<div class="mb10">
+<div id="fb-root"></div>
+
+<div class="fb-like-box" data-href="https://www.facebook.com/OSSNews" data-width="300" data-height="460" data-show-faces="true" data-stream="false" data-border-color="#F5F6F7" data-header="false"></div>
+</div>
+
+
+
+<p class="hxtwitter png">twitter</p>
+<div class="mb10">
+<a class="twitter-timeline" href="https://twitter.com/OSS_News" data-widget-id="299797062885707776">@OSS_News &#x304B;&#x3089;&#x306E;&#x30C4;&#x30A4;&#x30FC;&#x30C8;</a>
+
+
+</div>
+
+
+<ul>
+  <li><a href="/site/contact/">&#x3054;&#x610F;&#x898B;&#x30FB;&#x3054;&#x611F;&#x60F3;</a></li>
+<li><a href="/site/pr/">&#x5E83;&#x544A;&#x306B;&#x95A2;&#x3059;&#x308B;&#x304A;&#x554F;&#x3044;&#x5408;&#x308F;&#x305B;</a></li>
+</ul>
+
+
+
+
+</div>
+
+</div>
+
+</div>
+
+
+
+<div id="footer">
+
+<div class="footerliner">
+<div class="headlinerbox">
+<h3 class="mb5"><img src="/share/images/common/footer_infotitle.png" width="253" height="40" alt="OSS INFORMATION"></h3>
+<div id="footerossbox">
+<dl><dt>OS</dt><dd><ul><li><a href="/oss_info/Android">Android</a></li><li><a href="/oss_info/CentOS">CentOS</a></li><li><a href="/oss_info/Debian_GNU_Linux">Debian GNU/Linux</a></li><li><a href="/oss_info/Fedora">Fedora</a></li><li><a href="/oss_info/FreeBSD">FreeBSD</a></li><li><a href="/oss_info/FreeRTOS">FreeRTOS</a></li><li><a href="/oss_info/Linux_Mint">Linux Mint</a></li><li><a href="/oss_info/Mbed_OS">Mbed OS</a></li><li><a href="/oss_info/NetBSD">NetBSD</a></li><li><a href="/oss_info/OpenBSD">OpenBSD</a></li><li><a href="/oss_info/openSUSE">openSUSE</a></li><li><a href="/oss_info/RancherOS">RancherOS</a></li><li><a href="/oss_info/Raspbian">Raspbian</a></li><li><a href="/oss_info/Red_Hat_Enterprise_Linux">Red Hat Enterprise Linux</a></li><li><a href="/oss_info/RIOT">RIOT</a></li><li><a href="/oss_info/Ubuntu">Ubuntu</a></li><li><a href="/oss_info/VyOS">VyOS</a></li></ul></dd></dl><dl><dt>&#x30C7;&#x30FC;&#x30BF;&#x30D9;&#x30FC;&#x30B9;</dt><dd><ul><li><a href="/oss_info/Apache_Cassandra">Apache Cassandra</a></li><li><a href="/oss_info/Apache_CouchDB">Apache CouchDB</a></li><li><a href="/oss_info/Apache_Hbase">Apache Hbase</a></li><li><a href="/oss_info/Berkeley_DB">Berkeley DB</a></li><li><a href="/oss_info/Firebird">Firebird</a></li><li><a href="/oss_info/GridDB">GridDB</a></li><li><a href="/oss_info/Hazelcast">Hazelcast</a></li><li><a href="/oss_info/MariaDB">MariaDB</a></li><li><a href="/oss_info/MongoDB">MongoDB</a></li><li><a href="/oss_info/MySQL">MySQL</a></li><li><a href="/oss_info/mysql-cluster">MySQL Cluster</a></li><li><a href="/oss_info/Neo4j">Neo4j</a></li><li><a href="/oss_info/PostgreSQL">PostgreSQL</a></li><li><a href="/oss_info/Presto">Presto</a></li><li><a href="/oss_info/Realm">Realm</a></li><li><a href="/oss_info/Redis">Redis</a></li><li><a href="/oss_info/RRDtool">RRDtool</a></li><li><a href="/oss_info/SQLite">SQLite</a></li></ul></dd></dl><dl><dt>&#x8A00;&#x8A9E;</dt><dd><ul><li><a href="/oss_info/Apache_Groovy">Apache Groovy</a></li><li><a href="/oss_info/C_sharp">C#</a></li><li><a href="/oss_info/CoffeeScript">CoffeeScript</a></li><li><a href="/oss_info/Dart">Dart</a></li><li><a href="/oss_info/Elixir">Elixir</a></li><li><a href="/oss_info/Erlang">Erlang</a></li><li><a href="/oss_info/F_sharp">F#</a></li><li><a href="/oss_info/Genius">Genius</a></li><li><a href="/oss_info/Go">Go&#x8A00;&#x8A9E;</a></li><li><a href="/oss_info/Hack">Hack</a></li><li><a href="/oss_info/Haskell">Haskell</a></li><li><a href="/oss_info/Julia">Julia</a></li><li><a href="/oss_info/Kotlin">Kotlin</a></li><li><a href="/oss_info/Lua">Lua</a></li><li><a href="/oss_info/mruby">mruby</a></li><li><a href="/oss_info/Nim">Nim</a></li><li><a href="/oss_info/OCaml">OCaml</a></li><li><a href="/oss_info/OpenJDK">OpenJDK</a></li><li><a href="/oss_info/Perl">Perl</a></li><li><a href="/oss_info/PHP">PHP</a></li><li><a href="/oss_info/Python">Python</a></li><li><a href="/oss_info/Ruby">Ruby</a></li><li><a href="/oss_info/Rust">Rust</a></li><li><a href="/oss_info/R">R&#x8A00;&#x8A9E;</a></li><li><a href="/oss_info/Scala">Scala</a></li><li><a href="/oss_info/Swift">Swift</a></li><li><a href="/oss_info/TypeScript">TypeScript</a></li><li><a href="/oss_info/Nadeshiko">&#x306A;&#x3067;&#x3057;&#x3053;</a></li></ul></dd></dl><dl><dt>Web&#x30B5;&#x30FC;&#x30D0;</dt><dd><ul><li><a href="/oss_info/Apache_HTTP_Server">Apache HTTP Server</a></li><li><a href="/oss_info/lighttpd">lighttpd</a></li><li><a href="/oss_info/Nginx">Nginx</a></li></ul></dd></dl><dl><dt>&#x30D7;&#x30ED;&#x30AD;&#x30B7;&#x30B5;&#x30FC;&#x30D0;</dt><dd><ul><li><a href="/oss_info/Apache_Traffic_Server">Apache Traffic Server</a></li><li><a href="/oss_info/HAProxy">HAProxy</a></li><li><a href="/oss_info/MariaDB_MaxScale">MariaDB MaxScale</a></li><li><a href="/oss_info/Squid">Squid</a></li></ul></dd></dl><dl><dt>AP&#x30B5;&#x30FC;&#x30D0;</dt><dd><ul><li><a href="/oss_info/apachegeronimo">Apache Geronimo/WAS CE</a></li><li><a href="/oss_info/Apache_Tomcat">Apache Tomcat</a></li><li><a href="/oss_info/glassfish">GlassFish</a></li><li><a href="/oss_info/JBoss_Enterprise_Application_Platform">JBoss Enterprise Application Platform</a></li><li><a href="/oss_info/Jetty">Jetty</a></li><li><a href="/oss_info/Node.js">Node.js</a></li><li><a href="/oss_info/WildFly">WildFly</a></li></ul></dd></dl><dl><dt>&#x30D5;&#x30EC;&#x30FC;&#x30E0;&#x30EF;&#x30FC;&#x30AF;</dt><dd><ul><li><a href="/oss_info/dotNET_Core">.NET Core</a></li><li><a href="/oss_info/AngularJS">AngularJS</a></li><li><a href="/oss_info/Apache_Axis2">Apache Axis2</a></li><li><a href="/oss_info/Apache_Cordova">Apache Cordova</a></li><li><a href="/oss_info/apachestruts">Apache Struts</a></li><li><a href="/oss_info/ASPdotNET">ASP.NET</a></li><li><a href="/oss_info/Bootstrap">Bootstrap</a></li><li><a href="/oss_info/CakePHP">CakePHP</a></li><li><a href="/oss_info/cocos2d-x">Cocos2d-x</a></li><li><a href="/oss_info/CodeIgniter">CodeIgniter</a></li><li><a href="/oss_info/Convertigo">Convertigo</a></li><li><a href="/oss_info/core_Flight_System">core Flight System</a></li><li><a href="/oss_info/Corteza">Corteza</a></li><li><a href="/oss_info/Django">Django</a></li><li><a href="/oss_info/Dojo_Toolkit">Dojo Toolkit</a></li><li><a href="/oss_info/Electron">Electron</a></li><li><a href="/oss_info/Flutter">Flutter</a></li><li><a href="/oss_info/framework-spider">framework-spider</a></li><li><a href="/oss_info/Godot">Godot</a></li><li><a href="/oss_info/Google_Web_Toolkit">Google Web Toolkit</a></li><li><a href="/oss_info/Grails">Grails</a></li><li><a href="/oss_info/Hermes">Hermes</a></li><li><a href="/oss_info/Hibernate">Hibernate</a></li><li><a href="/oss_info/Ionic_Framework">Ionic Framework</a></li><li><a href="/oss_info/iPLAss">iPLAss</a></li><li><a href="/oss_info/Joget_Workflow">Joget Workflow</a></li><li><a href="/oss_info/jQuery">jQuery</a></li><li><a href="/oss_info/Laravel">Laravel</a></li><li><a href="/oss_info/Meteor">Meteor</a></li><li><a href="/oss_info/Mono">Mono</a></li><li><a href="/oss_info/MyBatis">MyBatis</a></li><li><a href="/oss_info/Node-RED">Node-RED</a></li><li><a href="/oss_info/NW_js">NW.js</a></li><li><a href="/oss_info/onsenui">Onsen UI</a></li><li><a href="/oss_info/Open_Lowcode">Open Lowcode</a></li><li><a href="/oss_info/OpenXava">OpenXava</a></li><li><a href="/oss_info/OSBP">OSBP</a></li><li><a href="/oss_info/Play_Framework">Play Framework</a></li><li><a href="/oss_info/Pure">Pure</a></li><li><a href="/oss_info/Qt">Qt</a></li><li><a href="/oss_info/React">React</a></li><li><a href="/oss_info/React_Native">React Native</a></li><li><a href="/oss_info/ResearchKit">ResearchKit</a></li><li><a href="/oss_info/ROS">ROS</a></li><li><a href="/oss_info/Ruby_on_Rails">Ruby on Rails</a></li><li><a href="/oss_info/Ryu_SDN_Framework">Ryu SDN Framework</a></li><li><a href="/oss_info/Seasar2">Seasar2</a></li><li><a href="/oss_info/Spring_Boot">Spring Boot</a></li><li><a href="/oss_info/Spring_Framework">Spring Framework</a></li><li><a href="/oss_info/Trema">Trema</a></li><li><a href="/oss_info/UIkit">UIkit</a></li><li><a href="/oss_info/Urushi">Urushi</a></li><li><a href="/oss_info/VisionX">VisionX</a></li><li><a href="/oss_info/Vue_js">Vue.js</a></li><li><a href="/oss_info/Xamarin">Xamarin</a></li><li><a href="/oss_info/Zend_Framework">Zend Framework</a></li><li><a href="/oss_info/Skyve">&#x200B;Skyve</a></li></ul></dd></dl><dl><dt>&#x30ED;&#x30B0;&#x7BA1;&#x7406;</dt><dd><ul><li><a href="/oss_info/Apache_log4j">Apache log4j</a></li><li><a href="/oss_info/Embulk">Embulk</a></li><li><a href="/oss_info/Filebeat">Filebeat</a></li><li><a href="/oss_info/fluentd">fluentd</a></li><li><a href="/oss_info/Graylog">Graylog</a></li><li><a href="/oss_info/Logstash">Logstash</a></li><li><a href="/oss_info/SyLAS">SyLAS</a></li></ul></dd></dl><dl><dt>SOAP</dt><dd><ul><li><a href="/oss_info/apacheaxis">Apache Axis</a></li></ul></dd></dl><dl><dt>&#x30D3;&#x30B8;&#x30CD;&#x30B9;&#x30D7;&#x30ED;&#x30BB;&#x30B9;</dt><dd><ul><li><a href="/oss_info/Activiti">Activiti</a></li><li><a href="/oss_info/Camunda_BPM">Camunda BPM</a></li></ul></dd></dl><dl><dt>SOA</dt><dd><ul><li><a href="/oss_info/WSO2_Enterprise_Service_Bus">WSO2 Enterprise Service Bus</a></li></ul></dd></dl><dl><dt>DNS</dt><dd><ul><li><a href="/oss_info/bind">BIND</a></li><li><a href="/oss_info/dnsdist">dnsdist</a></li><li><a href="/oss_info/Knot_DNS">Knot DNS</a></li><li><a href="/oss_info/NSD">NSD</a></li><li><a href="/oss_info/PowerDNS">PowerDNS</a></li></ul></dd></dl><dl><dt>&#x8A8D;&#x8A3C;&#x30B5;&#x30FC;&#x30D0;</dt><dd><ul><li><a href="/oss_info/389_Directory_Server">389 Directory Server</a></li><li><a href="/oss_info/Apache_DS">Apache DS</a></li><li><a href="/oss_info/FreeRADIUS">FreeRADIUS</a></li><li><a href="/oss_info/Google_Authenticator">Google Authenticator</a></li><li><a href="/oss_info/OpenDJ">OpenDJ</a></li><li><a href="/oss_info/OpenLDAP">OpenLDAP</a></li></ul></dd></dl><dl><dt>&#x30E1;&#x30FC;&#x30EB;&#x30B5;&#x30FC;&#x30D0;</dt><dd><ul><li><a href="/oss_info/Courier_IMAP">Courier-IMAP</a></li><li><a href="/oss_info/Cyrus_IMAP">Cyrus IMAP</a></li><li><a href="/oss_info/Dovecot">Dovecot</a></li><li><a href="/oss_info/Exim">Exim</a></li><li><a href="/oss_info/GNU_Mailman">GNU Mailman</a></li><li><a href="/oss_info/Messasy">Messasy</a></li><li><a href="/oss_info/postfix">Postfix</a></li><li><a href="/oss_info/postldapadmin">postLDAPadmin</a></li><li><a href="/oss_info/SaMMA">SaMMA</a></li><li><a href="/oss_info/sendmail">sendmail</a></li><li><a href="/oss_info/sympa">Sympa</a></li></ul></dd></dl><dl><dt>&#x30D0;&#x30FC;&#x30B8;&#x30E7;&#x30F3;&#x7BA1;&#x7406;</dt><dd><ul><li><a href="/oss_info/Apache_Subversion">Apache Subversion</a></li><li><a href="/oss_info/CVS">CVS</a></li><li><a href="/oss_info/Git">Git</a></li><li><a href="/oss_info/Mercurial">Mercurial</a></li></ul></dd></dl><dl><dt>&#x30A4;&#x30F3;&#x30B7;&#x30C7;&#x30F3;&#x30C8;&#x7BA1;&#x7406;</dt><dd><ul><li><a href="/oss_info/CDIR_Collector">CDIR Collector</a></li></ul></dd></dl><dl><dt>&#x30AF;&#x30E9;&#x30B9;&#x30BF;&#x30EA;&#x30F3;&#x30B0;</dt><dd><ul><li><a href="/oss_info/Apache_Mesos">Apache Mesos</a></li><li><a href="/oss_info/Consul">Consul</a></li><li><a href="/oss_info/Corosync">Corosync</a></li><li><a href="/oss_info/DRBD">DRBD</a></li><li><a href="/oss_info/Heartbeat">Heartbeat</a></li><li><a href="/oss_info/ILUKA">ILUKA</a></li><li><a href="/oss_info/Infinispan">Infinispan</a></li><li><a href="/oss_info/Linux_Virtual_Server">Linux Virtual Server</a></li><li><a href="/oss_info/memcached">memcached</a></li><li><a href="/oss_info/MySQL_MHA">MySQL MHA</a></li><li><a href="/oss_info/Pacemaker">Pacemaker</a></li><li><a href="/oss_info/pgpool-ii">pgpool-II</a></li><li><a href="/oss_info/Serf">Serf</a></li><li><a href="/oss_info/UltraMonkey-L7">UltraMonkey-L7</a></li></ul></dd></dl><dl><dt>&#x30B7;&#x30F3;&#x30B0;&#x30EB;&#x30B5;&#x30A4;&#x30F3;&#x30AA;&#x30F3;</dt><dd><ul><li><a href="/oss_info/Gluu">Gluu</a></li><li><a href="/oss_info/Keycloak">Keycloak</a></li><li><a href="/oss_info/OpenAM">OpenAM</a></li><li><a href="/oss_info/Shibboleth">Shibboleth</a></li><li><a href="/oss_info/WSO2_Identity_Server">WSO2 Identity Server</a></li></ul></dd></dl><dl><dt>ID&#x7BA1;&#x7406;</dt><dd><ul><li><a href="/oss_info/LISM">LISM</a></li><li><a href="/oss_info/OpenIDM">OpenIDM</a></li></ul></dd></dl><dl><dt>&#x904B;&#x7528;&#x7BA1;&#x7406;&#x30FB;&#x904B;&#x7528;&#x81EA;&#x52D5;&#x5316;</dt><dd><ul><li><a href="/oss_info/Alertmanager">Alertmanager</a></li><li><a href="/oss_info/Ansible">Ansible</a></li><li><a href="/oss_info/Apache_Ant">Apache Ant</a></li><li><a href="/oss_info/Apache_Maven">Apache Maven</a></li><li><a href="/oss_info/Apache_ZooKeeper">Apache ZooKeeper</a></li><li><a href="/oss_info/Beats">Beats</a></li><li><a href="/oss_info/Cacti">Cacti</a></li><li><a href="/oss_info/Chef">Chef</a></li><li><a href="/oss_info/collectd">collectd</a></li><li><a href="/oss_info/daloRADIUS">daloRADIUS</a></li><li><a href="/oss_info/Draft">Draft</a></li><li><a href="/oss_info/Drone">Drone</a></li><li><a href="/oss_info/EasySCP">EasySCP</a></li><li><a href="/oss_info/Grafana">Grafana</a></li><li><a href="/oss_info/Graphite">Graphite</a></li><li><a href="/oss_info/Hatohol">Hatohol</a></li><li><a href="/oss_info/Hinemos">Hinemos</a></li><li><a href="/oss_info/Icinga2">Icinga2</a></li><li><a href="/oss_info/Itamae">Itamae</a></li><li><a href="/oss_info/JobScheduler">JobScheduler</a></li><li><a href="/oss_info/Juju">Juju</a></li><li><a href="/oss_info/Kubernetes">Kubernetes</a></li><li><a href="/oss_info/Munin">Munin</a></li><li><a href="/oss_info/Nagios">Nagios</a></li><li><a href="/oss_info/NUT">NUT</a></li><li><a href="/oss_info/OKD">OKD</a></li><li><a href="/oss_info/Open-Falcon">Open-Falcon</a></li><li><a href="/oss_info/Packer">Packer</a></li><li><a href="/oss_info/Pandora_FMS">Pandora FMS</a></li><li><a href="/oss_info/Polaris">Polaris</a></li><li><a href="/oss_info/Prometheus">Prometheus</a></li><li><a href="/oss_info/Pulumi">Pulumi</a></li><li><a href="/oss_info/Puppet">Puppet</a></li><li><a href="/oss_info/rsyslog">rsyslog</a></li><li><a href="/oss_info/Spinnaker">Spinnaker</a></li><li><a href="/oss_info/StackStoom">StackStoom</a></li><li><a href="/oss_info/syslog-ng">syslog-ng</a></li><li><a href="/oss_info/Terraform">Terraform</a></li><li><a href="/oss_info/Vagrant">Vagrant</a></li><li><a href="/oss_info/Xymon">Xymon</a></li><li><a href="/oss_info/Zabbix">Zabbix</a></li></ul></dd></dl><dl><dt>&#x30B0;&#x30EB;&#x30FC;&#x30D7;&#x30A6;&#x30A7;&#x30A2;</dt><dd><ul><li><a href="/oss_info/Aipo">Aipo</a></li><li><a href="/oss_info/oss-calendar">OSS&#x30AB;&#x30EC;&#x30F3;&#x30C0;&#x30FC;</a></li><li><a href="/oss_info/Roundcube_Webmail">Roundcube Webmail</a></li><li><a href="/oss_info/SOGo">SOGo</a></li><li><a href="/oss_info/Zimbra">Zimbra</a></li></ul></dd></dl><dl><dt>&#x30AA;&#x30D5;&#x30A3;&#x30B9;&#x30B9;&#x30A4;&#x30FC;&#x30C8;</dt><dd><ul><li><a href="/oss_info/Apache_OpenOffice">Apache OpenOffice</a></li><li><a href="/oss_info/LibreOffice">LibreOffice</a></li><li><a href="/oss_info/Odoo">Odoo</a></li><li><a href="/oss_info/OnlyOffice">OnlyOffice</a></li></ul></dd></dl><dl><dt>&#x30CD;&#x30C3;&#x30C8;&#x30EF;&#x30FC;&#x30AF;&#x7CFB;&#x30C4;&#x30FC;&#x30EB;</dt><dd><ul><li><a href="/oss_info/fping">fping</a></li><li><a href="/oss_info/LibreSpeed">LibreSpeed</a></li><li><a href="/oss_info/LibreSSL">LibreSSL</a></li><li><a href="/oss_info/Metasploit_Framework">Metasploit Framework</a></li><li><a href="/oss_info/Nmap">Nmap</a></li><li><a href="/oss_info/OpenSSH">OpenSSH</a></li><li><a href="/oss_info/OpenSSL">OpenSSL</a></li><li><a href="/oss_info/OpenVPN">OpenVPN</a></li><li><a href="/oss_info/SoftEther_VPN">SoftEther VPN</a></li><li><a href="/oss_info/tcpdump">tcpdump</a></li><li><a href="/oss_info/vyatta">Vyatta</a></li><li><a href="/oss_info/WireGuard">WireGuard</a></li><li><a href="/oss_info/Wireshark">Wireshark</a></li></ul></dd></dl><dl><dt>&#x30AF;&#x30E9;&#x30A6;&#x30C9;&#x57FA;&#x76E4;</dt><dd><ul><li><a href="/oss_info/Cloud_Foundry">Cloud Foundry</a></li><li><a href="/oss_info/CloudStack">CloudStack</a></li><li><a href="/oss_info/Eucalyptus">Eucalyptus</a></li><li><a href="/oss_info/OpenStack">OpenStack</a></li></ul></dd></dl><dl><dt>&#x30D0;&#x30C3;&#x30AF;&#x30A2;&#x30C3;&#x30D7;&#x30C4;&#x30FC;&#x30EB;</dt><dd><ul><li><a href="/oss_info/Amanda">Amanda</a></li><li><a href="/oss_info/Bacula">Bacula</a></li></ul></dd></dl><dl><dt>&#x691C;&#x7D22;&#x30A8;&#x30F3;&#x30B8;&#x30F3;</dt><dd><ul><li><a href="/oss_info/Apache_Lucene">Apache Lucene</a></li><li><a href="/oss_info/Apache_Solr">Apache Solr</a></li><li><a href="/oss_info/Elasticsearch">Elasticsearch</a></li><li><a href="/oss_info/Fess">Fess</a></li></ul></dd></dl><dl><dt>BI&#x30C4;&#x30FC;&#x30EB;</dt><dd><ul><li><a href="/oss_info/Apache_NiFi">Apache NiFi</a></li><li><a href="/oss_info/Apache_Superset">Apache Superset</a></li><li><a href="/oss_info/eclipsebirt">Eclipse BIRT</a></li><li><a href="/oss_info/Jaspersoft">Jaspersoft</a></li><li><a href="/oss_info/Kibana">Kibana</a></li><li><a href="/oss_info/Metabase">Metabase</a></li><li><a href="/oss_info/openolap">OpenOLAP</a></li><li><a href="/oss_info/Orange">Orange</a></li><li><a href="/oss_info/Pentaho">Pentaho</a></li><li><a href="/oss_info/RapidMiner_Studio">RapidMiner Studio</a></li></ul></dd></dl><dl><dt>CRM</dt><dd><ul><li><a href="/oss_info/f-revocrm">F-RevoCRM</a></li><li><a href="/oss_info/SugarCRM">SugarCRM</a></li><li><a href="/oss_info/vtiger_CRM">Vtiger CRM</a></li></ul></dd></dl><dl><dt>EC</dt><dd><ul><li><a href="/oss_info/ec-cube">EC-CUBE</a></li><li><a href="/oss_info/Interchange">Interchange</a></li><li><a href="/oss_info/Magento">Magento</a></li><li><a href="/oss_info/oscommerce">osCommerce</a></li><li><a href="/oss_info/WooCommerce">WooCommerce</a></li></ul></dd></dl><dl><dt>ERP</dt><dd><ul><li><a href="/oss_info/adempiere">ADempiere</a></li><li><a href="/oss_info/idempiere">iDempiere</a></li></ul></dd></dl><dl><dt>ETL</dt><dd><ul><li><a href="/oss_info/Pentaho_Data_Integration">Pentaho Data Integration</a></li><li><a href="/oss_info/Talend_Open_Studio">Talend Open Studio</a></li></ul></dd></dl><dl><dt>e&#x30E9;&#x30FC;&#x30CB;&#x30F3;&#x30B0;</dt><dd><ul><li><a href="/oss_info/Canvas_LMS">Canvas LMS</a></li><li><a href="/oss_info/moodle">moodle</a></li><li><a href="/oss_info/Sakai">Sakai</a></li></ul></dd></dl><dl><dt>IP-PBX</dt><dd><ul><li><a href="/oss_info/asterisk">Asterisk</a></li><li><a href="/oss_info/FreeSWITCH">FreeSWITCH</a></li></ul></dd></dl><dl><dt>ITIL&#x7BA1;&#x7406;</dt><dd><ul><li><a href="/oss_info/CuMAS">CuMAS</a></li><li><a href="/oss_info/OTRS">OTRS</a></li></ul></dd></dl><dl><dt>&#x4EEE;&#x60F3;&#x5316;&#x30BD;&#x30D5;&#x30C8;</dt><dd><ul><li><a href="/oss_info/Ceph">Ceph</a></li><li><a href="/oss_info/CephFS">CephFS</a></li><li><a href="/oss_info/CoprHD">CoprHD</a></li><li><a href="/oss_info/Docker">Docker</a></li><li><a href="/oss_info/GlusterFS">GlusterFS</a></li><li><a href="/oss_info/Kernel-based_Virtual_Machine">Kernel-based Virtual Machine</a></li><li><a href="/oss_info/Lustre">Lustre</a></li><li><a href="/oss_info/LXC">LXC</a></li><li><a href="/oss_info/Oracle_VM_VirtualBox">Oracle VM VirtualBox</a></li><li><a href="/oss_info/oVirt">oVirt</a></li><li><a href="/oss_info/Xen_Project_Hypervisor">Xen Project Hypervisor</a></li></ul></dd></dl><dl><dt>&#x81EA;&#x52D5;&#x30C6;&#x30B9;&#x30C8;&#x30C4;&#x30FC;&#x30EB;</dt><dd><ul><li><a href="/oss_info/Apache_Jmeter">Apache Jmeter</a></li><li><a href="/oss_info/Appium">Appium</a></li><li><a href="/oss_info/Concourse_CI">Concourse CI</a></li><li><a href="/oss_info/Infrataster">Infrataster</a></li><li><a href="/oss_info/Jenkins">Jenkins</a></li><li><a href="/oss_info/Karate">Karate</a></li><li><a href="/oss_info/OSS-Fuzz">OSS-Fuzz</a></li><li><a href="/oss_info/Selenide">Selenide</a></li><li><a href="/oss_info/Selenium">Selenium</a></li><li><a href="/oss_info/Serverspec">Serverspec</a></li><li><a href="/oss_info/SikuliX">SikuliX</a></li></ul></dd></dl><dl><dt>&#x4EBA;&#x4E8B;&#x7D66;&#x4E0E;&#xFF0F;&#x52E4;&#x6020;</dt><dd><ul><li><a href="/oss_info/MosP">MosP</a></li></ul></dd></dl><dl><dt>&#x30B9;&#x30C8;&#x30EA;&#x30FC;&#x30E0;&#x30C7;&#x30FC;&#x30BF;&#x51E6;&#x7406;</dt><dd><ul><li><a href="/oss_info/Apache_Flink">Apache Flink</a></li><li><a href="/oss_info/Apache_Storm">Apache Storm</a></li><li><a href="/oss_info/Jitsi">Jitsi</a></li><li><a href="/oss_info/Norikra">Norikra</a></li><li><a href="/oss_info/Pravega">Pravega</a></li></ul></dd></dl><dl><dt>&#x30C9;&#x30AD;&#x30E5;&#x30E1;&#x30F3;&#x30C8;&#x7BA1;&#x7406;</dt><dd><ul><li><a href="/oss_info/Alfresco">Alfresco</a></li><li><a href="/oss_info/Nextcloud">Nextcloud</a></li><li><a href="/oss_info/ownCloud">ownCloud</a></li><li><a href="/oss_info/Samba">Samba</a></li></ul></dd></dl><dl><dt>&#x30D3;&#x30C3;&#x30B0;&#x30C7;&#x30FC;&#x30BF;&#x51E6;&#x7406;&#x30C4;&#x30FC;&#x30EB;</dt><dd><ul><li><a href="/oss_info/Apache_Drill">Apache Drill</a></li><li><a href="/oss_info/Apache_Hadoop">Apache Hadoop</a></li><li><a href="/oss_info/Apache_Kafka">Apache Kafka</a></li><li><a href="/oss_info/Apache_ManifoldCF">Apache ManifoldCF</a></li><li><a href="/oss_info/Apache_Nutch">Apache Nutch</a></li><li><a href="/oss_info/Apache_Spark">Apache Spark</a></li><li><a href="/oss_info/Jupyter_Notebook">Jupyter Notebook</a></li><li><a href="/oss_info/NGT">NGT</a></li><li><a href="/oss_info/Schema_Registry">Schema Registry</a></li></ul></dd></dl><dl><dt>&#x30D7;&#x30ED;&#x30B8;&#x30A7;&#x30AF;&#x30C8;&#x7BA1;&#x7406;</dt><dd><ul><li><a href="/oss_info/Bugzilla">Bugzilla</a></li><li><a href="/oss_info/GanttProject">GanttProject</a></li><li><a href="/oss_info/GitBucket">GitBucket</a></li><li><a href="/oss_info/GitLab">GitLab</a></li><li><a href="/oss_info/Mantis_Bug_Tracker">Mantis Bug Tracker</a></li><li><a href="/oss_info/Redmine">Redmine</a></li><li><a href="/oss_info/Trac">Trac</a></li></ul></dd></dl><dl><dt>&#x30DD;&#x30FC;&#x30BF;&#x30EB;&#xFF0F;CMS</dt><dd><ul><li><a href="/oss_info/baserCMS">baserCMS</a></li><li><a href="/oss_info/Concrete5">Concrete5</a></li><li><a href="/oss_info/Drupal">Drupal</a></li><li><a href="/oss_info/Geeklog">Geeklog</a></li><li><a href="/oss_info/Ghost">Ghost</a></li><li><a href="/oss_info/Joomla">Joomla!</a></li><li><a href="/oss_info/Liferay">Liferay</a></li><li><a href="/oss_info/Movable_Type_Open_Source">Movable Type Open Source</a></li><li><a href="/oss_info/NetCommons">NetCommons</a></li><li><a href="/oss_info/OpenCms">OpenCms</a></li><li><a href="/oss_info/Osclass">Osclass</a></li><li><a href="/oss_info/Plone">Plone</a></li><li><a href="/oss_info/WordPress">WordPress</a></li><li><a href="/oss_info/XOOPS_Cube">XOOPS Cube</a></li></ul></dd></dl><dl><dt>&#x4E88;&#x7B97;&#x7BA1;&#x7406;</dt><dd><ul><li><a href="/oss_info/BudgetRunner">BudgetRunner</a></li></ul></dd></dl><dl><dt>AI&#x30FB;&#x4EBA;&#x5DE5;&#x77E5;&#x80FD;</dt><dd><ul><li><a href="/oss_info/BERT">BERT</a></li><li><a href="/oss_info/Caffe">Caffe</a></li><li><a href="/oss_info/Chainer">Chainer</a></li><li><a href="/oss_info/DSSTNE">DSSTNE</a></li><li><a href="/oss_info/Eclipse_Deeplearning4j">Eclipse Deeplearning4j</a></li><li><a href="/oss_info/H2O">H2O</a></li><li><a href="/oss_info/Keras">Keras</a></li><li><a href="/oss_info/Microsoft_Cognitive_Toolkit">Microsoft Cognitive Toolkit</a></li><li><a href="/oss_info/MXNet">MXNet</a></li><li><a href="/oss_info/Pylearn2">Pylearn2</a></li><li><a href="/oss_info/scikit-learn">scikit-learn</a></li><li><a href="/oss_info/TensorFlow">TensorFlow</a></li><li><a href="/oss_info/Theano">Theano</a></li><li><a href="/oss_info/Torch">Torch</a></li></ul></dd></dl><dl><dt>FinTech&#x7CFB;&#x30C4;&#x30FC;&#x30EB;</dt><dd><ul><li><a href="/oss_info/Catalyst">Catalyst</a></li><li><a href="/oss_info/Enigma">Enigma</a></li><li><a href="/oss_info/Hyperledger">Hyperledger</a></li></ul></dd></dl><dl><dt>&#x305D;&#x306E;&#x4ED6;</dt><dd><ul><li><a href="/oss_info/7-Zip">7-Zip</a></li><li><a href="/oss_info/Adblock_Plus">Adblock Plus</a></li><li><a href="/oss_info/Adminer">Adminer</a></li><li><a href="/oss_info/Anaconda">Anaconda</a></li><li><a href="/oss_info/Android_Studio">Android Studio</a></li><li><a href="/oss_info/Apache_Guacamole">Apache Guacamole</a></li><li><a href="/oss_info/Arduino">Arduino</a></li><li><a href="/oss_info/ArduPilot">ArduPilot</a></li><li><a href="/oss_info/Atom">Atom</a></li><li><a href="/oss_info/Audacity">Audacity</a></li><li><a href="/oss_info/AVideo">AVideo</a></li><li><a href="/oss_info/Ax">Ax</a></li><li><a href="/oss_info/Bash">Bash</a></li><li><a href="/oss_info/BigBlueButton">BigBlueButton</a></li><li><a href="/oss_info/Bino">Bino</a></li><li><a href="/oss_info/Blender">Blender</a></li><li><a href="/oss_info/Brackets">Brackets</a></li><li><a href="/oss_info/Brave">Brave</a></li><li><a href="/oss_info/Curl">Curl</a></li><li><a href="/oss_info/Cygwin">Cygwin</a></li><li><a href="/oss_info/DVD_Flick">DVD Flick</a></li><li><a href="/oss_info/Eclipse">Eclipse</a></li><li><a href="/oss_info/Evergreen">Evergreen</a></li><li><a href="/oss_info/FFFTP">FFFTP</a></li><li><a href="/oss_info/FFmpeg">FFmpeg</a></li><li><a href="/oss_info/FileZilla">FileZilla</a></li><li><a href="/oss_info/Firefox">Firefox</a></li><li><a href="/oss_info/FOG_Project">FOG Project</a></li><li><a href="/oss_info/FreeCAD">FreeCAD</a></li><li><a href="/oss_info/GIMP">GIMP</a></li><li><a href="/oss_info/GNU_Compiler_Collection">GNU Compiler Collection</a></li><li><a href="/oss_info/GNU_Emacs">GNU Emacs</a></li><li><a href="/oss_info/GNU_Scientific_Library">GNU Scientific Library</a></li><li><a href="/oss_info/GNU_Wget">GNU Wget</a></li><li><a href="/oss_info/ImageMagick">ImageMagick</a></li><li><a href="/oss_info/Inkscape">Inkscape</a></li><li><a href="/oss_info/IntelliJ_IDEA">IntelliJ IDEA</a></li><li><a href="/oss_info/Julius">Julius</a></li><li><a href="/oss_info/K-9_Mail">K-9 Mail</a></li><li><a href="/oss_info/Kaltura">Kaltura</a></li><li><a href="/oss_info/Kodi">Kodi</a></li><li><a href="/oss_info/Krita">Krita</a></li><li><a href="/oss_info/LiVES">LiVES</a></li><li><a href="/oss_info/MAMP">MAMP</a></li><li><a href="/oss_info/Marble">Marble</a></li><li><a href="/oss_info/Mastodon">Mastodon</a></li><li><a href="/oss_info/Mattermost">Mattermost</a></li><li><a href="/oss_info/Maxima">Maxima</a></li><li><a href="/oss_info/MusE">MusE</a></li><li><a href="/oss_info/nano">nano</a></li><li><a href="/oss_info/NetBeans">NetBeans</a></li><li><a href="/oss_info/Notepad_plus_plus">Notepad++</a></li><li><a href="/oss_info/OpenCV">OpenCV</a></li><li><a href="/oss_info/OpenPNE">OpenPNE</a></li><li><a href="/oss_info/OpenToonz">OpenToonz</a></li><li><a href="/oss_info/Orion">Orion</a></li><li><a href="/oss_info/Pandas">Pandas</a></li><li><a href="/oss_info/PeaZip">PeaZip</a></li><li><a href="/oss_info/PowerShell">PowerShell</a></li><li><a href="/oss_info/PrimeCloud_Controller">PrimeCloud Controller</a></li><li><a href="/oss_info/PuTTY">PuTTY</a></li><li><a href="/oss_info/RLogin">RLogin</a></li><li><a href="/oss_info/SEC">SEC</a></li><li><a href="/oss_info/Signal">Signal</a></li><li><a href="/oss_info/SonarQube">SonarQube</a></li><li><a href="/oss_info/SoX">SoX</a></li><li><a href="/oss_info/Spectrum">Spectrum</a></li><li><a href="/oss_info/SpiderMonkey">SpiderMonkey</a></li><li><a href="/oss_info/Sylpheed">Sylpheed</a></li><li><a href="/oss_info/Thunderbird">Thunderbird</a></li><li><a href="/oss_info/Tor_Browser">Tor Browser</a></li><li><a href="/oss_info/UroboroSQL">UroboroSQL</a></li><li><a href="/oss_info/Vim">Vim</a></li><li><a href="/oss_info/Visual_Studio_Code">Visual Studio Code</a></li><li><a href="/oss_info/VLC_media_player">VLC media player</a></li><li><a href="/oss_info/Wine">Wine</a></li><li><a href="/oss_info/WinSCP">WinSCP</a></li><li><a href="/oss_info/XAMPP">XAMPP</a></li><li><a href="/oss_info/XMind">XMind</a></li><li><a href="/oss_info/YENMA">YENMA</a></li><li><a href="/oss_info/Zenko">Zenko</a></li><li><a href="/oss_info/Zsh">Zsh</a></li></ul></dd></dl><dl><dt>Amazon Web Services</dt><dd><ul><li><a href="/oss_info/Amazon_API_Gateway">Amazon API Gateway</a></li><li><a href="/oss_info/Amazon_Aurora">Amazon Aurora</a></li><li><a href="/oss_info/Amazon_CloudWatch">Amazon CloudWatch</a></li><li><a href="/oss_info/Amazon_Elastic_Block_Store">Amazon Elastic Block Store</a></li><li><a href="/oss_info/Amazon_Elastic_Compute_Cloud">Amazon Elastic Compute Cloud</a></li><li><a href="/oss_info/Amazon_Kinesis">Amazon Kinesis</a></li><li><a href="/oss_info/Amazon_Lex">Amazon Lex</a></li><li><a href="/oss_info/Amazon_Machine_Learning">Amazon Machine Learning</a></li><li><a href="/oss_info/Amazon_Polly">Amazon Polly</a></li><li><a href="/oss_info/Amazon_Redshift">Amazon Redshift</a></li><li><a href="/oss_info/Amazon_Rekognition">Amazon Rekognition</a></li><li><a href="/oss_info/Amazon_Relational_Database_Service">Amazon Relational Database Service</a></li><li><a href="/oss_info/Amazon_Simple_Email_Service">Amazon Simple Email Service</a></li><li><a href="/oss_info/Amazon_Simple_Storage_Service">Amazon Simple Storage Service</a></li><li><a href="/oss_info/Amazon_Virtual_Private_Cloud">Amazon Virtual Private Cloud</a></li><li><a href="/oss_info/Amazon_Web_Services">Amazon Web Services</a></li><li><a href="/oss_info/AWS_CloudFormation">AWS CloudFormation</a></li><li><a href="/oss_info/AWS_Database_Migration_Service">AWS Database Migration Service</a></li><li><a href="/oss_info/AWS_Direct_Connect">AWS Direct Connect</a></li><li><a href="/oss_info/AWS_Identity_and_Access_Management">AWS Identity and Access Management</a></li><li><a href="/oss_info/AWS_Organizations">AWS Organizations</a></li><li><a href="/oss_info/AWS_Simple_Monthly_Calculator">AWS Simple Monthly Calculator</a></li><li><a href="/oss_info/AWS_CommandLine_Interface">AWS &#x30B3;&#x30DE;&#x30F3;&#x30C9;&#x30E9;&#x30A4;&#x30F3;&#x30A4;&#x30F3;&#x30BF;&#x30FC;&#x30D5;&#x30A7;&#x30A4;&#x30B9;</a></li><li><a href="/oss_info/AWS_ManagementConsole">AWS&#x30DE;&#x30CD;&#x30B8;&#x30E1;&#x30F3;&#x30C8;&#x30B3;&#x30F3;&#x30BD;&#x30FC;&#x30EB;</a></li></ul></dd></dl><dl><dt>Microsoft Azure</dt><dd><ul><li><a href="/oss_info/App_Service">App Service</a></li><li><a href="/oss_info/Azure_Active_Directory">Azure Active Directory</a></li><li><a href="/oss_info/Azure_API_Management">Azure API Management</a></li><li><a href="/oss_info/Azure_Backup">Azure Backup</a></li><li><a href="/oss_info/Azure_Blob_Storage">Azure Blob Storage</a></li><li><a href="/oss_info/Azure_Bot_Service">Azure Bot Service</a></li><li><a href="/oss_info/Azure_Content_Delivery_Network">Azure Content Delivery Network</a></li><li><a href="/oss_info/Azure_HDInsight">Azure HDInsight</a></li><li><a href="/oss_info/Azure_Machine_Learning">Azure Machine Learning</a></li><li><a href="/oss_info/Azure_Marketplace">Azure Marketplace</a></li><li><a href="/oss_info/Azure_Monitor">Azure Monitor</a></li><li><a href="/oss_info/Azure_Storage">Azure Storage</a></li><li><a href="/oss_info/Azure_Table_Storage">Azure Table Storage</a></li><li><a href="/oss_info/Azure_Virtual_Machines">Azure Virtual Machines</a></li><li><a href="/oss_info/Azure_Web_Apps">Azure Web Apps</a></li><li><a href="/oss_info/Azure_Portal">Azure&#x30DD;&#x30FC;&#x30BF;&#x30EB;</a></li><li><a href="/oss_info/Cloud_Services">Cloud Services</a></li><li><a href="/oss_info/Microsoft_Azure">Microsoft Azure</a></li><li><a href="/oss_info/SQL_Database">SQL Database</a></li><li><a href="/oss_info/Stream_Analytics">Stream Analytics</a></li><li><a href="/oss_info/Visual_Studio_Tools_for_Azure">Visual Studio Tools for Azure</a></li></ul></dd></dl><dl><dt>Salesforce</dt><dd><ul><li><a href="/oss_info/Analytics_Cloud_Einstein">Analytics Cloud Einstein</a></li><li><a href="/oss_info/App_Cloud">App Cloud</a></li><li><a href="/oss_info/Commerce_Cloud_Einstein">Commerce Cloud Einstein</a></li><li><a href="/oss_info/Community_Cloud_Einstein">Community Cloud Einstein</a></li><li><a href="/oss_info/Marketing_Cloud_Einstein">Marketing Cloud Einstein</a></li><li><a href="/oss_info/Sales_Cloud_Einstein">Sales Cloud Einstein</a></li><li><a href="/oss_info/Service_Cloud_Einstein">Service Cloud Einstein</a></li></ul></dd></dl><dl><dt>&#x30AF;&#x30E9;&#x30A6;&#x30C9;&#x30B5;&#x30FC;&#x30D3;&#x30B9;</dt><dd><ul><li><a href="/oss_info/Aipo_com">Aipo.com</a></li><li><a href="/oss_info/Box">Box</a></li><li><a href="/oss_info/Brabio">Brabio!</a></li><li><a href="/oss_info/ChatWork">ChatWork</a></li><li><a href="/oss_info/CircleCI">CircleCI</a></li><li><a href="/oss_info/Datadog">Datadog</a></li><li><a href="/oss_info/Dropbox">Dropbox</a></li><li><a href="/oss_info/freee">freee</a></li><li><a href="/oss_info/GoogleDrive">Google&#x30C9;&#x30E9;&#x30A4;&#x30D6;</a></li><li><a href="/oss_info/IBM_Bluemix_Infrastructure">IBM Bluemix Infrastructure</a></li><li><a href="/oss_info/Keyspider">Keyspider</a></li><li><a href="/oss_info/kintone">kintone</a></li><li><a href="/oss_info/Mackerel">Mackerel</a></li><li><a href="/oss_info/OneDrive">OneDrive</a></li><li><a href="/oss_info/Sansan">Sansan</a></li><li><a href="/oss_info/Speak2Leads">Speak2Leads</a></li><li><a href="/oss_info/Twilio">Twilio</a></li><li><a href="/oss_info/cybozu_Live">&#x30B5;&#x30A4;&#x30DC;&#x30A6;&#x30BA;Live</a></li></ul></dd></dl><dl><dt>&#x30BB;&#x30AD;&#x30E5;&#x30EA;&#x30C6;&#x30A3;&#x30BD;&#x30D5;&#x30C8;</dt><dd><ul><li><a href="/oss_info/ClamAV">ClamAV</a></li><li><a href="/oss_info/OpenVAS">OpenVAS</a></li><li><a href="/oss_info/Snort">Snort</a></li><li><a href="/oss_info/Vuls">Vuls</a></li></ul></dd></dl><dl><dt>API&#x9023;&#x643A;</dt><dd><ul><li><a href="/oss_info/API_Umbrella">API Umbrella</a></li><li><a href="/oss_info/JSON_Server">JSON Server</a></li><li><a href="/oss_info/Kong">Kong</a></li><li><a href="/oss_info/WSO2_API_Manager">WSO2 API Manager</a></li></ul></dd></dl><dl><dt>Google Cloud Platform</dt><dd><ul><li><a href="/oss_info/BigQuery">BigQuery</a></li><li><a href="/oss_info/Cloud_Console">Cloud Console</a></li><li><a href="/oss_info/Cloud_IoT_Core">Cloud IoT Core</a></li><li><a href="/oss_info/Cloud_Storage">Cloud Storage</a></li><li><a href="/oss_info/Compute_Engine">Compute Engine</a></li><li><a href="/oss_info/Google_Cloud_DNS">Google Cloud DNS</a></li><li><a href="/oss_info/Google_Cloud_Endpoints">Google Cloud Endpoints</a></li><li><a href="/oss_info/Google_Cloud_Launcher">Google Cloud Launcher</a></li><li><a href="/oss_info/Google_Cloud_Platform">Google Cloud Platform</a></li><li><a href="/oss_info/Google_Cloud_SDK">Google Cloud SDK</a></li><li><a href="/oss_info/Google_Cloud_SQL">Google Cloud SQL</a></li><li><a href="/oss_info/Google_Cloud_Virtual_Network">Google Cloud Virtual Network</a></li><li><a href="/oss_info/Google_Cloud_Vision_API">Google Cloud Vision API</a></li></ul></dd></dl><dl><dt>&#x30DE;&#x30FC;&#x30B1;&#x30C6;&#x30A3;&#x30F3;&#x30B0;&#x30AA;&#x30FC;&#x30C8;&#x30E1;&#x30FC;&#x30B7;&#x30E7;&#x30F3;</dt><dd><ul><li><a href="/oss_info/Mautic">Mautic</a></li></ul></dd></dl><dl><dt>&#x30ED;&#x30FC;&#x30B3;&#x30FC;&#x30C9;&#x958B;&#x767A;&#x30C4;&#x30FC;&#x30EB;</dt><dd><ul><li><a href="/oss_info/Pleasanter">Pleasanter</a></li></ul></dd></dl><dl><dt>&#x5546;&#x7528;&#x88FD;&#x54C1;</dt><dd><ul><li><a href="/oss_info/Oracle_JDK">Oracle JDK</a></li><li><a href="/oss_info/vSphere">vSphere</a></li></ul></dd></dl></div>
+
+</div></div>
+<div class="footerlinkbox">
+<p><a href="/site/company/">&#x904B;&#x55B6;&#x4F1A;&#x793E;</a> | <a href="/site/sitemap/">&#x30B5;&#x30A4;&#x30C8;&#x30DE;&#x30C3;&#x30D7;</a> | <a href="/site/right/">&#x5229;&#x7528;&#x898F;&#x7D04;</a> | <a href="/site/privacy/">&#x30D7;&#x30E9;&#x30A4;&#x30D0;&#x30B7;&#x30FC;&#x30DD;&#x30EA;&#x30B7;&#x30FC;</a> | <a href="/site/pr/">&#x5E83;&#x544A;&#x6848;&#x5185;</a> | <a href="/site/contact/">&#x304A;&#x554F;&#x3044;&#x5408;&#x308F;&#x305B;</a> |<a href="https://twitter.com/OSS_News" target="_blank">Twitter</a> | <a href="https://www.facebook.com/OSSNews" target="_blank">Facebook</a></p>
+</div>
+<div class="footerinner">
+<div class="copyright png">Copyright &#xA9; 2013 <a href="http://osslabo.com/" target="_blank">&#x682A;&#x5F0F;&#x4F1A;&#x793E;&#x30AA;&#x30FC;&#x30D7;&#x30F3;&#x30BD;&#x30FC;&#x30B9;&#x6D3B;&#x7528;&#x7814;&#x7A76;&#x6240;</a>. All rights reserved. <br>
+  &#x3053;&#x306E;&#x30DA;&#x30FC;&#x30B8;&#x306B;&#x63B2;&#x8F09;&#x3055;&#x308C;&#x3066;&#x3044;&#x308B;&#x8A18;&#x4E8B;&#x30FB;&#x5199;&#x771F;&#x30FB;&#x56F3;&#x8868;&#x306A;&#x3069;&#x306E;&#x7121;&#x65AD;&#x8EE2;&#x8F09;&#x3092;&#x7981;&#x3058;&#x307E;&#x3059;&#x3002;<br>
+  &#x8457;&#x4F5C;&#x6A29;&#x306F;&#x60C5;&#x5831;&#x63D0;&#x4F9B;&#x8005;&#x306B;&#x5E30;&#x5C5E;&#x3057;&#x307E;&#x3059;&#x3002; &#x63B2;&#x8F09;&#x3057;&#x3066;&#x3044;&#x308B;&#x60C5;&#x5831;&#x306F;&#x3001;&#x8A18;&#x4E8B;&#x57F7;&#x7B46;&#x6642;&#x70B9;&#x306E;&#x3082;&#x306E;&#x3067;&#x3059;&#x3002;</div>
+</div>
+<img src="https://majisemi.com/e/checker.gif">
+</div>
+
+
+
+
+
+
+
+    
+</body>
+
+
+
+
+
+
+
+
+</html>

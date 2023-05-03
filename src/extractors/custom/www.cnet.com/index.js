@@ -6,7 +6,7 @@ export const WwwCnetComExtractor = {
   },
 
   author: {
-    selectors: ['a.author'],
+    selectors: ['span.author', 'a.author'],
   },
 
   date_published: {
@@ -16,7 +16,7 @@ export const WwwCnetComExtractor = {
   },
 
   dek: {
-    selectors: ['.article-dek'],
+    selectors: ['.c-head_dek', '.article-dek'],
   },
 
   lead_image_url: {

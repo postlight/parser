@@ -2,15 +2,21 @@ export const WwwRawstoryComExtractor = {
   domain: 'www.rawstory.com',
 
   title: {
-    selectors: ['.blog-title'],
+    selectors: [['meta[name="og:title"]', 'value'], '.blog-title'],
   },
 
   author: {
-    selectors: ['.blog-author a:first-of-type'],
+    selectors: [
+      'div.main-post-head .social-author__name',
+      '.blog-author a:first-of-type',
+    ],
   },
 
   date_published: {
-    selectors: ['.blog-author a:last-of-type'],
+    selectors: [
+      ['meta[name="article:published_time"]', 'value'],
+      '.blog-author a:last-of-type',
+    ],
 
     timezone: 'EST',
   },
@@ -20,7 +26,7 @@ export const WwwRawstoryComExtractor = {
   },
 
   content: {
-    selectors: ['.blog-content'],
+    selectors: ['.post-body', '.blog-content'],
 
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images

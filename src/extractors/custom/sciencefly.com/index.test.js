@@ -15,9 +15,7 @@ describe('ScienceflyComExtractor', () => {
     beforeAll(() => {
       url =
         'http://sciencefly.com/video-shows-false-killer-whale-snagging-tuna-bait/';
-      const html = fs.readFileSync(
-        './fixtures/sciencefly.com/1482530492413.html'
-      );
+      const html = fs.readFileSync('./fixtures/sciencefly.com.html');
       result = Mercury.parse(url, { html, fallback: false });
     });
 

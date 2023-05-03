@@ -14,9 +14,7 @@ describe('ScanNetsecurityNeJpExtractor', () => {
     let url;
     beforeAll(() => {
       url = 'https://scan.netsecurity.ne.jp/article/2019/03/05/42049.html';
-      const html = fs.readFileSync(
-        './fixtures/scan.netsecurity.ne.jp/1551788723281.html'
-      );
+      const html = fs.readFileSync('./fixtures/scan.netsecurity.ne.jp.html');
       result = Mercury.parse(url, {
         html,
         fallback: false,

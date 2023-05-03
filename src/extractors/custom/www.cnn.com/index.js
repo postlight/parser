@@ -6,11 +6,11 @@ export const WwwCnnComExtractor = {
   },
 
   author: {
-    selectors: ['.metadata__byline__author'],
+    selectors: [['meta[name="author"]', 'value']],
   },
 
   date_published: {
-    selectors: [['meta[name="pubdate"]', 'value']],
+    selectors: [['meta[name="article:published_time"]', 'value']],
   },
 
   lead_image_url: {

@@ -15,9 +15,7 @@ describe('WwwLinkedinComExtractor', () => {
     beforeAll(() => {
       url =
         'https://www.linkedin.com/pulse/what-set-your-soul-fire-2017-ellyn-shook';
-      const html = fs.readFileSync(
-        './fixtures/www.linkedin.com/1485452542218.html'
-      );
+      const html = fs.readFileSync('./fixtures/www.linkedin.com.html');
       result = Mercury.parse(url, { html, fallback: false });
     });
 
@@ -68,7 +66,7 @@ describe('WwwLinkedinComExtractor', () => {
       // the article.
       assert.equal(
         lead_image_url,
-        'https://media.licdn.com/mpr/mpr/AAEAAQAAAAAAAAkoAAAAJDFhNGYyNjllLTkwOTAtNDM4OS1iOTY4LTlkMGRlMTk1ODAwZQ.jpg'
+        'https://media-exp1.licdn.com/dms/image/C5612AQHh48YF28VJbA/article-cover_image-shrink_600_2000/0/1520113723041?e=1665619200&v=beta&t=DRTBiEEMzl6b3frwdw4_YEhh2xuIdCgtRqZR0pu_2Vg'
       );
     });
 

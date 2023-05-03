@@ -6,12 +6,13 @@ export const PastebinComExtractor = {
   },
 
   author: {
-    selectors: ['.paste_box_line2 .t_us + a'],
+    selectors: ['.username', '.paste_box_line2 .t_us + a'],
   },
 
   date_published: {
-    selectors: ['.paste_box_line2 .t_da + span'],
+    selectors: ['.date', '.paste_box_line2 .t_da + span'],
     timezone: 'America/New_York',
+    format: 'MMMM D, YYYY',
   },
 
   lead_image_url: {
@@ -19,7 +20,7 @@ export const PastebinComExtractor = {
   },
 
   content: {
-    selectors: ['#selectable .text'],
+    selectors: ['.source', '#selectable .text'],
 
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images

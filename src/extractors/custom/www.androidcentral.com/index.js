@@ -6,7 +6,7 @@ export const WwwAndroidcentralComExtractor = {
   },
 
   author: {
-    selectors: ['.meta-by'],
+    selectors: [['meta[name="parsely-author"]', 'value']],
   },
 
   date_published: {
@@ -14,15 +14,15 @@ export const WwwAndroidcentralComExtractor = {
   },
 
   dek: {
-    selectors: [['meta[name="og:description"]', 'value']],
+    selectors: [['meta[name="description"]', 'value']],
   },
 
   lead_image_url: {
-    selectors: [['.image-large', 'src']],
+    selectors: [['meta[name="og:image"]', 'value']],
   },
 
   content: {
-    selectors: ['.article-body'],
+    selectors: ['#article-body'],
 
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images

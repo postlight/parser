@@ -28,6 +28,6 @@ export default {
       : 'dist/mercury.web.js',
     format: 'iife',
     name: 'Mercury',
-    sourceMap: true,
+    sourcemap: true,
   },
 };

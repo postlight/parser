@@ -15,7 +15,7 @@ describe('ForwardComExtractor', () => {
     beforeAll(() => {
       url =
         'http://forward.com/schmooze/358592/why-does-slack-want-me-to-say-hummus/';
-      const html = fs.readFileSync('./fixtures/forward.com/1488392273490.html');
+      const html = fs.readFileSync('./fixtures/forward.com.html');
       result = Mercury.parse(url, { html, fallback: false });
     });
 
@@ -57,7 +57,7 @@ describe('ForwardComExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(date_published, '2016-12-28T20:32:00.000Z');
+      assert.equal(date_published, '2016-12-29T01:32:00.000Z');
     });
 
     it('returns the lead_image_url', async () => {
@@ -69,7 +69,7 @@ describe('ForwardComExtractor', () => {
       // the article.
       assert.equal(
         lead_image_url,
-        'https://s3.amazonaws.com/assets.forward.com/images/cropped/gettyimages-457536286-1482958420.jpg'
+        'https://images.forwardcdn.com/image/1300x/center/images/cropped/gettyimages-457536286-1482958420.jpg'
       );
     });
 
@@ -93,7 +93,7 @@ describe('ForwardComExtractor', () => {
       // the article.
       assert.equal(
         first13,
-        'Getty Images Sometimes (okay, a lot of the time), if I’m in the'
+        'Sometimes (okay, a lot of the time), if I’m in the middle of'
       );
     });
   });

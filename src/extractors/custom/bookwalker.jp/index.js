@@ -2,15 +2,16 @@ export const BookwalkerJpExtractor = {
   domain: 'bookwalker.jp',
 
   title: {
-    selectors: ['h1.main-heading'],
+    selectors: ['h1.p-main__title', 'h1.main-heading'],
   },
 
   author: {
-    selectors: ['div.authors'],
+    selectors: ['div.p-author__list', 'div.authors'],
   },
 
   date_published: {
     selectors: [
+      'dl.p-information__data dd:nth-of-type(7)',
       '.work-info .work-detail:first-of-type .work-detail-contents:last-of-type',
     ],
     timezone: 'Asia/Tokyo',
@@ -23,7 +24,10 @@ export const BookwalkerJpExtractor = {
   },
 
   content: {
-    selectors: [['div.main-info', 'div.main-cover-inner']],
+    selectors: [
+      'div.p-main__information',
+      ['div.main-info', 'div.main-cover-inner'],
+    ],
 
     defaultCleaner: false,
 

@@ -12,15 +12,18 @@ export const WwwAbendblattDeExtractor = {
   },
 
   date_published: {
-    selectors: [['time.article__header__date', 'datetime']],
+    selectors: [
+      ['time.teaser-stream-time', 'datetime'],
+      ['time.article__header__date', 'datetime'],
+    ],
   },
 
   dek: {
-    selectors: ["span[itemprop='description']"],
+    selectors: [['meta[name="description"]', 'value']],
   },
 
   lead_image_url: {
-    selectors: [["meta[name='og:image']", 'value']],
+    selectors: [['meta[name="og:image"]', 'value']],
   },
 
   content: {

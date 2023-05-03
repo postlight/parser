@@ -17,9 +17,7 @@ describe('ClinicaltrialsGovExtractor', () => {
     beforeAll(() => {
       url =
         'https://clinicaltrials.gov/ct2/show/NCT03746262?term=Guardant+Health';
-      const html = fs.readFileSync(
-        './fixtures/clinicaltrials.gov/1551708504719.html'
-      );
+      const html = fs.readFileSync('./fixtures/clinicaltrials.gov.html');
       result = Mercury.parse(url, { html, fallback: false });
     });
 

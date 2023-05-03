@@ -14,7 +14,7 @@ describe('WiredJpExtractor', () => {
     let url;
     beforeAll(() => {
       url = 'https://wired.jp/2019/04/25/helvetica-now/';
-      const html = fs.readFileSync('./fixtures/wired.jp/1556585529692.html');
+      const html = fs.readFileSync('./fixtures/wired.jp.html');
       result = Mercury.parse(url, {
         html,
         fallback: false,
@@ -49,10 +49,7 @@ describe('WiredJpExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(
-        author,
-        'TEXT BY ARIELLE PARDES\nTRANSLATION BY CHIHIRO OKA WIRED(US)'
-      );
+      assert.equal(author, 'Arielle Pardes');
     });
 
     it('returns the date_published', async () => {
@@ -62,7 +59,7 @@ describe('WiredJpExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(date_published, `2019-04-25T16:00:25.000Z`);
+      assert.equal(date_published, `2019-04-25T07:00:25.000Z`);
     });
 
     it('returns the dek', async () => {
@@ -87,7 +84,7 @@ describe('WiredJpExtractor', () => {
       // the article.
       assert.equal(
         lead_image_url,
-        `https://wired.jp/wp-content/uploads/2019/04/190315_Helvetica_Now_Device_AS-1024x768.jpg`
+        `https://media.wired.jp/photos/61ce7c3feca9c13f76376390/16:9/w_1280,c_limit/5d08c7d457813df29e12d93c9b6f869f.jpg`
       );
     });
 
@@ -111,7 +108,7 @@ describe('WiredJpExtractor', () => {
       // the article.
       assert.equal(
         first13,
-        '世界で最も多く使われているであろうフォントのひとつ「Helvetica」が、このほどリニューアルを遂げた。まるで水のように生活に浸透しているフォントのデザインは、いかに伝統を守りながら、デジタル時代に合わせて最適化されたのか。'
+        '「Helvetica」は、おそらく世界で最もよく使われているフォントだろう。1957年に誕生したこの書体を紹介する動画は、「Helveticaは水のようだ」というナレーションで始まる。サンセリフの簡素な字形には「ユビキタス」という形容詞がぴったりで、ニューヨーク市の地下鉄の案内表示や、アメリカン航空、アメリカンアパレルといった企業のロゴに採用されている。このフォントで「John'
       );
     });
   });

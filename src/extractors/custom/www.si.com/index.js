@@ -10,13 +10,13 @@ export const WwwSiComExtractor = {
   },
 
   date_published: {
-    selectors: ['.timestamp'],
+    selectors: [['meta[name="published"]', 'value']],
 
     timezone: 'America/New_York',
   },
 
   dek: {
-    selectors: ['.quick-hit ul'],
+    selectors: ['.m-detail-header--dek'],
   },
 
   lead_image_url: {
@@ -24,7 +24,10 @@ export const WwwSiComExtractor = {
   },
 
   content: {
-    selectors: [['p', '.marquee_large_2x', '.component.image']],
+    selectors: [
+      '.m-detail--body',
+      ['p', '.marquee_large_2x', '.component.image'],
+    ],
 
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images

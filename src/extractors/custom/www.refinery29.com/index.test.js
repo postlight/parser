@@ -15,9 +15,7 @@ describe('WwwRefinery29ComExtractor', () => {
     beforeAll(() => {
       url =
         'http://www.refinery29.com/2016/12/132377/graphic-tees-statement-shirt-style-tips';
-      const html = fs.readFileSync(
-        './fixtures/www.refinery29.com/1481661863250.html'
-      );
+      const html = fs.readFileSync('./fixtures/www.refinery29.com.html');
       result = Mercury.parse(url, { html, fallback: false });
     });
 
@@ -34,11 +32,11 @@ describe('WwwRefinery29ComExtractor', () => {
       // in ./src/extractors/custom/www.refinery29.com/index.js.
       const { title } = await result;
 
-      // Update these values with the expected values from
+      // Up  these values with the expected values from
       // the article.
       assert.equal(
         title,
-        "For Holiday Parties This Year, Let's Get Behind The Conversation-Starter Tee"
+        'For Holiday Parties This Year, Let’s Get Behind The Conversation-Starter Tee'
       );
     });
 
@@ -52,15 +50,16 @@ describe('WwwRefinery29ComExtractor', () => {
       assert.equal(author, 'Connie Wang');
     });
 
-    it('returns the date_published', async () => {
-      // To pass this test, fill out the date_published selector
-      // in ./src/extractors/custom/www.refinery29.com/index.js.
-      const { date_published } = await result;
+    // As of 10-7-22, The HTML no longer returns a parseable date
+    // it('returns the date_published', async () => {
+    //   // To pass this test, fill out the date_published selector
+    //   // in ./src/extractors/custom/www.refinery29.com/index.js.
+    //   const { date_published } = await result;
 
-      // Update these values with the expected values from
-      // the article.
-      assert.equal(date_published, '2016-12-13T01:00:00.000Z');
-    });
+    //   // Update these values with the expected values from
+    //   // the article.
+    //   assert.equal(date_published, '2016-12-13T01:00:00.000Z');
+    // });
 
     it('returns the lead_image_url', async () => {
       // To pass this test, fill out the lead_image_url selector
@@ -71,7 +70,7 @@ describe('WwwRefinery29ComExtractor', () => {
       // the article.
       assert.equal(
         lead_image_url,
-        'http://s3.r29static.com//bin/entry/fc5/0,213,2000,1050/x,80/1708221/image.jpg'
+        'https://s1.r29static.com/bin/entry/c60/0,675,2000,1050/x,80/1708221/image.jpg'
       );
     });
 

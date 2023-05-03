@@ -16,7 +16,7 @@ describe('TimesofindiaIndiatimesComExtractor', () => {
       url =
         'https://timesofindia.indiatimes.com/india/china-snubs-imran-says-resolve-jk-bilaterally/articleshow/71496416.cms';
       const html = fs.readFileSync(
-        './fixtures/timesofindia.indiatimes.com/1570663350014.html'
+        './fixtures/timesofindia.indiatimes.com.html'
       );
       result = Mercury.parse(url, { html, fallback: true });
     });
@@ -71,7 +71,7 @@ describe('TimesofindiaIndiatimesComExtractor', () => {
       // the article.
       assert.equal(
         lead_image_url,
-        `https://static.toiimg.com/thumb/msid-71496420,width-1070,height-580,imgsize-83878,resizemode-6,overlay-toi_sw,pt-32,y_pad-40/photo.jpg`
+        `https://static.toiimg.com/thumb/msid-71496420,width-1070,height-580,imgsize-83878,resizemode-75,overlay-toi_sw,pt-32,y_pad-40/photo.jpg`
       );
     });
 
@@ -95,7 +95,7 @@ describe('TimesofindiaIndiatimesComExtractor', () => {
       // the article.
       assert.equal(
         first13,
-        'BEIJING: In what is being seen as a snub to the visiting Pakistan'
+        'This story is from October 9, 2019AA+Text SizeSmallMediumLargeChina snubs Imran Khan, says resolve'
       );
     });
   });

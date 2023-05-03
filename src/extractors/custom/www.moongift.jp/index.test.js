@@ -15,9 +15,7 @@ describe('WwwMoongiftJpExtractor', () => {
     beforeAll(() => {
       url =
         'http://www.moongift.jp/2019/04/wasm-module-rust%e3%81%aewebassembly%e3%81%ae%e4%b8%ad%e3%81%a7dom%e3%82%92%e6%89%b1%e3%81%86/';
-      const html = fs.readFileSync(
-        './fixtures/www.moongift.jp/1554559177617.html'
-      );
+      const html = fs.readFileSync('./fixtures/www.moongift.jp.html');
       result = Mercury.parse(url, {
         html,
         fallback: false,

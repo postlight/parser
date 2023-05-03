@@ -14,9 +14,7 @@ describe('WwwSanwaCoJpExtractor', () => {
     let url;
     beforeAll(() => {
       url = 'https://www.sanwa.co.jp/news/201903/ma-irfp139bk/index.html';
-      const html = fs.readFileSync(
-        './fixtures/www.sanwa.co.jp/1552194315797.html'
-      );
+      const html = fs.readFileSync('./fixtures/www.sanwa.co.jp.html');
       result = Mercury.parse(url, { html, fallback: false });
     });
 
@@ -83,7 +81,7 @@ describe('WwwSanwaCoJpExtractor', () => {
       // the article.
       assert.equal(
         lead_image_url,
-        `https://www.sanwa.co.jp/product/syohin_img/M/MA-IRFP139BK_MDX.jpg`
+        'https://cdn.sanwa.co.jp/product/syohin_img/M/MA-IRFP139BK_MDX.jpg'
       );
     });
 

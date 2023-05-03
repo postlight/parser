@@ -9,7 +9,7 @@ const fs = require('fs');
 describe('GenericContentExtractor', () => {
   describe('extract($, html, opts)', () => {
     it('extracts html and returns the article', () => {
-      const html = fs.readFileSync('./fixtures/vulture.html', 'utf-8');
+      const html = fs.readFileSync('./fixtures/www.vulture.com.html', 'utf-8');
       const result = clean(
         GenericContentExtractor.extract({
           $: null,

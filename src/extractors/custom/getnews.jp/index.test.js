@@ -14,7 +14,7 @@ describe('GetnewsJpExtractor', () => {
     let url;
     beforeAll(() => {
       url = 'https://getnews.jp/archives/2146078';
-      const html = fs.readFileSync('./fixtures/getnews.jp/1555846693544.html');
+      const html = fs.readFileSync('./fixtures/getnews.jp.html');
       result = Mercury.parse(url, {
         html,
         fallback: false,
@@ -46,7 +46,7 @@ describe('GetnewsJpExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(author, 'NeoL／ネオエル');
+      assert.equal(author, 'https://getnews.jp/author/neol');
     });
 
     it('returns the date_published', async () => {

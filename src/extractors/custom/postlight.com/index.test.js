@@ -14,9 +14,7 @@ describe('PostlightComExtractor', () => {
     let url;
     beforeAll(() => {
       url = 'https://postlight.com/insights/three-ways-to-be-the-thermostat';
-      const html = fs.readFileSync(
-        './fixtures/postlight.com/1664999338243.html'
-      );
+      const html = fs.readFileSync('./fixtures/postlight.com.html');
       result = Mercury.parse(url, { html, fallback: false });
     });
 
@@ -104,7 +102,7 @@ describe('PostlightComExtractor', () => {
       // the article.
       assert.equal(
         first13,
-        'One of the best pieces of advice I’ve ever received is: “Be the'
+        'Image: Brian Weaver One of the best pieces of advice I’ve ever received'
       );
     });
   });

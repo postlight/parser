@@ -2,7 +2,10 @@ export const WwwRedditComExtractor = {
   domain: 'www.reddit.com',
 
   title: {
-    selectors: ['div[data-test-id="post-content"] h2'],
+    selectors: [
+      'div[data-test-id="post-content"] h1',
+      'div[data-test-id="post-content"] h2',
+    ],
   },
 
   author: {
@@ -11,6 +14,7 @@ export const WwwRedditComExtractor = {
 
   date_published: {
     selectors: [
+      'div[data-test-id="post-content"] span[data-click-id="timestamp"]',
       'div[data-test-id="post-content"] a[data-click-id="timestamp"]',
     ],
   },
@@ -27,9 +31,7 @@ export const WwwRedditComExtractor = {
         'div[data-test-id="post-content"] div[data-click-id="media"]', // embedded media
       ], // external link with media preview (YouTube, imgur album, etc...)
       ['div[data-test-id="post-content"] div[data-click-id="media"]'], // Embedded media (Reddit video)
-      [
-        'div[data-test-id="post-content"] a[target="_blank"]:not([data-click-id="timestamp"])',
-      ], // external link
+      ['div[data-test-id="post-content"] a'], // external link
       'div[data-test-id="post-content"]',
     ],
 
@@ -51,6 +53,10 @@ export const WwwRedditComExtractor = {
     // Is there anything that is in the result that shouldn't be?
     // The clean selectors will remove anything that matches from
     // the result
-    clean: ['.icon'],
+    clean: [
+      '.icon',
+      'span[id^="PostAwardBadges"]',
+      'div a[data-test-id="comments-page-link-num-comments"]',
+    ],
   },
 };

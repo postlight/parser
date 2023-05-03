@@ -6,7 +6,7 @@ const fs = require('fs');
 
 describe('NYMagExtractor', () => {
   it('works with a feature story', async () => {
-    const html = fs.readFileSync('./fixtures/nymag.com/ailes.html');
+    const html = fs.readFileSync('./fixtures/nymag.com.html');
     const uri =
       'http://nymag.com/daily/intelligencer/2016/09/how-fox-news-women-took-down-roger-ailes.html';
 

@@ -15,9 +15,7 @@ describe('WwwInquisitrComExtractor', () => {
     beforeAll(() => {
       url =
         'http://www.inquisitr.com/3790467/donald-trump-intelligence-briefings-security-president-elect-smart-mike-pence/';
-      const html = fs.readFileSync(
-        './fixtures/www.inquisitr.com/1481665067498.html'
-      );
+      const html = fs.readFileSync('./fixtures/www.inquisitr.com.html');
       result = Mercury.parse(url, { html, fallback: false });
     });
 

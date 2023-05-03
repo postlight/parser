@@ -15,9 +15,7 @@ describe('WwwRollingstoneComExtractor', () => {
     beforeAll(() => {
       url =
         'http://www.rollingstone.com/movies/features/how-la-la-land-resurrected-the-hollywood-musical-w454198';
-      const html = fs.readFileSync(
-        './fixtures/www.rollingstone.com/1482380017694.html'
-      );
+      const html = fs.readFileSync('./fixtures/www.rollingstone.com.html');
       result = Mercury.parse(url, { html, fallback: false });
     });
 
@@ -38,7 +36,7 @@ describe('WwwRollingstoneComExtractor', () => {
       // the article.
       assert.equal(
         title,
-        "'La La Land': How a Young Filmmaker Resurrected the Hollywood Musical"
+        '‘La La Land’: How a Young Filmmaker Resurrected the Hollywood Musical'
       );
     });
 
@@ -59,7 +57,7 @@ describe('WwwRollingstoneComExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(date_published, '2016-12-09T05:00:00.000Z');
+      assert.equal(date_published, '2016-12-09T14:50:00.000Z');
     });
 
     it('returns the dek', async () => {
@@ -84,7 +82,7 @@ describe('WwwRollingstoneComExtractor', () => {
       // the article.
       assert.equal(
         lead_image_url,
-        'http://img.wennermedia.com/social/rs-la-la-land-3d3a431a-8329-4539-b953-51e2d61a396c.jpg'
+        'https://www.rollingstone.com/wp-content/uploads/2018/06/rs-la-la-land-3d3a431a-8329-4539-b953-51e2d61a396c.jpg'
       );
     });
 
@@ -108,7 +106,7 @@ describe('WwwRollingstoneComExtractor', () => {
       // the article.
       assert.equal(
         first13,
-        "Inside: 'La La Land': How a young filmmaker, his best-friend composer and two"
+        'Ask most folks what the most iconic thing about Los Angeles is, and'
       );
     });
   });

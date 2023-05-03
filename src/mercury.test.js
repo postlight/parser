@@ -186,7 +186,7 @@ describe('Parser', () => {
     const url =
       'https://www.sandiegouniontribune.com/business/growth-development/story/2019-08-27/sdsu-mission-valley-stadium-management-firm';
     const html = fs.readFileSync(
-      './fixtures/sandiegouniontribune.com/test.html',
+      './fixtures/sandiegouniontribune.com.html',
       'utf8'
     );
 

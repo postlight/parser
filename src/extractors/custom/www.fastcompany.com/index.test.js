@@ -15,9 +15,7 @@ describe('WwwFastcompanyComExtractor', () => {
     beforeAll(() => {
       url =
         'https://www.fastcompany.com/3067012/the-only-five-email-folders-your-inbox-will-ever-need';
-      const html = fs.readFileSync(
-        './fixtures/www.fastcompany.com/1547124373499.html'
-      );
+      const html = fs.readFileSync('./fixtures/www.fastcompany.com.html');
       result = Mercury.parse(url, { html, fallback: false });
     });
 
@@ -84,7 +82,7 @@ describe('WwwFastcompanyComExtractor', () => {
       // the article.
       assert.equal(
         lead_image_url,
-        'https://images.fastcompany.net/image/upload/w_1280,f_auto,q_auto,fl_lossy/fc/3067012-poster-p-1-the-only-five-email-folders-your-inbox-will-ever-need.jpg'
+        'https://images.fastcompany.net/image/upload/w_1280,f_auto,q_auto,fl_lossy/wp-cms/uploads/https://fast-company-res.cloudinary.com/image/upload/fc/3067012-poster-p-1-the-only-five-email-folders-your-inbox-will-ever-need.jpg'
       );
     });
 

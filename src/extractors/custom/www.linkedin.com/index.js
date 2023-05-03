@@ -7,13 +7,17 @@ export const WwwLinkedinComExtractor = {
 
   author: {
     selectors: [
+      '.main-author-card h3',
       ['meta[name="article:author"]', 'value'],
       '.entity-name a[rel=author]',
     ],
   },
 
   date_published: {
-    selectors: [['time[itemprop="datePublished"]', 'datetime']],
+    selectors: [
+      '.base-main-card__metadata',
+      ['time[itemprop="datePublished"]', 'datetime'],
+    ],
 
     timezone: 'America/Los_Angeles',
   },
@@ -29,7 +33,11 @@ export const WwwLinkedinComExtractor = {
   },
 
   content: {
-    selectors: [['header figure', '.prose'], '.prose'],
+    selectors: [
+      '.article-content__body',
+      ['header figure', '.prose'],
+      '.prose',
+    ],
 
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images

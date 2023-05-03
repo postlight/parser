@@ -15,9 +15,7 @@ describe('WwwLifehackerJpExtractor', () => {
     beforeAll(() => {
       url =
         'https://www.lifehacker.jp/2019/03/amazon-fine-newspaper-stocker.html';
-      const html = fs.readFileSync(
-        './fixtures/www.lifehacker.jp/1555841834276.html'
-      );
+      const html = fs.readFileSync('./fixtures/www.lifehacker.jp.html');
       result = Mercury.parse(url, {
         html,
         fallback: false,
@@ -62,7 +60,7 @@ describe('WwwLifehackerJpExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(date_published, `2019-03-08T04:00:00.000Z`);
+      assert.equal(date_published, `2019-03-08T13:00:00.000Z`);
     });
 
     it('returns the dek', async () => {
@@ -84,7 +82,7 @@ describe('WwwLifehackerJpExtractor', () => {
       // the article.
       assert.equal(
         lead_image_url,
-        `https://assets.media-platform.com/lifehacker/dist/images/2019/02/28/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%882019-02-2810.48.32-w960.jpg`
+        `https://media.loom-app.com/mpp/lifehacker/dist/images/2019/02/28/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%882019-02-2810.48.32.jpg?w=1280&h=630&f=jpg`
       );
     });
 
@@ -108,7 +106,7 @@ describe('WwwLifehackerJpExtractor', () => {
       // the article.
       assert.equal(
         first13,
-        'Image: Amazon.co.jpついつい溜めてしまい、気がつくとかさばって捨てるのにも苦労する新聞紙。そんな新聞紙を捨てる時には、ファインの｢新聞ストッカー｣が役に立ちます。新聞紙を簡単に、くるくるっとテープでまけちゃうんです。Image:'
+        'ついつい溜めてしまい、気がつくとかさばって捨てるのにも苦労する新聞紙。そんな新聞紙を捨てる時には、ファインの「新聞ストッカー」が役に立ちます。新聞紙を簡単に、くるくるっとテープでまけちゃうんです。Image: Amazon.co.jp使い方は簡単。テープや包帯を巻くようにぐるぐると巻きつけるだけ。普通だったら紐でまとめますが、下に通して、結んで、切って…と、結構時間がかかります。でも、このアイテムはラップフィルム。テープのように新聞に吸着してくれるので、きつく締めたり、結ぶ必要がありません。サクサクっとまとめられるので、時短になること間違いなしですね。Image:'
       );
     });
   });

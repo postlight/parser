@@ -2,15 +2,15 @@ export const WwwTodayComExtractor = {
   domain: 'www.today.com',
 
   title: {
-    selectors: ['h1.entry-headline'],
+    selectors: ['h1.article-hero-headline__htag', 'h1.entry-headline'],
   },
 
   author: {
-    selectors: [['meta[name="author"]', 'value']],
+    selectors: ['span.byline-name', ['meta[name="author"]', 'value']],
   },
 
   date_published: {
-    selectors: [['meta[name="DC.date.issued"]', 'value']],
+    selectors: ['time[datetime]', ['meta[name="DC.date.issued"]', 'value']],
   },
 
   lead_image_url: {
@@ -18,7 +18,7 @@ export const WwwTodayComExtractor = {
   },
 
   content: {
-    selectors: ['.entry-container'],
+    selectors: ['div.article-body__content', '.entry-container'],
 
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images

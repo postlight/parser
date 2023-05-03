@@ -14,9 +14,7 @@ describe('BookwalkerJpExtractor', () => {
     let url;
     beforeAll(() => {
       url = 'https://bookwalker.jp/de2b8f78c6-f6bb-4da9-8d15-202e8c6c185b/';
-      const html = fs.readFileSync(
-        './fixtures/bookwalker.jp/1554821842273.html'
-      );
+      const html = fs.readFileSync('./fixtures/bookwalker.jp.html');
       result = Mercury.parse(url, {
         html,
         fallback: false,
@@ -104,7 +102,7 @@ describe('BookwalkerJpExtractor', () => {
       // the article.
       assert.equal(
         first13,
-        '電子書籍（ラノベ） 著者 お米ゴハン イラスト 汐街コナ 税込価格 1,296円 1,296 円'
+        '著者 お米ゴハン イラスト 汐街コナ 偉人の“おもいで”が紡ぐ、心あたたまるストーリーを召し上がれ！ 古今東西の偉人たちが転生し、暮らしている異世界――さくら小町。その一角に「おもいで食堂」と呼ばれる和食店があった。 板前の天宮勇士（あまみや・ゆうじ）は、この世界に転生してきた、平凡な青年。 ただの料理好きだった彼は、オーナーである《勝海舟》との奇妙な縁からこの食堂で働くことになり、現代ではなれなかった料理人としての人生を謳歌する。 味はもとより、料理で客の“おもいで”を刺激し、懐かしさを想起させる事もあって、店は徐々に知られていき、今ではすっかりさくら小町の隠れた名店となっていた。'
       );
     });
   });

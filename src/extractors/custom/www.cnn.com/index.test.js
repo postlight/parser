@@ -15,7 +15,7 @@ describe('WwwCnnComExtractor', () => {
     beforeAll(() => {
       url =
         'http://www.cnn.com/2016/11/29/politics/donald-trump-transition-presidency/index.html';
-      const html = fs.readFileSync('./fixtures/www.cnn.com/1480458253239.html');
+      const html = fs.readFileSync('./fixtures/www.cnn.com.html');
       result = Mercury.parse(url, { html, fallback: false });
     });
 
@@ -34,7 +34,7 @@ describe('WwwCnnComExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(title, "Why Donald Trump won't change");
+      assert.equal(title, 'Why Donald Trump won’t change');
     });
 
     it('returns the author', async () => {
@@ -44,7 +44,7 @@ describe('WwwCnnComExtractor', () => {
 
       // Update these values with the expected values from
       // the article.
-      assert.equal(author, 'Stephen Collinson, CNN');
+      assert.equal(author, 'Stephen Collinson');
     });
 
     it('returns the date_published', async () => {
@@ -66,7 +66,7 @@ describe('WwwCnnComExtractor', () => {
       // the article.
       assert.equal(
         lead_image_url,
-        'http://i2.cdn.cnn.com/cnnnext/dam/assets/161128072443-01-trump-1128-super-tease.jpg'
+        'https://media.cnn.com/api/v1/images/stellar/prod/161128072443-01-trump-1128.jpg?q=x_823,y_333,h_874,w_1554,c_crop/w_800'
       );
     });
 
@@ -90,9 +90,8 @@ describe('WwwCnnComExtractor', () => {
       // the article.
       assert.equal(
         first13,
-        "(CNN)Winning the presidency didn't change Donald Trump -- and it's increasingly clear that"
+        'Winning the presidency didn’t change Donald Trump – and it’s increasingly clear that'
       );
-      assert.equal($('.media__video--thumbnail').length, 1);
     });
   });
 });

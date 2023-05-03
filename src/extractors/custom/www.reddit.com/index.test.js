@@ -16,9 +16,7 @@ describe('WwwRedditComExtractor', () => {
     beforeAll(() => {
       url =
         'https://www.reddit.com/r/Showerthoughts/comments/awx46q/vanilla_becoming_the_default_flavour_of_ice_cream/';
-      const html = fs.readFileSync(
-        './fixtures/www.reddit.com/1551705199548.html'
-      );
+      const html = fs.readFileSync('./fixtures/www.reddit.com.html');
       result = Mercury.parse(url, { html, fallback: false });
     });
 
@@ -61,7 +59,7 @@ describe('WwwRedditComExtractor', () => {
         .format()
         .split('T')[0];
       const expectedDate = moment()
-        .subtract(18, 'hours')
+        .subtract(4, 'years')
         .format()
         .split('T')[0];
 
@@ -71,9 +69,7 @@ describe('WwwRedditComExtractor', () => {
     });
 
     it('returns the lead_image_url', async () => {
-      const html = fs.readFileSync(
-        './fixtures/www.reddit.com/1552069933451.html'
-      );
+      const html = fs.readFileSync('./fixtures/www.reddit.com--image.html');
       const uri =
         'https://www.reddit.com/r/aww/comments/aybw1m/nothing_to_see_here_human/';
 
@@ -115,20 +111,27 @@ describe('WwwRedditComExtractor', () => {
 
     it('handles posts that only have a title', async () => {
       const html = fs.readFileSync(
-        './fixtures/www.reddit.com/1552069905710.html'
+        './fixtures/www.reddit.com--title-only.html'
       );
       const uri =
         'https://www.reddit.com/r/AskReddit/comments/axtih6/what_is_the_most_worth_it_item_you_have_ever/';
 
       const { content } = await Mercury.parse(uri, { html });
 
-      assert.equal(content, '<div></div>');
+      const $ = cheerio.load(content || '');
+
+      const first13 = excerptContent(
+        $('*')
+          .first()
+          .text(),
+        13
+      );
+
+      assert.equal(first13, '');
     });
 
     it('handles image posts', async () => {
-      const html = fs.readFileSync(
-        './fixtures/www.reddit.com/1552069933451.html'
-      );
+      const html = fs.readFileSync('./fixtures/www.reddit.com--image.html');
       const uri =
         'https://www.reddit.com/r/aww/comments/aybw1m/nothing_to_see_here_human/';
 
@@ -144,9 +147,7 @@ describe('WwwRedditComExtractor', () => {
     });
 
     it('handles video posts', async () => {
-      const html = fs.readFileSync(
-        './fixtures/www.reddit.com/1552069947100.html'
-      );
+      const html = fs.readFileSync('./fixtures/www.reddit.com--video.html');
       const uri =
         'https://www.reddit.com/r/HumansBeingBros/comments/aybtf7/thanks_human/';
 
@@ -154,17 +155,16 @@ describe('WwwRedditComExtractor', () => {
 
       const $ = cheerio.load(content || '');
 
-      const video = $(
-        'video > source[src="https://v.redd.it/kwhzxoz5rok21/HLSPlaylist.m3u8"]'
-      );
+      const video = $('video');
 
       assert.equal(video.length, 1);
     });
 
     it('handles external link posts with image preview', async () => {
       const html = fs.readFileSync(
-        './fixtures/www.reddit.com/1552069958273.html'
+        './fixtures/www.reddit.com--external-link.html'
       );
+
       const uri =
         'https://www.reddit.com/r/todayilearned/comments/aycizd/til_that_when_jrr_tolkiens_son_michael_signed_up/';
 
@@ -177,7 +177,7 @@ describe('WwwRedditComExtractor', () => {
       );
 
       const image = $(
-        'img[src="https://b.thumbs.redditmedia.com/gWPmq95XmEzQns6B-H6_l4kBNFeuhScpVDYPjvPsdDs.jpg"]'
+        'img[src="https://b.thumbs.redditmedia.com/mZhJhz9fAxHzdGRcA-tbCa06IieIIuI0YWfdSYQa3Uk.jpg"]'
       );
 
       assert.equal(link.length, 2);
@@ -187,7 +187,7 @@ describe('WwwRedditComExtractor', () => {
 
     it('handles external image posts with image preview', async () => {
       const html = fs.readFileSync(
-        './fixtures/www.reddit.com/1552070031501.html'
+        './fixtures/www.reddit.com--external-image.html'
       );
       const uri =
         'https://www.reddit.com/r/gifs/comments/4vv0sa/leonardo_dicaprio_scaring_jonah_hill_on_the/';
@@ -198,19 +198,15 @@ describe('WwwRedditComExtractor', () => {
 
       const link = $('a[href="http://i.imgur.com/Qcx1DSD.gifv"]');
 
-      const image = $(
-        'img[src="https://external-preview.redd.it/sKJFPLamiRPOW5u7NTch3ykbFYMwqI5Qr0zlCINMTfU.gif?format=png8&s=56ecd472f8b8b2ee741b3b1cb76cb3a5110a85f9"]'
-      );
+      const video = $('video');
 
       assert.equal(link.length, 1);
 
-      assert.equal(image.length, 1);
+      assert.equal(video.length, 1);
     });
 
     it('handles external link posts with embedded media', async () => {
-      const html = fs.readFileSync(
-        './fixtures/www.reddit.com/1552069973740.html'
-      );
+      const html = fs.readFileSync('./fixtures/www.reddit.com--embedded.html');
       const uri =
         'https://www.reddit.com/r/videos/comments/5gafop/rick_astley_never_gonna_give_you_up_sped_up_every/';
 
@@ -221,7 +217,7 @@ describe('WwwRedditComExtractor', () => {
       const link = $('a[href="https://youtu.be/dQw4w9WgXcQ"]');
 
       const embed = $(
-        'iframe[src="https://www.redditmedia.com/mediaembed/5gafop?responsive=true"]'
+        'iframe[src^="https://www.redditmedia.com/mediaembed/5gafop"]'
       );
 
       assert.equal(link.length, 1);

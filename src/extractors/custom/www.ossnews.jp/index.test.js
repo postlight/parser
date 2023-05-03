@@ -14,9 +14,7 @@ describe('WwwOssnewsJpExtractor', () => {
     let url;
     beforeAll(() => {
       url = 'http://www.ossnews.jp/oss_info/article.html?oid=8976';
-      const html = fs.readFileSync(
-        './fixtures/www.ossnews.jp/1552736892695.html'
-      );
+      const html = fs.readFileSync('./fixtures/www.ossnews.jp.html');
       result = Mercury.parse(url, {
         html,
         fallback: false,

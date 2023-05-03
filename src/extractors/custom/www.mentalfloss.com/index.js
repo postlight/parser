@@ -2,15 +2,26 @@ export const WwwMentalflossComExtractor = {
   domain: 'www.mentalfloss.com',
 
   title: {
-    selectors: ['h1.title', '.title-group', '.inner'],
+    selectors: [
+      ['meta[name="og:title"]', 'value'],
+      'h1.title',
+      '.title-group',
+      '.inner',
+    ],
   },
 
   author: {
-    selectors: ['.field-name-field-enhanced-authors'],
+    selectors: [
+      'a[data-vars-label*="authors"]',
+      '.field-name-field-enhanced-authors',
+    ],
   },
 
   date_published: {
-    selectors: ['.date-display-single'],
+    selectors: [
+      ['meta[name="article:published_time"]', 'value'],
+      '.date-display-single',
+    ],
     timezone: 'America/New_York',
   },
 
@@ -19,7 +30,7 @@ export const WwwMentalflossComExtractor = {
   },
 
   content: {
-    selectors: ['div.field.field-name-body'],
+    selectors: ['article main', 'div.field.field-name-body'],
 
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images
@@ -28,6 +39,6 @@ export const WwwMentalflossComExtractor = {
     // Is there anything that is in the result that shouldn't be?
     // The clean selectors will remove anything that matches from
     // the result
-    clean: [],
+    clean: ['small'],
   },
 };

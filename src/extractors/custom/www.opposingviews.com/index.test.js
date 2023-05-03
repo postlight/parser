@@ -15,9 +15,7 @@ describe('WwwOpposingviewsComExtractor', () => {
     beforeAll(() => {
       url =
         'http://www.opposingviews.com/i/politics/trump-picks-investing-mogul-icahn-advise-him-finance-regulation';
-      const html = fs.readFileSync(
-        './fixtures/www.opposingviews.com/1482427531189.html'
-      );
+      const html = fs.readFileSync('./fixtures/www.opposingviews.com.html');
       result = Mercury.parse(url, { html, fallback: false });
     });
 
@@ -71,7 +69,7 @@ describe('WwwOpposingviewsComExtractor', () => {
       // the article.
       assert.equal(
         lead_image_url,
-        'http://images.opposingviews.com:8080/ovi/catalog/downloads/preview/rndr_670x377//2016/12/icahn-1482373693.jpg/rndr_670x377.jpg'
+        'https://www.opposingviews.com/.image/t_share/MTU0MDAxMTEyNDA2ODkzNjUw/investor-icahn-to-advise-trump-on-finances-regulation-promo-image.jpg'
       );
     });
 

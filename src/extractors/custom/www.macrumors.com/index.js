@@ -6,14 +6,11 @@ export const WwwMacrumorsComExtractor = {
   },
 
   author: {
-    selectors: ['.author-url'],
+    selectors: ['article a[rel="author"]', '.author-url'],
   },
 
   date_published: {
-    selectors: ['.article .byline'],
-
-    // Wednesday January 18, 2017 11:44 am PST
-    format: 'dddd MMMM D, YYYY h:mm A zz',
+    selectors: [['time', 'datetime']],
 
     timezone: 'America/Los_Angeles',
   },
@@ -27,7 +24,7 @@ export const WwwMacrumorsComExtractor = {
   },
 
   content: {
-    selectors: ['.article'],
+    selectors: ['article', '.article'],
 
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images

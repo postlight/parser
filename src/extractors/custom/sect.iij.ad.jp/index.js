@@ -2,15 +2,15 @@ export const SectIijAdJpExtractor = {
   domain: 'sect.iij.ad.jp',
 
   title: {
-    selectors: ['h3'],
+    selectors: ['div.title-box-inner h1', 'h3'],
   },
 
   author: {
-    selectors: ['dl.entrydate dd'],
+    selectors: ['p.post-author a', 'dl.entrydate dd'],
   },
 
   date_published: {
-    selectors: ['dl.entrydate dd'],
+    selectors: ['time'],
     format: 'YYYY年MM月DD日',
     timezone: 'Asia/Tokyo',
   },
@@ -22,7 +22,7 @@ export const SectIijAdJpExtractor = {
   },
 
   content: {
-    selectors: ['#article'],
+    selectors: ['.entry-inner', '#article'],
 
     transforms: {},
 

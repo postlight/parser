@@ -6,11 +6,14 @@ export const GetnewsJpExtractor = {
   },
 
   author: {
-    selectors: ['span.prof'],
+    selectors: [['meta[name="article:author"]', 'value'], 'span.prof'],
   },
 
   date_published: {
-    selectors: [['ul.cattag-top time', 'datetime']],
+    selectors: [
+      ['meta[name="article:published_time"]', 'value'],
+      ['ul.cattag-top time', 'datetime'],
+    ],
   },
 
   dek: null,

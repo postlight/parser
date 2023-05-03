@@ -16,7 +16,7 @@ export const IciRadioCanadaCaExtractor = {
   },
 
   dek: {
-    selectors: ['.bunker-component.lead'],
+    selectors: ['div.lead-container', '.bunker-component.lead'],
   },
 
   lead_image_url: {
@@ -24,7 +24,10 @@ export const IciRadioCanadaCaExtractor = {
   },
 
   content: {
-    selectors: [['.main-multimedia-item', '.news-story-content']],
+    selectors: [
+      'section.document-content-style',
+      ['.main-multimedia-item', '.news-story-content'],
+    ],
 
     // Is there anything in the content you selected that needs transformed
     // before it's consumable content? E.g., unusual lazy loaded images

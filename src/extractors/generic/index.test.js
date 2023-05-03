@@ -8,7 +8,10 @@ const fs = require('fs');
 describe('GenericExtractor', () => {
   describe('extract(opts)', () => {
     it('extracts this old LA Times article', () => {
-      const html = fs.readFileSync('./fixtures/latimes.html', 'utf-8');
+      const html = fs.readFileSync(
+        './fixtures/www.latimes.com--old.html',
+        'utf-8'
+      );
 
       const { title, author, date_published, dek } = GenericExtractor.extract({
         url: 'http://latimes.com',
@@ -27,7 +30,10 @@ describe('GenericExtractor', () => {
     });
 
     it('extracts html and returns the article title', () => {
-      const html = fs.readFileSync('./fixtures/wired.html', 'utf-8');
+      const html = fs.readFileSync(
+        './fixtures/www.wired.com--other.html',
+        'utf-8'
+      );
 
       const { author, title, datePublished, dek } = GenericExtractor.extract({
         url: 'http://wired.com',
