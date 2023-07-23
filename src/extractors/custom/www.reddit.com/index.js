@@ -59,4 +59,11 @@ export const WwwRedditComExtractor = {
       'div a[data-test-id="comments-page-link-num-comments"]',
     ],
   },
+
+  extend: {
+    comments: {
+      selectors: ['div[data-testid="comment"]'],
+      allowMultiple: true,
+    },
+  },
 };
