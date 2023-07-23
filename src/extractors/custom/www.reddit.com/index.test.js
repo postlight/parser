@@ -1,10 +1,10 @@
 import assert from 'assert';
-import URL from 'url';
 import cheerio from 'cheerio';
 import moment from 'moment-timezone';
+import URL from 'url';
 
-import Mercury from 'mercury';
 import getExtractor from 'extractors/get-extractor';
+import Mercury from 'mercury';
 import { excerptContent } from 'utils/text';
 
 const fs = require('fs');
@@ -223,6 +223,26 @@ describe('WwwRedditComExtractor', () => {
       assert.equal(link.length, 1);
 
       assert.equal(embed.length, 1);
+    });
+
+    it('returns the comments', async () => {
+      const html = fs.readFileSync(
+        './fixtures/www.reddit.com--title-only.html'
+      );
+      const uri =
+        'https://www.reddit.com/r/AskReddit/comments/axtih6/what_is_the_most_worth_it_item_you_have_ever/';
+
+      const { comments } = await Mercury.parse(uri, { html });
+
+      const expectedCommentsLength = 12;
+      assert.equal(comments.length, expectedCommentsLength);
+
+      const first13 = excerptContent(comments[0] || '', 13);
+
+      assert.equal(
+        first13,
+        'A Miele canister vacuum. I had read the 4 AMAs from the vacuum'
+      );
     });
   });
 });
