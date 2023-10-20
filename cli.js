@@ -107,5 +107,6 @@ Usage:\n\
   extend || e,
   extendList || l,
   header || h,
-  addExtractor || x
+  addExtractor || x,
+  version,
 );
