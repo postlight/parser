@@ -77,14 +77,22 @@ export const UNLIKELY_CANDIDATES_WHITELIST = [
 // A list of tags which, if found inside, should cause a <div /> to NOT
 // be turned into a paragraph tag. Shallow div tags without these elements
 // should be turned into <p /> tags.
+// Note: P tags cannot contain block-level elements per HTML5 spec.
 export const DIV_TO_P_BLOCK_TAGS = [
   'a',
+  'article',
+  'aside',
   'blockquote',
   'dl',
   'div',
+  'footer',
+  'header',
   'img',
+  'main',
+  'nav',
   'p',
   'pre',
+  'section',
   'table',
 ].join(',');
 
