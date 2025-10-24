@@ -523,7 +523,7 @@ function paragraphize(node, $) {
 function convertDivs($) {
   $('div').each(function (index, div) {
     var $div = $(div);
-    var convertible = $div.children(DIV_TO_P_BLOCK_TAGS).length === 0;
+    var convertible = $div.find(DIV_TO_P_BLOCK_TAGS).length === 0;
 
     if (convertible) {
       convertNodeTo$$1($div, $, 'p');
@@ -7846,6 +7846,12 @@ var RootExtractor = {
       };
     }
 
+    var extendedResults = {};
+
+    if (extractor.extend) {
+      extendedResults = selectExtendedTypes(extractor.extend, opts);
+    }
+
     var title = extractResult(_objectSpread({}, opts, {
       type: 'title'
     }));
@@ -7893,12 +7899,6 @@ var RootExtractor = {
     },
         url = _ref3.url,
         domain = _ref3.domain;
-
-    var extendedResults = {};
-
-    if (extractor.extend) {
-      extendedResults = selectExtendedTypes(extractor.extend, opts);
-    }
 
     return _objectSpread({
       title: title,

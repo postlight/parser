@@ -5,7 +5,7 @@ import { DIV_TO_P_BLOCK_TAGS } from './constants';
 function convertDivs($) {
   $('div').each((index, div) => {
     const $div = $(div);
-    const convertible = $div.children(DIV_TO_P_BLOCK_TAGS).length === 0;
+    const convertible = $div.find(DIV_TO_P_BLOCK_TAGS).length === 0;
 
     if (convertible) {
       convertNodeTo($div, $, 'p');
