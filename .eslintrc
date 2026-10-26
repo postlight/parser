@@ -25,6 +25,7 @@
       { "max": 1, "maxEOF": 0, "maxBOF": 0 }
     ],
     "import/no-unresolved": false,
+    "import/no-cycle": 0,
     "import/no-extraneous-dependencies": [
       "error",
       {

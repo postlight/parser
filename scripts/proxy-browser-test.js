@@ -8,6 +8,17 @@ const start = () => {
   app.use('/:url', (req, res) => {
     const url = req.originalUrl.slice(1);
 
+    try {
+      const parsedUrl = new URL(url);
+      if (parsedUrl.protocol !== 'http:' && parsedUrl.protocol !== 'https:') {
+        res.status(400).send('Invalid protocol');
+        return;
+      }
+    } catch (e) {
+      res.status(400).send('Invalid URL');
+      return;
+    }
+
     const options = {
       url,
       // Don't set encoding; fixes issues
