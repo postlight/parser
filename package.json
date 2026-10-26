@@ -64,9 +64,8 @@
     "@babel/runtime": "^7.0.0",
     "@jesses/circle-github-bot": "^2.1.0",
     "@octokit/rest": "^16.9.0",
-    "babel-core": "^7.0.0-bridge.0",
     "babel-eslint": "^10.0.1",
-    "babel-jest": "^23.4.2",
+    "babel-jest": "^24.9.0",
     "babel-plugin-module-alias": "^1.6.0",
     "babel-plugin-module-resolver": "^3.1.2",
     "babelify": "^10.0.0",
@@ -87,8 +86,8 @@
     "husky": "^3.0.0",
     "inquirer": "^7.0.0",
     "jasmine-core": "^2.5.2",
-    "jest": "^23.6.0",
-    "jest-cli": "^23.6.0",
+    "jest": "^24.9.0",
+    "jest-cli": "^24.9.0",
     "karma": "^6.3.16",
     "karma-browserify": "8.1.0",
     "karma-chrome-launcher": "^3.0.0",
@@ -174,7 +173,6 @@
     "proxy-addr": "^2.0.8",
     "set-value": "^2.0.1",
     "sha.js": "^2.4.12",
-    "shell-quote": "^1.12.0",
-    "simple-git": "^3.16.0"
+    "shell-quote": "^1.12.0"
   }
 }
